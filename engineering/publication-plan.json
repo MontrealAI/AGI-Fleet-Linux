@@ -1,6 +1,6 @@
 {
   "schema": "agi-linux-publication-plan/v1",
-  "status": "AWAITING_EXPLICIT_PUBLICATION_APPROVAL",
+  "status": "PUBLISHED_WITH_EXPLICIT_OWNER_APPROVAL",
   "destination": "MontrealAI/AGI-Fleet-Linux",
   "visibility": "public",
   "scope": "Frozen implementation, historical engineering fixtures and restricted-run evidence become downloadable by anyone.",
@@ -29,5 +29,7 @@
   "operatorProfilesIncluded": false,
   "operatorAccountAccessRequired": false,
   "acceptanceStatus": "NOT_QUALIFIED",
-  "nextGate": "After approved publication, provision hash-verified Node 24.21.0 and OpenClaw 2026.9.5; run all 14 outstanding test files, then the complete suite with saved evidence."
+  "nextGate": "Run all 14 outstanding native test files, then all 341 test files on hash-verified Node 24.21.0 and OpenClaw 2026.9.5; retain separate capable-run evidence.",
+  "releaseURL": "https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.6-qualification",
+  "publishedAssetDigestsMatch": true
 }
