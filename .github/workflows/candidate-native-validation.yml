@@ -1,0 +1,70 @@
+name: Linux 1.0.7 saved-archive native validation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/candidate-native-validation.yml
+      - engineering/run-candidate-native.py
+
+permissions:
+  contents: read
+
+concurrency:
+  group: candidate-linux-native-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  candidate-native:
+    name: Saved candidate / ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 180
+    steps:
+      - name: Fetch the harness from this exact workflow commit
+        shell: bash
+        env:
+          HARNESS_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/engineering/run-candidate-native.py
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error "$HARNESS_URL" --output "$RUNNER_TEMP/run-candidate-native.py"
+          python3 -m py_compile "$RUNNER_TEMP/run-candidate-native.py"
+      - name: Verify downloads, exercise native cases, then run the complete suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo --preserve-env=GITHUB_RUN_ID,GITHUB_SHA python3 "$RUNNER_TEMP/run-candidate-native.py" \
+            --work "/root/agi-candidate-qualification-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --evidence "$GITHUB_WORKSPACE/capable-run"
+      - name: Make retained evidence readable for upload and write summary
+        if: always()
+        shell: bash
+        run: |
+          if test -d "$GITHUB_WORKSPACE/capable-run"; then
+            sudo chown -R "$(id -u):$(id -g)" "$GITHUB_WORKSPACE/capable-run"
+          fi
+          {
+            echo '## Saved candidate native acceptance'
+            echo 'Exact Linux 1.0.7 archive; original 1.0.6 restricted and capable-run evidence remains preserved.'
+            echo 'Physical installation, OAuth, inference, documents, cleanup, reboot and endurance remain separate qualification gates.'
+            if test -f capable-run/summary.json; then
+              echo '```json'
+              cat capable-run/summary.json
+              echo '```'
+            else
+              echo 'The run stopped before producing a complete test summary. Inspect the retained logs; this is not PASS.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve the capable-run evidence separately
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0, Node 24
+        with:
+          name: candidate-native-${{ matrix.runner }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: capable-run/
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 9
