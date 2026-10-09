@@ -38,7 +38,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo --preserve-env=GITHUB_RUN_ID,GITHUB_SHA python3 "$RUNNER_TEMP/run-frozen-native.py" \
-            --work "/opt/agi-fleet-qualification-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --work "/root/agi-fleet-qualification-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             --evidence "$GITHUB_WORKSPACE/capable-run"
       - name: Make retained evidence readable for upload and write summary
         if: always()
