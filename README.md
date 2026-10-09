@@ -6,7 +6,9 @@ The [frozen 1.0.7 prerelease](https://github.com/MontrealAI/AGI-Fleet-Linux/rele
 
 ## Native validation
 
-[Run 38006497366](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38006497366) is testing the exact published 1.0.7 ZIP on separate, disposable x64 and ARM64 runners. It runs 23 targeted files (285 tests), followed by the complete 342-file suite (3,897 tests). **Results are pending; the operator installation gate remains closed.**
+[Run 38006497366](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38006497366) is testing the exact published 1.0.7 ZIP on separate, disposable x64 and ARM64 runners. It runs 23 targeted files (285 tests), followed by the complete 342-file suite (3,897 tests). **The run has exposed a source-map limit regression in 1.0.7; the operator installation gate remains closed. Complete results are still running and will be preserved.**
+
+A separately versioned 1.0.8 candidate is being prepared. It retains the 128-entry bound by placing the catalog validator inside the existing SQLite policy module. The unchanged regression test reproduces failure on 1.0.7 and passes on 1.0.8; this local result does not replace native saved-archive acceptance.
 
 The prerequisites include real Unix-domain sockets and disposable cross-user ownership, verified Node 24.21.0 in application and SDK system lookup locations, inventory-verified OpenClaw 2026.9.5, and the supplied historical fixtures. Ownership guards and fail-closed STOP handling remain enforced. No operator account, wallet or OAuth store is a fixture.
 
