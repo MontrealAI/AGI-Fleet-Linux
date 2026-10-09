@@ -71,8 +71,11 @@ def main():
     args = p.parse_args()
     with args.release.open('rb') as stream:
         assert hashlib.file_digest(stream, 'sha256').hexdigest() == RELEASE_SHA
-    with zipfile.ZipFile(args.case_audit) as z:
-        ledger = json.loads(z.read('case-ledger.json'))
+    if zipfile.is_zipfile(args.case_audit):
+        with zipfile.ZipFile(args.case_audit) as z:
+            ledger = json.loads(z.read('case-ledger.json'))
+    else:
+        ledger = json.loads(args.case_audit.read_text())
     assert ledger['releaseSHA256'] == RELEASE_SHA and len(ledger['cases']) == 50
     with zipfile.ZipFile(args.release) as release:
         runs = [audit(directory, release, ledger['cases']) for directory in args.run]
