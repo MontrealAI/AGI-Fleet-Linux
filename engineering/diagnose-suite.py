@@ -18,7 +18,7 @@ def diagnostic_run(command, log, timeout=10800):
     source = Path(command[1]).parents[1]
     evidence = log.parent
     changed = []
-    for worker in source.glob('**/compute/setup-standard-readiness-service-worker.mjs'):
+    for worker in source.glob('**/shared/runtime/compute/setup-standard-readiness-service-worker.mjs'):
         text = worker.read_text()
         old = "if(warnings.length||createHash('sha256').update(managedServiceEnvironmentFile(plan.environment)).digest('hex')!==authority.environmentSHA256)"
         if old not in text:
@@ -27,7 +27,7 @@ def diagnostic_run(command, log, timeout=10800):
         text = text.replace("}catch{", "}catch(error){console.error('DIAGNOSTIC_ERROR '+JSON.stringify({name:error.name,code:error.code,message:String(error.message).slice(0,1000)}));")
         worker.write_text(text)
         changed.append(str(worker.relative_to(source)))
-    for caller in source.glob('**/compute/setup-standard-readiness-resume.mjs'):
+    for caller in source.glob('**/shared/runtime/compute/setup-standard-readiness-resume.mjs'):
         text = caller.read_text()
         old = "need(result.status===0,'pinned-gateway-launch-render');"
         if old not in text:
@@ -57,3 +57,4 @@ def diagnostic_run(command, log, timeout=10800):
 
 frozen.run = diagnostic_run
 frozen.main()
+
