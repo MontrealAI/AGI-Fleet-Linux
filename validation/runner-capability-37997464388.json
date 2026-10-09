@@ -1,0 +1,73 @@
+{
+  "schema": "agi-native-capability-summary/v1",
+  "workflowCommit": "fb155993d4330f3f69e5dd5d1a5b79a3423322c1",
+  "runId": 37997464388,
+  "scope": "RUNNER_CAPABILITY_ONLY",
+  "releaseQualified": false,
+  "results": [
+    {
+      "schema": "agi-native-runner-capability/v1",
+      "scope": "RUNNER_CAPABILITY_ONLY",
+      "releaseTestsExecuted": 0,
+      "releaseQualified": false,
+      "recordedAt": "2026-10-09T22:07:36.703656+00:00",
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "commit": "fb155993d4330f3f69e5dd5d1a5b79a3423322c1",
+      "runId": "37997464388",
+      "runAttempt": "1",
+      "platform": "Linux-6.17.0-1022-azure-aarch64-with-glibc2.39",
+      "architecture": "aarch64",
+      "uid": 0,
+      "gid": 0,
+      "checks": {
+        "unixSocketRoundtripAndRemoval": {
+          "status": "PASS"
+        },
+        "realCrashLeftSocket": {
+          "status": "PASS"
+        },
+        "realSocketHardLink": {
+          "status": "PASS"
+        },
+        "realForeignDirectoryAndSocketOwnership": {
+          "status": "PASS"
+        }
+      },
+      "status": "CAPABILITY_PASS",
+      "jobId": 114047049025,
+      "deprecatedRuntimeWarning": false
+    },
+    {
+      "schema": "agi-native-runner-capability/v1",
+      "scope": "RUNNER_CAPABILITY_ONLY",
+      "releaseTestsExecuted": 0,
+      "releaseQualified": false,
+      "recordedAt": "2026-10-09T22:07:35.328461+00:00",
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "commit": "fb155993d4330f3f69e5dd5d1a5b79a3423322c1",
+      "runId": "37997464388",
+      "runAttempt": "1",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "architecture": "x86_64",
+      "uid": 0,
+      "gid": 0,
+      "checks": {
+        "unixSocketRoundtripAndRemoval": {
+          "status": "PASS"
+        },
+        "realCrashLeftSocket": {
+          "status": "PASS"
+        },
+        "realSocketHardLink": {
+          "status": "PASS"
+        },
+        "realForeignDirectoryAndSocketOwnership": {
+          "status": "PASS"
+        }
+      },
+      "status": "CAPABILITY_PASS",
+      "jobId": 114047049196,
+      "deprecatedRuntimeWarning": false
+    }
+  ]
+}
