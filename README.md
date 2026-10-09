@@ -1,36 +1,33 @@
 # AGI Fleet Linux
 
-Linux engineering and qualification workspace for AGI Fleet.
+**Linux 1.0.7 is a controlled qualification candidate, not production-qualified.**
 
-**Status: qualification candidate; not production-qualified.** The existing Linux 1.0.6 release remains frozen. Its restricted validation recorded 3,826 passing tests, 44 failures and six skips, with no timeouts.
+The [frozen 1.0.7 prerelease](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.7-qualification) contains all six roles for Ubuntu Desktop 24.04 LTS, x86-64 and ARM64. Download the Fleet Linux ZIP for the implementation. GitHub-generated source archives contain this qualification repository and its engineering harnesses.
 
-## Current scope
+## Native validation
 
-**Runner capability: PASS on Ubuntu 24.04 x86-64 and ARM64.** [Run 37997464388](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/37997464388) verified all four native capabilities. The [retained JSON](validation/runner-capability-37997464388.json) records the exact workflow commit, architectures and checks. Release tests executed by this run: **zero**.
+[Run 38006497366](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38006497366) is testing the exact published 1.0.7 ZIP on separate, disposable x64 and ARM64 runners. It runs 23 targeted files (285 tests), followed by the complete 342-file suite (3,897 tests). **Results are pending; the operator installation gate remains closed.**
 
-This repository contains native capability checks and a hash-bound frozen-release acceptance workflow. The latter runs the 14 affected test files and then the complete suite on both architectures. The targeted run now reports **224 passed, zero failed, zero skipped on each architecture** in [run 37998479254](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/37998479254). The complete suites finished with **3,847 passes / 29 failures on x86-64** and **3,846 passes / 30 failures on ARM64**, out of 3,876 tests each, with **zero skips and zero timeouts**. The remaining failures concern telemetry fixtures and historical service rendering. **Installation remains gated while these failures are investigated.**
+The prerequisites include real Unix-domain sockets and disposable cross-user ownership, verified Node 24.21.0 in application and SDK system lookup locations, inventory-verified OpenClaw 2026.9.5, and the supplied historical fixtures. Ownership guards and fail-closed STOP handling remain enforced. No operator account, wallet or OAuth store is a fixture.
 
-The capability workflow verifies real Unix-domain socket communication, crash-left sockets, hard links and disposable foreign ownership on fresh GitHub-hosted Ubuntu 24.04 x86-64 and ARM64 VMs. Each run retains a separate JSON evidence artifact. A green capability job establishes runner capability only; it does not mean any of the 44 failures or six skips has passed.
+The new release introduces a bounded, explicitly versioned policy for the pinned default unsigned plugin discovery cache. Installed code, plugin approvals, allowlists, credentials and older seals remain protected. Telemetry integration tests isolate automatic polling while retaining the actual pinned writer and real local HTTP requests.
 
-The three exact frozen archives are now [publicly available as a prerelease](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.6-qualification), with matching published SHA-256 digests and explicit owner approval. Download `AGI_Fleet_Linux_v1.0.6.zip` for the implementation; GitHub-generated source archives currently contain this qualification scaffolding. Historical fixtures are for engineering tests only and are not a fresh-install requirement. No operator profile, wallet, OAuth material, setup JSON or user document belongs in this repository.
+The [original 1.0.6 artifacts](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.6-qualification) remain unchanged. Its restricted run recorded 3,826 passes, 44 failures and six skips. Native runs resolved those original 50 cases on both architectures, but complete runs found 29 x64 and 30 ARM64 failures. The [separate 1.0.6 addendum](validation/LINUX_1_0_6_NATIVE_ADDENDUM.md) retains those failures and the independent 710-log audit. They are not relabeled as passes.
 
 ## Fresh installation
 
-Follow the [single fresh signer/compute procedure](docs/FRESH_INSTALL.md) after reviewing the completed native validation addendum. Physical qualification remains pending. Keep earlier installations inactive and preserved.
+Use the [single fresh signer/compute procedure](docs/FRESH_INSTALL.md) only after the hash-bound native addendum records complete-suite PASS for your architecture. Preserve prior installations inactive. No migration, historical engineering fixtures or manual state editing is required.
 
-## Acceptance sequence
+Physical Linux installation, real OAuth/inference, actual documents, positive base/browser cleanup, identity approval after reboot and measured endurance remain unqualified. Physical M1 and M2 results are separately NOT RUN. Native regression success does not qualify those gates.
 
-1. Confirm native runner capabilities.
-2. Make the exact frozen release and engineering fixtures available through an approved distribution path; verify archive hashes, Node 24.21.0 and OpenClaw 2026.9.5.
-3. Run all 14 files containing the outstanding 44 failures and six skips, then the complete suite. Preserve the original restricted results and each capable run separately.
-4. Investigate remaining failures. Any release-code change requires a new version and saved-archive validation. An unchanged passing release gets a validation addendum bound to its existing hash.
-5. Qualify fresh physical Linux installation, OAuth/inference, real document creation, positive base/browser cleanup, identity approval after reboot and endurance. M1 and M2 are separate qualification targets.
+New profiles default to 256 runs per rolling day; Agent and Node allow 32 image attempts. Spending controls and explicit signer approvals remain independent.
 
-Ownership checks and fail-closed STOP semantics remain mandatory. Operator signer and compute accounts are never engineering fixtures.
+## Frozen candidate identity
 
-## Frozen candidate
+- File: `AGI_Fleet_Linux_v1.0.7.zip`
+- Bytes: 401,734,226
+- SHA-256: `11c47bf901df7c47d5816be0f65a707bd5ff9efd6d515a9f9ae5ae7a77fa062d`
+- Every supplied archive and member is below 450,000,000 bytes.
+- Saved-archive checks passed: all seven manifests/source inventories, 275 shell files, 7,786 JavaScript files and 248 packaged launcher cases. Local parsing used Node 24.19.0; native acceptance uses hash-pinned Node 24.21.0.
 
-- File: `AGI_Fleet_Linux_v1.0.6.zip`
-- Size: 402,016,636 bytes
-- SHA-256: `c3faed24d51472a7a69dede9f9d015c433e5b5c7e09aab331b61a02e681340e1`
-- Distribution limit: every supplied file stays below 450,000,000 bytes.
+No operator profile, wallet, setup JSON, OAuth material, provider response or user document belongs in this repository.
