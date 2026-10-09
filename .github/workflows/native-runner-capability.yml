@@ -1,0 +1,150 @@
+name: Native runner capability (not release acceptance)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/native-runner-capability.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-runner-capability-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  native-capability:
+    name: Native capabilities / ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 10
+    steps:
+      - name: Exercise real Unix sockets and disposable ownership
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_ACTIONS:-}" = true
+          probe_output="$RUNNER_TEMP/native-capability.json"
+          sudo -n /usr/bin/python3 - "$probe_output" "$GITHUB_SHA" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" <<'PY'
+          import datetime, errno, json, os, pathlib, platform, socket, stat, subprocess, sys, tempfile
+          
+          output, commit, repository, run_id, attempt = sys.argv[1:]
+          result = {
+              "schema": "agi-native-runner-capability/v1",
+              "scope": "RUNNER_CAPABILITY_ONLY",
+              "releaseTestsExecuted": 0,
+              "releaseQualified": False,
+              "recordedAt": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "repository": repository, "commit": commit, "runId": run_id, "runAttempt": attempt,
+              "platform": platform.platform(), "architecture": platform.machine(),
+              "uid": os.getuid(), "gid": os.getgid(), "checks": {}
+          }
+          def check(name, operation):
+              try:
+                  operation()
+                  result["checks"][name] = {"status": "PASS"}
+              except Exception as error:
+                  result["checks"][name] = {"status": "FAIL", "type": type(error).__name__,
+                                            "errno": getattr(error, "errno", None),
+                                            "message": str(error)[:300]}
+          with tempfile.TemporaryDirectory(prefix="agi-native-capability-") as directory:
+              root = pathlib.Path(directory)
+              def real_socket():
+                  endpoint = root / "roundtrip.sock"
+                  with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as server:
+                      server.settimeout(3)
+                      server.bind(str(endpoint))
+                      os.chmod(endpoint, 0o600)
+                      assert stat.S_ISSOCK(endpoint.lstat().st_mode)
+                      assert stat.S_IMODE(endpoint.lstat().st_mode) == 0o600
+                      server.listen(1)
+                      with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
+                          client.settimeout(3)
+                          client.connect(str(endpoint))
+                          connection, _ = server.accept()
+                          with connection:
+                              connection.settimeout(3)
+                              client.sendall(b"native-probe")
+                              assert connection.recv(12) == b"native-probe"
+                              connection.sendall(b"verified")
+                              assert client.recv(8) == b"verified"
+                  endpoint.unlink()
+                  assert not endpoint.exists()
+              check("unixSocketRoundtripAndRemoval", real_socket)
+              def crash_left():
+                  endpoint = root / "abandoned.sock"
+                  code = "import socket,sys; s=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM); s.bind(sys.argv[1]); s.listen(1); print('READY',flush=True); sys.stdin.read()"
+                  child = subprocess.Popen([sys.executable, "-u", "-c", code, str(endpoint)],
+                                           stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                  try:
+                      import selectors
+                      with selectors.DefaultSelector() as selector:
+                          selector.register(child.stdout, selectors.EVENT_READ)
+                          assert selector.select(timeout=3), "Child readiness timed out"
+                          assert child.stdout.readline().strip() == b"READY"
+                      child.kill()
+                      child.communicate(timeout=3)
+                      assert stat.S_ISSOCK(endpoint.lstat().st_mode)
+                      with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
+                          client.settimeout(3)
+                          try:
+                              client.connect(str(endpoint))
+                              raise AssertionError("Crash-left socket unexpectedly live")
+                          except OSError as error:
+                              assert error.errno == errno.ECONNREFUSED, str(error)
+                  finally:
+                      if child.poll() is None:
+                          child.kill()
+                          child.communicate(timeout=3)
+              check("realCrashLeftSocket", crash_left)
+              def socket_hardlink():
+                  endpoint = root / "abandoned.sock"
+                  alias = root / "alias.sock"
+                  assert stat.S_ISSOCK(endpoint.lstat().st_mode)
+                  os.link(endpoint, alias)
+                  assert endpoint.lstat().st_nlink == 2
+                  assert alias.lstat().st_ino == endpoint.lstat().st_ino
+                  alias.unlink()
+                  assert endpoint.lstat().st_nlink == 1
+              check("realSocketHardLink", socket_hardlink)
+              def foreign_ownership():
+                  assert os.getuid() == 0, "Use the authorized disposable runner administrator"
+                  folder = root / "owned-directory"
+                  folder.mkdir(mode=0o700)
+                  endpoint = root / "abandoned.sock"
+                  assert stat.S_ISSOCK(endpoint.lstat().st_mode)
+                  for target in (folder, endpoint):
+                      original = target.lstat()
+                      foreign_uid = 1 if original.st_uid != 1 else 2
+                      try:
+                          os.chown(target, foreign_uid, original.st_gid)
+                          assert target.lstat().st_uid == foreign_uid
+                          assert target.exists()
+                      finally:
+                          os.chown(target, original.st_uid, original.st_gid)
+                      assert target.lstat().st_uid == original.st_uid
+              check("realForeignDirectoryAndSocketOwnership", foreign_ownership)
+          result["status"] = "CAPABILITY_PASS" if all(row["status"] == "PASS" for row in result["checks"].values()) else "CAPABILITY_FAIL"
+          pathlib.Path(output).write_text(json.dumps(result, indent=2) + "\n")
+          os.chmod(output, 0o644)
+          print(json.dumps(result, indent=2))
+          sys.exit(0 if result["status"] == "CAPABILITY_PASS" else 1)
+          PY
+      - name: Retain capability evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-capability-${{ matrix.runner }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/native-capability.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: State acceptance scope
+        if: always()
+        shell: bash
+        run: |
+          printf '%s\n' '## Runner capability only' 'This job does not execute or qualify the Fleet release. The 44 failing cases and six skipped cases remain pending a separately recorded native test run.' >> "$GITHUB_STEP_SUMMARY"
