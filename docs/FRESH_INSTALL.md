@@ -1,5 +1,7 @@
 # Fresh Linux installation and physical qualification
 
+Start this procedure only after the native validation addendum records complete-suite PASS for your architecture. A targeted-only or runner-capability PASS does not open this installation gate.
+
 Linux 1.0.6 is a controlled qualification candidate. Native regression results and the exact frozen archive identity are recorded in the repository validation addendum. Physical installation, real OAuth/inference, document creation, cleanup, reboot identity persistence and endurance are separate gates and have not yet been completed by engineering.
 
 Use this one fresh-install path. Prior installations stay inactive and preserved. No migration, historical fixtures or manual state editing is required. The engineering regression fixtures published alongside the release are not operator installation inputs.
