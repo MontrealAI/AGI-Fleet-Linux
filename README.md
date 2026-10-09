@@ -8,9 +8,11 @@ Linux engineering and qualification workspace for AGI Fleet.
 
 **Runner capability: PASS on Ubuntu 24.04 x86-64 and ARM64.** [Run 37997464388](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/37997464388) verified all four native capabilities. The [retained JSON](validation/runner-capability-37997464388.json) records the exact workflow commit, architectures and checks. Release tests executed by this run: **zero**.
 
-This repository initially contains a native runner capability workflow. It verifies real Unix-domain socket communication, crash-left sockets, hard links and disposable foreign ownership on fresh GitHub-hosted Ubuntu 24.04 x86-64 and ARM64 VMs. Each run retains a separate JSON evidence artifact. A green capability job establishes runner capability only; it does not mean any of the 44 failures or six skips has passed.
+This repository contains native capability checks and a hash-bound frozen-release acceptance workflow. The latter runs the 14 affected test files and then the complete suite on both architectures. Results are pending.
 
-The Fleet implementation, release archives and historical fixtures are not yet published here. Public release of those previously privately distributed materials requires an explicit publication decision. No operator profile, wallet, OAuth material, setup JSON or user document belongs in this repository.
+The capability workflow It verifies real Unix-domain socket communication, crash-left sockets, hard links and disposable foreign ownership on fresh GitHub-hosted Ubuntu 24.04 x86-64 and ARM64 VMs. Each run retains a separate JSON evidence artifact. A green capability job establishes runner capability only; it does not mean any of the 44 failures or six skips has passed.
+
+The three exact frozen archives are now [publicly available as a prerelease](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.6-qualification), with matching published SHA-256 digests and explicit owner approval. Download `AGI_Fleet_Linux_v1.0.6.zip` for the implementation; GitHub-generated source archives currently contain this qualification scaffolding. Historical fixtures are for engineering tests only and are not a fresh-install requirement. No operator profile, wallet, OAuth material, setup JSON or user document belongs in this repository.
 
 ## Acceptance sequence
 
