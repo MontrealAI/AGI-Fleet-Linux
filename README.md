@@ -6,7 +6,7 @@ Linux engineering and qualification workspace for AGI Fleet.
 
 ## Current scope
 
-**Runner capability: PASS on Ubuntu 24.04 x86-64 and ARM64.** [Run 37997071635](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/37997071635) verified all four native capabilities. The [retained JSON](validation/runner-capability-37997071635.json) records the exact workflow commit, architectures and checks. Release tests executed by this run: **zero**.
+**Runner capability: PASS on Ubuntu 24.04 x86-64 and ARM64.** [Run 37997464388](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/37997464388) verified all four native capabilities. The [retained JSON](validation/runner-capability-37997464388.json) records the exact workflow commit, architectures and checks. Release tests executed by this run: **zero**.
 
 This repository initially contains a native runner capability workflow. It verifies real Unix-domain socket communication, crash-left sockets, hard links and disposable foreign ownership on fresh GitHub-hosted Ubuntu 24.04 x86-64 and ARM64 VMs. Each run retains a separate JSON evidence artifact. A green capability job establishes runner capability only; it does not mean any of the 44 failures or six skips has passed.
 
