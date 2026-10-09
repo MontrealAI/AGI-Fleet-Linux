@@ -1,0 +1,30 @@
+{
+  "schema": "agi-native-provisioning-attempt/v1",
+  "runId": 37998288915,
+  "workflowCommit": "a6249239a674759802c753cdcc4774507fc59d63",
+  "status": "PREREQUISITE_FAILED",
+  "releaseTestsExecuted": 0,
+  "architectures": [
+    "x64",
+    "arm64"
+  ],
+  "failureCode": "COMPUTE_NODE_UNTRUSTED",
+  "publishedArchiveDigestsVerified": true,
+  "releaseSourceChanged": false,
+  "explanation": "The runner provisioned Node beneath /opt. The next isolated runner recorded /opt as root-owned mode 0777, which the unchanged executable-chain trust check rejects. Provisioning moved to a newly created root-owned directory beneath /root; no ownership guard or existing runner security control was weakened.",
+  "artifacts": [
+    {
+      "name": "native-preflight-37998288915-x64.zip",
+      "artifactId": 11647662392,
+      "bytes": 2998,
+      "sha256": "4df5642ddb1a9ee85a97bdea7d85fe26f02e287aa195fc672ad2159c2eebb77a"
+    },
+    {
+      "name": "native-preflight-37998288915-arm64.zip",
+      "artifactId": 11647968076,
+      "bytes": 3000,
+      "sha256": "5625c703f7f9e042256454a12c04792d9faa12411e811cc4674937da7cf393f7"
+    }
+  ],
+  "successorRunId": 37998479254
+}
