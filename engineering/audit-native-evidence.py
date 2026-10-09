@@ -26,6 +26,11 @@ def audit(root, release, cases):
         result = json.loads((directory / 'results.json').read_text())
         assert result['sourceUnchanged'] is result['retainedLogsUnchanged'] is result['complete'] is True
         assert result['testFiles'] == len(result['results']) == expected_files
+        actual_files = {row['file'] for row in result['results']}
+        expected_selection = {c['source'] for c in cases} if scope == 'targeted' else {
+            n.removeprefix('AGI_Fleet_Linux_v1.0.6/') for n in release.namelist()
+            if re.fullmatch(r'AGI_Fleet_Linux_v1\.0\.6/(?:tests|packages/[^/]+/tests)/[^/]+\.test\.mjs', n)}
+        assert actual_files == expected_selection and len(actual_files) == expected_files
         inventory = json.loads((directory / 'tested-source.json').read_text())
         for name, expected in inventory.items():
             assert digest(release.read('AGI_Fleet_Linux_v1.0.6/' + name)) == expected, name
