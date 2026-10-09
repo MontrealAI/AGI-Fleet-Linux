@@ -23,7 +23,18 @@ def diagnostic_run(command, log, timeout=10800):
     provisioned = []
     backup = source.parent.parent / 'system-node-originals'
     backup.mkdir()
-    for target in (Path('/usr/local/bin/node'), Path('/usr/bin/node')):
+    # Quarantine the runner's non-pinned /usr/local Node without changing any
+    # directory permissions. The SDK's system lookup can then reach the exact
+    # verified binary at the trusted /usr/bin/node location.
+    ambient = Path('/usr/local/bin/node')
+    if ambient.exists() or ambient.is_symlink():
+        original = {'path': str(ambient), 'classification': 'NON_PINNED_NODE_PRESERVED',
+                    'previousLink': os.readlink(ambient) if ambient.is_symlink() else None,
+                    'previousSHA256': frozen.sha(ambient) if ambient.exists() else None}
+        shutil.copy2(ambient, backup / 'usr-local-node', follow_symlinks=False)
+        ambient.unlink()
+        provisioned.append(original)
+    for target in (Path('/usr/bin/node'),):
         chain = [target.parent, *target.parent.parents]
         for directory in chain:
             info = directory.lstat()
