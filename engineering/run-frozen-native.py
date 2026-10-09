@@ -141,6 +141,12 @@ def main():
     npm = node.parent / 'npm'
     node_receipt['executableSHA256'] = sha(node)
     save(evidence / 'node-download.json', node_receipt)
+    chain = []
+    for path in (node, *node.parents, Path('/opt')):
+        s = path.lstat()
+        chain.append({'path': str(path), 'uid': s.st_uid, 'gid': s.st_gid, 'mode': oct(stat.S_IMODE(s.st_mode))})
+    save(evidence / 'node-ownership-chain.json', chain)
+    print(json.dumps({'nodeOwnershipChain': chain}), flush=True)
     os.environ['PATH'] = str(node.parent) + os.pathsep + os.environ['PATH']
     dependencies = work / 'dependencies'
     prepared = run(['python3', source / 'scripts/prepare-regression-fixtures.py', '--archives',
