@@ -1,0 +1,33 @@
+{
+  "schema": "agi-linux-publication-plan/v1",
+  "status": "AWAITING_EXPLICIT_PUBLICATION_APPROVAL",
+  "destination": "MontrealAI/AGI-Fleet-Linux",
+  "visibility": "public",
+  "scope": "Frozen implementation, historical engineering fixtures and restricted-run evidence become downloadable by anyone.",
+  "releaseSourceChanged": false,
+  "assets": [
+    {
+      "name": "AGI_Fleet_Linux_v1.0.6.zip",
+      "bytes": 402016636,
+      "sha256": "c3faed24d51472a7a69dede9f9d015c433e5b5c7e09aab331b61a02e681340e1",
+      "contents": "All six-role implementation, bundled dependencies, documentation and retained historical material."
+    },
+    {
+      "name": "AGI_Regression_Fixtures_v1.19.6.zip",
+      "bytes": 211966077,
+      "sha256": "4e95b35a90a2f212f2686f2c31bd4eb0d7de8131f1733d4d51e8647359b47014",
+      "contents": "Four pinned historical Agent/Node package archives used only by engineering tests."
+    },
+    {
+      "name": "Linux-Validation-Evidence-v1.0.6.zip",
+      "bytes": 4346684,
+      "sha256": "c85926b733b7f3277c09ada0b9ad7c9e4969ee0fdddac3b84830159fbab339cf",
+      "contents": "Original restricted results, Linux regression logs, comparisons and engineering selection."
+    }
+  ],
+  "maximumFileBytes": 450000000,
+  "operatorProfilesIncluded": false,
+  "operatorAccountAccessRequired": false,
+  "acceptanceStatus": "NOT_QUALIFIED",
+  "nextGate": "After approved publication, provision hash-verified Node 24.21.0 and OpenClaw 2026.9.5; run all 14 outstanding test files, then the complete suite with saved evidence."
+}
