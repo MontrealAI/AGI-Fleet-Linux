@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 import shutil
 import sys
+import os
+import stat
 
 spec = importlib.util.spec_from_file_location('frozen', Path(__file__).with_name('run-frozen-native.py'))
 frozen = importlib.util.module_from_spec(spec)
@@ -17,7 +19,36 @@ def diagnostic_run(command, log, timeout=10800):
         return original_run(command, log, timeout)
     source = Path(command[1]).parents[1]
     evidence = log.parent
+    node = Path(command[command.index('--node') + 1])
+    provisioned = []
+    backup = source.parent.parent / 'system-node-originals'
+    backup.mkdir()
+    for target in (Path('/usr/local/bin/node'), Path('/usr/bin/node')):
+        chain = [target.parent, *target.parent.parents]
+        for directory in chain:
+            info = directory.lstat()
+            if not stat.S_ISDIR(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
+                raise ValueError('Unsafe system Node parent: ' + str(directory))
+        prior = {'path': str(target), 'previousLink': os.readlink(target) if target.is_symlink() else None,
+                 'previousSHA256': frozen.sha(target) if target.exists() else None}
+        if target.exists():
+            shutil.copyfile(target, backup / ('usr-local-node' if 'local' in target.parts else 'usr-node'))
+        temporary = target.with_name('node-agi-provisioned')
+        with node.open('rb') as src, temporary.open('xb') as dst:
+            shutil.copyfileobj(src, dst)
+        temporary.chmod(0o755)
+        temporary.replace(target)
+        prior['verifiedSHA256'] = frozen.sha(target)
+        assert prior['verifiedSHA256'] == frozen.sha(node)
+        provisioned.append(prior)
+    frozen.save(evidence / 'system-node-provisioning.json', provisioned)
     changed = []
+    for identity in source.glob('**/shared/runtime/compute/setup-runtime-identity.mjs'):
+        text = identity.read_text()
+        old = 'error.runtimeIdentityDiagnostic=diagnosticFor(record,actual??error.runtimeIdentityCapture,error,options);throw error;'
+        assert old in text
+        identity.write_text(text.replace(old, 'error.runtimeIdentityDiagnostic=diagnosticFor(record,actual??error.runtimeIdentityCapture,error,options);console.error("DIAGNOSTIC_IDENTITY "+JSON.stringify(safeRuntimeIdentityDiagnostic(error.runtimeIdentityDiagnostic)));throw error;'))
+        changed.append(str(identity.relative_to(source)))
     for worker in source.glob('**/shared/runtime/compute/setup-standard-readiness-service-worker.mjs'):
         text = worker.read_text()
         old = "if(warnings.length||createHash('sha256').update(managedServiceEnvironmentFile(plan.environment)).digest('hex')!==authority.environmentSHA256)"
@@ -43,7 +74,7 @@ def diagnostic_run(command, log, timeout=10800):
         changed.append(str(fixture.relative_to(source)))
     sdk = Path(command[command.index('--openclaw') + 1])
     (evidence / 'sdk-diagnostic-source').mkdir()
-    for name in ('daemon-install-helpers-BQ0CTd58.mjs', 'telemetry-CwSEtSer.mjs'):
+    for name in ('daemon-install-helpers-BQ0CTd58.mjs', 'telemetry-CwSEtSer.mjs', 'daemon-install-plan.shared-C9y880L3.mjs', 'runtime-paths-4M-K3zyp.mjs'):
         shutil.copyfile(sdk / 'dist' / name, evidence / 'sdk-diagnostic-source' / name)
     frozen.save(evidence / 'diagnostic-changes.json', {'classification': 'DIAGNOSTIC_ONLY_NOT_ACCEPTANCE', 'frozenArchiveUnchanged': True, 'modifiedExtractedFiles': changed, 'ownershipChecksBypassed': False, 'operatorAccountsUsed': False})
     base = command[:command.index('--out')]
@@ -57,4 +88,3 @@ def diagnostic_run(command, log, timeout=10800):
 
 frozen.run = diagnostic_run
 frozen.main()
-
