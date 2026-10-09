@@ -1,0 +1,556 @@
+{
+  "schema": "agi-linux-native-case-audit/v1",
+  "createdAt": "2026-10-09T21:52:31.127Z",
+  "releaseSHA256": "c3faed24d51472a7a69dede9f9d015c433e5b5c7e09aab331b61a02e681340e1",
+  "releaseChanged": false,
+  "status": "BLOCKED_NATIVE_RUNNER_REQUIRED",
+  "correctionComplete": false,
+  "newFullSuiteRun": false,
+  "historicalCounts": {
+    "tests": 3876,
+    "suites": 9,
+    "pass": 3826,
+    "fail": 44,
+    "cancelled": 0,
+    "skipped": 6,
+    "todo": 0
+  },
+  "classificationCounts": {
+    "SOCKET_EPERM_DIRECT": 30,
+    "UNIX_SOCKET_UNAVAILABLE": 4,
+    "FOREIGN_OWNERSHIP_UNAVAILABLE": 2,
+    "SOCKET_FIXTURE_CHILD_EXIT_INFERRED": 8,
+    "SOCKET_EPERM_DOWNSTREAM_ASSERTION": 6
+  },
+  "auditedFinalLogCount": 341,
+  "freshRunnerProbes": {
+    "schema": "agi-linux-runner-diagnostic/v1",
+    "recordedAt": "2026-10-09T21:52:31.127Z",
+    "qualification": false,
+    "node": "v24.19.0",
+    "requiredNode": "v24.21.0",
+    "uid": 0,
+    "gid": 0,
+    "platform": "linux",
+    "arch": "x64",
+    "fixtureCodeSHA256": "589ef7e0156c1b40e52ad34b6c9bab87fd64c2c4055053dfc7d70f6e3a0ab893",
+    "unixSocket": {
+      "available": false,
+      "code": "EPERM",
+      "syscall": "listen"
+    },
+    "foreignOwnership": {
+      "available": false,
+      "code": "EINVAL",
+      "syscall": "chown",
+      "foreignUID": 1
+    },
+    "frozenFixtureChild": {
+      "message": "FIXTURE_CHILD_EXITED_BEFORE_READY",
+      "exitCode": 2,
+      "signal": null
+    }
+  },
+  "cases": [
+    {
+      "source": "packages/AGI_Agent/tests/compute-repair.test.mjs",
+      "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__compute-repair.test.mjs.tap",
+      "logSHA256": "63e78ca6365e42bbb9b8d5825cf0b8ec7202905a8696651fc6eb8769fe92c280",
+      "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/compute-restart.test.mjs",
+      "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__compute-restart.test.mjs.tap",
+      "logSHA256": "08702f79cec520c98057a5103510394e02aa1ef07fca207221e8a3d12c86ceab",
+      "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+      "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+      "status": "SKIP",
+      "classification": "UNIX_SOCKET_UNAVAILABLE",
+      "log": "agent__public-browser-integration.test.mjs.tap",
+      "logSHA256": "762ec3979776d7bbc0bbb57ad1c199e389a04eacc1bdbe16a354103317cb4bd3",
+      "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+      "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+      "status": "SKIP",
+      "classification": "UNIX_SOCKET_UNAVAILABLE",
+      "log": "agent__public-browser-integration.test.mjs.tap",
+      "logSHA256": "762ec3979776d7bbc0bbb57ad1c199e389a04eacc1bdbe16a354103317cb4bd3",
+      "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "real foreign-owned runtime directory and socket are rejected",
+      "status": "SKIP",
+      "classification": "FOREIGN_OWNERSHIP_UNAVAILABLE",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+      "status": "FAIL",
+      "classification": "SOCKET_FIXTURE_CHILD_EXIT_INFERRED",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": false
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+      "status": "FAIL",
+      "classification": "SOCKET_FIXTURE_CHILD_EXIT_INFERRED",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": false
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "socket hard-link aliases are rejected and neither pathname is removed",
+      "status": "FAIL",
+      "classification": "SOCKET_FIXTURE_CHILD_EXIT_INFERRED",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": false
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "broker close refuses a replacement file before native close can unlink it",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "worker session cleanup failure still closes broker and preserves primary failure",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+      "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+      "status": "FAIL",
+      "classification": "SOCKET_FIXTURE_CHILD_EXIT_INFERRED",
+      "log": "agent__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "ee75ac6f3dadd67abaf8fb8fa0a1f0a3d0572209d00cd810cb48c73f83065cb9",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": false
+    },
+    {
+      "source": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs",
+      "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__public-web-qualification-import.test.mjs.tap",
+      "logSHA256": "be93ba5d33a93609cf3929ac3812de54335b735123150b44851de4e53db66f9a",
+      "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/service-stop.test.mjs",
+      "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__service-stop.test.mjs.tap",
+      "logSHA256": "33d8964cb8ec381ae7eb94ab8ea96172e1cb4fc30d613d843b6d59642a040a86",
+      "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+      "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "e0973e5227d5b447305f8324345e9f96a1d8df2437fc11614de5f57e33c7bf89",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+      "test": "an in-profile live broker still fails durable completion after successful verification",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DOWNSTREAM_ASSERTION",
+      "log": "agent__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "e0973e5227d5b447305f8324345e9f96a1d8df2437fc11614de5f57e33c7bf89",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+      "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "e0973e5227d5b447305f8324345e9f96a1d8df2437fc11614de5f57e33c7bf89",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+      "test": "strict identity and snapshot reject unexpected live socket web.sock",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "e0973e5227d5b447305f8324345e9f96a1d8df2437fc11614de5f57e33c7bf89",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+      "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "e0973e5227d5b447305f8324345e9f96a1d8df2437fc11614de5f57e33c7bf89",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+      "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "agent__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "e0973e5227d5b447305f8324345e9f96a1d8df2437fc11614de5f57e33c7bf89",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+      "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DOWNSTREAM_ASSERTION",
+      "log": "agent__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "e0973e5227d5b447305f8324345e9f96a1d8df2437fc11614de5f57e33c7bf89",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+      "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DOWNSTREAM_ASSERTION",
+      "log": "agent__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "e0973e5227d5b447305f8324345e9f96a1d8df2437fc11614de5f57e33c7bf89",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/compute-repair.test.mjs",
+      "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__compute-repair.test.mjs.tap",
+      "logSHA256": "baa35d21d424550dd8cdbc0389418783434afaad261d1308da7d4ff4b59537a9",
+      "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/compute-restart.test.mjs",
+      "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__compute-restart.test.mjs.tap",
+      "logSHA256": "59e18ae064b1bd70731d9cddac58708aa5002e5b771b7094af8e38f61cfcba85",
+      "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+      "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+      "status": "SKIP",
+      "classification": "UNIX_SOCKET_UNAVAILABLE",
+      "log": "node__public-browser-integration.test.mjs.tap",
+      "logSHA256": "b5884c6e74b0a8877335b9b0aa171c31d1bcb48106e485e578a725d6023c1a3e",
+      "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+      "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+      "status": "SKIP",
+      "classification": "UNIX_SOCKET_UNAVAILABLE",
+      "log": "node__public-browser-integration.test.mjs.tap",
+      "logSHA256": "b5884c6e74b0a8877335b9b0aa171c31d1bcb48106e485e578a725d6023c1a3e",
+      "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "real foreign-owned runtime directory and socket are rejected",
+      "status": "SKIP",
+      "classification": "FOREIGN_OWNERSHIP_UNAVAILABLE",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+      "status": "FAIL",
+      "classification": "SOCKET_FIXTURE_CHILD_EXIT_INFERRED",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": false
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+      "status": "FAIL",
+      "classification": "SOCKET_FIXTURE_CHILD_EXIT_INFERRED",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": false
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "socket hard-link aliases are rejected and neither pathname is removed",
+      "status": "FAIL",
+      "classification": "SOCKET_FIXTURE_CHILD_EXIT_INFERRED",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": false
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "broker close refuses a replacement file before native close can unlink it",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "worker session cleanup failure still closes broker and preserves primary failure",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+      "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+      "status": "FAIL",
+      "classification": "SOCKET_FIXTURE_CHILD_EXIT_INFERRED",
+      "log": "node__public-browser-runtime.test.mjs.tap",
+      "logSHA256": "6d32fd70e8cb1949391d3b10ff1515a87614895721db01d1653f3ddb69d3bffa",
+      "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+      "historicalNativeChildErrorRetained": false
+    },
+    {
+      "source": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs",
+      "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__public-web-qualification-import.test.mjs.tap",
+      "logSHA256": "39278c5a436a4d0a6c808764102493dbefb3751202e10ca2c79aa8fbf4878f79",
+      "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/service-stop.test.mjs",
+      "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__service-stop.test.mjs.tap",
+      "logSHA256": "fa789cfe745f1b3f41038afd681586322fe6217e943d452702431f86c28f908f",
+      "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+      "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "4273dd5d2c841f9fc3c5ad74e3decac2068d693935d1f9222415089d6573a3aa",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+      "test": "an in-profile live broker still fails durable completion after successful verification",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DOWNSTREAM_ASSERTION",
+      "log": "node__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "4273dd5d2c841f9fc3c5ad74e3decac2068d693935d1f9222415089d6573a3aa",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+      "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "4273dd5d2c841f9fc3c5ad74e3decac2068d693935d1f9222415089d6573a3aa",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+      "test": "strict identity and snapshot reject unexpected live socket web.sock",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "4273dd5d2c841f9fc3c5ad74e3decac2068d693935d1f9222415089d6573a3aa",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+      "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "4273dd5d2c841f9fc3c5ad74e3decac2068d693935d1f9222415089d6573a3aa",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+      "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DIRECT",
+      "log": "node__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "4273dd5d2c841f9fc3c5ad74e3decac2068d693935d1f9222415089d6573a3aa",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+      "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DOWNSTREAM_ASSERTION",
+      "log": "node__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "4273dd5d2c841f9fc3c5ad74e3decac2068d693935d1f9222415089d6573a3aa",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    },
+    {
+      "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+      "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+      "status": "FAIL",
+      "classification": "SOCKET_EPERM_DOWNSTREAM_ASSERTION",
+      "log": "node__setup-runtime-socket.test.mjs.tap",
+      "logSHA256": "4273dd5d2c841f9fc3c5ad74e3decac2068d693935d1f9222415089d6573a3aa",
+      "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+      "historicalNativeChildErrorRetained": null
+    }
+  ]
+}
