@@ -6,6 +6,8 @@ The engineering baseline is Linux 1.0.9 and AGIJobManager commit `191cf3590e5cdc
 
 Both architecture jobs passed in [main run 38052394030](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38052394030). The [hash-bound acceptance addendum](../validation/LINUX_1_0_9_JOB_INTEGRATION_ADDENDUM.md) records the independently audited results and permanent release evidence. On each architecture, all eight standalone scripts, the fresh-manager lifecycle and 777 manager regressions passed. This is additional coverage beyond the 3,897 native tests.
 
+The supplied [Ethereum mainnet deployment](MAINNET_DEPLOYMENT.md) was independently observed against two RPC services. Its exact manager and eight-library runtimes match the same Fleet artifacts. That separate public-chain snapshot records paused intake and does not broaden the local integration evidence below.
+
 ## Reproduce locally
 
 Use Ubuntu 24.04 x86-64 or ARM64, Python 3.12+, Git, network access and two absent directories under existing canonical parents:

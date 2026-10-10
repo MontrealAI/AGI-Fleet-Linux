@@ -5,6 +5,7 @@ from pathlib import Path
 import re
 
 from release_tools import ROOT, SHA256, SIZE, require, sha, verify_source
+from mainnet_evidence import check_mainnet
 
 
 def main():
@@ -59,6 +60,20 @@ def main():
                     and run['productionSourcesMatched'] == run['contractArtifactsMatched'] == 11
                     and run['managerTestsPassed'] == 777 and run['productionQualified'] is False,
                     'Integration acceptance is incomplete')
+    mainnet = current.get('mainnetDeploymentObservation')
+    require(mainnet is not None or not (ROOT / 'validation/mainnet-cfa78f9980ea9b55c705b3e44467bae383ce1fa7.json').exists(),
+            'Mainnet evidence has no reviewed release anchor')
+    if mainnet is not None:
+        report_path = ROOT / mainnet['path']
+        require(sha(report_path) == mainnet['sha256'], 'Mainnet observation digest differs')
+        report = json.loads(report_path.read_text())
+        replay = check_mainnet(report)
+        require(mainnet['chainId'] == report['chainId'] == 1 and mainnet['manager'] == report['manager']
+                and mainnet['deploymentBlock'] == report['creation']['block']
+                and mainnet['observationBlock'] == replay['observationBlock']
+                and mainnet['runtimeCompatibility'] == replay['status']
+                and mainnet['intakeOpenAtObservedBlock'] == replay['intakeOpenAtObservedBlock']
+                and mainnet['productionQualified'] is False, 'Mainnet observation anchor differs')
     for path in [ROOT / 'README.md', *(ROOT / 'docs').glob('*.md'), ROOT / 'engineering/README.md']:
         for target in re.findall(r'\]\(([^\s)]+)\)', path.read_text()):
             if re.match(r'^[a-zA-Z][a-zA-Z0-9+.-]*:', target) or target.startswith('#'):
@@ -68,6 +83,7 @@ def main():
     source = verify_source(mirror) if mirror.exists() else None
     require(not args.require_source or source is not None, 'Frozen source mirror is missing')
     print(json.dumps({'status': 'PASS', 'nativeAcceptance': 'PASS', 'jobIntegration': integration['status'] if integration else None,
+                      'mainnetDeploymentObservation': replay if mainnet else None,
                       'operatorGate': current['operatorGate'],
                       'sourceMirror': source, 'productionQualified': False}, indent=2))
 

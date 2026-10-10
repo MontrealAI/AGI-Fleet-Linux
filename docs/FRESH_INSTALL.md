@@ -82,6 +82,8 @@ Switch to the signer. Test the connection, review the authenticated compute iden
 
 No unexplained sandbox containers may remain; COMPUTE_STOP must be absent; authenticated health must remain current. If tools remain NOT_TESTED or any check is ambiguous, do not advance the ledger. Repeat for Node's independent workflow using its own separate account pair. Protected public browsing starts disabled. Configure-Public-Browser.sh and Import-Public-Browser-Qualification.sh support explicit policy review and exact-host evidence, but require their own independent native qualification; do not enable it merely to complete the offline document test.
 
+The [mainnet deployment guide](MAINNET_DEPLOYMENT.md) supplies the verified manager address and creation block for later contract setup. Complete the physical workflow and independent role/RPC qualification first. A deployment snapshot does not authorize signing or open contract intake.
+
 ## 7. Reboot And Endurance
 After a successful live cycle, record the exact release ZIP hash, OS/architecture, Node/OpenClaw/Docker versions, role, policy digest and sanitized qualification results. Reboot normally. Log into the signer again. The compute account's lingering user services should return on their own. Confirm authenticated identity is unchanged and its approval persisted; rerun inspection, inference, a document workflow and both cleanup checks. Unexpected identity change requires review; do not bypass it by editing state.
 

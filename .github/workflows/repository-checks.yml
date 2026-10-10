@@ -25,4 +25,6 @@ jobs:
       - name: Exercise extraction safety and integrity failures
         run: python3 -m unittest discover -s engineering/tests -v
       - name: Parse engineering scripts
-        run: python3 -m compileall -q engineering
+        run: |
+          python3 -m compileall -q engineering
+          node --check engineering/verify-mainnet-deployment.mjs
