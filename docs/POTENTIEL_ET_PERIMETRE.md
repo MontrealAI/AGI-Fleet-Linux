@@ -1,6 +1,6 @@
 # Fleet + AGIJobManager : quel potentiel ensemble ?
 
-[English](POTENTIAL_AND_SCOPE.md) · [Site Fleet](https://montrealai.github.io/AGI-Fleet-Linux/fr.html) · [Installation](FRESH_INSTALL.md) · [État actuel de qualification](../engineering/current-release.json)
+[English](POTENTIAL_AND_SCOPE.md) · [Site Fleet](https://montrealai.github.io/AGI-Fleet-Linux/fr.html) · [Installation](FRESH_INSTALL.md) · [État actuel de qualification](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.0.10-qualification/Release-Manifest-v1.0.10.json)
 
 **Notre mission : créer une main-d'œuvre d'IA capable et simple à utiliser, qui puisse accomplir une grande part du travail effectué avec un clavier, une souris et un écran.** Cela comprend les applications installées et les outils professionnels avec comptes connectés, ainsi que les fichiers, le code et la recherche publique. L'environnement public isolé est un premier mode de fonctionnement, pas la limite visée du produit.
 
@@ -29,7 +29,7 @@ La [spécification `computer-work/v2`](https://github.com/MontrealAI/AGIJobManag
 | **Comptes** | Aucune session personnelle; les tâches exigeant une connexion sont hors de ce mode. | Applications et sessions volontairement mises à disposition dans le compte dédié. L'opérateur effectue la connexion. |
 | **Autorité** | Politique de travail public et séparation signature-calcul. | Autorisations signées à durée limitée, ressources déclarées, budgets d'actions/temps/coût, révocation et journal durable. Le contrôle du bureau porte sur le compte entier, sans isolation par site ou action. |
 | **Résultats** | Livrable public déclaré et intégration existante aux tâches publiques. | Transmission chiffrée des résultats et parcours distinct de vérification. Aucune publication ou passerelle de règlement automatique pour les tâches privées. |
-| **État** | Acceptation native et intégration de Linux 1.0.9 enregistrées; qualification physique encore ouverte. | Nouveau code sous `workstation/engine/`; préversion de développement réservée aux essais pilotes, exigeant ses propres essais complets et sa qualification physique. L’exécution en production est désactivée; remplir un rapport local ne peut l’activer. Les résultats de 1.0.9 ne lui sont pas transférables. |
+| **État** | Version de qualification Linux 1.0.10; résultats natifs et d’intégration consignés dans son manifeste publié; qualification physique encore en attente. | Nouveau code sous `workstation/engine/`; préversion de développement réservée aux essais pilotes, exigeant ses propres essais complets et sa qualification physique. L’exécution en production est désactivée; remplir un rapport local ne peut l’activer. La qualification de la version distribuée ne lui est pas transférable. |
 | **Démarrer** | [Installer la version publique](FRESH_INSTALL.md). | [Suivre le démarrage de l'espace autorisé](../workstation/QUICKSTART.md). |
 
 Pour l'espace autorisé, préparer un **compte système ou une machine virtuelle réservé aux tâches, distinct de votre bureau habituel et du compte de signature Fleet**. Une autorisation signée peut encadrer une exécution et ses ressources, mais le contrôle général du clavier et de la souris peut atteindre tous les fichiers, terminaux, sessions et applications accessibles au compte. Les noms d'applications ou de domaines ne constituent pas une isolation plus étroite. Limiter cet accès par le provisionnement du compte et les permissions des services. Les réserves de coût de l’exécution ne plafonnent pas les achats ou services accessibles dans une application connectée; ils exigent leurs propres contrôles au niveau du compte.
@@ -117,7 +117,7 @@ Ce bilan décrit **Linux 1.0.9**; il ne constitue pas une affirmation permanente
 
 L'intégration utilise une chaîne en mémoire, des jetons de test et des dispositifs simulant génération, transport du contenu et identités. Ses clients Node et portefeuilles distincts partagent un même contrôleur de test. Des jours simulés ne prouvent pas l'endurance en temps réel. Consulter les [preuves d'intégration](JOB_INTEGRATION.md), l'[addendum d'acceptation lié aux empreintes](../validation/LINUX_1_0_9_JOB_INTEGRATION_ADDENDUM.md) et l'[observation du réseau principal](MAINNET_DEPLOYMENT.md).
 
-Pour décider aujourd'hui, consulter le [manifeste actuel](../engineering/current-release.json) et le [registre de qualification physique](PHYSICAL_QUALIFICATION.md). Un nouveau modèle, outil, environnement ou règlement nécessite une nouvelle qualification pertinente; une réussite antérieure ne se transfère pas automatiquement.
+Pour décider aujourd'hui, consulter le [manifeste actuel](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.0.10-qualification/Release-Manifest-v1.0.10.json) et le [registre de qualification physique](PHYSICAL_QUALIFICATION.md). Un nouveau modèle, outil, environnement ou règlement nécessite une nouvelle qualification pertinente; une réussite antérieure ne se transfère pas automatiquement.
 
 ## Une feuille de route vers une couverture étendue
 

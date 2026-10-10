@@ -1,6 +1,6 @@
 # Fleet + AGIJobManager: what can they make possible?
 
-[Français](POTENTIEL_ET_PERIMETRE.md) · [Fleet website](https://montrealai.github.io/AGI-Fleet-Linux/) · [Installation](FRESH_INSTALL.md) · [Current qualification status](../engineering/current-release.json)
+[Français](POTENTIEL_ET_PERIMETRE.md) · [Fleet website](https://montrealai.github.io/AGI-Fleet-Linux/) · [Installation](FRESH_INSTALL.md) · [Current qualification status](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.0.10-qualification/Release-Manifest-v1.0.10.json)
 
 **The mission is to build a capable, easy-to-use AI workforce that can perform a large fraction of the work people do with a keyboard, mouse and screen.** That includes work in installed applications and signed-in business tools, alongside files, code and public research. The public sandbox is an initial operating mode, not the intended boundary of the product.
 
@@ -29,7 +29,7 @@ The [`computer-work/v2` specification](https://github.com/MontrealAI/AGIJobManag
 | **Account access** | No personal browser session; login-dependent tasks are outside this mode. | The applications and sessions deliberately made available in the dedicated account. The operator signs in. |
 | **Authority** | Public-work policy and signer/compute separation. | Signed, expiring grants, declared resources, action/time/cost budgets, revocation and a durable action journal. Desktop authority is account-wide, not a per-site or per-action sandbox. |
 | **Outputs** | The declared public deliverable and existing public-job integration. | Encrypted result handoffs and a separate reviewer workflow. No automatic private-job publication or settlement bridge. |
-| **Status** | Linux 1.0.9 native and integration acceptance recorded; physical gates remain open. | New source under `workstation/engine/`; a pilot-only development preview requiring its own end-to-end and physical qualification. Production execution is disabled; completing a local report cannot enable it. It does not inherit 1.0.9's test results. |
+| **Status** | Linux 1.0.10 qualification release; native and integration results are recorded in its published manifest; physical qualification remains pending. | New source under `workstation/engine/`; a pilot-only development preview requiring its own end-to-end and physical qualification. Production execution is disabled; completing a local report cannot enable it. It does not inherit qualification from the packaged release. |
 | **Start** | [Install the public-work release](FRESH_INSTALL.md). | [Follow the workspace quickstart](../workstation/QUICKSTART.md). |
 
 For the authorized workspace, prepare a **task-only OS account or VM, separate from your normal desktop and the Fleet signing account**. A signed grant can authorize a run and bound its resources, but general mouse and keyboard control can reach every file, terminal, session and application available to that OS account. Application or domain labels do not enforce narrower isolation. Use account provisioning and service-side permissions to limit that reach. Run cost reserves are not a spending cap on purchases or services reached through a signed-in application; those need their own account-level controls.
@@ -117,7 +117,7 @@ Snapshot for **Linux 1.0.9**, not an evergreen readiness claim. The [manifest at
 
 Integration uses an in-process chain, mock tokens and generation/content/identity fixtures. Node clients and wallets share one controller. Simulated days are not real-time endurance. Read [integration evidence](JOB_INTEGRATION.md), [hash-bound acceptance addendum](../validation/LINUX_1_0_9_JOB_INTEGRATION_ADDENDUM.md) and [mainnet observation](MAINNET_DEPLOYMENT.md).
 
-Check the [current manifest](../engineering/current-release.json) and [physical qualification ledger](PHYSICAL_QUALIFICATION.md). A changed model, tool, image or policy needs relevant new qualification.
+Check the [current manifest](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.0.10-qualification/Release-Manifest-v1.0.10.json) and [physical qualification ledger](PHYSICAL_QUALIFICATION.md). A changed model, tool, image or policy needs relevant new qualification.
 
 ## A qualification roadmap toward broad coverage
 
