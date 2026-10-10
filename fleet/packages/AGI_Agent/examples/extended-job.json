@@ -1,0 +1,32 @@
+{
+  "schema": "agi-agent-job/v1",
+  "dataPolicy": "public",
+  "task": "Summarize the supplied public announcement in two concise sentences. Use only supplied facts.",
+  "inputs": "The sample library opens a new reading room on Monday. It has 20 seats and is open from 9 am to 5 pm.",
+  "acceptance": {
+    "schema": "agi-node-job/v1",
+    "profile": "json-rules/v1",
+    "title": "Public reading-room announcement",
+    "rules": [
+      {
+        "id": "summary-type",
+        "path": "/summary",
+        "op": "type",
+        "value": "string"
+      },
+      {
+        "id": "summary-length",
+        "path": "/summary",
+        "op": "stringLength",
+        "min": 30,
+        "max": 350
+      },
+      {
+        "id": "seats",
+        "path": "/seats",
+        "op": "equals",
+        "value": 20
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "montreal-ai-private-agi-agent",
+  "version": "1.0.9",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "scripts": {
+    "start": "node src/launch.mjs",
+    "app": "node src/launch.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:integration": "node tests/integration.mjs",
+    "verify": "node scripts/verify-package.mjs",
+    "test:contracts": "node scripts/verify-contract-artifacts.mjs",
+    "test:openclaw": "node tests/openclaw-gateway.mjs",
+    "docs:build": "node scripts/render-docs.mjs",
+    "monitor": "node fleet/monitor.mjs",
+    "test:identity": "node tests/integration-identity.mjs",
+    "test:finalization": "node tests/integration-finalization.mjs",
+    "test:recovery": "node tests/integration-budget-recovery.mjs",
+    "test:workstation": "node --test tests/workstation.test.mjs",
+    "test:workstation-browser": "node tests/workstation-browser.mjs",
+    "test:openclaw-workstation": "node tests/openclaw-workstation.mjs",
+    "test:computer-lifecycle": "node tests/integration-computer.mjs",
+    "test:studio": "node --test tests/studio.test.mjs",
+    "test:studio-browser": "node tests/studio-browser.mjs",
+    "test:autonomy": "node --test tests/autonomy.test.mjs",
+    "admission": "node scripts/admission.mjs",
+    "docs:check": "node scripts/check-guides.mjs",
+    "workforce": "node workforce/cli.mjs",
+    "workforce:benchmark": "node workforce/benchmark.mjs",
+    "workforce:qualify": "node workforce/core/workforce.cjs",
+    "workforce:project": "node workforce/project.mjs",
+    "workforce:plan": "node workforce/core/capacity-plan.cjs",
+    "workforce:economics": "node workforce/core/project-economics.cjs",
+    "review-time": "node scripts/review-time.mjs",
+    "test:wallet": "node --test tests/wallet-recovery.test.mjs",
+    "test:wallet-browser": "node tests/wallet-browser.mjs",
+    "test:backup": "node --test tests/backup-state.test.mjs tests/operational-state.test.mjs",
+    "guide:build": "node scripts/build-genesis-guide.mjs",
+    "test:genesis": "node --test tests/genesis-*.test.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ethers": "6.17.0",
+    "ws": "8.21.0"
+  },
+  "devDependencies": {
+    "hardhat": "3.17.0",
+    "marked": "17.0.5",
+    "solc": "0.8.37"
+  }
+}

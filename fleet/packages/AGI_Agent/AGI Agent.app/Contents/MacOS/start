@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+AGI_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/../../.." && pwd)
+. "$AGI_ROOT/scripts/node-runtime.sh"
+if ! agi_select_node_24; then
+  /usr/bin/open "$AGI_ROOT/START_HERE.html"
+  /usr/bin/osascript -e 'display dialog "First install Node.js 24.19.0 or later within 24.x using the official installer linked in Start Here. Then open AGI Agent again. No terminal commands or package installation are needed." buttons {"OK"} default button "OK" with title "AGI Agent — one-time setup"'
+  exit 0
+fi
+exec "$AGI_RUNTIME_NODE" "$AGI_ROOT/src/launch-helper.mjs" "$@"

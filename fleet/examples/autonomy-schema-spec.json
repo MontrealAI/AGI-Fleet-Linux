@@ -1,0 +1,42 @@
+{
+  "schema": "agi-autonomy-job/v1",
+  "title": "Complete public quality record",
+  "task": "Produce a complete deliverable satisfying every formal criterion in acceptance.",
+  "inputs": "Public inputs only. Replace this example with your complete task.",
+  "dataPolicy": "public",
+  "acceptance": {
+    "schema": "agi-node-job/v1",
+    "profile": "json-schema-2020-12/v1",
+    "title": "Complete public quality record",
+    "acceptanceSchema": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "const": "AGI-001"
+        },
+        "priceUSDC": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "available": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "productId",
+        "priceUSDC",
+        "available"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "resolution": {
+    "mode": "formal-only/v1",
+    "moderators": [
+      "0x0000000000000000000000000000000000000004"
+    ],
+    "neutralRefund": true
+  }
+}

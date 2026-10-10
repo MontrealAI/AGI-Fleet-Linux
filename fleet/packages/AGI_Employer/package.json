@@ -1,0 +1,23 @@
+{
+  "name": "montreal-ai-agi-employer",
+  "version": "1.0.9",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "scripts": {
+    "start": "node ops/launch.mjs --role employer",
+    "test": "node --test tests/*.test.mjs",
+    "docs:check": "node scripts/check-guides.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ethers": "6.17.0"
+  },
+  "devDependencies": {
+    "hardhat": "3.17.0",
+    "marked": "17.0.5",
+    "solc": "0.8.37"
+  }
+}

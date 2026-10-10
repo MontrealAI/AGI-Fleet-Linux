@@ -1,0 +1,22 @@
+export const sampleSpec = {
+  schema: "agi-node-job/v1",
+  profile: "json-rules/v1",
+  title: "Deliver a verified catalogue record",
+  rules: [
+    { id: "product-id", path: "/productId", op: "equals", value: "AGI-001" },
+    {
+      id: "description-length",
+      path: "/description",
+      op: "stringLength",
+      min: 30,
+      max: 200,
+    },
+    { id: "price", path: "/priceUSDC", op: "numberRange", min: 1, max: 100 },
+  ],
+};
+export const goodDelivery = {
+  productId: "AGI-001",
+  description:
+    "A clearly described example catalogue product for the private AGI Node demo.",
+  priceUSDC: 25,
+};

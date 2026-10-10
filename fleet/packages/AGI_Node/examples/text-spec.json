@@ -1,0 +1,22 @@
+{
+  "schema": "agi-node-job/v1",
+  "profile": "text-checks/v1",
+  "title": "Notice with explicit wording",
+  "checks": [
+    {
+      "id": "heading",
+      "op": "startsWith",
+      "value": "Delivery report"
+    },
+    {
+      "id": "evidence",
+      "op": "contains",
+      "value": "Evidence verified"
+    },
+    {
+      "id": "no-placeholder",
+      "op": "excludes",
+      "value": "TODO"
+    }
+  ]
+}

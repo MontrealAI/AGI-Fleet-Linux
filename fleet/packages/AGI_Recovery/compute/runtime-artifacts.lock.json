@@ -1,0 +1,197 @@
+{
+  "schema": "agi-runtime-artifact-lock/v1",
+  "refreshedAt": "2026-10-03",
+  "node": {
+    "supportedRange": ">=24.19.0 <25",
+    "preferredVersion": "24.21.0",
+    "lts": "Krypton",
+    "release": "https://nodejs.org/en/blog/release/v24.21.0",
+    "checksums": "https://nodejs.org/dist/v24.21.0/SHASUMS256.txt",
+    "archives": [
+      {
+        "platform": "darwin-arm64",
+        "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-darwin-arm64.tar.xz",
+        "sha256": "6239d4cf92d864487ec8cd3615038f7b67e7f58b77b21cd2f09ea9fbd68065fe"
+      },
+      {
+        "platform": "darwin-x64",
+        "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-darwin-x64.tar.xz",
+        "sha256": "0ae5a24c24bb7d015cd816c5036b3f90f2945aa872fcf54e58da054753b3a299"
+      },
+      {
+        "platform": "linux-x64",
+        "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz",
+        "sha256": "fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6"
+      },
+      {
+        "platform": "linux-arm64",
+        "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-arm64.tar.xz",
+        "sha256": "6ad1325edbdb5649c379b75a237147a666c95d4f9ae8d340fef2d1575d289ad2"
+      }
+    ]
+  },
+  "openclaw": {
+    "version": "2026.9.5",
+    "installedProfileBaseline": "2026.9.5",
+    "release": "https://github.com/openclaw/openclaw/releases/tag/v2026.9.5",
+    "commit": "ec9c1a13db8938e5a3eaa51fca2e981cde2395a9",
+    "tarball": "https://registry.npmjs.org/openclaw/-/openclaw-2026.9.5.tgz",
+    "integrity": "sha512-TCO/ImVLh5HkF4tdfo7iriIa7kT6iYkIr/jR5ZOkePGFGhUx5Oe7DE716Y1DzzG2teRAVDdCjgJDu1A24Yta7w==",
+    "tarballSHA256": "1fb6ef4fae447af14f1e3b1028334f39146d181a66a4cce2848d4f741c636340",
+    "inventoryFile": "openclaw-2026.9.5.inventory.json",
+    "inventorySHA256": "69e615e84587797f9936acd79bef8c415fdee449034cac301b42167d50ce0530",
+    "fileCount": 11428,
+    "providerAuthSDK": {
+      "path": "dist/plugin-sdk/provider-auth.js",
+      "sha256": "da1c1b7c46afaa074d935bd7ff8141b00e88895b7c778fd3e6527fbcea0bb5dd"
+    },
+    "nativePackage": {
+      "name": "@openclaw/fs-safe",
+      "version": "0.13.1",
+      "probe": "Public config.configureFsSafeNative({mode:\"require\"}) and copy.readCloneFileMetadata([]); no filesystem paths or repair downloads."
+    },
+    "provenance": {
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/openclaw@2026.9.5",
+      "provenance": {
+        "predicateType": "https://slsa.dev/provenance/v1"
+      }
+    },
+    "scope": "Every file in the official npm tarball. External installed dependencies under root node_modules are pinned at download by the consumer lock but are not continuously byte-attested by this inventory.",
+    "consumerPackage": {
+      "packageFile": "runtime-package/package.json",
+      "packageSHA256": "46d9c51412307ad449e45cb25bf164a41e7ef89d34eab3b2a5437a0b04b1c1bb",
+      "lockFile": "runtime-package/package-lock.json",
+      "lockSHA256": "4cc6523e51c737940e9712b8a2d8b83d6c64632d4e1aef26186b39d626648ca3",
+      "lockVersion": 3,
+      "entries": 376,
+      "installFlags": [
+        "ci",
+        "--ignore-scripts",
+        "--omit=dev",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "scope": "All registry tarballs are exact-URL/SHA512 pinned at install. Platform-native execution requires qualification on the target Mac."
+    }
+  },
+  "dockerDesktop": {
+    "qualificationTarget": "4.93.0",
+    "operatorReportedInstalled": "4.93.0",
+    "platform": "darwin-arm64",
+    "release": "https://docs.docker.com/desktop/release-notes/#4930",
+    "url": "https://desktop.docker.com/mac/main/arm64/240920/Docker.dmg",
+    "sha256": "bf062f45334c711bd2fc2ed47a5588d050fbb950be3ae3aa4ac9826f04ad4dba",
+    "validation": "NOT_RUN: Apple Silicon Mac and Docker Desktop unavailable in the Linux verification environment."
+  },
+  "dockerBases": [
+    {
+      "image": "node:24.21.0-bookworm-slim@sha256:0e0ff40c39bc087845bfb27465a0df4ea419520094bc35842ff83dd8cbe6f9b6",
+      "source": "https://registry-1.docker.io/v2/library/node/manifests/sha256:0e0ff40c39bc087845bfb27465a0df4ea419520094bc35842ff83dd8cbe6f9b6",
+      "sha256_match": true,
+      "mediaType": "application/vnd.oci.image.index.v1+json",
+      "platforms": [
+        {
+          "architecture": "amd64",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "arm64",
+          "os": "linux",
+          "variant": "v8"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "ppc64le",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        }
+      ]
+    },
+    {
+      "image": "debian:bookworm-slim@sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+      "source": "https://registry-1.docker.io/v2/library/debian/manifests/sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+      "sha256_match": true,
+      "mediaType": "application/vnd.oci.image.index.v1+json",
+      "platforms": [
+        {
+          "architecture": "amd64",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "arm",
+          "os": "linux",
+          "variant": "v7"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "arm64",
+          "os": "linux",
+          "variant": "v8"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "386",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "ppc64le",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Node archive SHA-256 verified against official signed checksum content; this does not attest an existing Mac installation.",
+    "Docker Desktop checksum fetched; DMG not downloaded or executed.",
+    "Base image OCI index digests reverified; images were not built or run here.",
+    "Debian apt packages remain repository-resolved at build time. Recipe plus base digest does not imply reproducible apt closure. Built runtime image IDs are captured and sealed separately.",
+    "OpenClaw npm inventory covers package-owned bytes and included bundled dependencies. Additional installed npm dependency closure is not attested by this inventory."
+  ],
+  "buildInputs": {
+    "dockerfileFrontend": {
+      "reference": "docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e",
+      "source": "https://registry-1.docker.io/v2/docker/dockerfile/manifests/sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e",
+      "registryDigestVerified": true,
+      "tagAndDigestBodiesMatch": true,
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "execution": "NOT_RUN: no Docker build was performed here."
+    },
+    "aptClosure": "Repository-resolved at image build time; not changed or qualified as reproducible in this release."
+  },
+  "dependencyDecision": {
+    "requestedEvaluation": "2026.9.6",
+    "selectedCorrectiveTarget": "2026.9.5",
+    "reason": "2026.9.6 Doctor migration reproduced a failure/candidate-corruption blocker. Retain the existing supported profile version and stage auth ordering through its public SDK without invoking Doctor. Rejected9.6 research evidence is preserved separately."
+  }
+}

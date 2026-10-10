@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 6,
+  "epoch": "REPLACE_WITH_REVIEWED_ALLOCATION_ID",
+  "chainId": 1,
+  "manager": "0x0000000000000000000000000000000000000000",
+  "wallet": "0x0000000000000000000000000000000000000000",
+  "role": "reviewer",
+  "trustedKeys": {},
+  "classes": [],
+  "maxPacketAgeSeconds": 600,
+  "maxEvidenceAgeSeconds": 86400,
+  "minimumSamples": 100,
+  "minimumHorizonDays": 180,
+  "limits": {
+    "employer": {
+      "minimumExpectedNetUSDC": "0",
+      "maximumScenarioLossUSDC": "0"
+    },
+    "agent": {
+      "minimumExpectedNetUSDC": "0",
+      "maximumScenarioLossUSDC": "0"
+    },
+    "reviewer": {
+      "minimumExpectedNetUSDC": "0",
+      "maximumScenarioLossUSDC": "0"
+    }
+  },
+  "maxOpenExposureUSDC": "0",
+  "maxEpochCostUSDC": "0",
+  "maxOpenJobs": 1,
+  "maxGasWeiPerJob": "0",
+  "maxPreparationAttempts": 4,
+  "calibration": {
+    "allowedKinds": [
+      "observed"
+    ],
+    "environmentSha256": "REPLACE_WITH_SHA256_OF_REVIEWED_ENVIRONMENT",
+    "minimumEvaluationSamples": 100,
+    "maximumProbabilityErrorPpm": 0,
+    "minimumCaseWeightPpm": 1,
+    "maximumObservedLossRatePpm": 0
+  },
+  "reviewPayment": "operator-budget"
+}

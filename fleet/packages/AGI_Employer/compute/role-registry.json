@@ -1,0 +1,176 @@
+{
+  "schema": "agi-fleet-role-registry/v1",
+  "fleet": "1.0.5",
+  "runtime": "1.0.0",
+  "roles": {
+    "agent": {
+      "display": "AGI Agent",
+      "version": "1.0.5",
+      "package": "AGI_Agent",
+      "profile": "agi-compute",
+      "port": 18894,
+      "gatewayPort": 18896,
+      "schema": "agi-agent-openclaw-setup/v1",
+      "oauth": [
+        "agi-creator",
+        "agi-checker",
+        "agi-reviewer"
+      ],
+      "executor": "agi-creator",
+      "checker": "agi-checker",
+      "reviewer": "agi-reviewer",
+      "tools": "sandboxed-workstation",
+      "settlement": "accept assigned AGI Jobs and claim earned USDC within signer policy",
+      "primaryModel": "openai/gpt-6-astra",
+      "maxRuns24h": 256,
+      "maxImages24h": 32,
+      "computeLabel": "ai.montreal.agi-compute",
+      "gatewayLabel": "ai.openclaw.agi-compute",
+      "standard": true,
+      "verified": true,
+      "signerSeparation": true,
+      "computeSettlementAuthority": false
+    },
+    "node": {
+      "display": "AGI Node",
+      "version": "1.0.5",
+      "package": "AGI_Node",
+      "profile": "agi-node-compute",
+      "port": 18898,
+      "gatewayPort": 18900,
+      "schema": "agi-node-openclaw-setup/v1",
+      "oauth": [
+        "agi-checker",
+        "agi-reviewer"
+      ],
+      "executor": null,
+      "checker": "agi-checker",
+      "reviewer": "agi-reviewer",
+      "tools": "sandboxed-review",
+      "settlement": "independent validation and earned review claims within signer policy",
+      "primaryModel": "openai/gpt-6-astra",
+      "maxRuns24h": 256,
+      "maxImages24h": 32,
+      "computeLabel": "ai.montreal.agi-node-compute",
+      "gatewayLabel": "ai.openclaw.agi-node-compute",
+      "standard": true,
+      "verified": true,
+      "signerSeparation": true,
+      "computeSettlementAuthority": false
+    },
+    "moderator": {
+      "display": "AGI Moderator",
+      "version": "1.0.5",
+      "package": "AGI_Moderator",
+      "profile": "agi-moderator-compute",
+      "port": 18910,
+      "gatewayPort": 18912,
+      "schema": "agi-fleet-role-openclaw-setup/v2",
+      "oauth": [
+        "agi-moderator"
+      ],
+      "executor": null,
+      "checker": "agi-moderator",
+      "reviewer": "agi-moderator",
+      "tools": "none",
+      "settlement": "appointed, conflict-free dispute resolution after formal evidence checks; model may veto only",
+      "primaryModel": "openai/gpt-6-astra",
+      "maxRuns24h": 256,
+      "maxImages24h": 0,
+      "computeLabel": "ai.montreal.agi-moderator-compute",
+      "gatewayLabel": "ai.openclaw.agi-moderator-compute",
+      "standard": true,
+      "verified": true,
+      "signerSeparation": true,
+      "computeSettlementAuthority": false
+    },
+    "employer": {
+      "display": "AGI Employer",
+      "version": "1.0.5",
+      "package": "AGI_Employer",
+      "profile": "agi-employer-compute",
+      "port": 18920,
+      "gatewayPort": 18922,
+      "schema": "agi-fleet-role-openclaw-setup/v2",
+      "oauth": [
+        "agi-employer"
+      ],
+      "executor": null,
+      "checker": "agi-employer",
+      "reviewer": "agi-employer",
+      "tools": "none",
+      "settlement": "own scoped jobs, buyer acceptance/dispute and bounded funding in signer policy",
+      "primaryModel": "openai/gpt-6-astra",
+      "maxRuns24h": 256,
+      "maxImages24h": 0,
+      "computeLabel": "ai.montreal.agi-employer-compute",
+      "gatewayLabel": "ai.openclaw.agi-employer-compute",
+      "standard": true,
+      "verified": true,
+      "signerSeparation": true,
+      "computeSettlementAuthority": false
+    },
+    "evidence": {
+      "display": "AGI Evidence",
+      "version": "1.0.5",
+      "package": "AGI_Evidence",
+      "profile": "agi-evidence-compute",
+      "port": 18930,
+      "gatewayPort": 18932,
+      "schema": "agi-fleet-role-openclaw-setup/v2",
+      "oauth": [
+        "agi-evidence"
+      ],
+      "executor": null,
+      "checker": "agi-evidence",
+      "reviewer": "agi-evidence",
+      "tools": "none",
+      "settlement": "none; read-only evidence service without signing key",
+      "primaryModel": "openai/gpt-6-astra",
+      "maxRuns24h": 256,
+      "maxImages24h": 0,
+      "computeLabel": "ai.montreal.agi-evidence-compute",
+      "gatewayLabel": "ai.openclaw.agi-evidence-compute",
+      "standard": true,
+      "verified": true,
+      "signerSeparation": true,
+      "computeSettlementAuthority": false
+    },
+    "recovery": {
+      "display": "AGI Recovery",
+      "version": "1.0.5",
+      "package": "AGI_Recovery",
+      "profile": "agi-recovery-compute",
+      "port": 18950,
+      "gatewayPort": 18952,
+      "schema": "agi-fleet-role-openclaw-setup/v2",
+      "oauth": [
+        "agi-recovery"
+      ],
+      "executor": null,
+      "checker": "agi-recovery",
+      "reviewer": "agi-recovery",
+      "tools": "none",
+      "settlement": "scoped expire/finalize/refund and beneficiary claims after protocol deadlines",
+      "primaryModel": "openai/gpt-6-astra",
+      "maxRuns24h": 256,
+      "maxImages24h": 0,
+      "computeLabel": "ai.montreal.agi-recovery-compute",
+      "gatewayLabel": "ai.openclaw.agi-recovery-compute",
+      "standard": true,
+      "verified": true,
+      "signerSeparation": true,
+      "computeSettlementAuthority": false
+    }
+  },
+  "utilities": {
+    "orchestrator": {
+      "signerRequired": true,
+      "computeRole": "delegates to isolated role accounts"
+    },
+    "monitor": {
+      "signerRequired": false,
+      "authority": "authenticated read-only observation"
+    }
+  }
+}

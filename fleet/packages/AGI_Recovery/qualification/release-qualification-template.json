@@ -1,0 +1,1407 @@
+{
+  "schema": "agi-fleet-release-qualification/v1",
+  "release": {
+    "version": "1.19.4",
+    "archiveSha256": null,
+    "sourceSha256": null,
+    "archiveEvidenceId": null,
+    "sourceEvidenceId": null
+  },
+  "scope": "all-six-roles-on-selected-deployment",
+  "frozenAt": null,
+  "evidence": [],
+  "gates": {
+    "in_place_update": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "identity_approval": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "approval_resilience": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "live_tools": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "cleanup": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "cleanup_reconciliation": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "cleanup_capacity": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "full_job_cycle": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "role_independence": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "lifecycle_endurance": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "distribution": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "outstanding_tests": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    },
+    "capacity_and_economics": {
+      "status": "NOT_RUN",
+      "measurement": null,
+      "evidenceIds": []
+    }
+  },
+  "deployment": {
+    "repository": "MontrealAI/AGIJobManager",
+    "commit": "db876a8021da6afcf7aa974489d13374e6d188b5",
+    "sourceTag": "v1.1.0",
+    "chainId": null,
+    "manager": null,
+    "abiSha256": null,
+    "bytecodeSha256": null,
+    "token": null,
+    "tokenDecimals": null,
+    "confirmations": null,
+    "observedBlock": null,
+    "observedBlockHash": null,
+    "supportedTransitions": [],
+    "evidenceIds": []
+  },
+  "environment": {
+    "physicalMac": null,
+    "signerAccount": "agiagentv1",
+    "computeAccount": "agiagentcomputev3",
+    "newAccountCreated": null,
+    "walletPreserved": null,
+    "oauthPreserved": null,
+    "oldFailureEvidencePreserved": null
+  },
+  "soak": {
+    "measurement": null,
+    "startedAt": null,
+    "finishedAt": null,
+    "activeSeconds": null,
+    "rebootVerified": null,
+    "interruptionRecoveryVerified": null,
+    "evidenceIds": []
+  },
+  "outstandingTests": {
+    "relevantFailures": null,
+    "relevantSkips": null,
+    "relevantTimeouts": null,
+    "capableEnvironment": null,
+    "evidenceIds": []
+  },
+  "cases": [
+    {
+      "id": "case-01",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-02",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-03",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-04",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-05",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-06",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-07",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-08",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-09",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-10",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-11",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-12",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-13",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-14",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-15",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-16",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-17",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-18",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-19",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-20",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-21",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-22",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-23",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    },
+    {
+      "id": "case-24",
+      "status": "NOT_RUN",
+      "execution": "NOT_RUN",
+      "inputClassification": null,
+      "inputPermission": "public-or-synthetic-only",
+      "deliverableEvidenceIds": [],
+      "toolEvidenceIds": [],
+      "openedAndInspected": null,
+      "criteria": [
+        {
+          "id": "C1",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C2",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        },
+        {
+          "id": "C3",
+          "status": "NOT_RUN",
+          "evidenceIds": []
+        }
+      ],
+      "review": {
+        "decision": "NOT_REVIEWED",
+        "independenceVerified": null,
+        "agentController": null,
+        "reviewerController": null,
+        "assignmentEvidenceIds": [],
+        "decisionEvidenceIds": []
+      },
+      "elapsedSeconds": null,
+      "humanInterventionSeconds": null,
+      "usage": {
+        "attemptedRequests": null,
+        "reservedSlots": null,
+        "providerCalls": null,
+        "toolRuns": null,
+        "images": null,
+        "billableUsage": null,
+        "evidenceIds": []
+      },
+      "payment": {
+        "classification": "NONE",
+        "finalized": null,
+        "chainId": null,
+        "manager": null,
+        "evidenceIds": []
+      }
+    }
+  ],
+  "economics": {
+    "measurement": null,
+    "metricsEvidenceIds": [],
+    "ledgers": {
+      "jobVolume": [],
+      "fees": [],
+      "providerCosts": [],
+      "refunds": [],
+      "liabilities": []
+    }
+  },
+  "catalogSha256": "ec38f09f48b9944ed71415f7f507d10c8e163a7e231d3d34823491d548a24b66"
+}

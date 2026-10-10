@@ -1,0 +1,42 @@
+{
+  "schema": "agi-node-job/v1",
+  "profile": "computer-work/v1",
+  "title": "Quarterly sales report, spreadsheet and slide",
+  "prompt": "Create an editable Word report, an Excel workbook with live formulas, and a one-slide PowerPoint summary using these public synthetic data: January 120 units, February 150 units, March 180 units. Include total, monthly average, and percentage growth from January to March. Label the data as a public synthetic commissioning fixture. Recalculate the workbook and inspect the rendered files. This task involves no external actions.",
+  "dataPolicy": "public",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "report.docx",
+      "mediaType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "maxBytes": 250000,
+      "requirement": "Readable editable report with the source data and three correct calculations."
+    },
+    {
+      "name": "sales.xlsx",
+      "mediaType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "maxBytes": 250000,
+      "requirement": "Workbook contains source data and formulas, with recalculated displayed totals."
+    },
+    {
+      "name": "summary.pptx",
+      "mediaType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "maxBytes": 250000,
+      "requirement": "One readable slide summarizing the correct total, average and growth."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "accuracy",
+      "requirement": "Report, spreadsheet and slide consistently show total 450, monthly average 150, and January-to-March growth 50%."
+    },
+    {
+      "id": "editable",
+      "requirement": "Office files reopen correctly; workbook contains working formulas and correctly cached calculated values."
+    },
+    {
+      "id": "presentation",
+      "requirement": "Rendered report, spreadsheet and slide have readable text, no clipping, and clearly identify the public synthetic fixture."
+    }
+  ]
+}

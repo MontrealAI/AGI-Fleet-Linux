@@ -1,0 +1,28 @@
+{
+  "schema": "agi-node-job/v1",
+  "profile": "json-schema-2020-12/v1",
+  "title": "Complete public quality record",
+  "acceptanceSchema": {
+    "type": "object",
+    "properties": {
+      "productId": {
+        "type": "string",
+        "const": "AGI-001"
+      },
+      "priceUSDC": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 100
+      },
+      "available": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "productId",
+      "priceUSDC",
+      "available"
+    ],
+    "additionalProperties": false
+  }
+}

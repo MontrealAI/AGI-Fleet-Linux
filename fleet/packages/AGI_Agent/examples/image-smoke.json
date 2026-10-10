@@ -1,0 +1,20 @@
+{
+  "schema": "agi-node-job/v1",
+  "profile": "image-png/v1",
+  "title": "Blue square",
+  "prompt": "Create an original blue square on a white background.",
+  "criteria": [
+    {
+      "id": "blue",
+      "requirement": "One blue square is visible."
+    },
+    {
+      "id": "white",
+      "requirement": "The background is white."
+    }
+  ],
+  "width": 1024,
+  "height": 1024,
+  "maxBytes": 4194304,
+  "dataPolicy": "public"
+}

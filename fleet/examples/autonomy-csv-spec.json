@@ -1,0 +1,42 @@
+{
+  "schema": "agi-autonomy-job/v1",
+  "title": "Checked public catalogue",
+  "task": "Produce a complete deliverable satisfying every formal criterion in acceptance.",
+  "inputs": "Public inputs only. Replace this example with your complete task.",
+  "dataPolicy": "public",
+  "acceptance": {
+    "schema": "agi-node-job/v1",
+    "profile": "csv-table/v1",
+    "title": "Checked public catalogue",
+    "columns": [
+      {
+        "name": "product_id",
+        "type": "string",
+        "min": 3,
+        "max": 20
+      },
+      {
+        "name": "price_usdc",
+        "type": "number",
+        "min": 1,
+        "max": 100
+      },
+      {
+        "name": "available",
+        "type": "boolean"
+      }
+    ],
+    "minRows": 2,
+    "maxRows": 100,
+    "uniqueBy": [
+      "product_id"
+    ]
+  },
+  "resolution": {
+    "mode": "formal-only/v1",
+    "moderators": [
+      "0x0000000000000000000000000000000000000004"
+    ],
+    "neutralRefund": true
+  }
+}

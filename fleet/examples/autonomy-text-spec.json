@@ -1,0 +1,36 @@
+{
+  "schema": "agi-autonomy-job/v1",
+  "title": "Notice with explicit wording",
+  "task": "Produce a complete deliverable satisfying every formal criterion in acceptance.",
+  "inputs": "Public inputs only. Replace this example with your complete task.",
+  "dataPolicy": "public",
+  "acceptance": {
+    "schema": "agi-node-job/v1",
+    "profile": "text-checks/v1",
+    "title": "Notice with explicit wording",
+    "checks": [
+      {
+        "id": "heading",
+        "op": "startsWith",
+        "value": "Delivery report"
+      },
+      {
+        "id": "evidence",
+        "op": "contains",
+        "value": "Evidence verified"
+      },
+      {
+        "id": "no-placeholder",
+        "op": "excludes",
+        "value": "TODO"
+      }
+    ]
+  },
+  "resolution": {
+    "mode": "formal-only/v1",
+    "moderators": [
+      "0x0000000000000000000000000000000000000004"
+    ],
+    "neutralRefund": true
+  }
+}

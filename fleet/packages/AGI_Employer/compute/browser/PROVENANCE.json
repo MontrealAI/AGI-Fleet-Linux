@@ -1,0 +1,31 @@
+{
+  "project": "openclaw/openclaw",
+  "tag": "v2026.9.5",
+  "files": [
+    {
+      "source": "scripts/docker/sandbox/Dockerfile.browser",
+      "sha256": "256044aa469091e2e396d3c54ab6f15d90c88e3a84cb28047546c8187f1cf8f3"
+    },
+    {
+      "source": "scripts/sandbox-browser-entrypoint.sh",
+      "sha256": "132b6af8620360a876ddcecb82ecb02f17f726428987ac8c8b8742dac32a3395"
+    },
+    {
+      "source": "LICENSE",
+      "sha256": "73571b25326281d369087f469842c02444fe39faaecebda4d82ed21ff3a1c29d"
+    }
+  ],
+  "localModifications": [
+    {
+      "file": "Dockerfile",
+      "description": "Pin the Debian Bookworm base to the recorded immutable OCI digest while retaining the imported OpenClaw 2026.9.5 browser recipe."
+    },
+    {
+      "file": "Dockerfile",
+      "description": "Pin the Dockerfile 1.7 frontend to the official registry digest resolved and independently refetched by digest on 2026-10-03.",
+      "reference": "docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e"
+    }
+  ],
+  "packagedDockerfileSHA256": "f0fb081e2b4367790d62d5304edc22e861a8755818c82ec743ad010e47c936e9",
+  "validationScope": "Static source and registry-manifest digest verification only. No Docker build or Apple Silicon execution is claimed. Apt dependencies remain repository-resolved."
+}

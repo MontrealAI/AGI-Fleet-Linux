@@ -1,0 +1,131 @@
+{
+  "schema": "agi-fleet-source-qualification-assessment/v1",
+  "assessedAt": "2026-10-08",
+  "release": "1.19.4",
+  "method": "Read-only inspection of listed source files; no physical Mac, provider, Docker, wallet, RPC or payment operation.",
+  "productionQualified": false,
+  "computeRuntimeModifiedByThisAssessment": false,
+  "operatorSelectedDeployment": null,
+  "findings": [
+    {
+      "id": "contract-source",
+      "status": "IMPLEMENTED_NOT_DEPLOYMENT_QUALIFIED",
+      "sources": [
+        "packages/AGI_Agent/contract/artifact-provenance.json",
+        "packages/AGI_Agent/src/chain.mjs",
+        "packages/AGI_Node/src/chain.mjs"
+      ],
+      "implemented": "Bundled artifacts pin AGIJobManager v1.1.0 source commit db876a8021da6afcf7aa974489d13374e6d188b5. Enrollment checks deployment creation block, manager plus eight linked-library runtimes, native USDC and six decimals; verification rechecks deployed code identities.",
+      "gap": "Distributed defaults have manager empty and deploymentBlock zero. The actual operator-selected chain/address/block/bytecode/token/ABI observations were not available in this review. Do not infer an actual deployment from the default chain ID or Fleet version."
+    },
+    {
+      "id": "chain-event-recovery",
+      "status": "IMPLEMENTED_NOT_LIVE_QUALIFIED",
+      "sources": [
+        "packages/AGI_Agent/src/chain.mjs",
+        "packages/AGI_Node/src/chain.mjs",
+        "shared/operator/ops/chain.mjs",
+        "packages/AGI_Agent/src/store.mjs"
+      ],
+      "implemented": "SQLite job IDs and transactional cursors provide durable ingestion. Confirmed/finalized heights are bounded. Stored cursor hash mismatch stops for reindex/reconciliation.",
+      "gap": "Reorganization and interruption behavior needs evidence against the selected deployment and a capable environment; a fail-closed reindex requirement is not automatic recovery."
+    },
+    {
+      "id": "transaction-reconciliation",
+      "status": "IMPLEMENTED_NOT_LIVE_QUALIFIED",
+      "sources": [
+        "packages/AGI_Agent/src/transactions.mjs",
+        "packages/AGI_Node/src/transactions.mjs",
+        "shared/operator/ops/transactions.mjs"
+      ],
+      "implemented": "Signed transactions are durably reserved before broadcast. Recovery follows the known transaction hash/nonce, verifies receipts and finality, and refuses silent duplicate replacement. Current policy is rechecked before rebroadcast.",
+      "gap": "No actual funded job, independent acceptance, settlement receipt or interrupted live-transaction recovery was performed here."
+    },
+    {
+      "id": "role-authority",
+      "status": "IMPLEMENTED_NOT_END_TO_END_QUALIFIED",
+      "sources": [
+        "shared/operator/ops/policy.mjs",
+        "packages/AGI_Agent/src/transactions.mjs",
+        "packages/AGI_Node/src/transactions.mjs"
+      ],
+      "implemented": "Role allowlists distinguish Employer funding/acceptance/dispute, Agent application/submission, Node validation, Moderator appointed dispute decisions, read-only Evidence, and bounded Recovery finalization/expiry/refund/claims.",
+      "gap": "All-six-role discovery-through-archive qualification remains pending. The internal Creator/Checker/Reviewer workflow is not independent acceptance."
+    },
+    {
+      "id": "durable-queues-and-budgets",
+      "status": "IMPLEMENTED_BOUNDED_LOCAL_PRIMITIVES",
+      "sources": [
+        "packages/AGI_Agent/src/store.mjs",
+        "packages/AGI_Agent/src/admission.mjs",
+        "shared/operator/ops/store.mjs",
+        "shared/operator/ops/funding.mjs",
+        "workforce/core.mjs",
+        "workforce/runner.mjs"
+      ],
+      "implemented": "SQLite queues, atomic admission/funding reservations, unique capacity leases, reviewer windows, bounded retries, account locks, run journals and native heartbeat leases exist. Agent/reviewer capacity is included in Employer reservations.",
+      "gap": "These primitives do not establish a qualified distributed queue or measured fleet throughput. Partitioned leases, backpressure under load, restart recovery, reviewer saturation and long-running resource consumption still need scenario evidence."
+    },
+    {
+      "id": "independent-acceptance",
+      "status": "IMPLEMENTED_ATTESTED_CONTROLS_NOT_OBSERVED_INDEPENDENCE",
+      "sources": [
+        "workforce/review-time.mjs",
+        "workforce/core/workforce.cjs",
+        "workforce/core/capacity-plan.cjs"
+      ],
+      "implemented": "Review-time policy rejects duplicate participant wallets/controllers/failure domains/keys. Workforce qualification requires distinct declared organizations and keys and held-out observed outcomes.",
+      "gap": "Declarations, signatures, different wallets and different process names do not prove organizational independence. Record assignment, conflicts, actual controllers and evidence supporting each decision."
+    },
+    {
+      "id": "cleanup-evidence",
+      "status": "IMPLEMENTED_LIVE_MAC_OUTCOME_PENDING",
+      "sources": [
+        "shared/runtime/compute/cleanup-evidence.mjs",
+        "shared/runtime/compute/sandbox-cleanup.mjs",
+        "shared/runtime/compute/server.mjs"
+      ],
+      "implemented": "Append-only durable starts/finishes, start hashes, allowlisted classifications, exact-session inventory and process-termination/postcondition checks preserve uncertain outcomes and block work. Existing cleanup history survives restart.",
+      "gap": "The original physical-Mac failure root cause remains unobserved here. A zero-attempt or ABSENT inventory is not a live cleanup pass. Base/browser and observer/workspace stages must be exercised after the signer correction."
+    },
+    {
+      "id": "cleanup-reconciliation",
+      "status": "PRODUCTION_BLOCKER",
+      "sources": [
+        "shared/runtime/compute/repair.mjs",
+        "shared/runtime/compute/cleanup-evidence.mjs",
+        "shared/runtime/compute/server.mjs"
+      ],
+      "implemented": "Repair preserves COMPUTE_STOP and historical evidence and does not automatically clear safety stops.",
+      "gap": "A reviewed bounded reconciliation operation that validates retained evidence and restores authority was not implemented in this signer-only change. Do not remove markers or delete evidence manually."
+    },
+    {
+      "id": "cleanup-capacity",
+      "status": "PRODUCTION_BLOCKER",
+      "sources": [
+        "shared/runtime/compute/cleanup-evidence.mjs",
+        "shared/runtime/compute/repair.mjs"
+      ],
+      "implemented": "Inventory exposes observed attempt count and byte count. The enforced bounds are 4096 attempts and 16777216 bytes; new intent reserves space for pending finishes.",
+      "gap": "No verified archival/rotation chain or proactive capacity-warning workflow exists in the inspected runtime. Saturation remains fail-closed. Runtime identity must not be silently changed to address this during the signer-only correction."
+    },
+    {
+      "id": "useful-work-and-economics",
+      "status": "NOT_RUN",
+      "sources": [
+        "qualification/acceptance-catalog.json",
+        "qualification/release-qualification-template.json"
+      ],
+      "implemented": "Twenty-four reusable case specifications cover software, numerical reproduction, public data, documents, spreadsheets, presentations, isolated browser and dedicated native desktop workflows.",
+      "gap": "These are specifications only: zero cases were executed by this qualification work; deliverables, acceptance, costs and payments remain unmeasured. No commercial receipts or throughput results are claimed."
+    }
+  ],
+  "nextEvidenceOrder": [
+    "Test the signer-only correction against existing agiagentv1 and agiagentcomputev3 without creating a new account.",
+    "Demonstrate persisted identity approval, relaunch/reboot and permitted inference.",
+    "Execute actual document tools, collect and inspect artifacts, and verify each applicable cleanup stage.",
+    "Select and verify the actual AGIJobManager deployment; preserve exact observations and supported transitions.",
+    "Execute independently reviewed cases and a contract-backed lifecycle within explicitly authorized budgets.",
+    "Close cleanup reconciliation/capacity gaps through a separately controlled compute update; complete outstanding capable-environment tests and measured 72-hour endurance."
+  ]
+}

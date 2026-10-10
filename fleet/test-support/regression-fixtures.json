@@ -1,0 +1,43 @@
+{
+  "schema": "agi-regression-fixtures/v1",
+  "node": "24.21.0",
+  "openclaw": "2026.9.5",
+  "historical": [
+    {
+      "label": "commissioning",
+      "role": "agent",
+      "relativeRoot": "commissioning/agent/AGI_Agent_Private_v1.24.9",
+      "archiveName": "AGI_Agent_Private_v1.24.9.zip",
+      "archiveSHA256": "21f35e78e593f2f9a9eceafc1c74ca78aad4ad10c96ba58dc210f57459b786de",
+      "archiveBytes": 51822685,
+      "manifestSHA256": "9c6d1c843f347717da95d3003e1b305c1195241b13c5869d112b263e10a92059"
+    },
+    {
+      "label": "commissioning",
+      "role": "node",
+      "relativeRoot": "commissioning/node/AGI_Node_Private_v2.25.9",
+      "archiveName": "AGI_Node_Private_v2.25.9.zip",
+      "archiveSHA256": "eb829fae193e05479965dd3bf182b50234c9d9e124c9c013ed1543c4f6d3d604",
+      "archiveBytes": 54068602,
+      "manifestSHA256": "f5540fb44d11f428b63934aae5dafebf8f060258ba166f572ec2ce5b0c4bd0a8"
+    },
+    {
+      "label": "authority",
+      "role": "agent",
+      "relativeRoot": "authority/agent/AGI_Agent_Private_v1.24.9",
+      "archiveName": "AGI_Agent_Private_v1.24.9.zip",
+      "archiveSHA256": "43d1c36e2da66e29b1762a6b6773f5b7d0208a1986b5d258a26818e0fb0c154a",
+      "archiveBytes": 51910510,
+      "manifestSHA256": "ec89195442b790a8eced827854b42d631e3a3647c79c8ab23e7d84f6c6beabd2"
+    },
+    {
+      "label": "authority",
+      "role": "node",
+      "relativeRoot": "authority/node/AGI_Node_Private_v2.25.9",
+      "archiveName": "AGI_Node_Private_v2.25.9.zip",
+      "archiveSHA256": "c242f0957e1919c2b1322725497cf32fa990d118e8be0011f20054a7253230c9",
+      "archiveBytes": 54156828,
+      "manifestSHA256": "074e56dab7e2d9c195b329312c6dbb23654b22811cddd398f905cfa93db6f708"
+    }
+  ]
+}

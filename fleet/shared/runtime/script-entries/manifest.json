@@ -1,0 +1,40 @@
+{
+  "schema": "agi-script-entry-templates/v1",
+  "entries": [
+    {
+      "template": "setup-agent.mjs.template",
+      "output": "scripts/setup-openclaw.mjs",
+      "roles": [
+        "agent"
+      ],
+      "imports": [
+        "import {setupRole} from '../compute/roles.mjs';"
+      ]
+    },
+    {
+      "template": "setup-node.mjs.template",
+      "output": "scripts/setup-openclaw.mjs",
+      "roles": [
+        "node"
+      ],
+      "imports": [
+        "import {setupRole} from '../compute/roles.mjs';"
+      ]
+    },
+    {
+      "template": "qualify-mac.mjs.template",
+      "output": "scripts/qualify-mac.mjs",
+      "roles": [
+        "agent",
+        "node",
+        "moderator",
+        "employer",
+        "evidence",
+        "recovery"
+      ],
+      "imports": [
+        "import {COMPUTE_ROLES,roleContract} from '../compute/roles.mjs';"
+      ]
+    }
+  ]
+}

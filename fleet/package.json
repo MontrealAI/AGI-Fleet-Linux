@@ -1,0 +1,41 @@
+{
+  "name": "montreal-ai-autonomous-fleet",
+  "version": "1.0.9",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "scripts": {
+    "start": "node ops/launch.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:integration": "node tests/integration.mjs",
+    "verify": "node scripts/verify.mjs",
+    "demo": "node tests/demo.mjs",
+    "funding": "node scripts/funding.mjs",
+    "review-funding": "node scripts/review-funding.mjs",
+    "labor": "node scripts/labor.mjs",
+    "docs:build": "node scripts/render-docs.mjs",
+    "docs:check": "node scripts/check-guides.mjs",
+    "workforce": "node workforce/cli.mjs",
+    "workforce:benchmark": "node workforce/benchmark.mjs",
+    "workforce:qualify": "node workforce/core/workforce.cjs",
+    "workforce:project": "node workforce/project.mjs",
+    "workforce:plan": "node workforce/core/capacity-plan.cjs",
+    "workforce:economics": "node workforce/core/project-economics.cjs",
+    "review-time": "node scripts/review-time.mjs",
+    "test:wallet": "node --test tests/wallet-recovery.test.mjs",
+    "test:backup": "node --test tests/backup-state.test.mjs",
+    "guide:build": "node scripts/build-genesis-guide.mjs",
+    "test:genesis": "node --test tests/genesis-*.test.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ethers": "6.17.0"
+  },
+  "devDependencies": {
+    "hardhat": "3.17.0",
+    "marked": "17.0.5",
+    "solc": "0.8.37"
+  }
+}

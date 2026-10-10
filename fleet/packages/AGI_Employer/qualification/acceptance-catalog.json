@@ -1,0 +1,1230 @@
+{
+  "schema": "agi-fleet-acceptance-catalog/v1",
+  "purpose": "Reusable job specifications, not executed case studies or commercial receipts.",
+  "defaultStatus": "NOT_RUN",
+  "caseCount": 24,
+  "inputPolicy": "Public nonpersonal or explicitly labeled synthetic inputs only.",
+  "budgetPolicy": "No job is admitted until wall-time, run, image, cost and reviewer-capacity bounds are explicitly approved. No paid API fallback.",
+  "cases": [
+    {
+      "id": "case-01",
+      "domain": "software",
+      "title": "CSV import correction",
+      "buyerNeed": "An operations team needs deterministic imports without dropped records.",
+      "jobDescription": "Repair a supplied dependency-free CSV parser to support quoted commas, CRLF and escaped quotes, preserving a regression suite.",
+      "inputPermissions": {
+        "allowed": "Synthetic CSV files and public example parser source.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "All supplied valid rows parse exactly; malformed rows return bounded errors.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Before/after tests demonstrate the defect and correction.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "No input file is modified.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "parser.mjs",
+        "parser.test.mjs",
+        "test-results.txt"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-02",
+      "domain": "software",
+      "title": "Measured search optimization",
+      "buyerNeed": "A public catalog team needs faster local lookup without changing results.",
+      "jobDescription": "Optimize a public-data search fixture while preserving exact ordered output; report controlled before/after latency distributions.",
+      "inputPermissions": {
+        "allowed": "Synthetic 50,000-row catalog and reference implementation.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Exact result equivalence for all held-out queries.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "At least 30 warm measurements with hardware and method recorded.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Performance change and regressions reported without selective omission.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "search.mjs",
+        "benchmark.mjs",
+        "measurements.csv",
+        "report.txt"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-03",
+      "domain": "software",
+      "title": "Accessible form feature",
+      "buyerNeed": "A small organization needs a keyboard-operable static intake form.",
+      "jobDescription": "Implement client-side validation, accessible error focus and keyboard submission using synthetic data, with no remote submission.",
+      "inputPermissions": {
+        "allowed": "Local HTML fixture and synthetic form values.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Keyboard-only completion and invalid-input focus verified.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Errors are programmatically associated with fields.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "No network requests or real personal information.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "index.html",
+        "form.test.mjs",
+        "accessibility-results.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-04",
+      "domain": "software",
+      "title": "HTTP client resilience",
+      "buyerNeed": "A software maintainer needs predictable failure handling.",
+      "jobDescription": "Build a local fixture API client with bounded GET retries, cancellation, timeout and 429 handling; do not retry non-idempotent requests.",
+      "inputPermissions": {
+        "allowed": "Local mock HTTP server and synthetic JSON resources.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Timeout and cancellation stop pending work.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "429 Retry-After obeys the specified upper bound.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Malformed JSON and non-idempotent calls do not loop.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "client.mjs",
+        "server.mjs",
+        "client.test.mjs"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-05",
+      "domain": "numerical",
+      "title": "Independent numerical reproduction",
+      "buyerNeed": "A researcher needs a reproducible checked calculation.",
+      "jobDescription": "Reproduce a supplied public least-squares example using both a direct solver and an independent residual calculation.",
+      "inputPermissions": {
+        "allowed": "Public problem statement and synthetic matrix fixture.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Results match declared tolerance against withheld reference.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Residual norm and conditioning assumptions reported.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "One documented command regenerates all outputs.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "reproduce.py",
+        "result.json",
+        "method.txt"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-06",
+      "domain": "numerical",
+      "title": "Monte Carlo convergence",
+      "buyerNeed": "A teaching team needs an honest convergence experiment.",
+      "jobDescription": "Estimate a known integral with seeded sampling across multiple sample sizes and plot error with uncertainty.",
+      "inputPermissions": {
+        "allowed": "Synthetic draws and a public analytic integral.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Seeds and sample sizes are recorded.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Independent analytic value is used for error calculations.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "All trials including outliers are retained.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "experiment.py",
+        "trials.csv",
+        "convergence.pdf"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-07",
+      "domain": "numerical",
+      "title": "Time-series reconciliation",
+      "buyerNeed": "A public infrastructure analyst needs consistent totals.",
+      "jobDescription": "Reconcile synthetic hourly series with missing and duplicate timestamps; emit an exception register and exact daily totals.",
+      "inputPermissions": {
+        "allowed": "Synthetic nonpersonal time series with specified timezone and DST rules.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Duplicate and missing records appear in the exception register.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Daily sums match independent integer arithmetic.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "DST handling and imputation rules are explicit.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "reconcile.py",
+        "daily.csv",
+        "exceptions.csv"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-08",
+      "domain": "public-data",
+      "title": "Public dataset quality audit",
+      "buyerNeed": "A civic analyst needs a trustworthy source inventory.",
+      "jobDescription": "Audit a frozen public dataset for duplicates, types, missingness and out-of-range values without inferring personal attributes.",
+      "inputPermissions": {
+        "allowed": "Public nonpersonal dataset pinned by URL, retrieval time, license and SHA-256.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Source identity and permission are preserved.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Every reported count matches a rerunnable query.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "No private or personal rows are introduced.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "audit.py",
+        "quality.json",
+        "source-manifest.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-09",
+      "domain": "public-data",
+      "title": "Public procurement comparison",
+      "buyerNeed": "A buyer needs comparable documented public requirements.",
+      "jobDescription": "Compare three frozen public procurement specifications using predefined dimensions and pinpoint citations.",
+      "inputPermissions": {
+        "allowed": "Public specification PDFs and explicit reuse permissions.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Every material comparison cites an actual source page.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Missing data is shown as unknown.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "No unsupported ranking or invented price.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "comparison.csv",
+        "comparison.pdf",
+        "sources.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-10",
+      "domain": "public-data",
+      "title": "Public release-change analysis",
+      "buyerNeed": "A maintainer needs actionable dependency change evidence.",
+      "jobDescription": "Compare two pinned public release snapshots for breaking configuration changes and migration steps, checking examples locally.",
+      "inputPermissions": {
+        "allowed": "Public tagged release notes and source snapshots.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Tags and source hashes recorded.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Claims map to a primary source and a tested example where applicable.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Unverified compatibility is labeled pending.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "changes.csv",
+        "examples/",
+        "analysis.txt"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-11",
+      "domain": "documents",
+      "title": "Verified operations handbook",
+      "buyerNeed": "A team needs an accurate usable procedure.",
+      "jobDescription": "Produce a concise handbook from a supplied synthetic process specification with a checklist, failure paths and source references.",
+      "inputPermissions": {
+        "allowed": "Synthetic process definition and public formatting assets.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Every required step and failure path is present.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Rendered pages are opened and visually inspected.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "No broken links, clipped tables or invented approvals.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "handbook.docx",
+        "handbook.pdf",
+        "review.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-12",
+      "domain": "documents",
+      "title": "Document package generation",
+      "buyerNeed": "A buyer needs repeatable structured deliverables.",
+      "jobDescription": "Generate three test documents with exact section and table requirements, collect them, open them and verify sandbox cleanup.",
+      "inputPermissions": {
+        "allowed": "Synthetic public task brief only.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "All three documents satisfy their per-file checklist.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Files are independently opened after collection.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Base, browser, observer and workspace cleanup evidence is complete.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "brief.docx",
+        "checklist.docx",
+        "summary.pdf"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-13",
+      "domain": "documents",
+      "title": "Accessible public report",
+      "buyerNeed": "A public service team needs a readable report.",
+      "jobDescription": "Convert a frozen public-data analysis into an accessible report with heading hierarchy, descriptive links and tables.",
+      "inputPermissions": {
+        "allowed": "Public nonpersonal data and supplied analysis outputs.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "All numeric values reconcile to source outputs.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Headings, table headers and image descriptions are checked.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Rendered document is inspected at normal reading scale.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "report.docx",
+        "report.pdf",
+        "accessibility-check.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-14",
+      "domain": "spreadsheets",
+      "title": "Ledger reconciliation",
+      "buyerNeed": "A buyer needs an auditable exception list.",
+      "jobDescription": "Reconcile two synthetic transaction ledgers using exact cents and produce matched, unmatched and duplicate views.",
+      "inputPermissions": {
+        "allowed": "Synthetic transaction IDs and amounts; no bank credentials.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Opening plus movements equals closing balance exactly.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "All source rows are accounted for once.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Formulas recalculate and independent totals agree.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "reconciliation.xlsx",
+        "checks.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-15",
+      "domain": "spreadsheets",
+      "title": "Capacity and budget model",
+      "buyerNeed": "An operator needs a bounded planning worksheet.",
+      "jobDescription": "Create a spreadsheet separating agent capacity, independent reviewer capacity and human review time with explicit assumptions.",
+      "inputPermissions": {
+        "allowed": "Synthetic workload assumptions and user-supplied budget bounds.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Reviewer bottlenecks constrain output.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "All scenarios recompute correctly.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Projections are labeled and are not represented as measured throughput.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "capacity.xlsx",
+        "model-checks.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-16",
+      "domain": "spreadsheets",
+      "title": "Formula regression repair",
+      "buyerNeed": "A finance operations trainer needs corrected formulas.",
+      "jobDescription": "Repair a supplied synthetic workbook with known reference and rounding defects, preserving values and an audit log.",
+      "inputPermissions": {
+        "allowed": "Synthetic workbook and independently specified expected totals.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Before/after results demonstrate every seeded defect.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "No unexpected formula or source-value changes.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Recalculated totals match the independent oracle.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "corrected.xlsx",
+        "changes.csv",
+        "recalculation.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-17",
+      "domain": "presentations",
+      "title": "Evidence-backed briefing",
+      "buyerNeed": "A project sponsor needs a concise factual briefing.",
+      "jobDescription": "Create an eight-slide deck from a frozen public research packet, with charts tied to checked data.",
+      "inputPermissions": {
+        "allowed": "Public sources and synthetic project context.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Every numeric claim traces to the packet.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Charts match the source table.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "All slides rendered and inspected for legibility and overflow.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "briefing.pptx",
+        "briefing.pdf",
+        "claim-register.csv"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-18",
+      "domain": "presentations",
+      "title": "Technical handoff deck",
+      "buyerNeed": "A development team needs a usable system handoff.",
+      "jobDescription": "Produce a deck explaining a supplied local fixture application, its state transitions, limits and verified tests.",
+      "inputPermissions": {
+        "allowed": "Public fixture source and actual local test results.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Diagrams match implemented interfaces.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Test outcomes and untested behavior are separated.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "All slides opened and inspected.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "handoff.pptx",
+        "handoff.pdf",
+        "source-links.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-19",
+      "domain": "presentations",
+      "title": "Public-data chart correction",
+      "buyerNeed": "An analyst needs corrected misleading charts.",
+      "jobDescription": "Repair a synthetic deck containing inconsistent scales, wrong labels and unsupported percentages, recording each change.",
+      "inputPermissions": {
+        "allowed": "Synthetic presentation and authoritative accompanying data table.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "All seeded chart defects are corrected.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Totals and percentages reconcile.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Review includes actual rendered charts and retained originals.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "corrected.pptx",
+        "change-register.csv",
+        "corrected.pdf"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-20",
+      "domain": "isolated-browser",
+      "title": "Authorized local catalog workflow",
+      "buyerNeed": "A catalog operator needs verified UI filtering.",
+      "jobDescription": "Use an isolated browser to filter and export a local synthetic catalog fixture, then verify exported rows.",
+      "inputPermissions": {
+        "allowed": "Operator-authorized local fixture only; no sign-in or remote submission.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Filter postconditions verified from UI and exported data.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Export contains only requested rows in specified order.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Browser cleanup postcondition proven.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "catalog-export.csv",
+        "ui-observations.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-21",
+      "domain": "isolated-browser",
+      "title": "Public page accessibility repair",
+      "buyerNeed": "A publisher needs a tested keyboard navigation fix.",
+      "jobDescription": "Repair and exercise a local public HTML fixture with broken focus order, dialog dismissal and labels.",
+      "inputPermissions": {
+        "allowed": "Public HTML fixture; synthetic interaction only.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Keyboard focus order is deterministic.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Escape closes the dialog and restores focus.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Observation evidence covers every interaction and final state.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "site/",
+        "accessibility-observations.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-22",
+      "domain": "isolated-browser",
+      "title": "Bounded public research collection",
+      "buyerNeed": "A researcher needs a source-grounded collection.",
+      "jobDescription": "Collect five explicitly allowed public nonpersonal pages in an isolated browser and produce a deduplicated source table.",
+      "inputPermissions": {
+        "allowed": "Allowlisted public URLs; no authentication, private inboxes or uploads.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": false
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Each source has retrieval time, title and content hash.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Claims are tied to actual retrieved material.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "No navigation outside the allowlist and cleanup is verified.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "sources.csv",
+        "research.txt",
+        "navigation-audit.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-23",
+      "domain": "native-desktop",
+      "title": "Dedicated-account spreadsheet task",
+      "buyerNeed": "An operator needs demonstrated desktop execution.",
+      "jobDescription": "In an explicitly authorized dedicated compute desktop, open a synthetic workbook, apply specified formatting and save an inspected copy.",
+      "inputPermissions": {
+        "allowed": "Synthetic local workbook; signer desktop and wallet files excluded.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": true
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Native route and OS permissions recorded.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "Before/after observations show actual app actions.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "Saved copy is reopened and verified in the dedicated account.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "formatted.xlsx",
+        "desktop-observations.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    },
+    {
+      "id": "case-24",
+      "domain": "native-desktop",
+      "title": "Dedicated-account presentation export",
+      "buyerNeed": "A buyer needs dependable native document export.",
+      "jobDescription": "In an authorized isolated desktop, open a synthetic presentation, make a specified title correction and export a PDF for visual review.",
+      "inputPermissions": {
+        "allowed": "Synthetic local deck in dedicated compute account.",
+        "policy": "public-or-synthetic-only",
+        "prohibited": [
+          "private inboxes",
+          "customer credentials",
+          "signer desktop",
+          "wallet or OAuth material"
+        ],
+        "requiresExplicitDedicatedDesktopAuthority": true
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "C1",
+          "requirement": "Correct slide title is visible in native app and exported PDF.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C2",
+          "requirement": "All exported pages open and meet layout checks.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        },
+        {
+          "id": "C3",
+          "requirement": "No signer desktop access; cleanup and final file location verified.",
+          "verification": "Independent reviewer must open actual deliverables, reproduce the stated check and attach bounded evidence."
+        }
+      ],
+      "expectedDeliverables": [
+        "updated.pptx",
+        "export.pdf",
+        "desktop-observations.json"
+      ],
+      "executionProtocol": [
+        "Freeze input hashes, permissions, job scope, acceptance criteria and bounded time/usage budgets.",
+        "Record the exact runtime route, versions, compute identity and reviewer assignment.",
+        "Execute the authorized task with actual provider and tools; retain failures and interventions.",
+        "Collect and independently open and inspect actual deliverables; preserve scoped cleanup observations.",
+        "Record independent acceptance or rejection and reconcile usage and separately classified payment evidence."
+      ],
+      "resultStatus": "NOT_RUN",
+      "actualDeliverables": [],
+      "paymentClassification": "NONE",
+      "commercialValueMeasured": false
+    }
+  ]
+}
