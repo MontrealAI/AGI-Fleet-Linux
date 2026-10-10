@@ -1,0 +1,84 @@
+name: Mac source preview parity
+
+on:
+  pull_request:
+    paths:
+      - macos/preview/**
+      - macos/runtime/**
+      - macos/release.json
+      - engineering/check-workstation-preview.py
+      - engineering/release_tools.py
+      - engineering/next-release.json
+      - engineering/build-next-release.py
+      - fleet/**
+      - workstation/candidate.json
+      - workstation/studio-overlay/**
+      - workstation/engine/job-draft.mjs
+      - workstation/tests/studio.test.mjs
+      - .github/workflows/macos-preview.yml
+  push:
+    branches: [main]
+    paths: [macos/preview/**, macos/runtime/**, macos/release.json, engineering/**, fleet/**, workstation/**, .github/workflows/macos-preview.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: macos-preview-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  preview:
+    name: Preview contracts on ${{ matrix.os }} / Apple silicon
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-26]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - name: Check out the reviewed source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare hash-pinned native Node
+        run: |
+          set -euo pipefail
+          test "$(uname -s)" = Darwin
+          test "$(uname -m)" = arm64
+          curl --fail --location --silent --show-error https://nodejs.org/dist/v24.21.0/node-v24.21.0-darwin-arm64.tar.xz -o "$RUNNER_TEMP/mac-preview-node.tar.xz"
+          printf '%s  %s\n' 6239d4cf92d864487ec8cd3615038f7b67e7f58b77b21cd2f09ea9fbd68065fe "$RUNNER_TEMP/mac-preview-node.tar.xz" | shasum -a 256 --check
+          tar -xJf "$RUNNER_TEMP/mac-preview-node.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/node-v24.21.0-darwin-arm64/bin" >> "$GITHUB_PATH"
+      - name: Materialize the separate Mac preview
+        run: |
+          set -euo pipefail
+          mkdir preview-evidence
+          python3 macos/preview/check.py > preview-evidence/source-check.json
+          python3 macos/preview/materialize.py --output "$RUNNER_TEMP/mac-preview" > preview-evidence/materialized.json
+          python3 -m unittest discover -s macos/preview/tests -p 'test_*.py' -v 2>&1 | tee preview-evidence/materialization-tests.txt
+          npm --prefix "$RUNNER_TEMP/mac-preview" ci --ignore-scripts --no-audit --no-fund > preview-evidence/dependency-install.txt 2>&1
+      - name: Observe the native host without a desktop provider
+        env:
+          AGI_MAC_PREVIEW_FIXTURE: ${{ runner.temp }}/mac-preview
+        run: |
+          set -euo pipefail
+          node --input-type=module -e 'import {pathToFileURL} from "node:url"; const root=process.env.AGI_MAC_PREVIEW_FIXTURE; const {assertMacHost}=await import(pathToFileURL(root+"/workforce/mac-host.mjs")); const {inspectHardware}=await import(pathToFileURL(root+"/workforce/platform.mjs")); console.log(JSON.stringify({host:assertMacHost(),hardware:inspectHardware(),physicalQualification:"NOT_RUN",productionQualified:false}));' > preview-evidence/native-host.json
+      - name: Exercise exact Mac native and shared Studio behavior
+        env:
+          AGI_MAC_PREVIEW_FIXTURE: ${{ runner.temp }}/mac-preview
+          AGI_WORKSTATION_FIXTURE: ${{ runner.temp }}/mac-preview
+        run: |
+          set -euo pipefail
+          node --test --test-reporter=tap macos/preview/tests/*.test.mjs > preview-evidence/native-contracts.tap 2>&1
+          node --test --test-reporter=tap workstation/tests/studio.test.mjs > preview-evidence/studio-contracts.tap 2>&1
+          git diff --exit-code
+          test -z "$(git ls-files --others --exclude-standard -- macos/preview fleet)"
+      - name: Preserve preview evidence without release publication
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: mac-preview-${{ matrix.os }}
+          path: preview-evidence/
+          if-no-files-found: error
+          retention-days: 30

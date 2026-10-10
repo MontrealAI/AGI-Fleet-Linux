@@ -1,0 +1,27 @@
+{
+  "schema": "agi-macos-source-preview/v1",
+  "version": "0.1.0-preview.1",
+  "classification": "DEVELOPMENT_PREVIEW",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "minimumMacOS": "15",
+  "executionMode": "PILOT_ONLY",
+  "productionExecution": "DISABLED",
+  "productionQualified": false,
+  "qualificationInherited": false,
+  "includedInMac1200Zip": false,
+  "reusedPreviewHistoricalBasis": {
+    "repositoryCommit": "672222897c3424f75815830b95d469e3bbe15fa1",
+    "frozenFleetVersion": "1.0.9",
+    "frozenSourceSha256": "0bf5b82329a7f743759fa7f8a6383ef985df286f3c702143719b8667c5051f97"
+  },
+  "physicalQualification": {
+    "M1": "NOT_RUN",
+    "M2": "NOT_RUN",
+    "desktopProvider": "NOT_RUN",
+    "liveModel": "NOT_RUN",
+    "independentReview": "NOT_RUN",
+    "rebootRecovery": "NOT_RUN",
+    "endurance72h": "NOT_RUN"
+  }
+}

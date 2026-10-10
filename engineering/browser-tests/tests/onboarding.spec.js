@@ -292,14 +292,31 @@ test('a keyboard user can enter the guide, choose a path and return with visible
   expect(outline).not.toBe('none');
 });
 
-test('both mobile homepages prominently offer Linux and Mac guided welcomes', async ({ page }, testInfo) => {
+test('homepages feature both platforms and their source previews on mobile and desktop', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
   for (const language of languages) {
     await page.goto(language.home);
     const primary = page.locator(`.hero a[href^="${language.path.slice(1)}"]`).first();
     await expect(primary).toBeVisible();
+    await expect(page).toHaveTitle(/Linux & Apple silicon Mac/);
+    await expect(page.locator('header .brand')).toContainText('LINUX + MAC');
+    await expect(page.locator('.orbit-center small')).toHaveText('LINUX + MAC');
+    for (const selector of [
+      '#work-modes a[href$="/macos/preview/README.md"]',
+      '#resources a[href$="/macos/preview/README.md"]',
+      '#resources a[href$="/macos/preview/STUDIO.md"]'
+    ]) {
+      await expect(page.locator(selector)).toBeVisible();
+      await expect(page.locator(selector)).toHaveAccessibleName(/Mac/);
+    }
     await expectNoOverflow(page, `${language.code} mobile homepage`);
     await screenshot(page, testInfo, `${language.name.replaceAll(' ', '-')}-mobile-homepage`);
+    if (language.os === 'ubuntu') {
+      await page.setViewportSize({ width: 1440, height: 1000 });
+      await expectNoOverflow(page, `${language.code} desktop homepage`);
+      await screenshot(page, testInfo, `${language.code}-desktop-homepage`);
+      await page.setViewportSize({ width: 390, height: 844 });
+    }
     await primary.click();
     await expect(page.locator('html')).toHaveAttribute('lang', language.code);
     await expectPanel(page, 'welcome', false);
