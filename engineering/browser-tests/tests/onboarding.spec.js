@@ -74,6 +74,8 @@ for (const language of languages) {
       expect(response.ok()).toBe(true);
       const release = await response.json();
       const download = page.locator('#download-link');
+      const releaseDetails = page.locator('#plan details').filter({ has: download });
+      await releaseDetails.locator('summary').click();
       await expect(download).toBeVisible();
       if (release.published) {
         expect(release.nativeAcceptance).toBe('PASS');
@@ -85,6 +87,7 @@ for (const language of languages) {
         await expect(download).toHaveAttribute('href', /\/macos\/docs\/FRESH_INSTALL\.md$/);
         await expect(download).not.toHaveAttribute('href', /\/releases\/download\//);
       }
+      await releaseDetails.locator('summary').click();
     }
     await page.locator('#plan [data-back="role"]').click();
     await page.locator('#role [data-role="node"]').click();
