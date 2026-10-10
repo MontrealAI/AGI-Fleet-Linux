@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AGI Agent · Private workspace</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/studio.css" />
+    <link rel="stylesheet" href="/genesis.css">
+    <link rel="stylesheet" href="/atelier.css">
+  </head>
+  <body class="genesis-agent"><a href="#genesis-heading" class="genesis-skip">Skip to readiness center</a>
+    <aside>
+      <a class="brand" href="#genesis-heading"><span class="brand-seal" aria-hidden="true">✧</span><span class="brand-label">MONTREAL.AI<small>AGI AGENT / PRIVATE</small></span></a>
+      <nav aria-label="Workspace">
+        <button data-view="overview" class="active">Overview</button>
+          <button data-view="studio">Work Studio</button
+        ><button data-view="setup">1 · Secure & connect</button
+        ><button data-view="intelligence">2 · OpenClaw & delivery</button
+        ><button data-view="policy">3 · Jobs & limits</button
+        ><button data-view="activity">Activity & work</button
+        ><button data-view="recovery">Backup & Mac startup</button
+        ><button data-view="help">Help & rehearsal</button>
+          <button data-view="operations">Operations & commissioning</button>
+      </nav>
+      <p class="aside-note">
+        One Mac. One dedicated wallet.<br />Authority stays within your limits.
+      </p>
+    </aside>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">PRIVATE OPERATOR EDITION · <span id="appVersion">1.0.9</span></p>
+          <h1 id="pageTitle">Overview</h1>
+        </div>
+        <div>
+          <button id="lock" class="quiet">Lock & stop</button
+          ><button id="quit" class="quiet">Quit app</button>
+        </div>
+      </header>
+      <div id="notice" role="status" aria-live="polite" hidden></div>
+      <div id="disconnected" class="banner" hidden>
+        Connection lost. Open Launch-AGI-Agent again. Displayed information may
+        be out of date.
+      </div>
+<section id="studio" class="view studio-shell" data-role="agent" hidden>
+<div class="studio-hero"><div><span class="studio-kicker">MONTREAL.AI · WORK STUDIO</span><h2>Intelligence at work.</h2><p>Research, documents, spreadsheets, slides, code and images. Turn a public brief into files you can use, inspect and send for review.</p></div><span class="studio-badge">NO FUNDS NEEDED</span></div>
+<div class="studio-stats"><div><small>Connection</small><strong id="studio-connection">Checking setup</strong></div><div><small>Local 24-hour allowance</small><strong id="studio-quota">—</strong></div><div><small>Local work shelf</small><strong id="studio-shelf-count">—</strong></div></div>
+<div id="studio-message" class="studio-alert" aria-live="polite" hidden></div>
+<div id="studio-setup-note" class="studio-alert" hidden><b>Finish these steps to start</b><ul id="studio-blockers"></ul><button id="studio-open-setup" class="studio-button" type="button">Open computer setup</button></div>
+<div class="studio-grid"><div><div class="studio-panel"><h3>What would you like to make?</h3><p>Choose a starting point. Replace the example brief and define what a good result must do.</p><div id="studio-templates" class="studio-templates" aria-label="Task starting points"></div><details><summary>Format practice &amp; original templates</summary><div id="studio-format-templates" class="studio-templates"></div></details><div id="studio-template-details" class="genesis-template-details"></div><form id="studio-form"><div id="studio-import-note" class="studio-note" hidden></div><label>Give this task a name<input id="studio-title" maxlength="160" required autocomplete="off"></label><label>Describe the work<textarea id="studio-brief" rows="6" maxlength="6000" required></textarea><small>Be specific about the audience, supplied facts, sources, constraints and desired result. Use public, permitted data.</small></label><div class="studio-fields"><label>Files you want<textarea id="studio-outputs" rows="4" required spellcheck="false"></textarea><small>One file name per line, such as report.docx or budget.xlsx. This quick editor supports up to 24 files and 4 MiB total. Import a general v2 specification below for other file types and larger work.</small></label><label>What success looks like<textarea id="studio-criteria" rows="4" required></textarea><small>One checkable criterion per line. Include substance, accuracy and usability, not only appearance.</small></label></div><div class="studio-actions"><button id="studio-run" type="submit" class="studio-button primary" disabled>Create &amp; check the work</button><span class="studio-muted">Two workflow starts from your allowance</span></div><p class="studio-footer">The Agent uses its isolated tools, then a separate review session. Files are saved locally for you to inspect. This uses your connected model allowance; it does not apply for a job or publish the result.</p><details class="studio-advanced"><summary>Already have a job specification?</summary><p>Import a public computer-work/v2 specification for any declared file type: up to 64 files, 32 MiB per file, 64 MiB total and 64 criteria. Legacy computer-work/v1 and image-png/v1 also work. Runtime hashes, input hashes, permissions, deadline and budgets are preserved exactly; your compute service must match them. This local workflow does not authorize publication or settlement.</p><label>Job specification JSON<input id="studio-spec-file" type="file" accept="application/json,.json"></label></details><details class="studio-advanced"><summary>Improve work using a review</summary><p>Import Revision feedback from an Agent or Node. The original files are preserved; the Agent creates and checks a revised set against the same criteria. Each revision uses two workflow starts. Uncertain or unsafe reviews require investigation instead of automatic repair.</p><label>Revision feedback JSON<input id="studio-revision-file" type="file" accept="application/json,.json"></label></details></form></div></div><div><div class="studio-panel studio-progress"><span class="studio-kicker">YOUR TASK</span><h3 id="studio-progress-label">Ready for your next task</h3><ol id="studio-steps"><li>Understand the brief</li><li>Research / execution</li><li>Create files</li><li>Self-check</li><li>Ready for review</li></ol><p id="studio-elapsed">Each workflow can take several minutes.</p><button id="studio-cancel" class="studio-button danger" type="button" hidden>Stop task</button></div><div class="studio-panel"><h3>Useful boundaries</h3><p>Studio uses offline public inputs and a disposable work desktop. Use the dedicated commissioning panel to test protected browsing. Accepted browser jobs also require approved website permissions and a current, reviewed qualification receipt. Private accounts and your personal desktop use the separate, explicitly authorized workstation workflow; this Studio stays isolated from them and your wallet.</p><p>Quick editor: up to 4 MiB of output. General v2 imports: up to 64 files, 32 MiB each and 64 MiB total. Each task keeps its own smaller declared limits. Allow up to 192 MiB of local storage per saved run, including revision originals; download and remove old runs when needed.</p><p>Model access and quotas depend on your account. Missing tools or evidence should stop a task, not produce an invented success.</p></div></div></div>
+<div class="studio-panel"><span class="studio-kicker">FILES + EVIDENCE</span><h3>Your work, ready to inspect</h3><p>The last five saved runs fit on this shelf. Download what you want to keep before removing a local copy. Full encrypted backups include Studio files within the recovery size limits. For larger work, download files, handoffs and receipts separately, then explicitly exclude Studio in the backup form. Wallet and operational history remain included; local Studio files are kept.</p><div id="studio-runs"></div></div>
+<p class="studio-footer">A successful Studio run demonstrates this task on this setup. It does not establish coverage of most human jobs, an independent validator quorum, payment or unattended-mainnet readiness.</p>
+</section>
+      <section id="overview" class="view">
+<section class="genesis-center" aria-labelledby="genesis-heading">
+<div class="genesis-hero"><div><span class="genesis-kicker">AGI JOBS / OPERATIONS</span><h2 id="genesis-heading">Intelligence operations.<br><em>Clear oversight.</em></h2><p>Create, review and deliver useful work. Check readiness, protect recovery and act within your approved limits.</p><p class="genesis-version"><span id="genesis-role"></span> · <span id="genesis-release"></span></p></div><svg class="celestial-mark" viewBox="0 0 320 320" aria-hidden="true" focusable="false"><defs><radialGradient id="orb-glow"><stop stop-color="#b772d8" stop-opacity=".25"/><stop offset="1" stop-color="#6a258c" stop-opacity="0"/></radialGradient></defs><circle cx="160" cy="160" r="145" fill="url(#orb-glow)"/><g class="orbital-line"><circle cx="160" cy="160" r="119"/><circle cx="160" cy="160" r="105" stroke-dasharray="1 9"/><circle cx="160" cy="160" r="70"/><ellipse cx="160" cy="160" rx="147" ry="53" transform="rotate(-32 160 160)"/><ellipse cx="160" cy="160" rx="134" ry="53" transform="rotate(50 160 160)"/><path d="M160 27v25m0 216v25M27 160h25m216 0h25"/></g><g fill="#efd39f"><circle cx="54" cy="216" r="3"/><circle cx="237" cy="69" r="2.5"/><circle cx="274" cy="191" r="2"/></g><path class="orbital-line orbital-gold" d="m160 71 5 10-5 10-5-10Zm-78 89-10 5-10-5 10-5Z"/><text x="163" y="163" text-anchor="middle">AGI</text><text class="orbital-small" x="161" y="183" text-anchor="middle">GENESIS</text><path class="orbital-line orbital-gold" d="M126 199h68"/></svg></div><div class="workspace-snapshot" aria-label="Current workspace status"><div><span>Local vault</span><strong id="snapshot-vault">Checking</strong></div><div><span>Recovery</span><strong id="snapshot-recovery">Checking</strong></div><div><span>Compute</span><strong id="snapshot-compute">Checking</strong></div></div><section class="next-step" aria-labelledby="next-step-title"><span class="next-step-index" aria-hidden="true">↗</span><div class="next-step-copy"><small>YOUR NEXT STEP</small><h3 id="next-step-title">Checking your workspace…</h3><p id="next-step-detail">Checking this workspace’s current state.</p></div><div class="next-step-buttons"><button type="button" class="primary" id="next-step-action">Continue setup</button><button type="button" class="quiet" id="next-step-studio">Open Work Studio →</button></div></section>
+<div class="genesis-heading"><h3>Readiness center</h3><span class="genesis-legend">Evidence for each operating requirement</span></div><details class="readiness-key"><summary>How to read readiness</summary><dl><div><dt>Verified</dt><dd>The specific application check passed. Read its evidence and scope.</dd></div><div><dt>Observed</dt><dd>A connection, measurement or operator record exists. Further qualification is required.</dd></div><div><dt>Action needed</dt><dd>A required step is incomplete. Open the card for the next action.</dd></div><div><dt>Unverified</dt><dd>This requirement has no sufficient evidence yet.</dd></div></dl><p>These are separate requirements. A passed check does not authorize live operation.</p></details><div id="genesis-gates" class="genesis-gates"></div>
+<p id="genesis-boundary" class="genesis-boundary"></p><div id="genesis-message" class="notice" role="status" aria-live="polite" hidden></div>
+<div class="genesis-actions"><button id="genesis-setup" type="button" class="primary">Continue setup</button><button id="genesis-backup" type="button">Verify my backup</button><button id="genesis-preflight" type="button">Check this machine</button><button id="genesis-diagnostics" type="button">Export sanitized diagnostics</button></div>
+<details class="genesis-details"><summary>Installed software &amp; compatibility</summary><p id="genesis-compatibility" class="genesis-upgrade"></p></details><details class="genesis-details" id="genesis-machine"><summary>Machine facts · current account</summary><p>This reports the account running this panel. Run the commissioning utility in the separate compute account for Docker and workstation measurements.</p><dl id="genesis-facts" class="genesis-facts"></dl></details>
+<details class="genesis-details"><summary>Upgrading? Check your exact wallet and profile</summary><p>Keep the same launcher and profile. A Seed-Wallet launcher deliberately uses a separate profile. Upgrading never requires entering your recovery phrase.</p><p id="genesis-upgrade" class="genesis-upgrade"></p><form id="genesis-compare"><label for="genesis-expected">Public address from your existing records</label><input id="genesis-expected" placeholder="0x…" autocomplete="off" spellcheck="false" required><button type="submit">Compare expected address</button></form></details>
+</section>
+        <article class="hero">
+          <div>
+            <span class="pill" id="mode">Getting ready</span>
+            <h2 id="headline">A clear path from job to delivery.</h2>
+            <p id="runtime">
+              Complete the setup once. Your agent can then monitor, prepare,
+              check and submit supported jobs within your chosen limits.
+            </p>
+            <p id="freshness" class="muted"></p>
+          </div>
+          <div class="actions">
+            <button data-go="setup" class="primary">Continue setup</button
+            ><button id="observe">Preview opportunities</button
+            ><button id="authorize">Authorize live operation</button
+            ><button id="live" class="primary">Start autonomous work</button
+            ><button id="pause" class="danger">Pause signing</button
+            ><button id="resume">Resume after checks</button
+            ><button id="stop">Stop worker</button>
+          </div>
+        </article>
+        <article id="overviewWallet" hidden>
+          <h2>Your Agent wallet</h2>
+          <div class="wallet-address-row"><textarea id="overviewAddress" class="address" rows="2" readonly aria-label="Public Agent address"></textarea><button id="copyOverviewAddress" class="primary">Copy address</button></div>
+          <p id="overviewCopyStatus" role="status" aria-live="polite"></p>
+          <button data-go="setup">Wallet &amp; recovery phrase</button>
+        </article>
+        <div class="metrics">
+          <article>
+            <p>Jobs assigned to you</p>
+            <strong id="assigned">0</strong>
+          </article>
+          <article>
+            <p>Transactions · rolling 24h</p>
+            <strong id="txCount">0</strong>
+          </article>
+          <article>
+            <p>Gas reserved · rolling 24h</p>
+            <strong id="gas">0 ETH</strong>
+          </article>
+          <article>
+            <p>AI calls · rolling 24h</p>
+            <strong id="aiCalls">0</strong>
+          </article>
+        </div>
+        <article>
+          <h2>Your readiness</h2>
+          <ol id="readiness" class="readiness"></ol>
+          <p class="muted">
+            Preview mode only reads and checks job specifications. Live mode can
+            send public job data to OpenAI, publish deliverables, lock bonds and
+            spend gas.
+          </p>
+        </article>
+        <article>
+          <h2>How work happens</h2>
+          <div class="steps">
+            <span>Discover</span><span>Prepare</span><span>Check</span
+            ><span>Publish</span><span>Apply</span><span>Submit</span>
+          </div>
+          <p>
+            The agent prepares the work before accepting the deadline.
+            Independent validators or the buyer decide acceptance and payment.
+            AI review cannot guarantee correctness or earnings.
+          </p>
+        </article>
+      </section>
+      <section id="setup" class="view" hidden>
+        <div class="grid">
+          <article>
+            <h2>Protect this computer’s wallet</h2>
+            <p>
+              Choose a unique password of at least 12 characters. This encrypts
+              the wallet, blockchain connection and gateway token locally.
+            </p>
+            <form id="vaultForm">
+              <label
+                >Password<input
+                  id="password"
+                  type="password"
+                  minlength="12"
+                  autocomplete="current-password"
+                  required /></label
+              ><button id="vaultAction" class="primary">
+                Create encrypted vault
+              </button>
+            </form>
+            <p id="vaultState" class="muted"></p>
+            <p id="walletProfile" class="muted"></p>
+            <label for="walletAddress">Your public Ethereum address</label>
+            <div class="wallet-address-row">
+              <textarea id="walletAddress" class="address" rows="2" readonly placeholder="No wallet yet" aria-label="Public Ethereum wallet address"></textarea>
+              <button id="copyAddress" type="button" class="primary" disabled>Copy address</button>
+            </div>
+            <p id="copyAddressStatus" role="status" aria-live="polite"></p>
+            <ol class="genesis-journey" aria-label="Wallet and recovery progress"><li><b>01 Create</b>Dedicated wallet</li><li><b>02 Write</b>Offline copy</li><li><b>03 Verify</b>Three-word check</li><li><b>04 Download</b>Encrypted backup</li><li><b>05 Verify file</b>Read-only check</li><li><b>06 Recovery ready</b>Store off-machine</li></ol><div id="walletNew">
+              <label>Recovery phrase length<select id="walletWords"><option value="24">24 words · recommended</option><option value="12">12 words</option></select></label>
+              <button id="wallet" type="button" class="primary">Create seed-phrase wallet</button>
+              <p>Creates a fresh dedicated Ethereum wallet on this computer. Write down the words, verify your copy, then download the encrypted Agent backup before funding it.</p>
+              <details id="phraseImportDetails">
+                <summary>Recover an existing dedicated seed wallet</summary>
+                <p>Use only a dedicated Agent phrase. Keep hardware-wallet and treasury phrases on their original device. Recovery restores wallet access; the full Agent backup is needed for job and transaction history.</p>
+                <form id="phraseImportForm" autocomplete="off">
+                  <label>12 or 24 English recovery words<input id="importPhrase" type="password" autocomplete="off" spellcheck="false" autocapitalize="none" maxlength="1024" required></label>
+                  <label>Expected public wallet address<input id="importAddress" placeholder="0x…" spellcheck="false" required></label>
+                  <details><summary>Advanced recovery settings</summary>
+                    <label>Optional BIP-39 passphrase<input id="importPassphrase" type="password" autocomplete="off" maxlength="1024"></label>
+                    <p>This is an extra secret used by the original wallet, not the Agent vault password. Leave blank if the wallet had none.</p>
+                    <label>Ethereum derivation path<input id="importPath" value="m/44'/60'/0'/0/0" spellcheck="false" required></label>
+                  </details>
+                  <label class="check"><input id="importHistory" type="checkbox" required> I understand that a used Agent wallet needs its original backup and complete transaction history before live operation.</label>
+                  <button type="submit">Recover and check address</button>
+                </form>
+              </details>
+            </div>
+            <p id="recoveryClearNotice" class="notice" role="status" aria-live="polite" hidden></p><div id="seedRecovery" hidden>
+              <h3>Your wallet recovery phrase</h3>
+              <p id="seedRecoveryStatus" role="status"></p>
+              <p id="seedRecoveryPath" class="muted"></p>
+              <form id="revealPhraseForm" autocomplete="off">
+                <label>Vault password<input id="revealPassword" type="password" autocomplete="off" required></label>
+                <button type="submit">Show recovery phrase</button>
+              </form>
+              <p>The words restore wallet access. Your encrypted Agent backup also preserves operational history. Keep both safely.</p>
+            </div>
+            <div id="legacyRecovery" hidden>
+              <h3>This existing wallet uses encrypted backup recovery</h3>
+              <p>The previous edition did not save its recovery phrase. Upgrading preserves this wallet but cannot recreate its original words.</p>
+              <button type="button" data-go="recovery">Back up this existing wallet</button>
+              <details><summary>I want a new seed-phrase wallet</summary>
+                <ol><li>Save the old wallet’s encrypted backup. Keep any old funds, jobs and ENS identity attached to that wallet until separately resolved.</li><li>Quit this app, then run <b>./Launch.sh</b> in Terminal in the v1.0.9 folder.</li><li>Create a vault and seed wallet in the separate profile. Use that launcher each time to reopen it.</li></ol>
+                <p>The original wallet, configuration and history stay in the original profile. The new wallet has a different address and needs its own setup and Agent identity. No funds are moved.</p>
+              </details>
+            </div>
+            <p class="muted">Use a distinct wallet for each Agent. Never share a recovery phrase, vault password or encrypted backup with a model, reviewer or support agent.</p>
+          </article>
+          <article>
+            <details id="deploymentDetails"><summary>Advanced · connect to a blockchain deployment</summary><h2>Connect to the deployment</h2>
+            <p>
+              Before deployment, you can secure the wallet and connect OpenClaw.
+              Add the deployment information when available.
+            </p>
+            <form id="rpcForm">
+              <label
+                >Private blockchain RPC URL<input
+                  id="rpc"
+                  type="password"
+                  placeholder="https://…"
+                  required
+                  autocomplete="off" /></label
+              ><button>Save encrypted connection</button>
+            </form>
+            <form id="deploymentForm">
+              <label
+                >Network<select id="chain">
+                  <option value="11155111">
+                    Sepolia · practice with test funds
+                  </option>
+                  <option value="1">Ethereum · real funds</option>
+                </select></label
+              ><label
+                >Manager contract address<input
+                  id="manager"
+                  placeholder="0x…"
+                  required /></label
+              ><label
+                >Deployment block<input
+                  id="block"
+                  type="number"
+                  min="1"
+                  required /></label
+              ><button>Save deployment</button>
+            </form>
+            <details>
+              <summary>Have the deployment transaction instead?</summary>
+              <form id="discoverForm">
+                <label
+                  >Creation transaction hash<input
+                    id="receipt"
+                    placeholder="0x…"
+                    required /></label
+                ><button>Find contract and block</button>
+              </form>
+            </details>
+            <p class="muted">
+              The agent checks the exact v1.1.0 manager and all eight linked
+              libraries. Other versions and networks are refused.
+            </p>
+            <button id="enroll" class="primary">
+              Verify and enroll contract</button
+            ><button id="check">Check readiness</button>
+            <p id="health" class="muted"></p></details>
+          </article>
+        </div>
+      </section>
+      <section id="intelligence" class="view" hidden>
+        <details class="card" open><summary>Review and approve the compute identity</summary><p>Complete the Linux fresh-install guide first. Keep prior installations inactive and preserved. Leave this worker stopped until identity approval. Review the authenticated proposal against the compute report. Compare any browser reviewer fingerprint with a record received independently from that reviewer.</p><p id="computeAvailability" role="status"></p><p id="computeCommissioningStages" class="muted compute-stages"></p><p id="computeAllowance" class="muted"></p><button id="inspectComputeIdentity" type="button">Review current compute identity</button><div id="computeIdentityReview" hidden aria-busy="false"><pre id="computeIdentityDetails" class="compute-identity-details" aria-live="polite"></pre><label class="check"><input id="computeIdentityConsent" type="checkbox"> I reviewed this exact identity and any proposed browser reviewer fingerprint, and authorize one bounded inference test using my existing ChatGPT allowance.</label><button id="approveComputeIdentity" type="button" disabled>Approve reviewed identity and test</button><button id="cancelComputeIdentity" type="button" disabled>Cancel approval</button><p id="computeIdentityResult" role="status"></p></div><p id="computeApprovalOutcome" role="status"></p></details>
+        <div class="grid">
+          <article>
+            <h2>Linux compute connection and usage</h2>
+            <p>
+              Use the dedicated <b>AGI work studio</b> under a separate standard Linux account for tools and skills. Your ChatGPT sign-in
+              happens in OpenClaw’s browser flow. Never enter your OpenAI
+              password here.
+            </p>
+            <p><b>Fresh Linux deployment.</b> Use new separate signer and compute accounts. Preserve previous installations inactive. Follow the <a href="/docs/Linux-Guide.html" target="_blank" rel="noopener">Linux installation guide</a> before exporting the setup kit.</p>
+            <details><summary>Fresh Ubuntu setup</summary><ol><li>Have the administrator prepare new isolated accounts using the Linux guide.</li><li>Export this private setup kit and transfer it using Transfer-Setup.sh.</li><li>In the compute desktop session run Prepare-Compute.sh, then this role’s Install.sh --file PRIVATE_SETUP.json.</li><li>Retain the authenticated readiness report and approve its exact identity here.</li></ol><p><a href="/docs/Linux-Guide.html" target="_blank" rel="noopener">Complete fresh-install procedure</a>. Preserve every failed attempt and STOP marker.</p></details><label>Mode for next setup<select id="workMode"><option value="workstation">Offline work — desktop, documents and code</option></select></label>
+            <p><a href="/docs/Linux-Guide.html" target="_blank" rel="noopener">Read the computer-work setup guide</a>. Tools run in a network-isolated container. Browsing starts disabled. Use the protected-browser panel below for the fixed commissioning test; browser jobs require approved sites, actions and a current reviewed receipt. <a href="/docs/PUBLIC_BROWSER_QUALIFICATION.html" target="_blank" rel="noopener">Read the browser qualification guide</a>.</p>
+            <label class="check"
+              ><input id="kitConsent" type="checkbox" />I authorize this
+              dedicated subscription connection. I understand Pro usage limits
+              apply and the gateway token is a powerful credential.</label
+            ><button id="kit" class="primary">
+              Download private setup file</button
+            ><button id="testAI">Test my connection</button><button id="testComputer">Create test documents</button><button id="testImage">Generate a test image</button><p class="muted">Tests use your ChatGPT allowance; document tests download a ZIP and image tests download a PNG. It creates no job or transaction. It may take several minutes.</p>
+            <p id="aiStatus" class="muted"></p>
+            <form id="aiSettings">
+              <label
+                >Configured signer allowance per 24 hours<input
+                  id="calls"
+                  type="number"
+                  min="1"
+                  max="1000"
+                  value="48" /></label
+              ><label class="check"
+                ><input id="autoBrief" type="checkbox" />Explain operating
+                status automatically (uses the same allowance)</label
+              ><button>Save usage preferences</button>
+            </form>
+            <button id="brief">Explain status now</button>
+            <p id="briefText"></p><p id="automaticBriefRule" class="muted">Automatic explanations are suspended during commissioning. Read-only status does not use model allowance.</p>
+            <p class="muted">
+              One generation and one review usually need two workflows. A tool-enabled workflow can make several model/tool calls; this is not a token or billing cap. The compute service also starts with 48 workflows and 8 image attempts per day. Failures
+              and tests also count. The kit configures no paid API fallback.
+              Verify the actual billing route in OpenClaw with /codex status.
+            </p>
+          </article>
+          <article>
+            <h2>Publish deliverables with IPFS Desktop</h2>
+            <p>
+              Install and open IPFS Desktop on this computer. Keep it running so your
+              public work stays available to buyers and validators.
+            </p>
+            <button id="publisher">Check IPFS Desktop</button>
+            <p id="publisherStatus" class="muted">
+              The agent uses the local Kubo API and verifies the bytes through
+              your public gateway before applying.
+            </p>
+            <label class="check"
+              ><input id="publicData" type="checkbox" />Every buyer and job I
+              authorize uses public, nonconfidential inputs that I have
+              permission to send to OpenAI.</label
+            ><label class="check"
+              ><input id="publicPublishing" type="checkbox" />I authorize
+              publishing these deliverables publicly on IPFS, including prepared
+              work for jobs another agent may win. Published data may persist
+              permanently.</label
+            ><button id="saveConsent">Save my data choices</button>
+            <p class="muted">
+              No automatic detector can guarantee that inputs contain no
+              personal information. Do not authorize buyers handling private or
+              sensitive material. Public content must still be lawful to process
+              and publish.
+            </p>
+          </article>
+        </div>
+<details class="card" id="publicBrowserCommissioning">
+  <summary>Protected public browser · commissioning</summary>
+  <p>First run <b>Configure-Public-Browser.sh</b> in the separate compute account and review its commissioning policy. Then approve the updated compute identity above. Your normal configuration starts with public browsing disabled.</p>
+  <p>This runs the fixed public-browser test through your connected model and isolated local containers. It records this attempt for inspection. It creates no paid job and does not enable commercial browsing.</p>
+  <label><input id="publicBrowserConsent" type="checkbox"> I authorize this commissioning test to use my connected model allowance and start its isolated local browser runtime.</label>
+  <div class="actions"><button id="publicBrowserRun" type="button" disabled>Run browser commissioning test</button><button id="publicBrowserCancel" type="button" disabled>Stop browser test</button><button id="publicBrowserDownload" type="button" disabled>Download test report</button><button id="publicBrowserEvidence" type="button" hidden disabled>Download review evidence</button></div>
+  <p id="publicBrowserResult" role="status" aria-live="polite">Unlock the workspace to load the last saved browser test.</p>
+  <p id="publicBrowserSaved" class="muted"></p>
+  <p id="publicBrowserEvidenceStatus" role="status" aria-live="polite"></p>
+</details>
+
+      </section>
+      <section id="policy" class="view" hidden>
+        <form id="policyForm">
+          <div class="grid">
+            <article>
+              <h2>Choose whose jobs to accept</h2>
+              <label
+                >Approved buyer wallet addresses<textarea
+                  id="buyers"
+                  rows="4"
+                  placeholder="One 0x address per line"
+                  required
+                ></textarea></label
+              ><label
+                >Excluded related parties<textarea
+                  id="excluded"
+                  rows="2"
+                  placeholder="One address per line"
+                ></textarea></label
+              ><label
+                >Agent ENS label (if required)<input
+                  id="label"
+                  placeholder="Your short label, without dots" /></label
+              ><label
+                >Merkle proof (if required)<textarea
+                  id="proof"
+                  rows="2"
+                  placeholder="One 0x hash per line"
+                ></textarea>
+              </label>
+              <p class="muted">
+                The contract owner must authorize the agent through its
+                supported identity mechanism. Some jobs also require an eligible
+                NFT. Each application is simulated before signing.
+              </p>
+              <label class="check"
+                ><input id="computerJobs" type="checkbox" />Accept computer-work bundles (requires the separate work desktop and compatible unrelated reviewers).</label><label class="check"><input id="imageJobs" type="checkbox" />Accept shared PNG image jobs (requires the capable worker and compatible unrelated validators).</label><label class="check"><input id="envelopes" type="checkbox" />Accept extended task
+                envelopes. I have arranged buyer acceptance or compatible
+                validation.</label
+              >
+              <p class="muted">
+                AGI Node v2.5 supports the shared text profiles and opt-in PNG visual review. It skips the new extended task envelopes.
+                See JOB_FORMATS.html for the distinction.
+              </p>
+              <label
+                >Public IPFS gateway<input
+                  id="gateway"
+                  value="https://ipfs.io"
+                  type="url" /></label
+              ><label
+                >Allowed HTTPS specification hosts<textarea
+                  id="hosts"
+                  rows="2"
+                  placeholder="example.com"
+                ></textarea>
+              </label>
+            </article>
+            <article>
+              <h2>Set your exposure and budget</h2>
+              <label
+                >Minimum expected agent share (USDC)<input
+                  id="minReward"
+                  type="number"
+                  step="0.000001"
+                  min="0.000001"
+                  value="1"
+              /></label>
+              <p class="muted">
+                This is your contract share before gas and AI costs, not the
+                job’s total escrow and not guaranteed profit.
+              </p>
+              <div class="pair">
+                <label
+                  >Maximum bond per job (USDC)<input
+                    id="maxBond"
+                    value="25"
+                    inputmode="decimal" /></label
+                ><label
+                  >Maximum open bonds and deferred claims (USDC)<input
+                    id="openBond"
+                    value="100"
+                    inputmode="decimal" /></label
+                ><label
+                  >Gross new bonds per 24h (USDC)<input
+                    id="dailyBond"
+                    value="100"
+                    inputmode="decimal" /></label
+                ><label
+                  >Maximum total job escrow (USDC)<input
+                    id="maxJob"
+                    value="1000"
+                    inputmode="decimal" /></label
+                ><label
+                  >Maximum gas per transaction (ETH)<input
+                    id="txETH"
+                    value="0.01"
+                    inputmode="decimal" /></label
+                ><label
+                  >Maximum gas per 24h (ETH)<input
+                    id="dailyGas"
+                    value="0.1"
+                    inputmode="decimal" /></label
+                ><label
+                  >Maximum transactions per 24h<input
+                    id="dailyTx"
+                    type="number"
+                    min="3"
+                    value="30" /></label
+                ><label
+                  >Maximum active jobs<input
+                    id="activeJobs"
+                    type="number"
+                    min="1"
+                    max="20"
+                    value="3"
+                /></label>
+              </div>
+              <label
+                >Ordinary transaction gas units<input
+                  id="txGasUnits"
+                  type="number"
+                  min="21000"
+                  max="2000000"
+                  step="1"
+                  required
+              /></label>
+              <label
+                >Finalization gas units<input
+                  id="finalizeGasUnits"
+                  type="number"
+                  min="21000"
+                  max="2000000"
+                  step="1"
+                  required
+              /></label>
+              <p>
+                Gas units measure execution work. Finalization needs more units
+                as reviewer counts grow. The estimated units plus 20% must fit
+                this limit, and both ETH budgets still apply. Existing
+                installations retain their previous gas limit until explicitly
+                changed. Saving limits requires a new backup and authorization.
+              </p>
+              <label class="check"
+                ><input id="autoClaim" type="checkbox" checked />Automatically
+                collect deferred USDC to this wallet</label
+              ><label class="check"
+                ><input id="finalize" type="checkbox" checked />Finalize my
+                submitted jobs after sufficient favorable votes and the waiting
+                period</label
+              >
+              <details>
+                <summary>Multiple dedicated Macs</summary>
+                <p>
+                  Give all agents the same fleet size and a different slot. Use
+                  separate wallets and backups. Changing the fleet size changes
+                  the distribution; stop all agents first and let accepted work
+                  settle.
+                </p>
+                <div class="pair">
+                  <label
+                    >Number of Macs<input
+                      id="shardCount"
+                      type="number"
+                      min="1"
+                      max="1024"
+                      value="1" /></label
+                  ><label
+                    >This computer’s slot (starts at 0)<input
+                      id="shardIndex"
+                      type="number"
+                      min="0"
+                      value="0"
+                  /></label>
+                </div>
+              </details>
+            </article>
+          </div>
+          <button class="primary">Save job policy and limits</button>
+          <p class="muted">
+            Stop the worker before changing settings. Policy changes require a
+            new backup and live authorization. Finish accepted jobs before
+            changing policy.
+          </p>
+        </form>
+        <article>
+          <h2>Recover an active job’s settlement budget</h2>
+          <p>
+            If finalization cannot fit the current gas or ETH budget, stop the
+            worker and reconcile pending transactions first. This separate
+            action preserves accepted work and financial history. It cannot
+            change job rules, bonds, wallet or deployment.
+          </p>
+          <form id="settlementBudgetForm">
+            <label
+              >Finalization gas units<input
+                id="recoveryFinalizeGas"
+                type="number"
+                min="21000"
+                max="2000000"
+                step="1"
+                required
+            /></label>
+            <label
+              >Maximum gas per transaction (ETH)<input
+                id="recoveryTxETH"
+                inputmode="decimal"
+                required
+            /></label>
+            <label
+              >Maximum gas per 24 hours (ETH)<input
+                id="recoveryDailyETH"
+                inputmode="decimal"
+                required
+            /></label>
+            <label class="check"
+              ><input id="recoveryConsent" type="checkbox" required />I reviewed
+              the estimate and these limits. I will save a new backup and
+              reauthorize; no signing resumes automatically.</label
+            >
+            <button class="primary">Save reviewed settlement budgets</button>
+          </form>
+          <p>
+            STOP files and pending transaction safeguards remain. The
+            per-transaction and daily ETH caps also constrain ordinary
+            transactions. Recovery does not certify commissioning or resolve
+            disputes.
+          </p>
+        </article>
+      </section>
+      <section id="activity" class="view" hidden>
+        <article>
+          <h2>Jobs and deliverables</h2>
+          <p>
+            Latest 40 discovered jobs. Skipped jobs explain why they were not
+            accepted.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Job</th>
+                  <th>Status</th>
+                  <th>Explanation</th>
+                  <th>Deliverable</th>
+                </tr>
+              </thead>
+              <tbody id="jobs"></tbody>
+            </table>
+          </div>
+          <p id="empty">
+            No jobs yet. Add the deployment and start preview mode.
+          </p>
+        </article>
+        <article>
+          <h2>Transactions</h2>
+          <div id="transactions"></div>
+          <button id="report">Download operating report</button>
+        </article>
+        <article>
+          <h2>Issues needing attention</h2>
+          <div id="incidents"></div>
+        </article>
+      </section>
+      <section id="recovery" class="view" hidden>
+        <div class="grid">
+          <article>
+            <h2>Back up the whole agent</h2>
+            <p>
+              The encrypted backup contains your wallet, configuration, prepared
+              deliverables, transaction journal, AI allowance history, admission evidence,
+              reviewer windows and pilot records. Studio work is included unless you explicitly exclude it below. Backup
+              stops the worker safely.
+            </p>
+            <form id="backupForm">
+<label><input id="backup-exclude-studio" type="checkbox">I saved my Studio files, handoffs and receipts separately. Exclude Studio work from this wallet backup; keep the local Studio files.</label><p class="muted">Use this option for large Studio results. The wallet, transaction history, admission evidence and pilot records stay included. The verified backup will record that Studio work is excluded.</p>
+              <label
+                >Vault password<input
+                  id="backupPassword"
+                  type="password"
+                  required /></label
+              ><button class="primary">Download encrypted backup</button>
+            </form>
+            <section class="backup-verifier"><h3>Verify the file you downloaded</h3><p>This check decrypts and validates the selected file in a temporary area. It does not restore or change your profile.</p><p id="backupProof" role="status"></p><p id="backupPrerequisite" role="status"></p><button id="backupUnlock" type="button" hidden>Unlock to verify</button><form id="verifyBackupForm" aria-busy="false"><label for="verifyBackupFile">Downloaded encrypted backup</label><input aria-describedby="backupPrerequisite backupVerificationResult" id="verifyBackupFile" type="file" accept=".agiagentbackup,.aginodebackup,.json" required><label for="verifyBackupPassword">Backup password</label><input aria-describedby="backupPrerequisite backupVerificationResult" id="verifyBackupPassword" type="password" autocomplete="off" required><button type="submit" class="primary">Verify downloaded backup</button></form><p id="backupVerificationResult" tabindex="-1" class="backup-proof" role="status" aria-live="polite"></p></section><button id="backupSaved">I saved my backup safely</button>
+            <p class="muted">
+              Keep the password separately. IPFS pins and OpenClaw sign-in are
+              managed by those apps and are not included.
+            </p>
+            <details>
+              <summary>Restore on a replacement Mac</summary>
+              <p>
+                Stop the old Mac first. An old backup may omit later
+                transactions; it cannot safely reconstruct them by itself.
+              </p>
+              <form id="restoreForm">
+                <label
+                  >Encrypted backup file<input
+                    id="backupFile"
+                    type="file"
+                    required /></label
+                ><label
+                  >Backup password<input
+                    id="restorePassword"
+                    type="password"
+                    required /></label
+                ><label class="check"
+                  ><input id="restoreConsent" type="checkbox" required />I have
+                  stopped the original agent and kept its latest state.</label
+                ><button>Restore backup</button>
+              </form>
+              <button id="reconcile">Check restored transaction history</button>
+            </details>
+          </article>
+          <article>
+            <h2>Run after Mac login</h2>
+            <p>
+              Once live practice succeeds, you can use desktop keyring and start
+              the agent after you log in. A restart may still need your computer
+              password and OpenClaw sign-in.
+            </p>
+            <label class="check"
+              ><input id="remember" type="checkbox" />Use desktop keyring to
+              unlock this agent</label
+            ><button id="saveRemember">Save unlock choice</button
+            ><label class="check"
+              ><input id="background" type="checkbox" />Launch AGI Agent at
+              login</label
+            ><label class="check"
+              ><input id="autoResume" type="checkbox" />Resume the previous mode
+              after login</label
+            ><button id="saveStartup">Save startup choices</button>
+            <p class="muted">
+              Also enable login startup for OpenClaw and IPFS Desktop. Keep
+              system sleep off while on power. Do not disable FileVault or
+              expose local control ports to the internet.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section id="help" class="view" hidden>
+        <article>
+          <h2>Try a local delivery check</h2>
+          <p>
+            This example checks a structured deliverable without a wallet,
+            blockchain, public upload or AI call.
+          </p>
+          <button id="demo" class="primary">Run local example</button>
+          <pre id="demoResult"></pre>
+        </article>
+        <article>
+          <h2>What this edition can do</h2>
+          <p>
+            Research public sources, run sandboxed code and use reviewed skills in
+            the separate compute account. Produce bounded text, JSON, CSV or PNG;
+            run formal acceptance checks and a separate model review; publish
+            immutable content; apply, submit, monitor settlement and claim
+            deferred payments.
+          </p>
+          <p>
+            It skips private-account tasks and unsupported deliverable formats.
+            Tools run within the configured compute boundary. A model can still make
+            mistakes. There is no guarantee of acceptance, earnings, uptime or
+            loss-free operation.
+          </p>
+          <p>
+            Open <b>START_HERE.html</b> in your extracted folder for the offline
+            guides: Mac setup, job formats, fleet operation, recovery and
+            validation evidence.
+          </p>
+          <h3>When it pauses</h3>
+          <p>
+            Insufficient funds, quotas and temporary outages are retried within
+            limits. A changed contract, ambiguous wallet nonce, corrupted
+            history or reorganization stops signing for reconciliation. Pausing
+            cannot revoke transactions already broadcast or stop an accepted
+            job’s deadline.
+          </p>
+        </article>
+      </section>
+      <dialog id="authorization">
+        <form method="dialog">
+          <h2>Authorize autonomous operation</h2>
+          <p>
+            Review this exact wallet, contract and budget before enabling
+            signing.
+          </p>
+          <pre id="authorityDetails"></pre>
+          <label class="check"
+            ><input id="riskAck" type="checkbox" />I accept gas costs, bond
+            losses and incorrect or unpaid work within these limits.</label
+          ><label class="check"
+            ><input id="scopeAck" type="checkbox" />I have tested this setup and
+            authorize only suitable, public jobs from the approved
+            buyers.</label
+          >
+          <div class="actions">
+            <button id="confirmAuthority" type="button" class="primary">
+              Authorize these limits</button
+            ><button>Cancel</button>
+          </div>
+        </form>
+      </dialog>
+      <footer>
+        Private local application · Exact contract v1.1.0 · Public deliverables
+        · Controlled rehearsal required before real funds
+      </footer>
+      <section id="operations" class="view" hidden>
+        <h1>Operations & commissioning</h1>
+        <p>
+          Mac mini: AGI Agent. MacBook Pro: AGI Node. Separate wallets, ENS
+          identities, OpenClaw profiles and local journals. Your Node excludes
+          your Agent and all other related parties.
+        </p>
+        <div id="opsNotice" role="status" aria-live="polite"></div>
+        <div class="ops-grid">
+          <article class="ops-card">
+            <h2>1 · Two independent RPC providers</h2>
+            <p>
+              Live mode requires agreement between providers. Use different
+              provider companies and hostnames. A disagreement pauses signing;
+              an outage waits for recovery. Preview remains available with one
+              connection.
+            </p>
+            <form id="opsRPC">
+              <label
+                >Primary RPC URL<input
+                  id="opsPrimary"
+                  type="password"
+                  autocomplete="off"
+                  required
+                  placeholder="https://…" /></label
+              ><label
+                >Verification RPC URL<input
+                  id="opsWitness"
+                  type="password"
+                  autocomplete="off"
+                  required
+                  placeholder="https://…" /></label
+              ><button>Encrypt both connections</button>
+            </form>
+            <p id="opsRPCState"></p>
+          </article>
+          <article class="ops-card">
+            <h2>2 · Keep identities independent</h2>
+            <p>
+              Export the other machine’s public identity, then import it here.
+              Its wallet is added to excluded parties. Include related wallets
+              used outside this pair as well. The software cannot discover
+              undisclosed common control.
+            </p>
+            <button id="opsExportIdentity">
+              Download this machine’s identity</button
+            ><label
+              >Exclude a related machine<input
+                id="opsPeer"
+                type="file"
+                accept=".json,application/json" /></label
+            ><button id="opsImportIdentity">Import & exclude</button>
+            <form id="opsIndependence">
+              <label
+                ><input id="opsIndependent" type="checkbox" required /> I use
+                one signer on one machine, keep journals separate, and have
+                excluded all related parties. My Node will not validate my
+                Agent’s work.</label
+              ><button>Record my independence review</button>
+            </form>
+            <p id="opsIdentityState"></p>
+          </article>
+        </div>
+        <article class="ops-card">
+          <h2>3 · Watch from a third machine</h2>
+          <p>
+            Download a read-only connection for Fleet Monitor. It discloses
+            operating counts and wallet balances, with no wallet key, RPC
+            secret, address or job content. Creating access replaces the
+            previous read token. Keep the app and OpenClaw bound to localhost;
+            use a restricted SSH tunnel for remote access.
+          </p>
+          <div class="actions">
+            <button id="opsMonitorAccess">Download monitoring connection</button
+            ><button id="opsRevoke">Revoke read access</button
+            ><button id="opsProbe">Check dependencies now</button>
+          </div>
+          <p>
+            Use the authenticated local status panel during Linux qualification. A separate supervised monitoring deployment requires its own native qualification.
+          </p>
+          <pre id="opsHealth"></pre>
+        </article>
+        <article class="ops-card">
+          <h2>4 · Record commissioning evidence</h2>
+          <p>
+            Complete these on the real machines and Sepolia before mainnet
+            authorization. A pass is your recorded attestation, not an automatic
+            certification. Record dates and local report filenames; do not paste
+            private data or secrets. Configuration or software changes require a
+            fresh review. Complete records for the final mainnet configuration
+            before authorizing its small pilot.
+          </p>
+          <form id="opsCommission">
+            <label>Check<select id="opsCase"></select></label
+            ><label
+              >Result<select id="opsResult">
+                <option value="pending">Not yet tested</option>
+                <option value="pass">Passed — evidence recorded</option>
+                <option value="blocked">Blocked — needs attention</option>
+              </select></label
+            ><label
+              >Evidence or exception<textarea
+                id="opsEvidence"
+                maxlength="1000"
+                rows="3"
+                placeholder="Test date, machine, actual result and local report filename"
+              ></textarea></label
+            ><button>Save this result</button>
+          </form>
+          <ul id="opsCases"></ul>
+          <button id="opsExportReport">Download commissioning evidence</button>
+        </article>
+        <article class="ops-card">
+          <h2>5 · Measure your pilot</h2>
+          <p>
+            Start after enrolling your Sepolia deployment. Record every job
+            outcome, including failures, and time spent fixing problems. Reports
+            distinguish local transaction records from your attestations. This
+            notebook does not certify commissioning or prove continuous uptime.
+          </p>
+          <p>
+            Use original <b>agi-node-job/v1</b> specifications. Keep extended
+            Agent envelopes disabled. Your Node reviews unrelated participants;
+            arrange independent validators for your Agent.
+          </p>
+          <form id="pilotStart">
+            <label
+              >Rehearsal name<input
+                id="pilotLabel"
+                maxlength="80"
+                minlength="3"
+                required
+                placeholder="Mac mini · Sepolia rehearsal 1" /></label
+            ><button>Start measurement period</button>
+          </form>
+          <pre id="pilotSummary">No measurement period started.</pre>
+          <div id="pilotActive" hidden>
+            <details>
+              <summary>Record or correct a job outcome</summary>
+              <p>
+                One record per job. Saving the same job number corrects its
+                record. Verify final receipts and any deferred USDC claim first.
+                Return of a bond is not job revenue. Buyer acceptance alone is
+                not independent validation.
+              </p>
+              <form id="pilotJob">
+                <label
+                  >Job number<input
+                    id="pilotJobId"
+                    inputmode="numeric"
+                    pattern="[1-9][0-9]{0,77}"
+                    required
+                    maxlength="78"
+                /></label>
+                <label
+                  >Outcome<select id="pilotOutcome">
+                    <option value="unresolved">Still unresolved</option>
+                    <option value="failed">Failed / expired / rejected</option>
+                    <option value="settled-reviewed">
+                      Successful, independently reviewed and paid
+                    </option>
+                    <option value="settled-other">
+                      Paid through another route, including buyer acceptance
+                    </option>
+                  </select></label
+                >
+                <label
+                  >Final payment or claim transaction hash (paid outcomes)<input
+                    id="pilotReceipt"
+                    maxlength="66"
+                    placeholder="0x…"
+                /></label>
+                <label
+                  >Payment time in UTC (within this measurement period)<input
+                    id="pilotTime"
+                    type="datetime-local"
+                    step="0.001"
+                /></label>
+                <label
+                  >Actual job revenue received in USDC (exclude returned
+                  bonds)<input
+                    id="pilotReceived"
+                    inputmode="decimal"
+                    placeholder="Leave blank until paid"
+                /></label>
+                <label
+                  >Evidence reference and review notes<textarea
+                    id="pilotJobEvidence"
+                    minlength="20"
+                    maxlength="800"
+                    required
+                    rows="3"
+                    placeholder="Local receipt report; independent validators checked; deferred claim resolved. No keys or personal information."
+                  ></textarea>
+                </label>
+                <label
+                  ><input id="pilotAttest" type="checkbox" required /> I checked
+                  this outcome. An independent review means validators unrelated
+                  to me, the buyer and the Agent.</label
+                >
+                <button>Save outcome</button>
+              </form>
+            </details>
+            <details>
+              <summary>Record time spent intervening</summary>
+              <form id="pilotIntervention">
+                <label
+                  >Minutes of your time<input
+                    id="pilotMinutes"
+                    type="number"
+                    min="1"
+                    max="1440"
+                    step="1"
+                    required
+                /></label>
+                <label
+                  >What needed your attention?<textarea
+                    id="pilotInterventionEvidence"
+                    minlength="10"
+                    maxlength="800"
+                    required
+                    rows="2"
+                    placeholder="Example: investigated a stalled RPC connection"
+                  ></textarea></label
+                ><button>Record intervention</button>
+              </form>
+            </details>
+            <details>
+              <summary>Record actual costs</summary>
+              <p>
+                Enter cumulative totals for this period, including failed
+                attempts. Leave unknown totals blank; zero means measured zero.
+                Gas budgets are spending ceilings, not actual fees. Record an
+                allocated share of subscriptions and hosting in USD if useful.
+              </p>
+              <form id="pilotCosts">
+                <label
+                  >Actual gas fees in ETH<input
+                    id="pilotGas"
+                    inputmode="decimal"
+                    placeholder="Unknown"
+                /></label>
+                <label
+                  >Nonrefundable costs / lost bonds in USDC<input
+                    id="pilotLost"
+                    inputmode="decimal"
+                    placeholder="Unknown"
+                /></label>
+                <label
+                  >Other allocated costs in USD<input
+                    id="pilotExternal"
+                    inputmode="decimal"
+                    placeholder="Unknown"
+                /></label>
+                <label
+                  >Source / cost allocation method<textarea
+                    id="pilotCostEvidence"
+                    minlength="10"
+                    maxlength="800"
+                    required
+                    rows="2"
+                  ></textarea></label
+                ><button>Save cost totals</button>
+              </form>
+            </details>
+          </div>
+          <p id="pilotScopeNotice"></p>
+          <button id="pilotFinish">Finish measurement period</button>
+          <button id="pilotExport">Download private pilot report</button>
+          <p>
+            Finish freezes this period. Export before upgrading or restoring.
+            Current encrypted application backups include the saved pilot periods. Make a fresh backup after important work. Keep them private. No rate is extrapolated
+            before 24 hours. Commissioning requires at least 72 hours AND the
+            full deployed review/settlement lifecycle. The default review is
+            seven days after submission; 72 hours alone cannot demonstrate it.
+          </p>
+          <p>
+            Open <b>docs/PILOT_MEASUREMENT.html</b> in the extracted folder for
+            the measurement guide.
+          </p>
+        </article>
+      </section>
+    </main>
+    <dialog id="phraseDialog" aria-labelledby="phraseTitle" aria-describedby="phraseLead" class="secure-ceremony">
+      <div class="secure-topline"><span>PRIVATE RECOVERY CEREMONY</span><span id="phraseCountdown" aria-live="off"></span></div>
+      <h2 id="phraseTitle">Write down your recovery words</h2>
+      <p id="phraseLead"></p><p id="phraseMetadata" class="recovery-metadata"></p>
+      <p id="phraseExtraSecret" hidden>Your original extra BIP-39 passphrase is required separately; it is never displayed here.</p>
+      <p class="muted">Words clear after two minutes, when this tab is hidden, or when you choose Hide. Clicking outside this panel does not dismiss it.</p>
+      <ol id="phraseWords" class="phrase-grid" aria-label="Numbered recovery words"></ol>
+      <button id="phraseVerify" class="primary" type="button">I wrote it down · check my copy</button>
+      <form id="confirmPhraseForm" hidden autocomplete="off"><div id="phraseQuestions"></div><label id="confirmPassphraseLabel" hidden>Original BIP-39 passphrase<input id="confirmPassphrase" type="password" autocomplete="off" maxlength="1024"></label><button type="submit" class="primary">Verify recovery copy</button></form>
+      <div id="phraseComplete" hidden><p class="verification-success">✓ RECOVERY COPY VERIFIED</p><p>Your wallet’s recovery check is saved. The encrypted backup also protects your application state and transaction history.</p><button id="phraseContinue" type="button" class="primary">Continue to encrypted backup</button></div>
+      <p id="phraseError" role="alert"></p><button id="phraseClose" type="button">Hide words &amp; close</button>
+    </dialog>
+    <script src="/experience.js"></script>
+    <script src="/genesis.js"></script>
+    <script src="/wallet.js"></script>
+    <script src="/public-browser-ui.js"></script>
+    <script src="/app.js"></script>
+    <script src="/operations.js"></script>
+    <script src="/studio.js"></script>
+  </body>
+</html>

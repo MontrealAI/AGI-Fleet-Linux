@@ -48,3 +48,20 @@ python3 engineering/materialize-release.py --source-only --output /ABSOLUTE/PATH
 An offline ZIP can be supplied with `--archive`. Materialization verifies size, SHA-256, CRC, seven manifests, inventories and executable modes before extracting into an absent canonical directory.
 
 `engineering/current-release.json` preserves the 1.0.9 acceptance anchor for the historical audit tools; `engineering/next-release.json` describes the 1.0.10 source and required gates. The published 1.0.10 manifest is the authority for new archive identity and observed test results. The [baseline engineering guide](../engineering/README.md) documents historical reproduction commands. Do not update historical constants to make a new candidate appear previously accepted.
+
+## Authorized-workspace development preview
+
+New workstation capability work lives under [`workstation/`](../workstation/QUICKSTART.md), version `0.1.0-preview.1`. Its Linux engine records a historical **1.0.9** native workforce source basis in `workstation/candidate.json` and has its own source inventory, tests and qualification ledger. The preview and Studio overlay are **not included in the 1.0.10 Fleet ZIP**. They do not modify a published Fleet archive or inherit acceptance from either the frozen 1.0.9 release or the 1.0.10 release track. Start the guided terminal menu with `npm --prefix workstation start` on a prepared task account; the engine itself uses Node built-ins and needs no npm dependency install. Read the quickstart before connecting a desktop.
+
+The [Studio source overlay](../workstation/STUDIO.md) adds general-format imports to the top-level Agent and Node applications. To assemble a **disposable source fixture** for development outside this checkout:
+
+```sh
+python3 engineering/materialize-workstation-preview.py --output /ABSOLUTE/PATH/workstation-preview-source
+python3 engineering/check-workstation-preview.py
+npm --prefix workstation test
+npm --prefix workstation run test:regressions
+```
+
+Studio tests need the frozen `ajv` dependency. Set `AGI_STUDIO_NODE_MODULES` to an existing verified dependency directory, or run `npm ci --prefix fleet --ignore-scripts --omit=dev` to install the exact lockfile dependencies for testing. No install scripts run. The materialized fixture contains no bundled dependencies and is **not an operator distribution**. Its top-level Agent/Node overlay is the tested UI path; nested Studio distribution copies retain the underlying Fleet source. The fixture records its actual reviewed Fleet source identity separately from the preview’s historical 1.0.9 origin. Do not run the baseline installer or verifier against this modified fixture and treat its output as release qualification.
+
+The preview workflow exercises source and synthetic regressions on Linux x64 and ARM64. A release still requires rebuilding all distribution copies, new inventories, a saved archive and retained native acceptance, followed by actual desktop, model, account, recovery and endurance commissioning. [`candidate.json`](../workstation/candidate.json) records those physical gates separately as `NOT_RUN`.
