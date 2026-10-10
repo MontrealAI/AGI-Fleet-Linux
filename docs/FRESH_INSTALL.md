@@ -1,6 +1,6 @@
 # Fresh Linux installation and physical qualification
 
-Start this procedure only after the native validation addendum records complete-suite PASS for your architecture. A targeted-only or runner-capability PASS does not open this installation gate.
+**The native gate is open for Linux 1.0.9 on both x86-64 and ARM64.** The [hash-bound addendum](../validation/LINUX_1_0_9_NATIVE_ADDENDUM.md) records audited complete-suite PASS. Follow this procedure for a controlled fresh physical installation and keep the [physical ledger](PHYSICAL_QUALIFICATION.md) current.
 
 Linux 1.0.9 is a controlled qualification candidate. Native regression results and the exact frozen archive identity are recorded in the repository validation addendum. Physical installation, real OAuth/inference, document creation, cleanup, reboot identity persistence and endurance are separate gates and have not yet been completed by engineering.
 
@@ -24,10 +24,11 @@ Download `AGI_Fleet_Linux_v1.0.9.zip` from the [frozen prerelease](https://githu
 
     printf '%s  %s\n' 5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102 AGI_Fleet_Linux_v1.0.9.zip | sha256sum --check
 
-Extract the entire ZIP into a new directory; do not extract an individual role. A stable read-only location shared by the new accounts is /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9. From the directory containing the ZIP:
+Before extracting, confirm the destination below is absent. If it exists, stop and preserve it. Extract the entire ZIP into a new directory; do not extract an individual role. A stable read-only location shared by the new accounts is /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9. From the directory containing the ZIP:
 
+    sudo test ! -e /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9
     sudo mkdir -p /opt/agi-fleet-linux
-    sudo unzip AGI_Fleet_Linux_v1.0.9.zip -d /opt/agi-fleet-linux
+    sudo unzip -n AGI_Fleet_Linux_v1.0.9.zip -d /opt/agi-fleet-linux
     sudo chown -R root:root /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9
     sudo chmod -R go-w /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9
     /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9/Verify-Linux.sh

@@ -1,5 +1,7 @@
 # Reproducing Linux 1.0.9 native validation
 
+**The current candidate passed on both architectures.** See the [audited native addendum](../validation/LINUX_1_0_9_NATIVE_ADDENDUM.md). The [development guide](../docs/DEVELOPMENT.md) covers source materialization. The commands below reproduce the engineering qualification; operators use the fresh-install guide.
+
 Use a fresh, disposable Ubuntu 24.04 engineering VM. The supplied workflow uses GitHub-hosted x86-64 and ARM64 VMs, with a read-only repository token and no operator secrets. Authorized root access is used only for isolated test provisioning and real foreign-ownership fixtures. Do not run this harness in an operator signer or compute account.
 
 Run `Linux 1.0.9 saved-archive native validation` from the Actions tab. The workflow fetches its harness from the exact workflow commit. It downloads the frozen 1.0.9 release ZIP and the unchanged historical fixtures and restricted evidence from the 1.0.6 release, checking exact sizes and SHA-256 digests. It validates all seven release manifests and source inventories while freshly extracting the saved archive. It installs hash-verified Node 24.21.0 and lockfile-pinned OpenClaw 2026.9.5; the frozen preflight verifies the OpenClaw inventory and historical fixture manifests. The real OpenClaw CLI version is also checked.

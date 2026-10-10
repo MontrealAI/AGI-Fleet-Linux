@@ -1,38 +1,44 @@
 # AGI Fleet Linux
 
-**Linux 1.0.9 is a controlled qualification candidate, not production-qualified. Native validation is running; operator installation remains gated.**
+**Linux 1.0.9 passed the complete native suite on Ubuntu 24.04 x86-64 and ARM64. It is ready for controlled fresh installation on your Linux machine.** Physical qualification remains open, so this is a prerelease.
 
-The [frozen 1.0.9 prerelease](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.9-qualification) contains all six roles for Ubuntu Desktop 24.04 LTS, x86-64 and ARM64. Download the Fleet Linux ZIP for the implementation. GitHub-generated source archives contain this qualification repository and its engineering harnesses.
+[Download Linux 1.0.9](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.9-qualification) · [Install step by step](docs/FRESH_INSTALL.md) · [Audited results](validation/LINUX_1_0_9_NATIVE_ADDENDUM.md)
 
-## Native validation
+The Fleet ZIP includes **Agent, Node, Moderator, Employer, Evidence and Recovery**. Agent performs sandboxed workstation work; Node independently checks and reviews it. Signer and compute run in separate nonadministrator accounts. Compute uses rootless Docker and policy-bound local services, with spending/run limits, authenticated readiness, durable cleanup evidence and fail-closed STOP controls.
 
-[Run 38022168787](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38022168787) is testing the exact published 1.0.9 ZIP on separate, disposable x64 and ARM64 runners. It runs 25 targeted files (291 tests), followed by the complete 342-file suite (3,897 tests). **Results are pending; the operator installation gate remains closed until the complete results and retained evidence pass independent audit.**
+## Start here
 
-The prerequisites include real Unix-domain sockets and disposable cross-user ownership, verified Node 24.21.0 in application and SDK system lookup locations, inventory-verified OpenClaw 2026.9.5, and the supplied historical fixtures. Ownership guards and fail-closed STOP handling remain enforced. No operator account, wallet or OAuth store is a fixture.
+1. Use a dedicated clean **Ubuntu Desktop 24.04 LTS** host, x86-64 or ARM64, with GNOME, systemd and cgroup v2. Allow at least 8 GB RAM and 40 GB free disk; 16 GB RAM is recommended.
+2. Download **AGI_Fleet_Linux_v1.0.9.zip** from the release page. Verify its checksum before following the [fresh-install guide](docs/FRESH_INSTALL.md).
+3. Start with Agent using new separate signer/compute accounts. Record actual results in the [physical qualification ledger](docs/PHYSICAL_QUALIFICATION.md).
 
-Linux 1.0.9 corrects two historical fresh-readiness fixtures: a recreated 1.18.6 approval must omit both modern mutability-policy fields. Production executable source and test acceptance assertions are unchanged from 1.0.8. The original 50 case source files remain byte-for-byte unchanged. The existing 128-entry qualification source-map bound remains enforced.
+The installer pins Node 24.21.0, OpenClaw 2026.9.5 and Docker Engine 29.8.2. New profiles default to 256 runs per rolling day; Agent and Node allow 32 image attempts. Signer approval and spending controls remain separate.
 
-The new release introduces a bounded, explicitly versioned policy for the pinned default unsigned plugin discovery cache. Installed code, plugin approvals, allowlists, credentials and older seals remain protected. Telemetry integration tests isolate automatic polling while retaining the actual pinned writer and real local HTTP requests.
+## What passed
 
-The [original 1.0.6 artifacts](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.6-qualification) remain unchanged. Its restricted run recorded 3,826 passes, 44 failures and six skips. Native runs resolved those original 50 cases on both architectures, but complete runs found 29 x64 and 30 ARM64 failures. The [separate 1.0.6 addendum](validation/LINUX_1_0_6_NATIVE_ADDENDUM.md) retains those failures and the independent 710-log audit. They are not relabeled as passes.
+| Architecture | Targeted tests | Full suite | Failures / skips / timeouts |
+| --- | ---: | ---: | ---: |
+| x86-64 | 291 / 291 | 3,897 / 3,897 | 0 / 0 / 0 |
+| ARM64 | 291 / 291 | 3,897 / 3,897 | 0 / 0 / 0 |
 
-The [1.0.7 addendum](validation/LINUX_1_0_7_NATIVE_ADDENDUM.md) records 283/285 targeted and 3,889/3,897 complete passes on each architecture, with two source-map boundary failures and six historical fixture failures. The [1.0.8 addendum](validation/LINUX_1_0_8_NATIVE_ADDENDUM.md) records 285/285 targeted and 3,891/3,897 complete passes on each architecture; its six historical fixture failures led to 1.0.9. Separate raw evidence and audits preserve both NOT_PASS results. See [engineering reproduction instructions](engineering/README.md).
+The [independent audit](validation/capable-38022168787-audit.json) verified **734 retained TAP logs** against the exact published ZIP, including real Unix sockets, cross-user ownership and the actual pinned Gateway discovery cache. The original 44 failures and six skips are resolved on both architectures. Their original test source remains unchanged.
 
-## Fresh installation
+Fresh physical installation, rootless Docker/cgroup enforcement, real OAuth/inference, live documents, positive base AND browser cleanup, reboot identity persistence and 72-hour endurance are **NOT RUN**. Keep funded work disabled while recording these gates. Native regression success cannot supply physical observations.
 
-Use the [single fresh signer/compute procedure](docs/FRESH_INSTALL.md) only after the hash-bound native addendum records complete-suite PASS for your architecture. Preserve prior installations inactive. No migration, historical engineering fixtures or manual state editing is required.
+## Download integrity
 
-Physical Linux installation, real OAuth/inference, actual documents, positive base/browser cleanup, identity approval after reboot and measured endurance remain unqualified. Physical M1 and M2 results are separately NOT RUN. Native regression success does not qualify those gates.
+| File | Bytes | SHA-256 |
+| --- | ---: | --- |
+| AGI_Fleet_Linux_v1.0.9.zip | 401,420,759 | `5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102` |
 
-New profiles default to 256 runs per rolling day; Agent and Node allow 32 image attempts. Spending controls and explicit signer approvals remain independent.
+Every supplied archive and member is below **450,000,000 bytes**. Permanent native evidence and its checksum are attached to the release. The original Fleet ZIP remains frozen; its embedded pending reports are superseded by the [later hash-bound addendum](validation/LINUX_1_0_9_NATIVE_ADDENDUM.md).
 
-## Frozen candidate identity
+## Engineering
 
-- File: `AGI_Fleet_Linux_v1.0.9.zip`
-- Bytes: 401,420,759
-- SHA-256: `5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102`
-- Every supplied archive and member is below 450,000,000 bytes.
-- Saved-archive checks passed: all seven manifests/source inventories, 275 shell files, 7,773 JavaScript files and 248 packaged launcher cases. Local parsing used Node 24.19.0; native acceptance uses hash-pinned Node 24.21.0.
+[Development and verified source materialization](docs/DEVELOPMENT.md) · [Native reproduction](engineering/README.md)
 
-No operator profile, wallet, setup JSON, OAuth material, provider response or user document belongs in this repository.
+The repository tracks the exact inventoried application source under `fleet/`, including all six roles, shared runtime, 342 regression files, lockfiles and license notices. Dependencies and historical reports are distributed in the full Fleet ZIP. Use that ZIP for operator installation; GitHub-generated source archives are development checkouts.
 
+Historical results remain available: [1.0.6](validation/LINUX_1_0_6_NATIVE_ADDENDUM.md), [1.0.7](validation/LINUX_1_0_7_NATIVE_ADDENDUM.md), [1.0.8](validation/LINUX_1_0_8_NATIVE_ADDENDUM.md). Their failures have not been relabeled.
+
+Never commit operator profiles, wallets, setup JSON, OAuth stores, provider responses or user documents.

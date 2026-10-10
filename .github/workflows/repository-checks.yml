@@ -1,0 +1,28 @@
+name: Repository checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  repository:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Fetch this exact commit
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+      - name: Check evidence metadata, handoff links and source identity
+        run: python3 engineering/check-repository.py
+      - name: Exercise extraction safety and integrity failures
+        run: python3 -m unittest discover -s engineering/tests -v
+      - name: Parse engineering scripts
+        run: python3 -m compileall -q engineering
