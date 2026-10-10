@@ -4,9 +4,13 @@
 
 **The mission is to build a capable, easy-to-use AI workforce that can perform a large fraction of the work people do with a keyboard, mouse and screen.** That includes work in installed applications and signed-in business tools, alongside files, code and public research. The public sandbox is an initial operating mode, not the intended boundary of the product.
 
-AGI Fleet Linux supplies execution and review; AGIJobManager supplies funding, participation and settlement rules. Together, they could support a broad market for independently checked digital work. **The team's approximately US$40 trillion annual total addressable market is a strategic estimate supplied by the project team.** It is not an independently verified market measurement, expected revenue or an established percentage of jobs the system can automate. A defensible market model must specify geography, included work, year, pricing and achievable adoption without counting the same work twice.
+**Our assessment: Fleet and AGIJobManager could become a reusable workforce for buying and delivering independently checked outcomes across existing applications.** Fleet supplies execution and review; AGIJobManager supplies funded work orders, participation rules and settlement. The opportunity extends from individual deliverables to recurring workflows and coordinated projects. Capturing a large share depends on making accepted results consistently economical, dependable and easy to obtain, with little human rescue.
+
+**The team's approximately US$40 trillion annual total addressable market is a strategic estimate supplied by the project team.** It is not an independently verified market measurement, expected revenue or an established percentage of jobs the system can automate. The [market model below](#from-a-40-trillion-opportunity-to-actual-business) separates that opportunity from work the system can serve, accepted job value and participant receipts.
 
 The product ambition is broad; readiness is specific to a release, workspace and task. **Current releases have not demonstrated reliable completion of most screen-based jobs.** This guide separates the mission, available development paths and the results needed to establish that coverage.
+
+**Source review: 10 October 2026.** This analysis examines [Fleet source at `2f27979`](https://github.com/MontrealAI/AGI-Fleet-Linux/tree/2f2797905fe7867ab3ec63d3b7332ef6d38f407d) and [AGIJobManager source at `69a9d6c` (1.14.0)](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/README.md). The potential and adoption recommendations are architectural and commercial inferences, not measured results. Fleet's retained contract-integration evidence uses the separately pinned **1.13.0** baseline; it does not automatically qualify the newer manager source or private-work settlement.
 
 ## How the two systems work together
 
@@ -19,6 +23,29 @@ The product ambition is broad; readiness is specific to a release, workspace and
 Fleet executes and reviews outside the contract. The contract enforces rules; it cannot establish whether a conclusion is true. See [integration](JOB_INTEGRATION.md).
 
 The [`computer-work/v2` specification](https://github.com/MontrealAI/AGIJobManager/blob/main/docs/OPERATIONS/GENERAL_COMPUTER_WORK.md) has **no profession or filename-extension allowlist**. It describes goals, inputs, outputs, testable criteria, environment, permissions, budget and deadline. New work need not require a new settlement contract; it requires suitable tools and demonstrated competence.
+
+## Why buy the combined service?
+
+Modern assistants can already use tools and produce files. The proposed value of this combination is a dependable work-delivery process around those capabilities:
+
+| Value to the buyer | What the combined process should provide |
+| --- | --- |
+| **A result defined in advance** | A deliverable or final application state, acceptance criteria, budget and deadline. |
+| **Execution in the required tools** | Work carried through files and applications, with recorded outputs and effects. |
+| **A separate quality check** | Review of actual results against the brief, with reasons for acceptance, rejection or uncertainty. |
+| **A durable commercial process** | Funded jobs, participation rules, deadlines, disputes and settlement on the supported public-job path. |
+
+This is an integration thesis, not a claim that these features are exclusive to Fleet or that review guarantees correctness. The private desktop preview still needs a separately implemented and qualified settlement bridge. For a simple question or draft, a standalone assistant may remain the easier and cheaper choice; the combined service earns its place when execution, verification and commercial coordination justify their cost.
+
+## Measure tasks, workflows and occupations separately
+
+| Unit | Example | What success establishes |
+| --- | --- | --- |
+| **Task** | Reconcile a workbook against supplied records. | One accepted result under specified conditions. |
+| **Workflow** | Reconcile records, update an application and produce a report. | Dependent tasks and their combined final state are correct. |
+| **Occupation** | The continuing responsibilities of an analyst or operations specialist. | Much broader coverage, including judgment, exceptions, relationships and accountability. |
+
+Completing substantial work within many occupations is different from replacing most occupations end to end. The ambition can remain broad while evaluation stays precise: report **accepted tasks / all attempted tasks**, **fully completed workflows / attempted workflows**, and the share of a representative workload's **human time or economic value** covered. State the sample, excluded work and human intervention. None of these denominators is interchangeable with a count of job titles or a market-share claim.
 
 ## Choose the workspace for the job
 
@@ -69,7 +96,7 @@ Success means an accepted, usable deliverable with evidence.
 
 ## Broader access, clear control and an easy first run
 
-Keyboard and mouse access enables interaction; reliable outcomes also require judgment, organizational context, recovery and verification. The goal is substantial useful work across occupations. A whole occupation may include responsibilities that cannot be evaluated as a single desktop task.
+Keyboard and mouse access enables interaction; reliable outcomes also require judgment, organizational context, recovery and verification. The goal is substantial useful work across occupations, measured at the task and workflow levels described above.
 
 The user experience should follow a simple sequence:
 
@@ -87,6 +114,27 @@ The preview retains signed authority, budget admission, encrypted handoffs and i
 
 Larger projects also need dependency planning, handoffs, integration review and recovery. Specification references do not supply complete coordination. Separate child-job settlements do not guarantee atomic project settlement; each stage must preserve its authority, budget and accepted inputs. The private workspace currently has no automatic bridge to public AGIJobManager job settlement.
 
+## From a $40 trillion opportunity to actual business
+
+A defensible market model must specify geography, included work, year, pricing and achievable adoption without counting the same work twice. Use four distinct layers:
+
+| Layer | What it means | What establishes it |
+| --- | --- | --- |
+| **1. Total opportunity** | The team's approximately **US$40 trillion/year** strategic estimate for human screen-based work. | A sourced market definition and explicit assumptions; the estimate is not independently verified here. |
+| **2. Serviceable work** | Work compatible with available applications, authorized access, demonstrated quality and viable total cost. | Representative task results and evidence that buyers can use the service. |
+| **3. Accepted paid job value** | Work customers actually buy and accept through the service. | Observed demand, prices, completion and payment, constrained by execution and review capacity. |
+| **4. Participant receipts and profit** | Actual Agent, validator and settlement-wallet receipts; profit after relevant costs. | The chosen job's payout terms, actual receipts and complete cost records. |
+
+**Illustration of scale only.** Applied to the team's stated TAM, these fractions correspond to the following associated annual human-work spending:
+
+| Assumed fraction of the stated TAM | Arithmetic | Associated annual spend |
+| --- | --- | ---: |
+| **0.01%** | US$40 trillion × 0.0001 | **US$4 billion** |
+| **0.1%** | US$40 trillion × 0.001 | **US$40 billion** |
+| **1%** | US$40 trillion × 0.01 | **US$400 billion** |
+
+These are exact arithmetic illustrations under an unverified market assumption, **not adoption forecasts, job transaction volume or company revenue**. Human-work spending does not translate one for one into purchases of automated work: prices, task boundaries, buyer demand and review costs may differ. No platform fee or company ownership of settlement receipts is assumed. The scale explains why even a small measured foothold could matter; it does not establish that foothold.
+
 ## Review quality and economics determine scalability
 
 Different wallets or repeated model calls do not establish independence. Use independently controlled reviewers and examine shared model, prompt, source and testing errors. Independent recalculation, adversarial examples and diverse checking methods help assess that risk. A voting majority can still be wrong. See [evidence review](../fleet/packages/AGI_Agent/compute/skills/agi-evidence-review/SKILL.md).
@@ -103,6 +151,19 @@ More Agents need sufficient qualified review capacity and sustainable economics.
 The price includes these shares; 80 USDC is shared across eligible Nodes. This is no profit forecast or universal outcome. The rate is snapshotted per job; rounding, residual pools, separate bonds, slashing, disputes and unreviewed acceptance can change transfers. Inspect actual terms and [exact payout rules](https://github.com/MontrealAI/AGIJobManager/blob/main/docs/USDC_PAYOUT_SPLIT.md).
 
 Count inference, review, failed/unpaid work, ETH gas, infrastructure, publishing, human intervention and capital at risk. Gross allocation is not profit; architecture establishes no revenue forecast.
+
+## A practical route to broad adoption
+
+**Recommended commercial progression, not a record of deployments already delivered:**
+
+| Step | Offer to develop | Evidence needed to expand |
+| --- | --- | --- |
+| **1. Verified task templates** | Clear, repeatable public deliverables with reusable briefs and acceptance checks. | Useful results, economical review and a first-run experience operators can complete. |
+| **2. Repeat-buyer workflows** | Recurring work in a small set of qualified applications. | Repeat demand, predictable cost and turnaround, reliable recovery and low human intervention. |
+| **3. Cross-application projects** | Dependent workflows with a checked final result and explicit authority for external changes. | Correct handoffs, application state, integration review and project-level economics. Private work needs its own qualified integration and settlement path. |
+| **4. A multi-operator market** | Work distributed among independently operated Agents and reviewers. | Qualified supply, genuine review independence, repeat buyers, dependable settlement and support at increasing volume. |
+
+Start where useful outputs are easiest to verify, then expand applications and task families as evidence supports them. More machines alone do not create demand, independent review or profitable work. Qualified templates, application knowledge and reliable delivery are the assets this progression should build.
 
 ## Evidence snapshot: 10 October 2026
 
@@ -144,4 +205,14 @@ For every evaluation, freeze the workload, criteria and runtime; separate tuning
 
 See the upstream [measurement and qualification workflow](https://github.com/MontrealAI/AGIJobManager/blob/main/docs/OPERATIONS/GENERAL_COMPUTER_WORK.md#measure-improvements-before-promotion). A changed model, desktop provider, application version or permission policy needs relevant reevaluation.
 
-The opportunity is broad digital labor. The route to it is a capable workstation, a simple operator experience, dependable independent review and measured task success. The approximately US$40 trillion annual strategic estimate describes the team's ambition; evidence of useful work determines the portion the system can actually serve.
+The opportunity is broad digital labor: a reusable workforce that turns a clear request into a verified result in the tools people already use. **Large-scale adoption would require repeatable quality, competitive total cost and a simple experience for both buyers and operators.** Fleet and AGIJobManager provide complementary building blocks; measured task coverage, repeat demand and observed economics will determine how much of the team's approximately US$40 trillion strategic opportunity they can actually serve.
+
+## Sources for this assessment
+
+The reviewed [Fleet source](https://github.com/MontrealAI/AGI-Fleet-Linux/tree/2f2797905fe7867ab3ec63d3b7332ef6d38f407d) and the following manager documents are pinned to the source snapshot above. They describe mechanisms and requirements, not proof of broad commercial performance:
+
+- [AGIJobManager overview](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/README.md)
+- [General computer work](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/docs/OPERATIONS/GENERAL_COMPUTER_WORK.md)
+- [Confidential project work](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/docs/OPERATIONS/CONFIDENTIAL_PROJECT_WORK.md)
+- [Operating qualification](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/docs/OPERATIONS/OPERATING_QUALIFICATION.md)
+- [Project economics](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/docs/OPERATIONS/PROJECT_ECONOMICS.md)

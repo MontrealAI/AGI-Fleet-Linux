@@ -23,13 +23,21 @@ The public sandbox is one work mode, **not the ceiling of the product's mission*
 
 ## The potential of Fleet + AGIJobManager
 
-**Fleet supplies the workforce; AGIJobManager supplies escrow, participation rules, review deadlines and settlement.** A reusable job specification can accommodate many occupations without a profession or filename-extension allowlist. Broader tools and account access expand what can be attempted; representative task results establish what can be offered reliably.
+**Our assessment: together, they could form a reusable workforce that turns a clear request into an independently checked outcome in the tools people already use.** Fleet supplies execution and review; AGIJobManager supplies funded work orders, participation rules and settlement. This is an architectural and commercial assessment, not a measured automation rate.
 
-The target spans software and data work, documents and creative production, research, customer operations, CRM, scheduling, business administration and multi-application projects. Some tasks require installed applications, enterprise access or extra adapters. These are categories to qualify, not claims of demonstrated customer-job coverage.
+Modern assistants can already use tools. The combined product's value would be a dependable process: **define the result → execute in the required applications → independently review the outcome → settle under the job's rules**. That process must justify its total cost; a simple question or draft may still be better served by an assistant alone. The private workspace preview needs a separately implemented and qualified settlement bridge.
+
+The target spans software, data, documents, research, creative production, business operations and cross-application projects. The job format has no profession or file-extension allowlist, but tools, permissions and demonstrated competence still determine coverage. **A successful task, a completed workflow and an entire occupation are different units.** Measure accepted results across all attempted work, human intervention and the share of representative work time or value covered.
+
+The commercial progression is **verified task templates → repeat-buyer workflows → cross-application projects → a multi-operator market**. Expand when quality, demand, review capacity and economics support the next step. These are recommended development stages, not completed deployments.
+
+Keep the market model clear: **total opportunity → serviceable work → accepted paid job value → actual participant receipts and profit**. At the team's stated US$40 trillion TAM, 0.01%, 0.1% and 1% correspond arithmetically to US$4 billion, US$40 billion and US$400 billion in associated annual human-work spending. These illustrate scale; they are neither forecasts, job transaction volume nor company revenue. No platform fee is assumed.
 
 A user-friendly experience should answer five questions: **What should be done? Which workspace may be used? What may it change? What will it cost? How do I review or stop it?** The preview quickstart makes the first workspace explicit; task templates, smoother setup and broader application qualification remain part of the development roadmap.
 
 Success means **repeatable, independently accepted results at a competitive total cost and low human supervision**. No current release establishes that most keyboard-and-mouse jobs can already be completed.
+
+The full analysis reviews Fleet [`2f27979`](https://github.com/MontrealAI/AGI-Fleet-Linux/tree/2f2797905fe7867ab3ec63d3b7332ef6d38f407d) and AGIJobManager [`69a9d6c` (1.14.0 source)](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/README.md). Fleet's retained 1.13.0 integration results do not automatically qualify the newer source or private-work settlement.
 
 **[Read the complete potential and scope guide](docs/POTENTIAL_AND_SCOPE.md)** · **[Français](docs/POTENTIEL_ET_PERIMETRE.md)** · **[Explore the website explanation](https://montrealai.github.io/AGI-Fleet-Linux/#potential)**
 
