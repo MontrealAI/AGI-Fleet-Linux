@@ -29,6 +29,36 @@ def main():
                     and result['verifiedLogs'] == files, 'Incomplete native acceptance')
             require(all(result['counts'][k] == 0 for k in ('fail', 'cancelled', 'skipped', 'todo')), 'Native evidence contains unsuccessful cases')
     require(all(v == 'NOT_RUN' for v in current['physicalQualification'].values()), 'Physical results require a separate reviewed ledger')
+    integration = current.get('jobIntegration')
+    metadata_path = ROOT / 'validation/Linux-Job-Integration-Evidence-v1.0.9.json'
+    require(integration is not None or not metadata_path.exists(), 'Integration evidence has no reviewed release anchor')
+    if integration is not None:
+        require(integration['status'] == 'PASS' and integration['managerRepository'] == 'MontrealAI/AGIJobManager'
+                and integration['managerCommit'] == '191cf3590e5cdc08df1bb0af500ee28a91c8b010'
+                and integration['managerVersion'] == '1.13.0', 'Integration manager identity differs')
+        integration_audit_path = ROOT / integration['audit']['path']
+        require(sha(integration_audit_path) == integration['audit']['sha256'], 'Integration audit digest differs')
+        integration_audit = json.loads(integration_audit_path.read_text())
+        metadata = json.loads(metadata_path.read_text())
+        require(integration_audit['status'] == 'PASS' and integration_audit['releaseSHA256'] == SHA256
+                and integration_audit['productionQualified'] is False and integration_audit['verifiedLogs'] == 38,
+                'Integration audit classification differs')
+        require(metadata['audit'] == integration_audit and metadata['productionQualified'] is False
+                and metadata['releaseSHA256'] == SHA256 and metadata['name'] == integration['evidence']['name']
+                and metadata['bytes'] == integration['evidence']['bytes']
+                and metadata['sha256'] == integration['evidence']['sha256'], 'Integration evidence identity differs')
+        for record in [integration_audit, metadata]:
+            require(record['managerCommit'] == integration['managerCommit']
+                    and record['workflowRun'] == integration['workflowRun']
+                    and record['workflowCommit'] == integration['workflowCommit'], 'Integration provenance differs')
+        require(len(integration_audit['runs']) == 2
+                and {run['architecture'] for run in integration_audit['runs']} == {'x64', 'arm64'},
+                'Both integration architectures are required')
+        for run in integration_audit['runs']:
+            require(run['status'] == 'PASS' and run['verifiedLogs'] == 19 and run['standaloneIntegrationScripts'] == 8
+                    and run['productionSourcesMatched'] == run['contractArtifactsMatched'] == 11
+                    and run['managerTestsPassed'] == 777 and run['productionQualified'] is False,
+                    'Integration acceptance is incomplete')
     for path in [ROOT / 'README.md', *(ROOT / 'docs').glob('*.md'), ROOT / 'engineering/README.md']:
         for target in re.findall(r'\]\(([^\s)]+)\)', path.read_text()):
             if re.match(r'^[a-zA-Z][a-zA-Z0-9+.-]*:', target) or target.startswith('#'):
@@ -37,7 +67,8 @@ def main():
     mirror = ROOT / 'fleet'
     source = verify_source(mirror) if mirror.exists() else None
     require(not args.require_source or source is not None, 'Frozen source mirror is missing')
-    print(json.dumps({'status': 'PASS', 'nativeAcceptance': 'PASS', 'operatorGate': current['operatorGate'],
+    print(json.dumps({'status': 'PASS', 'nativeAcceptance': 'PASS', 'jobIntegration': integration['status'] if integration else None,
+                      'operatorGate': current['operatorGate'],
                       'sourceMirror': source, 'productionQualified': False}, indent=2))
 
 

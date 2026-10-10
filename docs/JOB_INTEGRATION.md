@@ -4,6 +4,8 @@ Fleet executes jobs outside the contract. AGIJobManager holds USDC escrow, assig
 
 The engineering baseline is Linux 1.0.9 and AGIJobManager commit `191cf3590e5cdc08df1bb0af500ee28a91c8b010` (package 1.13.0). Fleet's older `v1.1.0` source label is retained as provenance. All 11 production Solidity sources, ABI, creation/runtime bytecode, library links and immutable byte offsets match the freshly compiled baseline. This check fails when production source or contract artifacts change; an old label alone does not prove compatibility with a future manager.
 
+Both architecture jobs passed in [main run 38052394030](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38052394030). The [hash-bound acceptance addendum](../validation/LINUX_1_0_9_JOB_INTEGRATION_ADDENDUM.md) records the independently audited results and permanent release evidence. On each architecture, all eight standalone scripts, the fresh-manager lifecycle and 777 manager regressions passed. This is additional coverage beyond the 3,897 native tests.
+
 ## Reproduce locally
 
 Use Ubuntu 24.04 x86-64 or ARM64, Python 3.12+, Git, network access and two absent directories under existing canonical parents:

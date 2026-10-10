@@ -24,5 +24,22 @@
     "baseAndBrowserCleanup": "NOT_RUN",
     "rebootIdentity": "NOT_RUN",
     "endurance72Hours": "NOT_RUN"
+  },
+  "jobIntegration": {
+    "status": "PASS",
+    "managerRepository": "MontrealAI/AGIJobManager",
+    "managerCommit": "191cf3590e5cdc08df1bb0af500ee28a91c8b010",
+    "managerVersion": "1.13.0",
+    "workflowRun": "38052394030",
+    "workflowCommit": "1620be59395599b898fe81a4c36f040b3d9e1c8c",
+    "audit": {
+      "path": "validation/job-integration-audit.json",
+      "sha256": "6b02c028282aa9e6d74c434fc2af1b2bb0ed89abaa1d152f34fd14ccf83fdbfa"
+    },
+    "evidence": {
+      "name": "Linux-Job-Integration-Evidence-v1.0.9.zip",
+      "bytes": 74706,
+      "sha256": "059a085435ebf8d06789b74e754b25f028982dfebe72772982c6c236df5d7353"
+    }
   }
 }

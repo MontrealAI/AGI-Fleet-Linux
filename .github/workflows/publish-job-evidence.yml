@@ -1,0 +1,44 @@
+name: Publish audited job integration evidence
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-job-evidence.yml
+      - engineering/publish-job-evidence.py
+      - engineering/audit-job-evidence.py
+      - validation/Linux-Job-Integration-Evidence-v1.0.9.json
+      - validation/job-integration-audit.json
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: publish-job-evidence-v1.0.9
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Fetch this exact reviewed commit
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+      - name: Check source, evidence metadata and integrity regressions
+        run: |
+          python3 engineering/check-repository.py --require-source
+          python3 -m unittest discover -s engineering/tests -v
+      - name: Re-audit original logs and publish immutable integration evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 engineering/publish-job-evidence.py

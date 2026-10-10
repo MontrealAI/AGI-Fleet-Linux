@@ -1,0 +1,42 @@
+{
+  "schema": "agi-fleet-manager-integration-audit/v1",
+  "status": "PASS",
+  "releaseSHA256": "5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102",
+  "workflowRun": "38052394030",
+  "workflowCommit": "1620be59395599b898fe81a4c36f040b3d9e1c8c",
+  "managerCommit": "191cf3590e5cdc08df1bb0af500ee28a91c8b010",
+  "runs": [
+    {
+      "architecture": "x64",
+      "status": "PASS",
+      "summarySHA256": "2c79ca9a6ab63ae7123bfd61bccb612b8f408a4e98f04733ad4fb5e79dbeea3d",
+      "verifiedLogs": 19,
+      "standaloneIntegrationScripts": 8,
+      "productionSourcesMatched": 11,
+      "contractArtifactsMatched": 11,
+      "managerTestsPassed": 777,
+      "currentManagerLifecycleSHA256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56",
+      "managerCommit": "191cf3590e5cdc08df1bb0af500ee28a91c8b010",
+      "workflowRun": "38052394030",
+      "workflowCommit": "1620be59395599b898fe81a4c36f040b3d9e1c8c",
+      "productionQualified": false
+    },
+    {
+      "architecture": "arm64",
+      "status": "PASS",
+      "summarySHA256": "71a573dc7e4cd07b57edcd61680ef3c28917d7d96a5e7333748986aadf0a2278",
+      "verifiedLogs": 19,
+      "standaloneIntegrationScripts": 8,
+      "productionSourcesMatched": 11,
+      "contractArtifactsMatched": 11,
+      "managerTestsPassed": 777,
+      "currentManagerLifecycleSHA256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56",
+      "managerCommit": "191cf3590e5cdc08df1bb0af500ee28a91c8b010",
+      "workflowRun": "38052394030",
+      "workflowCommit": "1620be59395599b898fe81a4c36f040b3d9e1c8c",
+      "productionQualified": false
+    }
+  ],
+  "verifiedLogs": 38,
+  "productionQualified": false
+}
