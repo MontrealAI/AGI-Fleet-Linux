@@ -167,6 +167,57 @@ def edition_paths(root):
     return [('fleet', root)] + [(role, root / 'packages' / entry['package']) for role, entry in registry.items()]
 
 
+def plain_text_guide(version, role):
+    return f'''AGI Fleet Linux {version} — {role.title()} edition
+Current Linux installation and qualification guide
+
+START HERE
+Open START_HERE.html in this verified release folder.
+
+Fresh installation:
+  docs/linux-current/docs/FRESH_INSTALL.html
+Plain-text instructions:
+  docs/linux-current/docs/FRESH_INSTALL.md
+Troubleshooting and safe failure reporting:
+  docs/linux-current/docs/TROUBLESHOOTING.html
+  docs/linux-current/docs/TROUBLESHOOTING.md
+Physical qualification ledger:
+  docs/linux-current/docs/PHYSICAL_QUALIFICATION.html
+Release status:
+  docs/linux-current/README.html
+
+BEFORE INSTALLATION
+Use the complete AGI_Fleet_Linux_v{version}.zip and verify its SHA-256
+against SHA256SUMS-v{version}.txt from the same published release.
+Confirm that this exact archive has passed native acceptance on both
+architectures and its controlled fresh-install gate is open.
+Earlier releases' results do not qualify this archive.
+
+The supported target is Ubuntu Desktop 24.04 LTS, x86-64 or ARM64.
+Follow the current fresh-install guide in order with NEW nonadministrator accounts
+for separate signer and compute roles. Keep the complete Fleet folder.
+Keep previous installations inactive and preserved.
+No migration, engineering fixtures or manual profile/state edits are required.
+The administrator follows Prepare-Ubuntu.sh in the guide. In the separate
+compute desktop session, follow Prepare-Compute.sh and the role's
+Install.sh --file PRIVATE_SETUP.json instructions. Use only the Linux .sh
+entry points named in the guide. Qualify each role independently.
+
+Physical installation, rootless Docker, OAuth/inference, live documents,
+base and browser cleanup, reboot identity and 72-hour endurance require
+their own recorded results. Production qualification remains pending.
+
+ON FAILURE
+Stop and preserve accounts, state, reports and COMPUTE_STOP. Follow the
+current troubleshooting guide above. Never remove STOP manually, weaken
+ownership checks or substitute the root Docker daemon. Keep wallet
+material, setup JSON, tokens and private documents out of support reports.
+
+Historical instructions and evidence remain for engineering traceability.
+Use the current guide paths above for this release.
+'''
+
+
 def add_operator_guides(root, repository, version, commit):
     guides = [repository / 'README.md', *sorted((repository / 'docs').glob('*.md')),
               repository / 'engineering/README.md', *sorted((repository / 'validation').glob('*.md'))]
@@ -197,9 +248,9 @@ def add_operator_guides(root, repository, version, commit):
 
 **Engineering and physical-qualification candidate — {role.title()} edition.**
 
-Native acceptance for this exact release must be published before a controlled fresh installation. Production and physical qualification remain pending. Earlier releases' results do not qualify this ZIP.
+Native acceptance for this exact release must be published before a controlled fresh installation. Production qualification is pending. Physical qualification remains pending. Earlier releases' results do not qualify this ZIP.
 
-1. Read the [current fresh-install guide](docs/linux-current/docs/FRESH_INSTALL.md).
+1. Read the [Linux fresh-install guide](docs/linux-current/docs/FRESH_INSTALL.md).
 2. Check the [release status](docs/linux-current/README.md) and exact SHA-256 on the release page.
 3. Follow the guide using new, separate signer and compute accounts. Keep the complete Fleet folder.
 4. Record each physical gate in the [qualification ledger](docs/linux-current/docs/PHYSICAL_QUALIFICATION.md).
@@ -216,6 +267,7 @@ Historical Mac instructions and prior evidence remain available for engineering 
             (app / name).write_text(welcome)
             (app / name.replace('.md', '.html')).write_text(render_markdown(welcome))
         (app / 'Linux-Guide.html').write_text(render_markdown(welcome))
+        (app / 'Linux-Guide.txt').write_text(plain_text_guide(version, role))
         (app / 'READ_ME_FIRST.txt').write_text(f'AGI Fleet Linux {version}\nOpen START_HERE.html for the current Linux installation and qualification guide.\nProduction and physical qualification remain pending.\n')
         # Refresh only current release labels; historical prose and evidence stay intact.
         for source in (app / 'docs').glob('*.md'):

@@ -34,7 +34,7 @@ Output includes `AGI_Fleet_Linux_v1.0.10.zip`, `release.json`, packaging receipt
 
 The [next-release workflow](../.github/workflows/next-release.yml) builds once and distributes the same artifact to disposable x86-64 and ARM64 runners. It runs targeted/full native suites and AGIJobManager integration separately, then rechecks retained log hashes, test-source identity, exact counts and workflow provenance. Root runtime provisioning is limited to disposable GitHub-hosted runners; do not run that harness in an operator account or on a shared workstation.
 
-Pull requests run all qualification jobs without publishing. On `main`, publication runs only after the independent audit passes. It uploads a draft release, verifies the remote asset digests, and publishes the prerelease. Existing differing assets are rejected rather than replaced. Every file must remain below 450,000,000 bytes. A stable production release additionally requires the [physical ledger](PHYSICAL_QUALIFICATION.md), which is still open.
+Pull requests run all qualification jobs without publishing. On `main`, changing `engineering/next-release.json` starts a release invocation; ordinary documentation pushes do not republish the fixed tag. Manual dispatch validates only unless `publish` is explicitly selected. Publication runs only after the independent audit passes. It uploads a draft release, verifies the remote asset digests, and publishes the prerelease. Existing differing assets are rejected rather than replaced. Every file must remain below 450,000,000 bytes. A stable production release additionally requires the [physical ledger](PHYSICAL_QUALIFICATION.md), which is still open.
 
 ## Reproduce the preserved 1.0.9 baseline
 

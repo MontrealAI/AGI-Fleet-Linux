@@ -2,9 +2,9 @@
 
 **Engineering and physical-qualification candidate — Recovery edition.**
 
-Native acceptance for this exact release must be published before a controlled fresh installation. Production and physical qualification remain pending. Earlier releases' results do not qualify this ZIP.
+Native acceptance for this exact release must be published before a controlled fresh installation. Production qualification is pending. Physical qualification remains pending. Earlier releases' results do not qualify this ZIP.
 
-1. Read the [current fresh-install guide](docs/linux-current/docs/FRESH_INSTALL.md).
+1. Read the [Linux fresh-install guide](docs/linux-current/docs/FRESH_INSTALL.md).
 2. Check the [release status](docs/linux-current/README.md) and exact SHA-256 on the release page.
 3. Follow the guide using new, separate signer and compute accounts. Keep the complete Fleet folder.
 4. Record each physical gate in the [qualification ledger](docs/linux-current/docs/PHYSICAL_QUALIFICATION.md).

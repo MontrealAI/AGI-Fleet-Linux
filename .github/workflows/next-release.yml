@@ -4,13 +4,19 @@ on:
     paths: ['fleet/**', 'docs/**', 'engineering/**', '.github/workflows/next-release.yml']
   push:
     branches: [main]
-    paths: ['fleet/**', 'docs/**', 'engineering/next-release.json', 'engineering/*next*', '.github/workflows/next-release.yml']
+    paths: ['engineering/next-release.json']
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish this explicitly prepared release after qualification
+        type: boolean
+        required: true
+        default: false
 permissions:
   contents: read
 concurrency:
   group: next-linux-release-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -142,7 +148,7 @@ jobs:
           if-no-files-found: error
           retention-days: 90
   publish:
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish))
     needs: [build, native, integration, audit]
     permissions:
       contents: write

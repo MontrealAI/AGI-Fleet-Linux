@@ -97,6 +97,32 @@ class CandidateBuilder(unittest.TestCase):
             m.write_json(app / 'release-manifest.json', {'version': '1.0.9', 'nativeAcceptance': 'PASS', 'productionQualified': True})
         return editions
 
+    def test_operator_guides_replace_stale_plain_text_in_all_seven_editions(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / 'release'
+            repository = Path(temporary) / 'repository'
+            editions = self.edition_fixture(root)
+            for relative in ['README.md', 'engineering/README.md', 'docs/FRESH_INSTALL.md',
+                             'docs/TROUBLESHOOTING.md', 'docs/PHYSICAL_QUALIFICATION.md']:
+                file = repository / relative
+                file.parent.mkdir(parents=True, exist_ok=True)
+                file.write_text('# Current instructions\n')
+            for _, app in editions:
+                (app / 'Linux-Guide.txt').write_text('AGI FLEET LINUX 1.0.6: obsolete install command\n')
+            m.add_operator_guides(root, repository, '1.0.10', 'a' * 40)
+            for role, app in editions:
+                guide = (app / 'Linux-Guide.txt').read_text()
+                self.assertIn('AGI Fleet Linux 1.0.10', guide)
+                self.assertNotIn('1.0.6', guide)
+                self.assertNotIn('obsolete install command', guide)
+                for relative in ['START_HERE.html', 'docs/linux-current/docs/FRESH_INSTALL.html',
+                                 'docs/linux-current/docs/FRESH_INSTALL.md',
+                                 'docs/linux-current/docs/TROUBLESHOOTING.html',
+                                 'docs/linux-current/docs/TROUBLESHOOTING.md']:
+                    self.assertIn(relative, guide)
+                    self.assertTrue((app / relative).is_file(), relative)
+                self.assertIn('Production qualification remains pending', guide)
+
     def test_new_manifests_do_not_reuse_previous_acceptance(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
