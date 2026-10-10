@@ -1,5 +1,7 @@
 # AGI Fleet Linux
 
+**[Open the Fleet website — installation, roles, readiness and troubleshooting](https://montrealai.github.io/AGI-Fleet-Linux/)** · [Français](https://montrealai.github.io/AGI-Fleet-Linux/fr.html)
+
 **Install, operate and qualify six isolated AGI Jobs roles on Ubuntu Desktop 24.04 LTS.** The current release track is **1.0.10**, a controlled-installation prerelease for x86-64 and ARM64. Physical commissioning remains open.
 
 [Download Linux 1.0.10](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.10-qualification) · [Install step by step](docs/FRESH_INSTALL.md) · [Troubleshooting](docs/TROUBLESHOOTING.md) · [Release notes](docs/RELEASE_NOTES_1_0_10.md)
