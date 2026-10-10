@@ -35,6 +35,13 @@ FIXTURE_BYTES = 211966077
 FIXTURE_SHA256 = '4e95b35a90a2f212f2686f2c31bd4eb0d7de8131f1733d4d51e8647359b47014'
 COUNT_KEYS = ('tests', 'suites', 'pass', 'fail', 'cancelled', 'skipped', 'todo')
 ROLES = ('Agent', 'Node', 'Moderator', 'Employer', 'Evidence', 'Recovery')
+SYSTEM_NODE = Path('/opt/homebrew/bin/node')
+SYSTEM_NODE_PARENTS = ('/opt/homebrew/bin', '/opt/homebrew', '/opt', '/')
+SYSTEM_NODE_CANDIDATES = ('/opt/homebrew/bin/node', '/opt/homebrew/opt/node/bin/node',
+                          '/opt/homebrew/opt/node@24/bin/node', '/opt/homebrew/opt/node@22/bin/node',
+                          '/usr/local/bin/node', '/usr/local/opt/node/bin/node',
+                          '/usr/local/opt/node@24/bin/node', '/usr/local/opt/node@22/bin/node', '/usr/bin/node')
+PROBE_MODULE = 'dist/runtime-paths-4M-K3zyp.mjs'
 
 
 def need(value, message):
@@ -252,6 +259,110 @@ def packaged_host_checks(source, evidence, environment, node):
             'platform': 'darwin', 'architecture': 'arm64', 'cases': cases, 'productionQualified': False}
 
 
+def entry_identity(path):
+    if not path.exists() and not path.is_symlink():
+        return {'kind': 'absent'}
+    info = path.lstat()
+    need(stat.S_ISREG(info.st_mode) or stat.S_ISLNK(info.st_mode), 'System Node entry must be a file or symbolic link')
+    result = {'kind': 'symlink' if path.is_symlink() else 'file', 'uid': info.st_uid, 'gid': info.st_gid, 'mode': stat.S_IMODE(info.st_mode)}
+    if path.is_symlink():
+        result['linkTarget'] = os.readlink(path)
+        result['sha256'] = hashlib.sha256(os.fsencode(result['linkTarget'])).hexdigest()
+    else:
+        result['sha256'] = sha(path)
+    return result
+
+
+def parent_permissions():
+    rows = []
+    for name in SYSTEM_NODE_PARENTS:
+        path = Path(name)
+        info = path.lstat()
+        need(stat.S_ISDIR(info.st_mode) and not path.is_symlink(), 'System Node parent must be an ordinary directory')
+        rows.append({'path': name, 'uid': info.st_uid, 'gid': info.st_gid, 'mode': stat.S_IMODE(info.st_mode)})
+    return rows
+
+
+def safe_ci_parents(rows, runner_uid):
+    need([row['path'] for row in rows] == list(SYSTEM_NODE_PARENTS), 'Unexpected system Node parent chain')
+    for row in rows:
+        need(row['uid'] in (0, runner_uid) and not row['mode'] & 0o002 and
+             (not row['mode'] & 0o020 or row['gid'] == 80), 'Unsafe system Node parent ownership or permissions')
+
+
+def provision_system_node(node, runner_uid, state):
+    # This is only engineering preparation on an ephemeral hosted machine.
+    # Never use this operation for a Standard-account Mac installation.
+    runner_guard(os.environ, platform.system(), platform.machine(), os.geteuid(), os.environ.get('HOME', ''))
+    parents = parent_permissions()
+    safe_ci_parents(parents, runner_uid)
+    state.update(schema='agi-macos-ci-system-node/v1', status='NOT_PASS', scope='DISPOSABLE_GITHUB_HOSTED_CI_ONLY',
+                 operatorAccountsUsed=False, target=str(SYSTEM_NODE), version=NODE_VERSION, archiveSHA256=NODE_SHA256,
+                 executableSHA256=sha(node), originalEntry=entry_identity(SYSTEM_NODE), parentsBefore=parents,
+                 runnerUID=runner_uid,
+                 repository=REPOSITORY, githubRunId=os.environ['GITHUB_RUN_ID'], workflowCommit=os.environ['GITHUB_SHA'])
+    nonce = os.environ['GITHUB_RUN_ID'] + '-' + str(os.getpid())
+    backup = SYSTEM_NODE.with_name('.node-agi-' + nonce + '-original')
+    stage = SYSTEM_NODE.with_name('.node-agi-' + nonce + '-pinned')
+    need(not backup.exists() and not backup.is_symlink() and not stage.exists() and not stage.is_symlink(), 'System Node preparation already exists')
+    state['_backup'] = backup
+    state['_stage'] = stage
+    state['_prepared'] = True
+    if state['originalEntry']['kind'] != 'absent':
+        SYSTEM_NODE.rename(backup)
+        need(entry_identity(backup) == state['originalEntry'], 'Original system Node identity was not preserved')
+    with node.open('rb') as source, stage.open('xb') as destination:
+        shutil.copyfileobj(source, destination)
+    stage.chmod(0o755)
+    need(sha(stage) == state['executableSHA256'], 'Provisioned system Node differs from the verified private binary')
+    stage.rename(SYSTEM_NODE)
+    state['provisionedEntry'] = entry_identity(SYSTEM_NODE)
+    need(state['provisionedEntry']['uid'] == 0 and state['provisionedEntry']['mode'] == 0o755, 'Provisioned Node must be root-owned and executable')
+    need(parent_permissions() == parents, 'System Node parent permissions changed')
+
+
+def probe_system_node(package, evidence, environment, node, state):
+    module = package / PROBE_MODULE
+    candidates = re.search(r'if \(platform === "darwin"\) return (\[[\s\S]*?\]);', module.read_text())
+    need(candidates is not None, 'Pinned upstream Darwin candidate policy was not found')
+    state['systemNodeCandidates'] = json.loads(candidates[1])
+    need(state['systemNodeCandidates'] == list(SYSTEM_NODE_CANDIDATES) and state['systemNodeCandidates'][0] == str(SYSTEM_NODE),
+         'Pinned upstream Darwin candidate policy changed')
+    state['probeModule'] = PROBE_MODULE
+    state['probeModuleSHA256'] = sha(module)
+    code = ('const m=await import(' + json.dumps(module.as_uri()) + ');const v=await m.l({env:process.env});'
+            'const warning=m.r(v,' + json.dumps(str(node)) + ');if(warning)throw Error(warning);'
+            'console.log(JSON.stringify({path:v?.path,status:v?.status,version:v?.version,sqliteVersion:v?.sqliteVersion}));')
+    log = evidence / 'system-node-probe.json'
+    need(run([node, '--input-type=module', '-e', code], log, environment, timeout=90) == 0, 'Pinned upstream system Node probe reported a warning or failed')
+    value = json.loads(log.read_text())
+    need(value.get('path') == str(SYSTEM_NODE) and value.get('status') == 'supported' and value.get('version') == NODE_VERSION,
+         'Pinned upstream selected an unexpected system Node')
+    need(sha(Path(value['path'])) == state['executableSHA256'], 'Upstream selected Node bytes differ from the verified private binary')
+    state.update(probe=value, probeSHA256=sha(Path(value['path'])), probeWarnings=[], probeLog=log.name, probeLogSHA256=sha(log))
+
+
+def restore_system_node(state):
+    if not state.get('_prepared'):
+        return
+    backup, stage = state['_backup'], state['_stage']
+    if SYSTEM_NODE.exists() or SYSTEM_NODE.is_symlink():
+        need(entry_identity(SYSTEM_NODE) == state.get('provisionedEntry'), 'System Node changed during engineering checks; preserve evidence')
+        SYSTEM_NODE.unlink()
+    if stage.exists():
+        need(stage.is_file() and not stage.is_symlink(), 'Unexpected system Node staging entry')
+        stage.unlink()
+    if state['originalEntry']['kind'] != 'absent':
+        need(entry_identity(backup) == state['originalEntry'], 'Preserved system Node changed during engineering checks')
+        backup.rename(SYSTEM_NODE)
+    state['restoredEntry'] = entry_identity(SYSTEM_NODE)
+    state['parentsAfter'] = parent_permissions()
+    need(state['restoredEntry'] == state['originalEntry'] and state['parentsAfter'] == state['parentsBefore'], 'System Node restoration differs from the original entry or parent permissions')
+    state.update(originalPreserved=True, restoration='PASS', parentPermissionsUnchanged=True)
+    if state.get('probeWarnings') == [] and state.get('probeSHA256') == state['executableSHA256']:
+        state['status'] = 'PASS'
+
+
 def readable_evidence(root):
     for path in root.rglob('*'):
         if not path.is_symlink():
@@ -284,6 +395,7 @@ def main():
                'runnerOS': os.environ['RUNNER_OS'], 'runnerArchitecture': os.environ['RUNNER_ARCH'],
                'runnerEnvironment': os.environ['RUNNER_ENVIRONMENT']}
     temporary = None
+    system_node = {}
     try:
         save(evidence / 'runner.json', {**summary, 'platformDetail': platform.platform(), 'macOS': platform.mac_ver()[0], 'uid': os.geteuid()})
         # macOS AF_UNIX paths are limited to 104 bytes; avoid the long hosted
@@ -351,6 +463,12 @@ def main():
         version = subprocess.check_output([str(node), str(dependencies / 'runtime/node_modules/openclaw/openclaw.mjs'), '--version'], env=environment, text=True, timeout=30).strip()
         need('2026.9.5' in version.split(), 'Unexpected OpenClaw CLI version')
         save(evidence / 'openclaw-cli-version.json', {'output': version, 'expected': '2026.9.5'})
+        package = dependencies / 'runtime/node_modules/openclaw'
+        before_code = ('const m=await import(' + json.dumps((package / PROBE_MODULE).as_uri()) + ');const v=await m.l({env:process.env});'
+                       'console.log(JSON.stringify({path:v?.path,status:v?.status,version:v?.version,sqliteVersion:v?.sqliteVersion,warning:m.r(v,' + json.dumps(str(node)) + ')}));')
+        run([node, '--input-type=module', '-e', before_code], evidence / 'system-node-before.json', environment, timeout=90)
+        provision_system_node(node, workspace.stat().st_uid, system_node)
+        probe_system_node(package, evidence, environment, node, system_node)
         smoke = safe_launcher_smoke(source, evidence, environment)
         save(evidence / 'mac-launcher-smoke.json', smoke)
         code = run([sys.executable, source / 'scripts/run-regressions.py', '--node', node, '--openclaw', dependencies / 'runtime/node_modules/openclaw',
@@ -365,6 +483,18 @@ def main():
         summary['error'] = type(error).__name__ + ': ' + str(error)
         print(summary['error'], file=sys.stderr, flush=True)
     finally:
+        if system_node:
+            try:
+                restore_system_node(system_node)
+            except Exception as error:
+                system_node['restoration'] = 'NOT_PASS'
+                system_node['error'] = type(error).__name__ + ': ' + str(error)
+            save(evidence / 'system-node.json', {key: value for key, value in system_node.items() if not key.startswith('_')})
+        summary['systemNodeProvisioning'] = system_node.get('status', 'NOT_PASS')
+        if summary['systemNodeProvisioning'] != 'PASS':
+            summary['status'] = summary['nativeAcceptance'] = 'NOT_PASS'
+            if 'complete' in summary:
+                summary['complete']['status'] = 'NOT_PASS'
         save(evidence / 'summary.json', summary)
         readable_evidence(evidence)
         if temporary is not None:

@@ -14,6 +14,41 @@ const host=(overrides={})=>({platform:'darwin',arch:'arm64',run:(file,args,optio
 test('native Apple Silicon on macOS 15 or newer passes without granting qualification',()=>{
   assert.deepEqual(assertMacHost(host()),{schema:'agi-macos-host/v1',platform:'darwin',arch:'arm64',osVersion:'15.0',translated:false,productionQualified:false});
 });
+const missingTranslationKey={status:1,stdout:'',stderr:"sysctl: unknown oid 'sysctl.proc_translated'\n"};
+test('Apple documented missing translation key is native and still checks ARM hardware and macOS',()=>{
+  const calls=[],base=host();
+  const result=assertMacHost({...base,run:(file,args,options)=>{
+    calls.push([file,args]);assert.equal(options.env.LC_ALL,'C');
+    return args.at(-1)==='sysctl.proc_translated'?missingTranslationKey:base.run(file,args,options);
+  }});
+  assert.deepEqual(result,{schema:'agi-macos-host/v1',platform:'darwin',arch:'arm64',osVersion:'15.0',translated:false,productionQualified:false});
+  assert.deepEqual(calls,[['/usr/sbin/sysctl',['-n','sysctl.proc_translated']],['/usr/sbin/sysctl',['-n','hw.optional.arm64']],['/usr/bin/sw_vers',['-productVersion']]]);
+});
+test('only the exact absent translation key diagnostic is accepted, never process or permission failures',()=>{
+  for(const changed of [
+    {status:0},{status:2},{status:null},{stdout:'0\n'},{stdout:'\n'},
+    {stderr:''},{stderr:undefined},{stderr:"sysctl: unknown oid 'hw.optional.arm64'\n"},
+    {stderr:"sysctl: unknown oid 'sysctl.proc_translated': Operation not permitted\n"},
+    {stderr:"sysctl: unknown oid 'sysctl.proc_translated': No such file or directory\n"},
+    {stderr:missingTranslationKey.stderr+'another error\n'},
+    {error:Object.assign(Error('spawn ENOENT'),{code:'ENOENT'})},
+    {error:Object.assign(Error('timed out'),{code:'ETIMEDOUT'})},{signal:'SIGTERM'}
+  ]) assert.throws(()=>assertMacHost(host({run:()=>({...missingTranslationKey,...changed})})),/MAC_HOST_OBSERVATION_FAILED/);
+});
+test('missing translation key never bypasses Intel, OS or hardware gates',()=>{
+  assert.throws(()=>assertMacHost(host({arch:'x64',run:()=>assert.fail('must not run')})),/MAC_APPLE_SILICON_REQUIRED/);
+  for(const [key,response,code] of [
+    ['hw.optional.arm64',{status:0,stdout:'0\n'},'MAC_APPLE_SILICON_REQUIRED'],
+    ['hw.optional.arm64',{status:1,stdout:'',stderr:"sysctl: unknown oid 'hw.optional.arm64'\n"},'MAC_HOST_OBSERVATION_FAILED'],
+    ['hw.optional.arm64',missingTranslationKey,'MAC_HOST_OBSERVATION_FAILED'],
+    ['-productVersion',{status:0,stdout:'14.7\n'},'MACOS_15_REQUIRED'],
+    ['-productVersion',{status:0,stdout:'unknown\n'},'MAC_HOST_OBSERVATION_FAILED'],
+    ['-productVersion',missingTranslationKey,'MAC_HOST_OBSERVATION_FAILED']
+  ]){
+    const base=host();
+    assert.throws(()=>assertMacHost({...base,run:(file,args,options)=>args.at(-1)==='sysctl.proc_translated'?missingTranslationKey:args.at(-1)===key?response:base.run(file,args,options)}),new RegExp(code));
+  }
+});
 test('Intel and non-Mac hosts reject before invoking any system command',()=>{
   for(const values of [{arch:'x64'},{platform:'linux'}])assert.throws(()=>assertMacHost(host({...values,run:()=>assert.fail('must not run')})),/MAC_APPLE_SILICON_REQUIRED/);
 });

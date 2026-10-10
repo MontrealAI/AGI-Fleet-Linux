@@ -101,6 +101,64 @@ def apply(root, version):
 
     edit('tests/linux-platform.test.mjs', 'import {linuxStandardGroups,', 'import {assertLinuxHost,linuxStandardGroups,')
     chain('tests/linux-platform.test.mjs', "test('Systemd itself accepts all twelve generated units without executing services',t=>{", "test('Native Linux verifies twelve units; Darwin explicitly refuses the Linux host adapter',t=>{if(process.platform==='darwin'){assert.throws(()=>assertLinuxHost(),/LINUX_PLATFORM_REQUIRED/);return;}")
+    # Include every reviewed compute module in receipt binding. The source
+    # collector already allowed 255 entries; the validator's old 128-entry
+    # ceiling could not represent this complete Mac runtime.
+    qualification = base + 'compute/public-web-qualification.mjs'
+    edit(qualification, "export const PUBLIC_WEB_QUALIFICATION_SCOPE", "export const PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT = 255;\nexport const PUBLIC_WEB_QUALIFICATION_SCOPE")
+    chain(qualification, 'Object.keys(value).length <= 128', 'Object.keys(value).length <= PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT')
+    identity = base + 'compute/public-web-qualification-identity.mjs'
+    edit(identity, "import {consumerRoot,", "import {PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT} from './public-web-qualification.mjs';\nimport {consumerRoot,")
+    chain(identity, 'files.length<256', 'files.length<=PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT')
+    for role in ('Agent', 'Node'):
+        tests = f'packages/AGI_{role}/tests/'
+        public_web = tests + 'public-web-qualification-import.test.mjs'
+        edit(public_web, 'import {verifyPublicWebQualification}', 'import {PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT,verifyPublicWebQualification}')
+        chain(public_web, 'Object.keys(before.sourceHashes).length<=128', 'Object.keys(before.sourceHashes).length<=PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT')
+        clean = tests + 'setup-clean-install.test.mjs'
+        edit(clean, "assert.throws(()=>assertCleanInstallAdmission({...options,platform:'linux'}),/STANDARD/)", "assert.throws(()=>assertCleanInstallAdmission({...options,platform:'linux'}),process.platform==='darwin'?/LINUX_PLATFORM_REQUIRED/:/STANDARD/)")
+        alias = tests + 'fresh-oauth-continuation-fixture.mjs'
+        edit(alias, "const root=fs.mkdtempSync('/tmp/agi-alias-case-'),real=", "const root=fs.realpathSync(fs.mkdtempSync('/tmp/agi-alias-case-')),real=")
+        # These fixtures prove map compatibility and rejection, not physical
+        # qualification. They retain the independent reviewer signature and
+        # never publish their fabricated observations as operational evidence.
+        bounds = tests + 'public-web-qualification.test.mjs'
+        edit(bounds, 'import {verifyPublicWebQualification,', "import {publicWebQualificationSources} from '../compute/public-web-qualification-identity.mjs';\nimport {PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT, verifyPublicWebQualification,")
+        anchor = "test('independently signed receipt qualifies only its exact narrow technical scope and remains frozen', async t => {"
+        checks = """test('complete Mac source inventory fits signed receipts and any changed source still rejects', async t => {
+  const sourceHashes=publicWebQualificationSources(),f=await qualificationFixture({sourceHashes});t.after(f.close);
+  assert.ok(Object.keys(sourceHashes).length>128);
+  assert.ok(Object.keys(sourceHashes).length<=PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT);
+  assert.ok(sourceHashes['compute/mac-host.mjs']);assert.ok(sourceHashes['compute/desktop-cleanup.mjs']);
+  assert.equal(verifyPublicWebQualification(f.receipt,f.options).status,'PASS');
+  const changed={...sourceHashes,'compute/mac-host.mjs':'0'.repeat(64)};
+  assert.throws(()=>verifyPublicWebQualification(f.receipt,{...f.options,sourceHashes:changed}),/PUBLIC_WEB_QUALIFICATION_SOURCE_CHANGED/);
+});
+test('signed source maps enforce the shared finite source limit', async t => {
+  const f=await fixture(t),payload=structuredClone(f.payload);
+  const sourceHashes=Object.fromEntries(Array.from({length:PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT},(_,i)=>['compute/fixture-'+i+'.mjs','f'.repeat(64)]));
+  payload.observations.sourceHashes=sourceHashes;
+  assert.equal(verifyPublicWebQualification(signed(payload,f.reviewerPrivateKey),{...f.options,sourceHashes}).status,'PASS');
+  sourceHashes['compute/one-too-many.mjs']='e'.repeat(64);
+  assert.throws(()=>verifyPublicWebQualification(signed(payload,f.reviewerPrivateKey),{...f.options,sourceHashes}),/PUBLIC_WEB_QUALIFICATION_SOURCE_CHANGED/);
+});
+"""
+        chain(bounds, anchor, checks + anchor)
+
+    for edition in ['', *('packages/AGI_' + role + '/' for role in ROLES)]:
+        guide_test = edition + 'tests/production-guide.test.mjs'
+        anchor = "assert.match(html,/Existing installation: start here/);"
+        mac_checks = """if(JSON.parse(read('release-manifest.json')).platformEdition==='macOS Apple silicon'){
+ const release=JSON.parse(read('release-manifest.json')),guide=read('docs/macos-current/FRESH_INSTALL.md'),physical=read('docs/macos-current/PHYSICAL_QUALIFICATION.md');
+ assert.equal(release.architecture,'arm64');assert.equal(release.productionArchitecture.default,'fresh-install');assert.equal(release.productionArchitecture.productionQualified,false);
+ for(const page of ['FRESH_INSTALL','PHYSICAL_QUALIFICATION','TROUBLESHOOTING'])assert.ok(html.includes('docs/macos-current/'+page+'.html'));
+ assert.match(html,/Native acceptance must be published for this exact ZIP/);assert.match(html,/separate signer and Standard compute accounts/);assert.match(html,/production qualification.*pending/);assert.match(html,/COMPUTE_STOP/);
+ assert.doesNotMatch(html,/Existing installation: start here|agiagentv1|agiagentcomputev3|Update-Signer.command/);
+ assert.match(guide,/two new.*Standard.*accounts/);assert.match(guide,/Install.command/);assert.match(guide,/4\\.93\\.0/);assert.match(guide,/private.*Node 24\\.21\\.0/);assert.match(guide,/8 GB operation is unqualified/);assert.match(guide,/Do not erase or reuse an incident account/);
+ for(const role of ['Agent','Node','Moderator','Employer','Evidence','Recovery'])assert.ok(guide.includes(role));
+ assert.match(physical,/NOT_RUN/);assert.match(physical,/72.hour/);assert.match(physical,/productionQualified: false/);return;
+}"""
+        edit(guide_test, anchor, mac_checks + anchor)
     old = "fs.writeFileSync(path.join(scripts,'node-runtime.sh'),controlled);fs.copyFileSync(path.join(root,app,'package.json'),path.join(stage,app,'package.json'));"
     new = "fs.writeFileSync(path.join(scripts,'node-runtime.sh'),controlled);for(const name of ['standard-node.sh','check-mac-host.mjs'])fs.copyFileSync(path.join(root,app,'scripts',name),path.join(scripts,name));fs.copyFileSync(path.join(root,app,'package.json'),path.join(stage,app,'package.json'));"
     edit('tests/launcher-runtime.test.mjs', old, new)

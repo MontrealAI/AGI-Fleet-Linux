@@ -152,6 +152,119 @@ class CompleteEvidenceTests(unittest.TestCase):
             audit.regular_tree(self.root)
 
 
+class SystemNodeProvisioningTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.root = Path(self.temporary.name)
+        self.node = {'executableSHA256': 'b' * 64}
+        module = 'dist/runtime-paths-4M-K3zyp.mjs'
+        self.inventory = {'files': {module: {'sha256': 'c' * 64}}}
+        original = {'kind': 'file', 'uid': 503, 'gid': 20, 'mode': 0o755, 'sha256': 'd' * 64}
+        parents = [{'path': path, 'uid': 503 if path.startswith('/opt/homebrew') else 0,
+                    'gid': 20 if path.startswith('/opt/homebrew') else 0, 'mode': 0o755}
+                   for path in ['/opt/homebrew/bin', '/opt/homebrew', '/opt', '/']]
+        probe = {'path': '/opt/homebrew/bin/node', 'status': 'supported', 'version': '24.21.0', 'sqliteVersion': '3.51.0'}
+        audit.write_json(self.root / 'system-node-probe.json', probe)
+        self.receipt = {'schema': 'agi-macos-ci-system-node/v1', 'status': 'PASS',
+                        'scope': 'DISPOSABLE_GITHUB_HOSTED_CI_ONLY', 'operatorAccountsUsed': False,
+                        'repository': audit.REPOSITORY, 'workflowCommit': COMMIT, 'githubRunId': RUN,
+                        'systemNodeCandidates': audit.SYSTEM_NODE_CANDIDATES.copy(), 'runnerUID': 503,
+                        'target': '/opt/homebrew/bin/node', 'version': '24.21.0', 'archiveSHA256': audit.NODE_SHA,
+                        'executableSHA256': self.node['executableSHA256'], 'originalEntry': original,
+                        'restoredEntry': copy.deepcopy(original), 'originalPreserved': True, 'restoration': 'PASS',
+                        'parentPermissionsUnchanged': True, 'parentsBefore': parents, 'parentsAfter': copy.deepcopy(parents),
+                        'provisionedEntry': {'kind': 'file', 'uid': 0, 'gid': 0, 'mode': 0o755,
+                                             'sha256': self.node['executableSHA256']},
+                        'probe': probe, 'probeSHA256': self.node['executableSHA256'], 'probeWarnings': [],
+                        'probeLog': 'system-node-probe.json', 'probeLogSHA256': audit.sha(self.root / 'system-node-probe.json'),
+                        'probeModule': module, 'probeModuleSHA256': 'c' * 64}
+
+    def tearDown(self):
+        self.temporary.cleanup()
+
+    def check(self):
+        audit.write_json(self.root / 'system-node.json', self.receipt)
+        return audit.audit_ci_system_node(self.root, self.node, self.inventory, COMMIT, audit.REPOSITORY, RUN)
+
+    def test_exact_ci_runtime_with_restored_original_passes(self):
+        self.assertEqual(self.check(), audit.sha(self.root / 'system-node.json'))
+
+    def test_original_absence_and_literal_symlink_identity_are_supported(self):
+        link = '../Cellar/node/25.0.0/bin/node'
+        for entry in ({'kind': 'absent'}, {'kind': 'symlink', 'uid': 503, 'gid': 20, 'mode': 0o777,
+                                         'linkTarget': link, 'sha256': audit.digest(link.encode())}):
+            self.receipt['originalEntry'] = entry
+            self.receipt['restoredEntry'] = copy.deepcopy(entry)
+            self.assertEqual(self.check(), audit.sha(self.root / 'system-node.json'))
+
+    def test_unrestored_changed_and_broadened_provisioning_is_rejected(self):
+        baseline = copy.deepcopy(self.receipt)
+        for field, value in [('restoration', 'NOT_RUN'), ('originalPreserved', False),
+                             ('parentPermissionsUnchanged', False), ('originalPreserved', 1),
+                             ('status', 'NOT_PASS'), ('operatorAccountsUsed', True),
+                             ('scope', 'OPERATOR_INSTALL'), ('target', '/usr/local/bin/node'),
+                             ('repository', 'other/repo'), ('workflowCommit', 'e' * 40), ('githubRunId', '12346'),
+                             ('systemNodeCandidates', list(reversed(audit.SYSTEM_NODE_CANDIDATES)))]:
+            self.receipt = {**copy.deepcopy(baseline), field: value}
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                self.check()
+        self.receipt = copy.deepcopy(baseline)
+        self.receipt['restoredEntry']['sha256'] = 'e' * 64
+        with self.assertRaises(ValueError):
+            self.check()
+
+    def test_parent_permission_changes_or_incomplete_coverage_are_rejected(self):
+        self.receipt['parentsAfter'][0]['mode'] = 0o777
+        with self.assertRaises(ValueError):
+            self.check()
+        self.receipt['parentsAfter'] = copy.deepcopy(self.receipt['parentsBefore'])
+        self.receipt['parentsAfter'].pop()
+        self.receipt['parentsBefore'].pop()
+        with self.assertRaises(ValueError):
+            self.check()
+
+    def test_parent_world_write_or_foreign_ownership_is_rejected_even_when_unchanged(self):
+        baseline = copy.deepcopy(self.receipt)
+        for field, value in [('mode', 0o777), ('uid', 999), ('mode', 0o775)]:
+            self.receipt = copy.deepcopy(baseline)
+            for group in ('parentsBefore', 'parentsAfter'):
+                self.receipt[group][0][field] = value
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                self.check()
+
+    def test_runtime_probe_and_module_must_match_verified_pins(self):
+        baseline = copy.deepcopy(self.receipt)
+        for field, value in [('archiveSHA256', 'e' * 64), ('executableSHA256', 'e' * 64),
+                             ('probeSHA256', 'e' * 64), ('probeModuleSHA256', 'e' * 64),
+                             ('probeModule', 'dist/other.mjs'), ('probeWarnings', ['unsupported node']),
+                             ('probeLog', '../system-node-probe.json')]:
+            self.receipt = {**copy.deepcopy(baseline), field: value}
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                self.check()
+        for field, value in [('status', 'unsupported'), ('version', '25.0.0'), ('path', '/usr/bin/node')]:
+            self.receipt = copy.deepcopy(baseline)
+            self.receipt['probe'][field] = value
+            with self.subTest(probe_field=field), self.assertRaises(ValueError):
+                self.check()
+
+    def test_provisioned_file_cannot_be_writable_or_changed(self):
+        baseline = copy.deepcopy(self.receipt)
+        for field, value in [('uid', 503), ('mode', 0o777), ('kind', 'symlink'), ('sha256', 'e' * 64)]:
+            self.receipt = copy.deepcopy(baseline)
+            self.receipt['provisionedEntry'][field] = value
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                self.check()
+
+    def test_malformed_original_and_changed_retained_probe_are_rejected(self):
+        self.receipt['originalEntry'] = self.receipt['restoredEntry'] = {'kind': 'absent', 'uid': 0}
+        with self.assertRaises(ValueError):
+            self.check()
+        self.receipt['originalEntry'] = self.receipt['restoredEntry'] = {'kind': 'absent'}
+        (self.root / 'system-node-probe.json').write_text('{}\n')
+        with self.assertRaises(ValueError):
+            self.check()
+
+
 class IntegrationFilesystemTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()

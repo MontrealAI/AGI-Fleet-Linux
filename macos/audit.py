@@ -25,6 +25,12 @@ BAD = ('fail', 'cancelled', 'skipped', 'todo')
 NODE_SHA = '6239d4cf92d864487ec8cd3615038f7b67e7f58b77b21cd2f09ea9fbd68065fe'
 FIXTURE_SHA = '4e95b35a90a2f212f2686f2c31bd4eb0d7de8131f1733d4d51e8647359b47014'
 FIXTURE_BYTES = 211966077
+SYSTEM_NODE_CANDIDATES = [
+    '/opt/homebrew/bin/node', '/opt/homebrew/opt/node/bin/node',
+    '/opt/homebrew/opt/node@24/bin/node', '/opt/homebrew/opt/node@22/bin/node',
+    '/usr/local/bin/node', '/usr/local/opt/node/bin/node',
+    '/usr/local/opt/node@24/bin/node', '/usr/local/opt/node@22/bin/node', '/usr/bin/node',
+]
 
 
 def unique_object(pairs):
@@ -144,9 +150,10 @@ def archive_identity(archive, metadata):
         source = {row['path']: row['sha256'] for row in records}
         require(len(source) == len(records) == metadata['sourceFiles'], 'Source inventory coverage differs')
         fixture_lock = decode_json(saved.read(prefix + 'test-support/regression-fixtures.json'))
+        openclaw_inventory = decode_json(saved.read(prefix + 'shared/runtime/compute/openclaw-2026.9.5.inventory.json'))
     tests = {name for name in tree if re.fullmatch(r'(?:tests|packages/[^/]+/tests)/[^/]+\.test\.mjs', name)}
     require(len(tests) >= 342 and tests <= source.keys(), 'Complete regression sources missing')
-    return tree, source, tests, fixture_lock
+    return tree, source, tests, fixture_lock, openclaw_inventory
 
 
 def audit_complete(directory, tree, sources, selection, node, fixture_lock):
@@ -225,6 +232,70 @@ def audit_host_gates(directory, tree, macos):
     require({path.name for path in directory.glob('mac-host-*.log')} == logs, 'Mac host log coverage differs')
 
 
+def audit_ci_system_node(directory, node, openclaw_inventory, commit, repository, run_id):
+    """Bind the disposable runner's upstream probe without broadening product trust."""
+    receipt = read_json(directory / 'system-node.json')
+    require(receipt['schema'] == 'agi-macos-ci-system-node/v1' and receipt['status'] == 'PASS'
+            and receipt['scope'] == 'DISPOSABLE_GITHUB_HOSTED_CI_ONLY'
+            and receipt['operatorAccountsUsed'] is False, 'System Node provisioning has the wrong scope or status')
+    require(receipt['repository'] == repository and receipt['workflowCommit'] == commit
+            and str(receipt['githubRunId']) == str(run_id), 'System Node receipt workflow provenance differs')
+    require(receipt['systemNodeCandidates'] == SYSTEM_NODE_CANDIDATES
+            and receipt['target'] == SYSTEM_NODE_CANDIDATES[0], 'Pinned upstream system Node candidate scope differs')
+    require(receipt['target'] == '/opt/homebrew/bin/node' and receipt['version'] == '24.21.0'
+            and receipt['archiveSHA256'] == NODE_SHA
+            and receipt['executableSHA256'] == node['executableSHA256'], 'Provisioned Node is not the verified private runtime')
+    require(receipt['restoration'] == 'PASS' and receipt['originalPreserved'] is True
+            and receipt['parentPermissionsUnchanged'] is True, 'Original system Node or directory permissions were not restored')
+    original = receipt['originalEntry']
+    require(original == receipt['restoredEntry'], 'Restored system Node differs from its original entry')
+    require(isinstance(original, dict) and original.get('kind') in ('file', 'symlink', 'absent'), 'Unsafe original system Node entry')
+    if original['kind'] == 'absent':
+        require(original == {'kind': 'absent'}, 'Malformed absent system Node entry')
+    else:
+        keys = {'kind', 'uid', 'gid', 'mode', 'sha256'}
+        if original['kind'] == 'symlink':
+            keys.add('linkTarget')
+        require(set(original) == keys and all(type(original[key]) is int and original[key] >= 0
+                    for key in ('uid', 'gid', 'mode')) and original['mode'] <= 0o7777
+                and re.fullmatch('[0-9a-f]{64}', original['sha256']), 'Malformed original system Node identity')
+        if original['kind'] == 'symlink':
+            require(isinstance(original['linkTarget'], str) and original['linkTarget']
+                    and '\x00' not in original['linkTarget']
+                    and digest(original['linkTarget'].encode()) == original['sha256'], 'Original Node symlink identity differs')
+    parents = receipt['parentsBefore']
+    require(type(receipt['runnerUID']) is int and receipt['runnerUID'] > 0, 'Missing disposable runner ownership identity')
+    require(parents == receipt['parentsAfter'] and isinstance(parents, list)
+            and [row['path'] for row in parents] == ['/opt/homebrew/bin', '/opt/homebrew', '/opt', '/'],
+            'System Node parent coverage or identity changed')
+    for row in parents:
+        require(set(row) == {'path', 'uid', 'gid', 'mode'}
+                and all(type(row[key]) is int and row[key] >= 0 for key in ('uid', 'gid', 'mode'))
+                and row['mode'] <= 0o7777, 'Malformed system Node parent identity')
+        require(row['uid'] in (0, receipt['runnerUID']) and not row['mode'] & 0o002
+                and (not row['mode'] & 0o020 or row['gid'] == 80), 'Unsafe system Node parent ownership or permissions')
+    provisioned = receipt['provisionedEntry']
+    require(set(provisioned) == {'kind', 'uid', 'gid', 'mode', 'sha256'}
+            and provisioned['kind'] == 'file' and type(provisioned['uid']) is int and provisioned['uid'] == 0
+            and type(provisioned['gid']) is int and provisioned['gid'] >= 0
+            and type(provisioned['mode']) is int and provisioned['mode'] == 0o755
+            and provisioned['sha256'] == node['executableSHA256'], 'Provisioned Node file identity differs')
+    probe = receipt['probe']
+    require(set(probe) == {'path', 'status', 'version', 'sqliteVersion'}
+            and probe['path'] == receipt['target'] and probe['status'] == 'supported'
+            and probe['version'] == '24.21.0' and isinstance(probe['sqliteVersion'], str)
+            and re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', probe['sqliteVersion']), 'Pinned upstream system Node probe did not pass')
+    module_path = 'dist/runtime-paths-4M-K3zyp.mjs'
+    require(receipt['probeModule'] == module_path
+            and receipt['probeModuleSHA256'] == openclaw_inventory['files'][module_path]['sha256']
+            and receipt['probeSHA256'] == node['executableSHA256'] and receipt['probeWarnings'] == [],
+            'Upstream system Node probe module, executable or warnings differ')
+    require(receipt['probeLog'] == 'system-node-probe.json'
+            and sha(directory / receipt['probeLog']) == receipt['probeLogSHA256']
+            and read_json(directory / receipt['probeLog']) == probe, 'Retained system Node probe differs')
+    return sha(directory / 'system-node.json')
+
+
 def audit_native(directory, label, metadata, metadata_sha, identity, commit, repository, run_id):
     regular_tree(directory)
     runner = read_json(directory / 'runner.json')
@@ -238,7 +309,7 @@ def audit_native(directory, label, metadata, metadata_sha, identity, commit, rep
     require(str(runner['macOS']).split('.')[0] == label.removeprefix('macos-'), 'Native macOS major version differs')
     require(read_json(directory / 'release-metadata.json') == metadata
             and sha(directory / 'release-metadata.json') == metadata_sha, 'Native release metadata differs')
-    tree, sources, selection, fixture_lock = identity
+    tree, sources, selection, fixture_lock, openclaw_inventory = identity
     require(read_json(directory / 'tested-archive-tree.json') == tree, 'Native extracted tree differs from archive')
     audit_host_gates(directory, tree, runner['macOS'])
     node = read_json(directory / 'node-download.json')
@@ -248,6 +319,7 @@ def audit_native(directory, label, metadata, metadata_sha, identity, commit, rep
             and re.fullmatch('[0-9a-f]{64}', node['executableSHA256']), 'Pinned Darwin Node differs')
     require(read_json(directory / 'node-identity.json') == {
         'platform': 'darwin', 'architecture': 'arm64', 'version': '24.21.0'}, 'Node was not native Darwin arm64')
+    system_node_sha = audit_ci_system_node(directory, node, openclaw_inventory, commit, repository, run_id)
     fixture = read_json(directory / 'fixture-download.json')
     require(fixture == {'url': 'https://github.com/' + repository + '/releases/download/v1.0.6-qualification/'
                         'AGI_Regression_Fixtures_v1.19.6.zip', 'bytes': FIXTURE_BYTES, 'sha256': FIXTURE_SHA},
@@ -270,6 +342,7 @@ def audit_native(directory, label, metadata, metadata_sha, identity, commit, rep
             and summary['productionQualified'] is False and summary['operatorAccountsUsed'] is False
             and summary['archiveTreeUnchanged'] is True and summary['packagedHostGates'] == 'PASS',
             'Native acceptance summary differs')
+    require(summary['systemNodeProvisioning'] == 'PASS', 'Disposable system Node provisioning was not fully restored')
     require(summary['workflowCommit'] == commit and str(summary['githubRunId']) == str(run_id)
             and summary['repository'] == repository and summary['runnerLabel'] == label, 'Native summary provenance differs')
     reported = summary['complete']
@@ -304,6 +377,7 @@ def audit_native(directory, label, metadata, metadata_sha, identity, commit, rep
     return {'status': 'PASS', 'runnerLabel': label, 'platform': 'darwin', 'architecture': 'arm64',
             'macOS': runner['macOS'], 'workflowCommit': commit, 'workflowRun': str(run_id),
             'repository': repository, 'complete': complete, 'summarySHA256': sha(directory / 'summary.json'),
+            'systemNodeProvisioningSHA256': system_node_sha,
             'productionQualified': False, 'physicalQualification': 'NOT_RUN'}
 
 

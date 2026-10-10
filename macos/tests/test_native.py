@@ -6,6 +6,7 @@ import stat
 import tempfile
 import unittest
 import zipfile
+from unittest.mock import patch
 
 NATIVE = runpy.run_path(str(Path(__file__).resolve().parents[1] / 'run-native.py'))
 
@@ -175,6 +176,60 @@ class NativeFixtureExtractionTests(unittest.TestCase):
             file = root / 'extracted/history/file'
             self.assertEqual(file.read_bytes(), b'fixture')
             self.assertEqual(stat.S_IMODE(file.stat().st_mode), 0o755)
+
+
+class DisposableSystemNodeTests(unittest.TestCase):
+    def test_parent_policy_never_admits_world_write_or_foreign_owner(self):
+        rows = [{'path': value, 'uid': 0, 'gid': 0, 'mode': 0o755} for value in NATIVE['SYSTEM_NODE_PARENTS']]
+        NATIVE['safe_ci_parents'](rows, 501)
+        rows[0].update(uid=501, gid=80, mode=0o775)
+        NATIVE['safe_ci_parents'](rows, 501)
+        for change in ({'uid': 502}, {'mode': 0o777}, {'gid': 20}):
+            changed = copy.deepcopy(rows)
+            changed[0].update(change)
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                NATIVE['safe_ci_parents'](changed, 501)
+        with self.assertRaises(ValueError):
+            NATIVE['safe_ci_parents'](list(reversed(rows)), 501)
+
+    def test_symlink_receipt_binds_link_itself_and_preserves_broken_links(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            link = Path(temporary) / 'node'
+            self.assertEqual(NATIVE['entry_identity'](link), {'kind': 'absent'})
+            link.symlink_to('../preserved-node')
+            value = NATIVE['entry_identity'](link)
+            self.assertEqual(value['kind'], 'symlink')
+            self.assertEqual(value['linkTarget'], '../preserved-node')
+            self.assertEqual(value['sha256'], hashlib.sha256(b'../preserved-node').hexdigest())
+
+    def test_restoration_retains_original_entry_and_refuses_changed_provisioned_bytes(self):
+        for changed in (False, True):
+            with self.subTest(changed=changed), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                node, backup, stage = (root / name for name in ('node', 'original', 'stage'))
+                node.symlink_to('original-runtime')
+                original = NATIVE['entry_identity'](node)
+                node.rename(backup)
+                node.write_bytes(b'verified pinned binary')
+                node.chmod(0o755)
+                parents = [{'path': str(root), 'uid': root.stat().st_uid, 'gid': root.stat().st_gid, 'mode': stat.S_IMODE(root.stat().st_mode)}]
+                state = {'_prepared': True, '_backup': backup, '_stage': stage, 'originalEntry': original,
+                         'provisionedEntry': NATIVE['entry_identity'](node), 'parentsBefore': parents,
+                         'executableSHA256': NATIVE['sha'](node), 'probeSHA256': NATIVE['sha'](node),
+                         'probeWarnings': [], 'status': 'NOT_PASS'}
+                if changed:
+                    node.write_bytes(b'changed bytes')
+                with patch.dict(NATIVE['restore_system_node'].__globals__, SYSTEM_NODE=node, SYSTEM_NODE_PARENTS=(str(root),)):
+                    if changed:
+                        with self.assertRaises(ValueError):
+                            NATIVE['restore_system_node'](state)
+                        self.assertEqual(NATIVE['entry_identity'](backup), original)
+                        self.assertEqual(state['status'], 'NOT_PASS')
+                    else:
+                        NATIVE['restore_system_node'](state)
+                        self.assertEqual(NATIVE['entry_identity'](node), original)
+                        self.assertEqual(state['parentsAfter'], parents)
+                        self.assertEqual(state['status'], 'PASS')
 
 
 if __name__ == '__main__':
