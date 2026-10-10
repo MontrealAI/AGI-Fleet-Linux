@@ -116,11 +116,31 @@ jobs:
     steps:
       - *checkout
       - *candidate
+      - name: Create an isolated case-sensitive integration workspace
+        run: |
+          set -euo pipefail
+          # The pinned Manager repository has distinct documentation names that
+          # differ only by case. Never rename/exclude them or weaken Git checks.
+          # This is a disposable image, not a change to any host disk format.
+          mac_integration_image="$RUNNER_TEMP/mac-integration.sparseimage"
+          mac_integration_volume="$RUNNER_TEMP/mac-integration-volume"
+          test ! -e "$mac_integration_image"
+          test ! -e "$mac_integration_volume"
+          mkdir "$mac_integration_volume"
+          /usr/bin/hdiutil create -size 8g -type SPARSE -fs 'Case-sensitive APFS' -volname AGIManagerTests "$mac_integration_image"
+          /usr/bin/hdiutil attach -nobrowse -noautoopen -mountpoint "$mac_integration_volume" "$mac_integration_image"
+          touch "$RUNNER_TEMP/mac-integration-attached"
       - name: Requalify the saved Mac archive against the pinned manager
         run: |
           python3 macos/run-integration.py --metadata release/release.json \
             --archive release/AGI_Fleet_macOS_v1.20.0.zip \
-            --work "$RUNNER_TEMP/mac-integration" --evidence "$GITHUB_WORKSPACE/integration-evidence"
+            --work "$RUNNER_TEMP/mac-integration-volume/work" --evidence "$GITHUB_WORKSPACE/integration-evidence"
+      - name: Detach only this run's integration image
+        if: always()
+        run: |
+          if test -f "$RUNNER_TEMP/mac-integration-attached"; then
+            /usr/bin/hdiutil detach "$RUNNER_TEMP/mac-integration-volume"
+          fi
       - name: Retain all integration logs
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f

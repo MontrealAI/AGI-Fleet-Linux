@@ -152,6 +152,42 @@ class CompleteEvidenceTests(unittest.TestCase):
             audit.regular_tree(self.root)
 
 
+class IntegrationFilesystemTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.root = Path(self.temporary.name)
+        self.receipt = {'schema': 'agi-macos-integration-filesystem/v1', 'caseSensitive': True,
+                        'distinctCaseNames': True, 'scope': 'disposable engineering workspace only'}
+
+    def tearDown(self):
+        self.temporary.cleanup()
+
+    def test_exact_successful_probe_is_required_and_hash_bound(self):
+        audit.write_json(self.root / 'filesystem.json', self.receipt)
+        self.assertEqual(audit.audit_integration_filesystem(self.root), audit.sha(self.root / 'filesystem.json'))
+
+    def test_failed_ambiguous_or_broadened_probe_is_rejected(self):
+        for change in ({'caseSensitive': False}, {'distinctCaseNames': False}, {'caseSensitive': 1},
+                       {'distinctCaseNames': 1}, {'scope': 'operator deployment'},
+                       {'schema': 'unrecognized'}, {'productionQualified': True}):
+            audit.write_json(self.root / 'filesystem.json', {**self.receipt, **change})
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                audit.audit_integration_filesystem(self.root)
+
+    def test_missing_linked_or_duplicate_probe_is_rejected(self):
+        path = self.root / 'filesystem.json'
+        with self.assertRaises(ValueError):
+            audit.audit_integration_filesystem(self.root)
+        audit.write_json(self.root / 'other.json', self.receipt)
+        path.symlink_to(self.root / 'other.json')
+        with self.assertRaises(ValueError):
+            audit.audit_integration_filesystem(self.root)
+        path.unlink()
+        path.write_text('{"caseSensitive":false,"caseSensitive":true}')
+        with self.assertRaises(ValueError):
+            audit.audit_integration_filesystem(self.root)
+
+
 class PublicationTests(unittest.TestCase):
     def test_provenance_rejects_unknown_repo_run_or_commit(self):
         for commit, repo, run in [('main', audit.REPOSITORY, RUN), (COMMIT, 'other/repo', RUN), (COMMIT, audit.REPOSITORY, '0')]:

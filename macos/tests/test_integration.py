@@ -1,10 +1,12 @@
 import hashlib
+from contextlib import redirect_stderr
 import importlib.util
 import io
 import json
 import os
 from pathlib import Path
 import sys
+import subprocess
 import tarfile
 import tempfile
 from types import SimpleNamespace
@@ -96,6 +98,38 @@ class IntegrationBindingTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'Saved archive identity differs'):
                 bound.verify_archive(Path('candidate.zip'))
 
+    def test_clean_checkout_is_checked_immediately_after_head_without_mutating_global_subprocess(self):
+        with patch.object(RUNNER.subprocess, 'check_output', side_effect=['a' * 40 + '\n', b'']) as command:
+            bound = RUNNER.bind_runner(self.candidate)
+            result = bound.subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=Path('/manager'), text=True)
+            self.assertEqual(result, 'a' * 40 + '\n')
+            self.assertIs(RUNNER.subprocess.check_output, command)
+            self.assertIsNot(bound.subprocess, RUNNER.subprocess)
+        self.assertEqual(command.call_args_list[0].args, (['git', 'rev-parse', 'HEAD'],))
+        self.assertEqual(command.call_args_list[0].kwargs, {'cwd': Path('/manager'), 'text': True})
+        self.assertEqual(command.call_args_list[1].args, (['git', 'status', '--porcelain', '--untracked-files=no'],))
+        self.assertEqual(command.call_args_list[1].kwargs, {'cwd': Path('/manager')})
+
+    def test_case_collision_or_any_dirty_checkout_is_rejected_before_validation(self):
+        for dirty in [b' M docs/README.md\n', b' D docs/Readme.md\n', b'?? unexpected-status\n']:
+            with self.subTest(dirty=dirty), patch.object(RUNNER.subprocess, 'check_output', side_effect=['a' * 40 + '\n', dirty]) as command:
+                bound = RUNNER.bind_runner(self.candidate)
+                with self.assertRaisesRegex(ValueError, 'Manager checkout is not exact before validation'):
+                    bound.subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=Path('/manager'), text=True)
+                self.assertEqual(command.call_count, 2)
+
+    def test_unavailable_cleanliness_check_is_not_treated_as_clean_and_final_guard_is_unchanged(self):
+        failure = subprocess.CalledProcessError(128, ['git', 'status'])
+        with patch.object(RUNNER.subprocess, 'check_output', side_effect=['a' * 40 + '\n', failure]):
+            bound = RUNNER.bind_runner(self.candidate)
+            with self.assertRaises(subprocess.CalledProcessError):
+                bound.subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=Path('/manager'), text=True)
+        with patch.object(RUNNER.subprocess, 'check_output', return_value=b' M changed') as command:
+            bound = RUNNER.bind_runner(self.candidate)
+            observed = bound.subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=Path('/manager'))
+            self.assertEqual(observed, b' M changed')
+            self.assertEqual(command.call_count, 1)
+
     def test_main_refuses_candidate_from_a_different_workflow_before_running_harness(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -108,7 +142,7 @@ class IntegrationBindingTests(unittest.TestCase):
                     RUNNER.main()
                 bind.assert_not_called()
 
-    def test_failure_summary_retains_exact_candidate_provenance_without_changing_status(self):
+    def test_failure_summary_retains_exact_provenance_even_if_diagnostic_file_cannot_be_written(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             metadata, evidence = root / 'release.json', root / 'evidence'
@@ -125,10 +159,12 @@ class IntegrationBindingTests(unittest.TestCase):
             arguments = ['run-integration.py', '--metadata', str(metadata), '--archive', str(root / 'candidate.zip'),
                          '--work', str(root / 'work'), '--evidence', str(evidence)]
             environment = {'GITHUB_SHA': 'a' * 40, 'GITHUB_RUN_ID': '12345', 'GITHUB_REPOSITORY': 'MontrealAI/AGI-Fleet-Linux'}
-            with patch.object(sys, 'argv', arguments), patch.object(RUNNER, 'guard'), patch.dict(os.environ, environment), patch.object(RUNNER, 'bind_runner', return_value=harness):
+            error_output = io.StringIO()
+            with patch.object(sys, 'argv', arguments), patch.object(RUNNER, 'guard'), patch.dict(os.environ, environment), patch.object(RUNNER, 'bind_runner', return_value=harness), patch.object(RUNNER, 'retain_manager_diagnostics', side_effect=OSError('fixture disk error')), redirect_stderr(error_output):
                 with self.assertRaisesRegex(ValueError, 'fixture failure'):
                     RUNNER.main()
                 self.assertEqual(sys.argv, arguments)
+            self.assertIn('original failure and provenance retained', error_output.getvalue())
             self.assertEqual(saved_arguments[-2:], ['--manager-ref', harness.MANAGER_BASELINE])
             report = json.loads((evidence / 'summary.json').read_text())
             self.assertEqual(report['status'], 'FAIL')
@@ -138,6 +174,88 @@ class IntegrationBindingTests(unittest.TestCase):
             self.assertEqual(binding['workflowCommit'], 'a' * 40)
             self.assertEqual(binding['workflowRun'], '12345')
             self.assertFalse(binding['productionQualified'])
+
+
+class IntegrationFilesystemTests(unittest.TestCase):
+    def test_real_case_sensitive_workspace_is_observed_and_probe_is_removed(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            parent = Path(temporary)
+            receipt = RUNNER.case_sensitive_workspace(parent)
+            self.assertEqual(receipt, {'schema': 'agi-macos-integration-filesystem/v1', 'caseSensitive': True,
+                                      'distinctCaseNames': True, 'scope': 'disposable engineering workspace only'})
+            self.assertEqual(list(parent.iterdir()), [])
+
+    def test_case_insensitive_exclusive_create_fails_closed_and_cleans_probe(self):
+        original = Path.open
+
+        def open_case(file, mode='r', *args, **kwargs):
+            if file.name == 'CASE-PROBE' and mode == 'xb':
+                raise FileExistsError('Simulated case-insensitive filesystem')
+            return original(file, mode, *args, **kwargs)
+
+        with tempfile.TemporaryDirectory() as temporary, patch.object(Path, 'open', open_case):
+            with self.assertRaises(FileExistsError):
+                RUNNER.case_sensitive_workspace(Path(temporary))
+            self.assertEqual(list(Path(temporary).iterdir()), [])
+
+    def test_same_inode_or_changed_contents_cannot_claim_case_sensitivity(self):
+        original_stat, original_read = Path.stat, Path.read_bytes
+
+        def same_inode(file, *args, **kwargs):
+            result = original_stat(file, *args, **kwargs)
+            if file.name in ('case-probe', 'CASE-PROBE'):
+                values = list(result)
+                values[1] = 1
+                return os.stat_result(values)
+            return result
+
+        def changed(file):
+            return b'lower' if file.name == 'CASE-PROBE' else original_read(file)
+
+        for name, replacement in [('stat', same_inode), ('read_bytes', changed)]:
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temporary, patch.object(Path, name, replacement):
+                with self.assertRaisesRegex(ValueError, 'Case-sensitive integration workspace required'):
+                    RUNNER.case_sensitive_workspace(Path(temporary))
+                self.assertEqual(list(Path(temporary).iterdir()), [])
+
+    def test_checkout_failure_retains_only_bounded_read_only_git_diagnostics(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manager, evidence = root / 'manager', root / 'evidence'
+            (manager / '.git').mkdir(parents=True)
+            evidence.mkdir()
+            with patch.object(RUNNER.subprocess, 'run', return_value=SimpleNamespace(returncode=0)) as command:
+                RUNNER.retain_manager_diagnostics(manager, evidence)
+            self.assertEqual([call.args[0] for call in command.call_args_list], [
+                ['git', 'status', '--porcelain=v1', '--untracked-files=no'],
+                ['git', 'diff', '--no-ext-diff', '--no-textconv', '--stat', '--summary']])
+            for call in command.call_args_list:
+                self.assertEqual(call.kwargs['cwd'], manager)
+                self.assertEqual(call.kwargs['timeout'], 30)
+                self.assertFalse(call.kwargs['check'])
+            log = (evidence / 'manager-source-change.log').read_text()
+            self.assertIn('git status --porcelain=v1 --untracked-files=no', log)
+            self.assertIn('git diff --no-ext-diff --no-textconv --stat --summary', log)
+
+    def test_no_manager_repository_produces_no_diagnostic_commands(self):
+        with tempfile.TemporaryDirectory() as temporary, patch.object(RUNNER.subprocess, 'run') as command:
+            RUNNER.retain_manager_diagnostics(Path(temporary) / 'absent', Path(temporary))
+            command.assert_not_called()
+            self.assertFalse((Path(temporary) / 'manager-source-change.log').exists())
+
+    def test_diagnostic_command_timeout_and_spawn_failure_cannot_mask_primary_error(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manager, evidence = root / 'manager', root / 'evidence'
+            (manager / '.git').mkdir(parents=True)
+            evidence.mkdir()
+            failures = [subprocess.TimeoutExpired(['git', 'status'], 30), OSError('fixture git unavailable')]
+            with patch.object(RUNNER.subprocess, 'run', side_effect=failures) as command:
+                RUNNER.retain_manager_diagnostics(manager, evidence)
+            self.assertEqual(command.call_count, 2)
+            log = (evidence / 'manager-source-change.log').read_text()
+            self.assertIn('TimeoutExpired: diagnostic command unavailable', log)
+            self.assertIn('OSError: diagnostic command unavailable', log)
 
 
 if __name__ == '__main__':

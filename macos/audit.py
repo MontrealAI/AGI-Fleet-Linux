@@ -307,8 +307,18 @@ def audit_native(directory, label, metadata, metadata_sha, identity, commit, rep
             'productionQualified': False, 'physicalQualification': 'NOT_RUN'}
 
 
+def audit_integration_filesystem(directory):
+    receipt = read_json(directory / 'filesystem.json')
+    require(receipt == {'schema': 'agi-macos-integration-filesystem/v1', 'caseSensitive': True,
+                        'distinctCaseNames': True, 'scope': 'disposable engineering workspace only'}
+            and receipt['caseSensitive'] is True and receipt['distinctCaseNames'] is True,
+            'Integration filesystem did not preserve distinct case-sensitive paths')
+    return sha(directory / 'filesystem.json')
+
+
 def audit_integration(directory, metadata, receipt, commit, repository, run_id, extraction):
     regular_tree(directory)
+    filesystem_sha = audit_integration_filesystem(directory)
     require(read_json(directory / 'candidate-binding.json') == candidate_binding(metadata, commit, repository, run_id),
             'Integration candidate binding differs')
     report = read_json(directory / 'summary.json')
@@ -318,11 +328,12 @@ def audit_integration(directory, metadata, receipt, commit, repository, run_id, 
         (str, '1.0.9'): metadata['version'], (int, 4816): metadata['sourceFiles'],
         (int, 57853): sum(row['manifestFiles'] for row in receipt['editions'].values()),
         (str, 'fleet/packages/AGI_Agent/contract'): metadata['prefix'] + '/packages/AGI_Agent/contract',
-    }, extra_expected_files=('candidate-binding.json',))
+    }, extra_expected_files=('candidate-binding.json', 'filesystem.json'))
     auditor.SHA256, auditor.SIZE, auditor.ROOT = metadata['sha256'], metadata['bytes'], extraction
     auditor.runner.NODE_SHA = {**auditor.runner.NODE_SHA, 'arm64': NODE_SHA}
     result = auditor.audit_run(directory, 'arm64', str(run_id), commit)
-    return {**result, 'platform': 'darwin', 'runnerLabel': 'macos-26', 'repository': repository}
+    return {**result, 'platform': 'darwin', 'runnerLabel': 'macos-26', 'repository': repository,
+            'filesystemSHA256': filesystem_sha}
 
 
 def audit(release, evidence, commit, repository, run_id):
