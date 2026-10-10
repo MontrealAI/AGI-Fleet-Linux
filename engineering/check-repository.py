@@ -80,9 +80,29 @@ def main():
                 continue
             require((path.parent / target.split('#')[0]).exists(), 'Broken documentation link: ' + target)
     mirror = ROOT / 'fleet'
-    source = verify_source(mirror) if mirror.exists() else None
+    source = None
+    if mirror.exists():
+        candidate = ROOT / 'engineering/next-release.json'
+        if candidate.exists():
+            import hashlib
+            release = json.loads(candidate.read_text())
+            inventory = json.loads((mirror / 'source-inventory.json').read_text())
+            records = inventory['files']
+            require(release['productionQualified'] is False, 'Candidate requires separate physical qualification')
+            require(inventory['revisionSHA256'] == release['sourceRevisionSHA256'] == hashlib.sha256(
+                json.dumps(records, sort_keys=True, separators=(',', ':')).encode()).hexdigest(), 'Candidate source identity differs')
+            expected = {r['path'] for r in records} | {'source-inventory.json'}
+            actual = {p.relative_to(mirror).as_posix() for p in mirror.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc'}
+            require(len(records) == release['sourceFiles'] and actual == expected, 'Candidate source coverage differs')
+            for row in records:
+                p = mirror / row['path']
+                require(not p.is_symlink() and p.resolve().is_relative_to(mirror.resolve()) and sha(p) == row['sha256']
+                        and bool(p.stat().st_mode & 0o111) == row['executable'], 'Candidate source differs: ' + row['path'])
+            source = {'status': 'PASS', 'version': release['version'], 'files': len(records), 'revisionSHA256': inventory['revisionSHA256']}
+        else:
+            source = verify_source(mirror)
     require(not args.require_source or source is not None, 'Frozen source mirror is missing')
-    print(json.dumps({'status': 'PASS', 'nativeAcceptance': 'PASS', 'jobIntegration': integration['status'] if integration else None,
+    print(json.dumps({'status': 'PASS', 'acceptanceRelease': current['version'], 'nativeAcceptance': 'PASS', 'candidateAcceptance': 'SEE_NEW_RELEASE_AUDIT' if (ROOT / 'engineering/next-release.json').exists() else None, 'jobIntegration': integration['status'] if integration else None,
                       'mainnetDeploymentObservation': replay if mainnet else None,
                       'operatorGate': current['operatorGate'],
                       'sourceMirror': source, 'productionQualified': False}, indent=2))

@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
 """Create a disposable source fixture for preview development, never a release."""
 import argparse
+import importlib.util
 import json
 from pathlib import Path
 import shutil
 
-from release_tools import ROOT, require, verify_source
+from release_tools import ROOT, require
 
 
 def materialize(output):
     output = Path(output).absolute()
     require(not output.exists() and not output.is_symlink(), 'Output must not exist')
     require(not output.is_relative_to(ROOT), 'Use a directory outside the repository')
-    verify_source(ROOT / 'fleet')
-    shutil.copytree(ROOT / 'fleet', output, symlinks=False)
+    spec = importlib.util.spec_from_file_location('workstation_preview_check', ROOT / 'engineering/check-workstation-preview.py')
+    checker = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(checker)
+    checked = checker.check_preview()
+    shutil.copytree(ROOT / 'fleet', output, symlinks=False, ignore=shutil.ignore_patterns('__pycache__'))
     engine = ROOT / 'workstation/engine'
     for directory in [output / 'workforce', *(output / 'packages').glob('*/workforce')]:
         shutil.copytree(engine, directory, dirs_exist_ok=True)
@@ -31,8 +35,13 @@ def materialize(output):
     (output / 'source-inventory.json').unlink(missing_ok=True)
     note = json.loads((ROOT / 'workstation/candidate.json').read_text())
     note['purpose'] = 'Disposable source fixture. No bundled dependencies. Not an operator distribution.'
+    note['materializedSourceBasis'] = checked['fleetSource']
+    note['previewSourceSha256'] = checked['sourceSha256']
+    note['qualificationInherited'] = False
     (output / 'PREVIEW-NOT-A-RELEASE.json').write_text(json.dumps(note, indent=2) + '\n')
-    print(json.dumps({'output': str(output), 'classification': note['classification'], 'productionQualified': False}))
+    print(json.dumps({'output': str(output), 'classification': note['classification'],
+                      'materializedSourceBasis': note['materializedSourceBasis'],
+                      'qualificationInherited': False, 'productionQualified': False}))
 
 
 if __name__ == '__main__':

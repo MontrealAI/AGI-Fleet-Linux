@@ -1,7 +1,7 @@
 {
   "schema": "agi-linux-physical-qualification/v1",
-  "release": "1.0.9",
-  "releaseSHA256": "5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102",
+  "release": "1.0.10",
+  "releaseSHA256": "",
   "host": {
     "os": "",
     "architecture": "",
@@ -9,7 +9,8 @@
     "node": "",
     "openclaw": "",
     "docker": "",
-    "policySHA256": ""
+    "policySHA256": "",
+    "qualificationScope": ""
   },
   "startedAtUTC": null,
   "completedAtUTC": null,
@@ -18,57 +19,68 @@
     "releaseIntegrity": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "freshSetup": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "rootlessRuntime": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "oauthInference": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "localDocument": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "liveDocuments": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "baseAndBrowserCleanup": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "rebootIdentity": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "local50Cycles": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "endurance72Hours": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     },
     "interruptionRecovery": {
       "status": "NOT_RUN",
       "observedAtUTC": null,
-      "sanitizedEvidence": []
+      "sanitizedEvidence": [],
+      "notes": ""
     }
   },
   "productionQualified": false
