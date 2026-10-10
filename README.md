@@ -2,6 +2,10 @@
 
 **[Open the Fleet website — installation, roles, readiness and troubleshooting](https://montrealai.github.io/AGI-Fleet-Linux/)** · [Français](https://montrealai.github.io/AGI-Fleet-Linux/fr.html)
 
+**Our mission: make a large fraction of the work people do with a keyboard, mouse and screen accessible to a capable, easy-to-use AI workforce.** Fleet is being developed for everyday installed applications, signed-in business tools, documents, code, research and multi-step workflows, with independent review and clear human control.
+
+The team frames this opportunity as an **approximately US$40 trillion annual total addressable market**. This is the team's strategic estimate, not a verified market measurement, revenue forecast or demonstrated automation rate.
+
 **Linux 1.0.9 passed native tests and AGIJobManager integration on Ubuntu 24.04 x86-64 and ARM64. It is ready for controlled fresh installation on your Linux machine.** Physical qualification remains open, so this is a prerelease.
 
 [Download Linux 1.0.9](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.9-qualification) · [Install step by step](docs/FRESH_INSTALL.md) · [Audited results](validation/LINUX_1_0_9_NATIVE_ADDENDUM.md)
@@ -10,13 +14,26 @@ The Fleet ZIP includes **Agent, Node, Moderator, Employer, Evidence and Recovery
 
 Fleet works with [AGIJobManager](https://github.com/MontrealAI/AGIJobManager): Agent prepares and publishes a supported deliverable, submits its completion URI, and follows settlement; Node reviews the evidence and submits a bonded vote. The contract enforces escrow, identity, review deadlines and USDC settlement. [Integration validation](docs/JOB_INTEGRATION.md) covers the actual clients against the current manager baseline. The [new mainnet deployment](docs/MAINNET_DEPLOYMENT.md), `0xCFA78f9980eA9B55c705B3E44467baE383cE1fA7`, also matches all nine production runtimes; its verified snapshot records paused job intake.
 
+## Choose the right work mode
+
+| Your goal | Work mode | Where to start |
+| --- | --- | --- |
+| Produce checkable files from public or synthetic inputs using an isolated workspace. | **Public-work release.** Linux 1.0.9 has recorded native and contract-integration acceptance; physical qualification remains open. | [Fresh-install guide](docs/FRESH_INSTALL.md) |
+| Develop and qualify work across installed Linux applications and manually signed-in business accounts. | **Authorized workspace preview.** A separate Linux X11 native engine, signed task grants, action budgets and encrypted result handoffs. Pilot-only development preview; production execution is disabled. Not part of the published 1.0.9 archive. | [Workspace quickstart](workstation/QUICKSTART.md) |
+
+The public sandbox is one work mode, **not the ceiling of the product's mission**. The authorized workspace expands the development path toward normal workstation tasks. It uses a dedicated OS account: desktop control can reach everything that account can access. Keep it separate from your everyday account and the Fleet signer; a grant is not a per-site sandbox. Sign into approved applications yourself. The preview does not automatically publish private results or settle private jobs through AGIJobManager.
+
+**Also in the source preview:** [Work Studio general-format imports](workstation/STUDIO.md) let Agent and Node open public `computer-work/v2` jobs with arbitrary declared file extensions and larger bounded bundles. The quick editor remains v1; this preview preserves each imported job’s exact runtimes, permissions, inputs and budgets.
+
 ## The potential of Fleet + AGIJobManager
 
-**Together, they can provide a general-purpose foundation for specified, independently reviewed and paid digital work.** Fleet supplies execution and review; AGIJobManager supplies escrow, participant rules and settlement. The reusable job specification can support new task categories as tools and measured competence improve.
+**Fleet supplies the workforce; AGIJobManager supplies escrow, participation rules, review deadlines and settlement.** A reusable job specification can accommodate many occupations without a profession or filename-extension allowlist. Broader tools and account access expand what can be attempted; representative task results establish what can be offered reliably.
 
-The strongest initial opportunities are bounded software work, public-data analysis, scientific reproduction, local websites/demos, document deliverables and source-backed research. These are promising categories to qualify, not a claim of completed commercial work. Automating most keyboard-and-mouse work is a plausible long-term ambition; the current release does not establish that coverage.
+The target spans software and data work, documents and creative production, research, customer operations, CRM, scheduling, business administration and multi-application projects. Some tasks require installed applications, enterprise access or extra adapters. These are categories to qualify, not claims of demonstrated customer-job coverage.
 
-Success means **repeatable, independently accepted results at a competitive total cost and low human supervision**. It also requires reliable review, viable economics for every participant and actual host qualification. The current public-work path excludes general access to signed-in business applications.
+A user-friendly experience should answer five questions: **What should be done? Which workspace may be used? What may it change? What will it cost? How do I review or stop it?** The preview quickstart makes the first workspace explicit; task templates, smoother setup and broader application qualification remain part of the development roadmap.
+
+Success means **repeatable, independently accepted results at a competitive total cost and low human supervision**. No current release establishes that most keyboard-and-mouse jobs can already be completed.
 
 **[Read the complete potential and scope guide](docs/POTENTIAL_AND_SCOPE.md)** · **[Français](docs/POTENTIEL_ET_PERIMETRE.md)** · **[Explore the website explanation](https://montrealai.github.io/AGI-Fleet-Linux/#potential)**
 

@@ -2,9 +2,11 @@
 
 [English](POTENTIAL_AND_SCOPE.md) · [Site Fleet](https://montrealai.github.io/AGI-Fleet-Linux/fr.html) · [Installation](FRESH_INSTALL.md) · [État actuel de qualification](../engineering/current-release.json)
 
-**AGI Fleet Linux et AGIJobManager pourraient constituer ensemble une infrastructure généraliste pour le travail numérique rémunéré.** Fleet fournit l'environnement d'exécution et de vérification; AGIJobManager fournit les règles de financement, de participation et de règlement. Le même cadre peut accueillir de nombreux livrables à mesure que progressent les outils, les permissions et les compétences mesurées des opérateurs.
+**Notre mission : créer une main-d'œuvre d'IA capable et simple à utiliser, qui puisse accomplir une grande part du travail effectué avec un clavier, une souris et un écran.** Cela comprend les applications installées et les outils professionnels avec comptes connectés, ainsi que les fichiers, le code et la recherche publique. L'environnement public isolé est un premier mode de fonctionnement, pas la limite visée du produit.
 
-**Accomplir la majorité du travail qu'un humain peut effectuer avec un clavier, une souris et un écran reste une ambition à long terme. Les versions Linux actuelles n'ont pas démontré cette étendue de capacités.** Ce guide présente le potentiel, les limites actuelles et les preuves nécessaires pour élargir le périmètre.
+Fleet fournit l'exécution et la vérification; AGIJobManager fournit les règles de financement, de participation et de règlement. Ensemble, ils pourraient soutenir un vaste marché du travail numérique vérifié indépendamment. **L'équipe situe le marché total adressable à environ 40 000 milliards de dollars américains par an.** Il s'agit de son estimation stratégique, et non d'une mesure de marché vérifiée indépendamment, d'une prévision de revenus ou d'un taux établi d'automatisation. Un modèle de marché défendable doit préciser la géographie, les travaux inclus, l'année, les prix et l'adoption envisageable, sans compter deux fois le même travail.
+
+L'ambition est large; la disponibilité dépend de la version, de l'espace de travail et de la tâche. **Les versions actuelles n'ont pas démontré l'exécution fiable de la majorité des travaux à l'écran.** Ce guide distingue la mission, les parcours de développement et les résultats nécessaires pour établir cette couverture.
 
 ## Comment les deux systèmes collaborent
 
@@ -18,20 +20,40 @@ Le contrat coordonne et règle le travail. Il n'exécute pas le modèle et ne d�
 
 La [spécification `computer-work/v2`](https://github.com/MontrealAI/AGIJobManager/blob/main/docs/OPERATIONS/GENERAL_COMPUTER_WORK.md) **n'impose aucun catalogue de professions ni d'extensions de fichiers autorisées**. Elle décrit l'objectif, les entrées immuables, les sorties, les critères vérifiables indépendamment, l'environnement, les permissions, le budget et l'échéance. Un nouveau type de travail ne nécessite donc pas forcément un nouveau contrat de règlement. Il exige toutefois les bons outils et la preuve que l'Agent et ses vérificateurs peuvent l'accomplir.
 
-## Les débouchés les plus prometteurs
+## Choisir l'espace adapté au travail
 
-Le meilleur point de départ est un livrable utile dont la qualité se vérifie à un coût raisonnable. **Il s'agit de marchés candidats selon une analyse stratégique, et non d'une liste de travaux clients représentatifs déjà accomplis par cette Fleet.**
-
-| Travail candidat | Exemple de livrable | Vérification indépendante utile |
+| | Version pour le travail public | Préversion de l'espace autorisé |
 | --- | --- | --- |
-| **Modifications logicielles ciblées, tests et outils** | Une archive de code contenant une correction délimitée et des tests de non-régression. | Reproduire le défaut, exercer la correction et rechercher les régressions avec les dépendances disponibles. |
-| **Analyse de données publiques et rapports** | Un classeur, des graphiques et un rapport à partir de données fournies. | Recalculer les résultats; examiner formules, unités et traitement des données manquantes. |
-| **Reproduction scientifique et numérique** | Une reproduction exécutable avec hypothèses et résultats déclarés. | Relancer les calculs et comparer à des résultats attendus établis indépendamment. |
-| **Sites, démonstrations interactives et documentation exécutable** | Une application web locale ou un projet d'exemple documenté. | Exercer l'interface livrée et les instructions selon les exigences explicites. |
-| **Documents, tableurs et présentations** | Un DOCX, XLSX, PPTX ou PDF conforme à un cahier des charges clair. | Ouvrir les fichiers réels, recalculer au besoin et inspecter le rendu des pages ou diapositives. |
-| **Recherche à partir de sources publiques** | Un rapport avec affirmations attribuables et sources justificatives. | Vérifier les affirmations dans les sources fournies ou par navigation publique qualifiée; signaler les questions non résolues. |
+| **Usage** | Données publiques ou synthétiques et livrables locaux vérifiables. | Développer des tâches dans les applications Linux installées et les outils professionnels auxquels l'opérateur se connecte lui-même. |
+| **Environnement** | Calcul isolé sans réseau et navigateur public qualifié séparément. | Compte Linux X11 dédié, avec captures d'écran et contrôle réels du clavier et de la souris par le fournisseur Linux expérimental d'OpenClaw. |
+| **Comptes** | Aucune session personnelle; les tâches exigeant une connexion sont hors de ce mode. | Applications et sessions volontairement mises à disposition dans le compte dédié. L'opérateur effectue la connexion. |
+| **Autorité** | Politique de travail public et séparation signature-calcul. | Autorisations signées à durée limitée, ressources déclarées, budgets d'actions/temps/coût, révocation et journal durable. Le contrôle du bureau porte sur le compte entier, sans isolation par site ou action. |
+| **Résultats** | Livrable public déclaré et intégration existante aux tâches publiques. | Transmission chiffrée des résultats et parcours distinct de vérification. Aucune publication ou passerelle de règlement automatique pour les tâches privées. |
+| **État** | Acceptation native et intégration de Linux 1.0.9 enregistrées; qualification physique encore ouverte. | Nouveau code sous `workstation/engine/`; préversion de développement réservée aux essais pilotes, exigeant ses propres essais complets et sa qualification physique. L’exécution en production est désactivée; remplir un rapport local ne peut l’activer. Les résultats de 1.0.9 ne lui sont pas transférables. |
+| **Démarrer** | [Installer la version publique](FRESH_INSTALL.md). | [Suivre le démarrage de l'espace autorisé](../workstation/QUICKSTART.md). |
 
-Privilégier les tâches délimitées avec des entrées et critères d'acceptation explicites. L'environnement Linux installé comprend Python, Node.js, des bibliothèques courantes de données et de documents, LibreOffice et un bureau jetable. Les sorties déclarées peuvent inclure PDF, DOCX, XLSX, PPTX, images, texte, code et projets ZIP, dans les limites du travail. Les outils et formats créent des possibilités; ils n'établissent aucun taux de réussite. Consulter les instructions [code et données](../fleet/packages/AGI_Agent/compute/skills/agi-code-and-data/SKILL.md), [documents](../fleet/packages/AGI_Agent/compute/skills/agi-document-work/SKILL.md) et [bureau](../fleet/packages/AGI_Agent/compute/skills/agi-desktop-work/SKILL.md).
+Pour l'espace autorisé, préparer un **compte système ou une machine virtuelle réservé aux tâches, distinct de votre bureau habituel et du compte de signature Fleet**. Une autorisation signée peut encadrer une exécution et ses ressources, mais le contrôle général du clavier et de la souris peut atteindre tous les fichiers, terminaux, sessions et applications accessibles au compte. Les noms d'applications ou de domaines ne constituent pas une isolation plus étroite. Limiter cet accès par le provisionnement du compte et les permissions des services. Les réserves de coût de l’exécution ne plafonnent pas les achats ou services accessibles dans une application connectée; ils exigent leurs propres contrôles au niveau du compte.
+
+Les captures d'écran et les données du travail peuvent être transmises au fournisseur de modèle explicitement approuvé. Le chiffrement protège la transmission du résultat; il ne signifie ni traitement exclusivement local ni effacement automatique. Les fichiers de travail et journaux locaux peuvent conserver des données en clair : l'opérateur doit gérer leur accès, leur conservation et leur nettoyage. Confirmer les permissions sur les données avant de rendre disponibles comptes ou fichiers. Garder les entrées et résultats privés hors du parcours de livraison public.
+
+**Un format de tâche publique plus général est aussi proposé en préversion de code.** L’[importation générale dans Work Studio](../workstation/STUDIO.md) accepte les tâches publiques `computer-work/v2`, leurs extensions déclarées sans catalogue imposé, jusqu’à 64 sorties et 64 Mio au total selon les limites de la tâche. Agent et Node conservent identités des environnements, permissions, empreintes des entrées, budget et échéance. L’éditeur rapide reste en v1. Cette préversion distincte n’accepte pas les tâches privées ou les comptes dédiés et ne met pas à jour l’installateur publié.
+
+## Du travail dans de nombreux métiers
+
+**Ce sont des familles de tâches visées, pas un bilan de travaux clients déjà accomplis.** L'espace doit fournir les outils et permissions nécessaires avant tout essai. Des résultats d'acceptation représentatifs sont nécessaires avant de présenter une famille de tâches comme fiable.
+
+| Famille de tâches | Exemple de résultat | Vérification nécessaire |
+| --- | --- | --- |
+| **Logiciels et opérations techniques** | Correction testée, site, compilation reproductible ou déploiement documenté. | Reproduire le problème, exécuter les contrôles et inspecter le service ou le livrable. Un déploiement externe exige l'espace et les autorisations appropriés. |
+| **Données, science et rapports** | Données rapprochées, classeur, graphiques ou reproduction numérique. | Recalcul indépendant; contrôle des unités, formules, hypothèses et données manquantes. |
+| **Documents et création** | Rapports, présentations, mises en page, images ou autres fichiers créés avec les outils installés. | Ouvrir les fichiers réels; inspecter rendu, contenu, structure modifiable et conformité au brief. Les outils et licences doivent être disponibles. |
+| **Recherche et connaissances** | Résultats sourcés, comparatifs ou base de connaissances structurée. | Vérifier affirmations, qualité des sources, preuves manquantes et périmètre convenu. |
+| **Opérations clients et administration** | Mise à jour CRM, réponse de soutien préparée, catalogue ou dossier administratif. | Examiner les dossiers visés et les effets réels avant/après, y compris les changements involontaires. Le travail connecté relève de la préversion autorisée et exige sa propre qualification. |
+| **Coordination entre applications** | Préparer une proposition, mettre à jour un suivi et assembler un dossier de vérification. | Vérifier chaque transmission, dépendance et état final; maintenir envois, publications et autres effets externes dans l'autorité accordée. |
+
+La version publique comprend Python, Node.js, des bibliothèques de données et de documents, LibreOffice et un bureau jetable. Ses livrables peuvent inclure PDF, DOCX, XLSX, PPTX, images, texte, code et ZIP dans les limites déclarées. L'espace autorisé ouvre un parcours de développement vers davantage d'applications installées; il ne permet pas à Linux d'exécuter tous les logiciels Windows ou macOS. Compatibilité, permissions d'entreprise et adaptateurs restent propres à chaque tâche.
+
+Consulter les instructions publiques [code et données](../fleet/packages/AGI_Agent/compute/skills/agi-code-and-data/SKILL.md), [documents](../fleet/packages/AGI_Agent/compute/skills/agi-document-work/SKILL.md) et [bureau](../fleet/packages/AGI_Agent/compute/skills/agi-desktop-work/SKILL.md), ou le [guide de la préversion](../workstation/QUICKSTART.md).
 
 ## Un exemple concret
 
@@ -45,23 +67,25 @@ Privilégier les tâches délimitées avec des entrées et critères d'acceptati
 
 Le produit utile est le livrable accepté et utilisable, avec ses preuves. Davantage d'appels au modèle ou de fichiers produits ne suffisent pas à rendre le travail réussi.
 
-## Ce que signifie le « travail à l'écran »
+## Un accès plus large, un contrôle clair et un démarrage simple
 
-L'accès au clavier et à la souris n'établit pas la compétence pour exercer une profession entière. De nombreux métiers demandent aussi du jugement face à l'ambiguïté, une connaissance de l'organisation, de la négociation, des logiciels indisponibles ou de longues séquences d'actions dépendantes. Automatiser des tâches substantielles et bien définies dans plusieurs professions constitue une étape antérieure à l'exécution fiable de professions entières.
+Clavier et souris permettent d'interagir; un résultat fiable exige aussi jugement, contexte organisationnel, récupération et vérification. L'objectif est d'accomplir du travail substantiel dans de nombreux métiers. Une profession entière peut comporter des responsabilités impossibles à évaluer comme une seule tâche de bureau.
 
-Le **parcours Linux actuel pour le travail public** possède des limites explicites :
+L'expérience visée suit cinq étapes :
 
-| Limite | Conséquence pratique |
-| --- | --- |
-| **Entrées publiques non personnelles ou synthétiques** | Les données doivent être autorisées pour ce parcours public. Un fichier techniquement lisible n'est pas nécessairement adapté à une livraison publique. |
-| **Navigateur public protégé** | Disponible seulement s'il est exposé, autorisé et qualifié. Il ne contient aucune session personnelle. Les dépendances à une connexion, un CAPTCHA ou un compte privé imposent de refuser les critères concernés. |
-| **Aucune action de navigation engageant un changement externe** | Envoi de messages, publication, achats et création de comptes sont exclus par ce navigateur. Livrer un site local ne comprend pas son déploiement dans un compte connecté. |
-| **Environnement de calcul sans réseau** | Le travail utilise les outils installés. Il ne peut installer de dépendances pendant la tâche ni remplacer une capacité absente par l'exécution sur l'hôte ou des accès réseau en ligne de commande. |
-| **Environnement et limites de sortie déclarés** | Une application absente, une exigence non prise en charge ou une sortie trop volumineuse nécessite une autre spécification convenue ou un refus. Une empreinte valide prouve l'intégrité du fichier, pas son exactitude. |
+1. **Décrire le résultat.** Nommer le livrable ou l'état final attendu dans l'application, et expliquer comment l'accepter.
+2. **Choisir l'espace.** Utiliser le mode public ou un espace autorisé dédié avec les bonnes applications.
+3. **Examiner l'autorité et le budget.** Comprendre la portée du compte, les effets externes voulus, les limites de temps et de dépenses et les destinataires du résultat.
+4. **Exécuter avec une progression visible et un moyen d'arrêt.** Conserver les preuves des actions réussies, échouées et incertaines. Inspecter un envoi ou une soumission interrompus avant toute nouvelle tentative.
+5. **Vérifier le résultat.** Examiner fichiers et état des applications selon les critères d'acceptation avant d'annoncer réalisation ou règlement.
 
-Consulter le [périmètre du navigateur](../fleet/packages/AGI_Agent/compute/skills/agi-browser-work/SKILL.md) et celui du [code](../fleet/packages/AGI_Agent/compute/skills/agi-code-and-data/SKILL.md). Ces limites excluent l'exploitation générale de comptes connectés de courriel, CRM, banque et applications d'entreprise de ce parcours Linux. Les parcours privés ou natifs distincts décrits en amont ne prouvent pas que Linux les fournit ou les qualifie.
+C'est l'expérience produit visée; la préversion ne fournit pas encore un parcours opérateur achevé en un clic. Le guide décrit la configuration et les commandes actuelles.
 
-Les grands projets demandent aussi planification des dépendances, transmissions, vérification d'intégration et récupération. Une référence parent/dépendance dans une spécification ne constitue pas un coordinateur de projet complet. Le règlement séparé de tâches ne garantit pas le règlement atomique du projet entier. Toute coordination supplémentaire doit préserver les permissions exactes, le budget et les entrées acceptées de chaque étape.
+Le mode public conserve ses limites : données publiques ou synthétiques, aucune session personnelle, aucun travail exigeant une connexion dans le navigateur, aucun envoi/publication/achat par ce navigateur, et aucun réseau ou installation de dépendances dans le calcul isolé. Ces contrôles protègent ce parcours. Le nouveau travail dans des comptes utilise l'espace autorisé distinct. Voir les [instructions du navigateur public](../fleet/packages/AGI_Agent/compute/skills/agi-browser-work/SKILL.md).
+
+La préversion conserve les mécanismes d'autorité signée, d'admission selon le budget, de transmission chiffrée et de vérification indépendante. Leur efficacité sur le nouveau parcours Linux exige ses propres observations. La vérification doit examiner les effets externes autant que les fichiers livrés. Autorisations signées, portefeuilles distincts et empreintes de fichiers ne prouvent pas seuls l'exactitude du travail.
+
+Les grands projets demandent aussi planification des dépendances, transmissions, vérification d'intégration et récupération. Des références dans une spécification ne constituent pas un coordinateur complet. Le règlement séparé des sous-tâches ne garantit pas le règlement atomique du projet; chaque étape doit préserver autorité, budget et entrées acceptées. L'espace privé n'a actuellement aucune passerelle automatique vers le règlement des tâches publiques AGIJobManager.
 
 ## Qualité de vérification et économie déterminent la croissance
 
@@ -95,19 +119,29 @@ L'intégration utilise une chaîne en mémoire, des jetons de test et des dispos
 
 Pour décider aujourd'hui, consulter le [manifeste actuel](../engineering/current-release.json) et le [registre de qualification physique](PHYSICAL_QUALIFICATION.md). Un nouveau modèle, outil, environnement ou règlement nécessite une nouvelle qualification pertinente; une réussite antérieure ne se transfère pas automatiquement.
 
-## L'étape qui établirait ce potentiel
+## Une feuille de route vers une couverture étendue
 
-**Livrer régulièrement un travail accepté indépendamment, à un coût total compétitif et avec peu de supervision humaine.** Le démontrer par catégorie de tâches avant d'élargir le périmètre.
+**Livrer du travail accepté indépendamment, à un coût total compétitif et avec peu de supervision humaine.** Mesurer cet objectif par famille de tâches, application et environnement; ne pas extrapoler une démonstration à un métier ou à une part de marché.
+
+| Étape | Démonstration requise avant promotion |
+| --- | --- |
+| **1. Un bureau opérationnel** | Captures et actions réelles sur la machine Linux visée; identité du fournisseur; interaction avec applications installées et application de test connectée; STOP, expiration et révocation; redémarrage et reconnexion. Utiliser d'abord des comptes synthétiques. |
+| **2. Des tâches applicatives utiles** | Cas réservés dans les documents, tableurs, applications web, outils logiciels et dossiers professionnels; vérification indépendante des sorties et de l'état avant/après. Consigner échecs et aide humaine. |
+| **3. Du travail en plusieurs étapes** | Passage entre applications, reprise après interruption, identification des effets incertains et prévention des doubles envois/soumissions. Vérifier transmissions, échéances et limites. |
+| **4. Vérification indépendante et économie** | Vérificateurs sous contrôle indépendant; détection d'erreurs introduites; factures réelles d'inférence, coût de vérification, minutes humaines, infrastructure, échecs et paiements réalisés le cas échéant. |
+| **5. Déploiement auprès des opérateurs** | Études d'utilisabilité d'une installation neuve, modèles de tâches testés, commandes claires de mode/coût/état, preuves de soutien et de récupération, fonctionnement prolongé et qualification par application. |
+
+Pour chaque évaluation, figer tâches, critères et environnement; séparer réglage et cas réservés, et conserver les échecs. Le registre doit inclure :
 
 | Mesure | Éléments à conserver |
 | --- | --- |
-| Livrable utile accepté | Preuves indépendantes du résultat pour les fichiers réellement livrés. |
-| Exactitude de la vérification | Acceptation erronée d'un travail défectueux, rejet erroné d'un bon travail et incertitudes non résolues. |
-| Fiabilité | Chaque engagement prévu, y compris échecs, dépassements de délai, refus et abstentions. |
-| Économie | Coûts totaux Agent et Node, travail non payé, frais réseau, minutes humaines, nouvelles tentatives et paiements réalisés. |
-| Délais et capacité | Attente, exécution, vérification, litiges et récupération; capacité des Agents comme des Nodes. |
-| Sûreté opérationnelle | Nettoyage, comportement STOP, récupération après redémarrage et respect des permissions et limites déclarées. |
+| **Travail utile accepté** | Preuves indépendantes sur les fichiers réels et l'état des applications, avec le nombre total de travaux tentés. |
+| **Exactitude de la vérification** | Fausses acceptations, faux rejets, abstentions et erreurs corrélées entre modèles ou vérificateurs. |
+| **Coût total et effort humain** | Inférence Agent et Node, reprises, travail échoué/non payé, infrastructure, frais réseau pertinents, minutes humaines et paiements réalisés. |
+| **Délai et fiabilité** | Attente, exécution, vérification, interruptions, récupération et délai complet. |
+| **Effets externes et autorité** | Envois, modifications et soumissions voulus face aux changements réels; doublons ou effets inattendus; expiration, révocation et STOP. |
+| **Couverture** | Familles, difficulté, applications, comptes requis et exclusions, avec taille de l'échantillon et incertitude. |
 
-Figer la charge de travail, les critères d'acceptation et l'environnement; séparer calibration et évaluation sur des cas réservés; conserver les échecs et factures réelles. Utiliser des résultats établis indépendamment et indiquer les incertitudes, particulièrement lorsque les erreurs peuvent être corrélées. Voir le [processus de mesure et de qualification en amont](https://github.com/MontrealAI/AGIJobManager/blob/main/docs/OPERATIONS/GENERAL_COMPUTER_WORK.md#measure-improvements-before-promotion).
+Voir le [processus de mesure et de qualification en amont](https://github.com/MontrealAI/AGIJobManager/blob/main/docs/OPERATIONS/GENERAL_COMPUTER_WORK.md#measure-improvements-before-promotion). Un changement de modèle, fournisseur de bureau, version d'application ou politique de permissions nécessite une réévaluation pertinente.
 
-À mesure que davantage de catégories sont qualifiées, les deux systèmes pourraient soutenir un marché croissant du travail numérique effectué par des machines, avec le même cadre de tâches et de règlement. Le chemin passe par la livraison, la vérification et l'économie mesurées, une catégorie éprouvée à la fois.
+Le potentiel couvre largement le travail numérique. Pour l'atteindre : un poste capable, une expérience opérateur simple, une vérification indépendante fiable et des réussites mesurées. L'estimation stratégique d'environ 40 000 milliards de dollars américains par an exprime l'ambition de l'équipe; les preuves de travail utile déterminent la part réellement accessible au système.

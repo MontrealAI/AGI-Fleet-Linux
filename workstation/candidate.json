@@ -1,0 +1,29 @@
+{
+  "schema": "agi-linux-workstation-preview/v1",
+  "version": "0.1.0-preview.1",
+  "classification": "DEVELOPMENT_PREVIEW",
+  "basis": {
+    "repositoryCommit": "672222897c3424f75815830b95d469e3bbe15fa1",
+    "frozenFleetVersion": "1.0.9",
+    "frozenSourceSha256": "0bf5b82329a7f743759fa7f8a6383ef985df286f3c702143719b8667c5051f97"
+  },
+  "productionQualified": false,
+  "executionMode": "PILOT_ONLY",
+  "productionExecution": "DISABLED",
+  "physicalQualification": {
+    "linuxX64Desktop": "NOT_RUN",
+    "linuxArm64Desktop": "NOT_RUN",
+    "liveModel": "NOT_RUN",
+    "signedInApplication": "NOT_RUN",
+    "independentPrivateReview": "NOT_RUN",
+    "rebootRecovery": "NOT_RUN",
+    "endurance72h": "NOT_RUN"
+  },
+  "unsupported": [
+    "native Wayland",
+    "per-site or per-application sandbox for whole-account GUI authority",
+    "broker-scoped permissions",
+    "local-only model processing",
+    "automatic confidential job settlement through the public publisher"
+  ]
+}
