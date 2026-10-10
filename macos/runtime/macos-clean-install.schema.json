@@ -1,0 +1,971 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Mac clean-install qualification evidence (never a runtime authorization)",
+  "type": "object",
+  "required": [
+    "schema",
+    "scope",
+    "release",
+    "frozenAt",
+    "evidence",
+    "machines",
+    "nativeTests",
+    "review",
+    "productionQualified",
+    "authorization"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "agi-macos-clean-install-qualification/v1"
+    },
+    "scope": {
+      "const": "all-six-roles-clean-install-m1-m2"
+    },
+    "release": {
+      "type": "object",
+      "required": [
+        "version",
+        "archiveSHA256",
+        "sourceSHA256",
+        "archiveEvidenceId",
+        "sourceEvidenceId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "archiveSHA256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sourceSHA256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "archiveEvidenceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceEvidenceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "frozenAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "maxItems": 4096,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "path",
+          "sha256",
+          "bytes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "exclusiveMaximum": 450000000
+          }
+        }
+      }
+    },
+    "machines": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "chipFamily",
+          "physical",
+          "platform",
+          "arch",
+          "translated",
+          "osVersion",
+          "machineSHA256",
+          "evidenceIds",
+          "accounts",
+          "roles",
+          "gates"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "chipFamily": {
+            "enum": [
+              "M1",
+              "M2"
+            ]
+          },
+          "physical": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "platform": {
+            "const": "darwin"
+          },
+          "arch": {
+            "const": "arm64"
+          },
+          "translated": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "osVersion": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "machineSHA256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "evidenceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,100}$"
+            },
+            "uniqueItems": true
+          },
+          "accounts": {
+            "type": "object",
+            "required": [
+              "installationTrack",
+              "newComputeAccount",
+              "computeStandard",
+              "signerStandard",
+              "computeUID",
+              "signerUID",
+              "walletSeparated",
+              "oldStatePreserved",
+              "evidenceIds"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "installationTrack": {
+                "const": "clean-install"
+              },
+              "newComputeAccount": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "computeStandard": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "signerStandard": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "computeUID": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "signerUID": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "walletSeparated": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "oldStatePreserved": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "evidenceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                },
+                "uniqueItems": true
+              }
+            }
+          },
+          "roles": {
+            "type": "object",
+            "required": [
+              "agent",
+              "node",
+              "moderator",
+              "employer",
+              "evidence",
+              "recovery"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "agent": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "node": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "moderator": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "employer": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "evidence": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "recovery": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              }
+            }
+          },
+          "gates": {
+            "type": "object",
+            "required": [
+              "freshInstall",
+              "dockerIsolation",
+              "oauthInference",
+              "liveDocuments",
+              "baseAndBrowserCleanup",
+              "stopAndRecovery",
+              "rebootIdentity",
+              "endurance72Hours",
+              "jobIntegration",
+              "independentReview",
+              "distribution"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "freshInstall": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "dockerIsolation": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "oauthInference": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "liveDocuments": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "baseAndBrowserCleanup": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "stopAndRecovery": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "rebootIdentity": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "endurance72Hours": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "jobIntegration": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "independentReview": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "distribution": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "measurement",
+                  "evidenceIds"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_RUN",
+                      "PASS",
+                      "FAIL",
+                      "BLOCKED"
+                    ]
+                  },
+                  "measurement": {
+                    "enum": [
+                      null,
+                      "observed",
+                      "simulated"
+                    ]
+                  },
+                  "evidenceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "nativeTests": {
+      "type": "object",
+      "required": [
+        "platform",
+        "arch",
+        "passed",
+        "failed",
+        "skipped",
+        "timedOut",
+        "evidenceIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "platform": {
+          "const": "darwin"
+        },
+        "arch": {
+          "const": "arm64"
+        },
+        "passed": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "failed": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "skipped": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "timedOut": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "decision",
+        "operatorIdentitySHA256",
+        "reviewerIdentitySHA256",
+        "independenceObserved",
+        "evidenceIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "decision": {
+          "enum": [
+            "NOT_REVIEWED",
+            "ACCEPT",
+            "REJECT"
+          ]
+        },
+        "operatorIdentitySHA256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reviewerIdentitySHA256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "independenceObserved": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,100}$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "productionQualified": {
+      "const": false
+    },
+    "authorization": {
+      "const": "NONE"
+    }
+  }
+}

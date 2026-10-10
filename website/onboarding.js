@@ -1,6 +1,9 @@
 'use strict';
 (() => {
-  const storageKey = 'agi-fleet-onboarding-v1';
+  const platform = document.documentElement.dataset.platform === 'macos' ? 'macos' : 'linux';
+  const mac = platform === 'macos';
+  const supportedOS = mac ? 'macos' : 'ubuntu';
+  const storageKey = mac ? 'agi-fleet-macos-onboarding-v1' : 'agi-fleet-onboarding-v1';
   const french = document.documentElement.lang === 'fr';
   const copy = french ? {
     start: 'Choisissez ce que vous voulez faire.',
@@ -27,7 +30,7 @@
     nodeLogin: 'Suivez les connexions séparées Checker et Reviewer indiquées dans le guide. Dans les commandes, utilisez packages/AGI_Node à la place de packages/AGI_Agent.',
     unsureTitle: 'Vérifions d’abord votre ordinateur.',
     otherTitle: 'Prévoyez un ordinateur Ubuntu compatible.',
-    unsureText: 'Sur l’ordinateur prévu pour Fleet, vérifiez le nom et la version du système : sur Ubuntu ou Windows, ouvrez Paramètres → Système → À propos; sur Mac, menu Apple → À propos de ce Mac. Revenez ensuite au choix de l’ordinateur. Fleet nécessite Ubuntu Desktop 24.04 LTS; Windows et macOS ne sont pas pris en charge par cette version.',
+    unsureText: 'Sur l’ordinateur prévu pour Fleet, vérifiez le nom et la version du système : sur Ubuntu ou Windows, ouvrez Paramètres → Système → À propos; sur Mac, menu Apple → À propos de ce Mac. Revenez ensuite au choix de l’ordinateur. Fleet nécessite Ubuntu Desktop 24.04 LTS; Pour un Mac M1 ou M2, utilisez le guide Mac distinct ci-dessous. Windows ne fait pas partie de cette version Linux.',
     otherText: 'Cette version vise un ordinateur dédié avec Ubuntu Desktop 24.04 LTS et un bureau GNOME, sur x86-64 ou ARM64. Windows, macOS, WSL et les autres versions de Linux ne font pas partie de cette qualification.'
   } : {
     start: 'Choose what you want to do.',
@@ -54,16 +57,31 @@
     nodeLogin: 'Follow the separate Checker and Reviewer sign-ins described in the guide. In its commands, use packages/AGI_Node in place of packages/AGI_Agent.',
     unsureTitle: 'Let’s check your computer first.',
     otherTitle: 'Plan for a compatible Ubuntu computer.',
-    unsureText: 'On the computer you plan to use, check the system name and version: on Ubuntu or Windows, open Settings → System → About; on a Mac, use Apple menu → About This Mac. Then return to the computer choices. Fleet needs Ubuntu Desktop 24.04 LTS; Windows and macOS are not supported by this release.',
+    unsureText: 'On the computer you plan to use, check the system name and version: on Ubuntu or Windows, open Settings → System → About; on a Mac, use Apple menu → About This Mac. Then return to the computer choices. Fleet needs Ubuntu Desktop 24.04 LTS; For a Mac with an M1 or M2 chip, use the separate Mac guide linked below. Windows is outside this Linux release.',
     otherText: 'This release targets a dedicated computer with Ubuntu Desktop 24.04 LTS and a GNOME desktop, on x86-64 or ARM64. Windows, macOS, WSL and other Linux versions are outside this qualification target.'
   };
+  if (mac) Object.assign(copy, french ? {
+    planHeading: 'AGI Fleet pour Mac — plan de préparation',
+    nodeLogin: 'Suivez les connexions séparées Checker et Reviewer du guide. Utilisez le dossier du rôle AGI_Node, et non celui de AGI_Agent.',
+    unsureTitle: 'Vérifions d’abord votre Mac.',
+    otherTitle: 'Trouvons la bonne version pour votre ordinateur.',
+    unsureText: 'Menu Apple → À propos de ce Mac : relevez la puce, la mémoire et la version de macOS. Ce guide vise les Mac M1 et M2 sous macOS 15 ou version ultérieure. Revenez ensuite au choix de l’ordinateur.',
+    otherText: 'Cette archive est native pour Apple silicon M1 et M2 sous macOS 15 ou version ultérieure. Un Mac Intel ne convient pas à cette archive; le guide Linux concerne un ordinateur Ubuntu distinct. Consultez les exigences avec votre aide avant de modifier votre ordinateur.'
+  } : {
+    planHeading: 'AGI Fleet for Mac — preparation plan',
+    nodeLogin: 'Follow the separate Checker and Reviewer sign-ins in the guide. Use the AGI_Node role folder, not the AGI_Agent folder.',
+    unsureTitle: 'Let’s check your Mac first.',
+    otherTitle: 'Find the right version for your computer.',
+    unsureText: 'Choose Apple menu → About This Mac and check the chip, memory and macOS version. This guide targets M1 and M2 Macs on macOS 15 or newer. Then return to the computer choices.',
+    otherText: 'This archive runs natively on Apple silicon M1 and M2 with macOS 15 or newer. An Intel Mac cannot use this archive; the Linux guide is for a separate Ubuntu computer. Review the requirements with your helper before changing your computer.'
+  });
   const panels = [...document.querySelectorAll('[data-panel]')];
   const knownPanels = new Set(panels.map(panel => panel.id));
   if (!panels.length) return;
   const blankState = largeText => ({path: '', os: '', role: '', panel: 'welcome', largeText});
   const validatedState = value => ({
     path: ['worker', 'hire', 'explore'].includes(value?.path) ? value.path : '',
-    os: ['ubuntu', 'other', 'unsure'].includes(value?.os) ? value.os : '',
+    os: [supportedOS, 'other', 'unsure'].includes(value?.os) ? value.os : '',
     role: ['agent', 'node'].includes(value?.role) ? value.role : '',
     panel: knownPanels.has(value?.panel) ? value.panel : 'welcome',
     largeText: value?.largeText === true
@@ -108,7 +126,7 @@
     focusFrame = null;
   }
   const route = () => ({path: state.path, os: state.os, role: state.role, panel: state.panel});
-  const isGuideEntry = value => value?.agiFleetGuide === 1;
+  const isGuideEntry = value => value?.agiFleetGuide === 1 && (value.platform || 'linux') === platform;
   const isCurrentEntry = value => isGuideEntry(value) && value.epoch === epoch && value.route && typeof value.route === 'object';
   const locationKey = () => location.href + '|' + (history.state?.entry || '');
   function refreshEpoch() {
@@ -125,14 +143,14 @@
     const current = history.state;
     const sameRoute = isCurrentEntry(current) && JSON.stringify(validatedState(current.route)) === JSON.stringify(validatedState(nextRoute));
     if (mode === 'push' && sameRoute && location.hash === hash) { lastLocation = locationKey(); return; }
-    const entry = {agiFleetGuide: 1, epoch, entry: newId(), route: nextRoute};
+    const entry = {agiFleetGuide: 1, platform, epoch, entry: newId(), route: nextRoute};
     try { history[mode === 'push' ? 'pushState' : 'replaceState'](entry, '', location.pathname + location.search + hash); }
     catch { /* The guide remains usable if browser history is unavailable. */ }
     lastLocation = locationKey();
   }
   const normalise = panel => {
-    if (panel === 'role' && state.os !== 'ubuntu') return 'computer';
-    if (panel === 'plan' && (state.os !== 'ubuntu' || !state.role)) return state.os === 'ubuntu' ? 'role' : 'computer';
+    if (panel === 'role' && state.os !== supportedOS) return 'computer';
+    if (panel === 'plan' && (state.os !== supportedOS || !state.role)) return state.os === supportedOS ? 'role' : 'computer';
     if (panel === 'device' && !['other', 'unsure'].includes(state.os)) state.os = 'unsure';
     return knownPanels.has(panel) ? panel : 'welcome';
   };

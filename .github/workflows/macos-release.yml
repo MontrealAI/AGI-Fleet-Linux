@@ -1,0 +1,199 @@
+name: Apple silicon Mac release qualification
+
+on:
+  pull_request:
+    paths:
+      - macos/build.py
+      - macos/release.json
+      - macos/runtime/**
+      - macos/docs/**
+      - macos/run-*.py
+      - macos/audit.py
+      - macos/publish.py
+      - macos/tests/**
+      - .github/workflows/macos-release.yml
+  push:
+    branches: [main]
+    paths: [macos/release.json]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the exact candidate after native acceptance
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+concurrency:
+  group: macos-release-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Build the complete Mac distribution
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - &checkout
+        name: Check out this exact revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install hash-pinned build runtime
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz -o "$RUNNER_TEMP/node.tar.xz"
+          printf '%s  %s\n' fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6 "$RUNNER_TEMP/node.tar.xz" | sha256sum --check
+          tar -xJf "$RUNNER_TEMP/node.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/node-v24.21.0-linux-x64/bin" >> "$GITHUB_PATH"
+      - name: Verify frozen Linux source and Mac engineering gates
+        run: |
+          python3 engineering/check-repository.py --require-source
+          python3 -m unittest discover -s macos/tests -v
+          python3 -m unittest discover -s macos/runtime -p 'test_*.py' -v
+          node --test macos/runtime/runtime.test.mjs
+      - name: Build and independently verify the saved archive
+        run: |
+          python3 macos/build.py build --output "$RUNNER_TEMP/mac-candidate" --work "$RUNNER_TEMP/mac-build" > "$RUNNER_TEMP/mac-build-receipt.json"
+      - name: Retain exact candidate and packaging evidence
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: macos-candidate
+          path: ${{ runner.temp }}/mac-candidate/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
+  native:
+    name: Native suite on ${{ matrix.os }} / Apple silicon
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-26]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 180
+    env:
+      AGI_MACOS_RUNNER_LABEL: ${{ matrix.os }}
+    steps:
+      - *checkout
+      - &candidate
+        name: Download this run's saved candidate
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: macos-candidate
+          path: release
+      - name: Exercise native launchers and every regression
+        run: |
+          set -euo pipefail
+          sudo -H /usr/bin/env GITHUB_ACTIONS="$GITHUB_ACTIONS" RUNNER_ENVIRONMENT="$RUNNER_ENVIRONMENT" \
+            GITHUB_REPOSITORY="$GITHUB_REPOSITORY" GITHUB_RUN_ID="$GITHUB_RUN_ID" GITHUB_SHA="$GITHUB_SHA" \
+            GITHUB_WORKSPACE="$GITHUB_WORKSPACE" RUNNER_OS="$RUNNER_OS" RUNNER_ARCH="$RUNNER_ARCH" \
+            AGI_MACOS_RUNNER_LABEL="$AGI_MACOS_RUNNER_LABEL" "$(command -v python3)" macos/run-native.py \
+            --metadata "$GITHUB_WORKSPACE/release/release.json" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_macOS_v1.20.0.zip" \
+            --work "/private/var/root/agi-mac-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --evidence "$GITHUB_WORKSPACE/native-evidence"
+      - name: Preserve readable evidence ownership
+        if: always()
+        run: |
+          if test -d native-evidence; then sudo chown -R "$(id -u):$(id -g)" native-evidence; fi
+      - name: Retain every native log
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: ${{ matrix.os }}
+          path: native-evidence/
+          if-no-files-found: error
+          retention-days: 90
+  integration:
+    name: Native Mac contract and job lifecycle integration
+    needs: build
+    runs-on: macos-26
+    timeout-minutes: 50
+    env:
+      AGI_MACOS_RUNNER_LABEL: macos-26
+    steps:
+      - *checkout
+      - *candidate
+      - name: Create an isolated case-sensitive integration workspace
+        run: |
+          set -euo pipefail
+          # The pinned Manager repository has distinct documentation names that
+          # differ only by case. Never rename/exclude them or weaken Git checks.
+          # This is a disposable image, not a change to any host disk format.
+          mac_integration_image="$RUNNER_TEMP/mac-integration.sparseimage"
+          mac_integration_volume="$RUNNER_TEMP/mac-integration-volume"
+          test ! -e "$mac_integration_image"
+          test ! -e "$mac_integration_volume"
+          mkdir "$mac_integration_volume"
+          /usr/bin/hdiutil create -size 8g -type SPARSE -fs 'Case-sensitive APFS' -volname AGIManagerTests "$mac_integration_image"
+          /usr/bin/hdiutil attach -nobrowse -noautoopen -mountpoint "$mac_integration_volume" "$mac_integration_image"
+          touch "$RUNNER_TEMP/mac-integration-attached"
+      - name: Requalify the saved Mac archive against the pinned manager
+        run: |
+          python3 macos/run-integration.py --metadata release/release.json \
+            --archive release/AGI_Fleet_macOS_v1.20.0.zip \
+            --work "$RUNNER_TEMP/mac-integration-volume/work" --evidence "$GITHUB_WORKSPACE/integration-evidence"
+      - name: Detach only this run's integration image
+        if: always()
+        run: |
+          if test -f "$RUNNER_TEMP/mac-integration-attached"; then
+            /usr/bin/hdiutil detach "$RUNNER_TEMP/mac-integration-volume"
+          fi
+      - name: Retain all integration logs
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: macos-integration-26
+          path: integration-evidence/
+          if-no-files-found: error
+          retention-days: 90
+  audit:
+    name: Independently audit Mac acceptance evidence
+    needs: [build, native, integration]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - *checkout
+      - *candidate
+      - name: Download retained native and integration evidence
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          pattern: macos-*
+          path: evidence
+      - name: Remove packaging artifact from evidence collection
+        run: rm -r evidence/macos-candidate
+      - name: Audit complete source-bound logs and prepare publication
+        run: |
+          python3 macos/publish.py prepare --release-dir release --evidence-dir evidence --output prepared \
+            --commit "$GITHUB_SHA" --repository "$GITHUB_REPOSITORY" --run-id "$GITHUB_RUN_ID"
+      - name: Retain audited publication files
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: macos-publication
+          path: prepared/
+          if-no-files-found: error
+          retention-days: 90
+  publish:
+    name: Publish the exact Mac qualification prerelease
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish))
+    needs: [build, native, integration, audit]
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - *checkout
+      - *candidate
+      - name: Download independently audited publication files
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: macos-publication
+          path: prepared
+      - name: Publish immutable verified assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 macos/publish.py publish --release-dir release --output prepared \
+            --commit "$GITHUB_SHA" --repository "$GITHUB_REPOSITORY" --run-id "$GITHUB_RUN_ID"

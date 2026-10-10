@@ -9,8 +9,8 @@ import sys
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-REQUIRED = {'index.html', 'fr.html', 'start.html', 'start-fr.html', 'styles.css',
-            'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'release.json'}
+REQUIRED = {'index.html', 'fr.html', 'start.html', 'start-fr.html', 'mac.html', 'mac-fr.html', 'styles.css',
+            'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'release.json', 'mac-release.json'}
 ALLOWED = REQUIRED | {'.nojekyll', '404.html'}
 PROJECT_PATH = '/AGI-Fleet-Linux/'
 REPOSITORY_PATH = '/MontrealAI/AGI-Fleet-Linux/'
@@ -163,7 +163,10 @@ def check(site):
             spec.loader.exec_module(builder)
             builder.ROOT = ROOT
             expected = builder.read_release()
-            tokens = builder.release_tokens(expected)
+            tokens = builder.website_tokens(expected)
+            mac, published = builder.read_mac_release()
+            if json.loads(texts.get('mac-release.json', 'null')) != {**mac, 'published': published}:
+                errors.append('mac-release.json: does not match reviewed Mac release metadata')
             if release != expected:
                 errors.append('release.json: does not match the selected reviewed release metadata')
             for name in builder.PUBLIC_FILES:

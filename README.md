@@ -1,12 +1,20 @@
-# AGI Fleet Linux
+# AGI Fleet · Linux & Apple silicon Mac
 
 ## New here? Let’s find your next step.
 
-Fleet helps a dedicated Linux computer perform AI work and check the results. You can explore the possibilities without knowing the technical terms.
+Fleet helps a dedicated Linux computer or Apple silicon Mac perform AI work and check the results. You can explore the possibilities without knowing the technical terms.
 
 ### [Start here — guide me, one step at a time →](https://montrealai.github.io/AGI-Fleet-Linux/start.html)
 
 ### [Commencer en français — me guider, étape par étape →](https://montrealai.github.io/AGI-Fleet-Linux/start-fr.html)
+
+### Apple silicon Mac · M1 / M2
+
+[**Mac guide — start here →**](https://montrealai.github.io/AGI-Fleet-Linux/mac.html) · [**Guide Mac en français →**](https://montrealai.github.io/AGI-Fleet-Linux/mac-fr.html)
+
+Mac mini, MacBook and Mac Studio have a dedicated native macOS distribution, all six roles, a clean Standard-account installation guide, recovery instructions and a physical qualification checklist. [Mac installation](macos/docs/FRESH_INSTALL.md) · [Platform parity](macos/docs/PARITY.md) · [Mac release status](macos/release.json)
+
+The Mac candidate is **not production-qualified**, signed or notarized. Its native test results and release downloads have their own publication gate; Linux test results do not qualify a Mac. Start with controlled, unfunded testing only after the Mac release gate permits it.
 
 **Get work done · Set up an AI worker · Help me understand**
 
