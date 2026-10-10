@@ -35,7 +35,7 @@ Every supplied archive and member is below **450,000,000 bytes**. Permanent nati
 
 ## Engineering
 
-[Development and verified source materialization](docs/DEVELOPMENT.md) · [Native reproduction](engineering/README.md)
+[Development and verified source materialization](docs/DEVELOPMENT.md) · [Native reproduction](engineering/README.md) · [AGIJobManager integration](docs/JOB_INTEGRATION.md)
 
 The repository tracks the exact inventoried application source under `fleet/`, including all six roles, shared runtime, 342 regression files, lockfiles and license notices. Dependencies and historical reports are distributed in the full Fleet ZIP. Use that ZIP for operator installation; GitHub-generated source archives are development checkouts.
 
