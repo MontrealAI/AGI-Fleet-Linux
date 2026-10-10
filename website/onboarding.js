@@ -280,6 +280,12 @@
         state.largeText = saved?.largeText === true;
         setTextSize();
       } catch { /* Keep the active text preference if storage cannot be read. */ }
+      if (!epochStored) {
+        epoch = newId();
+        state = blankState(state.largeText);
+        show('welcome', {save: false, historyMode: 'replace'});
+        return;
+      }
       lastLocation = '';
       restoreLocation();
     }

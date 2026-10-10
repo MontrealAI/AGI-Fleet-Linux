@@ -270,10 +270,15 @@ test('a keyboard user can enter the guide, choose a path and return with visible
   await expect(page.locator('a.skip')).toBeFocused();
   await page.keyboard.press('Enter');
   const choice = page.locator('#welcome [data-go="computer"]');
-  await choice.focus();
+  for (let presses = 0; presses < 12; presses++) {
+    if (await choice.evaluate(element => element === document.activeElement)) break;
+    await page.keyboard.press('Tab');
+  }
+  await expect(choice).toBeFocused();
   await page.keyboard.press('Enter');
   await expectPanel(page, 'computer');
-  await page.locator('#computer [data-back="welcome"]').focus();
+  await page.keyboard.press('Shift+Tab');
+  await expect(page.locator('#computer [data-back="welcome"]')).toBeFocused();
   await page.keyboard.press('Enter');
   await expectPanel(page, 'welcome');
   await page.keyboard.press('Tab');
