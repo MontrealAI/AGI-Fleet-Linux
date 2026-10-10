@@ -6,7 +6,7 @@
 
 The team frames this opportunity as an **approximately US$40 trillion annual total addressable market**. This is the team's strategic estimate, not a verified market measurement, revenue forecast or demonstrated automation rate.
 
-**Install, operate and qualify six isolated AGI Jobs roles on Ubuntu Desktop 24.04 LTS.** The **1.0.10** release track targets controlled fresh installation on x86-64 and ARM64. Publication requires the saved-archive qualification gates below to pass; physical commissioning remains open.
+**Linux 1.0.10 is published as a qualification prerelease with native and AGIJobManager integration PASS on x86-64 and ARM64.** Install, operate and qualify six isolated AGI Jobs roles on Ubuntu Desktop 24.04 LTS. Physical commissioning remains open.
 
 [Download Linux 1.0.10](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.10-qualification) · [Install step by step](docs/FRESH_INSTALL.md) · [Troubleshooting](docs/TROUBLESHOOTING.md) · [Release notes](docs/RELEASE_NOTES_1_0_10.md)
 
@@ -14,7 +14,7 @@ The team frames this opportunity as an **approximately US$40 trillion annual tot
 
 | Your goal | Work mode | Where to start |
 | --- | --- | --- |
-| Produce checkable files from public or synthetic inputs using an isolated workspace. | **Public-work release.** Linux 1.0.10 requires its own native and contract-integration acceptance before publication; physical qualification remains open. | [Fresh-install guide](docs/FRESH_INSTALL.md) |
+| Produce checkable files from public or synthetic inputs using an isolated workspace. | **Public-work release.** Linux 1.0.10 has native and contract-integration PASS on both architectures, recorded in the [published manifest](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.0.10-qualification/Release-Manifest-v1.0.10.json); physical qualification remains open. | [Fresh-install guide](docs/FRESH_INSTALL.md) |
 | Develop and qualify work across installed Linux applications and manually signed-in business accounts. | **Authorized workspace preview.** A separate Linux X11 native engine, signed task grants, action budgets and encrypted result handoffs. Pilot-only development preview; production execution is disabled. Not included in the 1.0.10 Fleet ZIP; the preview records a historical 1.0.9 source basis. | [Workspace quickstart](workstation/QUICKSTART.md) |
 
 The public sandbox is one work mode, **not the ceiling of the product's mission**. The authorized workspace expands the development path toward normal workstation tasks. It uses a dedicated OS account: desktop control can reach everything that account can access. Keep it separate from your everyday account and the Fleet signer; a grant is not a per-site sandbox. Sign into approved applications yourself. The preview does not automatically publish private results or settle private jobs through AGIJobManager.
@@ -44,7 +44,7 @@ The full analysis reviews Fleet [`2f27979`](https://github.com/MontrealAI/AGI-Fl
 ## Start here
 
 1. Use a dedicated, clean **Ubuntu Desktop 24.04 LTS** machine with GNOME, systemd and cgroup v2. Allow at least 8 GB RAM and 40 GB free disk; 16 GB RAM is recommended.
-2. Once the release page records completed native and integration acceptance, download **AGI_Fleet_Linux_v1.0.10.zip** and **SHA256SUMS-v1.0.10.txt**. Follow the [checksum and extraction instructions](docs/FRESH_INSTALL.md). GitHub's automatic source archives are development checkouts, not installer bundles.
+2. Download **AGI_Fleet_Linux_v1.0.10.zip** and **SHA256SUMS-v1.0.10.txt** from the release page. Follow the [checksum and extraction instructions](docs/FRESH_INSTALL.md). GitHub's automatic source archives are development checkouts, not installer bundles.
 3. Start with Agent using new, separate nonadministrator signer and compute accounts. Follow the guide through readiness, then record your machine's results in the [physical qualification ledger](docs/PHYSICAL_QUALIFICATION.md).
 
 The ZIP includes the pinned dependencies and current operator guides. You do not need the historical regression-fixture download to install it. Every supplied file and archive member is below **450,000,000 bytes**.

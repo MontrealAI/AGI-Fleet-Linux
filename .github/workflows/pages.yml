@@ -8,6 +8,7 @@ on:
       - engineering/build-website.py
       - engineering/check-website.py
       - engineering/current-release.json
+      - engineering/published-release.json
       - validation/**
       - docs/**
       - README.md
@@ -18,6 +19,7 @@ on:
       - engineering/build-website.py
       - engineering/check-website.py
       - engineering/current-release.json
+      - engineering/published-release.json
       - validation/**
       - docs/**
       - README.md

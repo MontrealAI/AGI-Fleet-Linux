@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 from html.parser import HTMLParser
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -156,8 +157,20 @@ def check(site):
             release = json.loads(texts['release.json'])
             if not isinstance(release, dict):
                 errors.append('release.json: expected an object')
-        except json.JSONDecodeError:
-            errors.append('release.json: invalid JSON')
+            spec = importlib.util.spec_from_file_location('website_build', ROOT / 'engineering/build-website.py')
+            builder = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(builder)
+            builder.ROOT = ROOT
+            expected = builder.read_release()
+            tokens = builder.release_tokens(expected)
+            if release != expected:
+                errors.append('release.json: does not match the selected reviewed release metadata')
+            for name in ('index.html', 'fr.html'):
+                source = ROOT / 'website' / name
+                if texts.get(name) != builder.render(source.read_text(encoding='utf-8'), '.html', tokens):
+                    errors.append(f'{name}: stale or changed page; rebuild from the selected release metadata')
+        except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+            errors.append('release.json: invalid release metadata: ' + str(error))
     return errors, {'files': len(texts), 'links': checked_links, 'htmlPages': len(pages)}
 
 

@@ -1,6 +1,6 @@
 # Maintain the AGI Fleet Linux website
 
-The public operator guide lives at **<https://montrealai.github.io/AGI-Fleet-Linux/>**. Its editable source is [`website/`](../website/). The build reads the reviewed [`engineering/current-release.json`](../engineering/current-release.json) so release numbers, archive size and checksums are generated from the same record used by the repository.
+The public operator guide lives at **<https://montrealai.github.io/AGI-Fleet-Linux/>**. Its editable source is [`website/`](../website/). The build reads `engineering/published-release.json` when present. This is an unchanged copy of a verified manifest downloaded from an actually published release. Until that pointer exists, the build uses the frozen [`engineering/current-release.json`](../engineering/current-release.json) acceptance baseline. The baseline remains unchanged when a new release is published.
 
 ## Preview a change
 
@@ -29,9 +29,23 @@ Official GitHub actions are pinned to full commit hashes. The build has read-onl
 
 After a successful run, open the workflow's deployment URL and confirm the expected release, working navigation and downloads. If GitHub Pages briefly shows an older page, reload after the deployment completes. Do not claim publication from a successful build alone: the deployment job must succeed and the public URL must serve the new page.
 
+## Point the website at a newly published release
+
+Only after the release publisher succeeds and the public release assets are verified:
+
+1. Download the exact `Release-Manifest-vVERSION.json` asset and its published `SHA256SUMS-vVERSION.txt`. Verify the manifest's checksum and confirm the matching tag, archive identity, workflow commit/run and published (not draft) release in GitHub.
+2. Save the manifest **unchanged** as `engineering/published-release.json`. Do not synthesize this file from a candidate, edit acceptance to PASS, or alter `engineering/current-release.json` or a historical audit.
+3. Build and check the website, review both languages, and confirm the new archive/checksum and immutable release-asset evidence links. Merge the reviewed pointer update through the normal workflow, then confirm successful Pages deployment and the live page.
+
+The pointer uses the publisher's `agi-linux-published-release/v1` schema. It includes `version`, `tag`, `name`, `bytes`, `sha256`, `sourceRevisionSHA256`, `sourceFiles`, `workflowCommit`, `workflowRun`, expected `native.targeted`/`native.complete` counts, `nativeAcceptance`, `jobIntegrationAcceptance`, `operatorGate`, `productionQualified`, `physicalQualification`, the inline `audit`, and the `evidence` archive identity. Additional publisher fields are preserved in the public `release.json`.
+
+The current published-pointer contract requires audited native and integration PASS for both x64 and ARM64, matching workflow/source/archive identities, complete native counts with no failures/skips, `productionQualified: false` and physical qualification `NOT_RUN`. A future release with a different qualification scope needs an explicit renderer/validator review. Unknown or malformed pointer data stops the build; it never silently falls back to the older release.
+
+The builder normalizes the inline audit for display without changing the manifest data. Native audit and release-manifest links point to the versioned manifest asset; integration evidence points to that release's versioned evidence ZIP. The offline build validates the recorded evidence relationships; it does not contact GitHub or prove that publication occurred. The verification in step 1 is therefore required. Never add a pointer merely because a candidate build or a local site preview passed.
+
 ## Validation and maintenance
 
-`engineering/check-website.py` runs offline. It verifies the public-file allowlist, UTF-8 text, bounded file sizes, template substitution, basic document accessibility, unique section IDs, local assets and anchors, and links to files in this repository. It rejects symlinks, unexpected files, obvious credentials, external assets and links that escape the project path. These checks complement review; they are not a comprehensive secret scanner or accessibility audit. They do not request third-party pages or certify the availability of external websites.
+`engineering/check-website.py` runs offline. It verifies the public-file allowlist, UTF-8 text, bounded file sizes, template substitution, basic document accessibility, unique section IDs, local assets and anchors, and links to files in this repository. It also requires the public release JSON to match the selected reviewed manifest and both rendered HTML pages to match the current templates and release data. It rejects symlinks, unexpected files, obvious credentials, external assets and links that escape the project path. These checks complement review; they are not a comprehensive secret scanner or accessibility audit. They do not request third-party pages or certify the availability of external websites.
 
 The “Potential and scope” sections in both languages summarize [`POTENTIAL_AND_SCOPE.md`](POTENTIAL_AND_SCOPE.md) and [`POTENTIEL_ET_PERIMETRE.md`](POTENTIEL_ET_PERIMETRE.md). Keep their task examples, current access boundaries, payout illustration and qualification language aligned. Examples are prospective unless linked to observed customer evidence.
 

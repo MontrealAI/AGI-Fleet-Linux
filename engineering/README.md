@@ -1,6 +1,6 @@
 # Reproducing Linux 1.0.9 native validation
 
-**The current candidate passed on both architectures.** See the [audited native addendum](../validation/LINUX_1_0_9_NATIVE_ADDENDUM.md). The [development guide](../docs/DEVELOPMENT.md) covers source materialization. The commands below reproduce the engineering qualification; operators use the fresh-install guide.
+**This is the frozen 1.0.9 baseline, which passed on both architectures.** See the [audited native addendum](../validation/LINUX_1_0_9_NATIVE_ADDENDUM.md). For the current 1.0.10 build and publication process, use the [development guide](../docs/DEVELOPMENT.md). The commands below reproduce historical engineering qualification; operators use the [fresh-install guide](../docs/FRESH_INSTALL.md).
 
 Use a fresh, disposable Ubuntu 24.04 engineering VM. The supplied workflow uses GitHub-hosted x86-64 and ARM64 VMs, with a read-only repository token and no operator secrets. Authorized root access is used only for isolated test provisioning and real foreign-ownership fixtures. Do not run this harness in an operator signer or compute account.
 
@@ -14,7 +14,7 @@ The pinned SDK also searches system Node locations. In these disposable VMs only
 
 `AGI_REQUIRE_LIVE_PLUGIN_CATALOG=1` requires the real pinned Gateway to persist the hosted default discovery cache in each positive materialization case. Acceptance cannot pass by testing only an empty cache. This unsigned cache carries no plugin-install authority; policy, approvals, installed code and credentials remain independently sealed.
 
-Evidence is uploaded even when a job fails. Every run gets a separate artifact; never overwrite restricted-run evidence. The release ZIP remains frozen, and workflow changes do not change its release identity. The original `Frozen Linux 1.0.6 native validation` and the separate 1.0.7 candidate workflow remain available for historical reproduction; they are not the current candidate.
+Evidence is uploaded even when a job fails. Every run gets a separate artifact; never overwrite restricted-run evidence. The release ZIP remains frozen, and workflow changes do not change its release identity. The original `Frozen Linux 1.0.6 native validation`, the separate 1.0.7 candidate workflow and this 1.0.9 workflow remain available for historical reproduction; they do not qualify changed 1.0.10 source.
 
 For an independent evidence audit, download the capable-run evidence and original release ZIP, then run:
 
