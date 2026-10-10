@@ -1,0 +1,28 @@
+{
+  "schema": "agi-linux-current-release/v1",
+  "version": "1.0.9",
+  "tag": "v1.0.9-qualification",
+  "name": "AGI_Fleet_Linux_v1.0.9.zip",
+  "bytes": 401420759,
+  "sha256": "5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102",
+  "nativeAcceptance": "PASS",
+  "operatorGate": "OPEN_FOR_CONTROLLED_FRESH_INSTALL",
+  "productionQualified": false,
+  "nativeAudit": {
+    "path": "validation/capable-38022168787-audit.json",
+    "sha256": "ae426756581a54141a8d8d5fce527c28d6c873a3b5a848f4a31304578d2fb23f",
+    "workflowRun": 38022168787,
+    "workflowCommit": "30d337265e6ec459ed54d9572949a6d0d6980ff4",
+    "verifiedTapLogs": 734
+  },
+  "sourceRevisionSHA256": "0bf5b82329a7f743759fa7f8a6383ef985df286f3c702143719b8667c5051f97",
+  "physicalQualification": {
+    "freshInstall": "NOT_RUN",
+    "rootlessDocker": "NOT_RUN",
+    "oauthInference": "NOT_RUN",
+    "liveDocuments": "NOT_RUN",
+    "baseAndBrowserCleanup": "NOT_RUN",
+    "rebootIdentity": "NOT_RUN",
+    "endurance72Hours": "NOT_RUN"
+  }
+}

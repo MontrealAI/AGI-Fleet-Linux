@@ -1,0 +1,44 @@
+name: Publish audited native acceptance
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-native-acceptance.yml
+      - engineering/publish-qualified-release.py
+      - engineering/import-frozen-source.py
+      - engineering/current-release.json
+      - validation/Linux-Native-Evidence-v1.0.9.json
+      - docs/RELEASE_NOTES_1_0_9.md
+permissions:
+  contents: write
+concurrency:
+  group: publish-linux-native-acceptance
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Fetch this exact commit
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+      - name: Verify the repository handoff
+        run: |
+          python3 engineering/check-repository.py
+          python3 -m unittest discover -s engineering/tests -v
+      - name: Independently re-audit and preserve the native release evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 engineering/publish-qualified-release.py
+      - name: Prepare an exact-source branch for review
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 engineering/import-frozen-source.py

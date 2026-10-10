@@ -1,0 +1,75 @@
+{
+  "schema": "agi-linux-physical-qualification/v1",
+  "release": "1.0.9",
+  "releaseSHA256": "5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102",
+  "host": {
+    "os": "",
+    "architecture": "",
+    "role": "",
+    "node": "",
+    "openclaw": "",
+    "docker": "",
+    "policySHA256": ""
+  },
+  "startedAtUTC": null,
+  "completedAtUTC": null,
+  "elapsedEnduranceHours": 0,
+  "gates": {
+    "releaseIntegrity": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "freshSetup": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "rootlessRuntime": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "oauthInference": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "localDocument": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "liveDocuments": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "baseAndBrowserCleanup": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "rebootIdentity": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "local50Cycles": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "endurance72Hours": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    },
+    "interruptionRecovery": {
+      "status": "NOT_RUN",
+      "observedAtUTC": null,
+      "sanitizedEvidence": []
+    }
+  },
+  "productionQualified": false
+}
