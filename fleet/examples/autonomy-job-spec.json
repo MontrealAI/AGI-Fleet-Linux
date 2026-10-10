@@ -1,0 +1,41 @@
+{
+  "schema": "agi-autonomy-job/v1",
+  "title": "Deliver a verified catalogue record",
+  "task": "Produce a complete deliverable satisfying every formal criterion in acceptance.",
+  "inputs": "Public inputs only. Replace this example with your complete task.",
+  "dataPolicy": "public",
+  "acceptance": {
+    "schema": "agi-node-job/v1",
+    "profile": "json-rules/v1",
+    "title": "Deliver a verified catalogue record",
+    "rules": [
+      {
+        "id": "product-id",
+        "path": "/productId",
+        "op": "equals",
+        "value": "AGI-001"
+      },
+      {
+        "id": "description-length",
+        "path": "/description",
+        "op": "stringLength",
+        "min": 30,
+        "max": 200
+      },
+      {
+        "id": "price",
+        "path": "/priceUSDC",
+        "op": "numberRange",
+        "min": 1,
+        "max": 100
+      }
+    ]
+  },
+  "resolution": {
+    "mode": "formal-only/v1",
+    "moderators": [
+      "0x0000000000000000000000000000000000000004"
+    ],
+    "neutralRefund": true
+  }
+}

@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AGI Fleet · Control room</title>
+    <link rel="stylesheet" href="/app.css" />
+    <link rel="stylesheet" href="/genesis.css">
+    <link rel="stylesheet" href="/atelier.css">
+  </head>
+  <body class="genesis-fleet"><a href="#genesis-heading" class="genesis-skip">Skip to readiness center</a>
+<aside><a class="brand" href="#genesis-heading"><span class="brand-seal" aria-hidden="true">✧</span><span class="brand-label">MONTREAL.AI<small>AGI FLEET / PRIVATE</small></span></a><nav aria-label="Fleet workspace"><button data-fleet-view="overview" type="button">Readiness center</button><button data-fleet-view="wallet" type="button">Wallet & recovery</button><button data-fleet-view="connections" type="button">Network & OpenClaw</button><button data-fleet-view="activity" type="button">Work & review time</button><button data-fleet-view="authority" type="button">Live authority</button><button data-fleet-view="backup" type="button">Backups & startup</button></nav><p class="aside-note">Each signing role keeps its own wallet, journal and explicit authority.</p></aside><div class="fleet-content">
+    <header>
+      <span class="brand">MONTREAL.AI / AGI FLEET</span>
+      <p id="appVersion"></p><h1 id="title">Your dedicated machine.</h1>
+      <p id="subtitle">A clear view of its work, authority and recovery.</p>
+      <div class="toolbar">
+        <span id="state" class="badge">Connecting</span
+        ><button id="refresh">Refresh</button
+        ><button id="pause" class="danger">Pause signing now</button>
+      </div>
+    </header>
+    <main>
+<section class="genesis-center" aria-labelledby="genesis-heading">
+<div class="genesis-hero"><div><span class="genesis-kicker">AGI JOBS / OPERATIONS</span><h2 id="genesis-heading">Intelligence operations.<br><em>Clear oversight.</em></h2><p>Create, review and deliver useful work. Check readiness, protect recovery and act within your approved limits.</p><p class="genesis-version"><span id="genesis-role"></span> · <span id="genesis-release"></span></p></div><svg class="celestial-mark" viewBox="0 0 320 320" aria-hidden="true" focusable="false"><defs><radialGradient id="orb-glow"><stop stop-color="#b772d8" stop-opacity=".25"/><stop offset="1" stop-color="#6a258c" stop-opacity="0"/></radialGradient></defs><circle cx="160" cy="160" r="145" fill="url(#orb-glow)"/><g class="orbital-line"><circle cx="160" cy="160" r="119"/><circle cx="160" cy="160" r="105" stroke-dasharray="1 9"/><circle cx="160" cy="160" r="70"/><ellipse cx="160" cy="160" rx="147" ry="53" transform="rotate(-32 160 160)"/><ellipse cx="160" cy="160" rx="134" ry="53" transform="rotate(50 160 160)"/><path d="M160 27v25m0 216v25M27 160h25m216 0h25"/></g><g fill="#efd39f"><circle cx="54" cy="216" r="3"/><circle cx="237" cy="69" r="2.5"/><circle cx="274" cy="191" r="2"/></g><path class="orbital-line orbital-gold" d="m160 71 5 10-5 10-5-10Zm-78 89-10 5-10-5 10-5Z"/><text x="163" y="163" text-anchor="middle">AGI</text><text class="orbital-small" x="161" y="183" text-anchor="middle">GENESIS</text><path class="orbital-line orbital-gold" d="M126 199h68"/></svg></div><div class="workspace-snapshot" aria-label="Current workspace status"><div><span>Local vault</span><strong id="snapshot-vault">Checking</strong></div><div><span>Recovery</span><strong id="snapshot-recovery">Checking</strong></div><div><span>Compute</span><strong id="snapshot-compute">Checking</strong></div></div><section class="next-step" aria-labelledby="next-step-title"><span class="next-step-index" aria-hidden="true">↗</span><div class="next-step-copy"><small>YOUR NEXT STEP</small><h3 id="next-step-title">Checking your workspace…</h3><p id="next-step-detail">Checking this workspace’s current state.</p></div><div class="next-step-buttons"><button type="button" class="primary" id="next-step-action">Continue setup</button><button type="button" class="quiet" id="next-step-studio">Open Work Studio →</button></div></section>
+<div class="genesis-heading"><h3>Readiness center</h3><span class="genesis-legend">Evidence for each operating requirement</span></div><details class="readiness-key"><summary>How to read readiness</summary><dl><div><dt>Verified</dt><dd>The specific application check passed. Read its evidence and scope.</dd></div><div><dt>Observed</dt><dd>A connection, measurement or operator record exists. Further qualification is required.</dd></div><div><dt>Action needed</dt><dd>A required step is incomplete. Open the card for the next action.</dd></div><div><dt>Unverified</dt><dd>This requirement has no sufficient evidence yet.</dd></div></dl><p>These are separate requirements. A passed check does not authorize live operation.</p></details><div id="genesis-gates" class="genesis-gates"></div>
+<p id="genesis-boundary" class="genesis-boundary"></p><div id="genesis-message" class="notice" role="status" aria-live="polite" hidden></div>
+<div class="genesis-actions"><button id="genesis-setup" type="button" class="primary">Continue setup</button><button id="genesis-backup" type="button">Verify my backup</button><button id="genesis-preflight" type="button">Check this machine</button><button id="genesis-diagnostics" type="button">Export sanitized diagnostics</button></div>
+<details class="genesis-details"><summary>Installed software &amp; compatibility</summary><p id="genesis-compatibility" class="genesis-upgrade"></p></details><details class="genesis-details" id="genesis-machine"><summary>Machine facts · current account</summary><p>This reports the account running this panel. Run the commissioning utility in the separate compute account for Docker and workstation measurements.</p><dl id="genesis-facts" class="genesis-facts"></dl></details>
+<details class="genesis-details"><summary>Upgrading? Check your exact wallet and profile</summary><p>Keep the same launcher and profile. A Seed-Wallet launcher deliberately uses a separate profile. Upgrading never requires entering your recovery phrase.</p><p id="genesis-upgrade" class="genesis-upgrade"></p><form id="genesis-compare"><label for="genesis-expected">Public address from your existing records</label><input id="genesis-expected" placeholder="0x…" autocomplete="off" spellcheck="false" required><button type="submit">Compare expected address</button></form></details>
+</section>
+      <div id="message" role="status" aria-live="polite"></div>
+      <section class="metrics" id="metrics"></section>
+      <section class="panel" id="access">
+        <h2>1. Unlock this machine</h2>
+        <p>
+          Create a password on first use. The wallet and connection credentials
+          stay in an encrypted vault on this computer.
+        </p>
+        <label
+          >Vault password
+          <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            minlength="12"
+            placeholder="At least 12 characters"
+        /></label>
+        <div class="actions">
+          <button id="unlock" class="primary">Create / unlock vault</button
+          ><button id="lock">Lock & pause</button>
+        </div>
+      </section>
+      <section class="panel" id="walletPanel"><h2>Your dedicated signing wallet</h2><p id="walletProfile" class="muted"></p>
+<label>Public wallet address</label>
+<div class="wallet-address-row"><textarea id="walletAddress" rows="2" readonly spellcheck="false" aria-label="Public wallet address" placeholder="Create or recover a wallet below"></textarea><button id="copyAddress" type="button">Copy address</button></div>
+<p id="copyAddressStatus" role="status" aria-live="polite"></p>
+<p id="lockedRecovery" hidden>Unlock the vault to see this wallet’s recovery options.</p>
+<ol class="genesis-journey" aria-label="Wallet and recovery progress"><li><b>01 Create</b>Dedicated wallet</li><li><b>02 Write</b>Offline copy</li><li><b>03 Verify</b>Three-word check</li><li><b>04 Download</b>Encrypted backup</li><li><b>05 Verify file</b>Read-only check</li><li><b>06 Recovery ready</b>Store off-machine</li></ol><div id="walletNew">
+  <label>Recovery phrase length<select id="walletWords"><option value="24">24 words · recommended</option><option value="12">12 words</option></select></label>
+  <button id="walletCreate" class="primary" type="button">Create dedicated seed wallet</button>
+  <details><summary>Recover an existing dedicated seed wallet</summary>
+    <p>Use only a dedicated Fleet role phrase. Keep hardware-wallet and treasury phrases on their original device. The phrase recovers wallet access; the full encrypted backup preserves transaction history.</p>
+    <form id="phraseImportForm" autocomplete="off">
+      <label>12 or 24 English recovery words<input id="importPhrase" type="password" autocomplete="off" spellcheck="false" autocapitalize="none" maxlength="1024" required></label>
+      <label>Expected public wallet address<input id="importAddress" placeholder="0x…" spellcheck="false" required></label>
+      <details><summary>Advanced recovery settings</summary>
+        <label>Optional BIP-39 passphrase<input id="importPassphrase" type="password" autocomplete="off" maxlength="1024"></label>
+        <p>This is the extra secret used by the original wallet, separate from the vault password. Leave blank if the wallet had none.</p>
+        <label>Ethereum derivation path<input id="importPath" value="m/44'/60'/0'/0/0" spellcheck="false" required></label>
+      </details>
+      <label class="check"><input id="importHistory" type="checkbox" required> I understand that a wallet that has signed before needs its original backup and complete journal before live operation.</label>
+      <button type="submit">Recover and check address</button>
+    </form>
+  </details>
+</div>
+<p id="recoveryClearNotice" class="notice" role="status" aria-live="polite" hidden></p><div id="seedRecovery" hidden>
+  <h3>Your wallet recovery phrase</h3><p id="seedRecoveryStatus" role="status"></p><p id="seedRecoveryPath" class="muted"></p>
+  <form id="revealPhraseForm" autocomplete="off"><label>Vault password<input id="revealPassword" type="password" autocomplete="off" required></label><button type="submit">Show recovery phrase</button></form>
+  <p>Keep your words offline and your encrypted Fleet role backup current. Stop the service before showing the phrase.</p>
+</div>
+<div id="legacyRecovery" hidden>
+  <h3>This existing wallet uses encrypted backup recovery</h3>
+  <p>This wallet has no recovery phrase saved in the application. Upgrading preserves its address and history; it cannot recreate the original words.</p>
+  <details><summary>I want a new seed-phrase wallet</summary>
+    <ol><li>Save the existing encrypted backup. Keep its funds, work, identity and claims attached to that wallet until separately resolved.</li><li>Stop the service and open <b>packages/AGI_ROLE/Launch.sh</b> in this release folder.</li><li>Create a vault and seed wallet in that separate profile. Use its launcher each time.</li></ol>
+    <p>The new wallet has a different address and needs its own configuration and eligibility. Nothing is transferred or deleted.</p>
+  </details>
+</div>
+<p class="muted">Use a distinct wallet for each signing participant. Never share a phrase, vault password or backup with a model, reviewer or support agent.</p>
+</section>
+      <section class="panel">
+        <h2>2. Connect your deployment</h2>
+        <p>
+          Use a dedicated wallet for each signing machine. The evidence role has
+          no signing key. Save only while the service is stopped.
+        </p>
+        <div class="form-grid">
+          <label
+            >Network
+            <select id="chainId">
+              <option value="11155111">Sepolia rehearsal</option>
+              <option value="1">Ethereum mainnet</option>
+              <option value="31337">Local development chain</option>
+            </select></label
+          >
+          <label
+            >AGIJobManager address
+            <input id="manager" placeholder="0x…" spellcheck="false" /></label
+          ><label
+            >Deployment block <input id="deploymentBlock" type="number" min="1"
+          /></label>
+          <label
+            >Dedicated wallet address
+            <input id="wallet" placeholder="0x…" spellcheck="false" /></label
+          ><label
+            >Primary RPC URL
+            <input
+              id="rpcURL"
+              type="password"
+              autocomplete="off"
+              placeholder="Leave blank to retain saved value" /></label
+          ><label
+            >Independent verification RPC URL
+            <input
+              id="verificationRPCURL"
+              type="password"
+              autocomplete="off"
+              placeholder="A different provider"
+          /></label>
+          <label id="keylabel"
+            >Advanced: import a legacy private key
+            <input
+              id="privateKey"
+              type="password"
+              autocomplete="off"
+              placeholder="Leave blank to retain saved key"
+          /></label>
+          <label
+            >Allowed employers · one address per line
+            <textarea
+              id="trustedBuyers"
+              rows="3"
+              spellcheck="false"
+            ></textarea></label
+          ><label
+            >Related parties to exclude · one per line
+            <textarea
+              id="excludedParties"
+              rows="3"
+              spellcheck="false"
+            ></textarea></label
+          ><label
+            >Allowed claim beneficiaries · one per line
+            <textarea
+              id="claimBeneficiaries"
+              rows="3"
+              spellcheck="false"
+            ></textarea>
+          </label>
+          <label
+            >Maximum job value · USDC
+            <input id="maxJobUSDC" inputmode="decimal" /></label
+          ><label
+            >Transaction limit / 24 hours
+            <input id="maxTransactions24h" type="number" min="1" /></label
+          ><label
+            >Maximum gas spending / 24 hours · ETH
+            <input id="maxGas24hETH" inputmode="decimal"
+          /></label>
+          <label class="check"
+            ><input id="independenceConfirmed" type="checkbox" /> I have checked
+            and disclosed the moderator’s operator and conflicts.</label
+          >
+          <label
+            >Beneficiaries checked per cycle
+            <input id="maxClaimsPerCycle" type="number" min="1" max="200" />
+          </label>
+          <label
+            >Machines in this partition group
+            <input id="shardCount" type="number" min="1" max="4096" />
+          </label>
+          <label
+            >This machine's partition · starts at 0
+            <input id="shardIndex" type="number" min="0" max="4095" />
+          </label>
+        </div>
+        <p>
+          For one machine per role, keep the group size at 1 and partition at 0.
+          Every signing machine needs its own wallet. Coordinate partition
+          changes across the group before resuming.
+        </p>
+        <details>
+          <summary>Advanced limits and fleet partition</summary>
+          <p>
+            All limits are enforced by the transaction service. Changing any
+            setting invalidates standing authority. Wallets and deployment
+            identity require a new data folder.
+          </p>
+          <textarea
+            id="advanced"
+            rows="20"
+            spellcheck="false"
+            aria-label="Full configuration JSON"
+          ></textarea
+          ><button id="useAdvanced">Use advanced values in form</button>
+        </details>
+        <div class="actions">
+          <button id="save" class="primary">Save configuration</button
+          ><button id="enroll">Verify contract & deployment</button>
+        </div>
+        <pre id="deployment"></pre>
+      </section>
+      <section class="panel">
+        <h2>3. Connect OpenClaw</h2>
+        <p>
+          The dedicated reviewer can flag concerns in public evidence. It cannot
+          sign transactions or access this wallet. Automatic rulings require the
+          agreed formal checks to pass or fail conclusively.
+        </p>
+        <label
+          >Model ID available in your OpenClaw installation
+          <input id="model" value="openai/gpt-6-astra" placeholder="openai/model-id" spellcheck="false"
+        /></label>
+        <div class="actions">
+          <button id="kit">Download private setup file</button
+          ><button id="testModel">Test model connection</button>
+        </div>
+        <p>
+          Follow <a href="/docs/Linux-Guide.html" target="_blank" rel="noopener">the Linux fresh-install guide</a> to transfer this kit and run <strong>Install.sh --file PRIVATE_SETUP.json</strong> in the separate compute desktop session. Complete real OAuth there.
+          Enable the option below if you want a model concern to block automatic
+          decisions, then choose <strong>Save configuration</strong> above.
+        </p>
+        <label class="check"
+          ><input id="modelVeto" type="checkbox" />
+          Require the connected model to report no concern before a formal
+          decision.
+        </label>
+        <p>
+          With this option enabled, an unavailable or inconclusive model pauses
+          the decision. The model cannot overrule a failed formal check.
+        </p>
+      </section>
+      <section class="panel">
+        <h2>4. Observe, then authorize</h2>
+        <p>
+          Observation checks real jobs without signing. Standing authority
+          permits only this role’s listed actions, within your limits and
+          expiry.
+        </p>
+        <div class="actions">
+          <button id="observe" class="primary">Start observation</button
+          ><button id="stop">Stop service</button>
+        </div>
+        <div id="authority">
+          <label
+            >Authority duration · days, maximum 30
+            <input id="days" type="number" value="7" min="1" max="30" /></label
+          ><label id="phraseLabel"
+            >Type the exact authorization shown below
+            <input id="phrase" autocomplete="off"
+          /></label>
+          <p id="expectedPhrase" class="mono"></p>
+          <div class="actions">
+            <button id="activate">Grant standing authority</button
+            ><button id="live" class="primary">Start authorized service</button>
+          </div>
+        </div>
+        <p id="authorityStatus"></p>
+      </section>
+      <section class="panel">
+        <h2>Work & recovery</h2>
+        <h3>Exceptions to review</h3>
+        <p id="exceptionCount"></p>
+        <div id="exceptions"></div>
+        <div class="actions"><button id="exceptionFirst">First page</button><button id="exceptionNext">Next page</button></div>
+        <p>Repeated checks update the same case. A cleared job exception does not establish payment. Claims remain visible until a zero pending balance is observed.</p>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Job</th>
+                <th>State</th>
+                <th>What is happening</th>
+              </tr>
+            </thead>
+            <tbody id="jobs"></tbody>
+          </table>
+        </div>
+        <h3>Unpaid protected claims</h3>
+        <div id="claims"></div>
+        <p>
+          A closed job can still have an unpaid claim. Retry exhaustion remains
+          visible; it does not erase the beneficiary’s funds.
+        </p>
+        <details id="claimRenewal">
+          <summary>Resume an exhausted beneficiary after review</summary>
+          <p>Stop and unlock this service first. This renews one bounded retry allowance. It preserves lifetime attempts, the original beneficiary, signing limits and standing authority. It sends no transaction.</p>
+          <label>Exhausted beneficiary address<input id="renewBeneficiary" spellcheck="false" placeholder="0x…"></label>
+          <label>Reason for renewed retries<select id="renewReason"><option value="token-restriction-cleared">Token restriction was cleared</option><option value="funding-or-infrastructure-restored">Funding or infrastructure was restored</option><option value="operator-reviewed">Operator reviewed the cause</option></select></label>
+          <label class="check"><input id="renewConfirm" type="checkbox">I reviewed the cause and authorize one more bounded retry allowance.</label>
+          <button id="renewClaim">Renew retry allowance</button>
+        </details>
+        <button id="export">Export evidence & status</button>
+        <button id="monitor">Download read-only monitoring access</button>
+        <p>
+          This separate credential can read health only. It cannot unlock,
+          configure, authorize or sign.
+        </p>
+      </section>
+      <section class="panel" id="workloadPanel">
+        <h2>Automation & human work</h2>
+        <p id="workloadSummary" aria-live="polite"></p>
+        <p>This is one role’s retained journal. Confirmed actions and evidence checks are observed activity; avoided human hours remain unmeasured. Exported claim amounts are last observed values.</p>
+        <button id="workloadExport">Download workload report</button>
+        <details>
+          <summary>Record human handling</summary>
+          <p>Unlock the vault, then record time spent. Include specification, maintenance and governance. Record each interval once on one machine. Entries are self-reported and cannot establish complete coverage.</p>
+          <div class="form-grid"><label>Activity<select id="humanCategory"><option value="buyerAcceptance">Buyer acceptance</option><option value="buyerDispute">Buyer dispute</option><option value="moderatorRuling">Moderator ruling</option><option value="additionalEvidenceRequest">Additional evidence</option><option value="ownerGovernance">Owner governance</option><option value="exhaustedBeneficiaryReview">Exhausted claim review</option><option value="specification">Job specification</option><option value="customerSupport">Customer support</option><option value="reviewCompensation">Review payment exception</option><option value="qualification">Qualification / issuer audit</option><option value="fundingAdmission">Funding admission</option><option value="reservationReconciliation">Reservation reconciliation</option><option value="valueCalibration">Employer value calibration</option><option value="maintenance">Fleet maintenance</option><option value="incident">Incident response</option><option value="other">Other work</option></select></label><label>Minutes spent<input id="humanMinutes" type="number" min="1" max="1440" step="1" value="15"></label></div>
+          <label>Optional job or exception reference · no secrets<input id="humanReference" maxlength="150" placeholder="job:42"></label>
+          <button id="recordHuman">Record time</button>
+          <div id="humanEntries"></div>
+        </details>
+        <details>
+          <summary>Explore the historical labor model</summary>
+          <p>These are hypothetical, labor-weighted assumptions for the one-million-offer experiment. Set the eligible share of each activity and the share completed without human handling. Evidence requests default to 0% eligible because a formal check is not an additional-evidence workflow.</p>
+          <label>Scenario<select id="laborCase"><option value="case3_moderate">Case 3 · moderate cap</option><option value="case4_conservative">Case 4 · conservative cap with correlated failures</option></select></label>
+          <div class="tablewrap"><table><thead><tr><th>Activity</th><th>Eligible workload %</th><th>Completed automatically %</th></tr></thead><tbody id="laborInputs"></tbody></table></div>
+          <button id="calculateLabor">Calculate scenario</button>
+          <p id="laborResult" aria-live="polite">Choose assumptions and calculate. No real savings are inferred.</p>
+          <button id="laborExport" disabled>Download scenario assumptions</button>
+          <p>Owner governance and exhausted-beneficiary reviews remain in the model. Specification, maintenance, security, audits and other unmeasured work are additional. Zero open jobs does not mean zero unpaid claims.</p>
+        </details>
+      </section>
+      <section class="panel">
+        <h2>Keep this computer ready</h2>
+        <p>
+          Optional Keychain unlock and background start work after login.
+          FileVault startup, lost power, provider quotas and received alerts
+          must be checked on this computer before unattended operation.
+        </p>
+        <div class="actions">
+          <button id="remember">Enable Keychain unlock</button
+          ><button id="forget">Remove Keychain unlock</button
+          ><button id="background">Start after login</button
+          ><button id="noBackground">Disable login service</button>
+        </div>
+        <h3>Encrypted backup</h3>
+        <p>
+          Stop the service first. Keep backups private and never run two
+          restored copies with the same wallet. The encrypted file includes your wallet, configuration, transaction journal, funding packets, reviewer windows and funding evidence. Native workforce and operating-system account data need separate backups.
+        </p>
+        <label
+          >Vault password for a new backup · original backup password to restore
+          <input
+            id="backupPassword"
+            type="password"
+            autocomplete="off"
+            placeholder="At least 12 characters"
+        /></label>
+        <div class="actions">
+          <section class="backup-verifier"><h3>Verify the file you downloaded</h3><p>This check decrypts and validates the selected file in a temporary area. It does not restore or change your profile.</p><p id="backupProof" role="status"></p><p id="backupPrerequisite" role="status"></p><button id="backupUnlock" type="button" hidden>Unlock to verify</button><form id="verifyBackupForm" aria-busy="false"><label for="verifyBackupFile">Downloaded encrypted backup</label><input aria-describedby="backupPrerequisite backupVerificationResult" id="verifyBackupFile" type="file" accept=".agiagentbackup,.aginodebackup,.json" required><label for="verifyBackupPassword">Backup password</label><input aria-describedby="backupPrerequisite backupVerificationResult" id="verifyBackupPassword" type="password" autocomplete="off" required><button type="submit" class="primary">Verify downloaded backup</button></form><p id="backupVerificationResult" tabindex="-1" class="backup-proof" role="status" aria-live="polite"></p></section><button id="backupSaved" hidden>I saved my backup safely</button><p id="backupState" role="status"></p><button id="backup">Download encrypted backup</button
+          ><label class="file"
+            >Restore into a new, empty role folder
+            <input id="restoreFile" type="file" accept=".json" /></label
+          ><button id="restore">Restore backup</button>
+        </div>
+      </section>
+      <footer>
+        AGI Fleet 1.19.6 · Agent 1.25.6 · Node 2.26.6<br />Qualified automatic
+        decisions apply to the supported formal job format. Local validation
+        does not certify your live deployment.
+      </footer>
+    </main>
+    </div>
+    <dialog id="phraseDialog" aria-labelledby="phraseTitle" aria-describedby="phraseLead" class="secure-ceremony">
+      <div class="secure-topline"><span>PRIVATE RECOVERY CEREMONY</span><span id="phraseCountdown" aria-live="off"></span></div>
+      <h2 id="phraseTitle">Write down your recovery words</h2>
+      <p id="phraseLead"></p><p id="phraseMetadata" class="recovery-metadata"></p>
+      <p id="phraseExtraSecret" hidden>Your original extra BIP-39 passphrase is required separately; it is never displayed here.</p>
+      <p class="muted">Words clear after two minutes, when this tab is hidden, or when you choose Hide. Clicking outside this panel does not dismiss it.</p>
+      <ol id="phraseWords" class="phrase-grid" aria-label="Numbered recovery words"></ol>
+      <button id="phraseVerify" class="primary" type="button">I wrote it down · check my copy</button>
+      <form id="confirmPhraseForm" hidden autocomplete="off"><div id="phraseQuestions"></div><label id="confirmPassphraseLabel" hidden>Original BIP-39 passphrase<input id="confirmPassphrase" type="password" autocomplete="off" maxlength="1024"></label><button type="submit" class="primary">Verify recovery copy</button></form>
+      <div id="phraseComplete" hidden><p class="verification-success">✓ RECOVERY COPY VERIFIED</p><p>Your wallet’s recovery check is saved. The encrypted backup also protects your application state and transaction history.</p><button id="phraseContinue" type="button" class="primary">Continue to encrypted backup</button></div>
+      <p id="phraseError" role="alert"></p><button id="phraseClose" type="button">Hide words &amp; close</button>
+    </dialog>
+    <script src="/experience.js" defer></script>
+    <script src="/genesis.js" defer></script>
+    <script src="/wallet.js" defer></script>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

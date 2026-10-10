@@ -1,0 +1,54 @@
+{
+  "schema": "agi-fleet-labor-baseline/v1",
+  "kind": "modeled-not-measured",
+  "source": {
+    "file": "AGI_1M_Recovery_Experiment/report/data.json",
+    "sha256": "3146101693b0a7143e5d4caa215e7e46b79d7a4ccdbada00d7d2440e5d06d94b"
+  },
+  "minutes": {
+    "buyerAcceptance": 5,
+    "buyerDispute": 15,
+    "moderatorRuling": 30,
+    "additionalEvidenceRequest": 15,
+    "ownerGovernance": 5,
+    "exhaustedBeneficiaryReview": 20
+  },
+  "cases": [
+    {
+      "id": "case3_moderate",
+      "label": "Case 3 \u00b7 moderate cap",
+      "horizonDays": 180,
+      "offered": 1000000,
+      "admitted": 308043,
+      "counts": {
+        "buyerAcceptance": 10604,
+        "buyerDispute": 895,
+        "moderatorRuling": 9353,
+        "additionalEvidenceRequest": 943,
+        "ownerGovernance": 0,
+        "exhaustedBeneficiaryReview": 0
+      },
+      "openJobs": 0,
+      "unpaidBeneficiaries": 0,
+      "claimMicroUSDC": "0"
+    },
+    {
+      "id": "case4_conservative",
+      "label": "Case 4 \u00b7 conservative cap",
+      "horizonDays": 180,
+      "offered": 1000000,
+      "admitted": 212079,
+      "counts": {
+        "buyerAcceptance": 10166,
+        "buyerDispute": 1200,
+        "moderatorRuling": 8175,
+        "additionalEvidenceRequest": 844,
+        "ownerGovernance": 66,
+        "exhaustedBeneficiaryReview": 203
+      },
+      "openJobs": 0,
+      "unpaidBeneficiaries": 204,
+      "claimMicroUSDC": "287321034918"
+    }
+  ]
+}

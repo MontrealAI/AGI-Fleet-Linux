@@ -1,0 +1,35 @@
+{
+  "schema": "agi-fresh-readiness-historical-source/v1",
+  "agent": {
+    "versions": {
+      "public": "1.13.0",
+      "fleet": "1.18.6",
+      "agent": "1.24.6",
+      "node": "2.25.6",
+      "role": "agent"
+    },
+    "packageManifestSHA256": "7c51ecf4b812bb84c2daa431135fc48a32cb7adad7ff8d45861bc0874da45790",
+    "sourceHashes": {
+      "selftest": "4977a3f3c34caa709a41cf0cda4e9e60e2a6f60700b9069f9bbb16c6205f4da6",
+      "fixture": "915931dbfa6e2f9d908fac87f119b962c8dd35b859ae3f1e1eac8ed41c66d1a4",
+      "desktop": "d0df9d47a2e48a85b90c866aaee5ac390bfcaf4393c9335d61dfcc427952a34a",
+      "dockerfile": "ed8abb25a2368eb37521363e83437cbf9f7d21404843c1df8c1208cc1e111623"
+    }
+  },
+  "node": {
+    "versions": {
+      "public": "1.13.0",
+      "fleet": "1.18.6",
+      "agent": "1.24.6",
+      "node": "2.25.6",
+      "role": "node"
+    },
+    "packageManifestSHA256": "57ae7eea9fb6082890eb093def9d28887d56e27b7c83be50ed87cebb9d852b0f",
+    "sourceHashes": {
+      "selftest": "4977a3f3c34caa709a41cf0cda4e9e60e2a6f60700b9069f9bbb16c6205f4da6",
+      "fixture": "915931dbfa6e2f9d908fac87f119b962c8dd35b859ae3f1e1eac8ed41c66d1a4",
+      "desktop": "d0df9d47a2e48a85b90c866aaee5ac390bfcaf4393c9335d61dfcc427952a34a",
+      "dockerfile": "ed8abb25a2368eb37521363e83437cbf9f7d21404843c1df8c1208cc1e111623"
+    }
+  }
+}

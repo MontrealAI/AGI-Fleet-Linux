@@ -1,0 +1,24 @@
+# Observation only. Public live operation requires the graphical application.
+# Optional Linux systemd USER service. Replace /ABSOLUTE/PATH/AGI_Node_Private_v2.3.0.
+# Set private RPC environment as described in docs/OPERATIONS.md before enabling.
+[Unit]
+Description=Private AGI Node legacy observation only
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/ABSOLUTE/PATH/AGI_Node_Private_v2.3.0
+EnvironmentFile=%h/.config/agi-node/service.env
+ExecStart=/usr/bin/node /ABSOLUTE/PATH/AGI_Node_Private_v2.3.0/src/cli.mjs run
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=300
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/ABSOLUTE/PATH/AGI_Node_Private_v2.3.0/data
+
+[Install]
+WantedBy=default.target

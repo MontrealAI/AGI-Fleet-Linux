@@ -1,0 +1,66 @@
+{
+  "schema": "agi-fleet-outcome-metrics/v1",
+  "measurement": "NOT_RUN",
+  "window": {
+    "startedAt": null,
+    "finishedAt": null
+  },
+  "denominatorPolicy": "Include all admitted jobs in the stated cohort, including declines after admission, failures, rework, unresolved work and rejected deliveries. Report unresolved states separately. Do not select only successful runs.",
+  "observations": {
+    "admittedJobs": null,
+    "independentlyAcceptedJobs": null,
+    "rejectedJobs": null,
+    "unresolvedJobs": null,
+    "reworkedJobs": null,
+    "disputedJobs": null,
+    "cleanupAttempts": null,
+    "cleanupFailures": null,
+    "humanReviewMinutes": null,
+    "providerBillTotal": null,
+    "otherExecutionCostTotal": null,
+    "acceptedJobVolume": null,
+    "fees": null,
+    "refunds": null,
+    "outstandingLiabilities": null
+  },
+  "definitions": {
+    "costPerAcceptedDeliverable": "Observed provider and execution costs for the complete cohort, including failed work, divided by independently accepted deliverables. Unknown if any material bill is missing or the denominator is zero. Report human labor separately unless measured and included explicitly.",
+    "acceptanceRate": "Independently accepted / all admitted jobs; also show unresolved count and observation cutoff.",
+    "reworkRate": "Jobs requiring at least one rework / all admitted jobs; retain number and cost of all rework attempts.",
+    "humanReviewMinutes": "Measured review and intervention time; distinguish reviewer labor from operator setup and debugging.",
+    "disputeRate": "Distinct disputed jobs / all jobs eligible for dispute in the same cohort and observation window.",
+    "cleanupFailureRate": "Failed or unconfirmed applicable cleanup attempts / all applicable cleanup attempts. NOT_RUN and legitimately inapplicable resources are separate, never passes.",
+    "settlementLatency": "Elapsed time from independent acceptance to contract-finalized settlement; report pending/censored cases and their age. A claimable balance is not automatically a received payment.",
+    "measuredThroughput": "Independently accepted useful deliverables / measured wall-clock hours, with concurrency, hardware, provider route, reviewer capacity, failures and resource consumption.",
+    "jobVolume": "Finalized accepted job consideration for unique jobs in the declared deployment/currency and cohort. Do not add fees, refunds or returned deposits as new job volume. Job volume is not platform revenue, profit or valuation."
+  },
+  "usageSeparation": [
+    "attemptedRequests",
+    "reservedSlots",
+    "actualProviderCalls",
+    "toolRuns",
+    "images",
+    "billableUsage"
+  ],
+  "separateLedgers": [
+    "jobVolume",
+    "fees",
+    "providerCosts",
+    "refunds",
+    "liabilities"
+  ],
+  "paymentClassifications": {
+    "NONE": "No payment evidence; no commercial receipt.",
+    "MOCK": "Synthetic or simulated transfer; no commercial receipt.",
+    "TESTNET": "Observed test-network transaction; no commercial receipt.",
+    "COMMERCIAL": "Actual authorized payment with independently reconciled, finalized receipt and asset/deployment identity."
+  },
+  "planningAssumptions": {
+    "marketDollars": "40000000000000",
+    "targetAcceptedAnnualJobVolumeDollars": "40000000000",
+    "arithmeticShare": "0.001",
+    "status": "USER_SUPPLIED_UNVALIDATED_PLANNING_ASSUMPTIONS",
+    "measuredDemand": null,
+    "measuredRevenue": null
+  }
+}

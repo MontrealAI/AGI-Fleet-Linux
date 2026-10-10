@@ -1,0 +1,30 @@
+{
+  "agent": {
+    "packageManifestSHA256": "ec89195442b790a8eced827854b42d631e3a3647c79c8ab23e7d84f6c6beabd2",
+    "versions": {
+      "public": "1.13.0",
+      "fleet": "1.18.9",
+      "agent": "1.24.9",
+      "node": "2.25.9",
+      "role": "agent"
+    },
+    "imageRecipes": {
+      "work": "ae49cb3a1b6ad871242a13f0f6b00f103c5f003bd8ff189d5d6c3ef10be87acd",
+      "browser": "1199e2b0732413950382dbc782c134f3819eb6c2826e08f3b389fcf1f5fbfc9b"
+    }
+  },
+  "node": {
+    "packageManifestSHA256": "074e56dab7e2d9c195b329312c6dbb23654b22811cddd398f905cfa93db6f708",
+    "versions": {
+      "public": "1.13.0",
+      "fleet": "1.18.9",
+      "agent": "1.24.9",
+      "node": "2.25.9",
+      "role": "node"
+    },
+    "imageRecipes": {
+      "work": "6a0eef1bda73c13b9cfceca34dbc46b8e2a5e2309b60a0a5b06547f17dca36c8",
+      "browser": "1199e2b0732413950382dbc782c134f3819eb6c2826e08f3b389fcf1f5fbfc9b"
+    }
+  }
+}

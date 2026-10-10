@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AGI Fleet Monitor</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">MONTREAL.AI · PRIVATE OPERATIONS</p>
+          <h1>One view. Every appliance.</h1>
+          <p>Read-only monitoring. No wallet keys. No signing controls.</p>
+        </div>
+        <button id="quit">Quit monitor</button>
+      </header>
+      <p id="notice" role="status"></p>
+      <section id="actors" class="grid"></section>
+      <section class="panel">
+        <h2>Add a machine</h2>
+        <p>
+          First create its restricted SSH tunnel. Download its monitoring
+          connection from Operations & commissioning, then add that file here.
+          Use the forwarded port on this monitor machine.
+        </p>
+        <form id="add">
+          <label
+            >Machine name<input
+              id="name"
+              maxlength="60"
+              placeholder="Mac mini · Agent"
+              required /></label
+          ><label
+            >Monitoring connection<input
+              id="file"
+              type="file"
+              accept=".json,application/json"
+              required /></label
+          ><label
+            >Local forwarded port<input
+              id="port"
+              type="number"
+              min="1024"
+              max="65535"
+              value="18788"
+              required /></label
+          ><button>Add machine</button>
+        </form>
+        <p>
+          Suggested tunnel ports: Agent 18788 → 8788; Node 18787 → 8787. Keep
+          every gateway and app on localhost. Do not expose ports to the
+          Internet.
+        </p>
+      </section>
+      <section class="panel">
+        <h2>Alerts without an open browser</h2>
+        <p>
+          For macOS background operation, run
+          <b>Setup-Supervised-Monitor.command</b> after configuring and testing
+          the restricted SSH keys. Reopen the dashboard with
+          <b>Open-Fleet-Monitor.command</b>. These are after-login services;
+          test cold boot and FileVault on your monitor Mac.
+        </p>
+        <p>
+          Create two independent checks at your chosen external heartbeat
+          service: <b>monitor alive</b> and <b>fleet healthy</b>. Set each
+          period to 60 seconds, grace to at least 180 seconds, and deliver
+          missed-heartbeat alerts to a device you will actually receive them on.
+          Configure all expected machines first. No keys, balances or job
+          content are sent.
+        </p>
+        <form id="watchdogForm">
+          <label
+            >Monitor-alive heartbeat URL<input
+              id="aliveURL"
+              type="password"
+              autocomplete="off"
+              required
+          /></label>
+          <label
+            >Fleet-healthy heartbeat URL<input
+              id="healthyURL"
+              type="password"
+              autocomplete="off"
+              required
+          /></label>
+          <label
+            ><input id="watchdogConsent" type="checkbox" required /> I authorize
+            empty heartbeat requests to this external service. I will test
+            delivery with the browser closed and this monitor stopped.</label
+          >
+          <button type="submit">Save external heartbeat checks</button>
+        </form>
+        <p id="watchdogState"></p>
+        <button id="disableWatchdog">Disable heartbeat sending</button>
+        <p>
+          Changed machine roster? Save both endpoints again after reviewing it.
+          A disabled, stopped, sleeping or unhealthy monitor stops the relevant
+          heartbeat; the external service must raise the alert. HTTP acceptance
+          here does not prove notification delivery. Disable the external checks
+          as well during planned shutdown.
+        </p>
+      </section>
+      <section class="panel">
+        <h2>Commissioning observations</h2>
+        <p>
+          Samples and state changes are saved locally. A restarted or offline
+          monitor cannot observe the missing period. Inspect exceptions and time
+          gaps before recording a soak pass.
+        </p>
+        <button id="export">Download observation report</button
+        ><button id="alerts">Enable browser alerts</button>
+        <p>
+          Alerts require this page to stay open and the monitor to remain
+          connected. External missed-heartbeat alerts above work independently
+          of this page once configured and tested.
+        </p>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

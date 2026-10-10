@@ -1,0 +1,14 @@
+{
+  "schema": "agi-fresh-oauth-historical-sources/v1",
+  "fleetReleases": [
+    "1.18.1",
+    "1.18.2"
+  ],
+  "sourceHashes": {
+    "selftest": "4977a3f3c34caa709a41cf0cda4e9e60e2a6f60700b9069f9bbb16c6205f4da6",
+    "fixture": "915931dbfa6e2f9d908fac87f119b962c8dd35b859ae3f1e1eac8ed41c66d1a4",
+    "desktop": "d0df9d47a2e48a85b90c866aaee5ac390bfcaf4393c9335d61dfcc427952a34a",
+    "dockerfile": "ed8abb25a2368eb37521363e83437cbf9f7d21404843c1df8c1208cc1e111623"
+  },
+  "scope": "Known unchanged Dockerfile and disposable-desktop sources from verified Fleet 1.18.2 and its recorded 1.18.1 change index. Historical image eligibility only; no image is reused for execution."
+}

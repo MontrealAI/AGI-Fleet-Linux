@@ -1,0 +1,142 @@
+{
+  "schema": "agi-native-commissioning-matrix/v1",
+  "status": "NOT_EXECUTED",
+  "requiresActualHardware": true,
+  "classes": [
+    {
+      "class": "spreadsheets",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "documents",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "research",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "code",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "websites",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "crm-workflows",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "data-entry",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "visual-editing",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "quality-assurance",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "business-operations",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    },
+    {
+      "class": "multiple-applications",
+      "actualApps": [],
+      "acceptedJobSpecSha256": null,
+      "invalidDeliverySpecSha256": null,
+      "independentOutcomeEvidenceSha256": null,
+      "billsSha256": null,
+      "settlementReceiptsSha256": null,
+      "humanSeconds": null,
+      "passed": null
+    }
+  ],
+  "crossCutting": [
+    "actual screen/keyboard/pointer/drag",
+    "signed-in dedicated sessions",
+    "independent original-input reproduction",
+    "private-data recipient checks",
+    "signing-account secret isolation",
+    "revocation before subsequent input",
+    "provider disconnection and uncertain actions",
+    "physical reboot and checkpoint recovery",
+    "multi-hour/multi-day work",
+    "automatic four-stage dependency execution",
+    "complete costs and supervision",
+    "external security review"
+  ]
+}

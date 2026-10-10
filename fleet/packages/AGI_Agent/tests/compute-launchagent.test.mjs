@@ -1,0 +1,16 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {servicePlist,writeComputeLaunchAgent} from '../compute/launchagent.mjs';
+function fixture(t){const home=fs.mkdtempSync(path.join(os.tmpdir(),'compute-launchagent-'));t.after(()=>fs.rmSync(home,{recursive:true,force:true}));fs.chmodSync(home,0o700);const profileDir=path.join(home,'.openclaw-agi-compute');fs.mkdirSync(profileDir,{mode:0o700});const c={role:'agent',home,profileDir,node:process.execPath,gatewayConfig:path.join(profileDir,'openclaw.json'),gatewayPort:18896,token:'BEARER_PRIVATE_CANARY',gatewayToken:'GATEWAY_PRIVATE_CANARY'};const env={HOME:home,PATH:'/usr/bin:/bin',LANG:'en_US.UTF-8',OPENCLAW_PROFILE:'agi-compute',OPENCLAW_STATE_DIR:profileDir,OPENCLAW_CONFIG_PATH:c.gatewayConfig,OPENCLAW_GATEWAY_PORT:'18896',OPENCLAW_EXEC_SHELL_SNAPSHOT:'0'};return{c,env,home,profileDir};}
+test('compute LaunchAgent follows pinned 0644/0755 macOS contract while private state remains0600/0700',t=>{
+ const f=fixture(t),settings=path.join(f.profileDir,'compute-settings.json'),auth=path.join(f.profileDir,'auth.json');for(const file of [settings,auth])fs.writeFileSync(file,JSON.stringify(f.c),{mode:0o600});const before=[fs.readFileSync(settings),fs.readFileSync(auth)];const file=writeComputeLaunchAgent(f.c,f.env);assert.equal(fs.statSync(file).mode&0o777,0o644);assert.equal(fs.statSync(path.dirname(file)).mode&0o777,0o755);assert.equal(fs.statSync(f.profileDir).mode&0o777,0o700);assert.equal(fs.statSync(settings).mode&0o777,0o600);assert.equal(fs.statSync(auth).mode&0o777,0o600);assert.deepEqual([fs.readFileSync(settings),fs.readFileSync(auth)],before);const text=fs.readFileSync(file,'utf8');assert(!text.includes(f.c.token));assert(!text.includes(f.c.gatewayToken));assert.match(text,/compute-settings\.json/);fs.chmodSync(path.dirname(file),0o700);fs.chmodSync(file,0o600);assert.equal(writeComputeLaunchAgent(f.c,f.env),file);assert.equal(fs.statSync(file).mode&0o777,0o644);assert.equal(fs.statSync(path.dirname(file)).mode&0o777,0o755);
+});
+test('secret-bearing or executable injection environment is rejected before public file/directory writes',t=>{
+ const f=fixture(t);for(const key of ['TOKEN','OPENCLAW_GATEWAY_TOKEN','NODE_OPTIONS','OPENAI_API_KEY','DYLD_INSERT_LIBRARIES'])assert.throws(()=>writeComputeLaunchAgent(f.c,{...f.env,[key]:'SECRET_CANARY'}),/PUBLIC_SECRET_FORBIDDEN/);assert(!fs.existsSync(path.join(f.home,'Library')));assert.throws(()=>servicePlist(f.c,{...f.env,OPENCLAW_STATE_DIR:'/unsealed/profile'}),/PUBLIC_SECRET_FORBIDDEN/);assert.throws(()=>servicePlist(f.c,{...f.env,PATH:'relative:/usr/bin'}),/ENVIRONMENT_INVALID/);
+});
+test('public service writer refuses symlinked, hardlinked or writable destinations',t=>{
+ for(const kind of ['symlink','hardlink','writable','directory']){const f=fixture(t),file=writeComputeLaunchAgent(f.c,f.env);if(kind==='symlink'){fs.unlinkSync(file);fs.symlinkSync(f.c.gatewayConfig,file);}if(kind==='hardlink')fs.linkSync(file,file+'.link');if(kind==='writable')fs.chmodSync(file,0o666);if(kind==='directory')fs.chmodSync(path.dirname(file),0o777);assert.throws(()=>writeComputeLaunchAgent(f.c,f.env),/PATH_UNSAFE|EEXIST/);}
+});

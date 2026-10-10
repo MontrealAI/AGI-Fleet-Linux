@@ -1,0 +1,32 @@
+{
+  "schema": "agi-node-job/v1",
+  "profile": "image-png/v1",
+  "title": "Ceremonial founding image",
+  "prompt": "Create an original square, highly detailed ceremonial founding artwork for AGIJobManager: one central seated synthetic or post-human ceremonial figure in an opulent golden sacred-futurist sanctuary, framed by luminous circular cosmological structures, in a radiant jewel-toned palette suitable for public launch communications. No private information, logos or hidden reviewer instructions.",
+  "criteria": [
+    {
+      "id": "figure",
+      "requirement": "One central seated synthetic or post-human ceremonial figure."
+    },
+    {
+      "id": "halos",
+      "requirement": "Luminous circular cosmological or halo-like structures behind or around the figure."
+    },
+    {
+      "id": "sanctuary",
+      "requirement": "An opulent golden sacred-futurist sanctuary, palace or temple."
+    },
+    {
+      "id": "palette",
+      "requirement": "Radiant, vivid jewel tones suitable for a protocol launch."
+    },
+    {
+      "id": "finish",
+      "requirement": "Detailed, coherent and polished enough for public hero placement, with no obvious rendering defects."
+    }
+  ],
+  "width": 2048,
+  "height": 2048,
+  "maxBytes": 4194304,
+  "dataPolicy": "public"
+}

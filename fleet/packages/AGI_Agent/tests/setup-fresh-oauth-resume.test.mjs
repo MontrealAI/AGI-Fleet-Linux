@@ -1,0 +1,49 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {DatabaseSync} from 'node:sqlite';
+import {fixture} from './fresh-oauth-fixture.mjs';import {cleanInitializationFixture} from './clean-initialization-fixture.mjs';import {runtimeDatabase,runtimeReceipt} from './runtime-sqlite-fixture.mjs';
+import {setupCapable} from '../compute/setup.mjs';import {assertAuthorizedOAuthChanges} from '../compute/setup-oauth-delta.mjs';import {inspectFreshOAuthResume,archiveFreshOAuthAttempt,seedFreshOAuthRoles} from '../compute/setup-fresh-oauth-resume.mjs';import {readSetupArguments} from '../compute/setup-ledger.mjs';
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+import {records,edit,paused} from './fresh-oauth-paused-fixture.mjs';
+for(const role of ['agent','node'])test(role+' failed fresh OAuth is archived intact, valid roles are reused, exact visibility reaches new approval and complete readiness',async t=>{
+ const f=await paused(t,role),before=records(path.join(f.support,'transaction')),report=fs.readFileSync(path.join(f.support,'setup-diagnostics.json')),old=JSON.parse(fs.readFileSync(f.txFile)),logins=f.loginCount,events=f.events.length;
+ const found=inspectFreshOAuthResume(f.options);assert.equal(found.admission.openAIModelVisibility,'openai/*');
+ let reviewed=false;f.rl.question=async prompt=>{if(!prompt.includes('Type APPROVE'))return 'SEPARATE';reviewed=true;assert.equal(fs.existsSync(f.profileDir),false);assert.equal(f.active.size,0);assert.ok(f.events.slice(events).every(e=>!e.command.startsWith('gateway')));const v=JSON.parse(fs.readFileSync(path.join(f.support,'security-review.json')));assert.ok(v.changes.some(e=>e.path.includes('modelPolicy')&&JSON.stringify(e.afterValue).includes('openai/*')));return 'APPROVE '+v.digest.slice(0,12);};
+ const result=await f.resume(),receipt=result.supportReport.freshOAuthResume;assert.equal(result.supportReport.passed,true);assert.equal(reviewed,true);assert.equal(f.loginCount,logins);assert.equal(result.supportReport.cleanInstallAdmission.priorSetupAbsent,false);assert.equal(result.supportReport.cleanInstallAdmission.continuingFreshOAuth,true);assert.equal(receipt.roleStoresPreserved,f.roles.length);assert.equal(receipt.sourceSQLiteOpened,false);assert.equal(receipt.legacyProfileImported,false);assert.equal(receipt.originalEvidencePreserved,true);assert.equal(receipt.oauthConfigAdmission.openAIModelVisibility,'openai/*');
+ assert.deepEqual(records(path.join(f.support,receipt.archive,'transaction')),before);assert.deepEqual(fs.readFileSync(path.join(f.support,receipt.archive,'setup-diagnostics.json')),report);
+ const current=JSON.parse(fs.readFileSync(f.txFile));assert.notEqual(current.id,old.id);assert.equal(current.previousExisted,false);assert.equal(current.state,'complete');assert.equal(result.supportReport.serviceReadiness.finalPolicy.state,'passed');assert.equal(result.supportReport.walletAccessed,false);assert.equal(result.supportReport.moneyMoved,false);assert.equal(fs.existsSync(path.join(f.profileDir,'plugin-skills/browser-automation')),false);
+ const settings=JSON.parse(fs.readFileSync(path.join(f.profileDir,'compute-settings.json')));assert.equal(settings.maxRuns24h,48);assert.equal(settings.maxImages24h,8);
+ assert(!JSON.stringify(result.supportReport).includes('PRIVATE-ACCESS'));assert(!JSON.stringify(result.supportReport).includes('PRIVATE-REFRESH'));
+});
+for(const [name,mutation] of [
+ ['primary model',f=>edit(path.join(f.candidate,'openclaw.json'),v=>{v.agents.defaults.model.primary='openai/unapproved';})],
+ ['plugin permission',f=>edit(path.join(f.candidate,'openclaw.json'),v=>{v.plugins.allow.push('unapproved');})],
+ ['limits',f=>edit(path.join(f.candidate,'compute-settings.json'),v=>{v.maxRuns24h++;})],
+ ['wrong setup kit',f=>{f.options.kit={...f.kit,token:'c'.repeat(64)};}],
+ ['previous installed state',f=>fs.mkdirSync(f.profileDir,{mode:0o700})],
+ ['already approved',f=>edit(f.txFile,v=>{v.approval='a'.repeat(64);})],
+ ['service stage attempted',f=>edit(path.join(f.support,'genesis-setup-progress.json'),v=>{v.stages.services='failed';})],
+ ['incomplete role OAuth',f=>edit(path.join(f.support,'genesis-setup-progress.json'),v=>{v.auth['agi-reviewer']=false;})],
+ ['old transaction protocol',f=>edit(f.txFile,v=>{v.treeIdentityVersion=2;})],
+ ['unexpected symlink',f=>fs.symlinkSync('/tmp',path.join(f.candidate,'unexpected'))],
+ ['unknown top-level support file',f=>fs.writeFileSync(path.join(f.support,'unexpected'),'data',{mode:0o600})],
+ ['legacy source release',f=>edit(path.join(f.support,'clean-install-intent.json'),v=>{v.releaseVersion='1.23.11';})],
+ ['wrong DB permissions',f=>fs.chmodSync(path.join(f.candidate,'agents/agi-creator/agent/openclaw-agent.sqlite'),0o644)]
+])test('fresh OAuth resume refuses '+name+' before archiving or mutation',async t=>{const f=await paused(t);mutation(f);const before=records(f.support);assert.throws(()=>inspectFreshOAuthResume(f.options),/CLEAN_INSTALL_OAUTH_RESUME_UNAVAILABLE|OPENCLAW_OAUTH_SECURITY_CHANGED/);assert.deepEqual(records(f.support),before);});
+for(const [name,change] of [
+ ['loaded service',f=>{f.options.spawn=()=>({status:0,stdout:'loaded'});}],
+ ['ambiguous service result',f=>{f.options.spawn=()=>({status:113,stderr:'Permission denied'});}],
+ ['open port',f=>{f.options.listen=async()=>true;}]
+])test('fresh OAuth archive refuses '+name+' without modifying evidence',async t=>{const f=await paused(t);change(f);const before=records(f.support);await assert.rejects(archiveFreshOAuthAttempt(f.options),/CLEAN_INSTALL_OAUTH_RESUME_UNAVAILABLE/);assert.deepEqual(records(f.support),before);});
+test('fresh role transfer includes committed WAL and does not open/change the archived DB or sidecars',async t=>{
+ const f=await paused(t),relative='agents/agi-creator/agent/openclaw-agent.sqlite',file=path.join(f.candidate,relative),held=new DatabaseSync(file);t.after(()=>held.close());held.exec('PRAGMA journal_mode=WAL; PRAGMA wal_autocheckpoint=0');const v=JSON.parse(held.prepare('SELECT store_json FROM auth_profile_store').get().store_json);v.profiles['openai:agi-compute-pro'].access='WAL-COMMITTED-ACCESS';held.prepare('UPDATE auth_profile_store SET store_json=?').run(JSON.stringify(v));for(const suffix of ['-wal','-shm'])fs.chmodSync(file+suffix,0o600);assert.ok(fs.statSync(file+'-wal').size>0);
+ const before=records(path.join(f.support,'transaction')),continuation=await archiveFreshOAuthAttempt(f.options),next=path.join(f.support,'next-disposable-candidate');fs.mkdirSync(next,{mode:0o700});const receipt=seedFreshOAuthRoles(continuation,next,f.profileDir);assert.equal(receipt.committedWALIncluded,true);assert.deepEqual(records(path.join(continuation.archive,'transaction')),before);
+ const copied=new DatabaseSync(path.join(next,relative),{readOnly:true});try{assert.equal(JSON.parse(copied.prepare('SELECT store_json FROM auth_profile_store').get().store_json).profiles['openai:agi-compute-pro'].access,'WAL-COMMITTED-ACCESS');}finally{copied.close();}
+});
+for(const [name,change] of [
+ ['unknown schema',db=>db.exec('CREATE TABLE unknown_security_grant(value TEXT)')],
+ ['wrong role owner',db=>db.exec("UPDATE schema_meta SET agent_id='agi-reviewer'")],
+ ['missing local OAuth credential',db=>db.prepare('UPDATE auth_profile_store SET store_json=?').run(JSON.stringify({version:1,profiles:{}}))]
+])test('fresh role transfer refuses '+name+' and preserves source archive',async t=>{const f=await paused(t),file=path.join(f.candidate,'agents/agi-creator/agent/openclaw-agent.sqlite'),db=new DatabaseSync(file);try{change(db);}finally{db.close();}const continuation=await archiveFreshOAuthAttempt(f.options),before=records(continuation.archive),next=path.join(f.support,'next-disposable-candidate');fs.mkdirSync(next,{mode:0o700});assert.throws(()=>seedFreshOAuthRoles(continuation,next,f.profileDir),/CLEAN_INSTALL_OAUTH_RESUME_UNAVAILABLE|SETUP_RUNTIME_SQLITE/);assert.deepEqual(records(continuation.archive),before);assert.deepEqual(fs.readdirSync(next),[]);});
+test('revalidation failure never falls back to another browser login',async t=>{const f=await paused(t),logins=f.loginCount,spawn=f.dependencies.spawnSync;f.dependencies.spawnSync=(exe,args,opts)=>args.includes('models')&&args.includes('status')?{status:1}:spawn(exe,args,opts);await assert.rejects(f.resume(),/OPENCLAW_EXISTING_AUTH_REQUIRED/);assert.equal(f.loginCount,logins);assert.equal(f.active.size,0);assert.equal(fs.existsSync(f.profileDir),false);assert.equal(fs.readdirSync(path.join(f.support,'fresh-oauth-attempts')).length,1);});
+test('resume CLI is explicit, fresh-only and conflicts with maintenance or unattended setup',()=>{assert.equal(readSetupArguments(['--resume-fresh-oauth']).cleanOAuthResume,true);assert.equal(readSetupArguments(['--resume-fresh-oauth']).cleanInstall,true);for(const flag of ['--experimental-legacy','--retry-clean-install','--selftest-only','--non-interactive','--refresh-stopped-profile','--recover-interrupted-lock'])assert.throws(()=>readSetupArguments(['--resume-fresh-oauth',flag]),/CONFLICT/);});
+
+test('fresh role transfer refuses a redirected destination without copying credentials outside the private candidate',async t=>{const f=await paused(t),continuation=await archiveFreshOAuthAttempt(f.options),before=records(continuation.archive),next=path.join(f.support,'next-disposable-candidate'),outside=path.join(f.home,'unrelated');fs.mkdirSync(next,{mode:0o700});fs.mkdirSync(outside,{mode:0o700});fs.symlinkSync(outside,path.join(next,'agents'));assert.throws(()=>seedFreshOAuthRoles(continuation,next,f.profileDir),/CLEAN_INSTALL_OAUTH_RESUME_UNAVAILABLE/);assert.deepEqual(fs.readdirSync(outside),[]);assert.deepEqual(records(continuation.archive),before);});

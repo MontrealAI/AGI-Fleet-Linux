@@ -1,0 +1,85 @@
+{
+  "schema": "agi-standard-oauth-sources/v1",
+  "sources": [
+    {
+      "versions": {
+        "public": "1.13.0",
+        "fleet": "1.18.9",
+        "agent": "1.24.9",
+        "node": "2.25.9",
+        "role": "agent"
+      },
+      "packageManifestSHA256": "9c6d1c843f347717da95d3003e1b305c1195241b13c5869d112b263e10a92059",
+      "sourceHashes": {
+        "selftest": "4977a3f3c34caa709a41cf0cda4e9e60e2a6f60700b9069f9bbb16c6205f4da6",
+        "fixture": "915931dbfa6e2f9d908fac87f119b962c8dd35b859ae3f1e1eac8ed41c66d1a4",
+        "desktop": "d0df9d47a2e48a85b90c866aaee5ac390bfcaf4393c9335d61dfcc427952a34a",
+        "dockerfile": "ed8abb25a2368eb37521363e83437cbf9f7d21404843c1df8c1208cc1e111623"
+      },
+      "imageRecipes": {
+        "work": "5373f1364295302bc3f7c85b0f88f0df162c75ffe820635c7d94480bc91af735",
+        "browser": "1199e2b0732413950382dbc782c134f3819eb6c2826e08f3b389fcf1f5fbfc9b"
+      }
+    },
+    {
+      "versions": {
+        "public": "1.13.0",
+        "fleet": "1.18.9",
+        "agent": "1.24.9",
+        "node": "2.25.9",
+        "role": "agent"
+      },
+      "packageManifestSHA256": "eff7071e7ba0123622ba2401f7295ab208ad44cda83ce197ce494c9fd655ed36",
+      "sourceHashes": {
+        "selftest": "4977a3f3c34caa709a41cf0cda4e9e60e2a6f60700b9069f9bbb16c6205f4da6",
+        "fixture": "915931dbfa6e2f9d908fac87f119b962c8dd35b859ae3f1e1eac8ed41c66d1a4",
+        "desktop": "d0df9d47a2e48a85b90c866aaee5ac390bfcaf4393c9335d61dfcc427952a34a",
+        "dockerfile": "ed8abb25a2368eb37521363e83437cbf9f7d21404843c1df8c1208cc1e111623"
+      },
+      "imageRecipes": {
+        "work": "108f32d0adb0064ec88ee60346f74e6882f5987cab5148189dc6ce2cc904abee",
+        "browser": "1199e2b0732413950382dbc782c134f3819eb6c2826e08f3b389fcf1f5fbfc9b"
+      }
+    },
+    {
+      "versions": {
+        "public": "1.13.0",
+        "fleet": "1.18.9",
+        "agent": "1.24.9",
+        "node": "2.25.9",
+        "role": "node"
+      },
+      "packageManifestSHA256": "f5540fb44d11f428b63934aae5dafebf8f060258ba166f572ec2ce5b0c4bd0a8",
+      "sourceHashes": {
+        "selftest": "4977a3f3c34caa709a41cf0cda4e9e60e2a6f60700b9069f9bbb16c6205f4da6",
+        "fixture": "915931dbfa6e2f9d908fac87f119b962c8dd35b859ae3f1e1eac8ed41c66d1a4",
+        "desktop": "d0df9d47a2e48a85b90c866aaee5ac390bfcaf4393c9335d61dfcc427952a34a",
+        "dockerfile": "ed8abb25a2368eb37521363e83437cbf9f7d21404843c1df8c1208cc1e111623"
+      },
+      "imageRecipes": {
+        "work": "5373f1364295302bc3f7c85b0f88f0df162c75ffe820635c7d94480bc91af735",
+        "browser": "1199e2b0732413950382dbc782c134f3819eb6c2826e08f3b389fcf1f5fbfc9b"
+      }
+    },
+    {
+      "versions": {
+        "public": "1.13.0",
+        "fleet": "1.18.9",
+        "agent": "1.24.9",
+        "node": "2.25.9",
+        "role": "node"
+      },
+      "packageManifestSHA256": "f73c16ac8406c6d4e5c5ac56685be339bcad038d36afdeca587e40156adfcc03",
+      "sourceHashes": {
+        "selftest": "4977a3f3c34caa709a41cf0cda4e9e60e2a6f60700b9069f9bbb16c6205f4da6",
+        "fixture": "915931dbfa6e2f9d908fac87f119b962c8dd35b859ae3f1e1eac8ed41c66d1a4",
+        "desktop": "d0df9d47a2e48a85b90c866aaee5ac390bfcaf4393c9335d61dfcc427952a34a",
+        "dockerfile": "ed8abb25a2368eb37521363e83437cbf9f7d21404843c1df8c1208cc1e111623"
+      },
+      "imageRecipes": {
+        "work": "108f32d0adb0064ec88ee60346f74e6882f5987cab5148189dc6ce2cc904abee",
+        "browser": "1199e2b0732413950382dbc782c134f3819eb6c2826e08f3b389fcf1f5fbfc9b"
+      }
+    }
+  ]
+}

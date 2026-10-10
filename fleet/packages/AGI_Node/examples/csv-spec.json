@@ -1,0 +1,28 @@
+{
+  "schema": "agi-node-job/v1",
+  "profile": "csv-table/v1",
+  "title": "Checked public catalogue",
+  "columns": [
+    {
+      "name": "product_id",
+      "type": "string",
+      "min": 3,
+      "max": 20
+    },
+    {
+      "name": "price_usdc",
+      "type": "number",
+      "min": 1,
+      "max": 100
+    },
+    {
+      "name": "available",
+      "type": "boolean"
+    }
+  ],
+  "minRows": 2,
+  "maxRows": 100,
+  "uniqueBy": [
+    "product_id"
+  ]
+}

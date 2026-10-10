@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AGI Node · Private Control Room</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="orb"></span>MONTREAL.AI <small>PRIVATE SYSTEMS</small>
+      </div>
+      <span class="chip">AGI NODE / 1.0</span>
+    </header>
+    <main>
+      <div class="eyebrow">YOUR AUTONOMOUS REVIEW OPERATOR</div>
+      <h1>Evidence first.<br /><span>Every vote accountable.</span></h1>
+      <p class="lede">
+        Monitor opportunities, verify delivery, and act within the authority you
+        configured.
+      </p>
+      <section class="hero">
+        <div>
+          <span id="mode" class="chip">CONNECTING</span>
+          <h2 id="status">Connecting to your node…</h2>
+          <p id="message">
+            Your wallet credentials never enter this dashboard.
+          </p>
+        </div>
+        <div class="pulse" aria-hidden="true"><i></i></div>
+      </section>
+      <div id="notice" role="status"></div>
+      <section class="metrics">
+        <article>
+          <small>REVIEWED / READY</small><strong id="reviewed">—</strong>
+        </article>
+        <article>
+          <small>VOTES RECORDED</small><strong id="voted">—</strong>
+        </article>
+        <article>
+          <small>ABSTENTIONS</small><strong id="abstained">—</strong>
+        </article>
+        <article>
+          <small>CONFIRMED SCAN BLOCK</small><strong id="cursor">—</strong>
+        </article>
+      </section>
+      <section class="panel">
+        <div class="heading">
+          <h2>Opportunity queue</h2>
+          <span class="muted">Refreshes every 5 seconds</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Job</th>
+                <th>State</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody id="jobs"></tbody>
+          </table>
+        </div>
+        <p id="empty" class="muted">
+          No jobs yet. The node will discover eligible completions after
+          deployment.
+        </p>
+      </section>
+      <div class="columns">
+        <section class="panel">
+          <h2>Transaction journal</h2>
+          <div id="transactions" class="journal"></div>
+          <p class="muted">
+            One durable signing queue. Pending transactions are reconciled
+            before another is signed.
+          </p>
+        </section>
+        <section class="panel">
+          <h2>You remain in control</h2>
+          <p>Pause new signing without exposing your keys:</p>
+          <code>node src/cli.mjs pause</code>
+          <p>Review configuration, balances and eligibility:</p>
+          <code>npm run doctor</code>
+          <p>Export your private evidence report:</p>
+          <code>node src/cli.mjs report</code>
+          <p class="muted">
+            This dashboard is read-only and available only on this computer.
+            Already broadcast transactions cannot be stopped here.
+          </p>
+        </section>
+      </div>
+      <footer>
+        <b>PRIVATE BY DEFAULT</b
+        ><span id="updated"
+          >No public telemetry. No browser wallet connection.</span
+        >
+      </footer>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

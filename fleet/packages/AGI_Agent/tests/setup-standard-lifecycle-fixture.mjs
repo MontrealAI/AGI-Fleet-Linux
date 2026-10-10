@@ -1,0 +1,61 @@
+import {roleContract,OPERATOR_ROLES} from '../compute/roles.mjs';
+import {readSetupArguments} from '../compute/setup-ledger.mjs';
+import {validateManagedGatewayAuthority} from '../compute/setup-managed-service.mjs';
+import {syntheticAuthority,writeSyntheticService} from './managed-service-fixture.mjs';
+import {cleanInitializationFixture} from './clean-initialization-fixture.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
+import {runtimeDatabase,stageRuntimeFixture} from './runtime-sqlite-fixture.mjs';
+import {statePreparationFixture} from './state-preparation-fixture.mjs';
+import {setupCapable} from '../compute/setup.mjs';
+import {inspectExecutable} from '../compute/runtime-env.mjs';
+import {policyHash} from '../compute/policy.mjs';
+export function fixture(t,role='agent'){
+ const home=fs.mkdtempSync(path.join(os.tmpdir(),'agi-setup-entry-'));t.after(()=>fs.rmSync(home,{recursive:true,force:true}));const profile=roleContract(role).profile,profileDir=path.join(home,'.openclaw-'+profile),port=roleContract(role).port,gatewayPort=roleContract(role).gatewayPort,active=new Set(),events=[],images=new Map(),imageRecords=new Map();let imageAttempt=0,imagePlan=({tag})=> 'sha256:'+(tag.includes('browser')?'d':'a').repeat(64),imageReject=()=>false;let stopTime=0,loginCount=0,failStart=false,modelDelay=0,healthDelay=0,modelCalls=0,healthCalls=0,failHealth=false,failFirstRollbackStop=false,rollbackPrintFailed=false,rollbackArmed=false,failAllRollbackStops=false;
+ const runtime={home,node:path.join(home,'bin/node'),openclaw:path.join(home,'bin/openclaw'),docker:path.join(home,'bin/docker'),versions:{node:'24.21.0',openclaw:'2026.9.5'}};
+ fs.mkdirSync(path.join(home,'bin'),{mode:0o700});for(const kind of ['node','openclaw','docker'])fs.writeFileSync(runtime[kind],'\x23!/bin/sh\nexit 0\n',{mode:0o700});runtime.executableIdentity={schema:1,...Object.fromEntries(['node','openclaw','docker'].map(kind=>[kind,inspectExecutable(runtime[kind],kind,{home})]))};
+ const dependencies={deriveManagedGatewayAuthority:syntheticAuthority,prepareManagedGatewayService:c=>{writeSyntheticService(c);return validateManagedGatewayAuthority(c);},prepareCandidateState:({candidate,profileDir:live})=>{assert.notEqual(candidate,live);assert.equal(live,profileDir);assert.ok(fs.existsSync(path.join(candidate,'compute-settings.json')));events.push({command:'prepare candidate state',candidate:true});return statePreparationFixture();},finishCandidateStatePreparation:()=>events.push({command:'candidate state preparation saved',candidate:true}),stageCandidateAuthOrder:stageRuntimeFixture,home,platform:'darwin',uid:504,fileUID:process.getuid(),runtimePlatform:process.platform,serviceStop:{timeoutMs:100,pollIntervalMs:1,requestTimeoutMs:50,now:()=>stopTime,sleep:async ms=>{stopTime+=ms;}},discoverRuntime:()=>runtime,runtimeEnvironment:()=>({HOME:home,PATH:'/usr/bin:/bin'}),gatewayWrapperPlan:c=>({path:path.join(c.profileDir,'agi-runtime/gateway-wrapper'),content:'\x23!/bin/sh\nexit 0\n',installEnvironment:{OPENCLAW_WRAPPER:path.join(c.profileDir,'agi-runtime/gateway-wrapper')},heapMiB:4096}),collectPreflight:()=>({facts:{platform:'darwin',account:'standard',totalMemoryBytes:8*1024**3,openclawVersion:'2026.9.5',availableDiskBytes:3*1024**3},gates:[{id:'runtime',state:'passed'}]}),desktopCheck:()=>({passed:true,detail:{passed:true,schema:'agi-workstation-check/v3'},oomKilled:false}),readiness:{pollIntervalMs:1,gatewayTimeoutMs:5000,computePortTimeoutMs:5000,healthTimeoutMs:5000},listen:async p=>active.has(p),fetch:async(url,options)=>{const c=JSON.parse(fs.readFileSync(path.join(profileDir,'compute-settings.json')));assert.ok(fs.existsSync(path.join(profileDir,'COMPUTE_STOP')));if(url.endsWith('/v1/models')){events.push({command:'gateway models',candidate:false});assert.equal(options.headers.Authorization,'Bearer '+c.gatewayToken);return new Response(JSON.stringify({data:++modelCalls<=modelDelay?[]:roleContract(role).oauth.map(id=>({id:'openclaw/'+id}))}));}events.push({command:'compute health',candidate:false});assert.equal(options.headers.Authorization,'Bearer '+c.token);healthCalls++;if(failHealth)rollbackArmed=true;return new Response(JSON.stringify({role,policyHash:policyHash(c),stopped:true,gatewayReady:healthCalls>healthDelay,policyCurrent:!failHealth}));},spawnSync:(exe,args,options)=>{
+  if(exe==='/bin/launchctl'){if(args[0]==='bootout'){active.clear();return {status:0};}if(args[0]==='print'&&rollbackArmed&&(failAllRollbackStops||failFirstRollbackStop&&!rollbackPrintFailed)){rollbackPrintFailed=true;return failAllRollbackStops?{status:0,stdout:'service still loaded'}:{status:1,stderr:'Permission denied fixture'};}if(args[0]==='print')return {status:113,stderr:'Bad request.\nCould not find service "'+args[1].split('/').at(-1)+'" in domain for user gui: 504\n'};events.push({command:'compute bootstrap',candidate:false});active.add(port);return {status:0};}
+  if(exe===runtime.docker){if(args[0]==='info')return{status:0,stdout:'29.8.0'};if(args[0]==='build'){const tag=args[args.indexOf('-t')+1],label=args[args.indexOf('--label')+1].split('=')[1];images.set(tag,label);const id=imagePlan({tag,attempt:imageAttempt});imageRecords.set(tag,{id,label});imageRecords.set(id,{id,label});return {status:0};}if(args[0]==='image'){const tag=args.at(-1),v=imageRecords.get(tag);events.push({command:'image inspect',tag,attempt:imageAttempt,imageID:v?.id});return {status:v?0:1,stdout:JSON.stringify(v?[{Id:v.id,Config:{Labels:{'ai.montreal.agi.recipe':imageReject({tag,attempt:imageAttempt})?'invalid-recipe':v.label}}}]:[])};}throw Error('UNEXPECTED_DOCKER');}
+  assert.equal(exe,runtime.openclaw);const a=args.slice(2),state=options.env.OPENCLAW_STATE_DIR,config=options.env.OPENCLAW_CONFIG_PATH;events.push({command:a.join(' '),candidate:state!==profileDir,timeout:options.timeout});
+  if(a[0]==='config'){JSON.parse(fs.readFileSync(config));return {status:0};}
+  if(a[0]==='models'){const agent=a[a.indexOf('--agent')+1],authFile=path.join(state,'agents',agent,'agent/auth-profiles.json');if(a[1]==='status')return{status:fs.existsSync(authFile)?0:1};if(a.includes('login')){loginCount++;assert.notEqual(state,profileDir);fs.mkdirSync(path.dirname(authFile),{recursive:true,mode:0o700});fs.writeFileSync(authFile,'{"private":"OAUTH-CANARY"}',{mode:0o600});const c=JSON.parse(fs.readFileSync(config));c.auth.profiles['openai:agi-compute-pro'].displayName='PRIVATE ACCOUNT';fs.writeFileSync(config,JSON.stringify(c));return{status:0};}if(a.includes('order'))return {status:0};}
+  if(a[0]==='infer')return{status:0,stdout:'{}'};
+  if(a[0]==='gateway'){if(a[1]==='install')writeSyntheticService(JSON.parse(fs.readFileSync(path.join(state,'compute-settings.json'))));if(a[1]==='start'){if(failStart)return{status:1,stderr:'Gateway failed fixture'};active.add(gatewayPort);}return{status:0,stdout:'Gateway '+a[1]+' fixture completed',stderr:'Gateway diagnostic fixture'};}
+  throw Error('UNEXPECTED_COMMAND');
+ }};
+ const kit={schema:roleContract(role).schema,...(OPERATOR_ROLES.includes(role)?{role}:{}),openclawVersion:'2026.9.5',token:'b'.repeat(64),port,agent:roleContract(role).oauth[0],model:'openai/gpt-6-astra',mode:'workstation',signerUID:503};
+ const rl={question:async prompt=>prompt.includes('Type APPROVE')?'APPROVE '+/APPROVE ([a-f0-9]{12})/.exec(prompt)[1]:prompt.includes('SEPARATE')?'SEPARATE':'STOP AND REVIEW'};
+ return {home,profileDir,events,dependencies,kit,rl,runtime,set imageAttempt(v){imageAttempt=v;imageRecords.clear();},set imagePlan(v){imagePlan=v;imageRecords.clear();},set imageReject(v){imageReject=v;},get loginCount(){return loginCount;},set failStart(v){failStart=v;},set modelDelay(v){modelDelay=v;modelCalls=0;},set healthDelay(v){healthDelay=v;healthCalls=0;},set failHealth(v){failHealth=v;},set failFirstRollbackStop(v){failFirstRollbackStop=v;},set failAllRollbackStops(v){failAllRollbackStops=v;},get active(){return active;},run:()=>setupCapable(kit,rl,{repair:true,dependencies})};
+}
+
+import {spawnSync} from 'node:child_process';import {pathToFileURL} from 'node:url';
+import {initializeFreshCandidateState,finishCandidateStatePreparation} from '../compute/setup-state-preparation.mjs';
+import {stageCandidateAuthOrder} from '../compute/setup-auth-store.mjs';
+export const pinnedPackage=process.env.AGI_TEST_OPENCLAW_PACKAGE_ROOT;
+export function pinnedStandardFixture(t,role,{binLayout=false}={}){
+ const f=fixture(t,role),node=process.execPath;Object.assign(f.dependencies.serviceStop,{timeoutMs:20000,requestTimeoutMs:5000});let openclaw=path.join(pinnedPackage,'openclaw.mjs');if(binLayout){const dir=path.join(f.home,'.agi-genesis-runtime/openclaw-2026.9.5/node_modules/.bin');fs.mkdirSync(dir,{recursive:true,mode:0o700});const link=path.join(dir,'openclaw');fs.symlinkSync(openclaw,link);openclaw=link;}
+ Object.assign(f.runtime,{node,openclaw,versions:{node:process.versions.node,openclaw:'2026.9.5'}});
+ f.runtime.executableIdentity={schema:1,...Object.fromEntries(['node','openclaw','docker'].map(kind=>[kind,inspectExecutable(f.runtime[kind],kind,{home:f.home})]))};
+ f.dependencies.cleanInstallGroups=()=>({status:0,stdout:'staff everyone localaccounts'});
+ f.dependencies.initializeFreshCandidateState=initializeFreshCandidateState;
+ f.dependencies.finishCandidateStatePreparation=finishCandidateStatePreparation;
+ f.dependencies.stageCandidateAuthOrder=stageCandidateAuthOrder;
+ f.dependencies.prepareCandidateState=()=>{throw Error('LEGACY_PREPARATION_MUST_NOT_RUN');};
+ f.dependencies.prepareCleanCandidateInitialization=()=>{throw Error('VERIFIED_INITIALIZER_MUST_NOT_RUN');};
+ const adapter=f.dependencies.spawnSync;let loginExchanges=0;
+ f.dependencies.spawnSync=(exe,args,options)=>{
+  if(exe===openclaw&&args[2]==='models'){
+   const agent=args[args.indexOf('--agent')+1],candidate=options.env.OPENCLAW_STATE_DIR,agentDir=path.join(candidate,'agents',agent,'agent');
+   if(args.includes('login')){
+    // Only the network credential exchange is synthetic. The pinned SDK writes
+    // the role store, schema and owner metadata; Fleet stages real SQLite order.
+    loginExchanges++;fs.mkdirSync(agentDir,{recursive:true,mode:0o700});
+    const program=`const api=await import(${JSON.stringify(pathToFileURL(path.join(pinnedPackage,'dist/plugin-sdk/provider-auth.js')).href)});await api.updateAuthProfileStoreWithLock({agentDir:${JSON.stringify(agentDir)},stateDir:process.env.OPENCLAW_STATE_DIR,sharedStoreWrite:false,saveOptions:{syncExternalCli:false},updater:store=>{store.profiles['openai:agi-compute-pro']={type:'oauth',provider:'openai',access:'local-test-access',refresh:'local-test-refresh',expires:4102444800000,accountId:${JSON.stringify(agent)}};return true;}});`;
+    return spawnSync(node,['--input-type=module','-e',program],{env:{HOME:candidate,PATH:'/usr/bin:/bin',NODE_NO_WARNINGS:'1',OPENCLAW_STATE_DIR:candidate,OPENCLAW_CONFIG_PATH:options.env.OPENCLAW_CONFIG_PATH,OPENCLAW_AGENT_DIR:agentDir},encoding:'utf8',timeout:30000});
+   }
+   if(args.includes('status'))return spawnSync(node,[openclaw,...args],{...options,env:{...options.env,NODE_NO_WARNINGS:'1',OPENCLAW_EXEC_SHELL_SNAPSHOT:'0'},timeout:60000});
+  }
+  return adapter(exe,args,options);
+ };
+ Object.defineProperty(f,'loginExchanges',{get:()=>loginExchanges});return f;
+}

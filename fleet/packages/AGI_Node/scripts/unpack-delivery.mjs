@@ -1,0 +1,4 @@
+import fs from 'node:fs';import path from 'node:path';import {validateBundle} from '../src/artifacts.mjs';
+const [specFile,bundleFile,output]=process.argv.slice(2);if(!specFile||!bundleFile||!output)throw Error('Usage: node scripts/unpack-delivery.mjs specification.json delivery.bundle.json NEW_DIRECTORY');
+const dir=path.resolve(output);if(fs.existsSync(dir))throw Error('Choose a new empty destination; existing directories are never overwritten.');
+const {files}=validateBundle(JSON.parse(fs.readFileSync(specFile)),fs.readFileSync(bundleFile));fs.mkdirSync(dir,{mode:0o700});for(const [name,bytes]of files){const p=path.join(dir,name);fs.mkdirSync(path.dirname(p),{recursive:true,mode:0o700});fs.writeFileSync(p,bytes,{flag:'wx',mode:0o600});}console.log(files.size+' verified files extracted. Inspect untrusted deliverables in the isolated work environment.');
