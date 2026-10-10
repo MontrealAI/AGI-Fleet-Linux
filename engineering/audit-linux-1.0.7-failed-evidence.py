@@ -53,14 +53,26 @@ def audit(root, release, cases):
         assert dict(totals) == result['counts']
         if scope == 'complete':
             assert result['status'] == 'NOT_PASS' and result['scope'] == 'FULL'
-            assert totals['tests'] == totals['pass'] + totals['fail'] == 3897 and totals['fail'] == 2
+            assert totals['tests'] == totals['pass'] + totals['fail'] == 3897 and totals['fail'] == 8
         else:
             assert result['scope'] == 'PARTIAL' and totals['tests'] == totals['pass'] + totals['fail'] == 285 and totals['fail'] == 2
         failed = [row for row in result['results'] if row['exitCode'] != 0]
-        assert {row['file'] for row in failed} == {f'packages/AGI_{role}/tests/public-web-qualification-import.test.mjs' for role in ('Agent','Node')}
+        expected_failures = {f'packages/AGI_{role}/tests/public-web-qualification-import.test.mjs' for role in ('Agent','Node')}
+        if scope == 'complete':
+            expected_failures |= {f'packages/AGI_{role}/tests/setup-fresh-readiness-resume.test.mjs' for role in ('Agent','Node')}
+        assert {row['file'] for row in failed} == expected_failures
         for row in failed:
             names = re.findall(r'^not ok \d+ - (.*)$', (directory / row['log']).read_text(), re.M)
-            assert names == ['execution fingerprint is mode-transition stable but binds machine, credentials, source and settings'], names
+            if row['file'].endswith('/public-web-qualification-import.test.mjs'):
+                assert names == ['execution fingerprint is mode-transition stable but binds machine, credentials, source and settings'], names
+                assert 'assert.ok(Object.keys(before.sourceHashes).length<=128)' in (directory / row['log']).read_text()
+            else:
+                role = 'agent' if '/AGI_Agent/' in row['file'] else 'node'
+                assert names == [role + ' ' + name for name in (
+                    'known approved 1.18.6 stopped failure retains exact evidence, current OAuth, state and limits, then reaches new approval/readiness',
+                    'recovery admission rejects authority, provenance, state and quiescence changes without mutation',
+                    'write-ahead retention resumes an interruption after the profile atomic rename and never opens installed SQLite')]
+                assert (directory / row['log']).read_text().count('Error: SETUP_RUNTIME_SECURITY_VERSION') == 3
         for case in cases:
             row = sources[case['source']]
             assert row['sourceSHA256'] == case['sourceSHA256']
