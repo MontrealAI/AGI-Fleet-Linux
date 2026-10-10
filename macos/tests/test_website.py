@@ -1,5 +1,6 @@
 """A planned Mac release must never become a download or production claim by accident."""
 import copy
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -17,11 +18,17 @@ class MacWebsiteMetadataTests(unittest.TestCase):
         self.release = json.loads((ROOT / 'macos/release.json').read_text())
 
     def published(self):
-        release = {**self.release, 'schema': 'agi-macos-published-release/v1',
+        candidate = {**self.release, 'schema': 'agi-macos-candidate-build/v1',
+                     'bytes': 300_000_000, 'sha256': 'a' * 64, 'sourceRevisionSHA256': 'c' * 64, 'sourceFiles': 4900,
+                     'repositoryCommit': 'b' * 40, 'workflowCommit': 'b' * 40,
+                     'baseline': {'sha256': self.release['base']['sha256']},
+                     'buildInputs': [{'path': 'macos/runtime/apply.py', 'sha256': '7' * 64}],
+                     'archiveVerification': {'status': 'PASS', 'editions': 7}}
+        metadata_sha = hashlib.sha256((json.dumps(candidate, indent=2, ensure_ascii=False) + '\n').encode('utf-8')).hexdigest()
+        release = {**candidate, 'schema': 'agi-macos-published-release/v1',
                    'nativeAcceptance': 'PASS', 'jobIntegrationAcceptance': 'PASS',
                    'operatorGate': 'OPEN_FOR_CONTROLLED_FRESH_INSTALL', 'repository': 'MontrealAI/AGI-Fleet-Linux',
-                   'bytes': 300_000_000, 'sha256': 'a' * 64, 'sourceRevisionSHA256': 'c' * 64, 'sourceFiles': 4900,
-                   'workflowCommit': 'b' * 40, 'repositoryCommit': 'b' * 40, 'workflowRun': '12345'}
+                   'workflowRun': '12345'}
         common = {key: release[key] for key in ('repository', 'workflowCommit', 'workflowRun', 'platform',
                                                'architecture', 'productionQualified')}
         counts = {'tests': 4000, 'suites': 50, 'pass': 4000, 'fail': 0, 'cancelled': 0, 'skipped': 0, 'todo': 0}
@@ -42,7 +49,7 @@ class MacWebsiteMetadataTests(unittest.TestCase):
                  'workflowRun', 'nativeAcceptance', 'jobIntegrationAcceptance', 'operatorGate',
                  'physicalQualification', 'productionQualified', 'signedNotarized')}
         audit.update({'schema': 'agi-macos-independent-audit/v1', 'status': 'PASS', 'releaseSHA256': release['sha256'],
-                      'releaseBytes': release['bytes'], 'releaseMetadataSHA256': '5' * 64, 'native': native,
+                      'releaseBytes': release['bytes'], 'releaseMetadataSHA256': metadata_sha, 'native': native,
                       'integration': integration, 'verifiedTapLogs': 698, 'verifiedIntegrationLogs': 19})
         return {**release, 'audit': audit, 'evidence': {'name': 'macOS-Qualification-Evidence-v1.20.0.zip',
                                                      'bytes': 1234567, 'sha256': '6' * 64}}
@@ -174,6 +181,21 @@ class MacWebsiteMetadataTests(unittest.TestCase):
             release = self.published()
             change(release['audit'])
             with self.subTest(case=index), self.assertRaises(ValueError):
+                builder.mac_release_tokens(release, published=True)
+
+    def test_stale_audit_cannot_accept_changed_candidate_metadata(self):
+        changes = [lambda release: release['buildInputs'][0].update(sha256='8' * 64),
+                   lambda release: release['archiveVerification'].update(editions=6),
+                   lambda release: release['base'].update(sha256='9' * 64),
+                   lambda release: release['baseline'].update(sha256='0' * 64),
+                   lambda release: release.update(nodeVersion='24.99.0'),
+                   lambda release: release.update(unreviewedMetadata=True),
+                   lambda release: release.pop('buildInputs'),
+                   lambda release: release['audit'].update(releaseMetadataSHA256='5' * 64)]
+        for index, change in enumerate(changes):
+            release = copy.deepcopy(self.published())
+            change(release)
+            with self.subTest(case=index), self.assertRaisesRegex(ValueError, 'audit metadata digest differs'):
                 builder.mac_release_tokens(release, published=True)
 
     def test_native_pass_without_complete_integration_and_lifecycle_is_rejected(self):

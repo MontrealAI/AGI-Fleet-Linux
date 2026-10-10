@@ -191,6 +191,17 @@ def mac_published_evidence(release):
     require(isinstance(audit, dict) and audit.get('schema') == 'agi-macos-independent-audit/v1'
             and audit.get('status') == 'PASS' and digest(audit.get('releaseMetadataSHA256')),
             'independent audit is missing or incomplete')
+    # publish.py preserves candidate key order and values, replaces these three
+    # fields, and adds five publication-only fields. Reconstruct build.py's
+    # exact UTF-8 serialization so the audit binds *all* candidate metadata,
+    # including the build inputs, base, toolchain and archive verification.
+    candidate = {key: value for key, value in release.items()
+                 if key not in {'repository', 'workflowRun', 'jobIntegrationAcceptance', 'audit', 'evidence'}}
+    candidate.update(schema='agi-macos-candidate-build/v1', nativeAcceptance='NOT_RUN',
+                     operatorGate='CLOSED_PENDING_NATIVE_ACCEPTANCE')
+    candidate_bytes = (json.dumps(candidate, indent=2, ensure_ascii=False) + '\n').encode('utf-8')
+    require(hashlib.sha256(candidate_bytes).hexdigest() == audit['releaseMetadataSHA256'],
+            'audit metadata digest differs from the published candidate')
     expected = {'version': release['version'], 'releaseSHA256': release['sha256'], 'releaseBytes': release['bytes'],
                 'sourceRevisionSHA256': release['sourceRevisionSHA256'], 'repository': repository,
                 'workflowCommit': commit, 'workflowRun': run_id, 'nativeAcceptance': 'PASS',

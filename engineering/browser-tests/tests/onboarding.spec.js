@@ -301,6 +301,16 @@ test('homepages feature both platforms and their source previews on mobile and d
     await expect(page).toHaveTitle(/Linux & Apple silicon Mac/);
     await expect(page.locator('header .brand')).toContainText('LINUX + MAC');
     await expect(page.locator('.orbit-center small')).toHaveText('LINUX + MAC');
+    for (const label of ['.orbit-star', '.orbit-center strong', '.orbit-center small']) {
+      const labelBox = await page.locator(label).boundingBox();
+      expect(labelBox, `${language.code} mobile orbit label is visible`).not.toBeNull();
+      for (const satellite of await page.locator('.satellite').all()) {
+        const card = await satellite.boundingBox();
+        const overlaps = labelBox.x < card.x + card.width && labelBox.x + labelBox.width > card.x
+          && labelBox.y < card.y + card.height && labelBox.y + labelBox.height > card.y;
+        expect(overlaps, `${language.code} mobile orbit ${label} must not be covered`).toBe(false);
+      }
+    }
     for (const selector of [
       '#work-modes a[href$="/macos/preview/README.md"]',
       '#resources a[href$="/macos/preview/README.md"]',
