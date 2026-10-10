@@ -1,6 +1,6 @@
 {
   "schema": "agi-macos-preview-source-inventory/v1",
-  "sourceSha256": "251621daa6d4869e07b3f6c2472cd9b7f8ba2db668e8a99ce3fb386a01c0b599",
+  "sourceSha256": "f4bd4a006385a515ccd56fc2b9832898bf46f9a2fa001d5fd56f13cea49561e4",
   "files": [
     {
       "path": ".github/workflows/macos-preview.yml",
@@ -30,27 +30,27 @@
     {
       "path": "macos/preview/QUICKSTART.md",
       "bytes": 8285,
-      "sha256": "3d7e40fb99c8d57ecfebeb490da5ea16a099dafe965223096fc5aa8e8b6101a0"
+      "sha256": "7bb171813a19d86d262290af483937c401f758d335a6d951a5b44c9d27204af2"
     },
     {
       "path": "macos/preview/README.md",
-      "bytes": 4466,
-      "sha256": "316854a0689cd4252c42290b13938a1cb90a6a165134a94f1605cb0105cf0739"
+      "bytes": 4454,
+      "sha256": "dda4e8013b64acc951edf7b67ca668886f8554c87c08e1fce68083761e455816"
     },
     {
       "path": "macos/preview/STUDIO.md",
-      "bytes": 4024,
-      "sha256": "92d18aef5794f9e3504e7102575a31367421177452eda12d61a6c462fa524c90"
+      "bytes": 4019,
+      "sha256": "95b00221285938ba358de50a4cc3988188d1499fed3c1bf954165f892623e4ec"
     },
     {
       "path": "macos/preview/candidate.json",
-      "bytes": 840,
-      "sha256": "8a3ad43360cbf7be1cd6bdebc9a81e6f1b5654114033992a6c13bb83c0089b29"
+      "bytes": 843,
+      "sha256": "b2715cc88a1ec17ec899e81424e1b6e6ecebe97c619475c94671f42664f26e6e"
     },
     {
       "path": "macos/preview/check.py",
-      "bytes": 3695,
-      "sha256": "73033f5e5fb9c4d8f8038080c765bbc1fda8b2c55ee3ec86fdf9ee3d7b4f9ae5"
+      "bytes": 3816,
+      "sha256": "62b3b339455dfd13f32f5ea878cb795ac2c70347352aa7600f31f8bbed046f81"
     },
     {
       "path": "macos/preview/launch.mjs",
@@ -59,8 +59,8 @@
     },
     {
       "path": "macos/preview/materialize.py",
-      "bytes": 5312,
-      "sha256": "2ffd9bd005d7c6c74d9f75d3bad1eebb40db724221b3967e6596fc4c66867a9c"
+      "bytes": 5367,
+      "sha256": "141198ea5c8246f35ff2a8976c9b5baab1dcc82013b2aef555159eea1b16ede2"
     },
     {
       "path": "macos/preview/operator.mjs",
@@ -69,8 +69,8 @@
     },
     {
       "path": "macos/preview/overlay.py",
-      "bytes": 10037,
-      "sha256": "8e83f414bf683b247907ee555c90c9db2a87839b4851ab08c32a27ba83228541"
+      "bytes": 10042,
+      "sha256": "ee3751af4623885ec942d046a74ec54c8543634ca2fe59f422580069c75c0d5b"
     },
     {
       "path": "macos/preview/task-host.mjs",
@@ -99,18 +99,23 @@
     },
     {
       "path": "macos/preview/tests/test_materialize.py",
-      "bytes": 6300,
-      "sha256": "4805012321d68ce6d92893ca5e6a8e495ec7669bf0e3c212bf1a4431d64e6f45"
+      "bytes": 7466,
+      "sha256": "4e5fc3bd291e60f82d937c88bb6b1ebfb5d28f5a21f4bcc50e43650dfea7134e"
     },
     {
       "path": "macos/release.json",
       "bytes": 1066,
-      "sha256": "704dad876e79837a37791ffb6ee65b554168dcb941593c3b9229a4f43d0dfe35"
+      "sha256": "5014c336ffcb4787502ce325e8bbafdbfaa99c7112f2975b460bdba8a04fdc0b"
     },
     {
       "path": "macos/runtime/apply.py",
-      "bytes": 19444,
-      "sha256": "6dd8a714b492c3b6161edd963323ddbae66a8f2f79e4bd9487eb8c31f714cac3"
+      "bytes": 23185,
+      "sha256": "70edc75d2c78e0bd4f9cbdac9647ae56e1a0bb4d2b6e232f759a5a0dbc7d73e7"
+    },
+    {
+      "path": "macos/runtime/control-ui-cache.test.mjs",
+      "bytes": 6290,
+      "sha256": "fdb592e17645d6fa97e4fbd283f90a0bc33cf7e49f62dc590c9889511237cbf3"
     },
     {
       "path": "macos/runtime/desktop-cleanup.mjs",
@@ -135,7 +140,7 @@
     {
       "path": "macos/runtime/macos-clean-install.template.json",
       "bytes": 6806,
-      "sha256": "f46ff18f39e1019eb68b9f3c31bbbaa85d22de40f70bfe90255f3cae3170a4b2"
+      "sha256": "5251f9e72925bc771c2cbb08fe4a6a1b0a03843900671797243cd24ee3e34744"
     },
     {
       "path": "macos/runtime/runtime.test.mjs",
@@ -144,8 +149,8 @@
     },
     {
       "path": "macos/runtime/test_apply.py",
-      "bytes": 5198,
-      "sha256": "1a4e902afcf08b6443514872f4e91033ef472345ec0815d9d300bb835741977d"
+      "bytes": 6420,
+      "sha256": "89f2f7eb0f95f56ed9c63e75c95a3650f189d00ed7797c658f518971e35d2f70"
     },
     {
       "path": "workstation/candidate.json",

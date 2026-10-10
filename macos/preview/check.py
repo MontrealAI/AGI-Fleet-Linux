@@ -51,7 +51,8 @@ def check(write_inventory=False):
         raise ValueError('Shared preview historical basis differs')
     if not (candidate['classification'] == 'DEVELOPMENT_PREVIEW' and candidate['executionMode'] == 'PILOT_ONLY'
             and candidate['productionExecution'] == 'DISABLED' and candidate['productionQualified'] is False
-            and candidate['qualificationInherited'] is False and candidate['includedInMac1200Zip'] is False
+            and candidate['qualificationInherited'] is False and candidate['includedInMacReleaseZip'] is False
+            and not any(name.startswith('includedInMac') and name != 'includedInMacReleaseZip' for name in candidate)
             and all(value == 'NOT_RUN' for value in candidate['physicalQualification'].values())):
         raise ValueError('Preview qualification boundary changed')
     actual = inventory()

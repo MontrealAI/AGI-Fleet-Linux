@@ -14,7 +14,7 @@ from audit import (ROOT, REPOSITORY, LIMIT, audit, decode_json, module, read_jso
                    regular_tree, require, sha, validate_metadata, write_json)
 from release_tools import extract
 
-VERSION = '1.20.0'
+VERSION = '1.20.1'
 EVIDENCE = 'macOS-Qualification-Evidence-v' + VERSION + '.zip'
 MANIFEST = 'Release-Manifest-macOS-v' + VERSION + '.json'
 CHECKSUMS = 'SHA256SUMS-macOS-v' + VERSION + '.txt'
@@ -156,7 +156,7 @@ def publish(release_dir, output, commit, repository, run_id):
     if release is None:
         release = api('/releases', method='POST', data=json.dumps({
             'tag_name': metadata['tag'], 'target_commitish': commit,
-            'name': 'macOS 1.20.0 — native Apple silicon qualification candidate',
+            'name': 'macOS ' + VERSION + ' — native Apple silicon qualification candidate',
             'body': notes, 'draft': True, 'prerelease': True, 'make_latest': 'false'}).encode())
     require(release['prerelease'] is True and release['target_commitish'] == commit
             and release['tag_name'] == metadata['tag'] and release['body'] == notes,

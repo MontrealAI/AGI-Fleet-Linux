@@ -56,6 +56,11 @@ def apply(root, version):
     edit(setup, "import {computeSourceIdentity}", "import {assertMacHost} from './mac-host.mjs';\nimport {computeSourceIdentity}")
     chain(setup, "  const home=dependencies.home??os.homedir()", "  if(process.platform==='darwin')assertMacHost();\n  const home=dependencies.home??os.homedir()")
     chain(setup, "{strictCleanup:platform==='linux'}", '{strictCleanup:true}')
+    chain(setup, "import {captureStandardOAuthAuthority}", "import {preparePinnedControlUICache} from './setup-runtime-materialization.mjs';\nimport {captureStandardOAuthAuthority}")
+    # Standard first-start retention runs after HTTP readiness in the pinned
+    # Gateway. Prepare its exact generation while the private candidate is
+    # stopped, before any authority capture or approval; validation stays pure.
+    chain(setup, "if(standardInstall){c.standardOAuthAuthority=captureStandardOAuthAuthority(transaction.candidate,c);", "if(standardInstall){(dependencies.preparePinnedControlUICache??preparePinnedControlUICache)(transaction.candidate,runtime.artifact?.packageRoot);c.standardOAuthAuthority=captureStandardOAuthAuthority(transaction.candidate,c);")
     support = base + 'compute/setup-support.mjs'
     edit(support, "import fs from 'node:fs';", "import {confirmDesktopCleanup} from './desktop-cleanup.mjs';\nimport fs from 'node:fs';")
     chain(support, 'let result,inspect;', 'let result,inspect,report;')
@@ -144,6 +149,28 @@ test('signed source maps enforce the shared finite source limit', async t => {
 });
 """
         chain(bounds, anchor, checks + anchor)
+
+    # Synthetic setup adapters do not contain the pinned SDK. Their explicit
+    # preparation seam records ordering; real SDK fixtures remove that seam.
+    fixtures = [f'packages/AGI_{role}/tests/{name}'
+                for role in ('Agent', 'Node')
+                for name in ('setup-entry.test.mjs', 'fresh-oauth-fixture.mjs')]
+    fixtures += [f'packages/AGI_{role}/tests/setup-standard-lifecycle-fixture.mjs' for role in ROLES]
+    for fixture in fixtures:
+        chain(fixture, 'const dependencies={deriveManagedGatewayAuthority:', "const dependencies={preparePinnedControlUICache:()=>events.push({command:'prepare pinned UI cache',candidate:true}),deriveManagedGatewayAuthority:")
+    for role in ('Agent', 'Node'):
+        entry_test = f'packages/AGI_{role}/tests/setup-entry.test.mjs'
+        chain(entry_test, "const result=await setupCapable(f.kit,f.rl,{cleanInstall:true,dependencies:f.dependencies});\n const report=result.supportReport", "const question=f.rl.question;f.rl.question=async prompt=>{if(prompt.includes('Type APPROVE')){assert.equal(f.events.filter(e=>e.command==='prepare pinned UI cache').length,1);assert.equal(fs.existsSync(f.profileDir),false);assert.equal(f.active.size,0);}return question(prompt);};\n const result=await setupCapable(f.kit,f.rl,{cleanInstall:true,dependencies:f.dependencies});\n const report=result.supportReport")
+        lazy_test = f'packages/AGI_{role}/tests/setup-standard-lazy.test.mjs'
+        chain(lazy_test, "import {captureStandardOAuthAuthority}", "import {validatePinnedControlUICache} from '../compute/setup-runtime-materialization.mjs';\nimport {captureStandardOAuthAuthority}")
+        chain(lazy_test, "assert.equal(db.prepare('PRAGMA user_version').get().user_version,17);", "assert.ok(validatePinnedControlUICache(candidate,pinnedPackage).length>0,'actual Standard setup prepares the pinned cache before asking for approval');assert.equal(f.active.size,0);\n  assert.equal(db.prepare('PRAGMA user_version').get().user_version,17);")
+    for role in ROLES:
+        fixture = f'packages/AGI_{role}/tests/setup-standard-lifecycle-fixture.mjs'
+        chain(fixture, 'Object.assign(f.runtime,{node,openclaw,versions:', "delete f.dependencies.preparePinnedControlUICache;\n Object.assign(f.runtime,{node,openclaw,artifact:{packageRoot:pinnedPackage},versions:")
+        runtime_test = f'packages/AGI_{role}/tests/setup-runtime-materialization.test.mjs'
+        chain(runtime_test, "const receipt=mode==='standard'?undefined:prepareCleanCandidateInitialization(f.args);", "if(mode==='standard')preparePinnedControlUICache(tx.candidate,packageRoot);\n const receipt=mode==='standard'?undefined:prepareCleanCandidateInitialization(f.args);")
+        chain(runtime_test, "if(mode==='verified')validatePinnedControlUICache(f.profileDir,packageRoot);", 'validatePinnedControlUICache(f.profileDir,packageRoot);')
+    add('tests/macos-control-ui-cache.test.mjs', (HERE / 'control-ui-cache.test.mjs').read_bytes())
 
     for edition in ['', *('packages/AGI_' + role + '/' for role in ROLES)]:
         guide_test = edition + 'tests/production-guide.test.mjs'

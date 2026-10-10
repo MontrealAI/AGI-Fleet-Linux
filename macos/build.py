@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'engineering'))
 from release_tools import LIMIT, download, extract, members, require, sha
 
-VERSION = '1.20.0'
+VERSION = '1.20.1'
 PREFIX = 'AGI_Fleet_macOS_v' + VERSION
 ROLES = {'agent', 'node', 'moderator', 'employer', 'evidence', 'recovery'}
 BASE_SHA = 'bb21983d654291a860f2f78c2b69bbcd49423b5f41ffc9178864c41acc347695'
@@ -395,7 +395,7 @@ def build(args):
     inputs = [{'path': path.relative_to(repository).as_posix(), 'sha256': sha(path)}
               for path in sorted((repository / 'macos').rglob('*'))
               if path.is_file() and not path.is_symlink() and '__pycache__' not in path.parts]
-    write_json(root / 'evidence/current-v1.20.0/build-inputs.json', {
+    write_json(root / ('evidence/current-v' + VERSION) / 'build-inputs.json', {
         'schema': 'agi-macos-build-inputs/v1', 'repositoryCommit': commit, 'base': spec['base'],
         'inputs': inputs, 'productionQualified': False,
         'history': 'All earlier Linux and Mac evidence is historical, not current Mac qualification.'})

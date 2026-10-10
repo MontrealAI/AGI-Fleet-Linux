@@ -5,11 +5,11 @@ This separate development preview brings the current Linux source preview's usef
 - **Larger public tasks:** Agent and Node Studio imports for `computer-work/v2`, arbitrary declared file formats, up to 64 files and 64 MiB total, exact-byte review handoffs, revision feedback and explicit large-Studio exclusion from wallet backups.
 - **Guided native tasks:** a Mac menu for account checks, provider connection, application registration, descriptors, job drafts, approved pilot execution, operating records and safe stop/resume.
 
-**This is source code, outside the Mac 1.20.0 ZIP.** The ZIP already contains the original Mac native-workforce pilot and public Studio. This preview adds the newer interfaces without changing that archive or inheriting its acceptance. Production native grants are disabled. Every physical Mac gate remains `NOT_RUN`.
+**This is source code, outside the Mac 1.20.1 ZIP.** The ZIP contains the original Mac native-workforce pilot and public Studio. This preview adds the newer interfaces without changing that archive or inheriting its acceptance. Production native grants are disabled. Every physical Mac gate remains `NOT_RUN`.
 
 The native engine remains the original Mac implementation, using the signed OpenClaw Mac app and its approved paired provider. No Linux X11 engine, systemd service or Linux package installer is substituted. The Studio and job composer reuse the current shared implementations.
 
-The generated copy uses the current frozen **Linux 1.0.10 source** plus the reviewed Mac runtime overlay and these preview additions. The reused Linux Studio/composer preview records a historical **1.0.9** basis; `reusedPreviewHistoricalBasis` preserves that provenance separately from `materializedSourceBasis`. The released Mac 1.20.0 archive also derives from Linux 1.0.10, but this generated source tree is a different, unqualified artifact with no bundled dependencies.
+The generated copy uses the current frozen **Linux 1.0.10 source** plus the reviewed Mac runtime overlay and these preview additions. The reused Linux Studio/composer preview records a historical **1.0.9** basis; `reusedPreviewHistoricalBasis` preserves that provenance separately from `materializedSourceBasis`. The Mac 1.20.1 distribution also derives from Linux 1.0.10, but this generated source tree is a different, unqualified artifact with no bundled dependencies.
 
 ## Prepare a separate developer copy
 

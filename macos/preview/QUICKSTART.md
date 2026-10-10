@@ -1,6 +1,6 @@
 # A guided native workspace on your Mac
 
-**A controlled source preview for M1/M2, macOS 15+ and native arm64 Node 24.19+ within 24.x.** This guide accompanies the generated developer copy. It is outside the Mac 1.20.0 ZIP and has no inherited qualification. Production execution is disabled.
+**A controlled source preview for M1/M2, macOS 15+ and native arm64 Node 24.19+ within 24.x.** This guide accompanies the generated developer copy. It is outside the Mac 1.20.1 ZIP and has no inherited qualification. Production execution is disabled.
 
 Ask a trusted technical helper to prepare it with you. The menu reduces command entry; it does not create account permissions, pair a provider or certify an installation. Stop at an unexplained error and preserve your files and operating records.
 

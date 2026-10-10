@@ -2,7 +2,7 @@
 
 **Turn a dedicated Mac into a place where AI can make and check useful work.** Start with a small public document, a simple spreadsheet or a software task you can inspect yourself.
 
-This is the **Mac 1.20.0 qualification candidate**, for Apple silicon M1 and M2 Macs running macOS 15 or later. One Fleet download includes all six role folders; choose the role you need after extracting it. Begin controlled installation and evaluation only after native acceptance is published for this exact ZIP; physical Mac qualification and funded operation are separate gates. Reading this guide does not require an account, wallet or payment.
+This is the **Mac 1.20.1 qualification candidate**, for Apple silicon M1 and M2 Macs running macOS 15 or later. One Fleet download includes all six role folders; choose the role you need after extracting it. Begin controlled installation and evaluation only after native acceptance is published for this exact ZIP; physical Mac qualification and funded operation are separate gates. Reading this guide does not require an account, wallet or payment.
 
 ## Choose what you want to do
 

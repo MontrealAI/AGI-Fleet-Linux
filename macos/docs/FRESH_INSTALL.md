@@ -1,6 +1,6 @@
 # Set up a fresh M1 or M2 Mac
 
-**Start with one Agent, one small task and two new Standard accounts.** This guide is for Mac 1.20.0, a qualification candidate. Installation does not establish physical reliability or authorize funded jobs.
+**Start with one Agent, one small task and two new Standard accounts.** This guide is for Mac 1.20.1, a qualification candidate. Installation does not establish physical reliability or authorize funded jobs.
 
 You can ask a trusted helper to perform the preparation with you. Keep this page open or print it. Stop at any unexplained error and use [Help and recovery](TROUBLESHOOTING.md).
 
