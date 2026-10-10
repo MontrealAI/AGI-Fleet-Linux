@@ -33,6 +33,8 @@ After a successful run, open the workflow's deployment URL and confirm the expec
 
 `engineering/check-website.py` runs offline. It verifies the public-file allowlist, UTF-8 text, bounded file sizes, template substitution, basic document accessibility, unique section IDs, local assets and anchors, and links to files in this repository. It rejects symlinks, unexpected files, obvious credentials, external assets and links that escape the project path. These checks complement review; they are not a comprehensive secret scanner or accessibility audit. They do not request third-party pages or certify the availability of external websites.
 
+The “Potential and scope” sections in both languages summarize [`POTENTIAL_AND_SCOPE.md`](POTENTIAL_AND_SCOPE.md) and [`POTENTIEL_ET_PERIMETRE.md`](POTENTIEL_ET_PERIMETRE.md). Keep their task examples, current access boundaries, payout illustration and qualification language aligned. Examples are prospective unless linked to observed customer evidence.
+
 Update release metadata only with reviewed evidence. Preserve the difference between native acceptance, contract integration and physical qualification. An observed mainnet state is a dated snapshot, not a live status feed. Keep release archives on GitHub Releases and never place operator profiles, wallets, setup JSON, OAuth data, provider responses or user documents in `website/`.
 
 For rollback, revert the website change through the normal reviewed Git workflow, merge to `main`, and let Pages deploy the restored site. Website deployment does not modify Fleet runtime code, release archives or on-chain configuration.
