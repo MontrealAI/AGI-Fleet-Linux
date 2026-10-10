@@ -8,6 +8,8 @@ Use [Fresh Mac setup](FRESH_INSTALL.md) with genuinely new Standard signer and c
 
 Record the release and source hashes, ZIP filename, physical chip/model, RAM, macOS, native Node architecture/version, OpenClaw version, Docker Desktop/Engine versions, VM memory, free storage, account separation, power/sleep settings, role and approved policy/limits. Keep identifying account details private; publish reviewed, sanitized observations only.
 
+Record any pre-existing system or Homebrew Node installation and any runtime warning during readiness checks. Hosted CI temporarily provisions and restores a pinned system Node for its isolated tests; that does not qualify an operator's existing Node configuration. Do not apply the CI provisioning procedure to an operator Mac or dismiss a readiness warning.
+
 The release provides `qualification/macos-clean-install.mjs` for evidence completeness and file-integrity checking. Its result does not prove that observations are true, approve production, clear STOP or grant financial authority. Follow the shipped qualification template and keep evidence paths within its private evidence folder.
 
 ## Record the result of each gate
