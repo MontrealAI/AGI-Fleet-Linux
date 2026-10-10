@@ -1,0 +1,92 @@
+name: Fleet and AGIJobManager integration
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/job-integration.yml
+      - engineering/run-job-integration.py
+      - engineering/job-lifecycle.mjs
+      - engineering/release_tools.py
+      - engineering/tests/test_job_integration.py
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/job-integration.yml
+      - engineering/run-job-integration.py
+      - engineering/job-lifecycle.mjs
+      - engineering/release_tools.py
+      - engineering/tests/test_job_integration.py
+  workflow_dispatch:
+    inputs:
+      manager_ref:
+        description: Full AGIJobManager commit SHA, or main for an upstream compatibility probe
+        default: 191cf3590e5cdc08df1bb0af500ee28a91c8b010
+        required: true
+        type: string
+  schedule:
+    - cron: '17 6 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fleet-manager-integration-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  integration:
+    name: Job lifecycle / ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    steps:
+      - name: Fetch this exact engineering commit
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+      - name: Check engineering integrity and negative cases
+        run: |
+          python3 engineering/check-repository.py --require-source
+          python3 -m unittest discover -s engineering/tests -v
+      - name: Validate frozen Fleet and freshly compiled AGIJobManager
+        env:
+          MANAGER_REF: ${{ github.event_name == 'schedule' && 'main' || inputs.manager_ref || '191cf3590e5cdc08df1bb0af500ee28a91c8b010' }}
+        run: |
+          set -euo pipefail
+          python3 engineering/run-job-integration.py \
+            --work "$RUNNER_TEMP/fleet-manager-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --evidence "$GITHUB_WORKSPACE/job-evidence" \
+            --manager-ref "$MANAGER_REF"
+      - name: Summarize saved evidence
+        if: always()
+        run: |
+          {
+            echo '## Fleet / AGIJobManager compatibility'
+            echo 'Exact saved Fleet ZIP; all eight standalone EVM scripts; freshly compiled manager; three Node clients; restart and deferred-claim recovery.'
+            echo 'Local chain and mock USDC. Inference, publication, operator independence, physical installation and endurance require separate qualification.'
+            if test -f job-evidence/summary.json; then
+              echo '```json'
+              cat job-evidence/summary.json
+              echo '```'
+            else
+              echo 'No complete summary was produced. This is not PASS.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain every integration log and provenance report
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0, Node 24
+        with:
+          name: fleet-manager-integration-${{ matrix.runner }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: job-evidence/
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 9
