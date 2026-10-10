@@ -152,7 +152,12 @@ def archive_identity(archive, metadata):
         fixture_lock = decode_json(saved.read(prefix + 'test-support/regression-fixtures.json'))
         openclaw_inventory = decode_json(saved.read(prefix + 'shared/runtime/compute/openclaw-2026.9.5.inventory.json'))
     tests = {name for name in tree if re.fullmatch(r'(?:tests|packages/[^/]+/tests)/[^/]+\.test\.mjs', name)}
-    require(len(tests) >= 342 and tests <= source.keys(), 'Complete regression sources missing')
+    require(len(tests) >= 342, 'Complete regression sources missing')
+    require(all(name in tree and tree[name]['sha256'] == checksum for name, checksum in source.items()),
+            'Source inventory differs from saved archive')
+    # The revision inventory excludes current-* paths, including the guide test.
+    # Select every test from the full archive: audit_complete binds each executed
+    # test's hash, and audit_native compares the entire tested archive tree.
     return tree, source, tests, fixture_lock, openclaw_inventory
 
 

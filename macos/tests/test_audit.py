@@ -8,6 +8,7 @@ import sys
 import tempfile
 import types
 import unittest
+import zipfile
 from unittest.mock import patch
 
 MACOS = Path(__file__).resolve().parents[1]
@@ -57,6 +58,46 @@ class TapAuditTests(unittest.TestCase):
         self.assertEqual(audit.parse_tap(data)['tests'], 2)
 
 
+class ArchiveSelectionTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.root = Path(self.temporary.name)
+        self.archive = self.root / 'candidate.zip'
+        self.files = {f'tests/case-{index}.test.mjs': b'ordinary test' for index in range(341)}
+        self.files['tests/current-guides.test.mjs'] = b'current guide test'
+        # The release revision deliberately omits current-* paths. Full archive
+        # integrity and executed-test identity still cover every such test.
+        self.source = [{'path': name, 'sha256': audit.digest(data)} for name, data in self.files.items()
+                       if name != 'tests/current-guides.test.mjs']
+
+    def tearDown(self):
+        self.temporary.cleanup()
+
+    def check(self):
+        with zipfile.ZipFile(self.archive, 'w') as saved:
+            for name, data in self.files.items():
+                saved.writestr('candidate/' + name, data)
+            saved.writestr('candidate/source-inventory.json', json.dumps({'files': self.source}))
+            saved.writestr('candidate/test-support/regression-fixtures.json', '{}')
+            saved.writestr('candidate/shared/runtime/compute/openclaw-2026.9.5.inventory.json', '{}')
+        return audit.archive_identity(self.archive, {'prefix': 'candidate', 'sourceFiles': len(self.source)})
+
+    def test_every_archive_test_is_required_even_outside_revision_inventory(self):
+        tree, source, selection, _, _ = self.check()
+        self.assertEqual(selection, set(self.files))
+        self.assertNotIn('tests/current-guides.test.mjs', source)
+        self.assertEqual(tree['tests/current-guides.test.mjs']['sha256'], audit.digest(b'current guide test'))
+
+    def test_missing_tests_or_mismatched_source_bytes_are_rejected(self):
+        original = self.files.pop('tests/current-guides.test.mjs')
+        with self.assertRaisesRegex(ValueError, 'Complete regression sources missing'):
+            self.check()
+        self.files['tests/current-guides.test.mjs'] = original
+        self.source[0]['sha256'] = 'f' * 64
+        with self.assertRaisesRegex(ValueError, 'Source inventory differs'):
+            self.check()
+
+
 class CompleteEvidenceTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
@@ -91,6 +132,27 @@ class CompleteEvidenceTests(unittest.TestCase):
 
     def test_complete_bound_logs_pass(self):
         self.assertEqual(self.check()['counts']['tests'], 3898)
+
+    def test_test_outside_revision_inventory_remains_mandatory_and_hash_bound(self):
+        self.file = 'tests/current-guides.test.mjs'
+        self.source = {}
+        self.tree = {self.file: {'sha256': 'a' * 64, 'mode': 420}}
+        self.result['results'][0]['file'] = self.file
+        audit.write_json(self.root / 'tested-source.json', self.source)
+        self.assertEqual(self.check()['testFiles'], 1)
+        self.result['results'][0]['sourceSHA256'] = 'd' * 64
+        with self.assertRaisesRegex(ValueError, 'Executed test source differs'):
+            self.check()
+        self.result['results'][0]['sourceSHA256'] = 'a' * 64
+        (self.root / 'complete.tap').write_bytes(self.data + b'# edited\n')
+        with self.assertRaisesRegex(ValueError, 'Retained TAP bytes differ'):
+            self.check()
+        (self.root / 'complete.tap').unlink()
+        with self.assertRaises(OSError):
+            self.check()
+        self.result['results'] = []
+        with self.assertRaisesRegex(ValueError, 'Native test file count differs'):
+            self.check()
 
     def test_modified_retained_tap_is_rejected(self):
         (self.root / 'complete.tap').write_bytes(self.data + b'# edited\n')
