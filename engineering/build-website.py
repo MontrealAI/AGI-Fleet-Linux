@@ -157,13 +157,108 @@ def read_mac_release():
     if selected.is_symlink() or not selected.is_file():
         raise ValueError('Mac release metadata must be a regular repository file')
     release = json.loads(selected.read_text())
-    if not isinstance(release, dict) or release.get('schema') not in {
-            'agi-macos-release-specification/v1', 'agi-macos-candidate-build/v1', 'agi-macos-published-release/v1'}:
+    expected = 'agi-macos-published-release/v1' if selected == published else 'agi-macos-release-specification/v1'
+    if not isinstance(release, dict) or release.get('schema') != expected:
         raise ValueError('Unexpected Mac release metadata schema')
     return release, selected == published
 
 
+
+def mac_published_evidence(release):
+    """Bind website claims to the exact independent publication audit."""
+    def require(condition, message):
+        if not condition:
+            raise ValueError('Published Mac evidence: ' + message)
+
+    def digest(value):
+        return isinstance(value, str) and re.fullmatch(r'[0-9a-f]{64}', value)
+
+    def integer(value, minimum=0):
+        return type(value) is int and value >= minimum
+
+    repository = 'MontrealAI/AGI-Fleet-Linux'
+    commit, run_id = release.get('workflowCommit'), release.get('workflowRun')
+    require(release.get('repository') == repository
+            and release.get('repositoryCommit') == commit
+            and isinstance(commit, str) and re.fullmatch(r'[0-9a-f]{40}', commit)
+            and isinstance(run_id, str) and re.fullmatch(r'[1-9][0-9]*', run_id), 'workflow provenance differs')
+    require(digest(release.get('sourceRevisionSHA256')) and integer(release.get('sourceFiles'), 4816),
+            'source identity is incomplete')
+    evidence, audit = release.get('evidence'), release.get('audit')
+    require(isinstance(evidence, dict) and evidence.get('name') == f'macOS-Qualification-Evidence-v{release["version"]}.zip'
+            and integer(evidence.get('bytes'), 1) and evidence['bytes'] < 450_000_000
+            and digest(evidence.get('sha256')), 'evidence archive identity is invalid')
+    require(isinstance(audit, dict) and audit.get('schema') == 'agi-macos-independent-audit/v1'
+            and audit.get('status') == 'PASS' and digest(audit.get('releaseMetadataSHA256')),
+            'independent audit is missing or incomplete')
+    # publish.py preserves candidate key order and values, replaces these three
+    # fields, and adds five publication-only fields. Reconstruct build.py's
+    # exact UTF-8 serialization so the audit binds *all* candidate metadata,
+    # including the build inputs, base, toolchain and archive verification.
+    candidate = {key: value for key, value in release.items()
+                 if key not in {'repository', 'workflowRun', 'jobIntegrationAcceptance', 'audit', 'evidence'}}
+    candidate.update(schema='agi-macos-candidate-build/v1', nativeAcceptance='NOT_RUN',
+                     operatorGate='CLOSED_PENDING_NATIVE_ACCEPTANCE')
+    candidate_bytes = (json.dumps(candidate, indent=2, ensure_ascii=False) + '\n').encode('utf-8')
+    require(hashlib.sha256(candidate_bytes).hexdigest() == audit['releaseMetadataSHA256'],
+            'audit metadata digest differs from the published candidate')
+    expected = {'version': release['version'], 'releaseSHA256': release['sha256'], 'releaseBytes': release['bytes'],
+                'sourceRevisionSHA256': release['sourceRevisionSHA256'], 'repository': repository,
+                'workflowCommit': commit, 'workflowRun': run_id, 'nativeAcceptance': 'PASS',
+                'jobIntegrationAcceptance': 'PASS', 'operatorGate': 'OPEN_FOR_CONTROLLED_FRESH_INSTALL',
+                'physicalQualification': 'NOT_RUN'}
+    require(all(audit.get(key) == value for key, value in expected.items())
+            and audit.get('productionQualified') is False and audit.get('signedNotarized') is False,
+            'audit belongs to a different release or qualification scope')
+
+    def provenance(row):
+        return (row.get('status') == 'PASS' and row.get('repository') == repository
+                and row.get('workflowCommit') == commit and row.get('workflowRun') == run_id
+                and row.get('platform') == 'darwin' and row.get('architecture') == 'arm64'
+                and row.get('productionQualified') is False)
+
+    native = audit.get('native')
+    require(isinstance(native, list) and len(native) == 2 and all(isinstance(row, dict) for row in native)
+            and {row.get('runnerLabel') for row in native} == {'macos-15', 'macos-26'},
+            'both native macOS versions are required')
+    native_logs, native_counts = 0, []
+    for row in native:
+        require(provenance(row) and row.get('physicalQualification') == 'NOT_RUN'
+                and str(row.get('macOS', '')).split('.')[0] == row['runnerLabel'].removeprefix('macos-')
+                and digest(row.get('summarySHA256')) and digest(row.get('systemNodeProvisioningSHA256')),
+                'native result provenance differs')
+        complete = row.get('complete')
+        require(isinstance(complete, dict) and complete.get('status') == 'PASS'
+                and integer(complete.get('testFiles'), 342) and complete.get('verifiedLogs') == complete['testFiles']
+                and complete.get('verifiedSourceFiles') == release['sourceFiles']
+                and digest(complete.get('resultsSHA256')) and digest(complete.get('testedSourceSHA256')),
+                'complete native suite is missing')
+        counts = complete.get('counts')
+        require(isinstance(counts, dict) and all(integer(counts.get(key)) for key in
+                ('tests', 'suites', 'pass', 'fail', 'cancelled', 'skipped', 'todo'))
+                and counts['tests'] == counts['pass'] >= 3898
+                and all(counts[key] == 0 for key in ('fail', 'cancelled', 'skipped', 'todo')),
+                'native suite did not pass without omissions')
+        native_logs += complete['verifiedLogs']
+        native_counts.append(counts)
+    require(native_counts[0] == native_counts[1] and audit.get('verifiedTapLogs') == native_logs,
+            'native coverage or log total differs')
+    integration = audit.get('integration')
+    require(isinstance(integration, dict) and provenance(integration)
+            and integration.get('runnerLabel') == 'macos-26'
+            and integration.get('standaloneIntegrationScripts') == 8 and integration.get('managerTestsPassed') == 777
+            and integration.get('productionSourcesMatched') == integration.get('contractArtifactsMatched') == 11
+            and integration.get('verifiedLogs') == audit.get('verifiedIntegrationLogs') == 19
+            and integration.get('managerCommit') == '191cf3590e5cdc08df1bb0af500ee28a91c8b010'
+            and all(digest(integration.get(key)) for key in
+                    ('summarySHA256', 'currentManagerLifecycleSHA256', 'filesystemSHA256')),
+            'complete integration and lifecycle evidence is missing')
+
+
 def mac_release_tokens(release, published=False):
+    expected = 'agi-macos-published-release/v1' if published else 'agi-macos-release-specification/v1'
+    if not isinstance(release, dict) or release.get('schema') != expected:
+        raise ValueError('Mac release schema does not match publication status')
     version, tag, name = (release[key] for key in ('version', 'tag', 'name'))
     if (not re.fullmatch(r'\d+\.\d+\.\d+', version)
             or tag != f'v{version}-macos-qualification'
@@ -180,12 +275,14 @@ def mac_release_tokens(release, published=False):
     guide = f'{REPO}/blob/main/macos/docs/FRESH_INSTALL.md'
     notes = f'{REPO}/blob/main/macos/docs/RELEASE_NOTES.md'
     if published:
-        if (native != 'PASS' or release.get('operatorGate') != 'OPEN_FOR_CONTROLLED_FRESH_INSTALL'
+        if (native != 'PASS' or release.get('jobIntegrationAcceptance') != 'PASS'
+                or release.get('operatorGate') != 'OPEN_FOR_CONTROLLED_FRESH_INSTALL'
                 or type(release.get('bytes')) is not int or not 0 < release['bytes'] < 450_000_000
                 or not re.fullmatch(r'[0-9a-f]{64}', release.get('sha256', ''))
                 or not re.fullmatch(r'[0-9a-f]{40}', release.get('workflowCommit', ''))
                 or not re.fullmatch(r'[1-9][0-9]*', str(release.get('workflowRun', '')))):
-            raise ValueError('Published Mac archive needs native acceptance and exact workflow provenance')
+            raise ValueError('Published Mac archive needs native and integration acceptance with exact workflow provenance')
+        mac_published_evidence(release)
     elif release.get('operatorGate') != 'CLOSED_PENDING_NATIVE_ACCEPTANCE':
         raise ValueError('Unpublished Mac candidate must keep its installation gate closed')
     return {
