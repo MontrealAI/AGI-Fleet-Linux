@@ -6,7 +6,7 @@ The [frozen 1.0.8 prerelease](https://github.com/MontrealAI/AGI-Fleet-Linux/rele
 
 ## Native validation
 
-[Run 38007875613](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38007875613) is testing the exact published 1.0.8 ZIP on separate, disposable x64 and ARM64 runners. It runs 23 targeted files (285 tests), followed by the complete 342-file suite (3,897 tests). **Results are pending; the operator installation gate remains closed.**
+[Run 38007875613](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38007875613) is testing the exact published 1.0.8 ZIP on separate, disposable x64 and ARM64 runners. It runs 23 targeted files (285 tests), followed by the complete 342-file suite (3,897 tests). **The complete run has reported a fresh-readiness historical-fixture failure. Final counts are pending; native acceptance is not PASS and the operator installation gate remains closed.**
 
 The prerequisites include real Unix-domain sockets and disposable cross-user ownership, verified Node 24.21.0 in application and SDK system lookup locations, inventory-verified OpenClaw 2026.9.5, and the supplied historical fixtures. Ownership guards and fail-closed STOP handling remain enforced. No operator account, wallet or OAuth store is a fixture.
 
