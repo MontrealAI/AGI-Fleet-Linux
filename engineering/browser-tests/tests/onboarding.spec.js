@@ -20,10 +20,10 @@ async function openGuide(page, language = languages[0], hash = '') {
   await expect(page.locator('#text-size')).toBeVisible();
 }
 
-async function expectPanel(page, panel, focused = true) {
+async function expectPanel(page, panel, focused = true, allowBareWelcome = !focused && panel === 'welcome') {
   await expect(page.locator('[data-panel]:visible')).toHaveCount(1);
   await expect(page.locator(`#${panel}`)).toBeVisible();
-  await expect(page).toHaveURL(new RegExp(`#${panel}$`));
+  await expect(page).toHaveURL(new RegExp(allowBareWelcome ? '\\/start(?:-fr)?\\.html(?:#welcome)?$' : `#${panel}$`));
   if (focused) await expect(page.locator(`#${panel} h2`).first()).toBeFocused();
 }
 
@@ -103,8 +103,10 @@ for (const language of languages) {
         await expect(page.locator(`#${panel} h2`).first()).toBeVisible();
         await expect(page.locator(`#${panel} a[href]`).first()).toBeVisible();
       }
-      await expect(page.locator('#plan noscript')).toContainText('Agent');
-      await expect(page.locator('#plan noscript')).toContainText('Node');
+      const staticPlan = page.locator('#plan noscript .note');
+      await expect(staticPlan).toBeVisible();
+      await expect(staticPlan).toContainText('Agent');
+      await expect(staticPlan).toContainText('Node');
       await expect(page.locator('#installation-guide')).toBeVisible();
       const details = page.locator('#plan details[data-print-open]');
       expect(await details.count()).toBeGreaterThan(0);
@@ -147,7 +149,7 @@ test('the browser Back and Forward buttons follow the choices and preserve their
   await makePlan(page, 'node');
   for (const panel of ['role', 'computer', 'welcome']) {
     await page.goBack();
-    await expectPanel(page, panel);
+    await expectPanel(page, panel, true, panel === 'welcome');
   }
   for (const panel of ['computer', 'role', 'plan']) {
     await page.goForward();

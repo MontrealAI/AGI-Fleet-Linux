@@ -97,6 +97,16 @@
     epochStored = true;
   } catch { /* Navigation still works when session storage is unavailable. */ }
   let lastLocation = '';
+  let focusRevision = 0;
+  let focusTimer = null;
+  let focusFrame = null;
+  function cancelPendingFocus() {
+    focusRevision += 1;
+    if (focusTimer !== null) clearTimeout(focusTimer);
+    if (focusFrame !== null) cancelAnimationFrame(focusFrame);
+    focusTimer = null;
+    focusFrame = null;
+  }
   const route = () => ({path: state.path, os: state.os, role: state.role, panel: state.panel});
   const isGuideEntry = value => value?.agiFleetGuide === 1;
   const isCurrentEntry = value => isGuideEntry(value) && value.epoch === epoch && value.route && typeof value.route === 'object';
@@ -141,7 +151,8 @@
     document.documentElement.classList.toggle('large-text', state.largeText);
     textSize.setAttribute('aria-pressed', String(state.largeText));
   }
-  function show(panel, {focus = true, save = true, historyMode = 'push', keepHash = false} = {}) {
+  function show(panel, {focus = true, deferFocus = false, save = true, historyMode = 'push', keepHash = false} = {}) {
+    cancelPendingFocus();
     state.panel = normalise(panel);
     if (['computer', 'role', 'plan', 'device'].includes(state.panel)) state.path = 'worker';
     if (['hire', 'explore'].includes(state.panel)) state.path = state.panel;
@@ -167,8 +178,20 @@
     if (copyStatus) copyStatus.textContent = '';
     if (save) persist();
     if (historyMode) recordHistory(historyMode, keepHash);
-    if (focus) active.querySelector('h2').focus({preventScroll: true});
-    if (focus) active.scrollIntoView({block: 'start', behavior: 'auto'});
+    if (focus) {
+      const revision = focusRevision;
+      const focusPanel = () => {
+        if (revision !== focusRevision || active.hidden || state.panel !== active.id) return;
+        active.querySelector('h2').focus({preventScroll: true});
+        active.scrollIntoView({block: 'start', behavior: 'auto'});
+      };
+      if (deferFocus) {
+        focusTimer = setTimeout(() => {
+          focusTimer = null;
+          focusFrame = requestAnimationFrame(() => { focusFrame = null; focusPanel(); });
+        }, 0);
+      } else focusPanel();
+    }
   }
   document.querySelectorAll('[data-go]').forEach(link => {
     link.addEventListener('click', event => {
@@ -248,7 +271,8 @@
   if (isGuideEntry(history.state) && !isCurrentEntry(history.state)) state = blankState(state.largeText);
   else if (isCurrentEntry(history.state)) state = {...validatedState(history.state.route), largeText: state.largeText};
   else if (knownPanels.has(requested)) state.panel = requested;
-  const keepInitialHash = !knownPanels.has(requested) && Boolean(document.getElementById(requested)) && !isGuideEntry(history.state);
+  const keepInitialHash = (!requested && state.panel === 'welcome')
+    || (!knownPanels.has(requested) && Boolean(document.getElementById(requested)) && !isGuideEntry(history.state));
   show(state.panel, {focus: false, save: false, historyMode: 'replace', keepHash: keepInitialHash});
   status.textContent = !canSave ? copy.unavailable : restored ? copy.restored : copy.saved;
   function restoreLocation() {
@@ -258,18 +282,18 @@
     const next = location.hash.slice(1);
     if (epochChanged || (isGuideEntry(entry) && !isCurrentEntry(entry))) {
       state = blankState(state.largeText);
-      show('welcome', {save: false, historyMode: 'replace'});
+      show('welcome', {deferFocus: true, save: false, historyMode: 'replace'});
       return;
     }
     if (isCurrentEntry(entry)) {
       state = {...validatedState(entry.route), largeText: state.largeText};
-      show(state.panel, {historyMode: null, focus: knownPanels.has(next)});
+      show(state.panel, {historyMode: null, focus: knownPanels.has(next) || !next, deferFocus: true});
       if (knownPanels.has(next) && state.panel !== next) recordHistory('replace');
       lastLocation = locationKey();
       return;
     }
-    if (knownPanels.has(next)) show(next, {historyMode: 'replace'});
-    else recordHistory('replace', true);
+    if (knownPanels.has(next)) show(next, {historyMode: 'replace', deferFocus: true});
+    else { cancelPendingFocus(); recordHistory('replace', true); }
   }
   window.addEventListener('popstate', restoreLocation);
   window.addEventListener('hashchange', restoreLocation);
@@ -283,7 +307,7 @@
       if (!epochStored) {
         epoch = newId();
         state = blankState(state.largeText);
-        show('welcome', {save: false, historyMode: 'replace'});
+        show('welcome', {deferFocus: true, save: false, historyMode: 'replace'});
         return;
       }
       lastLocation = '';
