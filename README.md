@@ -10,6 +10,16 @@ The Fleet ZIP includes **Agent, Node, Moderator, Employer, Evidence and Recovery
 
 Fleet works with [AGIJobManager](https://github.com/MontrealAI/AGIJobManager): Agent prepares and publishes a supported deliverable, submits its completion URI, and follows settlement; Node reviews the evidence and submits a bonded vote. The contract enforces escrow, identity, review deadlines and USDC settlement. [Integration validation](docs/JOB_INTEGRATION.md) covers the actual clients against the current manager baseline. The [new mainnet deployment](docs/MAINNET_DEPLOYMENT.md), `0xCFA78f9980eA9B55c705B3E44467baE383cE1fA7`, also matches all nine production runtimes; its verified snapshot records paused job intake.
 
+## The potential of Fleet + AGIJobManager
+
+**Together, they can provide a general-purpose foundation for specified, independently reviewed and paid digital work.** Fleet supplies execution and review; AGIJobManager supplies escrow, participant rules and settlement. The reusable job specification can support new task categories as tools and measured competence improve.
+
+The strongest initial opportunities are bounded software work, public-data analysis, scientific reproduction, local websites/demos, document deliverables and source-backed research. These are promising categories to qualify, not a claim of completed commercial work. Automating most keyboard-and-mouse work is a plausible long-term ambition; the current release does not establish that coverage.
+
+Success means **repeatable, independently accepted results at a competitive total cost and low human supervision**. It also requires reliable review, viable economics for every participant and actual host qualification. The current public-work path excludes general access to signed-in business applications.
+
+**[Read the complete potential and scope guide](docs/POTENTIAL_AND_SCOPE.md)** · **[Français](docs/POTENTIEL_ET_PERIMETRE.md)** · **[Explore the website explanation](https://montrealai.github.io/AGI-Fleet-Linux/#potential)**
+
 ## Start here
 
 1. Use a dedicated clean **Ubuntu Desktop 24.04 LTS** host, x86-64 or ARM64, with GNOME, systemd and cgroup v2. Allow at least 8 GB RAM and 40 GB free disk; 16 GB RAM is recommended.
