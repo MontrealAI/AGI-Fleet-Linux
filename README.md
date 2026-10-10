@@ -1,10 +1,12 @@
 # AGI Fleet Linux
 
-**Linux 1.0.9 passed the complete native suite on Ubuntu 24.04 x86-64 and ARM64. It is ready for controlled fresh installation on your Linux machine.** Physical qualification remains open, so this is a prerelease.
+**Linux 1.0.9 passed native tests and AGIJobManager integration on Ubuntu 24.04 x86-64 and ARM64. It is ready for controlled fresh installation on your Linux machine.** Physical qualification remains open, so this is a prerelease.
 
 [Download Linux 1.0.9](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.9-qualification) · [Install step by step](docs/FRESH_INSTALL.md) · [Audited results](validation/LINUX_1_0_9_NATIVE_ADDENDUM.md)
 
 The Fleet ZIP includes **Agent, Node, Moderator, Employer, Evidence and Recovery**. Agent performs sandboxed workstation work; Node independently checks and reviews it. Signer and compute run in separate nonadministrator accounts. Compute uses rootless Docker and policy-bound local services, with spending/run limits, authenticated readiness, durable cleanup evidence and fail-closed STOP controls.
+
+Fleet works with [AGIJobManager](https://github.com/MontrealAI/AGIJobManager): Agent prepares and publishes a supported deliverable, submits its completion URI, and follows settlement; Node reviews the evidence and submits a bonded vote. The contract enforces escrow, identity, review deadlines and USDC settlement. [Integration validation](docs/JOB_INTEGRATION.md) covers the actual clients against the current manager baseline.
 
 ## Start here
 
@@ -22,6 +24,8 @@ The installer pins Node 24.21.0, OpenClaw 2026.9.5 and Docker Engine 29.8.2. New
 | ARM64 | 291 / 291 | 3,897 / 3,897 | 0 / 0 / 0 |
 
 The [independent audit](validation/capable-38022168787-audit.json) verified **734 retained TAP logs** against the exact published ZIP, including real Unix sockets, cross-user ownership and the actual pinned Gateway discovery cache. The original 44 failures and six skips are resolved on both architectures. Their original test source remains unchanged.
+
+[AGIJobManager integration acceptance](validation/LINUX_1_0_9_JOB_INTEGRATION_ADDENDUM.md) additionally passed **eight standalone EVM scripts, a freshly compiled-manager lifecycle with Agent and three Node clients, and 777 manager regressions on each architecture**. All 11 production sources and contract artifacts match the current manager baseline (1.13.0). The independent audit verified 38 integration logs; permanent evidence is attached to the release. Generation, content transport and identities use explicit fixtures.
 
 Fresh physical installation, rootless Docker/cgroup enforcement, real OAuth/inference, live documents, positive base AND browser cleanup, reboot identity persistence and 72-hour endurance are **NOT RUN**. Keep funded work disabled while recording these gates. Native regression success cannot supply physical observations.
 
