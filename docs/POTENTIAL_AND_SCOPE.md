@@ -2,9 +2,11 @@
 
 [Français](POTENTIEL_ET_PERIMETRE.md) · [Fleet website](https://montrealai.github.io/AGI-Fleet-Linux/) · [Installation](FRESH_INSTALL.md) · [Current qualification status](../engineering/current-release.json)
 
-**Together, AGI Fleet Linux and AGIJobManager could become general-purpose infrastructure for paid digital work.** Fleet supplies execution and review; AGIJobManager supplies funding, participation and settlement rules. The framework can serve more deliverables as tools, permissions and measured competence improve.
+**The mission is to build a capable, easy-to-use AI workforce that can perform a large fraction of the work people do with a keyboard, mouse and screen.** That includes work in installed applications and signed-in business tools, alongside files, code and public research. The public sandbox is an initial operating mode, not the intended boundary of the product.
 
-**Completing most work a human can do with a keyboard, mouse and screen is a long-term ambition. The current Linux releases have not demonstrated that breadth.** This guide explains the opportunity, present boundaries and evidence needed to expand.
+AGI Fleet Linux supplies execution and review; AGIJobManager supplies funding, participation and settlement rules. Together, they could support a broad market for independently checked digital work. **The team's approximately US$40 trillion annual total addressable market is a strategic estimate supplied by the project team.** It is not an independently verified market measurement, expected revenue or an established percentage of jobs the system can automate. A defensible market model must specify geography, included work, year, pricing and achievable adoption without counting the same work twice.
+
+The product ambition is broad; readiness is specific to a release, workspace and task. **Current releases have not demonstrated reliable completion of most screen-based jobs.** This guide separates the mission, available development paths and the results needed to establish that coverage.
 
 ## How the two systems work together
 
@@ -18,20 +20,40 @@ Fleet executes and reviews outside the contract. The contract enforces rules; it
 
 The [`computer-work/v2` specification](https://github.com/MontrealAI/AGIJobManager/blob/main/docs/OPERATIONS/GENERAL_COMPUTER_WORK.md) has **no profession or filename-extension allowlist**. It describes goals, inputs, outputs, testable criteria, environment, permissions, budget and deadline. New work need not require a new settlement contract; it requires suitable tools and demonstrated competence.
 
-## Where the opportunity is strongest
+## Choose the workspace for the job
 
-Start with valuable outputs that are inexpensive to check. **These are strategic candidate markets, not demonstrated customer-job results.**
-
-| Candidate work | Example deliverable | Useful independent check |
+| | Public-work release | Authorized workspace preview |
 | --- | --- | --- |
-| **Bounded software changes, tests and tooling** | A source ZIP containing a focused fix and regression tests. | Reproduce the fault, exercise the fix and inspect regressions with available dependencies. |
-| **Public-data analysis and reporting** | A workbook, charts and a concise report from supplied public data. | Recompute results, inspect formulas, units and missing-data treatment. |
-| **Scientific and numerical reproduction** | An executable reproduction with declared assumptions and outputs. | Rerun the calculation and compare with independently established expected results. |
-| **Websites, interactive demos and executable documentation** | A local web application or documented example project. | Exercise the delivered UI and instructions against explicit requirements. |
-| **Documents, spreadsheets and presentations** | A DOCX, XLSX, PPTX or PDF matching a clear brief. | Open the actual files, recalculate where needed and inspect rendered pages or slides. |
-| **Public-source research** | A report with attributable claims and source evidence. | Check claims against supplied sources or qualified public browsing, and identify unresolved questions. |
+| **Use it for** | Public or synthetic inputs and checkable local deliverables. | Developing tasks across installed Linux applications and manually signed-in business tools. |
+| **Environment** | Isolated, network-disabled compute plus a separately qualified public browser. | A dedicated Linux X11 OS account with actual screenshot, keyboard and mouse control through OpenClaw's experimental Linux provider. |
+| **Account access** | No personal browser session; login-dependent tasks are outside this mode. | The applications and sessions deliberately made available in the dedicated account. The operator signs in. |
+| **Authority** | Public-work policy and signer/compute separation. | Signed, expiring grants, declared resources, action/time/cost budgets, revocation and a durable action journal. Desktop authority is account-wide, not a per-site or per-action sandbox. |
+| **Outputs** | The declared public deliverable and existing public-job integration. | Encrypted result handoffs and a separate reviewer workflow. No automatic private-job publication or settlement bridge. |
+| **Status** | Linux 1.0.9 native and integration acceptance recorded; physical gates remain open. | New source under `workstation/engine/`; a pilot-only development preview requiring its own end-to-end and physical qualification. Production execution is disabled; completing a local report cannot enable it. It does not inherit 1.0.9's test results. |
+| **Start** | [Install the public-work release](FRESH_INSTALL.md). | [Follow the workspace quickstart](../workstation/QUICKSTART.md). |
 
-Installed tools include Python, Node.js, data/document libraries, LibreOffice and a disposable desktop. Outputs can include PDF, DOCX, XLSX, PPTX, images, text, source files and project ZIPs within declared limits. Available formats do not establish success rates. Read the [code and data](../fleet/packages/AGI_Agent/compute/skills/agi-code-and-data/SKILL.md), [document](../fleet/packages/AGI_Agent/compute/skills/agi-document-work/SKILL.md) and [desktop](../fleet/packages/AGI_Agent/compute/skills/agi-desktop-work/SKILL.md) operating instructions.
+For the authorized workspace, prepare a **task-only OS account or VM, separate from your normal desktop and the Fleet signing account**. A signed grant can authorize a run and bound its resources, but general mouse and keyboard control can reach every file, terminal, session and application available to that OS account. Application or domain labels do not enforce narrower isolation. Use account provisioning and service-side permissions to limit that reach. Run cost reserves are not a spending cap on purchases or services reached through a signed-in application; those need their own account-level controls.
+
+Screenshots and task material may be sent to the explicitly approved model provider. Encrypted handoffs protect result transport; they do not mean model processing is local-only or provide automatic secure erasure. Local work files and journals may retain plaintext: the operator must manage access, retention and cleanup. Confirm the actual task's data permissions before making accounts or files available. Keep private inputs and results out of the public delivery path.
+
+**A broader public-job format is also available as a source preview.** [Work Studio general-format imports](../workstation/STUDIO.md) support public `computer-work/v2` jobs with arbitrary declared extensions, up to 64 outputs and 64 MiB total output bytes, within each job’s limits. Agent and Node preserve the imported runtime identities, permissions, input hashes, budget and deadline. The quick editor remains v1. This separate import preview does not accept private or dedicated-account jobs and is not an update to the published installer.
+
+## Work across many professions
+
+**These are target task families, not a record of completed customer jobs.** A workspace must expose the necessary tools and permissions before a task can be attempted, and that task family needs representative acceptance evidence before it can be offered as reliable.
+
+| Task family | Example outcome | What needs to be checked |
+| --- | --- | --- |
+| **Software and technical operations** | A tested fix, website, reproducible build or documented deployment. | Reproduce the issue, run checks and inspect the resulting service or artifact. External deployment requires the appropriate workspace and authority. |
+| **Data, science and reporting** | Reconciled data, a workbook, charts or a numerical reproduction. | Independently recompute results; inspect units, formulas, assumptions and missing data. |
+| **Documents and creative production** | Reports, slide decks, layouts, images or other files produced with installed tools. | Open the real files and inspect rendering, content, editable structure and the brief. Tools and licenses must be available. |
+| **Research and knowledge work** | Source-backed findings, comparisons or a structured knowledge base. | Check claims and source quality, missing evidence and the agreed research scope. |
+| **Customer and business operations** | A CRM update, support-case draft, catalog maintenance or administrative record. | Inspect the intended records and actual before/after effects, including unintended changes. Signed-in work belongs in the authorized preview path and needs separate qualification. |
+| **Coordination across applications** | Prepare a proposal, update a tracker and assemble a review package. | Check every handoff, dependency and final state; keep sends, publishing and other external effects within the granted task authority. |
+
+The public release includes Python, Node.js, data/document libraries, LibreOffice and a disposable desktop. Its deliverables can include PDF, DOCX, XLSX, PPTX, images, text, source and ZIPs within the declared limits. The authorized workspace creates a development path for a broader installed application set; it does not make Linux run every Windows or macOS application. Application compatibility, enterprise permissions and required adapters remain task-specific.
+
+Read the current public [code and data](../fleet/packages/AGI_Agent/compute/skills/agi-code-and-data/SKILL.md), [document](../fleet/packages/AGI_Agent/compute/skills/agi-document-work/SKILL.md) and [desktop](../fleet/packages/AGI_Agent/compute/skills/agi-desktop-work/SKILL.md) instructions, or use the [workspace preview quickstart](../workstation/QUICKSTART.md).
 
 ## A concrete example
 
@@ -45,23 +67,25 @@ Installed tools include Python, Node.js, data/document libraries, LibreOffice an
 
 Success means an accepted, usable deliverable with evidence.
 
-## What “screen-based work” does and does not mean
+## Broader access, clear control and an easy first run
 
-Keyboard and mouse access does not establish occupational competence. Jobs can require ambiguous judgment, organizational knowledge, negotiation or long action sequences. Automating bounded tasks across occupations comes before reliably performing whole occupations.
+Keyboard and mouse access enables interaction; reliable outcomes also require judgment, organizational context, recovery and verification. The goal is substantial useful work across occupations. A whole occupation may include responsibilities that cannot be evaluated as a single desktop task.
 
-The **current Linux public-work path** is deliberately bounded:
+The user experience should follow a simple sequence:
 
-| Boundary | Practical meaning |
-| --- | --- |
-| **Public, non-personal or synthetic inputs** | Inputs must be authorized for the public workflow. A file being technically readable does not make it appropriate for public delivery. |
-| **Protected public browser** | Only available when exposed, authorized and qualified. It has no personal session. Login, CAPTCHA and private-account dependencies require declining affected criteria. |
-| **No browser actions that commit external changes** | Messaging, publishing, purchasing and creating accounts through that browser are excluded. Delivering a local website does not include deploying it through a signed-in account. |
-| **Network-disabled work sandbox** | Compute uses installed tools. It cannot install dependencies during a job or substitute host execution or shell networking for a missing capability. |
-| **Declared runtime and output limits** | Missing applications, unsupported requirements or oversized outputs require a different agreed specification or a decline. A valid file hash proves integrity, not correctness. |
+1. **Describe the result.** Name the deliverable or final application state and explain how to accept it.
+2. **Choose the workspace.** Select public work or a dedicated authorized workspace with the required applications.
+3. **Review the authority and budget.** Understand the account's reach, the intended external effects, time and spending limits, and who may receive the result.
+4. **Run with visible progress and a stop path.** Keep evidence of completed, failed and uncertain actions. An interrupted send or submission must be inspected before any retry.
+5. **Review the result.** Check actual files and application state against the acceptance criteria before reporting completion or settlement.
 
-See the [browser scope](../fleet/packages/AGI_Agent/compute/skills/agi-browser-work/SKILL.md) and [code scope](../fleet/packages/AGI_Agent/compute/skills/agi-code-and-data/SKILL.md). Signed-in email, CRM, banking and enterprise account operation falls outside this Linux path. Separate private/native workflows upstream do not establish Linux capability.
+This is the product direction, not a claim that the development preview already provides a finished one-click operator experience. The quickstart describes the current setup and commands.
 
-Larger projects need dependency planning, handoffs, integration review and recovery. Specification references do not supply complete coordination. Separate child-job settlements do not guarantee atomic project settlement; each stage must preserve its authority, budget and accepted inputs.
+The existing public-work mode retains its restrictions: public or synthetic inputs, no personal browser session, no login-dependent browser work, no messaging/publishing/purchasing through that browser, and no network or dependency installation in its work sandbox. Those controls protect that workflow; new account-based work uses the separate authorized workspace. See the [public browser instructions](../fleet/packages/AGI_Agent/compute/skills/agi-browser-work/SKILL.md).
+
+The preview retains signed authority, budget admission, encrypted handoffs and independent review primitives. Their effectiveness on the new Linux path needs its own observed qualification. A reviewer must inspect external effects as well as delivered files. Signed grants, separate wallets and file hashes alone do not prove correct work.
+
+Larger projects also need dependency planning, handoffs, integration review and recovery. Specification references do not supply complete coordination. Separate child-job settlements do not guarantee atomic project settlement; each stage must preserve its authority, budget and accepted inputs. The private workspace currently has no automatic bridge to public AGIJobManager job settlement.
 
 ## Review quality and economics determine scalability
 
@@ -95,19 +119,29 @@ Integration uses an in-process chain, mock tokens and generation/content/identit
 
 Check the [current manifest](../engineering/current-release.json) and [physical qualification ledger](PHYSICAL_QUALIFICATION.md). A changed model, tool, image or policy needs relevant new qualification.
 
-## The milestone that would establish the opportunity
+## A qualification roadmap toward broad coverage
 
-**Repeatably deliver independently accepted work at a competitive total cost with little human supervision.** Establish that for each task class before expanding its scope.
+**Deliver independently accepted work at a competitive total cost with little human supervision.** Track that goal by task family, application and runtime; do not extrapolate a single demo to an occupation or a market share.
+
+| Stage | Demonstration required before promotion |
+| --- | --- |
+| **1. A working desktop** | Real screenshots and input on the intended Linux host; correct provider identity; installed-app and signed-in test-app interaction; STOP, grant expiry and revocation; reboot/reconnect behavior. Use synthetic accounts first. |
+| **2. Useful application tasks** | Held-out tasks in documents, spreadsheets, browser apps, software tools and business records; independent checks of actual outputs and before/after application state. Record failures and human rescue. |
+| **3. Multi-step work** | Work across applications, resume after interruptions, identify uncertain side effects and avoid duplicate sends/submissions. Verify handoffs, deadlines and resource limits. |
+| **4. Independent review and economics** | Reviewers under independent control; planted-error detection; observed inference bills, review costs, human minutes, infrastructure, failures and realized payments where applicable. |
+| **5. Broader operator rollout** | Fresh-install usability studies, tested task templates, clear mode/cost/status controls, support and recovery evidence, sustained operation and application-specific qualification. |
+
+For every evaluation, freeze the workload, criteria and runtime; separate tuning from held-out evaluation and retain failed cases. The record should include:
 
 | Measure | Include in the record |
 | --- | --- |
-| Useful accepted output | Independent outcome evidence for actual delivered files. |
-| Review accuracy | False acceptance of flawed work, false rejection of good work and unresolved uncertainty. |
-| Reliability | Every planned engagement, including failures, timeouts, refusals and abstentions. |
-| Economics | Total Agent and Node costs, unpaid work, gas, human minutes, retries and realized payments. |
-| Completion time and capacity | Queueing, execution, review, disputes and recovery; both Agent and Node capacity. |
-| Operational safety | Cleanup, STOP behavior, reboot recovery and adherence to declared permissions and limits. |
+| **Accepted useful work** | Independent evidence for actual files and application state, with the denominator of all attempted jobs. |
+| **Review accuracy** | False acceptance, false rejection, abstention and correlated model or reviewer errors. |
+| **Total cost and human effort** | Agent and Node inference, retries, failed/unpaid work, infrastructure, gas where applicable, human minutes and realized payment. |
+| **Time and reliability** | Queueing, execution, review, interruptions, recovery and end-to-end completion time. |
+| **External effects and authority** | Intended versus actual sends, edits, submissions and other changes; duplicate or unexpected effects; expiry, revocation and STOP behavior. |
+| **Coverage** | Task families, difficulty, applications, account requirements and exclusions, with sample size and uncertainty. |
 
-Freeze the workload, acceptance criteria and runtime; separate calibration from held-out evaluation; retain failed cases and actual bills. Use independently established outcomes and report uncertainty, particularly where errors may be correlated. See the upstream [measurement and qualification workflow](https://github.com/MontrealAI/AGIJobManager/blob/main/docs/OPERATIONS/GENERAL_COMPUTER_WORK.md#measure-improvements-before-promotion).
+See the upstream [measurement and qualification workflow](https://github.com/MontrealAI/AGIJobManager/blob/main/docs/OPERATIONS/GENERAL_COMPUTER_WORK.md#measure-improvements-before-promotion). A changed model, desktop provider, application version or permission policy needs relevant reevaluation.
 
-More qualified task classes could support an expanding market for machine-performed digital labor, using the same settlement framework. Measure delivery, review and economics, one proven class at a time.
+The opportunity is broad digital labor. The route to it is a capable workstation, a simple operator experience, dependable independent review and measured task success. The approximately US$40 trillion annual strategic estimate describes the team's ambition; evidence of useful work determines the portion the system can actually serve.

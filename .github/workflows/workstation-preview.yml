@@ -1,0 +1,45 @@
+name: Authorized workspace preview
+
+on:
+  pull_request:
+    paths: [workstation/**, engineering/check-workstation-preview.py, engineering/materialize-workstation-preview.py, .github/workflows/workstation-preview.yml]
+  push:
+    branches: [main]
+    paths: [workstation/**, engineering/check-workstation-preview.py, engineering/materialize-workstation-preview.py, .github/workflows/workstation-preview.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    name: Preview regression checks / ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    steps:
+      - name: Check out this revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Select the exact supported Node runtime
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24.19.0
+      - name: Check separate preview inventory and unchanged frozen source
+        run: python3 engineering/check-workstation-preview.py
+      - name: Install locked test-only dependencies without lifecycle scripts
+        run: npm ci --prefix fleet --ignore-scripts --omit=dev --no-audit --no-fund
+      - name: Exercise Linux admission, authority, operator flow and general-format Studio
+        env:
+          AGI_STUDIO_NODE_MODULES: ${{ github.workspace }}/fleet/node_modules
+        run: npm --prefix workstation test
+      - name: Retain inherited encryption, uncertain-action and resume regressions
+        run: npm --prefix workstation run test:regressions
+      - name: State the qualification boundary
+        if: always()
+        run: |
+          echo 'These are source and synthetic regression checks on x64/arm64. They do not commission a real desktop, signed-in application or live model, and do not promote the preview to production.' >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,14 @@
+{
+  "name": "agi-fleet-linux-authorized-workspace",
+  "version": "0.1.0-preview.1",
+  "private": true,
+  "type": "module",
+  "description": "Linux authorized-workspace development preview; separate from the frozen qualification release",
+  "engines": { "node": ">=24.19.0 <25" },
+  "scripts": {
+    "start": "node launch.mjs",
+    "workforce": "node engine/cli.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:regressions": "node test-regressions.mjs"
+  }
+}
