@@ -55,7 +55,7 @@ def audit(root, release, cases):
             assert result['status'] == 'NOT_PASS' and result['scope'] == 'FULL'
             assert totals['tests'] == totals['pass'] + totals['fail'] == 3897 and totals['fail'] == 6
         else:
-            assert result['scope'] == 'PARTIAL' and totals['tests'] == totals['pass'] + totals['fail'] == 085 and totals['fail'] == 0
+            assert result['scope'] == 'PARTIAL' and totals['tests'] == totals['pass'] + totals['fail'] == 285 and totals['fail'] == 0
         failed = [row for row in result['results'] if row['exitCode'] != 0]
         expected_failures = set()
         if scope == 'complete':
