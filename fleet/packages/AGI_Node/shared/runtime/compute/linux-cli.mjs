@@ -1,5 +1,5 @@
 import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import crypto from 'node:crypto';import net from 'node:net';import {spawnSync} from 'node:child_process';import {pathToFileURL} from 'node:url';import {createInterface} from 'node:readline/promises';
-import {roleContract,setupRole} from './roles.mjs';import {setupCapable} from './setup.mjs';import {validateHandoffFile} from './setup-ledger.mjs';import {assertComputePolicy} from './policy.mjs';import {runtimeEnvironment} from './runtime-env.mjs';import {assertLinuxHost,privateObject,stopLinuxServices,startLinuxService} from './linux-host.mjs';import {publicBrowserSocketsStopped} from './public-browser-runtime.mjs';import {desktopCheck} from './setup-support.mjs';import {atomicWrite} from '../src/util.mjs';
+import {roleContract,setupRole} from './roles.mjs';import {setupCapable} from './setup.mjs';import {validateHandoffFile} from './setup-ledger.mjs';import {assertComputePolicy} from './policy.mjs';import {runtimeEnvironment} from './runtime-env.mjs';import {assertLinuxHost,privateObject,stopLinuxServices,startLinuxService,linuxReleaseVersion} from './linux-host.mjs';import {publicBrowserSocketsStopped} from './public-browser-runtime.mjs';import {desktopCheck} from './setup-support.mjs';import {atomicWrite} from '../src/util.mjs';
 const need=(v,c)=>{if(!v)throw Error(c);};
 const code=e=>/^[A-Z0-9_]{3,100}$/.test(e?.message??'')?e.message:'LINUX_OPERATION_FAILED';
 const listening=port=>new Promise(resolve=>{const s=net.connect({host:'127.0.0.1',port});s.setTimeout(1000);s.once('connect',()=>{s.destroy();resolve(true);});s.once('error',()=>resolve(false));s.once('timeout',()=>{s.destroy();resolve(false);});});
@@ -21,7 +21,7 @@ export async function linuxMain(args=process.argv.slice(2)){
  if(action==='inspect'){
   let policy='PASS',host='PASS';try{assertComputePolicy(c);}catch(e){policy=code(e);}try{assertLinuxHost(c);}catch(e){host=code(e);}
   let health=null;if(policy==='PASS')try{const r=await fetch('http://127.0.0.1:'+c.port+'/health',{headers:{Authorization:'Bearer '+c.token},signal:AbortSignal.timeout(5000)});if(r.ok){const v=await r.json();health={role:v.role===role?role:null,stopped:v.stopped===true,busy:v.busy===true,policyCurrent:v.policyCurrent===true,runs24h:Number.isSafeInteger(v.runs24h)&&v.runs24h>=0?v.runs24h:null,images24h:Number.isSafeInteger(v.images24h)&&v.images24h>=0?v.images24h:null};}}catch{}
-  console.log(JSON.stringify({schema:'agi-linux-inspection/v1',platform:'linux',arch:process.arch,release:'1.0.6',role,policy,host,computeSTOP:fs.existsSync(path.join(c.profileDir,'COMPUTE_STOP')),health,productionQualified:false,walletAccessed:false,providerCall:false},null,2));return;
+  console.log(JSON.stringify({schema:'agi-linux-inspection/v1',platform:'linux',arch:process.arch,release:linuxReleaseVersion(),role,policy,host,computeSTOP:fs.existsSync(path.join(c.profileDir,'COMPUTE_STOP')),health,productionQualified:false,walletAccessed:false,providerCall:false},null,2));return;
  }
  if(action==='stop'){stopMarker(c,'OPERATOR_REQUESTED_STOP');console.log(JSON.stringify(await stop(c),null,2));console.log('COMPUTE_STOP preserved. Explicit reconciliation is required.');return;}
  assertLinuxHost(c);assertComputePolicy(c);need(!fs.existsSync(path.join(c.profileDir,'COMPUTE_STOP')),'COMPUTE_STOP_REQUIRES_RECONCILIATION');
@@ -30,7 +30,7 @@ export async function linuxMain(args=process.argv.slice(2)){
  }
  need(action==='qualify'&&['agent','node'].includes(role),'LINUX_ACTION_INVALID');const cycles=Number(take('--cycles')??'1');need(Number.isSafeInteger(cycles)&&cycles>=1&&cycles<=50,'LINUX_CYCLE_LIMIT');
  const directory=fs.mkdtempSync(path.join(c.home,'.agi-linux-qualification-'));fs.chmodSync(directory,0o700);const reportFile=path.join(directory,'report.json'),started=Date.now();
- const report={schema:'agi-linux-local-qualification/v1',release:'1.0.6',role,startedAt:new Date(started).toISOString(),state:'RUNNING',requestedCycles:cycles,completedCycles:0,results:[],providerCalled:false,walletAccessed:false,productionQualified:false,scope:'Local Docker desktop/document checks; OAuth, live job cleanup, reboot and endurance remain separate.'};
+ const report={schema:'agi-linux-local-qualification/v1',release:linuxReleaseVersion(),role,startedAt:new Date(started).toISOString(),state:'RUNNING',requestedCycles:cycles,completedCycles:0,results:[],providerCalled:false,walletAccessed:false,productionQualified:false,scope:'Local Docker desktop/document checks; OAuth, live job cleanup, reboot and endurance remain separate.'};
  const save=()=>atomicWrite(reportFile,JSON.stringify(report,null,2));save();const env=runtimeEnvironment(c);let aborted=false;const cancel=()=>{aborted=true;};process.once('SIGINT',cancel);process.once('SIGTERM',cancel);
  const run=(exe,a,capture=true)=>spawnSync(exe,a,{env,encoding:'utf8',timeout:180000,maxBuffer:2*1024*1024,shell:false});
  try{for(let i=0;i<cycles;i++){

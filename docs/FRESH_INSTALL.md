@@ -1,105 +1,174 @@
-# Fresh Linux installation and physical qualification
+# Fresh Linux installation
 
-**The native gate is open for Linux 1.0.9 on both x86-64 and ARM64.** The [hash-bound addendum](../validation/LINUX_1_0_9_NATIVE_ADDENDUM.md) records audited complete-suite PASS. Follow this procedure for a controlled fresh physical installation and keep the [physical ledger](PHYSICAL_QUALIFICATION.md) current.
+**Start with Agent on a dedicated Ubuntu Desktop 24.04 LTS host.** This guide is for **Linux 1.0.10**, a qualification prerelease. Download the complete Fleet archive from the [1.0.10 release page](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.10-qualification), and check that its release notes report completed native acceptance for your architecture before installing. Historical 1.0.9 results do not qualify changed 1.0.10 source.
 
-Linux 1.0.9 is a controlled qualification candidate. Native regression results and the exact frozen archive identity are recorded in the repository validation addendum. Physical installation, real OAuth/inference, document creation, cleanup, reboot identity persistence and endurance are separate gates and have not yet been completed by engineering.
+A successful installation is the start of physical qualification. Real OAuth/inference, live documents, cleanup, reboot and 72-hour endurance require observations on your machine. Record them in the [physical ledger](PHYSICAL_QUALIFICATION.md). Installation does not enable funded jobs or establish production readiness.
 
-Use this one fresh-install path. Prior installations stay inactive and preserved. No migration, historical fixtures or manual state editing is required. The engineering regression fixtures published alongside the release are not operator installation inputs.
+## Before you begin
 
-## Supported Target
-Ubuntu Desktop 24.04 LTS on x86-64 or ARM64, systemd, cgroup v2 and a normal GNOME desktop login. Minimum 8 GB RAM; 16 GB or more recommended. Reserve at least 40 GB free for the release, pinned runtimes and Docker images; compute admission requires 20 GiB available. Internet is needed for signed Ubuntu/Docker packages, hash-pinned Node, lockfile-pinned OpenClaw, image builds and OAuth. This edition is not qualified for Ubuntu 22.04/26.04, other distributions, WSL, containers, headless desktop substitutes or Mac.
+| Requirement | What to prepare |
+| --- | --- |
+| Host | Dedicated clean Ubuntu **Desktop 24.04 LTS**, x86-64 or ARM64; GNOME login, systemd and cgroup v2 |
+| Resources | At least 8 GB RAM; 16 GB recommended. Reserve at least 40 GB free; compute admission requires 20 GiB available |
+| Administrator | One existing administrator account to prepare the machine and transfer the setup kit |
+| New accounts | Two unused names, such as `agisignerlinux1` and `agicomputelinux1`; the helper creates both |
+| Internet | Access to Ubuntu/Docker packages, pinned Node/OpenClaw downloads, image builds and OAuth |
+| Container software | No existing Docker/container packages or Docker apt sources; preparation preserves and refuses existing installations |
+| Provider access | Access for the role's prompted OAuth logins; provider use remains subject to your subscription and approved budget |
 
-## What Is Included
-Agent, Node, Moderator, Employer, Evidence and Recovery applications. Agent executes sandboxed workstation work; Node independently checks/reviews. The four specialist roles keep their existing bounded role authority. Evidence has no signing wallet. Start with Agent; qualify Node and each additional role independently in another dedicated signer/compute pair. Do not treat one role's success as qualification of the other roles.
+Ubuntu 22.04/26.04, other distributions, WSL, containers, headless substitutes and Macs are outside this qualification target. A supported ARM64 architecture alone does not qualify a particular physical device.
 
-New profiles default to 256 runs in a rolling 24 hours. Agent and Node allow 32 image attempts; specialist roles allow zero. Work remains serial, with explicit sandbox CPU/memory/PID limits and a 4 GiB gateway heap. Existing budget controls and explicit signer approvals remain in force. No paid-provider fallback, wallet spending or funded job submission is authorized by installing or running local qualification.
+**Keep old installations inactive and preserved.** Use fresh accounts and a clean host. Do not uninstall an existing Docker environment to force preparation to accept it. There is no migration prerequisite, and the release's engineering fixtures are not installation inputs.
 
-## Account And Data Model
-An existing administrator prepares the machine. NEW nonadministrator accounts hold the signer and compute separately. Neither joins sudo, docker, lxd, incus or another privileged group. Only the signer holds its encrypted wallet. Compute uses its own rootless Docker socket under /run/user/UID. It never receives the wallet. System services use the installed immutable code and private home profiles. Native GNOME Secret Service support is available; an unavailable/locked keyring never causes plaintext key storage. Login background service remains an explicit UI choice.
+The signer holds its encrypted wallet; compute never receives that wallet. Both accounts remain nonadministrators outside `sudo`, `docker`, `lxd`, `incus` and other privileged groups. Compute uses its own rootless Docker socket. All steps below use local desktop sessions, with the account for each step explicitly identified.
 
-Keep previous installations inactive and preserved. Do not use an old signer/compute home as a fixture. This preparation script intentionally refuses pre-existing Docker/container packages or Docker apt sources: it will not replace or stop an existing Docker installation. If this preflight refuses, use an otherwise clean dedicated Ubuntu host and report the refusal; do not uninstall an existing environment to force acceptance. No migration, engineering fixtures or manual profile/state edits are required.
+## 1. Download and verify — administrator
 
-## 1. Verify And Place The Complete Release — Administrator
-Download `AGI_Fleet_Linux_v1.0.9.zip` from the [frozen prerelease](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.9-qualification) and read the current validation addendum. The expected ZIP SHA-256 is `5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102`. Verify it before extraction:
+Download these two assets together from the [release page](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.10-qualification):
 
-    printf '%s  %s\n' 5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102 AGI_Fleet_Linux_v1.0.9.zip | sha256sum --check
+- `AGI_Fleet_Linux_v1.0.10.zip` — the complete application, including all six roles.
+- `SHA256SUMS-v1.0.10.txt` — published checksums.
 
-Before extracting, confirm the destination below is absent. If it exists, stop and preserve it. Extract the entire ZIP into a new directory; do not extract an individual role. A stable read-only location shared by the new accounts is /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9. From the directory containing the ZIP:
+Use a new download directory. Do not select GitHub's automatically generated **Source code** ZIP or a native evidence archive for installation. Each supplied archive is below 450,000,000 bytes.
 
-    sudo test ! -e /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9
-    sudo mkdir -p /opt/agi-fleet-linux
-    sudo unzip -n AGI_Fleet_Linux_v1.0.9.zip -d /opt/agi-fleet-linux
-    sudo chown -R root:root /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9
-    sudo chmod -R go-w /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9
-    /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9/Verify-Linux.sh
+Open Terminal in the download directory and run:
 
-Use an absent destination. If it already exists, stop and preserve it. Verification must report PASS, including all seven manifests/source inventories. Checksums establish integrity, not independent publisher authentication. Keep the code at this path after approval; moving or editing it changes the approved runtime identity.
+```bash
+sha256sum --check --ignore-missing SHA256SUMS-v1.0.10.txt
+```
 
-## 2. Prepare New Accounts — Administrator
-Use new, unused account names. Example:
+**Continue only when `AGI_Fleet_Linux_v1.0.10.zip: OK` appears and the command succeeds.** Missing evidence archives may be ignored; the Fleet ZIP may not. A checksum detects changed bytes; it is not independent publisher authentication.
 
-    sudo /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9/Prepare-Ubuntu.sh agisignerlinux1 agicomputelinux1
+Ubuntu needs `unzip` for the next step. If it is missing, the administrator can install it:
 
-Review the printed changes and type PREPARE. The helper installs Ubuntu prerequisites and Docker Engine/CLI/rootless extras exactly 29.8.2 from Docker's signed Noble repository. It verifies Docker's signing-key fingerprint, creates private 0700 homes, asks you to set both account passwords, disables the newly installed root Docker service, and enables compute-only lingering plus UID-scoped CPU/memory/PID delegation. It does not lower AppArmor restrictions or grant access to the root Docker socket. A failure stops the sequence and preserves the attempt. Do not blindly rerun a partly completed preparation or repurpose those accounts.
+```bash
+sudo apt-get update && sudo apt-get install --yes unzip
+```
 
-## 3. Create The Signer Setup Kit — New Signer Desktop Login
-Log into agisignerlinux1 using Ubuntu's login screen. Open Terminal; never launch the signer with sudo:
+Extract into a new, stable directory. The following block stops at the first failed command; if the destination already exists, it does nothing. Preserve an existing destination and diagnose it before proceeding.
 
-    /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9/packages/AGI_Agent/Launch.sh
+```bash
+sudo test ! -e /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10 &&
+sudo mkdir -p /opt/agi-fleet-linux &&
+sudo unzip -n AGI_Fleet_Linux_v1.0.10.zip -d /opt/agi-fleet-linux &&
+sudo chown -R root:root /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10 &&
+sudo chmod -R go-w /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10 &&
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10/Verify-Linux.sh
+```
 
-The launcher installs verified Node 24.21.0 privately, then opens the local signer UI in its seed-wallet profile. Create a new encrypted wallet and preserve the recovery information using the application's recovery workflow. Do not import or fund an operator's existing wallet for qualification. For Evidence, the corresponding launcher opens its read-only profile without a wallet.
+**Expected:** `status: PASS` and `editions: 7`, covering the Fleet and six role manifests/inventories. Preserve the original ZIP and checksum outside the application tree. Do not move or edit installed code after approval; its location and bytes form part of the runtime identity.
 
-In the stopped, unlocked signer, select workstation compute and export the private OpenClaw setup JSON. This file carries a bearer token and public approval material, not the wallet. Keep it inside this signer's private home, such as Downloads. Never paste it into chat, attach it to a support report, place it in a shared folder or print its contents. Leave the signer stopped after export.
+## 2. Prepare new accounts — administrator
 
-## 4. Transfer Only The Setup Json — Administrator
-Switch to the administrator desktop. Supply the actual exported filename:
+Use new, unused account names. These examples are used throughout this guide; replace both names consistently if you choose others.
 
-    sudo /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9/Transfer-Setup.sh /home/agisignerlinux1/Downloads/ACTUAL_SETUP_FILENAME.json agicomputelinux1
+```bash
+sudo /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10/Prepare-Ubuntu.sh agisignerlinux1 agicomputelinux1
+```
 
-The helper checks source ownership, the private signer home, canonical parent directories, bounded schema and distinct signer/compute UIDs. It creates /home/agicomputelinux1/AGI-Setup/OpenClaw-Setup.json with compute ownership and mode 0600. It refuses an existing destination. Only this setup JSON is copied. Preserve wallet files in the signer account.
+Review the proposed changes and type `PREPARE`. The helper verifies Docker's signing key, installs prerequisites and Docker Engine/CLI/rootless extras **29.8.2**, creates private `0700` homes, prompts for both account passwords, disables the newly installed root Docker service, and enables compute-only lingering with CPU/memory/PID delegation. It does not weaken AppArmor or grant access to the root Docker socket.
 
-## 5. Prepare And Install Compute — New Compute Desktop Login
-Log into agicomputelinux1 using the login screen. Do not use su, sudo -u or a root terminal; a real user session and D-Bus are required. In Terminal:
+**Expected:** `Preparation complete.` A failure preserves the attempt. Do not rerun a partially completed preparation blindly: existing packages, accounts or homes intentionally cause a refusal. See [troubleshooting](TROUBLESHOOTING.md).
 
-    /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9/Prepare-Compute.sh
-    /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9/packages/AGI_Agent/Install.sh --file /home/agicomputelinux1/AGI-Setup/OpenClaw-Setup.json
+## 3. Create the setup kit — signer desktop
 
-Prepare-Compute installs the user rootless Docker service and verifies exact Docker version and cgroup enforcement. Install independently rechecks the account, private socket, runtime, free disk, images and desktop. It prepares pinned OpenClaw 2026.9.5, performs real OAuth separately for Creator/Checker/Reviewer, then asks you to review and approve the exact policy digest. Follow the OAuth prompts in the compute session; do not copy OAuth secrets to the signer.
+Use Ubuntu's login screen to log into **agisignerlinux1**. Open Terminal and run without `sudo`:
 
-The installer creates two policy-bound systemd user services, authenticates Gateway readiness and compute health, and completes its transaction before clearing only its own temporary setup STOP. It cannot reconcile an earlier cleanup STOP. Both services remain local to 127.0.0.1. Standard setup success establishes transport and policy identity; it does not prove live tools or production readiness.
+```bash
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10/packages/AGI_Agent/Launch.sh
+```
 
-Accept removal of the imported temporary setup kit when offered after success. Return to the signer and delete its temporary exported kit through the file manager after both endpoints are working. Do not delete the wallet, OpenClaw state, journals or setup reports.
+The launcher installs hash-verified Node **24.21.0** privately and opens the local signer UI. Create a new encrypted seed wallet and preserve its recovery information using the application's workflow. Do not import or fund an existing operator wallet for qualification. Native GNOME Secret Service support is available; a missing or locked keyring does not permit plaintext key storage.
 
-## 6. Local Tools And Live Work — Qualification
-From compute, run:
+In the **stopped, unlocked** signer, select workstation compute and export its private OpenClaw setup JSON into this signer's private home, such as `Downloads`. The kit contains a bearer token and public approval material. It contains no wallet, but is still sensitive: do not paste it into chat or a support issue. Leave the signer stopped after export.
 
-    /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9/packages/AGI_Agent/Inspect.sh
-    /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.9/packages/AGI_Agent/Qualify-Linux.sh --cycles 1
+## 4. Transfer the setup kit — administrator
 
-Inspect is read-only and prints filtered policy/host/health status. The frozen inspection and local qualification helpers retain a historical `release: 1.0.6` report label; identify this candidate by its exact ZIP SHA-256 and the 1.0.9 addendum. That label does not change the archive identity or supply any physical PASS. Local qualification creates and rereads a real DOCX in a real restricted Docker container, verifies host ownership and actual memory/CPU/PID controls, checks the desktop, and positively verifies test-container removal. It makes no model call and accesses no wallet. Its private report is saved to the printed .agi-linux-qualification-* directory. A local failure writes/preserves COMPUTE_STOP and stops qualification.
+Switch to the administrator desktop. Replace `ACTUAL_SETUP_FILENAME.json` with the exported filename; quote the full path if it contains spaces.
 
-Switch to the signer. Test the connection, review the authenticated compute identity, explicitly approve its bounded test, and confirm that the exact approval is persisted. Run real OAuth-backed inference. Then use Create test documents with an actual synthetic document request. Open and inspect the returned deliverables. This live workflow must use real tools/files and record positive base AND browser sandbox cleanup postconditions in compute-journal. A green local Docker check alone does not qualify OpenClaw job cleanup.
+```bash
+sudo /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10/Transfer-Setup.sh "/home/agisignerlinux1/Downloads/ACTUAL_SETUP_FILENAME.json" agicomputelinux1
+```
 
-No unexplained sandbox containers may remain; COMPUTE_STOP must be absent; authenticated health must remain current. If tools remain NOT_TESTED or any check is ambiguous, do not advance the ledger. Repeat for Node's independent workflow using its own separate account pair. Protected public browsing starts disabled. Configure-Public-Browser.sh and Import-Public-Browser-Qualification.sh support explicit policy review and exact-host evidence, but require their own independent native qualification; do not enable it merely to complete the offline document test.
+**Expected:** the helper copies only the kit to `/home/agicomputelinux1/AGI-Setup/OpenClaw-Setup.json`, owned by compute with mode `0600`. It validates ownership, private paths, schema and distinct signer/compute identities. It refuses an existing `AGI-Setup` destination. Keep wallet files in the signer account; do not copy the signer's home or OAuth data.
 
-The [mainnet deployment guide](MAINNET_DEPLOYMENT.md) supplies the verified manager address and creation block for later contract setup. Complete the physical workflow and independent role/RPC qualification first. A deployment snapshot does not authorize signing or open contract intake.
+## 5. Install compute — compute desktop
 
-## 7. Reboot And Endurance
-After a successful live cycle, record the exact release ZIP hash, OS/architecture, Node/OpenClaw/Docker versions, role, policy digest and sanitized qualification results. Reboot normally. Log into the signer again. The compute account's lingering user services should return on their own. Confirm authenticated identity is unchanged and its approval persisted; rerun inspection, inference, a document workflow and both cleanup checks. Unexpected identity change requires review; do not bypass it by editing state.
+Use Ubuntu's login screen to log into **agicomputelinux1**. Do not use `su`, `sudo -u` or a root terminal; a real session and D-Bus are required. Run the first command and continue only after it reports success:
 
-Run 50 local cycles with Qualify-Linux.sh --cycles 50. Separately perform the documented 72-hour host endurance period: record authenticated health and a synthetic live document/checker cycle at the beginning, after reboot, at least every 12 hours, and at the end. Verify cleanup after every live job, no STOP, no identity drift, no orphaned containers, and stable memory/disk use. Keep provider activity within approved subscriptions/budgets and leave paid jobs, transactions and wallet funding disabled during engineering qualification. Suspend/restore and network interruption must fail closed and be reconciled only with retained evidence. A completed 50-cycle local check does not substitute for the 72-hour live endurance period.
+```bash
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10/Prepare-Compute.sh
+```
 
-Native test acceptance is recorded in the hash-bound addendum for this exact archive: the expanded 25-file targeted selection followed by all 342 test files on suitably permitted isolated x64 and ARM64 engineering runners. Do not start this procedure while either required result is pending or failed. These fixtures are engineering-only and are not required by this installation procedure. Do not use your signer/compute accounts for those tests. Restricted-run results, capable-run results and your physical Linux-host ledger must remain separate.
+**Expected:** `Rootless Docker ready.` Then run:
 
-## Failure, Stop And Reporting
-Stop on any failure. Preserve the new accounts, Docker state, compute-journal, OpenClaw profile, service files, support report, setup report and COMPUTE_STOP. Do not run Mac repair/restart/rollback launchers, remove STOP manually, replace ownership guards, weaken AppArmor or substitute a root Docker daemon. An installation failure may require a diagnosed new candidate and new unused accounts; there is no automatic same-release cleanup reconciliation in this edition.
+```bash
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10/packages/AGI_Agent/Install.sh --file /home/agicomputelinux1/AGI-Setup/OpenClaw-Setup.json
+```
 
-Stop-Compute.sh deliberately writes an operator STOP and proves services, ports and recognized sockets stopped. Start-Approved.sh is only for an already approved STOP-free profile; it cannot undo Stop-Compute. Normal reboot does not require either command. A listening service is not work authority when STOP exists.
+The installer independently checks the account, rootless socket, resource controls, disk, images and desktop. It prepares pinned OpenClaw **2026.9.5**. Follow the Agent's separate **Creator, Checker and Reviewer** OAuth prompts in this compute session. Review the exact policy digest before approving it. Other roles have different OAuth profiles; see the table below.
 
-Report: release hash, Ubuntu version and architecture, RAM/free disk, role, failing stage, sanitized error code, Inspect output, local qualification report and the bounded sanitized setup/cleanup reports. Never attach setup JSON, wallet material, OAuth/token stores, raw service journals, provider responses or user documents. Existing durable cleanup evidence records sanitized command class, phase, target, exit/signal and timing; retain the original local records for engineering diagnosis. Do not post full home archives.
+**Expected:** the setup transaction completes and prints the path to `setup-diagnostics.json`. Two policy-bound systemd **user** services provide authenticated Gateway readiness and compute health on `127.0.0.1`. The installer may clear only its own temporary setup STOP; it cannot clear an earlier cleanup STOP.
 
-## All Six Roles
-For each additional role substitute packages/AGI_Node, packages/AGI_Moderator, packages/AGI_Employer, packages/AGI_Evidence or packages/AGI_Recovery in the launch/install/inspect commands, and use distinct fresh signer/compute accounts. Prepare-Ubuntu is the first clean-host preparation; it deliberately refuses subsequent existing Docker packages. Additional account-pair provisioning on the same host is not automated by this candidate: qualify additional roles on separately prepared clean hosts. Qualify-Linux.sh is provided for Agent and Node because the four specialist roles do not expose workstation tools.
+Accept removal of the imported temporary kit if offered after success. After both endpoints work, return to the signer and delete its temporary exported kit through the file manager. Keep the wallet, OpenClaw state, journals and setup reports.
 
-## Reference Material
-The full package retains historical source, Mac launchers, fixtures metadata and prior reports for engineering traceability. They are not the Linux installation path. Use only this guide and the .sh entry points named here. A historical PASS, a help-only launcher probe or a syntax check is not native Linux acceptance. Linux 1.0.9 has its own hashes and requires its own validation addendum. No release in this package is represented as flawless, production-qualified or physically qualified on M1/M2.
+## 6. Qualify tools and live work
+
+In the compute desktop, run:
+
+```bash
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10/packages/AGI_Agent/Inspect.sh
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.0.10/packages/AGI_Agent/Qualify-Linux.sh --cycles 1
+```
+
+Read `Inspect.sh`'s fields, not just its exit status. Before work, expect `policy: PASS`, `host: PASS`, `computeSTOP: false`, and authenticated health with the correct role, `policyCurrent: true` and `stopped: false`. `health: null` is not readiness. Inspect can print a failed check while exiting successfully.
+
+Local qualification creates and rereads a real DOCX inside a restricted Docker container, checks the desktop, verifies host ownership and memory/CPU/PID limits, then positively confirms test-container removal. **It makes no provider call and accesses no wallet.** Its private report path is printed. Any failure writes or preserves `COMPUTE_STOP`.
+
+Return to the signer and complete the live checks:
+
+1. Test the compute connection; review the authenticated identity and explicitly approve the bounded test. Confirm the approval persists.
+2. Run real OAuth-backed inference.
+3. Use **Create test documents** with synthetic content. Open the returned files and inspect their contents.
+4. Confirm positive **base and browser** sandbox cleanup postconditions in `compute-journal`, current authenticated health, no STOP and no unexplained containers after the job.
+
+A local Docker PASS does not prove OpenClaw live cleanup. If tools remain `NOT_TESTED`, health is absent, or any check is ambiguous, record the result and stop advancement. Protected public browsing starts disabled and requires separate explicit policy review and exact-host qualification; do not enable it to complete the offline document check.
+
+New profiles allow 256 runs in a rolling 24 hours. Agent/Node allow 32 image attempts; specialist roles allow zero. Work is serial and retains resource limits, budget controls and signer approvals. Stay within approved provider use; keep wallet funding, paid jobs and transactions disabled during engineering qualification.
+
+## 7. Reboot, repeat and record endurance
+
+Record the exact release ZIP hash, OS/architecture, role, runtime versions and policy digest in a private copy of the [physical ledger](PHYSICAL_QUALIFICATION.md). After a successful live cycle:
+
+1. Reboot normally. Compute's lingering user services should return without running a stop/start helper.
+2. Log into the signer. Verify unchanged authenticated identity and persisted approval. Repeat inspection, inference, live document/review and both cleanup checks.
+3. For Agent/Node, run `Qualify-Linux.sh --cycles 50` from the compute account.
+4. Observe **72 elapsed hours**. Retain a sanitized health observation and a live synthetic role workflow at the start, after reboot, at least every 12 hours, and at the end. Check cleanup after every live job, stable memory/disk use, and no STOP, identity drift or orphaned containers.
+5. Record suspend/restore and network interruption behavior. A fail-closed interruption must be diagnosed and reconciled with retained evidence before work resumes.
+
+Fifty local cycles do not substitute for 72 hours of live observations. If an interruption causes STOP, there is no automatic cleanup reconciliation in this candidate. Do not remove it to finish the ledger.
+
+The [AGIJobManager integration guide](JOB_INTEGRATION.md) and [mainnet deployment record](MAINNET_DEPLOYMENT.md) cover later contract configuration. Check current on-chain state and complete independent role/RPC qualification before funded operation; a deployment snapshot does not authorize signing or open intake.
+
+## All six roles
+
+Use the package column in place of `packages/AGI_Agent` in the launch/install/inspect paths. Use each role's own exported kit and separate fresh accounts. **Additional account-pair provisioning on a host that already has Docker is not automated.** Qualify additional roles on separately prepared clean hosts; `Prepare-Ubuntu.sh` intentionally refuses existing Docker installations.
+
+| Role | Package | OAuth profiles | Work and qualification scope |
+| --- | --- | --- | --- |
+| Agent | `packages/AGI_Agent` | Creator, Checker, Reviewer | Sandboxed workstation creation; local DOCX and live tools |
+| Node | `packages/AGI_Node` | Checker, Reviewer | Independent checking/review; local DOCX and live review tools |
+| Moderator | `packages/AGI_Moderator` | Moderator | Appointed, conflict-free dispute work within policy; no workstation tools |
+| Employer | `packages/AGI_Employer` | Employer | Own scoped jobs and bounded buyer actions; no workstation tools |
+| Evidence | `packages/AGI_Evidence` | Evidence | Read-only evidence; **no signing wallet** or workstation tools |
+| Recovery | `packages/AGI_Recovery` | Recovery | Scoped protocol recovery after deadlines; no workstation tools |
+
+All six packages have `Launch.sh`, `Install.sh`, `Inspect.sh`, `Stop-Compute.sh` and `Start-Approved.sh`. Only Agent/Node have `Qualify-Linux.sh`; do not substitute an Agent PASS for a specialist's live workflow. For Evidence, use its read-only UI and setup export without creating a wallet. See the ledger's specialist guidance when a workstation gate is inapplicable.
+
+## Everyday operation, stopping and updates
+
+Normal reboot does not require an operator STOP. Use the signer's explicit background-login option if you want that behavior; merely launching the UI does not authorize unattended work.
+
+`Stop-Compute.sh` deliberately writes `COMPUTE_STOP` and attempts to prove services, ports and recognized sockets stopped. **It is a safety stop, not a reversible pause.** `Start-Approved.sh` starts an already approved, STOP-free profile only; it cannot undo `Stop-Compute.sh` or a cleanup failure.
+
+For diagnosis, decommissioning or a newer release, follow [troubleshooting and lifecycle guidance](TROUBLESHOOTING.md). No supported in-place upgrade or automatic uninstall is provided. Preserve the old release and profiles; do not overwrite approved code or run historical Mac repair/update launchers.

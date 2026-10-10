@@ -1,13 +1,18 @@
-# AGI Moderator Linux 1.0.9
+# AGI Fleet Linux 1.0.10
 
-Controlled engineering and qualification candidate for Ubuntu Desktop 24.04 LTS (x86-64 / ARM64). Production qualification is pending.
+**Engineering and physical-qualification candidate — Moderator edition.**
 
-Follow the [Linux fresh-install guide](Linux-Guide.html) in order. Keep the complete Fleet folder. Use new separate signer and compute accounts; preserve prior installations inactive. No migration, historical test fixtures or manual state edits are required.
+Native acceptance for this exact release must be published before a controlled fresh installation. Production and physical qualification remain pending. Earlier releases' results do not qualify this ZIP.
 
-The `.sh` entry points in the guide are the Linux workflow. Mac `.command` files and historical Mac documentation are retained for source traceability. They are not Linux installation instructions.
+1. Read the [current fresh-install guide](docs/linux-current/docs/FRESH_INSTALL.md).
+2. Check the [release status](docs/linux-current/README.md) and exact SHA-256 on the release page.
+3. Follow the guide using new, separate signer and compute accounts. Keep the complete Fleet folder.
+4. Record each physical gate in the [qualification ledger](docs/linux-current/docs/PHYSICAL_QUALIFICATION.md).
 
-Defaults: 256 runs per rolling day; Agent and Node allow 32 image attempts. Spending remains independently controlled by signer policy.
+The supported target is Ubuntu Desktop 24.04 LTS, x86-64 or ARM64. Use the Linux `.sh` entry points named in the guide. Agent, Node, Moderator, Employer, Evidence and Recovery retain separate bounded authority.
 
-Read the external validation addendum bound to this ZIP's SHA-256. Restricted-run results are preserved separately. Real Unix sockets, cross-user ownership, rootless Docker, systemd sessions, OAuth/inference, actual document cleanup, reboot identity persistence and endurance require native qualification. M1 and M2 qualification remain separate and pending.
+On any failure, preserve accounts, state, reports and COMPUTE_STOP. Follow the guide's failure instructions. Never remove STOP manually or weaken ownership and cleanup checks.
 
-On failure preserve profiles, Docker state, journals, service files, reports and COMPUTE_STOP. Never remove STOP automatically or weaken ownership checks.
+[AGIJobManager integration](docs/linux-current/docs/JOB_INTEGRATION.md) · [Mainnet deployment observation](docs/linux-current/docs/MAINNET_DEPLOYMENT.md)
+
+Historical Mac instructions and prior evidence remain available for engineering traceability. Begin with the current Linux guide above.

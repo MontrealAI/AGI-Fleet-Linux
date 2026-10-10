@@ -1,0 +1,162 @@
+name: Linux 1.0.10 release qualification
+on:
+  pull_request:
+    paths: ['fleet/**', 'docs/**', 'engineering/**', '.github/workflows/next-release.yml']
+  push:
+    branches: [main]
+    paths: ['fleet/**', 'docs/**', 'engineering/next-release.json', 'engineering/*next*', '.github/workflows/next-release.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: next-linux-release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - &checkout
+        name: Fetch the exact workflow commit
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+      - name: Verify repository and engineering regressions
+        run: |
+          python3 engineering/check-repository.py --require-source
+          python3 -m unittest discover -s engineering/tests -v
+      - name: Install hash-pinned Node for package validation
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz -o "$RUNNER_TEMP/node.tar.xz"
+          printf '%s  %s\n' fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6 "$RUNNER_TEMP/node.tar.xz" | sha256sum --check
+          tar -xJf "$RUNNER_TEMP/node.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/node-v24.21.0-linux-x64/bin" >> "$GITHUB_PATH"
+      - name: Build and validate the deterministic saved archive
+        run: python3 engineering/build-next-release.py --output "$RUNNER_TEMP/candidate-dist"
+      - name: Retain exact candidate and packaging evidence
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: linux-next-candidate
+          path: ${{ runner.temp }}/candidate-dist/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+  native:
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {runner: ubuntu-24.04, arch: x64}
+          - {runner: ubuntu-24.04-arm, arch: arm64}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 180
+    steps:
+      - *checkout
+      - &download_candidate
+        name: Download this run's saved candidate
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: linux-next-candidate
+          path: release
+      - name: Exercise targeted cases and complete native suite
+        run: |
+          set -euo pipefail
+          sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY,GITHUB_RUN_ID,GITHUB_SHA python3 engineering/run-next-native.py \
+            --metadata "$GITHUB_WORKSPACE/release/release.json" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.0.10.zip" \
+            --work "/root/agi-next-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --evidence "$GITHUB_WORKSPACE/native-evidence"
+      - name: Preserve evidence ownership
+        if: always()
+        run: |
+          if test -d native-evidence; then sudo chown -R "$(id -u):$(id -g)" native-evidence; fi
+      - name: Retain every native test log
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: next-native-${{ matrix.arch }}
+          path: native-evidence/
+          if-no-files-found: error
+          retention-days: 90
+  integration:
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {runner: ubuntu-24.04, arch: x64}
+          - {runner: ubuntu-24.04-arm, arch: arm64}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 40
+    steps:
+      - *checkout
+      - *download_candidate
+      - name: Requalify the saved Fleet with AGIJobManager
+        run: |
+          python3 engineering/run-next-integration.py \
+            --metadata "$GITHUB_WORKSPACE/release/release.json" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.0.10.zip" \
+            --work "$RUNNER_TEMP/agi-integration-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --evidence "$GITHUB_WORKSPACE/integration-evidence"
+      - name: Retain all integration evidence
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: next-integration-${{ matrix.arch }}
+          path: integration-evidence/
+          if-no-files-found: error
+          retention-days: 90
+  audit:
+    needs: [build, native, integration]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - *checkout
+      - *download_candidate
+      - name: Download all retained validation logs
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          pattern: next-*
+          path: evidence
+      - name: Independently audit source-bound results
+        run: |
+          python3 engineering/audit-next-evidence.py \
+            --metadata release/release.json --archive release/AGI_Fleet_Linux_v1.0.10.zip \
+            --native evidence/next-native-x64 --native evidence/next-native-arm64 \
+            --integration evidence/next-integration-x64 --integration evidence/next-integration-arm64 \
+            --out evidence/audit.json
+          python3 engineering/publish-next-release.py --prepare-only --release-dir release --evidence-dir evidence --output publication
+      - name: Retain audited publication files
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: next-publication
+          path: publication/
+          if-no-files-found: error
+          retention-days: 90
+  publish:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: [build, native, integration, audit]
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - *checkout
+      - *download_candidate
+      - name: Download independently audited publication files
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: next-publication
+          path: publication
+      - name: Publish the exact validated prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 engineering/publish-next-release.py --release-dir release --output publication

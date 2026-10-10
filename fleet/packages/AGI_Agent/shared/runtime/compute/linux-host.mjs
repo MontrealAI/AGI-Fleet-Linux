@@ -4,9 +4,10 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {roleContract} from './roles.mjs';
-import {consumerCompute} from './consumer.mjs';
+import {consumerCompute,consumerFile} from './consumer.mjs';
 const need=(ok,code)=>{if(!ok)throw Error(code);};
 const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
+export function linuxReleaseVersion(){const version=JSON.parse(fs.readFileSync(consumerFile('package.json'),'utf8')).version;need(typeof version==='string'&&/^\d+\.\d+\.\d+$/.test(version),'LINUX_RELEASE_IDENTITY_INVALID');return version;}
 export const PRIVILEGED_GROUPS=new Set(['root','sudo','wheel','admin','docker','lxd','incus','incus-admin','disk','shadow','kmem']);
 export function linuxStandardGroups(result){
  if(result?.status!==0||result.error||result.signal||typeof result.stdout!=='string')return false;
