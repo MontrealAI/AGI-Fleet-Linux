@@ -9,8 +9,9 @@ import sys
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-REQUIRED = {'index.html', 'styles.css', 'app.js', 'favicon.svg', 'release.json'}
-ALLOWED = REQUIRED | {'.nojekyll', 'fr.html', '404.html'}
+REQUIRED = {'index.html', 'fr.html', 'start.html', 'start-fr.html', 'styles.css',
+            'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'release.json'}
+ALLOWED = REQUIRED | {'.nojekyll', '404.html'}
 PROJECT_PATH = '/AGI-Fleet-Linux/'
 REPOSITORY_PATH = '/MontrealAI/AGI-Fleet-Linux/'
 SECRET_PATTERNS = (
@@ -165,10 +166,10 @@ def check(site):
             tokens = builder.release_tokens(expected)
             if release != expected:
                 errors.append('release.json: does not match the selected reviewed release metadata')
-            for name in ('index.html', 'fr.html'):
+            for name in builder.PUBLIC_FILES:
                 source = ROOT / 'website' / name
-                if texts.get(name) != builder.render(source.read_text(encoding='utf-8'), '.html', tokens):
-                    errors.append(f'{name}: stale or changed page; rebuild from the selected release metadata')
+                if texts.get(name) != builder.render(source.read_text(encoding='utf-8'), source.suffix, tokens):
+                    errors.append(f'{name}: stale or changed public file; rebuild from the selected release metadata')
         except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
             errors.append('release.json: invalid release metadata: ' + str(error))
     return errors, {'files': len(texts), 'links': checked_links, 'htmlPages': len(pages)}
