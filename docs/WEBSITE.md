@@ -30,6 +30,22 @@ Edit the homepage templates (`website/index.html`, `website/fr.html`), guided we
 
 Before publishing, check both languages at desktop and narrow mobile sizes, keyboard navigation, readable zoom, links, disclosure controls, language selection and copy buttons. Exercise every guided route, browser Back, the no-JavaScript fallback and printed preparation guidance. Verify that the displayed release and qualification statements match the source evidence. Repository links belong on GitHub; only the public site files are uploaded to Pages.
 
+## Browser quality checks
+
+The Pages build runs a locked Playwright/axe test suite before uploading the site. Run it locally after building when a supported browser is available:
+
+```bash
+npm ci --prefix engineering/browser-tests --ignore-scripts --no-audit --no-fund
+engineering/browser-tests/node_modules/.bin/playwright install --with-deps --only-shell chromium
+npm test --prefix engineering/browser-tests
+```
+
+The suite exercises English and French journeys, browser Back/Forward, larger-text persistence, route reset, direct-link guards, blocked storage and clipboard fallback. It checks narrow/mobile and desktop reflow, keyboard focus, no-JavaScript reading, printable setup details and automated accessibility rules. Test screenshots and failure evidence are retained in the workflow's `website-browser-evidence` artifact. Automated checks complement manual review; they do not establish usability with every assistive technology or user group.
+
+Keep choices at the start of the guide brief. Put the setup plan's next action before its detailed account instructions. Technical details use open-by-default disclosures so they remain readable without JavaScript; enhanced reading can collapse them, and printing opens the relevant sections. Reset clears the route while preserving the larger-text preference. Browser Back/Forward should return through visited questions instead of unexpectedly leaving the guide.
+
+The helper-copy feature contains only public setup requirements, the chosen role, release identity/readiness and official guide links. It must never include wallet or provider data. If clipboard access fails, keep a selectable read-only summary available and say that copying did not complete.
+
 ## Publication
 
 The [`Website / GitHub Pages` workflow](../.github/workflows/pages.yml) builds and validates pull requests without publishing them. Merging an applicable change to `main` builds a new artifact and deploys it to the `github-pages` environment. The workflow also supports **Actions → Website / GitHub Pages → Run workflow → main**.

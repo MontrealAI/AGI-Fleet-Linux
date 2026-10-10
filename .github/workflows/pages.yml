@@ -7,6 +7,7 @@ on:
       - website/**
       - engineering/build-website.py
       - engineering/check-website.py
+      - engineering/browser-tests/**
       - engineering/current-release.json
       - engineering/published-release.json
       - validation/**
@@ -18,6 +19,7 @@ on:
       - website/**
       - engineering/build-website.py
       - engineering/check-website.py
+      - engineering/browser-tests/**
       - engineering/current-release.json
       - engineering/published-release.json
       - validation/**
@@ -37,7 +39,7 @@ jobs:
   build:
     name: Build and check website
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 20
     outputs:
       public_hashes: ${{ steps.content_hashes.outputs.public_hashes }}
     steps:
@@ -52,6 +54,20 @@ jobs:
           python3 engineering/check-website.py
           node --check website/app.js
           node --check website/onboarding.js
+      - name: Install locked website browser tests
+        run: npm ci --prefix engineering/browser-tests --ignore-scripts --no-audit --no-fund
+      - name: Install Chromium for website checks
+        run: engineering/browser-tests/node_modules/.bin/playwright install --with-deps --only-shell chromium
+      - name: Exercise mobile layouts, accessibility and guided journeys
+        run: npm test --prefix engineering/browser-tests
+      - name: Retain website browser evidence
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: website-browser-evidence
+          path: engineering/browser-tests/test-results/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Record the checked public content identities
         id: content_hashes
         run: |

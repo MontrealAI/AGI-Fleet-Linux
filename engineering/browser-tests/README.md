@@ -1,0 +1,21 @@
+# Onboarding browser checks
+
+These tests exercise the built English and French public guides on a local HTTP server. They do not install Fleet, open third-party websites, submit jobs or use a wallet. All browser requests outside the local server are blocked.
+
+From the repository root, with Python 3 and Node.js 22 or later:
+
+```bash
+python3 engineering/build-website.py
+npm ci --prefix engineering/browser-tests
+cd engineering/browser-tests
+npx playwright install --with-deps --only-shell chromium
+npm test
+```
+
+The suite checks actual navigation and browser history, unsupported computers, saved choices and storage failures, language changes, keyboard focus, printable plans, clipboard fallback, JavaScript-free reading, narrow-screen reflow and automated accessibility rules. It opens only the site files served from `_site/` on `127.0.0.1:4173`.
+
+Screenshots, failure traces and attachments go to `test-results/`; the HTML report goes to `playwright-report/`. The Pages workflow publishes the test artifacts for review, and a failing test prevents site publication. Mobile and desktop screenshots are attached even on a passing run.
+
+Automated axe checks cover the welcome and selected-plan screens in both languages using WCAG 2 A/AA, 2.1 A/AA and 2.2 AA tags. They complement human review: they cannot establish complete WCAG conformance, usability with every assistive technology, installation success or capacity for billions of visitors.
+
+Keep failures actionable. Correct the public page when a supported journey or accessibility rule fails; do not suppress rules or exclude page regions to make the suite pass.

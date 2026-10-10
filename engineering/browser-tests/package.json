@@ -1,0 +1,14 @@
+{
+  "name": "agi-fleet-onboarding-browser-tests",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-only browser regressions for the public English and French onboarding guides.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.64.0"
+  }
+}
