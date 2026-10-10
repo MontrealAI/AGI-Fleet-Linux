@@ -10,7 +10,7 @@ Fleet helps a dedicated Linux computer perform AI work and check the results. Yo
 
 **Get work done · Set up an AI worker · Help me understand**
 
-Choose a goal in the guided welcome. It explains what you need and points you to the right next step, including help preparing a suitable computer. You can go back and explore at your own pace. No sign-up is needed to read the guide.
+Choose a goal in the guided welcome. It explains what you need and points you to the right next step, including help preparing a suitable computer. Use your browser’s Back button, keep larger text enabled, and copy or print a preparation plan for someone helping you. No sign-up is needed to explore.
 
 **Today’s release:** Linux 1.0.10 is an early testing release with recorded native and contract-integration acceptance; physical machine qualification remains open, so paid work must stay disabled until its required checks pass.
 
