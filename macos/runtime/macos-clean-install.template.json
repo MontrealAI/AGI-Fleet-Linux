@@ -1,0 +1,271 @@
+{
+  "schema": "agi-macos-clean-install-qualification/v1",
+  "scope": "all-six-roles-clean-install-m1-m2",
+  "release": {
+    "version": "1.20.0",
+    "archiveSHA256": null,
+    "sourceSHA256": null,
+    "archiveEvidenceId": null,
+    "sourceEvidenceId": null
+  },
+  "frozenAt": null,
+  "evidence": [],
+  "machines": [
+    {
+      "chipFamily": "M1",
+      "physical": null,
+      "platform": "darwin",
+      "arch": "arm64",
+      "translated": null,
+      "osVersion": null,
+      "machineSHA256": null,
+      "evidenceIds": [],
+      "accounts": {
+        "installationTrack": "clean-install",
+        "newComputeAccount": null,
+        "computeStandard": null,
+        "signerStandard": null,
+        "computeUID": null,
+        "signerUID": null,
+        "walletSeparated": null,
+        "oldStatePreserved": null,
+        "evidenceIds": []
+      },
+      "roles": {
+        "agent": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "node": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "moderator": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "employer": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "evidence": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "recovery": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        }
+      },
+      "gates": {
+        "freshInstall": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "dockerIsolation": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "oauthInference": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "liveDocuments": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "baseAndBrowserCleanup": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": [],
+          "baseAttempts": 0,
+          "basePasses": 0,
+          "browserAttempts": 0,
+          "browserPasses": 0,
+          "remainingContainers": null,
+          "unresolvedFailures": null
+        },
+        "stopAndRecovery": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "rebootIdentity": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "endurance72Hours": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": [],
+          "activeSeconds": 0,
+          "startedAt": null,
+          "finishedAt": null
+        },
+        "jobIntegration": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "independentReview": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "distribution": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        }
+      }
+    },
+    {
+      "chipFamily": "M2",
+      "physical": null,
+      "platform": "darwin",
+      "arch": "arm64",
+      "translated": null,
+      "osVersion": null,
+      "machineSHA256": null,
+      "evidenceIds": [],
+      "accounts": {
+        "installationTrack": "clean-install",
+        "newComputeAccount": null,
+        "computeStandard": null,
+        "signerStandard": null,
+        "computeUID": null,
+        "signerUID": null,
+        "walletSeparated": null,
+        "oldStatePreserved": null,
+        "evidenceIds": []
+      },
+      "roles": {
+        "agent": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "node": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "moderator": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "employer": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "evidence": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "recovery": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        }
+      },
+      "gates": {
+        "freshInstall": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "dockerIsolation": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "oauthInference": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "liveDocuments": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "baseAndBrowserCleanup": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": [],
+          "baseAttempts": 0,
+          "basePasses": 0,
+          "browserAttempts": 0,
+          "browserPasses": 0,
+          "remainingContainers": null,
+          "unresolvedFailures": null
+        },
+        "stopAndRecovery": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "rebootIdentity": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "endurance72Hours": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": [],
+          "activeSeconds": 0,
+          "startedAt": null,
+          "finishedAt": null
+        },
+        "jobIntegration": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "independentReview": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        },
+        "distribution": {
+          "status": "NOT_RUN",
+          "measurement": null,
+          "evidenceIds": []
+        }
+      }
+    }
+  ],
+  "nativeTests": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "passed": 0,
+    "failed": null,
+    "skipped": null,
+    "timedOut": null,
+    "evidenceIds": []
+  },
+  "review": {
+    "decision": "NOT_REVIEWED",
+    "operatorIdentitySHA256": null,
+    "reviewerIdentitySHA256": null,
+    "independenceObserved": null,
+    "evidenceIds": []
+  },
+  "productionQualified": false,
+  "authorization": "NONE"
+}

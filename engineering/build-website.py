@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'website'
 OUTPUT = ROOT / '_site'
 REPO = 'https://github.com/MontrealAI/AGI-Fleet-Linux'
-PUBLIC_FILES = ('index.html', 'fr.html', 'start.html', 'start-fr.html',
+PUBLIC_FILES = ('index.html', 'fr.html', 'start.html', 'start-fr.html', 'mac.html', 'mac-fr.html',
                 'styles.css', 'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg')
 
 
@@ -150,6 +150,70 @@ def release_tokens(release):
     return tokens
 
 
+
+def read_mac_release():
+    published = ROOT / 'macos/published-release.json'
+    selected = published if published.exists() or published.is_symlink() else ROOT / 'macos/release.json'
+    if selected.is_symlink() or not selected.is_file():
+        raise ValueError('Mac release metadata must be a regular repository file')
+    release = json.loads(selected.read_text())
+    if not isinstance(release, dict) or release.get('schema') not in {
+            'agi-macos-release-specification/v1', 'agi-macos-candidate-build/v1', 'agi-macos-published-release/v1'}:
+        raise ValueError('Unexpected Mac release metadata schema')
+    return release, selected == published
+
+
+def mac_release_tokens(release, published=False):
+    version, tag, name = (release[key] for key in ('version', 'tag', 'name'))
+    if (not re.fullmatch(r'\d+\.\d+\.\d+', version)
+            or tag != f'v{version}-macos-qualification'
+            or name != f'AGI_Fleet_macOS_v{version}.zip'):
+        raise ValueError('Mac release identity requires an explicit reviewed version')
+    if (release.get('platform') != 'darwin' or release.get('architecture') != 'arm64'
+            or release.get('productionQualified') is not False
+            or release.get('physicalQualification') != 'NOT_RUN'
+            or release.get('signedNotarized') is not False):
+        raise ValueError('Mac website qualification and signing claims require explicit review')
+    native = release.get('nativeAcceptance')
+    if native not in {'NOT_RUN', 'PASS', 'FAIL', 'BLOCKED'}:
+        raise ValueError('Unknown Mac native acceptance status')
+    guide = f'{REPO}/blob/main/macos/docs/FRESH_INSTALL.md'
+    notes = f'{REPO}/blob/main/macos/docs/RELEASE_NOTES.md'
+    if published:
+        if (native != 'PASS' or release.get('operatorGate') != 'OPEN_FOR_CONTROLLED_FRESH_INSTALL'
+                or type(release.get('bytes')) is not int or not 0 < release['bytes'] < 450_000_000
+                or not re.fullmatch(r'[0-9a-f]{64}', release.get('sha256', ''))
+                or not re.fullmatch(r'[0-9a-f]{40}', release.get('workflowCommit', ''))
+                or not re.fullmatch(r'[1-9][0-9]*', str(release.get('workflowRun', '')))):
+            raise ValueError('Published Mac archive needs native acceptance and exact workflow provenance')
+    elif release.get('operatorGate') != 'CLOSED_PENDING_NATIVE_ACCEPTANCE':
+        raise ValueError('Unpublished Mac candidate must keep its installation gate closed')
+    return {
+        'MAC_VERSION': version, 'MAC_ASSET_NAME': name,
+        'MAC_CHECKSUM_NAME': f'SHA256SUMS-macOS-v{version}.txt',
+        'MAC_RELEASE_URL': f'{REPO}/releases/tag/{tag}' if published else notes,
+        'MAC_DOWNLOAD_URL': f'{REPO}/releases/download/{tag}/{name}' if published else guide,
+        'MAC_DOWNLOAD_LABEL_EN': 'Download the complete Mac ZIP' if published else 'Read the Mac preparation guide',
+        'MAC_DOWNLOAD_LABEL_FR': 'Télécharger le ZIP Mac complet' if published else 'Lire le guide de préparation Mac (anglais)',
+        'MAC_RELEASE_LABEL_EN': 'Mac qualification prerelease' if published else 'Mac qualification candidate',
+        'MAC_RELEASE_LABEL_FR': 'Préversion Mac de qualification' if published else 'Version candidate Mac de qualification',
+        'MAC_GATE_EN': ('Native acceptance is recorded. Controlled fresh installation is open.' if published else
+                        'The installation gate is closed while native acceptance and publication are pending.'),
+        'MAC_GATE_FR': ('Acceptation native consignée. Installation initiale contrôlée autorisée.' if published else
+                        'L’installation reste fermée en attendant l’acceptation native et la publication.'),
+        'MAC_PRODUCTION_EN': 'not complete', 'MAC_PRODUCTION_FR': 'non terminée',
+        'MAC_AVAILABILITY_EN': (f'The published complete archive is {release["bytes"] / 1_000_000:.1f} MB.' if published else
+                                'The candidate archive has not been published. Read the preparation guide now; wait for the native acceptance gate before downloading or installing.'),
+        'MAC_AVAILABILITY_FR': (f'L’archive complète publiée fait {release["bytes"] / 1_000_000:.1f} Mo.' if published else
+                                'L’archive candidate n’est pas encore publiée. Consultez le guide maintenant; attendez l’acceptation native avant de télécharger ou d’installer.'),
+    }
+
+
+def website_tokens(release):
+    mac, published = read_mac_release()
+    return {**release_tokens(release), **mac_release_tokens(mac, published)}
+
+
 def render(contents, suffix, tokens):
     if suffix == '.html':
         contents = re.sub(r'@@([A-Z][A-Z0-9_]+)@@', lambda match: html.escape(str(tokens[match[1]]), quote=True), contents)
@@ -160,12 +224,12 @@ def render(contents, suffix, tokens):
 
 def build():
     release = read_release()
-    tokens = release_tokens(release)
+    tokens = website_tokens(release)
     if OUTPUT.is_symlink():
         raise ValueError('Output must not be a symlink')
     OUTPUT.mkdir(exist_ok=True)
     files = list(PUBLIC_FILES)
-    for name in files + ['release.json', '.nojekyll']:
+    for name in files + ['release.json', 'mac-release.json', '.nojekyll']:
         destination = OUTPUT / name
         if destination.is_symlink() or (destination.exists() and (not destination.is_file() or destination.stat().st_nlink != 1)):
             raise ValueError('Website output must be a regular file without links')
@@ -180,8 +244,10 @@ def build():
             raise ValueError('Website output must not be a symlink')
         destination.write_text(contents, encoding='utf-8')
     (OUTPUT / 'release.json').write_text(json.dumps(release, indent=2) + '\n', encoding='utf-8')
+    mac, published = read_mac_release()
+    (OUTPUT / 'mac-release.json').write_text(json.dumps({**mac, 'published': published}, indent=2) + '\n', encoding='utf-8')
     (OUTPUT / '.nojekyll').write_text('', encoding='utf-8')
-    print(f"Built EN/FR GitHub Pages site for Linux {release['version']} in {OUTPUT}")
+    print(f"Built EN/FR GitHub Pages site for Mac and Linux {release['version']} in {OUTPUT}")
 
 
 if __name__ == '__main__':

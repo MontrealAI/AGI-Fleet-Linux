@@ -3,8 +3,10 @@ import AxeBuilder from '@axe-core/playwright';
 
 const origin = 'http://127.0.0.1:4173';
 const languages = [
-  { code: 'en', path: '/start.html', home: '/index.html', employer: 'https://montrealai.github.io/AGIJobManager/employers/' },
-  { code: 'fr', path: '/start-fr.html', home: '/fr.html', employer: 'https://montrealai.github.io/AGIJobManager/fr/employers/' }
+  { code: 'en', name: 'Linux EN', os: 'ubuntu', path: '/start.html', home: '/index.html', employer: 'https://montrealai.github.io/AGIJobManager/employers/' },
+  { code: 'fr', name: 'Linux FR', os: 'ubuntu', path: '/start-fr.html', home: '/fr.html', employer: 'https://montrealai.github.io/AGIJobManager/fr/employers/' },
+  { code: 'en', name: 'Mac EN', os: 'macos', path: '/mac.html', home: '/index.html', employer: 'https://montrealai.github.io/AGIJobManager/employers/' },
+  { code: 'fr', name: 'Mac FR', os: 'macos', path: '/mac-fr.html', home: '/fr.html', employer: 'https://montrealai.github.io/AGIJobManager/fr/employers/' }
 ];
 
 test.beforeEach(async ({ context }) => {
@@ -23,14 +25,15 @@ async function openGuide(page, language = languages[0], hash = '') {
 async function expectPanel(page, panel, focused = true, allowBareWelcome = !focused && panel === 'welcome') {
   await expect(page.locator('[data-panel]:visible')).toHaveCount(1);
   await expect(page.locator(`#${panel}`)).toBeVisible();
-  await expect(page).toHaveURL(new RegExp(allowBareWelcome ? '\\/start(?:-fr)?\\.html(?:#welcome)?$' : `#${panel}$`));
+  await expect(page).toHaveURL(new RegExp(allowBareWelcome ? '\\/(?:start|mac)(?:-fr)?\\.html(?:#welcome)?$' : `#${panel}$`));
   if (focused) await expect(page.locator(`#${panel} h2`).first()).toBeFocused();
 }
 
 async function makePlan(page, role = 'agent') {
   await page.locator('#welcome [data-go="computer"]').click();
   await expectPanel(page, 'computer');
-  await page.locator('#computer [data-os="ubuntu"]').click();
+  const os = (await page.locator('html').getAttribute('data-platform')) === 'macos' ? 'macos' : 'ubuntu';
+  await page.locator(`#computer [data-os="${os}"]`).click();
   await expectPanel(page, 'role');
   await page.locator(`#role [data-role="${role}"]`).click();
   await expectPanel(page, 'plan');
@@ -51,7 +54,7 @@ async function screenshot(page, testInfo, name) {
 }
 
 for (const language of languages) {
-  test(`${language.code}: all goals lead to a useful next step and both roles make accurate plans`, async ({ page }, testInfo) => {
+  test(`${language.name}: all goals lead to a useful next step and both roles make accurate plans`, async ({ page }, testInfo) => {
     await openGuide(page, language);
     await expectPanel(page, 'welcome', false);
     await page.locator('#welcome [data-go="hire"]').click();
@@ -70,12 +73,12 @@ for (const language of languages) {
     await page.locator('#role [data-role="node"]').click();
     await expectPanel(page, 'plan');
     await expect(page.locator('#plan-title')).toContainText('Node');
-    await expect(page.locator('#role-login')).toContainText('packages/AGI_Node');
+    await expect(page.locator('#role-login')).toContainText(language.os === 'macos' ? 'AGI_Node' : 'packages/AGI_Node');
     await expect(page.locator('#role-login')).not.toContainText('Creator');
-    await screenshot(page, testInfo, `${language.code}-desktop-node-plan`);
+    await screenshot(page, testInfo, `${language.name.replaceAll(' ', '-')}-desktop-node-plan`);
   });
 
-  test(`${language.code}: unsupported or unknown computers stay on the help route`, async ({ page }) => {
+  test(`${language.name}: unsupported or unknown computers stay on the help route`, async ({ page }) => {
     await openGuide(page, language);
     await page.locator('#welcome [data-go="computer"]').click();
     for (const os of ['other', 'unsure']) {
@@ -89,7 +92,7 @@ for (const language of languages) {
     }
   });
 
-  test(`${language.code}: the complete guide stays useful with JavaScript disabled`, async ({ browser }) => {
+  test(`${language.name}: the complete guide stays useful with JavaScript disabled`, async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
     await context.route('**/*', route => new URL(route.request().url()).origin === origin ? route.continue() : route.abort());
     const page = await context.newPage();
@@ -117,18 +120,18 @@ for (const language of languages) {
     }
   });
 
-  test(`${language.code}: welcome and chosen plan have no automated WCAG A or AA violations`, async ({ page }) => {
+  test(`${language.name}: welcome and chosen plan have no automated WCAG A or AA violations`, async ({ page }) => {
     await openGuide(page, language);
     for (const panel of ['welcome', 'plan']) {
       if (panel === 'plan') await makePlan(page, 'node');
       const result = await new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
         .analyze();
-      expect(result.violations, `${language.code} ${panel}: ${JSON.stringify(result.violations, null, 2)}`).toEqual([]);
+      expect(result.violations, `${language.name} ${panel}: ${JSON.stringify(result.violations, null, 2)}`).toEqual([]);
     }
   });
 
-  test(`${language.code}: welcome and plan reflow on small screens and with larger text`, async ({ page }, testInfo) => {
+  test(`${language.name}: welcome and plan reflow on small screens and with larger text`, async ({ page }, testInfo) => {
     await openGuide(page, language);
     for (const panel of ['welcome', 'plan']) {
       if (panel === 'plan') await makePlan(page, 'node');
@@ -136,8 +139,8 @@ for (const language of languages) {
         if ((await page.locator('#text-size').getAttribute('aria-pressed')) !== String(largeText)) await page.locator('#text-size').click();
         for (const width of [320, 390, 768, 1440]) {
           await page.setViewportSize({ width, height: width < 768 ? 844 : 1000 });
-          await expectNoOverflow(page, `${language.code} ${panel}, ${width}px, larger text=${largeText}`);
-          if (width === 390 && largeText) await screenshot(page, testInfo, `${language.code}-mobile-${panel}-large-text`);
+          await expectNoOverflow(page, `${language.name} ${panel}, ${width}px, larger text=${largeText}`);
+          if (width === 390 && largeText) await screenshot(page, testInfo, `${language.name.replaceAll(' ', '-')}-mobile-${panel}-large-text`);
         }
       }
     }
@@ -289,16 +292,100 @@ test('a keyboard user can enter the guide, choose a path and return with visible
   expect(outline).not.toBe('none');
 });
 
-test('both mobile homepages prominently lead into the matching guided welcome', async ({ page }, testInfo) => {
+test('both mobile homepages prominently offer Linux and Mac guided welcomes', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
   for (const language of languages) {
     await page.goto(language.home);
     const primary = page.locator(`.hero a[href^="${language.path.slice(1)}"]`).first();
     await expect(primary).toBeVisible();
     await expectNoOverflow(page, `${language.code} mobile homepage`);
-    await screenshot(page, testInfo, `${language.code}-mobile-homepage`);
+    await screenshot(page, testInfo, `${language.name.replaceAll(' ', '-')}-mobile-homepage`);
     await primary.click();
     await expect(page.locator('html')).toHaveAttribute('lang', language.code);
     await expectPanel(page, 'welcome', false);
+  }
+});
+
+
+test('Mac and Linux choices stay separate across language changes, reloads and browser history', async ({ page }) => {
+  await openGuide(page);
+  await makePlan(page, 'agent');
+  await page.goto('/mac.html');
+  await expectPanel(page, 'welcome', false);
+  await page.locator('#text-size').click();
+  await makePlan(page, 'node');
+  await page.goBack();
+  await expectPanel(page, 'role');
+  await page.goForward();
+  await expectPanel(page, 'plan');
+  await page.locator('header a[hreflang="fr"]').click();
+  await expectPanel(page, 'plan', false);
+  await expect(page.locator('#plan-title')).toContainText('Node');
+  await expect(page.locator('#text-size')).toHaveAttribute('aria-pressed', 'true');
+  await page.reload();
+  await expect(page.locator('#plan-title')).toContainText('Node');
+  await page.goto('/start-fr.html');
+  await expectPanel(page, 'plan', false);
+  await expect(page.locator('#plan-title')).toContainText('Agent');
+  await expect(page.locator('#text-size')).toHaveAttribute('aria-pressed', 'false');
+  await page.goto('/mac-fr.html');
+  await expectPanel(page, 'plan', false);
+  await page.locator('#reset-choices').click();
+  await expectPanel(page, 'welcome');
+  await expect(page.locator('#text-size')).toHaveAttribute('aria-pressed', 'true');
+  await page.goto('/mac.html#plan');
+  await expectPanel(page, 'computer', false);
+});
+
+test('Mac guide refuses a Linux or Intel choice injected into its saved plan', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('agi-fleet-macos-onboarding-v1', JSON.stringify({version: 1, path: 'worker', os: 'ubuntu', role: 'agent', panel: 'plan'}));
+  });
+  await openGuide(page, languages[2], '#plan');
+  await expectPanel(page, 'computer', false);
+  await expect(page.locator('#plan')).toBeHidden();
+  await page.locator('#computer [data-os="other"]').click();
+  await expect(page.locator('#device-description')).toContainText('Intel');
+  await expect(page.locator('#device a[href*="/releases/download/"]')).toHaveCount(0);
+});
+
+test('Mac plan can be copied manually and printed with its native setup and honest readiness', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText: async () => { throw new DOMException('Denied', 'NotAllowedError'); } } });
+  });
+  await openGuide(page, languages[2]);
+  await makePlan(page, 'node');
+  await page.locator('#copy-plan').click();
+  const summary = page.locator('#plan-copy-text');
+  await expect(summary).toBeVisible();
+  await expect(summary).toBeFocused();
+  await expect(summary).toHaveValue(/AGI Fleet for Mac/);
+  await expect(summary).toHaveValue(/macOS 15/);
+  await expect(summary).toHaveValue(/Standard/);
+  await expect(summary).toHaveValue(/16 GB/);
+  await expect(summary).toHaveValue(/8 GB.*not been qualified/);
+  await expect(summary).toHaveValue(/unsigned and unnotarized/);
+  await expect(summary).toHaveValue(/macos\/docs\/FRESH_INSTALL.md/);
+  await expect(summary).not.toHaveValue(/Ubuntu|packages\/AGI_Node|Creator/);
+  const details = page.locator('#plan details[data-print-open]');
+  const initial = await details.evaluateAll(items => items.map(item => item.open));
+  await page.evaluate(() => window.dispatchEvent(new Event('beforeprint')));
+  await page.emulateMedia({media: 'print'});
+  for (const detail of await details.all()) await expect(detail).toHaveAttribute('open', '');
+  await expect(page.locator('#plan .timeline')).toContainText('Install.command');
+  await expect(page.locator('#role-login')).toBeVisible();
+  await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
+  await page.emulateMedia({media: 'screen'});
+  expect(await details.evaluateAll(items => items.map(item => item.open))).toEqual(initial);
+});
+
+test('Linux computer choices link directly to the matching Mac setup guide', async ({ page }) => {
+  for (const language of languages.filter(item => item.os === 'ubuntu')) {
+    await openGuide(page, language, '#computer');
+    const target = language.code === 'fr' ? 'mac-fr.html#computer' : 'mac.html#computer';
+    await page.locator(`#computer a[href="${target}"]`).click();
+    await expect(page.locator('html')).toHaveAttribute('data-platform', 'macos');
+    await expect(page.locator('html')).toHaveAttribute('lang', language.code);
+    await expectPanel(page, 'computer', false);
   }
 });

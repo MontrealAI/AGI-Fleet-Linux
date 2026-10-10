@@ -1,0 +1,29 @@
+{
+  "schema": "agi-macos-release-specification/v1",
+  "version": "1.20.0",
+  "tag": "v1.20.0-macos-qualification",
+  "prefix": "AGI_Fleet_macOS_v1.20.0",
+  "name": "AGI_Fleet_macOS_v1.20.0.zip",
+  "sourceDateEpoch": 1791638400,
+  "maximumFileBytes": 450000000,
+  "platform": "darwin",
+  "architecture": "arm64",
+  "minimumMacOS": "15",
+  "nodeVersion": "24.21.0",
+  "base": {
+    "version": "1.0.10",
+    "tag": "v1.0.10-qualification",
+    "prefix": "AGI_Fleet_Linux_v1.0.10",
+    "name": "AGI_Fleet_Linux_v1.0.10.zip",
+    "bytes": 403770769,
+    "sha256": "bb21983d654291a860f2f78c2b69bbcd49423b5f41ffc9178864c41acc347695",
+    "sourceRevisionSHA256": "ba5d4b30cc7b02d60e7211a3201ad74129dce0056d64655a222c4fe08e699ba7",
+    "sourceFiles": 4816,
+    "url": "https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.0.10-qualification/AGI_Fleet_Linux_v1.0.10.zip"
+  },
+  "nativeAcceptance": "NOT_RUN",
+  "operatorGate": "CLOSED_PENDING_NATIVE_ACCEPTANCE",
+  "physicalQualification": "NOT_RUN",
+  "productionQualified": false,
+  "signedNotarized": false
+}
