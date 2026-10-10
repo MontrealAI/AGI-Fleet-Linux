@@ -62,8 +62,8 @@ class IntegrationGuardTests(unittest.TestCase):
 
 class IntegrationBindingTests(unittest.TestCase):
     def setUp(self):
-        self.candidate = {'version': '1.20.0', 'tag': 'v1.20.0-macos-qualification',
-                          'name': 'AGI_Fleet_macOS_v1.20.0.zip', 'prefix': 'AGI_Fleet_macOS_v1.20.0',
+        self.candidate = {'version': '1.20.1', 'tag': 'v1.20.1-macos-qualification',
+                          'name': 'AGI_Fleet_macOS_v1.20.1.zip', 'prefix': 'AGI_Fleet_macOS_v1.20.1',
                           'sha256': 'b' * 64, 'bytes': 100, 'sourceRevisionSHA256': 'c' * 64,
                           'sourceFiles': 5000, 'workflowCommit': 'a' * 40}
 

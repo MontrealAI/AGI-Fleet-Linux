@@ -69,6 +69,26 @@ for (const language of languages) {
     await expect(page.locator('#plan-title')).toContainText('Agent');
     await expect(page.locator('#role-login')).toContainText('Creator');
     await expect(page.locator('#installation-guide')).toHaveAttribute('href', /\/docs\/FRESH_INSTALL\.md$/);
+    if (language.os === 'macos') {
+      const response = await page.request.get('/mac-release.json');
+      expect(response.ok()).toBe(true);
+      const release = await response.json();
+      const download = page.locator('#download-link');
+      const releaseDetails = page.locator('#plan details').filter({ has: download });
+      await releaseDetails.locator('summary').click();
+      await expect(download).toBeVisible();
+      if (release.published) {
+        expect(release.nativeAcceptance).toBe('PASS');
+        expect(release.jobIntegrationAcceptance).toBe('PASS');
+        await expect(download).toHaveAttribute('href', `https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/${release.tag}/${release.name}`);
+        await expect(page.locator('#release-link')).toHaveAttribute('href', `https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/${release.tag}`);
+        await expect(download).toHaveAccessibleName(/ZIP/);
+      } else {
+        await expect(download).toHaveAttribute('href', /\/macos\/docs\/FRESH_INSTALL\.md$/);
+        await expect(download).not.toHaveAttribute('href', /\/releases\/download\//);
+      }
+      await releaseDetails.locator('summary').click();
+    }
     await page.locator('#plan [data-back="role"]').click();
     await page.locator('#role [data-role="node"]').click();
     await expectPanel(page, 'plan');

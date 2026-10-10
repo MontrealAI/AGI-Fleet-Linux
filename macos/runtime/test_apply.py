@@ -20,7 +20,7 @@ class RuntimeOverlayTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory(prefix='mac-runtime-overlay-test-')
         cls.stage = Path(cls.temporary.name) / 'fleet'
         shutil.copytree(SOURCE, cls.stage)
-        cls.receipt = OVERLAY.apply(cls.stage, '1.20.0')
+        cls.receipt = OVERLAY.apply(cls.stage, '1.20.1')
 
     @classmethod
     def tearDownClass(cls):
@@ -42,6 +42,20 @@ class RuntimeOverlayTests(unittest.TestCase):
         text = (self.stage / 'shared/runtime/compute/setup.mjs').read_text()
         self.assertLess(text.index("if(process.platform==='darwin')assertMacHost();"), text.index('const home=dependencies.home'))
         self.assertIn('desktopTest(run,docker,imageID,{strictCleanup:true})', text)
+
+    def test_standard_cache_is_prepared_before_authority_and_review_without_weakening_validation(self):
+        text = (self.stage / 'shared/runtime/compute/setup.mjs').read_text()
+        prepare = text.index('(dependencies.preparePinnedControlUICache??preparePinnedControlUICache)')
+        self.assertLess(prepare, text.index('c.standardOAuthAuthority=captureStandardOAuthAuthority'))
+        self.assertLess(prepare, text.index('review=transaction.bindReview('))
+        self.assertIn('transaction.candidate,runtime.artifact?.packageRoot', text)
+        for name in ('setup-standard-authority.mjs', 'setup-runtime-materialization.mjs'):
+            relative = Path('shared/runtime/compute') / name
+            self.assertEqual((self.stage / relative).read_bytes(), (SOURCE / relative).read_bytes())
+        for role in OVERLAY.ROLES:
+            tests = self.stage / 'packages' / ('AGI_' + role) / 'tests'
+            self.assertIn('delete f.dependencies.preparePinnedControlUICache;', (tests / 'setup-standard-lifecycle-fixture.mjs').read_text())
+            self.assertIn("if(mode==='standard')preparePinnedControlUICache(tx.candidate,packageRoot);", (tests / 'setup-runtime-materialization.test.mjs').read_text())
 
     def test_actual_staged_desktop_check_rejects_failed_cleanup_and_records_success(self):
         module = (self.stage / 'packages/AGI_Agent/compute/setup-support.mjs').as_uri()
@@ -81,9 +95,9 @@ assert.equal(result.passed,true);assert.equal(result.cleanup.exactContainerAbsen
 
     def test_reapplication_and_frozen_source_are_refused(self):
         with self.assertRaisesRegex(ValueError, 'Overlay already applied'):
-            OVERLAY.apply(self.stage, '1.20.0')
+            OVERLAY.apply(self.stage, '1.20.1')
         with self.assertRaisesRegex(ValueError, 'Refusing to modify frozen'):
-            OVERLAY.apply(SOURCE, '1.20.0')
+            OVERLAY.apply(SOURCE, '1.20.1')
 
 
 if __name__ == '__main__':

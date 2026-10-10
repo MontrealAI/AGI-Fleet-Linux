@@ -1,6 +1,14 @@
-# Mac 1.20.0 — complete Fleet qualification candidate
+# Mac 1.20.1 — reliable first-start preparation
 
 **A dedicated Apple silicon Mac distribution with all six Fleet roles and a guided clean-install path.** This candidate targets M1 and M2 Macs, macOS 15 or later and native arm64 execution. It remains separate from the Linux release identity and its physical evidence.
+
+## What changed in 1.20.1
+
+A first-start timing race could interrupt a new Standard-account installation: the pinned Gateway could write its interface cache after it had reported ready. The later integrity check then correctly rejected the unexpected profile change.
+
+The installer now prepares the exact pinned cache while the private candidate is stopped, before capturing its authority and asking for approval. This removes the identified race without relaxing integrity validation, ownership checks, cleanup requirements or safety stops. A regression using the actual pinned runtime checks this preparation path.
+
+Mac 1.20.0 introduced the initial complete Mac distribution. Its archive and recorded results remain separate historical evidence. Version 1.20.1 has a new archive, source revision and qualification run; earlier acceptance does not qualify the changed package.
 
 ## Included
 

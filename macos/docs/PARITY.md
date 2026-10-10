@@ -1,6 +1,6 @@
 # The Mac and Linux editions
 
-**The Mac edition contains the complete six-role Fleet, with the platform-specific machinery Mac needs.** Mac 1.20.0 is derived from the shared Fleet source used by Linux 1.0.10, with an explicit Mac distribution and qualification boundary. Features being present is different from those features having passed physical qualification.
+**The Mac edition contains the complete six-role Fleet, with the platform-specific machinery Mac needs.** Mac 1.20.1 is derived from the shared Fleet source used by Linux 1.0.10, with an explicit Mac distribution and qualification boundary. Features being present is different from those features having passed physical qualification.
 
 ## Roles included
 

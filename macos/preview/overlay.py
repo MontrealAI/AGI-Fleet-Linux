@@ -116,6 +116,6 @@ Inherited advanced commands (production options are disabled in this preview):
         body = '<body class="genesis-' + role.lower() + '">'
         if text.count(body) != 1:
             raise ValueError('Studio preview notice anchor differs')
-        text=text.replace(body,body+'\n<aside role="note" style="padding:14px 20px;background:#fff3d6;color:#493813;font:600 16px/1.5 system-ui">Mac source preview · outside the 1.20.0 ZIP. Use isolated test profiles. No release qualification is inherited. <a href="https://github.com/MontrealAI/AGI-Fleet-Linux/blob/main/macos/preview/STUDIO.md" style="color:inherit;text-decoration:underline">Studio preview setup</a></aside>')
+        text=text.replace(body,body+'\n<aside role="note" style="padding:14px 20px;background:#fff3d6;color:#493813;font:600 16px/1.5 system-ui">Mac source preview · outside the Mac release ZIP. Use isolated test profiles. No release qualification is inherited. <a href="https://github.com/MontrealAI/AGI-Fleet-Linux/blob/main/macos/preview/STUDIO.md" style="color:inherit;text-decoration:underline">Studio preview setup</a></aside>')
         file.write_text(text)
     return {'platformEngine':'original-darwin-arm64','productionExecution':'DISABLED','preservedModules':sorted(originals),'studioSource':'workstation/studio-overlay','composerSource':'workstation/engine/job-draft.mjs'}

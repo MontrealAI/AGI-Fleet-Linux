@@ -1,6 +1,6 @@
 # Public Studio preview on a Mac
 
-This guide is for the larger **public** Agent/Node Studio in the generated developer source copy. It is outside the Mac 1.20.0 ZIP and inherits no acceptance or physical qualification. The native desktop menu has its own [setup guide](QUICKSTART.md); it is not the Docker compute setup procedure.
+This guide is for the larger **public** Agent/Node Studio in the generated developer source copy. It is outside the Mac 1.20.1 ZIP and inherits no acceptance or physical qualification. The native desktop menu has its own [setup guide](QUICKSTART.md); it is not the Docker compute setup procedure.
 
 ## Open isolated test profiles
 
@@ -23,7 +23,7 @@ Use only unfunded test wallets and nonsensitive test files. Do not import an ope
 
 The connection panel retains the original setup-kit and authenticated readiness workflow. It needs separate Standard signer and compute accounts, a private setup JSON transferred to the compute account without wallet material, the reviewed Docker Desktop arm64 runtime running there, and actual runtime/provider identities. Docker's isolated public workspace is separate from the whole-account native Mac workflow.
 
-Use the [Mac fresh-install procedure](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/main/macos/docs/FRESH_INSTALL.md) for the account, pinned Docker, setup-kit transfer and compute prerequisites. That procedure describes the released distribution; **this source fixture is not its installer**. Do not substitute the preview tree into an operational installation or reuse the release's readiness, qualification or acceptance as proof for changed sources. A developer conducting end-to-end preview work must retain fresh setup/readiness evidence bound to this exact source and configured services before approving test execution. Preserve STOP markers and every failed attempt. The preview's physical gates remain `NOT_RUN`.
+Use the [Mac fresh-install procedure](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/main/macos/docs/FRESH_INSTALL.md) for the account, pinned Docker, setup-kit transfer and compute prerequisites. That procedure describes the Mac distribution; **this source fixture is not its installer**. Do not substitute the preview tree into an operational installation or reuse the release's readiness, qualification or acceptance as proof for changed sources. A developer conducting end-to-end preview work must retain fresh setup/readiness evidence bound to this exact source and configured services before approving test execution. Preserve STOP markers and every failed attempt. The preview's physical gates remain `NOT_RUN`.
 
 ## Import a larger public task
 

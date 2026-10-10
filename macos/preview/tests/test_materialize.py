@@ -43,7 +43,9 @@ class MaterializationTests(unittest.TestCase):
             self.assertEqual(note['productionExecution'], 'DISABLED')
             self.assertFalse(note['productionQualified'])
             self.assertFalse(note['qualificationInherited'])
-            self.assertFalse(note['includedInMac1200Zip'])
+            self.assertFalse(note['includedInMacReleaseZip'])
+            self.assertEqual(note['macRuntimeOverlayVersion'], json.loads((ROOT / 'macos/release.json').read_text())['version'])
+            self.assertEqual([name for name in note if name.startswith('includedInMac')], ['includedInMacReleaseZip'])
             self.assertEqual(set(note['physicalQualification'].values()), {'NOT_RUN'})
             self.assertEqual(note['physicalQualification']['endurance72h'], 'NOT_RUN')
             self.assertFalse((app / 'release-manifest.json').exists())
@@ -58,6 +60,22 @@ class MaterializationTests(unittest.TestCase):
             for name in ('platform.mjs', 'gateway.mjs', 'native.mjs', 'authority.mjs', 'envelope.mjs', 'project.mjs'):
                 self.assertEqual((directory / name).read_bytes(), (ROOT / 'fleet/workforce' / name).read_bytes())
             self.assertEqual((directory / 'job-draft.mjs').read_bytes(), (ROOT / 'workstation/engine/job-draft.mjs').read_bytes())
+
+    def test_preview_rejects_stale_or_qualified_release_flags(self):
+        checker = load('mac_preview_boundary_test', HERE / 'check.py')
+        candidate_file = HERE / 'candidate.json'
+        candidate = json.loads(candidate_file.read_text())
+        original_read = Path.read_text
+        for changed in ({'includedInMacReleaseZip': True}, {'includedInMac1201Zip': False},
+                        {'productionQualified': True}):
+            with self.subTest(changed=changed):
+                def read(file, *args, **kwargs):
+                    if file == candidate_file:
+                        return json.dumps({**candidate, **changed})
+                    return original_read(file, *args, **kwargs)
+                with patch.object(Path, 'read_text', read):
+                    with self.assertRaisesRegex(ValueError, 'Preview qualification boundary changed'):
+                        checker.check()
 
     def test_studio_reuses_all_functional_code_with_only_mac_help_changes(self):
         overlay = ROOT / 'workstation/studio-overlay'

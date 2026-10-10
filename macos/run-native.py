@@ -27,7 +27,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = 'MontrealAI/AGI-Fleet-Linux'
-VERSION = '1.20.0'
+VERSION = '1.20.1'
 NODE_VERSION = '24.21.0'
 NODE_SHA256 = '6239d4cf92d864487ec8cd3615038f7b67e7f58b77b21cd2f09ea9fbd68065fe'
 FIXTURE_NAME = 'AGI_Regression_Fixtures_v1.19.6.zip'
