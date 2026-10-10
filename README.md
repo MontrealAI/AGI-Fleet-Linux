@@ -12,7 +12,7 @@ The team frames this opportunity as an **approximately US$40 trillion annual tot
 
 The Fleet ZIP includes **Agent, Node, Moderator, Employer, Evidence and Recovery**. Agent performs sandboxed workstation work; Node independently checks and reviews it. Signer and compute run in separate nonadministrator accounts. Compute uses rootless Docker and policy-bound local services, with spending/run limits, authenticated readiness, durable cleanup evidence and fail-closed STOP controls.
 
-Fleet works with [AGIJobManager](https://github.com/MontrealAI/AGIJobManager): Agent prepares and publishes a supported deliverable, submits its completion URI, and follows settlement; Node reviews the evidence and submits a bonded vote. The contract enforces escrow, identity, review deadlines and USDC settlement. [Integration validation](docs/JOB_INTEGRATION.md) covers the actual clients against the current manager baseline. The [new mainnet deployment](docs/MAINNET_DEPLOYMENT.md), `0xCFA78f9980eA9B55c705B3E44467baE383cE1fA7`, also matches all nine production runtimes; its verified snapshot records paused job intake.
+Fleet works with [AGIJobManager](https://github.com/MontrealAI/AGIJobManager): Agent prepares and publishes a supported deliverable, submits its completion URI, and follows settlement; Node reviews the evidence and submits a bonded vote. The contract enforces escrow, identity, review deadlines and USDC settlement. [Integration validation](docs/JOB_INTEGRATION.md) covers the actual clients against the pinned manager 1.13.0 baseline. The [new mainnet deployment](docs/MAINNET_DEPLOYMENT.md), `0xCFA78f9980eA9B55c705B3E44467baE383cE1fA7`, also matches all nine production runtimes; its verified snapshot records paused job intake.
 
 ## Choose the right work mode
 
@@ -27,13 +27,21 @@ The public sandbox is one work mode, **not the ceiling of the product's mission*
 
 ## The potential of Fleet + AGIJobManager
 
-**Fleet supplies the workforce; AGIJobManager supplies escrow, participation rules, review deadlines and settlement.** A reusable job specification can accommodate many occupations without a profession or filename-extension allowlist. Broader tools and account access expand what can be attempted; representative task results establish what can be offered reliably.
+**Our assessment: together, they could form a reusable workforce that turns a clear request into an independently checked outcome in the tools people already use.** Fleet supplies execution and review; AGIJobManager supplies funded work orders, participation rules and settlement. This is an architectural and commercial assessment, not a measured automation rate.
 
-The target spans software and data work, documents and creative production, research, customer operations, CRM, scheduling, business administration and multi-application projects. Some tasks require installed applications, enterprise access or extra adapters. These are categories to qualify, not claims of demonstrated customer-job coverage.
+Modern assistants can already use tools. The combined product's value would be a dependable process: **define the result → execute in the required applications → independently review the outcome → settle under the job's rules**. That process must justify its total cost; a simple question or draft may still be better served by an assistant alone. The private workspace preview needs a separately implemented and qualified settlement bridge.
+
+The target spans software, data, documents, research, creative production, business operations and cross-application projects. The job format has no profession or file-extension allowlist, but tools, permissions and demonstrated competence still determine coverage. **A successful task, a completed workflow and an entire occupation are different units.** Measure accepted results across all attempted work, human intervention and the share of representative work time or value covered.
+
+The commercial progression is **verified task templates → repeat-buyer workflows → cross-application projects → a multi-operator market**. Expand when quality, demand, review capacity and economics support the next step. These are recommended development stages, not completed deployments.
+
+Keep the market model clear: **total opportunity → serviceable work → accepted paid job value → actual participant receipts and profit**. At the team's stated US$40 trillion TAM, 0.01%, 0.1% and 1% correspond arithmetically to US$4 billion, US$40 billion and US$400 billion in associated annual human-work spending. These illustrate scale; they are neither forecasts, job transaction volume nor company revenue. No platform fee is assumed.
 
 A user-friendly experience should answer five questions: **What should be done? Which workspace may be used? What may it change? What will it cost? How do I review or stop it?** The preview quickstart makes the first workspace explicit; task templates, smoother setup and broader application qualification remain part of the development roadmap.
 
 Success means **repeatable, independently accepted results at a competitive total cost and low human supervision**. No current release establishes that most keyboard-and-mouse jobs can already be completed.
+
+The full analysis reviews Fleet [`2f27979`](https://github.com/MontrealAI/AGI-Fleet-Linux/tree/2f2797905fe7867ab3ec63d3b7332ef6d38f407d) and AGIJobManager [`69a9d6c` (1.14.0 source)](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/README.md). Fleet's retained 1.13.0 integration results do not automatically qualify the newer source or private-work settlement.
 
 **[Read the complete potential and scope guide](docs/POTENTIAL_AND_SCOPE.md)** · **[Français](docs/POTENTIEL_ET_PERIMETRE.md)** · **[Explore the website explanation](https://montrealai.github.io/AGI-Fleet-Linux/#potential)**
 
@@ -54,7 +62,7 @@ The installer pins Node 24.21.0, OpenClaw 2026.9.5 and Docker Engine 29.8.2. New
 
 The [independent audit](validation/capable-38022168787-audit.json) verified **734 retained TAP logs** against the exact published ZIP, including real Unix sockets, cross-user ownership and the actual pinned Gateway discovery cache. The original 44 failures and six skips are resolved on both architectures. Their original test source remains unchanged.
 
-[AGIJobManager integration acceptance](validation/LINUX_1_0_9_JOB_INTEGRATION_ADDENDUM.md) additionally passed **eight standalone EVM scripts, a freshly compiled-manager lifecycle with Agent and three Node clients, and 777 manager regressions on each architecture**. All 11 production sources and contract artifacts match the current manager baseline (1.13.0). The independent audit verified 38 integration logs; permanent evidence is attached to the release. Generation, content transport and identities use explicit fixtures.
+[AGIJobManager integration acceptance](validation/LINUX_1_0_9_JOB_INTEGRATION_ADDENDUM.md) additionally passed **eight standalone EVM scripts, a freshly compiled-manager lifecycle with Agent and three Node clients, and 777 manager regressions on each architecture**. All 11 production sources and contract artifacts match the pinned manager baseline (1.13.0). The independent audit verified 38 integration logs; permanent evidence is attached to the release. Generation, content transport and identities use explicit fixtures.
 
 Fresh physical installation, rootless Docker/cgroup enforcement, real OAuth/inference, live documents, positive base AND browser cleanup, reboot identity persistence and 72-hour endurance are **NOT RUN**. Keep funded work disabled while recording these gates. Native regression success cannot supply physical observations.
 

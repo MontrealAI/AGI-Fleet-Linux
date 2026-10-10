@@ -9,6 +9,21 @@
 .evidence-value[data-status]:not([data-status="PASS"]){color:#f0ccad}
 
 /* Potential and scope: editorial content, readable without JavaScript. */
+.potential-nav{display:flex;flex-wrap:wrap;gap:12px 24px;margin:-10px 0 34px;font-size:12px;font-weight:650;color:#62428d}
+.combined-value{margin-bottom:40px}.combined-value>h3,.market-analysis>h3{font-size:26px;line-height:1.25;letter-spacing:-.035em}
+.value-intro,.market-analysis>p{max-width:960px;font-size:14px;line-height:1.9;color:var(--muted)}
+.value-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:24px 0 16px}
+.value-grid article{padding:24px 20px;background:#fbfafc;border:1px solid #ddd3e6;border-radius:6px}
+.value-grid article>span{font:9px ui-monospace,monospace;letter-spacing:.06em;color:#73548f}
+.value-grid h4{font-size:18px;line-height:1.3;letter-spacing:-.025em;margin:16px 0 12px}
+.value-grid p{font-size:12px;line-height:1.8;color:var(--muted);margin:0}
+.market-analysis{margin:38px 0;padding:30px;border:1px solid #d9cde5;border-radius:8px;background:#eee7f5}
+.market-analysis>.eyebrow{font-size:9px;margin-bottom:16px}.market-analysis .opportunity-table{margin:22px 0}
+.market-analysis .market-note{font-size:12px}.market-steps{font-size:13px;line-height:1.85;color:var(--muted);padding-left:24px;margin-bottom:0}.market-steps li+li{margin-top:12px}
+@media(max-width:1000px){.value-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.potential-nav{font-size:11px;gap:12px 20px}.market-analysis{padding:22px 18px}.combined-value>h3,.market-analysis>h3{font-size:23px}.value-intro,.market-analysis>p{font-size:13px}.value-grid article{padding:20px 16px}.value-grid h4{font-size:17px}.market-steps{font-size:12px}}
+@media(max-width:420px){.value-grid{grid-template-columns:1fr}}
+@media print{.potential-nav{display:none}.value-grid{grid-template-columns:repeat(2,1fr)}.value-grid article{break-inside:avoid}.market-analysis{background:white;padding:15px}.market-analysis details:not([open])>.market-steps{display:block!important}}
 .potential-section{background:#f5f2f8;border-top:1px solid #e0d8e9;border-bottom:1px solid #e0d8e9}
 .potential-thesis{padding:26px 30px;border-left:3px solid #8a68ae;background:#eae3f1;margin-bottom:36px}
 .potential-thesis p{font-size:15px;line-height:1.9;margin-bottom:14px}.potential-thesis a{font-size:12px;font-weight:650;color:#553776}
