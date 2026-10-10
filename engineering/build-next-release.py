@@ -266,6 +266,8 @@ Historical Mac instructions and prior evidence remain available for engineering 
         for name in ['README.md', 'START_HERE.md']:
             (app / name).write_text(welcome)
             (app / name.replace('.md', '.html')).write_text(render_markdown(welcome))
+        if role == 'fleet':
+            (app / 'NOTICE.html').write_text(render_markdown((app / 'NOTICE.md').read_text()))
         (app / 'Linux-Guide.html').write_text(render_markdown(welcome))
         (app / 'Linux-Guide.txt').write_text(plain_text_guide(version, role))
         (app / 'READ_ME_FIRST.txt').write_text(f'AGI Fleet Linux {version}\nOpen START_HERE.html for the current Linux installation and qualification guide.\nProduction and physical qualification remain pending.\n')

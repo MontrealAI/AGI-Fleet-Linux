@@ -109,7 +109,15 @@ class CandidateBuilder(unittest.TestCase):
                 file.write_text('# Current instructions\n')
             for _, app in editions:
                 (app / 'Linux-Guide.txt').write_text('AGI FLEET LINUX 1.0.6: obsolete install command\n')
+            notice = '# Distribution notice\n\nCopyright Example & contributors. No warranty is granted.\n'
+            (root / 'NOTICE.md').write_text(notice)
+            (root / 'NOTICE.html').write_text('<nav>AGI FLEET 1.0.9</nav>')
             m.add_operator_guides(root, repository, '1.0.10', 'a' * 40)
+            self.assertEqual((root / 'NOTICE.md').read_text(), notice)
+            rendered_notice = (root / 'NOTICE.html').read_text()
+            self.assertIn('Copyright Example &amp; contributors. No warranty is granted.', rendered_notice)
+            self.assertIn(hashlib.sha256(notice.encode()).hexdigest(), rendered_notice)
+            self.assertNotIn('1.0.9', rendered_notice)
             for role, app in editions:
                 guide = (app / 'Linux-Guide.txt').read_text()
                 self.assertIn('AGI Fleet Linux 1.0.10', guide)
