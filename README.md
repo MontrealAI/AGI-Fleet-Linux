@@ -1,16 +1,16 @@
 # AGI Fleet Linux
 
-**Linux 1.0.7 is a controlled qualification candidate, not production-qualified.**
+**Linux 1.0.8 is a controlled qualification candidate, not production-qualified.**
 
-The [frozen 1.0.7 prerelease](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.7-qualification) contains all six roles for Ubuntu Desktop 24.04 LTS, x86-64 and ARM64. Download the Fleet Linux ZIP for the implementation. GitHub-generated source archives contain this qualification repository and its engineering harnesses.
+The [frozen 1.0.8 prerelease](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.8-qualification) contains all six roles for Ubuntu Desktop 24.04 LTS, x86-64 and ARM64. Download the Fleet Linux ZIP for the implementation. GitHub-generated source archives contain this qualification repository and its engineering harnesses.
 
 ## Native validation
 
-[Run 38006497366](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38006497366) is testing the exact published 1.0.7 ZIP on separate, disposable x64 and ARM64 runners. It runs 23 targeted files (285 tests), followed by the complete 342-file suite (3,897 tests). **The run has exposed a source-map limit regression in 1.0.7; the operator installation gate remains closed. Complete results are still running and will be preserved.**
-
-A separately versioned 1.0.8 candidate is being prepared. It retains the 128-entry bound by placing the catalog validator inside the existing SQLite policy module. The unchanged regression test reproduces failure on 1.0.7 and passes on 1.0.8; this local result does not replace native saved-archive acceptance.
+[Run 38007875613](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38007875613) is testing the exact published 1.0.8 ZIP on separate, disposable x64 and ARM64 runners. It runs 23 targeted files (285 tests), followed by the complete 342-file suite (3,897 tests). **Results are pending; the operator installation gate remains closed.**
 
 The prerequisites include real Unix-domain sockets and disposable cross-user ownership, verified Node 24.21.0 in application and SDK system lookup locations, inventory-verified OpenClaw 2026.9.5, and the supplied historical fixtures. Ownership guards and fail-closed STOP handling remain enforced. No operator account, wallet or OAuth store is a fixture.
+
+The new release keeps the existing 128-entry qualification source-map bound. Its cache validator resides in the existing SQLite policy module; the independently published 1.0.7 archive remains preserved with the source-map boundary regression it exposed.
 
 The new release introduces a bounded, explicitly versioned policy for the pinned default unsigned plugin discovery cache. Installed code, plugin approvals, allowlists, credentials and older seals remain protected. Telemetry integration tests isolate automatic polling while retaining the actual pinned writer and real local HTTP requests.
 
@@ -26,10 +26,10 @@ New profiles default to 256 runs per rolling day; Agent and Node allow 32 image 
 
 ## Frozen candidate identity
 
-- File: `AGI_Fleet_Linux_v1.0.7.zip`
-- Bytes: 401,734,226
-- SHA-256: `11c47bf901df7c47d5816be0f65a707bd5ff9efd6d515a9f9ae5ae7a77fa062d`
+- File: `AGI_Fleet_Linux_v1.0.8.zip`
+- Bytes: 401,550,566
+- SHA-256: `fa2bafdf957c3b3ecf36639ecd47adb4f7bf33c2ddfb13a99500fdd4625f4fb8`
 - Every supplied archive and member is below 450,000,000 bytes.
-- Saved-archive checks passed: all seven manifests/source inventories, 275 shell files, 7,786 JavaScript files and 248 packaged launcher cases. Local parsing used Node 24.19.0; native acceptance uses hash-pinned Node 24.21.0.
+- Saved-archive checks passed: all seven manifests/source inventories, 275 shell files, 7,773 JavaScript files and 248 packaged launcher cases. Local parsing used Node 24.19.0; native acceptance uses hash-pinned Node 24.21.0.
 
 No operator profile, wallet, setup JSON, OAuth material, provider response or user document belongs in this repository.
