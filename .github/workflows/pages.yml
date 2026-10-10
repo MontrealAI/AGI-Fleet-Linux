@@ -39,9 +39,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     outputs:
-      index_sha256: ${{ steps.content_hashes.outputs.index_sha256 }}
-      french_sha256: ${{ steps.content_hashes.outputs.french_sha256 }}
-      release_sha256: ${{ steps.content_hashes.outputs.release_sha256 }}
+      public_hashes: ${{ steps.content_hashes.outputs.public_hashes }}
     steps:
       - name: Check out this revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -53,17 +51,18 @@ jobs:
         run: |
           python3 engineering/check-website.py
           node --check website/app.js
+          node --check website/onboarding.js
       - name: Record the checked public content identities
         id: content_hashes
         run: |
           python3 - <<'PY'
-          import hashlib, os
+          import hashlib, json, os
           from pathlib import Path
 
+          hashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+                    for path in sorted(Path('_site').iterdir()) if path.name != '.nojekyll'}
           with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
-              for name, key in [('index.html', 'index_sha256'), ('fr.html', 'french_sha256'), ('release.json', 'release_sha256')]:
-                  digest = hashlib.sha256((Path('_site') / name).read_bytes()).hexdigest()
-                  print(f'{key}={digest}', file=output)
+              print('public_hashes=' + json.dumps(hashes, separators=(',', ':')), file=output)
           PY
       - name: Upload only the checked public site
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
@@ -92,12 +91,10 @@ jobs:
       - name: Verify the exact content served by the public website
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
-          EXPECTED_INDEX_SHA256: ${{ needs.build.outputs.index_sha256 }}
-          EXPECTED_FRENCH_SHA256: ${{ needs.build.outputs.french_sha256 }}
-          EXPECTED_RELEASE_SHA256: ${{ needs.build.outputs.release_sha256 }}
+          EXPECTED_PUBLIC_HASHES: ${{ needs.build.outputs.public_hashes }}
         run: |
           python3 - <<'PY'
-          import hashlib, os, re, signal, time, urllib.error, urllib.parse, urllib.request
+          import hashlib, json, os, re, signal, time, urllib.error, urllib.parse, urllib.request
 
           page = urllib.parse.urlsplit(os.environ['PAGE_URL'])
           if (page.scheme != 'https' or page.netloc != 'montrealai.github.io'
@@ -106,12 +103,13 @@ jobs:
           commit = os.environ['GITHUB_SHA']
           if not re.fullmatch(r'[0-9a-f]{40}', commit):
               raise SystemExit('Invalid deployment commit')
-          pending = {
-              'index.html': os.environ['EXPECTED_INDEX_SHA256'],
-              'fr.html': os.environ['EXPECTED_FRENCH_SHA256'],
-              'release.json': os.environ['EXPECTED_RELEASE_SHA256'],
-          }
-          if not all(re.fullmatch(r'[0-9a-f]{64}', digest) for digest in pending.values()):
+          pending = json.loads(os.environ['EXPECTED_PUBLIC_HASHES'])
+          required = {'index.html', 'fr.html', 'start.html', 'start-fr.html', 'styles.css',
+                      'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'release.json'}
+          if (not isinstance(pending, dict) or not required <= pending.keys()
+                  or not all(re.fullmatch(r'[A-Za-z0-9_.-]+', name)
+                             and isinstance(digest, str) and re.fullmatch(r'[0-9a-f]{64}', digest)
+                             for name, digest in pending.items())):
               raise SystemExit('Missing or invalid checked content identities')
 
           class NoRedirect(urllib.request.HTTPRedirectHandler):

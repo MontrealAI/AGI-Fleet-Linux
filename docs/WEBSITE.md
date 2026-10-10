@@ -2,6 +2,16 @@
 
 The public operator guide lives at **<https://montrealai.github.io/AGI-Fleet-Linux/>**. Its editable source is [`website/`](../website/). The build reads `engineering/published-release.json` when present. This is an unchanged copy of a verified manifest downloaded from an actually published release. Until that pointer exists, the build uses the frozen [`engineering/current-release.json`](../engineering/current-release.json) acceptance baseline. The baseline remains unchanged when a new release is published.
 
+## The guided welcome is the main entrance
+
+Link newcomers to **[Start here](https://montrealai.github.io/AGI-Fleet-Linux/start.html)** or **[Commencer](https://montrealai.github.io/AGI-Fleet-Linux/start-fr.html)**. Keep these links prominent in the README, homepage navigation, hero and welcome section. The homepages retain the deeper technical guidance, release evidence, work modes and existing diagrams.
+
+`website/start.html` and `website/start-fr.html` contain the English and French guided welcome. `website/onboarding.css` and `website/onboarding.js` provide its presentation and progressive enhancements. Keep the two languages equivalent. Stable starting points `#hire`, `#computer` and `#explore` let the homepages link to requesting work, preparing a worker and learning the basics.
+
+The guided page helps people choose a path; it does not install software, create a wallet or qualify a computer. Its operator handoff must remain linked to the real [fresh-install guide](FRESH_INSTALL.md), verified release assets and [physical qualification ledger](PHYSICAL_QUALIFICATION.md). Explain administrator access, technical help and setup costs before that handoff. Direct people who want work done to AGIJobManager’s employer onboarding.
+
+Keep ordinary reading and navigation usable without JavaScript. Use large text and controls, visible keyboard focus, clear Back actions, an “I’m not sure” choice, reduced-motion support and printable preparation guidance. Ask only for simple onboarding choices: never request passwords, wallet recovery words, setup JSON, OAuth data, private documents or other sensitive content. Do not add tracking or claim the guide is a live installer or readiness check.
+
 ## Preview a change
 
 From the repository root, using Python 3.10+ and Node.js:
@@ -10,14 +20,15 @@ From the repository root, using Python 3.10+ and Node.js:
 python3 engineering/build-website.py
 python3 engineering/check-website.py
 node --check website/app.js
+node --check website/onboarding.js
 python3 -m http.server 8000 --directory _site --bind 127.0.0.1
 ```
 
 Open **http://127.0.0.1:8000/**. Stop the preview server with Ctrl+C.
 
-Edit `website/index.html`, `website/fr.html`, `website/styles.css`, `website/app.js` or `website/favicon.svg`, then rebuild and reload. Do not edit `_site/`: it is generated. Keep normal content and links usable without JavaScript; the script supplies progressive enhancements.
+Edit the homepage templates (`website/index.html`, `website/fr.html`), guided welcome templates (`website/start.html`, `website/start-fr.html`) or their local CSS/JavaScript assets, then rebuild and reload. Do not edit `_site/`: it is generated. Keep normal content and links usable without JavaScript; the script supplies progressive enhancements.
 
-Before publishing, check the desktop and narrow mobile layouts, keyboard navigation, links, disclosure controls, language selection and copy buttons. Verify that the displayed release and qualification statements match the source evidence. Repository links belong on GitHub; only the public site files are uploaded to Pages.
+Before publishing, check both languages at desktop and narrow mobile sizes, keyboard navigation, readable zoom, links, disclosure controls, language selection and copy buttons. Exercise every guided route, browser Back, the no-JavaScript fallback and printed preparation guidance. Verify that the displayed release and qualification statements match the source evidence. Repository links belong on GitHub; only the public site files are uploaded to Pages.
 
 ## Publication
 
@@ -27,7 +38,7 @@ The initial repository setting is **Settings → Pages → Build and deployment 
 
 Official GitHub actions are pinned to full commit hashes. The build has read-only repository access. Only the deployment job receives `pages: write` and `id-token: write`, and it runs only on `main`. Pull requests cannot deploy. Upload is limited to `_site/`; the Fleet source, dependencies, profiles and runtime state are never part of the upload.
 
-After a successful run, open the workflow's deployment URL and confirm the expected release, working navigation and downloads. If GitHub Pages briefly shows an older page, reload after the deployment completes. Do not claim publication from a successful build alone: the deployment job must succeed and the public URL must serve the new page.
+After a successful run, open the workflow's deployment URL and confirm the expected release, guided welcome, working navigation and downloads. The Pages workflow verifies the SHA-256 of every public asset against the built artifact, including the guided HTML, CSS and JavaScript. If GitHub Pages briefly shows an older page, reload after the deployment completes. Do not claim publication from a successful build alone: the deployment job must succeed and the public URL must serve the new page.
 
 ## Point the website at a newly published release
 
@@ -45,7 +56,7 @@ The builder normalizes the inline audit for display without changing the manifes
 
 ## Validation and maintenance
 
-`engineering/check-website.py` runs offline. It verifies the public-file allowlist, UTF-8 text, bounded file sizes, template substitution, basic document accessibility, unique section IDs, local assets and anchors, and links to files in this repository. It also requires the public release JSON to match the selected reviewed manifest and both rendered HTML pages to match the current templates and release data. It rejects symlinks, unexpected files, obvious credentials, external assets and links that escape the project path. These checks complement review; they are not a comprehensive secret scanner or accessibility audit. They do not request third-party pages or certify the availability of external websites.
+`engineering/check-website.py` runs offline. It verifies the public-file allowlist, UTF-8 text, bounded file sizes, template substitution, basic document accessibility, unique section IDs, local assets and anchors, and links to files in this repository. It also requires the public release JSON to match the selected reviewed manifest and all four rendered HTML pages to match the current templates and release data. It rejects symlinks, unexpected files, obvious credentials, external assets and links that escape the project path. These checks complement review; they are not a comprehensive secret scanner or accessibility audit. They do not request third-party pages or certify the availability of external websites.
 
 The “Potential and scope” sections in both languages summarize [`POTENTIAL_AND_SCOPE.md`](POTENTIAL_AND_SCOPE.md) and [`POTENTIEL_ET_PERIMETRE.md`](POTENTIEL_ET_PERIMETRE.md). Keep their task examples, current access boundaries, payout illustration and qualification language aligned. Examples are prospective unless linked to observed customer evidence.
 

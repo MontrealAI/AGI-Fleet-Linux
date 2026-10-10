@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'website'
 OUTPUT = ROOT / '_site'
 REPO = 'https://github.com/MontrealAI/AGI-Fleet-Linux'
+PUBLIC_FILES = ('index.html', 'fr.html', 'start.html', 'start-fr.html',
+                'styles.css', 'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg')
 
 
 def read_release():
@@ -162,7 +164,7 @@ def build():
     if OUTPUT.is_symlink():
         raise ValueError('Output must not be a symlink')
     OUTPUT.mkdir(exist_ok=True)
-    files = ['index.html', 'fr.html', 'styles.css', 'app.js', 'favicon.svg']
+    files = list(PUBLIC_FILES)
     for name in files + ['release.json', '.nojekyll']:
         destination = OUTPUT / name
         if destination.is_symlink() or (destination.exists() and (not destination.is_file() or destination.stat().st_nlink != 1)):

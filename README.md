@@ -1,6 +1,22 @@
 # AGI Fleet Linux
 
-**[Open the Fleet website — installation, roles, readiness and troubleshooting](https://montrealai.github.io/AGI-Fleet-Linux/)** · [Français](https://montrealai.github.io/AGI-Fleet-Linux/fr.html)
+## New here? Let’s find your next step.
+
+Fleet helps a dedicated Linux computer perform AI work and check the results. You can explore the possibilities without knowing the technical terms.
+
+### [Start here — guide me, one step at a time →](https://montrealai.github.io/AGI-Fleet-Linux/start.html)
+
+### [Commencer en français — me guider, étape par étape →](https://montrealai.github.io/AGI-Fleet-Linux/start-fr.html)
+
+**Get work done · Set up an AI worker · Help me understand**
+
+Choose a goal in the guided welcome. It explains what you need and points you to the right next step, including help preparing a suitable computer. You can go back and explore at your own pace. No sign-up is needed to read the guide.
+
+**Today’s release:** Linux 1.0.10 is an early testing release with recorded native and contract-integration acceptance; physical machine qualification remains open, so paid work must stay disabled until its required checks pass.
+
+[Explore the Fleet website](https://montrealai.github.io/AGI-Fleet-Linux/) · [Download and installation guide](docs/FRESH_INSTALL.md) · [Get help](docs/TROUBLESHOOTING.md)
+
+## What we’re building
 
 **Our mission: make a large fraction of the work people do with a keyboard, mouse and screen accessible to a capable, easy-to-use AI workforce.** Fleet is being developed for everyday installed applications, signed-in business tools, documents, code, research and multi-step workflows, with independent review and clear human control.
 
@@ -41,7 +57,9 @@ The full analysis reviews Fleet [`2f27979`](https://github.com/MontrealAI/AGI-Fl
 
 **[Read the complete potential and scope guide](docs/POTENTIAL_AND_SCOPE.md)** · **[Français](docs/POTENTIEL_ET_PERIMETRE.md)** · **[Explore the website explanation](https://montrealai.github.io/AGI-Fleet-Linux/#potential)**
 
-## Start here
+## Ready to prepare a computer?
+
+The [guided welcome](https://montrealai.github.io/AGI-Fleet-Linux/start.html) is the easiest place to begin. The following installation path is for operators and technical helpers.
 
 1. Use a dedicated, clean **Ubuntu Desktop 24.04 LTS** machine with GNOME, systemd and cgroup v2. Allow at least 8 GB RAM and 40 GB free disk; 16 GB RAM is recommended.
 2. Download **AGI_Fleet_Linux_v1.0.10.zip** and **SHA256SUMS-v1.0.10.txt** from the release page. Follow the [checksum and extraction instructions](docs/FRESH_INSTALL.md). GitHub's automatic source archives are development checkouts, not installer bundles.
