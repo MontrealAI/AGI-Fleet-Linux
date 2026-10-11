@@ -47,7 +47,7 @@
     try { history.replaceState(null, '', location.pathname + `?role=${state.role}#step-${state.step + 1}`); } catch {}
     render(true);
   }
-  navigation.forEach((link, i) => link.addEventListener('click', event => { event.preventDefault(); go(i); }));
+  navigation.forEach((link, i) => link.addEventListener('click', event => { if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); go(i); }));
   document.getElementById('setup-back').addEventListener('click', () => go(state.step - 1));
   document.getElementById('setup-next').addEventListener('click', () => go(state.step + 1));
   mark.addEventListener('click', () => { state.done = state.done.includes(state.step) ? state.done.filter(n => n !== state.step) : [...state.done, state.step]; render(); });
