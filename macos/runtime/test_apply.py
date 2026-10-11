@@ -20,7 +20,7 @@ class RuntimeOverlayTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory(prefix='mac-runtime-overlay-test-')
         cls.stage = Path(cls.temporary.name) / 'fleet'
         shutil.copytree(SOURCE, cls.stage)
-        cls.receipt = OVERLAY.apply(cls.stage, '1.20.1')
+        cls.receipt = OVERLAY.apply(cls.stage, '1.20.2')
 
     @classmethod
     def tearDownClass(cls):
@@ -37,6 +37,18 @@ class RuntimeOverlayTests(unittest.TestCase):
             self.assertIn('strictCleanup:true', (app / 'scripts/qualify-mac.mjs').read_text())
             self.assertEqual((app / 'shared/runtime/compute/mac-host.mjs').read_bytes(), (HERE / 'mac-host.mjs').read_bytes())
             self.assertTrue((app / 'qualification/macos-clean-install.template.json').exists())
+
+    def test_every_installer_uses_the_shared_decoder_and_preserves_argv(self):
+        entries = [self.stage / 'scripts/setup-openclaw.mjs']
+        entries += [self.stage / 'packages' / ('AGI_' + role) / 'scripts/setup-openclaw.mjs' for role in OVERLAY.ROLES]
+        for entry in entries:
+            text = entry.read_text()
+            self.assertIn('file = setupFilePath(file,{argument:', text)
+            self.assertNotIn('file.trim()', text)
+            result = subprocess.run(['node', '--check', str(entry)], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+        result = subprocess.run(['node', '--test', str(self.stage / 'tests/macos-setup-file-path.test.mjs')], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_installer_checks_host_before_setup_and_always_requires_cleanup(self):
         text = (self.stage / 'shared/runtime/compute/setup.mjs').read_text()
@@ -95,9 +107,9 @@ assert.equal(result.passed,true);assert.equal(result.cleanup.exactContainerAbsen
 
     def test_reapplication_and_frozen_source_are_refused(self):
         with self.assertRaisesRegex(ValueError, 'Overlay already applied'):
-            OVERLAY.apply(self.stage, '1.20.1')
+            OVERLAY.apply(self.stage, '1.20.2')
         with self.assertRaisesRegex(ValueError, 'Refusing to modify frozen'):
-            OVERLAY.apply(SOURCE, '1.20.1')
+            OVERLAY.apply(SOURCE, '1.20.2')
 
 
 if __name__ == '__main__':

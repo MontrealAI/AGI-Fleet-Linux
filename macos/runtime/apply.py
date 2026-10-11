@@ -52,8 +52,23 @@ def apply(root, version):
     base = 'shared/runtime/'
     add(base + 'compute/mac-host.mjs', (HERE / 'mac-host.mjs').read_bytes())
     add(base + 'compute/desktop-cleanup.mjs', (HERE / 'desktop-cleanup.mjs').read_bytes())
+    add(base + 'compute/setup-file-path.mjs', (HERE / 'setup-file-path.mjs').read_bytes())
+    for entry, options, imported in [
+        ('scripts/setup-openclaw.mjs', 'options', '../packages/AGI_Agent/compute/setup-file-path.mjs'),
+        *[(base + 'script-entries/setup-' + role + '.mjs.template', 'setupOptions', '../compute/setup-file-path.mjs') for role in ('agent', 'node')],
+        *[('packages/AGI_' + role + '/scripts/setup-openclaw.mjs', 'options', '../compute/setup-file-path.mjs') for role in ('Moderator', 'Employer', 'Evidence', 'Recovery')],
+    ]:
+        original = (root / entry).read_text()
+        start = original.index('  file = file' if entry.endswith('.template') or entry == 'scripts/setup-openclaw.mjs' else 'file=file.trim()')
+        end = original.index('const kit', start)
+        old = original[start:end]
+        chain(entry, old, '  file = setupFilePath(file,{argument:' + options + '.file !== undefined});\n  ')
+        first_import = original[original.index('import '):].splitlines()[0]
+        chain(entry, first_import, "import {setupFilePath} from '" + imported + "';\n" + first_import)
+    path_tests = (HERE / 'setup-file-path.test.mjs').read_text()
+    add('tests/macos-setup-file-path.test.mjs', path_tests.replace('./setup-file-path.mjs', '../shared/runtime/compute/setup-file-path.mjs').encode())
     setup = base + 'compute/setup.mjs'
-    edit(setup, "import {computeSourceIdentity}", "import {assertMacHost} from './mac-host.mjs';\nimport {computeSourceIdentity}")
+    chain(setup, "import {computeSourceIdentity}", "import {assertMacHost} from './mac-host.mjs';\nimport {computeSourceIdentity}")
     chain(setup, "  const home=dependencies.home??os.homedir()", "  if(process.platform==='darwin')assertMacHost();\n  const home=dependencies.home??os.homedir()")
     chain(setup, "{strictCleanup:platform==='linux'}", '{strictCleanup:true}')
     chain(setup, "import {captureStandardOAuthAuthority}", "import {preparePinnedControlUICache} from './setup-runtime-materialization.mjs';\nimport {captureStandardOAuthAuthority}")
@@ -79,13 +94,13 @@ def apply(root, version):
     chain(qualify, "desktopCheck(run,'docker',c.imageID)", "desktopCheck(run,'docker',c.imageID,{strictCleanup:true})")
     for name in ('setup-agent.mjs.template', 'setup-node.mjs.template'):
         entry = base + 'script-entries/' + name
-        edit(entry, 'process.umask(0o077);', "assertMacHost();\nprocess.umask(0o077);")
+        chain(entry, 'process.umask(0o077);', "assertMacHost();\nprocess.umask(0o077);")
         chain(entry, "import fs from", "import {assertMacHost} from '../compute/mac-host.mjs';\nimport fs from")
     for role in ('Moderator', 'Employer', 'Evidence', 'Recovery'):
         entry = 'packages/AGI_' + role + '/scripts/setup-openclaw.mjs'
-        edit(entry, "import {setupCapable}", "import {assertMacHost} from '../compute/mac-host.mjs';\nimport {setupCapable}")
+        chain(entry, "import {setupCapable}", "import {assertMacHost} from '../compute/mac-host.mjs';\nimport {setupCapable}")
         chain(entry, 'process.umask(0o077);', 'assertMacHost();\nprocess.umask(0o077);')
-    edit('scripts/setup-openclaw.mjs', 'const rl = createInterface(', "assertMacHost();\nconst rl = createInterface(")
+    chain('scripts/setup-openclaw.mjs', 'const rl = createInterface(', "assertMacHost();\nconst rl = createInterface(")
     chain('scripts/setup-openclaw.mjs', 'import {selectOpenClawRuntime,', "import {assertMacHost} from '../packages/AGI_Agent/compute/mac-host.mjs';\nimport {selectOpenClawRuntime,")
 
     template = json.loads((HERE / 'macos-clean-install.template.json').read_text())
@@ -233,7 +248,7 @@ test('signed source maps enforce the shared finite source limit', async t => {
     for role in ROLES:
         for name in canonical_changes:
             generated.append('packages/AGI_' + role + '/shared/runtime/' + name)
-        generated.extend('packages/AGI_' + role + '/' + name for name in ('compute/mac-host.mjs', 'compute/desktop-cleanup.mjs', 'scripts/qualify-mac.mjs'))
+        generated.extend('packages/AGI_' + role + '/' + name for name in ('compute/mac-host.mjs', 'compute/desktop-cleanup.mjs', 'compute/setup-file-path.mjs', 'scripts/qualify-mac.mjs'))
     generated.extend('packages/AGI_' + role + '/scripts/setup-openclaw.mjs' for role in ('Agent', 'Node'))
     generated.append('shared/runtime-inventory.json')
     paths = sorted(set(changes) | set(generated))

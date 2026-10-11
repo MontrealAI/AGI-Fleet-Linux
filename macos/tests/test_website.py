@@ -51,7 +51,7 @@ class MacWebsiteMetadataTests(unittest.TestCase):
         audit.update({'schema': 'agi-macos-independent-audit/v1', 'status': 'PASS', 'releaseSHA256': release['sha256'],
                       'releaseBytes': release['bytes'], 'releaseMetadataSHA256': metadata_sha, 'native': native,
                       'integration': integration, 'verifiedTapLogs': 698, 'verifiedIntegrationLogs': 19})
-        return {**release, 'audit': audit, 'evidence': {'name': 'macOS-Qualification-Evidence-v1.20.1.zip',
+        return {**release, 'audit': audit, 'evidence': {'name': 'macOS-Qualification-Evidence-v1.20.2.zip',
                                                      'bytes': 1234567, 'sha256': '6' * 64}}
 
     def test_unpublished_candidate_has_preparation_links_and_closed_gate(self):

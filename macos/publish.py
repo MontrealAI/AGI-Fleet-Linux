@@ -14,7 +14,7 @@ from audit import (ROOT, REPOSITORY, LIMIT, audit, decode_json, module, read_jso
                    regular_tree, require, sha, validate_metadata, write_json)
 from release_tools import extract
 
-VERSION = '1.20.1'
+VERSION = '1.20.2'
 EVIDENCE = 'macOS-Qualification-Evidence-v' + VERSION + '.zip'
 MANIFEST = 'Release-Manifest-macOS-v' + VERSION + '.json'
 CHECKSUMS = 'SHA256SUMS-macOS-v' + VERSION + '.txt'

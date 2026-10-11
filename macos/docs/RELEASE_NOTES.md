@@ -1,14 +1,14 @@
-# Mac 1.20.1 — reliable first-start preparation
+# Mac 1.20.2 — clearer setup and reliable file handoff
 
 **A dedicated Apple silicon Mac distribution with all six Fleet roles and a guided clean-install path.** This candidate targets M1 and M2 Macs, macOS 15 or later and native arm64 execution. It remains separate from the Linux release identity and its physical evidence.
 
-## What changed in 1.20.1
+## What changed in 1.20.2
 
-A first-start timing race could interrupt a new Standard-account installation: the pinned Gateway could write its interface cache after it had reported ready. The later integrity check then correctly rejected the unexpected profile change.
+Dragging a setup JSON into Terminal could fail when its filename contained an apostrophe, escaped punctuation or a literal backslash. The root installer and all six role installers now share a bounded filename decoder. It handles Finder escaping and quoted paths without invoking a shell, preserves already-decoded command-line arguments, and rejects malformed or multiple dropped paths. Existing file ownership, private permissions, role admission and approval checks remain in place.
 
-The installer now prepares the exact pinned cache while the private candidate is stopped, before capturing its authority and asking for approval. This removes the identified race without relaxing integrity validation, ownership checks, cleanup requirements or safety stops. A regression using the actual pinned runtime checks this preparation path.
+The website adds a complete English/French Mac setup companion with eight readable steps, explicit account labels, Agent/Node instructions, progress saved on the device, larger text, print support and recovery help. These personal checkmarks are not machine observations or qualification results.
 
-Mac 1.20.0 introduced the initial complete Mac distribution. Its archive and recorded results remain separate historical evidence. Version 1.20.1 has a new archive, source revision and qualification run; earlier acceptance does not qualify the changed package.
+Version 1.20.2 retains the 1.20.1 pinned-cache preparation fix and requires a new exact-archive native suite, integration run and evidence audit. Earlier releases and their recorded results remain historical evidence.
 
 ## Included
 
