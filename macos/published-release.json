@@ -1,0 +1,428 @@
+{
+  "schema": "agi-macos-published-release/v1",
+  "version": "1.20.1",
+  "tag": "v1.20.1-macos-qualification",
+  "prefix": "AGI_Fleet_macOS_v1.20.1",
+  "name": "AGI_Fleet_macOS_v1.20.1.zip",
+  "sourceDateEpoch": 1791638400,
+  "maximumFileBytes": 450000000,
+  "platform": "darwin",
+  "architecture": "arm64",
+  "minimumMacOS": "15",
+  "nodeVersion": "24.21.0",
+  "base": {
+    "version": "1.0.10",
+    "tag": "v1.0.10-qualification",
+    "prefix": "AGI_Fleet_Linux_v1.0.10",
+    "name": "AGI_Fleet_Linux_v1.0.10.zip",
+    "bytes": 403770769,
+    "sha256": "bb21983d654291a860f2f78c2b69bbcd49423b5f41ffc9178864c41acc347695",
+    "sourceRevisionSHA256": "ba5d4b30cc7b02d60e7211a3201ad74129dce0056d64655a222c4fe08e699ba7",
+    "sourceFiles": 4816,
+    "url": "https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.0.10-qualification/AGI_Fleet_Linux_v1.0.10.zip"
+  },
+  "nativeAcceptance": "PASS",
+  "operatorGate": "OPEN_FOR_CONTROLLED_FRESH_INSTALL",
+  "physicalQualification": "NOT_RUN",
+  "productionQualified": false,
+  "signedNotarized": false,
+  "bytes": 406218135,
+  "sha256": "1cd0dcbced0e667513a0c4321b4ffbe1199181511091cbf4ad7454c41df8c7d6",
+  "sourceRevisionSHA256": "ee4850505fc09b8f269735a3068a953d7bff3db6658654c6b527d28f0e2870f3",
+  "sourceFiles": 4890,
+  "repositoryCommit": "1a0cdfada839bfe9f885b21a132ed59419cd5f06",
+  "workflowCommit": "1a0cdfada839bfe9f885b21a132ed59419cd5f06",
+  "baseline": {
+    "status": "PASS",
+    "sha256": "bb21983d654291a860f2f78c2b69bbcd49423b5f41ffc9178864c41acc347695",
+    "bytes": 403770769,
+    "manifestEntriesVerified": 58360,
+    "editions": 7,
+    "sourceFiles": 4816
+  },
+  "buildInputs": [
+    {
+      "path": "macos/audit.py",
+      "sha256": "5c31e0d3540dbfc9df0f63852497bc86b49b3f68df9b4b705f075ca451617c50"
+    },
+    {
+      "path": "macos/build.py",
+      "sha256": "f596f0eabbf49b29177fe67fb4a1f4f02046b0a4c2143fbb7df05a52ab42b267"
+    },
+    {
+      "path": "macos/docs/FRESH_INSTALL.md",
+      "sha256": "82121d1a40a58bc85d01b0d9e27ded3bef4f481740eadc20b47f554e53eaa95d"
+    },
+    {
+      "path": "macos/docs/PARITY.md",
+      "sha256": "a347aca3a2cf3dd0778098f1224acb415356bb2194ad6856437025a54dc06fde"
+    },
+    {
+      "path": "macos/docs/PHYSICAL_QUALIFICATION.md",
+      "sha256": "d235822f07412703a0a6e9a86f093d450b818dc93f21039d19f04757668e13ff"
+    },
+    {
+      "path": "macos/docs/RELEASE_NOTES.md",
+      "sha256": "e480756a0c05e757892d675c3f2ab3546655fd028e7e8bc9424a6a8791c02bcf"
+    },
+    {
+      "path": "macos/docs/START_HERE.md",
+      "sha256": "f26a44325d3a454e29d4f443d2fdc943053469f1e813a3d86a5d76c0f1292639"
+    },
+    {
+      "path": "macos/docs/TROUBLESHOOTING.md",
+      "sha256": "14594bf9d9d3a92741882155421319577b9ff561c307447ecf233befe479062a"
+    },
+    {
+      "path": "macos/preview/QUICKSTART.md",
+      "sha256": "7bb171813a19d86d262290af483937c401f758d335a6d951a5b44c9d27204af2"
+    },
+    {
+      "path": "macos/preview/README.md",
+      "sha256": "dda4e8013b64acc951edf7b67ca668886f8554c87c08e1fce68083761e455816"
+    },
+    {
+      "path": "macos/preview/STUDIO.md",
+      "sha256": "95b00221285938ba358de50a4cc3988188d1499fed3c1bf954165f892623e4ec"
+    },
+    {
+      "path": "macos/preview/candidate.json",
+      "sha256": "b2715cc88a1ec17ec899e81424e1b6e6ecebe97c619475c94671f42664f26e6e"
+    },
+    {
+      "path": "macos/preview/check.py",
+      "sha256": "62b3b339455dfd13f32f5ea878cb795ac2c70347352aa7600f31f8bbed046f81"
+    },
+    {
+      "path": "macos/preview/launch.mjs",
+      "sha256": "9e94ca25e041c7884ab9ea7f7d898613f8ae4e06cff01d9f2e038bb62ed8aa04"
+    },
+    {
+      "path": "macos/preview/materialize.py",
+      "sha256": "141198ea5c8246f35ff2a8976c9b5baab1dcc82013b2aef555159eea1b16ede2"
+    },
+    {
+      "path": "macos/preview/operator.mjs",
+      "sha256": "5bf622b416fbde4e294ff8e5ffc9ea4417f5cb030eab1fd105222a1a38e004c1"
+    },
+    {
+      "path": "macos/preview/overlay.py",
+      "sha256": "ee3751af4623885ec942d046a74ec54c8543634ca2fe59f422580069c75c0d5b"
+    },
+    {
+      "path": "macos/preview/source-inventory.json",
+      "sha256": "5256c7ab716e3913e37e406ac9280c3b25bbea530a9b8ef3b5951288daeead35"
+    },
+    {
+      "path": "macos/preview/task-host.mjs",
+      "sha256": "ad8a9170db75cca21f67361dc1e0dd27d8137e2e92cff2a4fbefe971ef60ed31"
+    },
+    {
+      "path": "macos/preview/tests/authority.test.mjs",
+      "sha256": "c7c8287a3da78ac735b299b246ffc94d21898dc4bd5e6247cf15916a7e65013d"
+    },
+    {
+      "path": "macos/preview/tests/draft.test.mjs",
+      "sha256": "0ad46270ad9c712bc06875c48f9e6dbead1c2b8975ef2727edc0174530f6f87e"
+    },
+    {
+      "path": "macos/preview/tests/fixture.mjs",
+      "sha256": "01e02856911fdfeb4d7aaa674a777b4180d50da38279c5ac1c8d28ad8c2e472c"
+    },
+    {
+      "path": "macos/preview/tests/operator.test.mjs",
+      "sha256": "831062bd444ed5b8305d277e454c491c0fc586883f9f083b49c3a40737f23d3d"
+    },
+    {
+      "path": "macos/preview/tests/test_materialize.py",
+      "sha256": "4e5fc3bd291e60f82d937c88bb6b1ebfb5d28f5a21f4bcc50e43650dfea7134e"
+    },
+    {
+      "path": "macos/publish.py",
+      "sha256": "9ce06ea82387fd8d5c6d335f557f115cd2c63ee4740574c6ab95b6b60994f35b"
+    },
+    {
+      "path": "macos/release.json",
+      "sha256": "5014c336ffcb4787502ce325e8bbafdbfaa99c7112f2975b460bdba8a04fdc0b"
+    },
+    {
+      "path": "macos/run-integration.py",
+      "sha256": "c912e7bfe550ae0dbfbb797206d0f6d17d5b279094ab10408a949f8c6f32da62"
+    },
+    {
+      "path": "macos/run-native.py",
+      "sha256": "10562b4b2f50eff2932cf365600af1788bd9762273033c519518f068ba1462f9"
+    },
+    {
+      "path": "macos/runtime/apply.py",
+      "sha256": "70edc75d2c78e0bd4f9cbdac9647ae56e1a0bb4d2b6e232f759a5a0dbc7d73e7"
+    },
+    {
+      "path": "macos/runtime/control-ui-cache.test.mjs",
+      "sha256": "fdb592e17645d6fa97e4fbd283f90a0bc33cf7e49f62dc590c9889511237cbf3"
+    },
+    {
+      "path": "macos/runtime/desktop-cleanup.mjs",
+      "sha256": "4a7a4a160fff5d33ae809d5759ab397b4463916cced7e8c1dee6112715b5f503"
+    },
+    {
+      "path": "macos/runtime/mac-host.mjs",
+      "sha256": "f12b0b3ea51c6359385321d4f26123f0a38ff6c2f9eca34ebefd5d5151f6314b"
+    },
+    {
+      "path": "macos/runtime/macos-clean-install.mjs",
+      "sha256": "d24208f0ee45267b71cf78498d569d702be84b74266284755af4276a7b954339"
+    },
+    {
+      "path": "macos/runtime/macos-clean-install.schema.json",
+      "sha256": "4f505abdb726efc24a7402491af355987403bedfa81b826a5b4b99e6fa70f032"
+    },
+    {
+      "path": "macos/runtime/macos-clean-install.template.json",
+      "sha256": "5251f9e72925bc771c2cbb08fe4a6a1b0a03843900671797243cd24ee3e34744"
+    },
+    {
+      "path": "macos/runtime/runtime.test.mjs",
+      "sha256": "db3ad3bb4d6a79571f0282b0aafe2a3717d35875d3751131558a560ed81aeab8"
+    },
+    {
+      "path": "macos/runtime/test_apply.py",
+      "sha256": "89f2f7eb0f95f56ed9c63e75c95a3650f189d00ed7797c658f518971e35d2f70"
+    },
+    {
+      "path": "macos/tests/test_audit.py",
+      "sha256": "2c0c50ccc21c41c1e8bc152ca496957108b7237c95246772399ae9adf2a4a1bf"
+    },
+    {
+      "path": "macos/tests/test_build.py",
+      "sha256": "2d417262f49c85d98faef09c9df424ad36f8db867e6ace51fc83b794c98a88f3"
+    },
+    {
+      "path": "macos/tests/test_integration.py",
+      "sha256": "12a39b29e74b11e2c97451fb32d1f58b8dc1d0353ec96c1a661a1f4abb2f539a"
+    },
+    {
+      "path": "macos/tests/test_native.py",
+      "sha256": "d7172819ac1bd4ea84eaffb89cbf53d9382a0e33988b5f810c6ec16dcc589744"
+    },
+    {
+      "path": "macos/tests/test_website.py",
+      "sha256": "1c52cece2235dc26e4258d369f56fe0e76c8781c942f3a0b4e5374bfa092eaae"
+    }
+  ],
+  "archiveVerification": {
+    "schema": "agi-macos-archive-verification/v1",
+    "status": "PASS_ARCHIVE_INTEGRITY",
+    "sha256": "1cd0dcbced0e667513a0c4321b4ffbe1199181511091cbf4ad7454c41df8c7d6",
+    "bytes": 406218135,
+    "files": 33369,
+    "crcVerified": true,
+    "allManifestsVerified": true,
+    "sourceInventoryVerified": true,
+    "executableModesVerified": true,
+    "freshExtraction": true,
+    "editions": {
+      "fleet": {
+        "sourceFiles": 4890,
+        "sourceRevisionSHA256": "ee4850505fc09b8f269735a3068a953d7bff3db6658654c6b527d28f0e2870f3",
+        "manifestFiles": 33368
+      },
+      "agent": {
+        "sourceFiles": 681,
+        "sourceRevisionSHA256": "64ab88b09b1d1686c6de29cb9ea213d13937f1af6d75b34c8e0ee5157dd623b0",
+        "manifestFiles": 5961
+      },
+      "node": {
+        "sourceFiles": 705,
+        "sourceRevisionSHA256": "609ea14721e647f0010426a4398b50125738ab60f28e93509cb11d7d5d22a6b9",
+        "manifestFiles": 6014
+      },
+      "moderator": {
+        "sourceFiles": 752,
+        "sourceRevisionSHA256": "52eee674f8f8051a9293ab1311ccca95767df8d3ce197cb892e54ad44dc4b8a5",
+        "manifestFiles": 3345
+      },
+      "employer": {
+        "sourceFiles": 752,
+        "sourceRevisionSHA256": "69575ff0931a2821cb20c4a1a91275f2e1299692545d15566b4c23b7ac9a1ba4",
+        "manifestFiles": 3345
+      },
+      "evidence": {
+        "sourceFiles": 751,
+        "sourceRevisionSHA256": "8512e915f6e24e7158f77ed232951896498e9da7059806dd2a6a896098006dbb",
+        "manifestFiles": 3344
+      },
+      "recovery": {
+        "sourceFiles": 752,
+        "sourceRevisionSHA256": "bebc105062d5e6daa04dee48ede58bd3dcdd848acf787ff943346da74dd08dc7",
+        "manifestFiles": 3345
+      }
+    },
+    "nativeAcceptance": "NOT_RUN",
+    "physicalQualification": "NOT_RUN",
+    "productionQualified": false
+  },
+  "repository": "MontrealAI/AGI-Fleet-Linux",
+  "workflowRun": "38093741562",
+  "jobIntegrationAcceptance": "PASS",
+  "audit": {
+    "schema": "agi-macos-independent-audit/v1",
+    "status": "PASS",
+    "version": "1.20.1",
+    "releaseSHA256": "1cd0dcbced0e667513a0c4321b4ffbe1199181511091cbf4ad7454c41df8c7d6",
+    "releaseBytes": 406218135,
+    "releaseMetadataSHA256": "e691d165e4c0766f19275b3b4b080b421284287bf389e4773c462f0b4542a92e",
+    "sourceRevisionSHA256": "ee4850505fc09b8f269735a3068a953d7bff3db6658654c6b527d28f0e2870f3",
+    "workflowCommit": "1a0cdfada839bfe9f885b21a132ed59419cd5f06",
+    "repository": "MontrealAI/AGI-Fleet-Linux",
+    "workflowRun": "38093741562",
+    "native": [
+      {
+        "status": "PASS",
+        "runnerLabel": "macos-15",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "macOS": "15.7.9",
+        "workflowCommit": "1a0cdfada839bfe9f885b21a132ed59419cd5f06",
+        "workflowRun": "38093741562",
+        "repository": "MontrealAI/AGI-Fleet-Linux",
+        "complete": {
+          "status": "PASS",
+          "counts": {
+            "tests": 4003,
+            "suites": 9,
+            "pass": 4003,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "testFiles": 350,
+          "verifiedLogs": 350,
+          "verifiedSourceFiles": 4890,
+          "resultsSHA256": "8adaf3299cd77edc8e2aac8deaba3d039bfe9613c14d9643b06e8e1f0dfaa306",
+          "testedSourceSHA256": "58fcc22038f7015d4bdd4df8ca3a0fd576c6a00134b942b3a9a8a0292afcb225"
+        },
+        "summarySHA256": "0ce32b6c0d0cac842b161275ac88ba511e2440ab1674a4fef43ba0530b1f24ab",
+        "systemNodeProvisioningSHA256": "e050cb67513ec3c0581b1bb99e9d94d764896344ae2bc21b8a08f53427d067ab",
+        "productionQualified": false,
+        "physicalQualification": "NOT_RUN"
+      },
+      {
+        "status": "PASS",
+        "runnerLabel": "macos-26",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "macOS": "26.6.2",
+        "workflowCommit": "1a0cdfada839bfe9f885b21a132ed59419cd5f06",
+        "workflowRun": "38093741562",
+        "repository": "MontrealAI/AGI-Fleet-Linux",
+        "complete": {
+          "status": "PASS",
+          "counts": {
+            "tests": 4003,
+            "suites": 9,
+            "pass": 4003,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "testFiles": 350,
+          "verifiedLogs": 350,
+          "verifiedSourceFiles": 4890,
+          "resultsSHA256": "41a4604b4ec37df4f6499ada744ffdf6a888d7edebedfbf9508cf3e8ff372623",
+          "testedSourceSHA256": "58fcc22038f7015d4bdd4df8ca3a0fd576c6a00134b942b3a9a8a0292afcb225"
+        },
+        "summarySHA256": "ba466f62c1ee066d80d29a91c6306bb4aa8a3069bee208a129c6a07ae9ce65b3",
+        "systemNodeProvisioningSHA256": "ae429932802f2e4347afea46028262a48c8a98bb2dd9575b407282f53a80110d",
+        "productionQualified": false,
+        "physicalQualification": "NOT_RUN"
+      }
+    ],
+    "integration": {
+      "architecture": "arm64",
+      "status": "PASS",
+      "summarySHA256": "3c4f647fd316dd57b73ac90992dce50f37526307c90df3f44e913bb67bafe986",
+      "verifiedLogs": 19,
+      "standaloneIntegrationScripts": 8,
+      "productionSourcesMatched": 11,
+      "contractArtifactsMatched": 11,
+      "managerTestsPassed": 777,
+      "currentManagerLifecycleSHA256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56",
+      "managerCommit": "191cf3590e5cdc08df1bb0af500ee28a91c8b010",
+      "workflowRun": "38093741562",
+      "workflowCommit": "1a0cdfada839bfe9f885b21a132ed59419cd5f06",
+      "productionQualified": false,
+      "platform": "darwin",
+      "runnerLabel": "macos-26",
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "filesystemSHA256": "ab2a60adbffd315bd24c4c0302958e5bfdb9fe287173d1aecf59a156d8a9b917"
+    },
+    "verifiedTapLogs": 700,
+    "verifiedIntegrationLogs": 19,
+    "archiveVerification": {
+      "schema": "agi-macos-archive-verification/v1",
+      "status": "PASS_ARCHIVE_INTEGRITY",
+      "sha256": "1cd0dcbced0e667513a0c4321b4ffbe1199181511091cbf4ad7454c41df8c7d6",
+      "bytes": 406218135,
+      "files": 33369,
+      "crcVerified": true,
+      "allManifestsVerified": true,
+      "sourceInventoryVerified": true,
+      "executableModesVerified": true,
+      "freshExtraction": false,
+      "editions": {
+        "fleet": {
+          "sourceFiles": 4890,
+          "sourceRevisionSHA256": "ee4850505fc09b8f269735a3068a953d7bff3db6658654c6b527d28f0e2870f3",
+          "manifestFiles": 33368
+        },
+        "agent": {
+          "sourceFiles": 681,
+          "sourceRevisionSHA256": "64ab88b09b1d1686c6de29cb9ea213d13937f1af6d75b34c8e0ee5157dd623b0",
+          "manifestFiles": 5961
+        },
+        "node": {
+          "sourceFiles": 705,
+          "sourceRevisionSHA256": "609ea14721e647f0010426a4398b50125738ab60f28e93509cb11d7d5d22a6b9",
+          "manifestFiles": 6014
+        },
+        "moderator": {
+          "sourceFiles": 752,
+          "sourceRevisionSHA256": "52eee674f8f8051a9293ab1311ccca95767df8d3ce197cb892e54ad44dc4b8a5",
+          "manifestFiles": 3345
+        },
+        "employer": {
+          "sourceFiles": 752,
+          "sourceRevisionSHA256": "69575ff0931a2821cb20c4a1a91275f2e1299692545d15566b4c23b7ac9a1ba4",
+          "manifestFiles": 3345
+        },
+        "evidence": {
+          "sourceFiles": 751,
+          "sourceRevisionSHA256": "8512e915f6e24e7158f77ed232951896498e9da7059806dd2a6a896098006dbb",
+          "manifestFiles": 3344
+        },
+        "recovery": {
+          "sourceFiles": 752,
+          "sourceRevisionSHA256": "bebc105062d5e6daa04dee48ede58bd3dcdd848acf787ff943346da74dd08dc7",
+          "manifestFiles": 3345
+        }
+      },
+      "nativeAcceptance": "NOT_RUN",
+      "physicalQualification": "NOT_RUN",
+      "productionQualified": false
+    },
+    "nativeAcceptance": "PASS",
+    "jobIntegrationAcceptance": "PASS",
+    "operatorGate": "OPEN_FOR_CONTROLLED_FRESH_INSTALL",
+    "productionQualified": false,
+    "physicalQualification": "NOT_RUN",
+    "signedNotarized": false
+  },
+  "evidence": {
+    "name": "macOS-Qualification-Evidence-v1.20.1.zip",
+    "bytes": 4786075,
+    "sha256": "2bb5e1c9b7ac06886107a441bf2edd09dca55da283424b5839d40d728b4e9571"
+  }
+}
