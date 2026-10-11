@@ -131,7 +131,7 @@ The Mac workflow runs the complete native suite on each named macOS version; it 
 
 Fleet works with [AGIJobManager](https://github.com/MontrealAI/AGIJobManager): Agent prepares and publishes a supported deliverable, submits its completion URI, and follows settlement; Node reviews evidence and submits a bonded vote. The contract governs escrow, identity, deadlines and USDC settlement.
 
-The tested contract baseline is **1.13.0**, commit `191cf3590e5cdc08df1bb0af500ee28a91c8b010`. [Integration details](docs/JOB_INTEGRATION.md) distinguish real client execution from explicit local-chain, generation, content-transport and identity fixtures. The [mainnet deployment report](docs/MAINNET_DEPLOYMENT.md) records nine matching production runtimes for `0xCFA78f9980eA9B55c705B3E44467baE383cE1fA7` at its observation block. Its paused-intake finding is a historical snapshot; check current readiness before commissioning.
+The release contract baseline is **1.13.0**, commit `191cf3590e5cdc08df1bb0af500ee28a91c8b010`. [Integration details](docs/JOB_INTEGRATION.md) separate that preserved acceptance from the current **1.14.0** compatibility probe and its local-chain, generation, content-transport and identity fixtures. The [mainnet deployment and readiness guide](docs/MAINNET_DEPLOYMENT.md) records nine matching production runtimes for `0xCFA78f9980eA9B55c705B3E44467baE383cE1fA7`, the later connected ENS helper and the evidence still required before funded work. These are dated observations; the recorded activation decision remains **HOLD**, with physical and operator commissioning open.
 
 ## Engineering and history
 

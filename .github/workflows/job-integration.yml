@@ -8,6 +8,9 @@ on:
       - engineering/job-lifecycle.mjs
       - engineering/release_tools.py
       - engineering/tests/test_job_integration.py
+      - engineering/verify-mainnet-source.mjs
+      - engineering/verify-mainnet-deployment.mjs
+      - engineering/tests/mainnet-source.test.mjs
   push:
     branches: [main]
     paths:
@@ -16,6 +19,9 @@ on:
       - engineering/job-lifecycle.mjs
       - engineering/release_tools.py
       - engineering/tests/test_job_integration.py
+      - engineering/verify-mainnet-source.mjs
+      - engineering/verify-mainnet-deployment.mjs
+      - engineering/tests/mainnet-source.test.mjs
   workflow_dispatch:
     inputs:
       manager_ref:
@@ -34,12 +40,54 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  observer:
+    name: Mainnet observer / published frozen materialization
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Fetch this exact engineering commit
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+      - name: Materialize the original published ZIP and verify without RPC
+        run: |
+          set -euo pipefail
+          python3 engineering/materialize-release.py --output "$RUNNER_TEMP/mainnet-source"
+          python3 - <<'PY'
+          import importlib.util, os, subprocess, sys
+          from pathlib import Path
+          sys.path.insert(0, 'engineering')
+          spec = importlib.util.spec_from_file_location('integration', 'engineering/run-job-integration.py')
+          runner = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(runner)
+          work = Path(os.environ['RUNNER_TEMP'])
+          node_bin, _ = runner.install_node(work)
+          subprocess.run([str(node_bin / 'node'), '--test', 'engineering/tests/mainnet-source.test.mjs'], check=True)
+          result = subprocess.check_output([str(node_bin / 'node'), 'engineering/verify-mainnet-source.mjs',
+              '--fleet', str(work / 'mainnet-source' / runner.PREFIX)], text=True)
+          Path('mainnet-source-check.json').write_text(result)
+          print(result)
+          PY
+      - name: Retain the offline materialization receipt
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: mainnet-observer-source-${{ github.run_id }}-${{ github.run_attempt }}
+          path: mainnet-source-check.json
+          if-no-files-found: error
+          retention-days: 90
   integration:
-    name: Job lifecycle / ${{ matrix.runner }}
+    name: Job lifecycle / ${{ matrix.manager }} / ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
         runner: [ubuntu-24.04, ubuntu-24.04-arm]
+        manager: ${{ fromJSON((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && '["selected"]' || '["baseline-1.13.0","current-1.14.0"]') }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 35
     steps:
@@ -59,7 +107,7 @@ jobs:
           python3 -m unittest discover -s engineering/tests -v
       - name: Validate frozen Fleet and freshly compiled AGIJobManager
         env:
-          MANAGER_REF: ${{ github.event_name == 'schedule' && 'main' || inputs.manager_ref || '191cf3590e5cdc08df1bb0af500ee28a91c8b010' }}
+          MANAGER_REF: ${{ matrix.manager == 'current-1.14.0' && '5f296a14727f3497128f3a49bd628c1f09a96221' || github.event_name == 'schedule' && 'main' || inputs.manager_ref || '191cf3590e5cdc08df1bb0af500ee28a91c8b010' }}
         run: |
           set -euo pipefail
           python3 engineering/run-job-integration.py \
@@ -85,7 +133,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0, Node 24
         with:
-          name: fleet-manager-integration-${{ matrix.runner }}-${{ github.run_id }}-${{ github.run_attempt }}
+          name: fleet-manager-integration-${{ matrix.manager }}-${{ matrix.runner }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: job-evidence/
           if-no-files-found: error
           retention-days: 90

@@ -74,6 +74,23 @@ def main():
                 and mainnet['runtimeCompatibility'] == replay['status']
                 and mainnet['intakeOpenAtObservedBlock'] == replay['intakeOpenAtObservedBlock']
                 and mainnet['productionQualified'] is False, 'Mainnet observation anchor differs')
+    recorded = json.loads((ROOT / 'engineering/mainnet-observation.json').read_text())
+    require(recorded['schema'] == 'agi-fleet-recorded-mainnet-observation/v1'
+            and recorded['path'] == 'validation/mainnet-2026-10-11.json'
+            and recorded['notLiveState'] is True and recorded['productionQualified'] is False
+            and recorded['sourceVerification'] == 'complete-frozen-materialization',
+            'Recorded mainnet observation scope differs')
+    recorded_path = ROOT / recorded['path']
+    require(sha(recorded_path) == recorded['sha256'], 'Recorded mainnet observation digest differs')
+    recorded_report = json.loads(recorded_path.read_text())
+    recorded_replay = check_mainnet(recorded_report)
+    require('materialization' in recorded_report
+            and recorded['observedAt'] == recorded_report['observedAt']
+            and recorded['manager'] == recorded_report['manager']
+            and recorded['observationBlock'] == recorded_replay['observationBlock']
+            and recorded['observationBlockHash'] == recorded_report['observation']['hash']
+            and recorded['intakeOpenAtObservedBlock'] == recorded_replay['intakeOpenAtObservedBlock'],
+            'Recorded mainnet observation anchor differs')
     for path in [ROOT / 'README.md', *(ROOT / 'docs').glob('*.md'), ROOT / 'engineering/README.md']:
         for target in re.findall(r'\]\(([^\s)]+)\)', path.read_text()):
             if re.match(r'^[a-zA-Z][a-zA-Z0-9+.-]*:', target) or target.startswith('#'):
@@ -104,6 +121,7 @@ def main():
     require(not args.require_source or source is not None, 'Frozen source mirror is missing')
     print(json.dumps({'status': 'PASS', 'acceptanceRelease': current['version'], 'nativeAcceptance': 'PASS', 'candidateAcceptance': 'SEE_NEW_RELEASE_AUDIT' if (ROOT / 'engineering/next-release.json').exists() else None, 'jobIntegration': integration['status'] if integration else None,
                       'mainnetDeploymentObservation': replay if mainnet else None,
+                      'recordedMainnetObservation': recorded_replay,
                       'operatorGate': current['operatorGate'],
                       'sourceMirror': source, 'productionQualified': False}, indent=2))
 
