@@ -10,6 +10,10 @@ Fleet helps a dedicated Linux computer or Apple silicon Mac perform AI work and 
 
 ### Apple silicon Mac · M1 / M2
 
+[**Set up your Mac, one step at a time →**](https://montrealai.github.io/AGI-Fleet-Linux/install-mac.html) · [**Configurer votre Mac, étape par étape →**](https://montrealai.github.io/AGI-Fleet-Linux/install-mac-fr.html)
+
+An eight-step companion stays beside you through setup: clear account labels, Agent/Node instructions, larger text, saved progress, a printable guide and help at every stage. It asks for no secrets and does not inspect or change your computer.
+
 [**Mac guide — start here →**](https://montrealai.github.io/AGI-Fleet-Linux/mac.html) · [**Guide Mac en français →**](https://montrealai.github.io/AGI-Fleet-Linux/mac-fr.html)
 
 Mac mini, MacBook and Mac Studio have a dedicated native macOS distribution, all six roles, a clean Standard-account installation guide, recovery instructions and a physical qualification checklist. [Mac installation](macos/docs/FRESH_INSTALL.md) · [Platform parity](macos/docs/PARITY.md) · [Published Mac manifest](macos/published-release.json) · [Mac 1.20.1 download and release notes](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.20.1-macos-qualification)

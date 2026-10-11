@@ -177,6 +177,7 @@
     if (state.panel === 'welcome') state.path = '';
     panels.forEach(section => { section.hidden = section.id !== state.panel; });
     const active = document.getElementById(state.panel);
+    if (mac) document.getElementById('installation-guide').href = `install-mac${french ? '-fr' : ''}.html?role=${state.role || 'agent'}`;
     const workerStep = ({welcome: 1, computer: 2, device: 2, role: 3, plan: 4})[state.panel];
     progress.hidden = !workerStep || state.panel === 'welcome';
     [...progress.children].forEach((item, index) => {

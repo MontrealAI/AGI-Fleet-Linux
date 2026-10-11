@@ -11,7 +11,7 @@ SOURCE = ROOT / 'website'
 OUTPUT = ROOT / '_site'
 REPO = 'https://github.com/MontrealAI/AGI-Fleet-Linux'
 PUBLIC_FILES = ('index.html', 'fr.html', 'start.html', 'start-fr.html', 'mac.html', 'mac-fr.html',
-                'styles.css', 'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg')
+                'styles.css', 'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'install-mac.html', 'install-mac-fr.html', 'mac-setup.css', 'mac-setup.js')
 
 
 def read_release():
