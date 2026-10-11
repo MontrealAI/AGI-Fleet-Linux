@@ -67,9 +67,21 @@ AGIJobManager's [dated deployment record](https://github.com/MontrealAI/AGIJobMa
 
 The earlier zero helper address is historical. The later record contains deployment, configuration, ownership, approval and attachment receipts; do not redeploy or repeat these transactions as part of Fleet setup. The root owner's NameWrapper approval is wallet-wide, not restricted to this root. The manager's read-only connection checker covers the connected helper; Fleet's observer below reads the helper address but does not qualify the helper's runtime, custody or approvals.
 
+## Operate the existing instance with manager 1.15.0
+
+Use the [v1.15.0 commissioning guide](https://github.com/MontrealAI/AGIJobManager/blob/3958cbc3b01aa459de16cf39e1ab0985b5fa56c3/docs/OPERATIONS/COMMISSIONING.md) from a fresh engineering checkout at `3958cbc3b01aa459de16cf39e1ab0985b5fa56c3`. Preserve the original private deployment workspace. The manager guide requires its own Node **22.23.2** and locked dependencies; this does not change Fleet's pinned Node **24.21.0** verifier or the installed Mac/Linux runtime. Version 1.15.0 changes operator tooling and adds regression coverage; production Solidity and compiler settings are unchanged, so this update needs no contract migration.
+
+Start with `npm run mainnet:evidence` for the offline historical record. After preparing the guide's clean shell, private report directory and read-only HTTPS RPC connection, use `npm run mainnet:inspect` or `npm run ens:inspect` with the explicit `--instance recorded-2026-10-10` and a new private `--out` file. Do not route this connected instance through fresh deployment. The commands neither load a signing wallet nor authorize activation.
+
+The current inspection collects policy, USDC, reserves, identity and ENS state at one canonical block hash. Complete NFT enumeration needs the original reviewed build/receipt bundle; full approval history and real participant checks need explicit inputs. Missing inputs remain **NOT_RUN / NEEDS_OPERATOR_INPUT**, never an empty registry or approval. Single-provider inspection is distinct from Fleet's two-provider core observation. Keep original artifacts and private reports private.
+
+The same guide provides `ens:rehearse` for an isolated chain-31337 fork, `ens:recover` for read-only reconciliation of the original private journal, and `activation:review` for A1–A5 evidence collection. A passing rehearsal uses synthetic participants and funds; a complete collection still needs a separate signed owner decision. Original build artifacts, archive access, real participants and physical workstation qualification remain operator inputs.
+
+**Check the actual ENS records.** The manager accepts specification URIs up to **2,048 bytes** and completion URIs up to **1,024 bytes**, but its fixed **500,000-gas** ENS hook cannot guarantee mirroring every permitted input. The 1.15.0 regression reproduces long-record failures with its test resolver even when the outer hook reports success; cancellation, settlement and completion NFT recovery are checked separately. Review both event layers and resolver records, and rehearse the actual URI lengths/resolver under activation gate A3. The short-URI fork rehearsal is not qualification for every permitted input.
+
 ## What must close before funded operation
 
-Use the manager's [production activation runbook](https://github.com/MontrealAI/AGIJobManager/blob/5f296a14727f3497128f3a49bd628c1f09a96221/docs/OPERATIONS/PRODUCTION_ACTIVATION.md) for the exact evidence and owner decisions. The five recorded activation gates remain open in that dated record:
+Use the manager's [production activation runbook](https://github.com/MontrealAI/AGIJobManager/blob/3958cbc3b01aa459de16cf39e1ab0985b5fa56c3/docs/OPERATIONS/PRODUCTION_ACTIVATION.md) and [current commissioning workflow](https://github.com/MontrealAI/AGIJobManager/blob/3958cbc3b01aa459de16cf39e1ab0985b5fa56c3/docs/OPERATIONS/COMMISSIONING.md) for the exact evidence and owner decisions. The five recorded activation gates remain open in that dated record:
 
 | Requirement | Evidence needed |
 | --- | --- |
