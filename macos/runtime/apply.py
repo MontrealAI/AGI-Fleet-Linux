@@ -62,7 +62,7 @@ def apply(root, version):
         start = original.index('  file = file' if entry.endswith('.template') or entry == 'scripts/setup-openclaw.mjs' else 'file=file.trim()')
         end = original.index('const kit', start)
         old = original[start:end]
-        chain(entry, old, '  file = setupFilePath(file,{argument:' + options + '.file !== undefined});\n  ')
+        chain(entry, old, '  file = setupFilePath(file,{argument:' + options + '.file != null});\n  ')
         first_import = original[original.index('import '):].splitlines()[0]
         chain(entry, first_import, "import {setupFilePath} from '" + imported + "';\n" + first_import)
     path_tests = (HERE / 'setup-file-path.test.mjs').read_text()

@@ -45,8 +45,22 @@ class RuntimeOverlayTests(unittest.TestCase):
             text = entry.read_text()
             self.assertIn('file = setupFilePath(file,{argument:', text)
             self.assertNotIn('file.trim()', text)
+            self.assertIn('.file != null}', text)
             result = subprocess.run(['node', '--check', str(entry)], capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
+        script = r'''
+import assert from 'node:assert/strict';
+const {readSetupArguments}=await import(process.argv[1]);
+const {setupFilePath}=await import(process.argv[2]);
+const prompted=readSetupArguments(['--standard-install']);
+assert.equal(prompted.file,null);
+assert.equal(setupFilePath('/Users/a/first\\ name.json',{argument:prompted.file!=null}),'/Users/a/first name.json');
+const literal='/Users/a/literal\\(1).json',provided=readSetupArguments([literal,'--standard-install']);
+assert.equal(setupFilePath(provided.file,{argument:provided.file!=null}),literal);
+'''
+        args = [str(self.stage / 'shared/runtime/compute' / name) for name in ('setup-ledger.mjs', 'setup-file-path.mjs')]
+        result = subprocess.run(['node', '--input-type=module', '-e', script, *args], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
         result = subprocess.run(['node', '--test', str(self.stage / 'tests/macos-setup-file-path.test.mjs')], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
