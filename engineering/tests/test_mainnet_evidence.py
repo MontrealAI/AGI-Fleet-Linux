@@ -76,5 +76,20 @@ class PublicDeploymentEvidence(unittest.TestCase):
             check_mainnet(self.report)
 
 
+class RefreshedDeploymentEvidence(PublicDeploymentEvidence):
+    def setUp(self):
+        self.report = json.loads((ROOT.parent / 'validation/mainnet-2026-10-11.json').read_text())
+
+    def test_connected_helper_and_materialization_are_recorded(self):
+        self.assertEqual(self.report['state']['ensJobPages'], '0x6EE7A600C56C1Bfd12c482190d5dAbDD7194CDBC')
+        self.assertEqual(self.report['materialization']['manifestEntriesVerified'], 32900)
+        self.assertEqual(check_mainnet(self.report)['observationBlock'], 26170203)
+
+    def test_changed_materialization_cannot_pass(self):
+        self.report['materialization']['manifestEntriesVerified'] = 4816
+        with self.assertRaisesRegex(ValueError, 'Materialization verification differs'):
+            check_mainnet(self.report)
+
+
 if __name__ == '__main__':
     unittest.main()

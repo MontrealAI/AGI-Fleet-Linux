@@ -8,7 +8,7 @@ This replay verifies artifact bytes and snapshot consistency, not fresh readines
 import json
 import re
 from datetime import datetime
-from release_tools import ROOT, SHA256, require
+from release_tools import ROOT, SHA256, SOURCE_REVISION, require
 
 GETTERS = {'0x8da5cb5b': ['owner', 'address'],
  '0xe30c3978': ['pendingOwner', 'address'],
@@ -84,6 +84,13 @@ def check_mainnet(report):
             and pin['deploymentBlock'] == report['creation']['block'], 'Deployment pin differs')
     require(report['actions'] == {'transactionsSent': 0, 'walletsLoaded': 0, 'operatorProfilesModified': 0},
             'Deployment verification exceeded read-only scope')
+    if 'materialization' in report:
+        require(report['materialization'] == {
+            'status': 'PASS', 'fleetVersion': '1.0.9', 'fleetSHA256': SHA256,
+            'manifestSHA256': '575b06be5344efaa861b8c5fe22fe48cfc9d97aa0edd29d474ff2218152758f6',
+            'manifestEntriesVerified': 32900, 'sourceRevisionSHA256': SOURCE_REVISION,
+            'sourceFilesVerified': 4816, 'rpcRequests': 0, 'transactionsSent': 0,
+            'productionQualified': False}, 'Materialization verification differs')
     hosts = observation['rpcHosts']
     require(len(hosts) == len(set(hosts)) == 2 and all(re.fullmatch('[a-zA-Z0-9.-]+', h) for h in hosts),
             'Two distinct RPC hosts required')

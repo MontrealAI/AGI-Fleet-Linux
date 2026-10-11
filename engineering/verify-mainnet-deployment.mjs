@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { spawn } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { FROZEN_RELEASE, verifyMaterializedFleet } from './verify-mainnet-source.mjs';
 
 const repository = fileURLToPath(new URL('..', import.meta.url));
 assert.equal(process.version, 'v24.21.0', 'Use the release-pinned Node 24.21.0');
@@ -18,22 +18,11 @@ for (let i = 2; i < process.argv.length; i += 2) {
 for (const key of ['--fleet', '--manager', '--creation-tx', '--primary-env', '--secondary-env', '--out']) {
   assert.ok(options[key], 'Required option: ' + key);
 }
-const fleet = fs.realpathSync(options['--fleet']);
+const fleet = path.resolve(options['--fleet']);
 const output = path.resolve(options['--out']);
 assert.ok(!fs.existsSync(output), 'Output must be absent');
 assert.match(options['--creation-tx'], /^0x[0-9a-fA-F]{64}$/);
-const inventory = JSON.parse(fs.readFileSync(path.join(repository, 'fleet/source-inventory.json')));
-assert.equal(inventory.revisionSHA256, '0bf5b82329a7f743759fa7f8a6383ef985df286f3c702143719b8667c5051f97');
-const ordered = value => Array.isArray(value) ? value.map(ordered)
-  : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(key => [key, ordered(value[key])])) : value;
-assert.equal(crypto.createHash('sha256').update(JSON.stringify(ordered(inventory.files))).digest('hex'), inventory.revisionSHA256);
-assert.equal(inventory.files.length, 4816);
-for (const row of inventory.files) {
-  const file = path.join(fleet, row.path), stat = fs.lstatSync(file);
-  assert.ok(stat.isFile() && fs.realpathSync(file).startsWith(fleet + path.sep), 'Unsafe source file');
-  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'), row.sha256, row.path);
-  assert.equal(Boolean(stat.mode & 0o111), row.executable, row.path + ' mode');
-}
+const materialization = verifyMaterializedFleet(fleet);
 const agent = path.join(fleet, 'packages/AGI_Agent');
 const requireFleet = createRequire(path.join(agent, 'package.json'));
 const { Interface, getAddress, keccak256, ZeroAddress } =
@@ -209,8 +198,9 @@ try {
     observation: { block: height, hash: anchor.hash, timestamp,
       rpcHosts: endpoints.map(url => url.hostname), bothRPCsAgree: true,
       creationBoundaryVerifiedByPrimaryRPC: true, creationReceiptAgreesOnBothRPCs: true },
-    fleetVersion: '1.0.9', fleetSHA256: '5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102',
-    sourceFilesVerified: inventory.files.length,
+    fleetVersion: FROZEN_RELEASE.version, fleetSHA256: FROZEN_RELEASE.sha256,
+    sourceFilesVerified: materialization.sourceFilesVerified,
+    materialization,
     deploymentPin: { schema: 1, chainId: 1, manager, token, deploymentBlock,
       sourceTag: 'v1.1.0', sourceCommit: 'db876a8021da6afcf7aa974489d13374e6d188b5', contracts }, state,
     assessment: {
