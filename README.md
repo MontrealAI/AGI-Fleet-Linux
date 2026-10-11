@@ -70,7 +70,7 @@ A user-friendly experience should answer five questions: **What should be done? 
 
 Success means **repeatable, independently accepted results at a competitive total cost and low human supervision**. No current release establishes that most keyboard-and-mouse jobs can already be completed.
 
-The full analysis reviews Fleet [`2f27979`](https://github.com/MontrealAI/AGI-Fleet-Linux/tree/2f2797905fe7867ab3ec63d3b7332ef6d38f407d) and AGIJobManager [`69a9d6c` (1.14.0 source)](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/README.md). Fleet's retained 1.13.0 integration results do not automatically qualify the newer source or private-work settlement.
+The full analysis reviews Fleet [`2f27979`](https://github.com/MontrealAI/AGI-Fleet-Linux/tree/2f2797905fe7867ab3ec63d3b7332ef6d38f407d) and AGIJobManager [`69a9d6c` (1.14.0 source)](https://github.com/MontrealAI/AGIJobManager/blob/69a9d6cef1d6f4daff22cfe360282f6abefcd27a/README.md). The subsequent [1.14.0 compatibility record](validation/AGIJOBMANAGER_1_14_0_COMPATIBILITY.md) reports a separate, source-pinned public-work probe. Neither record qualifies private-work settlement or replaces physical commissioning.
 
 **[Read the complete potential and scope guide](docs/POTENTIAL_AND_SCOPE.md)** · **[Français](docs/POTENTIEL_ET_PERIMETRE.md)** · **[Explore the website explanation](https://montrealai.github.io/AGI-Fleet-Linux/#potential)**
 
@@ -131,7 +131,7 @@ The Mac workflow runs the complete native suite on each named macOS version; it 
 
 Fleet works with [AGIJobManager](https://github.com/MontrealAI/AGIJobManager): Agent prepares and publishes a supported deliverable, submits its completion URI, and follows settlement; Node reviews evidence and submits a bonded vote. The contract governs escrow, identity, deadlines and USDC settlement.
 
-The release contract baseline is **1.13.0**, commit `191cf3590e5cdc08df1bb0af500ee28a91c8b010`. [Integration details](docs/JOB_INTEGRATION.md) separate that preserved acceptance from the current **1.14.0** compatibility probe and its local-chain, generation, content-transport and identity fixtures. The [mainnet deployment and readiness guide](docs/MAINNET_DEPLOYMENT.md) records nine matching production runtimes for `0xCFA78f9980eA9B55c705B3E44467baE383cE1fA7`, the later connected ENS helper and the evidence still required before funded work. These are dated observations; the recorded activation decision remains **HOLD**, with physical and operator commissioning open.
+The release contract baseline is **1.13.0**, commit `191cf3590e5cdc08df1bb0af500ee28a91c8b010`. The separate [**1.14.0 compatibility check passed on x64 and ARM64**](validation/AGIJOBMANAGER_1_14_0_COMPATIBILITY.md): eight Fleet scripts, 11 matching artifacts and 779 manager cases per architecture. Its complete logs are preserved in the repository. [Integration details](docs/JOB_INTEGRATION.md) explain the frozen Linux 1.0.9 probe and its local-chain, generation, content-transport and identity fixtures; this does not replace either published edition’s release qualification. The [mainnet deployment and readiness guide](docs/MAINNET_DEPLOYMENT.md) records nine matching production runtimes for `0xCFA78f9980eA9B55c705B3E44467baE383cE1fA7`, the later connected ENS helper and the evidence still required before funded work. These are dated observations; the recorded activation decision remains **HOLD**, with physical and operator commissioning open.
 
 ## Engineering and history
 
