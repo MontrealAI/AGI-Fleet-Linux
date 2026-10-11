@@ -28,6 +28,8 @@ jobs:
         run: node --test engineering/tests/*.test.mjs
       - name: Replay retained manager 1.14.0 compatibility evidence
         run: python3 validation/audit-manager-1.14.0.py
+      - name: Replay retained manager 1.15.0 compatibility evidence
+        run: python3 validation/audit-manager-1.15.0.py
       - name: Parse engineering scripts
         run: |
           python3 -m compileall -q engineering
