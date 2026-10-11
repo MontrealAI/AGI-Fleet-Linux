@@ -12,6 +12,8 @@ npx playwright install --with-deps --only-shell chromium
 npm test
 ```
 
+The Mac setup companion is also checked in English and French: all eight steps, role changes, explicit checklist marks, saved progress, printing every step, blocked storage, JavaScript-free reading, 320-pixel reflow and keyboard focus. Automated axe checks cover every companion step with larger text.
+
 The suite checks actual navigation and browser history, unsupported computers, saved choices and storage failures, language changes, keyboard focus, printable plans, clipboard fallback, JavaScript-free reading, narrow-screen reflow and automated accessibility rules. It opens only the site files served from `_site/` on `127.0.0.1:4173`.
 
 Screenshots, failure traces and attachments go to `test-results/`; the HTML report goes to `playwright-report/`. The Pages workflow publishes the test artifacts for review, and a failing test prevents site publication. Mobile and desktop screenshots are attached even on a passing run.

@@ -68,7 +68,7 @@ for (const language of languages) {
     await makePlan(page);
     await expect(page.locator('#plan-title')).toContainText('Agent');
     await expect(page.locator('#role-login')).toContainText('Creator');
-    await expect(page.locator('#installation-guide')).toHaveAttribute('href', /\/docs\/FRESH_INSTALL\.md$/);
+    await expect(page.locator('#installation-guide')).toHaveAttribute('href', language.os === 'macos' ? /install-mac(?:-fr)?\.html\?role=agent$/ : /\/docs\/FRESH_INSTALL\.md$/);
     if (language.os === 'macos') {
       const response = await page.request.get('/mac-release.json');
       expect(response.ok()).toBe(true);
@@ -412,7 +412,7 @@ test('Mac plan can be copied manually and printed with its native setup and hone
   await expect(summary).toHaveValue(/16 GB/);
   await expect(summary).toHaveValue(/8 GB.*not been qualified/);
   await expect(summary).toHaveValue(/unsigned and unnotarized/);
-  await expect(summary).toHaveValue(/macos\/docs\/FRESH_INSTALL.md/);
+  await expect(summary).toHaveValue(/install-mac\.html\?role=node/);
   await expect(summary).not.toHaveValue(/Ubuntu|packages\/AGI_Node|Creator/);
   const details = page.locator('#plan details[data-print-open]');
   const initial = await details.evaluateAll(items => items.map(item => item.open));
