@@ -1,6 +1,8 @@
 # Set up a fresh M1 or M2 Mac
 
-**Start with one Agent, one small task and two new Standard accounts.** This guide is for Mac 1.20.1, a qualification candidate. Installation does not establish physical reliability or authorize funded jobs.
+**Start with one Agent, one small task and two new Standard accounts.** This guide is for Mac 1.20.2, a qualification candidate. Installation does not establish physical reliability or authorize funded jobs.
+
+Use the [step-by-step website companion](https://montrealai.github.io/AGI-Fleet-Linux/install-mac.html) or [le guide en français](https://montrealai.github.io/AGI-Fleet-Linux/install-mac-fr.html) to keep your place and see which account to use. The website shows the latest published archive; verify its version before following this release-specific reference.
 
 You can ask a trusted helper to perform the preparation with you. Keep this page open or print it. Stop at any unexplained error and use [Help and recovery](TROUBLESHOOTING.md).
 
@@ -84,7 +86,7 @@ A helper can use an encrypted removable drive, copy the JSON into the compute ac
 Return to the new Standard **compute** account. Verify Docker is still running.
 
 1. Double-click **`Install.command`** in the extracted Fleet or matching role folder.
-2. When asked, drag the private setup JSON into the Terminal window and press Return. The Fleet installer selects the role from this file.
+2. When asked, drag only the private setup JSON into the Terminal window and press Return. Spaces, accents and Finder-escaped punctuation are supported; do not paste a shell command or multiple files. The Fleet installer selects the role from this file.
 3. Read the account-separation confirmation. The installer prepares its own hash-checked private **Node 24.21.0** and **OpenClaw 2026.9.5** runtime. It does not need a global OpenClaw install.
 4. Complete each displayed provider sign-in in this compute account. Agent uses Creator, Checker and Reviewer stores; Node uses Checker and Reviewer; each specialist role has one role-specific store. Separate stores are not proof of independent human control.
 5. Review the exact authority, role and limits. Enter the displayed **APPROVE** phrase only when they match your intent. The service cannot activate without approval.

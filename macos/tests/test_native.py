@@ -40,7 +40,7 @@ class NativeRunnerGuardTests(unittest.TestCase):
                 self.guard(environment={**self.environment, key: value})
 
     def test_original_archive_metadata_is_bound_to_workflow(self):
-        metadata = {'schema': 'agi-macos-candidate-build/v1', 'version': '1.20.1', 'platform': 'darwin',
+        metadata = {'schema': 'agi-macos-candidate-build/v1', 'version': '1.20.2', 'platform': 'darwin',
                     'architecture': 'arm64', 'nodeVersion': '24.21.0', 'repositoryCommit': 'a' * 40,
                     'workflowCommit': 'a' * 40, 'productionQualified': False, 'physicalQualification': 'NOT_RUN',
                     'nativeAcceptance': 'NOT_RUN'}

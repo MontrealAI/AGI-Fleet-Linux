@@ -59,7 +59,7 @@ class MacDistribution(unittest.TestCase):
         data = m.specification()
         self.assertEqual(data['base']['sha256'], m.BASE_SHA)
         self.assertEqual(data['base']['sourceFiles'], 4816)
-        self.assertEqual(data['tag'], 'v1.20.1-macos-qualification')
+        self.assertEqual(data['tag'], 'v1.20.2-macos-qualification')
         self.assertFalse(data['productionQualified'])
         with tempfile.TemporaryDirectory() as temporary:
             repo = Path(temporary)

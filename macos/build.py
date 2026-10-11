@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'engineering'))
 from release_tools import LIMIT, download, extract, members, require, sha
 
-VERSION = '1.20.1'
+VERSION = '1.20.2'
 PREFIX = 'AGI_Fleet_macOS_v' + VERSION
 ROLES = {'agent', 'node', 'moderator', 'employer', 'evidence', 'recovery'}
 BASE_SHA = 'bb21983d654291a860f2f78c2b69bbcd49423b5f41ffc9178864c41acc347695'

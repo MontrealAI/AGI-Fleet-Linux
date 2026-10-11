@@ -52,7 +52,7 @@ jobs:
           python3 engineering/check-repository.py --require-source
           python3 -m unittest discover -s macos/tests -v
           python3 -m unittest discover -s macos/runtime -p 'test_*.py' -v
-          node --test macos/runtime/runtime.test.mjs
+          node --test macos/runtime/runtime.test.mjs macos/runtime/setup-file-path.test.mjs
       - name: Build and independently verify the saved archive
         run: |
           python3 macos/build.py build --output "$RUNNER_TEMP/mac-candidate" --work "$RUNNER_TEMP/mac-build" > "$RUNNER_TEMP/mac-build-receipt.json"
@@ -91,7 +91,7 @@ jobs:
             GITHUB_WORKSPACE="$GITHUB_WORKSPACE" RUNNER_OS="$RUNNER_OS" RUNNER_ARCH="$RUNNER_ARCH" \
             AGI_MACOS_RUNNER_LABEL="$AGI_MACOS_RUNNER_LABEL" "$(command -v python3)" macos/run-native.py \
             --metadata "$GITHUB_WORKSPACE/release/release.json" \
-            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_macOS_v1.20.1.zip" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_macOS_v1.20.2.zip" \
             --work "/private/var/root/agi-mac-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             --evidence "$GITHUB_WORKSPACE/native-evidence"
       - name: Preserve readable evidence ownership
@@ -133,7 +133,7 @@ jobs:
       - name: Requalify the saved Mac archive against the pinned manager
         run: |
           python3 macos/run-integration.py --metadata release/release.json \
-            --archive release/AGI_Fleet_macOS_v1.20.1.zip \
+            --archive release/AGI_Fleet_macOS_v1.20.2.zip \
             --work "$RUNNER_TEMP/mac-integration-volume/work" --evidence "$GITHUB_WORKSPACE/integration-evidence"
       - name: Detach only this run's integration image
         if: always()

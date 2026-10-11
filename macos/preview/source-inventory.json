@@ -1,6 +1,6 @@
 {
   "schema": "agi-macos-preview-source-inventory/v1",
-  "sourceSha256": "f4bd4a006385a515ccd56fc2b9832898bf46f9a2fa001d5fd56f13cea49561e4",
+  "sourceSha256": "fb079c067e59370078d42a1528fedb7c51f135b303d3770a37281efb3a754db9",
   "files": [
     {
       "path": ".github/workflows/macos-preview.yml",
@@ -105,12 +105,12 @@
     {
       "path": "macos/release.json",
       "bytes": 1066,
-      "sha256": "5014c336ffcb4787502ce325e8bbafdbfaa99c7112f2975b460bdba8a04fdc0b"
+      "sha256": "79c490e6cf148433049b74733006dc3efd33fb2410fcf3fd9c5b0df821ab0f5d"
     },
     {
       "path": "macos/runtime/apply.py",
-      "bytes": 23185,
-      "sha256": "70edc75d2c78e0bd4f9cbdac9647ae56e1a0bb4d2b6e232f759a5a0dbc7d73e7"
+      "bytes": 24557,
+      "sha256": "2ea6f077423ee22ca523c4f53747d70fdc09e52a7687c454fa3745c6b2983da2"
     },
     {
       "path": "macos/runtime/control-ui-cache.test.mjs",
@@ -140,7 +140,7 @@
     {
       "path": "macos/runtime/macos-clean-install.template.json",
       "bytes": 6806,
-      "sha256": "5251f9e72925bc771c2cbb08fe4a6a1b0a03843900671797243cd24ee3e34744"
+      "sha256": "2dc757f41719e36eac95e0226d48cedcd56d8340e555acd087da951d3735d49e"
     },
     {
       "path": "macos/runtime/runtime.test.mjs",
@@ -148,9 +148,19 @@
       "sha256": "db3ad3bb4d6a79571f0282b0aafe2a3717d35875d3751131558a560ed81aeab8"
     },
     {
+      "path": "macos/runtime/setup-file-path.mjs",
+      "bytes": 1194,
+      "sha256": "28f21ad7ad0ae8e1e634e8ffd81340b9919777cd8f3a29df6405535c4d745c1e"
+    },
+    {
+      "path": "macos/runtime/setup-file-path.test.mjs",
+      "bytes": 2153,
+      "sha256": "0c4cab7ec0f027a258256455f54d5e52f3b9e7e8a7277ad8b85f167a53076c29"
+    },
+    {
       "path": "macos/runtime/test_apply.py",
-      "bytes": 6420,
-      "sha256": "89f2f7eb0f95f56ed9c63e75c95a3650f189d00ed7797c658f518971e35d2f70"
+      "bytes": 8186,
+      "sha256": "2ed5c1eb5da49dd9f5fed2ebe3b62af3bf845be992a2000a61cc099084b2cf48"
     },
     {
       "path": "workstation/candidate.json",
