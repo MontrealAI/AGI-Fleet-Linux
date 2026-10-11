@@ -87,7 +87,7 @@ jobs:
       fail-fast: false
       matrix:
         runner: [ubuntu-24.04, ubuntu-24.04-arm]
-        manager: ${{ fromJSON((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && '["selected"]' || '["baseline-1.13.0","current-1.14.0"]') }}
+        manager: ${{ fromJSON((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && '["selected"]' || '["baseline-1.13.0","current-1.15.0"]') }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 35
     steps:
@@ -107,7 +107,7 @@ jobs:
           python3 -m unittest discover -s engineering/tests -v
       - name: Validate frozen Fleet and freshly compiled AGIJobManager
         env:
-          MANAGER_REF: ${{ matrix.manager == 'current-1.14.0' && '5f296a14727f3497128f3a49bd628c1f09a96221' || github.event_name == 'schedule' && 'main' || inputs.manager_ref || '191cf3590e5cdc08df1bb0af500ee28a91c8b010' }}
+          MANAGER_REF: ${{ matrix.manager == 'current-1.15.0' && '3958cbc3b01aa459de16cf39e1ab0985b5fa56c3' || github.event_name == 'schedule' && 'main' || inputs.manager_ref || '191cf3590e5cdc08df1bb0af500ee28a91c8b010' }}
         run: |
           set -euo pipefail
           python3 engineering/run-job-integration.py \
