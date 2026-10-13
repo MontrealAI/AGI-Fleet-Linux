@@ -10,11 +10,14 @@ export const computer=require('./vendor/manager/scripts/economics/computer-work.
 export const REQUEST='agi-fleet/successor-request/v1';
 const CUSTOM_SCOPE='agi-fleet/custom-sidecar-scope/v1';
 const withoutParent=spec=>({...spec,coordination:{...spec.coordination,parentSpecSha256:null}});
+function requirePublicCustom(spec){
+  fail(spec?.profile==='computer-work/v2'&&spec.dataPolicy==='public'&&['agent','reviewer'].every(role=>spec.authority?.[role]?.scope==='isolated-public'),'FLEET_CUSTOM_PUBLIC_REQUIRED');
+}
 
 // Record the complete operator-prepared public Studio specification in the
 // immutable mission. This is a new, inert project, never an execution grant.
 export async function prepareCustomProject(mission,spec,budget) {
-  fail(mission.kind==='custom'&&spec.profile==='computer-work/v2','FLEET_CUSTOM_PUBLIC_REQUIRED');
+  fail(mission?.kind==='custom','FLEET_CUSTOM_PUBLIC_REQUIRED');requirePublicCustom(spec);
   await createSystem(mission);computer.validateComputerWork(spec);
   const boundMission={...mission,input:canonical({schema:CUSTOM_SCOPE,originalInput:mission.input,originalParentSpecSha256:spec.coordination.parentSpecSha256,specification:withoutParent(spec)})};
   let state=await createSystem(boundMission);const plan=await prepareImprovement(state,{budget});state=await recordPlan(state,plan);
@@ -67,6 +70,7 @@ export async function validateSidecarProject(capsule,handoff,files) {
   // Its immutable input must retain the complete specification selected when
   // this project was prepared, including inputs, requirements and criteria.
   if(state.mission.kind==='custom'){
+    requirePublicCustom(spec);
     let scope;try{scope=parseStrict(state.mission.input);}catch{fail(false,'FLEET_SIDECAR_CUSTOM_SCOPE');}
     keys(scope,['schema','originalInput','originalParentSpecSha256','specification'],'FLEET_SIDECAR_CUSTOM_SCOPE');
     fail(scope.schema===CUSTOM_SCOPE&&canonical(scope.specification)===canonical(withoutParent(spec)),'FLEET_SIDECAR_CUSTOM_SCOPE');
@@ -86,7 +90,7 @@ export async function checkReturnedWork(request,handoff,receipt,studioAPI) {
   const {state,inspected}=await inspectRequest(request);
   studioAPI.validateHandoff(handoff);
   fail(handoff.specification.coordination.parentSpecSha256===request.plan.commitment,'FLEET_PLAN_CHANGED');
-  validateReceiptBinding(handoff,receipt,'node');
+  await validateReceiptBinding(handoff,receipt,'node');
   const verdict=studioAPI.computerVerdict(handoff.specification,{safeToReview:receipt.review?.safeToReview,checks:receipt.review?.checks});
   const {files}=studioAPI.validateBundle(handoff.specification,Buffer.from(handoff.delivery));
   const source=inspected.capsule.payload.sourceManifest;

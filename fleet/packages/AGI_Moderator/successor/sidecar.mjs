@@ -25,7 +25,7 @@ export async function inspectSidecar(root){
   const core=[['capsule.json','portable-project'],['handoff.json','exact-review-handoff'],['receipt.json','historical-evidence']];
   for(const [name,role] of core){const entry=manifest.files.find(f=>f.path===name);fail(entry&&entry.mediaType==='application/json'&&entry.role===role,'FLEET_SIDECAR_CORE');}
   const handoff=parseStrict(bytes(checkedFile(root,'handoff.json'),FILE_LIMIT).toString(),FILE_LIMIT);
-  validateReceiptBinding(handoff,parseStrict(bytes(checkedFile(root,'receipt.json'),1000000).toString(),1000000),'node');
+  await validateReceiptBinding(handoff,parseStrict(bytes(checkedFile(root,'receipt.json'),1000000).toString(),1000000),'node');
   // Integrity inspection does not execute a job or grant qualification. Bind the
   // exact decoded delivery bytes to every sidecar artifact, including its metadata.
   const bundle=parseStrict(handoff.delivery,FILE_LIMIT),outputs=handoff.specification.outputs;
@@ -44,7 +44,7 @@ export async function inspectSidecar(root){
   return manifest;
 }
 export async function exportSidecar(destination,capsule,handoff,receipt,studioAPI){
-  studioAPI.validateHandoff(handoff);validateReceiptBinding(handoff,receipt,'node');
+  studioAPI.validateHandoff(handoff);await validateReceiptBinding(handoff,receipt,'node');
   const {files}=studioAPI.validateBundle(handoff.specification,Buffer.from(handoff.delivery));
   await validateSidecarProject(capsule,handoff,files);
   fail(!fs.existsSync(destination),'OUTPUT_EXISTS');directory(path.dirname(path.resolve(destination)));

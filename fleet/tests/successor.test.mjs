@@ -9,7 +9,7 @@ import {defaultMission} from '../successor/vendor/manager/site/assets/successor/
 import {createSystem,runCandidate,chooseCandidate,recordPlan,exportCapsule,inspectCapsule,restoreCapsule} from '../successor/vendor/manager/site/assets/successor/model.mjs';
 import {prepareImprovement} from '../successor/vendor/manager/site/assets/successor/jobs.mjs';
 import {builderArtifacts} from '../successor/vendor/manager/scripts/successor/build.mjs';
-import {REQUEST,compileRequest,inspectRequest,prepareCustomProject} from '../successor/project.mjs';
+import {REQUEST,compileRequest,inspectRequest,prepareCustomProject,computer} from '../successor/project.mjs';
 import {SuccessorController} from '../successor/controller.mjs';
 import {exportSidecar,inspectSidecar,restoreSidecar} from '../successor/sidecar.mjs';
 const root=fileURLToPath(new URL('..',import.meta.url)),source=builderArtifacts().sourceManifest;
@@ -57,6 +57,17 @@ test('SUCCESSOR rejected real delivery retains incumbent and returns criterion-b
 test('SUCCESSOR refuses changed inputs, credentials, private scope, expiry and unavailable runtime before compute',async()=>{
   const a=await fixture(root),n=await fixture(root,'node');try{const req=await request(),ctx=context(req,a,n);for(const change of [x=>x.inputs[0].sha256='0'.repeat(64),x=>x.deadline=1,x=>x.runtimes.agent.scope='dedicated-account',x=>x.runtimes.agent.capabilities=[]]){const bad=structuredClone(ctx);change(bad);await assert.rejects(a.bridge.prepare({request:req,context:bad},'principal'));}
     await assert.rejects(inspectRequest({...req,secret:'never allowed'}));const changed=structuredClone(req);changed.plan.goal+='tamper';await assert.rejects(compileRequest(changed,ctx));assert.equal(a.worker.state.calls.length,0);
+    const {compiled}=await compileRequest(req,ctx),mission=defaultMission('custom'),missionPath=path.join(a.dir,'private-mission.json');
+    fs.writeFileSync(missionPath,JSON.stringify(mission));
+    const privateScopes=[s=>{s.dataPolicy='scoped';for(const r of ['agent','reviewer'])s.authority[r].scope='dedicated-account';},s=>s.authority.agent.scope='dedicated-account',s=>s.authority.reviewer.scope='dedicated-account'];
+    for(let i=0;i<privateScopes.length;i++){
+      const spec=structuredClone(compiled.spec);privateScopes[i](spec);assert.doesNotThrow(()=>computer.validateComputerWork(spec),'The broader contract remains valid for its separate workflow.');
+      await assert.rejects(prepareCustomProject(mission,spec,'100'),/FLEET_CUSTOM_PUBLIC_REQUIRED/);
+      const input=path.join(a.dir,'private-spec-'+i+'.json'),output=path.join(a.dir,'private-project-'+i),raw=JSON.stringify(spec);fs.writeFileSync(input,raw);
+      const terminal=spawnSync(process.execPath,[path.join(root,'successor/cli.mjs'),'prepare-custom',missionPath,input,'100',output],{encoding:'utf8',timeout:30000});
+      assert.equal(terminal.status,1);assert.match(terminal.stderr,/FLEET_CUSTOM_PUBLIC_REQUIRED/);assert.equal(fs.existsSync(output),false);assert.equal(fs.readdirSync(a.dir).some(name=>name.startsWith('private-project-'+i+'.partial-')),false);
+      assert.equal(fs.readFileSync(input,'utf8'),raw);assert.deepEqual(JSON.parse(fs.readFileSync(missionPath)),mission);
+    }
   }finally{await a.close();await n.close();}
 });
 
@@ -146,18 +157,26 @@ test('SUCCESSOR sidecar disk-full failure leaves original and no completed desti
 test('SUCCESSOR sidecars reject mixed or altered receipts before writing and during restore inspection',async()=>{
   const a=await fixture(root),n=await fixture(root,'node');try{
     const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs){a.inputs.set(f.name,Buffer.from(f.content));n.inputs.set(f.name,Buffer.from(f.content));}const ar=await run(a.bridge,{request:req,context:ctx}),result=await a.bridge.result(ar.p.key),dest=path.join(a.dir,'mixed-receipt');
-    const agentReceipt=result.receipt,nr=await run(n.bridge,{handoff:result.handoff});result.receipt=(await n.bridge.result(nr.p.key)).receipt;
+    const agentReceipt=result.receipt,originalChat=n.worker.chat;let releaseReview,nr,pendingReceipt;
+    const reviewGate=new Promise(resolve=>{releaseReview=resolve;});n.worker.chat=async(...args)=>{await reviewGate;return originalChat(...args);};
+    try{
+      const p=await n.bridge.prepare({handoff:result.handoff},'test-principal'),started=await n.bridge.execute({ticket:p.ticket,key:p.key,confirm:true},'test-principal');nr={p,started};
+      pendingReceipt=n.controller.studio.export(started.run.id,'receipt');assert.equal(pendingReceipt.status,'running');assert.equal(pendingReceipt.review,null);assert.equal(pendingReceipt.hasFiles,true);
+    }finally{releaseReview();n.worker.chat=originalChat;}
+    await n.controller.studio.task;result.receipt=(await n.bridge.result(nr.p.key)).receipt;
     assert.equal(result.receipt.role,'node');assert.equal(result.receipt.status,'checked');
+    const invalidReviews=[pendingReceipt,...['cancelled','failed','declined'].map(status=>({...result.receipt,status,phase:status,review:null})),...[r=>r.finishedAt=null,r=>r.review=null,r=>r.review.checks=[],r=>r.review.checks[0].id='unrelated-criterion',r=>r.review.checks[0].files=[],r=>r.review.checks[0].method='',r=>r.review.verdict='concern'].map(change=>{const r=structuredClone(result.receipt);change(r);return r;})];
+    for(const receipt of invalidReviews){await assert.rejects(exportSidecar(dest,req.capsule,result.handoff,receipt,a.api),/FLEET_RECEIPT_REVIEW/);assert.equal(fs.existsSync(dest),false);await assert.rejects(a.bridge.result(ar.p.key,receipt),/FLEET_RECEIPT_REVIEW/);}
     await assert.rejects(exportSidecar(dest,req.capsule,result.handoff,agentReceipt,a.api),/FLEET_RECEIPT_SCHEMA/);assert.equal(fs.existsSync(dest),false);
     for(const change of [r=>r.schema='unknown',r=>r.role='agent',r=>r.role='employer',r=>r.specHash='a'.repeat(64),r=>r.deliveryHash='b'.repeat(64),r=>r.specification.prompt+='altered',r=>r.independent=true]){
       const receipt=structuredClone(result.receipt);change(receipt);await assert.rejects(exportSidecar(dest,req.capsule,result.handoff,receipt,a.api),/RECEIPT/);assert.equal(fs.existsSync(dest),false);
     }
     await exportSidecar(dest,req.capsule,result.handoff,result.receipt,a.api);
     const {createHash}=await import('node:crypto'),{canonical}=await import('../successor/vendor/manager/site/assets/successor/safe.mjs'),hash=b=>createHash('sha256').update(b).digest('hex');
-    for(const bad of [{...result.receipt,deliveryHash:'c'.repeat(64)},agentReceipt]){
+    for(const bad of [{...result.receipt,deliveryHash:'c'.repeat(64)},agentReceipt,...invalidReviews]){
       const raw=canonical(bad);fs.writeFileSync(path.join(dest,'receipt.json'),raw);
       const manifest=JSON.parse(fs.readFileSync(path.join(dest,'manifest.json'))),entry=manifest.files.find(f=>f.path==='receipt.json');manifest.totalBytes+=Buffer.byteLength(raw)-entry.bytes;entry.bytes=Buffer.byteLength(raw);entry.sha256=hash(raw);const {sha256,...body}=manifest;manifest.sha256=hash(canonical(body));fs.writeFileSync(path.join(dest,'manifest.json'),canonical(manifest));
-      await assert.rejects(inspectSidecar(dest),/RECEIPT_(BINDING|SCHEMA)/);await assert.rejects(restoreSidecar(dest,path.join(a.dir,'unsafe-restore'),true),/RECEIPT_(BINDING|SCHEMA)/);assert.equal(fs.existsSync(path.join(a.dir,'unsafe-restore')),false);
+      await assert.rejects(inspectSidecar(dest),/FLEET_RECEIPT_/);await assert.rejects(restoreSidecar(dest,path.join(a.dir,'unsafe-restore'),true),/FLEET_RECEIPT_/);assert.equal(fs.existsSync(path.join(a.dir,'unsafe-restore')),false);
     }
     const pristine=path.join(a.dir,'pristine');await exportSidecar(pristine,req.capsule,result.handoff,result.receipt,a.api);
     const artifact=(await inspectSidecar(pristine)).files.find(f=>f.role==='deliverable').path;
