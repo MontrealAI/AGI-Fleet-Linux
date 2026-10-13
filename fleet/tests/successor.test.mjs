@@ -9,7 +9,7 @@ import {defaultMission} from '../successor/vendor/manager/site/assets/successor/
 import {createSystem,runCandidate,chooseCandidate,recordPlan,exportCapsule,inspectCapsule,restoreCapsule} from '../successor/vendor/manager/site/assets/successor/model.mjs';
 import {prepareImprovement} from '../successor/vendor/manager/site/assets/successor/jobs.mjs';
 import {builderArtifacts} from '../successor/vendor/manager/scripts/successor/build.mjs';
-import {REQUEST,compileRequest,inspectRequest} from '../successor/project.mjs';
+import {REQUEST,compileRequest,inspectRequest,prepareCustomProject} from '../successor/project.mjs';
 import {SuccessorController} from '../successor/controller.mjs';
 import {exportSidecar,inspectSidecar,restoreSidecar} from '../successor/sidecar.mjs';
 const root=fileURLToPath(new URL('..',import.meta.url)),source=builderArtifacts().sourceManifest;
@@ -88,8 +88,12 @@ test('SUCCESSOR sidecars retain a maximum Studio file and reject missing, traver
   const {createHash}=await import('node:crypto'),{canonical}=await import('../successor/vendor/manager/site/assets/successor/safe.mjs');const a=await fixture(root),n=await fixture(root,'node');try{
     const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs)a.inputs.set(f.name,Buffer.from(f.content));const ar=await run(a.bridge,{request:req,context:ctx}),actual=await a.bridge.result(ar.p.key);
     const artifactName='a/b/c/d/e/f/g/h/i/j/k/artifact.bin';
-    const mission=defaultMission('custom');mission.outputs=artifactName;let state=await createSystem(mission);const plan=await prepareImprovement(state,{budget:'100'});state=await recordPlan(state,plan);const capsule=await exportCapsule(state,source);
-    const spec=structuredClone(actual.handoff.specification);spec.title=plan.draft.fields.title.slice(0,160);spec.prompt=plan.goal;spec.coordination.parentSpecSha256=plan.commitment;spec.inputs[0].sha256=plan.immutableInputs[0].sha256;spec.inputs[0].maxBytes=Buffer.byteLength(plan.immutableInputs[0].content);spec.outputs=[{name:artifactName,mediaType:'application/octet-stream',maxBytes:32*1024*1024,requirement:'Retain exact binary bytes.'}];for(const c of spec.criteria)c.evidence=[artifactName];
+    const mission=defaultMission('custom');mission.outputs=artifactName;
+    const originalSpec=structuredClone(actual.handoff.specification);originalSpec.outputs=[{name:artifactName,mediaType:'application/octet-stream',maxBytes:32*1024*1024,requirement:'Retain exact binary bytes.'}];for(const c of originalSpec.criteria)c.evidence=[artifactName];
+    const missionPath=path.join(a.dir,'custom-mission.json'),specPath=path.join(a.dir,'custom-spec.json'),preparedPath=path.join(a.dir,'prepared-custom');fs.writeFileSync(missionPath,JSON.stringify(mission));fs.writeFileSync(specPath,JSON.stringify(originalSpec));
+    const prepare=()=>spawnSync(process.execPath,[path.join(root,'successor/cli.mjs'),'prepare-custom',missionPath,specPath,'100',preparedPath],{encoding:'utf8',timeout:30000});
+    const terminal=prepare();assert.equal(terminal.status,0,terminal.stderr);assert.equal(JSON.parse(terminal.stdout).authority,'none');assert.equal(prepare().status,1);assert.deepEqual(JSON.parse(fs.readFileSync(missionPath)),mission);assert.deepEqual(JSON.parse(fs.readFileSync(specPath)),originalSpec);
+    const capsule=fs.readFileSync(path.join(preparedPath,'capsule.json'),'utf8'),spec=JSON.parse(fs.readFileSync(path.join(preparedPath,'specification.json'))),state=(await inspectCapsule(capsule)).capsule.payload.state;assert.equal(state.active,null);assert.equal(state.authority,'none');assert.equal(JSON.parse(state.mission.input).originalInput,mission.input);
     const handoff=a.api.makeHandoff(spec,a.api.buildBundle(spec,new Map([[artifactName,Buffer.alloc(32*1024*1024,42)]])));
     const receipt={...actual.receipt,specification:spec,specHash:handoff.specHash,deliveryHash:handoff.deliveryHash,title:spec.title,criteria:spec.criteria,files:JSON.parse(handoff.delivery).files.map(({content,...meta})=>meta)};
     const dir=path.join(a.dir,'large'),name=path.join(dir,'artifacts/'+artifactName);await exportSidecar(dir,capsule,handoff,receipt,a.api);
@@ -140,5 +144,24 @@ test('SUCCESSOR sidecars reject mixed or altered receipts before writing and dur
     const changedPack=path.join(a.dir,'changed-method');fs.cpSync(pristine,changedPack,{recursive:true});fs.writeFileSync(path.join(changedPack,'handoff.json'),canonical(altered));fs.writeFileSync(path.join(changedPack,'receipt.json'),canonical(alteredReceipt));fs.writeFileSync(path.join(changedPack,'artifacts/method.json'),'{}');
     const {sha256:oldHash,...changedBody}=JSON.parse(fs.readFileSync(path.join(changedPack,'manifest.json')));changedBody.files=changedBody.files.map(f=>{const bytes=fs.readFileSync(path.join(changedPack,f.path));return {...f,bytes:bytes.length,sha256:hash(bytes)};});changedBody.totalBytes=changedBody.files.reduce((n,f)=>n+f.bytes,0);fs.writeFileSync(path.join(changedPack,'manifest.json'),canonical({...changedBody,sha256:hash(canonical(changedBody))}));
     await assert.rejects(inspectSidecar(changedPack),/SIDECAR_PROJECT_ARTIFACTS/);await assert.rejects(restoreSidecar(changedPack,path.join(a.dir,'changed-method-restore'),true),/SIDECAR_PROJECT_ARTIFACTS/);
+    // Recompute every delivery, receipt and manifest digest after changing a
+    // valid specification. Integrity alone must not substitute for plan scope.
+    const custom=await prepareCustomProject(defaultMission('custom'),result.handoff.specification,'100');
+    const scopeChanges=[s=>s.outputs[0].requirement+=' Changed requirement.',s=>s.outputs[0].maxBytes++,s=>s.outputs[0].mediaType='application/octet-stream',s=>s.criteria[0].requirement='Only check that a file exists.',s=>s.criteria[0].verification='Ignore original inputs.',s=>s.criteria[0].evidence=['checker-results.json']];
+    const actualFiles=a.api.validateBundle(result.handoff.specification,Buffer.from(result.handoff.delivery)).files;
+    for(const [kind,capsule,baseSpec] of [['local',req.capsule,result.handoff.specification],['custom',custom.capsule,custom.specification]]){
+      const baseHandoff=a.api.makeHandoff(baseSpec,a.api.buildBundle(baseSpec,actualFiles)),baseReceipt={...result.receipt,specification:baseSpec,specHash:baseHandoff.specHash,deliveryHash:baseHandoff.deliveryHash};
+      const validPack=path.join(a.dir,kind+'-scope-original');await exportSidecar(validPack,capsule,baseHandoff,baseReceipt,a.api);
+      const changes=kind==='custom'?[...scopeChanges,s=>s.prompt+=' Different work.',s=>s.inputs[0].uri='https://example.org/different.json',s=>s.deadline++,s=>s.budget.maxAgentCostUSDC='6']:scopeChanges;
+      for(let i=0;i<changes.length;i++){
+        const spec=structuredClone(baseSpec);changes[i](spec);const handoff=a.api.makeHandoff(spec,a.api.buildBundle(spec,actualFiles)),receipt={...baseReceipt,specification:spec,specHash:handoff.specHash,deliveryHash:handoff.deliveryHash,criteria:spec.criteria,files:JSON.parse(handoff.delivery).files.map(({content,...meta})=>meta)};
+        const rejected=path.join(a.dir,kind+'-scope-export-'+i),tampered=path.join(a.dir,kind+'-scope-inspect-'+i),restored=path.join(a.dir,kind+'-scope-restore-'+i);
+        await assert.rejects(exportSidecar(rejected,capsule,handoff,receipt,a.api),/SIDECAR_(PROJECT|CUSTOM)_SCOPE/);assert.equal(fs.existsSync(rejected),false);
+        fs.cpSync(validPack,tampered,{recursive:true});fs.writeFileSync(path.join(tampered,'handoff.json'),canonical(handoff));fs.writeFileSync(path.join(tampered,'receipt.json'),canonical(receipt));
+        const {sha256,...body}=JSON.parse(fs.readFileSync(path.join(tampered,'manifest.json')));body.files=body.files.map(f=>{const bytes=fs.readFileSync(path.join(tampered,f.path));return {...f,mediaType:f.role==='deliverable'?spec.outputs.find(o=>'artifacts/'+o.name===f.path).mediaType:f.mediaType,bytes:bytes.length,sha256:hash(bytes)};});body.totalBytes=body.files.reduce((n,f)=>n+f.bytes,0);fs.writeFileSync(path.join(tampered,'manifest.json'),canonical({...body,sha256:hash(canonical(body))}));
+        await assert.rejects(inspectSidecar(tampered),/SIDECAR_(PROJECT|CUSTOM)_SCOPE/);await assert.rejects(restoreSidecar(tampered,restored,true),/SIDECAR_(PROJECT|CUSTOM)_SCOPE/);assert.equal(fs.existsSync(restored),false);
+      }
+    }
+    let unbound=await createSystem(defaultMission('custom'));const unboundPlan=await prepareImprovement(unbound,{budget:'100'});unbound=await recordPlan(unbound,unboundPlan);const unboundSpec={...custom.specification,coordination:{...custom.specification.coordination,parentSpecSha256:unboundPlan.commitment}},unboundHandoff=a.api.makeHandoff(unboundSpec,a.api.buildBundle(unboundSpec,actualFiles)),unboundReceipt={...result.receipt,specification:unboundSpec,specHash:unboundHandoff.specHash,deliveryHash:unboundHandoff.deliveryHash};await assert.rejects(exportSidecar(path.join(a.dir,'unbound-custom'),await exportCapsule(unbound),unboundHandoff,unboundReceipt,a.api),/SIDECAR_CUSTOM_SCOPE/);
   }finally{await a.close();await n.close();}
 });

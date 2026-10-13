@@ -1,13 +1,43 @@
 import {createRequire} from 'node:module';
 import {validateReceiptBinding} from './receipt.mjs';
 import {fail, keys, canonical, parseStrict, sha256} from './vendor/manager/site/assets/successor/safe.mjs';
-import {inspectCapsule, freezeCandidate, runCandidate, exportCapsule, compareCandidates} from './vendor/manager/site/assets/successor/model.mjs';
-import {validateImprovement} from './vendor/manager/site/assets/successor/jobs.mjs';
+import {inspectCapsule, freezeCandidate, runCandidate, exportCapsule, compareCandidates, createSystem, recordPlan} from './vendor/manager/site/assets/successor/model.mjs';
+import {validateImprovement, prepareImprovement} from './vendor/manager/site/assets/successor/jobs.mjs';
 import {checkArtifacts} from './vendor/manager/site/assets/successor/checker.mjs';
 import {compileComputerWork} from './vendor/manager/scripts/successor/adapter.mjs';
 const require=createRequire(import.meta.url);
 export const computer=require('./vendor/manager/scripts/economics/computer-work.cjs');
 export const REQUEST='agi-fleet/successor-request/v1';
+const CUSTOM_SCOPE='agi-fleet/custom-sidecar-scope/v1';
+const withoutParent=spec=>({...spec,coordination:{...spec.coordination,parentSpecSha256:null}});
+
+// Record the complete operator-prepared public Studio specification in the
+// immutable mission. This is a new, inert project, never an execution grant.
+export async function prepareCustomProject(mission,spec,budget) {
+  fail(mission.kind==='custom'&&spec.profile==='computer-work/v2','FLEET_CUSTOM_PUBLIC_REQUIRED');
+  await createSystem(mission);computer.validateComputerWork(spec);
+  const boundMission={...mission,input:canonical({schema:CUSTOM_SCOPE,originalInput:mission.input,originalParentSpecSha256:spec.coordination.parentSpecSha256,specification:withoutParent(spec)})};
+  let state=await createSystem(boundMission);const plan=await prepareImprovement(state,{budget});state=await recordPlan(state,plan);
+  const specification={...spec,coordination:{...spec.coordination,parentSpecSha256:plan.commitment}};
+  computer.validateComputerWork(specification);
+  return {capsule:await exportCapsule(state),plan,mission:boundMission,specification,authority:'none'};
+}
+
+// Independent validation projection of the pinned Manager compiler. Dispatch
+// still uses compileComputerWork above; actual compiler outputs are exercised
+// by both end-to-end mission tests to detect upstream contract drift.
+function validateLocalScope(plan,kind,spec) {
+  fail(['analyst','website'].includes(kind),'FLEET_SIDECAR_PROJECT_SCOPE');
+  const delivered=kind==='website'?[['index.html','text/html'],['method.json','application/json']]:[['report.html','text/html'],['result.json','application/json'],['method.json','application/json']];
+  const expected={
+    outputs:[...delivered.map(([name,mediaType])=>({name,mediaType,maxBytes:plan.outputByteLimit,requirement:'Actual editable artifact; preserve the immutable mission content and document reproduction.'})),{name:'checker-results.json',mediaType:'application/json',maxBytes:100000,requirement:'A separate implementation checks actual delivered bytes, retaining failures and uncertainty.'}],
+    criteria:[{id:'exact-result',requirement:plan.draft.fields.acceptance,verification:'Reopen original immutable inputs in a separately controlled environment; recompute exact results and inspect actual delivered artifacts.',evidence:[...delivered.map(([name])=>name),'checker-results.json']}],
+    dataPolicy:'public',authority:{agent:{scope:'isolated-public',resources:['job-workspace']},reviewer:{scope:'isolated-public',resources:['job-workspace']}},
+    coordination:{parentSpecSha256:plan.commitment,dependencies:[],delegation:'none'}
+  };
+  for(const [field,value] of Object.entries(expected))fail(canonical(spec[field])===canonical(value),'FLEET_SIDECAR_PROJECT_SCOPE');
+  fail(canonical(spec.environment.capabilities)===canonical({agent:['files','code'],reviewer:['files','code','independent-review']}),'FLEET_SIDECAR_PROJECT_SCOPE');
+}
 
 export async function inspectRequest(value) {
   const request=typeof value==='string'?parseStrict(value,6000000):value;
@@ -33,11 +63,18 @@ export async function validateSidecarProject(capsule,handoff,files) {
   const plan=state.plans.find(p=>p.commitment===spec.coordination.parentSpecSha256);
   fail(plan&&plan.missionSha256===await sha256(state.mission),'FLEET_SIDECAR_PROJECT_PLAN');
   fail(plan.candidateSha256===null?state.mission.kind==='custom':state.candidates.some(c=>c.id===plan.candidateSha256),'FLEET_SIDECAR_PROJECT_INCUMBENT');
+  // A custom plan's prose alone cannot bind arbitrary Studio deliverables.
+  // Its immutable input must retain the complete specification selected when
+  // this project was prepared, including inputs, requirements and criteria.
+  if(state.mission.kind==='custom'){
+    let scope;try{scope=parseStrict(state.mission.input);}catch{fail(false,'FLEET_SIDECAR_CUSTOM_SCOPE');}
+    keys(scope,['schema','originalInput','originalParentSpecSha256','specification'],'FLEET_SIDECAR_CUSTOM_SCOPE');
+    fail(scope.schema===CUSTOM_SCOPE&&canonical(scope.specification)===canonical(withoutParent(spec)),'FLEET_SIDECAR_CUSTOM_SCOPE');
+    return; // Historical evidence only; no candidate or operating authority.
+  }
   fail(spec.title===plan.draft.fields.title.slice(0,160)&&spec.prompt===plan.goal&&spec.inputs.length===plan.immutableInputs.length,'FLEET_SIDECAR_PROJECT_SCOPE');
-  for(let i=0;i<spec.inputs.length;i++){const input=spec.inputs[i],expected=plan.immutableInputs[i];fail(input.name===expected.name&&input.sha256===expected.sha256&&input.maxBytes===Buffer.byteLength(expected.content),'FLEET_SIDECAR_PROJECT_INPUT');}
-  // Custom work retains format-checked historical evidence only. It cannot
-  // create a locally checked candidate or inherit operating authority.
-  if(state.mission.kind==='custom')return;
+  for(let i=0;i<spec.inputs.length;i++){const input=spec.inputs[i],expected=plan.immutableInputs[i];fail(input.name===expected.name&&input.sha256===expected.sha256&&input.maxBytes===Buffer.byteLength(expected.content)&&input.mediaType==='application/json','FLEET_SIDECAR_PROJECT_INPUT');}
+  validateLocalScope(plan,state.mission.kind,spec);
   const source=inspected.capsule.payload.sourceManifest;fail(source?.engineSha256,'FLEET_SOURCE_REQUIRED');
   const matches=c=>c&&files.size===c.files.length+1&&files.has('checker-results.json')&&c.files.every(f=>files.get(f.name)?.equals(Buffer.from(f.content)));
   if(matches(state.candidates.find(c=>c.id===plan.candidateSha256)))return;
