@@ -1,6 +1,6 @@
 # Fleet and AGIJobManager compatibility
 
-**New candidate: Linux 1.1.0** targets Manager 1.16.0 at `46560bd5b52592909baf0c70ee87c9b61b329169`. Its Builder source and runtime compiler are pinned to that revision; fresh saved-archive integration must pass before publication. [Builder integration and acceptance](../successor/docs/ACCEPTANCE.md).
+**New candidate: Linux 1.1.0** targets Manager 1.16.1 at `09d89fb22d52a8df194e8dd0a00beff9f7771d82`. Its Builder source and runtime compiler are pinned to that revision; fresh saved-archive integration must pass before publication. [Builder integration and acceptance](../successor/docs/ACCEPTANCE.md).
 
 **Published release: Linux 1.0.11.** Its exact installer passed integration against AGIJobManager 1.15.0 at `3958cbc3b01aa459de16cf39e1ab0985b5fa56c3`: eight standalone scripts, the Agent/three-Node lifecycle and all 780 Manager regressions on each architecture. The [release manifest](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.0.11-qualification/Release-Manifest-v1.0.11.json) and [validation addendum](../validation/LINUX_1_0_11_RELEASE_ADDENDUM.md) bind the observed results to the saved ZIP, Manager target and workflow. Physical commissioning remains open. The historical baseline and compatibility probes below remain separately identified.
 

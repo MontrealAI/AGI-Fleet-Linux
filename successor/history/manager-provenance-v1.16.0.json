@@ -1,0 +1,258 @@
+{
+  "schema": "agi-fleet-vendored-source/v1",
+  "repository": "MontrealAI/AGIJobManager",
+  "commit": "46560bd5b52592909baf0c70ee87c9b61b329169",
+  "version": "1.16.0",
+  "license": "MIT; nested Alpha Apache-2.0 notices retained",
+  "adaptations": [],
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25"
+    },
+    {
+      "path": "scripts/economics/admission-example.cjs",
+      "sha256": "3d18490b005016f60e0445cbf4a813130afebde967a8050f343175aaced24a23"
+    },
+    {
+      "path": "scripts/economics/admission-state.mjs",
+      "sha256": "aebff83ee5123ae40d85f0c2b96c5b78e747ee2c82fd23818fac13f3c0cb896c"
+    },
+    {
+      "path": "scripts/economics/admission.cjs",
+      "sha256": "fe367f642f2dd02c6273cf237eabd022d82e8e0ddfc54e1ff59213ac9f78d077"
+    },
+    {
+      "path": "scripts/economics/assess.cjs",
+      "sha256": "44c5632923baf8ce5a56cf5eeeb64fe9ea4c2ec72d86b37f41d6cc0a726f703d"
+    },
+    {
+      "path": "scripts/economics/benchmark-qualification.mjs",
+      "sha256": "bce761f7c59958f1be533547e783b0d03b9eecb36968696dc4f497cf71e0950a"
+    },
+    {
+      "path": "scripts/economics/calibration.cjs",
+      "sha256": "3f2fb60f0ce1d671087527b45aa478c19825e7e36bbe01c4009ab190a5febbbc"
+    },
+    {
+      "path": "scripts/economics/canonical-rpc.mjs",
+      "sha256": "5bd32561e42d927e1ba1dd85477d2204e7fe550120bff857c7fd5b1bf55669f2"
+    },
+    {
+      "path": "scripts/economics/capability-report.cjs",
+      "sha256": "709ba263e080699914558b8f65c376a8fefe00e0fc1b2eac9f9bf8d2f6ae2a8c"
+    },
+    {
+      "path": "scripts/economics/capacity-plan.cjs",
+      "sha256": "dea939ea88bdcf94854432a795e2c0ae738cb7121d5109674385a8d567ad0f95"
+    },
+    {
+      "path": "scripts/economics/closure-state.mjs",
+      "sha256": "2b119eea8a977302a6abe0bba4fdfc5db24965d767bae398036401f4245fd2e3"
+    },
+    {
+      "path": "scripts/economics/computer-work.cjs",
+      "sha256": "67472d13f65b391feeae1b1dd1e430c3b1b0ac066931a91602be723d22a23ff4"
+    },
+    {
+      "path": "scripts/economics/example.json",
+      "sha256": "bf138c91fecad3541a0704de44b2ac752ca9f704e0a9512972c1825900641a23"
+    },
+    {
+      "path": "scripts/economics/execution-window.cjs",
+      "sha256": "4ed2141e9940c9ee42a5ceec3483f2ab7cc68206fb1d99a75f04a494dd5fcee0"
+    },
+    {
+      "path": "scripts/economics/funding-state.mjs",
+      "sha256": "66fb1bb6ef9f30f1270ecfe378147c3b964ac576d7ef80451421c774e533b726"
+    },
+    {
+      "path": "scripts/economics/lifecycle-example.json",
+      "sha256": "1a15006ade7281c1c1f32b07975b9079c9b5bc68489f01e5430f3484dc60d666"
+    },
+    {
+      "path": "scripts/economics/lifecycle.cjs",
+      "sha256": "06fd17cf142924c9c99aad9c479bced2b4bb7782893dc19b55227a81574ce37a"
+    },
+    {
+      "path": "scripts/economics/pilot-evaluation.cjs",
+      "sha256": "6cb7c5c1c24edd8db81a7cd15eead3cdca94169351f97d45921a3fe29ecb0966"
+    },
+    {
+      "path": "scripts/economics/project-economics.cjs",
+      "sha256": "30cf970488528993806630ebb1315ced1411429413b00649030b3f5f5058e555"
+    },
+    {
+      "path": "scripts/economics/qualification-fixture.cjs",
+      "sha256": "990d6c2779fdca7223fb4862c16092596c00c08c213e894d4cdad427f48b1e98"
+    },
+    {
+      "path": "scripts/economics/qualification-service.mjs",
+      "sha256": "a19620a0466989afd23355e89307af38856f9780fd41d8aac9570a17e0963c2e"
+    },
+    {
+      "path": "scripts/economics/review-reservation.cjs",
+      "sha256": "d09d8b891c2577b019548bf94f07a48e1ee616e4d0645c17b323c21c5d4fd491"
+    },
+    {
+      "path": "scripts/economics/review-state.mjs",
+      "sha256": "311ebd6920e2daf756d4fdb0abe0527fdf438f9da3222fabfe1b7636a33296cd"
+    },
+    {
+      "path": "scripts/economics/screen-example.json",
+      "sha256": "ea57830662f88190b0942b2993fa52ca0062ab3ec69ad66e7bee917a1cb686ad"
+    },
+    {
+      "path": "scripts/economics/screen.cjs",
+      "sha256": "0b7cee1d0f223ba9b12c9a256088222424d54b1b4f89e90918da090c8a8a0215"
+    },
+    {
+      "path": "scripts/economics/workforce-outcomes.cjs",
+      "sha256": "92deca47350ba384e28a7f325539f2d7a5551e64ac9c9071062ca9dfb3c4bdee"
+    },
+    {
+      "path": "scripts/economics/workforce.cjs",
+      "sha256": "ae2393a86dd395431ec8311acc8fcaedc3be30ec9d0561bb082256941170006f"
+    },
+    {
+      "path": "scripts/lib/usdc.js",
+      "sha256": "698c919a88facd700e23c42c8415d6994dc1714f387056e4665bb1bcdb4d3f5a"
+    },
+    {
+      "path": "scripts/successor/adapter.mjs",
+      "sha256": "bfd80318efb06a74daa0ef00b8d3036dfabc97e36f0a7b7aeb95927872f076b4"
+    },
+    {
+      "path": "scripts/successor/browser-driver.mjs",
+      "sha256": "61c79f21b4960ce5ec6bdad174cb2bb00a73166bd8037c33f886f15671bc540c"
+    },
+    {
+      "path": "scripts/successor/browser-test.mjs",
+      "sha256": "d93c93536fcda2ec3a7c8b9049a6dc95c0447c41f5885cc318011ef81183a97b"
+    },
+    {
+      "path": "scripts/successor/build.mjs",
+      "sha256": "b40ac46f8ce28eee7a115ea86d6767e3ed4fa613668705612d36ef3707387d12"
+    },
+    {
+      "path": "scripts/successor/cli.mjs",
+      "sha256": "f7fc51052c444e17b9113a11de129489abbebe7feef15ebb7b9e4044b6f839e0"
+    },
+    {
+      "path": "scripts/successor/core.test.mjs",
+      "sha256": "e8896331c5e844e52faaa260d785404d21882dbd5a708e4104a7d7420204d16d"
+    },
+    {
+      "path": "scripts/successor/portable.test.mjs",
+      "sha256": "0a736221ca31a487a8d3fe1671fee1bd4f68086ebe2e77695c7927dac16c0e0b"
+    },
+    {
+      "path": "scripts/successor/preservation-normalize.mjs",
+      "sha256": "5a9f5874a8ef8c8b0dc4631d3a0f26d54d304dd7ac538745c9f04c1b2729bc20"
+    },
+    {
+      "path": "scripts/successor/preservation.test.mjs",
+      "sha256": "a52620e69361fd8f25823714d853f85ffb362b0d6b3db3ef26888aa36d8c2d87"
+    },
+    {
+      "path": "scripts/successor/rehearse.mjs",
+      "sha256": "218d335d48c32626292c32f5223e49f1083f99598990076d9c0d44289038a266"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/ALPHA-LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/LICENSE",
+      "sha256": "70842e0e7ae73b3ce65baa06a1c62b466bdb694570301969031cc48d9ac705d1"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/packages/successor-core/src/compiler.mjs",
+      "sha256": "5e4fc86d78af7a22e915d8b19803fc219cb68b9b73201f47cf1f643f19380762"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/packages/successor-core/src/domain.mjs",
+      "sha256": "2869bb750a408e12ada19f6d0b216d47c3b9f67fc66039db4372dae8430e47a3"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/packages/successor-core/src/integrity.mjs",
+      "sha256": "164000134cc9c8b54209c420a348e3e5c324ebf7ff8f71fc84dc44812345c428"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/packages/successor-core/src/templates.mjs",
+      "sha256": "bc035b1c38b36d2db24031ac92fb193946df9cf4f180120394506a8802be2b31"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/provenance.json",
+      "sha256": "317daf4ccaf4e21ba30d77f93868b03e54e308393fb8f74bd1ff531dbd7bd015"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/scripts/pages/vendor/alpha-successor/engine.mjs",
+      "sha256": "38c4f38978bf9fc29f207bae3adee0755bc6530d04502a36c491cc430787e488"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/scripts/pages/vendor/alpha-successor/model.mjs",
+      "sha256": "e5368e8f44c05e33a92a8f6bd6cd37583e121d07119dde39c71f1484798bbf5b"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/scripts/pages/vendor/alpha-successor/provenance.json",
+      "sha256": "4700dba7a51534de4f729dc32499215d520b464e971962257f57f933dc81520e"
+    },
+    {
+      "path": "scripts/successor/vendor/agijobsv0/scripts/pages/verify-successor-build.mjs",
+      "sha256": "0fee93b642f9c692e5be6f41c4f005b83238b8f3af622b7e2acbacd464d27099"
+    },
+    {
+      "path": "scripts/successor/worker.mjs",
+      "sha256": "99f06f8b109e5f5e2d9ff8b62be2b3eb1754ea6f5d214e5e6df977a0aaa2efe6"
+    },
+    {
+      "path": "scripts/successor/worker.test.mjs",
+      "sha256": "f899091b322504650fcdcab881ab8747832b08e6eaf9d9d576ebe489f32d763c"
+    },
+    {
+      "path": "site/assets/employer-model.mjs",
+      "sha256": "c6bd8ede88fe374482eae3b37555b47cede037d77b085e7942cabd3b9953b497"
+    },
+    {
+      "path": "site/assets/payments.mjs",
+      "sha256": "7010eef450f05e8382c4f5ea9659fa83f61a3149b29e7577568723ef7a7f47cd"
+    },
+    {
+      "path": "site/assets/successor/app.mjs",
+      "sha256": "c11df7e610c5cd183f3765fbd1aa32d7a15b7ab05976854b477988f0f7cf23fb"
+    },
+    {
+      "path": "site/assets/successor/archive.mjs",
+      "sha256": "b39fac2f3ca42144fd54d52fef3b117c5bc9756fc55da70b2bb36888a4de0955"
+    },
+    {
+      "path": "site/assets/successor/checker.mjs",
+      "sha256": "7bfb87755f2df1dc8606e52aaa725935586ddc5c1b727af49724c46cceb20fbd"
+    },
+    {
+      "path": "site/assets/successor/jobs.mjs",
+      "sha256": "f8c5bd8a483401851a86fe8a44855526909bce7fbf4bfd1e4a42a4dafad6488f"
+    },
+    {
+      "path": "site/assets/successor/missions.mjs",
+      "sha256": "59486d1b40a2cb28e30860fb57f6b3280ae8a9414f02de7c75347799138245a6"
+    },
+    {
+      "path": "site/assets/successor/model.mjs",
+      "sha256": "7c3b15e95bef2b8da983247a244a2517fec57f71524c2d7b3cebd726fe547fa0"
+    },
+    {
+      "path": "site/assets/successor/safe.mjs",
+      "sha256": "818dea97a117c86c77c4cd73ff0520cdf1096e4f880af8ff0803c589a61e6a56"
+    },
+    {
+      "path": "site/assets/successor/style.css",
+      "sha256": "194cf175108d09db46b4ddcae9629f48d76241f6520fbc8acf72332692a35cde"
+    },
+    {
+      "path": "site/successor.mjs",
+      "sha256": "ad2448c6af4e0e5eac74bd8bda27351d0c6088e1c1cd8ed921e4db883169701a"
+    }
+  ]
+}

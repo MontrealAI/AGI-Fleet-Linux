@@ -6,6 +6,9 @@ class SuccessorReleaseIdentity(unittest.TestCase):
     def test_troubleshooting_commands_use_current_candidate(self):
         paths=re.findall(r'/opt/agi-fleet-linux/(AGI_Fleet_Linux_v[\d.]+)/packages/AGI_Agent/(?:Inspect|Stop-Compute)\.sh',(ROOT/'docs/TROUBLESHOOTING.md').read_text())
         self.assertEqual(paths,[self.spec['prefix']]*2)
+    def test_builder_and_integration_qualify_the_same_manager_release(self):
+        provenance=json.loads((ROOT/'fleet/successor/vendor/manager-provenance.json').read_text())
+        for field in ('repository','version','commit'):self.assertEqual(provenance[field],self.spec['integration'][field])
     def test_blank_ledger_identity_does_not_import_observations(self):
         ledger=json.loads((ROOT/'docs/physical-qualification-template.json').read_text());self.assertEqual(ledger['release'],self.spec['version']);self.assertEqual(ledger['releaseSHA256'],'');self.assertFalse(ledger['productionQualified'])
         for gate in ledger['gates'].values():self.assertEqual(gate['status'],'NOT_RUN');self.assertEqual(gate['sanitizedEvidence'],[])

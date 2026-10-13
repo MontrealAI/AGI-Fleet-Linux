@@ -1,8 +1,8 @@
 {
   "schema": "agi-fleet-vendored-source/v1",
   "repository": "MontrealAI/AGIJobManager",
-  "commit": "46560bd5b52592909baf0c70ee87c9b61b329169",
-  "version": "1.16.0",
+  "commit": "09d89fb22d52a8df194e8dd0a00beff9f7771d82",
+  "version": "1.16.1",
   "license": "MIT; nested Alpha Apache-2.0 notices retained",
   "adaptations": [],
   "files": [
@@ -128,11 +128,11 @@
     },
     {
       "path": "scripts/successor/browser-test.mjs",
-      "sha256": "d93c93536fcda2ec3a7c8b9049a6dc95c0447c41f5885cc318011ef81183a97b"
+      "sha256": "e4991cdb16cc81813f5286fba7acef26c857308deda0d7b5dda95d4b96c99e3b"
     },
     {
       "path": "scripts/successor/build.mjs",
-      "sha256": "b40ac46f8ce28eee7a115ea86d6767e3ed4fa613668705612d36ef3707387d12"
+      "sha256": "a307ef22e8ddd961c300a43214ef7e24968a0f2c630b9d4a8f50f007f2973b9e"
     },
     {
       "path": "scripts/successor/cli.mjs",
@@ -148,11 +148,11 @@
     },
     {
       "path": "scripts/successor/preservation-normalize.mjs",
-      "sha256": "5a9f5874a8ef8c8b0dc4631d3a0f26d54d304dd7ac538745c9f04c1b2729bc20"
+      "sha256": "9920e18400cb3d0076d8e488c7bd16e6ea5e8b7a59bfc4507421ce76a4d8ac99"
     },
     {
       "path": "scripts/successor/preservation.test.mjs",
-      "sha256": "a52620e69361fd8f25823714d853f85ffb362b0d6b3db3ef26888aa36d8c2d87"
+      "sha256": "66da4f58f6c67c5bb32d4bfd6bd622152c3a4320ed6d84676ac3fb7bfb1ebe74"
     },
     {
       "path": "scripts/successor/rehearse.mjs",
@@ -220,7 +220,7 @@
     },
     {
       "path": "site/assets/successor/app.mjs",
-      "sha256": "c11df7e610c5cd183f3765fbd1aa32d7a15b7ab05976854b477988f0f7cf23fb"
+      "sha256": "66562abbebf2696185b34073a6cd054d21014052f3805b40ad58b5a8c23dbc77"
     },
     {
       "path": "site/assets/successor/archive.mjs",

@@ -29,3 +29,26 @@ test('SUCCESSOR preserves text on errors and unavailable storage; keyboard focus
   await page.locator('#save').evaluate(el=>el.closest('details').open=true);await page.locator('#save').click();await expect(page.locator('#error')).toContainText('STORAGE');await expect(page.locator('#data')).not.toHaveValue('');
   expect(await page.locator('#preview').getAttribute('sandbox')).toBe('');expect(await page.locator('meta[http-equiv="Content-Security-Policy"]').getAttribute('content')).toContain("connect-src 'none'");
 });
+
+for(const lang of ['en','fr'])test(`SUCCESSOR ${lang}: stale restore consent and stopped work preserve the selected version`,async({page})=>{
+  await page.goto(lang==='fr'?'/successor-fr.html':'/successor.html');
+  await page.locator('#public-consent').check();await page.locator('#run').click();
+  await expect(page.locator('#keep-version')).toBeEnabled();await page.locator('#keep-version').click();
+  async function capsule(){const [file]=await Promise.all([page.waitForEvent('download'),page.locator('#download-capsule').click()]);return JSON.parse(fs.readFileSync(await file.path(),'utf8'));}
+  const before=await capsule();
+  await page.locator('#import-file').setInputFiles({name:'valid.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(before))});
+  await expect(page.locator('#restore-preview')).toBeVisible();await page.locator('#restore-consent').check();
+  await page.locator('#import-file').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{invalid')});
+  await expect(page.locator('#error')).toBeVisible();await expect(page.locator('#restore-preview')).toBeHidden();
+  await expect(page.locator('#restore-consent')).not.toBeChecked();
+  await page.evaluate(()=>{
+    const NativeWorker=window.Worker;
+    window.Worker=class extends NativeWorker{set onmessage(callback){super.onmessage=event=>{window.__deliverWorker=()=>callback(event);};}};
+  });
+  await page.locator('#improve-local').click();await page.waitForFunction(()=>typeof window.__deliverWorker==='function');
+  for(const id of ['fleet-version','fleet-export','run','keep-version','restore','import-file','language'])await expect(page.locator('#'+id)).toBeDisabled();
+  await page.locator('#stop').click();await expect(page.locator('#error')).toContainText('STOPPED');
+  await page.evaluate(()=>window.__deliverWorker());
+  expect((await capsule()).payload.state).toEqual(before.payload.state);
+  await expect(page.locator('#fleet-version')).toBeEnabled();await expect(page.locator('#rollback')).toBeDisabled();
+});

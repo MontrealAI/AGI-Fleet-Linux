@@ -3,7 +3,7 @@
   "status": "PASS",
   "baselineCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
   "originalPaths": 5051,
-  "unchanged": 4836,
+  "unchanged": 4835,
   "modified": [
     {
       "path": ".github/workflows/next-release.yml",
@@ -20,7 +20,7 @@
     {
       "path": "README.md",
       "before": "3b64194922231e11e4980ba355a33b55d74da5b2449133365879e2bc5c01b55f",
-      "after": "2dad0acb6d916e9ef75ead817d4ee7031fac55be664ed20dc29dd83f50744c95",
+      "after": "57d26d186693a20cdc883b34cd4faff8b052024db1c7c8a04d2f46a9371498da",
       "reason": "Add bilingual Builder entry points without removing installation or release history."
     },
     {
@@ -38,7 +38,7 @@
     {
       "path": "docs/JOB_INTEGRATION.md",
       "before": "9a0b29f506191e35d4689499e8dea006f9d9a73c654416a260f56b39d0e6bb37",
-      "after": "1f8ea2049a4553df3f78db4a97635d9cfc0c683fbf2ede9b7e0f517d4366a90b",
+      "after": "557c4e06f465e3e3d150057239286e18b45bc42d5ccdbc49e8be587e560b6a26",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
@@ -62,7 +62,13 @@
     {
       "path": "engineering/audit-next-evidence.py",
       "before": "1a6a62a076dab220c1ca708a5472478e7bb54399a30c218f263bfd3d1007868e",
-      "after": "5fd06f7f474a4f81d0771f543b7f0dd9187b2da8f6315e8ee57dc3bdee00a444",
+      "after": "38c284539f8a84398e56546196e89f8180d308221749f1c9bcf09c07ed19761b",
+      "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
+    },
+    {
+      "path": "engineering/browser-tests/README.md",
+      "before": "e0e6c3f2ecd357fc55497d6c52a1977e89c3505bcf75375b1e0dbbe052981e74",
+      "after": "b0c5c3923fb5bb63e2e76aee15b7486b91dfefcfdcc3d56c61935edf003c2c13",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -98,13 +104,13 @@
     {
       "path": "engineering/next-release.json",
       "before": "d58742455c297f27a00b9c8330bd6186df4003baa966eb42929eedd452ef4871",
-      "after": "952390871687b484108bd3289fdf9d403d5c11338d2b084de85e0481b5604d09",
+      "after": "34ec54c2c052372fe266c66170df6f2f3168d22b3e3a71ae95cf36a3c80603f6",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
       "path": "engineering/publish-next-release.py",
       "before": "e667c5e451220ac70b6bbe88e595f6e2c5ccda2c640f24b6e8df4ee9842ef61e",
-      "after": "70d13793801f014cb1346eb97b0bfc02e3dc4c0accf046808ab1d492b3fadee0",
+      "after": "499f69a32402449abd0d55ae56ac971715fb8bf47fa2041bbe3d5cd7dee89aaf",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -128,7 +134,7 @@
     {
       "path": "engineering/tests/test_next_validation.py",
       "before": "e61c4517313fe279c6e311b5f74abfdd8af584ec56d214c08e550cbb099c8b52",
-      "after": "b1e30610ca487e29dc0546fb2fc7c8137720d80094bc654f876831d77646716a",
+      "after": "477d114e193848bbd0cccbe18f38d287930ad7c30de2ba62375a4b3c333e0d7b",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -1226,7 +1232,7 @@
     {
       "path": "fleet/source-inventory.json",
       "before": "5955175faeb7bea6fc9623e59d6621247a4f258597e725e658600c011cf9ed68",
-      "after": "0a5436d7c8e498fdbaa0da34852e9d901076b6887b2f81bb50fd83b557303426",
+      "after": "7b8d00b9a7de534445b720b1e2066a69c7ac2bff11c8534fe7886aa264ce5d52",
       "reason": "Regenerate exact source and role-copy integrity records; no qualification inferred."
     },
     {
@@ -1238,7 +1244,7 @@
     {
       "path": "macos/preview/source-inventory.json",
       "before": "3d1b27886fec89aa8afed9a9fa34a82c18af79be49cce2e39b5f377e2ea34521",
-      "after": "3df0259d18c5195ad3111e233a44b3685fdfaf66f8d40c2e5751ac998495d802",
+      "after": "9c7ca7d5c67b1813b7056beb5fe5b61eb9acfdcda900ba824c380fc3c8b55028",
       "reason": "Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification."
     },
     {

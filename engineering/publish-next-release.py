@@ -151,7 +151,7 @@ def publish(release_dir, output):
         if error.code != 404:
             raise
         release = api('/releases', method='POST', data=json.dumps({'tag_name': metadata['tag'],
-            'target_commitish': commit, 'name': 'Linux 1.1.0 — exact-archive SUCCESSOR Ω + Fleet / AGIJobManager 1.16.0 qualification',
+            'target_commitish': commit, 'name': 'Linux 1.1.0 — exact-archive SUCCESSOR Ω + Fleet / AGIJobManager 1.16.1 qualification',
             'body': (output / 'release-notes.md').read_text(), 'draft': True, 'prerelease': True}).encode())
     require(release['prerelease'] is True and release['target_commitish'] == commit, 'Existing release targets different source')
     ref = api('/git/ref/tags/' + metadata['tag']) if not release['draft'] else None

@@ -2,7 +2,7 @@
 
 **[Build my SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor.html)** · **[Créer mon SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor-fr.html)** — Create useful local work, connect a qualified Fleet computer, check improvements and keep your system. [Builder guide](successor/docs/GUIDE.md).
 
-**Preparing Linux 1.1.0:** SUCCESSOR Ω + Fleet, pinned Manager 1.16.0 reuse, installed Agent/Node connection, larger Studio work, portable ownership and fresh exact-archive qualification. [Release scope and gates](docs/RELEASE_NOTES_1_1_0.md). Until that separate release is qualified and published, the verified 1.0.11 release below remains the Linux download.
+**Preparing Linux 1.1.0:** SUCCESSOR Ω + Fleet, pinned Manager 1.16.1 reuse, installed Agent/Node connection, larger Studio work, portable ownership and fresh exact-archive qualification. [Release scope and gates](docs/RELEASE_NOTES_1_1_0.md). Until that separate release is qualified and published, the verified 1.0.11 release below remains the Linux download.
 
 **Linux 1.0.11 is published for controlled fresh-install qualification.** Its exact installer passed native suites and AGIJobManager 1.15.0 integration on x86-64 and ARM64. [Download and release notes](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.11-qualification) · [Hash-bound validation addendum](validation/LINUX_1_0_11_RELEASE_ADDENDUM.md). Physical commissioning remains open.
 

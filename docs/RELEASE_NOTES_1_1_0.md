@@ -1,6 +1,6 @@
 # Linux 1.1.0 — SUCCESSOR Ω + Fleet qualification candidate
 
-This additive release joins the portable SUCCESSOR Builder to Fleet's installed Agent and Node. It reuses the reviewed AGIJobManager 1.16.0 Builder at `46560bd5b52592909baf0c70ee87c9b61b329169` with pinned file identities and retained licenses. No mutable hosted JavaScript is imported.
+This additive release joins the portable SUCCESSOR Builder to Fleet's installed Agent and Node. It reuses the reviewed AGIJobManager 1.16.1 Builder at `09d89fb22d52a8df194e8dd0a00beff9f7771d82` with pinned file identities and retained licenses. No mutable hosted JavaScript is imported.
 
 English and French Builders offer useful local data and website missions before installation or account setup. Their files, capsule and editable source work offline. All seven Linux editions include both languages and the connection guide. The website keeps its existing routes and installation choices.
 
@@ -11,6 +11,8 @@ The larger existing Studio formats and explicit Studio backup exclusion are prom
 This release preserves all six roles, v1/v2 public work, the separately governed native v3 preview, Linux and Mac instructions, wallet recovery, admission, settlement, STOP and cleanup safeguards. Mac distributions are unchanged; the public offline Builder can be opened on Mac without claiming a new native Mac qualification. Existing native-account and custom-mission paths remain available through Work Studio; the automatic reusable-candidate compiler accepts the two reviewed local mission families. Unsupported candidate types stop before dispatch with an actionable error.
 
 Engineering acceptance is bound to the exact release archive, including x64/ARM64 native tests, pinned Manager local-EVM regressions, source rebuild, offline restoration and an actual Chromium interaction through the Fleet compute path. The Chromium test uses a declared simulated provider transport and sandbox CLI. It is not evidence of provider competence, physical isolation or independent administration.
+
+The saved-archive journey now starts with a request downloaded from the free Builder, authenticates separate Agent and Node sessions, refuses dispatch without confirmation, checks the returned capsule, and requires an explicit version choice. The selected HTML is downloaded, opened in fresh offline browser contexts, and rerun in English and French with identical artifact bytes. The release evidence audit requires these observations and their hash-bound journey record. Manager 1.16.1 also supplies cancellation, stale-restore-consent and rollback recovery fixes; the Fleet version selector participates in the same busy-state boundary.
 
 **Qualification prerelease; `productionQualified: false`.** Physical installations, provider/OAuth participation and costs, native application competence, independent controller operation, human usability sessions and endurance remain `NOT_RUN` until their owners provide current observations. No mainnet transaction or job is authorized by this release. Prior evidence remains historical.
 

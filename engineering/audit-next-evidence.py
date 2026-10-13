@@ -168,7 +168,9 @@ def audit_successor(directory, candidate, commit, run_id):
             and result['sourceRevisionSHA256'] == candidate['sourceRevisionSHA256']
             and result['workflowCommit'] == commit and str(result['workflowRun']) == str(run_id),
             'Browser evidence belongs to another archive or workflow')
-    require(all(result.get(key) is True for key in ('actualBrowserEffects','actualComputeWorker','downloadedBytesChecked'))
+    require(all(result.get(key) is True for key in ('actualBrowserEffects','actualComputeWorker','downloadedBytesChecked',
+                                                  'authenticatedAgentDispatch','separatelyAuthorizedReview',
+                                                  'explicitVersionChoice','freshOfflineRestoreAndRerun'))
             and result['provider'] == 'NOT_RUN_SIMULATED_PROVIDER_TRANSPORT'
             and result['sandbox'] == 'FIXTURE_NO_DOCKER_QUALIFICATION'
             and result['independentController'] == 'UNVERIFIED' and result['authority'] == 'none',
@@ -176,6 +178,24 @@ def audit_successor(directory, candidate, commit, run_id):
     screenshot = file.parent / 'actual-browser-work.png'
     require(screenshot.is_file() and not screenshot.is_symlink() and sha(screenshot) == result['screenshotSHA256'],
             'Browser screenshot differs')
+    journey_file = file.parent / 'journey.json'
+    require(journey_file.is_file() and not journey_file.is_symlink() and sha(journey_file) == result.get('journeySHA256'),
+            'Browser journey evidence differs')
+    journey = read_json(journey_file)
+    require(journey.get('schema') == 'agi-fleet/successor-browser-journey/v1'
+            and all(journey.get(key) is True for key in ('inspectionRetainedIncumbent','agentAuthorization','separateReviewAuthorization'))
+            and journey.get('authority') == 'none' and journey.get('payment') == 'unfunded',
+            'Browser journey authority or authorization differs')
+    require(all(re.fullmatch(r'[a-f0-9]{64}', str(journey.get(key, ''))) for key in ('original','returned','selected'))
+            and journey['original'] != journey['returned']
+            and journey['returned'] == journey['selected'] == result.get('candidate') == result.get('selected'),
+            'Browser journey candidate selection differs')
+    offline = journey.get('offline')
+    require(isinstance(offline, list) and len(offline) == 2
+            and {row.get('language') for row in offline} == {'en','fr'}
+            and all(row.get('active') == journey['selected'] and row.get('artifactBytesEqual') is True
+                    and row.get('authority') == 'none' and re.fullmatch(r'[a-f0-9]{64}', str(row.get('capsuleSHA256', '')))
+                    for row in offline), 'Both fresh offline reruns must preserve the selected artifacts')
     return result
 
 

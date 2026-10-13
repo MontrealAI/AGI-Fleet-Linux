@@ -39,6 +39,7 @@ export function fleetArtifacts(){
   for(const lang of ['en','fr']){
     let html=built.pages[lang];const match=html.match(/<script>([\s\S]*?)<\/script><\/body>/);if(!match)throw Error('UPSTREAM_SCRIPT_DRIFT');let script=match[1];
     script=once(script,"const STORAGE_KEY = 'agijobmanager_successor_capsule_v1';","const STORAGE_KEY = 'agi_fleet_successor_capsule_v1';");
+    script=once(script,'#interface button,#interface input,#interface textarea','#interface button,#interface input,#interface textarea,#interface select');
     script=once(script,'  function redraw() {',`  function redraw() {
     $('fleet-export').disabled = !state?.active;
     $('fleet-version-wrap').hidden = !state?.candidates.length;
