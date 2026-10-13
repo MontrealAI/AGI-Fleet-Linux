@@ -1,6 +1,8 @@
 # Fleet and AGIJobManager compatibility
 
-**Next release: Linux 1.0.11.** Its release workflow tests the exact new ZIP against AGIJobManager 1.15.0 at `3958cbc3b01aa459de16cf39e1ab0985b5fa56c3`, including all 780 Manager regressions on each architecture. The integration target is retained in build metadata and per-run evidence. Publication requires a fresh independent audit; the historical results below are not reused as new-release acceptance. See the [1.0.11 release scope](RELEASE_NOTES_1_0_11.md).
+**New candidate: Linux 1.1.0** targets Manager 1.16.0 at `46560bd5b52592909baf0c70ee87c9b61b329169`. Its Builder source and runtime compiler are pinned to that revision; fresh saved-archive integration must pass before publication. [Builder integration and acceptance](../successor/docs/ACCEPTANCE.md).
+
+**Published release: Linux 1.0.11.** Its exact installer passed integration against AGIJobManager 1.15.0 at `3958cbc3b01aa459de16cf39e1ab0985b5fa56c3`: eight standalone scripts, the Agent/three-Node lifecycle and all 780 Manager regressions on each architecture. The [release manifest](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.0.11-qualification/Release-Manifest-v1.0.11.json) and [validation addendum](../validation/LINUX_1_0_11_RELEASE_ADDENDUM.md) bind the observed results to the saved ZIP, Manager target and workflow. Physical commissioning remains open. The historical baseline and compatibility probes below remain separately identified.
 
 Fleet executes jobs outside the contract. AGIJobManager holds USDC escrow, assigns a bonded Agent, records the completion URI, accepts bonded Node votes, enforces review deadlines, and settles or reserves deferred payments. A supported job requires explicit acceptance terms, a trusted buyer, authorized identities, adequate balances and budgets, and a verified contract deployment. Inference and publishing require configured, ready services.
 

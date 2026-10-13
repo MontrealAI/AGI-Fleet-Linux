@@ -3,7 +3,7 @@
   "status": "PASS",
   "baselineCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
   "originalPaths": 5051,
-  "unchanged": 4841,
+  "unchanged": 4839,
   "modified": [
     {
       "path": ".github/workflows/next-release.yml",
@@ -20,7 +20,7 @@
     {
       "path": "README.md",
       "before": "3b64194922231e11e4980ba355a33b55d74da5b2449133365879e2bc5c01b55f",
-      "after": "911cce21d598331b9597ec9386ce50e18a6d624c506493c7a098d4e430369ba3",
+      "after": "2dad0acb6d916e9ef75ead817d4ee7031fac55be664ed20dc29dd83f50744c95",
       "reason": "Add bilingual Builder entry points without removing installation or release history."
     },
     {
@@ -33,6 +33,12 @@
       "path": "docs/FRESH_INSTALL.md",
       "before": "4dee782ded141e988d8dbb15a8b0a097e855c38df732f090dfa641f459c3cd62",
       "after": "2e3d171f9edb681c5a024d5d28b00925be1f87a56dbead8b494445c4033ce73d",
+      "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
+    },
+    {
+      "path": "docs/JOB_INTEGRATION.md",
+      "before": "9a0b29f506191e35d4689499e8dea006f9d9a73c654416a260f56b39d0e6bb37",
+      "after": "1f8ea2049a4553df3f78db4a97635d9cfc0c683fbf2ede9b7e0f517d4366a90b",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
@@ -93,6 +99,12 @@
       "path": "engineering/publish-next-release.py",
       "before": "e667c5e451220ac70b6bbe88e595f6e2c5ccda2c640f24b6e8df4ee9842ef61e",
       "after": "b7f846a7d1871b9fc2c35f54d65bfb7c2e39c1da2ff8b458891c6bc01080b716",
+      "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
+    },
+    {
+      "path": "engineering/published-release.json",
+      "before": "116a7dcf39fa4a6999fd600b7843aae55959740daeb6c5386f2aabc3cd7ee4c6",
+      "after": "8365b8ad433631b0a364d161735da9e0caaa6cfb798f583a6b08222019a68118",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {

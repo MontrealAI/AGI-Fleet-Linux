@@ -9,7 +9,7 @@ def reason(name):
     if name.startswith('website/'):return 'Add Builder entry point; retain concurrent published-release installation links and existing routes.'
     if name.startswith('engineering/') or name.startswith('.github/workflows/'):return 'Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate.'
     if name=='README.md':return 'Add bilingual Builder entry points without removing installation or release history.'
-    if name.startswith('docs/') and p.name in ('FRESH_INSTALL.md','TROUBLESHOOTING.md','DEVELOPMENT.md','PHYSICAL_QUALIFICATION.md','physical-qualification-template.json'):return 'Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN.'
+    if name.startswith('docs/') and p.name in ('JOB_INTEGRATION.md','FRESH_INSTALL.md','TROUBLESHOOTING.md','DEVELOPMENT.md','PHYSICAL_QUALIFICATION.md','physical-qualification-template.json'):return 'Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN.'
     if name=='fleet/source-inventory.json' or name.endswith('/shared/runtime-inventory.json'):return 'Regenerate exact source and role-copy integrity records; no qualification inferred.'
     if name.startswith('fleet/'):
         if p.name in ('package.json','package-lock.json','companion-releases.json','role-registry.json','Info.plist'):return 'Coordinate the seven Linux release identities; retain dependencies and protocol rules.'
