@@ -1,0 +1,13 @@
+{
+  "schema": "agi-fleet/role-package/v1",
+  "role": "agent",
+  "version": "0.1.0-alpha.1",
+  "runtime": "0.1.0-alpha.1",
+  "actions": [
+    "successor-run"
+  ],
+  "capabilities": [
+    "bounded-offline"
+  ],
+  "settlementAuthority": false
+}

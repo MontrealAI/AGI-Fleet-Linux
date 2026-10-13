@@ -1,0 +1,122 @@
+name: Local Skills development qualification
+on:
+  pull_request:
+    paths: ['local-runtime/**', 'local-dashboard/**', 'role-skills/**', 'docs/local-skills/**', 'LOCAL_SKILLS.md', '.github/workflows/local-skills.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: local-skills-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            arch: x64
+          - runner: ubuntu-24.04-arm
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
+    steps:
+      - name: Fetch exact source
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+      - name: Preserve existing source inventory and engineering acceptance
+        run: |
+          python3 engineering/check-repository.py --require-source
+          python3 engineering/check-successor-preservation.py
+          python3 -m unittest discover -s engineering/tests -q
+      - name: Install the existing hash-pinned Node runtime
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, hashlib, urllib.request, tarfile
+          from pathlib import Path
+          pins=json.loads(Path('fleet/shared/runtime/compute/runtime-artifacts.lock.json').read_text())
+          target=next(x for x in pins['node']['archives'] if x['platform']=='linux-'+os.environ['ARCH'])
+          archive=Path(os.environ['RUNNER_TEMP'])/'local-node.tar.xz'
+          urllib.request.urlretrieve(target['url'],archive)
+          assert hashlib.sha256(archive.read_bytes()).hexdigest()==target['sha256']
+          with tarfile.open(archive) as t: t.extractall(os.environ['RUNNER_TEMP'],filter='data')
+          with open(os.environ['GITHUB_PATH'],'a') as f: f.write(str(Path(os.environ['RUNNER_TEMP'])/('node-v24.21.0-linux-'+os.environ['ARCH'])/'bin')+'\n')
+          PY
+      - name: Install declared sandbox and locked JavaScript dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap util-linux
+          npm ci --prefix fleet --ignore-scripts --omit=dev --no-audit --no-fund
+      - name: Check skills and state/transport regressions
+        run: |
+          node local-runtime/validate.mjs
+          node --test local-runtime/tests/*.test.mjs
+      - name: Require real native isolation and actual worker artifacts
+        run: node --test local-runtime/tests/native/*.test.mjs
+      - name: Build and verify a development archive, never an operator installer
+        run: |
+          python3 local-runtime/package.py --output "$RUNNER_TEMP/local-preview"
+          python3 local-runtime/package.py --verify "$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.1.zip"
+      - name: Exercise exact extracted bytes
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os, stat, zipfile
+          from pathlib import Path
+          target=Path(os.environ['RUNNER_TEMP'])/'local-extracted'
+          with zipfile.ZipFile(Path(os.environ['RUNNER_TEMP'])/'local-preview/agi-fleet-local-0.1.0-alpha.1.zip') as z:
+            z.extractall(target)
+            for i in z.infolist(): (target/i.filename).chmod(stat.S_IMODE(i.external_attr>>16))
+          PY
+          cd "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.1"
+          node local-runtime/validate.mjs
+          node --test local-runtime/tests/*.test.mjs
+          node --test local-runtime/tests/native/*.test.mjs
+      - name: Retain development artifact identity
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: local-skills-preview-${{ matrix.arch }}
+          path: ${{ runner.temp }}/local-preview/
+          if-no-files-found: warn
+          retention-days: 30
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Fetch exact source
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+      - name: Use pinned Node and browser distributions
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz -o "$RUNNER_TEMP/node.tar.xz"
+          printf '%s  %s\n' fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6 "$RUNNER_TEMP/node.tar.xz" | sha256sum --check
+          tar -xJf "$RUNNER_TEMP/node.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/node-v24.21.0-linux-x64/bin" >> "$GITHUB_PATH"
+      - name: Install locked browser dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap util-linux
+          npm ci --prefix fleet --ignore-scripts --omit=dev --no-audit --no-fund
+          npm ci --prefix engineering/browser-tests --ignore-scripts --no-audit --no-fund
+          engineering/browser-tests/node_modules/.bin/playwright install --with-deps --only-shell chromium
+      - name: Exercise English and French controls, reflow and accessibility
+        run: node --test local-runtime/tests/browser/dashboard.test.mjs

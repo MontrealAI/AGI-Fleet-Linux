@@ -1,0 +1,250 @@
+{
+  "schema": "agi-fleet/local-acceptance/v1",
+  "handoff": "IMPLEMENTATION_HANDOFF.md",
+  "fullHandoffComplete": false,
+  "releaseEligible": false,
+  "entries": [
+    {
+      "id": "A01",
+      "requiredCase": "Fresh local install",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Source state creation tested; Unix-socket startup unavailable here; packaged transactional installer not implemented.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A02",
+      "requiredCase": "Dedicated Fleet coexistence and removal",
+      "status": "PARTIAL",
+      "command": "python3 -m unittest discover -s engineering/tests -q",
+      "fixture": "../engineering/tests",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "No existing tracked path changed; clean dependency checkout passes original inventory and 84 engineering tests. Physical coexistence and uninstall NOT_RUN.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A03",
+      "requiredCase": "Six bounded skills and duplicate roles",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/roles.test.mjs",
+      "fixture": "roles.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Six format validators and bounded inspection/report paths pass; complete live role service workflows NOT_IMPLEMENTED.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A04",
+      "requiredCase": "Assistant invokes real runtime",
+      "status": "NOT_RUN",
+      "command": "Use the role skill in a fresh assistant context with no installed credentials",
+      "fixture": "skill-forward-check",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Forward check correctly blocks missing runtime; live OpenClaw adapter and positive assistant invocation are missing.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A05",
+      "requiredCase": "Agent and unrelated Node on one host",
+      "status": "NOT_IMPLEMENTED",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Internal Node checking implemented. Independent economic review deliberately blocked.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A06",
+      "requiredCase": "Cross-role isolation",
+      "status": "BLOCKED_ENVIRONMENT",
+      "command": "node --test local-runtime/tests/native/isolation.test.mjs",
+      "fixture": "native/isolation.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Synthetic client scopes pass. Native sandbox tests fail closed in this session; no OS isolation pass claimed.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A07",
+      "requiredCase": "Grants, replay and escalation",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Scoped grants, expiry, substitution, role checks and replay tests pass at the supervisor boundary. Full live tool injection tests NOT_RUN.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A08",
+      "requiredCase": "Resource and budget concurrency",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Atomic host/actor reservations and persistent daily limits pass. Native cgroup memory/process/disk budgets not implemented.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A09",
+      "requiredCase": "Files, browser and desktop outputs",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/roles.test.mjs",
+      "fixture": "roles.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Actual deterministic report bytes validated in module/synthetic-boundary tests. Native files blocked; browser/desktop adapters not implemented.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A10",
+      "requiredCase": "Exclusive desktop and changed sessions",
+      "status": "NOT_IMPLEMENTED",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Desktop grants are rejected; no desktop lease implementation is claimed.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A11",
+      "requiredCase": "STOP and fault handling",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "STOP, uncertainty, cancellation path and restart gating implemented; native fault injection and disk-full qualification remain.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A12",
+      "requiredCase": "Crash side-effect reconciliation",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Reservations precede dispatch; interrupted grants quarantined. Explicit uncertain-run reconciliation and signer path absent.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A13",
+      "requiredCase": "Honest review independence",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Known conflicts refused; unverified external control cannot claim independent review; internal checks labeled. Protocol review placement still missing.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A14",
+      "requiredCase": "Read-only original evidence",
+      "status": "BLOCKED_ENVIRONMENT",
+      "command": "node --test local-runtime/tests/native/isolation.test.mjs",
+      "fixture": "native/isolation.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Node consumes exact original bytes; native read-only mount negative test cannot run successfully here.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A15",
+      "requiredCase": "Safe export and hostile import",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/portability.test.mjs",
+      "fixture": "portability.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Allowlisted inert role JSON and existing capsule validators pass negative tests. No arbitrary archive or database import supported.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A16",
+      "requiredCase": "Restore on a second compatible host",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/portability.test.mjs",
+      "fixture": "portability.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Separate test stores produce a fresh inactive identity without authority. Real second-host restore NOT_RUN.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A17",
+      "requiredCase": "Complete SUCCESSOR journey",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/successor.test.mjs",
+      "fixture": "successor.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Deterministic execution, separately authorized internal review, rejected candidate, explicit choice and capsule restore pass. Full live ComputeWorker/independent-review journey NOT_IMPLEMENTED.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A18",
+      "requiredCase": "Protocol integration unchanged",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/roles.test.mjs",
+      "fixture": "roles.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Exact existing config and formal policy reused and tested; original 84 engineering regressions pass. New local-mode EVM and signer integration absent.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A19",
+      "requiredCase": "IPC and browser defenses",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/transport.test.mjs",
+      "fixture": "transport.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "HTTP Host/Origin/auth/scope/WebSocket tests pass. Real Unix socket test fails EPERM here; full native/private network matrix pending.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A20",
+      "requiredCase": "EN/FR functional and accessibility",
+      "status": "BLOCKED_ENVIRONMENT",
+      "command": "node --test local-runtime/tests/browser/dashboard.test.mjs",
+      "fixture": "browser/dashboard.test.mjs",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "UI and browser/axe test implemented. Locked browser download failed; manual screen-reader and human usability NOT_RUN.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A21",
+      "requiredCase": "Exact downloadable artifact",
+      "status": "PARTIAL",
+      "command": "python3 local-runtime/package.py --verify ARCHIVE.zip",
+      "fixture": "package.py",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "Development source archive built and verified, explicitly not an operator installer. Final saved-archive native qualification NOT_RUN.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    },
+    {
+      "id": "A22",
+      "requiredCase": "Physical targets and endurance",
+      "status": "NOT_RUN",
+      "command": "Not automated; follow the full handoff A22 requirements",
+      "fixture": "physical commissioning",
+      "expected": "Complete acceptance described in IMPLEMENTATION_HANDOFF.md; no skipped mandatory gate",
+      "actual": "No physical Linux x64/ARM64 or Apple silicon host, live credentials or endurance observations supplied.",
+      "evidence": "validation.json and retained GitHub workflow logs",
+      "fullCasePassed": false
+    }
+  ]
+}

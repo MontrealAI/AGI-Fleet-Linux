@@ -1,0 +1,13 @@
+{
+  "name": "agi-fleet-local-runtime",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.19.0 <25" },
+  "scripts": {
+    "start": "node cli/main.mjs serve",
+    "test": "node --test tests/*.test.mjs",
+    "test:native": "node --test tests/native/*.test.mjs",
+    "validate": "node validate.mjs"
+  }
+}

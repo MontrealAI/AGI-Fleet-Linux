@@ -1,0 +1,67 @@
+{
+  "schema": "agi-fleet/local-validation/v1",
+  "observedAt": "2026-10-13",
+  "dependencyHead": "e84ff1c3d5ce129f2c953a3216dfa36338c7a905",
+  "nodeObserved": "24.19.0",
+  "environment": "Linux x64 constrained execution session; not a physical target",
+  "skills": {
+    "passed": 6,
+    "clientQualification": false
+  },
+  "runtimeTests": {
+    "tests": 25,
+    "passed": 24,
+    "failed": 1,
+    "skipped": 0,
+    "failedGate": "Unix-socket listen EPERM"
+  },
+  "nativeTests": {
+    "tests": 2,
+    "passed": 0,
+    "failed": 2,
+    "reason": "SANDBOX_EXECUTABLE_UNTRUSTED; provided Node owned by UID 65534 while caller UID 0. Separate bubblewrap probe also denied by environment."
+  },
+  "browserTests": {
+    "tests": 1,
+    "passed": 0,
+    "failed": 1,
+    "reason": "Locked Chromium download failed; executable missing."
+  },
+  "baselineEngineering": {
+    "tests": 84,
+    "passed": 84,
+    "sourceInventory": "PASS in clean dependency checkout",
+    "existingPreservation": "PASS"
+  },
+  "skillForwardCheck": {
+    "result": "Correctly refused to prepare or execute without an installed runtime, actor binding and scoped credential",
+    "evidenceClass": "assistant behavior, negative case only"
+  },
+  "logs": {
+    "runtime-tests.log": {
+      "sha256": "17e6d21acaaa712942045c3a1ad91d99a3cb9a3aa2db6a1659725d342a661497",
+      "bytes": 3988
+    },
+    "native-tests.log": {
+      "sha256": "3e385da30965cd7b3487c8c9dd9d7992807e645032f9c188c557f0bd68e7a291",
+      "bytes": 2693
+    },
+    "browser-tests.log": {
+      "sha256": "e8218e757efb3f583f90633efc1d8e7731981a28777282f8e1a610daa1ddbcd1",
+      "bytes": 1573
+    }
+  },
+  "productionQualified": false,
+  "releaseEligible": false,
+  "missingImplementations": [
+    "live OpenClaw skill and ComputeWorker adapter",
+    "guided platform provisioning and transactional installation/update/uninstall",
+    "Linux browser and desktop adapters and exclusive desktop leases",
+    "native macOS local adapter",
+    "independent market review eligibility/placement",
+    "authoritative restore fencing and signer integration",
+    "uncertain-run reconciliation",
+    "full resource and lifecycle enforcement"
+  ],
+  "physical": "NOT_RUN"
+}

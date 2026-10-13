@@ -1,0 +1,22 @@
+{
+  "schema": "agi-fleet/local-compatibility/v1",
+  "version": "0.1.0-alpha.1",
+  "status": "development-preview-not-release-qualified",
+  "productionQualified": false,
+  "protocolChanges": false,
+  "dedicatedFleetChanges": false,
+  "runtime": { "node": ">=24.19.0 <25", "preferredNode": "24.21.0", "openclawPinUnchanged": "2026.9.5" },
+  "clients": { "localCLI": "v1", "openclaw": "NOT_RUN", "otherAssistants": "NOT_RUN" },
+  "backends": {
+    "linux-x64-bounded-offline": "native-test-required",
+    "linux-arm64-bounded-offline": "native-test-required",
+    "linux-browser": "BLOCKED_NOT_IMPLEMENTED",
+    "linux-desktop": "BLOCKED_NOT_IMPLEMENTED",
+    "macos-arm64": "BLOCKED_NOT_IMPLEMENTED"
+  },
+  "publicWorkOnly": true,
+  "liveProvider": "NOT_RUN",
+  "fundedWork": "DISABLED",
+  "independentMarketReview": "DISABLED",
+  "physicalCommissioning": "NOT_RUN"
+}
