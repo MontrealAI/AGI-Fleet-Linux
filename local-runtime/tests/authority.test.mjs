@@ -29,6 +29,17 @@ test('daily reservations persist and cannot reset by reactivation or replay',asy
 test('uncertain outcomes stop the host and cannot be replayed or silently resumed',async()=>{
   const f=fixture({execute:async()=>{throw Error('PROVIDER_FAILED');}});try{const a=f.create(),g=f.prepare(a);f.authorize(g);await assert.rejects(f.run(a,g),/PROVIDER_FAILED/);assert.equal(f.runtime.store.meta('stopped'),true);assert.equal(f.runtime.status(f.operator).runs[0].state,'uncertain');assert.throws(()=>f.runtime.resume({confirm:true},f.operator),/UNCERTAIN_RUN_RECONCILIATION_REQUIRED/);assert.throws(()=>f.prepare(a),/STOP_RECONCILIATION_REQUIRED/);}finally{f.close();}
 });
+test('an uncertain worker aborts peer work and revokes queued authority before recovery',async()=>{
+  const started=[];const f=fixture({execute:({signal})=>new Promise((resolve,reject)=>{started.push({signal,reject});signal.addEventListener('abort',()=>reject(Error('RUN_CANCELLED')),{once:true});})});
+  try{
+    const actors=[f.create(),f.create(),f.create()],grants=actors.map(a=>{const g=f.prepare(a);f.authorize(g);return g;});
+    const first=f.run(actors[0],grants[0]),second=f.run(actors[1],grants[1]),settled=Promise.allSettled([first,second]);
+    started[0].reject(Error('WORKER_FAILED'));const results=await settled;
+    assert.equal(results.every(r=>r.status==='rejected'),true);assert.equal(started[1].signal.aborted,true);assert.equal(f.runtime.active.size,0);
+    assert.equal(f.runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(grants[2].grant).state,'revoked');
+    assert.equal(f.runtime.status(f.operator).runs.every(r=>r.state==='uncertain'),true);assert.throws(()=>f.runtime.resume({confirm:true},f.operator),/UNCERTAIN_RUN_RECONCILIATION_REQUIRED/);
+  }finally{f.close();}
+});
 test('STOP revokes outstanding authority; resume requires new activation and new grants',()=>{
   const f=fixture();try{const a=f.create(),g=f.prepare(a);f.authorize(g);f.runtime.stop({actor:null},f.operator);assert.throws(()=>f.prepare(a),/STOP_RECONCILIATION_REQUIRED/);f.runtime.resume({confirm:true},f.operator);assert.throws(()=>f.prepare(a),/ACTIVATION_REQUIRED/);assert.equal(f.runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(g.grant).state,'revoked');}finally{f.close();}
 });

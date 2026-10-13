@@ -123,9 +123,12 @@ export class LocalRuntime {
       return {run:g.run.id,state:'complete',receipt};
     } catch(e) {
       this.emergency=true;
+      // Contain peer work immediately, including when writing STOP evidence fails.
+      for(const active of this.active.values())active.abort.abort();
       const code=/^[A-Z0-9_]{1,100}$/.test(e.code||e.message)?e.code||e.message:'FAILED_OR_UNCERTAIN';
       this.store.transaction(()=>{
         this.store.db.prepare("UPDATE runs SET state='uncertain',result=? WHERE id=?").run(canonical({error:code,observation:e.observation??null}),g.run.id);
+        this.store.db.prepare("UPDATE grants SET state='revoked' WHERE state IN ('prepared','authorized')").run();
         this.store.set('stopped',true);this.store.event('run-uncertain',{id:g.run.id,code});
       });throw Object.assign(new Error(code),{code,run:g.run.id});
     } finally {this.active.delete(g.run.id);}

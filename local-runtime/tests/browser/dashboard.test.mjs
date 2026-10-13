@@ -21,7 +21,7 @@ test('real EN/FR dashboard: authenticated onboarding, keyboard, mobile reflow an
       await page.locator('#name').fill('Public '+lang);await page.locator('#add').click();await page.waitForFunction(()=>document.getElementById('actors').textContent.includes('Public'));
       const ready=runtime.doctor();
       if(ready.supported){await page.locator('#actors .actor').last().locator('button').first().click();await page.locator('#prepare').click();await page.locator('#grant').waitFor({state:'visible'});await page.locator('#authorize').click();await page.locator('#run').click();await page.waitForFunction(()=>document.getElementById('output').textContent.includes('"state": "complete"'));}
-      else assert.match(await page.locator('#readiness').innerText(),/SANDBOX_|PLATFORM_|NODE_/);
+      else {assert.match(await page.locator('#diagnostic').textContent(),/SANDBOX_|PLATFORM_|NODE_/);assert.match(await page.locator('#readiness').innerText(),lang==='fr'?/ordinateur|installation|logiciel/:/computer|installation|software/);}
       await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.activeElement!==document.body),true);
       const a=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();assert.deepEqual(a.violations.map(v=>({id:v.id,nodes:v.nodes.length})),[]);
       const evidence=process.env.RUNNER_TEMP&&path.join(process.env.RUNNER_TEMP,'local-dashboard-evidence');

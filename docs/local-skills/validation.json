@@ -49,6 +49,10 @@
     "browser-tests.log": {
       "sha256": "e8218e757efb3f583f90633efc1d8e7731981a28777282f8e1a610daa1ddbcd1",
       "bytes": 1573
+    },
+    "final-runtime-tests.log": {
+      "sha256": "b42036712cce7e33866cd9ce50e55d5690bee050b7ece71549343b8aacccce01",
+      "bytes": 4086
     }
   },
   "productionQualified": false,
@@ -94,5 +98,46 @@
     },
     "browser": "Executed in Chromium; fixture failed because axe requires an explicit browser context. Fix awaiting rerun.",
     "sourceInventoryAndEngineering": "Passed on both runners"
+  },
+  "latestLocalRuntime": {
+    "tests": 26,
+    "passed": 25,
+    "failed": 1,
+    "skipped": 0,
+    "failedGate": "Unix-socket listen EPERM",
+    "includes": "Peer-work cancellation and queued-grant revocation on uncertainty"
+  },
+  "githubRefreshedRun": {
+    "url": "https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38459978516",
+    "pullRequestHead": "f5e20a13aec53bd1af6e9ab353ff57059b8ca587",
+    "sourceTested": "GitHub pull-request merge commit",
+    "runtimeTestsPerPlatform": {
+      "tests": 25,
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0
+    },
+    "platforms": [
+      "Linux x64",
+      "Linux ARM64"
+    ],
+    "nativeTestsPerPlatform": {
+      "tests": 2,
+      "passed": 0,
+      "failed": 2,
+      "reason": "bwrap loopback RTM_NEWADDR denied by OS; namespace isolation is required and was not weakened"
+    },
+    "browser": {
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "scope": "EN/FR authenticated onboarding, keyboard, automated axe checks and 360px reflow; no native task executed"
+    },
+    "screenshots": {
+      "artifactId": 11846095440,
+      "sha256": "83cbd028fb514a48de45fdc3908e3158d2cab34f14b80dd6a25126106f014b3b",
+      "visualInspection": "English desktop and French mobile inspected; status banner overlap found and corrected in subsequent source"
+    },
+    "laterChanges": "Peer cancellation regression and localized UI correction require new exact-head CI"
   }
 }
