@@ -67,3 +67,40 @@ After restoring a returned capsule, use **Inspect a saved version** in Results t
 Après restauration, **Examiner une version conservée** affiche le candidat sans l’activer. **Conserver cette version** reste une décision distincte. Une égalité ou une régression conserve la version actuelle. Le retour à une version précédente n’annule pas les effets externes.
 
 The terminal execution commands acquire the same exclusive `application.lock` as the installed app. Close the app before terminal execution; never delete an active profile lock to force entry. The normal launcher owns stale-lock recovery.
+
+## Terminal workflow / Parcours terminal
+
+Run these commands from the extracted Fleet directory with the bundled Node version. Each new output must not already exist. Start locally without a wallet or provider:
+
+```sh
+node successor/cli.mjs example analyst mission.json
+node successor/cli.mjs run mission.json baseline.json
+node successor/cli.mjs choose baseline.json latest selected.json
+node successor/cli.mjs validate selected.json
+node successor/cli.mjs inspect selected.json
+node successor/cli.mjs plan selected.json 100 plan.json
+node successor/cli.mjs request selected.json plan.json request.json
+node successor/cli.mjs inspect-request request.json
+node successor/cli.mjs compile-request request.json context.json compiled.json
+```
+
+`context.json` must contain the actual runtime descriptors and permitted immutable input URLs described above. The budget is a planning commitment, not permission to fund a job. With existing configured Agent and Node profiles, substitute their absolute profile paths below. Execution and review ask for the hidden local vault password and the complete displayed specification hash. The result files contain the actual handoff and receipt, so no browser is needed:
+
+```sh
+node successor/cli.mjs execute agent /absolute/agent-profile request.json context.json agent-result.json
+node successor/cli.mjs review node /absolute/node-profile agent-result.json node-result.json
+node successor/cli.mjs check-result request.json agent-result.json node-result.json checked.json
+node successor/cli.mjs inspect checked.json
+node successor/cli.mjs compare checked.json CANDIDATE_HASH
+node successor/cli.mjs choose checked.json CANDIDATE_HASH chosen.json
+node successor/cli.mjs export chosen.json NEW_OFFLINE_DIRECTORY
+node successor/cli.mjs export-pack chosen.json agent-result.json node-result.json NEW_PACK
+node successor/cli.mjs restore-pack NEW_PACK NEW_RESTORE_DIRECTORY --confirm
+node successor/cli.mjs restore chosen.json --confirm restored.json
+node successor/cli.mjs improve restored.json rerun.json
+node successor/cli.mjs rollback chosen.json INCUMBENT_HASH rolled-back.json
+```
+
+Use the candidate hashes from inspection or the checked result. `check-result` reports rejection without changing the incumbent; comparison does not select a version. `improve` above reruns the supported deterministic local engine and grants no Fleet authority. To recover an output after a failed download or terminal disconnect, use `result agent|node ABSOLUTE_PROFILE ATTEMPT_KEY NEW_RESULT` with the saved attempt key; it never redispatches work. `stop agent|node ABSOLUTE_PROFILE` revokes pending work in that opened profile. For an already running application or terminal that owns the profile lock, use its existing Stop work control or the installed `Stop-Compute.sh`; never bypass the lock. Errors include a stable code and leave previous exports intact.
+
+Le parcours terminal utilise les mêmes contrôles que l’application. Les fichiers de résultat contiennent le travail réel et le reçu de revue. La comparaison n’active rien : choisissez explicitement une version. Une restauration ne réactive ni mot de passe, ni autorisation historique. Les commandes d’exécution demandent une confirmation locale ; ne contournez jamais le verrou d’un profil actif.

@@ -21,7 +21,23 @@ export function inspectSidecar(root){
   fail(total===manifest.totalBytes,'FLEET_SIDECAR_LIMIT');
   const actual=[];function walk(dir,prefix=''){for(const e of fs.readdirSync(dir,{withFileTypes:true})){fail(!e.isSymbolicLink(),'FLEET_SIDECAR_PATH');const name=prefix+e.name;if(e.isDirectory())walk(path.join(dir,e.name),name+'/');else actual.push(name);}}
   walk(root);fail(actual.length===manifest.files.length+1&&actual.every(n=>n==='manifest.json'||seen.has(n.toLowerCase())),'FLEET_SIDECAR_EXTRA');
-  if(seen.has('handoff.json')||seen.has('receipt.json')){fail(seen.has('handoff.json')&&seen.has('receipt.json'),'FLEET_SIDECAR_MISSING');validateReceiptBinding(parseStrict(bytes(checkedFile(root,'handoff.json'),FILE_LIMIT).toString(),FILE_LIMIT),parseStrict(bytes(checkedFile(root,'receipt.json'),1000000).toString(),1000000));}
+  const core=[['capsule.json','portable-project'],['handoff.json','exact-review-handoff'],['receipt.json','historical-evidence']];
+  for(const [name,role] of core){const entry=manifest.files.find(f=>f.path===name);fail(entry&&entry.mediaType==='application/json'&&entry.role===role,'FLEET_SIDECAR_CORE');}
+  const handoff=parseStrict(bytes(checkedFile(root,'handoff.json'),FILE_LIMIT).toString(),FILE_LIMIT);
+  validateReceiptBinding(handoff,parseStrict(bytes(checkedFile(root,'receipt.json'),1000000).toString(),1000000));
+  // Integrity inspection does not execute a job or grant qualification. Bind the
+  // exact decoded delivery bytes to every sidecar artifact, including its metadata.
+  const bundle=parseStrict(handoff.delivery,FILE_LIMIT),outputs=handoff.specification.outputs;
+  keys(bundle,['schema','specHash','files'],'FLEET_SIDECAR_DELIVERY');
+  fail(bundle.schema===(handoff.specification.profile==='computer-work/v2'?'agi-work-bundle/v2':'agi-work-bundle/v1')&&bundle.specHash===handoff.specHash&&Array.isArray(bundle.files)&&Array.isArray(outputs)&&bundle.files.length>0&&bundle.files.length===outputs.length&&manifest.files.length===core.length+bundle.files.length,'FLEET_SIDECAR_DELIVERY');
+  const names=new Set();
+  for(let i=0;i<bundle.files.length;i++){
+    const f=bundle.files[i],output=outputs[i];keys(f,['name','mediaType','bytes','sha256','content'],'FLEET_SIDECAR_DELIVERY');safe(f.name);
+    fail(!names.has(f.name.toLowerCase()),'FLEET_SIDECAR_DUPLICATE');names.add(f.name.toLowerCase());
+    fail(f.name===output.name&&f.mediaType===output.mediaType&&Number.isSafeInteger(f.bytes)&&f.bytes>0&&f.bytes<=output.maxBytes&&f.bytes<=FILE_LIMIT&&typeof f.content==='string'&&f.content.length<=4*Math.ceil(f.bytes/3),'FLEET_SIDECAR_DELIVERY');
+    const decoded=Buffer.from(f.content,'base64');fail(decoded.length===f.bytes&&decoded.toString('base64')===f.content&&hash(decoded)===f.sha256,'FLEET_SIDECAR_DELIVERY');
+    const row=manifest.files.find(r=>r.path==='artifacts/'+f.name);fail(row&&row.role==='deliverable'&&row.mediaType===f.mediaType&&row.bytes===f.bytes&&row.sha256===f.sha256,'FLEET_SIDECAR_DELIVERY');
+  }
   return manifest;
 }
 export async function exportSidecar(destination,capsule,handoff,receipt,studioAPI){
