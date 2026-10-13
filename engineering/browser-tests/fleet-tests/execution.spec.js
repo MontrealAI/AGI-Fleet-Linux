@@ -67,6 +67,7 @@ test('Saved Fleet: Builder → authorized Agent → separately authorized Node �
       await workPage.locator('#public-consent').focus();await workPage.keyboard.press('Space');
       await workPage.locator('#improve-local').click();
       await expect(workPage.locator('#comparison')).toContainText('measured gap');
+      await expect(workPage.frameLocator('#preview').locator('h1')).toHaveText(JSON.parse(original.mission.input).title);
       for(const file of output.files){
         const [download]=await Promise.all([workPage.waitForEvent('download'),workPage.getByRole('button',{name:'Download '+file.name,exact:true}).click()]);
         file.content=fs.readFileSync(await download.path(),'utf8');
@@ -109,6 +110,7 @@ test('Saved Fleet: Builder → authorized Agent → separately authorized Node �
       if(language==='fr')await fresh.locator('#language').click();
       await fresh.locator('#public-consent').check();await fresh.locator('#run').click();
       await expect(fresh.locator('#result-summary')).toContainText(/Checks passed|Vérifications réussies/);
+      await expect(fresh.frameLocator('#preview').locator('h1')).toHaveText(JSON.parse(original.mission.input).title);
       await expect(fresh.locator('#keep-version')).toBeDisabled();await expect(fresh.locator('#error')).toBeHidden();
       const rerunRaw=await download(fresh,'#download-capsule');
       const rerun=(await model.inspectCapsule(rerunRaw)).capsule.payload.state;
