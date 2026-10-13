@@ -62,7 +62,7 @@ def load_candidate(metadata, archive, specification=None):
     specification = specification or ROOT / 'engineering/next-release.json'
     expected = json.loads(Path(specification).read_text())
     value = json.loads(Path(metadata).read_text())
-    for key in ('version', 'tag', 'name', 'sourceRevisionSHA256'):
+    for key in ('version', 'tag', 'name', 'sourceRevisionSHA256', 'integration'):
         require(value.get(key) == expected.get(key), 'Candidate metadata differs: ' + key)
     require(re.fullmatch(r'\d+\.\d+\.\d+', value['version']), 'Invalid candidate version')
     require(value['tag'] == 'v' + value['version'] + '-qualification', 'Invalid qualification tag')
@@ -110,6 +110,7 @@ def verify_candidate(archive, candidate):
 def provenance(candidate):
     return {'schema': 'agi-next-validation-binding/v1',
             'candidate': {key: candidate[key] for key in ('version', 'tag', 'name', 'bytes', 'sha256', 'sourceRevisionSHA256')},
+            'integration': candidate['integration'],
             'baselineHarnesses': BASELINES, 'productionQualified': False}
 
 

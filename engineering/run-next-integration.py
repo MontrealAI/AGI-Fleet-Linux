@@ -12,6 +12,7 @@ def bind_runner(candidate):
     bound = candidate_tools(candidate)
     for name in ('ASSET', 'PREFIX', 'SHA256', 'SIZE', 'verify_archive', 'extract'):
         setattr(runner, name, getattr(bound, name))
+    runner.MANAGER_BASELINE = candidate['integration']['commit']
     return runner
 
 

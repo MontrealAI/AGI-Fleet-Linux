@@ -385,7 +385,7 @@ def build(args):
               'archiveVerification': verified, 'finalExtractedGate': gate,
               'nativeAcceptance': 'NOT_RUN', 'operatorGate': 'CLOSED_PENDING_NATIVE_ACCEPTANCE',
               'productionQualified': False, 'physicalQualification': validation['external']}
-    for key in ['native', 'counts', 'targetedFiles', 'targetedTests', 'completeFiles', 'completeTests']:
+    for key in ['native', 'integration', 'counts', 'targetedFiles', 'targetedTests', 'completeFiles', 'completeTests']:
         if key in specification:
             result[key] = specification[key]
     write_json(out / 'release.json', result)

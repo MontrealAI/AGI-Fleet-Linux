@@ -1,6 +1,6 @@
 {
   "schema": "agi-source-inventory/v1",
-  "revisionSHA256": "ba5d4b30cc7b02d60e7211a3201ad74129dce0056d64655a222c4fe08e699ba7",
+  "revisionSHA256": "be9206a206fa1d90b46cfbb5a897cf1044c37e85221db6a40e7abdf0ac7b8dca",
   "definition": "SHA256 of compact sorted-key JSON files array. Excludes docs/evidence/dependencies/historical folders/generated release metadata/root prose; complete file bytes are in MANIFEST.sha256.",
   "files": [
     {
@@ -210,12 +210,12 @@
     },
     {
       "path": "config/companion-releases.json",
-      "sha256": "6b2e8f6827c3eb16ab7b646689d42d142bfb7f87a7bd181adbc592b180c0503f",
+      "sha256": "9f4d0a48f3570c68ed2e5a0d10927d9cf11fa37fdc9343eac576e6764235d180",
       "executable": false
     },
     {
       "path": "config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -385,12 +385,12 @@
     },
     {
       "path": "package-lock.json",
-      "sha256": "8d9c5eae7823dae22e79a9112bf3c47919342e04e0acea8c04da222285cdf4ff",
+      "sha256": "5e36028a8f0149a285d9f8c2e9aa3d33ba0903657638d9375dc1fd1e76ff78b0",
       "executable": false
     },
     {
       "path": "package.json",
-      "sha256": "342440537a8eaa44bde4cb9cab13a278ce31582eed8285811eb1c2ba561bd7c8",
+      "sha256": "96b7f7e1b7d93c4445fe519f8af4d7d4eddaee52fd94f8c3464134af379dd329",
       "executable": false
     },
     {
@@ -1370,7 +1370,7 @@
     },
     {
       "path": "packages/AGI_Agent/config/companion-releases.json",
-      "sha256": "14d23ce46432f9cf9e7ce1db4290ee7d7d6590dcd8cf334f7e46cb7d49c6e994",
+      "sha256": "e09ebcb6a0dc0ed4ef3ed45b133f942895a7609ee43cfcb0dfd3ce9856ba3fea",
       "executable": false
     },
     {
@@ -1625,12 +1625,12 @@
     },
     {
       "path": "packages/AGI_Agent/package-lock.json",
-      "sha256": "93489b98b189518be4892700cf2143a44f1b9b20ef396dfc1222c5306a5474fb",
+      "sha256": "3bb247fb4493a7d2172b6518c2eedcf2e9eacdbf5f678defd5e53b0bab075df1",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/package.json",
-      "sha256": "ba3cd4fd427c2ae6b82fde10030586c20c097cbf8070447008969740f9db6721",
+      "sha256": "99ae1db8bb1465fed11cb71919f9a0bbc787d8a0174545c56506b327690d1c79",
       "executable": false
     },
     {
@@ -4645,7 +4645,7 @@
     },
     {
       "path": "packages/AGI_Employer/config/companion-releases.json",
-      "sha256": "8347d90e8e43b2445124e97036e510fc268b612189dae92af5020bf8fcd9de84",
+      "sha256": "7b416b9b2eb3dd0cace6009c9891f6cd9ef2ac12d8f874e565e336242c5dbce9",
       "executable": false
     },
     {
@@ -4655,7 +4655,7 @@
     },
     {
       "path": "packages/AGI_Employer/config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -4840,12 +4840,12 @@
     },
     {
       "path": "packages/AGI_Employer/package-lock.json",
-      "sha256": "81762798ca75be0dce70c1324f87529d9a38e89a1ab3544aeb6f7b18e8edac72",
+      "sha256": "894fb125a5287d978986393bc8d08229d2a34ef69ffa289616818d496ae1dd8b",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/package.json",
-      "sha256": "5e2f53e744f5361ddc23454a6347d63ac727069134a206deffea2da057007c8b",
+      "sha256": "50cb7d7d7fe8567fa11bf583271cd301a793bb1e564d2185e6d4eab070a2e355",
       "executable": false
     },
     {
@@ -8400,7 +8400,7 @@
     },
     {
       "path": "packages/AGI_Evidence/config/companion-releases.json",
-      "sha256": "53561bf4fa8f6c5a7589344dd876f7d080d94a7f77d4b064f84e886b6b12c9cb",
+      "sha256": "0d9a3be9f13de986e3ca9f21612c868b7653475c021ae8c677d988dc0aeb303e",
       "executable": false
     },
     {
@@ -8410,7 +8410,7 @@
     },
     {
       "path": "packages/AGI_Evidence/config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -8595,12 +8595,12 @@
     },
     {
       "path": "packages/AGI_Evidence/package-lock.json",
-      "sha256": "3fc0397600e48e99269e132df18f933a63ad17c32cf9a81b2062687d96f79abf",
+      "sha256": "677efeab60af8c8ffbfb9cf4527490842eacdb0299f24b327e0f6b8ac9598c20",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/package.json",
-      "sha256": "9c4c3a7c95f58d7c8e40927250461ef8e747f80d982fa2f3075e1db327df219b",
+      "sha256": "8d92e523dc89e4adaf1ce798c0fd7ded77656604ff1d6ba20ddbcf086f15f631",
       "executable": false
     },
     {
@@ -12160,7 +12160,7 @@
     },
     {
       "path": "packages/AGI_Moderator/config/companion-releases.json",
-      "sha256": "49b80128e672b999aae8991f6e363f44d604eb149e1b787cebb4f9845ab2f794",
+      "sha256": "6d84d4137affc2513470bbfe4cd60b04c9221e64fc75f33b125409bf698e86ab",
       "executable": false
     },
     {
@@ -12170,7 +12170,7 @@
     },
     {
       "path": "packages/AGI_Moderator/config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -12355,12 +12355,12 @@
     },
     {
       "path": "packages/AGI_Moderator/package-lock.json",
-      "sha256": "0964d7c53c25268af9c439aa7357f0e4ea16e5790f03e77d36c85edca940920b",
+      "sha256": "fff4493bd30a4495b9c41730596e34ed78a154bc9e3ebba94b47427b6cb5305c",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/package.json",
-      "sha256": "9aa6977ec0f8f78ed7c27b885debe110ee8e7fd7c2bb361347f3ff130d07b623",
+      "sha256": "191d15e9be0796bad907bf470c25d4f0932d99fbb89fcd162f7ca5f0d14902df",
       "executable": false
     },
     {
@@ -16075,7 +16075,7 @@
     },
     {
       "path": "packages/AGI_Node/config/companion-releases.json",
-      "sha256": "fb47eaee3db973bb15f7c8beb6224ade6217dd35ec3c3dc4e3ea62ee33befc67",
+      "sha256": "671420aba0de8b0da6b947b16cffe5d26da373cdd5dee3176f952c3e9b9dc384",
       "executable": false
     },
     {
@@ -16385,12 +16385,12 @@
     },
     {
       "path": "packages/AGI_Node/package-lock.json",
-      "sha256": "bf4e0399f90404155553fe2b4f102549219a33ebb4883f4b14f87578143bd641",
+      "sha256": "9ad7285292c20b42c4a4ccdb26e0d808703305aaddf3817b5c2a0bad516b55c8",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/package.json",
-      "sha256": "a697097f90e4cfb13074a3554ed4124b5789ccd3d6e3ab0ea072f15913dbd122",
+      "sha256": "8316328a25e335163c8007a444aca02f64b697771da6d82a235b077119cf2775",
       "executable": false
     },
     {
@@ -19460,7 +19460,7 @@
     },
     {
       "path": "packages/AGI_Recovery/config/companion-releases.json",
-      "sha256": "5353f3f62afcb9d67d73c822fa70b4061e1efd95394bd03304882acd48819f0d",
+      "sha256": "6e604249fba0238acc60f3f713e24c196cdf141394681762fa9906410e93297e",
       "executable": false
     },
     {
@@ -19470,7 +19470,7 @@
     },
     {
       "path": "packages/AGI_Recovery/config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -19655,12 +19655,12 @@
     },
     {
       "path": "packages/AGI_Recovery/package-lock.json",
-      "sha256": "218c215e0e611e7de2d8d5f115607271cb0bfcbadb3b4fd03a6fc1135a5a0fac",
+      "sha256": "9f9cbe00f2c98227ef3b71e784cccbb5acc0be6e3d6d615366e870914f80369c",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/package.json",
-      "sha256": "f7818ce89c9aad7b6ba7076681f2bbfcd93259338a2332b45ce2af6ffafb98eb",
+      "sha256": "e487140d41f703af9181505fb8b4b5b75f10908d653cd3dc229ef81261ee37a5",
       "executable": false
     },
     {

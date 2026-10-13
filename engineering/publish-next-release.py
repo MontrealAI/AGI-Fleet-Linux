@@ -24,8 +24,17 @@ def write(path, value):
 
 def validate(metadata, audit, commit):
     require(re.fullmatch(r'[0-9a-f]{40}', commit or '') is not None, 'An exact workflow commit is required')
-    require(metadata['version'] == '1.0.10' and metadata['tag'] == 'v1.0.10-qualification'
-            and metadata['name'] == 'AGI_Fleet_Linux_v1.0.10.zip', 'Unexpected release identity')
+    specification = load(ROOT / 'engineering/next-release.json')
+    for key in ('version', 'tag', 'name', 'sourceRevisionSHA256', 'sourceFiles', 'native', 'integration'):
+        require(metadata.get(key) == specification.get(key), 'Release specification differs: ' + key)
+    require(metadata.get('repositoryCommit') == metadata.get('workflowCommit') == commit,
+            'Candidate was built from a different commit')
+    run_id = str(audit.get('workflowRun', ''))
+    require(re.fullmatch(r'[1-9][0-9]*', run_id) is not None, 'An exact workflow run is required')
+    require(not os.environ.get('GITHUB_RUN_ID') or os.environ['GITHUB_RUN_ID'] == run_id,
+            'Publication workflow run differs')
+    require(metadata['version'] == '1.0.11' and metadata['tag'] == 'v1.0.11-qualification'
+            and metadata['name'] == 'AGI_Fleet_Linux_v1.0.11.zip', 'Unexpected release identity')
     require(0 < metadata['bytes'] < LIMIT and re.fullmatch('[0-9a-f]{64}', metadata['sha256']), 'Invalid archive identity')
     require(audit['status'] == 'PASS' and audit['releaseSHA256'] == metadata['sha256']
             and audit['productionQualified'] is False and audit['workflowCommit'] == commit,
@@ -33,13 +42,18 @@ def validate(metadata, audit, commit):
     require(audit['sourceRevisionSHA256'] == metadata['sourceRevisionSHA256']
             and audit['physicalQualification'] == 'NOT_RUN' and audit['architectures'] == ['x64', 'arm64'],
             'Audit source or qualification scope differs')
-    expected = load(ROOT / 'engineering/next-release.json')['native']
+    expected = specification['native']
+    integration = specification['integration']
+    require(audit.get('version') == metadata['version'] and audit.get('integrationTarget') == integration,
+            'Audit release or integration target differs')
+    native_logs = integration_logs = 0
     for group in ('native', 'integration'):
         runs = audit[group]
         require(len(runs) == 2 and {run['architecture'] for run in runs} == {'x64', 'arm64'}, 'Missing architecture')
         for run in runs:
             require(run['status'] == 'PASS' and run['workflowCommit'] == commit and run['productionQualified'] is False,
                     'Incomplete per-architecture acceptance')
+            require(str(run.get('workflowRun')) == run_id, 'Mixed workflow runs cannot be published')
             if group == 'native':
                 for scope, target in expected.items():
                     result = run['runs'][scope]
@@ -47,10 +61,17 @@ def validate(metadata, audit, commit):
                             and result['counts']['tests'] == result['counts']['pass'] == target['tests']
                             and all(result['counts'][key] == 0 for key in ('fail', 'cancelled', 'skipped', 'todo')),
                             'Native acceptance count differs')
+                    native_logs += result['verifiedLogs']
             else:
-                require(run['standaloneIntegrationScripts'] == 8 and run['managerTestsPassed'] == 777
-                        and run['productionSourcesMatched'] == run['contractArtifactsMatched'] == 11,
+                require(run.get('managerCommit') == integration['commit']
+                        and run['standaloneIntegrationScripts'] == integration['standaloneScripts']
+                        and run['managerTestsPassed'] == integration['managerTests']
+                        and run['productionSourcesMatched'] == run['contractArtifactsMatched'] == integration['contractArtifacts']
+                        and run.get('verifiedLogs') == 19,
                         'Integration acceptance count differs')
+                integration_logs += run['verifiedLogs']
+    require(audit.get('verifiedTapLogs') == native_logs and audit.get('verifiedIntegrationLogs') == integration_logs,
+            'Audit log coverage differs')
 
 
 def prepare(release, evidence, output):
@@ -61,16 +82,16 @@ def prepare(release, evidence, output):
     require(sha(archive) == metadata['sha256'] and archive.stat().st_size == metadata['bytes'], 'Candidate archive changed')
     require(not output.exists() and not output.is_symlink(), 'Publication output must be absent')
     output.mkdir()
-    name = 'Linux-Qualification-Evidence-v1.0.10.zip'
+    name = 'Linux-Qualification-Evidence-v1.0.11.zip'
     with zipfile.ZipFile(output / name, 'x', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as target:
-        for root, prefix in [(evidence, 'validation'), (release / 'AGI_Fleet_Linux_v1.0.10-checks', 'packaging')]:
+        for root, prefix in [(evidence, 'validation'), (release / 'AGI_Fleet_Linux_v1.0.11-checks', 'packaging')]:
             require(root.is_dir(), 'Missing retained evidence: ' + str(root))
             for path in sorted(root.rglob('*')):
                 require(not path.is_symlink(), 'Evidence links are forbidden')
                 if not path.is_file():
                     continue
                 require(path.stat().st_size < LIMIT, 'Evidence member exceeds size ceiling')
-                info = zipfile.ZipInfo(prefix + '/' + path.relative_to(root).as_posix(), (2026, 10, 10, 12, 0, 0))
+                info = zipfile.ZipInfo(prefix + '/' + path.relative_to(root).as_posix(), (2026, 10, 13, 0, 0, 0))
                 info.create_system = 3
                 info.external_attr = (stat.S_IFREG | 0o644) << 16
                 target.writestr(info, path.read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
@@ -80,10 +101,10 @@ def prepare(release, evidence, output):
         'operatorGate': 'OPEN_FOR_CONTROLLED_FRESH_INSTALL',
         'productionQualified': False, 'physicalQualification': 'NOT_RUN', 'audit': audit,
         'evidence': {'name': name, 'bytes': (output / name).stat().st_size, 'sha256': sha(output / name)}}
-    write(output / 'Release-Manifest-v1.0.10.json', manifest)
-    assets = [archive, output / name, output / 'Release-Manifest-v1.0.10.json']
-    (output / 'SHA256SUMS-v1.0.10.txt').write_text(''.join(sha(path) + '  ' + path.name + '\n' for path in assets))
-    notes = (ROOT / 'docs/RELEASE_NOTES_1_0_10.md').read_text()
+    write(output / 'Release-Manifest-v1.0.11.json', manifest)
+    assets = [archive, output / name, output / 'Release-Manifest-v1.0.11.json']
+    (output / 'SHA256SUMS-v1.0.11.txt').write_text(''.join(sha(path) + '  ' + path.name + '\n' for path in assets))
+    notes = (ROOT / 'docs/RELEASE_NOTES_1_0_11.md').read_text()
     notes += '\n## Published artifact identities\n\n| Asset | Bytes | SHA-256 |\n| --- | ---: | --- |\n'
     notes += ''.join(f'| {path.name} | {path.stat().st_size:,} | `{sha(path)}` |\n' for path in assets)
     notes += f'\nValidated commit: `{commit}`. [Complete workflow evidence](https://github.com/{REPOSITORY}/actions/runs/{manifest["workflowRun"]}).\n'
@@ -93,12 +114,12 @@ def prepare(release, evidence, output):
 
 def publish(release_dir, output):
     metadata = load(release_dir / 'release.json')
-    manifest = load(output / 'Release-Manifest-v1.0.10.json')
+    manifest = load(output / 'Release-Manifest-v1.0.11.json')
     commit = os.environ.get('GITHUB_SHA')
     validate(metadata, manifest['audit'], commit)
     require(manifest['workflowCommit'] == commit and manifest['sha256'] == metadata['sha256'], 'Publication identity differs')
     assets = [release_dir / metadata['name'], output / manifest['evidence']['name'],
-              output / 'Release-Manifest-v1.0.10.json', output / 'SHA256SUMS-v1.0.10.txt']
+              output / 'Release-Manifest-v1.0.11.json', output / 'SHA256SUMS-v1.0.11.txt']
     expected = {line.split('  ', 1)[1]: line.split('  ', 1)[0] for line in assets[-1].read_text().splitlines()}
     require(set(expected) == {p.name for p in assets[:-1]}, 'Checksum coverage differs')
     for path in assets:
@@ -125,7 +146,7 @@ def publish(release_dir, output):
         if error.code != 404:
             raise
         release = api('/releases', method='POST', data=json.dumps({'tag_name': metadata['tag'],
-            'target_commitish': commit, 'name': 'Linux 1.0.10 — clearer installation and verified release identity',
+            'target_commitish': commit, 'name': 'Linux 1.0.11 — exact-archive AGIJobManager 1.15.0 qualification',
             'body': (output / 'release-notes.md').read_text(), 'draft': True, 'prerelease': True}).encode())
     require(release['prerelease'] is True and release['target_commitish'] == commit, 'Existing release targets different source')
     ref = api('/git/ref/tags/' + metadata['tag']) if not release['draft'] else None
