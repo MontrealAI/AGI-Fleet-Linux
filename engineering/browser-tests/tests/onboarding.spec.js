@@ -282,7 +282,12 @@ test('a denied clipboard offers a labelled, read-only, selectable helper plan', 
   await expect(fallback).toHaveValue(/Reviewer/);
   await expect(fallback).toHaveValue(/packages\/AGI_Node/);
   await expect(fallback).not.toHaveValue(/Creator/);
-  await expect(fallback).toHaveValue(/https:\/\/github\.com\/MontrealAI\/AGI-Fleet-Linux\/blob\/main\/docs\/FRESH_INSTALL\.md/);
+  const releaseURL = await page.locator('#release-link').getAttribute('href');
+  const releaseTag = new URL(releaseURL).pathname.split('/').pop();
+  expect(releaseTag).toMatch(/^v\d+\.\d+\.\d+-qualification$/);
+  const frozenGuide = `https://github.com/MontrealAI/AGI-Fleet-Linux/blob/${releaseTag}/docs/FRESH_INSTALL.md`;
+  await expect(page.locator('#installation-guide')).toHaveAttribute('href', frozenGuide);
+  expect(await fallback.inputValue()).toContain(frozenGuide);
   const selection = await fallback.evaluate(element => ({ start: element.selectionStart, end: element.selectionEnd, length: element.value.length }));
   expect(selection.start).toBe(0);
   expect(selection.end).toBe(selection.length);

@@ -123,6 +123,7 @@ def release_tokens(release):
         raise ValueError('Production label contradicts recorded qualification evidence')
     tokens = {
         'REPO': REPO, 'VERSION': version, 'ASSET_NAME': name,
+        'RELEASE_DOCS_URL': f'{REPO}/blob/{tag}/docs',
         'RELEASE_URL': f'{REPO}/releases/tag/{tag}',
         'DOWNLOAD_URL': f'{REPO}/releases/download/{tag}/{name}',
         'SHA256': release['sha256'], 'BYTES': f"{release['bytes']:,}",
