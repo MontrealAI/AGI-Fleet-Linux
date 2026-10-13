@@ -7,7 +7,7 @@ import {createInterface} from 'node:readline/promises';
 import {Writable} from 'node:stream';
 import {fail,parseStrict} from './vendor/manager/site/assets/successor/safe.mjs';
 import {REQUEST,compileRequest,inspectRequest,checkReturnedWork} from './project.mjs';
-import {inspectCapsule,compareCandidates} from './vendor/manager/site/assets/successor/model.mjs';
+import {inspectCapsule,compareCandidates,recordPlan,exportCapsule} from './vendor/manager/site/assets/successor/model.mjs';
 import {SuccessorController} from './controller.mjs';
 import {inspectSidecar,exportSidecar,restoreSidecar} from './sidecar.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -19,12 +19,12 @@ async function studio(role='agent'){
   return {...await import(pathToFileURL(path.join(app,'src/studio.mjs'))),...await import(pathToFileURL(path.join(app,'src/artifacts.mjs')))};
 }
 try{
-  if(command==='request'&&args.length===3){const value={schema:REQUEST,capsule:read(args[0]),plan:parseStrict(read(args[1]))};await inspectRequest(value);write(args[2],value);}
+  if(command==='request'&&args.length===3){const value={schema:REQUEST,capsule:read(args[0]),plan:parseStrict(read(args[1]))};const {state,inspected}=await inspectRequest(value);if(!state.plans.some(p=>p.commitment===value.plan.commitment))value.capsule=await exportCapsule(await recordPlan(state,value.plan),inspected.capsule.payload.sourceManifest);write(args[2],value);}
   else if(command==='compile-request'&&args.length===3)write(args[2],(await compileRequest(parseStrict(read(args[0]),6000000),parseStrict(read(args[1])))).compiled);
   else if(command==='inspect-request'&&args.length===1){const r=await inspectRequest(read(args[0]));console.log(JSON.stringify({project:r.project,revision:r.revision,requestSha256:r.requestSha256,goal:r.request.plan.goal,authority:'none'},null,2));}
   else if(command==='compare'&&args.length===2){const {capsule}=await inspectCapsule(read(args[0])),s=capsule.payload.state;const before=s.candidates.find(c=>c.id===s.active),after=s.candidates.find(c=>c.id===args[1]);fail(before&&after,'CANDIDATE_REQUIRED');console.log(JSON.stringify(compareCandidates(before,after),null,2));}
   else if(command==='check-result'&&args.length===4){const req=parseStrict(read(args[0]),6000000),agent=parseStrict(read(args[1],96000000),96000000),node=parseStrict(read(args[2],96000000),96000000);const checked=await checkReturnedWork(req,agent.handoff??agent,node.receipt??node,await studio());write(args[3],checked.capsule);const {capsule,...summary}=checked;console.log(JSON.stringify(summary,null,2));}
-  else if(command==='inspect-pack'&&args.length===1)console.log(JSON.stringify(inspectSidecar(args[0]),null,2));
+  else if(command==='inspect-pack'&&args.length===1)console.log(JSON.stringify(await inspectSidecar(args[0]),null,2));
   else if(command==='restore-pack'&&args.length>=2)console.log(JSON.stringify(await restoreSidecar(args[0],args[1],args[2]==='--confirm'),null,2));
   else if(command==='export-pack'&&args.length===4){const handoff=parseStrict(read(args[1],96000000),96000000),receipt=parseStrict(read(args[2],96000000),96000000);console.log(JSON.stringify(await exportSidecar(args[3],read(args[0]),handoff.handoff??handoff,receipt.receipt??receipt,await studio()),null,2));}
   else if(['execute','review','result','stop'].includes(command)){

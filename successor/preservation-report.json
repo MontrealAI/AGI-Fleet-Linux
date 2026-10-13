@@ -104,7 +104,7 @@
     {
       "path": "engineering/next-release.json",
       "before": "d58742455c297f27a00b9c8330bd6186df4003baa966eb42929eedd452ef4871",
-      "after": "34ec54c2c052372fe266c66170df6f2f3168d22b3e3a71ae95cf36a3c80603f6",
+      "after": "599762e377991c6ad41b93348235b5582874db0dab1428ea925468f10cedfed0",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -1232,7 +1232,7 @@
     {
       "path": "fleet/source-inventory.json",
       "before": "5955175faeb7bea6fc9623e59d6621247a4f258597e725e658600c011cf9ed68",
-      "after": "7b8d00b9a7de534445b720b1e2066a69c7ac2bff11c8534fe7886aa264ce5d52",
+      "after": "2fd4c3e5665b76bb724a03ea791af5beea467db53c17bceecb365c5086a004f4",
       "reason": "Regenerate exact source and role-copy integrity records; no qualification inferred."
     },
     {
@@ -1244,7 +1244,7 @@
     {
       "path": "macos/preview/source-inventory.json",
       "before": "3d1b27886fec89aa8afed9a9fa34a82c18af79be49cce2e39b5f377e2ea34521",
-      "after": "9c7ca7d5c67b1813b7056beb5fe5b61eb9acfdcda900ba824c380fc3c8b55028",
+      "after": "7ac3e8b3c13a8532ed514be8657f65aadb5c2f1c93b7d34c14512e0dfc0a2e56",
       "reason": "Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification."
     },
     {

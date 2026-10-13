@@ -1,7 +1,7 @@
 import {createRequire} from 'node:module';
 import {validateReceiptBinding} from './receipt.mjs';
 import {fail, keys, canonical, parseStrict, sha256} from './vendor/manager/site/assets/successor/safe.mjs';
-import {inspectCapsule, runCandidate, exportCapsule, compareCandidates} from './vendor/manager/site/assets/successor/model.mjs';
+import {inspectCapsule, freezeCandidate, runCandidate, exportCapsule, compareCandidates} from './vendor/manager/site/assets/successor/model.mjs';
 import {validateImprovement} from './vendor/manager/site/assets/successor/jobs.mjs';
 import {checkArtifacts} from './vendor/manager/site/assets/successor/checker.mjs';
 import {compileComputerWork} from './vendor/manager/scripts/successor/adapter.mjs';
@@ -24,6 +24,25 @@ export async function compileRequest(value,context,now=Math.floor(Date.now()/100
   const inspected=await inspectRequest(value);
   const compiled=await compileComputerWork(inspected.request.plan,context,now);
   return {...inspected,compiled};
+}
+
+export async function validateSidecarProject(capsule,handoff,files) {
+  const inspected=await inspectCapsule(capsule),state=inspected.capsule.payload.state,spec=handoff.specification;
+  fail(spec.profile==='computer-work/v2','FLEET_SIDECAR_PROJECT_PROFILE');
+  computer.validateComputerWork(spec);
+  const plan=state.plans.find(p=>p.commitment===spec.coordination.parentSpecSha256);
+  fail(plan&&plan.missionSha256===await sha256(state.mission),'FLEET_SIDECAR_PROJECT_PLAN');
+  fail(plan.candidateSha256===null?state.mission.kind==='custom':state.candidates.some(c=>c.id===plan.candidateSha256),'FLEET_SIDECAR_PROJECT_INCUMBENT');
+  fail(spec.title===plan.draft.fields.title.slice(0,160)&&spec.prompt===plan.goal&&spec.inputs.length===plan.immutableInputs.length,'FLEET_SIDECAR_PROJECT_SCOPE');
+  for(let i=0;i<spec.inputs.length;i++){const input=spec.inputs[i],expected=plan.immutableInputs[i];fail(input.name===expected.name&&input.sha256===expected.sha256&&input.maxBytes===Buffer.byteLength(expected.content),'FLEET_SIDECAR_PROJECT_INPUT');}
+  // Custom work retains format-checked historical evidence only. It cannot
+  // create a locally checked candidate or inherit operating authority.
+  if(state.mission.kind==='custom')return;
+  const source=inspected.capsule.payload.sourceManifest;fail(source?.engineSha256,'FLEET_SOURCE_REQUIRED');
+  const matches=c=>c&&files.size===c.files.length+1&&files.has('checker-results.json')&&c.files.every(f=>files.get(f.name)?.equals(Buffer.from(f.content)));
+  if(matches(state.candidates.find(c=>c.id===plan.candidateSha256)))return;
+  const improved=await freezeCandidate(state.mission,'improved',source.engineSha256);
+  fail(matches(improved),'FLEET_SIDECAR_PROJECT_ARTIFACTS');
 }
 
 export async function checkReturnedWork(request,handoff,receipt,studioAPI) {
