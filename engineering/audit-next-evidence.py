@@ -149,9 +149,12 @@ def audit_integration(directory, candidate, archive_receipt, extraction):
     auditor = adapt_baseline('audit-job-evidence.py', {
         (str, '1.0.9'): candidate['version'], (int, 4816): candidate['sourceFiles'],
         (int, 57853): archive_receipt['manifestEntriesVerified'],
+        (str, '1.13.0'): candidate['integration']['version'],
+        (int, 777): candidate['integration']['managerTests'],
         (str, 'fleet/packages/AGI_Agent/contract'): candidate['prefix'] + '/packages/AGI_Agent/contract',
     }, extra_expected_files=('candidate-binding.json',))
     auditor.SHA256, auditor.SIZE, auditor.ROOT = candidate['sha256'], candidate['bytes'], extraction
+    auditor.runner.MANAGER_BASELINE = candidate['integration']['commit']
     return auditor.audit_run(directory, report['runtime']['architecture'], report['workflowRun'], report['workflowCommit'])
 
 
@@ -180,6 +183,7 @@ def audit(archive_path, candidate, native, integration, workflow_commit=None, wo
             'version': candidate['version'], 'releaseSHA256': candidate['sha256'],
             'sourceRevisionSHA256': candidate['sourceRevisionSHA256'], 'workflowCommit': commit, 'workflowRun': run_id,
             'architectures': ['x64', 'arm64'], 'native': native_runs, 'integration': integration_runs,
+            'integrationTarget': candidate['integration'],
             'verifiedTapLogs': sum(run['runs'][scope]['verifiedLogs'] for run in native_runs for scope in ('targeted', 'complete')),
             'verifiedIntegrationLogs': sum(run['verifiedLogs'] for run in integration_runs),
             'productionQualified': False, 'physicalQualification': 'NOT_RUN'}

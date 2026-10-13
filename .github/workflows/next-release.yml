@@ -1,4 +1,4 @@
-name: Linux 1.0.10 release qualification
+name: Linux 1.0.11 release qualification
 on:
   pull_request:
     paths: ['fleet/**', 'docs/**', 'engineering/**', '.github/workflows/next-release.yml']
@@ -47,6 +47,7 @@ jobs:
       - name: Build and validate the deterministic saved archive
         run: python3 engineering/build-next-release.py --output "$RUNNER_TEMP/candidate-dist"
       - name: Retain exact candidate and packaging evidence
+        if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         with:
           name: linux-next-candidate
@@ -77,7 +78,7 @@ jobs:
           set -euo pipefail
           sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY,GITHUB_RUN_ID,GITHUB_SHA python3 engineering/run-next-native.py \
             --metadata "$GITHUB_WORKSPACE/release/release.json" \
-            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.0.10.zip" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.0.11.zip" \
             --work "/root/agi-next-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             --evidence "$GITHUB_WORKSPACE/native-evidence"
       - name: Preserve evidence ownership
@@ -109,7 +110,7 @@ jobs:
         run: |
           python3 engineering/run-next-integration.py \
             --metadata "$GITHUB_WORKSPACE/release/release.json" \
-            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.0.10.zip" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.0.11.zip" \
             --work "$RUNNER_TEMP/agi-integration-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             --evidence "$GITHUB_WORKSPACE/integration-evidence"
       - name: Retain all integration evidence
@@ -135,7 +136,7 @@ jobs:
       - name: Independently audit source-bound results
         run: |
           python3 engineering/audit-next-evidence.py \
-            --metadata release/release.json --archive release/AGI_Fleet_Linux_v1.0.10.zip \
+            --metadata release/release.json --archive release/AGI_Fleet_Linux_v1.0.11.zip \
             --native evidence/next-native-x64 --native evidence/next-native-arm64 \
             --integration evidence/next-integration-x64 --integration evidence/next-integration-arm64 \
             --out evidence/audit.json

@@ -366,6 +366,15 @@ def build(args):
     run('metadata', [sys.executable, str(root / 'scripts/prepare-release.py'), '--root', str(root), 'metadata',
                      '--baseline', str(archive.resolve()), '--epoch', str(epoch), '--validation', str(validation_path)])
     regenerated = json.loads((root / 'source-inventory.json').read_text())
+    if regenerated['files'] != source_inventory['files']:
+        expected = {row['path']: row for row in source_inventory['files']}
+        observed = {row['path']: row for row in regenerated['files']}
+        write_json(out / 'source-inventory-differences.json', {
+            'status': 'FAIL', 'expectedRevisionSHA256': source_inventory['revisionSHA256'],
+            'observedRevisionSHA256': regenerated['revisionSHA256'],
+            'differences': [{'path': name, 'expected': expected.get(name), 'observed': observed.get(name)}
+                            for name in sorted(expected.keys() | observed.keys())
+                            if expected.get(name) != observed.get(name)]})
     require(regenerated['files'] == source_inventory['files']
             and regenerated['revisionSHA256'] == source_inventory['revisionSHA256'],
             'Materialized source inventory differs from the reviewed mirror')
@@ -385,7 +394,7 @@ def build(args):
               'archiveVerification': verified, 'finalExtractedGate': gate,
               'nativeAcceptance': 'NOT_RUN', 'operatorGate': 'CLOSED_PENDING_NATIVE_ACCEPTANCE',
               'productionQualified': False, 'physicalQualification': validation['external']}
-    for key in ['native', 'counts', 'targetedFiles', 'targetedTests', 'completeFiles', 'completeTests']:
+    for key in ['native', 'integration', 'counts', 'targetedFiles', 'targetedTests', 'completeFiles', 'completeTests']:
         if key in specification:
             result[key] = specification[key]
     write_json(out / 'release.json', result)

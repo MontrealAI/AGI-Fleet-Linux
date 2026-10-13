@@ -9,7 +9,7 @@ This separate development preview brings the current Linux source preview's usef
 
 The native engine remains the original Mac implementation, using the signed OpenClaw Mac app and its approved paired provider. No Linux X11 engine, systemd service or Linux package installer is substituted. The Studio and job composer reuse the current shared implementations.
 
-The generated copy uses the current frozen **Linux 1.0.10 source** plus the reviewed Mac runtime overlay and these preview additions. The reused Linux Studio/composer preview records a historical **1.0.9** basis; `reusedPreviewHistoricalBasis` preserves that provenance separately from `materializedSourceBasis`. The Mac 1.20.1 distribution also derives from Linux 1.0.10, but this generated source tree is a different, unqualified artifact with no bundled dependencies.
+The generated copy uses the reviewed **Linux 1.0.11 candidate source** plus the reviewed Mac runtime overlay and these preview additions. The reused Linux Studio/composer preview records a historical **1.0.9** basis; `reusedPreviewHistoricalBasis` preserves that provenance separately from `materializedSourceBasis`. Published Mac 1.20.1 and 1.20.2 distributions derive from Linux 1.0.10; their immutable source and acceptance remain unchanged. This generated source tree is a different, unqualified artifact with no bundled dependencies.
 
 ## Prepare a separate developer copy
 

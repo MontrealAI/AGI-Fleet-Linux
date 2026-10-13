@@ -1,6 +1,6 @@
 {
   "schema": "agi-source-inventory/v1",
-  "revisionSHA256": "ba5d4b30cc7b02d60e7211a3201ad74129dce0056d64655a222c4fe08e699ba7",
+  "revisionSHA256": "8911ff0ef1f6f3e31260ed0ee04779a31652b8d725627dd04715663419a056e2",
   "definition": "SHA256 of compact sorted-key JSON files array. Excludes docs/evidence/dependencies/historical folders/generated release metadata/root prose; complete file bytes are in MANIFEST.sha256.",
   "files": [
     {
@@ -210,12 +210,12 @@
     },
     {
       "path": "config/companion-releases.json",
-      "sha256": "6b2e8f6827c3eb16ab7b646689d42d142bfb7f87a7bd181adbc592b180c0503f",
+      "sha256": "9f4d0a48f3570c68ed2e5a0d10927d9cf11fa37fdc9343eac576e6764235d180",
       "executable": false
     },
     {
       "path": "config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -385,17 +385,17 @@
     },
     {
       "path": "package-lock.json",
-      "sha256": "8d9c5eae7823dae22e79a9112bf3c47919342e04e0acea8c04da222285cdf4ff",
+      "sha256": "5e36028a8f0149a285d9f8c2e9aa3d33ba0903657638d9375dc1fd1e76ff78b0",
       "executable": false
     },
     {
       "path": "package.json",
-      "sha256": "342440537a8eaa44bde4cb9cab13a278ce31582eed8285811eb1c2ba561bd7c8",
+      "sha256": "96b7f7e1b7d93c4445fe519f8af4d7d4eddaee52fd94f8c3464134af379dd329",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/AGI Agent.app/Contents/Info.plist",
-      "sha256": "72ad7bbc7295711aa5c8a9377a2e9e1c721ddf70379cdc744375bd7f544b9446",
+      "sha256": "2ff390e265496c22847e726c9f218d862e5ff649b8515b75150c2a04fbc568af",
       "executable": false
     },
     {
@@ -515,12 +515,12 @@
     },
     {
       "path": "packages/AGI_Agent/Linux-Guide.html",
-      "sha256": "d05e7aa67363580cbefd1956f650d9e94e21542195b8153466d7c09fa9db6f3a",
+      "sha256": "1acb96623b927b22a226887f71c32d63495bd016a6983862f08528cfa6883dd0",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/Linux-Guide.txt",
-      "sha256": "8bdef4f7d66d2ffd0928661977454ceca1cd39ad4b6e3030f6f491da760ba91b",
+      "sha256": "7a78c8dd0ddf8a57eede4da229c7ae28dc1b2992fde54bfc5b1aec83e4e49e44",
       "executable": false
     },
     {
@@ -550,17 +550,17 @@
     },
     {
       "path": "packages/AGI_Agent/README.html",
-      "sha256": "d05e7aa67363580cbefd1956f650d9e94e21542195b8153466d7c09fa9db6f3a",
+      "sha256": "1acb96623b927b22a226887f71c32d63495bd016a6983862f08528cfa6883dd0",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/README.md",
-      "sha256": "7ebc803d5bd5239016812bc49ef2d524274d040209f25d4e84ddd54ba3454b4e",
+      "sha256": "08717cb328dd01e17a26d96124472794625526221d322c1adb45da8378c292ae",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/READ_ME_FIRST.txt",
-      "sha256": "db1865c2567fc3c4291f4a158890190cc876cb470dea8dc3f6b21b0e5f8f248d",
+      "sha256": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
       "executable": false
     },
     {
@@ -610,12 +610,12 @@
     },
     {
       "path": "packages/AGI_Agent/START_HERE.html",
-      "sha256": "d05e7aa67363580cbefd1956f650d9e94e21542195b8153466d7c09fa9db6f3a",
+      "sha256": "1acb96623b927b22a226887f71c32d63495bd016a6983862f08528cfa6883dd0",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/START_HERE.md",
-      "sha256": "7ebc803d5bd5239016812bc49ef2d524274d040209f25d4e84ddd54ba3454b4e",
+      "sha256": "08717cb328dd01e17a26d96124472794625526221d322c1adb45da8378c292ae",
       "executable": false
     },
     {
@@ -690,7 +690,7 @@
     },
     {
       "path": "packages/AGI_Agent/app/index.html",
-      "sha256": "e0a15f926973c331667fce7fbf2f59782e8075c315f1297d9e7419dee2ae85ec",
+      "sha256": "88115e028b621137c79ed370ccaa5eb9854329eefcb32e739bb92448313add82",
       "executable": false
     },
     {
@@ -1370,7 +1370,7 @@
     },
     {
       "path": "packages/AGI_Agent/config/companion-releases.json",
-      "sha256": "14d23ce46432f9cf9e7ce1db4290ee7d7d6590dcd8cf334f7e46cb7d49c6e994",
+      "sha256": "e09ebcb6a0dc0ed4ef3ed45b133f942895a7609ee43cfcb0dfd3ce9856ba3fea",
       "executable": false
     },
     {
@@ -1625,12 +1625,12 @@
     },
     {
       "path": "packages/AGI_Agent/package-lock.json",
-      "sha256": "93489b98b189518be4892700cf2143a44f1b9b20ef396dfc1222c5306a5474fb",
+      "sha256": "3bb247fb4493a7d2172b6518c2eedcf2e9eacdbf5f678defd5e53b0bab075df1",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/package.json",
-      "sha256": "ba3cd4fd427c2ae6b82fde10030586c20c097cbf8070447008969740f9db6721",
+      "sha256": "99ae1db8bb1465fed11cb71919f9a0bbc787d8a0174545c56506b327690d1c79",
       "executable": false
     },
     {
@@ -3815,7 +3815,7 @@
     },
     {
       "path": "packages/AGI_Employer/AGI Employer.app/Contents/Info.plist",
-      "sha256": "295b979d7fa3274b3d3dd80450f19dd00184cd1fb721794b09fd74890b93f938",
+      "sha256": "7c168e44f8fb33857010f08358d30901ad87705d22738c2ab74883baec539f48",
       "executable": false
     },
     {
@@ -3890,12 +3890,12 @@
     },
     {
       "path": "packages/AGI_Employer/Linux-Guide.html",
-      "sha256": "bf1da8074243ee4cfd165035014f4c6f75f5bca3695f00d349b69476b463736e",
+      "sha256": "21e0cf3baac9396c5e32cf3aa136f9195a5cde5cddf938e0c8b6c57f638b1130",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/Linux-Guide.txt",
-      "sha256": "fcd3531b480381b90825aa0adcac958b8dfd1f44ffe3cbe05e235a60b58de057",
+      "sha256": "298b5ef77115c3fe26baad6038e08e1aa45f9dc7af179d04cd63dc7ff953ef1a",
       "executable": false
     },
     {
@@ -3920,17 +3920,17 @@
     },
     {
       "path": "packages/AGI_Employer/README.html",
-      "sha256": "bf1da8074243ee4cfd165035014f4c6f75f5bca3695f00d349b69476b463736e",
+      "sha256": "21e0cf3baac9396c5e32cf3aa136f9195a5cde5cddf938e0c8b6c57f638b1130",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/README.md",
-      "sha256": "7541aad64c5f3e96d39cd2b52f0d2fd093100d357a4f9d5dbbc5db85fc28fb90",
+      "sha256": "a03575392d9b319cf29b7e4b084d63307a7ac3721814d75b09a8b96b82bd9d45",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/READ_ME_FIRST.txt",
-      "sha256": "db1865c2567fc3c4291f4a158890190cc876cb470dea8dc3f6b21b0e5f8f248d",
+      "sha256": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
       "executable": false
     },
     {
@@ -3960,12 +3960,12 @@
     },
     {
       "path": "packages/AGI_Employer/START_HERE.html",
-      "sha256": "bf1da8074243ee4cfd165035014f4c6f75f5bca3695f00d349b69476b463736e",
+      "sha256": "21e0cf3baac9396c5e32cf3aa136f9195a5cde5cddf938e0c8b6c57f638b1130",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/START_HERE.md",
-      "sha256": "7541aad64c5f3e96d39cd2b52f0d2fd093100d357a4f9d5dbbc5db85fc28fb90",
+      "sha256": "a03575392d9b319cf29b7e4b084d63307a7ac3721814d75b09a8b96b82bd9d45",
       "executable": false
     },
     {
@@ -4645,7 +4645,7 @@
     },
     {
       "path": "packages/AGI_Employer/config/companion-releases.json",
-      "sha256": "8347d90e8e43b2445124e97036e510fc268b612189dae92af5020bf8fcd9de84",
+      "sha256": "7b416b9b2eb3dd0cace6009c9891f6cd9ef2ac12d8f874e565e336242c5dbce9",
       "executable": false
     },
     {
@@ -4655,7 +4655,7 @@
     },
     {
       "path": "packages/AGI_Employer/config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -4840,12 +4840,12 @@
     },
     {
       "path": "packages/AGI_Employer/package-lock.json",
-      "sha256": "81762798ca75be0dce70c1324f87529d9a38e89a1ab3544aeb6f7b18e8edac72",
+      "sha256": "894fb125a5287d978986393bc8d08229d2a34ef69ffa289616818d496ae1dd8b",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/package.json",
-      "sha256": "5e2f53e744f5361ddc23454a6347d63ac727069134a206deffea2da057007c8b",
+      "sha256": "50cb7d7d7fe8567fa11bf583271cd301a793bb1e564d2185e6d4eab070a2e355",
       "executable": false
     },
     {
@@ -7475,7 +7475,7 @@
     },
     {
       "path": "packages/AGI_Employer/web/index.html",
-      "sha256": "81cb3771355c2cb4557942a9cf50e0f8ca51131b1b13852de917a48c2acae7ce",
+      "sha256": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
       "executable": false
     },
     {
@@ -7575,7 +7575,7 @@
     },
     {
       "path": "packages/AGI_Evidence/AGI Evidence.app/Contents/Info.plist",
-      "sha256": "49bbdf603cbe2a3080e3b1941f0325ceac1f8c9e19be6cfbe90b53bf2b8a9fc1",
+      "sha256": "331e280bc2c2326086de6d11ab598d14d2687dbaf5a9f0666500dadb57214d78",
       "executable": false
     },
     {
@@ -7645,12 +7645,12 @@
     },
     {
       "path": "packages/AGI_Evidence/Linux-Guide.html",
-      "sha256": "c3d57764a614f7df65d16fd92cd0afb6f4f5fb6b0cb9a0f77c8c2f9ce31646e5",
+      "sha256": "af1aafbe5f58c453c5dc92f43f15914b6015a64919e88daa06348ce10c3805c2",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/Linux-Guide.txt",
-      "sha256": "74fcd77a7a4f3dcf1d3232af06f865ee2734d2d012e3c0c6d5e619f09618bc5b",
+      "sha256": "b762f413d5c247f178fbe078b2d0b630abba34a9f3847383da677043e1e021d7",
       "executable": false
     },
     {
@@ -7675,17 +7675,17 @@
     },
     {
       "path": "packages/AGI_Evidence/README.html",
-      "sha256": "c3d57764a614f7df65d16fd92cd0afb6f4f5fb6b0cb9a0f77c8c2f9ce31646e5",
+      "sha256": "af1aafbe5f58c453c5dc92f43f15914b6015a64919e88daa06348ce10c3805c2",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/README.md",
-      "sha256": "59a0a8aaca41d738ce361794f9c3f25c6b2bfa751e45cd87229b3ecc8773e3c9",
+      "sha256": "39ecb8cac56d63d58f084ddbc6fa9ac79deceb2161add6aa3defb25dcc5b7b78",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/READ_ME_FIRST.txt",
-      "sha256": "db1865c2567fc3c4291f4a158890190cc876cb470dea8dc3f6b21b0e5f8f248d",
+      "sha256": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
       "executable": false
     },
     {
@@ -7715,12 +7715,12 @@
     },
     {
       "path": "packages/AGI_Evidence/START_HERE.html",
-      "sha256": "c3d57764a614f7df65d16fd92cd0afb6f4f5fb6b0cb9a0f77c8c2f9ce31646e5",
+      "sha256": "af1aafbe5f58c453c5dc92f43f15914b6015a64919e88daa06348ce10c3805c2",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/START_HERE.md",
-      "sha256": "59a0a8aaca41d738ce361794f9c3f25c6b2bfa751e45cd87229b3ecc8773e3c9",
+      "sha256": "39ecb8cac56d63d58f084ddbc6fa9ac79deceb2161add6aa3defb25dcc5b7b78",
       "executable": false
     },
     {
@@ -8400,7 +8400,7 @@
     },
     {
       "path": "packages/AGI_Evidence/config/companion-releases.json",
-      "sha256": "53561bf4fa8f6c5a7589344dd876f7d080d94a7f77d4b064f84e886b6b12c9cb",
+      "sha256": "0d9a3be9f13de986e3ca9f21612c868b7653475c021ae8c677d988dc0aeb303e",
       "executable": false
     },
     {
@@ -8410,7 +8410,7 @@
     },
     {
       "path": "packages/AGI_Evidence/config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -8595,12 +8595,12 @@
     },
     {
       "path": "packages/AGI_Evidence/package-lock.json",
-      "sha256": "3fc0397600e48e99269e132df18f933a63ad17c32cf9a81b2062687d96f79abf",
+      "sha256": "677efeab60af8c8ffbfb9cf4527490842eacdb0299f24b327e0f6b8ac9598c20",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/package.json",
-      "sha256": "9c4c3a7c95f58d7c8e40927250461ef8e747f80d982fa2f3075e1db327df219b",
+      "sha256": "8d92e523dc89e4adaf1ce798c0fd7ded77656604ff1d6ba20ddbcf086f15f631",
       "executable": false
     },
     {
@@ -11230,7 +11230,7 @@
     },
     {
       "path": "packages/AGI_Evidence/web/index.html",
-      "sha256": "81cb3771355c2cb4557942a9cf50e0f8ca51131b1b13852de917a48c2acae7ce",
+      "sha256": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
       "executable": false
     },
     {
@@ -11330,7 +11330,7 @@
     },
     {
       "path": "packages/AGI_Moderator/AGI Moderator.app/Contents/Info.plist",
-      "sha256": "d9a3a763a3d8aefbfdd821488db9b73aa2855d72a31992a0e7cae21c82e8a4ae",
+      "sha256": "49aaa7251c39fa929a8f28e0f88d1ba9d313fb7d919e941319501df5fd3825a0",
       "executable": false
     },
     {
@@ -11405,12 +11405,12 @@
     },
     {
       "path": "packages/AGI_Moderator/Linux-Guide.html",
-      "sha256": "b9d4d197fa2c19ae1c7e648282486ad10c3a1e66663d99e433d639c6ab8d7184",
+      "sha256": "ebfcb64815a4f282d47dc06d553e603c2f81079d6f7c69b0c41429f5a2c8ba37",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/Linux-Guide.txt",
-      "sha256": "c8a0d89ae9541487b05b9c2af6d622279e2241a790dc5eca31b37e1fccd14d13",
+      "sha256": "a9636aec7f412251bb9ab31a966b52406091de52754ba902d2d24fa2ad0d9630",
       "executable": false
     },
     {
@@ -11435,17 +11435,17 @@
     },
     {
       "path": "packages/AGI_Moderator/README.html",
-      "sha256": "b9d4d197fa2c19ae1c7e648282486ad10c3a1e66663d99e433d639c6ab8d7184",
+      "sha256": "ebfcb64815a4f282d47dc06d553e603c2f81079d6f7c69b0c41429f5a2c8ba37",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/README.md",
-      "sha256": "a2371a5ddcaf4b936a8ef102241f97beb1bc5905eeb0c953f02d00e79bd949cf",
+      "sha256": "1afc6d976500d3d997c18b87d044448a6745f397738ff16f501fcbabb5e2ba04",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/READ_ME_FIRST.txt",
-      "sha256": "db1865c2567fc3c4291f4a158890190cc876cb470dea8dc3f6b21b0e5f8f248d",
+      "sha256": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
       "executable": false
     },
     {
@@ -11475,12 +11475,12 @@
     },
     {
       "path": "packages/AGI_Moderator/START_HERE.html",
-      "sha256": "b9d4d197fa2c19ae1c7e648282486ad10c3a1e66663d99e433d639c6ab8d7184",
+      "sha256": "ebfcb64815a4f282d47dc06d553e603c2f81079d6f7c69b0c41429f5a2c8ba37",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/START_HERE.md",
-      "sha256": "a2371a5ddcaf4b936a8ef102241f97beb1bc5905eeb0c953f02d00e79bd949cf",
+      "sha256": "1afc6d976500d3d997c18b87d044448a6745f397738ff16f501fcbabb5e2ba04",
       "executable": false
     },
     {
@@ -12160,7 +12160,7 @@
     },
     {
       "path": "packages/AGI_Moderator/config/companion-releases.json",
-      "sha256": "49b80128e672b999aae8991f6e363f44d604eb149e1b787cebb4f9845ab2f794",
+      "sha256": "6d84d4137affc2513470bbfe4cd60b04c9221e64fc75f33b125409bf698e86ab",
       "executable": false
     },
     {
@@ -12170,7 +12170,7 @@
     },
     {
       "path": "packages/AGI_Moderator/config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -12355,12 +12355,12 @@
     },
     {
       "path": "packages/AGI_Moderator/package-lock.json",
-      "sha256": "0964d7c53c25268af9c439aa7357f0e4ea16e5790f03e77d36c85edca940920b",
+      "sha256": "fff4493bd30a4495b9c41730596e34ed78a154bc9e3ebba94b47427b6cb5305c",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/package.json",
-      "sha256": "9aa6977ec0f8f78ed7c27b885debe110ee8e7fd7c2bb361347f3ff130d07b623",
+      "sha256": "191d15e9be0796bad907bf470c25d4f0932d99fbb89fcd162f7ca5f0d14902df",
       "executable": false
     },
     {
@@ -14990,7 +14990,7 @@
     },
     {
       "path": "packages/AGI_Moderator/web/index.html",
-      "sha256": "81cb3771355c2cb4557942a9cf50e0f8ca51131b1b13852de917a48c2acae7ce",
+      "sha256": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
       "executable": false
     },
     {
@@ -15090,7 +15090,7 @@
     },
     {
       "path": "packages/AGI_Node/AGI Node.app/Contents/Info.plist",
-      "sha256": "1211ce961be18c8916ce0d246e1affd0f52487dcdcfbd030c8d1e4f85a2ea6e4",
+      "sha256": "bde7964a81ab9ee4a6a6ff83cdc3da717bca48481bfe2641dbe0c37daeebabcf",
       "executable": false
     },
     {
@@ -15225,12 +15225,12 @@
     },
     {
       "path": "packages/AGI_Node/Linux-Guide.html",
-      "sha256": "7d1179755f3bbb94a853df83eef33c79c78cd7608238b163464a4a270df26c11",
+      "sha256": "1d881788d028fa4c6bcd28f74b4e8218362991f6ee92e2c043375298b63c48bd",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/Linux-Guide.txt",
-      "sha256": "f9eeb071808fc0ebaf4efab667c270490c707657ddcb94f12f2d15a471d48232",
+      "sha256": "2654a3acd2eeaf43c312ec0fdfb8124f4cfff4996ea948281fbe7aeb88de41ea",
       "executable": false
     },
     {
@@ -15260,17 +15260,17 @@
     },
     {
       "path": "packages/AGI_Node/README.html",
-      "sha256": "7d1179755f3bbb94a853df83eef33c79c78cd7608238b163464a4a270df26c11",
+      "sha256": "1d881788d028fa4c6bcd28f74b4e8218362991f6ee92e2c043375298b63c48bd",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/README.md",
-      "sha256": "63fa3142ae4a9b52c41d8a6289841ce7a5fb0e871b27c10ac0cfef52114d81ed",
+      "sha256": "b3f62d6bdd72730ba91819a5baa014ea7d295d4bff8b6de93d1e2065e8a2d2f3",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/READ_ME_FIRST.txt",
-      "sha256": "db1865c2567fc3c4291f4a158890190cc876cb470dea8dc3f6b21b0e5f8f248d",
+      "sha256": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
       "executable": false
     },
     {
@@ -15320,12 +15320,12 @@
     },
     {
       "path": "packages/AGI_Node/START_HERE.html",
-      "sha256": "7d1179755f3bbb94a853df83eef33c79c78cd7608238b163464a4a270df26c11",
+      "sha256": "1d881788d028fa4c6bcd28f74b4e8218362991f6ee92e2c043375298b63c48bd",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/START_HERE.md",
-      "sha256": "63fa3142ae4a9b52c41d8a6289841ce7a5fb0e871b27c10ac0cfef52114d81ed",
+      "sha256": "b3f62d6bdd72730ba91819a5baa014ea7d295d4bff8b6de93d1e2065e8a2d2f3",
       "executable": false
     },
     {
@@ -15395,7 +15395,7 @@
     },
     {
       "path": "packages/AGI_Node/app/index.html",
-      "sha256": "c91d8ffba961104dbc99e52ba4d7d1a3771803fa6ef3f748df050a5e562ed93f",
+      "sha256": "6f7d868c6df881d3e2c78f633337c8736d7da236035c302d26b7cfea1b4e37dc",
       "executable": false
     },
     {
@@ -16075,7 +16075,7 @@
     },
     {
       "path": "packages/AGI_Node/config/companion-releases.json",
-      "sha256": "fb47eaee3db973bb15f7c8beb6224ade6217dd35ec3c3dc4e3ea62ee33befc67",
+      "sha256": "671420aba0de8b0da6b947b16cffe5d26da373cdd5dee3176f952c3e9b9dc384",
       "executable": false
     },
     {
@@ -16385,12 +16385,12 @@
     },
     {
       "path": "packages/AGI_Node/package-lock.json",
-      "sha256": "bf4e0399f90404155553fe2b4f102549219a33ebb4883f4b14f87578143bd641",
+      "sha256": "9ad7285292c20b42c4a4ccdb26e0d808703305aaddf3817b5c2a0bad516b55c8",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/package.json",
-      "sha256": "a697097f90e4cfb13074a3554ed4124b5789ccd3d6e3ab0ea072f15913dbd122",
+      "sha256": "8316328a25e335163c8007a444aca02f64b697771da6d82a235b077119cf2775",
       "executable": false
     },
     {
@@ -18630,7 +18630,7 @@
     },
     {
       "path": "packages/AGI_Recovery/AGI Recovery.app/Contents/Info.plist",
-      "sha256": "06ee5a7c39839e05ec4fed506544efff1e4c6ea99ba546bb26a0c07291a16e4b",
+      "sha256": "24994cedbd992ed94e2e5a1279f2c1bd3e8d82fa299b3acb08f249c1bb339129",
       "executable": false
     },
     {
@@ -18705,12 +18705,12 @@
     },
     {
       "path": "packages/AGI_Recovery/Linux-Guide.html",
-      "sha256": "0858cb6a0628feef3a97efe633f0f75172e529ae8502acd66caafbd9727e5c82",
+      "sha256": "00763c4192789917c06fc1625012c09ce722fc538a95a8b0425a5ad15ba5afc8",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/Linux-Guide.txt",
-      "sha256": "f6a83e539c1c7b514fc468b917f98a9fc5e3c30222a3e95cc721c3544c6885c0",
+      "sha256": "3fc9df2b547f47ba3b3862ecda8275cdde6e10ea01ccd795caf2b3aaa7fca3d6",
       "executable": false
     },
     {
@@ -18735,17 +18735,17 @@
     },
     {
       "path": "packages/AGI_Recovery/README.html",
-      "sha256": "0858cb6a0628feef3a97efe633f0f75172e529ae8502acd66caafbd9727e5c82",
+      "sha256": "00763c4192789917c06fc1625012c09ce722fc538a95a8b0425a5ad15ba5afc8",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/README.md",
-      "sha256": "7059618c83e3f6bb17620ff2223ea10fbde5870822357131c0e41496398a56e5",
+      "sha256": "8dbd50cd18005c3cff21723abb278d6d873b39a4dc4ddb9848538266c1c9b68c",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/READ_ME_FIRST.txt",
-      "sha256": "db1865c2567fc3c4291f4a158890190cc876cb470dea8dc3f6b21b0e5f8f248d",
+      "sha256": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
       "executable": false
     },
     {
@@ -18775,12 +18775,12 @@
     },
     {
       "path": "packages/AGI_Recovery/START_HERE.html",
-      "sha256": "0858cb6a0628feef3a97efe633f0f75172e529ae8502acd66caafbd9727e5c82",
+      "sha256": "00763c4192789917c06fc1625012c09ce722fc538a95a8b0425a5ad15ba5afc8",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/START_HERE.md",
-      "sha256": "7059618c83e3f6bb17620ff2223ea10fbde5870822357131c0e41496398a56e5",
+      "sha256": "8dbd50cd18005c3cff21723abb278d6d873b39a4dc4ddb9848538266c1c9b68c",
       "executable": false
     },
     {
@@ -19460,7 +19460,7 @@
     },
     {
       "path": "packages/AGI_Recovery/config/companion-releases.json",
-      "sha256": "5353f3f62afcb9d67d73c822fa70b4061e1efd95394bd03304882acd48819f0d",
+      "sha256": "6e604249fba0238acc60f3f713e24c196cdf141394681762fa9906410e93297e",
       "executable": false
     },
     {
@@ -19470,7 +19470,7 @@
     },
     {
       "path": "packages/AGI_Recovery/config/role-registry.json",
-      "sha256": "c83b6088578b2d53920038eef9ee0e51f23a9c122f6c861cfde9c5d65ea5b86d",
+      "sha256": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
       "executable": false
     },
     {
@@ -19655,12 +19655,12 @@
     },
     {
       "path": "packages/AGI_Recovery/package-lock.json",
-      "sha256": "218c215e0e611e7de2d8d5f115607271cb0bfcbadb3b4fd03a6fc1135a5a0fac",
+      "sha256": "9f9cbe00f2c98227ef3b71e784cccbb5acc0be6e3d6d615366e870914f80369c",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/package.json",
-      "sha256": "f7818ce89c9aad7b6ba7076681f2bbfcd93259338a2332b45ce2af6ffafb98eb",
+      "sha256": "e487140d41f703af9181505fb8b4b5b75f10908d653cd3dc229ef81261ee37a5",
       "executable": false
     },
     {
@@ -22290,7 +22290,7 @@
     },
     {
       "path": "packages/AGI_Recovery/web/index.html",
-      "sha256": "81cb3771355c2cb4557942a9cf50e0f8ca51131b1b13852de917a48c2acae7ce",
+      "sha256": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
       "executable": false
     },
     {
@@ -23985,7 +23985,7 @@
     },
     {
       "path": "web/index.html",
-      "sha256": "81cb3771355c2cb4557942a9cf50e0f8ca51131b1b13852de917a48c2acae7ce",
+      "sha256": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
       "executable": false
     },
     {

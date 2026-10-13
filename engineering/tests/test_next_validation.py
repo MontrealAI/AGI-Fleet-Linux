@@ -45,13 +45,13 @@ class CandidateAdapters(unittest.TestCase):
         self.assertEqual(len(bound.NATIVE_FILES), 25)
         self.assertEqual(before, {name: shared.sha(ENGINEERING / name) for name in shared.BASELINES})
 
-    def test_integration_binds_candidate_and_preserves_manager_baseline(self):
+    def test_integration_binds_candidate_and_exact_manager_target(self):
         bound = integration.bind_runner(candidate())
         self.assertEqual(bound.PREFIX, candidate()['prefix'])
         self.assertEqual(bound.SHA256, 'c' * 64)
-        self.assertIn('1.0.10', bound.main.__code__.co_consts)
+        self.assertIn('1.0.11', bound.main.__code__.co_consts)
         self.assertNotIn('1.0.9', bound.main.__code__.co_consts)
-        self.assertEqual(bound.MANAGER_BASELINE, '191cf3590e5cdc08df1bb0af500ee28a91c8b010')
+        self.assertEqual(bound.MANAGER_BASELINE, '3958cbc3b01aa459de16cf39e1ab0985b5fa56c3')
 
     def test_native_refuses_operator_environment_before_provisioning(self):
         with patch.dict(os.environ, {}, clear=True), self.assertRaisesRegex(ValueError, 'disposable'):
@@ -103,6 +103,9 @@ class CandidateIntegrationAudit(unittest.TestCase):
         self.report = json.loads((ENGINEERING / 'tests/fixtures/job-evidence-fixture.json').read_text())
         self.report['fleet'] = {key: self.candidate[key] for key in ('version', 'sha256', 'bytes')}
         self.report['archiveVerification'].update(sha256=self.candidate['sha256'], bytes=self.candidate['bytes'])
+        target = self.candidate['integration']
+        self.report['manager'].update(commit=target['commit'], requestedRef=target['commit'], version=target['version'])
+        self.report['managerRegression'] = {key: target['managerTests'] for key in ('collectedTests', 'executedTests', 'passedTests')}
         self.receipt = self.report['archiveVerification']
         self.extraction = self.root / 'release'; self.extraction.mkdir()
         (self.extraction / self.candidate['prefix']).symlink_to(ENGINEERING.parent / 'fleet', target_is_directory=True)

@@ -1,5 +1,7 @@
 # Fleet and AGIJobManager compatibility
 
+**Next release: Linux 1.0.11.** Its release workflow tests the exact new ZIP against AGIJobManager 1.15.0 at `3958cbc3b01aa459de16cf39e1ab0985b5fa56c3`, including all 780 Manager regressions on each architecture. The integration target is retained in build metadata and per-run evidence. Publication requires a fresh independent audit; the historical results below are not reused as new-release acceptance. See the [1.0.11 release scope](RELEASE_NOTES_1_0_11.md).
+
 Fleet executes jobs outside the contract. AGIJobManager holds USDC escrow, assigns a bonded Agent, records the completion URI, accepts bonded Node votes, enforces review deadlines, and settles or reserves deferred payments. A supported job requires explicit acceptance terms, a trusted buyer, authorized identities, adequate balances and budgets, and a verified contract deployment. Inference and publishing require configured, ready services.
 
 The engineering baseline is Linux 1.0.9 and AGIJobManager commit `191cf3590e5cdc08df1bb0af500ee28a91c8b010` (package 1.13.0). Fleet's older `v1.1.0` source label is retained as provenance. All 11 production Solidity sources, ABI, creation/runtime bytecode, library links and immutable byte offsets match the freshly compiled baseline. This check fails when production source or contract artifacts change; an old label alone does not prove compatibility with a future manager.

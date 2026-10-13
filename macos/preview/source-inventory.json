@@ -1,6 +1,6 @@
 {
   "schema": "agi-macos-preview-source-inventory/v1",
-  "sourceSha256": "fb079c067e59370078d42a1528fedb7c51f135b303d3770a37281efb3a754db9",
+  "sourceSha256": "c382b73e0ded27e7a2d7cbeed1bf73ca2fd86703ca3e4d6b010f8357041d63f4",
   "files": [
     {
       "path": ".github/workflows/macos-preview.yml",
@@ -9,8 +9,8 @@
     },
     {
       "path": "engineering/build-next-release.py",
-      "bytes": 25179,
-      "sha256": "ff198128d3f92b083de1dc5ace827b8da063b597b25a9d4e013aa65c41f94aa1"
+      "bytes": 25886,
+      "sha256": "1f4a132536813af8895a2ee94cb790064e015201ca9ea19c20839d9f9e2b23c9"
     },
     {
       "path": "engineering/check-workstation-preview.py",
@@ -19,8 +19,8 @@
     },
     {
       "path": "engineering/next-release.json",
-      "bytes": 509,
-      "sha256": "53fdd6538ac932aacb9a1244e4657afc147350a1a453d2f15c2a943c91d11e08"
+      "bytes": 743,
+      "sha256": "d58742455c297f27a00b9c8330bd6186df4003baa966eb42929eedd452ef4871"
     },
     {
       "path": "engineering/release_tools.py",
@@ -34,8 +34,8 @@
     },
     {
       "path": "macos/preview/README.md",
-      "bytes": 4454,
-      "sha256": "dda4e8013b64acc951edf7b67ca668886f8554c87c08e1fce68083761e455816"
+      "bytes": 4522,
+      "sha256": "6fba3b4ae48999c2f8e028174c92172a73831146b032f39d94edc20ff959cf17"
     },
     {
       "path": "macos/preview/STUDIO.md",
@@ -100,7 +100,7 @@
     {
       "path": "macos/preview/tests/test_materialize.py",
       "bytes": 7466,
-      "sha256": "4e5fc3bd291e60f82d937c88bb6b1ebfb5d28f5a21f4bcc50e43650dfea7134e"
+      "sha256": "088c84d793eca9f9db33b78953a5340b994568a1e8f6b7f7b5590f23423d1cca"
     },
     {
       "path": "macos/release.json",
