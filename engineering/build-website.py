@@ -4,6 +4,8 @@ import hashlib
 import html
 import json
 import re
+import subprocess
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -345,6 +347,16 @@ def build():
     mac, published = read_mac_release()
     (OUTPUT / 'mac-release.json').write_text(json.dumps({**mac, 'published': published}, indent=2) + '\n', encoding='utf-8')
     (OUTPUT / '.nojekyll').write_text('', encoding='utf-8')
+    with tempfile.TemporaryDirectory(prefix='fleet-successor-site-') as temporary:
+        subprocess.run(['node', str(ROOT / 'fleet/successor/build.mjs'), '--out', temporary], check=True)
+        for lang, name in [('en', 'successor.html'), ('fr', 'successor-fr.html')]:
+            (OUTPUT / name).write_bytes((Path(temporary) / f'My-SUCCESSOR-Omega-{lang}.html').read_bytes())
+    commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    identities = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(OUTPUT.iterdir())
+                  if p.is_file() and p.name not in ('build-info.json', '.nojekyll')}
+    (OUTPUT / 'build-info.json').write_text(json.dumps({'schema': 'agi-fleet-pages-build/v1', 'commit': commit,
+        'files': identities, 'builderUpstream': json.loads((ROOT / 'fleet/successor/vendor/manager-provenance.json').read_text())['commit'],
+        'productionQualified': False}, indent=2) + '\n')
     print(f"Built EN/FR GitHub Pages site for Mac and Linux {release['version']} in {OUTPUT}")
 
 

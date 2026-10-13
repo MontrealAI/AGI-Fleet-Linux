@@ -1,27 +1,27 @@
 {
   "schema": "agi-linux-next-release/v1",
-  "version": "1.0.11",
-  "tag": "v1.0.11-qualification",
-  "prefix": "AGI_Fleet_Linux_v1.0.11",
-  "name": "AGI_Fleet_Linux_v1.0.11.zip",
+  "version": "1.1.0",
+  "tag": "v1.1.0-qualification",
+  "prefix": "AGI_Fleet_Linux_v1.1.0",
+  "name": "AGI_Fleet_Linux_v1.1.0.zip",
   "sourceDateEpoch": 1791849600,
-  "sourceRevisionSHA256": "8911ff0ef1f6f3e31260ed0ee04779a31652b8d725627dd04715663419a056e2",
-  "sourceFiles": 4816,
+  "sourceRevisionSHA256": "284b7082c6c74bc2ca97e55990387b7969097208eacec75df943440280c1dd0f",
+  "sourceFiles": 5914,
   "native": {
     "targeted": {
       "tests": 291,
       "files": 25
     },
     "complete": {
-      "tests": 3898,
-      "files": 342
+      "tests": 3908,
+      "files": 343
     }
   },
   "productionQualified": false,
   "integration": {
     "repository": "MontrealAI/AGIJobManager",
-    "version": "1.15.0",
-    "commit": "3958cbc3b01aa459de16cf39e1ab0985b5fa56c3",
+    "version": "1.16.1",
+    "commit": "09d89fb22d52a8df194e8dd0a00beff9f7771d82",
     "managerTests": 780,
     "standaloneScripts": 8,
     "contractArtifacts": 11

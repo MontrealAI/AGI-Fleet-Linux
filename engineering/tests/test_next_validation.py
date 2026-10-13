@@ -49,9 +49,9 @@ class CandidateAdapters(unittest.TestCase):
         bound = integration.bind_runner(candidate())
         self.assertEqual(bound.PREFIX, candidate()['prefix'])
         self.assertEqual(bound.SHA256, 'c' * 64)
-        self.assertIn('1.0.11', bound.main.__code__.co_consts)
+        self.assertIn(candidate()['version'], bound.main.__code__.co_consts)
         self.assertNotIn('1.0.9', bound.main.__code__.co_consts)
-        self.assertEqual(bound.MANAGER_BASELINE, '3958cbc3b01aa459de16cf39e1ab0985b5fa56c3')
+        self.assertEqual(bound.MANAGER_BASELINE, candidate()['integration']['commit'])
 
     def test_native_refuses_operator_environment_before_provisioning(self):
         with patch.dict(os.environ, {}, clear=True), self.assertRaisesRegex(ValueError, 'disposable'):
@@ -102,7 +102,7 @@ class CandidateIntegrationAudit(unittest.TestCase):
         self.candidate = candidate()
         self.report = json.loads((ENGINEERING / 'tests/fixtures/job-evidence-fixture.json').read_text())
         self.report['fleet'] = {key: self.candidate[key] for key in ('version', 'sha256', 'bytes')}
-        self.report['archiveVerification'].update(sha256=self.candidate['sha256'], bytes=self.candidate['bytes'])
+        self.report['archiveVerification'].update(sha256=self.candidate['sha256'], bytes=self.candidate['bytes'], sourceFiles=self.candidate['sourceFiles'])
         target = self.candidate['integration']
         self.report['manager'].update(commit=target['commit'], requestedRef=target['commit'], version=target['version'])
         self.report['managerRegression'] = {key: target['managerTests'] for key in ('collectedTests', 'executedTests', 'passedTests')}
@@ -246,3 +246,39 @@ class CandidateNativeAudit(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class SuccessorBrowserAudit(unittest.TestCase):
+    def setUp(self):
+        temporary=tempfile.TemporaryDirectory();self.addCleanup(temporary.cleanup);self.root=Path(temporary.name);self.c=candidate();self.commit='a'*40;self.run='123'
+        self.screenshot=self.root/'actual-browser-work.png';self.screenshot.write_bytes(b'synthetic unit-test screenshot bytes')
+        self.record={'status':'PASS','archiveSHA256':self.c['sha256'],'sourceRevisionSHA256':self.c['sourceRevisionSHA256'],'workflowCommit':self.commit,'workflowRun':self.run,'actualBrowserEffects':True,'actualComputeWorker':True,'downloadedBytesChecked':True,'provider':'NOT_RUN_SIMULATED_PROVIDER_TRANSPORT','sandbox':'FIXTURE_NO_DOCKER_QUALIFICATION','independentController':'UNVERIFIED','authority':'none','screenshotSHA256':hashlib.sha256(self.screenshot.read_bytes()).hexdigest()}
+        self.record.update(authenticatedAgentDispatch=True,separatelyAuthorizedReview=True,explicitVersionChoice=True,freshOfflineRestoreAndRerun=True,selected='2'*64,candidate='2'*64)
+        self.journey={'schema':'agi-fleet/successor-browser-journey/v1','original':'1'*64,'returned':'2'*64,'selected':'2'*64,'inspectionRetainedIncumbent':True,'agentAuthorization':True,'separateReviewAuthorization':True,'authority':'none','payment':'unfunded','offline':[{'language':lang,'active':'2'*64,'artifactBytesEqual':True,'capsuleSHA256':'3'*64,'authority':'none'} for lang in ('en','fr')]}
+        self.save_journey()
+        self.save()
+    def save_journey(self):
+        save(self.root/'journey.json',self.journey)
+        self.record['journeySHA256']=hashlib.sha256((self.root/'journey.json').read_bytes()).hexdigest()
+    def save(self):save(self.root/'evidence.json',self.record)
+    def test_exact_archive_browser_evidence_is_accepted(self):
+        self.assertEqual(auditor.audit_successor(self.root,self.c,self.commit,self.run),self.record)
+    def test_relabelled_or_corrupted_browser_evidence_is_rejected(self):
+        for key,value in [('archiveSHA256','d'*64),('sourceRevisionSHA256','e'*64),('workflowCommit','f'*40),('workflowRun','124'),('provider','live-provider'),('authority','granted')]:
+            original=self.record[key];self.record[key]=value;self.save()
+            with self.subTest(key=key),self.assertRaises(ValueError):auditor.audit_successor(self.root,self.c,self.commit,self.run)
+            self.record[key]=original;self.save()
+        self.screenshot.write_bytes(b'changed')
+        with self.assertRaisesRegex(ValueError,'screenshot'):auditor.audit_successor(self.root,self.c,self.commit,self.run)
+    def test_incomplete_journey_cannot_qualify(self):
+        for key in ('authenticatedAgentDispatch','separatelyAuthorizedReview','explicitVersionChoice','freshOfflineRestoreAndRerun'):
+            self.record[key]=False;self.save()
+            with self.subTest(key=key),self.assertRaisesRegex(ValueError,'scope'):auditor.audit_successor(self.root,self.c,self.commit,self.run)
+            self.record[key]=True
+        self.save()
+        original=json.loads(json.dumps(self.journey))
+        for change in (lambda j:j.update(selected=j['original']),lambda j:j.update(agentAuthorization=False),lambda j:j.update(offline=j['offline'][:1]),lambda j:j['offline'][1].update(artifactBytesEqual=False),lambda j:j['offline'][0].update(active='4'*64)):
+            self.journey=json.loads(json.dumps(original));change(self.journey);self.save_journey();self.save()
+            with self.assertRaises(ValueError):auditor.audit_successor(self.root,self.c,self.commit,self.run)
+    def test_changed_journey_bytes_cannot_qualify(self):
+        (self.root/'journey.json').write_text('{}')
+        with self.assertRaisesRegex(ValueError,'journey evidence'):auditor.audit_successor(self.root,self.c,self.commit,self.run)

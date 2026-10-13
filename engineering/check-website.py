@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import hashlib
 from html.parser import HTMLParser
 import importlib.util
 import json
@@ -11,6 +12,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {'index.html', 'fr.html', 'start.html', 'start-fr.html', 'mac.html', 'mac-fr.html', 'styles.css',
             'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'release.json', 'mac-release.json', 'install-mac.html', 'install-mac-fr.html', 'mac-setup.css', 'mac-setup.js'}
+REQUIRED |= {'successor.html', 'successor-fr.html', 'build-info.json'}
 ALLOWED = REQUIRED | {'.nojekyll', '404.html'}
 PROJECT_PATH = '/AGI-Fleet-Linux/'
 REPOSITORY_PATH = '/MontrealAI/AGI-Fleet-Linux/'
@@ -46,7 +48,10 @@ class Page(HTMLParser):
             self.h1 += 1
         if tag == 'img' and 'alt' not in attrs:
             self.errors.append(f'{self.path.name}: image has no alt attribute')
-        if tag in {'base', 'iframe', 'object', 'embed', 'form'}:
+        builder = self.path.name in {'successor.html', 'successor-fr.html'}
+        safe_form = builder and tag == 'form' and attrs.get('id') == 'mission-form' and not attrs.get('action')
+        safe_preview = builder and tag == 'iframe' and attrs.get('id') == 'preview' and attrs.get('sandbox') == '' and not attrs.get('src') and not attrs.get('srcdoc')
+        if tag in {'base', 'iframe', 'object', 'embed', 'form'} and not (safe_form or safe_preview):
             self.errors.append(f'{self.path.name}: unsupported public-site element <{tag}>')
         for attribute in ('href', 'src', 'poster'):
             if attrs.get(attribute):
@@ -84,7 +89,21 @@ def check(site):
         texts[relative] = text
         if re.search(r'@@[A-Z][A-Z0-9_]*@@', text):
             errors.append(f'{relative}: unresolved build placeholder')
-        if any(re.search(pattern, text) for pattern in SECRET_PATTERNS):
+        scan = text
+        # The pinned adversarial test exports a bare rejection sentinel, not a key.
+        # Permit only that one sentinel when the entire fixture matches provenance;
+        # all other files, changed fixtures and additional occurrences remain scanned.
+        marker = '-----BEGIN PRIVATE KEY-----'
+        if relative in {'successor.html', 'successor-fr.html'} and text.count(marker) == 1:
+            match = re.search(r'<script id="successor-sources" type="application/json">(.*?)</script>', text, re.S)
+            if match:
+                files = json.loads(match[1])
+                fixture = [f for f in files if f['path'] == 'vendor/manager/scripts/successor/core.test.mjs']
+                provenance = json.loads((ROOT / 'fleet/successor/vendor/manager-provenance.json').read_text())
+                expected = next(f['sha256'] for f in provenance['files'] if f['path'] == 'scripts/successor/core.test.mjs')
+                if len(fixture) == 1 and hashlib.sha256(fixture[0]['content'].encode()).hexdigest() == expected:
+                    scan = scan.replace(marker, '[pinned synthetic rejection sentinel]')
+        if any(re.search(pattern, scan) for pattern in SECRET_PATTERNS):
             errors.append(f'{relative}: possible credential; remove it before publication')
         if path.suffix == '.html':
             page = Page(path, errors)

@@ -1,3 +1,7 @@
+import {parseStrict} from '../../successor/vendor/manager/site/assets/successor/safe.mjs';
+import {SuccessorController} from '../../successor/controller.mjs';
+import {studioSpec,validateHandoff} from '../studio.mjs';
+import {validateBundle,computerVerdict} from '../artifacts.mjs';
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
@@ -15,6 +19,11 @@ export async function createControlServer(
   controller,
   { port = 8787, launchSecret = token(), onQuit = null } = {},
 ) {
+  let successorAdapter;
+  const successor = () => {
+    ensure(typeof controller.home === 'string' && path.isAbsolute(controller.home), 'FLEET_HOME_REQUIRED');
+    return successorAdapter ??= new SuccessorController(controller, 'node', {studioSpec,validateHandoff,validateBundle,computerVerdict});
+  };
   const sessions = new Map(),
     bootstraps = new Map(),
     attempts = new Map();
@@ -54,7 +63,8 @@ export async function createControlServer(
       parts.push(part);
     }
     try {
-      return JSON.parse(Buffer.concat(parts).toString("utf8"));
+      const raw = Buffer.concat(parts).toString("utf8");
+      return req.url.startsWith("/api/successor/") ? parseStrict(raw,limit) : JSON.parse(raw);
     } catch {
       throw new Error("REQUEST_JSON_INVALID");
     }
@@ -117,6 +127,7 @@ export async function createControlServer(
           "/genesis.css": ["genesis.css", "text/css; charset=utf-8"],
           "/operations.js": ["operations.js", "text/javascript; charset=utf-8"],
           "/studio.js": ["studio.js", "text/javascript; charset=utf-8"],
+          "/successor.js": ["successor.js", "text/javascript; charset=utf-8"],
           "/studio.css": ["studio.css", "text/css; charset=utf-8"],
           "/wallet.js": ["wallet.js", "text/javascript; charset=utf-8"],
           "/public-browser-ui.js": ["public-browser-ui.js", "text/javascript; charset=utf-8"],
@@ -188,6 +199,8 @@ export async function createControlServer(
         else if (url.pathname === "/api/identity")
           json(controller.operations.identity());
         else if (url.pathname === "/api/report") json(controller.report());
+        else if (url.pathname === "/api/successor") json(successor().status());
+        else if (url.pathname === "/api/successor/runtime") json(await successor().health());
         else if (url.pathname === "/api/studio") json(controller.studio.status());
         else if (url.pathname === "/api/studio/export") json(controller.studio.export(url.searchParams.get("id"),url.searchParams.get("kind")));
         else if (url.pathname === "/api/companion/public-web-report") {ensure(!url.search,"METHOD_REJECTED");json(controller.companionPublicWebReport());}
@@ -202,7 +215,7 @@ export async function createControlServer(
       if (["/api/wallet/reveal", "/api/wallet/confirm", "/api/wallet/phrase"].includes(url.pathname)) limited("wallet-recovery", 8, 60000);
       const input = await body(
         req,
-        ["/api/restore","/api/backup/verify"].includes(url.pathname) ? 64 * 1024 * 1024 : url.pathname === "/api/studio/start" ? 128 * 1024 * 1024 : 1024 * 1024,
+        ["/api/restore","/api/backup/verify"].includes(url.pathname) ? 64 * 1024 * 1024 : ["/api/studio/start","/api/successor/prepare"].includes(url.pathname) ? 128 * 1024 * 1024 : 1024 * 1024,
       );
       ensure(
         input && typeof input === "object" && !Array.isArray(input),
@@ -218,7 +231,13 @@ export async function createControlServer(
         setTimeout(() => void onQuit(), 100);
         return;
       }
+      if (url.pathname === "/api/successor/revoke") { json(successor().revoke()); return; }
       const actions = {
+        "/api/successor/prepare": ["Inspecting the SUCCESSOR work", () => successor().prepare(input,session.csrf)],
+        "/api/successor/execute": ["Authorizing the exact SUCCESSOR work", () => successor().execute(input,session.csrf)],
+        "/api/successor/revoke": ["Revoking pending SUCCESSOR choices", () => successor().revoke()],
+        "/api/successor/stop": ["Stopping SUCCESSOR work", () => successor().stop()],
+        "/api/successor/result": ["Checking SUCCESSOR results", () => successor().result(input.key,input.review??null)],
         "/api/studio/start": ["Starting Studio work", () => controller.studio.start(input)],
         "/api/studio/cancel": ["Stopping Studio work", () => controller.studio.cancel()],
         "/api/studio/remove": ["Removing saved Studio work", () => controller.studio.remove(input.id)],
@@ -370,7 +389,7 @@ export async function createControlServer(
         ],
         "/api/backup": [
           "Stopping safely and encrypting your backup",
-          () => controller.backup(input.password),
+          () => controller.backup(input.password, {excludeStudio:input.excludeStudio??false}),
         ],
         "/api/backup/verify": ["Verifying the selected encrypted file (read only)", () => controller.verifyBackup(input.backup,input.password)],
         "/api/preflight": ["Measuring this machine", () => controller.machinePreflight()],
@@ -410,11 +429,11 @@ export async function createControlServer(
       ensure(action, "UNKNOWN_ACTION");
       // AI requests must not prevent the operator from locking or stopping the node.
       json(
-        await (["/api/companion/test", "/api/companion/brief", "/api/companion/cancel", "/api/companion/public-web-commissioning"].includes(
+        await (["/api/companion/test", "/api/companion/brief", "/api/companion/cancel", "/api/companion/approve-identity", "/api/companion/public-web-commissioning"].includes(
           url.pathname,
         )
           ? action[1]()
-          : controller.mutate(action[0], action[1], {interruptStudio:["/api/lock","/api/stop","/api/studio/cancel"].includes(url.pathname)})),
+          : controller.mutate(action[0], action[1], {interruptStudio:["/api/lock","/api/stop","/api/studio/cancel","/api/successor/stop"].includes(url.pathname)})),
       );
     } catch (error) {
       const detail = publicError(error),

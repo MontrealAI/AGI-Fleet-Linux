@@ -23,10 +23,10 @@ def bind_runner(candidate, archive):
     old = 'AGI_Fleet_Linux_v1.0.9'
     runner = adapt_baseline('run-linux-1.0.9-native.py', {
         (str, old): candidate['prefix'], (str, old + '.zip'): candidate['name'],
-        (str, old + '/'): candidate['prefix'] + '/', (int, 3897): candidate['native']['complete']['tests'],
+        (str, old + '/'): candidate['prefix'] + '/', (int, 3897): candidate['native']['complete']['tests'], (int, 342): candidate['native']['complete']['files'],
     })
     require(candidate['native']['targeted'] == {'tests': 291, 'files': 25}
-            and candidate['native']['complete']['files'] == 342, 'Native harness selection needs explicit review')
+            and candidate['native']['complete']['files'] == 343, 'Native harness selection needs explicit review')
     runner.ASSETS = {candidate['name']: (candidate['bytes'], candidate['sha256']),
                      **{name: value for name, value in runner.ASSETS.items() if name != candidate['name']}}
     original_download = runner.download

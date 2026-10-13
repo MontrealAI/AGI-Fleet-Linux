@@ -1,4 +1,4 @@
-import {makeRevision, validateStudioRevision} from '../studio.mjs';
+import {makeRevision, validateStudioRevision, STUDIO_LIMITS} from '../studio.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -11,7 +11,7 @@ import {normalizeWork} from '../work.mjs';
 import {DECLARATION} from '../review.mjs';
 import {publicError} from './messages.mjs';
 
-const MAX_RECORDS = 5, MAX_RECORD_BYTES = 14 * 1024 * 1024;
+const MAX_RECORDS = 5, MAX_RECORD_BYTES = STUDIO_LIMITS.recordBytes;
 const idPattern = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
 const activeStates = ['running','cancelling'];
 
@@ -86,7 +86,7 @@ export class Studio {
       maxRecords:MAX_RECORDS, templates:STUDIO_TEMPLATES,
       runs:c.vault.unlocked ? this.records.map(r => this.summary(r)).reverse() : [],
       connection:{mode:c.companion.config.mode, calls24h:connection.calls24h, remaining24h:Math.max(0,c.companion.config.maxCalls24h - connection.calls24h)},
-      limits:{files:24, outputBytes:4194304, workflowSeconds:600},
+      limits:{files:STUDIO_LIMITS.legacyFiles, outputBytes:STUDIO_LIMITS.legacyOutputBytes, workflowSeconds:600, imports:{profile:'computer-work/v2',files:STUDIO_LIMITS.generalFiles,fileBytes:STUDIO_LIMITS.generalFileBytes,outputBytes:STUDIO_LIMITS.generalOutputBytes,criteria:64}, recordBytes:MAX_RECORD_BYTES},
       note:'A completed Studio run is a local capability exercise, not a blockchain job, independent validation or production qualification.'};
   }
   record(id) {

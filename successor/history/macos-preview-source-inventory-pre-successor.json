@@ -1,0 +1,281 @@
+{
+  "schema": "agi-macos-preview-source-inventory/v1",
+  "sourceSha256": "c382b73e0ded27e7a2d7cbeed1bf73ca2fd86703ca3e4d6b010f8357041d63f4",
+  "files": [
+    {
+      "path": ".github/workflows/macos-preview.yml",
+      "bytes": 4099,
+      "sha256": "a77406f1e96be8e45d70e9b3c6f12f962848af21573bc0f21b64edc7de9b1c56"
+    },
+    {
+      "path": "engineering/build-next-release.py",
+      "bytes": 25886,
+      "sha256": "1f4a132536813af8895a2ee94cb790064e015201ca9ea19c20839d9f9e2b23c9"
+    },
+    {
+      "path": "engineering/check-workstation-preview.py",
+      "bytes": 4662,
+      "sha256": "4dbaaea65b0eff7bac52837f4c1fa75f26ab51340b43d08dfa7708e529b92ba3"
+    },
+    {
+      "path": "engineering/next-release.json",
+      "bytes": 743,
+      "sha256": "d58742455c297f27a00b9c8330bd6186df4003baa966eb42929eedd452ef4871"
+    },
+    {
+      "path": "engineering/release_tools.py",
+      "bytes": 8128,
+      "sha256": "89c01672b8f63d59552bcefe1a7cd670a9fd5ab7b3bb60bbc36351a97900ad97"
+    },
+    {
+      "path": "macos/preview/QUICKSTART.md",
+      "bytes": 8285,
+      "sha256": "7bb171813a19d86d262290af483937c401f758d335a6d951a5b44c9d27204af2"
+    },
+    {
+      "path": "macos/preview/README.md",
+      "bytes": 4522,
+      "sha256": "6fba3b4ae48999c2f8e028174c92172a73831146b032f39d94edc20ff959cf17"
+    },
+    {
+      "path": "macos/preview/STUDIO.md",
+      "bytes": 4019,
+      "sha256": "95b00221285938ba358de50a4cc3988188d1499fed3c1bf954165f892623e4ec"
+    },
+    {
+      "path": "macos/preview/candidate.json",
+      "bytes": 843,
+      "sha256": "b2715cc88a1ec17ec899e81424e1b6e6ecebe97c619475c94671f42664f26e6e"
+    },
+    {
+      "path": "macos/preview/check.py",
+      "bytes": 3816,
+      "sha256": "62b3b339455dfd13f32f5ea878cb795ac2c70347352aa7600f31f8bbed046f81"
+    },
+    {
+      "path": "macos/preview/launch.mjs",
+      "bytes": 7488,
+      "sha256": "9e94ca25e041c7884ab9ea7f7d898613f8ae4e06cff01d9f2e038bb62ed8aa04"
+    },
+    {
+      "path": "macos/preview/materialize.py",
+      "bytes": 5367,
+      "sha256": "141198ea5c8246f35ff2a8976c9b5baab1dcc82013b2aef555159eea1b16ede2"
+    },
+    {
+      "path": "macos/preview/operator.mjs",
+      "bytes": 3174,
+      "sha256": "5bf622b416fbde4e294ff8e5ffc9ea4417f5cb030eab1fd105222a1a38e004c1"
+    },
+    {
+      "path": "macos/preview/overlay.py",
+      "bytes": 10042,
+      "sha256": "ee3751af4623885ec942d046a74ec54c8543634ca2fe59f422580069c75c0d5b"
+    },
+    {
+      "path": "macos/preview/task-host.mjs",
+      "bytes": 1027,
+      "sha256": "ad8a9170db75cca21f67361dc1e0dd27d8137e2e92cff2a4fbefe971ef60ed31"
+    },
+    {
+      "path": "macos/preview/tests/authority.test.mjs",
+      "bytes": 7738,
+      "sha256": "c7c8287a3da78ac735b299b246ffc94d21898dc4bd5e6247cf15916a7e65013d"
+    },
+    {
+      "path": "macos/preview/tests/draft.test.mjs",
+      "bytes": 7974,
+      "sha256": "0ad46270ad9c712bc06875c48f9e6dbead1c2b8975ef2727edc0174530f6f87e"
+    },
+    {
+      "path": "macos/preview/tests/fixture.mjs",
+      "bytes": 6258,
+      "sha256": "01e02856911fdfeb4d7aaa674a777b4180d50da38279c5ac1c8d28ad8c2e472c"
+    },
+    {
+      "path": "macos/preview/tests/operator.test.mjs",
+      "bytes": 6030,
+      "sha256": "831062bd444ed5b8305d277e454c491c0fc586883f9f083b49c3a40737f23d3d"
+    },
+    {
+      "path": "macos/preview/tests/test_materialize.py",
+      "bytes": 7466,
+      "sha256": "088c84d793eca9f9db33b78953a5340b994568a1e8f6b7f7b5590f23423d1cca"
+    },
+    {
+      "path": "macos/release.json",
+      "bytes": 1066,
+      "sha256": "79c490e6cf148433049b74733006dc3efd33fb2410fcf3fd9c5b0df821ab0f5d"
+    },
+    {
+      "path": "macos/runtime/apply.py",
+      "bytes": 24557,
+      "sha256": "2ea6f077423ee22ca523c4f53747d70fdc09e52a7687c454fa3745c6b2983da2"
+    },
+    {
+      "path": "macos/runtime/control-ui-cache.test.mjs",
+      "bytes": 6290,
+      "sha256": "fdb592e17645d6fa97e4fbd283f90a0bc33cf7e49f62dc590c9889511237cbf3"
+    },
+    {
+      "path": "macos/runtime/desktop-cleanup.mjs",
+      "bytes": 618,
+      "sha256": "4a7a4a160fff5d33ae809d5759ab397b4463916cced7e8c1dee6112715b5f503"
+    },
+    {
+      "path": "macos/runtime/mac-host.mjs",
+      "bytes": 2299,
+      "sha256": "f12b0b3ea51c6359385321d4f26123f0a38ff6c2f9eca34ebefd5d5151f6314b"
+    },
+    {
+      "path": "macos/runtime/macos-clean-install.mjs",
+      "bytes": 7614,
+      "sha256": "d24208f0ee45267b71cf78498d569d702be84b74266284755af4276a7b954339"
+    },
+    {
+      "path": "macos/runtime/macos-clean-install.schema.json",
+      "bytes": 26503,
+      "sha256": "4f505abdb726efc24a7402491af355987403bedfa81b826a5b4b99e6fa70f032"
+    },
+    {
+      "path": "macos/runtime/macos-clean-install.template.json",
+      "bytes": 6806,
+      "sha256": "2dc757f41719e36eac95e0226d48cedcd56d8340e555acd087da951d3735d49e"
+    },
+    {
+      "path": "macos/runtime/runtime.test.mjs",
+      "bytes": 10446,
+      "sha256": "db3ad3bb4d6a79571f0282b0aafe2a3717d35875d3751131558a560ed81aeab8"
+    },
+    {
+      "path": "macos/runtime/setup-file-path.mjs",
+      "bytes": 1194,
+      "sha256": "28f21ad7ad0ae8e1e634e8ffd81340b9919777cd8f3a29df6405535c4d745c1e"
+    },
+    {
+      "path": "macos/runtime/setup-file-path.test.mjs",
+      "bytes": 2153,
+      "sha256": "0c4cab7ec0f027a258256455f54d5e52f3b9e7e8a7277ad8b85f167a53076c29"
+    },
+    {
+      "path": "macos/runtime/test_apply.py",
+      "bytes": 8186,
+      "sha256": "2ed5c1eb5da49dd9f5fed2ebe3b62af3bf845be992a2000a61cc099084b2cf48"
+    },
+    {
+      "path": "workstation/candidate.json",
+      "bytes": 980,
+      "sha256": "5075736acad9ffd0e25aca072f20456be2255b7adc90e91c6bc948c0af1b5c00"
+    },
+    {
+      "path": "workstation/engine/job-draft.mjs",
+      "bytes": 4597,
+      "sha256": "e5e1fea01d44b2497f47d87871c0aad5cbc85d38d13d039347e34674d10825a5"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/app/app.js",
+      "bytes": 36720,
+      "sha256": "d8cef1f881bca9867a3d4b23e01b77edf48f23236da9314ae374a0a9a25d1bb4"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/app/index.html",
+      "bytes": 64521,
+      "sha256": "17554ccb4c3af8755304437fc4fb51dc280139e442d0180d7e27cb015a454f22"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/app/studio.js",
+      "bytes": 18160,
+      "sha256": "47d56113276c3d744104fffb3a5c3c1f733b8c2f2dba5614c86c854cf7057bb9"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/src/control/backup-verification.mjs",
+      "bytes": 6340,
+      "sha256": "cfc3a4ef3048ae99c070988f1be4440b48060ba424c2c8c466ca53fe9aaca0e2"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/src/control/controller.mjs",
+      "bytes": 67187,
+      "sha256": "ada31b40ab5ecb151e28307b62c9366874df91387594f9a7130267fa76249bdc"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/src/control/messages.mjs",
+      "bytes": 42929,
+      "sha256": "b00a83df194d4de6d5b0c364b6e158da407b15e891f30af69df700e7ec944e1c"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/src/control/operational-state.mjs",
+      "bytes": 5825,
+      "sha256": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/src/control/server.mjs",
+      "bytes": 18259,
+      "sha256": "4f7199dbb1e6ecba7ae011eb2ea3d9ddeef8972ca9850e5bcae19c780b9b5049"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/src/control/studio.mjs",
+      "bytes": 13723,
+      "sha256": "a9fc539d47782a6b3a9cd0fcb78da253d2a36a3d628ed23c02352cdcc7964a9d"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Agent/src/studio.mjs",
+      "bytes": 24952,
+      "sha256": "1dbfe52909b41907fdf77fd431a881132a0ccd9a4a6b462c3838511b84e7ce0c"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/app/app.js",
+      "bytes": 54258,
+      "sha256": "7dea017ecb065c4800c8f7ac9787172a0736dca4ffc42d401b9d2270364f0a65"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/app/index.html",
+      "bytes": 75788,
+      "sha256": "97bdf16a6dffd2714d32e775dc93c6a1d402ed7d88ab9204e8249189c065a530"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/app/studio.js",
+      "bytes": 18160,
+      "sha256": "47d56113276c3d744104fffb3a5c3c1f733b8c2f2dba5614c86c854cf7057bb9"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/src/control/backup-verification.mjs",
+      "bytes": 6340,
+      "sha256": "cfc3a4ef3048ae99c070988f1be4440b48060ba424c2c8c466ca53fe9aaca0e2"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/src/control/controller.mjs",
+      "bytes": 63436,
+      "sha256": "31adc6ff9ae4ff7ba61ed1ab0dff146c1f007a68058315d7aa1864c02021ec7f"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/src/control/messages.mjs",
+      "bytes": 38570,
+      "sha256": "d4bab119ba88c5a172a9e8cc2cc6971ba36780020bd4db0d68e8cfe4aad58f2b"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/src/control/operational-state.mjs",
+      "bytes": 5825,
+      "sha256": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/src/control/server.mjs",
+      "bytes": 18122,
+      "sha256": "66a1f8c36d4b05d44c80ff5fa3ef0406dae06f92e6e08d6c53a1299bd2f10874"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/src/control/studio.mjs",
+      "bytes": 13723,
+      "sha256": "a9fc539d47782a6b3a9cd0fcb78da253d2a36a3d628ed23c02352cdcc7964a9d"
+    },
+    {
+      "path": "workstation/studio-overlay/packages/AGI_Node/src/studio.mjs",
+      "bytes": 24952,
+      "sha256": "1dbfe52909b41907fdf77fd431a881132a0ccd9a4a6b462c3838511b84e7ce0c"
+    },
+    {
+      "path": "workstation/tests/studio.test.mjs",
+      "bytes": 12926,
+      "sha256": "07791e97865a1a85ab97265a60444dd9a3017d7f40c03d12120ee5bd8741b799"
+    }
+  ]
+}

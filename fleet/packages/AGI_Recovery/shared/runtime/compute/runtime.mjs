@@ -85,7 +85,8 @@ export function checkWorkRuntime(worker,spec,role,{commissioning=false}={}){
  if(wantsBrowser)ensure(publicBrowserPolicyReady(worker.c,{commissioning})&&core.publicWebScope(spec,role)&&effectiveToolAllowed(config,entry,'agi_public_browser'),'COMPUTE_PUBLIC_WEB_NOT_QUALIFIED');
  const runtime=runtimeManifest(worker.c,role,{commissioning}),check=core.checkRuntime(spec,runtime,role,Math.floor(worker.now()/1000));
  ensure(spec.dataPolicy==='public'&&spec.authority[role].scope==='isolated-public','COMPUTE_SCOPED_ADAPTER_REQUIRED');
- ensure(spec.coordination.dependencies.length===0&&spec.coordination.delegation==='none'&&spec.coordination.parentSpecSha256===null,'COMPUTE_COORDINATION_ADAPTER_REQUIRED');
+ // A parent commitment is inert provenance, never delegation or dependency admission.
+ ensure(spec.coordination.dependencies.length===0&&spec.coordination.delegation==='none','COMPUTE_COORDINATION_ADAPTER_REQUIRED');
  return {...check,runtime};
 }
 export function workSignal(worker,spec,role,signal,options={}){

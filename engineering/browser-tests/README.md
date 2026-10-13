@@ -21,3 +21,7 @@ Screenshots, failure traces and attachments go to `test-results/`; the HTML repo
 Automated axe checks cover the welcome and selected-plan screens in both languages using WCAG 2 A/AA, 2.1 A/AA and 2.2 AA tags. They complement human review: they cannot establish complete WCAG conformance, usability with every assistive technology, installation success or capacity for billions of visitors.
 
 Keep failures actionable. Correct the public page when a supported journey or accessibility rule fails; do not suppress rules or exclude page regions to make the suite pass.
+
+With `FLEET_TEST_ROOT` pointing to an extracted, verified candidate and `FLEET_TEST_METADATA` to its `release.json`, the same command runs the saved-archive bridge journey. It creates and exports a mission through the Builder UI, separately authenticates and authorizes Agent execution and Node review through the installed HTTP endpoints, checks the returned capsule, explicitly chooses the improved version, and downloads its HTML. Fresh browser contexts then restore and rerun it fully offline in English and French, comparing the actual artifact bytes. `journey.json`, its SHA-256 binding, screenshots and `evidence.json` are retained for the release audit.
+
+The provider transport, immutable-input transport and sandbox CLI remain explicitly simulated fixtures around the actual Controller, Studio, Companion and ComputeWorker. Real Chromium effects and protocol authorization do not establish live-provider competence, Docker isolation, independent review ownership or paid settlement.

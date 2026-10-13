@@ -1,6 +1,6 @@
 # Physical Linux qualification ledger
 
-**This ledger begins with every physical gate `NOT_RUN`.** It records one exact release, host and role; neither native CI nor another machine's results can fill it in. Follow [fresh installation](FRESH_INSTALL.md) using distinct new signer and compute accounts. Check the [1.0.11 release notes](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.11-qualification) for native acceptance of the exact archive on your architecture before installing.
+**This ledger begins with every physical gate `NOT_RUN`.** It records one exact release, host and role; neither native CI nor another machine's results can fill it in. Follow [fresh installation](FRESH_INSTALL.md) using distinct new signer and compute accounts. Check the [1.1.0 release notes](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.0-qualification) for native acceptance of the exact archive on your architecture before installing.
 
 Copy [the blank JSON ledger](physical-qualification-template.json) into a private directory outside the application tree. Set `releaseSHA256` to the actual verified Fleet ZIP hash from the published checksum file; the template intentionally leaves it blank until verified. Record the host, role, versions, policy digest, timestamps and sanitized evidence references. Start a separate ledger for each host/role/release combination.
 

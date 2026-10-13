@@ -250,6 +250,12 @@ def add_operator_guides(root, repository, version, commit):
 
 Native acceptance for this exact release must be published before a controlled fresh installation. Production qualification is pending. Physical qualification remains pending. Earlier releases' results do not qualify this ZIP.
 
+## Build your SUCCESSOR Ω
+
+Open the [English Builder](docs/successor/My-SUCCESSOR-Omega-en.html) or [Builder en français](docs/successor/My-SUCCESSOR-Omega-fr.html) for a useful first result, entirely offline. No installation, wallet or provider is needed for the two local missions. Keep your capsule and [editable source](docs/successor/SUCCESSOR-Omega-Fleet-source.zip).
+
+For real Fleet work, follow the [connection, review and recovery guide](docs/successor/GUIDE.html). The installed Agent and Node expose SUCCESSOR Ω + Fleet within Work Studio. Existing roles, installation, STOP, backup and settlement workflows remain available below.
+
 1. Read the [Linux fresh-install guide](docs/linux-current/docs/FRESH_INSTALL.md).
 2. Check the [release status](docs/linux-current/README.md) and exact SHA-256 on the release page.
 3. Follow the guide using new, separate signer and compute accounts. Keep the complete Fleet folder.
@@ -265,10 +271,10 @@ Historical Mac instructions and prior evidence remain available for engineering 
 '''
         for name in ['README.md', 'START_HERE.md']:
             (app / name).write_text(welcome)
-            (app / name.replace('.md', '.html')).write_text(render_markdown(welcome))
+            (app / name.replace('.md', '.html')).write_text(render_markdown(welcome).replace('<body>', '<body><span id="agi-fleet-linux-1011"></span>'))
         if role == 'fleet':
             (app / 'NOTICE.html').write_text(render_markdown((app / 'NOTICE.md').read_text()))
-        (app / 'Linux-Guide.html').write_text(render_markdown(welcome))
+        (app / 'Linux-Guide.html').write_text(render_markdown(welcome).replace('<body>', '<body><span id="agi-fleet-linux-1011"></span>'))
         (app / 'Linux-Guide.txt').write_text(plain_text_guide(version, role))
         (app / 'READ_ME_FIRST.txt').write_text(f'AGI Fleet Linux {version}\nOpen START_HERE.html for the current Linux installation and qualification guide.\nProduction and physical qualification remain pending.\n')
         # Refresh only current release labels; historical prose and evidence stay intact.
@@ -316,6 +322,18 @@ def update_manifests(root, version, epoch):
     return validation
 
 
+def add_successor(root, repository, node):
+    """Materialize the same offline Builder in all seven complete editions."""
+    first = root / 'docs/successor'
+    subprocess.run([str(node), str(root / 'successor/build.mjs'), '--out', str(first)], check=True)
+    guide = (repository / 'successor/docs/GUIDE.md').read_text()
+    (first / 'GUIDE.md').write_text(guide)
+    (first / 'GUIDE.html').write_text(render_markdown(guide, '../../START_HERE.html'))
+    for role, app in edition_paths(root):
+        if role != 'fleet':
+            shutil.copytree(first, app / 'docs/successor')
+
+
 def build(args):
     repository = args.repository.resolve(strict=True)
     specification = json.loads(args.specification.read_text())
@@ -350,6 +368,7 @@ def build(args):
     root = work / 'extracted' / PREFIX
     overlay_source(root, source, source_inventory['files'])
     add_operator_guides(root, repository, version, args.commit)
+    add_successor(root, repository, node)
     validation = update_manifests(root, version, epoch)
     validation_path = work / 'pending-validation.json'; write_json(validation_path, validation)
     environment = {**os.environ, 'PATH': str(node.parent) + os.pathsep + os.environ.get('PATH', ''),
@@ -387,6 +406,7 @@ def build(args):
     gate = json.loads(gate_path.read_text())
     require(gate['status'] == 'PASS_PACKAGED_EXECUTABLES_AND_LINUX_LAUNCHER_SMOKE'
             and gate['sha256'] == verified['sha256'] and verified['bytes'] < LIMIT, 'Final extracted gate differs')
+    run('successor-saved-archive', [sys.executable, str(repository / 'engineering/check-successor-archive.py'), '--archive', str(destination), '--node', str(node), '--out', str(out / (prefix + '-checks/successor-archive.json'))])
     result = {'schema': 'agi-linux-candidate-build/v1', 'version': version, 'tag': specification['tag'],
               'prefix': prefix, 'name': destination.name, 'bytes': verified['bytes'], 'sha256': verified['sha256'],
               'sourceRevisionSHA256': source_inventory['revisionSHA256'], 'sourceFiles': len(source_inventory['files']),

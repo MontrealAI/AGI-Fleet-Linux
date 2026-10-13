@@ -936,7 +936,8 @@ export class Controller {
   requireCertainApprovalPersistence() {
     ensure(!this.companion.approvalPersistenceUncertain && this.companion.stateFailureCode!=="COMPANION_APPROVAL_RECONCILIATION_REQUIRED" && !fs.existsSync(this.companion.stateFile+".approval-pending"), "COMPANION_APPROVAL_RECONCILIATION_REQUIRED");
   }
-  async backup(password) {
+  async backup(password, {excludeStudio=false}={}) {
+    ensure(typeof excludeStudio === "boolean", "BACKUP_STATE_FORMAT");
     this.requireCertainApprovalPersistence();
     ensure(
       this.config.validator && fs.existsSync(this.configFile),
@@ -970,7 +971,7 @@ export class Controller {
         ? fs.readFileSync(file).toString("base64")
         : null,
     };
-    data.operational = captureOperational({home:this.home,dataDir:this.config.dataDir,kind:"node"});
+    data.operational = captureOperational({home:this.home,dataDir:this.config.dataDir,kind:"node",excludeStudio});
     const sealed = await sealBackup(addBackupIntegrity(data), password);
     this.requireCertainApprovalPersistence();
     // A newly issued snapshot needs its own verification and storage acknowledgement.
@@ -1358,7 +1359,7 @@ export class Controller {
       if(exists('admission_reservations') && db.prepare("SELECT 1 FROM admission_reservations WHERE closed=0 LIMIT 1").get())return true;
       if(exists('jobs') && db.prepare("SELECT 1 FROM jobs WHERE status NOT IN ('terminal','waiting','unsupported','skipped','lost','abstained') LIMIT 1").get())return true;
       if(exists('jobs') && db.prepare("SELECT 1 FROM jobs WHERE my_vote=1 AND status!='terminal' LIMIT 1").get())return true;
-      
+
       return false;
     });
     ensure(!active, "COMPANION_ACTIVE_WORK_IDENTITY_LOCKED");

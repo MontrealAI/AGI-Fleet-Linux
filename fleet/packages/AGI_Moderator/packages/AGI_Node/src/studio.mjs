@@ -3,6 +3,10 @@ import { ensure, strictKeys, canonical, sha256 } from './util.mjs';
 import { validateComputerSpec, isComputerSpec, fileType, safeArtifactName, validateBundle, bundleZIP, MAX_FILE_BYTES } from './artifacts.mjs';
 import { validateImageSpec, isImageSpec, decodeImage, evaluateImage } from './images.mjs';
 
+// The editor remains a legacy-sized convenience. Imported v2 specifications
+// retain their exact runtime identity, authority, byte budgets and criteria.
+export const STUDIO_LIMITS = Object.freeze({legacyFiles:24, legacyOutputBytes:4194304, generalFiles:64, generalFileBytes:33554432, generalOutputBytes:67108864, generalDeliveryBytes:94371840, recordBytes:201326592});
+
 // These are editable starting points, not measured capability or quality claims.
 const FORMAT_TEMPLATES = [
   { id:'research', label:'Research & compare', icon:'01', description:'Public sources → a clear, cited report.', title:'Compare three public alternatives', prompt:'Compare three public open-source tools for organizing a small community project. Browse their official documentation. Explain strengths, limitations and who each suits. State the date of your research and link the sources. Do not invent prices or test results.', outputs:['comparison.docx','comparison.pdf','sources.md'], criteria:['Compare three alternatives using the same criteria and primary sources.','Distinguish verified facts from judgment; include source URLs and access date.','Open and render the report; check that headings and tables fit the pages.'] },
@@ -257,7 +261,12 @@ export const STUDIO_TEMPLATES=[...[
 ],...FORMAT_TEMPLATES.map(t=>({...t,category:"format"}))];
 
 export function studioSpec(value) {
-  if (isComputerSpec(value)) return validateComputerSpec(value);
+  if (isComputerSpec(value)) {
+    const specification = validateComputerSpec(value);
+    ensure(specification.dataPolicy === 'public', 'STUDIO_PUBLIC_WORK_REQUIRED');
+    if (specification.profile === 'computer-work/v2') ensure(['agent','reviewer'].every(role => specification.authority[role].scope === 'isolated-public'), 'STUDIO_PUBLIC_WORK_REQUIRED');
+    return specification;
+  }
   if (isImageSpec(value)) return validateImageSpec(value);
   ensure(false, 'STUDIO_PROFILE_REQUIRED');
 }
@@ -283,7 +292,7 @@ export function composeStudio(input) {
 
 export function deliveryInfo(specification, delivery) {
   studioSpec(specification);
-  ensure(typeof delivery === 'string' && Buffer.byteLength(delivery) <= (specification?.profile==='computer-work/v2'?94371840:6291456), 'STUDIO_DELIVERY_TOO_LARGE');
+  ensure(typeof delivery === 'string' && Buffer.byteLength(delivery) <= (specification?.profile==='computer-work/v2'?STUDIO_LIMITS.generalDeliveryBytes:6291456), 'STUDIO_DELIVERY_TOO_LARGE');
   if (isComputerSpec(specification)) {
     const bytes = Buffer.from(delivery), {bundle} = validateBundle(specification, bytes);
     return {deliveryHash:sha256(bytes), files:bundle.files.map(({content,...meta}) => meta)};
