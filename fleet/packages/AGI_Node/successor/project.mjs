@@ -1,4 +1,5 @@
 import {createRequire} from 'node:module';
+import {validateReceiptBinding} from './receipt.mjs';
 import {fail, keys, canonical, parseStrict, sha256} from './vendor/manager/site/assets/successor/safe.mjs';
 import {inspectCapsule, runCandidate, exportCapsule, compareCandidates} from './vendor/manager/site/assets/successor/model.mjs';
 import {validateImprovement} from './vendor/manager/site/assets/successor/jobs.mjs';
@@ -29,7 +30,7 @@ export async function checkReturnedWork(request,handoff,receipt,studioAPI) {
   const {state,inspected}=await inspectRequest(request);
   studioAPI.validateHandoff(handoff);
   fail(handoff.specification.coordination.parentSpecSha256===request.plan.commitment,'FLEET_PLAN_CHANGED');
-  fail(receipt?.specHash===handoff.specHash&&receipt?.deliveryHash===handoff.deliveryHash&&receipt.role==='node','FLEET_REVIEW_BINDING');
+  validateReceiptBinding(handoff,receipt,'node');
   const verdict=studioAPI.computerVerdict(handoff.specification,{safeToReview:receipt.review?.safeToReview,checks:receipt.review?.checks});
   const {files}=studioAPI.validateBundle(handoff.specification,Buffer.from(handoff.delivery));
   const source=inspected.capsule.payload.sourceManifest;

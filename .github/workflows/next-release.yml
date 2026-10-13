@@ -89,6 +89,7 @@ jobs:
       - name: Execute actual browser effects through the saved Controller and ComputeWorker
         env:
           FLEET_TEST_ROOT: ${{ github.workspace }}/saved-fleet/AGI_Fleet_Linux_v1.1.0
+          FLEET_TEST_METADATA: ${{ github.workspace }}/release/release.json
         run: npm test --prefix engineering/browser-tests
       - name: Retain exact browser observations
         if: always()
@@ -182,7 +183,7 @@ jobs:
             --metadata release/release.json --archive release/AGI_Fleet_Linux_v1.1.0.zip \
             --native evidence/next-native-x64 --native evidence/next-native-arm64 \
             --integration evidence/next-integration-x64 --integration evidence/next-integration-arm64 \
-            --out evidence/audit.json
+            --successor evidence/next-successor-browser --out evidence/audit.json
           python3 engineering/publish-next-release.py --prepare-only --release-dir release --evidence-dir evidence --output publication
       - name: Retain audited publication files
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f

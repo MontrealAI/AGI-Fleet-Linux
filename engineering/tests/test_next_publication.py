@@ -24,6 +24,7 @@ class PublicationAcceptance(unittest.TestCase):
                       'verifiedTapLogs': 2 * sum(v['files'] for v in self.metadata['native'].values()), 'verifiedIntegrationLogs': 38,
                       'workflowCommit': self.commit, 'productionQualified': False, 'physicalQualification': 'NOT_RUN',
                       'architectures': ['x64', 'arm64'], 'native': [], 'integration': []}
+        self.audit['successorAcceptance'] = {'status':'PASS','archiveSHA256':self.metadata['sha256'],'sourceRevisionSHA256':self.metadata['sourceRevisionSHA256'],'workflowCommit':self.commit,'workflowRun':self.run_id,'authority':'none'}
         for arch in self.audit['architectures']:
             common = {'architecture': arch, 'status': 'PASS', 'workflowCommit': self.commit, 'workflowRun': self.run_id, 'productionQualified': False}
             native = {**common, 'runs': {}}
@@ -40,7 +41,7 @@ class PublicationAcceptance(unittest.TestCase):
         publisher.validate(self.metadata, self.audit, self.commit)
 
     def test_incomplete_or_unrelated_acceptance_is_rejected(self):
-        changes = [lambda a: a.update(workflowCommit='d' * 40), lambda a: a.update(productionQualified=True),
+        changes = [lambda a: a.update(successorAcceptance={}), lambda a: a.update(workflowCommit='d' * 40), lambda a: a.update(productionQualified=True),
                    lambda a: a.update(native=a['native'][:1]), lambda a: a.update(integration=[]),
                    lambda a: a['native'][0]['runs']['complete']['counts'].update(skipped=1),
                    lambda a: a['integration'][0].update(managerTestsPassed=0),

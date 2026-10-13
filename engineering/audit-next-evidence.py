@@ -158,7 +158,28 @@ def audit_integration(directory, candidate, archive_receipt, extraction):
     return auditor.audit_run(directory, report['runtime']['architecture'], report['workflowRun'], report['workflowCommit'])
 
 
-def audit(archive_path, candidate, native, integration, workflow_commit=None, workflow_run=None):
+def audit_successor(directory, candidate, commit, run_id):
+    files = list(Path(directory).rglob('evidence.json'))
+    require(len(files) == 1, 'Exactly one saved-archive browser observation is required')
+    file = files[0]
+    require(not file.is_symlink(), 'Browser evidence cannot be linked')
+    result = read_json(file)
+    require(result['status'] == 'PASS' and result['archiveSHA256'] == candidate['sha256']
+            and result['sourceRevisionSHA256'] == candidate['sourceRevisionSHA256']
+            and result['workflowCommit'] == commit and str(result['workflowRun']) == str(run_id),
+            'Browser evidence belongs to another archive or workflow')
+    require(all(result.get(key) is True for key in ('actualBrowserEffects','actualComputeWorker','downloadedBytesChecked'))
+            and result['provider'] == 'NOT_RUN_SIMULATED_PROVIDER_TRANSPORT'
+            and result['sandbox'] == 'FIXTURE_NO_DOCKER_QUALIFICATION'
+            and result['independentController'] == 'UNVERIFIED' and result['authority'] == 'none',
+            'Browser evidence scope differs')
+    screenshot = file.parent / 'actual-browser-work.png'
+    require(screenshot.is_file() and not screenshot.is_symlink() and sha(screenshot) == result['screenshotSHA256'],
+            'Browser screenshot differs')
+    return result
+
+
+def audit(archive_path, candidate, native, integration, workflow_commit=None, workflow_run=None, successor=None):
     require(len(native) == len(integration) == 2, 'Exactly two native and integration architecture runs are required')
     receipt = verify_candidate(archive_path, candidate)
     ledger = read_json(ROOT / 'validation/original-native-case-ledger.json')
@@ -184,6 +205,7 @@ def audit(archive_path, candidate, native, integration, workflow_commit=None, wo
             'sourceRevisionSHA256': candidate['sourceRevisionSHA256'], 'workflowCommit': commit, 'workflowRun': run_id,
             'architectures': ['x64', 'arm64'], 'native': native_runs, 'integration': integration_runs,
             'integrationTarget': candidate['integration'],
+            'successorAcceptance': audit_successor(successor, candidate, commit, run_id),
             'verifiedTapLogs': sum(run['runs'][scope]['verifiedLogs'] for run in native_runs for scope in ('targeted', 'complete')),
             'verifiedIntegrationLogs': sum(run['verifiedLogs'] for run in integration_runs),
             'productionQualified': False, 'physicalQualification': 'NOT_RUN'}
@@ -197,10 +219,11 @@ def main():
     parser.add_argument('--integration', type=Path, action='append', required=True)
     parser.add_argument('--workflow-commit', default=os.environ.get('GITHUB_SHA'))
     parser.add_argument('--workflow-run', default=os.environ.get('GITHUB_RUN_ID'))
+    parser.add_argument('--successor', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     candidate = load_candidate(args.metadata, args.archive)
-    result = audit(args.archive, candidate, args.native, args.integration, args.workflow_commit, args.workflow_run)
+    result = audit(args.archive, candidate, args.native, args.integration, args.workflow_commit, args.workflow_run, args.successor)
     require(not args.out.exists(), 'Audit output already exists')
     write_json(args.out, result)
     print(json.dumps({key: result[key] for key in ('status', 'version', 'releaseSHA256', 'workflowCommit', 'architectures',

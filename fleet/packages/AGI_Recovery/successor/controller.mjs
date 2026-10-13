@@ -57,7 +57,7 @@ export class SuccessorController {
     while(this.tickets.size>8)this.tickets.delete(this.tickets.keys().next().value);
     return {ticket,expiresAt,key,specification:compiled.spec,specificationSha256:compiled.specSha256,observation,
       action:this.role==='agent'?'Create and self-check the exact public work':'Review the exact delivered bytes',
-      providerBudget:compiled.spec.budget,financialAction:'none',independentControl:'UNVERIFIED',confirmationRequired:true};
+      declaredTaskBudget:compiled.spec.budget,budgetEnforcement:'Existing compute call and duration limits; USDC amounts are planning bounds, not measured provider billing.',financialAction:'none',independentControl:'UNVERIFIED',confirmationRequired:true};
   }
   async execute(input,principal){
     keys(input,['ticket','key','confirm'],'FLEET_EXECUTE_FIELDS');fail(input.confirm===true,'FLEET_CONFIRM_REQUIRED');

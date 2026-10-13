@@ -246,3 +246,20 @@ class CandidateNativeAudit(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class SuccessorBrowserAudit(unittest.TestCase):
+    def setUp(self):
+        temporary=tempfile.TemporaryDirectory();self.addCleanup(temporary.cleanup);self.root=Path(temporary.name);self.c=candidate();self.commit='a'*40;self.run='123'
+        self.screenshot=self.root/'actual-browser-work.png';self.screenshot.write_bytes(b'synthetic unit-test screenshot bytes')
+        self.record={'status':'PASS','archiveSHA256':self.c['sha256'],'sourceRevisionSHA256':self.c['sourceRevisionSHA256'],'workflowCommit':self.commit,'workflowRun':self.run,'actualBrowserEffects':True,'actualComputeWorker':True,'downloadedBytesChecked':True,'provider':'NOT_RUN_SIMULATED_PROVIDER_TRANSPORT','sandbox':'FIXTURE_NO_DOCKER_QUALIFICATION','independentController':'UNVERIFIED','authority':'none','screenshotSHA256':hashlib.sha256(self.screenshot.read_bytes()).hexdigest()}
+        self.save()
+    def save(self):save(self.root/'evidence.json',self.record)
+    def test_exact_archive_browser_evidence_is_accepted(self):
+        self.assertEqual(auditor.audit_successor(self.root,self.c,self.commit,self.run),self.record)
+    def test_relabelled_or_corrupted_browser_evidence_is_rejected(self):
+        for key,value in [('archiveSHA256','d'*64),('sourceRevisionSHA256','e'*64),('workflowCommit','f'*40),('workflowRun','124'),('provider','live-provider'),('authority','granted')]:
+            original=self.record[key];self.record[key]=value;self.save()
+            with self.subTest(key=key),self.assertRaises(ValueError):auditor.audit_successor(self.root,self.c,self.commit,self.run)
+            self.record[key]=original;self.save()
+        self.screenshot.write_bytes(b'changed')
+        with self.assertRaisesRegex(ValueError,'screenshot'):auditor.audit_successor(self.root,self.c,self.commit,self.run)

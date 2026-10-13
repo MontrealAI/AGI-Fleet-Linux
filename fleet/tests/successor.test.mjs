@@ -92,3 +92,18 @@ test('SUCCESSOR sidecar disk-full failure leaves original and no completed desti
     assert.equal(fs.existsSync(dest),false);assert.equal(fs.readdirSync(a.dir).some(n=>n.startsWith('disk-full')),false);assert.equal((await inspectRequest(req)).request.capsule,req.capsule);
   }finally{await a.close();await n.close();}
 });
+
+
+test('SUCCESSOR sidecars reject mixed or altered receipts before writing and during restore inspection',async()=>{
+  const a=await fixture(root),n=await fixture(root,'node');try{
+    const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs)a.inputs.set(f.name,Buffer.from(f.content));const ar=await run(a.bridge,{request:req,context:ctx}),result=await a.bridge.result(ar.p.key),dest=path.join(a.dir,'mixed-receipt');
+    for(const change of [r=>r.schema='unknown',r=>r.role='employer',r=>r.specHash='a'.repeat(64),r=>r.deliveryHash='b'.repeat(64),r=>r.specification.prompt+='altered',r=>r.independent=true]){
+      const receipt=structuredClone(result.receipt);change(receipt);await assert.rejects(exportSidecar(dest,req.capsule,result.handoff,receipt,a.api),/RECEIPT/);assert.equal(fs.existsSync(dest),false);
+    }
+    await exportSidecar(dest,req.capsule,result.handoff,result.receipt,a.api);
+    const {createHash}=await import('node:crypto'),{canonical}=await import('../successor/vendor/manager/site/assets/successor/safe.mjs'),hash=b=>createHash('sha256').update(b).digest('hex');
+    const bad={...result.receipt,deliveryHash:'c'.repeat(64)},raw=canonical(bad);fs.writeFileSync(path.join(dest,'receipt.json'),raw);
+    const manifest=JSON.parse(fs.readFileSync(path.join(dest,'manifest.json'))),entry=manifest.files.find(f=>f.path==='receipt.json');manifest.totalBytes+=Buffer.byteLength(raw)-entry.bytes;entry.bytes=Buffer.byteLength(raw);entry.sha256=hash(raw);const {sha256,...body}=manifest;manifest.sha256=hash(canonical(body));fs.writeFileSync(path.join(dest,'manifest.json'),canonical(manifest));
+    assert.throws(()=>inspectSidecar(dest),/RECEIPT_BINDING/);await assert.rejects(restoreSidecar(dest,path.join(a.dir,'unsafe-restore'),true),/RECEIPT_BINDING/);assert.equal(fs.existsSync(path.join(a.dir,'unsafe-restore')),false);
+  }finally{await a.close();await n.close();}
+});

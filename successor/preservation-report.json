@@ -3,12 +3,12 @@
   "status": "PASS",
   "baselineCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
   "originalPaths": 5051,
-  "unchanged": 4839,
+  "unchanged": 4836,
   "modified": [
     {
       "path": ".github/workflows/next-release.yml",
       "before": "061830edfde4cb77caf8f4be45e3cb17eb8925b7b8e84f56842e3f23b50b7f48",
-      "after": "da9c5f84d19c35bfbe71b19f7e7bd79fb770ba46b48aa4b6cc28c02015757d23",
+      "after": "be96d08b55db7725c3dd628fa5eaa0cbe2868e031c7a3e712f8414c3b251b555",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -60,6 +60,12 @@
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
+      "path": "engineering/audit-next-evidence.py",
+      "before": "1a6a62a076dab220c1ca708a5472478e7bb54399a30c218f263bfd3d1007868e",
+      "after": "5fd06f7f474a4f81d0771f543b7f0dd9187b2da8f6315e8ee57dc3bdee00a444",
+      "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
+    },
+    {
       "path": "engineering/browser-tests/playwright.config.js",
       "before": "429854ca4029b0b53201c5dca8337315fa13f9316accfd0d3d12643139459ff2",
       "after": "1d379a9907b39e09d92bf3ef0510e9ce0d6b4eaa336e0089166b9d1d754dde43",
@@ -92,13 +98,13 @@
     {
       "path": "engineering/next-release.json",
       "before": "d58742455c297f27a00b9c8330bd6186df4003baa966eb42929eedd452ef4871",
-      "after": "c2bd88d8b9c3b4676d961da8c88a1447aedd5ff96da58968696aeb036b43a955",
+      "after": "cd44dba65132fde13652a79e6d9cb82a680e22742814f6dca300b7cb06728359",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
       "path": "engineering/publish-next-release.py",
       "before": "e667c5e451220ac70b6bbe88e595f6e2c5ccda2c640f24b6e8df4ee9842ef61e",
-      "after": "b7f846a7d1871b9fc2c35f54d65bfb7c2e39c1da2ff8b458891c6bc01080b716",
+      "after": "70d13793801f014cb1346eb97b0bfc02e3dc4c0accf046808ab1d492b3fadee0",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -116,13 +122,13 @@
     {
       "path": "engineering/tests/test_next_publication.py",
       "before": "ead890fa8f9c2c8f26fd391b9270534018b43c6166315882ffec53721046984d",
-      "after": "44053f9ccf66a01a1baefdb73e2c81c305739eb022743871cebc9dc7231e9e52",
+      "after": "cb88b721925459602eab1dda5fd42dd32aa575658d211cdef068464238e0cf5c",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
       "path": "engineering/tests/test_next_validation.py",
       "before": "e61c4517313fe279c6e311b5f74abfdd8af584ec56d214c08e550cbb099c8b52",
-      "after": "c7af0c0ee84b49ce158aa43a52cbf9a53766f851c1329c4581dfa1beeb26aaee",
+      "after": "b1e30610ca487e29dc0546fb2fc7c8137720d80094bc654f876831d77646716a",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -1220,7 +1226,7 @@
     {
       "path": "fleet/source-inventory.json",
       "before": "5955175faeb7bea6fc9623e59d6621247a4f258597e725e658600c011cf9ed68",
-      "after": "ce2ce63d67f032c1047f931c6709c550932c21a76aaa5f951e051e3ff1b1e1ed",
+      "after": "1346b16c66cab7e86e29ac3f18102e485357a10ac20f9c2c67803e77d2983a3a",
       "reason": "Regenerate exact source and role-copy integrity records; no qualification inferred."
     },
     {
@@ -1228,6 +1234,18 @@
       "before": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
       "after": "a177f2a496a7a2fdc3bb7dee8ec96ed4237722a7da3971bbe4452bc8f68efe84",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
+    },
+    {
+      "path": "macos/preview/source-inventory.json",
+      "before": "3d1b27886fec89aa8afed9a9fa34a82c18af79be49cce2e39b5f377e2ea34521",
+      "after": "d856c3033ebec6e7a4bfa3d2b060953859914a9f4dd1c0e896f263feba73d320",
+      "reason": "Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification."
+    },
+    {
+      "path": "macos/preview/tests/test_materialize.py",
+      "before": "088c84d793eca9f9db33b78953a5340b994568a1e8f6b7f7b5590f23423d1cca",
+      "after": "cb516939b3b3877a630a855f745175839a579c93e1f24e2b7718b70ce4316585",
+      "reason": "Compare the materialized basis to the exact current candidate instead of a stale version literal; retain the prior test in successor/history."
     },
     {
       "path": "website/fr.html",

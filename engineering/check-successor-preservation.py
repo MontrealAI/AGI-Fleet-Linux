@@ -6,6 +6,8 @@ ROOT=Path(__file__).resolve().parents[1]
 def sha(b):return hashlib.sha256(b).hexdigest()
 def reason(name):
     p=Path(name)
+    if name=='macos/preview/tests/test_materialize.py':return 'Compare the materialized basis to the exact current candidate instead of a stale version literal; retain the prior test in successor/history.'
+    if name=='macos/preview/source-inventory.json':return 'Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification.'
     if name.startswith('website/'):return 'Add Builder entry point; retain concurrent published-release installation links and existing routes.'
     if name.startswith('engineering/') or name.startswith('.github/workflows/'):return 'Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate.'
     if name=='README.md':return 'Add bilingual Builder entry points without removing installation or release history.'

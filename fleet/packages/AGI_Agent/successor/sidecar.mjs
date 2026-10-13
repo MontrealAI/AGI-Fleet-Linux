@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {validateReceiptBinding} from './receipt.mjs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {fail,keys,parseStrict,canonical} from './vendor/manager/site/assets/successor/safe.mjs';
@@ -20,10 +21,11 @@ export function inspectSidecar(root){
   fail(total===manifest.totalBytes,'FLEET_SIDECAR_LIMIT');
   const actual=[];function walk(dir,prefix=''){for(const e of fs.readdirSync(dir,{withFileTypes:true})){fail(!e.isSymbolicLink(),'FLEET_SIDECAR_PATH');const name=prefix+e.name;if(e.isDirectory())walk(path.join(dir,e.name),name+'/');else actual.push(name);}}
   walk(root);fail(actual.length===manifest.files.length+1&&actual.every(n=>n==='manifest.json'||seen.has(n.toLowerCase())),'FLEET_SIDECAR_EXTRA');
+  if(seen.has('handoff.json')||seen.has('receipt.json')){fail(seen.has('handoff.json')&&seen.has('receipt.json'),'FLEET_SIDECAR_MISSING');validateReceiptBinding(parseStrict(bytes(checkedFile(root,'handoff.json'),FILE_LIMIT).toString(),FILE_LIMIT),parseStrict(bytes(checkedFile(root,'receipt.json'),1000000).toString(),1000000));}
   return manifest;
 }
 export async function exportSidecar(destination,capsule,handoff,receipt,studioAPI){
-  await inspectCapsule(capsule);studioAPI.validateHandoff(handoff);
+  await inspectCapsule(capsule);studioAPI.validateHandoff(handoff);validateReceiptBinding(handoff,receipt);
   const {files}=studioAPI.validateBundle(handoff.specification,Buffer.from(handoff.delivery));
   fail(!fs.existsSync(destination),'OUTPUT_EXISTS');directory(path.dirname(path.resolve(destination)));
   const temporary=path.resolve(destination)+'.partial-'+crypto.randomUUID();fs.mkdirSync(temporary,{mode:0o700});const rows=[];

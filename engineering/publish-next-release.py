@@ -42,6 +42,11 @@ def validate(metadata, audit, commit):
     require(audit['sourceRevisionSHA256'] == metadata['sourceRevisionSHA256']
             and audit['physicalQualification'] == 'NOT_RUN' and audit['architectures'] == ['x64', 'arm64'],
             'Audit source or qualification scope differs')
+    successor = audit.get('successorAcceptance', {})
+    require(successor.get('status') == 'PASS' and successor.get('archiveSHA256') == metadata['sha256']
+            and successor.get('sourceRevisionSHA256') == metadata['sourceRevisionSHA256']
+            and successor.get('workflowCommit') == commit and str(successor.get('workflowRun')) == run_id
+            and successor.get('authority') == 'none', 'Saved-archive SUCCESSOR acceptance differs')
     expected = specification['native']
     integration = specification['integration']
     require(audit.get('version') == metadata['version'] and audit.get('integrationTarget') == integration,
