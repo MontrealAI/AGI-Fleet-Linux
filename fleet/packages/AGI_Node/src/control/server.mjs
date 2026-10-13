@@ -19,7 +19,11 @@ export async function createControlServer(
   controller,
   { port = 8787, launchSecret = token(), onQuit = null } = {},
 ) {
-  const successor = new SuccessorController(controller, 'node', {studioSpec,validateHandoff,validateBundle,computerVerdict});
+  let successorAdapter;
+  const successor = () => {
+    ensure(typeof controller.home === 'string' && path.isAbsolute(controller.home), 'FLEET_HOME_REQUIRED');
+    return successorAdapter ??= new SuccessorController(controller, 'node', {studioSpec,validateHandoff,validateBundle,computerVerdict});
+  };
   const sessions = new Map(),
     bootstraps = new Map(),
     attempts = new Map();
@@ -195,8 +199,8 @@ export async function createControlServer(
         else if (url.pathname === "/api/identity")
           json(controller.operations.identity());
         else if (url.pathname === "/api/report") json(controller.report());
-        else if (url.pathname === "/api/successor") json(successor.status());
-        else if (url.pathname === "/api/successor/runtime") json(await successor.health());
+        else if (url.pathname === "/api/successor") json(successor().status());
+        else if (url.pathname === "/api/successor/runtime") json(await successor().health());
         else if (url.pathname === "/api/studio") json(controller.studio.status());
         else if (url.pathname === "/api/studio/export") json(controller.studio.export(url.searchParams.get("id"),url.searchParams.get("kind")));
         else if (url.pathname === "/api/companion/public-web-report") {ensure(!url.search,"METHOD_REJECTED");json(controller.companionPublicWebReport());}
@@ -227,13 +231,13 @@ export async function createControlServer(
         setTimeout(() => void onQuit(), 100);
         return;
       }
-      if (url.pathname === "/api/successor/revoke") { json(successor.revoke()); return; }
+      if (url.pathname === "/api/successor/revoke") { json(successor().revoke()); return; }
       const actions = {
-        "/api/successor/prepare": ["Inspecting the SUCCESSOR work", () => successor.prepare(input,session.csrf)],
-        "/api/successor/execute": ["Authorizing the exact SUCCESSOR work", () => successor.execute(input,session.csrf)],
-        "/api/successor/revoke": ["Revoking pending SUCCESSOR choices", () => successor.revoke()],
-        "/api/successor/stop": ["Stopping SUCCESSOR work", () => successor.stop()],
-        "/api/successor/result": ["Checking SUCCESSOR results", () => successor.result(input.key,input.review??null)],
+        "/api/successor/prepare": ["Inspecting the SUCCESSOR work", () => successor().prepare(input,session.csrf)],
+        "/api/successor/execute": ["Authorizing the exact SUCCESSOR work", () => successor().execute(input,session.csrf)],
+        "/api/successor/revoke": ["Revoking pending SUCCESSOR choices", () => successor().revoke()],
+        "/api/successor/stop": ["Stopping SUCCESSOR work", () => successor().stop()],
+        "/api/successor/result": ["Checking SUCCESSOR results", () => successor().result(input.key,input.review??null)],
         "/api/studio/start": ["Starting Studio work", () => controller.studio.start(input)],
         "/api/studio/cancel": ["Stopping Studio work", () => controller.studio.cancel()],
         "/api/studio/remove": ["Removing saved Studio work", () => controller.studio.remove(input.id)],

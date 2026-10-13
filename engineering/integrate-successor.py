@@ -16,10 +16,19 @@ for role in ('AGI_Agent', 'AGI_Node'):
     p = app / 'src/control/companion.mjs'
     p.write_text(replace_once(p.read_text(), 'stopped:h.stopped===true,publicWeb}', 'stopped:h.stopped===true,publicWeb,runtime:h.runtime??null}'))
     p = app / 'src/control/server.mjs'
-    s = p.read_text()
+    s = p.read_text().replace('successor().', 'successor.')
     if 'import {SuccessorController}' not in s:
         s = "import {SuccessorController} from '../../successor/controller.mjs';\nimport {studioSpec,validateHandoff} from '../studio.mjs';\nimport {validateBundle,computerVerdict} from '../artifacts.mjs';\n" + s
-    s = replace_once(s, '  const sessions = new Map(),', f"  const successor = new SuccessorController(controller, '{role_id}', {{studioSpec,validateHandoff,validateBundle,computerVerdict}});\n  const sessions = new Map(),")
+    eager = f"  const successor = new SuccessorController(controller, '{role_id}', {{studioSpec,validateHandoff,validateBundle,computerVerdict}});"
+    lazy = f"""  let successorAdapter;
+  const successor = () => {{
+    ensure(typeof controller.home === 'string' && path.isAbsolute(controller.home), 'FLEET_HOME_REQUIRED');
+    return successorAdapter ??= new SuccessorController(controller, '{role_id}', {{studioSpec,validateHandoff,validateBundle,computerVerdict}});
+  }};"""
+    if eager in s:
+        s = s.replace(eager, lazy)
+    elif lazy not in s:
+        s = replace_once(s, '  const sessions = new Map(),', lazy + '\n  const sessions = new Map(),')
     s = replace_once(s, '"/studio.js": ["studio.js", "text/javascript; charset=utf-8"],', '"/studio.js": ["studio.js", "text/javascript; charset=utf-8"],\n          "/successor.js": ["successor.js", "text/javascript; charset=utf-8"],')
     s = replace_once(s, 'else if (url.pathname === "/api/studio")', 'else if (url.pathname === "/api/successor") json(successor.status());\n        else if (url.pathname === "/api/successor/runtime") json(await successor.health());\n        else if (url.pathname === "/api/studio")')
     s = s.replace('url.pathname === "/api/studio/start" ? 128 * 1024 * 1024', '["/api/studio/start","/api/successor/prepare"].includes(url.pathname) ? 128 * 1024 * 1024')
@@ -35,6 +44,8 @@ for role in ('AGI_Agent', 'AGI_Node'):
     if 'import {parseStrict}' not in s:
         s = "import {parseStrict} from '../../successor/vendor/manager/site/assets/successor/safe.mjs';\n" + s
     s = s.replace('return JSON.parse(Buffer.concat(parts).toString("utf8"));', 'const raw = Buffer.concat(parts).toString("utf8");\n      return req.url.startsWith("/api/successor/") ? parseStrict(raw,limit) : JSON.parse(raw);')
+    for method in ('status', 'health', 'prepare', 'execute', 'revoke', 'stop', 'result'):
+        s = s.replace('successor.' + method + '(', 'successor().' + method + '(')
     p.write_text(s)
     p = app / 'app/index.html'
     p.write_text(replace_once(p.read_text(), '<script src="/studio.js"></script>', '<script src="/studio.js"></script>\n    <script src="/successor.js"></script>'))
