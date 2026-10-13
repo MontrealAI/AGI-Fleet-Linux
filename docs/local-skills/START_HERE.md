@@ -10,6 +10,10 @@ It is **not a qualified operator release**. The full handoff remains open. Linux
 
 Use Node >=24.19.0 and <25; the existing evaluated target remains 24.21.0. Linux native tests target x86-64 and ARM64 with the distribution's trusted `bubblewrap` and `util-linux` packages and working user namespaces. Do not disable operating-system security to make a failed diagnostic pass. On an unsupported host, configuration inspection remains useful; execution stays blocked.
 
+Ubuntu 24.04 can additionally require its packaged, capability-denying `bwrap-userns-restrict` AppArmor profile. The engineering workflow loads that distribution profile only on disposable GitHub-hosted VMs and records its digest and unchanged namespace restrictions. It neither disables AppArmor nor shares the host network. The native tests still require blocked host-file access, immutable inputs, isolated networking, zero child capabilities, and actual output bytes. Loading a prerequisite is not a passing test. Earlier failures remain in the validation record.
+
+The CI provisioner is intentionally unavailable on operator machines. An administrator must assess the distribution profile and other applications using Bubblewrap before changing an everyday computer. See [Ubuntu's explanation of the purpose-built Bubblewrap policy](https://discourse.ubuntu.com/t/understanding-apparmor-user-namespace-restriction/58007). Guided operator provisioning remains part of the unfinished installer work.
+
 ```sh
 npm ci --prefix fleet --ignore-scripts --omit=dev
 node local-runtime/validate.mjs

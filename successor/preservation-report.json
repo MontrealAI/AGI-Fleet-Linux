@@ -104,7 +104,7 @@
     {
       "path": "engineering/next-release.json",
       "before": "d58742455c297f27a00b9c8330bd6186df4003baa966eb42929eedd452ef4871",
-      "after": "d9eadb2735641d4777aeabe845ad054928990216b7c7c4e871d037162df30f76",
+      "after": "9d77243f6c6e1fc39e06419671f317f951138b6e6adf4160bb8d0eee82a2447a",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -278,13 +278,13 @@
     {
       "path": "fleet/packages/AGI_Agent/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Agent/src/control/server.mjs",
       "before": "a8016e111a06d27f71881b0224d56b01616d0431df6d887771662d9c99e6cc17",
-      "after": "6653339ab08310c2538d87fd700a47027ed46b06a1c949adece0e1510274d084",
+      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -398,13 +398,13 @@
     {
       "path": "fleet/packages/AGI_Employer/packages/AGI_Agent/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Employer/packages/AGI_Agent/src/control/server.mjs",
       "before": "e90d688d0d8b26c4bb40ca9fa5d5e489cae9d269ad4050100bbd701c95bb6c1a",
-      "after": "6653339ab08310c2538d87fd700a47027ed46b06a1c949adece0e1510274d084",
+      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -446,13 +446,13 @@
     {
       "path": "fleet/packages/AGI_Employer/packages/AGI_Node/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Employer/packages/AGI_Node/src/control/server.mjs",
       "before": "764149b229280779c7f531e8c01b06f7108a960db7864b597291c2fe45195d74",
-      "after": "559e8a0d868a3967e0e243df57bac09e403f48b6cf73bec6495956f21c694a42",
+      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -590,13 +590,13 @@
     {
       "path": "fleet/packages/AGI_Evidence/packages/AGI_Agent/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Evidence/packages/AGI_Agent/src/control/server.mjs",
       "before": "e90d688d0d8b26c4bb40ca9fa5d5e489cae9d269ad4050100bbd701c95bb6c1a",
-      "after": "6653339ab08310c2538d87fd700a47027ed46b06a1c949adece0e1510274d084",
+      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -638,13 +638,13 @@
     {
       "path": "fleet/packages/AGI_Evidence/packages/AGI_Node/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Evidence/packages/AGI_Node/src/control/server.mjs",
       "before": "764149b229280779c7f531e8c01b06f7108a960db7864b597291c2fe45195d74",
-      "after": "559e8a0d868a3967e0e243df57bac09e403f48b6cf73bec6495956f21c694a42",
+      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -782,13 +782,13 @@
     {
       "path": "fleet/packages/AGI_Moderator/packages/AGI_Agent/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Moderator/packages/AGI_Agent/src/control/server.mjs",
       "before": "e90d688d0d8b26c4bb40ca9fa5d5e489cae9d269ad4050100bbd701c95bb6c1a",
-      "after": "6653339ab08310c2538d87fd700a47027ed46b06a1c949adece0e1510274d084",
+      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -830,13 +830,13 @@
     {
       "path": "fleet/packages/AGI_Moderator/packages/AGI_Node/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Moderator/packages/AGI_Node/src/control/server.mjs",
       "before": "764149b229280779c7f531e8c01b06f7108a960db7864b597291c2fe45195d74",
-      "after": "559e8a0d868a3967e0e243df57bac09e403f48b6cf73bec6495956f21c694a42",
+      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -992,13 +992,13 @@
     {
       "path": "fleet/packages/AGI_Node/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Node/src/control/server.mjs",
       "before": "bb77725f15d09bf79cc0be0626a47d3bbb7b0e21289083e958ab99c00d19de37",
-      "after": "559e8a0d868a3967e0e243df57bac09e403f48b6cf73bec6495956f21c694a42",
+      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -1112,13 +1112,13 @@
     {
       "path": "fleet/packages/AGI_Recovery/packages/AGI_Agent/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Recovery/packages/AGI_Agent/src/control/server.mjs",
       "before": "e90d688d0d8b26c4bb40ca9fa5d5e489cae9d269ad4050100bbd701c95bb6c1a",
-      "after": "6653339ab08310c2538d87fd700a47027ed46b06a1c949adece0e1510274d084",
+      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -1160,13 +1160,13 @@
     {
       "path": "fleet/packages/AGI_Recovery/packages/AGI_Node/src/control/operational-state.mjs",
       "before": "0251e488dbed929959228be3fd374adc92e27c4bcca11c3eb765952b9d32867f",
-      "after": "9deb47669e1c1c17fa1b40cc0c07d1cc1f87f696bc78361c7f0c2230296a6d1e",
+      "after": "a98d52c85122ebab68142c2ee4d8bfc2dd7938e871e1b1138eccb1b48c8f55b4",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Recovery/packages/AGI_Node/src/control/server.mjs",
       "before": "764149b229280779c7f531e8c01b06f7108a960db7864b597291c2fe45195d74",
-      "after": "559e8a0d868a3967e0e243df57bac09e403f48b6cf73bec6495956f21c694a42",
+      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -1232,7 +1232,7 @@
     {
       "path": "fleet/source-inventory.json",
       "before": "5955175faeb7bea6fc9623e59d6621247a4f258597e725e658600c011cf9ed68",
-      "after": "c2afed1b2dbfe27da2ed6f426f1ef7e332f9db998e3ef3bd732c713c08d50057",
+      "after": "2c46392c228122f8958e747b75d48cf124f2b49d72d46650372ca5bf04da3081",
       "reason": "Regenerate exact source and role-copy integrity records; no qualification inferred."
     },
     {
@@ -1244,7 +1244,7 @@
     {
       "path": "macos/preview/source-inventory.json",
       "before": "3d1b27886fec89aa8afed9a9fa34a82c18af79be49cce2e39b5f377e2ea34521",
-      "after": "856b2be4ad79fd1a2ad5f5372c409ef792b5bf0050704822a2e10537cdc89fb7",
+      "after": "7f6a1023cac6b34406ad60da8317055af9aa21e2b4893d21a8ba130e1968a58b",
       "reason": "Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification."
     },
     {

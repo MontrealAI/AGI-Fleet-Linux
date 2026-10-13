@@ -73,15 +73,37 @@ test('SUCCESSOR grants bind session, scope, expiry, exact runtime, confirmation,
 
 test('SUCCESSOR installed routes retain Host, Origin, session, CSRF and strict JSON boundaries',async()=>{
   const a=await fixture(root);let server;try{
+    const store=path.join(a.controller.home,'successor-execution');fs.rmdirSync(store);
     const {createControlServer}=await import('../packages/AGI_Agent/src/control/server.mjs');server=await createControlServer(a.controller,{port:0});const url=new URL(server.url),origin=url.origin;
+    assert.equal(fs.existsSync(store),false);
     assert.equal((await fetch(origin+'/api/successor')).status,401);
     const session=await fetch(origin+'/api/session',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify({token:url.hash.slice(1)})});const cookie=session.headers.get('set-cookie').split(';')[0],{csrf}=await session.json();
     const post=(body,patch={})=>fetch(origin+'/api/successor/execute',{method:'POST',headers:{Origin:origin,Cookie:cookie,'Content-Type':'application/json','x-agi-csrf':csrf,...patch},body});
     for(const patch of [{Origin:'https://montrealai.github.io'},{'x-agi-csrf':'other'}]){const response=await post('{}',patch);assert.ok(response.status>=400);assert.match(JSON.stringify(await response.json()),/HOST|ORIGIN|CSRF/);}
     const http=await import('node:http');const hostile=await new Promise((resolve,reject)=>{const req=http.request(origin+'/api/successor',{headers:{Host:'attacker.invalid',Cookie:cookie}},res=>{let text='';res.on('data',b=>text+=b);res.on('end',()=>resolve({status:res.statusCode,text}));});req.on('error',reject);req.end();});assert.equal(hostile.status,403);assert.match(hostile.text,/HOST/);
     const duplicate=await post('{"confirm":false,"confirm":true}');assert.equal(duplicate.status,400);assert.match(JSON.stringify(await duplicate.json()),/REQUEST_JSON_INVALID/);
+    assert.equal(fs.existsSync(store),false);
+    assert.equal((await fetch(origin+'/api/successor',{headers:{Cookie:cookie}})).status,200);assert.equal(fs.existsSync(store),true);
+    assert.equal((await fetch(origin+'/successor.js')).status,200);
     assert.equal(a.worker.state.calls.length,0);
   }finally{await server?.close();await a.close();}
+});
+
+test('Studio backup size failures retain the legacy contract and actionable public guidance',async()=>{
+  const {default:os}=await import('node:os'),home=fs.mkdtempSync(path.join(os.tmpdir(),'successor-backup-'));
+  try{
+    fs.mkdirSync(path.join(home,'data'));fs.mkdirSync(path.join(home,'work-studio'));
+    const file=path.join(home,'work-studio','large');fs.writeFileSync(file,'');fs.truncateSync(file,14*1024*1024+1);
+    for(const role of ['AGI_Agent','AGI_Node']){
+      const {captureOperational}=await import(`../packages/${role}/src/control/operational-state.mjs`),{publicError}=await import(`../packages/${role}/src/control/messages.mjs`);
+      assert.throws(()=>captureOperational({home,kind:role==='AGI_Agent'?'agent':'node'}),error=>{
+        assert.match(error.message,/BACKUP_TOO_LARGE/);assert.equal(error.code,'BACKUP_STUDIO_EXPORT_REQUIRED');
+        assert.equal(publicError(error).code,'BACKUP_STUDIO_EXPORT_REQUIRED');return true;
+      });
+      const capture=captureOperational({home,kind:role==='AGI_Agent'?'agent':'node',excludeStudio:true});
+      assert.deepEqual(capture.excludedTrees,['work-studio']);assert.equal(fs.statSync(file).size,14*1024*1024+1);
+    }
+  }finally{fs.rmSync(home,{recursive:true,force:true});}
 });
 
 test('SUCCESSOR sidecars retain a maximum Studio file and reject missing, traversal, aliases, overflow and extra content',async()=>{

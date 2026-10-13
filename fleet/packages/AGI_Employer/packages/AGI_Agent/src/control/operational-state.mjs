@@ -39,7 +39,10 @@ export function captureOperational({home,dataDir=path.join(home,'data'),kind,exc
   }
   safePath(name,kind);
   ensure(stat.isFile()&&stat.nlink===1,'BACKUP_STATE_UNSAFE_FILE');
-  ensure(files.length<MAX_FILES&&stat.size<=MAX_FILE&&bytes+stat.size<=MAX_BYTES,name.startsWith('work-studio/')?'BACKUP_STUDIO_EXPORT_REQUIRED':'BACKUP_TOO_LARGE');
+  if(!(files.length<MAX_FILES&&stat.size<=MAX_FILE&&bytes+stat.size<=MAX_BYTES)){
+   const studio=name.startsWith('work-studio/');
+   throw Object.assign(Error(studio?'BACKUP_TOO_LARGE: BACKUP_STUDIO_EXPORT_REQUIRED':'BACKUP_TOO_LARGE'),{code:studio?'BACKUP_STUDIO_EXPORT_REQUIRED':'BACKUP_TOO_LARGE'});
+  }
   const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let content;
   try{
    const before=fs.fstatSync(fd);
