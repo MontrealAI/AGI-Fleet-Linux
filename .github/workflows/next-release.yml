@@ -47,6 +47,7 @@ jobs:
       - name: Build and validate the deterministic saved archive
         run: python3 engineering/build-next-release.py --output "$RUNNER_TEMP/candidate-dist"
       - name: Retain exact candidate and packaging evidence
+        if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         with:
           name: linux-next-candidate

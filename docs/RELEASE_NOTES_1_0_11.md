@@ -9,7 +9,7 @@ A qualification prerelease for controlled fresh installation on Ubuntu Desktop 2
 - Publication rejects mismatched build commits, changed release specifications, mixed workflow runs, wrong Manager commits and incomplete aggregate log coverage. Negative tests exercise these rejection paths.
 - The complete installer includes the current clean-install, recovery, integration and existing-instance commissioning guides. All seven edition version records are coordinated at 1.0.11.
 
-Fleet production executable source, runtime dependencies, contract artifacts and test assertions are unchanged from Linux 1.0.10. Contract production source remains compatible; this release does not deploy or migrate contracts. Existing releases and historical evidence remain intact.
+Fleet runtime logic, dependencies, contract artifacts and test assertions are unchanged from Linux 1.0.10. Installer, UI and retained launcher version labels are coordinated at 1.0.11. Contract production source remains compatible; this release does not deploy or migrate contracts. Existing releases and historical evidence remain intact.
 
 ## Exact-archive acceptance required for publication
 
