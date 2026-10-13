@@ -120,3 +120,11 @@ jobs:
           engineering/browser-tests/node_modules/.bin/playwright install --with-deps --only-shell chromium
       - name: Exercise English and French controls, reflow and accessibility
         run: node --test local-runtime/tests/browser/dashboard.test.mjs
+      - name: Retain non-secret dashboard observations
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: local-dashboard-observations
+          path: ${{ runner.temp }}/local-dashboard-evidence/
+          if-no-files-found: warn
+          retention-days: 30

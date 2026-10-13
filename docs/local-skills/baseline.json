@@ -6,8 +6,9 @@
   "dependency": {
     "pullRequest": 25,
     "stateAtInspection": "open",
-    "head": "e84ff1c3d5ce129f2c953a3216dfa36338c7a905",
-    "branch": "codex/successor-omega-fleet-20261013"
+    "head": "63ca8005ebb1622d3a060eaf14a2ec3301c9d072",
+    "branch": "codex/successor-omega-fleet-20261013",
+    "initiallyInspectedHead": "e84ff1c3d5ce129f2c953a3216dfa36338c7a905"
   },
   "publishedTracks": {
     "linux": "v1.0.11-qualification",
@@ -19,7 +20,7 @@
     "removals": [],
     "publicContractChanges": false,
     "publishedAssetsChanged": false,
-    "verificationCommand": "git diff --name-status e84ff1c3d5ce129f2c953a3216dfa36338c7a905 HEAD"
+    "verificationCommand": "git diff --name-status 63ca8005ebb1622d3a060eaf14a2ec3301c9d072 HEAD"
   },
   "versionDecision": "Separate unpublished 0.1.0-alpha.1 development identity. No major bump, tag reuse or automatic publication.",
   "fullHandoffComplete": false

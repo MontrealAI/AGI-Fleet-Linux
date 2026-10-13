@@ -7,7 +7,7 @@ import {ROOT,need,digest,canonical,parseStrict} from '../contracts.mjs';
 const BIN='/usr/bin/bwrap', LIMIT='/usr/bin/prlimit';
 function trusted(file,own=false) { const s=fs.statSync(file);need(s.isFile()&&(s.uid===0||own&&s.uid===process.getuid())&&!(s.mode&0o022),'SANDBOX_EXECUTABLE_UNTRUSTED');return fs.realpathSync(file); }
 export function sandboxArguments() {
-  const a=['--unshare-all','--die-with-parent','--new-session','--cap-drop','ALL','--clearenv','--setenv','PATH','/usr/bin','--setenv','HOME','/nonexistent','--setenv','LANG','C.UTF-8','--proc','/proc','--dev','/dev','--tmpfs','/tmp'];
+  const a=['--unshare-all','--die-with-parent','--new-session','--cap-drop','ALL','--clearenv','--setenv','PATH','/usr/bin','--setenv','HOME','/nonexistent','--setenv','LANG','C.UTF-8','--proc','/proc','--dev','/dev','--tmpfs','/tmp','--chdir','/tmp'];
   for(const dir of ['/lib','/lib64','/usr/lib','/usr/lib64'])if(fs.existsSync(dir))a.push('--ro-bind',dir,dir);
   a.push('--ro-bind',trusted(process.execPath,true),'/node','--dir','/app','--dir','/app/fleet');
   for(const rel of ['local-runtime','fleet/shared','fleet/successor','fleet/node_modules']) {
@@ -23,7 +23,11 @@ export class LinuxSandbox {
       need(process.versions.node.split('.')[0]==='24'&&Number(process.versions.node.split('.')[1])>=19,'NODE_VERSION_UNSUPPORTED');
       trusted(BIN);trusted(LIMIT);
       const p=spawnSync(BIN,[...sandboxArguments(),'--','/node','--version'],{encoding:'utf8',timeout:5000,maxBuffer:8192,env:{PATH:'/usr/bin:/bin'}});
-      need(!p.error&&p.status===0&&p.stdout.trim()===process.version,'SANDBOX_UNAVAILABLE');
+      if(p.error||p.status!==0||p.stdout.trim()!==process.version){
+        const reason=String(p.stderr||'');
+        const code=p.error?.code==='ETIMEDOUT'?'SANDBOX_PROBE_TIMEOUT':/namespace|Operation not permitted|Permission denied/i.test(reason)?'SANDBOX_NAMESPACE_DENIED':/chdir/i.test(reason)?'SANDBOX_WORKING_DIRECTORY':/execvp|shared libraries|No such file/i.test(reason)?'SANDBOX_LOADER_UNAVAILABLE':'SANDBOX_UNAVAILABLE';
+        need(false,code);
+      }
       return {...report,supported:true,observedAt:Date.now(),identity:digest({backend:report.backend,node:digest(fs.readFileSync(process.execPath)),sandbox:digest(fs.readFileSync(BIN)),platform:process.platform,arch:process.arch,os:os.release(),boot:fs.readFileSync('/proc/sys/kernel/random/boot_id','utf8').trim()})};
     }catch(e){return {...report,code:e.code==='ENOENT'?'SANDBOX_PREREQUISITE_MISSING':e.code||e.message,help:'Use the documented Linux prerequisites and rerun doctor. No host-shell fallback is permitted. Browser, desktop and macOS local execution require separate implementation and qualification.'};}
   }

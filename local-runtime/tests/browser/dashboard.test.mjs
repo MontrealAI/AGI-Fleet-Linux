@@ -14,7 +14,7 @@ test('real EN/FR dashboard: authenticated onboarding, keyboard, mobile reflow an
   try{
     const {url}=await s.start();
     for(const lang of ['en','fr']){
-      const {token}=runtime.issueClient(),page=await browser.newPage();await page.goto(url);if(lang==='fr')await page.locator('#language').click();
+      const {token}=runtime.issueClient(),context=await browser.newContext(),page=await context.newPage();await page.goto(url);if(lang==='fr')await page.locator('#language').click();
       await page.locator('#token').fill(token);await page.locator('#connect').click();await page.locator('#connected').waitFor({state:'visible'});
       assert.equal(await page.locator('html').getAttribute('lang'),lang);assert.equal(await page.evaluate(()=>localStorage.length),0);
       await page.locator('#doctor').click();await page.waitForFunction(()=>document.getElementById('diagnostic').textContent.includes('agi-fleet/local-host/v1'));
@@ -24,7 +24,11 @@ test('real EN/FR dashboard: authenticated onboarding, keyboard, mobile reflow an
       else assert.match(await page.locator('#readiness').innerText(),/SANDBOX_|PLATFORM_|NODE_/);
       await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.activeElement!==document.body),true);
       const a=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();assert.deepEqual(a.violations.map(v=>({id:v.id,nodes:v.nodes.length})),[]);
-      await page.setViewportSize({width:360,height:800});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);await page.close();
+      const evidence=process.env.RUNNER_TEMP&&path.join(process.env.RUNNER_TEMP,'local-dashboard-evidence');
+      if(evidence){fs.mkdirSync(evidence,{recursive:true});await page.screenshot({path:path.join(evidence,lang+'-desktop.png'),fullPage:true});}
+      await page.setViewportSize({width:360,height:800});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);
+      if(evidence)await page.screenshot({path:path.join(evidence,lang+'-mobile.png'),fullPage:true});
+      await context.close();
     }
   }finally{s.server.closeAllConnections();await new Promise(r=>s.server.close(r));runtime.close();fs.rmSync(directory,{recursive:true,force:true});await browser.close();}
 });

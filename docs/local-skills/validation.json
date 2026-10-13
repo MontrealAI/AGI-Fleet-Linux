@@ -1,7 +1,7 @@
 {
   "schema": "agi-fleet/local-validation/v1",
   "observedAt": "2026-10-13",
-  "dependencyHead": "e84ff1c3d5ce129f2c953a3216dfa36338c7a905",
+  "dependencyHead": "63ca8005ebb1622d3a060eaf14a2ec3301c9d072",
   "nodeObserved": "24.19.0",
   "environment": "Linux x64 constrained execution session; not a physical target",
   "skills": {
@@ -63,5 +63,36 @@
     "uncertain-run reconciliation",
     "full resource and lifecycle enforcement"
   ],
-  "physical": "NOT_RUN"
+  "physical": "NOT_RUN",
+  "initialLocalDependencyHead": "e84ff1c3d5ce129f2c953a3216dfa36338c7a905",
+  "refreshedLocalRuntime": {
+    "tests": 25,
+    "passed": 24,
+    "failed": 1,
+    "skipped": 0,
+    "failedGate": "Unix-socket listen EPERM"
+  },
+  "githubInitialRun": {
+    "url": "https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38459490845",
+    "pullRequestHead": "816395f81418dc6fc1109c4f60bb54c374155288",
+    "sourceTested": "GitHub pull-request merge commit",
+    "platforms": [
+      "Linux x64",
+      "Linux ARM64"
+    ],
+    "runtimeTestsPerPlatform": {
+      "tests": 25,
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0
+    },
+    "nativeTestsPerPlatform": {
+      "tests": 2,
+      "passed": 0,
+      "failed": 2,
+      "reason": "SANDBOX_UNAVAILABLE; cause under diagnosis"
+    },
+    "browser": "Executed in Chromium; fixture failed because axe requires an explicit browser context. Fix awaiting rerun.",
+    "sourceInventoryAndEngineering": "Passed on both runners"
+  }
 }

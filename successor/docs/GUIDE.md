@@ -50,6 +50,20 @@ node successor/cli.mjs restore-pack NEW_PACK NEW_DIRECTORY --confirm
 
 Inspection never executes imported code. Keep the entire directory together. Missing, extra, changed, linked or case-colliding files fail inspection. Interrupted exports use a temporary directory and do not overwrite a good export. Existing encrypted wallet backups remain separately bounded; explicitly exclude large Studio work only after exporting it. Wallet backup does not include `successor-execution` records or these portable sidecars. Export them separately.
 
+A SUCCESSOR pack must belong to one project: its capsule retains the plan named by the handoff, its immutable mission inputs match that plan, and its receipt and every artifact match the delivered bytes. For the two local mission families, the artifacts must reproduce the incumbent or proposed reusable method. Custom public Studio work can retain larger, plan-bound artifacts as historical evidence; format and integrity checks do not make them a locally executable or qualified candidate. Keep arbitrary rejected work through Studio's existing handoff/receipt and file exports. A mismatched project, missing plan or altered reusable method blocks pack creation, inspection and restoration. The terminal `request` command records the plan in its new request capsule without changing the original file.
+
+Un paquet SUCCESSOR doit conserver le plan de ce projet, les mêmes entrées immuables et les octets exacts du travail et du reçu. Un autre projet ou une méthode modifiée bloque l’exportation et la restauration. Les grandes pièces jointes d’une mission personnalisée restent des preuves historiques ; leur intégrité ne leur confère aucune qualification ni autorisation.
+
+For custom public work, first save your custom mission and complete Studio v2 specification, then run:
+
+```sh
+node successor/cli.mjs prepare-custom mission.json studio-spec.json 100 NEW_PROJECT
+```
+
+This creates a new capsule and plan that commit to the entire specification, including input references, deliverables, requirements, criteria, runtime identities and limits. It preserves your original input description and parent reference; the new specification names the new plan as its parent. Review `NEW_PROJECT/specification.json`, import it into the existing public Studio, and separately authorize execution and review. Export with `NEW_PROJECT/capsule.json` and the resulting handoff and receipt. The amount is an explicit USDC planning allowance; preparation spends nothing. Original files stay unchanged. Changing the specification requires preparing a new project before execution. An older custom capsule without this binding can still use all existing Studio exports, but cannot claim a plan-bound SUCCESSOR pack.
+
+Pour un travail public personnalisé, cette commande crée un nouveau projet qui conserve la spécification complète, les entrées, les livrables et leurs critères. Examinez `specification.json`, importez-le dans le Studio public existant, puis autorisez séparément l’exécution et la révision. Le montant est un budget de planification explicite en USDC ; aucune dépense n’est autorisée. Les fichiers originaux sont conservés. Une modification de la spécification exige un nouveau projet avant l’exécution.
+
 ## Boundaries and support
 
 Public v2 work, dedicated-account native v3 work, Linux and Mac qualification, local correctness, reviewer independence, payment and permission remain distinct. Physical installation, live OAuth/provider use, real application competence, independent controllers, actual invoices, older-user and assistive-technology sessions, and endurance require their own observed evidence. The approximately US$40-trillion annual computer-work thesis is a team ambition/estimate, not measured market coverage or automation performance.
