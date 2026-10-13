@@ -19,7 +19,7 @@ export function sourceIdentity() {
     else {need(s.isFile()&&s.size<=8_000_000,'SOURCE_FILE_INVALID');entries.push([rel,digest(fs.readFileSync(file))]);}
   }
   // Bind the facade plus every reused business/security module; never modify Fleet seals.
-  for(const rel of ['local-runtime','role-skills','local-dashboard','fleet/shared','fleet/successor','fleet/node_modules'])walk(rel);
+  for(const rel of ['local-runtime','role-skills','local-dashboard','fleet/shared','fleet/successor','fleet/node_modules','fleet/packages/AGI_Agent/src/admission-core','fleet/packages/AGI_Node/src'])walk(rel);
   entries.push(['fleet/package-lock.json',digest(fs.readFileSync(path.join(ROOT,'fleet/package-lock.json')))]);
   return digest(entries);
 }

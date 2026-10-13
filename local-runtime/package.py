@@ -12,7 +12,7 @@ def build(output):
     if output.exists() or output.is_relative_to(ROOT):
         raise ValueError('Use an absent output directory outside the checkout')
     entries = {}
-    for relative in ['local-runtime', 'local-dashboard', 'role-skills', 'docs/local-skills', 'fleet/shared', 'fleet/successor', 'fleet/node_modules']:
+    for relative in ['local-runtime', 'local-dashboard', 'role-skills', 'docs/local-skills', 'fleet/shared', 'fleet/successor', 'fleet/node_modules', 'fleet/packages/AGI_Agent/src/admission-core', 'fleet/packages/AGI_Node/src']:
         base = ROOT / relative
         if not base.is_dir():
             raise ValueError('Missing locked dependencies or source: ' + relative)

@@ -220,7 +220,7 @@
       "command": "node --test local-runtime/tests/browser/dashboard.test.mjs",
       "fixture": "browser/dashboard.test.mjs",
       "expected": "EN/FR onboarding, keyboard/screen-reader paths, zoom/reflow, failure recovery, and both deployment modes pass functional/accessibility checks.",
-      "actual": "Chromium EN/FR onboarding, keyboard, axe WCAG tags and mobile reflow pass on CI head f5e20a1; screenshots inspected. A later UI correction is awaiting exact-head rerun. Human screen-reader and complete dual-mode usability remain NOT_RUN.",
+      "actual": "Chromium EN/FR onboarding, keyboard, axe WCAG tags, localized blocked-state guidance and mobile reflow pass on CI head c7313d9. Human screen-reader and complete dual-mode usability remain NOT_RUN.",
       "evidence": "validation.json and retained GitHub workflow logs",
       "fullCasePassed": false
     },
@@ -231,7 +231,7 @@
       "command": "python3 local-runtime/package.py --verify ARCHIVE.zip",
       "fixture": "package.py",
       "expected": "Exact downloadable artifacts install and run the exercised paths; manifests, licenses, hashes, inventories, and executable modes verify.",
-      "actual": "Development source archive built and verified, explicitly not an operator installer. Final saved-archive native qualification NOT_RUN.",
+      "actual": "Saved development archive exposed missing imports, now fixed in the pack, sandbox mount and source identity. Extracted core suite passes 25/26 locally; Unix socket remains EPERM. Native qualification is blocked; archive is not an installer.",
       "evidence": "validation.json and retained GitHub workflow logs",
       "fullCasePassed": false
     },

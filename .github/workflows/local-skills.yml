@@ -61,8 +61,6 @@ jobs:
         run: |
           node local-runtime/validate.mjs
           node --test local-runtime/tests/*.test.mjs
-      - name: Require real native isolation and actual worker artifacts
-        run: node --test local-runtime/tests/native/*.test.mjs
       - name: Build and verify a development archive, never an operator installer
         run: |
           python3 local-runtime/package.py --output "$RUNNER_TEMP/local-preview"
@@ -81,7 +79,11 @@ jobs:
           cd "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.1"
           node local-runtime/validate.mjs
           node --test local-runtime/tests/*.test.mjs
-          node --test local-runtime/tests/native/*.test.mjs
+      - name: Require real native isolation and actual worker artifacts
+        run: node --test local-runtime/tests/native/*.test.mjs
+      - name: Require native isolation from the exact saved archive
+        if: ${{ !cancelled() }}
+        run: node --test "$RUNNER_TEMP"/local-extracted/agi-fleet-local-0.1.0-alpha.1/local-runtime/tests/native/*.test.mjs
       - name: Retain development artifact identity
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f

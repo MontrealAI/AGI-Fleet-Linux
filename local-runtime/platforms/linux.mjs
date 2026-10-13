@@ -10,7 +10,7 @@ export function sandboxArguments() {
   const a=['--unshare-all','--die-with-parent','--new-session','--cap-drop','ALL','--clearenv','--setenv','PATH','/usr/bin','--setenv','HOME','/nonexistent','--setenv','LANG','C.UTF-8','--proc','/proc','--dev','/dev','--tmpfs','/tmp','--chdir','/tmp'];
   for(const dir of ['/lib','/lib64','/usr/lib','/usr/lib64'])if(fs.existsSync(dir))a.push('--ro-bind',dir,dir);
   a.push('--ro-bind',trusted(process.execPath,true),'/node','--dir','/app','--dir','/app/fleet');
-  for(const rel of ['local-runtime','fleet/shared','fleet/successor','fleet/node_modules']) {
+  for(const rel of ['local-runtime','fleet/shared','fleet/successor','fleet/node_modules','fleet/packages/AGI_Agent/src/admission-core','fleet/packages/AGI_Node/src']) {
     const file=path.join(ROOT,rel);need(fs.statSync(file).isDirectory(),'INSTALLATION_INCOMPLETE');a.push('--ro-bind',file,'/app/'+rel);
   }
   return a;

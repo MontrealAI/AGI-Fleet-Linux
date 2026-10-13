@@ -53,6 +53,10 @@
     "final-runtime-tests.log": {
       "sha256": "b42036712cce7e33866cd9ce50e55d5690bee050b7ece71549343b8aacccce01",
       "bytes": 4086
+    },
+    "closure-archive-tests.log": {
+      "sha256": "e860bf76959397c157024d8f717baf28cf4f8d3ef80789d5e2beed858ce49a1f",
+      "bytes": 4289
     }
   },
   "productionQualified": false,
@@ -139,5 +143,26 @@
       "visualInspection": "English desktop and French mobile inspected; status banner overlap found and corrected in subsequent source"
     },
     "laterChanges": "Peer cancellation regression and localized UI correction require new exact-head CI"
+  },
+  "savedArchiveRegression": {
+    "finding": "Extracted archive omitted canonical Agent admission-core and Node source dependencies reexported by shared policy modules.",
+    "correction": "Include both existing source roots in the archive, read-only sandbox mounts and runtime source identity. Existing files are unchanged.",
+    "evidenceClass": "staged development archive after correction, not release qualification",
+    "archiveSHA256": "8964745f504be5c485bb446b33831c937af79343830e81192ae8047a62a32165",
+    "files": 2819,
+    "coreTests": {
+      "tests": 26,
+      "passed": 25,
+      "failed": 1,
+      "skipped": 0,
+      "failedGate": "Unix socket EPERM"
+    },
+    "ciChange": "Build and exercise saved source bytes before native checks so an unavailable isolation backend does not conceal packaging defects."
+  },
+  "dashboardFollowup": {
+    "head": "c7313d9080e2258efb6b359c950f3079a7381faa",
+    "job": "https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38460632734/job/115514568810",
+    "result": "PASS",
+    "scope": "Localized EN/FR blocked-state guidance, keyboard, automated axe checks and 360px reflow; no native execution claimed."
   }
 }
