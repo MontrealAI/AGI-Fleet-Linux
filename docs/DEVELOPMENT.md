@@ -1,6 +1,6 @@
 # Develop and reproduce AGI Fleet Linux
 
-The reviewed application source lives under `fleet/`: all six roles, shared runtime, 342 regression files, lockfiles and license notices. The **1.1.0** source identity is recorded in `engineering/next-release.json` and `fleet/source-inventory.json`. A source checkout alone is not an operator distribution.
+The reviewed application source lives under `fleet/`: all six roles, shared runtime, 343 regression files, lockfiles and license notices. The **1.1.0** source identity is recorded in `engineering/next-release.json` and `fleet/source-inventory.json`. A source checkout alone is not an operator distribution.
 
 ## Check a source change
 
@@ -53,7 +53,7 @@ An offline ZIP can be supplied with `--archive`. Materialization verifies size, 
 
 ## Authorized-workspace development preview
 
-New workstation capability work lives under [`workstation/`](../workstation/QUICKSTART.md), version `0.1.0-preview.1`. Its Linux engine records a historical **1.0.9** native workforce source basis in `workstation/candidate.json` and has its own source inventory, tests and qualification ledger. The preview and Studio overlay are **not included in the 1.1.0 Fleet ZIP**. They do not modify a published Fleet archive or inherit acceptance from either the frozen 1.0.9 release or the 1.1.0 release track. Start the guided terminal menu with `npm --prefix workstation start` on a prepared task account; the engine itself uses Node built-ins and needs no npm dependency install. Read the quickstart before connecting a desktop.
+New workstation capability work lives under [`workstation/`](../workstation/QUICKSTART.md), version `0.1.0-preview.1`. Its Linux engine records a historical **1.0.9** native workforce source basis in `workstation/candidate.json` and has its own source inventory, tests and qualification ledger. The native-workstation preview is **not included in the 1.1.0 Fleet ZIP**. Its reviewed public Studio format and explicit backup exclusion are incorporated into the 1.1.0 Agent and Node; the original overlay remains available below. The separate native preview does not modify a published Fleet archive or inherit acceptance from either the frozen 1.0.9 release or the 1.1.0 release track. Start the guided terminal menu with `npm --prefix workstation start` on a prepared task account; the engine itself uses Node built-ins and needs no npm dependency install. Read the quickstart before connecting a desktop.
 
 The [Studio source overlay](../workstation/STUDIO.md) adds general-format imports to the top-level Agent and Node applications. To assemble a **disposable source fixture** for development outside this checkout:
 
