@@ -32,7 +32,7 @@ Output includes `AGI_Fleet_Linux_v1.1.0.zip`, `release.json`, packaging receipts
 
 ## Qualify and publish
 
-Linux 1.1.0 binds AGIJobManager 1.15.0 at `3958cbc3b01aa459de16cf39e1ab0985b5fa56c3`, including all 780 Manager regressions. The build metadata, each evidence binding and the independent audit retain the exact target. Publication additionally rejects mixed workflow runs, a different build commit and incomplete log coverage. Historical 1.0.9 and 1.0.10 results remain unchanged.
+Linux 1.1.0 binds AGIJobManager 1.16.1 at `09d89fb22d52a8df194e8dd0a00beff9f7771d82`, including all 780 Manager regressions. The build metadata, each evidence binding and the independent audit retain the exact target. Publication additionally rejects mixed workflow runs, a different build commit and incomplete log coverage. Historical 1.0.9 and 1.0.10 results remain unchanged.
 
 The [next-release workflow](../.github/workflows/next-release.yml) builds once and distributes the same artifact to disposable x86-64 and ARM64 runners. It runs targeted/full native suites and AGIJobManager integration separately, then rechecks retained log hashes, test-source identity, exact counts and workflow provenance. Root runtime provisioning is limited to disposable GitHub-hosted runners; do not run that harness in an operator account or on a shared workstation.
 
