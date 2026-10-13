@@ -39,7 +39,7 @@ Le bouton **Arrêter le travail** annule le Studio et révoque les autorisations
 
 ## Keep larger work safely
 
-The original capsule stays capped at 4 MB. General Studio work remains capped at 64 files, 32 MiB each and 64 MiB total; smaller specification limits apply. Use a manifest-bound sidecar directory for larger results. The pack contains exact files, capsule, handoff and historical receipt, with sizes and SHA-256 identities. It contains no signing authority or provider secret.
+The original capsule stays capped at 4 MB. General Studio work remains capped at 64 files, 32 MiB each and 64 MiB total; smaller specification limits apply. Use a manifest-bound sidecar directory for larger results. The pack contains exact files, capsule, handoff and the Node’s historical review receipt, with sizes and SHA-256 identities. An Agent self-check receipt cannot replace the Node receipt. A rejected Node review can be retained; the pack does not establish successful qualification or reviewer independence. It contains no signing authority or provider secret.
 
 ```sh
 node successor/cli.mjs export-pack capsule.json handoff.json receipt.json NEW_PACK
@@ -47,6 +47,8 @@ node successor/cli.mjs inspect-pack NEW_PACK
 node successor/cli.mjs restore-pack NEW_PACK NEW_DIRECTORY
 node successor/cli.mjs restore-pack NEW_PACK NEW_DIRECTORY --confirm
 ```
+
+Le dossier portable exige le reçu historique du Node de revue. Le reçu d’autocontrôle de l’Agent ne suffit pas. Une revue rejetée peut être conservée ; le dossier ne prouve ni la qualification du résultat ni l’indépendance du réviseur. Les exports ordinaires du Studio restent disponibles.
 
 Inspection never executes imported code. Keep the entire directory together. Missing, extra, changed, linked or case-colliding files fail inspection. Interrupted exports use a temporary directory and do not overwrite a good export. Existing encrypted wallet backups remain separately bounded; explicitly exclude large Studio work only after exporting it. Wallet backup does not include `successor-execution` records or these portable sidecars. Export them separately.
 

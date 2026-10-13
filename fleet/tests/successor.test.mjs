@@ -108,7 +108,7 @@ test('Studio backup size failures retain the legacy contract and actionable publ
 
 test('SUCCESSOR sidecars retain a maximum Studio file and reject missing, traversal, aliases, overflow and extra content',async()=>{
   const {createHash}=await import('node:crypto'),{canonical}=await import('../successor/vendor/manager/site/assets/successor/safe.mjs');const a=await fixture(root),n=await fixture(root,'node');try{
-    const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs)a.inputs.set(f.name,Buffer.from(f.content));const ar=await run(a.bridge,{request:req,context:ctx}),actual=await a.bridge.result(ar.p.key);
+    const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs){a.inputs.set(f.name,Buffer.from(f.content));n.inputs.set(f.name,Buffer.from(f.content));}const ar=await run(a.bridge,{request:req,context:ctx}),actual=await a.bridge.result(ar.p.key);
     const artifactName='a/b/c/d/e/f/g/h/i/j/k/artifact.bin';
     const mission=defaultMission('custom');mission.outputs=artifactName;
     const originalSpec=structuredClone(actual.handoff.specification);originalSpec.outputs=[{name:artifactName,mediaType:'application/octet-stream',maxBytes:32*1024*1024,requirement:'Retain exact binary bytes.'}];for(const c of originalSpec.criteria)c.evidence=[artifactName];
@@ -117,7 +117,13 @@ test('SUCCESSOR sidecars retain a maximum Studio file and reject missing, traver
     const terminal=prepare();assert.equal(terminal.status,0,terminal.stderr);assert.equal(JSON.parse(terminal.stdout).authority,'none');assert.equal(prepare().status,1);assert.deepEqual(JSON.parse(fs.readFileSync(missionPath)),mission);assert.deepEqual(JSON.parse(fs.readFileSync(specPath)),originalSpec);
     const capsule=fs.readFileSync(path.join(preparedPath,'capsule.json'),'utf8'),spec=JSON.parse(fs.readFileSync(path.join(preparedPath,'specification.json'))),state=(await inspectCapsule(capsule)).capsule.payload.state;assert.equal(state.active,null);assert.equal(state.authority,'none');assert.equal(JSON.parse(state.mission.input).originalInput,mission.input);
     const handoff=a.api.makeHandoff(spec,a.api.buildBundle(spec,new Map([[artifactName,Buffer.alloc(32*1024*1024,42)]])));
-    const receipt={...actual.receipt,specification:spec,specHash:handoff.specHash,deliveryHash:handoff.deliveryHash,title:spec.title,criteria:spec.criteria,files:JSON.parse(handoff.delivery).files.map(({content,...meta})=>meta)};
+    n.worker.chat=async(_agent,_prompt,data)=>{
+      const delivered=fs.readFileSync(path.join(n.c.inputRoot,'delivery',artifactName));
+      const exact=delivered.equals(Buffer.alloc(32*1024*1024,42));
+      return JSON.stringify({safeToReview:true,checks:data.specification.criteria.map(c=>({id:c.id,status:exact?'pass':'fail',method:'Synthetic Node fixture compares every delivered binary byte.',observed:exact?'All 32 MiB match the fixed fixture.':'Binary bytes differ.',files:c.evidence}))});
+    };
+    const nr=await run(n.bridge,{handoff}),{receipt}=await n.bridge.result(nr.p.key);
+    assert.equal(receipt.role,'node');assert.equal(receipt.status,'checked');
     const dir=path.join(a.dir,'large'),name=path.join(dir,'artifacts/'+artifactName);await exportSidecar(dir,capsule,handoff,receipt,a.api);
     const {sha256,...body}=await inspectSidecar(dir);assert.ok(body.totalBytes>70*1024*1024);
     const save=v=>fs.writeFileSync(path.join(dir,'manifest.json'),canonical({...v,sha256:createHash('sha256').update(canonical(v)).digest('hex')}));
@@ -128,9 +134,10 @@ test('SUCCESSOR sidecars retain a maximum Studio file and reject missing, traver
 });
 
 test('SUCCESSOR sidecar disk-full failure leaves original and no completed destination',async()=>{
-  const a=await fixture(root),n=await fixture(root,'node');try{const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs)a.inputs.set(f.name,Buffer.from(f.content));const ar=await run(a.bridge,{request:req,context:ctx}),result=await a.bridge.result(ar.p.key),dest=path.join(a.dir,'disk-full');
+  const a=await fixture(root),n=await fixture(root,'node');try{const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs){a.inputs.set(f.name,Buffer.from(f.content));n.inputs.set(f.name,Buffer.from(f.content));}const ar=await run(a.bridge,{request:req,context:ctx}),result=await a.bridge.result(ar.p.key),dest=path.join(a.dir,'disk-full');
+    const nr=await run(n.bridge,{handoff:result.handoff}),reviewed=await n.bridge.result(nr.p.key);assert.equal(reviewed.receipt.status,'checked');
     const original=fs.writeFileSync;fs.writeFileSync=(file,...args)=>{if(String(file).includes('.partial-'))throw Object.assign(Error('injected full disk'),{code:'ENOSPC'});return original(file,...args);};
-    try{await assert.rejects(exportSidecar(dest,req.capsule,result.handoff,result.receipt,a.api),/full disk/);}finally{fs.writeFileSync=original;}
+    try{await assert.rejects(exportSidecar(dest,req.capsule,result.handoff,reviewed.receipt,a.api),/full disk/);}finally{fs.writeFileSync=original;}
     assert.equal(fs.existsSync(dest),false);assert.equal(fs.readdirSync(a.dir).some(n=>n.startsWith('disk-full')),false);assert.equal((await inspectRequest(req)).request.capsule,req.capsule);
   }finally{await a.close();await n.close();}
 });
@@ -138,15 +145,20 @@ test('SUCCESSOR sidecar disk-full failure leaves original and no completed desti
 
 test('SUCCESSOR sidecars reject mixed or altered receipts before writing and during restore inspection',async()=>{
   const a=await fixture(root),n=await fixture(root,'node');try{
-    const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs)a.inputs.set(f.name,Buffer.from(f.content));const ar=await run(a.bridge,{request:req,context:ctx}),result=await a.bridge.result(ar.p.key),dest=path.join(a.dir,'mixed-receipt');
-    for(const change of [r=>r.schema='unknown',r=>r.role='employer',r=>r.specHash='a'.repeat(64),r=>r.deliveryHash='b'.repeat(64),r=>r.specification.prompt+='altered',r=>r.independent=true]){
+    const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs){a.inputs.set(f.name,Buffer.from(f.content));n.inputs.set(f.name,Buffer.from(f.content));}const ar=await run(a.bridge,{request:req,context:ctx}),result=await a.bridge.result(ar.p.key),dest=path.join(a.dir,'mixed-receipt');
+    const agentReceipt=result.receipt,nr=await run(n.bridge,{handoff:result.handoff});result.receipt=(await n.bridge.result(nr.p.key)).receipt;
+    assert.equal(result.receipt.role,'node');assert.equal(result.receipt.status,'checked');
+    await assert.rejects(exportSidecar(dest,req.capsule,result.handoff,agentReceipt,a.api),/FLEET_RECEIPT_SCHEMA/);assert.equal(fs.existsSync(dest),false);
+    for(const change of [r=>r.schema='unknown',r=>r.role='agent',r=>r.role='employer',r=>r.specHash='a'.repeat(64),r=>r.deliveryHash='b'.repeat(64),r=>r.specification.prompt+='altered',r=>r.independent=true]){
       const receipt=structuredClone(result.receipt);change(receipt);await assert.rejects(exportSidecar(dest,req.capsule,result.handoff,receipt,a.api),/RECEIPT/);assert.equal(fs.existsSync(dest),false);
     }
     await exportSidecar(dest,req.capsule,result.handoff,result.receipt,a.api);
     const {createHash}=await import('node:crypto'),{canonical}=await import('../successor/vendor/manager/site/assets/successor/safe.mjs'),hash=b=>createHash('sha256').update(b).digest('hex');
-    const bad={...result.receipt,deliveryHash:'c'.repeat(64)},raw=canonical(bad);fs.writeFileSync(path.join(dest,'receipt.json'),raw);
-    const manifest=JSON.parse(fs.readFileSync(path.join(dest,'manifest.json'))),entry=manifest.files.find(f=>f.path==='receipt.json');manifest.totalBytes+=Buffer.byteLength(raw)-entry.bytes;entry.bytes=Buffer.byteLength(raw);entry.sha256=hash(raw);const {sha256,...body}=manifest;manifest.sha256=hash(canonical(body));fs.writeFileSync(path.join(dest,'manifest.json'),canonical(manifest));
-    await assert.rejects(inspectSidecar(dest),/RECEIPT_BINDING/);await assert.rejects(restoreSidecar(dest,path.join(a.dir,'unsafe-restore'),true),/RECEIPT_BINDING/);assert.equal(fs.existsSync(path.join(a.dir,'unsafe-restore')),false);
+    for(const bad of [{...result.receipt,deliveryHash:'c'.repeat(64)},agentReceipt]){
+      const raw=canonical(bad);fs.writeFileSync(path.join(dest,'receipt.json'),raw);
+      const manifest=JSON.parse(fs.readFileSync(path.join(dest,'manifest.json'))),entry=manifest.files.find(f=>f.path==='receipt.json');manifest.totalBytes+=Buffer.byteLength(raw)-entry.bytes;entry.bytes=Buffer.byteLength(raw);entry.sha256=hash(raw);const {sha256,...body}=manifest;manifest.sha256=hash(canonical(body));fs.writeFileSync(path.join(dest,'manifest.json'),canonical(manifest));
+      await assert.rejects(inspectSidecar(dest),/RECEIPT_(BINDING|SCHEMA)/);await assert.rejects(restoreSidecar(dest,path.join(a.dir,'unsafe-restore'),true),/RECEIPT_(BINDING|SCHEMA)/);assert.equal(fs.existsSync(path.join(a.dir,'unsafe-restore')),false);
+    }
     const pristine=path.join(a.dir,'pristine');await exportSidecar(pristine,req.capsule,result.handoff,result.receipt,a.api);
     const artifact=(await inspectSidecar(pristine)).files.find(f=>f.role==='deliverable').path;
     const changes=[pack=>['handoff.json','receipt.json'].forEach(f=>fs.unlinkSync(path.join(pack,f))),...['capsule.json','handoff.json','receipt.json',artifact].map(f=>pack=>fs.unlinkSync(path.join(pack,f))),pack=>fs.appendFileSync(path.join(pack,artifact),'changed')];
