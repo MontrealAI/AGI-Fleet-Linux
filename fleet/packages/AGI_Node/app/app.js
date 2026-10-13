@@ -871,6 +871,7 @@ submit("backup-form", async () => {
   try {
     const result = await request("/api/backup", {
       password: $("backup-password").value,
+      excludeStudio: $("backup-exclude-studio").checked,
     });
     download(
       `AGI-Node-${state.walletProfile === "seed" ? "seed" : "original"}-${state.config.validator.slice(0,10)}-Backup-` +
@@ -880,10 +881,11 @@ submit("backup-form", async () => {
     );
     $("backup-saved").hidden = false;
     say(
-      "Encrypted backup downloaded. Select the actual downloaded file below and verify it before confirming off-machine storage. The node is stopped.",
+      ($("backup-exclude-studio").checked ? "Studio work is excluded; keep its separate exports. " : "") + "Encrypted backup downloaded. Select the actual downloaded file below and verify it before confirming off-machine storage. The node is stopped.",
     );
   } finally {
     $("backup-password").value = "";
+    $("backup-exclude-studio").checked = false;
   }
 });
 click("backup-saved", async () => {

@@ -1,4 +1,4 @@
-name: Linux 1.0.11 release qualification
+name: Linux 1.1.0 release qualification
 on:
   pull_request:
     paths: ['fleet/**', 'docs/**', 'engineering/**', '.github/workflows/next-release.yml']
@@ -36,8 +36,10 @@ jobs:
       - name: Verify repository and engineering regressions
         run: |
           python3 engineering/check-repository.py --require-source
+          python3 engineering/check-successor-preservation.py
           python3 -m unittest discover -s engineering/tests -v
-      - name: Install hash-pinned Node for package validation
+      - &node_runtime
+        name: Install hash-pinned Node for package validation
         run: |
           set -euo pipefail
           curl --fail --location --silent --show-error https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz -o "$RUNNER_TEMP/node.tar.xz"
@@ -55,6 +57,47 @@ jobs:
           if-no-files-found: error
           retention-days: 30
           compression-level: 0
+  successor:
+    name: Saved-archive SUCCESSOR browser execution
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - *checkout
+      - name: Download this run's saved candidate
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: linux-next-candidate
+          path: release
+      - *node_runtime
+      - name: Install locked browser driver
+        run: |
+          npm ci --prefix engineering/browser-tests --ignore-scripts --no-audit --no-fund
+          engineering/browser-tests/node_modules/.bin/playwright install --with-deps --only-shell chromium
+      - name: Verify archive and materialize its real Fleet source
+        run: |
+          python3 - <<'PYCODE'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0,'engineering')
+          from next_release_tools import load_candidate, verify_candidate, candidate_tools
+          archive=Path('release/AGI_Fleet_Linux_v1.1.0.zip')
+          candidate=load_candidate('release/release.json',archive)
+          verify_candidate(archive,candidate)
+          candidate_tools(candidate).extract(archive,Path('saved-fleet'))
+          PYCODE
+      - name: Execute actual browser effects through the saved Controller and ComputeWorker
+        env:
+          FLEET_TEST_ROOT: ${{ github.workspace }}/saved-fleet/AGI_Fleet_Linux_v1.1.0
+        run: npm test --prefix engineering/browser-tests
+      - name: Retain exact browser observations
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: next-successor-browser
+          path: engineering/browser-tests/test-results/
+          if-no-files-found: error
+          retention-days: 90
   native:
     needs: build
     strategy:
@@ -78,7 +121,7 @@ jobs:
           set -euo pipefail
           sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY,GITHUB_RUN_ID,GITHUB_SHA python3 engineering/run-next-native.py \
             --metadata "$GITHUB_WORKSPACE/release/release.json" \
-            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.0.11.zip" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.0.zip" \
             --work "/root/agi-next-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             --evidence "$GITHUB_WORKSPACE/native-evidence"
       - name: Preserve evidence ownership
@@ -110,7 +153,7 @@ jobs:
         run: |
           python3 engineering/run-next-integration.py \
             --metadata "$GITHUB_WORKSPACE/release/release.json" \
-            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.0.11.zip" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.0.zip" \
             --work "$RUNNER_TEMP/agi-integration-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             --evidence "$GITHUB_WORKSPACE/integration-evidence"
       - name: Retain all integration evidence
@@ -122,7 +165,7 @@ jobs:
           if-no-files-found: error
           retention-days: 90
   audit:
-    needs: [build, native, integration]
+    needs: [build, native, integration, successor]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -136,7 +179,7 @@ jobs:
       - name: Independently audit source-bound results
         run: |
           python3 engineering/audit-next-evidence.py \
-            --metadata release/release.json --archive release/AGI_Fleet_Linux_v1.0.11.zip \
+            --metadata release/release.json --archive release/AGI_Fleet_Linux_v1.1.0.zip \
             --native evidence/next-native-x64 --native evidence/next-native-arm64 \
             --integration evidence/next-integration-x64 --integration evidence/next-integration-arm64 \
             --out evidence/audit.json
@@ -150,7 +193,7 @@ jobs:
           retention-days: 90
   publish:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish))
-    needs: [build, native, integration, audit]
+    needs: [build, native, integration, successor, audit]
     permissions:
       contents: write
     runs-on: ubuntu-24.04

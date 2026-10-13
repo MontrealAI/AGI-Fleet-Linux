@@ -168,9 +168,9 @@ export class Controller {
       throw new Error("RESTORE_INTERRUPTED_RECOVERY_REQUIRED");
     }
   }
-  requireStopped() {
+  requireStopped({allowIdentityApproval=false}={}) {
     this.assertRestoreReady();
-    ensure(!this.publicWebCommissioningBusy,"COMPANION_BUSY");
+    ensure(!this.publicWebCommissioningBusy && (allowIdentityApproval || !this.companion.approvalReservation),"COMPANION_BUSY");
     ensure(!this.studio?.busy, "STUDIO_BUSY");
     ensure(!this.worker && !this.desired, "STOP_BEFORE_CHANGING_SETTINGS");
     ensure(
@@ -320,7 +320,7 @@ export class Controller {
         restored: this.settings.restored,
       },
       keychainSupported: this.keychain.supported,
-      backgroundSupported: process.platform === "darwin",
+      backgroundSupported: ["darwin","linux"].includes(process.platform),
       incidents: this.settings.incidents,
       companion: this.companion.status(),
       operations: this.operations.summary(),
@@ -730,7 +730,7 @@ export class Controller {
   }
   async start(mode) {
     this.assertRestoreReady();
-    ensure(!this.publicWebCommissioningBusy,"COMPANION_BUSY");
+    ensure(!this.publicWebCommissioningBusy && !this.companion.approvalReservation,"COMPANION_BUSY");
     ensure(!this.studio?.busy, "STUDIO_BUSY");
     ensure(["observe", "live"].includes(mode), "RUN_MODE");
     ensure(!this.worker && !this.desired, "ALREADY_RUNNING");
@@ -933,7 +933,12 @@ export class Controller {
     this.saveState();
     return result;
   }
-  async backup(password) {
+  requireCertainApprovalPersistence() {
+    ensure(!this.companion.approvalPersistenceUncertain && this.companion.stateFailureCode!=="COMPANION_APPROVAL_RECONCILIATION_REQUIRED" && !fs.existsSync(this.companion.stateFile+".approval-pending"), "COMPANION_APPROVAL_RECONCILIATION_REQUIRED");
+  }
+  async backup(password, {excludeStudio=false}={}) {
+    ensure(typeof excludeStudio === "boolean", "BACKUP_STATE_FORMAT");
+    this.requireCertainApprovalPersistence();
     ensure(
       this.config.validator && fs.existsSync(this.configFile),
       "WALLET_REQUIRED",
@@ -942,6 +947,7 @@ export class Controller {
     await this.stop();
     this.requireStopped();
     await this.companion.cancel();
+    this.requireCertainApprovalPersistence();
     const file = path.join(this.config.dataDir, "node.sqlite");
     if (fs.existsSync(file)) {
       const db = new DatabaseSync(file);
@@ -965,8 +971,9 @@ export class Controller {
         ? fs.readFileSync(file).toString("base64")
         : null,
     };
-    data.operational = captureOperational({home:this.home,dataDir:this.config.dataDir,kind:"node"});
+    data.operational = captureOperational({home:this.home,dataDir:this.config.dataDir,kind:"node",excludeStudio});
     const sealed = await sealBackup(addBackupIntegrity(data), password);
+    this.requireCertainApprovalPersistence();
     // A newly issued snapshot needs its own verification and storage acknowledgement.
     // Persist this before returning it so restarting cannot revive an older receipt.
     this.settings.backupSaved = false;
@@ -987,6 +994,7 @@ export class Controller {
     return { saved: true };
   }
   async verifyBackup(envelope,password) {
+    this.requireCertainApprovalPersistence();
     this.requireStopped();ensure(this.vault.unlocked,"NODE_LOCKED");this.backupVerified=null;
     const result=await verifyDownloadedBackup(envelope,password,{role:"node",kind:"node",profileID:this.releaseProfile.id,expectedAddress:this.config.validator,issuedHash:this.backupIssued,openBackup,Vault,checkRecovery,
       validate:(value)=>{const c=validateConfig({...value.config,dataDir:path.join(this.home,"data")},this.home);ensure(!value.pin||(value.pin.manager.toLowerCase()===c.manager.toLowerCase()&&value.pin.chainId===c.chainId),"BACKUP_DEPLOYMENT_MISMATCH");},
@@ -995,15 +1003,18 @@ export class Controller {
         if(value.companion){validateCompanion({...value.companion.config,enabled:false,autoBrief:false});const companion=new Companion(temp,()=>null);atomicWrite(companion.stateFile,JSON.stringify(value.companion.state));ensure(!new Companion(temp,()=>null).stateError,"COMPANION_STATE_INVALID");}
       }
     });
+    this.requireCertainApprovalPersistence();
     this.backupVerified=result.currentReady?result:null;return result;
   }
   machinePreflight() {this.requireStopped();this.preflight=collectPreflight();return this.preflight;}
   diagnostics() {return sanitizeDiagnostics({facts:{...this.preflight?.facts,role:"node"}});}
   compareUpgrade(expected) {return compareExpectedAddress(expected,this.config.validator);}
   async restore(envelope, password, acknowledge) {
+    this.requireCertainApprovalPersistence();
     ensure(acknowledge === true, "RESTORE_CONFIRMATION_REQUIRED");
     this.requireStopped();
     const value = await openBackup(envelope, password);
+    this.requireCertainApprovalPersistence();
     ensure([2,3].includes(value.schema) && value.config && value.vault, "BACKUP_FORMAT");
     ensure(value.schema !== 3 || value.operational, "BACKUP_STATE_FORMAT");
     const c = validateConfig(
@@ -1016,6 +1027,7 @@ export class Controller {
     );
     assertRestoreWallet(this.releaseProfile,this.config.validator,c.validator);
     await this.companion.cancel();
+    this.requireCertainApprovalPersistence();
     ensure(
       !value.pin ||
         (value.pin.manager.toLowerCase() === c.manager.toLowerCase() &&
@@ -1096,6 +1108,7 @@ export class Controller {
         );
         const check = new Companion(temp, () => null);
         ensure(!check.stateError, "COMPANION_STATE_INVALID");
+        restoredCompanion.stateRevision = check.stateRevision;
         restoredCompanion.state = {
           ...check.state,
           cache: [],
@@ -1119,6 +1132,7 @@ export class Controller {
           path.join(temp, "node.sqlite"),
           path.join(temp, "data/node.sqlite"),
         );
+      this.requireCertainApprovalPersistence();
       const old = path.join(this.home, "previous-" + crypto.randomUUID()),
         marker = path.join(this.home, "restore-in-progress.json");
       privateDir(old);
@@ -1334,17 +1348,18 @@ export class Controller {
       model: "openai/gpt-6-astra",
     };
   }
-  requireComputeIdentityChangeReady() {
-    this.requireStopped();
+  requireComputeIdentityChangeReady({ignorePending=false}={}) {
+    ensure(!this.operation, "OPERATION_IN_PROGRESS");
+    this.requireStopped({allowIdentityApproval:ignorePending});
     ensure(this.vault.unlocked, "NODE_LOCKED");
-    ensure(!this.companion.pending, "COMPANION_BUSY");
+    ensure(ignorePending || !this.companion.pending, "COMPANION_BUSY");
     const active=this.dbRead(db=>{
       const exists=name=>Boolean(db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?").get(name));
       if(exists('txs') && db.prepare("SELECT 1 FROM txs WHERE state='pending' LIMIT 1").get())return true;
       if(exists('admission_reservations') && db.prepare("SELECT 1 FROM admission_reservations WHERE closed=0 LIMIT 1").get())return true;
       if(exists('jobs') && db.prepare("SELECT 1 FROM jobs WHERE status NOT IN ('terminal','waiting','unsupported','skipped','lost','abstained') LIMIT 1").get())return true;
       if(exists('jobs') && db.prepare("SELECT 1 FROM jobs WHERE my_vote=1 AND status!='terminal' LIMIT 1").get())return true;
-      
+
       return false;
     });
     ensure(!active, "COMPANION_ACTIVE_WORK_IDENTITY_LOCKED");
@@ -1354,11 +1369,10 @@ export class Controller {
     return this.companion.inspectComputeIdentity();
   }
   async approveComputeIdentity(input) {
-    ensure(input && Object.keys(input).every(k=>['policyHash','acknowledge'].includes(k)) && input.acknowledge===true && /^[a-f0-9]{64}$/.test(input.policyHash), "COMPANION_COMPUTE_APPROVAL_INVALID");
     this.requireComputeIdentityChangeReady();
-    const result=await this.companion.request("test", {purpose:"approve-compute-identity"}, {cacheMs:0,authorizePolicyHash:input.policyHash});
+    const result=await this.companion.approveComputeIdentity(input,{validateCommit:()=>this.requireComputeIdentityChangeReady({ignorePending:true})});
     this.invalidate();
-    return {...result,policyHash:this.companion.state.computePolicy};
+    return result;
   }
   companionPublicWebReport(){ensure(this.vault.unlocked,'NODE_LOCKED');return {report:publicWebReportView(this.companion.state.lastPublicWebReport)};}
   async companionPublicWebCommissioning(input) {

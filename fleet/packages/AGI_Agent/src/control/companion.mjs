@@ -335,7 +335,7 @@ export class Companion {
     const count=v=>Number.isSafeInteger(v)&&v>=0?v:null;
     let cleanupCapacity=null;try{if(h.cleanupCapacity)cleanupCapacity=safeCleanupCapacity(h.cleanupCapacity);}catch{}
     this.observedCompute={cleanupCapacity,runs24h:count(h.runs24h),images24h:count(h.images24h),maxRuns24h:count(h.maxRuns24h),maxImages24h:count(h.maxImages24h)};
-    return {policyHash:h.policyHash,protocol:h.protocol,role:["agent","node","moderator","employer","evidence","recovery"].includes(h.role)?h.role:null,uid:h.uid,auth:h.auth,capabilities,configuredCapabilities:configured,qualification,gatewayReady:h.gatewayReady===true,stopped:h.stopped===true,publicWeb};
+    return {policyHash:h.policyHash,protocol:h.protocol,role:["agent","node","moderator","employer","evidence","recovery"].includes(h.role)?h.role:null,uid:h.uid,auth:h.auth,capabilities,configuredCapabilities:configured,qualification,gatewayReady:h.gatewayReady===true,stopped:h.stopped===true,publicWeb,runtime:h.runtime??null};
   }
   async inspectComputeIdentity() {
     ensure(this.config.enabled && this.config.mode!=="bounded", "COMPANION_WORKSTATION_REQUIRED");

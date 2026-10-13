@@ -1,3 +1,5 @@
+import {safeCleanupCapacity} from '../../shared/runtime/compute/cleanup-evidence.mjs';
+import {persistCompanionState,validateApprovalState,createProposal,approvalStatus,approveReviewedIdentity,assertApprovalCurrent,completeApprovalState,identityDigest,approvalFailureCode} from './identity-approval.mjs';
 import {projectQualificationStatus,validatePublicWebReport} from './public-web-report.mjs';
 import {publicWebRequest,validatePublicWebHealth,signPublicWebPreparation,executionSpec,executionRole,publicWebReviewerKey,publicWebReviewerFingerprint} from './public-web-signing.mjs';
 import {computerVerdict} from '../artifacts.mjs';
@@ -23,12 +25,13 @@ export const COMPANION_DEFAULT = Object.freeze({
   autoBrief: false,
   port: 18892,
   agent: "agi-agent",
-  maxCalls24h: 48,
+  maxCalls24h: 256,
   timeoutMs: 60000,
   acknowledged: false,
 });
 const DAY = 86400000;
 const COMPUTE_CLIENT_ERRORS = new Set([
+  "COMPUTE_DAILY_LIMIT","COMPUTE_IMAGE_DAILY_LIMIT","COMPUTE_BUSY","COMPUTE_CLI_TIMEOUT",
   // Explicit protocol failure codes only; arbitrary provider text is never forwarded.
   "COMPUTE_PUBLIC_WEB_APPROVAL_MISMATCH","COMPUTE_PUBLIC_WEB_CONFIGURATION","COMPUTE_PUBLIC_WEB_EVENT_LIMIT","COMPUTE_PUBLIC_WEB_GRANT_CLOSED","COMPUTE_PUBLIC_WEB_LEASE_EXPIRED","COMPUTE_PUBLIC_WEB_NOT_QUALIFIED","COMPUTE_PUBLIC_WEB_PLUGIN_CHANGED","COMPUTE_PUBLIC_WEB_POLICY_INVALID","COMPUTE_PUBLIC_WEB_PREPARATION_REQUIRED","COMPUTE_PUBLIC_WEB_SCOPE_REQUIRED","COMPUTE_PUBLIC_WEB_SESSION_REQUIRED","PUBLIC_BROWSER_ACCEPTED_GRANT_REQUIRED","PUBLIC_BROWSER_AUTHORITY_INVALID","PUBLIC_BROWSER_BUSY","PUBLIC_BROWSER_CANCELLED","PUBLIC_BROWSER_CDP_AUTH","PUBLIC_BROWSER_CDP_CLOSED","PUBLIC_BROWSER_CDP_COMMAND","PUBLIC_BROWSER_CDP_COMMAND_FAILED","PUBLIC_BROWSER_CDP_CONTEXT","PUBLIC_BROWSER_CDP_ENDPOINT","PUBLIC_BROWSER_CDP_FRAME","PUBLIC_BROWSER_CDP_HANDSHAKE_TIMEOUT","PUBLIC_BROWSER_CDP_LIMIT","PUBLIC_BROWSER_CDP_SESSION","PUBLIC_BROWSER_CDP_TARGET","PUBLIC_BROWSER_CDP_TIMEOUT","PUBLIC_BROWSER_CDP_UNAVAILABLE","PUBLIC_BROWSER_DENIED","PUBLIC_BROWSER_FORM_NOT_APPROVED","PUBLIC_BROWSER_INDEPENDENT_REVIEWER_REQUIRED","PUBLIC_BROWSER_INPUT_FORBIDDEN","PUBLIC_BROWSER_LINK_STALE","PUBLIC_BROWSER_NAVIGATION_FAILED","PUBLIC_BROWSER_NAVIGATION_NOT_APPROVED","PUBLIC_BROWSER_PINNED_CONFIGURATION_REQUIRED","PUBLIC_BROWSER_PRIVATE_FILE","PUBLIC_BROWSER_PROPOSAL_INVALID","PUBLIC_BROWSER_QUALIFICATION_IMPORT_REQUIRED","PUBLIC_BROWSER_REFERENCE_STALE","PUBLIC_BROWSER_REQUEST_INVALID","PUBLIC_BROWSER_REQUEST_LIMIT","PUBLIC_BROWSER_REVIEWER_INVALID","PUBLIC_BROWSER_SCREENSHOT_LIMIT","PUBLIC_BROWSER_SESSION_CLOSED","PUBLIC_BROWSER_SNAPSHOT_FAILED","PUBLIC_BROWSER_SOCKET_CHANGED","PUBLIC_BROWSER_SOCKET_EXISTS","PUBLIC_BROWSER_SOCKET_INVALID","PUBLIC_BROWSER_SOCKET_PATH_TOO_LONG","PUBLIC_BROWSER_SOCKET_PERMISSIONS","PUBLIC_BROWSER_SOCKET_SYMLINK","PUBLIC_BROWSER_SOURCE_FILE","PUBLIC_BROWSER_SOURCE_LIMIT","PUBLIC_BROWSER_SOURCE_SYMLINK","PUBLIC_BROWSER_URL_INVALID","PUBLIC_WEB_ACCEPTED_SPEC_CHANGED","PUBLIC_WEB_ACTUAL_BROWSER_EVIDENCE_REQUIRED","PUBLIC_WEB_ACTUAL_NAVIGATION_REQUIRED","PUBLIC_WEB_ADMISSION_INVALID","PUBLIC_WEB_APPROVAL_IDENTITY_MISMATCH","PUBLIC_WEB_APPROVAL_INVALID","PUBLIC_WEB_ARGUMENTS","PUBLIC_WEB_AUTHORITY_INVALID","PUBLIC_WEB_AUTHORITY_MISMATCH","PUBLIC_WEB_BASE_DIGEST_REQUIRED","PUBLIC_WEB_BINDING_INVALID","PUBLIC_WEB_BROWSER_CLEANUP_REQUIRED","PUBLIC_WEB_BROWSER_DIRECT_ACCESS","PUBLIC_WEB_BROWSER_EVENT_BINDING","PUBLIC_WEB_BROWSER_EVENT_LIMIT","PUBLIC_WEB_BROWSER_EVIDENCE_BINDING","PUBLIC_WEB_BROWSER_EVIDENCE_INVALID","PUBLIC_WEB_BROWSER_NOT_ACTIVE","PUBLIC_WEB_BROWSER_OBSERVATION_FAILED","PUBLIC_WEB_BROWSER_STARTED_BEFORE_APPROVAL","PUBLIC_WEB_BUILD_CONTEXT_REQUIRED","PUBLIC_WEB_CANCELLED","PUBLIC_WEB_CLEANUP_OBSERVER_FAILED","PUBLIC_WEB_CLEANUP_REPORT_WRITE_FAILED","PUBLIC_WEB_CLIENT_NOT_BOUND","PUBLIC_WEB_COMMISSIONING_APPROVAL_REQUIRED","PUBLIC_WEB_COMMISSIONING_DELIVERY","PUBLIC_WEB_COMMISSIONING_FIXTURE","PUBLIC_WEB_COMMISSIONING_POLICY_REQUIRED","PUBLIC_WEB_CONNECT_FAILED","PUBLIC_WEB_CONTAINER_ADDRESS_CHANGED","PUBLIC_WEB_CONTAINER_IMAGE_MISMATCH","PUBLIC_WEB_CONTAINER_ISOLATION_CHANGED","PUBLIC_WEB_CONTAINER_NOT_RUNNING","PUBLIC_WEB_DESTINATION_MISMATCH","PUBLIC_WEB_DIRECTORY_SYMLINK","PUBLIC_WEB_DNS_INVALID","PUBLIC_WEB_DNS_NOT_PUBLIC","PUBLIC_WEB_DNS_TIMEOUT","PUBLIC_WEB_DOCKER_FAILED","PUBLIC_WEB_DOCKER_REQUIRED","PUBLIC_WEB_DOCKER_TIMEOUT","PUBLIC_WEB_DOCKER_VERSION_UNQUALIFIED","PUBLIC_WEB_FILE_PATH","PUBLIC_WEB_FILE_PERMISSIONS","PUBLIC_WEB_GATEWAY_TOOL_CORRELATION_REQUIRED","PUBLIC_WEB_GATEWAY_TOOL_EVIDENCE_REQUIRED","PUBLIC_WEB_GRANT_EXPIRED","PUBLIC_WEB_GRANT_IDENTITY","PUBLIC_WEB_GRANT_INVALID","PUBLIC_WEB_HOST_ACCESS_FORBIDDEN","PUBLIC_WEB_HOST_GATEWAY_EXPOSED","PUBLIC_WEB_HOST_INVALID","PUBLIC_WEB_HOST_NOT_APPROVED","PUBLIC_WEB_HTTP_PINNED","PUBLIC_WEB_IDENTITY_REQUIRED","PUBLIC_WEB_IMMUTABLE_IMAGE_REQUIRED","PUBLIC_WEB_INPUT_UNSAFE","PUBLIC_WEB_INSPECT_FAILED","PUBLIC_WEB_INSPECT_INVALID","PUBLIC_WEB_IPV6_NOT_DISABLED","PUBLIC_WEB_ISSUANCE_INVALID","PUBLIC_WEB_JOB_INVALID","PUBLIC_WEB_LIMIT_REACHED","PUBLIC_WEB_LOCAL_DOCKER_REQUIRED","PUBLIC_WEB_LOCAL_MEASUREMENT_APPROVAL_REQUIRED","PUBLIC_WEB_NETWORK_CONTAINS_OTHER_WORK","PUBLIC_WEB_NETWORK_IDENTITY_CHANGED","PUBLIC_WEB_NETWORK_ISOLATION_CHANGED","PUBLIC_WEB_PHYSICAL_MAC_REQUIRED","PUBLIC_WEB_PINNED_AUTHORITY_REQUIRED","PUBLIC_WEB_POLICY_INVALID","PUBLIC_WEB_PREPARATION_CHANGED","PUBLIC_WEB_PREPARATION_INVALID","PUBLIC_WEB_PRIVATE_DIRECTORY_REQUIRED","PUBLIC_WEB_PRIVATE_SUBNET_REQUIRED","PUBLIC_WEB_PROXY_IDENTITY_REQUIRED","PUBLIC_WEB_PROXY_MOUNT_INVALID","PUBLIC_WEB_PURPOSE_INVALID","PUBLIC_WEB_QUALIFICATION_ACTUAL_OBSERVATIONS_REQUIRED","PUBLIC_WEB_QUALIFICATION_APPROVAL_REQUIRED","PUBLIC_WEB_QUALIFICATION_BINDING","PUBLIC_WEB_QUALIFICATION_BROWSER_FAILED","PUBLIC_WEB_QUALIFICATION_CONTROL_FAILED","PUBLIC_WEB_QUALIFICATION_ENFORCEMENT_FAILED","PUBLIC_WEB_QUALIFICATION_GATEWAY_EVIDENCE_REQUIRED","PUBLIC_WEB_QUALIFICATION_IDENTITY_FILE","PUBLIC_WEB_QUALIFICATION_INDEPENDENT_REVIEWER_REQUIRED","PUBLIC_WEB_QUALIFICATION_INVALID","PUBLIC_WEB_QUALIFICATION_LIMIT","PUBLIC_WEB_QUALIFICATION_MACHINE_UNAVAILABLE","PUBLIC_WEB_QUALIFICATION_MAC_REQUIRED","PUBLIC_WEB_QUALIFICATION_NEGATIVE_FAILED","PUBLIC_WEB_QUALIFICATION_PHYSICAL_MAC_REQUIRED","PUBLIC_WEB_QUALIFICATION_PRIVATE_FILE","PUBLIC_WEB_QUALIFICATION_PROBES_REQUIRED","PUBLIC_WEB_QUALIFICATION_PROBE_FAILED","PUBLIC_WEB_QUALIFICATION_PROBE_UNKNOWN","PUBLIC_WEB_QUALIFICATION_RECEIPT_CHANGED","PUBLIC_WEB_QUALIFICATION_RECEIPT_REQUIRED","PUBLIC_WEB_QUALIFICATION_RESIDUALS_REQUIRED","PUBLIC_WEB_QUALIFICATION_REVIEWER_CHANGED","PUBLIC_WEB_QUALIFICATION_REVIEWER_KEY","PUBLIC_WEB_QUALIFICATION_REVIEWER_REQUIRED","PUBLIC_WEB_QUALIFICATION_SCOPE","PUBLIC_WEB_QUALIFICATION_SIGNATURE","PUBLIC_WEB_QUALIFICATION_SOURCE","PUBLIC_WEB_QUALIFICATION_SOURCE_CHANGED","PUBLIC_WEB_QUALIFICATION_SOURCE_LIMIT","PUBLIC_WEB_QUALIFICATION_STALE","PUBLIC_WEB_REQUEST_ABORTED","PUBLIC_WEB_REQUEST_BLOCKED","PUBLIC_WEB_REQUEST_INVALID","PUBLIC_WEB_RESOLVER_REQUIRED","PUBLIC_WEB_RESOURCE_ID_INVALID","PUBLIC_WEB_RESOURCE_INVENTORY_INVALID","PUBLIC_WEB_RESOURCE_OWNERSHIP_MISMATCH","PUBLIC_WEB_SCOPED_CLEANUP_BLOCKED","PUBLIC_WEB_SECOND_LOOKUP_DENIED","PUBLIC_WEB_SESSION_ALREADY_ACTIVATED","PUBLIC_WEB_SESSION_CLOSED","PUBLIC_WEB_SESSION_EXISTS","PUBLIC_WEB_SETTLEMENT_CHANGED","PUBLIC_WEB_SPEC_REQUIRED","PUBLIC_WEB_SPEC_SCOPE_REQUIRED","PUBLIC_WEB_STANDARD_UID_REQUIRED","PUBLIC_WEB_SUBNET_REQUIRED","PUBLIC_WEB_TLS_ECH_DENIED","PUBLIC_WEB_TLS_PROTOCOL_DENIED","PUBLIC_WEB_TLS_REQUIRED","PUBLIC_WEB_TLS_SNI_MISMATCH","PUBLIC_WEB_TLS_SNI_PINNED","PUBLIC_WEB_TLS_SNI_REQUIRED","PUBLIC_WEB_TLS_TIMEOUT","PUBLIC_WEB_UNEXPECTED_CONTAINER_NETWORK","PUBLIC_WEB_UPGRADE_DENIED",
   "COMPUTE_PUBLIC_WEB_NOT_QUALIFIED","COMPUTE_LEGACY_SCOPE_REQUIRED","COMPUTE_POLICY_CHANGED","COMPUTE_SETTINGS_CHANGED","COMPUTE_SETUP_PENDING","COMPUTE_POLICY_MIGRATION_REQUIRED",
@@ -221,6 +224,8 @@ export class Companion {
     this.config = { ...COMPANION_DEFAULT };
     this.state = cleanState();
     this.readTokenHash = null;
+    this.stateRevision = 0;
+    this.automaticReady = false;
     try {
       if (fs.existsSync(this.file)) {
         const saved = readJSON(this.file);
@@ -245,15 +250,20 @@ export class Companion {
         );
         if(s.publicWebReviewerPublicKey!=null)s.publicWebReviewerPublicKey=publicWebReviewerKey(s.publicWebReviewerPublicKey);
         if(s.lastPublicWebReport!=null)s.lastPublicWebReport=validatePublicWebReport(s.lastPublicWebReport);
+        validateApprovalState(s);
         this.state = s;
+        this.stateRevision = s.stateRevision ?? 0;
+        ensure(!fs.existsSync(this.stateFile+".approval-pending"), "COMPANION_APPROVAL_RECONCILIATION_REQUIRED");
+        if (s.approvalHistory?.some(x => x.status === "pending")) this.persist({...s,approvalHistory:s.approvalHistory.map(x=>x.status==="pending"?{...x,status:"interrupted",completedAt:this.now(),failureCode:"COMPANION_CANCELLED"}:x)});
       }
-    } catch {
+    } catch (error) {
+      this.stateFailureCode=error.code??error.message;
       this.stateError = true;
       this.config.enabled = false;
     }
   }
-  persist() {
-    atomicWrite(this.stateFile, JSON.stringify(this.state));
+  persist(next = this.state) {
+    persistCompanionState(this, next);
   }
   save() {
     atomicWrite(
@@ -267,12 +277,13 @@ export class Companion {
   }
   status() {
     const now = this.now();
-    const error = this.stateError
-      ? "COMPANION_STATE_INVALID"
+    const error = this.approvalPersistenceUncertain ? "COMPANION_APPROVAL_RECONCILIATION_REQUIRED" : this.stateError
+      ? (this.stateFailureCode === "COMPANION_APPROVAL_RECONCILIATION_REQUIRED" ? this.stateFailureCode : "COMPANION_STATE_INVALID")
       : this.state.lastError;
     return {
+      ...approvalStatus(this),
       config: this.config,
-      connected: !this.stateError && this.state.testedAt > 0,
+      connected: !this.stateError && !this.approvalPersistenceUncertain && this.state.testedAt > 0,
       testedAt: this.state.testedAt ?? null,
       computePolicy: this.state.computePolicy ?? null,
       configuredCapabilities: this.state.configuredCapabilities ?? [],
@@ -290,7 +301,7 @@ export class Companion {
   }
   async readComputeHealth(token, signal) {
     const response = await this.fetch(`http://127.0.0.1:${this.config.port}/health`, {redirect:"error", signal, headers:{Authorization:`Bearer ${token}`}});
-    ensure(response.ok, "COMPANION_COMPUTE_UNAVAILABLE");
+    ensure(response.ok, [401,403].includes(response.status)?"COMPANION_AUTH_FAILED":"COMPANION_COMPUTE_UNAVAILABLE");
     let size=0; const parts=[];
     for await (const b of response.body) { size+=b.length; ensure(size<=2359296,"COMPANION_RESPONSE_INVALID"); parts.push(b); }
     const h=boundedJSON(Buffer.concat(parts));
@@ -321,16 +332,23 @@ export class Companion {
       const p=h.publicWeb;
       publicWeb={enabled:p.enabled===true,mode:['disabled','commissioning','qualified'].includes(p.mode)?p.mode:'disabled',operatorPublicKey:typeof p.operatorPublicKey==='string'&&p.operatorPublicKey.length<=4096?p.operatorPublicKey:null,browserImageID:p.browserImageID,proxyImageID:p.proxyImageID,adapterVersion:p.adapterVersion,reviewerPublicKey:publicWebReviewerKey(p.reviewerPublicKey),reviewerFingerprint:publicWebReviewerFingerprint(p.reviewerPublicKey),qualificationReceipt:p.qualificationReceipt??null,qualificationIdentity:p.qualificationIdentity??null,runtimeSha256:Object.fromEntries(['agent','reviewer'].filter(role=>/^[a-f0-9]{64}$/.test(p.runtimeSha256?.[role]??'')).map(role=>[role,p.runtimeSha256[role]]))};
     }
-    return {policyHash:h.policyHash,capabilities,configuredCapabilities:configured,qualification,gatewayReady:h.gatewayReady===true,stopped:h.stopped===true,publicWeb};
+    const count=v=>Number.isSafeInteger(v)&&v>=0?v:null;
+    let cleanupCapacity=null;try{if(h.cleanupCapacity)cleanupCapacity=safeCleanupCapacity(h.cleanupCapacity);}catch{}
+    this.observedCompute={cleanupCapacity,runs24h:count(h.runs24h),images24h:count(h.images24h),maxRuns24h:count(h.maxRuns24h),maxImages24h:count(h.maxImages24h)};
+    return {policyHash:h.policyHash,protocol:h.protocol,role:["agent","node","moderator","employer","evidence","recovery"].includes(h.role)?h.role:null,uid:h.uid,auth:h.auth,capabilities,configuredCapabilities:configured,qualification,gatewayReady:h.gatewayReady===true,stopped:h.stopped===true,publicWeb,runtime:h.runtime??null};
   }
   async inspectComputeIdentity() {
     ensure(this.config.enabled && this.config.mode!=="bounded", "COMPANION_WORKSTATION_REQUIRED");
     const token=this.getToken();
     ensure(typeof token==="string" && /^[A-Za-z0-9_-]{32,256}$/.test(token), "COMPANION_TOKEN_REQUIRED");
+    const generation=this.generation;
     const h=await this.readComputeHealth(token,AbortSignal.timeout(5000));
+    ensure(generation===this.generation,"COMPANION_CANCELLED");
     const publicWeb=h.publicWeb?{...h.publicWeb}:null;if(publicWeb){delete publicWeb.qualificationReceipt;delete publicWeb.qualificationIdentity;}
-    return {...h,publicWeb,boundPublicWebReviewerFingerprint:publicWebReviewerFingerprint(this.state.publicWebReviewerPublicKey),boundPolicyHash:this.state.computePolicy??null,changed:Boolean(this.state.computePolicy&&this.state.computePolicy!==h.policyHash)};
+    const proposal=createProposal(this,h);
+    return {...h,publicWeb,proposal,boundPublicWebReviewerFingerprint:publicWebReviewerFingerprint(this.state.publicWebReviewerPublicKey),boundPolicyHash:this.state.computePolicy??null,changed:Boolean(this.state.computePolicy&&this.state.computePolicy!==h.policyHash)};
   }
+  async approveComputeIdentity(input, options) { return approveReviewedIdentity(this, input, options); }
   async readPublicWebEvidence(requestID,{includeQualification=false}={}) {
     ensure(/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(requestID??''),'PUBLIC_WEB_PREPARATION_INVALID');
     const response=await this.fetch(`http://127.0.0.1:${this.config.port}/commissioning/requests/${requestID}`,{redirect:'error',signal:AbortSignal.timeout(5000),headers:{Authorization:`Bearer ${this.getToken()}`}});
@@ -349,6 +367,7 @@ export class Companion {
   savePublicWebReport(value) { const report=validatePublicWebReport(value);this.state.lastPublicWebReport=report;this.persist();return structuredClone(report); }
   async cancel() {
     this.generation++;
+    this.automaticReady = false;
     this.abort?.abort();
     if (this.pending) await this.pending.promise.catch(() => {});
   }
@@ -357,6 +376,8 @@ export class Companion {
     const next = validateCompanion(value);
     await this.cancel();
     this.config = next;
+    this.proposals?.clear();
+    this.state.bindingRevision = (this.state.bindingRevision ?? 0) + 1;
     this.state.cache = [];
     this.state.lastBrief = null;
     this.state.testedAt = null;
@@ -384,9 +405,11 @@ export class Companion {
       )
     );
   }
-  async request(kind, input, { cacheMs = 900000, authorizePolicyHash = null, ...webOptions } = {}) {
+  async request(kind, input, { cacheMs = 900000, authorizePolicyHash = null, approvalContext = null, ...webOptions } = {}) {
+    ensure(!this.approvalPersistenceUncertain,"COMPANION_APPROVAL_RECONCILIATION_REQUIRED");
+    ensure(!this.approvalReservation || approvalContext?.operationID === this.approvalReservation, "COMPANION_BUSY");
     ensure(!this.commissioningReservation||(webOptions.purpose==='commissioning'&&webOptions.commissioningReservation===this.commissioningReservation),'COMPANION_BUSY');
-    ensure(authorizePolicyHash === null || (kind === "test" && /^[a-f0-9]{64}$/.test(authorizePolicyHash)), "COMPANION_COMPUTE_APPROVAL_INVALID");
+    ensure(authorizePolicyHash === null || (kind === "test" && /^[a-f0-9]{64}$/.test(authorizePolicyHash) && approvalContext?.operationID === this.approvalReservation && this.approvalReservation), "COMPANION_COMPUTE_APPROVAL_INVALID");
     ensure(Object.hasOwn(instructions, kind), "COMPANION_REQUEST_INVALID");
     ensure(kind !== "computer-review" || this.config.mode === "workstation", "COMPANION_WORKSTATION_REQUIRED");
     ensure(!this.stateError, "COMPANION_STATE_INVALID");
@@ -464,6 +487,7 @@ export class Companion {
       now,
       authorizePolicyHash,
       web,
+      approvalContext,
     );
     this.pending = { key, promise };
     try {
@@ -473,7 +497,7 @@ export class Companion {
       this.abort = null;
     }
   }
-  async perform(kind, data, token, abort, generation, key, started, authorizePolicyHash = null, web = null) {
+  async perform(kind, data, token, abort, generation, key, started, authorizePolicyHash = null, web = null, approvalContext = null) {
     const timeout = setTimeout(() => abort.abort(), this.config.timeoutMs);
     let retryDelay = 0, preparationAttempted=false;
     const requestID=crypto.randomUUID();
@@ -482,6 +506,7 @@ export class Companion {
       if (this.config.mode !== "bounded") {
         const h = await this.readComputeHealth(token, abort.signal);
         computeIdentity = h;
+        if (approvalContext) assertApprovalCurrent(this, approvalContext, h);
         ensure(h.gatewayReady !== false, "COMPANION_COMPUTE_UNAVAILABLE");
         ensure(h.stopped !== true, "COMPANION_COMPUTE_CLEANUP_REQUIRED");
         ensure(authorizePolicyHash === null || h.policyHash === authorizePolicyHash, "COMPANION_COMPUTE_APPROVAL_CHANGED");
@@ -502,6 +527,9 @@ export class Companion {
         ensure(generation===this.generation&&!abort.signal.aborted,'COMPANION_CANCELLED');
         publicWebApproval=signPublicWebPreparation({requestID,kind,input:JSON.parse(data),...web,preparation,identity:computeIdentity,authority,reviewerPublicKey:this.state.publicWebReviewerPublicKey,now:this.now()});
       }
+      ensure(generation === this.generation && !abort.signal.aborted, "COMPANION_CANCELLED");
+      this.state.dispatches = [...(this.state.dispatches ?? []).filter(t=>t>this.now()-DAY),this.now()];
+      this.persist();
       const r = await this.fetch(
         `http://127.0.0.1:${this.config.port}/v1/chat/completions`,
         {
@@ -588,7 +616,16 @@ export class Companion {
         generation === this.generation && !abort.signal.aborted,
         "COMPANION_CANCELLED",
       );
+      if (kind === "test" && computeIdentity) {
+        const current=await this.readComputeHealth(token,abort.signal);
+        ensure(generation === this.generation && !abort.signal.aborted, "COMPANION_CANCELLED");
+        ensure(current.gatewayReady && !current.stopped, current.stopped?"COMPANION_COMPUTE_CLEANUP_REQUIRED":"COMPANION_COMPUTE_UNAVAILABLE");
+        ensure(identityDigest(current)===identityDigest(computeIdentity), "COMPANION_COMPUTE_APPROVAL_CHANGED");
+        if (approvalContext) assertApprovalCurrent(this, approvalContext, current);
+      }
       const now = this.now();
+      const previousState=this.state;
+      this.state=structuredClone(this.state);
       this.state.nextAt = Math.max(now, started + 30000);
       this.state.failures = 0;
       this.state.lastError = null;
@@ -609,7 +646,11 @@ export class Companion {
         }
       }
       if (kind === "brief") this.state.lastBrief = { ...value, at: now };
-      this.persist();
+      if (approvalContext) this.state=completeApprovalState(this.state,approvalContext,now);
+      else if(kind === "test" && computeIdentity && previousState.computePolicy!==computeIdentity.policyHash)this.state.bindingRevision=(this.state.bindingRevision??0)+1;
+      const committed=this.state;this.state=previousState;
+      this.persist(committed);
+      if(kind === "test"){this.automaticReady=true;this.awaitingIdentityApproval=false;}
       return { ...value, at: now, cached: false, ...(web?.purpose==='commissioning'?{requestID}: {}) };
     } catch (error) {
       let cleanupFailed=false;
@@ -620,10 +661,14 @@ export class Companion {
       const code =
         cleanupFailed?'PUBLIC_WEB_CLEANUP_FAILED':generation !== this.generation
           ? "COMPANION_CANCELLED"
-          : typeof errorCode === "string" &&
+          : approvalContext
+            ? approvalFailureCode(error)
+            : typeof errorCode === "string" &&
               (errorCode.startsWith("COMPANION_") || COMPUTE_CLIENT_ERRORS.has(errorCode))
             ? errorCode
             : "COMPANION_UNAVAILABLE";
+      if (this.stateError) throw error;
+      if (code === "COMPANION_COMPUTE_POLICY_CHANGED") {this.awaitingIdentityApproval=true;this.automaticReady=false;}
       this.state.failures = Math.min(10, this.state.failures + 1);
       this.state.nextAt =
         this.now() +
@@ -645,6 +690,7 @@ export class Companion {
         !isUnlocked() ||
         !this.config.enabled ||
         !this.config.autoBrief ||
+        !this.automaticReady || this.awaitingIdentityApproval || this.approvalReservation ||
         this.pending || this.commissioningReservation
       )
         return;
@@ -653,6 +699,12 @@ export class Companion {
         return;
       this.lastAutoAttempt = now;
       try {
+        if(this.config.mode!=="bounded"){
+          const generation=this.generation,h=await this.readComputeHealth(this.getToken(),AbortSignal.timeout(5000));
+          if(generation!==this.generation||this.approvalReservation||this.pending)return;
+          if(h.policyHash!==this.state.computePolicy){this.awaitingIdentityApproval=true;this.automaticReady=false;return;}
+          if(h.stopped||!h.gatewayReady)return;
+        }
         await this.request("brief", getSnapshot(), { cacheMs: 21600000 });
       } catch {}
     }, 30000);

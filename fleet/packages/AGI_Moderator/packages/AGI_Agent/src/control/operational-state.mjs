@@ -20,7 +20,8 @@ function safePath(name,kind){
  ensure(s.files.includes(name)||s.trees.some(root=>name.startsWith(root+'/')),'BACKUP_STATE_PATH');
  return name;
 }
-export function captureOperational({home,dataDir=path.join(home,'data'),kind}){
+export function captureOperational({home,dataDir=path.join(home,'data'),kind,excludeStudio=false}){
+ ensure(typeof excludeStudio==='boolean'&&(!excludeStudio||['agent','node'].includes(kind)),'BACKUP_STATE_FORMAT');
  const s=scope(kind),files=[];let bytes=0,nodes=0;
  for(const base of new Set([home,...(kind==='fleet'?[]:[dataDir])])){
   const stat=fs.lstatSync(base);ensure(stat.isDirectory()&&!stat.isSymbolicLink(),'BACKUP_STATE_UNSAFE_FILE');
@@ -38,7 +39,7 @@ export function captureOperational({home,dataDir=path.join(home,'data'),kind}){
   }
   safePath(name,kind);
   ensure(stat.isFile()&&stat.nlink===1,'BACKUP_STATE_UNSAFE_FILE');
-  ensure(files.length<MAX_FILES&&stat.size<=MAX_FILE&&bytes+stat.size<=MAX_BYTES,'BACKUP_TOO_LARGE');
+  ensure(files.length<MAX_FILES&&stat.size<=MAX_FILE&&bytes+stat.size<=MAX_BYTES,name.startsWith('work-studio/')?'BACKUP_STUDIO_EXPORT_REQUIRED':'BACKUP_TOO_LARGE');
   const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let content;
   try{
    const before=fs.fstatSync(fd);
@@ -48,13 +49,16 @@ export function captureOperational({home,dataDir=path.join(home,'data'),kind}){
   }finally{fs.closeSync(fd);}
   bytes+=content.length;files.push({path:name,size:content.length,sha256:digest(content),data:content.toString('base64')});
  }
- for(const name of [...s.trees,...s.files])walk(name.startsWith('data/')?path.join(dataDir,name.slice(5)):path.join(home,name),name);
- const result={schema:'agi-operational-state/v1',kind,bytes,files};
+ for(const name of [...s.trees,...s.files].filter(name=>!excludeStudio||name!=='work-studio'))walk(name.startsWith('data/')?path.join(dataDir,name.slice(5)):path.join(home,name),name);
+ const result={schema:'agi-operational-state/v1',kind,bytes,files,...(excludeStudio?{excludedTrees:['work-studio']}: {})};
  validateOperational(result,kind);return result;
 }
 export function validateOperational(value,kind){
  scope(kind);
  ensure(value&&value.schema==='agi-operational-state/v1'&&value.kind===kind&&Array.isArray(value.files)&&value.files.length<=MAX_FILES,'BACKUP_STATE_FORMAT');
+ const excluded=Object.hasOwn(value,'excludedTrees')?value.excludedTrees:[];
+ ensure(Array.isArray(excluded)&&(excluded.length===0||(['agent','node'].includes(kind)&&excluded.length===1&&excluded[0]==='work-studio')),'BACKUP_STATE_FORMAT');
+ ensure(!excluded.length||value.files.every(entry=>typeof entry?.path==='string'&&!entry.path.startsWith('work-studio/')),'BACKUP_STATE_FORMAT');
  const seen=new Set();let bytes=0;
  const decoded=value.files.map(entry=>{
   ensure(entry&&typeof entry==='object','BACKUP_STATE_FORMAT');safePath(entry.path,kind);

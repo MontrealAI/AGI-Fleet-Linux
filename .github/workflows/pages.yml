@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
     paths:
+      - fleet/successor/**
+      - successor/**
       - website/**
       - engineering/build-website.py
       - engineering/check-website.py
@@ -19,6 +21,8 @@ on:
       - .github/workflows/pages.yml
   pull_request:
     paths:
+      - fleet/successor/**
+      - successor/**
       - website/**
       - engineering/build-website.py
       - engineering/check-website.py
@@ -128,7 +132,7 @@ jobs:
               raise SystemExit('Invalid deployment commit')
           pending = json.loads(os.environ['EXPECTED_PUBLIC_HASHES'])
           required = {'index.html', 'fr.html', 'start.html', 'start-fr.html', 'styles.css',
-                      'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'release.json',
+                      'successor.html', 'successor-fr.html', 'build-info.json', 'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'release.json',
                       'mac.html', 'mac-fr.html', 'mac-release.json', 'install-mac.html',
                       'install-mac-fr.html', 'mac-setup.css', 'mac-setup.js'}
           if (not isinstance(pending, dict) or not required <= pending.keys()

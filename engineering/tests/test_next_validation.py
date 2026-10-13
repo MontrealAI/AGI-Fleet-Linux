@@ -49,9 +49,9 @@ class CandidateAdapters(unittest.TestCase):
         bound = integration.bind_runner(candidate())
         self.assertEqual(bound.PREFIX, candidate()['prefix'])
         self.assertEqual(bound.SHA256, 'c' * 64)
-        self.assertIn('1.0.11', bound.main.__code__.co_consts)
+        self.assertIn(candidate()['version'], bound.main.__code__.co_consts)
         self.assertNotIn('1.0.9', bound.main.__code__.co_consts)
-        self.assertEqual(bound.MANAGER_BASELINE, '3958cbc3b01aa459de16cf39e1ab0985b5fa56c3')
+        self.assertEqual(bound.MANAGER_BASELINE, candidate()['integration']['commit'])
 
     def test_native_refuses_operator_environment_before_provisioning(self):
         with patch.dict(os.environ, {}, clear=True), self.assertRaisesRegex(ValueError, 'disposable'):
@@ -102,7 +102,7 @@ class CandidateIntegrationAudit(unittest.TestCase):
         self.candidate = candidate()
         self.report = json.loads((ENGINEERING / 'tests/fixtures/job-evidence-fixture.json').read_text())
         self.report['fleet'] = {key: self.candidate[key] for key in ('version', 'sha256', 'bytes')}
-        self.report['archiveVerification'].update(sha256=self.candidate['sha256'], bytes=self.candidate['bytes'])
+        self.report['archiveVerification'].update(sha256=self.candidate['sha256'], bytes=self.candidate['bytes'], sourceFiles=self.candidate['sourceFiles'])
         target = self.candidate['integration']
         self.report['manager'].update(commit=target['commit'], requestedRef=target['commit'], version=target['version'])
         self.report['managerRegression'] = {key: target['managerTests'] for key in ('collectedTests', 'executedTests', 'passedTests')}

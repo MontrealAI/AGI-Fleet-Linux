@@ -1,5 +1,7 @@
 # AGI Fleet · Linux & Apple silicon Mac
 
+**[Build my SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor.html)** · **[Créer mon SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor-fr.html)** — Create useful local work, connect a qualified Fleet computer, check improvements and keep your system. [Builder guide](successor/docs/GUIDE.md).
+
 **Preparing Linux 1.0.11:** exact-archive AGIJobManager 1.15.0 integration, stronger publication provenance and current operator guides. Publication requires fresh native and integration acceptance on both architectures. Until its audited release appears, 1.0.10 remains the published Linux candidate. [Release scope and gates](docs/RELEASE_NOTES_1_0_11.md).
 
 ## New here? Let’s find your next step.

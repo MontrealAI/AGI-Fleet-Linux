@@ -1077,7 +1077,8 @@ export class Controller {
   requireCertainApprovalPersistence() {
     ensure(!this.companion.approvalPersistenceUncertain && this.companion.stateFailureCode!=="COMPANION_APPROVAL_RECONCILIATION_REQUIRED" && !fs.existsSync(this.companion.stateFile+".approval-pending"), "COMPANION_APPROVAL_RECONCILIATION_REQUIRED");
   }
-  async backup(password) {
+  async backup(password, {excludeStudio=false}={}) {
+    ensure(typeof excludeStudio === "boolean", "BACKUP_STATE_FORMAT");
     this.requireCertainApprovalPersistence();
     ensure(
       this.config.agent && fs.existsSync(this.configFile),
@@ -1111,7 +1112,7 @@ export class Controller {
         ? fs.readFileSync(file).toString("base64")
         : null,
     };
-    data.operational = captureOperational({home:this.home,dataDir:this.config.dataDir,kind:"agent"});
+    data.operational = captureOperational({home:this.home,dataDir:this.config.dataDir,kind:"agent",excludeStudio});
     const sealed = await sealBackup(addBackupIntegrity(data), password);
     this.requireCertainApprovalPersistence();
     // A newly issued snapshot needs its own verification and storage acknowledgement.

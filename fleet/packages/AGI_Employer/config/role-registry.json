@@ -1,11 +1,11 @@
 {
   "schema": "agi-fleet-role-registry/v1",
-  "fleet": "1.0.11",
+  "fleet": "1.1.0",
   "runtime": "1.0.0",
   "roles": {
     "agent": {
       "display": "AGI Agent",
-      "version": "1.0.11",
+      "version": "1.1.0",
       "package": "AGI_Agent",
       "profile": "agi-compute",
       "port": 18894,
@@ -33,7 +33,7 @@
     },
     "node": {
       "display": "AGI Node",
-      "version": "1.0.11",
+      "version": "1.1.0",
       "package": "AGI_Node",
       "profile": "agi-node-compute",
       "port": 18898,
@@ -60,7 +60,7 @@
     },
     "moderator": {
       "display": "AGI Moderator",
-      "version": "1.0.11",
+      "version": "1.1.0",
       "package": "AGI_Moderator",
       "profile": "agi-moderator-compute",
       "port": 18910,
@@ -86,7 +86,7 @@
     },
     "employer": {
       "display": "AGI Employer",
-      "version": "1.0.11",
+      "version": "1.1.0",
       "package": "AGI_Employer",
       "profile": "agi-employer-compute",
       "port": 18920,
@@ -112,7 +112,7 @@
     },
     "evidence": {
       "display": "AGI Evidence",
-      "version": "1.0.11",
+      "version": "1.1.0",
       "package": "AGI_Evidence",
       "profile": "agi-evidence-compute",
       "port": 18930,
@@ -138,7 +138,7 @@
     },
     "recovery": {
       "display": "AGI Recovery",
-      "version": "1.0.11",
+      "version": "1.1.0",
       "package": "AGI_Recovery",
       "profile": "agi-recovery-compute",
       "port": 18950,

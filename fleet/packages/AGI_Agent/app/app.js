@@ -485,10 +485,11 @@ action("settlementBudgetForm", async () => {
 action("backupForm", async () => {
   download(
     `AGI-Agent-${state.walletProfile === "seed" ? "seed-profile" : "original-profile"}-${state.config.agent.slice(0,10)}-encrypted-backup.agiagentbackup`,
-    await api("/api/backup", { password: $("backupPassword").value }),
+    await api("/api/backup", { password: $("backupPassword").value, excludeStudio: $("backup-exclude-studio").checked }),
   );
   $("backupPassword").value = "";
-  notice("Select the actual downloaded file below, verify it, then store a copy off this computer.", true);
+  notice(($("backup-exclude-studio").checked ? "Studio work is excluded; keep its separate exports. " : "") + "Select the actual downloaded file below, verify it, then store a copy off this computer.", true);
+  $("backup-exclude-studio").checked = false;
 });
 action("backupSaved", async () => {
   await api("/api/backup/saved", {});

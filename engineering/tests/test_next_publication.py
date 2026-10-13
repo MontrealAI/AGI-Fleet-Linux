@@ -21,13 +21,14 @@ class PublicationAcceptance(unittest.TestCase):
         self.audit = {'status': 'PASS', 'version': self.metadata['version'], 'releaseSHA256': 'b' * 64,
                       'sourceRevisionSHA256': self.metadata['sourceRevisionSHA256'],
                       'workflowRun': self.run_id, 'integrationTarget': self.metadata['integration'],
-                      'verifiedTapLogs': 734, 'verifiedIntegrationLogs': 38,
+                      'verifiedTapLogs': 2 * sum(v['files'] for v in self.metadata['native'].values()), 'verifiedIntegrationLogs': 38,
                       'workflowCommit': self.commit, 'productionQualified': False, 'physicalQualification': 'NOT_RUN',
                       'architectures': ['x64', 'arm64'], 'native': [], 'integration': []}
         for arch in self.audit['architectures']:
             common = {'architecture': arch, 'status': 'PASS', 'workflowCommit': self.commit, 'workflowRun': self.run_id, 'productionQualified': False}
             native = {**common, 'runs': {}}
-            for scope, tests, files in [('targeted', 291, 25), ('complete', 3898, 342)]:
+            for scope, target in self.metadata['native'].items():
+                tests, files = target['tests'], target['files']
                 native['runs'][scope] = {'status': 'PASS', 'verifiedLogs': files, 'counts': {'tests': tests, 'pass': tests,
                     'fail': 0, 'cancelled': 0, 'skipped': 0, 'todo': 0}}
             self.audit['native'].append(native)

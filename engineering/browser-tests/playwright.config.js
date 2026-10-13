@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../../', import.meta.url));
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: process.env.FLEET_TEST_ROOT ? './fleet-tests' : './tests',
   outputDir: './test-results',
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
@@ -20,10 +20,11 @@ export default defineConfig({
     viewport: { width: 1440, height: 1000 },
     acceptDownloads: false,
     serviceWorkers: 'block',
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? {executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE, args:['--no-sandbox']} : {},
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure'
   },
-  webServer: {
+  webServer: process.env.FLEET_TEST_ROOT ? undefined : {
     command: 'python3 -m http.server 4173 --bind 127.0.0.1 --directory _site',
     cwd: root,
     url: 'http://127.0.0.1:4173/start.html',

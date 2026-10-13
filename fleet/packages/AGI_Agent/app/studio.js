@@ -1,3 +1,31 @@
+// Fast import feedback only. The server validates the complete specification,
+// file hashes, authority, runtime binding and review before spending allowance.
+const AGIStudioImport = Object.freeze({
+  uploadBytes: 96 * 1024 * 1024,
+  specificationBytes: 256 * 1024,
+  isComputer(profile) {return ['computer-work/v1','computer-work/v2'].includes(profile);},
+  deliveryBytes(spec) {return spec?.profile === 'computer-work/v2' ? 90 * 1024 * 1024 : 6 * 1024 * 1024;},
+  supportedBrief(spec) {
+    const general = spec?.profile === 'computer-work/v2', maxCriteria = general ? 64 : 16;
+    return spec?.schema === 'agi-node-job/v1' && ['computer-work/v1','computer-work/v2','image-png/v1'].includes(spec.profile) && spec.dataPolicy === 'public'
+      && (!general || ['agent','reviewer'].every(role => spec.authority?.[role]?.scope === 'isolated-public'))
+      && (!this.isComputer(spec.profile) || (Array.isArray(spec.outputs) && spec.outputs.length > 0 && spec.outputs.length <= (general ? 64 : 24) && spec.outputs.every(f => typeof f?.name === 'string' && f.name.length > 0)))
+      && typeof spec.title === 'string' && spec.title.length > 0 && spec.title.length <= 160
+      && typeof spec.prompt === 'string' && spec.prompt.length > 0 && spec.prompt.length <= (general ? 12000 : 6000)
+      && Array.isArray(spec.criteria) && spec.criteria.length > 0 && spec.criteria.length <= maxCriteria
+      && spec.criteria.every(c => typeof c?.requirement === 'string' && c.requirement.length > 0 && c.requirement.length <= (general ? 2000 : 500));
+  },
+  supportedHandoff(value) {
+    return value?.schema === 'agi-studio-handoff/v1' && this.supportedBrief(value.specification)
+      && typeof value.delivery === 'string' && new TextEncoder().encode(value.delivery).length <= this.deliveryBytes(value.specification);
+  },
+  supportedRevision(value) {
+    return value?.schema === 'agi-studio-revision/v1' && this.supportedHandoff(value.handoff)
+      && this.isComputer(value.handoff.specification.profile) && value.review?.safeToReview === true
+      && Array.isArray(value.review.checks) && value.review.checks.length <= (value.handoff.specification.profile === 'computer-work/v2' ? 64 : 16);
+  },
+});
+
 (() => {
   'use strict';
   const root = document.querySelector('.studio-shell');
@@ -101,7 +129,7 @@
         const original = element('button','Download original files','studio-button'); original.type='button';
         original.onclick=()=>action(()=>exportRun(r,'original-files')); buttons.append(original);
       }
-      if (r.currentScope && r.hasFiles && r.profile === 'computer-work/v1' && r.review?.safeToReview === true && r.review.verdict === 'concern') {
+      if (r.currentScope && r.hasFiles && AGIStudioImport.isComputer(r.profile) && r.review?.safeToReview === true && r.review.verdict === 'concern') {
         const feedback=element('button','Revision feedback','studio-button');feedback.type='button';feedback.onclick=()=>action(()=>exportRun(r,'revision'));buttons.append(feedback);
         if(role==='agent') {
           const improve=element('button','Improve & check again','studio-button primary');improve.type='button';improve.disabled=!snapshot.ready;
@@ -126,13 +154,6 @@
   }
   const lines = id => byId(id).value.split('\n').map(s => s.trim()).filter(Boolean);
   function displaySpec(spec) {byId('title').value=spec.title;byId('brief').value=spec.prompt;byId('outputs').value=spec.outputs?spec.outputs.map(f=>f.name).join('\n'):'image.png';byId('criteria').value=spec.criteria.map(c=>c.requirement).join('\n');}
-  function supportedBrief(spec) {
-    return spec?.schema === 'agi-node-job/v1' && ['computer-work/v1','image-png/v1'].includes(spec.profile) && spec.dataPolicy === 'public'
-      && typeof spec.title === 'string' && spec.title.length > 0 && spec.title.length <= 160
-      && typeof spec.prompt === 'string' && spec.prompt.length > 0 && spec.prompt.length <= 6000
-      && Array.isArray(spec.criteria) && spec.criteria.length > 0 && spec.criteria.length <= 16
-      && spec.criteria.every(c => typeof c?.requirement === 'string' && c.requirement.length > 0 && c.requirement.length <= 500);
-  }
   byId('form').addEventListener('submit',e => {e.preventDefault(); action(async () => {
     let input;
     if (role === 'agent') input = revision ? {revision} : imported ? {specification:imported} : {brief:{template:template.id,title:byId('title').value,prompt:byId('brief').value,outputs:lines('outputs'),criteria:lines('criteria')}};
@@ -146,9 +167,9 @@
       revision=null; imported=null; byId('import-note').hidden=true;
       for(const id of ['title','brief','outputs','criteria'])byId(id).disabled=false;
       const file=byId('revision-file').files[0];if(!file)return;
-      if(file.size>7*1024*1024)throw Error('The revision feedback exceeds 7 MiB.');
+      if(file.size>AGIStudioImport.uploadBytes)throw Error('The revision feedback exceeds the 96 MiB upload limit. Split larger work into smaller tasks.');
       const value=JSON.parse(await file.text());
-      if(value.schema!=='agi-studio-revision/v1'||!supportedBrief(value.handoff?.specification)||value.handoff.specification.profile!=='computer-work/v1'||typeof value.handoff.delivery!=='string'||value.handoff.delivery.length>6291456||value.review?.safeToReview!==true||!Array.isArray(value.review.checks)||value.review.checks.length>16)throw Error('Choose the complete Revision feedback JSON from an Agent or Node review.');
+      if(!AGIStudioImport.supportedRevision(value))throw Error('Choose the complete Revision feedback JSON from an Agent or Node review.');
       revision=value;displaySpec(value.handoff.specification);for(const id of ['title','brief','outputs','criteria'])byId(id).disabled=true;
       byId('import-note').hidden=false;byId('import-note').textContent='Revise: '+value.handoff.specification.title+'. The original files will be preserved. Two workflow starts create and check a new result against the unchanged job. Feedback is editable evidence, not a verified reviewer identity.';
     });
@@ -156,18 +177,18 @@
       imported = null; revision = null; byId('import-note').hidden = true;
       for (const id of ['title','brief','outputs','criteria']) byId(id).disabled = false;
       const file = byId('spec-file').files[0]; if (!file) return;
-      if (file.size > 20000) throw Error('The job specification must be smaller than 20 KB.');
+      if (file.size > AGIStudioImport.specificationBytes) throw Error('The job specification upload must be no larger than 256 KiB; the validated specification is limited to 64 KiB.');
       const spec = JSON.parse(await file.text());
-      if (!supportedBrief(spec)) throw Error('Choose a valid public computer-work/v1 or image-png/v1 job specification with 1–16 criteria.');
+      if (!AGIStudioImport.supportedBrief(spec)) throw Error('Choose a public computer-work/v2 specification with isolated-public authority and 1–64 criteria, or a legacy computer-work/v1 or image-png/v1 specification with 1–16 criteria. Private account work uses the authorized workstation workflow.');
       imported = spec; displaySpec(spec); for (const id of ['title','brief','outputs','criteria']) byId(id).disabled = true; byId('import-note').hidden = false; byId('import-note').textContent = `Imported task: ${spec.title}. The original specification, including inputs and byte limits, will be used unchanged. Choose a task tile to return to the editor.`;
     });
   } else {
     byId('handoff-file').onchange = () => action(async () => {
       handoff = null; byId('handoff-preview').replaceChildren();
       const file = byId('handoff-file').files[0]; if (!file) return;
-      if (file.size > 7*1024*1024) throw Error('This handoff exceeds the 7 MiB upload limit.');
+      if (file.size > AGIStudioImport.uploadBytes) throw Error('This handoff exceeds the 96 MiB upload limit. Split larger work into smaller tasks.');
       const value = JSON.parse(await file.text());
-      if (value.schema !== 'agi-studio-handoff/v1' || !supportedBrief(value.specification) || typeof value.delivery !== 'string' || value.delivery.length > 6291456) throw Error('Choose the complete review handoff JSON downloaded from the Agent Studio.');
+      if (!AGIStudioImport.supportedHandoff(value)) throw Error('Choose the complete review handoff JSON downloaded from the Agent Studio.');
       const spec = value.specification, preview = byId('handoff-preview');
       preview.append(element('h3',spec.title),element('p',spec.prompt));
       const checks = element('ol'); for (const c of spec.criteria ?? []) checks.append(element('li',c.requirement)); preview.append(checks);
