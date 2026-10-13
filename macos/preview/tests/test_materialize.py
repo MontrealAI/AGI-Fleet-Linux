@@ -38,7 +38,7 @@ class MaterializationTests(unittest.TestCase):
             note = json.loads((app / 'PREVIEW-NOT-A-RELEASE.json').read_text())
             self.assertEqual(note['previewSourceSha256'], checked['sourceSha256'])
             self.assertEqual(note['materializedSourceBasis']['revisionSHA256'], checked['fleetSource']['revisionSHA256'])
-            self.assertEqual(note['materializedSourceBasis']['version'], '1.0.10')
+            self.assertEqual(note['materializedSourceBasis']['version'], '1.0.11')
             self.assertEqual(note['reusedPreviewHistoricalBasis']['frozenFleetVersion'], '1.0.9')
             self.assertEqual(note['productionExecution'], 'DISABLED')
             self.assertFalse(note['productionQualified'])
