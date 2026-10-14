@@ -116,6 +116,30 @@ class MaintenanceReleaseTests(unittest.TestCase):
         self.assertIn("github.ref == 'refs/heads/main'", workflow)
         self.assertIn("paths: ['engineering/next-release.json']", workflow)
 
+    def test_generated_role_guides_match_current_markdown(self):
+        for folder in sorted((ROOT / 'fleet/packages').glob('AGI_*')):
+            welcome = (folder / 'README.md').read_text()
+            expected = builder.render_markdown(welcome).replace(
+                '<body>', '<body><span id="agi-fleet-linux-1011"></span>')
+            self.assertEqual((folder / 'START_HERE.md').read_text(), welcome)
+            for name in ('README.html', 'START_HERE.html', 'Linux-Guide.html'):
+                with self.subTest(role=folder.name, guide=name):
+                    self.assertEqual((folder / name).read_text(), expected)
+
+    def test_every_static_edition_label_matches_the_candidate(self):
+        labels = []
+        for folder in [ROOT / 'fleet', *sorted((ROOT / 'fleet/packages').glob('AGI_*'))]:
+            for name in ('app/index.html', 'web/index.html'):
+                page = folder / name
+                if not page.is_file():
+                    continue
+                found = re.findall(r'(?:id="appVersion"|data-app-version)\s*>\s*([^<]*)', page.read_text())
+                for label in found:
+                    if label.strip():
+                        self.assertEqual(label.strip(), self.release['version'], str(page))
+                        labels.append(label.strip())
+        self.assertGreaterEqual(len(labels), 3)
+
     def test_historical_notes_remain_available(self):
         self.assertTrue((ROOT / 'docs/RELEASE_NOTES_1_1_0.md').is_file())
         self.assertTrue((ROOT / 'validation/LINUX_1_1_0_RELEASE_ADDENDUM.md').is_file())
