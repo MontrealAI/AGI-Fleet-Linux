@@ -39,7 +39,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
-          import hashlib, json, os, pathlib, subprocess, urllib.request
+          import hashlib, json, os, pathlib, subprocess, urllib.request, urllib.error
           root = pathlib.Path(os.environ['RUNNER_TEMP']) / 'candidate'
           out = pathlib.Path(os.environ['RUNNER_TEMP']) / 'preparation-evidence'
           expected = 'fe286ffb9a3f73f197c97bb5b4e81158d5ef18f7'
@@ -62,14 +62,23 @@ jobs:
               if mode not in ('100644', '100755'):
                   raise SystemExit('Unexpected source mode')
               entries.append({'path': name, 'mode': mode, 'type': 'blob', 'content': path.read_bytes().decode('utf-8')})
-          payload = json.dumps({'base_tree': base, 'tree': entries}).encode()
+          # Workflow-file writes use the connected editor, not this content-only token.
+          content_entries = [entry for entry in entries if entry['path'] != '.github/workflows/next-release.yml']
+          if len(content_entries) != 99:
+              raise SystemExit('Unexpected content-only edit scope')
+          payload = json.dumps({'base_tree': base, 'tree': content_entries}).encode()
           request = urllib.request.Request('https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/git/trees', data=payload,
               headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept': 'application/vnd.github+json',
                        'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28'}, method='POST')
-          with urllib.request.urlopen(request, timeout=120) as response:
-              result = json.load(response)
-          if result.get('sha') != expected:
-              raise SystemExit('Stored Git tree differs from reviewed local tree')
+          try:
+              with urllib.request.urlopen(request, timeout=120) as response:
+                  result = json.load(response)
+          except urllib.error.HTTPError as error:
+              print('GitHub object write failed:', error.code, error.read(2048).decode('utf-8', errors='replace'))
+              raise
+          content_tree = '23cd78eb16d78d1fe876aa52891bced19f14fbb2'
+          if result.get('sha') != content_tree:
+              raise SystemExit('Stored content tree differs from reviewed local tree')
           archive = out / 'Linux-1.1.1-prepared-source.zip'
           subprocess.run(['git', 'archive', '--format=zip', '--output=' + str(archive), expected], cwd=root, check=True)
           if not 0 < archive.stat().st_size < 450_000_000:
@@ -78,6 +87,7 @@ jobs:
           receipt = {'schema': 'agi-linux-source-preparation/v1', 'status': 'PREPARED_SOURCE_ONLY',
               'workflowCommit': os.environ['GITHUB_SHA'], 'workflowRun': os.environ['GITHUB_RUN_ID'],
               'baseCommit': git('rev-parse', 'HEAD'), 'baseTree': base, 'preparedTree': expected,
+              'storedContentTree': content_tree, 'workflowEditPending': True,
               'version': '1.1.1', 'changedFiles': names, 'sourceRevisionSHA256': json.loads((root / 'engineering/next-release.json').read_text())['sourceRevisionSHA256'],
               'archive': {'name': archive.name, 'bytes': archive.stat().st_size, 'sha256': digest},
               'branchUpdated': False, 'releasePublished': False, 'productionQualified': False}
