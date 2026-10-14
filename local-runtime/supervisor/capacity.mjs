@@ -7,6 +7,15 @@ export const STORAGE_LIMITS=Object.freeze({grants:32_000_000,projects:32_000_000
   backendResult:2_100_000,outcome:2_200_000,runReservation:2_300_000});
 
 export function runHistoryUsage(db) {
+  // SQLite MAX orders TEXT above numbers, while SUM coerces it back to zero.
+  // Reject malformed retained reservations before accounting or grant consumption;
+  // missing fields remain compatible with legacy rows and use the numeric floor.
+  const invalid=db.prepare(`SELECT 1 FROM runs WHERE state IN ('running','uncertain')
+    AND json_type(value,'$.storageReservationBytes') IS NOT NULL
+    AND (json_type(value,'$.storageReservationBytes') != 'integer'
+      OR json_extract(value,'$.storageReservationBytes') < 0
+      OR json_extract(value,'$.storageReservationBytes') > ?) LIMIT 1`).get(STORAGE_LIMITS.runs);
+  need(!invalid,'HISTORY_RESERVATION_INVALID');
   return db.prepare(`SELECT COUNT(*) AS count,COALESCE(SUM(length(CAST(value AS BLOB))+
     CASE WHEN state IN ('running','uncertain') THEN
       MAX(length(CAST(COALESCE(result,'') AS BLOB)),?,COALESCE(json_extract(value,'$.storageReservationBytes'),?))

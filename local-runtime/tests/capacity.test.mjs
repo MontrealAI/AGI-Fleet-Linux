@@ -112,3 +112,13 @@ test('bounded failure reconciliation fits its reserved space while retaining the
     assert.equal(f.runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(g.grant).state,'consumed');
   }finally{f.close();}
 });
+
+for(const reservation of ['not-a-number',null,-1,2.5,64_000_001])test(`malformed retained reservation ${JSON.stringify(reservation)} refuses new work before grant consumption`,async()=>{
+  const f=fixture();try{
+    const a=f.create(),g=f.prepare(a);f.authorize(g);
+    f.runtime.store.db.prepare("INSERT INTO runs VALUES(?,?,?,'uncertain',?,NULL)").run(id(),a.id,id(),canonical({reservedAt:0,storageReservationBytes:reservation}));
+    await assert.rejects(f.run(a,g),/HISTORY_RESERVATION_INVALID/);
+    assert.equal(f.runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(g.grant).state,'authorized');
+    assert.equal(f.runtime.store.db.prepare('SELECT COUNT(*) AS n FROM runs').get().n,1);
+  }finally{f.close();}
+});
