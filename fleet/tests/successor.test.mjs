@@ -310,3 +310,34 @@ test('later preparations and repetitions cannot relabel committed first-pass met
     funnel(a,'repaired',1,null);summary=summarizeOutcomes(ledger.read());assert.equal(summary.funnel.firstPassAccepted,0);
   }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
+
+function holdHealth(f){
+  const original=f.controller.companion.readComputeHealth.bind(f.controller.companion);
+  let entered,release;const reached=new Promise(r=>entered=r),gate=new Promise(r=>release=r);
+  f.controller.companion.readComputeHealth=async(...args)=>{entered();await gate;return original(...args);};
+  return {reached,release,restore:()=>{f.controller.companion.readComputeHealth=original;}};
+}
+test('revocation and Stop during runtime inspection cannot create a late authorization ticket',async()=>{
+  const a=await fixture(root),n=await fixture(root,'node');try{
+    const req=await request(),ctx=context(req,a,n);
+    for(const action of ['revoke','stop']){
+      const gate=holdHealth(a),pending=a.bridge.prepare({request:req,context:ctx},'test-principal');await gate.reached;
+      await a.bridge[action]();gate.release();
+      await assert.rejects(pending,/FLEET_AUTHORIZATION_REVOKED/);gate.restore();
+      assert.equal(a.bridge.tickets.size,0);assert.equal(a.bridge.records.length,0);assert.equal(a.worker.state.calls.length,0);
+    }
+  }finally{await a.close();await n.close();}
+});
+test('revocation and Stop during fresh dispatch inspection cannot reserve or start the pending attempt',async()=>{
+  const a=await fixture(root),n=await fixture(root,'node');try{
+    const req=await request(),ctx=context(req,a,n);for(const file of req.plan.immutableInputs)a.inputs.set(file.name,Buffer.from(file.content));
+    for(const action of ['revoke','stop']){
+      const p=await a.bridge.prepare({request:req,context:ctx},'test-principal'),gate=holdHealth(a);
+      const pending=a.bridge.execute({ticket:p.ticket,key:p.key,confirm:true},'test-principal');await gate.reached;
+      await a.bridge[action]();gate.release();
+      await assert.rejects(pending,/FLEET_AUTHORIZATION_REVOKED/);gate.restore();
+      assert.equal(a.bridge.records.length,0);assert.equal(a.worker.state.calls.length,0);
+      assert.equal(a.bridge.status().outcomeSummary.attempts,0);
+    }
+  }finally{await a.close();await n.close();}
+});

@@ -9,7 +9,7 @@ import {compileRequest,inspectRequest,computer,checkReturnedWork} from './projec
 // All work goes through the installed Controller -> Studio -> Companion -> ComputeWorker.
 export class SuccessorController {
   constructor(controller,role,studioAPI) {
-    this.c=controller;this.role=role;this.api=studioAPI;this.tickets=new Map();
+    this.c=controller;this.role=role;this.api=studioAPI;this.tickets=new Map();this.authorizationGeneration=0;
     this.dir=path.join(controller.home,'successor-execution');this.problem=null;this.records=[];
     try {
       if(!fs.existsSync(this.dir))fs.mkdirSync(this.dir,{mode:0o700});
@@ -73,6 +73,7 @@ export class SuccessorController {
   async prepare(input,principal){
     fail(typeof principal==='string'&&principal.length>0,'FLEET_SESSION_REQUIRED');
     fail(this.records.length<100,'FLEET_HISTORY_FULL');this.c.requireStopped();
+    const authorizationGeneration=this.authorizationGeneration;
     let compiled,request=null,studioInput,family='not-recorded';
     if(this.role==='agent'){
       keys(input,['request','context'],'FLEET_PREPARE_FIELDS');
@@ -83,11 +84,14 @@ export class SuccessorController {
       fail(h.specification.profile==='computer-work/v2','FLEET_V2_REQUIRED');compiled={spec:h.specification,specSha256:h.specHash};studioInput={handoff:h};
     }
     const key=await sha256({role:this.role,spec:compiled.spec,delivery:studioInput.handoff?.deliveryHash??null});
+    fail(authorizationGeneration===this.authorizationGeneration,'FLEET_AUTHORIZATION_REVOKED');
     this.funnel(key,request,'offered',family);
-    const observation=await this.health(compiled.spec);this.funnel(key,request,'admissible',family);
+    const observation=await this.health(compiled.spec);
+    fail(authorizationGeneration===this.authorizationGeneration,'FLEET_AUTHORIZATION_REVOKED');
+    this.funnel(key,request,'admissible',family);
     fail(!this.records.some(r=>r.key===key),'FLEET_ALREADY_ATTEMPTED');
     const ticket=crypto.randomBytes(32).toString('hex'),expiresAt=Math.min(observation.expiresAt,compiled.spec.deadline*1000);
-    this.tickets.set(ticket,{principal,expiresAt,compiled,request,studioInput,key,family,scope:this.c.studio.scopeHash(),observation});
+    this.tickets.set(ticket,{authorizationGeneration,principal,expiresAt,compiled,request,studioInput,key,family,scope:this.c.studio.scopeHash(),observation});
     while(this.tickets.size>8)this.tickets.delete(this.tickets.keys().next().value);
     return {ticket,expiresAt,key,specification:compiled.spec,specificationSha256:compiled.specSha256,observation,
       action:this.role==='agent'?'Create and self-check the exact public work':'Review the exact delivered bytes',
@@ -100,7 +104,10 @@ export class SuccessorController {
     fail(grant&&grant.principal===principal&&grant.key===input.key,'FLEET_TICKET_INVALID');
     fail(now>=grant.observation.observedAt&&now<grant.expiresAt,'FLEET_TICKET_EXPIRED');
     fail(grant.scope===this.c.studio.scopeHash(),'FLEET_SCOPE_CHANGED');
+    fail(grant.authorizationGeneration===this.authorizationGeneration,'FLEET_AUTHORIZATION_REVOKED');
     const fresh=await this.health(grant.compiled.spec);
+    fail(grant.authorizationGeneration===this.authorizationGeneration,'FLEET_AUTHORIZATION_REVOKED');
+    fail(grant.scope===this.c.studio.scopeHash(),'FLEET_SCOPE_CHANGED');
     fail(fresh.runtimeSha256===grant.observation.runtimeSha256&&fresh.policyHash===grant.observation.policyHash,'FLEET_RUNTIME_CHANGED');
     const record={schema:'agi-fleet/successor-attempt/v1',key:grant.key,role:this.role,status:'reserved',at:now,run:null,
       specSha256:grant.compiled.specSha256,request:grant.request,observation:fresh,
@@ -110,7 +117,7 @@ export class SuccessorController {
     catch(error){record.status='blocked-or-uncertain';this.persist(record);this.observe(record,'blocked-or-uncertain');throw error;}
   }
   observe(record,state,outputHashes=[]){this.outcomes.append({attempt:record.key,type:'attempt',at:this.c.companion.now(),evidenceSha256:record.specSha256,data:{state,projectSha256:record.request?.plan.missionSha256??record.specSha256,method:record.request?.plan.candidateSha256??'installed-node-review',inputHashes:record.request?.plan.immutableInputs.map(f=>f.sha256)??[],outputHashes,runtimeSha256:record.observation.runtimeSha256}});}
-  revoke(){this.tickets.clear();return {revoked:true,runningWork:'Use Stop work to cancel the active Studio run. Safety STOP evidence is preserved.'};}
+  revoke(){this.authorizationGeneration++;this.tickets.clear();return {revoked:true,runningWork:'Use Stop work to cancel the active Studio run. Safety STOP evidence is preserved.'};}
   async stop(){this.revoke();const result=await this.c.studio.cancel();for(const r of this.records.filter(r=>r.status==='dispatched')){this.observe(r,'stopped');r.status='stopped';this.persist(r);}return result;}
   async result(key,reviewReceipt=null){
     if(typeof reviewReceipt==='string'){reviewReceipt=parseStrict(reviewReceipt,1000000);reviewReceipt=reviewReceipt.receipt??reviewReceipt;}

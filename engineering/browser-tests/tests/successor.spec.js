@@ -22,6 +22,40 @@ for(const lang of ['en','fr'])for(const width of [320,390,768,1440])test(`SUCCES
 });
 test.use({acceptDownloads:true});
 
+// Real installed UI, explicitly simulated RPC: cancellation must remain usable
+// while inspection is pending, and a late reply must not restore permission.
+for(const lang of ['en','fr'])for(const operation of ['stop','revoke'])test(`Installed SUCCESSOR ${lang}: ${operation} interrupts pending inspection`,async({page})=>{
+  await page.setContent('<div class="studio-shell" data-role="agent"></div>');
+  await page.evaluate(()=>{
+    window.__observed=[];
+    const read=File.prototype.text;
+    File.prototype.text=async function(){const text=await read.call(this);if(this.name==='fixture-context.json')window.__contextRead=true;return text;};
+    window.api=async(url)=>{
+      window.__observed.push(url);
+      if(url==='/api/successor/prepare')return new Promise(resolve=>{window.__releaseInspection=()=>resolve({ticket:'fixture-ticket',key:'fixture-key'});});
+      if(url==='/api/successor')return {runs:[],studio:{runs:[],blockers:[]}};
+      return {revoked:true};
+    };
+  });
+  await page.addScriptTag({content:fs.readFileSync(new URL('../../../successor/installed-ui.js',import.meta.url),'utf8')});
+  if(lang==='fr')await page.locator('#omega-language').click();
+  await page.locator('#omega-file').setInputFiles({name:'fixture-request.json',mimeType:'application/json',buffer:Buffer.from('{"plan":{"immutableInputs":[]}}')});
+  await expect(page.locator('#omega-message')).toContainText(/File loaded|Fichier chargé/);
+  await page.locator('#omega-advanced').evaluate(el=>el.open=true);
+  await page.locator('#omega-context').setInputFiles({name:'fixture-context.json',mimeType:'application/json',buffer:Buffer.from('{}')});
+  // The context reader is asynchronous; wait for its action to finish.
+  await page.waitForFunction(()=>window.__contextRead===true);
+  await page.locator('#omega-prepare').click();
+  await page.waitForFunction(()=>typeof window.__releaseInspection==='function');
+  await page.locator('#omega-'+operation).click();
+  await page.waitForFunction(op=>window.__observed.includes('/api/successor/'+op),operation);
+  await page.evaluate(()=>window.__releaseInspection());
+  await page.locator('#omega-confirm').check();
+  await expect(page.locator('#omega-execute')).toBeDisabled();
+  await expect(page.locator('#omega-preview')).toBeEmpty();
+  await expect(page.locator('#omega-message')).not.toContainText(/Review this one-minute|Examinez cette autorisation/);
+});
+
 test('SUCCESSOR preserves text on errors and unavailable storage; keyboard focus and isolated preview',async({page})=>{
   await page.addInitScript(()=>{Storage.prototype.setItem=()=>{throw Error('denied');};});await page.goto('/successor.html');
   await page.locator('#run').click();await expect(page.locator('#error')).toBeFocused();
