@@ -24,25 +24,32 @@ test.use({acceptDownloads:true});
 
 // Real installed UI, explicitly simulated RPC: cancellation must remain usable
 // while inspection is pending, and a late reply must not restore permission.
-for(const lang of ['en','fr'])for(const operation of ['stop','revoke'])test(`Installed SUCCESSOR ${lang}: ${operation} interrupts pending inspection`,async({page})=>{
+for(const lang of ['en','fr'])for(const operation of ['stop','revoke'])for(const phase of ['inspection','context'])test(`Installed SUCCESSOR ${lang}: ${operation} interrupts pending ${phase}`,async({page})=>{
   await page.setContent('<div class="studio-shell" data-role="agent"></div>');
-  await page.evaluate(()=>{
+  await page.evaluate(phase=>{
     window.__observed=[];
     const read=File.prototype.text;
-    File.prototype.text=async function(){const text=await read.call(this);if(this.name==='fixture-context.json')window.__contextRead=true;return text;};
+    File.prototype.text=async function(){const text=await read.call(this);if(['fixture-context.json','fixture-reviewer.json'].includes(this.name))window.__contextRead=true;return text;};
     window.api=async(url)=>{
       window.__observed.push(url);
-      if(url==='/api/successor/prepare')return new Promise(resolve=>{window.__releaseInspection=()=>resolve({ticket:'fixture-ticket',key:'fixture-key'});});
+      if(url==='/api/successor/prepare'&&phase==='inspection')return new Promise(resolve=>{window.__releaseInspection=()=>resolve({ticket:'fixture-ticket',key:'fixture-key'});});
+      if(url==='/api/successor/runtime'&&phase==='context')return new Promise(resolve=>{window.__releaseInspection=()=>resolve({runtime:{}});});
+      if(url==='/api/status')return {config:{manager:'0x1',chainId:31337}};
       if(url==='/api/successor')return {runs:[],studio:{runs:[],blockers:[]}};
       return {revoked:true};
     };
-  });
+  },phase);
   await page.addScriptTag({content:fs.readFileSync(new URL('../../../successor/installed-ui.js',import.meta.url),'utf8')});
   if(lang==='fr')await page.locator('#omega-language').click();
   await page.locator('#omega-file').setInputFiles({name:'fixture-request.json',mimeType:'application/json',buffer:Buffer.from('{"plan":{"immutableInputs":[]}}')});
   await expect(page.locator('#omega-message')).toContainText(/File loaded|Fichier chargé/);
-  await page.locator('#omega-advanced').evaluate(el=>el.open=true);
-  await page.locator('#omega-context').setInputFiles({name:'fixture-context.json',mimeType:'application/json',buffer:Buffer.from('{}')});
+  if(phase==='inspection'){
+    await page.locator('#omega-advanced').evaluate(el=>el.open=true);
+    await page.locator('#omega-context').setInputFiles({name:'fixture-context.json',mimeType:'application/json',buffer:Buffer.from('{}')});
+  }else{
+    await page.locator('#omega-reviewer').setInputFiles({name:'fixture-reviewer.json',mimeType:'application/json',buffer:Buffer.from('{"role":"reviewer","authority":"none","runtime":{}}')});
+    await page.locator('#omega-public').check();
+  }
   // The context reader is asynchronous; wait for its action to finish.
   await page.waitForFunction(()=>window.__contextRead===true);
   await page.locator('#omega-prepare').click();
@@ -50,6 +57,10 @@ for(const lang of ['en','fr'])for(const operation of ['stop','revoke'])test(`Ins
   await page.locator('#omega-'+operation).click();
   await page.waitForFunction(op=>window.__observed.includes('/api/successor/'+op),operation);
   await page.evaluate(()=>window.__releaseInspection());
+  if(phase==='context'){
+    await page.waitForFunction(()=>window.__observed.includes('/api/status'));
+    expect(await page.evaluate(()=>window.__observed.includes('/api/successor/prepare'))).toBe(false);
+  }
   await page.locator('#omega-confirm').check();
   await expect(page.locator('#omega-execute')).toBeDisabled();
   await expect(page.locator('#omega-preview')).toBeEmpty();

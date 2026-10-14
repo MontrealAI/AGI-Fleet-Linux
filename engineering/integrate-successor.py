@@ -38,7 +38,21 @@ for role in ('AGI_Agent', 'AGI_Node'):
         "/api/successor/revoke": ["Revoking pending SUCCESSOR choices", () => successor.revoke()],
         "/api/successor/stop": ["Stopping SUCCESSOR work", () => successor.stop()],
         "/api/successor/result": ["Checking SUCCESSOR results", () => successor.result(input.key,input.review??null)],''')
-    s = replace_once(s, '      const actions = {', '      if (url.pathname === "/api/successor/revoke") { json(successor.revoke()); return; }\n      const actions = {')
+    s = replace_once(s, '      const actions = {', '\n'.join([
+        '      if (url.pathname === "/api/successor/revoke") { json(successor.revoke()); return; }',
+        '      // Cancellation may preempt only an asynchronous SUCCESSOR inspection.',
+        '      // Configuration/restore mutations keep their existing exclusive gate.',
+        '      if (["/api/successor/stop","/api/studio/cancel","/api/stop","/api/lock"].includes(url.pathname)) {',
+        '        successorAdapter?.revoke();',
+        '        if (controller.operationKind === "successor-inspection") {',
+        '          controller.assertRestoreReady();',
+        '          await successor.stop();',
+        '          json(await (url.pathname === "/api/lock" ? controller.lock() : url.pathname === "/api/stop" ? controller.stop() : Promise.resolve({stopped:true})));',
+        '          return;',
+        '        }',
+        '      }',
+        '      const actions = {']))
+    s = s.replace('controller.mutate(action[0], action[1], {interruptStudio:', 'controller.mutate(action[0], action[1], {operationKind:["/api/successor/prepare","/api/successor/execute"].includes(url.pathname)?"successor-inspection":null,interruptStudio:')
     s = s.replace('"/api/studio/cancel"].includes(url.pathname)', '"/api/studio/cancel","/api/successor/stop"].includes(url.pathname)')
     s = s.replace('"/api/successor/stop","/api/successor/revoke"', '"/api/successor/stop"')
     if 'import {parseStrict}' not in s:

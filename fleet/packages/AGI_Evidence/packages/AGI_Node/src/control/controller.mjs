@@ -147,17 +147,17 @@ export class Controller {
     this.settings.incidents = this.settings.incidents.slice(0, 40);
     this.saveState();
   }
-  async mutate(label, work, { interruptStudio = false } = {}) {
+  async mutate(label, work, { interruptStudio = false, operationKind = null } = {}) {
     this.assertRestoreReady();
     ensure(!this.operation, "OPERATION_IN_PROGRESS");
     ensure(!this.publicWebCommissioningBusy||interruptStudio,"COMPANION_BUSY");
     ensure(!this.studio?.busy || interruptStudio, "STUDIO_BUSY");
-    this.operation = label;
+    this.operation = label; this.operationKind = operationKind;
     try {
       if (interruptStudio) await this.studio?.cancel();
       return await work();
     } finally {
-      this.operation = null;
+      this.operation = null; this.operationKind = null;
     }
   }
   assertRestoreReady() {

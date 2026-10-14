@@ -317,6 +317,40 @@ function holdHealth(f){
   f.controller.companion.readComputeHealth=async(...args)=>{entered();await gate;return original(...args);};
   return {reached,release,restore:()=>{f.controller.companion.readComputeHealth=original;}};
 }
+test('authenticated Stop interrupts pending inspection and dispatch through the installed HTTP operation lock',async()=>{
+  const a=await fixture(root),n=await fixture(root,'node');let server;
+  try{
+    const {createControlServer}=await import('../packages/AGI_Agent/src/control/server.mjs');
+    server=await createControlServer(a.controller,{port:0});const url=new URL(server.url),origin=url.origin;
+    const session=await fetch(origin+'/api/session',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify({token:url.hash.slice(1)})});
+    const cookie=session.headers.get('set-cookie').split(';')[0],{csrf}=await session.json();
+    const post=(route,input)=>fetch(origin+'/api/'+route,{method:'POST',headers:{Origin:origin,Cookie:cookie,'Content-Type':'application/json','x-agi-csrf':csrf},body:JSON.stringify(input)});
+    const rejected=await fetch(origin+'/api/successor/stop',{method:'POST',headers:{Origin:origin,Cookie:cookie,'Content-Type':'application/json','x-agi-csrf':'invalid'},body:'{}'});
+    assert.equal(rejected.status,403);assert.match(JSON.stringify(await rejected.json()),/CSRF_REJECTED/);
+    const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs)a.inputs.set(f.name,Buffer.from(f.content));
+    for(const route of ['successor/stop','stop','studio/cancel','lock'])for(const stage of ['prepare','execute']){
+      let input={request:req,context:ctx};
+      if(stage==='execute'){const prepared=await post('successor/prepare',input);assert.equal(prepared.status,200);const p=await prepared.json();input={ticket:p.ticket,key:p.key,confirm:true};}
+      const gate=holdHealth(a),pending=post('successor/'+stage,input);await gate.reached;
+      let stopped;
+      try{stopped=await post(route,{});}finally{gate.release();gate.restore();}
+      const late=await pending;
+      assert.equal(stopped.status,200,JSON.stringify(await stopped.json()));
+      assert.ok(late.status>=400);assert.match(JSON.stringify(await late.json()),/FLEET_AUTHORIZATION_REVOKED/);
+      if(route==='lock')await a.controller.unlock('Synthetic fixture password 123!');
+      const view=await fetch(origin+'/api/successor',{headers:{Cookie:cookie}});assert.equal((await view.json()).runs.length,0);
+      assert.equal(a.worker.state.calls.length,0);
+    }
+    let release;const held=a.controller.mutate('Changing settings',()=>new Promise(resolve=>{release=resolve;}));
+    try{
+      for(const route of ['successor/stop','stop','studio/cancel','lock']){
+        const response=await post(route,{});assert.equal(response.status,409);
+        assert.match(JSON.stringify(await response.json()),/OPERATION_IN_PROGRESS/);
+        assert.equal(a.controller.operation,'Changing settings');
+      }
+    }finally{release();await held;}
+  }finally{await server?.close();await a.close();await n.close();}
+});
 test('revocation and Stop during runtime inspection cannot create a late authorization ticket',async()=>{
   const a=await fixture(root),n=await fixture(root,'node');try{
     const req=await request(),ctx=context(req,a,n);
