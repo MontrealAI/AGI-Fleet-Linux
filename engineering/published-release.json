@@ -1,15 +1,15 @@
 {
   "schema": "agi-linux-published-release/v1",
-  "version": "1.0.11",
-  "tag": "v1.0.11-qualification",
-  "prefix": "AGI_Fleet_Linux_v1.0.11",
-  "name": "AGI_Fleet_Linux_v1.0.11.zip",
-  "bytes": 404252051,
-  "sha256": "4322b454df3e9fd8134cc7f28a12925f1d7c17e017ead545c1317006bb3c02cc",
-  "sourceRevisionSHA256": "8911ff0ef1f6f3e31260ed0ee04779a31652b8d725627dd04715663419a056e2",
-  "sourceFiles": 4816,
-  "repositoryCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
-  "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+  "version": "1.1.0",
+  "tag": "v1.1.0-qualification",
+  "prefix": "AGI_Fleet_Linux_v1.1.0",
+  "name": "AGI_Fleet_Linux_v1.1.0.zip",
+  "bytes": 423729286,
+  "sha256": "7d5f5063fadaf229ce01c753523e475edd98429a280f84fe9c6f4aa92ed3c9dc",
+  "sourceRevisionSHA256": "284b7082c6c74bc2ca97e55990387b7969097208eacec75df943440280c1dd0f",
+  "sourceFiles": 5914,
+  "repositoryCommit": "e120d55fb0b0d1f97691c59c5923ec400df14d14",
+  "workflowCommit": "e120d55fb0b0d1f97691c59c5923ec400df14d14",
   "sourceDateEpoch": 1791849600,
   "epoch": 1791849600,
   "baseline": {
@@ -21,10 +21,10 @@
     "sourceFiles": 4816
   },
   "archiveVerification": {
-    "file": "/home/runner/work/_temp/candidate-dist/AGI_Fleet_Linux_v1.0.11.zip",
-    "bytes": 404252051,
-    "sha256": "4322b454df3e9fd8134cc7f28a12925f1d7c17e017ead545c1317006bb3c02cc",
-    "files": 33216,
+    "file": "/home/runner/work/_temp/candidate-dist/AGI_Fleet_Linux_v1.1.0.zip",
+    "bytes": 423729286,
+    "sha256": "7d5f5063fadaf229ce01c753523e475edd98429a280f84fe9c6f4aa92ed3c9dc",
+    "files": 34377,
     "crcVerified": true,
     "allManifestsVerified": true,
     "sourceInventoryVerified": true,
@@ -32,14 +32,14 @@
   },
   "finalExtractedGate": {
     "schema": "agi-final-archive-gate/v1",
-    "archive": "AGI_Fleet_Linux_v1.0.11.zip",
-    "sha256": "4322b454df3e9fd8134cc7f28a12925f1d7c17e017ead545c1317006bb3c02cc",
-    "bytes": 404252051,
+    "archive": "AGI_Fleet_Linux_v1.1.0.zip",
+    "sha256": "7d5f5063fadaf229ce01c753523e475edd98429a280f84fe9c6f4aa92ed3c9dc",
+    "bytes": 423729286,
     "maximumFileBytes": 450000000,
     "status": "PASS_PACKAGED_EXECUTABLES_AND_LINUX_LAUNCHER_SMOKE",
     "physicalMacQualification": "NOT_RUN",
     "platform": "linux",
-    "extractedFiles": 33216,
+    "extractedFiles": 34377,
     "freshExtraction": true,
     "allArchiveCRCsVerified": true,
     "shellSyntax": {
@@ -48,8 +48,8 @@
     },
     "executables": {
       "schema": "agi-final-executable-validation/v1",
-      "generatedAt": "2026-10-13T17:18:52.206986Z",
-      "root": "/tmp/agi-final-extracted-hcranp6d/AGI_Fleet_Linux_v1.0.11",
+      "generatedAt": "2026-10-13T23:02:29.396802Z",
+      "root": "/tmp/agi-final-extracted-r8hdrub1/AGI_Fleet_Linux_v1.1.0",
       "runtime": {
         "path": "/home/runner/work/_temp/node-v24.21.0-linux-x64/bin/node",
         "version": "v24.21.0",
@@ -66,10 +66,10 @@
       "jobs": 4,
       "status": "PASS",
       "summary": {
-        "files": 7773,
-        "pass": 7773,
+        "files": 8691,
+        "pass": 8691,
         "fail": 0,
-        "nodeChecksPassed": 7773,
+        "nodeChecksPassed": 8691,
         "misplacedHashbangFiles": 0
       }
     },
@@ -97,28 +97,28 @@
       "files": 25
     },
     "complete": {
-      "tests": 3898,
-      "files": 342
+      "tests": 3908,
+      "files": 343
     }
   },
   "integration": {
     "repository": "MontrealAI/AGIJobManager",
-    "version": "1.15.0",
-    "commit": "3958cbc3b01aa459de16cf39e1ab0985b5fa56c3",
+    "version": "1.16.1",
+    "commit": "09d89fb22d52a8df194e8dd0a00beff9f7771d82",
     "managerTests": 780,
     "standaloneScripts": 8,
     "contractArtifacts": 11
   },
-  "workflowRun": "38437206563",
+  "workflowRun": "38481345528",
   "jobIntegrationAcceptance": "PASS",
   "audit": {
     "schema": "agi-next-release-independent-audit/v1",
     "status": "PASS",
-    "version": "1.0.11",
-    "releaseSHA256": "4322b454df3e9fd8134cc7f28a12925f1d7c17e017ead545c1317006bb3c02cc",
-    "sourceRevisionSHA256": "8911ff0ef1f6f3e31260ed0ee04779a31652b8d725627dd04715663419a056e2",
-    "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
-    "workflowRun": "38437206563",
+    "version": "1.1.0",
+    "releaseSHA256": "7d5f5063fadaf229ce01c753523e475edd98429a280f84fe9c6f4aa92ed3c9dc",
+    "sourceRevisionSHA256": "284b7082c6c74bc2ca97e55990387b7969097208eacec75df943440280c1dd0f",
+    "workflowCommit": "e120d55fb0b0d1f97691c59c5923ec400df14d14",
+    "workflowRun": "38481345528",
     "architectures": [
       "x64",
       "arm64"
@@ -127,8 +127,8 @@
       {
         "architecture": "x64",
         "status": "PASS",
-        "workflowRun": "38437206563",
-        "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+        "workflowRun": "38481345528",
+        "workflowCommit": "e120d55fb0b0d1f97691c59c5923ec400df14d14",
         "runs": {
           "targeted": {
             "status": "PASS",
@@ -142,23 +142,23 @@
               "todo": 0
             },
             "verifiedLogs": 25,
-            "verifiedSourceFiles": 4816,
-            "resultsSHA256": "a10b511dbdcd1902501cc7653715727a99992ad7b387ead39dbd694a1e6ce601"
+            "verifiedSourceFiles": 5914,
+            "resultsSHA256": "7e902223f80adb2fde3f6b670779b50803bbbd074eda38c3b307d17eac4026ad"
           },
           "complete": {
             "status": "PASS",
             "counts": {
-              "tests": 3898,
+              "tests": 3908,
               "suites": 9,
-              "pass": 3898,
+              "pass": 3908,
               "fail": 0,
               "cancelled": 0,
               "skipped": 0,
               "todo": 0
             },
-            "verifiedLogs": 342,
-            "verifiedSourceFiles": 4816,
-            "resultsSHA256": "4328a5d765500d2d5dda0584696307be4c4f2138fd9bfa3496590c1e6299c1b9"
+            "verifiedLogs": 343,
+            "verifiedSourceFiles": 5914,
+            "resultsSHA256": "0bc7dd32661ff19d19e69f599a8184f9896e8150e138349998fe51cf3f7b6fa1"
           }
         },
         "resolvedCases": [
@@ -169,7 +169,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
-            "logSHA256": "3a776a687e286cbce1c9a75868383eaf4c93b92b9d59cf2f99298e975d0b8709"
+            "logSHA256": "4ef99c1bb07916b0b437d24c09064123dc862bbc735473ed03c4a4d80189c673"
           },
           {
             "source": "packages/AGI_Agent/tests/compute-restart.test.mjs",
@@ -178,7 +178,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
-            "logSHA256": "7e7a9c574d08996f71a5a608b0297ce377e4d8dcf16da3294721f086e2b449d2"
+            "logSHA256": "2cc24242c93c65c4eb7047aa07cc2fb42a0b3fd1f5a47fddb83440f48c62e7ab"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
@@ -187,7 +187,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "78a43f233517ae0267395dcfc32e2dfeb9f6ebd4fc95d5cd095b772de535a16a"
+            "logSHA256": "6726b6de243726f1b72136217f26d3130d5b510fb12873f9f8160b7d43a82c30"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
@@ -196,7 +196,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "78a43f233517ae0267395dcfc32e2dfeb9f6ebd4fc95d5cd095b772de535a16a"
+            "logSHA256": "6726b6de243726f1b72136217f26d3130d5b510fb12873f9f8160b7d43a82c30"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -205,7 +205,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -214,7 +214,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -223,7 +223,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -232,7 +232,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -241,7 +241,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -250,7 +250,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -259,7 +259,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -268,7 +268,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -277,7 +277,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -286,7 +286,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -295,7 +295,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+            "logSHA256": "ba35d4da19c9b2c60f592d0b6b42c2cdf451344537634eec60ec60747678b182"
           },
           {
             "source": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs",
@@ -304,7 +304,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
-            "logSHA256": "96ea885838b1ca3e8a7c2f2a8d5d51df740611e3706a35f5b2ade6c0480a20eb"
+            "logSHA256": "ef853e5111bc39f582e83a517d0f2259be110f0163bf2834dc3a8f8358a7c96e"
           },
           {
             "source": "packages/AGI_Agent/tests/service-stop.test.mjs",
@@ -313,7 +313,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
-            "logSHA256": "52604b720c0fb528fcef83e47a4b526a13b8e9a898df562437e42d48d51b871d"
+            "logSHA256": "3395c84c761ebe45c5582d63bc2be6bc8ad0eae1f83116baebd7d1d5a88a42dc"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -322,7 +322,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+            "logSHA256": "5bf547c88d1e7433565b7b460d0de6261abfad901c3aaac2bc8bef95de9b60d3"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -331,7 +331,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+            "logSHA256": "5bf547c88d1e7433565b7b460d0de6261abfad901c3aaac2bc8bef95de9b60d3"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -340,7 +340,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+            "logSHA256": "5bf547c88d1e7433565b7b460d0de6261abfad901c3aaac2bc8bef95de9b60d3"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -349,7 +349,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+            "logSHA256": "5bf547c88d1e7433565b7b460d0de6261abfad901c3aaac2bc8bef95de9b60d3"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -358,7 +358,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+            "logSHA256": "5bf547c88d1e7433565b7b460d0de6261abfad901c3aaac2bc8bef95de9b60d3"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -367,7 +367,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+            "logSHA256": "5bf547c88d1e7433565b7b460d0de6261abfad901c3aaac2bc8bef95de9b60d3"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -376,7 +376,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+            "logSHA256": "5bf547c88d1e7433565b7b460d0de6261abfad901c3aaac2bc8bef95de9b60d3"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -385,7 +385,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+            "logSHA256": "5bf547c88d1e7433565b7b460d0de6261abfad901c3aaac2bc8bef95de9b60d3"
           },
           {
             "source": "packages/AGI_Node/tests/compute-repair.test.mjs",
@@ -394,7 +394,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
-            "logSHA256": "7aa01747f77bb9827cf3d55462089e37d6b7b46d969e57a46e54b0f7e86bc525"
+            "logSHA256": "55f5813c6fb5ebb0668566b16059591bc2f7ab7db5ad589e7987e0378356437d"
           },
           {
             "source": "packages/AGI_Node/tests/compute-restart.test.mjs",
@@ -403,7 +403,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
-            "logSHA256": "c3d16ade41a28da5e60d117840d3503bbcdc2c9b80400bf6d0dc0ca89c668adc"
+            "logSHA256": "d511a7d4d7e8494e97ea3bbf08f4891de638ef32c4b3913ed5cc41191bd8973d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
@@ -412,7 +412,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "623f133667aee5d3144e908e8faca72144f3ed3561978b1b59532d0b7a6fffd1"
+            "logSHA256": "d8206b8dd43750e9422b47ee9de4d2cb4cf53badfb54c54c5b2d4126450e7baf"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
@@ -421,7 +421,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "623f133667aee5d3144e908e8faca72144f3ed3561978b1b59532d0b7a6fffd1"
+            "logSHA256": "d8206b8dd43750e9422b47ee9de4d2cb4cf53badfb54c54c5b2d4126450e7baf"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -430,7 +430,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -439,7 +439,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -448,7 +448,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -457,7 +457,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -466,7 +466,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -475,7 +475,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -484,7 +484,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -493,7 +493,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -502,7 +502,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -511,7 +511,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -520,7 +520,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+            "logSHA256": "1e94466774f788aa8463aaf7eb732e1449e966b3c16ee55aae80e2f1661f252d"
           },
           {
             "source": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs",
@@ -529,7 +529,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
-            "logSHA256": "1ebe66e21da56d697833a508de8594a888824dc90901231627d21b487d776934"
+            "logSHA256": "dae23f52144260da18d2aa070597c6cac9f792c8174b0e57b28d91cb19bf5735"
           },
           {
             "source": "packages/AGI_Node/tests/service-stop.test.mjs",
@@ -538,7 +538,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
-            "logSHA256": "1c54705594183a19d5175249d73aa2c90fd3ef2060e0d8bc7f53903cb17f00cc"
+            "logSHA256": "449306737a2a0f64007d7311a9cb4c45fec35168cdc2e96bc10c514de7240552"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -547,7 +547,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+            "logSHA256": "a151c287390ba38dfa5cc28a5694827b273e5b2c9b0ed0a124e7c2f3e018ca81"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -556,7 +556,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+            "logSHA256": "a151c287390ba38dfa5cc28a5694827b273e5b2c9b0ed0a124e7c2f3e018ca81"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -565,7 +565,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+            "logSHA256": "a151c287390ba38dfa5cc28a5694827b273e5b2c9b0ed0a124e7c2f3e018ca81"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -574,7 +574,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+            "logSHA256": "a151c287390ba38dfa5cc28a5694827b273e5b2c9b0ed0a124e7c2f3e018ca81"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -583,7 +583,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+            "logSHA256": "a151c287390ba38dfa5cc28a5694827b273e5b2c9b0ed0a124e7c2f3e018ca81"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -592,7 +592,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+            "logSHA256": "a151c287390ba38dfa5cc28a5694827b273e5b2c9b0ed0a124e7c2f3e018ca81"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -601,7 +601,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+            "logSHA256": "a151c287390ba38dfa5cc28a5694827b273e5b2c9b0ed0a124e7c2f3e018ca81"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -610,7 +610,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+            "logSHA256": "a151c287390ba38dfa5cc28a5694827b273e5b2c9b0ed0a124e7c2f3e018ca81"
           },
           {
             "source": "packages/AGI_Agent/tests/compute-repair.test.mjs",
@@ -619,7 +619,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
-            "logSHA256": "6cb3d16a8e4f3dced141af2bc13fb5f4885fb69690ff197221058e61ff15a149"
+            "logSHA256": "dc755029e252c1791ce8e042162fe1fd6b2f695a2a387993aec3babfac0a7b82"
           },
           {
             "source": "packages/AGI_Agent/tests/compute-restart.test.mjs",
@@ -628,7 +628,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
-            "logSHA256": "b0d706142a5a9b6d0ea5b513e210e9d6da282e5d3495bc2309e25fecdd931198"
+            "logSHA256": "46ab2be758055f6b47849cb9702c5cf803e7b5ebe0bb94f8b12cee033eeda2f3"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
@@ -637,7 +637,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "5f314e993fe861083cf6d976c3b924c7b498af005c8ec8ecf3b8923895136957"
+            "logSHA256": "57b17b635a7b84582473ab3907ffdbc7e8acbf4381baa8149df67306d7c7f408"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
@@ -646,7 +646,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "5f314e993fe861083cf6d976c3b924c7b498af005c8ec8ecf3b8923895136957"
+            "logSHA256": "57b17b635a7b84582473ab3907ffdbc7e8acbf4381baa8149df67306d7c7f408"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -655,7 +655,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -664,7 +664,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -673,7 +673,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -682,7 +682,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -691,7 +691,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -700,7 +700,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -709,7 +709,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -718,7 +718,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -727,7 +727,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -736,7 +736,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -745,7 +745,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+            "logSHA256": "39081697d08a9aaa2f43585a997bba0d868a0ca0fbfac805ba5201fda4806310"
           },
           {
             "source": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs",
@@ -754,7 +754,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
-            "logSHA256": "16a522d970591dc34a0c195b7253fac3ea3634ae709cb07b7a9aaf6d1b22a5e7"
+            "logSHA256": "f62fefc8c5b7f5ddd47711b8f6c796094a703ffc4de071aff1d80aae0d0be1c7"
           },
           {
             "source": "packages/AGI_Agent/tests/service-stop.test.mjs",
@@ -763,7 +763,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
-            "logSHA256": "9ab1c3d20d3c07fb7e6580b0cfd497edebad197a23875eb8b5885fa076fd791f"
+            "logSHA256": "a4fb6db74783879875b13a166962ab60dd763627b39bf9387b03774cc76b1cab"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -772,7 +772,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+            "logSHA256": "11cbdd98d146016d53e6a60cdaa269c368c82fefdd69dd779d68c9517b94dd92"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -781,7 +781,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+            "logSHA256": "11cbdd98d146016d53e6a60cdaa269c368c82fefdd69dd779d68c9517b94dd92"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -790,7 +790,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+            "logSHA256": "11cbdd98d146016d53e6a60cdaa269c368c82fefdd69dd779d68c9517b94dd92"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -799,7 +799,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+            "logSHA256": "11cbdd98d146016d53e6a60cdaa269c368c82fefdd69dd779d68c9517b94dd92"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -808,7 +808,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+            "logSHA256": "11cbdd98d146016d53e6a60cdaa269c368c82fefdd69dd779d68c9517b94dd92"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -817,7 +817,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+            "logSHA256": "11cbdd98d146016d53e6a60cdaa269c368c82fefdd69dd779d68c9517b94dd92"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -826,7 +826,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+            "logSHA256": "11cbdd98d146016d53e6a60cdaa269c368c82fefdd69dd779d68c9517b94dd92"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -835,7 +835,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+            "logSHA256": "11cbdd98d146016d53e6a60cdaa269c368c82fefdd69dd779d68c9517b94dd92"
           },
           {
             "source": "packages/AGI_Node/tests/compute-repair.test.mjs",
@@ -844,7 +844,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
-            "logSHA256": "0820ad445e87771880230737ce80438630f4581e51e8bd4558e692263034f6b0"
+            "logSHA256": "f49ff69a41e4bf77eb90dae2dd67bdd3fac566316ad6f8c9fa6487f790098330"
           },
           {
             "source": "packages/AGI_Node/tests/compute-restart.test.mjs",
@@ -853,7 +853,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
-            "logSHA256": "e8d3977744dd8ae81c12961442e3ab23a47fb2a54f4cae8e02dcc858542abe65"
+            "logSHA256": "374e136fdac3755dfd5e1a3cc46be1507c5c1f6f8a43edd7f38a7296384c59e9"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
@@ -862,7 +862,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "06d002cbf715724cf4752a8e6d5eccd27c24f74b9af05b1de05225b5f5b1e352"
+            "logSHA256": "d102d431d7f36987da0feb900fbd27c6efadaffd4b9ab047899d68aaa03ba26e"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
@@ -871,7 +871,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "06d002cbf715724cf4752a8e6d5eccd27c24f74b9af05b1de05225b5f5b1e352"
+            "logSHA256": "d102d431d7f36987da0feb900fbd27c6efadaffd4b9ab047899d68aaa03ba26e"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -880,7 +880,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -889,7 +889,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -898,7 +898,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -907,7 +907,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -916,7 +916,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -925,7 +925,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -934,7 +934,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -943,7 +943,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -952,7 +952,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -961,7 +961,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -970,7 +970,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+            "logSHA256": "8915b6009fab5f02af8a34e79674f0424169039a31e9eec3500e906db0d8d665"
           },
           {
             "source": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs",
@@ -979,7 +979,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
-            "logSHA256": "ff265a01580a82ee15091ffce2a17c190254ef1c3aab2b5681d830149466e982"
+            "logSHA256": "5b83f00a8a5fa560192bc220e0cd04d5066063f6a7fb3170884e733ab6e42e6d"
           },
           {
             "source": "packages/AGI_Node/tests/service-stop.test.mjs",
@@ -988,7 +988,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
-            "logSHA256": "79911585db1c41a501328d78de220c559809a78d8c61457769601c6b54ca4ffa"
+            "logSHA256": "61ede7273540e643e337eed854dc03ff685a25388607a12c0939da644f69b6b3"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -997,7 +997,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+            "logSHA256": "2697938dc4380f6c4b944ec92ec273d6c8158e59ec8063d1df78c4782bfa8967"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1006,7 +1006,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+            "logSHA256": "2697938dc4380f6c4b944ec92ec273d6c8158e59ec8063d1df78c4782bfa8967"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1015,7 +1015,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+            "logSHA256": "2697938dc4380f6c4b944ec92ec273d6c8158e59ec8063d1df78c4782bfa8967"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1024,7 +1024,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+            "logSHA256": "2697938dc4380f6c4b944ec92ec273d6c8158e59ec8063d1df78c4782bfa8967"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1033,7 +1033,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+            "logSHA256": "2697938dc4380f6c4b944ec92ec273d6c8158e59ec8063d1df78c4782bfa8967"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1042,7 +1042,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+            "logSHA256": "2697938dc4380f6c4b944ec92ec273d6c8158e59ec8063d1df78c4782bfa8967"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1051,7 +1051,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+            "logSHA256": "2697938dc4380f6c4b944ec92ec273d6c8158e59ec8063d1df78c4782bfa8967"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1060,7 +1060,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+            "logSHA256": "2697938dc4380f6c4b944ec92ec273d6c8158e59ec8063d1df78c4782bfa8967"
           }
         ],
         "previousFailureCasesResolved": 44,
@@ -1070,8 +1070,8 @@
       {
         "architecture": "arm64",
         "status": "PASS",
-        "workflowRun": "38437206563",
-        "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+        "workflowRun": "38481345528",
+        "workflowCommit": "e120d55fb0b0d1f97691c59c5923ec400df14d14",
         "runs": {
           "targeted": {
             "status": "PASS",
@@ -1085,23 +1085,23 @@
               "todo": 0
             },
             "verifiedLogs": 25,
-            "verifiedSourceFiles": 4816,
-            "resultsSHA256": "9fb6909ee793e2caca999049d3ba080624f0ba4729c61f20077b8d930b7ace3a"
+            "verifiedSourceFiles": 5914,
+            "resultsSHA256": "9c1758db73087dd9bf6e83d3c0350307b27dd77c2d132722697d2f1008123882"
           },
           "complete": {
             "status": "PASS",
             "counts": {
-              "tests": 3898,
+              "tests": 3908,
               "suites": 9,
-              "pass": 3898,
+              "pass": 3908,
               "fail": 0,
               "cancelled": 0,
               "skipped": 0,
               "todo": 0
             },
-            "verifiedLogs": 342,
-            "verifiedSourceFiles": 4816,
-            "resultsSHA256": "6b4635e9a42b5044cb419d2437537b366039e41742e1cf7cc7ba45da56997297"
+            "verifiedLogs": 343,
+            "verifiedSourceFiles": 5914,
+            "resultsSHA256": "f2cf463ced7b4466c5ba204694b91c47b2128d5f7d72713b72bc93bc3451f79f"
           }
         },
         "resolvedCases": [
@@ -1112,7 +1112,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
-            "logSHA256": "8728d00c4e22ef286b0e234da0210c53fff49213bbece577491f20aa9cbebf04"
+            "logSHA256": "2deead0344d82aff1d61ffb6ab3ad3bcd37d86ec021858a916099fe09f9fa8b2"
           },
           {
             "source": "packages/AGI_Agent/tests/compute-restart.test.mjs",
@@ -1121,7 +1121,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
-            "logSHA256": "56583b22f0d4cb7d5058761af5207a30913a6f70ac3d4597efdbbb4851e2c0ed"
+            "logSHA256": "d128a201d0e755353204beadeb064cd7c5daeb731bde2399c3084b3b30442bd7"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
@@ -1130,7 +1130,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "ea05150eb3b79f2824be2a547c8619bd7169fdd80067feb79526765dc60f08bf"
+            "logSHA256": "6ca63ed7b8f6c32747042e05557053b540dcbaa6b667ecd452233bbcd239d0d8"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
@@ -1139,7 +1139,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "ea05150eb3b79f2824be2a547c8619bd7169fdd80067feb79526765dc60f08bf"
+            "logSHA256": "6ca63ed7b8f6c32747042e05557053b540dcbaa6b667ecd452233bbcd239d0d8"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1148,7 +1148,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1157,7 +1157,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1166,7 +1166,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1175,7 +1175,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1184,7 +1184,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1193,7 +1193,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1202,7 +1202,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1211,7 +1211,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1220,7 +1220,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1229,7 +1229,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1238,7 +1238,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+            "logSHA256": "a740473c71061f4b8d0f71a29ccf303d93360bcee0fa1440419d0fa0643e1ddb"
           },
           {
             "source": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs",
@@ -1247,7 +1247,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
-            "logSHA256": "dd1013d277c0fd694b493c436192c709d68cfdaefdf93a795ef75aeb64b7cab2"
+            "logSHA256": "b3c1eec4151ac4d46deff0d94f888f1b49565b2471e497c27e532f1255c39b4e"
           },
           {
             "source": "packages/AGI_Agent/tests/service-stop.test.mjs",
@@ -1256,7 +1256,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
-            "logSHA256": "f221ddc93440d96b1c475d3818daa0144955e6f59f1b73023ac530f96b4cd0fe"
+            "logSHA256": "733d56d23e336a61245effb10bb8a1c2a43ff47f6a1039d4456ebbf2d01f6635"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1265,7 +1265,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+            "logSHA256": "0e131cc7c294c6b01b73883a74de95185d1ae596ffccfb7b9955466a2582cb7a"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1274,7 +1274,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+            "logSHA256": "0e131cc7c294c6b01b73883a74de95185d1ae596ffccfb7b9955466a2582cb7a"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1283,7 +1283,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+            "logSHA256": "0e131cc7c294c6b01b73883a74de95185d1ae596ffccfb7b9955466a2582cb7a"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1292,7 +1292,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+            "logSHA256": "0e131cc7c294c6b01b73883a74de95185d1ae596ffccfb7b9955466a2582cb7a"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1301,7 +1301,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+            "logSHA256": "0e131cc7c294c6b01b73883a74de95185d1ae596ffccfb7b9955466a2582cb7a"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1310,7 +1310,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+            "logSHA256": "0e131cc7c294c6b01b73883a74de95185d1ae596ffccfb7b9955466a2582cb7a"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1319,7 +1319,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+            "logSHA256": "0e131cc7c294c6b01b73883a74de95185d1ae596ffccfb7b9955466a2582cb7a"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1328,7 +1328,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+            "logSHA256": "0e131cc7c294c6b01b73883a74de95185d1ae596ffccfb7b9955466a2582cb7a"
           },
           {
             "source": "packages/AGI_Node/tests/compute-repair.test.mjs",
@@ -1337,7 +1337,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
-            "logSHA256": "34a9d8d1ee1ef901d3e814a8b85307969fa5fcade5780717db6ae54b5a95121d"
+            "logSHA256": "66e25b07a46a7093963abf7a9d5d0a9af0f73d02508803b3944a3fe5d6ecfbed"
           },
           {
             "source": "packages/AGI_Node/tests/compute-restart.test.mjs",
@@ -1346,7 +1346,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
-            "logSHA256": "7bbcf95e85d144f4b861c0741183872c23ccdb5de7275190ea0d7a747ebb8c2b"
+            "logSHA256": "e2d3d4e28aae92f9686b1460fbac295ea3fa34c83aab850795648c1830a178a1"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
@@ -1355,7 +1355,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "5b54a36c5deea4aff0358889d02a33d431e50d3fa8e8c14e2a89896ede0d7a6e"
+            "logSHA256": "ba16e33715f20d9ee2749a0d49225d3e0a8a9c03daf907f352d66017ae7dd495"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
@@ -1364,7 +1364,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "5b54a36c5deea4aff0358889d02a33d431e50d3fa8e8c14e2a89896ede0d7a6e"
+            "logSHA256": "ba16e33715f20d9ee2749a0d49225d3e0a8a9c03daf907f352d66017ae7dd495"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1373,7 +1373,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1382,7 +1382,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1391,7 +1391,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1400,7 +1400,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1409,7 +1409,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1418,7 +1418,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1427,7 +1427,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1436,7 +1436,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1445,7 +1445,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1454,7 +1454,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1463,7 +1463,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+            "logSHA256": "36de5b181994713920ca23ee0a3ed6d57c5bcc623e81b58db1337628c7371175"
           },
           {
             "source": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs",
@@ -1472,7 +1472,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
-            "logSHA256": "d339236c896ebfbc81bc5c464af8a8038264fb895077c4d56c85e208ae8fe746"
+            "logSHA256": "191d775899139661c81466c57ce6dc8270c1e32a3c36e6a4dd02a43c312e8149"
           },
           {
             "source": "packages/AGI_Node/tests/service-stop.test.mjs",
@@ -1481,7 +1481,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
-            "logSHA256": "ecf8113cd2ca4f0d21e7bb87b766cb27d05aa3b7f3355a71fb388e1cc536567d"
+            "logSHA256": "3e481b1c382ff0de50ae26fbe736491413a60ae98441d5ff615ff9985dcc17a2"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1490,7 +1490,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+            "logSHA256": "7e76c64a7aa1d7ed2cf1804a1d975401a4ad0b3e9bc9bc3a571694e7460064c6"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1499,7 +1499,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+            "logSHA256": "7e76c64a7aa1d7ed2cf1804a1d975401a4ad0b3e9bc9bc3a571694e7460064c6"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1508,7 +1508,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+            "logSHA256": "7e76c64a7aa1d7ed2cf1804a1d975401a4ad0b3e9bc9bc3a571694e7460064c6"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1517,7 +1517,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+            "logSHA256": "7e76c64a7aa1d7ed2cf1804a1d975401a4ad0b3e9bc9bc3a571694e7460064c6"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1526,7 +1526,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+            "logSHA256": "7e76c64a7aa1d7ed2cf1804a1d975401a4ad0b3e9bc9bc3a571694e7460064c6"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1535,7 +1535,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+            "logSHA256": "7e76c64a7aa1d7ed2cf1804a1d975401a4ad0b3e9bc9bc3a571694e7460064c6"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1544,7 +1544,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+            "logSHA256": "7e76c64a7aa1d7ed2cf1804a1d975401a4ad0b3e9bc9bc3a571694e7460064c6"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1553,7 +1553,7 @@
             "scope": "targeted",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+            "logSHA256": "7e76c64a7aa1d7ed2cf1804a1d975401a4ad0b3e9bc9bc3a571694e7460064c6"
           },
           {
             "source": "packages/AGI_Agent/tests/compute-repair.test.mjs",
@@ -1562,7 +1562,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
-            "logSHA256": "3c9e49677eff48f3a0fe879ecefe6e57adf66f403a8ddc94f61c63a541a22613"
+            "logSHA256": "0dca57695012cbe1bd332500626754774ef3fac0eb4586d1ad0d3c4a3bd11d5b"
           },
           {
             "source": "packages/AGI_Agent/tests/compute-restart.test.mjs",
@@ -1571,7 +1571,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
-            "logSHA256": "bf2c5475f647b2055ec076643d9186684f3e73f45ea4df32b585e6876c4c265c"
+            "logSHA256": "904ddfd72c62eb49157a670e9cb2185c347e346bb26760f9224deea2eba53214"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
@@ -1580,7 +1580,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "17ba6ca0893529d1df71f443625b39d38c15aece5802df9826c0f7f504eb359c"
+            "logSHA256": "e1ad5860e884f9e93004b7f153e651dd62daa18c776b7af7cec581b45359b24c"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
@@ -1589,7 +1589,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "17ba6ca0893529d1df71f443625b39d38c15aece5802df9826c0f7f504eb359c"
+            "logSHA256": "e1ad5860e884f9e93004b7f153e651dd62daa18c776b7af7cec581b45359b24c"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1598,7 +1598,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1607,7 +1607,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1616,7 +1616,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1625,7 +1625,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1634,7 +1634,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1643,7 +1643,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1652,7 +1652,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1661,7 +1661,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1670,7 +1670,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1679,7 +1679,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
@@ -1688,7 +1688,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+            "logSHA256": "1f51b6655b0cac7d9c35e2741fd1ad36b4d41f5ca807d5054771d9fe4db12add"
           },
           {
             "source": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs",
@@ -1697,7 +1697,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
-            "logSHA256": "8ac43655f1081396c2b38dcfa17b37103bb6383c6c7d73bfd474d25f6a3f7457"
+            "logSHA256": "7ae6ac327c648cecef0ca4675aa4bd5a4779ceb4c99f7ca92bac082c680f23d8"
           },
           {
             "source": "packages/AGI_Agent/tests/service-stop.test.mjs",
@@ -1706,7 +1706,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
-            "logSHA256": "0d0a030136cef629bc28fcf75a1acec1db83d1493d35b7bd856dea7b701e7853"
+            "logSHA256": "457a3bc8effd788a645476420522ca5d338fda99ea4abf3a49a5bfdec1e9d41e"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1715,7 +1715,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+            "logSHA256": "39f4407c027aefa5db68883438ef43f5a93da2c2869842bd1e1ea29efc2332d9"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1724,7 +1724,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+            "logSHA256": "39f4407c027aefa5db68883438ef43f5a93da2c2869842bd1e1ea29efc2332d9"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1733,7 +1733,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+            "logSHA256": "39f4407c027aefa5db68883438ef43f5a93da2c2869842bd1e1ea29efc2332d9"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1742,7 +1742,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+            "logSHA256": "39f4407c027aefa5db68883438ef43f5a93da2c2869842bd1e1ea29efc2332d9"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1751,7 +1751,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+            "logSHA256": "39f4407c027aefa5db68883438ef43f5a93da2c2869842bd1e1ea29efc2332d9"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1760,7 +1760,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+            "logSHA256": "39f4407c027aefa5db68883438ef43f5a93da2c2869842bd1e1ea29efc2332d9"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1769,7 +1769,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+            "logSHA256": "39f4407c027aefa5db68883438ef43f5a93da2c2869842bd1e1ea29efc2332d9"
           },
           {
             "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
@@ -1778,7 +1778,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+            "logSHA256": "39f4407c027aefa5db68883438ef43f5a93da2c2869842bd1e1ea29efc2332d9"
           },
           {
             "source": "packages/AGI_Node/tests/compute-repair.test.mjs",
@@ -1787,7 +1787,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
-            "logSHA256": "67c6a0fb6acd855b9d03244c42594164c7d8fadacff5b02399bb032bbdd12888"
+            "logSHA256": "cfec6e4fe79f5c51152a94cde66d0e1e676485b91d96518ee62273138606ea2e"
           },
           {
             "source": "packages/AGI_Node/tests/compute-restart.test.mjs",
@@ -1796,7 +1796,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
-            "logSHA256": "4f272807d33b9484d75d309f638c6ae4d9a3c99a794bd5426eb1953ebcfe8c43"
+            "logSHA256": "2ed455eb72f59947942c47d83367def6cb7f5ec7af8110edee81dbad146dc153"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
@@ -1805,7 +1805,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "01ae91419aa5ac02383e0e3ccdb81155bd9fe192a83d71771a1580afc2f20798"
+            "logSHA256": "b2742dc95bad80e1370fbd93fdf0d13ef2902602f68121721aa34ff4c209ed81"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
@@ -1814,7 +1814,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
-            "logSHA256": "01ae91419aa5ac02383e0e3ccdb81155bd9fe192a83d71771a1580afc2f20798"
+            "logSHA256": "b2742dc95bad80e1370fbd93fdf0d13ef2902602f68121721aa34ff4c209ed81"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1823,7 +1823,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1832,7 +1832,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1841,7 +1841,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1850,7 +1850,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1859,7 +1859,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1868,7 +1868,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1877,7 +1877,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1886,7 +1886,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1895,7 +1895,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1904,7 +1904,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
@@ -1913,7 +1913,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
-            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+            "logSHA256": "3ed3f762d1e249eedca681b9017a0024058420cddcf00cf39e81f8354563b3d0"
           },
           {
             "source": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs",
@@ -1922,7 +1922,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
-            "logSHA256": "0c47d0fbd0d8f6af757616e1e9b700821e8ae6a71daef280b3eb44a07babbaa5"
+            "logSHA256": "332299d24a46829b35474d077fcd23a5e4ed0e408bf17000982b60006025aaa3"
           },
           {
             "source": "packages/AGI_Node/tests/service-stop.test.mjs",
@@ -1931,7 +1931,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
-            "logSHA256": "a3afda100754c90a25e878adebb8cf02a3540328f49619547181c4f7103dafa1"
+            "logSHA256": "9b1b9e4481dbfaa4e8c0e37f7fb635cb6a219ff3bff16bcb4a447025d35eabcc"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1940,7 +1940,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+            "logSHA256": "46ab409e59e3186cb85c1e9bb74c121efe85f0790f09c79e526a1572586d9652"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1949,7 +1949,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+            "logSHA256": "46ab409e59e3186cb85c1e9bb74c121efe85f0790f09c79e526a1572586d9652"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1958,7 +1958,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+            "logSHA256": "46ab409e59e3186cb85c1e9bb74c121efe85f0790f09c79e526a1572586d9652"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1967,7 +1967,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+            "logSHA256": "46ab409e59e3186cb85c1e9bb74c121efe85f0790f09c79e526a1572586d9652"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1976,7 +1976,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+            "logSHA256": "46ab409e59e3186cb85c1e9bb74c121efe85f0790f09c79e526a1572586d9652"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1985,7 +1985,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+            "logSHA256": "46ab409e59e3186cb85c1e9bb74c121efe85f0790f09c79e526a1572586d9652"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -1994,7 +1994,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+            "logSHA256": "46ab409e59e3186cb85c1e9bb74c121efe85f0790f09c79e526a1572586d9652"
           },
           {
             "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
@@ -2003,7 +2003,7 @@
             "scope": "complete",
             "status": "PASS",
             "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
-            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+            "logSHA256": "46ab409e59e3186cb85c1e9bb74c121efe85f0790f09c79e526a1572586d9652"
           }
         ],
         "previousFailureCasesResolved": 44,
@@ -2015,50 +2015,75 @@
       {
         "architecture": "x64",
         "status": "PASS",
-        "summarySHA256": "4af0cd696ce8688b0c4f5d4721bbfb5fbca98580f19689c16b579c557f4d5864",
+        "summarySHA256": "dac542aaa3cda2fd3dcf48c5cf31bac043142845a4264fa3b3ea5a1cf10e86fa",
         "verifiedLogs": 19,
         "standaloneIntegrationScripts": 8,
         "productionSourcesMatched": 11,
         "contractArtifactsMatched": 11,
         "managerTestsPassed": 780,
         "currentManagerLifecycleSHA256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56",
-        "managerCommit": "3958cbc3b01aa459de16cf39e1ab0985b5fa56c3",
-        "workflowRun": "38437206563",
-        "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+        "managerCommit": "09d89fb22d52a8df194e8dd0a00beff9f7771d82",
+        "workflowRun": "38481345528",
+        "workflowCommit": "e120d55fb0b0d1f97691c59c5923ec400df14d14",
         "productionQualified": false
       },
       {
         "architecture": "arm64",
         "status": "PASS",
-        "summarySHA256": "c318d44ec69918f5062c687a10bcde5ea99279c6feb2f33b5a642ad62e6e2276",
+        "summarySHA256": "5d6a3c225788b94a52f0281101a8fc8e0b27aa983b225d409c961712771bfd5c",
         "verifiedLogs": 19,
         "standaloneIntegrationScripts": 8,
         "productionSourcesMatched": 11,
         "contractArtifactsMatched": 11,
         "managerTestsPassed": 780,
         "currentManagerLifecycleSHA256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56",
-        "managerCommit": "3958cbc3b01aa459de16cf39e1ab0985b5fa56c3",
-        "workflowRun": "38437206563",
-        "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+        "managerCommit": "09d89fb22d52a8df194e8dd0a00beff9f7771d82",
+        "workflowRun": "38481345528",
+        "workflowCommit": "e120d55fb0b0d1f97691c59c5923ec400df14d14",
         "productionQualified": false
       }
     ],
     "integrationTarget": {
       "repository": "MontrealAI/AGIJobManager",
-      "version": "1.15.0",
-      "commit": "3958cbc3b01aa459de16cf39e1ab0985b5fa56c3",
+      "version": "1.16.1",
+      "commit": "09d89fb22d52a8df194e8dd0a00beff9f7771d82",
       "managerTests": 780,
       "standaloneScripts": 8,
       "contractArtifacts": 11
     },
-    "verifiedTapLogs": 734,
+    "successorAcceptance": {
+      "status": "PASS",
+      "workflowCommit": "e120d55fb0b0d1f97691c59c5923ec400df14d14",
+      "workflowRun": "38481345528",
+      "workflowAttempt": "1",
+      "archiveSHA256": "7d5f5063fadaf229ce01c753523e475edd98429a280f84fe9c6f4aa92ed3c9dc",
+      "sourceRevisionSHA256": "284b7082c6c74bc2ca97e55990387b7969097208eacec75df943440280c1dd0f",
+      "screenshotSHA256": "a7169d2185ac99eab32a6fe0ed1f0766d06c3b2549d70b1abf0d93a0e6b6957a",
+      "journeySHA256": "1a8154b8798b59d9ecd94dea92ae445c1c6c5c44384bdb58168a80b58de5d9f1",
+      "browserVersion": "156.0.8078.4",
+      "actualBrowserEffects": true,
+      "actualComputeWorker": true,
+      "downloadedBytesChecked": true,
+      "authenticatedAgentDispatch": true,
+      "separatelyAuthorizedReview": true,
+      "explicitVersionChoice": true,
+      "freshOfflineRestoreAndRerun": true,
+      "deliverySHA256": "cbf30161c91a6881e5052711c23fe5c486fb8b3b537617dd1dcb13497f5905b6",
+      "selected": "efc4fd436851c298a07d7f08dd0a36173c46630b6211ebf98a21c63465e87607",
+      "candidate": "efc4fd436851c298a07d7f08dd0a36173c46630b6211ebf98a21c63465e87607",
+      "provider": "NOT_RUN_SIMULATED_PROVIDER_TRANSPORT",
+      "sandbox": "FIXTURE_NO_DOCKER_QUALIFICATION",
+      "independentController": "UNVERIFIED",
+      "authority": "none"
+    },
+    "verifiedTapLogs": 736,
     "verifiedIntegrationLogs": 38,
     "productionQualified": false,
     "physicalQualification": "NOT_RUN"
   },
   "evidence": {
-    "name": "Linux-Qualification-Evidence-v1.0.11.zip",
-    "bytes": 2853128,
-    "sha256": "fe65b6d4f23352115ecd596d202b4a552d0e20c52c5a268d185f98599a773052"
+    "name": "Linux-Qualification-Evidence-v1.1.0.zip",
+    "bytes": 6151019,
+    "sha256": "f2fedfc48bdcc9d59c80bf0ee8ae9509c53aea6b7dcdc33e4e61986de7a70cce"
   }
 }
