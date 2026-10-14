@@ -240,9 +240,12 @@ export async function createControlServer(
         successorAdapter?.revoke();
         if (controller.operationKind === "successor-inspection") {
           controller.assertRestoreReady();
-          await successor().stop();
-          json(await (url.pathname === "/api/lock" ? controller.lock() : url.pathname === "/api/stop" ? controller.stop() : Promise.resolve({stopped:true})));
-          return;
+          controller.cancellationDepth = (controller.cancellationDepth ?? 0) + 1;
+          try {
+            await successor().stop();
+            json(await (url.pathname === "/api/lock" ? controller.lock() : url.pathname === "/api/stop" ? controller.stop() : Promise.resolve({stopped:true})));
+            return;
+          } finally { controller.cancellationDepth--; }
         }
       }
       const actions = {

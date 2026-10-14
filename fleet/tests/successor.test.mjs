@@ -341,6 +341,20 @@ test('authenticated Stop interrupts pending inspection and dispatch through the 
       const view=await fetch(origin+'/api/successor',{headers:{Cookie:cookie}});assert.equal((await view.json()).runs.length,0);
       assert.equal(a.worker.state.calls.length,0);
     }
+    for(const route of ['stop','lock']){
+      const originalStop=a.controller.stop.bind(a.controller);let entered,release;
+      const reached=new Promise(resolve=>{entered=resolve;}),waiting=new Promise(resolve=>{release=resolve;});
+      a.controller.stop=async()=>{entered();await waiting;return originalStop();};
+      const gate=holdHealth(a),pending=post('successor/prepare',{request:req,context:ctx});await gate.reached;
+      const stopped=post(route,{});await reached;gate.release();gate.restore();
+      try{
+        const late=await pending;assert.ok(late.status>=400);assert.equal(a.controller.operation,null);
+        const configure=await post('config',{});assert.equal(configure.status,409);
+        assert.match(JSON.stringify(await configure.json()),/OPERATION_IN_PROGRESS/);
+      }finally{release();await stopped;a.controller.stop=originalStop;if(route==='lock')await a.controller.unlock('Synthetic fixture password 123!');}
+      assert.equal(a.controller.cancellationDepth??0,0);
+      assert.equal(await a.controller.mutate('New configuration after cancellation',()=>true),true);
+    }
     let release;const held=a.controller.mutate('Changing settings',()=>new Promise(resolve=>{release=resolve;}));
     try{
       for(const route of ['successor/stop','stop','studio/cancel','lock']){

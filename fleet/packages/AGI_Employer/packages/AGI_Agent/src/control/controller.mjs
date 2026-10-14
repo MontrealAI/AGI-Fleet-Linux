@@ -144,7 +144,7 @@ export class Controller {
   }
   async mutate(label, work, { interruptStudio = false, operationKind = null } = {}) {
     this.assertRestoreReady();
-    ensure(!this.operation, "OPERATION_IN_PROGRESS");
+    ensure(!this.operation && !this.cancellationDepth, "OPERATION_IN_PROGRESS");
     ensure(!this.publicWebCommissioningBusy||interruptStudio,"COMPANION_BUSY");
     ensure(!this.studio?.busy || interruptStudio, "STUDIO_BUSY");
     this.operation = label; this.operationKind = operationKind;
