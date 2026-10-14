@@ -1,0 +1,63 @@
+name: Exact-tree maintenance branch preparation
+on:
+  push:
+    branches: [codex/prepare-linux-1.1.1-20261014]
+    paths: [engineering/maintenance-authoring/**, .github/workflows/maintenance-authoring.yml]
+permissions:
+  contents: read
+concurrency:
+  group: maintenance-authoring-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'MontrealAI/AGI-Fleet-Linux' && github.ref == 'refs/heads/codex/prepare-linux-1.1.1-20261014'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Fetch this exact authoring recipe
+        env:
+          COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin https://github.com/MontrealAI/AGI-Fleet-Linux.git
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$COMMIT"
+      - name: Materialize the exact previously reviewed basis
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/maintenance-candidate"
+          git -C "$RUNNER_TEMP/maintenance-candidate" init
+          git -C "$RUNNER_TEMP/maintenance-candidate" remote add origin https://github.com/MontrealAI/AGI-Fleet-Linux.git
+          git -C "$RUNNER_TEMP/maintenance-candidate" fetch --depth=1 origin 770666eaa79791d79f7fa00175c43a052dcc11d2
+          git -C "$RUNNER_TEMP/maintenance-candidate" checkout --detach FETCH_HEAD
+          python3 engineering/maintenance-authoring/prepare.py "$RUNNER_TEMP/maintenance-candidate"
+          git -C "$RUNNER_TEMP/maintenance-candidate" add -A
+          test "$(git -C "$RUNNER_TEMP/maintenance-candidate" write-tree)" = 198d90d86facdfac3a55d8fd38f103645b0a3428
+      - name: Recheck preservation and engineering behavior before writing Git objects
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/maintenance-candidate"
+          python3 engineering/check-repository.py --require-source
+          python3 engineering/check-successor-preservation.py
+          python3 -m unittest discover -s engineering/tests -v
+          node --test engineering/tests/*.test.mjs
+          python3 engineering/build-website.py
+          python3 engineering/check-website.py
+          git diff --exit-code
+          test "$(git write-tree)" = 198d90d86facdfac3a55d8fd38f103645b0a3428
+      - name: Create only the exact new review branch without merging or publishing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 engineering/maintenance-authoring/author.py "$RUNNER_TEMP/maintenance-candidate"
+      - name: Retain authoring provenance
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: maintenance-authoring-receipt
+          path: ${{ runner.temp }}/maintenance-authoring/
+          if-no-files-found: warn
+          retention-days: 30
