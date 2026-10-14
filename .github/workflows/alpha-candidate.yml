@@ -1,0 +1,133 @@
+name: Alpha frozen candidate build and isolation
+on:
+  pull_request:
+    paths:
+      - 'local-runtime/alpha/candidate/**'
+      - 'local-runtime/alpha/package-lock.json'
+      - 'local-runtime/alpha/requirements-fleet.lock'
+      - 'local-runtime/tests/fixtures/alpha-contract.json'
+      - '.github/workflows/alpha-candidate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: alpha-candidate-${{ github.ref }}-${{ github.sha }}
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  candidate:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            target: linux-x64
+          - runner: ubuntu-24.04-arm
+            target: linux-arm64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 25
+    steps:
+      - name: Fetch exact Fleet source with read-only token permissions
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$COMMIT"
+      - name: Require synthetic builder regressions and preserved trust boundaries
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s local-runtime/alpha/candidate -p 'test_*.py' -v
+          python3 engineering/check-repository.py --require-source
+          python3 engineering/check-successor-preservation.py
+      - name: Install the existing hash-pinned Fleet Node contract checker
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          python3 - <<'PYTHON'
+          import hashlib,json,os,pathlib,tarfile,urllib.request
+          pins=json.loads(pathlib.Path('fleet/shared/runtime/compute/runtime-artifacts.lock.json').read_text())
+          asset=next(x for x in pins['node']['archives'] if x['platform']==os.environ['TARGET'])
+          archive=pathlib.Path(os.environ['RUNNER_TEMP'])/'alpha-check-node.tar.xz'
+          urllib.request.urlretrieve(asset['url'],archive)
+          assert hashlib.sha256(archive.read_bytes()).hexdigest()==asset['sha256']
+          with tarfile.open(archive) as t: t.extractall(os.environ['RUNNER_TEMP'],filter='data')
+          node=pathlib.Path(os.environ['RUNNER_TEMP'])/('node-v'+pins['node']['preferredVersion']+'-'+os.environ['TARGET'])/'bin'
+          with open(os.environ['GITHUB_PATH'],'a') as f: f.write(str(node)+'\n')
+          PYTHON
+      - name: Fetch only the reviewed Alpha Git object
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib, subprocess
+          lock=json.loads(pathlib.Path('local-runtime/alpha/candidate/inputs.lock.json').read_text())
+          source=lock['source']; destination=pathlib.Path(os.environ['RUNNER_TEMP'])/'alpha-source'
+          subprocess.run(['git','init',str(destination)],check=True)
+          subprocess.run(['git','-C',str(destination),'remote','add','origin',source['repository']+'.git'],check=True)
+          subprocess.run(['git','-C',str(destination),'fetch','--depth=1','origin',source['commit']],check=True)
+          actual=subprocess.check_output(['git','-C',str(destination),'rev-parse','FETCH_HEAD'],text=True).strip()
+          assert actual==source['commit']
+          PY
+      - name: Install distribution-owned sandbox tools on disposable runner
+        run: |
+          mkdir -p "$RUNNER_TEMP/alpha-evidence"
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap util-linux apparmor-profiles binutils
+          sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY \
+            python3 local-runtime/prepare-engineering-host.py > "$RUNNER_TEMP/alpha-evidence/host-policy.json"
+      - name: Download hash-pinned official assets without running package code
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          python3 local-runtime/alpha/candidate/build.py --target "$TARGET" \
+            --cache "$RUNNER_TEMP/alpha-cache" --fetch
+      - name: Build twice with fixed interpreter, wheel and ELF closure
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          for suffix in first second; do
+            python3 local-runtime/alpha/candidate/build.py --target "$TARGET" \
+              --cache "$RUNNER_TEMP/alpha-cache" --alpha-repository "$RUNNER_TEMP/alpha-source" \
+              --output "$RUNNER_TEMP/alpha-$suffix"
+          done
+          mkdir -p "$RUNNER_TEMP/alpha-evidence"
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])
+          first=json.loads((root/'alpha-first/manifest.json').read_text())
+          second=json.loads((root/'alpha-second/manifest.json').read_text())
+          assert first==second, 'Reproducible build manifests differ'
+          assert (root/'alpha-first/candidate.tar.gz').read_bytes()==(root/'alpha-second/candidate.tar.gz').read_bytes()
+          receipt={'schema':'agi-fleet/alpha-candidate-reproduction/v1','fleetCommit':os.environ['GITHUB_SHA'],
+            'workflowRun':os.environ['GITHUB_RUN_ID'],'workflowAttempt':os.environ['GITHUB_RUN_ATTEMPT'],
+            'target':first['target'],'archiveSha256':first['archiveSha256'],'treeSha256':first['treeSha256'],
+            'inputsSha256':first['inputsSha256'],'identicalBuilds':2,'productionQualified':False,
+            'qualification':'NOT_YET_RUN','productionTrustTargets':'UNPROVISIONED'}
+          (root/'alpha-evidence/reproduction.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          PY
+      - name: Require actual saved-archive isolation, fixed work vectors and cleanup
+        run: |
+          set -euo pipefail
+          python3 local-runtime/alpha/candidate/qualify.py --candidate "$RUNNER_TEMP/alpha-first" \
+            --cache "$RUNNER_TEMP/alpha-cache" --alpha-repository "$RUNNER_TEMP/alpha-source" \
+            --evidence "$RUNNER_TEMP/alpha-evidence/native-candidate.json" \
+            2>&1 | tee "$RUNNER_TEMP/alpha-evidence/native-candidate.log"
+          test -z "$(git status --porcelain --untracked-files=no)"
+      - name: Retain candidate bytes and truthful evidence, never publish or activate
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: alpha-candidate-${{ matrix.target }}
+          path: |
+            ${{ runner.temp }}/alpha-first/candidate.tar.gz
+            ${{ runner.temp }}/alpha-first/manifest.json
+            ${{ runner.temp }}/alpha-evidence/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0

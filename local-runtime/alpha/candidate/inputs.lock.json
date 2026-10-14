@@ -1,0 +1,419 @@
+{
+  "schema": "agi-fleet/alpha-candidate-inputs/v1",
+  "purpose": "CANDIDATE_ONLY; no operational trust or production activation",
+  "pythonVersion": "3.12.15",
+  "source": {
+    "repository": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0",
+    "commit": "2355b3cb198a6fb2c948744d283f108ab6ce5ebc",
+    "requirementsSha256": "807e9de36cff92e1cecd7a6f1d651760f66ea4f8346dd799a139269f48c75790",
+    "entrypoint": "alpha_factory_v1.core.runtime.fleet_work",
+    "validator": "alpha_factory_v1.core.runtime.work_spec"
+  },
+  "sourceFiles": {
+    "alpha_factory_v1/__init__.py": "7b9c625da8b4518a17361b167090f88c1a5315f47480c0756a455cd4606dbb90",
+    "alpha_factory_v1/core/__init__.py": "b27148c349dd088377d90c6502c1a74d093f5b69d3e3642c55686fded90c53bd",
+    "alpha_factory_v1/core/evaluators/__init__.py": "ee34c2b173d1932b3142d01303b8ecc04179af3b2a8b0d339e93826e05a0493f",
+    "alpha_factory_v1/core/evaluators/feasibility_critic.py": "d108e9eabbd4cf29c580900b60cd1b016217b0ee1a931b28e5c8b9e51f77ab89",
+    "alpha_factory_v1/core/evaluators/lead_time.py": "7dd11e0c59fb6b9904c10ef7d5e1cea3e93dcf9730b3ec2a7abe0f2a5c6f5241",
+    "alpha_factory_v1/core/evaluators/logic_critic.py": "81daa980b669783642bf939fe23ff8dc0224599fee42f7d01fdb8332a4bf44eb",
+    "alpha_factory_v1/core/evaluators/novelty.py": "52c617c5efa63d055088b3618b8e115999dfc26e96abb1ad2c736eca3390cbcc",
+    "alpha_factory_v1/core/runtime/__init__.py": "58936175f8b9734cee347670c38f5fcf1e89fadb2d8d4adaffa522066501a1fa",
+    "alpha_factory_v1/core/runtime/fleet_work.py": "235dc4da4a803db29075a5ed1e212832ac2db2c369b6e13cf2be3042324f60eb",
+    "alpha_factory_v1/core/runtime/models.py": "9ecd2ccd5b8f17be6f94fda0bc887c831518ed7ca79e619ed03593742a11b5ab",
+    "alpha_factory_v1/core/runtime/store.py": "340025deb6718fcb09a3fbbb8c16d47f6456e2c53cf3ae9d96b154f05e822c3c",
+    "alpha_factory_v1/core/runtime/work.py": "031f190ca6aaf1bbf2c521e3e3d9660f6a81e204ce838099df9b46c3371bbd0d",
+    "alpha_factory_v1/core/runtime/work_spec.py": "64fc1ac65ad850b7e8cf776d4481ff641ddcaed7492ed8df84d8de69c213b62f",
+    "alpha_factory_v1/core/self_edit/__init__.py": "fc999d9d4be4661210afbcb31f485f45f4b9628b7961def04ce9b296d998475b",
+    "alpha_factory_v1/core/self_edit/safety.py": "ea3e90723cb041b7e09c84359cb2bdeab604fb46853e5798d8aa77ba71ba4762",
+    "alpha_factory_v1/core/self_edit/tools.py": "89b15a66ef829100b8bdd16dce2d2bf7c90844aa559271eec2d55e97b169a050",
+    "alpha_factory_v1/core/simulation/__init__.py": "fdcb5266e6cb14d0a0642fa3cd8cad46659dc0c823eb7b29feb6e697060526cf",
+    "alpha_factory_v1/core/simulation/forecast.py": "8648850e639f77689ab8e78fe3d7e41d5e7b9bdc941750dd05cb43e2fbaf73fd",
+    "alpha_factory_v1/core/simulation/mats.py": "8528f8760adecc9e17873e16cd3fcb2d2d5482489afb5c383631798aafb9b431",
+    "alpha_factory_v1/core/simulation/mats_ops.py": "aab873fc26f175cf8bc059deddabfbe2126e20fff27b5d5436014e7bb29d33bf",
+    "alpha_factory_v1/core/simulation/replay.py": "9088228fbf9115bf50a2e6933493244f0f51530af76b2ab905541d0d32d58f99",
+    "alpha_factory_v1/core/simulation/sector.py": "06fbe4d4d14dfe3a080bd5c90cf443b4be08b17bcc5fb15af0406f16baaed0fe",
+    "alpha_factory_v1/core/simulation/selector.py": "e381fd8351558876927427a6e4d4b7e0ddaf4f0b05695b220d47160859d34991",
+    "alpha_factory_v1/core/simulation/surrogate_fitness.py": "7eba65b4d292fd1558666f82be368f5806920b1e0c29df00e45717c25032bfb8",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "alpha_factory_v1/core/simulation/surrogate_fitness.yaml": "e5cfb32f1d65149671481fd18aca01f9db5523cdfa28c934fbc4bcc7b6505484"
+  },
+  "requirementsSha256": "6936b2f57340fbfaacbcd86744da3c003230ca156ebac85b0f1b209a1308d9e0",
+  "productionTrustLockSha256": "460c42ef369a0cf9a1110555d693aa502573a1b6133100528fa4ac46d3951c90",
+  "targets": {
+    "linux-x64": {
+      "machine": "x86_64",
+      "debianArch": "amd64",
+      "triplet": "x86_64-linux-gnu",
+      "loader": "/lib64/ld-linux-x86-64.so.2",
+      "python": {
+        "filename": "cpython-3.12.15+20261013-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261013/cpython-3.12.15%2B20261013-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+        "sha256": "178d3d83b6e8e99285a65d3fce9c16b87952cc5efdb4d1a0e3ff3be18ff0fc9c",
+        "bytes": 34340172,
+        "provenance": "https://api.github.com/repos/astral-sh/python-build-standalone/releases/tags/20261013"
+      },
+      "runtimePackages": [
+        {
+          "package": "gcc-14-base",
+          "version": "14.2.0-4ubuntu2~24.04.1",
+          "filename": "gcc-14-base_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-14/gcc-14-base_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+          "sha256": "b95c172411a7fdae70307cf33a9f5320ba5e056b556454543dd5b679d5ce1c4f",
+          "bytes": 51014,
+          "provenance": "https://archive.ubuntu.com/ubuntu/dists/noble-security/main/binary-amd64/Packages.xz",
+          "indexSha256": "cfcd1f3212743f091b4c5576d9f88014b8dc3ed2ac292c0684d20b49335a1139"
+        },
+        {
+          "package": "libc6",
+          "version": "2.39-0ubuntu8.9",
+          "filename": "libc6_2.39-0ubuntu8.9_amd64.deb",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.39-0ubuntu8.9_amd64.deb",
+          "sha256": "ff5557d99b51f761c4b7c92368b9cc45565eda17df9bf9eb4b134d09825008be",
+          "bytes": 3264314,
+          "provenance": "https://archive.ubuntu.com/ubuntu/dists/noble-security/main/binary-amd64/Packages.xz",
+          "indexSha256": "cfcd1f3212743f091b4c5576d9f88014b8dc3ed2ac292c0684d20b49335a1139"
+        },
+        {
+          "package": "libgcc-s1",
+          "version": "14.2.0-4ubuntu2~24.04.1",
+          "filename": "libgcc-s1_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-14/libgcc-s1_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+          "sha256": "aa7fadbe33b78bcf99885318040601c550c208929565b179891d9a3cc2aa68cd",
+          "bytes": 78392,
+          "provenance": "https://archive.ubuntu.com/ubuntu/dists/noble-security/main/binary-amd64/Packages.xz",
+          "indexSha256": "cfcd1f3212743f091b4c5576d9f88014b8dc3ed2ac292c0684d20b49335a1139"
+        },
+        {
+          "package": "libstdc++6",
+          "version": "14.2.0-4ubuntu2~24.04.1",
+          "filename": "libstdc++6_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-14/libstdc++6_14.2.0-4ubuntu2~24.04.1_amd64.deb",
+          "sha256": "a51f8de7829211db961a31f02158058ad1a95f92ac6d0a5dff6350e2821c54c0",
+          "bytes": 792064,
+          "provenance": "https://archive.ubuntu.com/ubuntu/dists/noble-security/main/binary-amd64/Packages.xz",
+          "indexSha256": "cfcd1f3212743f091b4c5576d9f88014b8dc3ed2ac292c0684d20b49335a1139"
+        },
+        {
+          "package": "zlib1g",
+          "version": "1:1.3.dfsg-3.1ubuntu2.2",
+          "filename": "zlib1g_1.3.dfsg-3.1ubuntu2.2_amd64.deb",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/z/zlib/zlib1g_1.3.dfsg-3.1ubuntu2.2_amd64.deb",
+          "sha256": "84b9cf5752b29c9f92c27cd4c4ba9bbcc70b5ccf9b1b515421a28ae23212e273",
+          "bytes": 62988,
+          "provenance": "https://archive.ubuntu.com/ubuntu/dists/noble-security/main/binary-amd64/Packages.xz",
+          "indexSha256": "cfcd1f3212743f091b4c5576d9f88014b8dc3ed2ac292c0684d20b49335a1139"
+        },
+        {
+          "package": "libcrypt1",
+          "version": "1:4.4.36-4build1",
+          "filename": "libcrypt1_4.4.36-4build1_amd64.deb",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/libx/libxcrypt/libcrypt1_4.4.36-4build1_amd64.deb",
+          "sha256": "9474785cd6f398512bf8c305c3901dbb111569dccb6f5832002373c0a8ac5832",
+          "bytes": 82302,
+          "provenance": "https://archive.ubuntu.com/ubuntu/dists/noble/main/binary-amd64/Packages.xz",
+          "indexSha256": "2a6a199e1031a5c279cb346646d594993f35b1c03dd4a82aaa0323980dd92451"
+        }
+      ],
+      "wheels": [
+        {
+          "package": "annotated-types",
+          "version": "0.8.0",
+          "filename": "annotated_types-0.8.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/99/91/8acff4f5e50511b911bbccb72b8628a49c68ce14148cd9f6431094859a90/annotated_types-0.8.0-py3-none-any.whl",
+          "sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0",
+          "requires_python": ">=3.10",
+          "bytes": 13427,
+          "provenance": "https://pypi.org/pypi/annotated-types/0.8.0/json",
+          "minimumGlibc": null
+        },
+        {
+          "package": "cffi",
+          "version": "2.1.1",
+          "filename": "cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/b1/db/dceb9dd5b231e1da801793f8acc9f3c52a7e1afe40bb1aae37e02b0faad5/cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+          "sha256": "c1453022f490d2459a11819d83ad1d586e9ff65a12ac3e705ffebd46d3685dcf",
+          "requires_python": ">=3.10",
+          "bytes": 221822,
+          "provenance": "https://pypi.org/pypi/cffi/2.1.1/json",
+          "minimumGlibc": "2.17"
+        },
+        {
+          "package": "cryptography",
+          "version": "50.0.1",
+          "filename": "cryptography-50.0.1-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/57/26/e6d4fc8512a51a5f9ee7bfdbfb853bce1197087df40c9ad993ad370b846f/cryptography-50.0.1-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+          "sha256": "ff838d62ec1bfce4f9ba7fa16f4a7b554cd8d0c299e6be37502161a660c84eef",
+          "requires_python": "!=3.9.0,!=3.9.1,>=3.9",
+          "bytes": 4712478,
+          "provenance": "https://pypi.org/pypi/cryptography/50.0.1/json",
+          "minimumGlibc": "2.17"
+        },
+        {
+          "package": "numpy",
+          "version": "2.4.6",
+          "filename": "numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/99/60/14115e6364fa676c5397c2ad3004e527e9aa487abf5d0706ec81bbd08529/numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+          "sha256": "90f9849678c75fe7afa2d348ac842c168b0a4d3d61919687216dfc547976d853",
+          "requires_python": ">=3.11",
+          "bytes": 16645538,
+          "provenance": "https://pypi.org/pypi/numpy/2.4.6/json",
+          "minimumGlibc": "2.27"
+        },
+        {
+          "package": "pycparser",
+          "version": "3.0",
+          "filename": "pycparser-3.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/0c/c3/44f3fbbfa403ea2a7c779186dc20772604442dde72947e7d01069cbe98e3/pycparser-3.0-py3-none-any.whl",
+          "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+          "requires_python": ">=3.10",
+          "bytes": 48172,
+          "provenance": "https://pypi.org/pypi/pycparser/3.0/json",
+          "minimumGlibc": null
+        },
+        {
+          "package": "pydantic",
+          "version": "2.13.5",
+          "filename": "pydantic-2.13.5-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/eb/47/c95ffc2009878c7aac0c5e08528022dcb885933252a88b5f170058014464/pydantic-2.13.5-py3-none-any.whl",
+          "sha256": "346a034f080da3755d8e9cb5e00e8b07de1d39e4f6e2c87d8ab7cafa0b269a73",
+          "requires_python": ">=3.9",
+          "bytes": 472589,
+          "provenance": "https://pypi.org/pypi/pydantic/2.13.5/json",
+          "minimumGlibc": null
+        },
+        {
+          "package": "pydantic-core",
+          "version": "2.46.5",
+          "filename": "pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/c0/a4/eb9409ec0736e50aa70a412f16c204ed149516846912f7e6724d4c73ee53/pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "sha256": "0fc5be0abd4a407e200d844b404e33639a554e7bd0d448e7b9ae181be4789ac2",
+          "requires_python": ">=3.9",
+          "bytes": 2066284,
+          "provenance": "https://pypi.org/pypi/pydantic-core/2.46.5/json",
+          "minimumGlibc": "2.17"
+        },
+        {
+          "package": "pyyaml",
+          "version": "6.0.3",
+          "filename": "pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/8b/9d/b3589d3877982d4f2329302ef98a8026e7f4443c765c46cfecc8858c6b4b/pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+          "sha256": "ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc",
+          "requires_python": ">=3.8",
+          "bytes": 807870,
+          "provenance": "https://pypi.org/pypi/pyyaml/6.0.3/json",
+          "minimumGlibc": "2.17"
+        },
+        {
+          "package": "typing-extensions",
+          "version": "4.16.0",
+          "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+          "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+          "requires_python": ">=3.9",
+          "bytes": 45571,
+          "provenance": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+          "minimumGlibc": null
+        },
+        {
+          "package": "typing-inspection",
+          "version": "0.4.4",
+          "filename": "typing_inspection-0.4.4-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/67/81/4add07e5172b7ac40d8ed5ff580409a7801a4fe26d529bdd915401dabfbe/typing_inspection-0.4.4-py3-none-any.whl",
+          "sha256": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147",
+          "requires_python": ">=3.10",
+          "bytes": 14750,
+          "provenance": "https://pypi.org/pypi/typing-inspection/0.4.4/json",
+          "minimumGlibc": null
+        }
+      ]
+    },
+    "linux-arm64": {
+      "machine": "aarch64",
+      "debianArch": "arm64",
+      "triplet": "aarch64-linux-gnu",
+      "loader": "/lib/ld-linux-aarch64.so.1",
+      "python": {
+        "filename": "cpython-3.12.15+20261013-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz",
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261013/cpython-3.12.15%2B20261013-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz",
+        "sha256": "9467a99bacc7d90b64b02de7fa9ecfc99b72905e64e74f7ff6b460ad95cfed5a",
+        "bytes": 29242161,
+        "provenance": "https://api.github.com/repos/astral-sh/python-build-standalone/releases/tags/20261013"
+      },
+      "runtimePackages": [
+        {
+          "package": "gcc-14-base",
+          "version": "14.2.0-4ubuntu2~24.04.1",
+          "filename": "gcc-14-base_14.2.0-4ubuntu2~24.04.1_arm64.deb",
+          "url": "https://ports.ubuntu.com/ubuntu-ports/pool/main/g/gcc-14/gcc-14-base_14.2.0-4ubuntu2~24.04.1_arm64.deb",
+          "sha256": "bddbe21061fdc73a23e7de79ece91693bf61aa22d634d1c69c5048385c114968",
+          "bytes": 50984,
+          "provenance": "https://ports.ubuntu.com/ubuntu-ports/dists/noble-security/main/binary-arm64/Packages.xz",
+          "indexSha256": "5dc147f1ea29e8fcb7ea94d6fe01fe170484a39a4997b75b30ddb19a1bc0604d"
+        },
+        {
+          "package": "libc6",
+          "version": "2.39-0ubuntu8.9",
+          "filename": "libc6_2.39-0ubuntu8.9_arm64.deb",
+          "url": "https://ports.ubuntu.com/ubuntu-ports/pool/main/g/glibc/libc6_2.39-0ubuntu8.9_arm64.deb",
+          "sha256": "ad109797c5f78a5eeb6d4c296bfbaae68b239111a0c9ac0eb97b8d430284ac45",
+          "bytes": 2776414,
+          "provenance": "https://ports.ubuntu.com/ubuntu-ports/dists/noble-security/main/binary-arm64/Packages.xz",
+          "indexSha256": "5dc147f1ea29e8fcb7ea94d6fe01fe170484a39a4997b75b30ddb19a1bc0604d"
+        },
+        {
+          "package": "libgcc-s1",
+          "version": "14.2.0-4ubuntu2~24.04.1",
+          "filename": "libgcc-s1_14.2.0-4ubuntu2~24.04.1_arm64.deb",
+          "url": "https://ports.ubuntu.com/ubuntu-ports/pool/main/g/gcc-14/libgcc-s1_14.2.0-4ubuntu2~24.04.1_arm64.deb",
+          "sha256": "5b191f79ad985a9a653dbba45214619f729f9178a9bdf92f7c68db06c50d070b",
+          "bytes": 61884,
+          "provenance": "https://ports.ubuntu.com/ubuntu-ports/dists/noble-security/main/binary-arm64/Packages.xz",
+          "indexSha256": "5dc147f1ea29e8fcb7ea94d6fe01fe170484a39a4997b75b30ddb19a1bc0604d"
+        },
+        {
+          "package": "libstdc++6",
+          "version": "14.2.0-4ubuntu2~24.04.1",
+          "filename": "libstdc++6_14.2.0-4ubuntu2~24.04.1_arm64.deb",
+          "url": "https://ports.ubuntu.com/ubuntu-ports/pool/main/g/gcc-14/libstdc++6_14.2.0-4ubuntu2~24.04.1_arm64.deb",
+          "sha256": "f84a05ac45a6884109b6527e911081a38263b89e042fc94a338cf975f61a330c",
+          "bytes": 750976,
+          "provenance": "https://ports.ubuntu.com/ubuntu-ports/dists/noble-security/main/binary-arm64/Packages.xz",
+          "indexSha256": "5dc147f1ea29e8fcb7ea94d6fe01fe170484a39a4997b75b30ddb19a1bc0604d"
+        },
+        {
+          "package": "zlib1g",
+          "version": "1:1.3.dfsg-3.1ubuntu2.2",
+          "filename": "zlib1g_1.3.dfsg-3.1ubuntu2.2_arm64.deb",
+          "url": "https://ports.ubuntu.com/ubuntu-ports/pool/main/z/zlib/zlib1g_1.3.dfsg-3.1ubuntu2.2_arm64.deb",
+          "sha256": "e55ab3b4fb7b6edc4a628e28ec13f8780b08abe427d33ae148f030d8586d0e9a",
+          "bytes": 61898,
+          "provenance": "https://ports.ubuntu.com/ubuntu-ports/dists/noble-security/main/binary-arm64/Packages.xz",
+          "indexSha256": "5dc147f1ea29e8fcb7ea94d6fe01fe170484a39a4997b75b30ddb19a1bc0604d"
+        },
+        {
+          "package": "libcrypt1",
+          "version": "1:4.4.36-4build1",
+          "filename": "libcrypt1_4.4.36-4build1_arm64.deb",
+          "url": "https://ports.ubuntu.com/ubuntu-ports/pool/main/libx/libxcrypt/libcrypt1_4.4.36-4build1_arm64.deb",
+          "sha256": "5cd73ba112507dabd8e43b528ca9f530719a370e014b8e3e797770e6e940cccf",
+          "bytes": 85888,
+          "provenance": "https://ports.ubuntu.com/ubuntu-ports/dists/noble/main/binary-arm64/Packages.xz",
+          "indexSha256": "4a1901e6124fb0a111f5dffc8f5c14474f449e2ecfa71f2eaf0b29917edb53f9"
+        }
+      ],
+      "wheels": [
+        {
+          "package": "annotated-types",
+          "version": "0.8.0",
+          "filename": "annotated_types-0.8.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/99/91/8acff4f5e50511b911bbccb72b8628a49c68ce14148cd9f6431094859a90/annotated_types-0.8.0-py3-none-any.whl",
+          "sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0",
+          "requires_python": ">=3.10",
+          "bytes": 13427,
+          "provenance": "https://pypi.org/pypi/annotated-types/0.8.0/json",
+          "minimumGlibc": null
+        },
+        {
+          "package": "cffi",
+          "version": "2.1.1",
+          "filename": "cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+          "url": "https://files.pythonhosted.org/packages/44/de/f98430906df1545ffde0d543dd124a7a439bc2cd32b36b9c53f805df7333/cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+          "sha256": "68e62fe11f30d5ca8289242866f0a5291402d8529ca2178ab8afc5c9694ae890",
+          "requires_python": ">=3.10",
+          "bytes": 222389,
+          "provenance": "https://pypi.org/pypi/cffi/2.1.1/json",
+          "minimumGlibc": "2.17"
+        },
+        {
+          "package": "cryptography",
+          "version": "50.0.1",
+          "filename": "cryptography-50.0.1-cp311-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+          "url": "https://files.pythonhosted.org/packages/90/34/9ce9a62ed9dc82ca9fd6a34445b6904af56e5f38b3eae2ed32e49c36053d/cryptography-50.0.1-cp311-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+          "sha256": "53e279950892dc102c6b4e52af03ae5ea92fac572a1ddab78ca73a997f62b69f",
+          "requires_python": "!=3.9.0,!=3.9.1,>=3.9",
+          "bytes": 4723133,
+          "provenance": "https://pypi.org/pypi/cryptography/50.0.1/json",
+          "minimumGlibc": "2.17"
+        },
+        {
+          "package": "numpy",
+          "version": "2.4.6",
+          "filename": "numpy-2.4.6-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+          "url": "https://files.pythonhosted.org/packages/c9/c6/50a46a6205feba2343f1d6d17438107c5dc491ed1c736e6ea68689fd906b/numpy-2.4.6-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+          "sha256": "5f9fb9157b4ce2971008323afe46053787b526ef624fea915b261468a8421a0f",
+          "requires_python": ">=3.11",
+          "bytes": 15671012,
+          "provenance": "https://pypi.org/pypi/numpy/2.4.6/json",
+          "minimumGlibc": "2.27"
+        },
+        {
+          "package": "pycparser",
+          "version": "3.0",
+          "filename": "pycparser-3.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/0c/c3/44f3fbbfa403ea2a7c779186dc20772604442dde72947e7d01069cbe98e3/pycparser-3.0-py3-none-any.whl",
+          "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+          "requires_python": ">=3.10",
+          "bytes": 48172,
+          "provenance": "https://pypi.org/pypi/pycparser/3.0/json",
+          "minimumGlibc": null
+        },
+        {
+          "package": "pydantic",
+          "version": "2.13.5",
+          "filename": "pydantic-2.13.5-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/eb/47/c95ffc2009878c7aac0c5e08528022dcb885933252a88b5f170058014464/pydantic-2.13.5-py3-none-any.whl",
+          "sha256": "346a034f080da3755d8e9cb5e00e8b07de1d39e4f6e2c87d8ab7cafa0b269a73",
+          "requires_python": ">=3.9",
+          "bytes": 472589,
+          "provenance": "https://pypi.org/pypi/pydantic/2.13.5/json",
+          "minimumGlibc": null
+        },
+        {
+          "package": "pydantic-core",
+          "version": "2.46.5",
+          "filename": "pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+          "url": "https://files.pythonhosted.org/packages/09/f0/2a8ce3849e299d44e2d2c196b6082643a3235565a735cb51db7a6261f614/pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+          "sha256": "4fdc8b93a41521988916eeaa271173fcca7fa0803d62f87675aac8dcec1c8e29",
+          "requires_python": ">=3.9",
+          "bytes": 1951772,
+          "provenance": "https://pypi.org/pypi/pydantic-core/2.46.5/json",
+          "minimumGlibc": "2.17"
+        },
+        {
+          "package": "pyyaml",
+          "version": "6.0.3",
+          "filename": "pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+          "url": "https://files.pythonhosted.org/packages/ed/23/7a778b6bd0b9a8039df8b1b1d80e2e2ad78aa04171592c8a5c43a56a6af4/pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
+          "sha256": "9149cad251584d5fb4981be1ecde53a1ca46c891a79788c0df828d2f166bda28",
+          "requires_python": ">=3.8",
+          "bytes": 775116,
+          "provenance": "https://pypi.org/pypi/pyyaml/6.0.3/json",
+          "minimumGlibc": "2.17"
+        },
+        {
+          "package": "typing-extensions",
+          "version": "4.16.0",
+          "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+          "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+          "requires_python": ">=3.9",
+          "bytes": 45571,
+          "provenance": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+          "minimumGlibc": null
+        },
+        {
+          "package": "typing-inspection",
+          "version": "0.4.4",
+          "filename": "typing_inspection-0.4.4-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/67/81/4add07e5172b7ac40d8ed5ff580409a7801a4fe26d529bdd915401dabfbe/typing_inspection-0.4.4-py3-none-any.whl",
+          "sha256": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147",
+          "requires_python": ">=3.10",
+          "bytes": 14750,
+          "provenance": "https://pypi.org/pypi/typing-inspection/0.4.4/json",
+          "minimumGlibc": null
+        }
+      ]
+    }
+  },
+  "contractFixtureSha256": "ab1f145253fc99b15669d70859ce092a0e3628b81e51655378ab8e2ae7104fde"
+}
