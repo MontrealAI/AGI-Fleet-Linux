@@ -1,6 +1,8 @@
 // Transport-safe primitives: no registry, filesystem state or module-relative reads.
 export {parseStrict,canonical} from '../fleet/successor/vendor/manager/site/assets/successor/safe.mjs';
 export const MAX_BYTES=4_000_000;
+// A bounded capsule can be JSON-escaped once inside the transport envelope.
+export const CAPSULE_ENVELOPE_BYTES=2*MAX_BYTES+1024;
 export const need=(ok,code)=>{if(!ok)throw Object.assign(new Error(code),{code});};
 export function keys(value,allowed,required=allowed){
   need(value&&typeof value==='object'&&!Array.isArray(value),'OBJECT_REQUIRED');
