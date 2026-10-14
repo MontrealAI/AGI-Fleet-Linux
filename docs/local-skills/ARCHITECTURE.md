@@ -2,7 +2,7 @@
 
 ## Baseline and dependency
 
-Inspection on 2026-10-13 found main at `22eba990dbaa0083c7c6f21a0638bf546d0d47ed` and active SUCCESSOR PR #25 at `e84ff1c3d5ce129f2c953a3216dfa36338c7a905`. This change is stacked on that dependency; it does not merge or alter its work or reuse its planned release tag. Published Linux 1.0.11 and macOS 1.20.2 remain separate qualification tracks. No existing tracked file is edited by this work.
+Inspection on 2026-10-13 found main at `22eba990dbaa0083c7c6f21a0638bf546d0d47ed` and active SUCCESSOR PR #25 at `e84ff1c3d5ce129f2c953a3216dfa36338c7a905`. That was the original stacked baseline; its observations remain historical. PR #25 has since merged at `e120d55fb0b0d1f97691c59c5923ec400df14d14` and Linux 1.1.0 qualification assets have been published. Local Skills incorporates that exact bridge and targets main without changing its released bytes or the separate Mac track.
 
 ## ADR 1: Preserve established authority
 
@@ -22,13 +22,13 @@ The process adapter applies wall timeout, CPU seconds, address-space, Node heap,
 
 The CLI uses a private Unix socket. The dashboard uses an IPv4-only loopback listener on an ephemeral port, exact Host/Origin rules, no CORS, no WebSocket upgrades, bounded strict JSON and bearer credentials in headers. IPv6 is not bound; malformed or alternative Host/Origin values are rejected. A scoped assistant client can inspect, prepare, run already-authorized work, cancel and read only its own outputs. It cannot authorize, activate, create actors or become another role. Public/offline Builder pages never receive a control token and cannot pair silently.
 
-The operator credential is stored in a 0600 file; the database stores only token hashes. The dashboard keeps credentials in memory. Installing a skill executes no code. OpenClaw and other assistant adapters remain unqualified: attaching an actor label or `allowed-tools` field to an assistant is not an enforcement boundary.
+The operator credential is stored in a 0600 file; the database stores only token hashes. The dashboard keeps credentials in memory. Installing a skill executes no code. The pinned OpenClaw client uses a separately provisioned Gateway per actor, one allowlisted `fleet_local` tool and a server-verified scoped credential; its current qualification is recorded separately in the lifecycle addendum. Other assistant adapters and live provider routes remain unqualified. Attaching an actor label or `allowed-tools` field to an assistant is not an enforcement boundary.
 
 ## ADR 4: Persistence, budgets and STOP
 
 SQLite `BEGIN IMMEDIATE`, foreign keys and FULL synchronous transactions preserve consumed grants and reservations before execution. Grants bind principal, actor generation, exact task, package, host, limits and expiry. Admission is at most two active jobs per host and one per actor, with durable 24-hour limits. `QUEUE_CAPACITY` leaves the grant unconsumed for a bounded retry. Failed and uncertain runs consume budget. Rebinding invalidates old grants; it does not reset reservations.
 
-STOP persists before requesting termination; if persistence fails, the current supervisor also enters an in-memory emergency stop. Restart invalidates unused grants and quarantines active reservations. Cleanup is not inferred solely from an absent worker response. The adapter checks process-group disappearance after the namespace launcher closes. Native fault injection, resource stress and uncertain-run reconciliation remain open gates. Do not claim universal exactly-once effects.
+STOP persists before requesting termination; if persistence fails, the current supervisor also enters an in-memory emergency stop. Restart invalidates unused grants and quarantines active reservations. Cleanup is not inferred solely from an absent worker response. The adapter checks process-group disappearance after the namespace launcher closes. Explicit offline reconciliation requires recorded process/namespace closure or an observed different boot. It preserves the unsuccessful outcome, consumed grant, reservation and STOP; it cannot reconcile a provider or signer effect. Native cancellation/reconciliation passed at the lifecycle checkpoint. Full fault/resource stress remains open. Do not claim universal exactly-once effects.
 
 ## ADR 5: Portability and review
 
@@ -40,7 +40,7 @@ The public-input detector is a guardrail, not a comprehensive secret classifier.
 
 ## ADR 6: Versions and release gate
 
-Local runtime/skills start at `0.1.0-alpha.1` in a separate compatibility manifest. This is an unqualified development identity, not a published release. The additive work does not warrant a forced major bump or changes to published platform assets. Installer transactions, live adapters, physical observations, browser accessibility and exact downloadable qualification remain explicit requirements. The full acceptance matrix governs promotion; a source archive is not an operator installer.
+Local runtime/skills start at `0.1.0-alpha.1` in a separate compatibility manifest. This is an unqualified development identity, not a published release. The additive work does not warrant a forced major bump or changes to published platform assets. The staged installer, software-only rollback and owned-resource removal preserve the external authority ledger. A maintenance reservation prevents service startup while code changes. The lifecycle checkpoint exercised a real saved-package install/start/run/remove; live adapters, physical observations, full accessibility and release qualification remain explicit requirements. The full acceptance matrix governs promotion; a source archive is not an operator installer.
 
 ```mermaid
 flowchart TD

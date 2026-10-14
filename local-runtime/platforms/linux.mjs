@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import {spawn,spawnSync} from 'node:child_process';
-import {ROOT,need,digest,canonical,parseStrict} from '../contracts.mjs';
+import {ROOT,need,keys,digest,canonical,parseStrict} from '../contracts.mjs';
 
 const BIN='/usr/bin/bwrap', LIMIT='/usr/bin/prlimit';
 function trusted(file,own=false) { const s=fs.statSync(file);need(s.isFile()&&(s.uid===0||own&&s.uid===process.getuid())&&!(s.mode&0o022),'SANDBOX_EXECUTABLE_UNTRUSTED');return fs.realpathSync(file); }
@@ -33,6 +33,7 @@ export class LinuxSandbox {
     }catch(e){return {...report,code:e.code==='ENOENT'?'SANDBOX_PREREQUISITE_MISSING':e.code||e.message,help:'Use the documented Linux prerequisites and rerun doctor. No host-shell fallback is permitted. Browser, desktop and macOS local execution require separate implementation and qualification.'};}
   }
   async execute({role,task,directory,signal}) {
+    const started=performance.now();
     const ready=this.inspect();need(ready.supported,ready.code);
     const input=path.join(directory,'task.json');fs.writeFileSync(input,canonical({role,task}),{flag:'wx',mode:0o600});
     const command=[...sandboxArguments(),'--ro-bind',input,'/input/task.json','--chdir','/tmp','--','/node','--max-old-space-size=128','--v8-pool-size=1','/app/local-runtime/worker.mjs'];
@@ -51,7 +52,14 @@ export class LinuxSandbox {
         let groupGone=false;try{process.kill(-child.pid,0);}catch(e){groupGone=e.code==='ESRCH';}
         const code=Buffer.concat(stderr).toString().trim();
         const observation={backend:ready.backend,exitStatus:status,signal:exitSignal,stderr:/^[A-Z0-9_]{1,100}$/.test(code)?code:(code?'REDACTED_NON_CODE_STDERR':''),processGroupGone:groupGone,privateNamespacesEnded:groupGone,network:'none',providerCalls:0};
-        try{need(groupGone,'CLEANUP_UNCONFIRMED');need(!problem,problem);need(status===0,'WORKER_FAILED');const result=parseStrict(Buffer.concat(stdout).toString(),2_000_000);resolve({result,observation});}catch(e){e.observation=observation;reject(e);}
+        try{
+          need(groupGone,'CLEANUP_UNCONFIRMED');need(!problem,problem);need(status===0,'WORKER_FAILED');
+          const envelope=parseStrict(Buffer.concat(stdout).toString(),2_000_000);keys(envelope,['result','workerObservation']);
+          const w=envelope.workerObservation;keys(w,['pidNamespace','networkNamespace','userCPUMicroseconds','systemCPUMicroseconds','maxRSSKiB','taskMilliseconds']);
+          need(/^pid:\[\d+\]$/.test(w.pidNamespace)&&/^net:\[\d+\]$/.test(w.networkNamespace),'WORKER_OBSERVATION_INVALID');
+          for(const key of ['userCPUMicroseconds','systemCPUMicroseconds','maxRSSKiB','taskMilliseconds'])need(Number.isSafeInteger(w[key])&&w[key]>=0,'WORKER_OBSERVATION_INVALID');
+          resolve({result:envelope.result,observation:{...observation,worker:w,wallMilliseconds:Math.ceil(performance.now()-started)}});
+        }catch(e){e.observation=observation;reject(e);}
       });
       if(signal?.aborted&&!exited)abort();
     });

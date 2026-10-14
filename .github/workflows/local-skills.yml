@@ -98,6 +98,26 @@ jobs:
           AGI_LOCAL_NODE_ARCHIVE="$RUNNER_TEMP/local-node.tar.xz" \
           AGI_LOCAL_INSTALL_EVIDENCE="$RUNNER_TEMP/local-host-evidence/installed-journey.json" \
             node local-runtime/qualification/installed-journey.mjs
+      - name: Prepare the existing locked OpenClaw client for assistant qualification
+        run: |
+          mkdir "$RUNNER_TEMP/local-openclaw"
+          cp fleet/shared/runtime/compute/runtime-package/package*.json "$RUNNER_TEMP/local-openclaw/"
+          npm ci --prefix "$RUNNER_TEMP/local-openclaw" --ignore-scripts --omit=dev --no-audit --no-fund
+      - name: Require the pinned assistant to invoke the real saved runtime and sandbox
+        run: |
+          for role in agent node moderator employer evidence recovery; do
+            OPENCLAW_BIN="$RUNNER_TEMP/local-openclaw/node_modules/openclaw/openclaw.mjs" \
+            AGI_LOCAL_OPENCLAW_EVIDENCE="$RUNNER_TEMP/local-host-evidence/openclaw-$role.json" \
+              node "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.1/local-runtime/qualification/openclaw-journey.mjs" "--role=$role"
+          done
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          for role in ['agent', 'node', 'moderator', 'employer', 'evidence', 'recovery']:
+            e=json.loads((Path(os.environ['RUNNER_TEMP'])/('local-host-evidence/openclaw-'+role+'.json')).read_text())
+            assert e['role']==role and e['actualGateway'] is True and e['actualSandbox'] is True and e['skillObserved'] is True
+            assert e['evidenceClass']=='NATIVE_LOCAL_RUNTIME' and e['providerTransport']=='local-synthetic-fixture'
+          PY
       - name: Retain development artifact identity
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f

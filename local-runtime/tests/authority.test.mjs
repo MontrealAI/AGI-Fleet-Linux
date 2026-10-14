@@ -52,3 +52,18 @@ test('STOP still aborts active work and blocks new work when durable storage fai
 test('explicit grant and client revocations deny queued dispatch and future authentication',async()=>{
   const f=fixture();try{const a=f.create(),c=f.runtime.issueClient(a.id),g=f.prepare(a,task(),c.principal);f.authorize(g);f.runtime.revoke({grant:g.grant},f.operator);await assert.rejects(f.run(a,g,c.principal),/GRANT_UNAVAILABLE/);const next=f.prepare(a,task(),c.principal);f.authorize(next);f.runtime.revokeClient({client:c.principal.hash},f.operator);assert.throws(()=>f.runtime.authenticate(c.token),/AUTH_REQUIRED/);await assert.rejects(f.run(a,next,c.principal),/AUTH_REQUIRED/);}finally{f.close();}
 });
+test('other actors cannot crowd scoped pending work or run history out of status limits (seeded history)',async()=>{
+  const f=fixture();try{
+    const own=f.create(),other=f.create(),principal=f.runtime.issueClient(own.id).principal;
+    const executed=f.prepare(own,task(),principal);f.authorize(executed);const run=await f.run(own,executed,principal);
+    const pending=f.prepare(own,task(),principal);
+    for(let i=0;i<65;i++)f.prepare(other);
+    // Status-only fixture: no additional work, provider calls or success claims.
+    f.runtime.store.transaction(()=>{for(let i=0;i<101;i++)f.runtime.store.db.prepare("INSERT INTO runs VALUES(?,?,?,'uncertain',?,NULL)").run(id(),other.id,id(),JSON.stringify({reservedAt:Date.now(),fixture:'pagination-only'}));});
+    const scoped=f.runtime.status(principal),operator=f.runtime.status(f.operator);
+    assert.deepEqual(scoped.pending.map(g=>g.grant),[pending.grant]);
+    assert.deepEqual(scoped.runs.map(r=>r.id),[run.run]);
+    assert.ok(scoped.pending.every(g=>g.actor===own.id)&&scoped.runs.every(r=>r.actor===own.id));
+    assert.equal(operator.pending.length,64);assert.equal(operator.runs.length,100);
+  }finally{f.close();}
+});

@@ -7,11 +7,13 @@ The [typed contract](../../local-runtime/schemas/client-v1.d.ts) and executable 
 | Operation | Client | Behavior |
 |---|---|---|
 | `status`, `inspect`, `output` | Operator or scoped actor | Read only the client's allowed actor state and actual receipt. |
+| `client-info` | Authenticated client | Inspect its own server-side scope without exposing credentials. |
 | `doctor` | Operator | Inspect local capability without provider calls, account changes or spending. |
 | `create` | Operator | Add an inert role instance. |
 | `activate` | Operator, `confirm: true` | Fresh host/package binding and generation; no run grant. |
 | `client` | Operator | Issue a new actor-only client credential. Return once; keep in a 0600 file. |
 | `prepare` | Operator or scoped actor | Validate exact task and return commitment, limits and expiry. |
+| `grant-inspect` | Operator | Inspect an existing exact request prepared by an assistant before deciding; never change its preparing principal. |
 | `authorize` | Operator, `confirm: true` | Approve the exact returned commitment for that principal. |
 | `run` | Preparing principal | Atomically reserve limits and consume authorization before one run. |
 | `cancel` | Operator or matching actor | Request active process termination; retain uncertainty and cleanup evidence. |
@@ -32,9 +34,11 @@ The [typed contract](../../local-runtime/schemas/client-v1.d.ts) and executable 
 
 An operator sends `create` with `{"role":"agent","name":"Public reports"}`, then `activate` with the returned actor UUID and `confirm:true`. To involve a skill, create a scoped `client` for that actor and deliver the private credential file through the client's supported credential mechanism. The assistant prepares work; the operator separately authorizes its exact commitment. Do not authorize through a model-controlled operator token.
 
+The [pinned OpenClaw client](OPENCLAW_CLIENT.md) implements this path with a fresh per-actor profile and the single `fleet_local` tool. The dashboard lists pending requests for exact inspection and approval. The originating scoped client retains execution ownership. Qualification with the actual Gateway and a synthetic model transport is separate from live-provider commissioning.
+
 `examples.mjs` returns valid synthetic tasks for Agent, Evidence, Employer, Moderator and Recovery. Node input consists of the original mission, variant and **exact delivered files**, plus source actor/controller provenance and `review: "internal"`. Each specialist reuses the existing registry and formal policy. Supplied protocol snapshots are unverified data; inspection output never becomes a live action or signer request.
 
-For SUCCESSOR, complete an Agent task, then a separately authorized Node task over its exact returned files. Send `project-assemble` with `project:null`, the execution run UUID and review run UUID. Candidate assembly returns `state.active:null`. Select explicitly using `project-select`; export and restore through `project-export`/`project-import`. A corrupt or differently reviewed delivery is rejected. This covers only the deterministic internal-check example; it does not qualify the full live Builder → ComputeWorker → independent review journey.
+For SUCCESSOR, complete an Agent task, then a separately authorized Node task over its exact returned files. Send `project-assemble` with `project:null`, the execution run UUID and review run UUID. Candidate assembly returns `state.active:null`. Select explicitly using `project-select`; export and restore through `project-export`/`project-import`. A corrupt or differently reviewed delivery is rejected. Concurrent project updates cannot overwrite a committed version choice: `PROJECT_CHANGED` means inspect the latest state and make a new explicit decision. There is no automatic retry. Project-count limits are enforced atomically during import. This covers only the deterministic internal-check example; it does not qualify the full live Builder → ComputeWorker → independent review journey.
 
 ## Validation commands
 

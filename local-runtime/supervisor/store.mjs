@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
 import {ROOT, need, id, canonical, parseStrict, digest} from '../contracts.mjs';
+import {readPrivate} from '../private-file.mjs';
+export {readPrivate} from '../private-file.mjs';
 
 export function privateDirectory(directory, {create = false} = {}) {
   need(path.isAbsolute(directory) && directory === path.resolve(directory) && !directory.startsWith(ROOT), 'STATE_OUTSIDE_CHECKOUT_REQUIRED');
@@ -9,10 +11,6 @@ export function privateDirectory(directory, {create = false} = {}) {
   const st = fs.lstatSync(directory);
   need(st.isDirectory() && !st.isSymbolicLink() && fs.realpathSync(directory) === directory && st.uid === process.getuid() && !(st.mode & 0o077), 'PRIVATE_STATE_REQUIRED');
   return directory;
-}
-export function readPrivate(file, max = 4_000_000) {
-  const fd = fs.openSync(file, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW | fs.constants.O_NONBLOCK);
-  try { const s = fs.fstatSync(fd); need(s.isFile() && s.nlink === 1 && s.uid === process.getuid() && !(s.mode & 0o077) && s.size <= max, 'PRIVATE_FILE_REQUIRED'); return fs.readFileSync(fd); } finally { fs.closeSync(fd); }
 }
 export class Store {
   constructor(directory, {create = false} = {}) {

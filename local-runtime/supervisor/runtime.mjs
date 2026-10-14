@@ -39,7 +39,7 @@ export class LocalRuntime {
     const r=this.store.db.prepare('SELECT value FROM clients WHERE hash=?').get(digest(token));need(r,'AUTH_REQUIRED');return parseStrict(r.value);
   }
   scope(p,action,actor=null) {need(p&&this.store.db.prepare('SELECT 1 FROM clients WHERE hash=?').get(p.hash),'AUTH_REQUIRED');need(p.operator||(p.actions.includes(action)&&actor===p.actor),'CLIENT_SCOPE_DENIED');}
-  doctor(){return {...this.backend.inspect(),runtime:VERSION,sourceSha256:this.source,roles:['agent','node','moderator','employer','evidence','recovery'],economicAuthority:'disabled',liveProvider:'NOT_RUN',supportedClient:'CLI v1; assistant integration NOT_RUN'};}
+  doctor(){return {...this.backend.inspect(),runtime:VERSION,sourceSha256:this.source,roles:['agent','node','moderator','employer','evidence','recovery'],economicAuthority:'disabled',liveProvider:'NOT_RUN',supportedClient:'CLI v1; pinned OpenClaw 2026.9.5 scoped adapter; exact-head native qualification required'};}
   addActor(input,p) {
     this.scope(p,'create');keys(input,['role','name']);label(input.name);const pkg=packagePolicy(input.role);
     need(this.store.listActors().length<64,'ACTOR_LIMIT');
@@ -172,8 +172,10 @@ export class LocalRuntime {
   }
   status(p) {
     this.scope(p,'status',p.actor);const actors=this.store.listActors().filter(a=>p.operator||a.id===p.actor);
-    const runs=this.store.db.prepare('SELECT id,actor,state,value FROM runs ORDER BY rowid DESC LIMIT 100').all().filter(r=>p.operator||r.actor===p.actor).map(r=>({...r,value:parseStrict(r.value)}));
-    return {schema:'agi-fleet/local-status/v1',stopped:this.emergency===true||this.store.meta('stopped'),paused:this.store.meta('paused'),actors,runs,productionQualified:false,economicAuthority:false};
+    const parameters=p.operator?[]:[p.actor];
+    const runs=this.store.db.prepare('SELECT id,actor,state,value FROM runs'+(p.operator?'':' WHERE actor=?')+' ORDER BY rowid DESC LIMIT 100').all(...parameters).map(r=>({...r,value:parseStrict(r.value)}));
+    const pending=this.store.db.prepare("SELECT id,actor,value,state FROM grants WHERE state IN ('prepared','authorized')"+(p.operator?'':' AND actor=?')+' ORDER BY rowid DESC LIMIT 64').all(...parameters).map(r=>{const g=parseStrict(r.value);return {grant:r.id,actor:r.actor,state:r.state,action:g.task.action,expiresAt:g.expiresAt};});
+    return {schema:'agi-fleet/local-status/v1',stopped:this.emergency===true||this.store.meta('stopped'),paused:this.store.meta('paused'),actors,runs,pending,productionQualified:false,economicAuthority:false};
   }
   output(input,p) {keys(input,['actor','run']);this.scope(p,'output',input.actor);const r=this.store.db.prepare('SELECT actor,state,result FROM runs WHERE id=?').get(uuid(input.run));need(r&&r.actor===input.actor,'RUN_UNKNOWN');return {state:r.state,receipt:r.result?parseStrict(r.result):null};}
   exportActor(input,p) {
@@ -195,6 +197,11 @@ export class LocalRuntime {
     if(['project-assemble','project-select','project-export','project-import'].includes(action))return successorOperation(this,action,input,p);
     const methods={create:'addActor',activate:'activate',prepare:'prepare',authorize:'authorize',run:'run',stop:'stop',cancel:'cancel',revoke:'revoke','revoke-client':'revokeClient',pause:'pause',resume:'resume',output:'output',export:'exportActor',import:'importActor'};
     if(action==='status')return this.status(p);
+    if(action==='client-info'){this.scope(p,'status',p.actor);keys(input,[]);return {actor:p.actor,operator:p.operator,actions:p.actions};}
+    if(action==='grant-inspect'){
+      this.scope(p,'grant-inspect');keys(input,['grant']);const row=this.store.db.prepare('SELECT state,value FROM grants WHERE id=?').get(uuid(input.grant));need(row,'GRANT_UNAVAILABLE');
+      const g=parseStrict(row.value);return {grant:g.id,commitment:digest(g),actor:g.actor,task:g.task,limits:g.limits,expiresAt:g.expiresAt,state:row.state,preparingClient:g.principal===p.hash?'this-operator':'scoped-client',confirmationRequired:true};
+    }
     if(action==='doctor'){this.scope(p,'doctor');return this.doctor();}
     if(action==='example'){this.scope(p,'example');keys(input,['kind','language']);need(['analyst','website'].includes(input.kind)&&['en','fr'].includes(input.language),'EXAMPLE_INVALID');return defaultMission(input.kind,input.language);}
     if(action==='client'){this.scope(p,'client');keys(input,['actor']);return this.issueClient(uuid(input.actor));}

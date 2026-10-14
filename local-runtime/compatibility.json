@@ -6,7 +6,7 @@
   "protocolChanges": false,
   "dedicatedFleetChanges": false,
   "runtime": { "node": ">=24.19.0 <25", "preferredNode": "24.21.0", "openclawPinUnchanged": "2026.9.5" },
-  "clients": { "localCLI": "v1", "openclaw": "NOT_RUN", "otherAssistants": "NOT_RUN" },
+  "clients": { "localCLI": "v1", "openclaw": "2026.9.5 scoped adapter; synthetic-provider qualification; exact-head native check required", "otherAssistants": "NOT_RUN" },
   "backends": {
     "linux-x64-bounded-offline": "native-test-required",
     "linux-arm64-bounded-offline": "native-test-required",

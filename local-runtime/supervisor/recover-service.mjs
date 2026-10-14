@@ -20,15 +20,25 @@ export async function recoverService(state,{confirm=false}={}) {
     });
     need(stopped,'SUPERVISOR_STILL_ACTIVE');
   }
-  const runtime=new LocalRuntime(state);
+  if(before){
+    const current=fs.lstatSync(socket);
+    need(current.isSocket()&&current.dev===before.dev&&current.ino===before.ino&&current.uid===before.uid&&current.mode===before.mode,'SOCKET_IDENTITY_CHANGED');
+    fs.unlinkSync(socket);
+  }
+  // Own the actual service endpoint before touching authority. If a raw CLI
+  // launch wins this bind, recovery fails without changing its live ledger.
+  // A crash leaves an ordinary stale private socket for the same recovery path.
+  const fence=net.createServer(connection=>connection.destroy());
+  let runtime;
   try {
+    await new Promise((resolve,reject)=>{fence.once('error',reject);fence.listen(socket,resolve);});
+    fs.chmodSync(socket,0o600);
+    runtime=new LocalRuntime(state);
     runtime.store.recover({forceStop:true});
-    if(before){
-      const current=fs.lstatSync(socket);
-      need(current.isSocket()&&current.dev===before.dev&&current.ino===before.ino&&current.uid===before.uid&&current.mode===before.mode,'SOCKET_IDENTITY_CHANGED');
-      fs.unlinkSync(socket);
-    }
     return {schema:'agi-fleet/service-recovery/v1',state:'STOP',unusedGrants:'revoked',interruptedRuns:'uncertain',actors:'inactive',
       replayAllowed:false,next:'Start the supervisor, inspect and reconcile uncertain runs, then explicitly resume and reactivate.'};
-  }finally{runtime.close();}
+  }finally{
+    try{runtime?.close();}
+    finally{if(fence.listening)await new Promise(resolve=>fence.close(resolve));}
+  }
 }

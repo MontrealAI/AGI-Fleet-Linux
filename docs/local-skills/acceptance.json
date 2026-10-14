@@ -246,5 +246,89 @@
       "evidence": "validation.json and retained GitHub workflow logs",
       "fullCasePassed": false
     }
+  ],
+  "currentEvidenceNote": "Original actual fields are retained historical observations. See LIFECYCLE_ADDENDUM.md and observedCheckpoints for observed native/assistant results. The scoped status pagination repair requires fresh exact-head CI; no full-handoff claim has changed.",
+  "observedCheckpoints": [
+    {
+      "head": "db19a6a6cab86e5c883e194d091a1da92d12701f",
+      "workflow": 38490542629,
+      "platforms": [
+        "linux-x64",
+        "linux-arm64"
+      ],
+      "supervisorSource": 33,
+      "supervisorArchive": 33,
+      "installerFixtures": 8,
+      "nativeSource": 3,
+      "nativeArchive": 3,
+      "installedJourney": "PASS",
+      "enFrBrowser": "PASS",
+      "provider": "none",
+      "productionQualified": false,
+      "fullHandoffComplete": false
+    },
+    {
+      "head": "bf88f46d7d86b5523cc54b162697f67942caf78a",
+      "workflow": 38498028265,
+      "platforms": [
+        "linux-x64",
+        "linux-arm64"
+      ],
+      "supervisorSource": 38,
+      "supervisorArchive": 38,
+      "installerFixtures": 10,
+      "nativeSource": 4,
+      "nativeArchive": 4,
+      "installedJourney": "PASS",
+      "enFrBrowser": "PASS",
+      "actualGatewayRoles": [
+        "agent",
+        "node",
+        "moderator",
+        "employer",
+        "evidence",
+        "recovery"
+      ],
+      "assistantSandbox": "NATIVE_LOCAL_RUNTIME",
+      "providerTransport": "local-synthetic-fixture",
+      "liveProviderJudgment": false,
+      "archiveSHA256": "a9506a9de8faee912cba15f62a01e2aa0da86dc715aee1df6d00dfae9038d78e",
+      "archiveFiles": 2841,
+      "productionQualified": false,
+      "fullHandoffComplete": false
+    },
+    {
+      "head": "7adeed55e58b6bf774f3b7b3beca13a310e89924",
+      "workflow": 38502591461,
+      "platforms": [
+        "linux-x64",
+        "linux-arm64"
+      ],
+      "supervisorSource": 40,
+      "supervisorArchive": 40,
+      "installerFixtures": 15,
+      "nativeSource": 4,
+      "nativeArchive": 4,
+      "installedJourney": "PASS",
+      "stableAssistantRestart": true,
+      "actualServiceRecovery": true,
+      "restartPreservedReservations": 2,
+      "oldGrantReplayed": false,
+      "enFrBrowser": "PASS",
+      "actualGatewayRoles": [
+        "agent",
+        "node",
+        "moderator",
+        "employer",
+        "evidence",
+        "recovery"
+      ],
+      "assistantSandbox": "NATIVE_LOCAL_RUNTIME",
+      "providerTransport": "local-synthetic-fixture",
+      "archiveSHA256": "c7dd34588bc916c7c226895ec6bf12819f99cd482c187739962efdc422b6df38",
+      "archiveFiles": 2841,
+      "fullHandoffComplete": false,
+      "productionQualified": false
+    }
   ]
 }

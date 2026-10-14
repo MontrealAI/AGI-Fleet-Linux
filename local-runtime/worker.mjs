@@ -60,9 +60,13 @@ export async function perform(role, task) {
 }
 if (process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href) {
   try {
+    const started=performance.now();
     const raw=fs.readFileSync('/input/task.json','utf8');need(Buffer.byteLength(raw)<=4_000_000,'INPUT_LIMIT');
     const {role,task}=parseStrict(raw,4_000_000);
-    const result=await perform(role,task),bytes=canonical(result);need(Buffer.byteLength(bytes)<=2_000_000,'OUTPUT_LIMIT');
+    const result=await perform(role,task),usage=process.resourceUsage();
+    const workerObservation={pidNamespace:fs.readlinkSync('/proc/self/ns/pid'),networkNamespace:fs.readlinkSync('/proc/self/ns/net'),
+      userCPUMicroseconds:usage.userCPUTime,systemCPUMicroseconds:usage.systemCPUTime,maxRSSKiB:usage.maxRSS,taskMilliseconds:Math.ceil(performance.now()-started)};
+    const bytes=canonical({result,workerObservation});need(Buffer.byteLength(bytes)<=2_000_000,'OUTPUT_LIMIT');
     process.stdout.write(bytes);
   } catch(e) { process.stderr.write(/^[A-Z0-9_]{1,100}$/.test(e.code||e.message)?e.code||e.message:'WORKER_FAILED');process.exitCode=1; }
 }
