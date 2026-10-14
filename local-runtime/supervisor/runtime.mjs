@@ -11,6 +11,7 @@ import {validateTaskInput} from '../worker.mjs';
 import {inspectReconciliation,reconcile} from './reconciliation.mjs';
 import {diagnostics} from './diagnostics.mjs';
 import {evaluateAdmission,requireAdmission,OFFLINE_LIMITS} from './admission.mjs';
+import {validateAlphaOutput} from '../alpha/contract.mjs';
 import {STORAGE_LIMITS,runHistoryUsage,encodeOutcome,encodeFailure} from './capacity.mjs';
 
 const ASSISTANT_ACTIONS=['status','inspect','prepare','run','cancel','output'];
@@ -136,7 +137,11 @@ export class LocalRuntime {
     try {
       directory=fs.mkdtempSync(path.join(this.directory,'runs',g.run.id+'-'));fs.chmodSync(directory,0o700);
       const result=await this.backend.execute({role:actor.role,task:g.task,directory,signal:abort.signal,expectedHost:g.host});
-      abort.signal.throwIfAborted();need(result.observation?.processGroupGone===true,'CLEANUP_UNCONFIRMED');
+      abort.signal.throwIfAborted();
+      // Validate every Alpha receipt in the supervisor, even for substituted
+      // test backends. A process exit or an asserted hash grants no authority.
+      if(g.task.action==='alpha-run')result.result=validateAlphaOutput(g.task.input,result.result);
+      need(result.observation?.processGroupGone===true,'CLEANUP_UNCONFIRMED');
       need(Buffer.byteLength(canonical(result))<=STORAGE_LIMITS.backendResult,'OUTPUT_LIMIT');
       const receipt={...result,outputSha256:digest(result.result),inputSha256:g.inputSha256,independentReview:false,sourceActor:actor.id,sourceController:actor.controller,authority:'none'};
       const outcome=encodeOutcome(receipt);

@@ -41,6 +41,7 @@ export async function successorOperation(runtime,action,input,principal) {
   const x=parseStrict(execution.result),y=parseStrict(review.result);
   const first=parseStrict(db.prepare('SELECT value FROM grants WHERE id=?').get(execution.grant_id).value);
   const second=parseStrict(db.prepare('SELECT value FROM grants WHERE id=?').get(review.grant_id).value);
+  need(first.task.action==='successor-run'&&second.task.action==='successor-check','PROJECT_MARKET_SCOPE');
   need(second.task.sourceActor===execution.actor&&second.task.sourceController===x.sourceController,'REVIEW_PROVENANCE');
   need(y.result.deliverySha256===digest(x.result.files)&&y.result.checker.passed,'CANDIDATE_REJECTED');
   need(canonical(first.task.input.mission)===canonical(second.task.input.mission)&&first.task.input.variant===second.task.input.variant,'REVIEW_INPUT_CHANGED');

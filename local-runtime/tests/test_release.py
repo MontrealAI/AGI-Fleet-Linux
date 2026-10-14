@@ -106,6 +106,15 @@ class PreviewReleaseTests(unittest.TestCase):
                 self.audit()
         file.write_text(original)
 
+    def test_source_and_extracted_logs_require_every_current_module_case(self):
+        for name in ('source', 'extracted'):
+            file = self.evidence / 'local-skills-preview-x64/local-host-evidence' / (name + '.tap')
+            original = file.read_text()
+            self.tap(file, self.spec['tests']['module'] - 1)
+            with self.assertRaisesRegex(ValueError, 'Incomplete TAP acceptance'):
+                self.audit()
+            file.write_text(original)
+
     def test_installed_package_and_restart_evidence_are_required(self):
         file = self.evidence / 'local-skills-preview-x64/local-host-evidence/installed-journey.json'
         original = R.load(file)

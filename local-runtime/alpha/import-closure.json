@@ -1,0 +1,122 @@
+{
+  "schema": "agi-fleet/alpha-import-observation/v1",
+  "sourceCommit": "2355b3cb198a6fb2c948744d283f108ab6ce5ebc",
+  "evidenceClass": "DEVELOPMENT_IMPORT_OBSERVATION; source modules repinned to canonical-wire candidate; not an artifact trust root",
+  "sourceModules": {
+    "alpha_factory_v1": {
+      "path": "alpha_factory_v1/__init__.py",
+      "sha256": "7b9c625da8b4518a17361b167090f88c1a5315f47480c0756a455cd4606dbb90"
+    },
+    "alpha_factory_v1.core": {
+      "path": "alpha_factory_v1/core/__init__.py",
+      "sha256": "b27148c349dd088377d90c6502c1a74d093f5b69d3e3642c55686fded90c53bd"
+    },
+    "alpha_factory_v1.core.evaluators": {
+      "path": "alpha_factory_v1/core/evaluators/__init__.py",
+      "sha256": "ee34c2b173d1932b3142d01303b8ecc04179af3b2a8b0d339e93826e05a0493f"
+    },
+    "alpha_factory_v1.core.evaluators.feasibility_critic": {
+      "path": "alpha_factory_v1/core/evaluators/feasibility_critic.py",
+      "sha256": "d108e9eabbd4cf29c580900b60cd1b016217b0ee1a931b28e5c8b9e51f77ab89"
+    },
+    "alpha_factory_v1.core.evaluators.lead_time": {
+      "path": "alpha_factory_v1/core/evaluators/lead_time.py",
+      "sha256": "7dd11e0c59fb6b9904c10ef7d5e1cea3e93dcf9730b3ec2a7abe0f2a5c6f5241"
+    },
+    "alpha_factory_v1.core.evaluators.logic_critic": {
+      "path": "alpha_factory_v1/core/evaluators/logic_critic.py",
+      "sha256": "81daa980b669783642bf939fe23ff8dc0224599fee42f7d01fdb8332a4bf44eb"
+    },
+    "alpha_factory_v1.core.evaluators.novelty": {
+      "path": "alpha_factory_v1/core/evaluators/novelty.py",
+      "sha256": "52c617c5efa63d055088b3618b8e115999dfc26e96abb1ad2c736eca3390cbcc"
+    },
+    "alpha_factory_v1.core.runtime": {
+      "path": "alpha_factory_v1/core/runtime/__init__.py",
+      "sha256": "58936175f8b9734cee347670c38f5fcf1e89fadb2d8d4adaffa522066501a1fa"
+    },
+    "alpha_factory_v1.core.runtime.fleet_work": {
+      "path": "alpha_factory_v1/core/runtime/fleet_work.py",
+      "sha256": "235dc4da4a803db29075a5ed1e212832ac2db2c369b6e13cf2be3042324f60eb"
+    },
+    "alpha_factory_v1.core.runtime.models": {
+      "path": "alpha_factory_v1/core/runtime/models.py",
+      "sha256": "9ecd2ccd5b8f17be6f94fda0bc887c831518ed7ca79e619ed03593742a11b5ab"
+    },
+    "alpha_factory_v1.core.runtime.store": {
+      "path": "alpha_factory_v1/core/runtime/store.py",
+      "sha256": "340025deb6718fcb09a3fbbb8c16d47f6456e2c53cf3ae9d96b154f05e822c3c"
+    },
+    "alpha_factory_v1.core.runtime.work": {
+      "path": "alpha_factory_v1/core/runtime/work.py",
+      "sha256": "031f190ca6aaf1bbf2c521e3e3d9660f6a81e204ce838099df9b46c3371bbd0d"
+    },
+    "alpha_factory_v1.core.runtime.work_spec": {
+      "path": "alpha_factory_v1/core/runtime/work_spec.py",
+      "sha256": "64fc1ac65ad850b7e8cf776d4481ff641ddcaed7492ed8df84d8de69c213b62f"
+    },
+    "alpha_factory_v1.core.self_edit": {
+      "path": "alpha_factory_v1/core/self_edit/__init__.py",
+      "sha256": "fc999d9d4be4661210afbcb31f485f45f4b9628b7961def04ce9b296d998475b"
+    },
+    "alpha_factory_v1.core.self_edit.safety": {
+      "path": "alpha_factory_v1/core/self_edit/safety.py",
+      "sha256": "ea3e90723cb041b7e09c84359cb2bdeab604fb46853e5798d8aa77ba71ba4762"
+    },
+    "alpha_factory_v1.core.self_edit.tools": {
+      "path": "alpha_factory_v1/core/self_edit/tools.py",
+      "sha256": "89b15a66ef829100b8bdd16dce2d2bf7c90844aa559271eec2d55e97b169a050"
+    },
+    "alpha_factory_v1.core.simulation": {
+      "path": "alpha_factory_v1/core/simulation/__init__.py",
+      "sha256": "fdcb5266e6cb14d0a0642fa3cd8cad46659dc0c823eb7b29feb6e697060526cf"
+    },
+    "alpha_factory_v1.core.simulation.forecast": {
+      "path": "alpha_factory_v1/core/simulation/forecast.py",
+      "sha256": "8648850e639f77689ab8e78fe3d7e41d5e7b9bdc941750dd05cb43e2fbaf73fd"
+    },
+    "alpha_factory_v1.core.simulation.mats": {
+      "path": "alpha_factory_v1/core/simulation/mats.py",
+      "sha256": "8528f8760adecc9e17873e16cd3fcb2d2d5482489afb5c383631798aafb9b431"
+    },
+    "alpha_factory_v1.core.simulation.mats_ops": {
+      "path": "alpha_factory_v1/core/simulation/mats_ops.py",
+      "sha256": "aab873fc26f175cf8bc059deddabfbe2126e20fff27b5d5436014e7bb29d33bf"
+    },
+    "alpha_factory_v1.core.simulation.replay": {
+      "path": "alpha_factory_v1/core/simulation/replay.py",
+      "sha256": "9088228fbf9115bf50a2e6933493244f0f51530af76b2ab905541d0d32d58f99"
+    },
+    "alpha_factory_v1.core.simulation.sector": {
+      "path": "alpha_factory_v1/core/simulation/sector.py",
+      "sha256": "06fbe4d4d14dfe3a080bd5c90cf443b4be08b17bcc5fb15af0406f16baaed0fe"
+    },
+    "alpha_factory_v1.core.simulation.selector": {
+      "path": "alpha_factory_v1/core/simulation/selector.py",
+      "sha256": "e381fd8351558876927427a6e4d4b7e0ddaf4f0b05695b220d47160859d34991"
+    },
+    "alpha_factory_v1.core.simulation.surrogate_fitness": {
+      "path": "alpha_factory_v1/core/simulation/surrogate_fitness.py",
+      "sha256": "7eba65b4d292fd1558666f82be368f5806920b1e0c29df00e45717c25032bfb8"
+    }
+  },
+  "optionalModulesMustBeAbsent": [
+    "agents",
+    "google_adk",
+    "faiss",
+    "sentence_transformers"
+  ],
+  "dependencies": [
+    "annotated-types",
+    "cffi",
+    "cryptography",
+    "numpy",
+    "pycparser",
+    "pydantic",
+    "pydantic-core",
+    "pyyaml",
+    "typing-extensions",
+    "typing-inspection"
+  ],
+  "importObservationCommit": "4227f13c88d40b6063fc91307c3b118429cec20c"
+}

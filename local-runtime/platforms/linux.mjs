@@ -4,6 +4,9 @@ import os from 'node:os';
 import {spawn,spawnSync} from 'node:child_process';
 import {ROOT,need,keys,digest,canonical,parseStrict} from '../contracts.mjs';
 
+import {inspectAlphaPackage,refuseUnprovisionedAlpha} from '../alpha/package.mjs';
+import {validateAlphaInput} from '../alpha/contract.mjs';
+
 const BIN='/usr/bin/bwrap', LIMIT='/usr/bin/prlimit';
 function trusted(file,own=false) { const s=fs.statSync(file);need(s.isFile()&&(s.uid===0||own&&s.uid===process.getuid())&&!(s.mode&0o022),'SANDBOX_EXECUTABLE_UNTRUSTED');return fs.realpathSync(file); }
 export function sandboxArguments() {
@@ -17,7 +20,7 @@ export function sandboxArguments() {
 }
 export class LinuxSandbox {
   inspect() {
-    const report={schema:'agi-fleet/local-host/v1',platform:process.platform,arch:process.arch,backend:'linux-bwrap-offline/v1',execution:'this host',inference:'none',network:'none',files:'per-run input only; no host writes',browser:'BLOCKED',desktop:'BLOCKED',productionQualified:false,physical:'NOT_RUN',supported:false};
+    const report={schema:'agi-fleet/local-host/v1',platform:process.platform,arch:process.arch,backend:'linux-bwrap-offline/v1',execution:'this host',inference:'none',network:'none',files:'per-run input only; no host writes',browser:'BLOCKED',desktop:'BLOCKED',productionQualified:false,physical:'NOT_RUN',supported:false,alphaRun:inspectAlphaPackage()};
     try {
       need(process.platform==='linux'&&['x64','arm64'].includes(process.arch),'PLATFORM_NOT_QUALIFIED');
       need(process.versions.node.split('.')[0]==='24'&&Number(process.versions.node.split('.')[1])>=19,'NODE_VERSION_UNSUPPORTED');
@@ -33,6 +36,9 @@ export class LinuxSandbox {
     }catch(e){return {...report,code:e.code==='ENOENT'?'SANDBOX_PREREQUISITE_MISSING':e.code||e.message,help:'Use the documented Linux prerequisites and rerun doctor. No host-shell fallback is permitted. Browser, desktop and macOS local execution require separate implementation and qualification.'};}
   }
   async execute({role,task,directory,signal,expectedHost}) {
+    // The next separately reviewed phase must replace this refusal with a
+    // pinned, no-network, exact-stdin launcher. No ambient Python fallback.
+    if(task?.action==='alpha-run'){need(role==='agent','ROLE_ACTION_DENIED');validateAlphaInput(task.input);refuseUnprovisionedAlpha();}
     const started=performance.now();
     need(expectedHost&&typeof expectedHost.identity==='string'&&typeof expectedHost.backend==='string','EXECUTION_BINDING_REQUIRED');
     const ready=this.inspect();need(ready.supported,ready.code);
