@@ -1,4 +1,4 @@
-# AGI Fleet Linux 1.1.1
+# AGI Fleet Linux 1.1.2
 
 **Engineering and physical-qualification candidate — Recovery edition.**
 

@@ -1,0 +1,20 @@
+{
+  "schema": "agi-fleet/practical-pilot-plan/v1",
+  "status": "NOT_RUN",
+  "classification": "IMPLEMENTATION_PREVIEW",
+  "minimumDistinctLiveTasks": 100,
+  "minimumConsentingNontechnicalUsers": 10,
+  "languages": ["en", "fr"],
+  "families": ["public-or-synthetic-exact-data-reconciliation", "informational-website-or-bounded-change", "bounded-public-repository-fix-and-tests"],
+  "taskRegistrySHA256": null,
+  "independentAcceptanceRegistrySHA256": null,
+  "pairedBaselineRegistrySHA256": null,
+  "repairAllowance": "Must be fixed by the pilot owner before any observations",
+  "thresholds": {"independentlyAcceptedFraction": 0.9, "medianRecurringActiveMinutes": 5, "p90RecurringActiveMinutes": 10, "pairedNextTaskEffortReduction": 0.3, "fullyLoadedRecurringCostFractionOfQualityMatchedBaseline": 0.5, "observedCriticalFailures": 0},
+  "unknownIsZero": false,
+  "fixtureResultsCountAsLive": false,
+  "physicalQualificationInherited": false,
+  "productionQualified": false,
+  "liveSpendingAuthorized": false,
+  "requiredOwners": ["release-engineering", "qualified-host-operators", "pilot-task-owner", "independently-controlled-reviewers", "consented-user-study-owner"]
+}

@@ -218,3 +218,16 @@ test('SUCCESSOR sidecars reject mixed or altered receipts before writing and dur
     let unbound=await createSystem(defaultMission('custom'));const unboundPlan=await prepareImprovement(unbound,{budget:'100'});unbound=await recordPlan(unbound,unboundPlan);const unboundSpec={...custom.specification,coordination:{...custom.specification.coordination,parentSpecSha256:unboundPlan.commitment}},unboundHandoff=a.api.makeHandoff(unboundSpec,a.api.buildBundle(unboundSpec,actualFiles)),unboundReceipt={...result.receipt,specification:unboundSpec,specHash:unboundHandoff.specHash,deliveryHash:unboundHandoff.deliveryHash};await assert.rejects(exportSidecar(path.join(a.dir,'unbound-custom'),await exportCapsule(unbound),unboundHandoff,unboundReceipt,a.api),/SIDECAR_CUSTOM_SCOPE/);
   }finally{await a.close();await n.close();}
 });
+
+test('outcome ledger retains failed/unknown attempts, distinct cost bases and active/waiting time without inventing independent economics',async()=>{
+  const {OutcomeLedger,summarizeOutcomes}=await import('../successor/outcomes.mjs');const os=await import('node:os');const dir=fs.mkdtempSync(path.join(os.tmpdir(),'outcome-ledger-'));
+  try{const ledger=new OutcomeLedger(dir),hash='1'.repeat(64),base={attempt:hash,at:1,evidenceSha256:hash};
+    ledger.append({...base,type:'attempt',data:{state:'blocked-or-uncertain',projectSha256:hash,method:'fixture',inputHashes:[hash],outputHashes:[],runtimeSha256:null}});
+    ledger.append({...base,type:'cost',data:{id:'unknown',category:'provider',basis:'unknown',currency:'USD',amountMicros:null,billingReferenceSha256:null}});
+    const charge={...base,type:'cost',data:{id:'invoice',category:'provider',basis:'invoiced',currency:'USD',amountMicros:'1234567',billingReferenceSha256:hash}};ledger.append(charge);assert.throws(()=>ledger.append(charge),/OUTCOME_DUPLICATE_COST/);
+    ledger.append({...base,type:'human-time',data:{stage:'repair',activeSeconds:90,waitingSeconds:120,measurement:'observed'}});
+    ledger.append({...base,type:'review',data:{verdict:'accepted',control:'unverified',deliverySha256:hash,eligibilityEvidenceSha256:null}});
+    const summary=summarizeOutcomes(ledger.read());assert.equal(summary.attempts,1);assert.equal(summary.externallyAttestedAccepted,0);assert.equal(summary.unknownCosts.length,1);assert.equal(summary.costMicrosByCurrencyAndBasis['USD:invoiced'],'1234567');assert.equal(summary.humanTimeByStage['repair:observed'].activeSeconds,90);assert.equal(summary.costPerIndependentlyAcceptedOutcome,null);
+    fs.appendFileSync(path.join(dir,'attempts.jsonl'),'{torn');assert.throws(()=>ledger.read(),/OUTCOME_TORN/);
+  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});

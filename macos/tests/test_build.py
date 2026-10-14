@@ -8,6 +8,7 @@ import stat
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -55,7 +56,7 @@ class MacDistribution(unittest.TestCase):
                 'bytes': target.stat().st_size, 'sha256': m.sha(target), 'productionQualified': False,
                 'sourceFiles': len(inventory['files']), 'sourceRevisionSHA256': inventory['revisionSHA256']}
 
-    def test_specification_pins_current_public_source_and_stays_unqualified(self):
+    def test_specification_pins_original_public_source_and_stays_unqualified(self):
         data = m.specification()
         self.assertEqual(data['base']['sha256'], m.BASE_SHA)
         self.assertEqual(data['base']['sourceFiles'], 4816)
@@ -63,13 +64,40 @@ class MacDistribution(unittest.TestCase):
         self.assertFalse(data['productionQualified'])
         with tempfile.TemporaryDirectory() as temporary:
             repo = Path(temporary)
-            for name in ('macos/release.json', 'engineering/published-release.json'):
-                (repo / name).parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(ROOT / name, repo / name)
-            data['base']['sha256'] = '0' * 64
             m.write_json(repo / 'macos/release.json', data)
-            with self.assertRaisesRegex(ValueError, 'baseline differs'):
-                m.specification(repo)
+            for key in data['base']:
+                changed = json.loads(json.dumps(data))
+                changed['base'][key] = 'changed'
+                m.write_json(repo / 'macos/release.json', changed)
+                with self.subTest(key=key), self.assertRaisesRegex(ValueError, 'baseline differs'):
+                    m.specification(repo)
+
+    def test_new_linux_release_pointer_and_source_do_not_retarget_mac_baseline(self):
+        data = json.loads((ROOT / 'macos/release.json').read_text())
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            m.write_json(repo / 'macos/release.json', data)
+            self.assertEqual(m.specification(repo), data)
+            m.write_json(repo / 'engineering/published-release.json', {'version': '99.0.0'})
+            m.write_json(repo / 'fleet/source-inventory.json', {'revisionSHA256': 'new-linux-source'})
+            self.assertEqual(m.specification(repo), data)
+
+    def test_baseline_archive_integrity_and_source_identity_are_both_required(self):
+        base = m.BASELINE
+        inventory = {'revisionSHA256': base['sourceRevisionSHA256'], 'files': [{}] * base['sourceFiles']}
+        with patch.object(m, 'baseline_tools') as factory:
+            tool = factory.return_value
+            tool.verify_archive.return_value = {'status': 'PASS'}
+            tool.zipfile_inventory.return_value = json.dumps(inventory)
+            self.assertEqual(m.verify_baseline('pinned.zip', base), {'status': 'PASS'})
+            tool.verify_archive.assert_called_once_with('pinned.zip')
+            for field, value in [('revisionSHA256', '0' * 64), ('files', [{}])]:
+                tool.zipfile_inventory.return_value = json.dumps({**inventory, field: value})
+                with self.subTest(field=field), self.assertRaisesRegex(ValueError, 'Base source identity'):
+                    m.verify_baseline('pinned.zip', base)
+            tool.verify_archive.side_effect = ValueError('Frozen release identity mismatch')
+            with self.assertRaisesRegex(ValueError, 'Frozen release identity'):
+                m.verify_baseline('changed.zip', base)
 
     def test_seven_editions_verify_after_saved_archive_and_fresh_extraction(self):
         with tempfile.TemporaryDirectory() as temporary:

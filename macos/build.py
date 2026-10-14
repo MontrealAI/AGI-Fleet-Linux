@@ -32,6 +32,15 @@ PREFIX = 'AGI_Fleet_macOS_v' + VERSION
 ROLES = {'agent', 'node', 'moderator', 'employer', 'evidence', 'recovery'}
 BASE_SHA = 'bb21983d654291a860f2f78c2b69bbcd49423b5f41ffc9178864c41acc347695'
 BASE_BYTES = 403770769
+BASELINE = {
+    'version': '1.0.10', 'tag': 'v1.0.10-qualification',
+    'prefix': 'AGI_Fleet_Linux_v1.0.10', 'name': 'AGI_Fleet_Linux_v1.0.10.zip',
+    'bytes': BASE_BYTES, 'sha256': BASE_SHA,
+    'sourceRevisionSHA256': 'ba5d4b30cc7b02d60e7211a3201ad74129dce0056d64655a222c4fe08e699ba7',
+    'sourceFiles': 4816,
+    'url': 'https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/'
+           'v1.0.10-qualification/AGI_Fleet_Linux_v1.0.10.zip',
+}
 DOCS = {'START_HERE.md', 'FRESH_INSTALL.md', 'TROUBLESHOOTING.md',
         'PHYSICAL_QUALIFICATION.md', 'PARITY.md', 'RELEASE_NOTES.md'}
 
@@ -62,13 +71,9 @@ def specification(repository=ROOT):
             and value['minimumMacOS'] == '15' and value['nodeVersion'] == '24.21.0',
             'Mac platform or runtime pin differs')
     base = value['base']
-    published = json.loads((repository / 'engineering/published-release.json').read_text())
-    for key in ('version', 'tag', 'prefix', 'name', 'bytes', 'sha256', 'sourceRevisionSHA256', 'sourceFiles'):
-        require(base[key] == published[key], 'Pinned public baseline differs: ' + key)
-    require(base['sha256'] == BASE_SHA and base['bytes'] == BASE_BYTES and base['sourceFiles'] == 4816,
-            'Unexpected public baseline')
-    require(base['url'] == 'https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/'
-            + base['tag'] + '/' + base['name'], 'Unexpected baseline download URL')
+    # This Mac track retains its original Linux input when newer Linux releases ship.
+    require(base == BASELINE and type(base['bytes']) is int and type(base['sourceFiles']) is int,
+            'Pinned public baseline differs')
     return value
 
 
@@ -91,6 +96,15 @@ def baseline_tools(base, repository=ROOT):
                            ('bytes', 'SIZE'), ('sha256', 'SHA256'), ('sourceRevisionSHA256', 'SOURCE_REVISION')]:
         setattr(tool, attribute, base[key])
     return tool
+
+
+def verify_baseline(archive, base, repository=ROOT):
+    tool = baseline_tools(base, repository)
+    result = tool.verify_archive(archive)
+    inventory = json.loads(tool.zipfile_inventory(archive))
+    require(inventory['revisionSHA256'] == base['sourceRevisionSHA256']
+            and len(inventory['files']) == base['sourceFiles'], 'Base source identity differs')
+    return result
 
 
 def preserve_history(root, base):
@@ -351,7 +365,6 @@ def build(args):
     repository = args.repository.resolve(strict=True)
     spec = specification(repository)
     renderer = module('macos_reviewed_source', repository / 'engineering/build-next-release.py')
-    renderer.inventory(repository / 'fleet', spec['base']['sourceRevisionSHA256'], spec['base']['sourceFiles'])
     commit = args.commit or subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=repository, text=True).strip()
     require(re.fullmatch(r'[a-f0-9]{40}', commit), 'A full reviewed commit is required')
     node = Path(shutil.which(args.node) or args.node).resolve(strict=True)
@@ -370,7 +383,7 @@ def build(args):
     archive = args.archive.resolve(strict=True) if args.archive else work / spec['base']['name']
     if not args.archive:
         download(spec['base']['url'], archive, spec['base']['sha256'], spec['base']['bytes'])
-    baseline = baseline_tools(spec['base'], repository).verify_archive(archive)
+    baseline = verify_baseline(archive, spec['base'], repository)
     extract(archive, work / 'source')
     root = work / 'source' / spec['base']['prefix']
     require(json.loads((root / 'source-inventory.json').read_text())['revisionSHA256']

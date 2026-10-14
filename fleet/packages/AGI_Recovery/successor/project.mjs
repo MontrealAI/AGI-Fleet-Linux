@@ -3,6 +3,7 @@ import {validateReceiptBinding} from './receipt.mjs';
 import {fail, keys, canonical, parseStrict, sha256} from './vendor/manager/site/assets/successor/safe.mjs';
 import {inspectCapsule, freezeCandidate, runCandidate, exportCapsule, compareCandidates, createSystem, recordPlan} from './vendor/manager/site/assets/successor/model.mjs';
 import {validateImprovement, prepareImprovement} from './vendor/manager/site/assets/successor/jobs.mjs';
+import {checkArtifacts as checkLegacy} from './vendor/manager/site/assets/successor/legacy-checker.mjs';
 import {checkArtifacts} from './vendor/manager/site/assets/successor/checker.mjs';
 import {compileComputerWork} from './vendor/manager/scripts/successor/adapter.mjs';
 const require=createRequire(import.meta.url);
@@ -82,7 +83,7 @@ export async function validateSidecarProject(capsule,handoff,files) {
   const source=inspected.capsule.payload.sourceManifest;fail(source?.engineSha256,'FLEET_SOURCE_REQUIRED');
   const matches=c=>c&&files.size===c.files.length+1&&files.has('checker-results.json')&&c.files.every(f=>files.get(f.name)?.equals(Buffer.from(f.content)));
   if(matches(state.candidates.find(c=>c.id===plan.candidateSha256)))return;
-  const improved=await freezeCandidate(state.mission,'improved',source.engineSha256);
+  const improved=await freezeCandidate(state.mission,'improved',source.engineSha256,state.engine);
   fail(matches(improved),'FLEET_SIDECAR_PROJECT_ARTIFACTS');
 }
 
@@ -100,7 +101,7 @@ export async function checkReturnedWork(request,handoff,receipt,studioAPI) {
     const actual=files.get(expected.name);fail(actual,'FLEET_MISSING_ARTIFACT');
     return {...expected,content:actual.toString('utf8')};
   });
-  const checks=checkArtifacts(state.mission,'improved',delivered);
+  const checks=(state.engine==='successor-local/1'?checkLegacy:checkArtifacts)(state.mission,'improved',delivered);
   const exact=proposed.candidate.files.every(expected=>files.get(expected.name)?.equals(Buffer.from(expected.content)));
   const accepted=verdict.verdict==='consistent'&&checks.passed&&exact;
   const before=state.candidates.find(c=>c.id===state.active);

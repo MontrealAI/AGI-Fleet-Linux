@@ -129,3 +129,21 @@ test('Saved Fleet: Builder → authorized Agent → separately authorized Node �
     for(const context of contexts)await context.close();
   }
 });
+
+test('Saved Fleet: explicit method reuse and mapped changed data retain lineage, fresh checks and whole mobile numbers',async({browser},info)=>{
+  for(const lang of ['en','fr']){
+    const context=await browser.newContext({acceptDownloads:true,serviceWorkers:'block'}),page=await context.newPage();
+    try{
+      await page.goto(pathToFileURL(path.join(root,`docs/successor/My-SUCCESSOR-Omega-${lang}.html`)).href);
+      await page.locator('#data').fill('id,category,value\na,Software,1200.5\nb,Software,-100.5\nc,Research,1000\nc,Research,1000\nd,Documentation,300');
+      await page.locator('#public-consent').check();await page.locator('#run').click();await expect(page.locator('#keep-version')).toBeEnabled();await page.locator('#keep-version').click();await page.locator('#improve-local').click();await expect(page.locator('#keep-version')).toBeEnabled();await page.locator('#keep-version').click();
+      await restore(page,await download(page,'#download-capsule'));await page.locator('#reuse-method').click();
+      await page.locator('#data').fill('order_id,product,amount\na,Software,1400\nb,Software,-50\nc,Research,920.10\nc,Research,920.10\nd,Documentation,250');
+      await page.locator('#map-columns').evaluate(el=>el.closest('details').open=true);await page.locator('#map-columns').click();for(const [target,source] of [['id','order_id'],['category','product'],['value','amount']])await page.locator('#map-'+target).selectOption(source);
+      await page.locator('#preview-mapping').click();await expect(page.locator('#mapping-preview')).toContainText('920.10');await page.locator('#mapping-consent').check();await page.locator('#apply-mapping').click();await page.locator('#public-consent').check();await page.locator('#new-mission').check();await page.locator('#run').click();await expect(page.locator('#keep-version')).toBeEnabled();await page.locator('#keep-version').click();
+      const model=await load('successor/vendor/manager/site/assets/successor/model.mjs'),state=(await model.inspectCapsule(await download(page,'#download-capsule'))).capsule.payload.state,candidate=state.candidates.find(c=>c.id===state.active);expect(candidate.manifest.variant).toBe('improved');expect(state.authority).toBe('none');expect(state.plans).toEqual([]);expect(state.chronicle.map(e=>e.action)).toContain('method-reused');expect(state.chronicle.map(e=>e.action)).toContain('input-mapped');expect(JSON.parse(candidate.files.find(f=>f.name==='result.json').content).groups.map(g=>g.total)).toEqual(['250','920.1','1350']);
+      const report=info.outputPath(`mapped-report-${lang}.html`);fs.writeFileSync(report,candidate.files.find(f=>f.name==='report.html').content);const artifact=await context.newPage();await artifact.goto(pathToFileURL(report).href);await artifact.setViewportSize({width:390,height:1000});expect(await artifact.locator('td:not(:first-child)').evaluateAll(c=>c.every(el=>getComputedStyle(el).whiteSpace==='nowrap'))).toBe(true);expect(await artifact.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await artifact.screenshot({path:info.outputPath(`mapped-report-${lang}-390.png`),fullPage:true});
+      await artifact.evaluate(()=>document.documentElement.style.fontSize='225%');expect(await artifact.locator('td:not(:first-child)').evaluateAll(c=>c.every(el=>getComputedStyle(el).whiteSpace==='nowrap'))).toBe(true);await artifact.screenshot({path:info.outputPath(`mapped-report-${lang}-text-zoom.png`),fullPage:true});await artifact.emulateMedia({media:'print'});await expect(artifact.locator('table')).toBeVisible();
+    }finally{await context.close();}
+  }
+});
