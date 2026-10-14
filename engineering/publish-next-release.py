@@ -187,8 +187,9 @@ def publish(release_dir, output):
     tag = api('/git/ref/tags/' + metadata['tag'])
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Tag changed before publication')
     if release['draft']:
-        observed = api(f'/releases/{release["id"]}', method='PATCH', data=json.dumps({'draft': False, 'prerelease': True, 'make_latest': 'false'}).encode())
+        observed = api(f'/releases/{release["id"]}', method='PATCH', data=json.dumps({'draft': False, 'prerelease': True, 'make_latest': 'false', 'body': notes}).encode())
     require(not observed['draft'] and observed['prerelease'], 'Release publication classification differs')
+    require(observed.get('body') == notes, 'Published release notes differ from reviewed publication text')
     tag = api('/git/ref/tags/' + metadata['tag'])
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Published tag identity differs')
     print(json.dumps({'status': 'PUBLISHED', 'url': observed['html_url'], 'sha256': metadata['sha256'], 'productionQualified': False}))
