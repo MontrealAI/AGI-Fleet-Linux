@@ -4,11 +4,13 @@
 
 **[Build my SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor.html)** · **[Créer mon SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor-fr.html)** — Create useful local work, connect a qualified Fleet computer, check improvements and keep your system. [Builder guide](successor/docs/GUIDE.md).
 
-**Linux 1.1.1 is published for controlled fresh-install qualification.** This maintenance release improves English/French setup guidance and release verification. [What changed](docs/RELEASE_NOTES_1_1_1.md). SUCCESSOR Ω + Fleet includes the free English/French Builder, pinned Manager 1.16.1, authenticated Agent execution, separately authorized Node review, portable ownership and explicit version choice. [Download and release notes](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.1-qualification) · [Verified release evidence](validation/LINUX_1_1_1_RELEASE_ADDENDUM.md). Browser-only missions need no account, wallet, installation or provider key. Physical and live-provider commissioning remain open.
+**Linux 1.1.2 is published for controlled fresh-install qualification.** It adds stronger report checks, approved column mapping, explicit method reuse on new data and truthful attempt observations. [What changed](docs/RELEASE_NOTES_1_1_2.md). The free English/French Builder, authenticated Agent execution, separately authorized Node review, portable ownership and deliberate version choice remain available. [Download and release notes](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.2-qualification) · [Verified release evidence](validation/LINUX_1_1_2_RELEASE_ADDENDUM.md). Browser-only missions need no account, wallet, installation or provider key. Physical and live-provider commissioning remain open.
 
 **Local Skills · separate Linux development preview:** [Download, verify and try it](docs/local-skills/DOWNLOAD.md) · [Télécharger et essayer en français](docs/local-skills/DOWNLOAD.md#français). One private installation, several actors and a zero-model-cost offline report. Full product acceptance remains open; funded work and general browser/desktop execution stay disabled.
 
-**Previous release:** Linux 1.1.0 remains available with its [frozen installation guide](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/FRESH_INSTALL.md), [release assets](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.0-qualification) and [original evidence](validation/LINUX_1_1_0_RELEASE_ADDENDUM.md). Use instructions that match your downloaded version.
+**Previous release:** Linux 1.1.1 remains available with its [frozen installation guide](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.1-qualification/docs/FRESH_INSTALL.md), [release assets](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.1-qualification) and [original evidence](validation/LINUX_1_1_1_RELEASE_ADDENDUM.md).
+
+**Earlier release:** Linux 1.1.0 remains available with its [frozen installation guide](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/FRESH_INSTALL.md), [release assets](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.0-qualification) and [original evidence](validation/LINUX_1_1_0_RELEASE_ADDENDUM.md). Use instructions that match your downloaded version.
 
 **Historical release:** **Linux 1.0.11 is published for controlled fresh-install qualification.** Its exact installer passed native suites and AGIJobManager 1.15.0 integration on x86-64 and ARM64. [Download and release notes](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.0.11-qualification) · [Hash-bound validation addendum](validation/LINUX_1_0_11_RELEASE_ADDENDUM.md). Physical commissioning remains open.
 
@@ -36,7 +38,7 @@ Mac **1.20.2** is published for controlled fresh-install qualification. Its exac
 
 Choose a goal in the guided welcome. It explains what you need and points you to the right next step, including help preparing a suitable computer. Use your browser’s Back button, keep larger text enabled, and copy or print a preparation plan for someone helping you. No sign-up is needed to explore.
 
-**Published qualification prereleases:** Linux **1.1.1** (x86-64 and ARM64) and Mac **1.20.2** (native Apple silicon). Each has its own recorded native and AGIJobManager integration acceptance. Physical machine qualification remains open for both; paid work must stay disabled until the required checks pass.
+**Published qualification prereleases:** Linux **1.1.2** (x86-64 and ARM64) and Mac **1.20.2** (native Apple silicon). Each has its own recorded native and AGIJobManager integration acceptance. Physical machine qualification remains open for both; paid work must stay disabled until the required checks pass.
 
 [Explore the Fleet website](https://montrealai.github.io/AGI-Fleet-Linux/) · [Linux installation](docs/FRESH_INSTALL.md) · [Mac installation](macos/docs/FRESH_INSTALL.md) · [Linux help](docs/TROUBLESHOOTING.md) · [Mac help](macos/docs/TROUBLESHOOTING.md)
 
@@ -46,17 +48,17 @@ Choose a goal in the guided welcome. It explains what you need and points you to
 
 The team frames this opportunity as an **approximately US$40 trillion annual total addressable market**. This is the team's strategic estimate, not a verified market measurement, revenue forecast or demonstrated automation rate.
 
-**Linux 1.1.1 and Mac 1.20.2 are published as separate qualification prereleases.** Both contain all six AGI Jobs roles. Linux targets Ubuntu Desktop 24.04 LTS on x86-64 and ARM64; Mac targets native Apple silicon M1/M2 on macOS 15 or later. Each edition has its own native and AGIJobManager integration PASS evidence. Physical commissioning remains open.
+**Linux 1.1.2 and Mac 1.20.2 are published as separate qualification prereleases.** Both contain all six AGI Jobs roles. Linux targets Ubuntu Desktop 24.04 LTS on x86-64 and ARM64; Mac targets native Apple silicon M1/M2 on macOS 15 or later. Each edition has its own native and AGIJobManager integration PASS evidence. Physical commissioning remains open.
 
-[Download Linux 1.1.1](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.1-qualification) · [Download Mac 1.20.2](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.20.2-macos-qualification) · [Linux installation](docs/FRESH_INSTALL.md) · [Mac installation](macos/docs/FRESH_INSTALL.md)
+[Download Linux 1.1.2](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.2-qualification) · [Download Mac 1.20.2](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.20.2-macos-qualification) · [Linux installation](docs/FRESH_INSTALL.md) · [Mac installation](macos/docs/FRESH_INSTALL.md)
 
 ## Choose the right work mode
 
 | Your goal | Work mode | Where to start |
 | --- | --- | --- |
-| Produce checkable files from public or synthetic inputs on Linux. | **Linux public-work release.** Linux 1.1.1 has native and contract-integration PASS on both architectures, recorded in the [published manifest](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.1.1-qualification/Release-Manifest-v1.1.1.json); physical qualification remains open. | [Linux fresh-install guide](docs/FRESH_INSTALL.md) |
+| Produce checkable files from public or synthetic inputs on Linux. | **Linux public-work release.** Linux 1.1.2 has native and contract-integration PASS on both architectures, recorded in the [published manifest](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.1.2-qualification/Release-Manifest-v1.1.2.json); physical qualification remains open. | [Linux fresh-install guide](docs/FRESH_INSTALL.md) |
 | Produce checkable files from public or synthetic inputs on an M1/M2 Mac. | **Mac public-work release.** Mac 1.20.2 includes the six roles and isolated Docker Desktop workspace. Native and integration acceptance are recorded in its [published manifest](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.20.2-macos-qualification/Release-Manifest-macOS-v1.20.2.json); physical qualification remains open. | [Mac fresh-install guide](macos/docs/FRESH_INSTALL.md) |
-| Develop and qualify work across installed Linux applications and manually signed-in business accounts. | **Linux authorized workspace preview.** A separate Linux X11 native engine, signed task grants, action budgets and encrypted result handoffs. Pilot-only development preview; production execution is disabled. Not included in the 1.1.1 Fleet ZIP; the preview records a historical 1.0.9 source basis. | [Workspace quickstart](workstation/QUICKSTART.md) |
+| Develop and qualify work across installed Linux applications and manually signed-in business accounts. | **Linux authorized workspace preview.** A separate Linux X11 native engine, signed task grants, action budgets and encrypted result handoffs. Pilot-only development preview; production execution is disabled. Not included in the 1.1.2 Fleet ZIP; the preview records a historical 1.0.9 source basis. | [Workspace quickstart](workstation/QUICKSTART.md) |
 | Evaluate the original native Mac application workflow in a dedicated account. | **Bundled Mac native-workforce pilot.** Included in the Mac 1.20.2 archive, with signed task grants and explicit macOS screen/accessibility permissions. Separate operating qualification is required; archive acceptance does not qualify native execution or private-work settlement. | [Bundled Mac pilot scope and launcher](macos/docs/PARITY.md#native-macos-work-is-an-additional-track) |
 | Develop broader Mac work with guided task preparation and larger public Studio imports. | **New Mac source preview.** Adds a guided native menu, job drafts, STOP/resume and general-v2 public Studio. Outside the Mac 1.20.2 ZIP, with no inherited release acceptance; production native execution is disabled and all physical gates remain NOT_RUN. | [Mac preview overview](macos/preview/README.md) · [Native task setup](macos/preview/QUICKSTART.md) · [Public Studio setup](macos/preview/STUDIO.md) |
 
@@ -64,7 +66,7 @@ The team frames this opportunity as an **approximately US$40 trillion annual tot
 
 The public sandbox is one work mode, **not the ceiling of the product's mission**. Native workstation paths use dedicated OS accounts: desktop control can reach everything that account can access. Keep them separate from your everyday account and the Fleet signer; a grant is not a per-site sandbox. Sign into approved applications yourself. These previews do not automatically publish private results or settle private jobs through AGIJobManager.
 
-**Larger public Studio tasks are included in Linux 1.1.1 and available in both source previews:** [Linux Studio](successor/docs/GUIDE.md#keep-larger-work-safely) · [Preserved Linux source preview](workstation/STUDIO.md) · [Mac Studio](macos/preview/STUDIO.md). Agent and Node can import public `computer-work/v2` jobs with arbitrary declared file formats, up to **64 files and 64 MiB total**, exact-byte review handoffs and revision feedback. Large Studio work can be explicitly excluded from bounded wallet backups; keep its exported files separately. The quick editor remains v1. Imports preserve each job's exact runtime identities, permissions, criteria, budgets and deadlines, and grant no execution authority. The reviewed public Studio format and explicit backup exclusion are included in Linux 1.1.1. The Mac additions remain outside its 1.20.2 ZIP; private or signed-in work belongs to the separate native workflow.
+**Larger public Studio tasks are included in Linux 1.1.2 and available in both source previews:** [Linux Studio](successor/docs/GUIDE.md#keep-larger-work-safely) · [Preserved Linux source preview](workstation/STUDIO.md) · [Mac Studio](macos/preview/STUDIO.md). Agent and Node can import public `computer-work/v2` jobs with arbitrary declared file formats, up to **64 files and 64 MiB total**, exact-byte review handoffs and revision feedback. Large Studio work can be explicitly excluded from bounded wallet backups; keep its exported files separately. The quick editor remains v1. Imports preserve each job's exact runtime identities, permissions, criteria, budgets and deadlines, and grant no execution authority. The reviewed public Studio format and explicit backup exclusion are included in Linux 1.1.2. The Mac additions remain outside its 1.20.2 ZIP; private or signed-in work belongs to the separate native workflow.
 
 ## The potential of Fleet + AGIJobManager
 
@@ -91,7 +93,7 @@ The full analysis reviews Fleet [`2f27979`](https://github.com/MontrealAI/AGI-Fl
 Choose the [Linux guided welcome](https://montrealai.github.io/AGI-Fleet-Linux/start.html) or [Mac M1/M2 guided welcome](https://montrealai.github.io/AGI-Fleet-Linux/mac.html). Mac operators should follow the [fresh Mac setup guide](macos/docs/FRESH_INSTALL.md), using a new Standard compute account and separate signer. The following checklist is the **Linux installation path** for operators and technical helpers.
 
 1. Use a dedicated, clean **Ubuntu Desktop 24.04 LTS** machine with GNOME, systemd and cgroup v2. Allow at least 8 GB RAM and 40 GB free disk; 16 GB RAM is recommended.
-2. Download **AGI_Fleet_Linux_v1.1.1.zip** and **SHA256SUMS-v1.1.1.txt** from the release page. Follow the [checksum and extraction instructions](docs/FRESH_INSTALL.md). GitHub's automatic source archives are development checkouts, not installer bundles.
+2. Download **AGI_Fleet_Linux_v1.1.2.zip** and **SHA256SUMS-v1.1.2.txt** from the release page. Follow the [checksum and extraction instructions](docs/FRESH_INSTALL.md). GitHub's automatic source archives are development checkouts, not installer bundles.
 3. Start with Agent using new, separate nonadministrator signer and compute accounts. Follow the guide through readiness, then record your machine's results in the [physical qualification ledger](docs/PHYSICAL_QUALIFICATION.md).
 
 The Linux ZIP includes the pinned dependencies and current operator guides. You do not need the historical regression-fixture download to install it. Both editions keep every supplied release asset and archive member below **450,000,000 bytes**. The Mac guide explains its verified private runtime and Docker Desktop preparation.
@@ -110,6 +112,13 @@ The Linux ZIP includes the pinned dependencies and current operator guides. You 
 Linux compute uses **rootless Docker Engine 29.8.2**. Mac compute uses **Apple silicon Docker Desktop 4.93.0**, with per-user CLI tools and context. Both retain policy-bound local services, spending/run limits, authenticated readiness, durable cleanup evidence and fail-closed STOP controls. Signer approval remains separate. Both pin **Node 24.21.0 and OpenClaw 2026.9.5**. New profiles allow 256 runs per rolling day; Agent and Node permit 32 image attempts. The [Linux installation guide](docs/FRESH_INSTALL.md) and [Mac installation guide](macos/docs/FRESH_INSTALL.md) list each role's OAuth sessions and capabilities.
 
 ## What release publication verifies
+
+### Linux 1.1.2
+
+The [published manifest](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/v1.1.2-qualification/Release-Manifest-v1.1.2.json) records 291 targeted and 3,909 complete native cases on each of x86-64 and ARM64, with no failures, skips, cancellations or TODO cases. Both architectures pass the eight integration scripts, Agent/three-Node lifecycle and 780 Manager regressions against source revision `d9b65eda376e990db30bfd20235cac0447af7fa4`.
+
+The saved-archive browser journey also verifies restored-method reuse on changed, explicitly mapped inputs with fresh checks and no inherited authority. Engine 1 capsules keep their original bytes and historical checker; new data uses engine 2. Report presentation, business acceptance, independent control and actual billing remain separate questions. [Evidence and remaining qualification](validation/LINUX_1_1_2_RELEASE_ADDENDUM.md) · [Practical guide](successor/docs/PRACTICAL_QUALIFICATION.md).
+
 
 ### Linux 1.1.1
 
@@ -147,7 +156,9 @@ The Mac workflow runs the complete native suite on each named macOS version; it 
 
 ## AGI Jobs integration
 
-Linux 1.1.1 targets [**AGIJobManager 1.16.1**](https://github.com/MontrealAI/AGIJobManager/releases/tag/v1.16.1) at `09d89fb22d52a8df194e8dd0a00beff9f7771d82`. The same exact source supplies the vendored Builder, runtime compiler and 780-case integration qualification. [Current release evidence](validation/LINUX_1_1_1_RELEASE_ADDENDUM.md). Paid intake remains on the recorded **HOLD**.
+Linux 1.1.2 binds AGIJobManager source revision `d9b65eda376e990db30bfd20235cac0447af7fa4`, derived from 1.16.1 with the engine 2 corrections. The same source supplies the vendored Builder, runtime compiler and 780-case integration qualification; the original upstream 1.16.1 release is unchanged. [Current release evidence](validation/LINUX_1_1_2_RELEASE_ADDENDUM.md). Paid intake remains on the recorded **HOLD**.
+
+Preserved Linux 1.1.1 targets [**AGIJobManager 1.16.1**](https://github.com/MontrealAI/AGIJobManager/releases/tag/v1.16.1) at `09d89fb22d52a8df194e8dd0a00beff9f7771d82`. The same exact source supplies the vendored Builder, runtime compiler and 780-case integration qualification. [Historical release evidence](validation/LINUX_1_1_1_RELEASE_ADDENDUM.md). Paid intake remains on the recorded **HOLD**.
 
 Fleet works with [AGIJobManager](https://github.com/MontrealAI/AGIJobManager): Agent prepares and publishes a supported deliverable, submits its completion URI, and follows settlement; Node reviews evidence and submits a bonded vote. The contract governs escrow, identity, deadlines and USDC settlement.
 
@@ -159,7 +170,7 @@ Linux 1.0.11 release acceptance now uses that exact **1.15.0** commit and record
 
 [Development and reproducible builds](docs/DEVELOPMENT.md) · [Native baseline reproduction](engineering/README.md) · [Physical ledger](docs/PHYSICAL_QUALIFICATION.md)
 
-The repository tracks all six packaged roles, shared runtime, **343 regression files**, lockfiles and license notices under `fleet/`. The current 1.1.1 artifacts retain the reviewed SUCCESSOR bridge and Studio support to the hash-pinned 1.0.9 dependency basis. The preserved 1.0.11 artifacts are built from reviewed `fleet/` source and the hash-pinned 1.0.9 dependency bundle. The separately inventoried `workstation/` development preview is not included in the 1.0.11 Fleet ZIP and needs its own qualification. Dependency versions and on-chain contract policies are unchanged in 1.0.11.
+The repository tracks all six packaged roles, shared runtime, **343 regression files**, lockfiles and license notices under `fleet/`. The current 1.1.2 artifacts add report verification, method reuse and attempt observations while retaining the reviewed SUCCESSOR bridge and Studio support to the hash-pinned 1.0.9 dependency basis. The preserved 1.0.11 artifacts are built from reviewed `fleet/` source and the hash-pinned 1.0.9 dependency bundle. The separately inventoried `workstation/` development preview is not included in the 1.0.11 Fleet ZIP and needs its own qualification. Dependency versions and on-chain contract policies are unchanged in 1.0.11.
 
 Current Mac distributions are built with `macos/build.py` and published through the Mac qualification workflow. Retained role-local `scripts/package-release.py` helpers and previous-version maintenance installers are historical tooling, outside this current one-Fleet-ZIP build and installation path.
 
