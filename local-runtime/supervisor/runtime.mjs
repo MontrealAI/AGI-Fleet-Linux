@@ -172,8 +172,9 @@ export class LocalRuntime {
   }
   status(p) {
     this.scope(p,'status',p.actor);const actors=this.store.listActors().filter(a=>p.operator||a.id===p.actor);
-    const runs=this.store.db.prepare('SELECT id,actor,state,value FROM runs ORDER BY rowid DESC LIMIT 100').all().filter(r=>p.operator||r.actor===p.actor).map(r=>({...r,value:parseStrict(r.value)}));
-    const pending=this.store.db.prepare("SELECT id,actor,value,state FROM grants WHERE state IN ('prepared','authorized') ORDER BY rowid DESC LIMIT 64").all().filter(r=>p.operator||r.actor===p.actor).map(r=>{const g=parseStrict(r.value);return {grant:r.id,actor:r.actor,state:r.state,action:g.task.action,expiresAt:g.expiresAt};});
+    const parameters=p.operator?[]:[p.actor];
+    const runs=this.store.db.prepare('SELECT id,actor,state,value FROM runs'+(p.operator?'':' WHERE actor=?')+' ORDER BY rowid DESC LIMIT 100').all(...parameters).map(r=>({...r,value:parseStrict(r.value)}));
+    const pending=this.store.db.prepare("SELECT id,actor,value,state FROM grants WHERE state IN ('prepared','authorized')"+(p.operator?'':' AND actor=?')+' ORDER BY rowid DESC LIMIT 64').all(...parameters).map(r=>{const g=parseStrict(r.value);return {grant:r.id,actor:r.actor,state:r.state,action:g.task.action,expiresAt:g.expiresAt};});
     return {schema:'agi-fleet/local-status/v1',stopped:this.emergency===true||this.store.meta('stopped'),paused:this.store.meta('paused'),actors,runs,pending,productionQualified:false,economicAuthority:false};
   }
   output(input,p) {keys(input,['actor','run']);this.scope(p,'output',input.actor);const r=this.store.db.prepare('SELECT actor,state,result FROM runs WHERE id=?').get(uuid(input.run));need(r&&r.actor===input.actor,'RUN_UNKNOWN');return {state:r.state,receipt:r.result?parseStrict(r.result):null};}

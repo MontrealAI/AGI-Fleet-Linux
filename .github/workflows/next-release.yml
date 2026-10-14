@@ -15,8 +15,9 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: next-linux-release-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  # Retain each PR commit's qualification; publishing keeps the shared ref lock.
+  group: next-linux-release-${{ github.event_name == 'pull_request' && format('{0}-{1}', github.ref, github.sha) || github.ref }}
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-24.04
