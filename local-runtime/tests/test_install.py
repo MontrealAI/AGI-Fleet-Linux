@@ -158,6 +158,28 @@ class Installation(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'PATH_ALIAS_FORBIDDEN'):
             I['uninstall'](self.root)
 
+    def test_state_fence_blocks_raw_service_start_and_live_recovery(self):
+        self.install()
+        with I['reserve_state'](self.state):
+            self.assertTrue((self.state / 'control.sock').is_file())
+            with self.assertRaises(FileExistsError):
+                os.open(self.state / 'control.sock', os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+            with self.assertRaisesRegex(ValueError, 'INSTALLATION_OPERATION_STILL_ACTIVE'):
+                I['recover_maintenance'](self.root)
+        self.assertFalse((self.state / 'control.sock').exists())
+
+    def test_only_recorded_dead_maintenance_can_release_its_state_fence(self):
+        self.install()
+        marker = self.state / 'control.sock'
+        marker.write_text(json.dumps({'schema': 'agi-fleet/state-maintenance/v1', 'pid': os.getpid(), 'boot': 'a-prior-boot', 'state': str(self.state)}))
+        result = I['recover_maintenance'](self.root)
+        self.assertFalse(result['authorityRestored'])
+        self.assertFalse(marker.exists())
+        marker.write_text('unowned data')
+        with self.assertRaises(ValueError):
+            I['recover_maintenance'](self.root)
+        self.assertEqual(marker.read_text(), 'unowned data')
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -5,6 +5,7 @@ const english=new Map([...document.querySelectorAll('[data-i18n]')].map(e=>[e.da
 const fr={eyebrow:'Une installation. Vos rôles. Votre travail.',title:'L’intelligence, chez vous.',lead:'Ajoutez les rôles nécessaires. Examinez chaque permission. Gardez le contrôle de chaque exécution.',preview:'Aperçu de développement',local:'Plusieurs acteurs sur un ordinateur, avec des autorisations distinctes et du travail hors ligne limité. La qualification native est requise.',dedicated:'Conservez les parcours existants : installation, signature, utilisation de l’ordinateur et protocole.',guide:'Ouvrir le guide d’installation existant ↗',connect:'Connexion à ce moteur local',tokenHelp:'Collez l’identifiant local indiqué par le lanceur. Il reste uniquement en mémoire dans cette page.',credential:'Identifiant local',connectButton:'Se connecter',computer:'1. Vérifier cet ordinateur',check:'Vérifier la disponibilité',details:'Observations techniques',add:'2. Ajouter un rôle',name:'Nom de l’acteur',role:'Rôle',create:'Ajouter l’acteur',work:'3. Préparer un travail utile',example:'L’exemple crée un véritable rapport modifiable à partir de données publiques synthétiques. Aucun appel de modèle et aucun coût en USDC.',choose:'Choisir un Agent actif',prepare:'Préparer l’exemple',authorize:'Autoriser cette exécution précise',run:'Exécuter sur cet ordinateur',outputs:'4. Examiner vos résultats',control:'Vous gardez le contrôle',pause:'Suspendre les nouveaux travaux',unpause:'Permettre de nouveaux travaux',stop:'ARRÊTER tous les acteurs',stopHelp:'L’arrêt persiste après un redémarrage. Il n’annule pas les actions passées. La reprise exige une réconciliation et une nouvelle activation.',footer:'Données publiques, sous licence ou synthétiques uniquement. Aucune qualification de production, d’examen indépendant ou de travail rémunéré n’est revendiquée.'};
 const say=(en,frText=en)=>{$('status').textContent=language==='fr'?frText:en;};
 Object.assign(fr,{resume:'Reprendre après examen des travaux inachevés',reconcile:'Clore cette tentative sans déclarer de réussite'});
+Object.assign(fr,{pending:'Demandes en attente de votre décision',pendingHelp:'Un assistant peut préparer un travail. Vous seul pouvez en autoriser la portée précise ici.',refresh:'Actualiser les demandes et les résultats'});
 async function api(action,input={}){
   const r=await fetch('/v1/'+action,{method:'POST',headers:{Authorization:'Bearer '+credential,'Content-Type':'application/json'},body:JSON.stringify(input),cache:'no-store',redirect:'error'});
   const v=await r.json();if(!r.ok)throw Error(v.error||'REQUEST_FAILED');return v;
@@ -15,7 +16,13 @@ function save(name,value,type='application/json'){
   const a=document.createElement('a'),url=URL.createObjectURL(new Blob([typeof value==='string'?value:JSON.stringify(value,null,2)],{type}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 async function refresh(){
-  const s=await api('status');$('actors').replaceChildren();$('actor').replaceChildren();$('runs').replaceChildren();
+  const s=await api('status');$('actors').replaceChildren();$('actor').replaceChildren();$('runs').replaceChildren();$('pending').replaceChildren();
+  for(const g of s.pending){const row=document.createElement('div');row.className='run';row.textContent=g.action+' · '+g.actor+' · '+g.state+' ';
+    row.append(button(language==='fr'?'Examiner cette demande':'Inspect this request',async()=>{
+      prepared=await api('grant-inspect',{grant:g.grant});$('grantDetails').textContent=JSON.stringify(prepared,null,2);$('grant').hidden=false;
+      $('authorize').disabled=prepared.state!=='prepared';$('run').disabled=true;$('grantDetails').tabIndex=-1;$('grantDetails').focus();
+    }),button(language==='fr'?'Révoquer':'Revoke',async()=>{await api('revoke',{grant:g.grant});await refresh();}));$('pending').append(row);
+  }
   for(const a of s.actors){
     const row=document.createElement('div');row.className='actor';const title=document.createElement('strong');title.textContent=`${a.name} · AGI ${a.role}`;row.append(title);
     const p=document.createElement('p');p.textContent=`${a.active?(language==='fr'?'Actif':'Active'):(language==='fr'?'Activation requise':'Activation required')} · ${a.id}`;row.append(p);
@@ -57,10 +64,11 @@ $('prepare').onclick=()=>attempt(async()=>{
   prepared=await api('prepare',{actor,task:{schema:'agi-fleet/local-task/v1',action:'successor-run',workspace:'files',input:{mission,variant:'improved'},review:'none',sourceActor:null,sourceController:null}});
   $('grantDetails').textContent=JSON.stringify(prepared,null,2);$('grant').hidden=false;$('run').disabled=true;$('authorize').disabled=false;say('Inspect the input, output scope and limits before authorizing.','Examinez les données et les limites avant d’autoriser.');
 });
-$('authorize').onclick=()=>attempt(async()=>{await api('authorize',{grant:prepared.grant,commitment:prepared.commitment,confirm:true});$('authorize').disabled=true;$('run').disabled=false;say('Authorized once. Run within five minutes.','Autorisé une seule fois. Exécutez dans les cinq minutes.');});
+$('authorize').onclick=()=>attempt(async()=>{await api('authorize',{grant:prepared.grant,commitment:prepared.commitment,confirm:true});$('authorize').disabled=true;$('run').disabled=prepared.preparingClient==='scoped-client';say('Authorized once. The preparing client can run within five minutes.','Autorisé une seule fois. Le client ayant préparé la tâche peut l’exécuter dans les cinq minutes.');await refresh();});
 $('run').onclick=()=>attempt(async()=>{$('run').disabled=true;const v=await api('run',{actor:prepared.actor,grant:prepared.grant});$('output').textContent=JSON.stringify(v,null,2);await refresh();say('Complete. Inspect and save your real output files.','Terminé. Examinez et enregistrez les fichiers produits.');});
 $('pause').onclick=()=>attempt(async()=>{await api('pause',{paused:true});say('New work paused; accepted work continues.','Nouveaux travaux suspendus; les travaux acceptés continuent.');});
 $('unpause').onclick=()=>attempt(async()=>{await api('pause',{paused:false});say('New work allowed, subject to STOP and readiness.','Nouveaux travaux permis, sous réserve de l’arrêt et de la disponibilité.');});
 $('stop').onclick=()=>attempt(async()=>{await api('stop',{actor:null});await refresh();});
+$('refresh').onclick=()=>attempt(refresh);
 $('reconcile').onclick=()=>attempt(async()=>{if(!recovery?.eligible)throw Error('RECOVERY_NOT_READY');await api('reconcile',{run:recovery.run,commitment:recovery.commitment,confirm:true});recovery=null;$('recovery').hidden=true;await refresh();say('Attempt closed without success. STOP and its reservation are preserved.','Tentative close sans réussite. L’ARRÊT et sa réservation sont conservés.');});
 $('resume').onclick=()=>attempt(async()=>{await api('resume',{confirm:true});await refresh();say('Ready for fresh activation. Previous permissions were not restored.','Prêt pour une nouvelle activation. Les permissions précédentes ne sont pas rétablies.');});

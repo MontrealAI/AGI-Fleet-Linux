@@ -173,7 +173,8 @@ export class LocalRuntime {
   status(p) {
     this.scope(p,'status',p.actor);const actors=this.store.listActors().filter(a=>p.operator||a.id===p.actor);
     const runs=this.store.db.prepare('SELECT id,actor,state,value FROM runs ORDER BY rowid DESC LIMIT 100').all().filter(r=>p.operator||r.actor===p.actor).map(r=>({...r,value:parseStrict(r.value)}));
-    return {schema:'agi-fleet/local-status/v1',stopped:this.emergency===true||this.store.meta('stopped'),paused:this.store.meta('paused'),actors,runs,productionQualified:false,economicAuthority:false};
+    const pending=this.store.db.prepare("SELECT id,actor,value,state FROM grants WHERE state IN ('prepared','authorized') ORDER BY rowid DESC LIMIT 64").all().filter(r=>p.operator||r.actor===p.actor).map(r=>{const g=parseStrict(r.value);return {grant:r.id,actor:r.actor,state:r.state,action:g.task.action,expiresAt:g.expiresAt};});
+    return {schema:'agi-fleet/local-status/v1',stopped:this.emergency===true||this.store.meta('stopped'),paused:this.store.meta('paused'),actors,runs,pending,productionQualified:false,economicAuthority:false};
   }
   output(input,p) {keys(input,['actor','run']);this.scope(p,'output',input.actor);const r=this.store.db.prepare('SELECT actor,state,result FROM runs WHERE id=?').get(uuid(input.run));need(r&&r.actor===input.actor,'RUN_UNKNOWN');return {state:r.state,receipt:r.result?parseStrict(r.result):null};}
   exportActor(input,p) {
@@ -195,6 +196,11 @@ export class LocalRuntime {
     if(['project-assemble','project-select','project-export','project-import'].includes(action))return successorOperation(this,action,input,p);
     const methods={create:'addActor',activate:'activate',prepare:'prepare',authorize:'authorize',run:'run',stop:'stop',cancel:'cancel',revoke:'revoke','revoke-client':'revokeClient',pause:'pause',resume:'resume',output:'output',export:'exportActor',import:'importActor'};
     if(action==='status')return this.status(p);
+    if(action==='client-info'){this.scope(p,'status',p.actor);keys(input,[]);return {actor:p.actor,operator:p.operator,actions:p.actions};}
+    if(action==='grant-inspect'){
+      this.scope(p,'grant-inspect');keys(input,['grant']);const row=this.store.db.prepare('SELECT state,value FROM grants WHERE id=?').get(uuid(input.grant));need(row,'GRANT_UNAVAILABLE');
+      const g=parseStrict(row.value);return {grant:g.id,commitment:digest(g),actor:g.actor,task:g.task,limits:g.limits,expiresAt:g.expiresAt,state:row.state,preparingClient:g.principal===p.hash?'this-operator':'scoped-client',confirmationRequired:true};
+    }
     if(action==='doctor'){this.scope(p,'doctor');return this.doctor();}
     if(action==='example'){this.scope(p,'example');keys(input,['kind','language']);need(['analyst','website'].includes(input.kind)&&['en','fr'].includes(input.language),'EXAMPLE_INVALID');return defaultMission(input.kind,input.language);}
     if(action==='client'){this.scope(p,'client');keys(input,['actor']);return this.issueClient(uuid(input.actor));}

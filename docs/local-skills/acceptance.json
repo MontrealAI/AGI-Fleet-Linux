@@ -246,5 +246,26 @@
       "evidence": "validation.json and retained GitHub workflow logs",
       "fullCasePassed": false
     }
+  ],
+  "currentEvidenceNote": "Original actual fields below are retained historical observations, not current-head qualification. See LIFECYCLE_ADDENDUM.md for observed db19a6a installer/native results and subsequent assistant/maintenance changes awaiting exact-head CI.",
+  "observedCheckpoints": [
+    {
+      "head": "db19a6a6cab86e5c883e194d091a1da92d12701f",
+      "workflow": 38490542629,
+      "platforms": [
+        "linux-x64",
+        "linux-arm64"
+      ],
+      "supervisorSource": 33,
+      "supervisorArchive": 33,
+      "installerFixtures": 8,
+      "nativeSource": 3,
+      "nativeArchive": 3,
+      "installedJourney": "PASS",
+      "enFrBrowser": "PASS",
+      "provider": "none",
+      "productionQualified": false,
+      "fullHandoffComplete": false
+    }
   ]
 }

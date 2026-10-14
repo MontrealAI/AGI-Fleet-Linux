@@ -22,5 +22,5 @@ export interface PortableRoleV1 {
   payload: { schema: 'agi-fleet/portable-role/v1'; role: Role; name: string; sourceActor: string; packageSha256: string; authority: 'none' };
   sha256: string;
 }
-export type OperatorOperation = 'create'|'activate'|'authorize'|'client'|'revoke'|'revoke-client'|'pause'|'stop'|'resume'|'reconciliation'|'reconcile'|'import'|'export'|'doctor'|'project-assemble'|'project-select'|'project-export'|'project-import';
-export type ScopedOperation = 'status'|'inspect'|'prepare'|'run'|'cancel'|'output';
+export type OperatorOperation = 'create'|'activate'|'authorize'|'grant-inspect'|'client'|'revoke'|'revoke-client'|'pause'|'stop'|'resume'|'reconciliation'|'reconcile'|'import'|'export'|'doctor'|'project-assemble'|'project-select'|'project-export'|'project-import';
+export type ScopedOperation = 'status'|'client-info'|'inspect'|'prepare'|'run'|'cancel'|'output';

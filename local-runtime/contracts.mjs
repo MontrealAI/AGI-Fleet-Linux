@@ -3,19 +3,14 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {roleContract, COMPUTE_ROLES} from '../fleet/shared/runtime/compute/roles.mjs';
 import {parseStrict, canonical} from '../fleet/successor/vendor/manager/site/assets/successor/safe.mjs';
+import {need,keys,uuid,MAX_BYTES} from './primitives.mjs';
+export {need,keys,uuid,MAX_BYTES} from './primitives.mjs';
 
 export {parseStrict, canonical, COMPUTE_ROLES, roleContract};
 export const ROOT = fileURLToPath(new URL('../', import.meta.url));
 export const VERSION = '0.1.0-alpha.1';
-export const MAX_BYTES = 4_000_000;
-export const need = (ok, code) => { if (!ok) throw Object.assign(new Error(code), {code}); };
 export const digest = value => crypto.createHash('sha256').update(typeof value === 'string' || Buffer.isBuffer(value) ? value : canonical(value)).digest('hex');
 export const id = () => crypto.randomUUID();
-export function keys(value, allowed, required = allowed) {
-  need(value && typeof value === 'object' && !Array.isArray(value), 'OBJECT_REQUIRED');
-  need(Object.keys(value).every(k => allowed.includes(k)) && required.every(k => Object.hasOwn(value, k)), 'FIELDS_INVALID');
-}
-export function uuid(value) { need(typeof value === 'string' && /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(value), 'IDENTITY_INVALID'); return value; }
 export function label(value) { need(typeof value === 'string' && value.length > 0 && value.length <= 80 && !/[\u0000-\u001f\u007f]/u.test(value), 'LABEL_INVALID'); return value; }
 export function integer(value, min, max) { need(Number.isSafeInteger(value) && value >= min && value <= max, 'LIMIT_INVALID'); return value; }
 export const ACTIONS = Object.freeze({agent:['successor-run'], node:['successor-check'], moderator:['protocol-inspect'], employer:['protocol-inspect'], evidence:['evidence-inspect'], recovery:['protocol-inspect']});

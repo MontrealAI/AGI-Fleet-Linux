@@ -8,6 +8,8 @@ import {spawnSync} from 'node:child_process';
 import {LinuxSandbox,sandboxArguments} from '../../platforms/linux.mjs';
 import {LocalRuntime} from '../../supervisor/runtime.mjs';
 import {task} from '../helpers.mjs';
+import {defaultMission,executeMission} from '../../../fleet/successor/vendor/manager/site/assets/successor/missions.mjs';
+import crypto from 'node:crypto';
 
 test('real native isolation denies host state, inherited credentials, input writes and host network',async()=>{
   const sandbox=new LinuxSandbox(),d=sandbox.inspect();
@@ -44,5 +46,26 @@ test('actual cancelled sandbox retains cleanup evidence and permits only explici
     const result=await runtime.dispatch('reconcile',{run,commitment:plan.commitment,confirm:true},p);
     assert.equal(result.receipt.disposition,'closed-without-success');assert.equal(runtime.status(p).stopped,true);
     assert.equal(runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(g.grant).state,'consumed');
+  }finally{runtime.close();fs.rmSync(directory,{recursive:true,force:true});}
+});
+test('one host concurrently executes Agent work and an unrelated internal Node check in distinct kernel namespaces',async()=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-native-two-roles-'));fs.chmodSync(directory,0o700);
+  const runtime=new LocalRuntime(directory,{create:true});
+  try{
+    const operator=runtime.issueClient().principal;
+    const actors=['agent','node'].map(role=>{const a=runtime.addActor({role,name:'Concurrent '+role},operator);return runtime.activate({actor:a.id,confirm:true},operator);});
+    const clients=actors.map(a=>runtime.issueClient(a.id).principal);
+    const unrelated=defaultMission('website','en'),files=executeMission(unrelated,'improved').files;
+    const tasks=[task(),{schema:'agi-fleet/local-task/v1',action:'successor-check',workspace:'files',input:{mission:unrelated,variant:'improved',files},review:'internal',sourceActor:crypto.randomUUID(),sourceController:crypto.randomUUID()}];
+    const grants=actors.map((a,i)=>runtime.prepare({actor:a.id,task:tasks[i]},clients[i]));
+    for(const g of grants)runtime.authorize({grant:g.grant,commitment:g.commitment,confirm:true},operator);
+    const runs=await Promise.all(actors.map((a,i)=>runtime.run({actor:a.id,grant:grants[i].grant},clients[i])));
+    assert.ok(runs.every(r=>r.state==='complete'&&r.receipt.result.checker.passed===true&&r.receipt.independentReview===false));
+    assert.notEqual(runs[0].receipt.observation.worker.pidNamespace,runs[1].receipt.observation.worker.pidNamespace);
+    assert.notEqual(runs[0].receipt.observation.worker.networkNamespace,runs[1].receipt.observation.worker.networkNamespace);
+    for(let i=0;i<2;i++){
+      assert.ok(runs[i].receipt.observation.worker.maxRSSKiB>0);assert.ok(runs[i].receipt.observation.wallMilliseconds>0);
+      assert.throws(()=>runtime.output({actor:actors[1-i].id,run:runs[1-i].run},clients[i]),/CLIENT_SCOPE_DENIED/);
+    }
   }finally{runtime.close();fs.rmSync(directory,{recursive:true,force:true});}
 });

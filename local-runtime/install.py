@@ -237,9 +237,9 @@ def installation(root):
     return root, m
 
 
-def quiescent(state):
+def quiescent(state, reserved=False):
     state = private(state)
-    require(not os.path.lexists(state / 'control.sock'), 'STOP_SUPERVISOR_BEFORE_MAINTENANCE')
+    require(reserved or not os.path.lexists(state / 'control.sock'), 'STOP_SUPERVISOR_BEFORE_MAINTENANCE')
     file = state / 'ledger.sqlite'
     if not file.exists():
         return
@@ -247,6 +247,58 @@ def quiescent(state):
     with sqlite3.connect(file.as_uri() + '?mode=ro', uri=True) as db:
         require(not db.execute("SELECT 1 FROM runs WHERE state IN ('running','uncertain')").fetchone(), 'RECONCILE_OBLIGATIONS_FIRST')
         require(not db.execute("SELECT 1 FROM grants WHERE state IN ('prepared','authorized')").fetchone(), 'REVOKE_PENDING_GRANTS_FIRST')
+
+
+@contextlib.contextmanager
+def reserve_state(state):
+    """Reserve the exact CLI socket path atomically, including raw CLI launches.
+
+    A regular private marker cannot accept requests, and the server cannot bind
+    over it. Never remove a live or pre-existing socket to acquire this fence.
+    """
+    state = private(state)
+    socket = state / 'control.sock'
+    try:
+        fd = os.open(socket, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    except FileExistsError:
+        raise ValueError('STOP_SUPERVISOR_BEFORE_MAINTENANCE') from None
+    identity = os.fstat(fd)
+    try:
+        data = {'schema': 'agi-fleet/state-maintenance/v1', 'pid': os.getpid(), 'boot': boot_identity(), 'state': str(state)}
+        os.write(fd, json.dumps(data).encode())
+        os.fsync(fd)
+        quiescent(state, reserved=True)
+        yield
+    finally:
+        os.close(fd)
+        current = socket.lstat()
+        require(stat.S_ISREG(current.st_mode) and (current.st_dev, current.st_ino) == (identity.st_dev, identity.st_ino), 'MAINTENANCE_FENCE_CHANGED')
+        socket.unlink()
+
+
+def recover_maintenance(root):
+    root, m = installation(root)
+    with maintenance(root, recover=True):
+        socket = Path(m['state']) / 'control.sock'
+        if socket.exists():
+            regular(socket, 4096)
+            s = socket.lstat()
+            require(s.st_uid == os.getuid() and s.st_mode & 0o077 == 0, 'MAINTENANCE_OWNERSHIP_UNKNOWN')
+            record = read_json(socket.read_bytes())
+            require(set(record) == {'schema', 'pid', 'boot', 'state'} and record['schema'] == 'agi-fleet/state-maintenance/v1'
+                    and record['state'] == m['state'] and type(record['pid']) is int and record['pid'] > 1, 'MAINTENANCE_OWNERSHIP_UNKNOWN')
+            if record['boot'] == boot_identity():
+                try:
+                    os.kill(record['pid'], 0)
+                except ProcessLookupError:
+                    pass
+                else:
+                    raise ValueError('INSTALLATION_OPERATION_STILL_ACTIVE')
+            current = socket.lstat()
+            require((current.st_dev, current.st_ino) == (s.st_dev, s.st_ino), 'MAINTENANCE_FENCE_CHANGED')
+            socket.unlink()
+    return {'state': 'maintenance-unlocked', 'authorityRestored': False, 'replayed': False, 'stagingContentDeleted': False,
+            'next': 'Run recover-service --confirm before restarting; inspect any unselected staging content.'}
 
 
 def stage(archive, expected, node_archive, root):
@@ -294,8 +346,7 @@ def install(archive, expected, node_archive, root, state, update=False):
         private(state, create=True)
         metadata = {'schema': SCHEMA, 'root': str(root), 'state': str(state), 'versions': [], 'current': None, 'generation': 0}
     try:
-        with maintenance(root):
-            quiescent(state)
+        with maintenance(root), reserve_state(state):
             require(not (root / 'versions' / expected).exists(), 'VERSION_ALREADY_INSTALLED')
             staged, receipt = stage(archive, expected, Path(node_archive), root)
             target = root / 'versions' / expected
@@ -375,8 +426,7 @@ def verify_version(root, version):
 
 def select(root, target):
     root, m = installation(root)
-    with maintenance(root):
-        quiescent(m['state'])
+    with maintenance(root), reserve_state(m['state']):
         require(re.fullmatch(r'[0-9a-f]{64}', target) and target in m['versions'], 'VERSION_NOT_OWNED')
         verify_version(root, target)
         m['previous'], m['current'] = m['current'], target
@@ -403,8 +453,7 @@ def launch(root, args):
 
 def uninstall(root):
     root, m = installation(root)
-    with maintenance(root):
-        quiescent(m['state'])
+    with maintenance(root), reserve_state(m['state']):
         expected = {'installation.json', 'versions', 'operation.lock'}
         require(set(x.name for x in root.iterdir()) == expected, 'UNOWNED_INSTALLATION_CONTENT')
         require(set(x.name for x in (root / 'versions').iterdir()) == set(m['versions']), 'UNOWNED_VERSION_CONTENT')
@@ -423,7 +472,7 @@ def uninstall(root):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('action', choices=['inspect', 'install', 'update', 'rollback', 'launch', 'uninstall'])
+    p.add_argument('action', choices=['inspect', 'install', 'update', 'rollback', 'launch', 'uninstall', 'recover-maintenance'])
     p.add_argument('--archive', type=Path)
     p.add_argument('--sha256')
     p.add_argument('--node-archive', type=Path)
@@ -445,6 +494,8 @@ def main():
             result = install(a.archive, a.sha256, a.node_archive, a.root, a.state, update=a.action == 'update')
         elif a.action == 'rollback':
             result = select(a.root, a.version)
+        elif a.action == 'recover-maintenance':
+            result = recover_maintenance(a.root)
         else:
             result = uninstall(a.root)
     print(json.dumps(result, indent=2))
