@@ -78,7 +78,7 @@ def audit(evidence, commit, run, specification=None):
     require(spec.get('schema') == 'agi-fleet/local-preview-release/v1' and spec.get('qualificationScope') == 'bounded-offline-linux-development-preview'
             and all(spec.get(k) is False for k in ('operatorInstaller', 'fullHandoffComplete', 'productionQualified'))
             and spec.get('physicalQualification') == spec.get('liveProviderQualification') == 'NOT_RUN' and spec.get('fundedWork') == 'DISABLED', 'Preview specification scope differs')
-    require(all(type(spec['tests'].get(k)) is int and spec['tests'][k] >= n for k, n in {'module':55, 'native':4, 'installer':28, 'browser':2}.items()), 'Required preview gates reduced')
+    require(all(type(spec['tests'].get(k)) is int and spec['tests'][k] >= n for k, n in {'module':55, 'native':4, 'installer':29, 'browser':2}.items()), 'Required preview gates reduced')
     archive_identity, observations = None, {}
     pins = load(ROOT / 'fleet/shared/runtime/compute/runtime-artifacts.lock.json')['node']
     for arch in ('x64', 'arm64'):

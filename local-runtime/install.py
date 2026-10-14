@@ -60,9 +60,9 @@ def private(directory, create=False):
     return directory
 
 
-def regular(file, maximum=CEILING):
+def regular(file, maximum=CEILING, allow_empty=False):
     s = file.lstat()
-    require(stat.S_ISREG(s.st_mode) and s.st_nlink == 1 and 0 < s.st_size < maximum, 'REGULAR_BOUNDED_FILE_REQUIRED')
+    require(stat.S_ISREG(s.st_mode) and s.st_nlink == 1 and (0 <= s.st_size if allow_empty else 0 < s.st_size) and s.st_size < maximum, 'REGULAR_BOUNDED_FILE_REQUIRED')
 
 
 def snapshot(source, target):
@@ -443,7 +443,7 @@ def removal_plan(root):
             if kind == 'directory':
                 require(stat.S_ISDIR(s.st_mode), 'REMOVAL_MEMBER_CHANGED')
             else:
-                regular(file)
+                regular(file, allow_empty=True)
                 require(stat.S_IMODE(s.st_mode) == row['mode'] and sha(file) == row['sha256'], 'REMOVAL_MEMBER_CHANGED')
     require(all(file.relative_to(root).as_posix() in expected for file in root.rglob('*')), 'UNOWNED_INSTALLATION_CONTENT')
     return root, m
@@ -839,7 +839,7 @@ def uninstall(root):
                     s = file.lstat()
                     directories.append({'path': relative, 'identity': [s.st_dev, s.st_ino]})
                 else:
-                    regular(file)
+                    regular(file, allow_empty=True)
                     s = file.lstat()
                     files.append({'path': relative, 'sha256': sha(file), 'mode': stat.S_IMODE(s.st_mode), 'identity': [s.st_dev, s.st_ino]})
             m = {'schema': 'agi-fleet/pending-removal/v1', 'root': str(root), 'state': m['state'],

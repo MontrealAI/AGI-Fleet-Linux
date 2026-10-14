@@ -29,9 +29,11 @@ class Installation(unittest.TestCase):
         self.temp.cleanup()
         os.umask(self.mask)
 
-    def archive(self, name='one', extra=None):
+    def archive(self, name='one', extra=None, empty=False):
         entries = {'LICENSE': b'Installer fixture only\n', 'local-runtime/validate.mjs': b'export const fixture=true;\n',
                    'local-runtime/cli/main.mjs': ('// Syntax-check fixture ' + name + '\n').encode()}
+        if empty:
+            entries['local-runtime/empty-owned.txt'] = b''
         records = [{'path': key, 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(), 'mode': 0o644} for key, data in entries.items()]
         manifest = {'schema': 'agi-fleet/local-source-preview/v1', 'version': '0.1.0-alpha.1', 'commit': '1' * 40,
                     'productionQualified': False, 'workingTreeDirty': False, 'files': records}
@@ -457,6 +459,20 @@ os.umask(0o077); i['uninstall'](Path(sys.argv[2]))
         self.assertFalse(self.root.exists())
         self.assertTrue(self.state.exists())
         self.assertFalse(result['authorityRestored'])
+
+    def test_receipt_owned_empty_code_file_can_be_removed_but_empty_metadata_stays_invalid(self):
+        installed = self.install(self.archive(empty=True))
+        empty = self.root / 'versions' / installed['archiveSHA256'] / 'application/local-runtime/empty-owned.txt'
+        self.assertEqual(empty.read_bytes(), b'')
+        metadata = self.root / 'installation.json'; original = metadata.read_bytes(); metadata.write_bytes(b'')
+        with self.assertRaisesRegex(ValueError, 'REGULAR_BOUNDED_FILE_REQUIRED'):
+            I['uninstall'](self.root)
+        self.assertTrue(empty.exists()); metadata.write_bytes(original)
+        output = self.state / 'kept-output'; output.write_bytes(b'keep')
+        result = I['uninstall'](self.root)
+        self.assertFalse(self.root.exists())
+        self.assertFalse(result['credentialsDeleted'])
+        self.assertEqual(output.read_bytes(), b'keep')
 
 
 if __name__ == '__main__':
