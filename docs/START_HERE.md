@@ -9,7 +9,7 @@
 | What you want to do | Start here | What to expect |
 | --- | --- | --- |
 | Try a useful local mission without installing anything. | [SUCCESSOR Ω Builder](https://montrealai.github.io/AGI-Fleet-Linux/successor.html) | The two local mission families need no account, wallet or provider key. Keep the downloaded files and capsule. |
-| Prepare a dedicated Linux worker or reviewer. | [Linux fresh installation](FRESH_INSTALL.md) | Use the published Linux **1.1.0 qualification prerelease**, then record your own machine's readiness. |
+| Prepare a dedicated Linux worker or reviewer. | [Linux 1.1.0 fresh installation](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/FRESH_INSTALL.md) | Use the published Linux **1.1.0 qualification prerelease**, then record your own machine's readiness. |
 | Prepare an Apple silicon Mac. | [Mac fresh installation](../macos/docs/FRESH_INSTALL.md) | Use the separate Mac **1.20.2 qualification prerelease** and Mac instructions. Linux evidence does not qualify a Mac. |
 | Connect the Builder to an installed Fleet Agent and Node. | [Builder connection, review and recovery guide](../successor/docs/GUIDE.md) | Inspect the exact work, authorize execution, separately authorize review, inspect the capsule and deliberately choose a version. |
 | Develop portable skills and multiple isolated local roles. | [Local Skills development PR #26](https://github.com/MontrealAI/AGI-Fleet-Linux/pull/26) | An unfinished development track, not part of the published Linux 1.1.0 installer. Do not treat green component tests as full-handoff completion. |
@@ -19,7 +19,7 @@
 
 1. **Choose the platform guide first.** Follow it in order on a clean, supported computer. Keep signer and compute accounts separate. Do not mix Linux commands with Mac commands or combine instructions from different versions.
 2. **Download the installer asset, not GitHub's “Source code” archive.** For Linux, obtain `AGI_Fleet_Linux_v1.1.0.zip` and `SHA256SUMS-v1.1.0.txt` from the [same release](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.0-qualification). Use the platform guide's verification and extraction instructions. A CI review-source ZIP is also not an installer.
-3. **Complete readiness and record observations.** Use the [Linux qualification ledger](PHYSICAL_QUALIFICATION.md) or the Mac guide's platform-specific checklist. Published automated results do not prove that your machine, provider connection, desktop permissions or cleanup are ready.
+3. **Complete readiness and record observations.** Use the [Linux qualification ledger](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/PHYSICAL_QUALIFICATION.md) or the Mac guide's platform-specific checklist. Published automated results do not prove that your machine, provider connection, desktop permissions or cleanup are ready.
 4. **Keep funded work disabled while qualification remains open.** Use the public or synthetic inputs permitted by the chosen workflow. Installation, opening a capsule and reviewing a proposed action do not grant execution, signing or payment authority.
 5. **Keep recovery materials separate.** Retain project files, exported artifacts and the SUCCESSOR capsule. Preserve wallet recovery through its own documented process. A capsule is not a wallet backup; restoring project history does not restore permission to run or spend.
 
@@ -37,10 +37,10 @@ The [current Linux manifest](https://github.com/MontrealAI/AGI-Fleet-Linux/relea
 
 ## Something failed?
 
-Preserve the current state, reports and STOP markers. Open [Linux troubleshooting](TROUBLESHOOTING.md) or [Mac troubleshooting](../macos/docs/TROUBLESHOOTING.md). Record the platform, exact release, role, failed step and visible error code. Share only sanitized diagnostics: never upload a seed phrase, private key, OAuth token, private setup JSON or private work document.
+Preserve the current state, reports and STOP markers. Open [Linux troubleshooting](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/TROUBLESHOOTING.md) or [Mac troubleshooting](../macos/docs/TROUBLESHOOTING.md). Record the platform, exact release, role, failed step and visible error code. Share only sanitized diagnostics: never upload a seed phrase, private key, OAuth token, private setup JSON or private work document.
 
 For project recovery, start with the [Builder guide](../successor/docs/GUIDE.md). Import history, inspect the selected version and restore or rerun only through a fresh, explicit authorization. Keep the working version until you deliberately accept a checked improvement.
 
 ## Useful next pages
 
-[Linux installation](FRESH_INSTALL.md) · [Mac installation](../macos/docs/FRESH_INSTALL.md) · [SUCCESSOR guide](../successor/docs/GUIDE.md) · [Release evidence](../validation/LINUX_1_1_0_RELEASE_ADDENDUM.md) · [Developer and publication guide](DEVELOPMENT.md)
+[Linux installation](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/FRESH_INSTALL.md) · [Mac installation](../macos/docs/FRESH_INSTALL.md) · [SUCCESSOR guide](../successor/docs/GUIDE.md) · [Release evidence](../validation/LINUX_1_1_0_RELEASE_ADDENDUM.md) · [Developer and publication guide](DEVELOPMENT.md)

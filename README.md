@@ -1,5 +1,7 @@
 # AGI Fleet · Linux & Apple silicon Mac
 
+**Linux 1.1.1 maintenance candidate:** [what changed and how qualification works](docs/RELEASE_NOTES_1_1_1.md). Its installer is available only after the [1.1.1 release page](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.1-qualification) reports completed exact-archive acceptance. Until then, the published 1.1.0 download and evidence below remain the installation reference. The current source installation commands target 1.1.1; use the [version-pinned 1.1.0 instructions](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/FRESH_INSTALL.md) with the previous archive.
+
 **[Which download and workflow should I use?](docs/START_HERE.md)** · **[Quel téléchargement et quel parcours choisir ?](docs/COMMENCER_ICI.md)** — Published releases, development previews, safe setup and recovery.
 
 **[Build my SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor.html)** · **[Créer mon SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor-fr.html)** — Create useful local work, connect a qualified Fleet computer, check improvements and keep your system. [Builder guide](successor/docs/GUIDE.md).
