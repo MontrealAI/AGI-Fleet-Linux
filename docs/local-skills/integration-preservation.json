@@ -89,7 +89,8 @@
   ],
   "modifiedPaths": [
     "engineering/build-next-release.py",
-    "engineering/tests/test_maintenance_release.py"
+    "engineering/tests/test_maintenance_release.py",
+    "macos/preview/source-inventory.json"
   ],
   "removedPaths": [],
   "exceptions": [
@@ -102,6 +103,15 @@
       "compatibility": "No Fleet/runtime/dependency/contract bytes or public command contracts change. Main workflow is retained exactly.",
       "verification": "120 engineering regressions, including saved-archive rejection of Local Skills at root and nested paths; complete inherited qualification remains required.",
       "rollback": "Revert these engineering changes together; never publish Local Skills inside the fixed 1.1.1 installer."
+    },
+    {
+      "paths": [
+        "macos/preview/source-inventory.json"
+      ],
+      "reason": "Refresh the Mac preview inventory for the reviewed builder that its source verifier imports.",
+      "compatibility": "Source hash synchronization only; Mac runtime, qualification boundary and published assets unchanged.",
+      "verification": "Mac preview source check and materialization regressions; native macOS 15/26 CI remains required.",
+      "rollback": "Regenerate only with the corresponding reviewed builder revision."
     }
   ],
   "publishedAssetsChanged": false,
