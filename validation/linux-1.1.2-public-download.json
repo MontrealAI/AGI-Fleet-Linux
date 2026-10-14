@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "release": "https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.2-qualification",
+  "commit": "f1de8602ccea65250bfd0c40757e4984e889869e",
+  "workflowRun": "38614251266",
+  "sourceRevisionSHA256": "52c25a4d7d548c0be33db1c509a8948cceff41a30550d6b4679b4c34f8ff8936",
+  "assets": [
+    {
+      "name": "AGI_Fleet_Linux_v1.1.2.zip",
+      "bytes": 426215995,
+      "sha256": "987a4f7bd56402e9cade8f5338570e0f803a787a83a64b1bcf17a7eceef9875d"
+    },
+    {
+      "name": "Linux-Qualification-Evidence-v1.1.2.zip",
+      "bytes": 6890684,
+      "sha256": "b766a23b2fba3798fb522af3569ad18be7c086d8c7711ad9588d70d28dbf99a7"
+    },
+    {
+      "name": "Release-Manifest-v1.1.2.json",
+      "bytes": 111081,
+      "sha256": "67494f2d102216036a292125fa89074af33485ee559bd823acd4b3944d7b0eb9"
+    },
+    {
+      "name": "SHA256SUMS-v1.1.2.txt",
+      "bytes": 294,
+      "sha256": "7eccdb8c52584904de73b174dc2f9fdc6c857b383e46b8a339aefb31a4c1ed6e"
+    }
+  ],
+  "archive": {
+    "status": "PASS",
+    "sha256": "987a4f7bd56402e9cade8f5338570e0f803a787a83a64b1bcf17a7eceef9875d",
+    "bytes": 426215995,
+    "manifestEntriesVerified": 61095,
+    "editions": 7,
+    "sourceFiles": 5989
+  },
+  "publicEvidenceAuditReproduced": true,
+  "verifiedTapLogs": 736,
+  "verifiedIntegrationLogs": 38,
+  "nativeAcceptance": "PASS",
+  "jobIntegrationAcceptance": "PASS",
+  "physicalQualification": "NOT_RUN",
+  "productionQualified": false
+}
