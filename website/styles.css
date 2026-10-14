@@ -8,6 +8,26 @@
 
 .evidence-value[data-status]:not([data-status="PASS"]){color:#f0ccad}
 
+/* Keep the landing pages readable at narrow widths and with larger text. */
+.step-num{color:#735580}
+.footer .footer-note{color:#686172}
+h1,h2,h3,h4{overflow-wrap:anywhere}
+.hero-inner>*,.welcome-layout>*,.welcome-paths>a>div,.system-grid>*,.start-grid>*,.help-layout>*,.resource-grid>*,.role-card{min-width:0}
+.role-card{overflow-wrap:anywhere}
+@media(min-width:761px){.sat-node{right:0;top:300px}}
+@media(max-width:1100px){
+  .header{height:auto;flex-wrap:wrap;padding-top:17px;padding-bottom:17px}
+  .header nav{order:3;flex-basis:100%;flex-wrap:wrap}
+  .header-actions{margin-left:auto}
+}
+@media(max-width:1000px){
+  .hero-inner{grid-template-columns:minmax(0,1fr)}
+  .orbit{transform:none;min-width:0;max-width:390px;margin:15px auto 0}
+}
+@media(max-width:370px){
+  .hero h1{font-size:clamp(2.6rem,14vw,3.6rem);overflow-wrap:anywhere}
+}
+
 /* Potential and scope: editorial content, readable without JavaScript. */
 .potential-nav{display:flex;flex-wrap:wrap;gap:12px 24px;margin:-10px 0 34px;font-size:12px;font-weight:650;color:#62428d}
 .combined-value{margin-bottom:40px}.combined-value>h3,.market-analysis>h3{font-size:26px;line-height:1.25;letter-spacing:-.035em}

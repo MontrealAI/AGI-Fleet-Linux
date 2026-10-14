@@ -24,6 +24,8 @@ jobs:
         run: python3 engineering/check-repository.py
       - name: Exercise extraction safety and integrity failures
         run: python3 -m unittest discover -s engineering/tests -v
+      - name: Check Mac build and website metadata against repository changes
+        run: python3 -m unittest discover -s macos/tests -v
       - name: Exercise mainnet observer materialization failures
         run: node --test engineering/tests/*.test.mjs
       - name: Replay retained manager 1.14.0 compatibility evidence

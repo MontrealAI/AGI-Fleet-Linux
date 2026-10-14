@@ -6,6 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def sha(b):return hashlib.sha256(b).hexdigest()
 def reason(name):
     p=Path(name)
+    if name in ('macos/build.py','macos/tests/test_build.py'):return 'Keep the Mac build bound to its original verified Linux archive as the active Linux download pointer and source advance; retain all archive-integrity and qualification requirements.'
     if name=='macos/preview/tests/test_materialize.py':return 'Compare the materialized basis to the exact current candidate instead of a stale version literal; retain the prior test in successor/history.'
     if name=='macos/preview/source-inventory.json':return 'Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification.'
     if name.startswith('website/'):return 'Add Builder entry point; retain concurrent published-release installation links and existing routes.'
