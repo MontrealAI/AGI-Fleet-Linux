@@ -38,7 +38,8 @@ jobs:
           archive = root / 'AGI-Fleet-Linux-review-source.zip'
           if not 0 < archive.stat().st_size < 450_000_000:
               raise SystemExit('Review source exceeds the archive size ceiling')
-          digest = hashlib.file_digest(archive.open('rb'), 'sha256').hexdigest()
+          with archive.open('rb') as stream:
+              digest = hashlib.file_digest(stream, 'sha256').hexdigest()
           receipt = {'schema': 'agi-fleet-review-source/v1', 'repository': os.environ['GITHUB_REPOSITORY'],
               'commit': commit, 'workflowRun': os.environ['GITHUB_RUN_ID'], 'event': os.environ['GITHUB_EVENT_NAME'],
               'name': archive.name, 'bytes': archive.stat().st_size, 'sha256': digest,
