@@ -1,5 +1,6 @@
 import {createSystem,runCandidate,chooseCandidate,exportCapsule,inspectCapsule,restoreCapsule,validateState,continueHistory,historyCapacity} from '../../fleet/successor/vendor/manager/site/assets/successor/model.mjs';
 import {need,keys,uuid,id,canonical,parseStrict,digest} from '../contracts.mjs';
+import {STORAGE_LIMITS} from './capacity.mjs';
 
 export async function successorOperation(runtime,action,input,principal) {
   runtime.scope(principal,action);
@@ -10,8 +11,8 @@ export async function successorOperation(runtime,action,input,principal) {
     need((current?.value??null)===prior,'PROJECT_CHANGED');
     if(prior===null)need(db.prepare('SELECT COUNT(*) AS n FROM projects').get().n<32,'PROJECT_LIMIT');
     const raw=canonical(state);need(Buffer.byteLength(raw)<=4_000_000,'PROJECT_LIMIT');
-    const used=db.prepare('SELECT COALESCE(SUM(length(value)),0) AS bytes FROM projects WHERE id<>?').get(key).bytes;
-    need(used+Buffer.byteLength(raw)<=32_000_000,'PROJECT_STORAGE_LIMIT');
+    const used=db.prepare('SELECT COALESCE(SUM(length(CAST(value AS BLOB))),0) AS bytes FROM projects WHERE id<>?').get(key).bytes;
+    need(used+Buffer.byteLength(raw)<=STORAGE_LIMITS.projects,'PROJECT_STORAGE_LIMIT');
     db.prepare('INSERT INTO projects VALUES(?,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(key,raw);
   });
   if(action==='project-import'){

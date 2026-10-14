@@ -1,4 +1,5 @@
 import {need,keys,uuid,digest,canonical,parseStrict} from '../contracts.mjs';
+import {STORAGE_LIMITS,encodeOutcome} from './capacity.mjs';
 
 // Reconciliation records what can be established; it never turns an uncertain
 // attempt into successful work and never releases its budget reservation.
@@ -17,6 +18,9 @@ function proof(runtime, value, result) {
   if(value.host?.backend!=='linux-bwrap-offline/v1'||value.host.authority!=='bounded-offline-only'||value.inference!=='none'||value.spendUSDC!=='0')
     return {eligible:false,reason:'EXTERNAL_RECONCILIATION_REQUIRED'};
   const observation=result?.observation;
+  if(observation?.backend==='linux-bwrap-offline/v1'&&observation.launchAttempted===false&&
+    observation.reason==='EXECUTION_HOST_CHANGED'&&result.error==='EXECUTION_HOST_CHANGED'&&observation.network==='none'&&observation.providerCalls===0)
+    return {eligible:true,kind:'recorded-launch-refusal',observationSha256:digest(observation),externalEffects:'none; task launcher was not invoked'};
   if(observation?.backend==='linux-bwrap-offline/v1'&&observation.processGroupGone===true&&observation.privateNamespacesEnded===true&&observation.network==='none'&&observation.providerCalls===0)
     return {eligible:true,kind:'recorded-sandbox-closure',observationSha256:digest(observation),externalEffects:'none; offline backend only'};
   const current=runtime.backend.inspect();
@@ -46,7 +50,7 @@ export function reconcile(runtime,input,principal) {
     const result=row.result?parseStrict(row.result):null;
     const receipt={schema:'agi-fleet/local-reconciliation/v1',run:input.run,priorCommitment:plan.commitment,
       recordedAt:runtime.now(),proof:plan,priorOutcome:result,disposition:'closed-without-success',authority:'none',replayAllowed:false};
-    runtime.store.db.prepare("UPDATE runs SET state='reconciled',result=? WHERE id=? AND state='uncertain'").run(canonical(receipt),input.run);
+    runtime.store.db.prepare("UPDATE runs SET state='reconciled',result=? WHERE id=? AND state='uncertain'").run(encodeOutcome(receipt,STORAGE_LIMITS.runReservation),input.run);
     runtime.store.event('run-reconciled',{run:input.run,priorCommitment:plan.commitment,receiptSha256:digest(receipt)});
     // STOP, revocation and existing reservations deliberately remain durable.
     return {run:input.run,state:'reconciled',receipt,next:'Inspect all other uncertain work, then explicitly resume and reactivate.'};

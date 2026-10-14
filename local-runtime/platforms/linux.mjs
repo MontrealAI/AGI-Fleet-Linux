@@ -29,12 +29,15 @@ export class LinuxSandbox {
         need(false,code);
       }
       const bootId=fs.readFileSync('/proc/sys/kernel/random/boot_id','utf8').trim();
-      return {...report,supported:true,observedAt:Date.now(),bootId,identity:digest({backend:report.backend,node:digest(fs.readFileSync(process.execPath)),sandbox:digest(fs.readFileSync(BIN)),platform:process.platform,arch:process.arch,os:os.release(),boot:bootId})};
+      return {...report,supported:true,observedAt:Date.now(),bootId,identity:digest({backend:report.backend,node:digest(fs.readFileSync(process.execPath)),sandbox:digest(fs.readFileSync(BIN)),limiter:digest(fs.readFileSync(LIMIT)),platform:process.platform,arch:process.arch,os:os.release(),boot:bootId})};
     }catch(e){return {...report,code:e.code==='ENOENT'?'SANDBOX_PREREQUISITE_MISSING':e.code||e.message,help:'Use the documented Linux prerequisites and rerun doctor. No host-shell fallback is permitted. Browser, desktop and macOS local execution require separate implementation and qualification.'};}
   }
-  async execute({role,task,directory,signal}) {
+  async execute({role,task,directory,signal,expectedHost}) {
     const started=performance.now();
+    need(expectedHost&&typeof expectedHost.identity==='string'&&typeof expectedHost.backend==='string','EXECUTION_BINDING_REQUIRED');
     const ready=this.inspect();need(ready.supported,ready.code);
+    if(ready.identity!==expectedHost.identity||ready.backend!==expectedHost.backend||(ready.bootId??null)!==(expectedHost.bootId??null))
+      throw Object.assign(new Error('EXECUTION_HOST_CHANGED'),{code:'EXECUTION_HOST_CHANGED',observation:{backend:'linux-bwrap-offline/v1',launchAttempted:false,reason:'EXECUTION_HOST_CHANGED',network:'none',providerCalls:0}});
     const input=path.join(directory,'task.json');fs.writeFileSync(input,canonical({role,task}),{flag:'wx',mode:0o600});
     const command=[...sandboxArguments(),'--ro-bind',input,'/input/task.json','--chdir','/tmp','--','/node','--max-old-space-size=128','--v8-pool-size=1','/app/local-runtime/worker.mjs'];
     signal?.throwIfAborted();
