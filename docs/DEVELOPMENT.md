@@ -9,10 +9,15 @@ Use Python 3.12+ and Node 24.21.0 on Ubuntu 24.04. Keep operator profiles and cr
 ```sh
 python3 engineering/check-repository.py --require-source
 python3 -m unittest discover -s engineering/tests -v
+python3 -m unittest discover -s macos/tests -v
 node --test fleet/tests/linux-platform.test.mjs
 ```
 
 Shared runtime changes belong in `fleet/shared/runtime/`. Propagate them with `python3 fleet/scripts/sync-shared-runtime.py --root fleet` and then use `--check`. Preserve role-specific adapters. Updating source also requires reviewed inventory hashes and a new release identity; do not change an already-published ZIP.
+
+For website changes, build with `python3 engineering/build-website.py`, check with `python3 engineering/check-website.py`, and run the [locked browser suite](../engineering/browser-tests/README.md). Both landing pages, setup guides and Builder journeys must pass before Pages deployment. The suite retains desktop/mobile screenshots and tests larger text, keyboard controls and automated accessibility rules; it does not establish complete accessibility conformance.
+
+The Mac 1.20.2 build retains its **Linux 1.0.10 archive input**, identified by the exact version, size, SHA-256 and source inventory in `macos/release.json` and `macos/build.py`. A newer Linux published pointer or `fleet/` mirror must not retarget that Mac input. The Mac builder verifies the saved baseline archive, its manifests, source bytes, executable modes, inventory digest and source count before applying the Mac overlay. Changing this tooling creates new build inputs and requires fresh saved-archive qualification; it does not change or requalify the published Mac ZIP. Ordinary repository checks run the Mac engineering tests so unrelated Linux metadata changes cannot silently break that boundary.
 
 ## Build the complete 1.1.2 candidate
 
@@ -32,7 +37,7 @@ Output includes `AGI_Fleet_Linux_v1.1.2.zip`, `release.json`, packaging receipts
 
 ## Qualify and publish
 
-Linux 1.1.2 binds AGIJobManager 1.16.1 at `d9b65eda376e990db30bfd20235cac0447af7fa4`, including all 780 Manager regressions. The build metadata, each evidence binding and the independent audit retain the exact target. Publication additionally rejects mixed workflow runs, a different build commit and incomplete log coverage. Historical 1.0.9 and 1.0.10 results remain unchanged.
+Linux 1.1.2 binds the AGIJobManager source revision `d9b65eda376e990db30bfd20235cac0447af7fa4`, derived from 1.16.1 with the engine 2 corrections, including all 780 Manager regressions. The original upstream 1.16.1 release is unchanged. The build metadata, each evidence binding and the independent audit retain the exact target. Publication additionally rejects mixed workflow runs, a different build commit and incomplete log coverage. Historical 1.0.9 and 1.0.10 results remain unchanged.
 
 The [next-release workflow](../.github/workflows/next-release.yml) builds once and distributes the same artifact to disposable x86-64 and ARM64 runners. It runs targeted/full native suites and AGIJobManager integration separately, then rechecks retained log hashes, test-source identity, exact counts and workflow provenance. Root runtime provisioning is limited to disposable GitHub-hosted runners; do not run that harness in an operator account or on a shared workstation.
 
