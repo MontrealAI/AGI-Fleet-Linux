@@ -1,0 +1,13 @@
+{
+  "schema": "agi-fleet/role-package/v1",
+  "role": "employer",
+  "version": "0.1.0-alpha.1",
+  "runtime": "0.1.0-alpha.1",
+  "actions": [
+    "protocol-inspect"
+  ],
+  "capabilities": [
+    "bounded-offline"
+  ],
+  "settlementAuthority": false
+}

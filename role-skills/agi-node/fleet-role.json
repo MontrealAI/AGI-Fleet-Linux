@@ -1,0 +1,13 @@
+{
+  "schema": "agi-fleet/role-package/v1",
+  "role": "node",
+  "version": "0.1.0-alpha.1",
+  "runtime": "0.1.0-alpha.1",
+  "actions": [
+    "successor-check"
+  ],
+  "capabilities": [
+    "bounded-offline"
+  ],
+  "settlementAuthority": false
+}

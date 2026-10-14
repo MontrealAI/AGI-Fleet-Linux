@@ -12,7 +12,7 @@
 | Prepare a dedicated Linux worker or reviewer. | [Linux fresh installation](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.1-qualification/docs/FRESH_INSTALL.md) | Use the published Linux **1.1.1 qualification prerelease**, then record your own machine's readiness. |
 | Prepare an Apple silicon Mac. | [Mac fresh installation](../macos/docs/FRESH_INSTALL.md) | Use the separate Mac **1.20.2 qualification prerelease** and Mac instructions. Linux evidence does not qualify a Mac. |
 | Connect the Builder to an installed Fleet Agent and Node. | [Builder connection, review and recovery guide](../successor/docs/GUIDE.md) | Inspect the exact work, authorize execution, separately authorize review, inspect the capsule and deliberately choose a version. |
-| Develop portable skills and multiple isolated local roles. | [Local Skills development PR #26](https://github.com/MontrealAI/AGI-Fleet-Linux/pull/26) | An unfinished development track, not part of the published Linux 1.1.1 installer. Do not treat green component tests as full-handoff completion. |
+| Develop portable skills and multiple isolated local roles. | [Local Skills preview download and first report](local-skills/DOWNLOAD.md) | Separate bounded Linux development preview, with verified package, private installation and EN/FR guidance. Full product acceptance remains open; it is outside the Linux 1.1.1 installer. |
 | Develop work in installed applications or signed-in accounts. | [Linux workspace preview](../workstation/QUICKSTART.md) or [Mac source preview](../macos/preview/README.md) | Separate development and commissioning paths. Do not run them in your everyday account or infer private-work settlement support. |
 
 ## Installing? Follow this order

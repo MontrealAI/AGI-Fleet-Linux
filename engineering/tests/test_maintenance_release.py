@@ -5,7 +5,9 @@ from pathlib import Path
 import plistlib
 import re
 import sys
+import tempfile
 import unittest
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'engineering'))
@@ -87,7 +89,9 @@ class MaintenanceReleaseTests(unittest.TestCase):
         self.assertFalse(self.release['productionQualified'])
         for field in ('runtimeLogicChanged', 'dependencyVersionsChanged', 'contractArtifactsChanged', 'productionQualified', 'localSkillsIncluded'):
             self.assertIs(self.scope[field], False)
-        self.assertFalse((ROOT / 'local-runtime').exists())
+        excluded = {'local-runtime', 'local-dashboard', 'role-skills'}
+        self.assertFalse(any(excluded.intersection(Path(row['path']).parts)
+                             for row in self.inventory['files']))
         self.assertEqual(self.release['native']['complete'], {'tests': 3908, 'files': 343})
         self.assertEqual(self.release['native']['targeted'], {'tests': 291, 'files': 25})
         published = json.loads((ROOT / 'engineering/published-release.json').read_text())
@@ -144,6 +148,25 @@ class MaintenanceReleaseTests(unittest.TestCase):
         self.assertTrue((ROOT / 'docs/RELEASE_NOTES_1_1_0.md').is_file())
         self.assertTrue((ROOT / 'validation/LINUX_1_1_0_RELEASE_ADDENDUM.md').is_file())
         self.assertIn('PR #26', (ROOT / 'docs/RELEASE_NOTES_1_1_1.md').read_text())
+
+    def test_saved_maintenance_installer_rejects_development_code_at_any_depth(self):
+        for relative in ('local-runtime/worker.mjs', 'local-dashboard/app.js',
+                         'role-skills/agi-agent/SKILL.md',
+                         'packages/AGI_Agent/local-runtime/worker.mjs'):
+            with self.subTest(relative=relative), tempfile.TemporaryDirectory() as temporary:
+                archive = Path(temporary) / 'candidate.zip'
+                with zipfile.ZipFile(archive, 'w') as saved:
+                    saved.writestr('AGI_Fleet_Linux_v1.1.1/' + relative, 'unqualified fixture')
+                with self.assertRaisesRegex(ValueError, 'Local Skills code is excluded'):
+                    builder.verify_maintenance_archive(archive)
+
+    def test_saved_maintenance_guidance_can_explain_the_separate_development_mode(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            archive = Path(temporary) / 'candidate.zip'
+            with zipfile.ZipFile(archive, 'w') as saved:
+                saved.writestr('AGI_Fleet_Linux_v1.1.1/docs/START_HERE.md',
+                               'Local Skills is a separate, unfinished development preview.')
+            builder.verify_maintenance_archive(archive)
 
 
 if __name__ == '__main__':

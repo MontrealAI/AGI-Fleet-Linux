@@ -17,10 +17,20 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import zipfile
 
 from release_tools import ASSET, LIMIT, PREFIX, ROOT, SHA256, SIZE, URL, download, extract, require, sha, verify_archive
 
 ROLES = {'agent', 'node', 'moderator', 'employer', 'evidence', 'recovery'}
+
+
+def verify_maintenance_archive(archive):
+    """Local Skills may coexist in the repository, never in the 1.1.1 installer."""
+    excluded = {'local-runtime', 'local-dashboard', 'role-skills'}
+    with zipfile.ZipFile(archive) as saved:
+        require(not any(excluded.intersection(PurePosixPath(row.filename).parts)
+                        for row in saved.infolist()),
+                'Unqualified Local Skills code is excluded from the maintenance installer')
 
 
 def write_json(path, value):
@@ -405,6 +415,8 @@ def build(args):
     spec = importlib.util.spec_from_file_location('candidate_preparation', root / 'scripts/prepare-release.py')
     preparation = importlib.util.module_from_spec(spec); spec.loader.exec_module(preparation)
     verified = preparation.verify_archive(destination)
+    if version == '1.1.1':
+        verify_maintenance_archive(destination)
     gate_path = out / (prefix + '-checks/final-gate.json')
     gate = json.loads(gate_path.read_text())
     require(gate['status'] == 'PASS_PACKAGED_EXECUTABLES_AND_LINUX_LAUNCHER_SMOKE'

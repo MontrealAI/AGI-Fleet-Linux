@@ -1,0 +1,522 @@
+{
+  "schema": "agi-fleet/local-acceptance/v1",
+  "handoff": "IMPLEMENTATION_HANDOFF.md",
+  "fullHandoffComplete": false,
+  "releaseEligible": false,
+  "entries": [
+    {
+      "id": "A01",
+      "requiredCase": "Fresh local install",
+      "status": "PARTIAL",
+      "command": "AGI_LOCAL_NODE_ARCHIVE=PINNED_NODE_ARCHIVE python3 -m unittest discover -s local-runtime/tests -p test_install.py -v; saved installation journey in .github/workflows/local-skills.yml",
+      "fixture": "authority.test.mjs",
+      "expected": "Fresh local install completes without a prior Fleet/OpenClaw profile, wallet history, or migration fixture.",
+      "actual": "Transactional installation, update/rollback/removal, interrupted-install recovery and the actual saved-package service journey passed on Linux x64/ARM64. Guided OS prerequisite provisioning and native Mac installation/execution remain unfinished.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Source state creation tested; Unix-socket startup unavailable here; packaged transactional installer not implemented.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A02",
+      "requiredCase": "Dedicated Fleet coexistence and removal",
+      "status": "PARTIAL",
+      "command": "python3 -m unittest discover -s engineering/tests -q",
+      "fixture": "../engineering/tests",
+      "expected": "Existing Dedicated Fleet installs and workflows pass before and after local-mode installation; new-mode removal does not damage them.",
+      "actual": "Original Fleet regression qualification passed separately at the recorded checkpoint; installer fixtures preserve unrelated installation files and external state. Physical Dedicated Fleet coexistence before/after installation and removal remains NOT_RUN.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "No existing tracked path changed; clean dependency checkout passes original inventory and 84 engineering tests. Physical coexistence and uninstall NOT_RUN.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A03",
+      "requiredCase": "Six bounded skills and duplicate roles",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/roles.test.mjs",
+      "fixture": "roles.test.mjs",
+      "expected": "All six skills validate; each role executes its real bounded workflow; two instances of one role do not collide.",
+      "actual": "All six skill packages validate and all six pinned Gateway paths invoke the real sandbox. Duplicate actors and bounded specialist policy inspections pass. Complete role services, protocol transactions and signer adapters remain unfinished.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Six format validators and bounded inspection/report paths pass; complete live role service workflows NOT_IMPLEMENTED.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A04",
+      "requiredCase": "Assistant invokes real runtime",
+      "status": "PARTIAL",
+      "command": "Six-role saved-package OpenClaw journey in .github/workflows/local-skills.yml (declared synthetic model transport)",
+      "fixture": "skill-forward-check",
+      "expected": "A supported assistant invokes the real local runtime through its skill, returns actual artifacts, and cannot escalate its client scope.",
+      "actual": "All six actual pinned OpenClaw Gateway/skill/private-IPC/native-worker paths passed with separate operator approval. Model transport is an explicit local synthetic fixture; live-provider availability, privacy, cost and judgment remain NOT_RUN.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "NOT_RUN",
+          "actual": "Forward check correctly blocks missing runtime; live OpenClaw adapter and positive assistant invocation are missing.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A05",
+      "requiredCase": "Agent and unrelated Node on one host",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "One host runs an Agent task and unrelated Node review with isolated state, credentials, inputs, outputs, and authorization.",
+      "actual": "Concurrent Agent work and unrelated internal Node checking ran in simultaneously observed separate kernel namespaces on both Linux architectures. Independent economic review and its eligibility/placement remain unavailable.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "NOT_IMPLEMENTED",
+          "actual": "Internal Node checking implemented. Independent economic review deliberately blocked.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A06",
+      "requiredCase": "Cross-role isolation",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/native/isolation.test.mjs",
+      "fixture": "native/isolation.test.mjs",
+      "expected": "Cross-role filesystem, memory, transcript, credential, browser, IPC, and runtime-management access attempts are denied.",
+      "actual": "Native Linux tests now pass blocked host secrets/management access, immutable inputs, separate namespaces, zero child capabilities and actual output checks. The historical namespace prerequisite failure is retained below. Browser/desktop, complete private-network and Mac isolation matrices remain missing.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "BLOCKED_ENVIRONMENT",
+          "actual": "Scoped client tests pass on Linux x64/ARM64. Native sandbox tests fail on both CI platforms with loopback RTM_NEWADDR denied; no OS isolation pass claimed.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A07",
+      "requiredCase": "Grants, replay and escalation",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Role spoofing, forged/stale/expired/revoked grants, request substitution, replay, and prompt-injection escalation are refused.",
+      "actual": "Scoped authority, grant substitution/expiry/replay, role restrictions and operator-only approval pass through private IPC and the actual Gateway. Complete live tool/prompt-injection qualification remains NOT_RUN.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Scoped grants, expiry, substitution, role checks and replay tests pass at the supervisor boundary. Full live tool injection tests NOT_RUN.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A08",
+      "requiredCase": "Resource and budget concurrency",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Concurrent runs cannot overspend shared admission limits or exceed enforced resources; restart does not reset limits.",
+      "actual": "Atomic host/actor reservations, persistent daily budgets, restart-retained reservations and measured worker CPU/RSS pass. Complete process/resident-memory/disk enforcement, model/spending reconciliation and resource stress remain unfinished.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Atomic host/actor reservations and persistent daily limits pass. Native cgroup memory/process/disk budgets not implemented.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A09",
+      "requiredCase": "Files, browser and desktop outputs",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/roles.test.mjs",
+      "fixture": "roles.test.mjs",
+      "expected": "Local files/code, browser, and desktop examples produce reopened, verified deliverables on each advertised backend.",
+      "actual": "Saved-package native workers produce and reopen deterministic report files on Linux x64/ARM64. The earlier native blocker is resolved for that path. General files/code, browser, desktop and native Mac Computer Use adapters remain unfinished.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Actual deterministic report bytes validated in module/synthetic-boundary tests. Native files blocked; browser/desktop adapters not implemented.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A10",
+      "requiredCase": "Exclusive desktop and changed sessions",
+      "status": "NOT_IMPLEMENTED",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Competing actors cannot control the same desktop; changed/suspended/rebooted sessions require renewed validation.",
+      "actual": "Desktop grants remain rejected. Exclusive desktop leases, session/display validation and sleep/logout/reboot revalidation are not implemented.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "NOT_IMPLEMENTED",
+          "actual": "Desktop grants are rejected; no desktop lease implementation is claimed.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A11",
+      "requiredCase": "STOP and fault handling",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "STOP, cancellation, timeout, killed processes, disk-full states, provider failure, and incomplete cleanup fail safely and expose evidence.",
+      "actual": "Native cancellation, positive process/namespace cleanup and explicit no-success recovery pass. STOP/storage-fault, interrupted installation and service recovery cases pass. Complete provider/disk/resource fault injection and physical cleanup remain open.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "STOP, uncertainty, peer cancellation, queued-grant revocation and restart gating tested. Native fault injection and complete disk-full qualification remain.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A12",
+      "requiredCase": "Crash side-effect reconciliation",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/reconciliation.test.mjs local-runtime/tests/service-recovery.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Crash/restart around side effects, grant reservation, output commit, and signer requests does not blindly repeat uncertain actions.",
+      "actual": "Offline reconciliation, interrupted reservations, stable private-socket restart and consumed-grant replay rejection pass. Provider and signer uncertainty remains blocked; their complete reconciliation adapters are missing.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Reservations precede dispatch; interrupted grants quarantined. Explicit uncertain-run reconciliation and signer path absent.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A13",
+      "requiredCase": "Honest review independence",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/authority.test.mjs",
+      "fixture": "authority.test.mjs",
+      "expected": "Internal checking cannot satisfy independent-review requirements; known actor-control conflicts are rejected.",
+      "actual": "Known common-control conflicts are refused and internal checks cannot claim independent review. Protocol eligibility, verified placement and independent-operation qualification remain unfinished.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Known conflicts refused; unverified external control cannot claim independent review; internal checks labeled. Protocol review placement still missing.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A14",
+      "requiredCase": "Read-only original evidence",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/native/isolation.test.mjs",
+      "fixture": "native/isolation.test.mjs",
+      "expected": "Review cannot mutate submitted original bytes; reports and scratch files remain writable only in permitted locations.",
+      "actual": "The Linux native read-only input test now passes, and Node checks the exact supplied bytes with separate disposable scratch. Browser/desktop and Mac review backends remain unimplemented.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "BLOCKED_ENVIRONMENT",
+          "actual": "Node consumes exact original bytes; native read-only mount negative test cannot run successfully here.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A15",
+      "requiredCase": "Safe export and hostile import",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/portability.test.mjs",
+      "fixture": "portability.test.mjs",
+      "expected": "Export contains no forbidden secrets; hostile archives, source drift, snapshot races, and duplicate activation are handled safely.",
+      "actual": "Allowlisted inert role exports and capsule validation reject hostile inputs; installer snapshots, path/mode/size/hash checks and transactional recovery pass. Authoritative cross-host activation fencing remains absent; ordinary imports grant no authority.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Allowlisted inert role JSON and existing capsule validators pass negative tests. No arbitrary archive or database import supported.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A16",
+      "requiredCase": "Restore on a second compatible host",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/portability.test.mjs",
+      "fixture": "portability.test.mjs",
+      "expected": "Restoring on a second compatible host preserves approved portable data, creates fresh bindings, and does not restore authority.",
+      "actual": "Separate test stores create fresh inactive identities with no restored grants or economic authority. Physical second-host restoration, destination qualification and authoritative fencing remain NOT_RUN or unimplemented.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Separate test stores produce a fresh inactive identity without authority. Real second-host restore NOT_RUN.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A17",
+      "requiredCase": "Complete SUCCESSOR journey",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/successor.test.mjs",
+      "fixture": "successor.test.mjs",
+      "expected": "SUCCESSOR Ω completes execution → separately authorized review → unselected checked candidate → explicit choice → offline restore/replay.",
+      "actual": "Deterministic execution, separately authorized internal review, rejected candidates, atomic explicit choice and capsule restore pass. Local-mode Computer Use and independently administered review are not completed by the separate Dedicated Fleet Builder qualification.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Deterministic execution, separately authorized internal review, rejected candidate, explicit choice and capsule restore pass. Full live ComputeWorker/independent-review journey NOT_IMPLEMENTED.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A18",
+      "requiredCase": "Protocol integration unchanged",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/roles.test.mjs",
+      "fixture": "roles.test.mjs",
+      "expected": "Existing protocol integration tests pass through local-mode adapters without changing contracts or using live funds.",
+      "actual": "Existing config/formal-policy semantics are reused and the inherited Fleet integration passed at the recorded checkpoint. Local-mode EVM/transaction construction, signer confirmation and reconciliation adapters remain unfinished.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Exact existing config and formal policy reused and tested; original 84 engineering regressions pass. New local-mode EVM and signer integration absent.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A19",
+      "requiredCase": "IPC and browser defenses",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/transport.test.mjs local-runtime/tests/diagnostics.test.mjs",
+      "fixture": "transport.test.mjs",
+      "expected": "Loopback/IPC authentication, browser-origin defenses, private-network restrictions, and private-data export controls resist negative tests.",
+      "actual": "Real Unix-socket authentication, scoped negatives, origin/Host controls and second-supervisor refusal passed on both Linux architectures. The new allowlisted support-report path requires its own exact-head CI. Full private-network/backend coverage remains open.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "All transport tests, including real Unix socket authority and second-supervisor refusal, pass on CI Linux x64/ARM64. Full native/private network matrix remains.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A20",
+      "requiredCase": "EN/FR functional and accessibility",
+      "status": "PARTIAL",
+      "command": "node --test local-runtime/tests/browser/dashboard.test.mjs",
+      "fixture": "browser/dashboard.test.mjs",
+      "expected": "EN/FR onboarding, keyboard/screen-reader paths, zoom/reflow, failure recovery, and both deployment modes pass functional/accessibility checks.",
+      "actual": "EN/FR onboarding, keyboard/reflow, automated axe checks, scoped approval and reconnect controls passed at the recorded checkpoint. New support preview/download controls require exact-head browser CI. Human screen-reader/usability and complete dual-mode onboarding remain NOT_RUN.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Chromium EN/FR onboarding, keyboard, axe WCAG tags, localized blocked-state guidance and mobile reflow pass on CI head c7313d9. Human screen-reader and complete dual-mode usability remain NOT_RUN.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A21",
+      "requiredCase": "Exact downloadable artifact",
+      "status": "PARTIAL",
+      "command": "python3 local-runtime/package.py --verify ARCHIVE.zip",
+      "fixture": "package.py",
+      "expected": "Exact downloadable artifacts install and run the exercised paths; manifests, licenses, hashes, inventories, and executable modes verify.",
+      "actual": "The exact 8,220,684-byte development package was verified after download: 2,841 members; saved native execution, installation, service recovery/restart and retained state/outputs passed. It remains a development package, not a qualified operator release. Revised source needs fresh exact-archive checks.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "PARTIAL",
+          "actual": "Saved development archive exposed missing imports, now fixed in the pack, sandbox mount and source identity. Extracted core suite passes 25/26 locally; Unix socket remains EPERM. Native qualification is blocked; archive is not an installer.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    },
+    {
+      "id": "A22",
+      "requiredCase": "Physical targets and endurance",
+      "status": "NOT_RUN",
+      "command": "Not automated; follow the full handoff A22 requirements",
+      "fixture": "physical commissioning",
+      "expected": "Fresh install, coexistence, sleep/reboot, recovery, local inference connectivity where applicable, and endurance are separately exercised on declared physical targets.",
+      "actual": "No physical Linux x64/ARM64 or Apple silicon commissioning, sleep/reboot, real provider credentials, human usability or endurance observations have been supplied.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
+      "fullCasePassed": false,
+      "historicalObservations": [
+        {
+          "status": "NOT_RUN",
+          "actual": "No physical Linux x64/ARM64 or Apple silicon host, live credentials or endurance observations supplied.",
+          "evidence": "validation.json and retained GitHub workflow logs"
+        }
+      ]
+    }
+  ],
+  "currentEvidenceNote": "Entries distinguish the latest recorded checkpoint from remaining full-handoff work. Earlier actual/status observations are preserved per row. Checkpoints qualify only their named source and archive; current PR checks must qualify each new head. No full-handoff or release-eligibility claim has changed.",
+  "observedCheckpoints": [
+    {
+      "head": "db19a6a6cab86e5c883e194d091a1da92d12701f",
+      "workflow": 38490542629,
+      "platforms": [
+        "linux-x64",
+        "linux-arm64"
+      ],
+      "supervisorSource": 33,
+      "supervisorArchive": 33,
+      "installerFixtures": 8,
+      "nativeSource": 3,
+      "nativeArchive": 3,
+      "installedJourney": "PASS",
+      "enFrBrowser": "PASS",
+      "provider": "none",
+      "productionQualified": false,
+      "fullHandoffComplete": false
+    },
+    {
+      "head": "bf88f46d7d86b5523cc54b162697f67942caf78a",
+      "workflow": 38498028265,
+      "platforms": [
+        "linux-x64",
+        "linux-arm64"
+      ],
+      "supervisorSource": 38,
+      "supervisorArchive": 38,
+      "installerFixtures": 10,
+      "nativeSource": 4,
+      "nativeArchive": 4,
+      "installedJourney": "PASS",
+      "enFrBrowser": "PASS",
+      "actualGatewayRoles": [
+        "agent",
+        "node",
+        "moderator",
+        "employer",
+        "evidence",
+        "recovery"
+      ],
+      "assistantSandbox": "NATIVE_LOCAL_RUNTIME",
+      "providerTransport": "local-synthetic-fixture",
+      "liveProviderJudgment": false,
+      "archiveSHA256": "a9506a9de8faee912cba15f62a01e2aa0da86dc715aee1df6d00dfae9038d78e",
+      "archiveFiles": 2841,
+      "productionQualified": false,
+      "fullHandoffComplete": false
+    },
+    {
+      "head": "7adeed55e58b6bf774f3b7b3beca13a310e89924",
+      "workflow": 38502591461,
+      "platforms": [
+        "linux-x64",
+        "linux-arm64"
+      ],
+      "supervisorSource": 40,
+      "supervisorArchive": 40,
+      "installerFixtures": 15,
+      "nativeSource": 4,
+      "nativeArchive": 4,
+      "installedJourney": "PASS",
+      "stableAssistantRestart": true,
+      "actualServiceRecovery": true,
+      "restartPreservedReservations": 2,
+      "oldGrantReplayed": false,
+      "enFrBrowser": "PASS",
+      "actualGatewayRoles": [
+        "agent",
+        "node",
+        "moderator",
+        "employer",
+        "evidence",
+        "recovery"
+      ],
+      "assistantSandbox": "NATIVE_LOCAL_RUNTIME",
+      "providerTransport": "local-synthetic-fixture",
+      "archiveSHA256": "c7dd34588bc916c7c226895ec6bf12819f99cd482c187739962efdc422b6df38",
+      "archiveFiles": 2841,
+      "fullHandoffComplete": false,
+      "productionQualified": false
+    },
+    {
+      "head": "6148924c58ccd4c043d460efad54df28d375a66a",
+      "integrationSource": "2c899fd302b720592b7eeccb1f292818ef27aca1",
+      "workflow": 38508295369,
+      "platforms": [
+        "linux-x64",
+        "linux-arm64"
+      ],
+      "supervisorSource": 41,
+      "supervisorArchive": 41,
+      "installerFixtures": 15,
+      "nativeSource": 4,
+      "nativeArchive": 4,
+      "installedJourney": "PASS",
+      "enFrBrowser": "PASS",
+      "actualGatewayRoles": [
+        "agent",
+        "node",
+        "moderator",
+        "employer",
+        "evidence",
+        "recovery"
+      ],
+      "providerTransport": "local-synthetic-fixture",
+      "archiveSHA256": "6305ccda0664a09d80f3cda2ad8a54e6288555ea2a618a96d356f3dd75c1f092",
+      "archiveBytes": 8220684,
+      "archiveFiles": 2841,
+      "downloadVerified": true,
+      "fullHandoffComplete": false,
+      "productionQualified": false
+    }
+  ],
+  "releaseEligibilityScope": "complete Local Skills product defined by IMPLEMENTATION_HANDOFF.md",
+  "previewReleaseSpecification": "../../local-runtime/preview-release.json",
+  "previewReleaseBoundary": "PREVIEW_RELEASE.md; requires its own exact-source coordinated qualification and is never full-handoff or production qualification"
+}
