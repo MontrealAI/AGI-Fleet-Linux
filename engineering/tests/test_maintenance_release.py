@@ -68,7 +68,7 @@ class MaintenanceReleaseTests(unittest.TestCase):
                         self.assertEqual(value[field], '1.1.1'); value[field] = '1.1.0'
                     old = plistlib.dumps(value, sort_keys=False)
                 elif relative.name == 'index.html' and relative.parent.name in ('app', 'web'):
-                    old = data.replace(b'id="appVersion">1.1.1<', b'id="appVersion">1.1.0<').replace(
+                    old = data.replace(b'data-app-version>1.1.1<', b'data-app-version>1.1.0<').replace(b'id="appVersion">1.1.1<', b'id="appVersion">1.1.0<').replace(
                         b'/AGI-Fleet-Linux/blob/v1.1.1-qualification/', b'/AGI-Fleet-Linux/blob/v1.1.0-qualification/')
                 elif len(relative.parts) == 3 and relative.parts[0] == 'packages':
                     if relative.name in ('README.html', 'START_HERE.html', 'Linux-Guide.html'):
