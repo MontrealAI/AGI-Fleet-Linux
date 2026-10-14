@@ -1,6 +1,6 @@
 # Reproducing Linux 1.0.9 native validation
 
-**This is the frozen 1.0.9 baseline, which passed on both architectures.** See the [audited native addendum](../validation/LINUX_1_0_9_NATIVE_ADDENDUM.md). For the current 1.1.0 build and publication process, use the [development guide](../docs/DEVELOPMENT.md). The commands below reproduce historical engineering qualification; operators use the [fresh-install guide](../docs/FRESH_INSTALL.md).
+**This is the frozen 1.0.9 baseline, which passed on both architectures.** See the [audited native addendum](../validation/LINUX_1_0_9_NATIVE_ADDENDUM.md). For the current 1.1.1 build and publication process, use the [development guide](../docs/DEVELOPMENT.md). The commands below reproduce historical engineering qualification; operators use the [fresh-install guide](../docs/FRESH_INSTALL.md).
 
 Use a fresh, disposable Ubuntu 24.04 engineering VM. The supplied workflow uses GitHub-hosted x86-64 and ARM64 VMs, with a read-only repository token and no operator secrets. Authorized root access is used only for isolated test provisioning and real foreign-ownership fixtures. Do not run this harness in an operator signer or compute account.
 

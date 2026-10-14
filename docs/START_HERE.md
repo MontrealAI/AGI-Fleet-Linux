@@ -9,7 +9,7 @@
 | What you want to do | Start here | What to expect |
 | --- | --- | --- |
 | Try a useful local mission without installing anything. | [SUCCESSOR Ω Builder](https://montrealai.github.io/AGI-Fleet-Linux/successor.html) | The two local mission families need no account, wallet or provider key. Keep the downloaded files and capsule. |
-| Prepare a dedicated Linux worker or reviewer. | [Linux fresh installation](FRESH_INSTALL.md) | Use the published Linux **1.1.0 qualification prerelease**, then record your own machine's readiness. |
+| Prepare a dedicated Linux worker or reviewer. | [Linux fresh installation](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/FRESH_INSTALL.md) | Use the published Linux **1.1.0 qualification prerelease**, then record your own machine's readiness. |
 | Prepare an Apple silicon Mac. | [Mac fresh installation](../macos/docs/FRESH_INSTALL.md) | Use the separate Mac **1.20.2 qualification prerelease** and Mac instructions. Linux evidence does not qualify a Mac. |
 | Connect the Builder to an installed Fleet Agent and Node. | [Builder connection, review and recovery guide](../successor/docs/GUIDE.md) | Inspect the exact work, authorize execution, separately authorize review, inspect the capsule and deliberately choose a version. |
 | Develop portable skills and multiple isolated local roles. | [Local Skills development PR #26](https://github.com/MontrealAI/AGI-Fleet-Linux/pull/26) | An unfinished development track, not part of the published Linux 1.1.0 installer. Do not treat green component tests as full-handoff completion. |
@@ -43,4 +43,8 @@ For project recovery, start with the [Builder guide](../successor/docs/GUIDE.md)
 
 ## Useful next pages
 
-[Linux installation](FRESH_INSTALL.md) · [Mac installation](../macos/docs/FRESH_INSTALL.md) · [SUCCESSOR guide](../successor/docs/GUIDE.md) · [Release evidence](../validation/LINUX_1_1_0_RELEASE_ADDENDUM.md) · [Developer and publication guide](DEVELOPMENT.md)
+[Linux installation](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/FRESH_INSTALL.md) · [Mac installation](../macos/docs/FRESH_INSTALL.md) · [SUCCESSOR guide](../successor/docs/GUIDE.md) · [Release evidence](../validation/LINUX_1_1_0_RELEASE_ADDENDUM.md) · [Developer and publication guide](DEVELOPMENT.md)
+
+## Preparing Linux 1.1.1
+
+The current source prepares the **Linux 1.1.1 maintenance candidate**. Use its [version-matched installation guide](FRESH_INSTALL.md) only after that exact archive has passed the complete publication gates. The published Linux 1.1.0 links above deliberately remain tied to the prior verified release; do not mix the two sets of commands. [Maintenance scope and acceptance](RELEASE_NOTES_1_1_1.md).
