@@ -92,8 +92,10 @@ def inline(text):
     return escaped
 
 
-def render_markdown(text, back='START_HERE.html'):
+def render_markdown(text, back='START_HERE.html', *, language='en'):
     """Render the bounded repository guide format without network dependencies."""
+    require(language in ('en', 'fr'), 'Unsupported guide language')
+    navigation = 'Commencer ici' if language == 'fr' else 'Start here'
     lines, result, paragraph = text.splitlines(), [], []
     listing = None
     seen_ids = {}
@@ -158,7 +160,7 @@ def render_markdown(text, back='START_HERE.html'):
     title = html.escape(lines[0].lstrip('# ') if lines else 'AGI Fleet Linux')
     digest = hashlib.sha256(text.encode()).hexdigest()
     css = 'html{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0b0d16;color:#eef1fa;font:16px/1.65 system-ui,sans-serif}main{max-width:1060px;margin:auto;padding:32px 24px 80px}a{color:#c9b6ff}nav{padding-bottom:18px;border-bottom:1px solid #43475c}h1{font-size:clamp(30px,5vw,44px);line-height:1.15}h2{margin-top:38px}pre{padding:18px;background:#151a2b;border:1px solid #4f5570;border-radius:8px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.88em}p,li{overflow-wrap:anywhere}.table{overflow:auto}table{border-collapse:collapse;width:100%}td,th{padding:10px;text-align:left;border-bottom:1px solid #43475c}a:focus-visible{outline:3px solid #d4c4ff;outline-offset:3px}blockquote{border-left:3px solid #bda6ed;margin-left:0;padding-left:16px}@media print{html{color-scheme:light}body,pre{background:white;color:black}a{color:black}}'
-    return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="' + digest + '"><meta name="referrer" content="no-referrer"><title>' + title + '</title><style>' + css + '</style></head><body><main><nav><a href="' + html.escape(back, quote=True) + '">Start here</a></nav>' + '\n'.join(result) + '</main></body></html>\n'
+    return '<!doctype html><html lang="' + language + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="' + digest + '"><meta name="referrer" content="no-referrer"><title>' + title + '</title><style>' + css + '</style></head><body><main><nav><a href="' + html.escape(back, quote=True) + '">' + navigation + '</a></nav>' + '\n'.join(result) + '</main></body></html>\n'
 
 
 def edition_paths(root):
@@ -243,7 +245,8 @@ def add_operator_guides(root, repository, version, commit):
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_text(text)
             back = os.path.relpath(app / 'START_HERE.html', destination.parent)
-            destination.with_suffix('.html').write_text(render_markdown(text, back))
+            destination.with_suffix('.html').write_text(render_markdown(text, back,
+                language='fr' if relative.as_posix() == 'docs/COMMENCER_ICI.md' else 'en'))
         welcome = f'''# AGI Fleet Linux {version}
 
 **Engineering and physical-qualification candidate — {role.title()} edition.**

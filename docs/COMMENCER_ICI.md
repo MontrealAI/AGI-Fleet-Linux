@@ -9,7 +9,7 @@
 | Votre objectif | Point de départ | À quoi vous attendre |
 | --- | --- | --- |
 | Essayer une mission locale utile sans installation. | [Builder SUCCESSOR Ω en français](https://montrealai.github.io/AGI-Fleet-Linux/successor-fr.html) | Les deux familles de missions locales ne nécessitent ni compte, ni portefeuille, ni clé de fournisseur. Conservez les fichiers et la capsule téléchargés. |
-| Préparer un travailleur ou un réviseur sur un ordinateur Linux dédié. | [Installation Linux](FRESH_INSTALL.md) | Utilisez la **préversion de qualification Linux 1.1.0** publiée, puis consignez l'état de préparation de votre propre machine. |
+| Préparer un travailleur ou un réviseur sur un ordinateur Linux dédié. | [Installation Linux](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/FRESH_INSTALL.md) | Utilisez la **préversion de qualification Linux 1.1.0** publiée, puis consignez l'état de préparation de votre propre machine. |
 | Préparer un Mac Apple silicon. | [Installation Mac](../macos/docs/FRESH_INSTALL.md) | Utilisez la **préversion de qualification Mac 1.20.2**, distincte, et les instructions Mac. Les résultats Linux ne qualifient pas un Mac. |
 | Relier le Builder à un Agent et à un Node Fleet installés. | [Connexion, révision et récupération](../successor/docs/GUIDE.md) | Inspectez le travail exact, autorisez son exécution, autorisez séparément la révision, vérifiez la capsule et choisissez délibérément une version. |
 | Développer des skills portables et plusieurs rôles locaux isolés. | [Développement Local Skills, PR #26](https://github.com/MontrealAI/AGI-Fleet-Linux/pull/26) | Ce chantier reste incomplet et ne fait pas partie de l'installateur Linux 1.1.0 publié. Des tests de composants réussis ne prouvent pas que l'ensemble est terminé. |
@@ -45,4 +45,8 @@ Pour récupérer un projet, commencez par le [guide du Builder](../successor/doc
 
 ## Pages utiles
 
-[Installation Linux](FRESH_INSTALL.md) · [Installation Mac](../macos/docs/FRESH_INSTALL.md) · [Guide SUCCESSOR](../successor/docs/GUIDE.md) · [Preuves de publication](../validation/LINUX_1_1_0_RELEASE_ADDENDUM.md) · [Développement et publication](DEVELOPMENT.md)
+[Installation Linux](https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.1.0-qualification/docs/FRESH_INSTALL.md) · [Installation Mac](../macos/docs/FRESH_INSTALL.md) · [Guide SUCCESSOR](../successor/docs/GUIDE.md) · [Preuves de publication](../validation/LINUX_1_1_0_RELEASE_ADDENDUM.md) · [Développement et publication](DEVELOPMENT.md)
+
+## Préparation de Linux 1.1.1
+
+Les sources actuelles préparent la **préversion de maintenance Linux 1.1.1**. Utilisez son [guide d’installation correspondant](FRESH_INSTALL.md) uniquement après la réussite de toutes les vérifications de publication de cette archive précise. Les liens Linux 1.1.0 ci-dessus restent volontairement liés à la publication antérieure vérifiée; ne mélangez pas les commandes des deux versions. [Portée et acceptation de la maintenance](RELEASE_NOTES_1_1_1.md).
