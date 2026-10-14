@@ -1,6 +1,6 @@
 # Develop and reproduce AGI Fleet Linux
 
-The reviewed application source lives under `fleet/`: all six roles, shared runtime, 343 regression files, lockfiles and license notices. The **1.1.1** source identity is recorded in `engineering/next-release.json` and `fleet/source-inventory.json`. A source checkout alone is not an operator distribution.
+The reviewed application source lives under `fleet/`: all six roles, shared runtime, 343 regression files, lockfiles and license notices. The **1.1.2** source identity is recorded in `engineering/next-release.json` and `fleet/source-inventory.json`. A source checkout alone is not an operator distribution.
 
 ## Check a source change
 
@@ -14,7 +14,7 @@ node --test fleet/tests/linux-platform.test.mjs
 
 Shared runtime changes belong in `fleet/shared/runtime/`. Propagate them with `python3 fleet/scripts/sync-shared-runtime.py --root fleet` and then use `--check`. Preserve role-specific adapters. Updating source also requires reviewed inventory hashes and a new release identity; do not change an already-published ZIP.
 
-## Build the complete 1.1.1 candidate
+## Build the complete 1.1.2 candidate
 
 The builder downloads and verifies the frozen 1.0.9 ZIP, overlays exactly the inventoried source, incorporates current operator guides, regenerates the seven edition inventories/manifests and SBOMs, and validates the final extracted archive. It never creates accounts, opens a wallet or starts an operator service.
 
@@ -28,11 +28,11 @@ python3 engineering/build-next-release.py \
 
 Use `--archive /ABSOLUTE/PATH/AGI_Fleet_Linux_v1.0.9.zip` for an offline baseline. Its hash must match the frozen release. `--node` can identify the exact Node executable. Do not use the resulting candidate for funded work; publication requires the saved-archive qualification workflow.
 
-Output includes `AGI_Fleet_Linux_v1.1.1.zip`, `release.json`, packaging receipts, and final-extraction evidence. `release.json` identifies the bytes; it is not a claim that native or physical tests have passed.
+Output includes `AGI_Fleet_Linux_v1.1.2.zip`, `release.json`, packaging receipts, and final-extraction evidence. `release.json` identifies the bytes; it is not a claim that native or physical tests have passed.
 
 ## Qualify and publish
 
-Linux 1.1.1 binds AGIJobManager 1.16.1 at `09d89fb22d52a8df194e8dd0a00beff9f7771d82`, including all 780 Manager regressions. The build metadata, each evidence binding and the independent audit retain the exact target. Publication additionally rejects mixed workflow runs, a different build commit and incomplete log coverage. Historical 1.0.9 and 1.0.10 results remain unchanged.
+Linux 1.1.2 binds AGIJobManager 1.16.1 at `d9b65eda376e990db30bfd20235cac0447af7fa4`, including all 780 Manager regressions. The build metadata, each evidence binding and the independent audit retain the exact target. Publication additionally rejects mixed workflow runs, a different build commit and incomplete log coverage. Historical 1.0.9 and 1.0.10 results remain unchanged.
 
 The [next-release workflow](../.github/workflows/next-release.yml) builds once and distributes the same artifact to disposable x86-64 and ARM64 runners. It runs targeted/full native suites and AGIJobManager integration separately, then rechecks retained log hashes, test-source identity, exact counts and workflow provenance. Root runtime provisioning is limited to disposable GitHub-hosted runners; do not run that harness in an operator account or on a shared workstation.
 
@@ -49,11 +49,11 @@ python3 engineering/materialize-release.py --source-only --output /ABSOLUTE/PATH
 
 An offline ZIP can be supplied with `--archive`. Materialization verifies size, SHA-256, CRC, seven manifests, inventories and executable modes before extracting into an absent canonical directory.
 
-`engineering/current-release.json` preserves the 1.0.9 acceptance anchor for the historical audit tools; `engineering/next-release.json` describes the 1.1.1 source and required gates. The published 1.1.1 manifest is the authority for new archive identity and observed test results. The [baseline engineering guide](../engineering/README.md) documents historical reproduction commands. Do not update historical constants to make a new candidate appear previously accepted.
+`engineering/current-release.json` preserves the 1.0.9 acceptance anchor for the historical audit tools; `engineering/next-release.json` describes the 1.1.2 source and required gates. The published 1.1.2 manifest is the authority for new archive identity and observed test results. The [baseline engineering guide](../engineering/README.md) documents historical reproduction commands. Do not update historical constants to make a new candidate appear previously accepted.
 
 ## Authorized-workspace development preview
 
-New workstation capability work lives under [`workstation/`](../workstation/QUICKSTART.md), version `0.1.0-preview.1`. Its Linux engine records a historical **1.0.9** native workforce source basis in `workstation/candidate.json` and has its own source inventory, tests and qualification ledger. The native-workstation preview is **not included in the 1.1.1 Fleet ZIP**. Its reviewed public Studio format and explicit backup exclusion are incorporated into the 1.1.1 Agent and Node; the original overlay remains available below. The separate native preview does not modify a published Fleet archive or inherit acceptance from either the frozen 1.0.9 release or the 1.1.1 release track. Start the guided terminal menu with `npm --prefix workstation start` on a prepared task account; the engine itself uses Node built-ins and needs no npm dependency install. Read the quickstart before connecting a desktop.
+New workstation capability work lives under [`workstation/`](../workstation/QUICKSTART.md), version `0.1.0-preview.1`. Its Linux engine records a historical **1.0.9** native workforce source basis in `workstation/candidate.json` and has its own source inventory, tests and qualification ledger. The native-workstation preview is **not included in the 1.1.2 Fleet ZIP**. Its reviewed public Studio format and explicit backup exclusion are incorporated into the 1.1.2 Agent and Node; the original overlay remains available below. The separate native preview does not modify a published Fleet archive or inherit acceptance from either the frozen 1.0.9 release or the 1.1.2 release track. Start the guided terminal menu with `npm --prefix workstation start` on a prepared task account; the engine itself uses Node built-ins and needs no npm dependency install. Read the quickstart before connecting a desktop.
 
 The [Studio source overlay](../workstation/STUDIO.md) adds general-format imports to the top-level Agent and Node applications. To assemble a **disposable source fixture** for development outside this checkout:
 

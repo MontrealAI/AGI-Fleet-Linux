@@ -1,0 +1,47 @@
+AGI Fleet Linux 1.1.1 — Agent edition
+Current Linux installation and qualification guide
+
+START HERE
+Open START_HERE.html in this verified release folder.
+
+Fresh installation:
+  docs/linux-current/docs/FRESH_INSTALL.html
+Plain-text instructions:
+  docs/linux-current/docs/FRESH_INSTALL.md
+Troubleshooting and safe failure reporting:
+  docs/linux-current/docs/TROUBLESHOOTING.html
+  docs/linux-current/docs/TROUBLESHOOTING.md
+Physical qualification ledger:
+  docs/linux-current/docs/PHYSICAL_QUALIFICATION.html
+Release status:
+  docs/linux-current/README.html
+
+BEFORE INSTALLATION
+Use the complete AGI_Fleet_Linux_v1.1.1.zip and verify its SHA-256
+against SHA256SUMS-v1.1.1.txt from the same published release.
+Confirm that this exact archive has passed native acceptance on both
+architectures and its controlled fresh-install gate is open.
+Earlier releases' results do not qualify this archive.
+
+The supported target is Ubuntu Desktop 24.04 LTS, x86-64 or ARM64.
+Follow the current fresh-install guide in order with NEW nonadministrator accounts
+for separate signer and compute roles. Keep the complete Fleet folder.
+Keep previous installations inactive and preserved.
+No migration, engineering fixtures or manual profile/state edits are required.
+The administrator follows Prepare-Ubuntu.sh in the guide. In the separate
+compute desktop session, follow Prepare-Compute.sh and the role's
+Install.sh --file PRIVATE_SETUP.json instructions. Use only the Linux .sh
+entry points named in the guide. Qualify each role independently.
+
+Physical installation, rootless Docker, OAuth/inference, live documents,
+base and browser cleanup, reboot identity and 72-hour endurance require
+their own recorded results. Production qualification remains pending.
+
+ON FAILURE
+Stop and preserve accounts, state, reports and COMPUTE_STOP. Follow the
+current troubleshooting guide above. Never remove STOP manually, weaken
+ownership checks or substitute the root Docker daemon. Keep wallet
+material, setup JSON, tokens and private documents out of support reports.
+
+Historical instructions and evidence remain for engineering traceability.
+Use the current guide paths above for this release.

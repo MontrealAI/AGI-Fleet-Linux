@@ -342,6 +342,10 @@ def add_successor(root, repository, node):
     guide = (repository / 'successor/docs/GUIDE.md').read_text()
     (first / 'GUIDE.md').write_text(guide)
     (first / 'GUIDE.html').write_text(render_markdown(guide, '../../START_HERE.html'))
+    for source in (repository / 'successor/docs').glob('*'):
+        if source.is_file() and source.name != 'GUIDE.md':
+            shutil.copyfile(source, first / source.name)
+            if source.suffix == '.md': (first / source.with_suffix('.html').name).write_text(render_markdown(source.read_text(), '../../START_HERE.html'))
     for role, app in edition_paths(root):
         if role != 'fleet':
             shutil.copytree(first, app / 'docs/successor')
@@ -415,7 +419,7 @@ def build(args):
     spec = importlib.util.spec_from_file_location('candidate_preparation', root / 'scripts/prepare-release.py')
     preparation = importlib.util.module_from_spec(spec); spec.loader.exec_module(preparation)
     verified = preparation.verify_archive(destination)
-    if version == '1.1.1':
+    if version in ('1.1.1', '1.1.2'):
         verify_maintenance_archive(destination)
     gate_path = out / (prefix + '-checks/final-gate.json')
     gate = json.loads(gate_path.read_text())

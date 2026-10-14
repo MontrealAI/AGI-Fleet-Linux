@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import {OutcomeLedger,summarizeOutcomes} from './outcomes.mjs';
 import {fail,keys,canonical,parseStrict,sha256} from './vendor/manager/site/assets/successor/safe.mjs';
 import {compileRequest,inspectRequest,computer,checkReturnedWork} from './project.mjs';
 
@@ -13,6 +14,7 @@ export class SuccessorController {
     try {
       if(!fs.existsSync(this.dir))fs.mkdirSync(this.dir,{mode:0o700});
       const stat=fs.lstatSync(this.dir);fail(stat.isDirectory()&&!stat.isSymbolicLink()&&!(stat.mode&0o077),'FLEET_STORE_UNSAFE');
+      this.outcomes=new OutcomeLedger(path.join(controller.home,'successor-outcomes'));
       const names=fs.readdirSync(this.dir);fail(names.length<=100,'FLEET_HISTORY_FULL');
       for(const name of names){fail(/^[a-f0-9]{64}\.json$/.test(name),'FLEET_HISTORY_DAMAGED');const record=this.read(name);fail(record.key+'.json'===name&&record.role===role,'FLEET_HISTORY_DAMAGED');this.records.push(record);}
     } catch(error){this.problem=error.code||error.message;}
@@ -37,7 +39,7 @@ export class SuccessorController {
     return {schema:'agi-fleet/successor-runtime-observation/v1',role,runtime:h.runtime,runtimeSha256:computer.digest(h.runtime),policyHash:h.policyHash,
       observedAt:companion.now(),expiresAt:companion.now()+60000,qualification:h.qualification,authority:'none'};
   }
-  status(){return {role:this.role,problem:this.problem,studio:this.c.studio.status(),runs:this.c.vault.unlocked?this.records.map(({request,...r})=>r):[],authority:'none',productionQualified:false};}
+  status(){return {outcomeSummary:this.outcomes?summarizeOutcomes(this.outcomes.read()):null,role:this.role,problem:this.problem,studio:this.c.studio.status(),runs:this.c.vault.unlocked?this.records.map(({request,...r})=>r):[],authority:'none',productionQualified:false};}
   async prepare(input,principal){
     fail(typeof principal==='string'&&principal.length>0,'FLEET_SESSION_REQUIRED');
     fail(this.records.length<100,'FLEET_HISTORY_FULL');this.c.requireStopped();
@@ -71,18 +73,25 @@ export class SuccessorController {
     const record={schema:'agi-fleet/successor-attempt/v1',key:grant.key,role:this.role,status:'reserved',at:now,run:null,
       specSha256:grant.compiled.specSha256,request:grant.request,observation:fresh};
     this.persist(record,true);this.records.push(record);
-    try{const run=this.c.studio.start(grant.studioInput);record.run=run.id;record.status='dispatched';this.persist(record);return {key:record.key,run};}
-    catch(error){record.status='blocked-or-uncertain';this.persist(record);throw error;}
+    this.observe(record,'reserved');
+    this.outcomes.append({attempt:record.key,type:'cost',at:now,evidenceSha256:record.specSha256,data:{id:'provider-billing-unavailable',category:'provider',basis:'unknown',currency:'USD',amountMicros:null,billingReferenceSha256:null}});
+    try{const run=this.c.studio.start(grant.studioInput);record.run=run.id;record.status='dispatched';this.persist(record);this.observe(record,'dispatched');return {key:record.key,run};}
+    catch(error){record.status='blocked-or-uncertain';this.persist(record);this.observe(record,'blocked-or-uncertain');throw error;}
   }
+  observe(record,state,outputHashes=[]){this.outcomes.append({attempt:record.key,type:'attempt',at:this.c.companion.now(),evidenceSha256:record.specSha256,data:{state,projectSha256:record.request?.plan.missionSha256??record.specSha256,method:record.request?.plan.candidateSha256??'installed-node-review',inputHashes:record.request?.plan.immutableInputs.map(f=>f.sha256)??[],outputHashes,runtimeSha256:record.observation.runtimeSha256}});}
   revoke(){this.tickets.clear();return {revoked:true,runningWork:'Use Stop work to cancel the active Studio run. Safety STOP evidence is preserved.'};}
-  async stop(){this.revoke();return this.c.studio.cancel();}
+  async stop(){this.revoke();const result=await this.c.studio.cancel();for(const r of this.records.filter(r=>r.status==='dispatched')){this.observe(r,'stopped');r.status='stopped';this.persist(r);}return result;}
   async result(key,reviewReceipt=null){
     if(typeof reviewReceipt==='string'){reviewReceipt=parseStrict(reviewReceipt,1000000);reviewReceipt=reviewReceipt.receipt??reviewReceipt;}
     const r=this.records.find(r=>r.key===key);fail(r&&r.run,'FLEET_RUN_UNKNOWN');
     const receipt=this.c.studio.export(r.run,'receipt'),handoff=this.c.studio.export(r.run,'handoff');
     fail(handoff.specHash===r.specSha256,'FLEET_SPECIFICATION_CHANGED');
-    if(this.role==='node')return {handoff,receipt};
-    if(reviewReceipt===null)return {request:r.request,handoff,receipt};
-    return checkReturnedWork(r.request,handoff,reviewReceipt,this.api);
+    this.observe(r,'completed',[handoff.deliveryHash]);
+    const observations=this.outcomes.read().filter(row=>row.event.attempt===key);
+    if(this.role==='node')return {handoff,receipt,outcomeObservations:observations};
+    if(reviewReceipt===null)return {request:r.request,handoff,receipt,outcomeObservations:observations};
+    const result=await checkReturnedWork(r.request,handoff,reviewReceipt,this.api);
+    this.outcomes.append({attempt:r.key,type:'review',at:this.c.companion.now(),evidenceSha256:await sha256(reviewReceipt),data:{verdict:result.outcome==='accepted'?'accepted':'rejected',control:'unverified',deliverySha256:handoff.deliveryHash,eligibilityEvidenceSha256:null}});
+    return {...result,outcomeObservations:this.outcomes.read().filter(row=>row.event.attempt===key)};
   }
 }

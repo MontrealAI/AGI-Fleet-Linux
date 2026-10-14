@@ -14,6 +14,13 @@ sys.path.insert(0, str(ROOT / 'engineering'))
 spec = importlib.util.spec_from_file_location('maintenance_builder', ROOT / 'engineering/build-next-release.py')
 builder = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(builder)
+# Preserve the exact maintenance campaign while current source evolves.
+ROOT = ROOT / 'successor/history/linux-1.1.1-maintenance'
+manifest = (ROOT / 'snapshot.json').read_text().strip()
+assert hashlib.sha256(manifest.encode()).hexdigest() == '94489627bfe33b2f41e98099c8d54565806edafc1e388921b31592902d1659ff'
+for row in json.loads(manifest):
+    assert hashlib.sha256((ROOT / row['path']).read_bytes()).hexdigest() == row['sha256']
+
 
 
 def digest(value):

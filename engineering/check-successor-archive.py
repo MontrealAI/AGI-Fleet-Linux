@@ -31,6 +31,6 @@ def check(archive, node):
         for lang,data in pages.items():assert (root/'rebuilt'/('My-SUCCESSOR-Omega-'+lang+'.html')).read_bytes()==data,'Editable rebuild differs: '+lang
         test=subprocess.run([node,'--test',str(source_root/'vendor/manager/scripts/successor/portable.test.mjs')],capture_output=True,text=True)
         assert test.returncode==0,test.stdout+test.stderr
-        return {'schema':'agi-fleet/successor-archive-check/v1','status':'PASS','archiveSHA256':hashlib.file_digest(open(archive,'rb'),'sha256').hexdigest(),'editionCopies':7,'languages':['en','fr'],'editableSourceRebuild':'BYTE_IDENTICAL','freshPortableTests':2,'authority':'none'}
+        return {'schema':'agi-fleet/successor-archive-check/v1','status':'PASS','archiveSHA256':hashlib.file_digest(open(archive,'rb'),'sha256').hexdigest(),'editionCopies':7,'languages':['en','fr'],'editableSourceRebuild':'BYTE_IDENTICAL','freshPortableTests':6,'authority':'none'}
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--archive',required=True);p.add_argument('--node',default='node');p.add_argument('--out',required=True);a=p.parse_args();value=check(a.archive,a.node);Path(a.out).write_text(json.dumps(value,indent=2)+'\n');print(json.dumps(value))
