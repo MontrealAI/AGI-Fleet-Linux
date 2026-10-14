@@ -5,6 +5,12 @@ on:
   push:
     branches: [main]
     paths: ['engineering/next-release.json']
+  workflow_call:
+    inputs:
+      validation_only:
+        description: Run every existing gate without publishing a Dedicated Fleet release
+        type: boolean
+        required: true
   workflow_dispatch:
     inputs:
       publish:
@@ -193,7 +199,7 @@ jobs:
           if-no-files-found: error
           retention-days: 90
   publish:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish))
+    if: ${{ !inputs.validation_only && github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish)) }}
     needs: [build, native, integration, successor, audit]
     permissions:
       contents: write

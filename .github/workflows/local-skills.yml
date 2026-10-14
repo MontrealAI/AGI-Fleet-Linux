@@ -2,11 +2,22 @@ name: Local Skills development qualification
 on:
   pull_request:
     paths: ['local-runtime/**', 'local-dashboard/**', 'role-skills/**', 'docs/local-skills/**', 'LOCAL_SKILLS.md', '.github/workflows/local-skills.yml']
+  push:
+    branches: [main]
+    paths: ['local-runtime/preview-release.json']
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the explicitly prepared Local Skills development preview
+        type: boolean
+        required: true
+        default: false
 permissions:
   contents: read
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
 concurrency:
-  group: local-skills-${{ github.ref }}
+  group: local-skills-${{ github.ref }}${{ github.event_name == 'pull_request' && format('-{0}', github.sha) || '' }}
   cancel-in-progress: false
 jobs:
   native:
@@ -65,10 +76,12 @@ jobs:
             python3 local-runtime/prepare-engineering-host.py | tee "$RUNNER_TEMP/local-host-evidence/apparmor.json"
       - name: Check skills and state/transport regressions
         run: |
+          set -euo pipefail
           node local-runtime/validate.mjs
-          node --test local-runtime/tests/*.test.mjs
-          AGI_LOCAL_NODE_ARCHIVE="$RUNNER_TEMP/local-node.tar.xz" PYTHONDONTWRITEBYTECODE=1 \
-            python3 -m unittest discover -s local-runtime/tests -p 'test_*.py' -v
+          node --test --test-reporter=tap local-runtime/tests/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/source.tap"
+          AGI_LOCAL_NODE_ARCHIVE="$RUNNER_TEMP/local-node.tar.xz" \
+            python3 -m unittest discover -s local-runtime/tests -p test_install.py -v 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/installer.log"
+          python3 -m unittest discover -s local-runtime/tests -p test_release.py -v
       - name: Build and verify a development archive, never an operator installer
         run: |
           python3 local-runtime/package.py --output "$RUNNER_TEMP/local-preview"
@@ -86,12 +99,16 @@ jobs:
           PY
           cd "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.1"
           node local-runtime/validate.mjs
-          node --test local-runtime/tests/*.test.mjs
+          node --test --test-reporter=tap local-runtime/tests/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/extracted.tap"
       - name: Require real native isolation and actual worker artifacts
-        run: node --test local-runtime/tests/native/*.test.mjs
+        run: |
+          set -euo pipefail
+          node --test --test-reporter=tap local-runtime/tests/native/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/native-source.tap"
       - name: Require native isolation from the exact saved archive
         if: ${{ !cancelled() }}
-        run: node --test "$RUNNER_TEMP"/local-extracted/agi-fleet-local-0.1.0-alpha.1/local-runtime/tests/native/*.test.mjs
+        run: |
+          set -euo pipefail
+          node --test --test-reporter=tap "$RUNNER_TEMP"/local-extracted/agi-fleet-local-0.1.0-alpha.1/local-runtime/tests/native/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/native-archive.tap"
       - name: Install the saved package and run the actual local service and worker
         run: |
           AGI_LOCAL_PACKAGE_ARCHIVE="$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.1.zip" \
@@ -118,6 +135,19 @@ jobs:
             assert e['role']==role and e['actualGateway'] is True and e['actualSandbox'] is True and e['skillObserved'] is True
             assert e['evidenceClass']=='NATIVE_LOCAL_RUNTIME' and e['providerTransport']=='local-synthetic-fixture'
           PY
+      - name: Bind successful observations to exact source and package
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          python3 - <<'PYCODE'
+          import hashlib, json, os
+          from pathlib import Path
+          base=Path(os.environ['RUNNER_TEMP'])
+          archive=base/'local-preview/agi-fleet-local-0.1.0-alpha.1.zip'
+          (base/'local-host-evidence/qualification.json').write_text(json.dumps({
+              'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],
+              'architecture':os.environ['ARCH'],'archiveSHA256':hashlib.sha256(archive.read_bytes()).hexdigest()})+'\n')
+          PYCODE
       - name: Retain development artifact identity
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
@@ -157,7 +187,17 @@ jobs:
           npm ci --prefix engineering/browser-tests --ignore-scripts --no-audit --no-fund
           engineering/browser-tests/node_modules/.bin/playwright install --with-deps --only-shell chromium
       - name: Exercise English and French controls, reflow and accessibility
-        run: node --test local-runtime/tests/browser/dashboard.test.mjs
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/local-dashboard-evidence"
+          node --test --test-reporter=tap local-runtime/tests/browser/dashboard.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-dashboard-evidence/browser.tap"
+          python3 - <<'PYCODE'
+          import json, os
+          from pathlib import Path
+          (Path(os.environ['RUNNER_TEMP'])/'local-dashboard-evidence/qualification.json').write_text(json.dumps({
+              'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],
+              'evidenceClass':'BROWSER_WITH_DECLARED_SYNTHETIC_WORKER'})+'\n')
+          PYCODE
       - name: Retain non-secret dashboard observations
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
@@ -166,3 +206,61 @@ jobs:
           path: ${{ runner.temp }}/local-dashboard-evidence/
           if-no-files-found: warn
           retention-days: 30
+  audit:
+    needs: [native, browser]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Download this run's Local Skills observations
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          pattern: local-*
+          path: evidence
+      - name: Independently audit both saved packages and all observations
+        run: python3 local-runtime/release.py --evidence evidence --output "$RUNNER_TEMP/local-audited"
+      - name: Retain the audited preview
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: audited-local-preview
+          path: ${{ runner.temp }}/local-audited/
+          if-no-files-found: error
+          retention-days: 90
+  fleet:
+    if: github.ref == 'refs/heads/main'
+    # The reusable workflow declares a write-scoped publisher, disabled below.
+    # Its build/test/audit jobs retain their own read-only permissions.
+    permissions:
+      contents: write
+    uses: ./.github/workflows/next-release.yml
+    with:
+      validation_only: true
+  publish:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish))
+    needs: [native, browser, audit, fleet]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the qualified source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Download this run's exact Local Skills packages and observations
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          pattern: local-*
+          path: evidence
+      - name: Download this run's audited full Fleet regression evidence
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: next-publication
+          path: fleet-evidence
+      - name: Reaudit and publish the immutable labeled preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 local-runtime/release.py --evidence evidence --fleet fleet-evidence --output "$RUNNER_TEMP/local-publication" --publish

@@ -1,17 +1,19 @@
 {
   "schema": "agi-fleet/local-integration-preservation/v1",
-  "baseCommit": "92d7768943e2f5363afd404d59e422c1a9d2d767",
-  "localSkillsParent": "6148924c58ccd4c043d460efad54df28d375a66a",
+  "baseCommit": "9a99049a3e84fa1325e8b6d258cea6420924fe38",
+  "localSkillsParent": "08d227934ddeeca5d03bca6aea8df626af36338f",
   "addedPaths": [
     ".github/workflows/local-skills.yml",
     "LOCAL_SKILLS.md",
     "docs/local-skills/ARCHITECTURE.md",
     "docs/local-skills/CLIENT.md",
     "docs/local-skills/CURRENT_STATUS.md",
+    "docs/local-skills/DOWNLOAD.md",
     "docs/local-skills/IMPLEMENTATION_HANDOFF.md",
     "docs/local-skills/INSTALL_AND_RECOVER.md",
     "docs/local-skills/LIFECYCLE_ADDENDUM.md",
     "docs/local-skills/OPENCLAW_CLIENT.md",
+    "docs/local-skills/PREVIEW_RELEASE.md",
     "docs/local-skills/START_HERE.md",
     "docs/local-skills/acceptance.json",
     "docs/local-skills/baseline.json",
@@ -35,10 +37,12 @@
     "local-runtime/package.py",
     "local-runtime/platforms/linux.mjs",
     "local-runtime/prepare-engineering-host.py",
+    "local-runtime/preview-release.json",
     "local-runtime/primitives.mjs",
     "local-runtime/private-file.mjs",
     "local-runtime/qualification/installed-journey.mjs",
     "local-runtime/qualification/openclaw-journey.mjs",
+    "local-runtime/release.py",
     "local-runtime/schemas/client-v1.d.ts",
     "local-runtime/supervisor/diagnostics.mjs",
     "local-runtime/supervisor/reconciliation.mjs",
@@ -59,6 +63,7 @@
     "local-runtime/tests/service-recovery.test.mjs",
     "local-runtime/tests/successor.test.mjs",
     "local-runtime/tests/test_install.py",
+    "local-runtime/tests/test_release.py",
     "local-runtime/tests/transport.test.mjs",
     "local-runtime/validate.mjs",
     "local-runtime/worker.mjs",
@@ -88,9 +93,15 @@
     "role-skills/agi-recovery/references/client.md"
   ],
   "modifiedPaths": [
+    ".github/workflows/next-release.yml",
+    "README.md",
+    "docs/COMMENCER_ICI.md",
+    "docs/START_HERE.md",
     "engineering/build-next-release.py",
     "engineering/tests/test_maintenance_release.py",
-    "macos/preview/source-inventory.json"
+    "macos/preview/source-inventory.json",
+    "website/fr.html",
+    "website/index.html"
   ],
   "removedPaths": [],
   "exceptions": [
@@ -100,7 +111,7 @@
         "engineering/tests/test_maintenance_release.py"
       ],
       "reason": "Enforce maintenance-release exclusion against the actual Fleet inventory and saved installer while allowing additive Local Skills source outside it.",
-      "compatibility": "No Fleet/runtime/dependency/contract bytes or public command contracts change. Main workflow is retained exactly.",
+      "compatibility": "No Fleet/runtime/dependency/contract bytes or public command contracts change; every inherited qualification gate is retained.",
       "verification": "120 engineering regressions, including saved-archive rejection of Local Skills at root and nested paths; complete inherited qualification remains required.",
       "rollback": "Revert these engineering changes together; never publish Local Skills inside the fixed 1.1.1 installer."
     },
@@ -112,10 +123,33 @@
       "compatibility": "Source hash synchronization only; Mac runtime, qualification boundary and published assets unchanged.",
       "verification": "Mac preview source check and materialization regressions; native macOS 15/26 CI remains required.",
       "rollback": "Regenerate only with the corresponding reviewed builder revision."
+    },
+    {
+      "paths": [
+        ".github/workflows/next-release.yml"
+      ],
+      "reason": "Reuse the full existing qualification in the coordinated Local Skills preview run, with its Dedicated Fleet publisher disabled by validation_only.",
+      "compatibility": "All prior gates, defaults and immutable published assets remain unchanged.",
+      "verification": "Complete same-commit/run inherited regression audit is a mandatory preview publication dependency.",
+      "rollback": "Remove workflow_call support and preview publication together."
+    },
+    {
+      "paths": [
+        "README.md",
+        "docs/START_HERE.md",
+        "docs/COMMENCER_ICI.md",
+        "website/index.html",
+        "website/fr.html"
+      ],
+      "reason": "Discoverable English/French preview download, limits and recovery guidance.",
+      "compatibility": "Dedicated Fleet release defaults and frozen versioned installation links remain unchanged.",
+      "verification": "Website build, repository checks and full engineering regression suite.",
+      "rollback": "Remove only the added preview discovery links."
     }
   ],
   "publishedAssetsChanged": false,
   "runtimePoliciesChanged": false,
   "fullHandoffComplete": false,
-  "releaseEligible": false
+  "releaseEligible": false,
+  "releaseEligibilityScope": "complete Local Skills product; separate bounded preview governed by PREVIEW_RELEASE.md"
 }

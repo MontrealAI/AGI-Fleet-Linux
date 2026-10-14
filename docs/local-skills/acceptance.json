@@ -12,7 +12,7 @@
       "fixture": "authority.test.mjs",
       "expected": "Fresh local install completes without a prior Fleet/OpenClaw profile, wallet history, or migration fixture.",
       "actual": "Transactional installation, update/rollback/removal, interrupted-install recovery and the actual saved-package service journey passed on Linux x64/ARM64. Guided OS prerequisite provisioning and native Mac installation/execution remain unfinished.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -30,7 +30,7 @@
       "fixture": "../engineering/tests",
       "expected": "Existing Dedicated Fleet installs and workflows pass before and after local-mode installation; new-mode removal does not damage them.",
       "actual": "Original Fleet regression qualification passed separately at the recorded checkpoint; installer fixtures preserve unrelated installation files and external state. Physical Dedicated Fleet coexistence before/after installation and removal remains NOT_RUN.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -48,7 +48,7 @@
       "fixture": "roles.test.mjs",
       "expected": "All six skills validate; each role executes its real bounded workflow; two instances of one role do not collide.",
       "actual": "All six skill packages validate and all six pinned Gateway paths invoke the real sandbox. Duplicate actors and bounded specialist policy inspections pass. Complete role services, protocol transactions and signer adapters remain unfinished.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -66,7 +66,7 @@
       "fixture": "skill-forward-check",
       "expected": "A supported assistant invokes the real local runtime through its skill, returns actual artifacts, and cannot escalate its client scope.",
       "actual": "All six actual pinned OpenClaw Gateway/skill/private-IPC/native-worker paths passed with separate operator approval. Model transport is an explicit local synthetic fixture; live-provider availability, privacy, cost and judgment remain NOT_RUN.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -84,7 +84,7 @@
       "fixture": "authority.test.mjs",
       "expected": "One host runs an Agent task and unrelated Node review with isolated state, credentials, inputs, outputs, and authorization.",
       "actual": "Concurrent Agent work and unrelated internal Node checking ran in simultaneously observed separate kernel namespaces on both Linux architectures. Independent economic review and its eligibility/placement remain unavailable.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -102,7 +102,7 @@
       "fixture": "native/isolation.test.mjs",
       "expected": "Cross-role filesystem, memory, transcript, credential, browser, IPC, and runtime-management access attempts are denied.",
       "actual": "Native Linux tests now pass blocked host secrets/management access, immutable inputs, separate namespaces, zero child capabilities and actual output checks. The historical namespace prerequisite failure is retained below. Browser/desktop, complete private-network and Mac isolation matrices remain missing.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -120,7 +120,7 @@
       "fixture": "authority.test.mjs",
       "expected": "Role spoofing, forged/stale/expired/revoked grants, request substitution, replay, and prompt-injection escalation are refused.",
       "actual": "Scoped authority, grant substitution/expiry/replay, role restrictions and operator-only approval pass through private IPC and the actual Gateway. Complete live tool/prompt-injection qualification remains NOT_RUN.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -138,7 +138,7 @@
       "fixture": "authority.test.mjs",
       "expected": "Concurrent runs cannot overspend shared admission limits or exceed enforced resources; restart does not reset limits.",
       "actual": "Atomic host/actor reservations, persistent daily budgets, restart-retained reservations and measured worker CPU/RSS pass. Complete process/resident-memory/disk enforcement, model/spending reconciliation and resource stress remain unfinished.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -156,7 +156,7 @@
       "fixture": "roles.test.mjs",
       "expected": "Local files/code, browser, and desktop examples produce reopened, verified deliverables on each advertised backend.",
       "actual": "Saved-package native workers produce and reopen deterministic report files on Linux x64/ARM64. The earlier native blocker is resolved for that path. General files/code, browser, desktop and native Mac Computer Use adapters remain unfinished.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -174,7 +174,7 @@
       "fixture": "authority.test.mjs",
       "expected": "Competing actors cannot control the same desktop; changed/suspended/rebooted sessions require renewed validation.",
       "actual": "Desktop grants remain rejected. Exclusive desktop leases, session/display validation and sleep/logout/reboot revalidation are not implemented.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -192,7 +192,7 @@
       "fixture": "authority.test.mjs",
       "expected": "STOP, cancellation, timeout, killed processes, disk-full states, provider failure, and incomplete cleanup fail safely and expose evidence.",
       "actual": "Native cancellation, positive process/namespace cleanup and explicit no-success recovery pass. STOP/storage-fault, interrupted installation and service recovery cases pass. Complete provider/disk/resource fault injection and physical cleanup remain open.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -210,7 +210,7 @@
       "fixture": "authority.test.mjs",
       "expected": "Crash/restart around side effects, grant reservation, output commit, and signer requests does not blindly repeat uncertain actions.",
       "actual": "Offline reconciliation, interrupted reservations, stable private-socket restart and consumed-grant replay rejection pass. Provider and signer uncertainty remains blocked; their complete reconciliation adapters are missing.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -228,7 +228,7 @@
       "fixture": "authority.test.mjs",
       "expected": "Internal checking cannot satisfy independent-review requirements; known actor-control conflicts are rejected.",
       "actual": "Known common-control conflicts are refused and internal checks cannot claim independent review. Protocol eligibility, verified placement and independent-operation qualification remain unfinished.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -246,7 +246,7 @@
       "fixture": "native/isolation.test.mjs",
       "expected": "Review cannot mutate submitted original bytes; reports and scratch files remain writable only in permitted locations.",
       "actual": "The Linux native read-only input test now passes, and Node checks the exact supplied bytes with separate disposable scratch. Browser/desktop and Mac review backends remain unimplemented.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -264,7 +264,7 @@
       "fixture": "portability.test.mjs",
       "expected": "Export contains no forbidden secrets; hostile archives, source drift, snapshot races, and duplicate activation are handled safely.",
       "actual": "Allowlisted inert role exports and capsule validation reject hostile inputs; installer snapshots, path/mode/size/hash checks and transactional recovery pass. Authoritative cross-host activation fencing remains absent; ordinary imports grant no authority.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -282,7 +282,7 @@
       "fixture": "portability.test.mjs",
       "expected": "Restoring on a second compatible host preserves approved portable data, creates fresh bindings, and does not restore authority.",
       "actual": "Separate test stores create fresh inactive identities with no restored grants or economic authority. Physical second-host restoration, destination qualification and authoritative fencing remain NOT_RUN or unimplemented.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -300,7 +300,7 @@
       "fixture": "successor.test.mjs",
       "expected": "SUCCESSOR Ω completes execution → separately authorized review → unselected checked candidate → explicit choice → offline restore/replay.",
       "actual": "Deterministic execution, separately authorized internal review, rejected candidates, atomic explicit choice and capsule restore pass. Local-mode Computer Use and independently administered review are not completed by the separate Dedicated Fleet Builder qualification.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -318,7 +318,7 @@
       "fixture": "roles.test.mjs",
       "expected": "Existing protocol integration tests pass through local-mode adapters without changing contracts or using live funds.",
       "actual": "Existing config/formal-policy semantics are reused and the inherited Fleet integration passed at the recorded checkpoint. Local-mode EVM/transaction construction, signer confirmation and reconciliation adapters remain unfinished.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -336,7 +336,7 @@
       "fixture": "transport.test.mjs",
       "expected": "Loopback/IPC authentication, browser-origin defenses, private-network restrictions, and private-data export controls resist negative tests.",
       "actual": "Real Unix-socket authentication, scoped negatives, origin/Host controls and second-supervisor refusal passed on both Linux architectures. The new allowlisted support-report path requires its own exact-head CI. Full private-network/backend coverage remains open.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -354,7 +354,7 @@
       "fixture": "browser/dashboard.test.mjs",
       "expected": "EN/FR onboarding, keyboard/screen-reader paths, zoom/reflow, failure recovery, and both deployment modes pass functional/accessibility checks.",
       "actual": "EN/FR onboarding, keyboard/reflow, automated axe checks, scoped approval and reconnect controls passed at the recorded checkpoint. New support preview/download controls require exact-head browser CI. Human screen-reader/usability and complete dual-mode onboarding remain NOT_RUN.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -372,7 +372,7 @@
       "fixture": "package.py",
       "expected": "Exact downloadable artifacts install and run the exercised paths; manifests, licenses, hashes, inventories, and executable modes verify.",
       "actual": "The exact 8,220,684-byte development package was verified after download: 2,841 members; saved native execution, installation, service recovery/restart and retained state/outputs passed. It remains a development package, not a qualified operator release. Revised source needs fresh exact-archive checks.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -390,7 +390,7 @@
       "fixture": "physical commissioning",
       "expected": "Fresh install, coexistence, sleep/reboot, recovery, local inference connectivity where applicable, and endurance are separately exercised on declared physical targets.",
       "actual": "No physical Linux x64/ARM64 or Apple silicon commissioning, sleep/reboot, real provider credentials, human usability or endurance observations have been supplied.",
-      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 6148924c58ccd4c043d460efad54df28d375a66a / workflow 38508295369. New changes require their own final-head CI.",
+      "evidence": "CURRENT_STATUS.md; LIFECYCLE_ADDENDUM.md; checkpoint 08d227934ddeeca5d03bca6aea8df626af36338f / workflow 38579981525. New changes require their own final-head CI.",
       "fullCasePassed": false,
       "historicalObservations": [
         {
@@ -515,5 +515,8 @@
       "fullHandoffComplete": false,
       "productionQualified": false
     }
-  ]
+  ],
+  "releaseEligibilityScope": "complete Local Skills product defined by IMPLEMENTATION_HANDOFF.md",
+  "previewReleaseSpecification": "../../local-runtime/preview-release.json",
+  "previewReleaseBoundary": "PREVIEW_RELEASE.md; requires its own exact-source coordinated qualification and is never full-handoff or production qualification"
 }

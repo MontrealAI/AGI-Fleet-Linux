@@ -1,6 +1,6 @@
 # Install and recover / Installer et reprendre
 
-These are development tools, not a released or fully qualified operator installer. The package must come from the exact reviewed source and have a verified SHA-256. An archive checksum establishes identity, not correctness or authorization. Existing Dedicated Fleet installations use their existing installers.
+These tools install the separately labeled development preview. They are not a production-qualified operator installer. Start with the [download and verification guide](DOWNLOAD.md). The package must come from the exact reviewed source and have a verified SHA-256. An archive checksum establishes identity, not correctness or authorization. Existing Dedicated Fleet installations use their existing installers.
 
 ## English
 
@@ -27,7 +27,7 @@ During a failed stage or atomic pointer switch, the previous complete version re
 
 ## Français
 
-Cet outil de développement n’est pas un installateur publié ou entièrement qualifié. Il vérifie le paquet et l’archive Node 24.21.0 correspondant à la plateforme. Il n’exige pas de privilèges administratifs, n’active aucun acteur, ne démarre aucun service et ne connecte ni fournisseur ni portefeuille. Gardez les répertoires d’application et d’état privé distincts, hors du code source. Les commandes ci-dessus utilisent des chemins absolus. Sur Linux, l’isolation bubblewrap prise en charge reste nécessaire; une copie sur Mac ne qualifie pas l’exécution macOS.
+Cet outil installe l’aperçu de développement distinct, sans qualification pour la production. Commencez par le [guide de téléchargement et de vérification](DOWNLOAD.md#français). Il vérifie le paquet et l’archive Node 24.21.0 correspondant à la plateforme. Il n’exige pas de privilèges administratifs, n’active aucun acteur, ne démarre aucun service et ne connecte ni fournisseur ni portefeuille. Gardez les répertoires d’application et d’état privé distincts, hors du code source. Les commandes ci-dessus utilisent des chemins absolus. Sur Linux, l’isolation bubblewrap prise en charge reste nécessaire; une copie sur Mac ne qualifie pas l’exécution macOS.
 
 Après `install`, exécutez séparément `init`, puis `serve`. Le lanceur indique l’adresse locale et le fichier d’identifiant privé. Collez l’identifiant uniquement dans le tableau de bord local. Ajoutez un acteur, activez-le, examinez les données et limites de la tâche, autorisez cette exécution précise, puis lancez-la. Ajouter un rôle ne télécharge pas une autre installation.
 

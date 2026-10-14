@@ -50,28 +50,13 @@ def build(output):
     print(json.dumps(result))
 
 def verify(archive):
-    with zipfile.ZipFile(archive) as z:
-        seen = set()
-        total = 0
-        for info in z.infolist():
-            path = Path(info.filename)
-            key = info.filename.casefold()
-            if path.is_absolute() or '..' in path.parts or key in seen or '\\' in info.filename or info.file_size >= 450_000_000 or not stat.S_ISREG(info.external_attr >> 16):
-                raise ValueError('Unsafe archive member')
-            seen.add(key)
-            total += info.file_size
-        if len(seen) > 25_000 or total > 450_000_000 or z.testzip() is not None:
-            raise ValueError('Archive bounds or CRC failure')
-        manifest = json.loads(z.read(PREFIX + '/local-preview-manifest.json'))
-        expected = {PREFIX + '/' + r['path'] for r in manifest['files']} | {PREFIX + '/local-preview-manifest.json'}
-        if expected != set(z.namelist()) or manifest['operatorInstaller'] or manifest['productionQualified']:
-            raise ValueError('Manifest coverage or qualification mismatch')
-        for row in manifest['files']:
-            info = z.getinfo(PREFIX + '/' + row['path'])
-            data = z.read(info)
-            if len(data) != row['bytes'] or sha(data) != row['sha256'] or stat.S_IMODE(info.external_attr >> 16) != row['mode']:
-                raise ValueError('Member identity mismatch')
-        print(json.dumps({'status': 'PASS', 'files': len(manifest['files']), 'archiveSHA256': sha(Path(archive).read_bytes()), 'qualification': 'source-preview-only'}))
+    import runpy
+    installer = runpy.run_path(str(ROOT / 'local-runtime/install.py'))
+    digest = sha(Path(archive).read_bytes())
+    manifest, _ = installer['inspect_archive'](Path(archive), digest)
+    if manifest.get('operatorInstaller') is not False:
+        raise ValueError('Development archive cannot claim operator qualification')
+    print(json.dumps({'status': 'PASS', 'files': len(manifest['files']), 'archiveSHA256': digest, 'qualification': 'source-preview-only'}))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

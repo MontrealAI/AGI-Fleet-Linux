@@ -1,6 +1,8 @@
 # Local Skills · Start here / Commencer
 
-[Current status and remaining merge requirements](CURRENT_STATUS.md) · English / Français
+[Download and try the preview — English / Français](DOWNLOAD.md) · [Current capabilities and remaining product requirements](CURRENT_STATUS.md)
+
+**Start with the download guide for the packaged preview.** The engineering-checkout commands below are for contributors.
 ## What works in this development preview
 
 The source includes six portable skills, a single local supervisor, actor-scoped clients, exact one-use grants, an English/French loopback dashboard, bounded offline report generation, internal checking, formal protocol inspection, inert role portability and the existing SUCCESSOR capsule format.
