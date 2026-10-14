@@ -157,7 +157,8 @@ def bundle(evidence, output, commit, run):
 def validate_fleet(fleet, commit, run):
     sys.path.insert(0, str(ROOT / 'engineering'))
     publisher = module('fleet_preview_regression', ROOT / 'engineering/publish-next-release.py')
-    manifest = load(fleet / 'Release-Manifest-v1.1.1.json')
+    specification = load(ROOT / 'engineering/next-release.json')
+    manifest = load(fleet / f"Release-Manifest-v{specification['version']}.json")
     require(str(manifest.get('workflowRun')) == run and manifest.get('workflowCommit') == commit, 'Fleet workflow identity differs')
     publisher.validate(manifest, manifest['audit'], commit)
     artifact = fleet / manifest['evidence']['name']
