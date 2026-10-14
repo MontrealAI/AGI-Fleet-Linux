@@ -1,10 +1,15 @@
 {
   "schema": "agi-fleet/local-preview-release/v1",
-  "version": "0.1.0-alpha.1",
-  "tag": "v0.1.0-local-skills-preview.1",
-  "name": "AGI Fleet Local Skills 0.1.0 — Linux development preview",
-  "archive": "agi-fleet-local-0.1.0-alpha.1.zip",
-  "tests": {"module": 43, "native": 4, "installer": 15, "browser": 2},
+  "version": "0.1.0-alpha.2",
+  "tag": "v0.1.0-local-skills-preview.2",
+  "name": "AGI Fleet Local Skills 0.1.0 \u2014 Linux development preview",
+  "archive": "agi-fleet-local-0.1.0-alpha.2.zip",
+  "tests": {
+    "module": 54,
+    "native": 4,
+    "installer": 28,
+    "browser": 2
+  },
   "qualificationScope": "bounded-offline-linux-development-preview",
   "operatorInstaller": false,
   "fullHandoffComplete": false,

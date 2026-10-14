@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {OutcomeLedger,summarizeOutcomes} from './outcomes.mjs';
+import {OutcomeLedger,summarizeOutcomes,exportAttemptObservations} from './outcomes.mjs';
 import {fail,keys,canonical,parseStrict,sha256} from './vendor/manager/site/assets/successor/safe.mjs';
 import {compileRequest,inspectRequest,computer,checkReturnedWork} from './project.mjs';
 
@@ -15,11 +15,33 @@ export class SuccessorController {
       if(!fs.existsSync(this.dir))fs.mkdirSync(this.dir,{mode:0o700});
       const stat=fs.lstatSync(this.dir);fail(stat.isDirectory()&&!stat.isSymbolicLink()&&!(stat.mode&0o077),'FLEET_STORE_UNSAFE');
       this.outcomes=new OutcomeLedger(path.join(controller.home,'successor-outcomes'));
-      const names=fs.readdirSync(this.dir);fail(names.length<=100,'FLEET_HISTORY_FULL');
-      for(const name of names){fail(/^[a-f0-9]{64}\.json$/.test(name),'FLEET_HISTORY_DAMAGED');const record=this.read(name);fail(record.key+'.json'===name&&record.role===role,'FLEET_HISTORY_DAMAGED');this.records.push(record);}
+      this.records=this.storedRecords();
     } catch(error){this.problem=error.code||error.message;}
   }
   read(name){const fd=fs.openSync(path.join(this.dir,name),fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);try{const s=fs.fstatSync(fd);fail(s.isFile()&&s.nlink===1&&s.size<6500000,'FLEET_HISTORY_DAMAGED');return parseStrict(fs.readFileSync(fd,'utf8'),6500000);}finally{fs.closeSync(fd);}}
+  storedRecords(){
+    const names=fs.readdirSync(this.dir);fail(names.length<=100,'FLEET_HISTORY_FULL');
+    return names.map(name=>{fail(/^[a-f0-9]{64}\.json$/.test(name),'FLEET_HISTORY_DAMAGED');const record=this.read(name);fail(record.key+'.json'===name&&record.role===this.role,'FLEET_HISTORY_DAMAGED');return record;});
+  }
+  taskIdentity(record){return record.request?.plan.missionSha256??record.taskSha256??record.specSha256;}
+  nextOrdinal(taskSha256,stored=this.storedRecords()){
+    const prior=stored.filter(r=>this.taskIdentity(r)===taskSha256),journal=this.outcomes.read().filter(r=>r.event.type==='funnel'&&r.event.data.stage==='attempted'&&r.event.data.taskSha256===taskSha256&&r.event.data.role===this.role);
+    return Math.max(prior.length,...prior.map(r=>r.attemptOrdinal??0),...journal.map(r=>r.event.data.attemptOrdinal))+1;
+  }
+  reserve(record,family){
+    const lock=path.join(this.c.home,'successor-attempt.lock');let fd;
+    try{fd=fs.openSync(lock,'wx',0o600);}catch(error){if(error.code==='EEXIST')fail(false,'FLEET_ATTEMPT_LOCKED');throw error;}
+    try{
+      // Re-read durable evidence inside the exclusive reservation lock. A
+      // changed deadline/budget/runtime is another attempt on the same task.
+      const stored=this.storedRecords();fail(stored.length<100,'FLEET_HISTORY_FULL');fail(!stored.some(r=>r.key===record.key),'FLEET_ALREADY_ATTEMPTED');
+      record.taskSha256=this.taskIdentity(record);record.attemptOrdinal=this.nextOrdinal(record.taskSha256,stored);record.repeatOfTaskSha256=record.attemptOrdinal>1?record.taskSha256:null;
+      this.persist(record,true);this.records=[...stored,record];this.observe(record,'reserved');
+      this.funnel(record.key,record.request,'attempted',family,record);
+      if(record.attemptOrdinal>1)this.funnel(record.key,record.request,'repeated',family,record);
+      this.outcomes.append({attempt:record.key,type:'cost',at:record.at,evidenceSha256:record.specSha256,data:{id:'provider-billing-unavailable',category:'provider',basis:'unknown',currency:'USD',amountMicros:null,billingReferenceSha256:null}});
+    }finally{fs.closeSync(fd);fs.unlinkSync(lock);}
+  }
   persist(record,exclusive=false){
     const destination=path.join(this.dir,record.key+'.json'),temporary=destination+'.'+crypto.randomUUID();
     const raw=canonical(record)+'\n';fail(Buffer.byteLength(raw)<6500000,'FLEET_HISTORY_LIMIT');
@@ -39,23 +61,33 @@ export class SuccessorController {
     return {schema:'agi-fleet/successor-runtime-observation/v1',role,runtime:h.runtime,runtimeSha256:computer.digest(h.runtime),policyHash:h.policyHash,
       observedAt:companion.now(),expiresAt:companion.now()+60000,qualification:h.qualification,authority:'none'};
   }
-  status(){return {outcomeSummary:this.outcomes?summarizeOutcomes(this.outcomes.read()):null,role:this.role,problem:this.problem,studio:this.c.studio.status(),runs:this.c.vault.unlocked?this.records.map(({request,...r})=>r):[],authority:'none',productionQualified:false};}
+  status(){
+    const unlocked=this.c.vault.unlocked,records=unlocked&&this.outcomes?this.outcomes.read():[];
+    return {outcomeSummary:unlocked&&this.outcomes?summarizeOutcomes(records):null,role:this.role,problem:this.problem,studio:this.c.studio.status(),
+      runs:unlocked?this.records.map(({request,...r})=>({...r,projectView:r.projectView??{goal:request?.plan.goal??null,inputs:request?.plan.immutableInputs.map(f=>f.name)??[],outputs:[],budget:null},outcomeSummary:summarizeOutcomes(exportAttemptObservations(records,r.key))})):[],authority:'none',productionQualified:false};
+  }
+  funnel(key,request,stage,family='not-recorded',reservation=null){
+    const taskSha256=reservation?.taskSha256??request?.plan.missionSha256??key,attemptOrdinal=reservation?.attemptOrdinal??this.nextOrdinal(taskSha256);
+    this.outcomes.append({attempt:key,type:'funnel',at:this.c.companion.now(),evidenceSha256:key,data:{taskSha256,stage,family,role:this.role,attemptOrdinal,repeatOfTaskSha256:reservation?.repeatOfTaskSha256??(attemptOrdinal>1?taskSha256:null)}});
+  }
   async prepare(input,principal){
     fail(typeof principal==='string'&&principal.length>0,'FLEET_SESSION_REQUIRED');
     fail(this.records.length<100,'FLEET_HISTORY_FULL');this.c.requireStopped();
-    let compiled,request=null,studioInput;
+    let compiled,request=null,studioInput,family='not-recorded';
     if(this.role==='agent'){
       keys(input,['request','context'],'FLEET_PREPARE_FIELDS');
       const result=await compileRequest(input.request,typeof input.context==='string'?parseStrict(input.context,100000):input.context,Math.floor(this.c.companion.now()/1000));
-      request=result.request;compiled=result.compiled;this.api.studioSpec(compiled.spec);studioInput={specification:compiled.spec};
+      request=result.request;compiled=result.compiled;family={analyst:'data-reconciliation',website:'website'}[result.state.mission.kind]??'custom';this.api.studioSpec(compiled.spec);studioInput={specification:compiled.spec};
     }else{
       keys(input,['handoff'],'FLEET_PREPARE_FIELDS');let raw=typeof input.handoff==='string'?parseStrict(input.handoff,128*1024*1024):input.handoff;const h=this.api.validateHandoff(raw.handoff??raw);
       fail(h.specification.profile==='computer-work/v2','FLEET_V2_REQUIRED');compiled={spec:h.specification,specSha256:h.specHash};studioInput={handoff:h};
     }
-    const observation=await this.health(compiled.spec),key=await sha256({role:this.role,spec:compiled.spec,delivery:studioInput.handoff?.deliveryHash??null});
+    const key=await sha256({role:this.role,spec:compiled.spec,delivery:studioInput.handoff?.deliveryHash??null});
+    this.funnel(key,request,'offered',family);
+    const observation=await this.health(compiled.spec);this.funnel(key,request,'admissible',family);
     fail(!this.records.some(r=>r.key===key),'FLEET_ALREADY_ATTEMPTED');
     const ticket=crypto.randomBytes(32).toString('hex'),expiresAt=Math.min(observation.expiresAt,compiled.spec.deadline*1000);
-    this.tickets.set(ticket,{principal,expiresAt,compiled,request,studioInput,key,scope:this.c.studio.scopeHash(),observation});
+    this.tickets.set(ticket,{principal,expiresAt,compiled,request,studioInput,key,family,scope:this.c.studio.scopeHash(),observation});
     while(this.tickets.size>8)this.tickets.delete(this.tickets.keys().next().value);
     return {ticket,expiresAt,key,specification:compiled.spec,specificationSha256:compiled.specSha256,observation,
       action:this.role==='agent'?'Create and self-check the exact public work':'Review the exact delivered bytes',
@@ -71,10 +103,9 @@ export class SuccessorController {
     const fresh=await this.health(grant.compiled.spec);
     fail(fresh.runtimeSha256===grant.observation.runtimeSha256&&fresh.policyHash===grant.observation.policyHash,'FLEET_RUNTIME_CHANGED');
     const record={schema:'agi-fleet/successor-attempt/v1',key:grant.key,role:this.role,status:'reserved',at:now,run:null,
-      specSha256:grant.compiled.specSha256,request:grant.request,observation:fresh};
-    this.persist(record,true);this.records.push(record);
-    this.observe(record,'reserved');
-    this.outcomes.append({attempt:record.key,type:'cost',at:now,evidenceSha256:record.specSha256,data:{id:'provider-billing-unavailable',category:'provider',basis:'unknown',currency:'USD',amountMicros:null,billingReferenceSha256:null}});
+      specSha256:grant.compiled.specSha256,request:grant.request,observation:fresh,
+      projectView:{goal:grant.compiled.spec.prompt,inputs:grant.compiled.spec.inputs.map(f=>f.name),outputs:grant.compiled.spec.outputs.map(f=>f.name),budget:grant.compiled.spec.budget,deadline:grant.compiled.spec.deadline,family:grant.family}};
+    this.reserve(record,grant.family);
     try{const run=this.c.studio.start(grant.studioInput);record.run=run.id;record.status='dispatched';this.persist(record);this.observe(record,'dispatched');return {key:record.key,run};}
     catch(error){record.status='blocked-or-uncertain';this.persist(record);this.observe(record,'blocked-or-uncertain');throw error;}
   }
@@ -87,11 +118,11 @@ export class SuccessorController {
     const receipt=this.c.studio.export(r.run,'receipt'),handoff=this.c.studio.export(r.run,'handoff');
     fail(handoff.specHash===r.specSha256,'FLEET_SPECIFICATION_CHANGED');
     this.observe(r,'completed',[handoff.deliveryHash]);
-    const observations=this.outcomes.read().filter(row=>row.event.attempt===key);
+    const observations=exportAttemptObservations(this.outcomes.read(),key);
     if(this.role==='node')return {handoff,receipt,outcomeObservations:observations};
     if(reviewReceipt===null)return {request:r.request,handoff,receipt,outcomeObservations:observations};
     const result=await checkReturnedWork(r.request,handoff,reviewReceipt,this.api);
     this.outcomes.append({attempt:r.key,type:'review',at:this.c.companion.now(),evidenceSha256:await sha256(reviewReceipt),data:{verdict:result.outcome==='accepted'?'accepted':'rejected',control:'unverified',deliverySha256:handoff.deliveryHash,eligibilityEvidenceSha256:null}});
-    return {...result,outcomeObservations:this.outcomes.read().filter(row=>row.event.attempt===key)};
+    return {...result,outcomeObservations:exportAttemptObservations(this.outcomes.read(),key)};
   }
 }

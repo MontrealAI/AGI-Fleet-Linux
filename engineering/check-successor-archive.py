@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Rebuild downloadable editable sources extracted from the exact saved archive."""
-import argparse, hashlib, json, os, subprocess, tempfile, zipfile
+import argparse, hashlib, json, os, re, subprocess, tempfile, zipfile
 from pathlib import Path
 
 def check(archive, node):
@@ -29,8 +29,10 @@ def check(archive, node):
         result=subprocess.run([node,str(builds[0]),'--out',str(root/'rebuilt')],capture_output=True,text=True)
         assert result.returncode==0,result.stderr
         for lang,data in pages.items():assert (root/'rebuilt'/('My-SUCCESSOR-Omega-'+lang+'.html')).read_bytes()==data,'Editable rebuild differs: '+lang
-        test=subprocess.run([node,'--test',str(source_root/'vendor/manager/scripts/successor/portable.test.mjs')],capture_output=True,text=True)
+        test=subprocess.run([node,'--test','--test-reporter=tap',str(source_root/'vendor/manager/scripts/successor/portable.test.mjs')],capture_output=True,text=True)
         assert test.returncode==0,test.stdout+test.stderr
-        return {'schema':'agi-fleet/successor-archive-check/v1','status':'PASS','archiveSHA256':hashlib.file_digest(open(archive,'rb'),'sha256').hexdigest(),'editionCopies':7,'languages':['en','fr'],'editableSourceRebuild':'BYTE_IDENTICAL','freshPortableTests':6,'authority':'none'}
+        counts={name:int(value) for name,value in re.findall(r'^# (tests|pass|fail|cancelled|skipped|todo) (\d+)$',test.stdout,re.M)}
+        assert counts=={'tests':13,'pass':13,'fail':0,'cancelled':0,'skipped':0,'todo':0},test.stdout
+        return {'schema':'agi-fleet/successor-archive-check/v1','status':'PASS','archiveSHA256':hashlib.file_digest(open(archive,'rb'),'sha256').hexdigest(),'editionCopies':7,'languages':['en','fr'],'editableSourceRebuild':'BYTE_IDENTICAL','freshPortableTests':counts['tests'],'authority':'none'}
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--archive',required=True);p.add_argument('--node',default='node');p.add_argument('--out',required=True);a=p.parse_args();value=check(a.archive,a.node);Path(a.out).write_text(json.dumps(value,indent=2)+'\n');print(json.dumps(value))

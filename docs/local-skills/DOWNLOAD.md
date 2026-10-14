@@ -2,7 +2,7 @@
 
 [English](#english) · [Français](#français) · [Capabilities and remaining work](CURRENT_STATUS.md)
 
-**Version 0.1.0-alpha.1 · Linux x64 / ARM64 · development preview.** This separate package runs a bounded offline report, internal checking and six scoped skills. It is not the completed Local Skills product or a production-qualified installer. Funded work, general browser/desktop execution, native Mac local execution and independent economic review are disabled. The example makes no model calls.
+**Version 0.1.0-alpha.2 · Linux x64 / ARM64 · development preview.** This separate package runs a bounded offline report, internal checking and six scoped skills. It is not the completed Local Skills product or a production-qualified installer. Funded work, general browser/desktop execution, native Mac local execution and independent economic review are disabled. The example makes no model calls.
 
 ## English
 
@@ -10,28 +10,28 @@
 
 Use a supported Linux test account with Python **3.11 or newer**, `sha256sum`, and working unprivileged user namespaces. The exercised hosts are Ubuntu 24.04 x64 and ARM64. Linux execution needs trusted distribution `bubblewrap` and `util-linux` packages, plus the distribution's applicable AppArmor policy. Ask the administrator to assess these prerequisites if needed; [host guidance](START_HERE.md#prepare-an-engineering-checkout) explains the boundary. Do not run the CI provisioner on an everyday machine or disable operating-system security.
 
-Open the [Local Skills preview release](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.1). Under **Assets**, save these two files into a new download folder:
+Open the [Local Skills preview release](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.2). Under **Assets**, save these two files into a new download folder:
 
-- `agi-fleet-local-0.1.0-alpha.1.zip`
-- `SHA256SUMS-local-0.1.0-alpha.1.txt`
+- `agi-fleet-local-0.1.0-alpha.2.zip`
+- `SHA256SUMS-local-0.1.0-alpha.2.txt`
 
-The release also contains `Local-Skills-Manifest-0.1.0-alpha.1.json` and `Local-Skills-Evidence-0.1.0-alpha.1.zip` for inspection. If publication has not completed and the named assets are absent, wait for the release; do not substitute GitHub's automatic **Source code** archives. Those omit the packaged dependencies. Existing Dedicated Fleet users should follow their separate [Linux](../START_HERE.md) or [Mac](../../macos/docs/FRESH_INSTALL.md) guide.
+The release also contains `Local-Skills-Manifest-0.1.0-alpha.2.json` and `Local-Skills-Evidence-0.1.0-alpha.2.zip` for inspection. If publication has not completed and the named assets are absent, wait for the release; do not substitute GitHub's automatic **Source code** archives. Those omit the packaged dependencies. Existing Dedicated Fleet users should follow their separate [Linux](../START_HERE.md) or [Mac](../../macos/docs/FRESH_INSTALL.md) guide.
 
 ### 2. Verify before extracting
 
 Open a terminal **in the download folder**. Keep this terminal for the commands below:
 
 ```sh
-sha256sum --check --ignore-missing SHA256SUMS-local-0.1.0-alpha.1.txt
+sha256sum --check --ignore-missing SHA256SUMS-local-0.1.0-alpha.2.txt
 ```
 
-Continue only if it exits successfully and explicitly reports `agi-fleet-local-0.1.0-alpha.1.zip: OK`. Missing optional evidence/manifest files are ignored. A mismatch, missing ZIP or unreadable checksum is a reason to stop and download again from the release page. A matching hash establishes the published bytes, not production readiness.
+Continue only if it exits successfully and explicitly reports `agi-fleet-local-0.1.0-alpha.2.zip: OK`. Missing optional evidence/manifest files are ignored. A mismatch, missing ZIP or unreadable checksum is a reason to stop and download again from the release page. A matching hash establishes the published bytes, not production readiness.
 
 ```sh
 AGI_PREVIEW_DOWNLOAD="$PWD"
-AGI_PREVIEW_SHA=$(sha256sum agi-fleet-local-0.1.0-alpha.1.zip | cut -d ' ' -f 1)
-python3 -m zipfile -e agi-fleet-local-0.1.0-alpha.1.zip unpacked
-cd unpacked/agi-fleet-local-0.1.0-alpha.1
+AGI_PREVIEW_SHA=$(sha256sum agi-fleet-local-0.1.0-alpha.2.zip | cut -d ' ' -f 1)
+python3 -m zipfile -e agi-fleet-local-0.1.0-alpha.2.zip unpacked
+cd unpacked/agi-fleet-local-0.1.0-alpha.2
 ```
 
 ### 3. Download the matching Node prerequisite
@@ -51,10 +51,10 @@ The commands below are for **x64**. On ARM64, replace only `linux-x64` with `lin
 
 ```sh
 python3 local-runtime/install.py inspect \
-  --archive "$AGI_PREVIEW_DOWNLOAD/agi-fleet-local-0.1.0-alpha.1.zip" \
+  --archive "$AGI_PREVIEW_DOWNLOAD/agi-fleet-local-0.1.0-alpha.2.zip" \
   --sha256 "$AGI_PREVIEW_SHA"
 python3 local-runtime/install.py install \
-  --archive "$AGI_PREVIEW_DOWNLOAD/agi-fleet-local-0.1.0-alpha.1.zip" \
+  --archive "$AGI_PREVIEW_DOWNLOAD/agi-fleet-local-0.1.0-alpha.2.zip" \
   --sha256 "$AGI_PREVIEW_SHA" \
   --node-archive "$AGI_PREVIEW_DOWNLOAD/node-v24.21.0-linux-x64.tar.xz" \
   --root "$HOME/agi-local-preview-app" \
@@ -80,7 +80,7 @@ For help, choose **Preview support report**, inspect its contents and **Save thi
 **Cet aperçu de développement Linux reste limité et non qualifié pour la production.** L’exemple produit un rapport hors ligne sans appel à un modèle ni dépense. Le travail rémunéré, le bureau/navigateur général, le mode local Mac et l’examen économique indépendant restent désactivés.
 
 1. **Préparez un compte Linux de test compatible.** Python 3.11+, `sha256sum`, `bubblewrap`, `util-linux` et les espaces de noms utilisateurs doivent fonctionner. Les essais portent sur Ubuntu 24.04 x64/ARM64. Demandez à l’administrateur d’évaluer les prérequis système et AppArmor; ne désactivez pas la sécurité pour obtenir un résultat vert.
-2. **Téléchargez les deux fichiers nommés à l’étape 1** depuis la [publication Local Skills](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.1). N’utilisez pas « Source code ». Si les fichiers ne sont pas encore publiés, attendez la fin de la qualification.
+2. **Téléchargez les deux fichiers nommés à l’étape 1** depuis la [publication Local Skills](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.2). N’utilisez pas « Source code ». Si les fichiers ne sont pas encore publiés, attendez la fin de la qualification.
 3. **Ouvrez le terminal dans le dossier de téléchargement**, puis exécutez les commandes de l’étape 2. Continuez uniquement si la vérification réussit et affiche le nom du ZIP suivi de `OK`. Le manifeste et les preuves sont facultatifs pour ce téléchargement; une erreur sur le ZIP impose l’arrêt.
 4. **Choisissez Node dans le tableau de l’étape 3.** `x86_64` correspond à x64; `aarch64` correspond à ARM64. Enregistrez l’archive Node dans le dossier initial, sans l’extraire. L’installateur vérifie son empreinte et sa version; aucune installation Node globale n’est nécessaire.
 5. **Exécutez l’étape 4 dans le même terminal.** Sur ARM64, remplacez `linux-x64` par `linux-arm64`. Les dossiers d’application et d’état doivent être nouveaux, distincts et privés. L’installation ne demande pas de droits administratifs et n’active ni acteur, ni fournisseur, ni portefeuille, ni démarrage automatique.

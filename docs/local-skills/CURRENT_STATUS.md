@@ -10,6 +10,8 @@ On a supported Linux engineering host, one installation can hold several isolate
 
 The transactional development installer preserves private state and user outputs during update, software rollback, recovery and removal. The pinned OpenClaw adapter uses private IPC, actor-specific credentials and a separate operator approval. These are implemented behaviors with bounded engineering evidence, not a completed browser/desktop workforce.
 
+The new [capability admission contract](CAPABILITY_ADMISSION.md) checks an exact task without creating authority, records supported operations and limits in its grant, and rechecks bound configuration before authorization and dispatch. It distinguishes supportable work, missing prerequisites and unsupported scope; custom missions are refused before reservation. Its component tests do not qualify general tools, live providers, independent review or Mac local execution, and the original 22 acceptance requirements remain in force.
+
 For help, use **Preview support report** in the local dashboard, inspect its complete contents, and choose **Save this report**. Only readiness and aggregate counts are included. Credentials, actor names/identities, host identifiers, paths, tasks, outputs and event history are excluded. Nothing is uploaded automatically. A passing readiness probe does not commission the machine.
 
 ## Verified checkpoint, kept separate from new changes

@@ -231,3 +231,82 @@ test('outcome ledger retains failed/unknown attempts, distinct cost bases and ac
     fs.appendFileSync(path.join(dir,'attempts.jsonl'),'{torn');assert.throws(()=>ledger.read(),/OUTCOME_TORN/);
   }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
+
+test('outcome funnel keeps refusals, repeat tasks and unaudited acceptance distinct; expense bases reconcile without counting a charge twice',async()=>{
+  const {OutcomeLedger,summarizeOutcomes,exportAttemptObservations,verifyLedger}=await import('../successor/outcomes.mjs'),os=await import('node:os');
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'outcome-funnel-'));
+  try{
+    const ledger=new OutcomeLedger(dir),a='a'.repeat(64),b='b'.repeat(64),c='c'.repeat(64),evidence='e'.repeat(64);
+    const event=(attempt,type,data)=>({attempt,type,at:1,evidenceSha256:evidence,data});
+    const funnel=(attempt,task,stage,ordinal=1,repeat=null)=>ledger.append(event(attempt,'funnel',{taskSha256:task,stage,family:'data-reconciliation',role:'agent',attemptOrdinal:ordinal,repeatOfTaskSha256:repeat}));
+    funnel(a,a,'offered');funnel(a,a,'admissible');funnel(a,a,'attempted');funnel(b,b,'offered');
+    funnel(c,c,'offered');funnel(c,c,'admissible');funnel(c,c,'attempted',2);funnel(c,c,'repaired',2);funnel(c,c,'repeated',2,a);
+    const cost=(id,basis,amountMicros)=>event(a,'cost',{id,category:'provider',basis,currency:'USD',amountMicros,billingReferenceSha256:basis==='invoiced'?evidence:null});
+    ledger.append(cost('same-charge','unknown',null));ledger.append(cost('same-charge','estimated','1000000'));ledger.append(cost('same-charge','metered','2000000'));ledger.append(cost('same-charge','invoiced','2300000'));
+    ledger.append(cost('unresolved-review','unknown',null));
+    assert.throws(()=>ledger.append(cost('same-charge','invoiced','2300000')),/OUTCOME_DUPLICATE_COST/);
+    assert.throws(()=>ledger.append({...cost('same-charge','subscription-allocated','100000'),data:{...cost('same-charge','subscription-allocated','100000').data,currency:'CAD'}}),/OUTCOME_EXPENSE_CHANGED/);
+    ledger.append(event(a,'human-time',{stage:'support',activeSeconds:90,waitingSeconds:600,measurement:'observed',actor:'founder'}));
+    ledger.append(event(a,'review',{verdict:'accepted',control:'unverified',deliverySha256:a,eligibilityEvidenceSha256:null}));
+    ledger.append(event(c,'review',{verdict:'accepted',control:'internal',deliverySha256:c,eligibilityEvidenceSha256:null}));
+    const summary=summarizeOutcomes(ledger.read());assert.deepEqual(summary.funnel,{offered:3,admissible:2,attempted:2,firstPassAccepted:1,repaired:1,rejected:0,abandoned:0,repeated:1});
+    assert.deepEqual(summary.acceptanceAssertionsByControl,{internal:1,unverified:1,'externally-attested':0});assert.equal(summary.costPerIndependentlyAcceptedOutcome,null);
+    assert.equal(summary.selectedExpenseMicrosByCurrency.USD,'2300000');assert.equal(summary.costMicrosByCurrencyAndBasis['USD:metered'],'2000000');assert.equal(summary.unknownCosts.length,1);assert.equal(summary.unknownCosts[0].id,'unresolved-review');
+    assert.equal(summary.humanTimeByActorAndStage['founder:support:observed'].activeSeconds,90);assert.equal(summary.humanTimeByActorAndStage['founder:support:observed'].waitingSeconds,600);
+    const isolated=exportAttemptObservations(ledger.read(),c);verifyLedger(isolated);assert.equal(isolated[0].previous,null);assert.ok(isolated.every(r=>r.event.attempt===c));assert.equal(JSON.stringify(isolated).includes('same-charge'),false);
+    const output=spawnSync(process.execPath,[path.join(root,'successor/outcome-cli.mjs'),'--store',dir,'--attempt',c,'--export'],{encoding:'utf8'});assert.equal(output.status,0,output.stderr);verifyLedger(JSON.parse(output.stdout));assert.deepEqual(JSON.parse(output.stdout),isolated);
+  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
+
+test('independent eligibility remains an explicit external audit assertion and never fabricated economics',async()=>{
+  const {OutcomeLedger,summarizeOutcomes}=await import('../successor/outcomes.mjs'),os=await import('node:os'),dir=fs.mkdtempSync(path.join(os.tmpdir(),'outcome-review-audit-'));
+  try{const ledger=new OutcomeLedger(dir),hash='2'.repeat(64),reviewHash='3'.repeat(64),auditHash='4'.repeat(64),base={attempt:hash,at:1,evidenceSha256:reviewHash};
+    ledger.append({...base,type:'review',data:{verdict:'accepted',control:'externally-attested',deliverySha256:hash,eligibilityEvidenceSha256:auditHash}});
+    let summary=summarizeOutcomes(ledger.read());assert.equal(summary.externallyAttestedAccepted,1);assert.equal(summary.eligibilityAuditAcceptedAssertions,0);assert.equal(summary.funnel.firstPassAccepted,0);
+    ledger.append({...base,type:'eligibility-audit',data:{verdict:'eligible',reviewEvidenceSha256:reviewHash,auditEvidenceSha256:auditHash}});
+    summary=summarizeOutcomes(ledger.read());assert.equal(summary.eligibilityAuditAcceptedAssertions,1);assert.equal(summary.costPerIndependentlyAcceptedOutcome,null);assert.equal(summary.activeMinutesPerIndependentlyAcceptedOutcome,null);assert.equal(summary.productionQualified,false);assert.match(summary.independentControl,/verify the actual audit/);
+    ledger.append({...base,type:'eligibility-audit',data:{verdict:'eligible',reviewEvidenceSha256:reviewHash,auditEvidenceSha256:'5'.repeat(64)}});assert.equal(summarizeOutcomes(ledger.read()).eligibilityAuditAcceptedAssertions,0);
+    assert.throws(()=>ledger.append({...base,type:'human-time',data:{stage:'support',activeSeconds:1,waitingSeconds:0,measurement:'observed',actor:'founder',payload:'secret'}}),/OUTCOME_TIME/);
+  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
+
+test('installed project view retains only selected attempt details; locked view withholds outcome observations',async()=>{
+  const a=await fixture(root),n=await fixture(root,'node');try{
+    const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs)a.inputs.set(f.name,Buffer.from(f.content));
+    const ar=await run(a.bridge,{request:req,context:ctx}),result=await a.bridge.result(ar.p.key),status=a.bridge.status(),saved=status.runs.find(r=>r.key===ar.p.key);
+    assert.equal(saved.projectView.goal,ar.p.specification.prompt);assert.deepEqual(saved.projectView.inputs,ar.p.specification.inputs.map(f=>f.name));assert.deepEqual(saved.projectView.outputs,ar.p.specification.outputs.map(f=>f.name));assert.deepEqual(saved.projectView.budget,ctx.budget);assert.equal(saved.outcomeSummary.funnel.attempted,1);assert.equal(saved.outcomeSummary.funnel.firstPassAccepted,0);assert.equal(saved.request,undefined);
+    const {verifyLedger}=await import('../successor/outcomes.mjs');verifyLedger(result.outcomeObservations);assert.ok(result.outcomeObservations.every(row=>row.event.attempt===ar.p.key));assert.equal(result.outcomeObservations[0].previous,null);
+    const raw=JSON.stringify(result.outcomeObservations);assert.equal(raw.includes(req.plan.goal),false);assert.equal(raw.includes(req.plan.immutableInputs[0].content),false);assert.equal(raw.includes('a'.repeat(64)),false);
+    a.controller.vault.lock();assert.equal(a.bridge.status().outcomeSummary,null);assert.deepEqual(a.bridge.status().runs,[]);
+  }finally{await a.close();await n.close();}
+});
+
+test('same-task retries reserve durable ordinals across changed bounds, stale controllers and restart; accepted retry is not first-pass',async()=>{
+  const a=await fixture(root),n=await fixture(root,'node');try{
+    const req=await request(),ctx=context(req,a,n);for(const f of req.plan.immutableInputs){a.inputs.set(f.name,Buffer.from(f.content));n.inputs.set(f.name,Buffer.from(f.content));}
+    const stale=new SuccessorController(a.controller,'agent',a.api),start=a.controller.studio.start.bind(a.controller.studio);
+    a.controller.studio.start=()=>{throw Error('TEST_BEFORE_DISPATCH_FAILURE');};
+    const p=await a.bridge.prepare({request:req,context:ctx},'test-principal');await assert.rejects(a.bridge.execute({ticket:p.ticket,key:p.key,confirm:true},'test-principal'),/TEST_BEFORE_DISPATCH_FAILURE/);
+    assert.equal(a.bridge.records[0].attemptOrdinal,1);assert.equal(a.bridge.records[0].status,'blocked-or-uncertain');assert.equal(a.worker.state.calls.length,0);
+    a.controller.studio.start=start;const changed=structuredClone(ctx);changed.deadline+=60;changed.budget.maxAgentCostUSDC='6';
+    const before=await stale.prepare({request:req,context:changed},'test-principal'),lock=path.join(a.controller.home,'successor-attempt.lock');fs.writeFileSync(lock,'',{mode:0o600});
+    await assert.rejects(stale.execute({ticket:before.ticket,key:before.key,confirm:true},'test-principal'),/FLEET_ATTEMPT_LOCKED/);assert.equal(a.worker.state.calls.length,0);fs.unlinkSync(lock);
+    const retry=await run(stale,{request:req,context:changed}),actual=await stale.result(retry.p.key);assert.notEqual(retry.p.key,p.key);
+    const saved=stale.records.find(r=>r.key===retry.p.key);assert.equal(saved.attemptOrdinal,2);assert.equal(saved.taskSha256,req.plan.missionSha256);assert.equal(saved.repeatOfTaskSha256,req.plan.missionSha256);
+    const nr=await run(n.bridge,{handoff:actual.handoff}),review=await n.bridge.result(nr.p.key);assert.equal((await stale.result(retry.p.key,review.receipt)).outcome,'accepted');
+    const reopened=new SuccessorController(a.controller,'agent',a.api),summary=reopened.status().outcomeSummary;assert.equal(summary.attempts,2);assert.equal(summary.funnel.attempted,1);assert.equal(summary.funnel.repeated,1);assert.equal(summary.funnel.firstPassAccepted,0);assert.equal(summary.acceptanceAssertionsByControl.unverified,1);
+    // Later offered/admissible observations cannot rewrite a committed ordinal.
+    const third=structuredClone(changed);third.deadline+=60;const prepared=await reopened.prepare({request:req,context:third},'test-principal');await reopened.execute({ticket:prepared.ticket,key:prepared.key,confirm:true},'test-principal');await a.controller.studio.task;assert.equal(reopened.records.find(r=>r.key===prepared.key).attemptOrdinal,3);
+  }finally{await a.close();await n.close();}
+});
+
+test('later preparations and repetitions cannot relabel committed first-pass metadata or erase a genuine original first pass',async()=>{
+  const {OutcomeLedger,summarizeOutcomes}=await import('../successor/outcomes.mjs'),os=await import('node:os'),dir=fs.mkdtempSync(path.join(os.tmpdir(),'outcome-ordinal-'));
+  try{const ledger=new OutcomeLedger(dir),task='6'.repeat(64),a='7'.repeat(64),b='8'.repeat(64),evidence='9'.repeat(64);
+    const event=(attempt,type,data)=>({attempt,type,at:1,evidenceSha256:evidence,data}),funnel=(attempt,stage,ordinal,repeat)=>ledger.append(event(attempt,'funnel',{taskSha256:task,stage,family:'data-reconciliation',role:'agent',attemptOrdinal:ordinal,repeatOfTaskSha256:repeat}));
+    funnel(a,'attempted',1,null);ledger.append(event(a,'review',{verdict:'accepted',control:'unverified',deliverySha256:a,eligibilityEvidenceSha256:null}));
+    funnel(a,'offered',2,task);funnel(b,'attempted',2,task);funnel(b,'repeated',2,task);ledger.append(event(b,'review',{verdict:'accepted',control:'unverified',deliverySha256:b,eligibilityEvidenceSha256:null}));
+    let summary=summarizeOutcomes(ledger.read());assert.equal(summary.funnel.firstPassAccepted,1);assert.equal(summary.funnel.repeated,1);assert.equal(summary.acceptanceAssertionsByControl.unverified,2);
+    funnel(a,'repaired',1,null);summary=summarizeOutcomes(ledger.read());assert.equal(summary.funnel.firstPassAccepted,0);
+  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});

@@ -1,7 +1,7 @@
 {
   "schema": "agi-fleet-vendored-source/v1",
   "repository": "MontrealAI/AGIJobManager",
-  "commit": "d9b65eda376e990db30bfd20235cac0447af7fa4",
+  "commit": "554f38ebd57e3d6092552400ff43cb7264f9f68c",
   "version": "1.16.1",
   "license": "MIT; nested Alpha Apache-2.0 notices retained",
   "adaptations": [],
@@ -12,7 +12,7 @@
     },
     {
       "path": "SOURCE.json",
-      "sha256": "4e9a70743584ef19d9da1df26d9de7f6b0e1062a748396f7a738456a5085cc05"
+      "sha256": "4552cc302e7385cca0058aa62a5c6e0e49f119cb260cfdb1a40c908f5f284bd5"
     },
     {
       "path": "package.json",
@@ -136,23 +136,27 @@
     },
     {
       "path": "scripts/successor/browser-test.mjs",
-      "sha256": "e4991cdb16cc81813f5286fba7acef26c857308deda0d7b5dda95d4b96c99e3b"
+      "sha256": "b2b3365ebd0273df5a4ab009925638490ccd7221da2fcd10be6f4bf22b71f1a2"
     },
     {
       "path": "scripts/successor/build.mjs",
-      "sha256": "e0aa40e7aeb21a50ad51640366f0814f8d39e3620db180dea3508ac26c733c96"
+      "sha256": "b9b26a645d322148695fed8036ebe9073cb64f36d11d6590c33236b24a582f13"
     },
     {
       "path": "scripts/successor/cli.mjs",
-      "sha256": "f7fc51052c444e17b9113a11de129489abbebe7feef15ebb7b9e4044b6f839e0"
+      "sha256": "ebde0cf74ff6dec1ff8268118d8577263e438f7cd310ea5f61add93cdd14cb25"
     },
     {
       "path": "scripts/successor/core.test.mjs",
       "sha256": "e8896331c5e844e52faaa260d785404d21882dbd5a708e4104a7d7420204d16d"
     },
     {
+      "path": "scripts/successor/history-browser-test.mjs",
+      "sha256": "b86b18a9ba20da6e3718b676d749c000e2f09d5d2b57816f8161d42b4f9a8771"
+    },
+    {
       "path": "scripts/successor/portable.test.mjs",
-      "sha256": "cf53de6e3e03920f5ba4a633744ef5ce96219da64b38e6721ad15bea8628becc"
+      "sha256": "aa44336bb197f7ac1efc7b11c381de5439c831909cbb1e6d82873df04b0b75c5"
     },
     {
       "path": "scripts/successor/preservation-normalize.mjs",
@@ -228,7 +232,7 @@
     },
     {
       "path": "site/assets/successor/app.mjs",
-      "sha256": "7fe2ff787091167a4d6b3cb1d16accd134563aef574b9c38b63fde472dca8eb4"
+      "sha256": "1cedad498f93c7845f5444c7ce9fb74ef1be27d8dfcf9e84b6e513dfaed5dec7"
     },
     {
       "path": "site/assets/successor/archive.mjs",
@@ -236,7 +240,7 @@
     },
     {
       "path": "site/assets/successor/checker.mjs",
-      "sha256": "5a7c436229139d0505f812140738ea87ce9332bc73b50285faf7a2d3b90c3edd"
+      "sha256": "c1cddf9c854632d86cc5ecb4ee40bfd0f04a7540031cd5ad4ceafbfb7882e8ce"
     },
     {
       "path": "site/assets/successor/jobs.mjs",
@@ -260,11 +264,11 @@
     },
     {
       "path": "site/assets/successor/model.mjs",
-      "sha256": "88e9f45105dabf8a37dc5d8c954010922664f0c151d6ca16c8907422060e512f"
+      "sha256": "d266f5a35acfb6d5ab298af258187cc2b06c912577fc0faeb43b011ea2b50f6b"
     },
     {
       "path": "site/assets/successor/safe.mjs",
-      "sha256": "818dea97a117c86c77c4cd73ff0520cdf1096e4f880af8ff0803c589a61e6a56"
+      "sha256": "d15c86c61369278e0bbf2ca8d3b1bd5f4ef3091c7cc7943f06afbe95e7b99ab6"
     },
     {
       "path": "site/assets/successor/style.css",
@@ -272,7 +276,7 @@
     },
     {
       "path": "site/successor.mjs",
-      "sha256": "7f1b11c4d51fbab1a1314d4f0b68617ed63bd6e507ca84f433452fc985d2f6e3"
+      "sha256": "9ca09bc186966056c373906ab4bae07811bab2f360f4d67d4ca013773de4fbac"
     }
   ]
 }

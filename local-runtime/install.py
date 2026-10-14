@@ -6,6 +6,7 @@ directories and is never removed or rolled back by software maintenance.
 """
 import argparse
 import contextlib
+import ctypes
 import hashlib
 import json
 import os
@@ -160,6 +161,81 @@ def inspect_archive(archive, expected):
     return m, prefix
 
 
+def preflight(archive, expected, node_archive, root, state, update=False):
+    """Inspect prerequisites without creating paths, locks or executing packages."""
+    checks, verified_node = [], None
+    def check(name, fn, help):
+        try:
+            value = fn()
+            checks.append({'prerequisite': name, 'status': 'present', 'detail': value})
+            return value
+        except (ValueError, OSError, KeyError, TypeError, StopIteration, zipfile.BadZipFile, tarfile.TarError) as e:
+            checks.append({'prerequisite': name, 'status': 'blocked', 'code': str(e), 'next': help})
+    manifest = check('package identity', lambda: inspect_archive(archive, expected)[0], 'Supply the reviewed Local Skills ZIP and its independently verified digest.')
+    if manifest:
+        checks[-1]['detail'] = {'commit': manifest['commit'], 'version': manifest['version'], 'archiveSHA256': expected}
+    pin = check('platform and pinned Node', node_pin, 'Use a supported Linux x64/ARM64 host. Native Mac execution remains unimplemented.')
+    if pin:
+        item, version = pin
+        checks[-1]['detail'] = {'platform': item['platform'], 'version': version}
+        def node_identity():
+            regular(Path(node_archive))
+            require(sha(node_archive) == item['sha256'], 'NODE_ARCHIVE_SHA256_MISMATCH')
+            return {'archiveSHA256': item['sha256']}
+        verified_node = check('Node archive identity', node_identity, 'Download the exact platform archive recorded in runtime-artifacts.lock.json.')
+    root, state = Path(root).absolute(), Path(state).absolute()
+    def paths():
+        require(root == root.resolve() and state == state.resolve(), 'PATH_ALIAS_FORBIDDEN')
+        require(not root.is_relative_to(ROOT) and not state.is_relative_to(ROOT)
+                and not state.is_relative_to(root) and not root.is_relative_to(state), 'INSTALLATION_PATH_SCOPE')
+        if update:
+            _, m = installation(root)
+            require(m['state'] == str(state), 'STATE_IDENTITY_CHANGED')
+            require(not os.path.lexists(state / 'control.sock'), 'STOP_SUPERVISOR_BEFORE_MAINTENANCE')
+        else:
+            require(not root.exists() and not state.exists(), 'FRESH_INSTALL_REQUIRED')
+        for path in (root, state):
+            ancestor = path
+            while not ancestor.exists():
+                ancestor = ancestor.parent
+            require(ancestor.is_dir() and os.access(ancestor, os.W_OK | os.X_OK), 'PARENT_NOT_WRITABLE')
+        return {'root': str(root), 'state': str(state), 'mode': 'update' if update else 'fresh-install'}
+    check('private installation paths', paths, 'Choose separate fresh writable directories; stop the existing service before update. Run as the standard compute user.')
+    if manifest and pin and verified_node:
+        def storage():
+            prefix = 'node-v' + version + '-' + item['platform']
+            with tarfile.open(node_archive, 'r:xz') as archive_file:
+                node_bytes = sum(archive_file.getmember(prefix + '/' + name).size for name in ('bin/node', 'LICENSE'))
+            required = sum(row['bytes'] for row in manifest['files']) + Path(archive).stat().st_size + Path(node_archive).stat().st_size + node_bytes + 1_048_576
+            ancestor = root
+            while not ancestor.exists():
+                ancestor = ancestor.parent
+            free = shutil.disk_usage(ancestor).free
+            require(free >= required, 'INSUFFICIENT_STAGE_DISK_SPACE')
+            return {'stagingRequiredBytes': required, 'availableBytes': free, 'reservation': False}
+        check('staging disk capacity', storage, 'Free sufficient space for the verified package, pinned runtime and staged extracted files; this inspection does not reserve storage.')
+    for executable in ('/usr/bin/bwrap', '/usr/bin/prlimit'):
+        def executable_identity(file=Path(executable)):
+            require(platform.system() == 'Linux', 'LOCAL_EXECUTION_BACKEND_UNIMPLEMENTED')
+            s = file.stat()
+            require(stat.S_ISREG(s.st_mode) and s.st_uid == 0 and not s.st_mode & 0o022 and os.access(file, os.X_OK), 'SANDBOX_PREREQUISITE_MISSING_OR_UNTRUSTED')
+            return str(file)
+        check(executable, executable_identity, 'An administrator may install the documented distribution bubblewrap/util-linux prerequisites. Fleet remains a standard-user process; do not disable OS safeguards.')
+    if platform.system() == 'Linux':
+        for file in ('/proc/sys/kernel/unprivileged_userns_clone', '/proc/sys/user/max_user_namespaces'):
+            if Path(file).exists():
+                def namespace_setting(path=Path(file)):
+                    value = int(path.read_text().strip())
+                    require(value > 0, 'SANDBOX_NAMESPACE_DISABLED')
+                    return value
+                check(file, namespace_setting, 'Use a host with supported isolation policy; do not turn off safeguards to force admission.')
+    return {'schema': 'agi-fleet/local-install-preflight/v1', 'readOnly': True, 'hostModified': False,
+            'readyForInstallInspection': all(x['status'] == 'present' for x in checks), 'checks': checks,
+            'runtimeAdmission': 'NOT_RUN; run installed doctor and fresh task admission', 'productionQualified': False,
+            'authority': 'none', 'administratorRequiredForInstaller': False, 'runAs': 'standard compute user',
+            'provider': 'NOT_INSPECTED', 'crossHostAuthorityRestore': 'BLOCKED_NOT_IMPLEMENTED'}
+
+
 def node_pin():
     system = {'Linux': 'linux', 'Darwin': 'darwin'}.get(platform.system())
     machine = {'x86_64': 'x64', 'aarch64': 'arm64', 'arm64': 'arm64'}.get(platform.machine())
@@ -224,6 +300,8 @@ def maintenance(root, recover=False):
 
 def installation(root, allow_pending=False):
     root = private(root)
+    require(not os.path.lexists(completion_path(root)), 'RESUME_REMOVAL_FIRST')
+    require(not os.path.lexists(root / 'pending-removal.json'), 'RESUME_REMOVAL_FIRST')
     require(allow_pending or not os.path.lexists(root / 'pending-install.json'), 'RECOVER_INSTALLATION_FIRST')
     file = root / 'installation.json'
     regular(file, 100_000)
@@ -312,8 +390,75 @@ def reserve_state(state):
         socket.unlink()
 
 
-def recover_maintenance(root):
+def release_dead_fence(state):
+    socket = state / 'control.sock'
+    if not os.path.lexists(socket):
+        return
+    regular(socket, 4096)
+    s = socket.lstat()
+    require(s.st_uid == os.getuid() and s.st_mode & 0o077 == 0, 'MAINTENANCE_OWNERSHIP_UNKNOWN')
+    record = read_json(socket.read_bytes())
+    require(set(record) == {'schema', 'pid', 'boot', 'state'} and record['schema'] == 'agi-fleet/state-maintenance/v1'
+            and record['state'] == str(state) and type(record['pid']) is int and record['pid'] > 1,
+            'MAINTENANCE_OWNERSHIP_UNKNOWN')
+    require_dead_owner(record)
+    current = socket.lstat()
+    require((current.st_dev, current.st_ino) == (s.st_dev, s.st_ino), 'MAINTENANCE_FENCE_CHANGED')
+    socket.unlink()
+
+
+def removal_plan(root):
     root = private(root)
+    journal = root / 'pending-removal.json'
+    regular(journal, 16_000_000)
+    s = journal.lstat()
+    require(s.st_uid == os.getuid() and s.st_mode & 0o077 == 0, 'REMOVAL_JOURNAL_INVALID')
+    m = read_json(journal.read_bytes())
+    require(set(m) == {'schema', 'root', 'state', 'rootIdentity', 'stateIdentity', 'files', 'directories'}
+            and m['schema'] == 'agi-fleet/pending-removal/v1' and m['root'] == str(root), 'REMOVAL_JOURNAL_INVALID')
+    state = private(m['state'])
+    require(not state.is_relative_to(root) and not root.is_relative_to(state)
+            and m['rootIdentity'] == directory_identity(root) and m['stateIdentity'] == directory_identity(state),
+            'INSTALLATION_DIRECTORY_CHANGED')
+    expected = {'pending-removal.json', 'operation.lock', 'operation.lock/owner.json'}
+    require(isinstance(m['files'], list) and isinstance(m['directories'], list)
+            and 0 < len(m['files']) + len(m['directories']) <= 100_000, 'REMOVAL_JOURNAL_INVALID')
+    for kind, rows in [('file', m['files']), ('directory', m['directories'])]:
+        for row in rows:
+            fields = {'path', 'identity', 'sha256', 'mode'} if kind == 'file' else {'path', 'identity'}
+            require(set(row) == fields and isinstance(row['path'], str), 'REMOVAL_JOURNAL_INVALID')
+            relative = row['path']
+            p = PurePosixPath(relative)
+            require(str(p) == relative and not p.is_absolute() and all(x not in ('.', '..') for x in p.parts)
+                    and (relative == 'installation.json' and kind == 'file' or relative == 'versions' and kind == 'directory'
+                         or re.fullmatch(r'versions/[a-f0-9]{64}(?:/[^\\\x00]+)?', relative))
+                    and relative not in expected, 'REMOVAL_PATH_INVALID')
+            expected.add(relative)
+            file = root / relative
+            require(file.resolve() == file, 'INSTALLED_PATH_ALIAS')
+            if not os.path.lexists(file):
+                continue  # Only journaled members already removed may be absent.
+            s = file.lstat()
+            require([s.st_dev, s.st_ino] == row['identity'] and s.st_uid == os.getuid(), 'REMOVAL_MEMBER_CHANGED')
+            if kind == 'directory':
+                require(stat.S_ISDIR(s.st_mode), 'REMOVAL_MEMBER_CHANGED')
+            else:
+                regular(file)
+                require(stat.S_IMODE(s.st_mode) == row['mode'] and sha(file) == row['sha256'], 'REMOVAL_MEMBER_CHANGED')
+    require(all(file.relative_to(root).as_posix() in expected for file in root.rglob('*')), 'UNOWNED_INSTALLATION_CONTENT')
+    return root, m
+
+
+def recover_maintenance(root):
+    if os.path.lexists(completion_path(Path(root).absolute())):
+        return finalize_removal(Path(root).absolute())
+    root = private(root)
+    if os.path.lexists(root / 'pending-removal.json'):
+        _, removal = removal_plan(root)
+        with maintenance(root, recover=True):
+            release_dead_fence(Path(removal['state']))
+        return {'state': 'removal-retry-required', 'authorityRestored': False, 'replayed': False,
+                'next': 'Repeat uninstall with the same root and --confirm; committed state remains preserved.'}
     incomplete = not (root / 'installation.json').exists()
     journal = pending_installation(root)[1] if incomplete or (root / 'pending-install.json').exists() else None
     if journal:
@@ -327,24 +472,7 @@ def recover_maintenance(root):
             require(pending_installation(root)[1] == journal, 'INSTALLATION_JOURNAL_CHANGED')
         if not incomplete:
             require(installation(root, allow_pending=True)[1] == m, 'INSTALLATION_JOURNAL_CHANGED')
-        socket = Path(m['state']) / 'control.sock'
-        if socket.exists():
-            regular(socket, 4096)
-            s = socket.lstat()
-            require(s.st_uid == os.getuid() and s.st_mode & 0o077 == 0, 'MAINTENANCE_OWNERSHIP_UNKNOWN')
-            record = read_json(socket.read_bytes())
-            require(set(record) == {'schema', 'pid', 'boot', 'state'} and record['schema'] == 'agi-fleet/state-maintenance/v1'
-                    and record['state'] == m['state'] and type(record['pid']) is int and record['pid'] > 1, 'MAINTENANCE_OWNERSHIP_UNKNOWN')
-            if record['boot'] == boot_identity():
-                try:
-                    os.kill(record['pid'], 0)
-                except ProcessLookupError:
-                    pass
-                else:
-                    raise ValueError('INSTALLATION_OPERATION_STILL_ACTIVE')
-            current = socket.lstat()
-            require((current.st_dev, current.st_ino) == (s.st_dev, s.st_ino), 'MAINTENANCE_FENCE_CHANGED')
-            socket.unlink()
+        release_dead_fence(Path(m['state']))
         if journal:
             if incomplete:
                 journal['resumable'] = True
@@ -538,28 +666,200 @@ def launch(root, args):
         return subprocess.call([str(node), str(version / 'application/local-runtime/cli/main.mjs'), *args], env=env)
 
 
+@contextlib.contextmanager
+def directory_fd(path):
+    path = Path(path).absolute()
+    fd = os.open('/', os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        for part in path.parts[1:]:
+            next_fd = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+            os.close(fd)
+            fd = next_fd
+        yield fd
+    finally:
+        os.close(fd)
+
+
+@contextlib.contextmanager
+def removal_parent(root_fd, row, plan):
+    expected = {r['path']: r['identity'] for r in plan['directories']}
+    parts = PurePosixPath(row['path']).parts
+    fd = os.dup(root_fd)
+    try:
+        for i, part in enumerate(parts[:-1]):
+            try:
+                next_fd = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+            except FileNotFoundError:
+                yield None
+                return
+            except OSError:
+                raise ValueError('REMOVAL_PARENT_CHANGED') from None
+            os.close(fd)
+            fd = next_fd
+            s = os.fstat(fd)
+            require([s.st_dev, s.st_ino] == expected.get('/'.join(parts[:i + 1])) and s.st_uid == os.getuid(), 'REMOVAL_PARENT_CHANGED')
+        yield fd
+    finally:
+        os.close(fd)
+
+
+def remove_member(root_fd, row, plan, directory=False):
+    with removal_parent(root_fd, row, plan) as parent:
+        if parent is None:
+            return
+        name = PurePosixPath(row['path']).name
+        try:
+            before = os.stat(name, dir_fd=parent, follow_symlinks=False)
+        except FileNotFoundError:
+            return
+        require([before.st_dev, before.st_ino] == row['identity'] and before.st_uid == os.getuid(), 'REMOVAL_MEMBER_CHANGED')
+        if directory:
+            require(stat.S_ISDIR(before.st_mode), 'REMOVAL_MEMBER_CHANGED')
+        else:
+            require(stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and stat.S_IMODE(before.st_mode) == row['mode'], 'REMOVAL_MEMBER_CHANGED')
+            fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
+            with os.fdopen(fd, 'rb') as stream:
+                opened = os.fstat(stream.fileno())
+                require((opened.st_dev, opened.st_ino) == (before.st_dev, before.st_ino)
+                        and hashlib.file_digest(stream, 'sha256').hexdigest() == row['sha256'], 'REMOVAL_MEMBER_CHANGED')
+                after = os.fstat(stream.fileno())
+                require((opened.st_size, opened.st_mtime_ns, opened.st_ctime_ns) == (after.st_size, after.st_mtime_ns, after.st_ctime_ns), 'REMOVAL_MEMBER_CHANGED')
+        current = os.stat(name, dir_fd=parent, follow_symlinks=False)
+        require((current.st_dev, current.st_ino, current.st_mode) == (before.st_dev, before.st_ino, before.st_mode), 'REMOVAL_MEMBER_CHANGED')
+        # Descriptor-relative deletion never follows a replaced parent symlink.
+        (os.rmdir if directory else os.unlink)(name, dir_fd=parent)
+        os.fsync(parent)
+
+
+def completion_path(root):
+    return root.with_name(root.name + '.removal.json')
+
+
+def finalize_removal(root, plan=None):
+    root = Path(root).absolute()
+    receipt = completion_path(root)
+    with directory_fd(root.parent) as parent:
+        parent_stat = os.fstat(parent)
+        if plan is not None:
+            value = {'schema': 'agi-fleet/removal-completion/v1', 'root': str(root), 'state': plan['state'],
+                     'rootIdentity': plan['rootIdentity'], 'stateIdentity': plan['stateIdentity'],
+                     'parentIdentity': [parent_stat.st_dev, parent_stat.st_ino]}
+            temporary = '.agi-fleet-removal-' + uuid.uuid4().hex + '.tmp'
+            try:
+                fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=parent)
+                with os.fdopen(fd, 'w') as out:
+                    json.dump(value, out)
+                    out.flush()
+                    os.fsync(out.fileno())
+                # Linux renameat2 commits complete bytes atomically without
+                # replacing an existing completion record. No destructive
+                # operation begins until the record and its parent are durable.
+                library = ctypes.CDLL(None, use_errno=True)
+                require(hasattr(library, 'renameat2'), 'ATOMIC_REMOVAL_NOT_SUPPORTED')
+                rename = library.renameat2
+                rename.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p, ctypes.c_uint]
+                rename.restype = ctypes.c_int
+                if rename(parent, os.fsencode(temporary), parent, os.fsencode(receipt.name), 1):
+                    code = ctypes.get_errno()
+                    raise OSError(code, os.strerror(code), str(receipt))
+                os.fsync(parent)
+            finally:
+                try:
+                    os.unlink(temporary, dir_fd=parent)
+                except FileNotFoundError:
+                    pass
+        fd = os.open(receipt.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
+        with os.fdopen(fd, 'rb') as stream:
+            record_stat = os.fstat(stream.fileno())
+            require(stat.S_ISREG(record_stat.st_mode) and record_stat.st_nlink == 1 and record_stat.st_uid == os.getuid()
+                    and record_stat.st_mode & 0o077 == 0 and 0 < record_stat.st_size < 4096, 'REMOVAL_COMPLETION_INVALID')
+            value = read_json(stream.read(4096))
+        require(set(value) == {'schema', 'root', 'state', 'rootIdentity', 'stateIdentity', 'parentIdentity'}
+                and value['schema'] == 'agi-fleet/removal-completion/v1' and value['root'] == str(root)
+                and value['parentIdentity'] == [parent_stat.st_dev, parent_stat.st_ino]
+                and value['stateIdentity'] == directory_identity(value['state']), 'REMOVAL_COMPLETION_INVALID')
+        try:
+            root_fd = os.open(root.name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
+        except FileNotFoundError:
+            root_fd = None
+        if root_fd is not None:
+            try:
+                s = os.fstat(root_fd)
+                require([s.st_dev, s.st_ino] == value['rootIdentity'] and s.st_uid == os.getuid()
+                        and not s.st_mode & 0o077, 'INSTALLATION_DIRECTORY_CHANGED')
+                require(set(os.listdir(root_fd)) <= {'pending-removal.json'}, 'UNOWNED_INSTALLATION_CONTENT')
+                try:
+                    journal_fd = os.open('pending-removal.json', os.O_RDONLY | os.O_NOFOLLOW, dir_fd=root_fd)
+                except FileNotFoundError:
+                    journal_fd = None
+                if journal_fd is not None:
+                    with os.fdopen(journal_fd, 'rb') as stream:
+                        journal_stat = os.fstat(stream.fileno())
+                        require(stat.S_ISREG(journal_stat.st_mode) and journal_stat.st_nlink == 1 and journal_stat.st_uid == os.getuid()
+                                and journal_stat.st_mode & 0o077 == 0 and journal_stat.st_size < 16_000_000, 'REMOVAL_JOURNAL_INVALID')
+                        journal = read_json(stream.read(16_000_000))
+                    require(journal['root'] == value['root'] and journal['state'] == value['state']
+                            and journal['rootIdentity'] == value['rootIdentity'] and journal['stateIdentity'] == value['stateIdentity'], 'REMOVAL_JOURNAL_INVALID')
+                    current = os.stat('pending-removal.json', dir_fd=root_fd, follow_symlinks=False)
+                    require((current.st_dev, current.st_ino) == (journal_stat.st_dev, journal_stat.st_ino), 'REMOVAL_JOURNAL_INVALID')
+                    os.unlink('pending-removal.json', dir_fd=root_fd)
+                    os.fsync(root_fd)
+                current = os.stat(root.name, dir_fd=parent, follow_symlinks=False)
+                require([current.st_dev, current.st_ino] == value['rootIdentity'], 'INSTALLATION_DIRECTORY_CHANGED')
+                os.rmdir(root.name, dir_fd=parent)
+                os.fsync(parent)
+            finally:
+                os.close(root_fd)
+        current = os.stat(receipt.name, dir_fd=parent, follow_symlinks=False)
+        require((current.st_dev, current.st_ino) == (record_stat.st_dev, record_stat.st_ino), 'REMOVAL_COMPLETION_INVALID')
+        os.unlink(receipt.name, dir_fd=parent)
+        os.fsync(parent)
+    return {'removed': str(root), 'preservedState': value['state'], 'credentialsDeleted': False, 'authorityRestored': False}
+
+
 def uninstall(root):
-    root, m = installation(root)
+    root = Path(root).absolute()
+    if os.path.lexists(completion_path(root)):
+        return finalize_removal(root)
+    root = private(root)
+    resuming = os.path.lexists(root / 'pending-removal.json')
+    root, m = removal_plan(root) if resuming else installation(root)
     with maintenance(root), reserve_state(m['state']):
-        expected = {'installation.json', 'versions', 'operation.lock'}
-        require(set(x.name for x in root.iterdir()) == expected, 'UNOWNED_INSTALLATION_CONTENT')
-        require(set(x.name for x in (root / 'versions').iterdir()) == set(m['versions']), 'UNOWNED_VERSION_CONTENT')
-        # Remove only receipt-bound code versions. Leave the authority ledger,
-        # operator recovery data and all external deliverables untouched.
-        for version in m['versions']:
-            require(re.fullmatch(r'[0-9a-f]{64}', version), 'VERSION_NOT_OWNED')
-            verify_version(root, version)
-        for version in m['versions']:
-            shutil.rmtree(root / 'versions' / version)
-        (root / 'versions').rmdir()
-        (root / 'installation.json').unlink()
-    root.rmdir()
-    return {'removed': str(root), 'preservedState': m['state'], 'credentialsDeleted': False}
+        if not resuming:
+            require(set(x.name for x in root.iterdir()) == {'installation.json', 'versions', 'operation.lock'}, 'UNOWNED_INSTALLATION_CONTENT')
+            require(set(x.name for x in (root / 'versions').iterdir()) == set(m['versions']), 'UNOWNED_VERSION_CONTENT')
+            for version in m['versions']:
+                verify_version(root, version)
+            files, directories = [], []
+            for file in root.rglob('*'):
+                if file.is_relative_to(root / 'operation.lock'):
+                    continue
+                relative = file.relative_to(root).as_posix()
+                if file.is_dir() and not file.is_symlink():
+                    s = file.lstat()
+                    directories.append({'path': relative, 'identity': [s.st_dev, s.st_ino]})
+                else:
+                    regular(file)
+                    s = file.lstat()
+                    files.append({'path': relative, 'sha256': sha(file), 'mode': stat.S_IMODE(s.st_mode), 'identity': [s.st_dev, s.st_ino]})
+            m = {'schema': 'agi-fleet/pending-removal/v1', 'root': str(root), 'state': m['state'],
+                 'rootIdentity': directory_identity(root), 'stateIdentity': directory_identity(m['state']),
+                 'files': files, 'directories': directories}
+            atomic(root / 'pending-removal.json', m)
+        removal_plan(root)  # Validate every remaining member before deleting one.
+        with directory_fd(root) as root_fd:
+            s = os.fstat(root_fd)
+            require([s.st_dev, s.st_ino] == m['rootIdentity'], 'INSTALLATION_DIRECTORY_CHANGED')
+            for row in m['files']:
+                remove_member(root_fd, row, m)
+            for row in sorted(m['directories'], key=lambda x: len(PurePosixPath(x['path']).parts), reverse=True):
+                remove_member(root_fd, row, m, directory=True)
+    return finalize_removal(root, m)
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('action', choices=['inspect', 'install', 'update', 'rollback', 'launch', 'uninstall', 'recover-maintenance'])
+    p.add_argument('action', choices=['inspect', 'preflight', 'install', 'update', 'rollback', 'launch', 'uninstall', 'recover-maintenance'])
     p.add_argument('--archive', type=Path)
     p.add_argument('--sha256')
     p.add_argument('--node-archive', type=Path)
@@ -567,9 +867,13 @@ def main():
     p.add_argument('--state', type=Path)
     p.add_argument('--version')
     p.add_argument('--confirm', action='store_true')
+    p.add_argument('--for-update', action='store_true')
     a, arguments = p.parse_known_args()
     require(a.action == 'launch' or not arguments, 'UNKNOWN_ARGUMENTS')
-    if a.action == 'inspect':
+    if a.action == 'preflight':
+        require(a.archive and a.sha256 and a.node_archive and a.root and a.state, 'INSTALL_ARGUMENTS_REQUIRED')
+        result = preflight(a.archive, a.sha256, a.node_archive, a.root, a.state, update=a.for_update)
+    elif a.action == 'inspect':
         m, _ = inspect_archive(a.archive, a.sha256)
         result = {'version': m['version'], 'commit': m['commit'], 'files': len(m['files']), 'productionQualified': False, 'authority': 'none'}
     elif a.action == 'launch':

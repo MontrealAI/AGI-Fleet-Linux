@@ -2,7 +2,7 @@
 
 PR #26 integrates the bounded Linux development preview described by its title. The full product described in [IMPLEMENTATION_HANDOFF.md](IMPLEMENTATION_HANDOFF.md) remains unfinished. Its 22 acceptance rows, `fullHandoffComplete: false` and `releaseEligible: false` are preserved; `releaseEligible` refers to that full product. None is a claim about completion of this narrower preview.
 
-The separate [preview specification](../../local-runtime/preview-release.json) names `0.1.0-alpha.1`, tag `v0.1.0-local-skills-preview.1`, and its mandatory observations. It permits only a clearly labeled prerelease with `operatorInstaller: false`, `productionQualified: false`, no physical/live-provider qualification and funded work disabled. It does not authorize Dedicated Fleet publication or new runtime capabilities.
+The separate [preview specification](../../local-runtime/preview-release.json) names `0.1.0-alpha.2`, tag `v0.1.0-local-skills-preview.2`, and its mandatory observations. It permits only a clearly labeled prerelease with `operatorInstaller: false`, `productionQualified: false`, no physical/live-provider qualification and funded work disabled. It does not authorize Dedicated Fleet publication or new runtime capabilities.
 
 ## Required before publication
 
@@ -16,10 +16,10 @@ Local publication requires all native, browser, local-audit and Fleet jobs. The 
 
 ## Published files and immutability
 
-- `agi-fleet-local-0.1.0-alpha.1.zip`: exact tested development package with locked JavaScript dependencies.
-- `Local-Skills-Evidence-0.1.0-alpha.1.zip`: native/browser/package observations, local audit and inherited Fleet regression evidence.
-- `Local-Skills-Manifest-0.1.0-alpha.1.json`: source/run/package/evidence identities, explicit scope and separately downloaded Node pins.
-- `SHA256SUMS-local-0.1.0-alpha.1.txt`: checksums for those three files.
+- `agi-fleet-local-0.1.0-alpha.2.zip`: exact tested development package with locked JavaScript dependencies.
+- `Local-Skills-Evidence-0.1.0-alpha.2.zip`: native/browser/package observations, local audit and inherited Fleet regression evidence.
+- `Local-Skills-Manifest-0.1.0-alpha.2.json`: source/run/package/evidence identities, explicit scope and separately downloaded Node pins.
+- `SHA256SUMS-local-0.1.0-alpha.2.txt`: checksums for those three files.
 
 A matching tag/release can be resumed only with identical target, canonical notes and assets. Differing tags, assets or published files are never replaced. The final publication repeats canonical notes, verifies remote asset digests, preserves prerelease classification and never makes this preview the default latest release. Each asset stays below 450 MB. Future changes require a fresh version/tag and qualification; documentation-only main changes do not silently rebuild this release.
 
@@ -30,3 +30,5 @@ The package's source manifest records `nativeAcceptance: NOT_RUN` at build time,
 Cette publication distincte rend disponible l’aperçu Linux limité de la PR #26. Elle ne termine pas le produit complet : les 22 exigences et leurs états restent inchangés. Les parcours x64/ARM64, les fichiers installés, les six chemins Gateway avec transport de modèle synthétique, le navigateur EN/FR et toutes les régressions Fleet doivent réussir pour la même révision et le même workflow.
 
 La publication vérifie à nouveau les fichiers et leurs empreintes. Elle ne remplace ni une étiquette ni un fichier publié et reste une préversion. Node est un prérequis séparé vérifié par empreinte. Le travail rémunéré, le bureau/navigateur général, le mode local Mac et l’examen indépendant restent désactivés; les essais physiques, les fournisseurs réels et l’accessibilité humaine restent à réaliser. Consultez [le guide de téléchargement](DOWNLOAD.md#français).
+
+This alpha.2 candidate is a new identity for admission and lifecycle corrections. It is unpublished until its exact-source and saved-package gates pass. The alpha.1 checkpoint and historical observations remain unchanged; none qualifies these new bytes.
