@@ -12,6 +12,7 @@ import urllib.error
 import zipfile
 
 from release_tools import ROOT, REPOSITORY, LIMIT, require, sha
+from release_note_links import render_release_note_links
 
 
 def load(path):
@@ -79,6 +80,18 @@ def validate(metadata, audit, commit):
             'Audit log coverage differs')
 
 
+def publication_notes(assets, commit, workflow_run):
+    require(re.fullmatch(r'[1-9][0-9]*', str(workflow_run or '')) is not None,
+            'Release notes require an exact workflow run')
+    source = 'docs/RELEASE_NOTES_1_1_0.md'
+    notes = render_release_note_links((ROOT / source).read_text(), root=ROOT,
+        source=source, repository=REPOSITORY, commit=commit)
+    notes += '\n## Published artifact identities\n\n| Asset | Bytes | SHA-256 |\n| --- | ---: | --- |\n'
+    notes += ''.join(f'| {path.name} | {path.stat().st_size:,} | `{sha(path)}` |\n' for path in assets)
+    notes += f'\nValidated commit: `{commit}`. [Complete workflow evidence](https://github.com/{REPOSITORY}/actions/runs/{workflow_run}).\n'
+    return notes
+
+
 def prepare(release, evidence, output):
     metadata, audit = load(release / 'release.json'), load(evidence / 'audit.json')
     commit = os.environ.get('GITHUB_SHA')
@@ -109,11 +122,7 @@ def prepare(release, evidence, output):
     write(output / 'Release-Manifest-v1.1.0.json', manifest)
     assets = [archive, output / name, output / 'Release-Manifest-v1.1.0.json']
     (output / 'SHA256SUMS-v1.1.0.txt').write_text(''.join(sha(path) + '  ' + path.name + '\n' for path in assets))
-    notes = (ROOT / 'docs/RELEASE_NOTES_1_1_0.md').read_text()
-    notes += '\n## Published artifact identities\n\n| Asset | Bytes | SHA-256 |\n| --- | ---: | --- |\n'
-    notes += ''.join(f'| {path.name} | {path.stat().st_size:,} | `{sha(path)}` |\n' for path in assets)
-    notes += f'\nValidated commit: `{commit}`. [Complete workflow evidence](https://github.com/{REPOSITORY}/actions/runs/{manifest["workflowRun"]}).\n'
-    (output / 'release-notes.md').write_text(notes)
+    (output / 'release-notes.md').write_text(publication_notes(assets, commit, manifest['workflowRun']))
     print(json.dumps({'status': 'PREPARED', 'assets': [p.name for p in assets], 'productionQualified': False}))
 
 
@@ -133,6 +142,9 @@ def publish(release_dir, output):
             require(sha(path) == expected[path.name], 'Publication bytes changed: ' + path.name)
     require(sha(assets[0]) == metadata['sha256'] and assets[0].stat().st_size == metadata['bytes'], 'Candidate changed')
     require(sha(assets[1]) == manifest['evidence']['sha256'], 'Evidence changed')
+    notes = publication_notes(assets[:-1], commit, manifest['workflowRun'])
+    require((output / 'release-notes.md').read_text() == notes,
+            'Release notes differ from the exact reviewed source and artifact identities')
     spec = importlib.util.spec_from_file_location('baseline_publisher', ROOT / 'engineering/publish-qualified-release.py')
     publisher = importlib.util.module_from_spec(spec); spec.loader.exec_module(publisher)
     token = os.environ['GH_TOKEN']
@@ -152,7 +164,7 @@ def publish(release_dir, output):
             raise
         release = api('/releases', method='POST', data=json.dumps({'tag_name': metadata['tag'],
             'target_commitish': commit, 'name': 'Linux 1.1.0 — exact-archive SUCCESSOR Ω + Fleet / AGIJobManager 1.16.1 qualification',
-            'body': (output / 'release-notes.md').read_text(), 'draft': True, 'prerelease': True}).encode())
+            'body': notes, 'draft': True, 'prerelease': True}).encode())
     require(release['prerelease'] is True and release['target_commitish'] == commit, 'Existing release targets different source')
     ref = api('/git/ref/tags/' + metadata['tag']) if not release['draft'] else None
     if ref is not None:
@@ -168,14 +180,16 @@ def publish(release_dir, output):
             api(f'/releases/{release["id"]}/assets?name=' + path.name, method='POST', data=path.read_bytes(),
                 content_type='application/zip' if path.suffix == '.zip' else 'application/octet-stream', upload=True)
     observed = api(f'/releases/{release["id"]}')
+    require(observed.get('body') == notes, 'Remote release notes differ from reviewed publication text')
     remote = {item['name']: item for item in observed['assets']}
     require(set(remote) == {p.name for p in assets} and all(remote[p.name]['digest'] == 'sha256:' + sha(p)
         and remote[p.name]['size'] == p.stat().st_size for p in assets), 'Remote publication verification failed')
     tag = api('/git/ref/tags/' + metadata['tag'])
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Tag changed before publication')
     if release['draft']:
-        observed = api(f'/releases/{release["id"]}', method='PATCH', data=json.dumps({'draft': False, 'prerelease': True, 'make_latest': 'false'}).encode())
+        observed = api(f'/releases/{release["id"]}', method='PATCH', data=json.dumps({'draft': False, 'prerelease': True, 'make_latest': 'false', 'body': notes}).encode())
     require(not observed['draft'] and observed['prerelease'], 'Release publication classification differs')
+    require(observed.get('body') == notes, 'Published release notes differ from reviewed publication text')
     tag = api('/git/ref/tags/' + metadata['tag'])
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Published tag identity differs')
     print(json.dumps({'status': 'PUBLISHED', 'url': observed['html_url'], 'sha256': metadata['sha256'], 'productionQualified': False}))

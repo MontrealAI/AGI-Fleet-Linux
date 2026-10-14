@@ -1,5 +1,7 @@
 # AGI Fleet · Linux & Apple silicon Mac
 
+**[Which download and workflow should I use?](docs/START_HERE.md)** · **[Quel téléchargement et quel parcours choisir ?](docs/COMMENCER_ICI.md)** — Published releases, development previews, safe setup and recovery.
+
 **[Build my SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor.html)** · **[Créer mon SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor-fr.html)** — Create useful local work, connect a qualified Fleet computer, check improvements and keep your system. [Builder guide](successor/docs/GUIDE.md).
 
 **Linux 1.1.0 is published for controlled fresh-install qualification.** SUCCESSOR Ω + Fleet includes the free English/French Builder, pinned Manager 1.16.1, authenticated Agent execution, separately authorized Node review, portable ownership and explicit version choice. [Download and release notes](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.0-qualification) · [Verified release evidence](validation/LINUX_1_1_0_RELEASE_ADDENDUM.md). Browser-only missions need no account, wallet, installation or provider key. Physical and live-provider commissioning remain open.
