@@ -30,3 +30,19 @@ test('actual saved code executes in a fresh sandbox and produces verified report
   const runtime=new LocalRuntime(directory,{create:true});
   try{const p=runtime.issueClient().principal,a=runtime.addActor({role:'agent',name:'Native qualification'},p);runtime.activate({actor:a.id,confirm:true},p);const g=runtime.prepare({actor:a.id,task:task()},p);runtime.authorize({grant:g.grant,commitment:g.commitment,confirm:true},p);const r=await runtime.run({actor:a.id,grant:g.grant},p);assert.equal(r.receipt.result.checker.passed,true);assert.equal(r.receipt.observation.processGroupGone,true);assert.equal(r.receipt.observation.network,'none');assert.match(r.receipt.result.files.find(f=>f.name==='report.html').content,/<table/);}finally{runtime.close();fs.rmSync(directory,{recursive:true,force:true});}
 });
+test('actual cancelled sandbox retains cleanup evidence and permits only explicit no-success reconciliation',async()=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-native-cancel-'));fs.chmodSync(directory,0o700);
+  const runtime=new LocalRuntime(directory,{create:true});
+  try{
+    const p=runtime.issueClient().principal,a=runtime.addActor({role:'agent',name:'Cancellation qualification'},p);
+    runtime.activate({actor:a.id,confirm:true},p);const g=runtime.prepare({actor:a.id,task:task()},p);
+    runtime.authorize({grant:g.grant,commitment:g.commitment,confirm:true},p);
+    const running=runtime.run({actor:a.id,grant:g.grant},p),run=runtime.status(p).runs[0].id;
+    runtime.cancel({actor:a.id,run},p);await assert.rejects(running,/RUN_CANCELLED/);
+    const plan=await runtime.dispatch('reconciliation',{run},p);
+    assert.equal(plan.kind,'recorded-sandbox-closure');assert.equal(plan.eligible,true);
+    const result=await runtime.dispatch('reconcile',{run,commitment:plan.commitment,confirm:true},p);
+    assert.equal(result.receipt.disposition,'closed-without-success');assert.equal(runtime.status(p).stopped,true);
+    assert.equal(runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(g.grant).state,'consumed');
+  }finally{runtime.close();fs.rmSync(directory,{recursive:true,force:true});}
+});

@@ -8,6 +8,7 @@ import {LocalRuntime} from '../supervisor/runtime.mjs';
 import {readPrivate,privateDirectory} from '../supervisor/store.mjs';
 import {createServer} from '../supervisor/server.mjs';
 import {need,parseStrict,canonical} from '../contracts.mjs';
+import {recoverService} from '../supervisor/recover-service.mjs';
 
 export async function client({state,tokenFile,action,input}) {
   privateDirectory(state);const token=readPrivate(tokenFile,100).toString().trim();
@@ -20,12 +21,26 @@ export async function client({state,tokenFile,action,input}) {
 export async function main(args=process.argv.slice(2)) {
   process.umask(0o077);
   const action=args.shift(),state=path.resolve(process.env.AGI_LOCAL_STATE||path.join(os.homedir(),'.local','state','agi-fleet-local'));
-  if(!action||action==='help'){console.log('AGI Fleet Local Skills — development preview\ninit | serve | status | doctor\nrequest ACTION PRIVATE_INPUT.json\nUse AGI_LOCAL_STATE for a fresh state directory outside the checkout.\nAGI_LOCAL_TOKEN_FILE selects an operator or scoped actor credential (0600).\nNo funded work, native desktop or live provider support is qualified.');return;}
+  if(!action||action==='help'){console.log('AGI Fleet Local Skills — development preview\ninit | serve | status | doctor\nrequest ACTION PRIVATE_INPUT.json\nrecover-service --confirm\nUse AGI_LOCAL_STATE for a fresh state directory outside the checkout.\nAGI_LOCAL_TOKEN_FILE selects an operator or scoped actor credential (0600).\nNo funded work, native desktop or live provider support is qualified.');return;}
   const tokenFile=process.env.AGI_LOCAL_TOKEN_FILE||path.join(state,'operator.token');
   if(action==='init'){
-    need(!fs.existsSync(state),'FRESH_STATE_REQUIRED');const runtime=new LocalRuntime(state,{create:true});
-    try{const {token}=runtime.issueClient();fs.writeFileSync(path.join(state,'operator.token'),token+'\n',{flag:'wx',mode:0o600});console.log(JSON.stringify({installed:true,state,authority:'none',next:'serve',credentialFile:path.join(state,'operator.token')}));}finally{runtime.close();}return;
+    need(args.length===0&&!fs.existsSync(state),'FRESH_STATE_REQUIRED');
+    fs.mkdirSync(path.dirname(state),{recursive:true,mode:0o700});
+    fs.mkdirSync(state,{mode:0o700});
+    const staged=fs.mkdtempSync(path.join(path.dirname(state),'.fleet-init-'));
+    let runtime;
+    try{
+      runtime=new LocalRuntime(staged,{create:true});
+      const {token}=runtime.issueClient();
+      const fd=fs.openSync(path.join(staged,'operator.token'),'wx',0o600);
+      try{fs.writeFileSync(fd,token+'\n');fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
+      runtime.close();runtime=null;
+      fs.renameSync(staged,state);
+      console.log(JSON.stringify({installed:true,state,authority:'none',next:'serve',credentialFile:path.join(state,'operator.token')}));
+    }catch(e){if(runtime)runtime.close();fs.rmSync(staged,{recursive:true,force:true});if(fs.existsSync(state)&&fs.readdirSync(state).length===0)fs.rmdirSync(state);throw e;}
+    return;
   }
+  if(action==='recover-service'){need(args.length===1&&args[0]==='--confirm','CONFIRM_REQUIRED');console.log(JSON.stringify(await recoverService(state,{confirm:true})));return;}
   if(action==='serve'){
     need(args.length===0,'ARGUMENTS_INVALID');const runtime=new LocalRuntime(state);
     const socket=path.join(state,'control.sock');

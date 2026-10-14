@@ -39,7 +39,7 @@ Le bouton **Arrêter le travail** annule le Studio et révoque les autorisations
 
 ## Keep larger work safely
 
-The original capsule stays capped at 4 MB. General Studio work remains capped at 64 files, 32 MiB each and 64 MiB total; smaller specification limits apply. Use a manifest-bound sidecar directory for larger results. The pack contains exact files, capsule, handoff and historical receipt, with sizes and SHA-256 identities. It contains no signing authority or provider secret.
+The original capsule stays capped at 4 MB. General Studio work remains capped at 64 files, 32 MiB each and 64 MiB total; smaller specification limits apply. Use a manifest-bound sidecar directory for larger results. The pack contains exact files, capsule, handoff and the Node’s historical review receipt, with sizes and SHA-256 identities. The Node review must be completed, with a `checked` or `needs-review` result and valid checks for every declared criterion. An Agent self-check, unfinished run, cancelled run or failed run cannot replace that receipt; keep those records through the ordinary Studio exports. A rejected Node review can be retained; the pack does not establish successful qualification or reviewer independence. It contains no signing authority or provider secret.
 
 ```sh
 node successor/cli.mjs export-pack capsule.json handoff.json receipt.json NEW_PACK
@@ -47,6 +47,8 @@ node successor/cli.mjs inspect-pack NEW_PACK
 node successor/cli.mjs restore-pack NEW_PACK NEW_DIRECTORY
 node successor/cli.mjs restore-pack NEW_PACK NEW_DIRECTORY --confirm
 ```
+
+Le dossier portable exige le reçu historique du Node de revue. La revue doit être terminée, avec un résultat `checked` ou `needs-review` et des vérifications valides pour chaque critère. Un autocontrôle de l’Agent ou une exécution inachevée, annulée ou échouée ne suffit pas ; conservez ces traces avec les exports ordinaires du Studio. Une revue rejetée peut être conservée ; le dossier ne prouve ni la qualification du résultat ni l’indépendance du réviseur. Les exports ordinaires du Studio restent disponibles.
 
 Inspection never executes imported code. Keep the entire directory together. Missing, extra, changed, linked or case-colliding files fail inspection. Interrupted exports use a temporary directory and do not overwrite a good export. Existing encrypted wallet backups remain separately bounded; explicitly exclude large Studio work only after exporting it. Wallet backup does not include `successor-execution` records or these portable sidecars. Export them separately.
 
@@ -60,9 +62,9 @@ For custom public work, first save your custom mission and complete Studio v2 sp
 node successor/cli.mjs prepare-custom mission.json studio-spec.json 100 NEW_PROJECT
 ```
 
-This creates a new capsule and plan that commit to the entire specification, including input references, deliverables, requirements, criteria, runtime identities and limits. It preserves your original input description and parent reference; the new specification names the new plan as its parent. Review `NEW_PROJECT/specification.json`, import it into the existing public Studio, and separately authorize execution and review. Export with `NEW_PROJECT/capsule.json` and the resulting handoff and receipt. The amount is an explicit USDC planning allowance; preparation spends nothing. Original files stay unchanged. Changing the specification requires preparing a new project before execution. An older custom capsule without this binding can still use all existing Studio exports, but cannot claim a plan-bound SUCCESSOR pack.
+Preparation requires public data and `isolated-public` authority for both the Agent and reviewer; other scopes fail before any output is written. Use the existing separately governed native workflow for private-account work. This creates a new capsule and plan that commit to the entire specification, including input references, deliverables, requirements, criteria, runtime identities and limits. It preserves your original input description and parent reference; the new specification names the new plan as its parent. Review `NEW_PROJECT/specification.json`, import it into the existing public Studio, and separately authorize execution and review. Export with `NEW_PROJECT/capsule.json` and the resulting handoff and receipt. The amount is an explicit USDC planning allowance; preparation spends nothing. Original files stay unchanged. Changing the specification requires preparing a new project before execution. An older custom capsule without this binding can still use all existing Studio exports, but cannot claim a plan-bound SUCCESSOR pack.
 
-Pour un travail public personnalisé, cette commande crée un nouveau projet qui conserve la spécification complète, les entrées, les livrables et leurs critères. Examinez `specification.json`, importez-le dans le Studio public existant, puis autorisez séparément l’exécution et la révision. Le montant est un budget de planification explicite en USDC ; aucune dépense n’est autorisée. Les fichiers originaux sont conservés. Une modification de la spécification exige un nouveau projet avant l’exécution.
+La préparation exige des données publiques et une autorité `isolated-public` pour l’Agent et le réviseur ; les autres périmètres sont refusés avant toute écriture. Le travail avec des comptes privés conserve son parcours natif distinct. Pour un travail public personnalisé, cette commande crée un nouveau projet qui conserve la spécification complète, les entrées, les livrables et leurs critères. Examinez `specification.json`, importez-le dans le Studio public existant, puis autorisez séparément l’exécution et la révision. Le montant est un budget de planification explicite en USDC ; aucune dépense n’est autorisée. Les fichiers originaux sont conservés. Une modification de la spécification exige un nouveau projet avant l’exécution.
 
 ## Boundaries and support
 

@@ -8,6 +8,7 @@ import {LinuxSandbox} from '../platforms/linux.mjs';
 import {defaultMission} from '../../fleet/successor/vendor/manager/site/assets/successor/missions.mjs';
 import {successorOperation} from './successor.mjs';
 import {validateTaskInput} from '../worker.mjs';
+import {inspectReconciliation,reconcile} from './reconciliation.mjs';
 
 const ASSISTANT_ACTIONS=['status','inspect','prepare','run','cancel','output'];
 export function sourceIdentity() {
@@ -51,7 +52,7 @@ export class LocalRuntime {
     return this.store.transaction(()=>{
       const actor=this.store.actor(uuid(input.actor));need(!actor.stopped&&!this.store.meta('stopped'),'STOP_RECONCILIATION_REQUIRED');
       const pkg=packagePolicy(actor.role);actor.packageSha256=pkg.sha256;actor.registrySha256=pkg.registry;
-      actor.host={schema:'agi-fleet/local-binding/v1',host:this.store.meta('host'),backend:host.backend,identity:host.identity,sourceSha256:this.source,authority:'bounded-offline-only'};
+      actor.host={schema:'agi-fleet/local-binding/v1',host:this.store.meta('host'),backend:host.backend,identity:host.identity,sourceSha256:this.source,authority:'bounded-offline-only',...(host.bootId?{bootId:host.bootId}:{})};
       actor.generation++;actor.active=true;this.store.saveActor(actor);
       this.store.db.prepare("UPDATE grants SET state='revoked' WHERE actor=? AND state IN ('prepared','authorized')").run(actor.id);
       this.store.event('actor-activated',{actor:actor.id,generation:actor.generation});return actor;
@@ -189,6 +190,8 @@ export class LocalRuntime {
     const a=this.addActor({role:v.role,name:v.name},p);a.sourceActor=v.sourceActor;this.store.saveActor(a);this.store.event('portable-import-inert',{actor:a.id,sourceActor:v.sourceActor});return a;
   }
   async dispatch(action,input,p) {
+    if(action==='reconciliation')return inspectReconciliation(this,input,p);
+    if(action==='reconcile')return reconcile(this,input,p);
     if(['project-assemble','project-select','project-export','project-import'].includes(action))return successorOperation(this,action,input,p);
     const methods={create:'addActor',activate:'activate',prepare:'prepare',authorize:'authorize',run:'run',stop:'stop',cancel:'cancel',revoke:'revoke','revoke-client':'revokeClient',pause:'pause',resume:'resume',output:'output',export:'exportActor',import:'importActor'};
     if(action==='status')return this.status(p);

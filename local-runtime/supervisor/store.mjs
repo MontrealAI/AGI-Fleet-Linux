@@ -44,12 +44,17 @@ export class Store {
   saveActor(actor) { this.db.prepare('INSERT INTO actors VALUES(?,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(actor.id,canonical(actor)); }
   listActors() { return this.db.prepare('SELECT value FROM actors ORDER BY rowid').all().map(r=>parseStrict(r.value)); }
   event(kind,body) { const prior=this.db.prepare('SELECT value FROM events ORDER BY seq DESC LIMIT 1').get(); const value={kind,body,previous:prior?digest(prior.value):null}; this.db.prepare('INSERT INTO events(value) VALUES(?)').run(canonical(value)); }
-  recover() {
+  recover({forceStop=false}={}) {
     this.transaction(()=>{
       const active=this.db.prepare("SELECT id,actor FROM runs WHERE state='running'").all();
       this.db.prepare("UPDATE grants SET state='revoked' WHERE state IN ('prepared','authorized')").run();
       this.db.prepare("UPDATE runs SET state='uncertain' WHERE state='running'").run();
       if(active.length){this.set('stopped',true);this.event('restart-needs-reconciliation',active);}
+      if(forceStop){
+        this.set('stopped',true);
+        for(const actor of this.listActors()){actor.active=false;actor.host=null;actor.generation++;this.saveActor(actor);}
+        this.event('explicit-service-recovery',{interrupted:active.map(r=>r.id),authority:'none'});
+      }
     });
   }
   close() { this.db.close(); }

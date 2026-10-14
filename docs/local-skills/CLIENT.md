@@ -18,7 +18,9 @@ The [typed contract](../../local-runtime/schemas/client-v1.d.ts) and executable 
 | `revoke`, `revoke-client` | Operator | Revoke an exact grant or client hash; cancel matching active work and never restore a consumed grant. |
 | `pause` | Operator | Pause/resume new preparations without discarding accepted work. |
 | `stop` | Operator | Stop one actor (`actor` UUID) or the host (`actor: null`). |
-| `resume` | Operator, `confirm: true` | Only clean stopped state; requires fresh activation. Uncertain-run reconciliation is pending. |
+| `reconciliation` | Operator | Inspect an exact uncertain run and recorded cleanup evidence; return a commitment and eligibility reason. |
+| `reconcile` | Operator, `confirm: true` | Close only the inspected offline attempt with positive closure evidence. Retain failure, reservation, consumed grant and STOP; never replay or mark successful. |
+| `resume` | Operator, `confirm: true` | Only after all uncertain runs are reconciled; requires fresh activation and grants. |
 | `export`, `import` | Operator | Allowlisted inert role configuration; no secrets or authority. |
 | `project-assemble` | Operator | Bind separate internal review to exact Agent output; create an unselected candidate. |
 | `project-select` | Operator, `confirm: true` | Original SUCCESSOR keep/replace/rollback semantics. No execution permission. |
@@ -54,8 +56,8 @@ python3 local-runtime/package.py --output /ABSOLUTE/ABSENT/preview-dist
 python3 local-runtime/package.py --verify /ABSOLUTE/preview-dist/agi-fleet-local-0.1.0-alpha.1.zip
 ```
 
-This archive includes reviewed source, the six skills, guides, original licenses and locked installed dependencies. Its manifest binds every member's bytes and mode, records the source commit and dirty-tree state, and explicitly says `operatorInstaller:false`. It is **not** a published or qualified installer. Node, bubblewrap and util-linux are external prerequisites. Native execution, full qualification and the transactional installer remain open gates. The script rejects archive/member sizes at 450,000,000 bytes and never overwrites existing output.
+This archive includes source, the six skills, guides, original licenses and locked installed dependencies. Its manifest binds every member's bytes and mode, records the source commit and dirty-tree state, and explicitly says `operatorInstaller:false`. It is **not** a published or qualified installer. The new [installation and recovery tools](INSTALL_AND_RECOVER.md) operate on this development package and an exact hash-pinned Node archive. Native execution and full qualification remain separate gates. The script rejects archive/member sizes at 450,000,000 bytes and never overwrites existing output.
 
 ## Compatibility and rollback
 
-The existing six-role registry, policy seals, runtime pins, Manager protocol and Dedicated Fleet distribution inventories are unchanged. The local state schema is `agi-fleet/local-ledger/v1`; portable role configuration is `agi-fleet/portable-role/v1`; no generic archive extractor or live database migration is provided. Imported actors remain inactive and economically disabled. Software rollback must not restore old ledgers, revoke receipts or reset budgets. Transactional update/rollback tooling has not yet been implemented, so this preview is unsuitable for authoritative production operation.
+The existing six-role registry, policy seals, runtime pins, Manager protocol and Dedicated Fleet distribution inventories are unchanged. The local state schema is `agi-fleet/local-ledger/v1`; portable role configuration is `agi-fleet/portable-role/v1`; no live database import is provided. Imported actors remain inactive and economically disabled. Software maintenance stages verified code and switches an atomic version pointer while keeping the authority ledger outside the installation. Rollback does not restore old ledgers or reset budgets. This development preview remains unsuitable for authoritative production operation.

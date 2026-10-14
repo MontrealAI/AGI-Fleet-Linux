@@ -28,7 +28,8 @@ export class LinuxSandbox {
         const code=p.error?.code==='ETIMEDOUT'?'SANDBOX_PROBE_TIMEOUT':/namespace|Operation not permitted|Permission denied/i.test(reason)?'SANDBOX_NAMESPACE_DENIED':/chdir/i.test(reason)?'SANDBOX_WORKING_DIRECTORY':/execvp|shared libraries|No such file/i.test(reason)?'SANDBOX_LOADER_UNAVAILABLE':'SANDBOX_UNAVAILABLE';
         need(false,code);
       }
-      return {...report,supported:true,observedAt:Date.now(),identity:digest({backend:report.backend,node:digest(fs.readFileSync(process.execPath)),sandbox:digest(fs.readFileSync(BIN)),platform:process.platform,arch:process.arch,os:os.release(),boot:fs.readFileSync('/proc/sys/kernel/random/boot_id','utf8').trim()})};
+      const bootId=fs.readFileSync('/proc/sys/kernel/random/boot_id','utf8').trim();
+      return {...report,supported:true,observedAt:Date.now(),bootId,identity:digest({backend:report.backend,node:digest(fs.readFileSync(process.execPath)),sandbox:digest(fs.readFileSync(BIN)),platform:process.platform,arch:process.arch,os:os.release(),boot:bootId})};
     }catch(e){return {...report,code:e.code==='ENOENT'?'SANDBOX_PREREQUISITE_MISSING':e.code||e.message,help:'Use the documented Linux prerequisites and rerun doctor. No host-shell fallback is permitted. Browser, desktop and macOS local execution require separate implementation and qualification.'};}
   }
   async execute({role,task,directory,signal}) {

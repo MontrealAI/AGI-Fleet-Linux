@@ -1,9 +1,10 @@
 'use strict';
-let credential='',language='en',prepared=null,readiness=null;
+let credential='',language='en',prepared=null,readiness=null,recovery=null;
 const $=id=>document.getElementById(id);
 const english=new Map([...document.querySelectorAll('[data-i18n]')].map(e=>[e.dataset.i18n,e.textContent]));
 const fr={eyebrow:'Une installation. Vos rôles. Votre travail.',title:'L’intelligence, chez vous.',lead:'Ajoutez les rôles nécessaires. Examinez chaque permission. Gardez le contrôle de chaque exécution.',preview:'Aperçu de développement',local:'Plusieurs acteurs sur un ordinateur, avec des autorisations distinctes et du travail hors ligne limité. La qualification native est requise.',dedicated:'Conservez les parcours existants : installation, signature, utilisation de l’ordinateur et protocole.',guide:'Ouvrir le guide d’installation existant ↗',connect:'Connexion à ce moteur local',tokenHelp:'Collez l’identifiant local indiqué par le lanceur. Il reste uniquement en mémoire dans cette page.',credential:'Identifiant local',connectButton:'Se connecter',computer:'1. Vérifier cet ordinateur',check:'Vérifier la disponibilité',details:'Observations techniques',add:'2. Ajouter un rôle',name:'Nom de l’acteur',role:'Rôle',create:'Ajouter l’acteur',work:'3. Préparer un travail utile',example:'L’exemple crée un véritable rapport modifiable à partir de données publiques synthétiques. Aucun appel de modèle et aucun coût en USDC.',choose:'Choisir un Agent actif',prepare:'Préparer l’exemple',authorize:'Autoriser cette exécution précise',run:'Exécuter sur cet ordinateur',outputs:'4. Examiner vos résultats',control:'Vous gardez le contrôle',pause:'Suspendre les nouveaux travaux',unpause:'Permettre de nouveaux travaux',stop:'ARRÊTER tous les acteurs',stopHelp:'L’arrêt persiste après un redémarrage. Il n’annule pas les actions passées. La reprise exige une réconciliation et une nouvelle activation.',footer:'Données publiques, sous licence ou synthétiques uniquement. Aucune qualification de production, d’examen indépendant ou de travail rémunéré n’est revendiquée.'};
 const say=(en,frText=en)=>{$('status').textContent=language==='fr'?frText:en;};
+Object.assign(fr,{resume:'Reprendre après examen des travaux inachevés',reconcile:'Clore cette tentative sans déclarer de réussite'});
 async function api(action,input={}){
   const r=await fetch('/v1/'+action,{method:'POST',headers:{Authorization:'Bearer '+credential,'Content-Type':'application/json'},body:JSON.stringify(input),cache:'no-store',redirect:'error'});
   const v=await r.json();if(!r.ok)throw Error(v.error||'REQUEST_FAILED');return v;
@@ -24,7 +25,14 @@ async function refresh(){
   for(const r of s.runs){const row=document.createElement('div');row.className='run';row.textContent=`${r.state} · ${r.value.role} · ${r.id} `;row.append(button(language==='fr'?'Voir le résultat':'View output',async()=>{
     const value=await api('output',{actor:r.actor,run:r.id});$('output').textContent=JSON.stringify(value,null,2);
     const files=value.receipt?.result?.files||[];for(const f of files){row.append(button((language==='fr'?'Enregistrer ':'Save ')+f.name,()=>save(f.name,f.content,f.mediaType)));}
+  }));
+  if(r.state==='uncertain')row.append(button(language==='fr'?'Examiner la reprise':'Inspect recovery',async()=>{
+    recovery=await api('reconciliation',{run:r.id});$('recovery').hidden=false;$('recoveryDetails').textContent=JSON.stringify(recovery,null,2);
+    $('reconcile').disabled=!recovery.eligible;
+    $('recoveryHelp').textContent=recovery.eligible?(language==='fr'?'La fermeture de cet environnement hors ligne a été observée. Clore conserve l’échec, la réservation et l’ARRÊT. Aucun travail ne sera répété.':'Closure of this offline environment was observed. Closing the attempt preserves failure evidence, its reservation and STOP. No work will be repeated.'):(language==='fr'?'La fermeture sûre n’est pas établie. Conservez l’ARRÊT et suivez le guide de reprise.':'Safe closure is not established. Keep STOP active and follow the recovery guide.');
+    $('recoveryHelp').tabIndex=-1;$('recoveryHelp').focus();
   }));$('runs').append(row);}
+  $('resume').hidden=!s.stopped;
   if(s.stopped)say('STOP is active. Inspect outstanding runs before recovery.','ARRÊT actif. Examinez les travaux avant la reprise.');
 }
 function renderReadiness(){
@@ -54,3 +62,5 @@ $('run').onclick=()=>attempt(async()=>{$('run').disabled=true;const v=await api(
 $('pause').onclick=()=>attempt(async()=>{await api('pause',{paused:true});say('New work paused; accepted work continues.','Nouveaux travaux suspendus; les travaux acceptés continuent.');});
 $('unpause').onclick=()=>attempt(async()=>{await api('pause',{paused:false});say('New work allowed, subject to STOP and readiness.','Nouveaux travaux permis, sous réserve de l’arrêt et de la disponibilité.');});
 $('stop').onclick=()=>attempt(async()=>{await api('stop',{actor:null});await refresh();});
+$('reconcile').onclick=()=>attempt(async()=>{if(!recovery?.eligible)throw Error('RECOVERY_NOT_READY');await api('reconcile',{run:recovery.run,commitment:recovery.commitment,confirm:true});recovery=null;$('recovery').hidden=true;await refresh();say('Attempt closed without success. STOP and its reservation are preserved.','Tentative close sans réussite. L’ARRÊT et sa réservation sont conservés.');});
+$('resume').onclick=()=>attempt(async()=>{await api('resume',{confirm:true});await refresh();say('Ready for fresh activation. Previous permissions were not restored.','Prêt pour une nouvelle activation. Les permissions précédentes ne sont pas rétablies.');});

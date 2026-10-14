@@ -9,15 +9,12 @@ import {fail,parseStrict} from './vendor/manager/site/assets/successor/safe.mjs'
 import {REQUEST,compileRequest,inspectRequest,checkReturnedWork,prepareCustomProject} from './project.mjs';
 import {inspectCapsule,compareCandidates,recordPlan,exportCapsule} from './vendor/manager/site/assets/successor/model.mjs';
 import {SuccessorController} from './controller.mjs';
+import {studio} from './studio-api.mjs';
 import {inspectSidecar,exportSidecar,restoreSidecar} from './sidecar.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const [command,...args]=process.argv.slice(2);
 const read=(name,max=6000000)=>{const fd=fs.openSync(name,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);try{const s=fs.fstatSync(fd);fail(s.isFile()&&s.nlink===1&&s.size<=max,'INPUT_FILE');return fs.readFileSync(fd,'utf8');}finally{fs.closeSync(fd);}};
 const write=(name,value)=>fs.writeFileSync(name,typeof value==='string'?value:JSON.stringify(value,null,2)+'\n',{flag:'wx',mode:0o600});
-async function studio(role='agent'){
-  const app=fs.existsSync(path.join(root,'src/studio.mjs'))?root:path.join(root,'packages',role==='agent'?'AGI_Agent':'AGI_Node');
-  return {...await import(pathToFileURL(path.join(app,'src/studio.mjs'))),...await import(pathToFileURL(path.join(app,'src/artifacts.mjs')))};
-}
 try{
   if(command==='request'&&args.length===3){const value={schema:REQUEST,capsule:read(args[0]),plan:parseStrict(read(args[1]))};const {state,inspected}=await inspectRequest(value);if(!state.plans.some(p=>p.commitment===value.plan.commitment))value.capsule=await exportCapsule(await recordPlan(state,value.plan),inspected.capsule.payload.sourceManifest);write(args[2],value);}
   else if(command==='compile-request'&&args.length===3)write(args[2],(await compileRequest(parseStrict(read(args[0]),6000000),parseStrict(read(args[1])))).compiled);
