@@ -1,6 +1,6 @@
 # SUCCESSOR Ω + Fleet architecture and trust boundaries
 
-The accepted Manager Builder is pinned to `09d89fb22d52a8df194e8dd0a00beff9f7771d82` (1.16.1). `fleet/successor/vendor/manager-provenance.json` lists exact upstream hashes and retained MIT/Apache notices. No upstream file is edited; `build.mjs` applies checked UI-only adaptations: Fleet navigation, namespaced public storage and explicit file handoff. Drift fails the build. Core mission execution, capsule validators, separate checker, comparison and USDC compiler remain upstream code.
+The accepted Manager Builder is pinned to `978256265124e91f7564907ce0431e66f9e99612` (1.16.1). `fleet/successor/vendor/manager-provenance.json` lists exact upstream hashes and retained MIT/Apache notices. No upstream file is edited; `build.mjs` applies checked UI-only adaptations: Fleet navigation, namespaced public storage and explicit file handoff. Drift fails the build. Core mission execution, capsule validators, separate checker, comparison and USDC compiler remain upstream code.
 
 ```mermaid
 flowchart TD

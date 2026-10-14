@@ -203,3 +203,27 @@ test('Saved Fleet: EN/FR history at 98/99/100 remains recoverable with bounded a
     fs.writeFileSync(info.outputPath('history-journey.json'),JSON.stringify({schema:'agi-fleet/history-browser-journey/v1',browserVersion:browser.version(),archiveIdentity:process.env.FLEET_TEST_METADATA?JSON.parse(fs.readFileSync(process.env.FLEET_TEST_METADATA,'utf8')).sha256:null,scope:'saved Fleet distribution and actual downloaded standalone HTML; deterministic local work; no provider, host or independent user qualification',results},null,2)+'\n');
   }finally{for(const context of contexts)await context.close();}
 });
+
+test('Saved Fleet: source-bearing capacity rejects selection without losing exports and preserves imported metadata',async({browser},info)=>{
+  test.setTimeout(90000);
+  const model=await load('successor/vendor/manager/site/assets/successor/model.mjs');
+  const {defaultMission}=await load('successor/vendor/manager/site/assets/successor/missions.mjs');
+  const {canonical}=await load('successor/vendor/manager/site/assets/successor/safe.mjs');
+  for(const lang of ['en','fr']){
+    const context=await browser.newContext({acceptDownloads:true,serviceWorkers:'block'}),page=await context.newPage();
+    try{
+      await context.setOffline(true);await page.goto(pathToFileURL(path.join(root,`docs/successor/My-SUCCESSOR-Omega-${lang}.html`)).href);
+      const source=await page.locator('#successor-source').evaluate(el=>JSON.parse(el.textContent));
+      const mission=defaultMission('analyst',lang);mission.input='id,category,value\n'+Array.from({length:1000},(_,i)=>'row'+i+','+('Category '+i).padEnd(79,'x')+',1').join('\n');
+      let state=await model.createSystem(mission);for(let i=0;i<11;i++)state=(await model.runCandidate(state,'baseline',i.toString(16).padStart(64,'0'))).state;
+      const size=(s,manifest)=>Buffer.byteLength(canonical({format:'successor-portable/1',payload:{state:s,sourceManifest:manifest},sha256:'0'.repeat(64)}));
+      async function fill(manifest){while(size(state,manifest)+2300<3999900)await model.appendEvent(state,'restored','x'.repeat(2000));const probe=structuredClone(state);await model.appendEvent(probe,'restored','x');await model.appendEvent(state,'restored','x'.repeat(3999900-size(probe,manifest)+1));}
+      await fill(source);const original=await model.exportCapsule(state,source);await restore(page,original);
+      await expect(page.locator('#keep-version')).toBeEnabled();await page.locator('#keep-version').click();await expect(page.locator('#error')).toContainText('CAPSULE_CAPACITY');
+      expect(await download(page,'#download-capsule')).toBe(original);expect(JSON.parse(await download(page,'#download-capsule')).payload.state.active).toBeNull();
+      await fill(null);const imported=await model.exportCapsule(state);await restore(page,imported);
+      expect(await download(page,'#download-capsule')).toBe(imported);
+      const saved=await download(page,'#download-html'),file=info.outputPath(`capacity-${lang}.html`);fs.writeFileSync(file,saved);const fresh=await context.newPage();await fresh.goto(pathToFileURL(file).href);await fresh.locator('#restore-preview').waitFor({state:'visible'});await fresh.locator('#restore-consent').check();await fresh.locator('#restore').click();await fresh.locator('#restore-preview').waitFor({state:'hidden'});expect(await download(fresh,'#download-capsule')).toBe(imported);
+    }finally{await context.close();}
+  }
+});
