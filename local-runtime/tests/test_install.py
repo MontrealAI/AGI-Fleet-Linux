@@ -6,6 +6,8 @@ from pathlib import Path
 import runpy
 import sqlite3
 import stat
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -51,6 +53,32 @@ class Installation(unittest.TestCase):
     def install(self, pair=None, update=False):
         archive, digest = pair or self.archive()
         return I['install'](archive, digest, self.node, self.root, self.state, update=update)
+
+    def crash_install(self, point):
+        archive, digest = self.archive()
+        script = '''
+import os, runpy, sys
+from pathlib import Path
+i = runpy.run_path(sys.argv[1]); g = i['install'].__globals__; point = sys.argv[7]
+atomic = g['atomic']; stage = g['stage']
+def interrupted_atomic(file, value):
+    if file.name == 'installation.json' and point == 'before-pointer': os._exit(75)
+    atomic(file, value)
+    if file.name == 'installation.json' and point == 'after-pointer': os._exit(75)
+def interrupted_stage(*args):
+    if point == 'before-stage': os._exit(75)
+    result = stage(*args)
+    if point == 'after-stage': os._exit(75)
+    return result
+g.update(atomic=interrupted_atomic, stage=interrupted_stage)
+os.umask(0o077)
+i['install'](Path(sys.argv[2]), sys.argv[3], Path(sys.argv[4]), Path(sys.argv[5]), Path(sys.argv[6]))
+'''
+        result = subprocess.run([sys.executable, '-c', script, str(Path(__file__).resolve().parents[1] / 'install.py'),
+                                 str(archive), digest, str(self.node), str(self.root), str(self.state), point], capture_output=True, timeout=60)
+        self.assertEqual(result.returncode, 75, result.stderr)
+        self.assertTrue((self.state / 'control.sock').exists())
+        return archive, digest
 
     def test_exact_source_and_node_required_before_activation(self):
         receipt = self.install()
@@ -179,6 +207,68 @@ class Installation(unittest.TestCase):
         with self.assertRaises(ValueError):
             I['recover_maintenance'](self.root)
         self.assertEqual(marker.read_text(), 'unowned data')
+
+    def test_first_install_crash_recovers_before_staging_without_deleting_unknown_files(self):
+        pair = self.crash_install('before-stage')
+        unknown = self.root / 'operator-notes'; unknown.write_text('preserve me')
+        with self.assertRaisesRegex(ValueError, 'RECOVER_MATCHING_INSTALLATION_FIRST'):
+            self.install(pair)
+        result = I['recover_maintenance'](self.root)
+        self.assertEqual(result['state'], 'installation-retry-required')
+        self.assertFalse(result['stagingContentDeleted'])
+        with self.assertRaisesRegex(ValueError, 'RECOVER_MATCHING_INSTALLATION_FIRST'):
+            self.install(self.archive('different'))
+        self.install(pair)
+        self.assertEqual(unknown.read_text(), 'preserve me')
+        self.assertFalse((self.root / 'pending-install.json').exists())
+        with self.assertRaisesRegex(ValueError, 'UNOWNED_INSTALLATION_CONTENT'):
+            I['uninstall'](self.root)
+
+    def test_first_install_crash_retains_unselected_staging_and_can_retry(self):
+        pair = self.crash_install('after-stage')
+        staged = next(self.root.glob('stage-*'))
+        before = I['sha'](staged / 'receipt.json')
+        I['recover_maintenance'](self.root)
+        self.install(pair)
+        self.assertEqual(I['sha'](staged / 'receipt.json'), before)
+
+    def test_first_install_crash_before_pointer_reuses_only_verified_target(self):
+        pair = self.crash_install('before-pointer')
+        version = self.root / 'versions' / pair[1]
+        inode = version.stat().st_ino
+        I['recover_maintenance'](self.root)
+        self.install(pair)
+        self.assertEqual(version.stat().st_ino, inode)
+        I['uninstall'](self.root)
+
+    def test_crash_after_first_pointer_cleans_only_its_validated_journal(self):
+        self.crash_install('after-pointer')
+        pointer = (self.root / 'installation.json').read_bytes()
+        with self.assertRaisesRegex(ValueError, 'RECOVER_INSTALLATION_FIRST'):
+            I['installation'](self.root)
+        result = I['recover_maintenance'](self.root)
+        self.assertEqual(result['state'], 'maintenance-unlocked')
+        self.assertEqual((self.root / 'installation.json').read_bytes(), pointer)
+        self.assertFalse((self.root / 'pending-install.json').exists())
+        I['uninstall'](self.root)
+
+    def test_incomplete_recovery_refuses_live_owner_changed_directories_and_existing_state(self):
+        pair = self.crash_install('before-stage')
+        file = self.root / 'pending-install.json'; original = file.read_bytes()
+        record = json.loads(original); record.update(pid=os.getpid(), boot=I['boot_identity']())
+        file.write_text(json.dumps(record))
+        with self.assertRaisesRegex(ValueError, 'INSTALLATION_OPERATION_STILL_ACTIVE'):
+            I['recover_maintenance'](self.root)
+        file.write_bytes(original)
+        moved = self.base / 'retained-state'; self.state.rename(moved); self.state.mkdir(mode=0o700)
+        with self.assertRaisesRegex(ValueError, 'INSTALLATION_DIRECTORY_CHANGED'):
+            I['recover_maintenance'](self.root)
+        self.state.rmdir(); moved.rename(self.state)
+        I['recover_maintenance'](self.root)
+        output = self.state / 'unknown-output'; output.write_bytes(b'keep')
+        with self.assertRaisesRegex(ValueError, 'FRESH_STATE_REQUIRED'):
+            self.install(pair)
+        self.assertEqual(output.read_bytes(), b'keep')
 
 
 if __name__ == '__main__':

@@ -12,6 +12,7 @@ export async function provision(input,{confirm=false}={}){
   need(confirm===true,'CONFIRM_REQUIRED');
   keys(input,['client','directory','model','port','openclaw']);
   const original=configuration(input.client);
+  need(original.socket,'CLIENT_STABLE_SOCKET_REQUIRED');
   await invoke(input.client,{operation:'inspect'}); // Scope and role are checked server-side.
   const directory=path.resolve(input.directory);
   need(directory===input.directory&&!directory.startsWith(ROOT)&&!fs.existsSync(directory),'FRESH_ASSISTANT_DIRECTORY_REQUIRED');

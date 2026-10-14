@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {fixture,task} from './helpers.mjs';
 import {createServer} from '../supervisor/server.mjs';
-import {invoke} from '../clients/openclaw/client.mjs';
+import {invoke,configuration} from '../clients/openclaw/client.mjs';
+import {provision} from '../clients/openclaw/provision.mjs';
 import {localTool} from '../clients/openclaw/index.mjs';
 
 async function setup(){
@@ -43,5 +44,17 @@ test('revoked scoped client stops all future adapter calls without exposing raw 
   const f=await setup();try{
     f.runtime.revokeClient({client:f.c.principal.hash},f.operator);
     await assert.rejects(invoke(f.config,{operation:'status'}),error=>error.message==='AUTH_REQUIRED'&&!error.message.includes(f.c.token));
+  }finally{await f.finish();}
+});
+test('provisioning refuses ephemeral TCP profiles; IPC never falls back or accepts a maintenance marker',async()=>{
+  const f=await setup();try{
+    await assert.rejects(provision({client:f.config,directory:f.directory+'/unused',model:'fixture/model',port:19123,openclaw:'/unused'},{confirm:true}),/CLIENT_STABLE_SOCKET_REQUIRED/);
+    const {origin,...base}=f.config,socket=f.directory+'/control.sock';
+    fs.writeFileSync(socket,'maintenance',{mode:0o600});
+    assert.throws(()=>configuration({...base,socket}),/CLIENT_SOCKET_INVALID/);
+    assert.throws(()=>configuration({...f.config,socket}),/CLIENT_ENDPOINT_REQUIRED/);
+    fs.unlinkSync(socket);fs.symlinkSync(f.config.tokenFile,socket);
+    assert.throws(()=>configuration({...base,socket}),/CLIENT_SOCKET_INVALID/);
+    assert.throws(()=>configuration({...base,socket:f.directory+'/../control.sock'}),/CLIENT_SOCKET_DIRECTORY/);
   }finally{await f.finish();}
 });

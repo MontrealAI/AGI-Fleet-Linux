@@ -30,17 +30,17 @@ const inputTask=role==='agent'?task():role==='node'?{schema:'agi-fleet/local-tas
 const expected=await perform(role,inputTask);
 const skill=fs.readFileSync(new URL('../../role-skills/agi-'+role+'/SKILL.md',import.meta.url),'utf8');
 const skillBody=skill.slice(skill.indexOf('\n# ')+1).trim();
-const runtime=new LocalRuntime(state,{create:true,...(synthetic?{backend:{inspect:()=>({supported:true,backend:'synthetic-boundary',identity:'synthetic-host'}),execute:async({role,task})=>({result:await perform(role,task),observation:{processGroupGone:true,evidenceClass:'synthetic; no OS isolation demonstrated'}})}}:{})}),server=createServer(runtime);
+const runtime=new LocalRuntime(state,{create:true,...(synthetic?{backend:{inspect:()=>({supported:true,backend:'synthetic-boundary',identity:'synthetic-host'}),execute:async({role,task})=>({result:await perform(role,task),observation:{processGroupGone:true,evidenceClass:'synthetic; no OS isolation demonstrated'}})}}:{})}),server=createServer(runtime,{socket:path.join(state,'control.sock')});
 let gatewayToken='not-initialized';
 let child,childDone,logs='',model,completed=0,phase='prepare',calls=0,prepared,runID,fixtureError,skillObserved=false;
 const env={PATH:path.dirname(process.execPath)+':/usr/bin:/bin',HOME:path.join(dir,'gateway-home'),OPENCLAW_STATE_DIR:path.join(dir,'gateway-state'),OPENCLAW_CONFIG_PATH:path.join(dir,'gateway.json'),OPENCLAW_SKIP_CHANNELS:'1',OPENCLAW_EXEC_SHELL_SNAPSHOT:'0'};
 fs.mkdirSync(env.HOME);
 try{
-  const {url}=await server.start(),operator=runtime.issueClient().principal;
+  const {socket}=await server.start(),operator=runtime.issueClient().principal;
   const actor=runtime.addActor({role,name:'Pinned '+role+' assistant qualification'},operator);
   runtime.activate({actor:actor.id,confirm:true},operator);
   const scoped=runtime.issueClient(actor.id),tokenFile=path.join(dir,'actor-client.token');fs.writeFileSync(tokenFile,scoped.token,{mode:0o600});
-  const clientConfig={actor:actor.id,role:actor.role,agentId:'fleet-'+actor.id,origin:url,tokenFile};
+  const clientConfig={actor:actor.id,role:actor.role,agentId:'fleet-'+actor.id,socket,tokenFile};
   model=http.createServer(async(req,res)=>{
     try{
       let raw='';for await(const b of req){raw+=b;assert.ok(raw.length<500_000);}

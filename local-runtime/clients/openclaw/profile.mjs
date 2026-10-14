@@ -10,7 +10,7 @@ export function profile(config,{workspace,model,port,gatewayToken}){
   configuration(config);uuid(config.actor);packagePolicy(config.role);
   need(path.isAbsolute(workspace)&&fs.realpathSync(workspace)===workspace,'CLIENT_WORKSPACE_REQUIRED');
   need(/^[a-z0-9-]+\/[a-zA-Z0-9._:/-]{1,100}$/.test(model),'CLIENT_MODEL_REQUIRED');
-  need(Number.isSafeInteger(port)&&port>=1024&&port<=65535&&port!==Number(new URL(config.origin).port),'CLIENT_GATEWAY_PORT');
+  need(Number.isSafeInteger(port)&&port>=1024&&port<=65535&&(!config.origin||port!==Number(new URL(config.origin).port)),'CLIENT_GATEWAY_PORT');
   need(/^[a-f0-9]{64}$/.test(gatewayToken),'CLIENT_GATEWAY_CREDENTIAL');
   const tools={allow:[TOOL],deny:['exec','process','read','write','edit','apply_patch','browser','computer','nodes','gateway','cron','message','sessions_list','sessions_history','sessions_send','sessions_spawn','memory_search','memory_get','web_fetch','web_search'],elevated:{enabled:false}};
   return {

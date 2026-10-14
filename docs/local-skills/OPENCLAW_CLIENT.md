@@ -16,7 +16,7 @@ Create a private 0600 setup JSON with these fields. Replace every placeholder wi
     "actor": "ACTOR_UUID",
     "role": "agent",
     "agentId": "fleet-ACTOR_UUID",
-    "origin": "http://127.0.0.1:OBSERVED_SUPERVISOR_PORT",
+    "socket": "/absolute/fleet-private-state/control.sock",
     "tokenFile": "/absolute/private/actor-client.token"
   },
   "directory": "/absolute/fresh-actor-assistant",
@@ -29,6 +29,8 @@ Create a private 0600 setup JSON with these fields. Replace every placeholder wi
 ```sh
 node local-runtime/clients/openclaw/provision.mjs /absolute/private/setup.json --confirm
 ```
+
+New profiles use the stable private Unix socket in the supervisor state directory. The authenticated endpoint survives service restarts; its parent must be caller-owned and private, and the endpoint must be an owned private socket. There is no TCP discovery or fallback. Existing manually configured loopback HTTP clients remain supported for explicit one-session use; provisioning rejects them because dashboard ports are ephemeral. During a stop or maintenance the assistant must wait for the operator to recover and resume; it never retries work automatically.
 
 Provisioning observes the real local client scope, verifies the pinned OpenClaw inventory, creates a fresh home/workspace/state configuration, copies only the scoped client credential, and writes a private launch receipt. It starts nothing and performs no model call. Automatic updates, catalog refresh, telemetry, heartbeats and cron are disabled. It never imports provider sessions. Each actor needs its own profile and unused Gateway port; the verified code installation is shared.
 
@@ -43,6 +45,8 @@ When an assistant prepares work, open the local dashboard and refresh **Requests
 ## Français
 
 Le client cible OpenClaw 2026.9.5 et vérifie son inventaire exact. Un profil Gateway neuf correspond à un acteur Fleet. Son seul outil est `fleet_local`; il ne reçoit ni shell, ni fichiers hôtes, ni mémoire d’autres acteurs, ni autorisation opérateur. Le serveur vérifie l’acteur et le rôle avant chaque opération. Une réponse de modèle ne peut pas élargir les permissions.
+
+Les nouveaux profils utilisent le socket privé stable `control.sock` du répertoire d’état. Il conserve son chemin après un redémarrage. Aucun repli TCP ni rejeu automatique n’est permis; l’opérateur doit rétablir le service et autoriser de nouvelles tâches.
 
 Après création et activation de l’acteur, fournissez uniquement son identifiant client privé. La commande ci-dessus crée un profil distinct et un reçu de lancement privé; elle ne démarre rien et n’appelle aucun modèle. N’importez pas un ancien profil ni les sessions OAuth d’un autre acteur. Le code vérifié peut être partagé, mais les profils, espaces de travail, sessions et identifiants restent distincts.
 

@@ -247,7 +247,7 @@
       "fullCasePassed": false
     }
   ],
-  "currentEvidenceNote": "Original actual fields below are retained historical observations, not current-head qualification. See LIFECYCLE_ADDENDUM.md for observed db19a6a installer/native results and subsequent assistant/maintenance changes awaiting exact-head CI.",
+  "currentEvidenceNote": "Original actual fields are retained historical observations, not current-head qualification. See LIFECYCLE_ADDENDUM.md and observedCheckpoints for db19a6a and bf88f46 native/assistant results. Stable assistant IPC and first-install crash recovery require fresh exact-head CI.",
   "observedCheckpoints": [
     {
       "head": "db19a6a6cab86e5c883e194d091a1da92d12701f",
@@ -264,6 +264,36 @@
       "installedJourney": "PASS",
       "enFrBrowser": "PASS",
       "provider": "none",
+      "productionQualified": false,
+      "fullHandoffComplete": false
+    },
+    {
+      "head": "bf88f46d7d86b5523cc54b162697f67942caf78a",
+      "workflow": 38498028265,
+      "platforms": [
+        "linux-x64",
+        "linux-arm64"
+      ],
+      "supervisorSource": 38,
+      "supervisorArchive": 38,
+      "installerFixtures": 10,
+      "nativeSource": 4,
+      "nativeArchive": 4,
+      "installedJourney": "PASS",
+      "enFrBrowser": "PASS",
+      "actualGatewayRoles": [
+        "agent",
+        "node",
+        "moderator",
+        "employer",
+        "evidence",
+        "recovery"
+      ],
+      "assistantSandbox": "NATIVE_LOCAL_RUNTIME",
+      "providerTransport": "local-synthetic-fixture",
+      "liveProviderJudgment": false,
+      "archiveSHA256": "a9506a9de8faee912cba15f62a01e2aa0da86dc715aee1df6d00dfae9038d78e",
+      "archiveFiles": 2841,
       "productionQualified": false,
       "fullHandoffComplete": false
     }

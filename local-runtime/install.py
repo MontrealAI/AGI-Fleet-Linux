@@ -222,8 +222,9 @@ def maintenance(root, recover=False):
         lock.rmdir()
 
 
-def installation(root):
+def installation(root, allow_pending=False):
     root = private(root)
+    require(allow_pending or not os.path.lexists(root / 'pending-install.json'), 'RECOVER_INSTALLATION_FIRST')
     file = root / 'installation.json'
     regular(file, 100_000)
     m = read_json(file.read_bytes())
@@ -235,6 +236,41 @@ def installation(root):
     private(m['state'])
     require(not Path(m['state']).is_relative_to(root), 'STATE_MUST_BE_OUTSIDE_INSTALLATION')
     return root, m
+
+
+def directory_identity(directory):
+    s = private(directory).stat()
+    return [s.st_dev, s.st_ino]
+
+
+def pending_installation(root):
+    """A pre-install journal binds recovery to the original private directories."""
+    root = private(root)
+    file = root / 'pending-install.json'
+    regular(file, 4096)
+    s = file.lstat()
+    require(s.st_uid == os.getuid() and s.st_mode & 0o077 == 0, 'INSTALLATION_JOURNAL_INVALID')
+    m = read_json(file.read_bytes())
+    require(set(m) == {'schema', 'root', 'state', 'rootIdentity', 'stateIdentity', 'archiveSHA256', 'pid', 'boot', 'resumable'}
+            and m['schema'] == 'agi-fleet/pending-installation/v1' and m['root'] == str(root)
+            and type(m['pid']) is int and m['pid'] > 1 and isinstance(m['boot'], str) and m['boot']
+            and type(m['resumable']) is bool and isinstance(m['archiveSHA256'], str)
+            and re.fullmatch(r'[a-f0-9]{64}', m['archiveSHA256']), 'INSTALLATION_JOURNAL_INVALID')
+    state = private(m['state'])
+    require(not root.is_relative_to(ROOT) and not state.is_relative_to(ROOT)
+            and not state.is_relative_to(root) and not root.is_relative_to(state), 'INSTALLATION_PATH_SCOPE')
+    require(m['rootIdentity'] == directory_identity(root) and m['stateIdentity'] == directory_identity(state), 'INSTALLATION_DIRECTORY_CHANGED')
+    return root, m
+
+
+def require_dead_owner(record):
+    if record['boot'] == boot_identity():
+        try:
+            os.kill(record['pid'], 0)
+        except ProcessLookupError:
+            pass
+        else:
+            raise ValueError('INSTALLATION_OPERATION_STILL_ACTIVE')
 
 
 def quiescent(state, reserved=False):
@@ -277,8 +313,20 @@ def reserve_state(state):
 
 
 def recover_maintenance(root):
-    root, m = installation(root)
+    root = private(root)
+    incomplete = not (root / 'installation.json').exists()
+    journal = pending_installation(root)[1] if incomplete or (root / 'pending-install.json').exists() else None
+    if journal:
+        require_dead_owner(journal)
+    root, m = (root, journal) if incomplete else installation(root, allow_pending=True)
+    if journal and not incomplete:
+        require(journal['state'] == m['state'] and journal['archiveSHA256'] == m['current'], 'INSTALLATION_JOURNAL_INVALID')
     with maintenance(root, recover=True):
+        require(incomplete == (not (root / 'installation.json').exists()), 'INSTALLATION_JOURNAL_CHANGED')
+        if journal:
+            require(pending_installation(root)[1] == journal, 'INSTALLATION_JOURNAL_CHANGED')
+        if not incomplete:
+            require(installation(root, allow_pending=True)[1] == m, 'INSTALLATION_JOURNAL_CHANGED')
         socket = Path(m['state']) / 'control.sock'
         if socket.exists():
             regular(socket, 4096)
@@ -297,8 +345,16 @@ def recover_maintenance(root):
             current = socket.lstat()
             require((current.st_dev, current.st_ino) == (s.st_dev, s.st_ino), 'MAINTENANCE_FENCE_CHANGED')
             socket.unlink()
-    return {'state': 'maintenance-unlocked', 'authorityRestored': False, 'replayed': False, 'stagingContentDeleted': False,
-            'next': 'Run recover-service --confirm before restarting; inspect any unselected staging content.'}
+        if journal:
+            if incomplete:
+                journal['resumable'] = True
+                atomic(root / 'pending-install.json', journal)
+            else:
+                (root / 'pending-install.json').unlink()
+    return {'state': 'installation-retry-required' if incomplete else 'maintenance-unlocked', 'authorityRestored': False,
+            'replayed': False, 'stagingContentDeleted': False,
+            'next': 'Repeat install with the same archive, root and state. Unknown files and staging content remain preserved.' if incomplete
+            else 'Run recover-service --confirm before restarting; inspect any unselected staging content.'}
 
 
 def stage(archive, expected, node_archive, root):
@@ -337,50 +393,81 @@ def install(archive, expected, node_archive, root, state, update=False):
     require(not root.is_relative_to(ROOT) and not state.is_relative_to(ROOT)
             and not state.is_relative_to(root) and not root.is_relative_to(state), 'INSTALLATION_PATH_SCOPE')
     inspect_archive(archive, expected)  # No installation paths exist before validation.
+    fresh = False
     if update:
         root, metadata = installation(root)
         require(str(state) == metadata['state'], 'STATE_IDENTITY_CHANGED')
     else:
-        require(not root.exists() and not state.exists(), 'FRESH_INSTALL_REQUIRED')
-        private(root, create=True)
-        private(state, create=True)
+        if root.exists() or state.exists():
+            require(root.exists() and not (root / 'installation.json').exists(), 'FRESH_INSTALL_REQUIRED')
+            _, journal = pending_installation(root)
+            require(journal['resumable'] and journal['state'] == str(state) and journal['archiveSHA256'] == expected,
+                    'RECOVER_MATCHING_INSTALLATION_FIRST')
+        else:
+            private(root, create=True)
+            private(state, create=True)
+            journal = {'schema': 'agi-fleet/pending-installation/v1', 'root': str(root), 'state': str(state),
+                       'rootIdentity': directory_identity(root), 'stateIdentity': directory_identity(state),
+                       'archiveSHA256': expected, 'pid': os.getpid(), 'boot': boot_identity(), 'resumable': False}
+            atomic(root / 'pending-install.json', journal)  # Durable before either maintenance fence.
+            fresh = True
         metadata = {'schema': SCHEMA, 'root': str(root), 'state': str(state), 'versions': [], 'current': None, 'generation': 0}
     try:
-        with maintenance(root), reserve_state(state):
-            require(not (root / 'versions' / expected).exists(), 'VERSION_ALREADY_INSTALLED')
-            staged, receipt = stage(archive, expected, Path(node_archive), root)
-            target = root / 'versions' / expected
-            try:
-                target.parent.mkdir(exist_ok=True, mode=0o700)
-                staged.rename(target)
-                metadata['versions'].append(expected)
-                metadata['previous'] = metadata['current']
-                metadata['current'] = expected
-                metadata['generation'] += 1
-                atomic(root / 'installation.json', metadata)
-            except BaseException:
-                # A failed switch preserves the old pointer. If the new pointer
-                # reached disk, leave that complete version available to inspect.
-                selected = read_json((root / 'installation.json').read_bytes()).get('current') if (root / 'installation.json').exists() else None
-                if target.exists() and selected != expected:
-                    verify_version(root, expected)
-                    shutil.rmtree(target)
-                raise
-            finally:
-                if staged.exists():
-                    shutil.rmtree(staged)
-            return {**receipt, 'installation': str(root), 'state': str(state), 'started': False, 'authority': 'none'}
+        with maintenance(root):
+            if not update:
+                _, observed = pending_installation(root)
+                require(observed == journal, 'INSTALLATION_JOURNAL_CHANGED')
+                require(not any(state.iterdir()), 'FRESH_STATE_REQUIRED')
+                journal.update(pid=os.getpid(), boot=boot_identity(), resumable=False)
+                atomic(root / 'pending-install.json', journal)
+            with reserve_state(state):
+                result = install_version(archive, expected, node_archive, root, state, metadata, update=update)
+            if not update:
+                (root / 'pending-install.json').unlink()
+            return result
     except BaseException:
-        if not update and not (root / 'installation.json').exists():
+        if fresh and not (root / 'installation.json').exists():
             versions = root / 'versions'
             if versions.exists() and not any(versions.iterdir()):
                 versions.rmdir()
-            if not any(root.iterdir()):
+            # Normal failure can remove only our journal and empty directories.
+            # Crash recovery retains all unknown or partially staged content.
+            if set(x.name for x in root.iterdir()) == {'pending-install.json'} and not any(state.iterdir()):
+                (root / 'pending-install.json').unlink()
                 root.rmdir()
-            if state.exists() and not any(state.iterdir()):
                 state.rmdir()
         raise
 
+
+def install_version(archive, expected, node_archive, root, state, metadata, update):
+    target = root / 'versions' / expected
+    require(not update or not target.exists(), 'VERSION_ALREADY_INSTALLED')
+    staged = None
+    if target.exists():
+        receipt = verify_version(root, expected)  # Crash after rename, before pointer commit.
+    else:
+        staged, receipt = stage(archive, expected, Path(node_archive), root)
+    try:
+        target.parent.mkdir(exist_ok=True, mode=0o700)
+        if staged:
+            staged.rename(target)
+        metadata['versions'].append(expected)
+        metadata['previous'] = metadata['current']
+        metadata['current'] = expected
+        metadata['generation'] += 1
+        atomic(root / 'installation.json', metadata)
+    except BaseException:
+        # A failed switch preserves the old pointer. If the new pointer
+        # reached disk, leave that complete version available to inspect.
+        selected = read_json((root / 'installation.json').read_bytes()).get('current') if (root / 'installation.json').exists() else None
+        if staged and target.exists() and selected != expected:
+            verify_version(root, expected)
+            shutil.rmtree(target)
+        raise
+    finally:
+        if staged and staged.exists():
+            shutil.rmtree(staged)
+    return {**receipt, 'installation': str(root), 'state': str(state), 'started': False, 'authority': 'none'}
 
 def verify_version(root, version):
     require(re.fullmatch(r'[0-9a-f]{64}', version), 'VERSION_NOT_OWNED')
