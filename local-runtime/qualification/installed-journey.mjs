@@ -66,6 +66,8 @@ try {
   child.kill('SIGTERM');assert.deepEqual(await exit,{code:0,signal:null});child=null;
   // Reuse the unchanged assistant endpoint and credential after a genuine CLI
   // process restart. Resume is explicit; old grants and budgets do not reset.
+  const recovered=JSON.parse(command('launch','--root',root,'--','recover-service','--confirm'));
+  assert.equal(recovered.state,'STOP');assert.equal(recovered.replayAllowed,false);
   await start();
   const stopped=await invoke(config,{operation:'status'});assert.equal(stopped.stopped,true);assert.equal(stopped.runs.length,1);
   assert.deepEqual((await invoke(config,{operation:'output',run:run.run})).receipt,run.receipt);
@@ -87,7 +89,7 @@ try {
   assert.equal(fs.readFileSync(path.join(state,'operator.token'),'utf8').trim(),token);
   assert.equal(fs.readdirSync(output).length,files.length);
   const evidence={schema:'agi-fleet/installed-local-observation/v1',archiveSHA256:sha,platform:process.platform,arch:process.arch,node:install.node,
-    actualInstallation:true,actualIPC:true,actualSandbox:true,stableAssistantRestart:true,restartPreservedReservations:history.length,oldGrantReplayed:false,files:files.map(f=>({name:f.name,bytes:Buffer.byteLength(f.content),sha256:crypto.createHash('sha256').update(f.content).digest('hex')})),
+    actualInstallation:true,actualIPC:true,actualSandbox:true,actualServiceRecovery:true,stableAssistantRestart:true,restartPreservedReservations:history.length,oldGrantReplayed:false,files:files.map(f=>({name:f.name,bytes:Buffer.byteLength(f.content),sha256:crypto.createHash('sha256').update(f.content).digest('hex')})),
     removalPreservedState:true,removalPreservedOutputs:true,provider:'none',independentReview:false,physical:'NOT_RUN',productionQualified:false};
   if(process.env.AGI_LOCAL_INSTALL_EVIDENCE)fs.writeFileSync(process.env.AGI_LOCAL_INSTALL_EVIDENCE,JSON.stringify(evidence,null,2)+'\n');
   console.log(JSON.stringify(evidence));
