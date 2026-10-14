@@ -39,7 +39,7 @@ export class LocalRuntime {
     const r=this.store.db.prepare('SELECT value FROM clients WHERE hash=?').get(digest(token));need(r,'AUTH_REQUIRED');return parseStrict(r.value);
   }
   scope(p,action,actor=null) {need(p&&this.store.db.prepare('SELECT 1 FROM clients WHERE hash=?').get(p.hash),'AUTH_REQUIRED');need(p.operator||(p.actions.includes(action)&&actor===p.actor),'CLIENT_SCOPE_DENIED');}
-  doctor(){return {...this.backend.inspect(),runtime:VERSION,sourceSha256:this.source,roles:['agent','node','moderator','employer','evidence','recovery'],economicAuthority:'disabled',liveProvider:'NOT_RUN',supportedClient:'CLI v1; assistant integration NOT_RUN'};}
+  doctor(){return {...this.backend.inspect(),runtime:VERSION,sourceSha256:this.source,roles:['agent','node','moderator','employer','evidence','recovery'],economicAuthority:'disabled',liveProvider:'NOT_RUN',supportedClient:'CLI v1; pinned OpenClaw 2026.9.5 scoped adapter; exact-head native qualification required'};}
   addActor(input,p) {
     this.scope(p,'create');keys(input,['role','name']);label(input.name);const pkg=packagePolicy(input.role);
     need(this.store.listActors().length<64,'ACTOR_LIMIT');

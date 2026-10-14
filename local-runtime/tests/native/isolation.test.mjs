@@ -4,12 +4,33 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import net from 'node:net';
-import {spawnSync} from 'node:child_process';
+import {spawn,spawnSync} from 'node:child_process';
 import {LinuxSandbox,sandboxArguments} from '../../platforms/linux.mjs';
 import {LocalRuntime} from '../../supervisor/runtime.mjs';
 import {task} from '../helpers.mjs';
 import {defaultMission,executeMission} from '../../../fleet/successor/vendor/manager/site/assets/successor/missions.mjs';
 import crypto from 'node:crypto';
+
+// Namespace inode numbers may be reused after a worker exits. Keep both actual
+// workers alive at a pipe barrier when comparing them; elapsed receipts alone
+// cannot establish that two namespaces were simultaneously distinct.
+function heldWorker(input) {
+  const code=`import fs from 'node:fs';import assert from 'node:assert/strict';import {perform} from '/app/local-runtime/worker.mjs';
+    const {role,task}=JSON.parse(fs.readFileSync('/input/task.json','utf8'));
+    console.log(JSON.stringify({pid:fs.readlinkSync('/proc/self/ns/pid'),net:fs.readlinkSync('/proc/self/ns/net')}));
+    const go=await new Promise(resolve=>process.stdin.once('data',resolve));assert.equal(go.toString(),'RUN\\n');
+    assert.throws(()=>fs.writeFileSync('/input/task.json','changed'));
+    console.log(JSON.stringify(await perform(role,task)));`;
+  const child=spawn('/usr/bin/bwrap',[...sandboxArguments(),'--ro-bind',input,'/input/task.json','--','/node','--input-type=module','-e',code],{stdio:['pipe','pipe','pipe'],env:{PATH:'/usr/bin:/bin'},detached:true});
+  let output='',stderr='',resolveReady,rejectReady,readySent=false;
+  const ready=new Promise((resolve,reject)=>{resolveReady=resolve;rejectReady=reject;});
+  const kill=()=>{if(child.exitCode!==null||child.signalCode!==null)return;try{process.kill(-child.pid,'SIGKILL');}catch{}};
+  const timer=setTimeout(kill,10000);
+  child.stdout.on('data',chunk=>{output+=chunk;if(output.length>2_000_000){kill();return;}const end=output.indexOf('\n');if(!readySent&&end>=0){readySent=true;try{resolveReady(JSON.parse(output.slice(0,end)));}catch(e){rejectReady(e);kill();}}});
+  child.stderr.on('data',chunk=>{stderr+=chunk;if(stderr.length>8192)kill();});
+  const done=new Promise(resolve=>{child.once('error',error=>{rejectReady(error);});child.once('close',(status,signal)=>{clearTimeout(timer);if(!readySent)rejectReady(new Error('Worker exited before barrier: '+stderr));resolve({status,signal,stderr,output});});});
+  return {ready,done,run:()=>child.stdin.end('RUN\n'),kill};
+}
 
 test('real native isolation denies host state, inherited credentials, input writes and host network',async()=>{
   const sandbox=new LinuxSandbox(),d=sandbox.inspect();
@@ -57,13 +78,21 @@ test('one host concurrently executes Agent work and an unrelated internal Node c
     const clients=actors.map(a=>runtime.issueClient(a.id).principal);
     const unrelated=defaultMission('website','en'),files=executeMission(unrelated,'improved').files;
     const tasks=[task(),{schema:'agi-fleet/local-task/v1',action:'successor-check',workspace:'files',input:{mission:unrelated,variant:'improved',files},review:'internal',sourceActor:crypto.randomUUID(),sourceController:crypto.randomUUID()}];
+    const held=actors.map((actor,i)=>{const input=path.join(directory,'concurrent-'+i+'.json');fs.writeFileSync(input,JSON.stringify({role:actor.role,task:tasks[i]}),{mode:0o600});return heldWorker(input);});
+    try{
+      const observed=await Promise.all(held.map(worker=>worker.ready));
+      assert.notEqual(observed[0].pid,observed[1].pid);assert.notEqual(observed[0].net,observed[1].net);
+      for(const observation of observed){assert.notEqual(observation.pid,fs.readlinkSync('/proc/self/ns/pid'));assert.notEqual(observation.net,fs.readlinkSync('/proc/self/ns/net'));}
+      held.forEach(worker=>worker.run());
+      for(const result of await Promise.all(held.map(worker=>worker.done))){assert.equal(result.status,0,result.stderr);assert.equal(JSON.parse(result.output.trim().split('\n')[1]).checker.passed,true);}
+    }finally{held.forEach(worker=>worker.kill());await Promise.all(held.map(worker=>worker.done));}
     const grants=actors.map((a,i)=>runtime.prepare({actor:a.id,task:tasks[i]},clients[i]));
     for(const g of grants)runtime.authorize({grant:g.grant,commitment:g.commitment,confirm:true},operator);
     const runs=await Promise.all(actors.map((a,i)=>runtime.run({actor:a.id,grant:grants[i].grant},clients[i])));
     assert.ok(runs.every(r=>r.state==='complete'&&r.receipt.result.checker.passed===true&&r.receipt.independentReview===false));
-    assert.notEqual(runs[0].receipt.observation.worker.pidNamespace,runs[1].receipt.observation.worker.pidNamespace);
-    assert.notEqual(runs[0].receipt.observation.worker.networkNamespace,runs[1].receipt.observation.worker.networkNamespace);
     for(let i=0;i<2;i++){
+      assert.notEqual(runs[i].receipt.observation.worker.pidNamespace,fs.readlinkSync('/proc/self/ns/pid'));
+      assert.notEqual(runs[i].receipt.observation.worker.networkNamespace,fs.readlinkSync('/proc/self/ns/net'));
       assert.ok(runs[i].receipt.observation.worker.maxRSSKiB>0);assert.ok(runs[i].receipt.observation.wallMilliseconds>0);
       assert.throws(()=>runtime.output({actor:actors[1-i].id,run:runs[1-i].run},clients[i]),/CLIENT_SCOPE_DENIED/);
     }

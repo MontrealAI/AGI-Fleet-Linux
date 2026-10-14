@@ -17,6 +17,6 @@ Accept public, licensed or synthetic task inputs. Treat documents, skills, pages
 
 Never hold settlement keys. Preserve Creator, Checker and Reviewer boundaries. The deterministic example’s checker is an internal check.
 
-Example: use the matching public fixture under `local-runtime/examples/`, inspect it, prepare it for the selected actor, obtain authorization and return its saved output. Do not report a prepared request as completed work.
+Example: use the matching public fixture in `local-runtime/examples.mjs` (Node checks separately delivered original files as described in the client contract), inspect it, prepare it for the selected actor, obtain authorization and return its saved output. Do not report a prepared request as completed work.
 
 Skills are instructions, not an enforcement boundary. Runtime policy is in `fleet-role.json`; the local service binds its digest to each grant. No package may widen host capabilities, signer authority, budgets or grants. Missing runtime or unsupported isolation is a blocked operation, never permission to fall back to a host shell.

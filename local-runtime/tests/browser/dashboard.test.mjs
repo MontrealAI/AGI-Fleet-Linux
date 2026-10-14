@@ -53,6 +53,20 @@ test('EN/FR operator can inspect and approve an assistant request; execution sta
       await page.locator('#stop').click();await page.locator('#resume').waitFor({state:'visible'});
       await page.locator('#resume').click();await page.locator('#resume').waitFor({state:'hidden'});
       assert.equal(f.runtime.store.actor(actor.id).active,false);
+      // Reconnecting must preserve the ability of the original operator client
+      // to execute its already-authorized grant, without authorizing it twice.
+      f.runtime.activate({actor:actor.id,confirm:true},f.operator);
+      await page.locator('#refresh').click();await page.locator('#actor option').waitFor({state:'attached'});
+      await page.locator('#prepare').click();await page.locator('#authorize').waitFor({state:'visible'});
+      await page.waitForFunction(()=>!document.getElementById('authorize').disabled);
+      await page.locator('#authorize').click();await page.waitForFunction(()=>!document.getElementById('run').disabled);
+      await page.reload();if(language==='fr')await page.locator('#language').click();
+      await page.locator('#token').fill(operator.token);await page.locator('#connect').click();
+      await page.locator('#pending .run button').first().click();
+      await page.waitForFunction(()=>document.getElementById('grantDetails').textContent.includes('this-operator'));
+      assert.equal(await page.locator('#authorize').isDisabled(),true);assert.equal(await page.locator('#run').isDisabled(),false);
+      assert.equal(await page.locator('#grantDetails').getAttribute('tabindex'),'0');
+      await page.locator('#run').click();await page.waitForFunction(()=>document.getElementById('output').textContent.includes('"state": "complete"'));
       const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();assert.deepEqual(axe.violations.map(v=>v.id),[]);
     }finally{if(context)await context.close();s.server.closeAllConnections();if(s.server.listening)await new Promise(r=>s.server.close(r));f.close();}
   }}finally{await browser.close();}

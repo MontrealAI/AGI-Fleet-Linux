@@ -4,16 +4,26 @@ import {need,keys,uuid,id,canonical,parseStrict,digest} from '../contracts.mjs';
 export async function successorOperation(runtime,action,input,principal) {
   runtime.scope(principal,action);
   const db=runtime.store.db;
-  const load=key=>{const r=db.prepare('SELECT value FROM projects WHERE id=?').get(uuid(key));need(r,'PROJECT_UNKNOWN');return parseStrict(r.value);};
-  const save=(key,state)=>runtime.store.transaction(()=>{const raw=canonical(state);need(Buffer.byteLength(raw)<=4_000_000,'PROJECT_LIMIT');const used=db.prepare('SELECT COALESCE(SUM(length(value)),0) AS bytes FROM projects WHERE id<>?').get(key).bytes;need(used+Buffer.byteLength(raw)<=32_000_000,'PROJECT_STORAGE_LIMIT');db.prepare('INSERT INTO projects VALUES(?,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(key,raw);});
+  const load=key=>{const r=db.prepare('SELECT value FROM projects WHERE id=?').get(uuid(key));need(r,'PROJECT_UNKNOWN');return {raw:r.value,state:parseStrict(r.value)};};
+  const save=(key,state,prior=null)=>runtime.store.transaction(()=>{
+    const current=db.prepare('SELECT value FROM projects WHERE id=?').get(key);
+    need((current?.value??null)===prior,'PROJECT_CHANGED');
+    if(prior===null)need(db.prepare('SELECT COUNT(*) AS n FROM projects').get().n<32,'PROJECT_LIMIT');
+    const raw=canonical(state);need(Buffer.byteLength(raw)<=4_000_000,'PROJECT_LIMIT');
+    const used=db.prepare('SELECT COALESCE(SUM(length(value)),0) AS bytes FROM projects WHERE id<>?').get(key).bytes;
+    need(used+Buffer.byteLength(raw)<=32_000_000,'PROJECT_STORAGE_LIMIT');
+    db.prepare('INSERT INTO projects VALUES(?,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(key,raw);
+  });
   if(action==='project-import'){
     keys(input,['capsule','confirm']);need(input.confirm===true,'CONFIRM_REQUIRED');
     need(db.prepare('SELECT COUNT(*) AS n FROM projects').get().n<32,'PROJECT_LIMIT');
     const inspected=await inspectCapsule(input.capsule),state=await restoreCapsule(inspected,true),project=id();save(project,state);return {project,state,authority:'none',qualification:'historical-only'};
   }
-  if(action==='project-export'){keys(input,['project']);return {capsule:await exportCapsule(load(input.project)),authority:'none'};}
+  if(action==='project-export'){keys(input,['project']);return {capsule:await exportCapsule(load(input.project).state),authority:'none'};}
   if(action==='project-select'){
-    keys(input,['project','candidate','decision','confirm']);need(input.confirm===true,'CONFIRM_REQUIRED');const state=await chooseCandidate(load(input.project),input.candidate,input.decision);save(input.project,state);return {project:input.project,state,runAuthorized:false};
+    keys(input,['project','candidate','decision','confirm']);need(input.confirm===true,'CONFIRM_REQUIRED');
+    const snapshot=load(input.project),state=await chooseCandidate(snapshot.state,input.candidate,input.decision);
+    save(input.project,state,snapshot.raw);return {project:input.project,state,runAuthorized:false};
   }
   keys(input,['project','execution','review']);
   const execution=db.prepare('SELECT * FROM runs WHERE id=?').get(uuid(input.execution));
@@ -28,12 +38,13 @@ export async function successorOperation(runtime,action,input,principal) {
   need(canonical(first.task.input.mission)===canonical(second.task.input.mission)&&first.task.input.variant===second.task.input.variant,'REVIEW_INPUT_CHANGED');
   const project=input.project===null?id():uuid(input.project);
   if(input.project===null)need(db.prepare('SELECT COUNT(*) AS n FROM projects').get().n<32,'PROJECT_LIMIT');
-  const state=input.project===null?await createSystem(first.task.input.mission):load(project);
+  const snapshot=input.project===null?null:load(project);
+  const state=snapshot?snapshot.state:await createSystem(first.task.input.mission);
   need(canonical(state.mission)===canonical(first.task.input.mission),'PROJECT_MISSION_CHANGED');
   await validateState(state);
   const result=await runCandidate(state,first.task.input.variant,a.sourceSha256);
   need(canonical(result.candidate.files.map(({sha256,...f})=>f))===canonical(x.result.files),'RETURNED_BYTES_CHANGED');
-  save(project,result.state);
+  save(project,result.state,snapshot?.raw??null);
   runtime.store.event('successor-internal-candidate',{project,execution:execution.id,review:review.id,candidate:result.candidate.id});
   return {project,...result,selectionRequired:true,reviewClass:'internal',independentReview:false,authority:'none'};
 }

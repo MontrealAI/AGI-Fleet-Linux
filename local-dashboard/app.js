@@ -20,7 +20,7 @@ async function refresh(){
   for(const g of s.pending){const row=document.createElement('div');row.className='run';row.textContent=g.action+' · '+g.actor+' · '+g.state+' ';
     row.append(button(language==='fr'?'Examiner cette demande':'Inspect this request',async()=>{
       prepared=await api('grant-inspect',{grant:g.grant});$('grantDetails').textContent=JSON.stringify(prepared,null,2);$('grant').hidden=false;
-      $('authorize').disabled=prepared.state!=='prepared';$('run').disabled=true;$('grantDetails').tabIndex=-1;$('grantDetails').focus();
+      $('authorize').disabled=prepared.state!=='prepared';$('run').disabled=!(prepared.state==='authorized'&&prepared.preparingClient==='this-operator');$('grantDetails').focus();
     }),button(language==='fr'?'Révoquer':'Revoke',async()=>{await api('revoke',{grant:g.grant});await refresh();}));$('pending').append(row);
   }
   for(const a of s.actors){

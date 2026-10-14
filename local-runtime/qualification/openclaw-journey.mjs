@@ -12,6 +12,8 @@ import {LocalRuntime} from '../supervisor/runtime.mjs';
 import {createServer} from '../supervisor/server.mjs';
 import {provision} from '../clients/openclaw/provision.mjs';
 import {task} from '../tests/helpers.mjs';
+import {example} from '../examples.mjs';
+import {defaultMission,executeMission} from '../../fleet/successor/vendor/manager/site/assets/successor/missions.mjs';
 import {verifyRuntimeArtifact} from '../../fleet/shared/runtime/compute/runtime-artifacts.mjs';
 import {perform} from '../worker.mjs';
 
@@ -19,8 +21,15 @@ process.umask(0o077);
 const binary=process.env.OPENCLAW_BIN;assert.ok(binary,'OPENCLAW_BIN must select the exact pinned installation.');
 const verified=verifyRuntimeArtifact(fs.realpathSync(binary));assert.equal(verified.version,'2026.9.5');
 const dir=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-openclaw-local-')),state=path.join(dir,'supervisor');
-const synthetic=process.argv.slice(2).includes('--synthetic-worker-boundary');
-assert.ok(process.argv.slice(2).every(x=>x==='--synthetic-worker-boundary'));
+const args=process.argv.slice(2),synthetic=args.includes('--synthetic-worker-boundary');
+assert.ok(args.every(x=>x==='--synthetic-worker-boundary'||/^--role=(agent|node|moderator|employer|evidence|recovery)$/.test(x)));
+assert.ok(args.filter(x=>x.startsWith('--role=')).length<=1);
+const role=args.find(x=>x.startsWith('--role='))?.slice(7)||'agent';
+const mission=defaultMission('website','en');
+const inputTask=role==='agent'?task():role==='node'?{schema:'agi-fleet/local-task/v1',action:'successor-check',workspace:'files',input:{mission,variant:'improved',files:executeMission(mission,'improved').files},review:'internal',sourceActor:crypto.randomUUID(),sourceController:crypto.randomUUID()}:example(role);
+const expected=await perform(role,inputTask);
+const skill=fs.readFileSync(new URL('../../role-skills/agi-'+role+'/SKILL.md',import.meta.url),'utf8');
+const skillBody=skill.slice(skill.indexOf('\n# ')+1).trim();
 const runtime=new LocalRuntime(state,{create:true,...(synthetic?{backend:{inspect:()=>({supported:true,backend:'synthetic-boundary',identity:'synthetic-host'}),execute:async({role,task})=>({result:await perform(role,task),observation:{processGroupGone:true,evidenceClass:'synthetic; no OS isolation demonstrated'}})}}:{})}),server=createServer(runtime);
 let gatewayToken='not-initialized';
 let child,childDone,logs='',model,completed=0,phase='prepare',calls=0,prepared,runID,fixtureError,skillObserved=false;
@@ -28,7 +37,7 @@ const env={PATH:path.dirname(process.execPath)+':/usr/bin:/bin',HOME:path.join(d
 fs.mkdirSync(env.HOME);
 try{
   const {url}=await server.start(),operator=runtime.issueClient().principal;
-  const actor=runtime.addActor({role:'agent',name:'Pinned assistant qualification'},operator);
+  const actor=runtime.addActor({role,name:'Pinned '+role+' assistant qualification'},operator);
   runtime.activate({actor:actor.id,confirm:true},operator);
   const scoped=runtime.issueClient(actor.id),tokenFile=path.join(dir,'actor-client.token');fs.writeFileSync(tokenFile,scoped.token,{mode:0o600});
   const clientConfig={actor:actor.id,role:actor.role,agentId:'fleet-'+actor.id,origin:url,tokenFile};
@@ -37,9 +46,9 @@ try{
       let raw='';for await(const b of req){raw+=b;assert.ok(raw.length<500_000);}
       const body=JSON.parse(raw);calls++;assert.ok(calls<=8,'Unbounded model loop');
       assert.deepEqual(body.tools.map(t=>t.function.name),['fleet_local'],'No shell, session or other tool may be offered');
-      skillObserved ||= JSON.stringify(body.messages).includes('agi-agent');
+      skillObserved ||= body.messages.some(m=>typeof m.content==='string'&&m.content.includes(skillBody));
       const toolMessage=[...body.messages].reverse().find(m=>m.role==='tool');
-      const parameters=phase==='prepare'?{operation:'prepare',task:task()}:{operation:'run',grant:prepared.grant};
+      const parameters=phase==='prepare'?{operation:'prepare',task:inputTask}:{operation:'run',grant:prepared.grant};
       const last=body.messages.at(-1);
       const returning=last?.role==='tool';
       if(returning){
@@ -47,7 +56,7 @@ try{
         assert.ok(!text.includes(scoped.token)&&!text.includes(gatewayToken),'Credential in tool response');
         const value=JSON.parse(text).value;
         if(phase==='prepare'){assert.ok(value.grant);prepared=value;}
-        else {assert.equal(value.state,'complete');assert.equal(value.receipt.result.checker.passed,true);runID=value.run;completed++;}
+        else {assert.equal(value.state,'complete');assert.deepEqual(value.receipt.result,expected);assert.equal(value.receipt.independentReview,false);runID=value.run;completed++;}
       }
       const delta=returning?{role:'assistant',content:'Observed real runtime result. No independent review or payment claim.'}:{role:'assistant',content:null,tool_calls:[{index:0,id:'fleet-call-'+phase,type:'function',function:{name:'fleet_local',arguments:JSON.stringify(parameters)}}]};
       if(body.stream){
@@ -74,7 +83,7 @@ try{
   for(let n=0;n<160;n++){assert.equal(child.exitCode,null,logs);try{const r=await fetch(base+'/v1/models',{signal:AbortSignal.timeout(500)});if(r.status===401){ready=true;await r.body?.cancel();break;}await r.body?.cancel();}catch{}await new Promise(r=>setTimeout(r,250));}
   assert.ok(ready,'Gateway did not become ready: '+logs);
   async function converse(){
-    const r=await fetch(base+'/v1/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+gatewayToken,'Content-Type':'application/json'},body:JSON.stringify({model:'openclaw/'+clientConfig.agentId,user:'local-qualification-'+phase,messages:[{role:'user',content:phase==='prepare'?'Use the AGI Agent skill to prepare the supplied public report. Stop for separate operator authorization.':'Execute the exact grant separately authorized by the operator. Return the actual outcome.'}],stream:false}),signal:AbortSignal.timeout(90000)});
+    const r=await fetch(base+'/v1/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+gatewayToken,'Content-Type':'application/json'},body:JSON.stringify({model:'openclaw/'+clientConfig.agentId,user:'local-qualification-'+phase,messages:[{role:'user',content:phase==='prepare'?'Use the AGI '+role+' skill to prepare the supplied public task. Stop for separate operator authorization.':'Execute the exact grant separately authorized by the operator. Return the actual outcome.'}],stream:false}),signal:AbortSignal.timeout(90000)});
     const text=await r.text();if(fixtureError)throw fixtureError;assert.equal(r.status,200,text);return text;
   }
   await converse();assert.ok(prepared?.grant,'Assistant did not prepare work. '+logs);
@@ -82,7 +91,7 @@ try{
   runtime.authorize({grant:prepared.grant,commitment:prepared.commitment,confirm:true},operator);phase='run';
   await converse();assert.equal(completed,1);assert.ok(skillObserved);
   const receipt=runtime.output({actor:actor.id,run:runID},operator);assert.equal(receipt.receipt.observation.processGroupGone,true);
-  const evidence={schema:'agi-fleet/local-openclaw-observation/v1',actualGateway:true,openclaw:verified.version,inventorySha256:verified.packageInventorySha256,skillObserved,actualRuntime:true,actualSandbox:!synthetic,evidenceClass:synthetic?'SYNTHETIC_WORKER_BOUNDARY':'NATIVE_LOCAL_RUNTIME',separateAuthorization:true,scopedActor:true,offeredTools:['fleet_local'],providerTransport:'local-synthetic-fixture',liveProviderJudgment:false,modelRequests:calls,files:receipt.receipt.result.files.map(f=>({name:f.name,sha256:crypto.createHash('sha256').update(f.content).digest('hex')})),independentReview:false,productionQualified:false};
+  const evidence={schema:'agi-fleet/local-openclaw-observation/v1',role,actualGateway:true,openclaw:verified.version,inventorySha256:verified.packageInventorySha256,skillObserved,skillBodySHA256:crypto.createHash('sha256').update(skillBody).digest('hex'),actualRuntime:true,actualSandbox:!synthetic,evidenceClass:synthetic?'SYNTHETIC_WORKER_BOUNDARY':'NATIVE_LOCAL_RUNTIME',separateAuthorization:true,scopedActor:true,offeredTools:['fleet_local'],providerTransport:'local-synthetic-fixture',liveProviderJudgment:false,modelRequests:calls,outputSha256:receipt.receipt.outputSha256,files:receipt.receipt.result.files.map(f=>({name:f.name,sha256:crypto.createHash('sha256').update(f.content).digest('hex')})),independentReview:false,productionQualified:false};
   if(process.env.AGI_LOCAL_OPENCLAW_EVIDENCE)fs.writeFileSync(process.env.AGI_LOCAL_OPENCLAW_EVIDENCE,JSON.stringify(evidence,null,2)+'\n');
   console.log(JSON.stringify(evidence));
 }catch(e){console.error(logs.replaceAll(gatewayToken,'REDACTED'));throw e;}
