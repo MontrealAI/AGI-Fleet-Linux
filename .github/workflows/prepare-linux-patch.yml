@@ -1,0 +1,96 @@
+name: Prepare reviewed Linux 1.1.1 source objects
+on:
+  push:
+    branches: [codex/prepare-linux-111-20261014]
+    paths: ['engineering/prepare-linux-patch.py', '.github/workflows/prepare-linux-patch.yml']
+permissions:
+  contents: read
+concurrency:
+  group: prepare-reviewed-linux-111-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'MontrealAI/AGI-Fleet-Linux' && github.actor == 'MontrealAI' && github.ref == 'refs/heads/codex/prepare-linux-111-20261014'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Fetch exact preparation code and reviewed source
+        env:
+          COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin https://github.com/MontrealAI/AGI-Fleet-Linux.git
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$COMMIT"
+          git fetch --depth=1 origin 770666eaa79791d79f7fa00175c43a052dcc11d2
+          git worktree add --detach "$RUNNER_TEMP/candidate" 770666eaa79791d79f7fa00175c43a052dcc11d2
+          mkdir -p "$RUNNER_TEMP/preparation-evidence"
+      - name: Prepare and test the bounded maintenance source
+        run: |
+          set -euo pipefail
+          python3 engineering/prepare-linux-patch.py --root "$RUNNER_TEMP/candidate" 2>&1 | tee "$RUNNER_TEMP/preparation-evidence/preparation.log"
+          test "$(git -C "$RUNNER_TEMP/candidate" write-tree)" = fe286ffb9a3f73f197c97bb5b4e81158d5ef18f7
+      - name: Store only the exact tested Git objects without moving any ref
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess, urllib.request
+          root = pathlib.Path(os.environ['RUNNER_TEMP']) / 'candidate'
+          out = pathlib.Path(os.environ['RUNNER_TEMP']) / 'preparation-evidence'
+          expected = 'fe286ffb9a3f73f197c97bb5b4e81158d5ef18f7'
+          base = '9cde3e1ce5dc0ec5a34862c7d31b671559f42811'
+          def git(*args):
+              return subprocess.check_output(['git', *args], cwd=root, text=True).strip()
+          if git('rev-parse', 'HEAD') != '770666eaa79791d79f7fa00175c43a052dcc11d2' or git('write-tree') != expected:
+              raise SystemExit('Unexpected prepared source identity')
+          if git('diff', '--name-only'):
+              raise SystemExit('Unstaged source changes are forbidden')
+          names = git('diff', '--cached', '--name-only').splitlines()
+          if len(names) != 100:
+              raise SystemExit('Prepared file scope differs')
+          entries = []
+          for name in names:
+              path = root / name
+              if not path.is_file() or path.is_symlink() or not path.resolve().is_relative_to(root):
+                  raise SystemExit('Unsafe prepared source path')
+              mode = git('ls-files', '-s', '--', name).split()[0]
+              if mode not in ('100644', '100755'):
+                  raise SystemExit('Unexpected source mode')
+              entries.append({'path': name, 'mode': mode, 'type': 'blob', 'content': path.read_bytes().decode('utf-8')})
+          payload = json.dumps({'base_tree': base, 'tree': entries}).encode()
+          request = urllib.request.Request('https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/git/trees', data=payload,
+              headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept': 'application/vnd.github+json',
+                       'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28'}, method='POST')
+          with urllib.request.urlopen(request, timeout=120) as response:
+              result = json.load(response)
+          if result.get('sha') != expected:
+              raise SystemExit('Stored Git tree differs from reviewed local tree')
+          archive = out / 'Linux-1.1.1-prepared-source.zip'
+          subprocess.run(['git', 'archive', '--format=zip', '--output=' + str(archive), expected], cwd=root, check=True)
+          if not 0 < archive.stat().st_size < 450_000_000:
+              raise SystemExit('Review source archive exceeds the byte ceiling')
+          digest = hashlib.sha256(archive.read_bytes()).hexdigest()
+          receipt = {'schema': 'agi-linux-source-preparation/v1', 'status': 'PREPARED_SOURCE_ONLY',
+              'workflowCommit': os.environ['GITHUB_SHA'], 'workflowRun': os.environ['GITHUB_RUN_ID'],
+              'baseCommit': git('rev-parse', 'HEAD'), 'baseTree': base, 'preparedTree': expected,
+              'version': '1.1.1', 'changedFiles': names, 'sourceRevisionSHA256': json.loads((root / 'engineering/next-release.json').read_text())['sourceRevisionSHA256'],
+              'archive': {'name': archive.name, 'bytes': archive.stat().st_size, 'sha256': digest},
+              'branchUpdated': False, 'releasePublished': False, 'productionQualified': False}
+          (out / 'preparation-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          (out / 'SHA256SUMS.txt').write_text(digest + '  ' + archive.name + '\n')
+          print(json.dumps(receipt, indent=2))
+          PY
+      - name: Retain preparation evidence
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: linux-111-prepared-source
+          path: ${{ runner.temp }}/preparation-evidence/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
