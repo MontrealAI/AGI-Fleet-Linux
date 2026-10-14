@@ -13,7 +13,12 @@ for(const lang of ['en','fr'])for(const width of [320,390,768,1440])test(`SUCCES
   const [capsule]=await Promise.all([page.waitForEvent('download'),page.locator('#download-capsule').click()]);const capsulePath=await capsule.path();
   const [offline]=await Promise.all([page.waitForEvent('download'),page.locator('#download-html').click()]);const htmlPath=testInfo.outputPath('My-SUCCESSOR-Omega.html');await offline.saveAs(htmlPath);
   const fresh=await browser.newContext({acceptDownloads:true});const restored=await fresh.newPage();await restored.goto('file://'+htmlPath);
-  await expect(restored.locator('#restore-preview')).toBeVisible();await restored.locator('#restore-consent').check();await restored.locator('#restore').click();await restored.locator('#public-consent').check();await restored.locator('#run').click();await expect(restored.locator('#result-summary')).toContainText(/Checks passed|Vérifications réussies/);await expect(restored.locator('#error')).toBeHidden();await expect(restored.locator('#keep-version')).toBeDisabled();
+  await expect(restored.locator('#restore-preview')).toBeVisible();await restored.locator('#restore-consent').check();
+  await restored.evaluate(()=>{const digest=crypto.subtle.digest.bind(crypto.subtle);crypto.subtle.digest=(...args)=>new Promise(resolve=>{window.__releaseRestore=()=>resolve(digest(...args));});});
+  await restored.locator('#restore').click();await restored.waitForFunction(()=>typeof window.__releaseRestore==='function');
+  await expect(restored.locator('#public-consent')).toBeDisabled();
+  await restored.evaluate(()=>{const release=window.__releaseRestore;const digest=SubtleCrypto.prototype.digest;crypto.subtle.digest=(...args)=>digest.apply(crypto.subtle,args);release();});
+  await expect(restored.locator('#restore-preview')).toBeHidden();await restored.locator('#public-consent').check();await restored.locator('#run').click();await expect(restored.locator('#result-summary')).toContainText(/Checks passed|Vérifications réussies/);await expect(restored.locator('#error')).toBeHidden();await expect(restored.locator('#keep-version')).toBeDisabled();
   await fresh.close();expect(JSON.parse(fs.readFileSync(capsulePath,'utf8')).payload.state.active).toBeTruthy();
   await page.locator('#language').click();await expect(page.locator('#fleet-export')).toBeEnabled();
   const results=await new AxeBuilder({page}).setLegacyMode(true).exclude('#preview').withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();expect(results.violations).toEqual([]);

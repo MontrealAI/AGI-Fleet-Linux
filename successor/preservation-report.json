@@ -32,7 +32,7 @@
     {
       "path": "docs/DEVELOPMENT.md",
       "before": "c31890d0adfb2dde7e0e134671bbe3547f228083894a8be39b5d4a91c74a1f57",
-      "after": "ced6b4cf19f885adf81e5cceef4c937d8d92cbd280192b549bc320fe789961f6",
+      "after": "fa5ff9eacbbef26815c78ea233b567455e2af36a1741023b464b9d5b9dd8fc3e",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
@@ -44,7 +44,7 @@
     {
       "path": "docs/JOB_INTEGRATION.md",
       "before": "9a0b29f506191e35d4689499e8dea006f9d9a73c654416a260f56b39d0e6bb37",
-      "after": "7e4fcf14c20d5ac554791a57f6196d66f84e2cfbe69b5c9e5fb230e2ef3b3b86",
+      "after": "33432bdc48a383a284c919efdef6a9b36d2e685510e6999cecd9370da6938e57",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
@@ -116,7 +116,7 @@
     {
       "path": "engineering/next-release.json",
       "before": "d58742455c297f27a00b9c8330bd6186df4003baa966eb42929eedd452ef4871",
-      "after": "6ad515afa968d2a5d1dd0ba1b577ed1f951dd3ac25f85aa4316bc7be97214f34",
+      "after": "796bc2ba27889a6c8d75c48cc2eeb8fc908ebcc0725fc588dfacfa2f89986a81",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -1244,7 +1244,7 @@
     {
       "path": "fleet/source-inventory.json",
       "before": "5955175faeb7bea6fc9623e59d6621247a4f258597e725e658600c011cf9ed68",
-      "after": "ed3f96ec0b2b15275a1824c0f6715da68972bc3129b9f4a30b162a28a6cabf37",
+      "after": "6fe2cfe1188fa2b8f9bed79ea381631643136937b7a7248d566dc5d1230aa592",
       "reason": "Regenerate exact source and role-copy integrity records; no qualification inferred."
     },
     {
@@ -1262,7 +1262,7 @@
     {
       "path": "macos/preview/source-inventory.json",
       "before": "3d1b27886fec89aa8afed9a9fa34a82c18af79be49cce2e39b5f377e2ea34521",
-      "after": "06e454c169611c6eeb9b891455f1987a74bd1ad1992c3e9553e1ca3cdb5ce219",
+      "after": "22f4719db6c2fc34c1dbcf222813ec9c1537615bbe86dc2ffa8d0ed374625176",
       "reason": "Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification."
     },
     {
