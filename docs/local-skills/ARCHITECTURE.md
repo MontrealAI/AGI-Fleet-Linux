@@ -4,6 +4,8 @@
 
 Inspection on 2026-10-13 found main at `22eba990dbaa0083c7c6f21a0638bf546d0d47ed` and active SUCCESSOR PR #25 at `e84ff1c3d5ce129f2c953a3216dfa36338c7a905`. That was the original stacked baseline; its observations remain historical. PR #25 has since merged at `e120d55fb0b0d1f97691c59c5923ec400df14d14` and Linux 1.1.0 qualification assets have been published. Local Skills incorporates that exact bridge and targets main without changing its released bytes or the separate Mac track.
 
+The branch now incorporates main `92d7768943e2f5363afd404d59e422c1a9d2d767`, including Linux 1.1.1 maintenance preparation. The existing release workflow is retained exactly. Local Skills remains separate from the Fleet installer; the saved maintenance ZIP now explicitly rejects Local Skills code paths. Current qualification and justified preservation exceptions are recorded in [CURRENT_STATUS.md](CURRENT_STATUS.md).
+
 ## ADR 1: Preserve established authority
 
 The six role names and protocol boundaries come from `fleet/shared/runtime/compute/roles.mjs`. Bounded specialist inspections call the original `validateConfig` and `jobAction`; there is no new settlement engine. Agent report production and Node checking reuse the Manager implementation already vendored by the Fleet SUCCESSOR bridge. Candidate choice and capsule restore use its unchanged model.

@@ -5,11 +5,19 @@
   "productionQualified": false,
   "protocolChanges": false,
   "dedicatedFleetChanges": false,
-  "runtime": { "node": ">=24.19.0 <25", "preferredNode": "24.21.0", "openclawPinUnchanged": "2026.9.5" },
-  "clients": { "localCLI": "v1", "openclaw": "2026.9.5 scoped adapter; synthetic-provider qualification; exact-head native check required", "otherAssistants": "NOT_RUN" },
+  "runtime": {
+    "node": ">=24.19.0 <25",
+    "preferredNode": "24.21.0",
+    "openclawPinUnchanged": "2026.9.5"
+  },
+  "clients": {
+    "localCLI": "v1",
+    "openclaw": "2026.9.5 scoped adapter; synthetic-provider qualification; exact-head native check required",
+    "otherAssistants": "NOT_RUN"
+  },
   "backends": {
-    "linux-x64-bounded-offline": "native-test-required",
-    "linux-arm64-bounded-offline": "native-test-required",
+    "linux-x64-bounded-offline": "native observed at checkpoint 6148924; each new head requires qualification",
+    "linux-arm64-bounded-offline": "native observed at checkpoint 6148924; each new head requires qualification",
     "linux-browser": "BLOCKED_NOT_IMPLEMENTED",
     "linux-desktop": "BLOCKED_NOT_IMPLEMENTED",
     "macos-arm64": "BLOCKED_NOT_IMPLEMENTED"
@@ -18,5 +26,6 @@
   "liveProvider": "NOT_RUN",
   "fundedWork": "DISABLED",
   "independentMarketReview": "DISABLED",
-  "physicalCommissioning": "NOT_RUN"
+  "physicalCommissioning": "NOT_RUN",
+  "evidence": "docs/local-skills/CURRENT_STATUS.md"
 }

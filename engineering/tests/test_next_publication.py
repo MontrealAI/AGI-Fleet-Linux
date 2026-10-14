@@ -5,6 +5,8 @@ import importlib.util
 from pathlib import Path
 import sys
 import unittest
+from unittest import mock
+import tempfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 spec = importlib.util.spec_from_file_location('next_publisher', Path(__file__).resolve().parents[1] / 'publish-next-release.py')
@@ -62,6 +64,53 @@ class PublicationAcceptance(unittest.TestCase):
             metadata = copy.deepcopy(self.metadata); metadata[key] = value
             with self.subTest(field=key), self.assertRaises(ValueError):
                 publisher.validate(metadata, self.audit, self.commit)
+
+    def test_published_guides_are_bound_to_the_validated_commit(self):
+        source = publisher.ROOT / 'docs/RELEASE_NOTES_1_1_1.md'
+        before = source.read_bytes()
+        notes = publisher.publication_notes([], self.commit, self.run_id)
+        for path in ('successor/docs/GUIDE.md', 'successor/docs/ARCHITECTURE.md',
+                     'successor/docs/ACCEPTANCE.md', 'docs/FRESH_INSTALL.md'):
+            self.assertIn(f'https://github.com/{publisher.REPOSITORY}/blob/{self.commit}/{path}', notes)
+        self.assertNotIn('](../successor/', notes)
+        self.assertNotIn('](FRESH_INSTALL.md)', notes)
+        self.assertEqual(source.read_bytes(), before)
+
+    def test_note_artifact_table_tracks_exact_bytes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            asset = Path(temporary) / 'test.zip'; asset.write_bytes(b'fixture')
+            notes = publisher.publication_notes([asset], self.commit, self.run_id)
+            self.assertIn(f'| test.zip | 7 | `{publisher.sha(asset)}` |', notes)
+            asset.write_bytes(b'changed')
+            self.assertNotEqual(notes, publisher.publication_notes([asset], self.commit, self.run_id))
+
+    def test_invalid_note_workflow_is_rejected(self):
+        for run in (None, '', '0', '../latest', '1.2'):
+            with self.subTest(run=run), self.assertRaises(ValueError):
+                publisher.publication_notes([], self.commit, run)
+
+    def test_changed_notes_stop_before_any_remote_publication(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); release = root / 'release'; output = root / 'output'
+            release.mkdir(); output.mkdir()
+            metadata = copy.deepcopy(self.metadata)
+            archive = release / metadata['name']; archive.write_bytes(b'archive fixture')
+            metadata.update(bytes=archive.stat().st_size, sha256=publisher.sha(archive))
+            audit = copy.deepcopy(self.audit); audit['releaseSHA256'] = metadata['sha256']
+            audit['successorAcceptance']['archiveSHA256'] = metadata['sha256']
+            evidence = output / 'evidence.zip'; evidence.write_bytes(b'evidence fixture')
+            manifest = {'workflowCommit': self.commit, 'workflowRun': self.run_id,
+                'sha256': metadata['sha256'], 'audit': audit,
+                'evidence': {'name': evidence.name, 'sha256': publisher.sha(evidence)}}
+            publisher.write(release / 'release.json', metadata)
+            manifest_path = output / 'Release-Manifest-v1.1.1.json'; publisher.write(manifest_path, manifest)
+            assets = [archive, evidence, manifest_path]
+            (output / 'SHA256SUMS-v1.1.1.txt').write_text(''.join(publisher.sha(p) + '  ' + p.name + '\n' for p in assets))
+            expected = publisher.publication_notes(assets, self.commit, self.run_id)
+            (output / 'release-notes.md').write_text(expected + '\nUnreviewed instructions.\n')
+            with mock.patch.dict(os.environ, {'GITHUB_SHA': self.commit, 'GITHUB_RUN_ID': self.run_id}):
+                with self.assertRaisesRegex(ValueError, 'Release notes differ'):
+                    publisher.publish(release, output)
 
 
 if __name__ == '__main__':

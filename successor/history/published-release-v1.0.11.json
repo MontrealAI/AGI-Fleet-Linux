@@ -1,0 +1,2064 @@
+{
+  "schema": "agi-linux-published-release/v1",
+  "version": "1.0.11",
+  "tag": "v1.0.11-qualification",
+  "prefix": "AGI_Fleet_Linux_v1.0.11",
+  "name": "AGI_Fleet_Linux_v1.0.11.zip",
+  "bytes": 404252051,
+  "sha256": "4322b454df3e9fd8134cc7f28a12925f1d7c17e017ead545c1317006bb3c02cc",
+  "sourceRevisionSHA256": "8911ff0ef1f6f3e31260ed0ee04779a31652b8d725627dd04715663419a056e2",
+  "sourceFiles": 4816,
+  "repositoryCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+  "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+  "sourceDateEpoch": 1791849600,
+  "epoch": 1791849600,
+  "baseline": {
+    "status": "PASS",
+    "sha256": "5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102",
+    "bytes": 401420759,
+    "manifestEntriesVerified": 57853,
+    "editions": 7,
+    "sourceFiles": 4816
+  },
+  "archiveVerification": {
+    "file": "/home/runner/work/_temp/candidate-dist/AGI_Fleet_Linux_v1.0.11.zip",
+    "bytes": 404252051,
+    "sha256": "4322b454df3e9fd8134cc7f28a12925f1d7c17e017ead545c1317006bb3c02cc",
+    "files": 33216,
+    "crcVerified": true,
+    "allManifestsVerified": true,
+    "sourceInventoryVerified": true,
+    "freshExtraction": null
+  },
+  "finalExtractedGate": {
+    "schema": "agi-final-archive-gate/v1",
+    "archive": "AGI_Fleet_Linux_v1.0.11.zip",
+    "sha256": "4322b454df3e9fd8134cc7f28a12925f1d7c17e017ead545c1317006bb3c02cc",
+    "bytes": 404252051,
+    "maximumFileBytes": 450000000,
+    "status": "PASS_PACKAGED_EXECUTABLES_AND_LINUX_LAUNCHER_SMOKE",
+    "physicalMacQualification": "NOT_RUN",
+    "platform": "linux",
+    "extractedFiles": 33216,
+    "freshExtraction": true,
+    "allArchiveCRCsVerified": true,
+    "shellSyntax": {
+      "files": 275,
+      "fail": 0
+    },
+    "executables": {
+      "schema": "agi-final-executable-validation/v1",
+      "generatedAt": "2026-10-13T17:18:52.206986Z",
+      "root": "/tmp/agi-final-extracted-hcranp6d/AGI_Fleet_Linux_v1.0.11",
+      "runtime": {
+        "path": "/home/runner/work/_temp/node-v24.21.0-linux-x64/bin/node",
+        "version": "v24.21.0",
+        "sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c"
+      },
+      "scope": "Every shipped .js, .mjs and .cjs file, including tests, dependencies and historical evidence; no exclusions.",
+      "hashbangPolicy": "The literal byte pair 0x23 0x21 is permitted only at byte offset 0; even comments and string literals are rejected elsewhere.",
+      "parseCommand": [
+        "<runtime.path>",
+        "--check",
+        "<absolute-file-path>"
+      ],
+      "nodeOptionsCleared": true,
+      "jobs": 4,
+      "status": "PASS",
+      "summary": {
+        "files": 7773,
+        "pass": 7773,
+        "fail": 0,
+        "nodeChecksPassed": 7773,
+        "misplacedHashbangFiles": 0
+      }
+    },
+    "executableEvidence": "executables.json",
+    "launcherEvidence": "launchers/launcher-smoke.json",
+    "launchers": {
+      "platform": "Linux",
+      "physicalMacQualification": "NOT_RUN",
+      "summary": {
+        "cases": 248,
+        "passed": 248,
+        "failed": 0
+      },
+      "status": "PASS"
+    },
+    "extractedBytesAndModesUnchangedAfterTests": true
+  },
+  "nativeAcceptance": "PASS",
+  "operatorGate": "OPEN_FOR_CONTROLLED_FRESH_INSTALL",
+  "productionQualified": false,
+  "physicalQualification": "NOT_RUN",
+  "native": {
+    "targeted": {
+      "tests": 291,
+      "files": 25
+    },
+    "complete": {
+      "tests": 3898,
+      "files": 342
+    }
+  },
+  "integration": {
+    "repository": "MontrealAI/AGIJobManager",
+    "version": "1.15.0",
+    "commit": "3958cbc3b01aa459de16cf39e1ab0985b5fa56c3",
+    "managerTests": 780,
+    "standaloneScripts": 8,
+    "contractArtifacts": 11
+  },
+  "workflowRun": "38437206563",
+  "jobIntegrationAcceptance": "PASS",
+  "audit": {
+    "schema": "agi-next-release-independent-audit/v1",
+    "status": "PASS",
+    "version": "1.0.11",
+    "releaseSHA256": "4322b454df3e9fd8134cc7f28a12925f1d7c17e017ead545c1317006bb3c02cc",
+    "sourceRevisionSHA256": "8911ff0ef1f6f3e31260ed0ee04779a31652b8d725627dd04715663419a056e2",
+    "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+    "workflowRun": "38437206563",
+    "architectures": [
+      "x64",
+      "arm64"
+    ],
+    "native": [
+      {
+        "architecture": "x64",
+        "status": "PASS",
+        "workflowRun": "38437206563",
+        "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+        "runs": {
+          "targeted": {
+            "status": "PASS",
+            "counts": {
+              "tests": 291,
+              "suites": 0,
+              "pass": 291,
+              "fail": 0,
+              "cancelled": 0,
+              "skipped": 0,
+              "todo": 0
+            },
+            "verifiedLogs": 25,
+            "verifiedSourceFiles": 4816,
+            "resultsSHA256": "a10b511dbdcd1902501cc7653715727a99992ad7b387ead39dbd694a1e6ce601"
+          },
+          "complete": {
+            "status": "PASS",
+            "counts": {
+              "tests": 3898,
+              "suites": 9,
+              "pass": 3898,
+              "fail": 0,
+              "cancelled": 0,
+              "skipped": 0,
+              "todo": 0
+            },
+            "verifiedLogs": 342,
+            "verifiedSourceFiles": 4816,
+            "resultsSHA256": "4328a5d765500d2d5dda0584696307be4c4f2138fd9bfa3496590c1e6299c1b9"
+          }
+        },
+        "resolvedCases": [
+          {
+            "source": "packages/AGI_Agent/tests/compute-repair.test.mjs",
+            "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+            "logSHA256": "3a776a687e286cbce1c9a75868383eaf4c93b92b9d59cf2f99298e975d0b8709"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/compute-restart.test.mjs",
+            "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+            "logSHA256": "7e7a9c574d08996f71a5a608b0297ce377e4d8dcf16da3294721f086e2b449d2"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+            "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "78a43f233517ae0267395dcfc32e2dfeb9f6ebd4fc95d5cd095b772de535a16a"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+            "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "78a43f233517ae0267395dcfc32e2dfeb9f6ebd4fc95d5cd095b772de535a16a"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "real foreign-owned runtime directory and socket are rejected",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "socket hard-link aliases are rejected and neither pathname is removed",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "broker close refuses a replacement file before native close can unlink it",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "worker session cleanup failure still closes broker and preserves primary failure",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "b76837e27d9754710e44896b56f285abb9dcc930cb55b3f1188a2ec446577628"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs",
+            "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+            "logSHA256": "96ea885838b1ca3e8a7c2f2a8d5d51df740611e3706a35f5b2ade6c0480a20eb"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/service-stop.test.mjs",
+            "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+            "logSHA256": "52604b720c0fb528fcef83e47a4b526a13b8e9a898df562437e42d48d51b871d"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "an in-profile live broker still fails durable completion after successful verification",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6c3cdc533485603f5ae7a2772de38b8ad4cca9ad9f3f86144e00422e23bbbcfe"
+          },
+          {
+            "source": "packages/AGI_Node/tests/compute-repair.test.mjs",
+            "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+            "logSHA256": "7aa01747f77bb9827cf3d55462089e37d6b7b46d969e57a46e54b0f7e86bc525"
+          },
+          {
+            "source": "packages/AGI_Node/tests/compute-restart.test.mjs",
+            "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+            "logSHA256": "c3d16ade41a28da5e60d117840d3503bbcdc2c9b80400bf6d0dc0ca89c668adc"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+            "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "623f133667aee5d3144e908e8faca72144f3ed3561978b1b59532d0b7a6fffd1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+            "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "623f133667aee5d3144e908e8faca72144f3ed3561978b1b59532d0b7a6fffd1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "real foreign-owned runtime directory and socket are rejected",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "socket hard-link aliases are rejected and neither pathname is removed",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "broker close refuses a replacement file before native close can unlink it",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "worker session cleanup failure still closes broker and preserves primary failure",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d0acee72ffb575d951dd9b0cb01df6800ffe7e288af7a3a1e48d5503ba29acfd"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs",
+            "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+            "logSHA256": "1ebe66e21da56d697833a508de8594a888824dc90901231627d21b487d776934"
+          },
+          {
+            "source": "packages/AGI_Node/tests/service-stop.test.mjs",
+            "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+            "logSHA256": "1c54705594183a19d5175249d73aa2c90fd3ef2060e0d8bc7f53903cb17f00cc"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "an in-profile live broker still fails durable completion after successful verification",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "baa4c4f12ac44d399004cdc3f2b4481a63671fe2a690f48f3bec16c7870f1166"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/compute-repair.test.mjs",
+            "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+            "logSHA256": "6cb3d16a8e4f3dced141af2bc13fb5f4885fb69690ff197221058e61ff15a149"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/compute-restart.test.mjs",
+            "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+            "logSHA256": "b0d706142a5a9b6d0ea5b513e210e9d6da282e5d3495bc2309e25fecdd931198"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+            "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "5f314e993fe861083cf6d976c3b924c7b498af005c8ec8ecf3b8923895136957"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+            "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "5f314e993fe861083cf6d976c3b924c7b498af005c8ec8ecf3b8923895136957"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "real foreign-owned runtime directory and socket are rejected",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "socket hard-link aliases are rejected and neither pathname is removed",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "broker close refuses a replacement file before native close can unlink it",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "worker session cleanup failure still closes broker and preserves primary failure",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "9d501cf9e91cc88ce64b299a2edfaf22779b5563f13123715389fc4e8c8b02de"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs",
+            "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+            "logSHA256": "16a522d970591dc34a0c195b7253fac3ea3634ae709cb07b7a9aaf6d1b22a5e7"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/service-stop.test.mjs",
+            "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+            "logSHA256": "9ab1c3d20d3c07fb7e6580b0cfd497edebad197a23875eb8b5885fa076fd791f"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "an in-profile live broker still fails durable completion after successful verification",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "44bef75d77012146088c94cec7579a23ae991737d5dd48148fdb7404d6cb394c"
+          },
+          {
+            "source": "packages/AGI_Node/tests/compute-repair.test.mjs",
+            "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+            "logSHA256": "0820ad445e87771880230737ce80438630f4581e51e8bd4558e692263034f6b0"
+          },
+          {
+            "source": "packages/AGI_Node/tests/compute-restart.test.mjs",
+            "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+            "logSHA256": "e8d3977744dd8ae81c12961442e3ab23a47fb2a54f4cae8e02dcc858542abe65"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+            "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "06d002cbf715724cf4752a8e6d5eccd27c24f74b9af05b1de05225b5f5b1e352"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+            "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "06d002cbf715724cf4752a8e6d5eccd27c24f74b9af05b1de05225b5f5b1e352"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "real foreign-owned runtime directory and socket are rejected",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "socket hard-link aliases are rejected and neither pathname is removed",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "broker close refuses a replacement file before native close can unlink it",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "worker session cleanup failure still closes broker and preserves primary failure",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "d7158f83bced9ea117f70494626565fa424d4a7ff5287a01293ca040beffcbc1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs",
+            "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+            "logSHA256": "ff265a01580a82ee15091ffce2a17c190254ef1c3aab2b5681d830149466e982"
+          },
+          {
+            "source": "packages/AGI_Node/tests/service-stop.test.mjs",
+            "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+            "logSHA256": "79911585db1c41a501328d78de220c559809a78d8c61457769601c6b54ca4ffa"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "an in-profile live broker still fails durable completion after successful verification",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "e3e9f758fb7a7a37e37115489057818491f500f795ca2bf194e054580d082c61"
+          }
+        ],
+        "previousFailureCasesResolved": 44,
+        "previousSkipCasesResolved": 6,
+        "productionQualified": false
+      },
+      {
+        "architecture": "arm64",
+        "status": "PASS",
+        "workflowRun": "38437206563",
+        "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+        "runs": {
+          "targeted": {
+            "status": "PASS",
+            "counts": {
+              "tests": 291,
+              "suites": 0,
+              "pass": 291,
+              "fail": 0,
+              "cancelled": 0,
+              "skipped": 0,
+              "todo": 0
+            },
+            "verifiedLogs": 25,
+            "verifiedSourceFiles": 4816,
+            "resultsSHA256": "9fb6909ee793e2caca999049d3ba080624f0ba4729c61f20077b8d930b7ace3a"
+          },
+          "complete": {
+            "status": "PASS",
+            "counts": {
+              "tests": 3898,
+              "suites": 9,
+              "pass": 3898,
+              "fail": 0,
+              "cancelled": 0,
+              "skipped": 0,
+              "todo": 0
+            },
+            "verifiedLogs": 342,
+            "verifiedSourceFiles": 4816,
+            "resultsSHA256": "6b4635e9a42b5044cb419d2437537b366039e41742e1cf7cc7ba45da56997297"
+          }
+        },
+        "resolvedCases": [
+          {
+            "source": "packages/AGI_Agent/tests/compute-repair.test.mjs",
+            "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+            "logSHA256": "8728d00c4e22ef286b0e234da0210c53fff49213bbece577491f20aa9cbebf04"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/compute-restart.test.mjs",
+            "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+            "logSHA256": "56583b22f0d4cb7d5058761af5207a30913a6f70ac3d4597efdbbb4851e2c0ed"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+            "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "ea05150eb3b79f2824be2a547c8619bd7169fdd80067feb79526765dc60f08bf"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+            "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "ea05150eb3b79f2824be2a547c8619bd7169fdd80067feb79526765dc60f08bf"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "real foreign-owned runtime directory and socket are rejected",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "socket hard-link aliases are rejected and neither pathname is removed",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "broker close refuses a replacement file before native close can unlink it",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "worker session cleanup failure still closes broker and preserves primary failure",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "7b70b60e9ea045fe842a9bce354f866f0a7675b466d98c2dbf453f289ec470b4"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs",
+            "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+            "logSHA256": "dd1013d277c0fd694b493c436192c709d68cfdaefdf93a795ef75aeb64b7cab2"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/service-stop.test.mjs",
+            "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+            "logSHA256": "f221ddc93440d96b1c475d3818daa0144955e6f59f1b73023ac530f96b4cd0fe"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "an in-profile live broker still fails durable completion after successful verification",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6e25e8bcd707362308a67e029a3477952cda437f747f870e00242a3b4e0d4c29"
+          },
+          {
+            "source": "packages/AGI_Node/tests/compute-repair.test.mjs",
+            "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+            "logSHA256": "34a9d8d1ee1ef901d3e814a8b85307969fa5fcade5780717db6ae54b5a95121d"
+          },
+          {
+            "source": "packages/AGI_Node/tests/compute-restart.test.mjs",
+            "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+            "logSHA256": "7bbcf95e85d144f4b861c0741183872c23ccdb5de7275190ea0d7a747ebb8c2b"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+            "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "5b54a36c5deea4aff0358889d02a33d431e50d3fa8e8c14e2a89896ede0d7a6e"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+            "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "5b54a36c5deea4aff0358889d02a33d431e50d3fa8e8c14e2a89896ede0d7a6e"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "real foreign-owned runtime directory and socket are rejected",
+            "previousStatus": "SKIP",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "socket hard-link aliases are rejected and neither pathname is removed",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "broker close refuses a replacement file before native close can unlink it",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "worker session cleanup failure still closes broker and preserves primary failure",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "5d518bfa7cb29936ed54c0a903fd0c2ef4a7b527f7682f94520dc2a36b4dbeff"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs",
+            "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+            "logSHA256": "d339236c896ebfbc81bc5c464af8a8038264fb895077c4d56c85e208ae8fe746"
+          },
+          {
+            "source": "packages/AGI_Node/tests/service-stop.test.mjs",
+            "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+            "logSHA256": "ecf8113cd2ca4f0d21e7bb87b766cb27d05aa3b7f3355a71fb388e1cc536567d"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "an in-profile live broker still fails durable completion after successful verification",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "targeted",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "53e82b4fd28727eef186fa6d24e6edfb9795a5c402d9b37358f9170ab4252e91"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/compute-repair.test.mjs",
+            "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+            "logSHA256": "3c9e49677eff48f3a0fe879ecefe6e57adf66f403a8ddc94f61c63a541a22613"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/compute-restart.test.mjs",
+            "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+            "logSHA256": "bf2c5475f647b2055ec076643d9186684f3e73f45ea4df32b585e6876c4c265c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+            "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "17ba6ca0893529d1df71f443625b39d38c15aece5802df9826c0f7f504eb359c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-integration.test.mjs",
+            "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "17ba6ca0893529d1df71f443625b39d38c15aece5802df9826c0f7f504eb359c"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "real foreign-owned runtime directory and socket are rejected",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "socket hard-link aliases are rejected and neither pathname is removed",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "broker close refuses a replacement file before native close can unlink it",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "worker session cleanup failure still closes broker and preserves primary failure",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs",
+            "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "21001e42037bc012b1133ebd4f45125d9b137eb3820dfce204d9132ea91b04c3"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs",
+            "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+            "logSHA256": "8ac43655f1081396c2b38dcfa17b37103bb6383c6c7d73bfd474d25f6a3f7457"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/service-stop.test.mjs",
+            "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+            "logSHA256": "0d0a030136cef629bc28fcf75a1acec1db83d1493d35b7bd856dea7b701e7853"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "an in-profile live broker still fails durable completion after successful verification",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+          },
+          {
+            "source": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "77063cf5cb9b82207868e2d60810f7aafa7698601a762e1a20c9bb177a2a9c52"
+          },
+          {
+            "source": "packages/AGI_Node/tests/compute-repair.test.mjs",
+            "test": "explicit rollback waits for external and legacy sockets to disappear before invoking profile restoration",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d",
+            "logSHA256": "67c6a0fb6acd855b9d03244c42594164c7d8fadacff5b02399bb032bbdd12888"
+          },
+          {
+            "source": "packages/AGI_Node/tests/compute-restart.test.mjs",
+            "test": "restart waits for delayed launchd, ports and recognized external or legacy broker sockets before starting either role",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24",
+            "logSHA256": "4f272807d33b9484d75d309f638c6ae4d9a3c99a794bd5426eb1953ebcfe8c43"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+            "test": "actual private Unix broker routes exact context, enforces strict arguments, and keeps a live socket",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "01ae91419aa5ac02383e0e3ccdb81155bd9fe192a83d71771a1580afc2f20798"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-integration.test.mjs",
+            "test": "an owned crash-left socket is reclaimed; regular files and symlinks are preserved",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98",
+            "logSHA256": "01ae91419aa5ac02383e0e3ccdb81155bd9fe192a83d71771a1580afc2f20798"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "enabled commissioning starts a real external broker and graceful close removes only its socket",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "regular files, symlinks, directories and permissive sockets are never reclaimed",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "real foreign-owned runtime directory and socket are rejected",
+            "previousStatus": "SKIP",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "strict crash-left external and exact legacy sockets are automatically reclaimed after quiescence",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "an unexpected socket remains untouched by scoped runtime cleanup",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "socket hard-link aliases are rejected and neither pathname is removed",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "live exact legacy listener blocks stop confirmation and is never deleted",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "broker close refuses a replacement file before native close can unlink it",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "socket disappearance during bounded shutdown probing confirms stopped without a false cleanup error",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "worker session cleanup failure still closes broker and preserves primary failure",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-browser-runtime.test.mjs",
+            "test": "aborted cleanup preserves a crash-left socket and reports cancellation",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279",
+            "logSHA256": "12a3a87e17d1af2ba684e9a7983be004305035241df3f84bb63ebd2d764c981f"
+          },
+          {
+            "source": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs",
+            "test": "qualification import uses bounded external and legacy socket shutdown before snapshotting the profile",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378",
+            "logSHA256": "0c47d0fbd0d8f6af757616e1e9b700821e8ae6a71daef280b3eb44a07babbaa5"
+          },
+          {
+            "source": "packages/AGI_Node/tests/service-stop.test.mjs",
+            "test": "a real Unix socket remains outside the profile and its delayed close is awaited",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff",
+            "logSHA256": "a3afda100754c90a25e878adebb8cf02a3540328f49619547181c4f7103dafa1"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "completion succeeds while an actual broker listens outside the durable profile and includes committed WAL state",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "an in-profile live broker still fails durable completion after successful verification",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket unexpected.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity and snapshot reject unexpected live socket nested/web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "strict identity rejects real FIFO and symlink redirection even when named web.sock",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old agent safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+          },
+          {
+            "source": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs",
+            "test": "physical-Mac prefixed absence recovers old node safe-stop evidence after actual socket exit and both port checks",
+            "previousStatus": "FAIL",
+            "scope": "complete",
+            "status": "PASS",
+            "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0",
+            "logSHA256": "6b0896e1a1d23e25752bcf70017aeef4a3c42a31169f47a02ef3552eece8ffbc"
+          }
+        ],
+        "previousFailureCasesResolved": 44,
+        "previousSkipCasesResolved": 6,
+        "productionQualified": false
+      }
+    ],
+    "integration": [
+      {
+        "architecture": "x64",
+        "status": "PASS",
+        "summarySHA256": "4af0cd696ce8688b0c4f5d4721bbfb5fbca98580f19689c16b579c557f4d5864",
+        "verifiedLogs": 19,
+        "standaloneIntegrationScripts": 8,
+        "productionSourcesMatched": 11,
+        "contractArtifactsMatched": 11,
+        "managerTestsPassed": 780,
+        "currentManagerLifecycleSHA256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56",
+        "managerCommit": "3958cbc3b01aa459de16cf39e1ab0985b5fa56c3",
+        "workflowRun": "38437206563",
+        "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+        "productionQualified": false
+      },
+      {
+        "architecture": "arm64",
+        "status": "PASS",
+        "summarySHA256": "c318d44ec69918f5062c687a10bcde5ea99279c6feb2f33b5a642ad62e6e2276",
+        "verifiedLogs": 19,
+        "standaloneIntegrationScripts": 8,
+        "productionSourcesMatched": 11,
+        "contractArtifactsMatched": 11,
+        "managerTestsPassed": 780,
+        "currentManagerLifecycleSHA256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56",
+        "managerCommit": "3958cbc3b01aa459de16cf39e1ab0985b5fa56c3",
+        "workflowRun": "38437206563",
+        "workflowCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
+        "productionQualified": false
+      }
+    ],
+    "integrationTarget": {
+      "repository": "MontrealAI/AGIJobManager",
+      "version": "1.15.0",
+      "commit": "3958cbc3b01aa459de16cf39e1ab0985b5fa56c3",
+      "managerTests": 780,
+      "standaloneScripts": 8,
+      "contractArtifacts": 11
+    },
+    "verifiedTapLogs": 734,
+    "verifiedIntegrationLogs": 38,
+    "productionQualified": false,
+    "physicalQualification": "NOT_RUN"
+  },
+  "evidence": {
+    "name": "Linux-Qualification-Evidence-v1.0.11.zip",
+    "bytes": 2853128,
+    "sha256": "fe65b6d4f23352115ecd596d202b4a552d0e20c52c5a268d185f98599a773052"
+  }
+}

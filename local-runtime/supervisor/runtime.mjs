@@ -9,6 +9,7 @@ import {defaultMission} from '../../fleet/successor/vendor/manager/site/assets/s
 import {successorOperation} from './successor.mjs';
 import {validateTaskInput} from '../worker.mjs';
 import {inspectReconciliation,reconcile} from './reconciliation.mjs';
+import {diagnostics} from './diagnostics.mjs';
 
 const ASSISTANT_ACTIONS=['status','inspect','prepare','run','cancel','output'];
 export function sourceIdentity() {
@@ -192,6 +193,7 @@ export class LocalRuntime {
     const a=this.addActor({role:v.role,name:v.name},p);a.sourceActor=v.sourceActor;this.store.saveActor(a);this.store.event('portable-import-inert',{actor:a.id,sourceActor:v.sourceActor});return a;
   }
   async dispatch(action,input,p) {
+    if(action==='diagnostics')return diagnostics(this,input,p);
     if(action==='reconciliation')return inspectReconciliation(this,input,p);
     if(action==='reconcile')return reconcile(this,input,p);
     if(['project-assemble','project-select','project-export','project-import'].includes(action))return successorOperation(this,action,input,p);

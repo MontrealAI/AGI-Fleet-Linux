@@ -22,5 +22,18 @@ export interface PortableRoleV1 {
   payload: { schema: 'agi-fleet/portable-role/v1'; role: Role; name: string; sourceActor: string; packageSha256: string; authority: 'none' };
   sha256: string;
 }
-export type OperatorOperation = 'create'|'activate'|'authorize'|'grant-inspect'|'client'|'revoke'|'revoke-client'|'pause'|'stop'|'resume'|'reconciliation'|'reconcile'|'import'|'export'|'doctor'|'project-assemble'|'project-select'|'project-export'|'project-import';
+export type OperatorOperation = 'create'|'activate'|'authorize'|'grant-inspect'|'client'|'revoke'|'revoke-client'|'pause'|'stop'|'resume'|'reconciliation'|'reconcile'|'import'|'export'|'doctor'|'diagnostics'|'project-assemble'|'project-select'|'project-export'|'project-import';
 export type ScopedOperation = 'status'|'client-info'|'inspect'|'prepare'|'run'|'cancel'|'output';
+export interface DiagnosticsV1 {
+  schema: 'agi-fleet/local-diagnostics/v1';
+  runtime: string;
+  system: { platform: string; architecture: string; node: string };
+  readiness: { operationalProbe: 'PASS'|'BLOCKED'; code: string|null; physicalQualification: 'NOT_RUN' };
+  controls: { stopped: boolean; paused: boolean };
+  actorsByRole: Record<Role, number>;
+  grants: Record<'prepared'|'authorized'|'consumed'|'revoked', number>;
+  runs: Record<'running'|'complete'|'uncertain'|'reconciled', number>;
+  productionQualified: false;
+  economicAuthority: false;
+  liveProviderQualification: 'NOT_RUN';
+}

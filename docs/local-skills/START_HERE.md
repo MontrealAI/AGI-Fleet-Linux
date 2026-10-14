@@ -1,5 +1,6 @@
 # Local Skills · Start here / Commencer
 
+[Current status and remaining merge requirements](CURRENT_STATUS.md) · English / Français
 ## What works in this development preview
 
 The source includes six portable skills, a single local supervisor, actor-scoped clients, exact one-use grants, an English/French loopback dashboard, bounded offline report generation, internal checking, formal protocol inspection, inert role portability and the existing SUCCESSOR capsule format.
@@ -36,6 +37,10 @@ The launcher prints the exact loopback dashboard URL and the path of a private o
 
 The dashboard example makes **zero model calls** and has **zero USDC spending authority**. The separately provisioned [OpenClaw client](OPENCLAW_CLIENT.md) needs a selected inference route; its live availability, privacy and costs remain unqualified. It executes only the reviewed deterministic operations. It is not a general arbitrary-code or AI Computer Use engine. Existing Computer Use remains in Dedicated Fleet and the separately labeled native-workstation previews.
 
+## Need help?
+
+Choose **Preview support report**, review the readiness and aggregate counts, then **Save this report** if you want to share it. The report excludes credentials, actor names and identities, task inputs and outputs. It is never uploaded automatically. Do not share raw state directories, tokens, browser profiles or private work.
+
 ## STOP, recovery and portability
 
 Pause blocks new preparation while accepted work can drain. STOP first revokes outstanding grants, persists a stopped state, and requests termination. The service records exit status and positive process-group cleanup. A failure or interrupted reservation is uncertain and blocks the host. Restart never repeats a consumed grant. Resume of a clean stopped host requires fresh activation and new grants.
@@ -57,3 +62,5 @@ Dans une copie de développement, exécutez les quatre commandes ci-dessus. Ouvr
 Les identifiants restent privés. Ne les mettez jamais dans une conversation, une URL ou un fichier partagé. Un contrôle interne ne constitue pas un examen indépendant. L’importation d’un rôle crée un nouvel acteur inactif et ne rétablit aucune autorisation.
 
 L’arrêt persiste après un redémarrage et n’annule pas une action passée. Un résultat incertain bloque la reprise. **Examiner la reprise** permet de clore explicitement une tentative hors ligne seulement si sa fermeture est prouvée, sans la déclarer réussie ni répéter le travail. Le registre et la réservation restent conservés. La reprise et la nouvelle activation sont séparées. Le guide d’installation explique la mise à jour, le retour à une version de code et la suppression des seuls fichiers possédés, sans effacer l’état privé ni les résultats. Les limites exactes figurent dans la matrice d’acceptation.
+
+Pour demander de l’aide, choisissez **Prévisualiser le rapport d’assistance**, examinez son contenu, puis **Enregistrer ce rapport** si vous souhaitez le partager. Il ne contient ni identifiants privés, ni noms ou identités d’acteurs, ni données ou résultats des tâches. Aucun téléversement automatique n’a lieu.

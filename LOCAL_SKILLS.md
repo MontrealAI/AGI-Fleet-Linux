@@ -1,5 +1,6 @@
 # AGI Fleet Skills + Local Runtime
 
+[Current status and remaining merge requirements](docs/local-skills/CURRENT_STATUS.md) · English / Français
 **Development preview. The complete implementation handoff is not yet fulfilled.**
 
 This additive track introduces lightweight role packages and a local actor/grant supervisor. Existing Dedicated Fleet, Linux and Mac installers, SUCCESSOR Ω pages, protocol contracts, signer rules and release tracks remain unchanged.

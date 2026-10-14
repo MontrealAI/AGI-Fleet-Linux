@@ -1,0 +1,65 @@
+name: Exact-source repository review
+on:
+  pull_request:
+    paths: ['README.md', 'docs/**', 'engineering/**', '.github/workflows/repository-review.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: repository-review-${{ github.event.pull_request.number || github.ref }}-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Fetch the exact review commit
+        env:
+          COMMIT: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "https://github.com/${REPOSITORY}.git"
+          git fetch --depth=1 origin "$COMMIT"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$COMMIT"
+      - name: Retain a hash-bound source snapshot
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/review-source"
+          git archive --format=zip --output="$RUNNER_TEMP/review-source/AGI-Fleet-Linux-review-source.zip" "$GITHUB_SHA"
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, re
+          commit = os.environ['GITHUB_SHA']
+          if not re.fullmatch('[0-9a-f]{40}', commit):
+              raise SystemExit('An exact source commit is required')
+          root = pathlib.Path(os.environ['RUNNER_TEMP']) / 'review-source'
+          archive = root / 'AGI-Fleet-Linux-review-source.zip'
+          if not 0 < archive.stat().st_size < 450_000_000:
+              raise SystemExit('Review source exceeds the archive size ceiling')
+          with archive.open('rb') as stream:
+              digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+          receipt = {'schema': 'agi-fleet-review-source/v1', 'repository': os.environ['GITHUB_REPOSITORY'],
+              'commit': commit, 'workflowRun': os.environ['GITHUB_RUN_ID'], 'event': os.environ['GITHUB_EVENT_NAME'],
+              'name': archive.name, 'bytes': archive.stat().st_size, 'sha256': digest,
+              'purpose': 'Exact review source; not an installer or qualified release',
+              'productionQualified': False, 'releaseEligible': False}
+          (root / 'source-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          (root / 'SHA256SUMS.txt').write_text(digest + '  ' + archive.name + '\n')
+          PY
+      - name: Verify repository preservation and engineering regressions
+        run: |
+          set -euo pipefail
+          python3 engineering/check-repository.py --require-source
+          python3 engineering/check-successor-preservation.py
+          python3 -m unittest discover -s engineering/tests -v
+      - name: Save exact review source independently of test outcome
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: exact-review-source
+          path: ${{ runner.temp }}/review-source/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0

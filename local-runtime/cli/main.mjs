@@ -21,7 +21,7 @@ export async function client({state,tokenFile,action,input}) {
 export async function main(args=process.argv.slice(2)) {
   process.umask(0o077);
   const action=args.shift(),state=path.resolve(process.env.AGI_LOCAL_STATE||path.join(os.homedir(),'.local','state','agi-fleet-local'));
-  if(!action||action==='help'){console.log('AGI Fleet Local Skills — development preview\ninit | serve | status | doctor\nrequest ACTION PRIVATE_INPUT.json\nrecover-service --confirm\nUse AGI_LOCAL_STATE for a fresh state directory outside the checkout.\nAGI_LOCAL_TOKEN_FILE selects an operator or scoped actor credential (0600).\nNo funded work, native desktop or live provider support is qualified.');return;}
+  if(!action||action==='help'){console.log('AGI Fleet Local Skills — development preview\ninit | serve | status | doctor | diagnostics\nrequest ACTION PRIVATE_INPUT.json\nrecover-service --confirm\nUse AGI_LOCAL_STATE for a fresh state directory outside the checkout.\nAGI_LOCAL_TOKEN_FILE selects an operator or scoped actor credential (0600).\nNo funded work, native desktop or live provider support is qualified.');return;}
   const tokenFile=process.env.AGI_LOCAL_TOKEN_FILE||path.join(state,'operator.token');
   if(action==='init'){
     need(args.length===0&&!fs.existsSync(state),'FRESH_STATE_REQUIRED');
@@ -55,7 +55,7 @@ export async function main(args=process.argv.slice(2)) {
   }
   let input={},operation=action;
   if(action==='request'){need(args.length===2&&/^[a-z-]+$/.test(args[0]),'ARGUMENTS_INVALID');operation=args[0];input=parseStrict(readPrivate(path.resolve(args[1])).toString());}
-  else need(['status','doctor'].includes(action)&&args.length===0,'ARGUMENTS_INVALID');
+  else need(['status','doctor','diagnostics'].includes(action)&&args.length===0,'ARGUMENTS_INVALID');
   console.log(JSON.stringify(await client({state,tokenFile,action:operation,input}),null,2));
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href)main().catch(e=>{console.error(JSON.stringify({error:e.code||e.message,help:e.code==='ENOENT'?'Initialize a fresh installation or start the local runtime. Do not fall back to unrestricted shell work.':undefined}));process.exitCode=1;});

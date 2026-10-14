@@ -9,6 +9,7 @@ The [typed contract](../../local-runtime/schemas/client-v1.d.ts) and executable 
 | `status`, `inspect`, `output` | Operator or scoped actor | Read only the client's allowed actor state and actual receipt. |
 | `client-info` | Authenticated client | Inspect its own server-side scope without exposing credentials. |
 | `doctor` | Operator | Inspect local capability without provider calls, account changes or spending. |
+| `diagnostics` | Operator | Return the allowlisted support-report schema, with readiness and aggregate counts; never include tokens, actor identities, task content, events or results. |
 | `create` | Operator | Add an inert role instance. |
 | `activate` | Operator, `confirm: true` | Fresh host/package binding and generation; no run grant. |
 | `client` | Operator | Issue a new actor-only client credential. Return once; keep in a 0600 file. |
@@ -39,6 +40,12 @@ The [pinned OpenClaw client](OPENCLAW_CLIENT.md) implements this path with a fre
 `examples.mjs` returns valid synthetic tasks for Agent, Evidence, Employer, Moderator and Recovery. Node input consists of the original mission, variant and **exact delivered files**, plus source actor/controller provenance and `review: "internal"`. Each specialist reuses the existing registry and formal policy. Supplied protocol snapshots are unverified data; inspection output never becomes a live action or signer request.
 
 For SUCCESSOR, complete an Agent task, then a separately authorized Node task over its exact returned files. Send `project-assemble` with `project:null`, the execution run UUID and review run UUID. Candidate assembly returns `state.active:null`. Select explicitly using `project-select`; export and restore through `project-export`/`project-import`. A corrupt or differently reviewed delivery is rejected. Concurrent project updates cannot overwrite a committed version choice: `PROJECT_CHANGED` means inspect the latest state and make a new explicit decision. There is no automatic retry. Project-count limits are enforced atomically during import. This covers only the deterministic internal-check example; it does not qualify the full live Builder → ComputeWorker → independent review journey.
+
+## Safe support reports
+
+Use **Preview support report** in the dashboard, inspect the complete JSON, then choose **Save this report**. Nothing is uploaded. The equivalent command is `node local-runtime/cli/main.mjs diagnostics`; it requires the running service and an operator credential. Scoped assistant clients cannot obtain the report.
+
+The versioned `agi-fleet/local-diagnostics/v1` report includes runtime/Node/platform versions, a bounded readiness code, STOP/pause flags and aggregate role/grant/run counts. It excludes actor names and identities, host identifiers, paths, credentials, task inputs, outputs and event history. A successful operational probe does not change physical or production qualification. Review even this limited metadata before sharing it. Do not substitute raw `status`, database files or screenshots containing credentials.
 
 ## Validation commands
 

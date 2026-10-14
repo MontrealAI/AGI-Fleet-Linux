@@ -23,6 +23,18 @@ test('real EN/FR dashboard: authenticated onboarding, keyboard, mobile reflow an
       const ready=runtime.doctor();
       if(ready.supported){await page.locator('#actors .actor').last().locator('button').first().click();await page.locator('#prepare').click();await page.locator('#grant').waitFor({state:'visible'});await page.locator('#authorize').click();await page.locator('#run').click();await page.waitForFunction(()=>document.getElementById('output').textContent.includes('"state": "complete"'));}
       else {assert.match(await page.locator('#diagnostic').textContent(),/SANDBOX_|PLATFORM_|NODE_/);assert.match(await page.locator('#readiness').innerText(),lang==='fr'?/ordinateur|installation|logiciel/:/computer|installation|software/);}
+      await page.locator('#supportPreview').click();
+      await page.locator('#supportReport').waitFor({state:'visible'});
+      const support=JSON.parse(await page.locator('#supportDetails').textContent());
+      assert.equal(support.schema,'agi-fleet/local-diagnostics/v1');
+      assert.equal(support.productionQualified,false);
+      assert.equal(JSON.stringify(support).includes(token),false);
+      assert.equal(JSON.stringify(support).includes('Public '+lang),false);
+      assert.match(await page.locator('#supportSave').textContent(),lang==='fr'?/Enregistrer/:/Save/);
+      assert.equal(await page.locator('#supportDetails').evaluate(e=>e===document.activeElement),true);
+      const download=page.waitForEvent('download');await page.locator('#supportSave').click();
+      const saved=await download;assert.equal(saved.suggestedFilename(),'fleet-local-support.json');
+      assert.deepEqual(JSON.parse(fs.readFileSync(await saved.path(),'utf8')),support);
       await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.activeElement!==document.body),true);
       const a=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();assert.deepEqual(a.violations.map(v=>({id:v.id,nodes:v.nodes.length})),[]);
       const evidence=process.env.RUNNER_TEMP&&path.join(process.env.RUNNER_TEMP,'local-dashboard-evidence');

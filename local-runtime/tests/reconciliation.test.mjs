@@ -16,10 +16,13 @@ test('offline reconciliation retains failed evidence, budget and STOP; new autho
   const f=recoveryFixture();try{
     const {a,g,run}=await uncertain(f),plan=await f.runtime.dispatch('reconciliation',{run},f.operator);
     assert.equal(plan.eligible,true);assert.equal(plan.kind,'recorded-sandbox-closure');
+    assert.equal((await f.runtime.dispatch('diagnostics',{},f.operator)).runs.uncertain,1);
     await assert.rejects(f.runtime.dispatch('reconcile',{run,commitment:plan.commitment,confirm:false},f.operator),/CONFIRM_REQUIRED/);
     const result=await f.runtime.dispatch('reconcile',{run,commitment:plan.commitment,confirm:true},f.operator);
     assert.equal(result.receipt.priorOutcome.error,'RUN_CANCELLED');assert.equal(result.receipt.authority,'none');
     assert.equal(result.receipt.disposition,'closed-without-success');assert.equal(f.runtime.store.meta('stopped'),true);
+    const report=await f.runtime.dispatch('diagnostics',{},f.operator);
+    assert.equal(report.runs.reconciled,1);assert.equal(report.runs.uncertain,0);assert.equal(report.runs.complete,0);
     assert.equal(f.runtime.store.db.prepare('SELECT COUNT(*) AS n FROM runs').get().n,1);
     assert.equal(f.runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(g.grant).state,'consumed');
     f.runtime.resume({confirm:true},f.operator);assert.throws(()=>f.prepare(a),/ACTIVATION_REQUIRED/);
