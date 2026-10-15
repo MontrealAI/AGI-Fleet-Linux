@@ -44,8 +44,8 @@ class WorkflowTests(unittest.TestCase):
         return c
 
     def test_exact_separate_source_constants_and_inert_location(self):
-        self.assertEqual(d.HARNESS_COMMIT,'6bbf81c68001bb8262f4df9e300d27b5ab8e5993')
-        self.assertEqual(d.HARNESS_TREE,'566b30a0abcad4d98af17a28447340cc81627245')
+        self.assertEqual(d.HARNESS_COMMIT,'076360c836d55ebc25d175bf3119ec88f740c1da')
+        self.assertEqual(d.HARNESS_TREE,'573430501e15cd46461a6a77ff838890a0d7ae19')
         self.assertEqual(d.RUNTIME_COMMIT,'2d5d62369d57db9abc9f622ccb4781e6cccd90d2')
         self.assertEqual(d.RUNTIME_TREE,'7c52bc0cdd85b87f2219b46b6be6caeafa136b43')
         self.assertNotEqual(d.HARNESS_COMMIT,d.RUNTIME_COMMIT)

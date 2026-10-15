@@ -25,8 +25,8 @@ import urllib.request
 
 REPOSITORY = 'MontrealAI/AGI-Fleet-Linux'
 GIT_URL = 'https://github.com/' + REPOSITORY + '.git'
-HARNESS_COMMIT = '6bbf81c68001bb8262f4df9e300d27b5ab8e5993'
-HARNESS_TREE = '566b30a0abcad4d98af17a28447340cc81627245'
+HARNESS_COMMIT = '076360c836d55ebc25d175bf3119ec88f740c1da'
+HARNESS_TREE = '573430501e15cd46461a6a77ff838890a0d7ae19'
 RUNTIME_COMMIT = '2d5d62369d57db9abc9f622ccb4781e6cccd90d2'
 RUNTIME_TREE = '7c52bc0cdd85b87f2219b46b6be6caeafa136b43'
 RELATIVE_HARNESS = Path('local-runtime/alpha/native-qualification/provision')

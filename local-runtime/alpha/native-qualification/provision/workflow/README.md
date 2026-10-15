@@ -21,9 +21,10 @@ Three independently identified checkouts are intentional:
    complete Git tree bind `implementation.json` itself. No file contains its own
    commit/hash. The helper does not invent approval from an environment boolean.
 2. **Frozen reviewed harness:** published inert PR 48 commit
-   `6bbf81c68001bb8262f4df9e300d27b5ab8e5993`, tree
-   `566b30a0abcad4d98af17a28447340cc81627245`. Its 21 harness files are byte-identical
-   to the independently reviewed `4ebd6f3` directory; its parent is exact PR 47.
+   `076360c836d55ebc25d175bf3119ec88f740c1da`, tree
+   `573430501e15cd46461a6a77ff838890a0d7ae19`. Its complete provision subtree is byte-identical
+   to independently reviewed `34e603c`, including the narrowly verified merged-PR
+   lifecycle guard. Its ancestry preserves exact PR 47; runtime source is unchanged.
 3. **Actual runtime source:** PR 47 head
    `2d5d62369d57db9abc9f622ccb4781e6cccd90d2`, tree
    `7c52bc0cdd85b87f2219b46b6be6caeafa136b43`. Its frozen expectation also requires
