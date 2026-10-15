@@ -1,6 +1,6 @@
 # Develop and reproduce AGI Fleet Linux
 
-The reviewed application source lives under `fleet/`: all six roles, shared runtime, 343 regression files, lockfiles and license notices. The **1.1.3** source identity is recorded in `engineering/next-release.json` and `fleet/source-inventory.json`. A source checkout alone is not an operator distribution.
+The reviewed application source lives under `fleet/`: all six roles, shared runtime, 344 saved-distribution regression files (including the generated current-guide test), lockfiles and license notices. The **1.1.3** source identity is recorded in `engineering/next-release.json` and `fleet/source-inventory.json`. A source checkout alone is not an operator distribution.
 
 ## Check a source change
 
@@ -40,6 +40,8 @@ Output includes `AGI_Fleet_Linux_v1.1.3.zip`, `release.json`, packaging receipts
 Linux 1.1.3 binds the AGIJobManager source revision `b12cb2fd711934562af6d14b9edcd1614956434c`, derived from 1.16.1 with the engine 2 corrections, including all 780 Manager regressions. The original upstream 1.16.1 release is unchanged. The build metadata, each evidence binding and the independent audit retain the exact target. Publication additionally rejects mixed workflow runs, a different build commit and incomplete log coverage. Historical 1.0.9 and 1.0.10 results remain unchanged.
 
 The [next-release workflow](../.github/workflows/next-release.yml) builds once and distributes the same artifact to disposable x86-64 and ARM64 runners. It runs targeted/full native suites and AGIJobManager integration separately, then rechecks retained log hashes, test-source identity, exact counts and workflow provenance. Root runtime provisioning is limited to disposable GitHub-hosted runners; do not run that harness in an operator account or on a shared workstation.
+
+The current complete native gate requires 3,931 tests across 344 files. Its reviewed count basis is the prior exact PR #39 native run `38654643431` (3,917 tests across 343 files), plus the 14 new contract-profile regressions in one file. This establishes the expected gate only: fresh complete native execution on both architectures must pass for the saved candidate. Targeted native coverage remains 291 tests across 25 files.
 
 Pull requests run all qualification jobs without publishing. On `main`, changing `engineering/next-release.json` starts a release invocation; ordinary documentation pushes do not republish the fixed tag. Manual dispatch validates only unless `publish` is explicitly selected. Publication runs only after the independent audit passes. It uploads a draft release, verifies the remote asset digests, and publishes the prerelease. Existing differing assets are rejected rather than replaced. Every file must remain below 450,000,000 bytes. A stable production release additionally requires the [physical ledger](PHYSICAL_QUALIFICATION.md), which is still open.
 

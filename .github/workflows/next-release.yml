@@ -171,8 +171,71 @@ jobs:
           path: integration-evidence/
           if-no-files-found: error
           retention-days: 90
+  profile-integration:
+    name: Saved-archive Manager 1.17 contract profile
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {runner: ubuntu-24.04, arch: x64}
+          - {runner: ubuntu-24.04-arm, arch: arm64}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    steps:
+      - *checkout
+      - *download_candidate
+      - name: Prepare hash-pinned Node and exact Manager source
+        run: |
+          set -euo pipefail
+          python3 - <<'PYCODE'
+          import os, sys
+          from pathlib import Path
+          sys.path.insert(0, 'engineering')
+          from contract_profiles import CONTRACT_PROFILES, baseline
+          root = Path(os.environ['RUNNER_TEMP']) / 'profile-tools'
+          root.mkdir()
+          node, arch = baseline.install_node(root)
+          profile = CONTRACT_PROFILES['manager-1.17.0-b7218196']
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write(f'PROFILE_NODE={node}/node\nPROFILE_NPM={node}/npm\nPROFILE_MANAGER_COMMIT={profile["commit"]}\n')
+          with open(os.environ['GITHUB_PATH'], 'a') as output:
+              output.write(str(node) + '\n')
+          PYCODE
+          mkdir "$RUNNER_TEMP/profile-manager"
+          git -C "$RUNNER_TEMP/profile-manager" init
+          git -C "$RUNNER_TEMP/profile-manager" remote add origin https://github.com/MontrealAI/AGIJobManager.git
+      - name: Build the locked Manager profile dependencies
+        run: |
+          set -euo pipefail
+          manager="$RUNNER_TEMP/profile-manager"
+          git -C "$manager" fetch --depth=1 origin "$PROFILE_MANAGER_COMMIT"
+          git -C "$manager" checkout --detach FETCH_HEAD
+          test "$(git -C "$manager" rev-parse HEAD)" = "$PROFILE_MANAGER_COMMIT"
+          cd "$manager"
+          "$PROFILE_NPM" ci --ignore-scripts --no-audit --no-fund
+          "$PROFILE_NPM" --prefix hardhat ci --ignore-scripts --no-audit --no-fund
+          "$PROFILE_NODE" scripts/security/patch-openzeppelin-compiler.cjs
+          "$PROFILE_NPM" run build
+      - name: Exercise the complete saved archive with the selected profile
+        run: |
+          python3 engineering/run-next-profile-integration.py \
+            --metadata "$GITHUB_WORKSPACE/release/release.json" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.3.zip" \
+            --work "$RUNNER_TEMP/profile-saved-work" \
+            --evidence "$RUNNER_TEMP/profile-evidence" \
+            --manager "$RUNNER_TEMP/profile-manager" --node "$PROFILE_NODE" \
+            --contract-profile manager-1.17.0-b7218196
+      - name: Retain complete archive and profile observations
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: next-profile-${{ matrix.arch }}
+          path: ${{ runner.temp }}/profile-evidence/
+          if-no-files-found: error
+          retention-days: 90
   audit:
-    needs: [build, native, integration, successor]
+    needs: [build, native, integration, profile-integration, successor]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -189,6 +252,7 @@ jobs:
             --metadata release/release.json --archive release/AGI_Fleet_Linux_v1.1.3.zip \
             --native evidence/next-native-x64 --native evidence/next-native-arm64 \
             --integration evidence/next-integration-x64 --integration evidence/next-integration-arm64 \
+            --profile evidence/next-profile-x64 --profile evidence/next-profile-arm64 \
             --successor evidence/next-successor-browser --out evidence/audit.json
           python3 engineering/publish-next-release.py --prepare-only --release-dir release --evidence-dir evidence --output publication
       - name: Retain audited publication files
@@ -201,7 +265,7 @@ jobs:
   qualification-gate:
     name: Required release qualification
     if: always()
-    needs: [build, native, integration, successor, audit]
+    needs: [build, native, integration, profile-integration, successor, audit]
     runs-on: ubuntu-24.04
     permissions:
       contents: read
@@ -213,7 +277,7 @@ jobs:
         run: python3 engineering/governance/check_children.py --needs "$CHILD_RESULTS"
   publish:
     if: ${{ !inputs.validation_only && github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish)) }}
-    needs: [build, native, integration, successor, audit, qualification-gate]
+    needs: [build, native, integration, profile-integration, successor, audit, qualification-gate]
     permissions:
       contents: write
     runs-on: ubuntu-24.04

@@ -45,6 +45,15 @@ class CandidateAdapters(unittest.TestCase):
         self.assertEqual(len(bound.NATIVE_FILES), 25)
         self.assertEqual(before, {name: shared.sha(ENGINEERING / name) for name in shared.BASELINES})
 
+    def test_native_requires_reviewed_profile_test_counts(self):
+        self.assertEqual(candidate()['native']['complete'], {'tests': 3931, 'files': 344})
+        for counts in ({'tests': 3917, 'files': 343}, {'tests': 3930, 'files': 344},
+                       {'tests': 3931, 'files': 343}, {'tests': 3932, 'files': 344}):
+            changed = candidate()
+            changed['native']['complete'] = counts
+            with self.subTest(counts=counts), self.assertRaisesRegex(ValueError, 'explicit review'):
+                native.bind_runner(changed, Path('/unused.zip'))
+
     def test_integration_binds_candidate_and_exact_manager_target(self):
         bound = integration.bind_runner(candidate())
         self.assertEqual(bound.PREFIX, candidate()['prefix'])

@@ -29,6 +29,8 @@ class PublicationNoteRaceTests(unittest.TestCase):
         audit = copy.deepcopy(self.acceptance.audit)
         audit['releaseSHA256'] = metadata['sha256']
         audit['successorAcceptance']['archiveSHA256'] = metadata['sha256']
+        for row in audit['contractProfiles']:
+            row['archiveSHA256'] = metadata['sha256']
         evidence = self.output / 'evidence.zip'; evidence.write_bytes(b'evidence fixture')
         manifest = {'workflowCommit': self.acceptance.commit, 'workflowRun': self.acceptance.run_id,
             'sha256': metadata['sha256'], 'audit': audit,

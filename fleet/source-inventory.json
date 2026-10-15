@@ -1,6 +1,6 @@
 {
   "schema": "agi-source-inventory/v1",
-  "revisionSHA256": "ed790455eb2a7ce8287f3b8105438471a6e46ef9c15647a9891406e2744c76fb",
+  "revisionSHA256": "4910db3683cf88a96c8d580544bdce4626dff27222041a811893b6333dd33769",
   "definition": "SHA256 of compact sorted-key JSON files array. Excludes docs/evidence/dependencies/historical folders/generated release metadata/root prose; complete file bytes are in MANIFEST.sha256.",
   "files": [
     {
@@ -1790,7 +1790,7 @@
     },
     {
       "path": "packages/AGI_Agent/scripts/verify-contract-artifacts.mjs",
-      "sha256": "6743e4a33fcdaff30e0f65627c37e62f01a0cd94b6f116de90ceac0413884d93",
+      "sha256": "8e8288d51e8c222b6c8366b6639a39d73df4d430720ff78db70697f8633105f4",
       "executable": false
     },
     {
@@ -2444,6 +2444,96 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/BUILD_RECEIPT.json",
+      "sha256": "c99edfd7181a0e841c15061c60883b5824675fbc18d327d5fe2f9e72651c5d78",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifact-provenance.json",
+      "sha256": "b92fa2c93be2a1078a3cfaf8b7f3d05fff9bd71c010894db8caf3ba5cb40ea76",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/AGIJobManager.json",
+      "sha256": "0b8b087b8cb98891e39a5a1d5b11752a5b641b04f8eba5c5bd34ffdb0b4c7f10",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/BondMath.json",
+      "sha256": "ccbc631a7103dd89cd9f8a88a64516144217812a25ef8060d3e1ff573b5b4d38",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ENSOwnership.json",
+      "sha256": "00ae48e3b7e9a23847d2e23933faad98ae408674b7cbfb6c1fa48c0eb339d3c6",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/FailingERC20.json",
+      "sha256": "616b90173b27b6523b7d895c13c200e15d93e559ac29a8c78c5377337fbb28ec",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobSettlement.json",
+      "sha256": "cf0ba6c9e287a45878bbfa160ca8398f4e13bb6461fceac640fd053bd62973c0",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobValidation.json",
+      "sha256": "60b4e56fbf726a1556712e192c0aa69bd91614dea6ddff1706ad28eca50e63aa",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/MockERC20.json",
+      "sha256": "64f31b163d29166ea44f40043e3f802837696e972704ddcac6332e533afd0571",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/NftEligibility.json",
+      "sha256": "e4d386ba9567afdbd13058d34a167a60881845abe91f610b0d0cb4cd18a21e6a",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ReputationMath.json",
+      "sha256": "782490d92dae04432e0371190a568c16e45e787fd9583573611a4d823b9c80eb",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/TransferUtils.json",
+      "sha256": "d2e6158f4cef94c292a031ac1f79892b0edb15bca20cd81cedb53c6fcecb1d7e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/UriUtils.json",
+      "sha256": "b2a3bc3837bc434c125488a439625f52f3df2c6a05337cb6378433d73a426cc5",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196/compiler-inputs/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.json",
+      "sha256": "32020507c14c2347344cc3883e95808bc482fdbbd0c9461d7fad9e90e8f2e3af",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.17.0-b7218196.json",
+      "sha256": "a16ca49d23b91387c727277f0cabbcfec9860734cdba47f0ccecc93e5c443df7",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
+      "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Agent/shared/runtime/package.json",
       "sha256": "c7885a52925dae70b15d46e6c6f305695d714967f3be2d05f5d4c801eb0be550",
       "executable": false
@@ -2491,6 +2581,11 @@
     {
       "path": "packages/AGI_Agent/shared/runtime/src/content.mjs",
       "sha256": "5c18b90705f8e2223da9aa1a22668074eb0bf194d90f502582621312c1269829",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/src/contract-profiles.mjs",
+      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
       "executable": false
     },
     {
@@ -2665,7 +2760,7 @@
     },
     {
       "path": "packages/AGI_Agent/src/chain.mjs",
-      "sha256": "694711926debfed8b78fcb2cba20d63ea801e1c7c0815b93d71fec00ae1c03c9",
+      "sha256": "f1a134594b1accbbb6ddd0d2c09cc78a081ca1e31fe9c5d675f5c3fd6ab8b19b",
       "executable": false
     },
     {
@@ -2675,12 +2770,17 @@
     },
     {
       "path": "packages/AGI_Agent/src/config.mjs",
-      "sha256": "f5561aec8619da4840ab2e088b6d08e3eb22397a077300977b34cb1660f13686",
+      "sha256": "799585ad2fd49cf22e3fee474b160b98df7df972432b780ff58d4258c40ab795",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/src/content.mjs",
       "sha256": "25bb8f18141f58ac419ba156ced707b5a51e8dad94609e705f025eceb1d6fbd9",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/src/contract-profiles.mjs",
+      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
       "executable": false
     },
     {
@@ -5485,7 +5585,7 @@
     },
     {
       "path": "packages/AGI_Employer/packages/AGI_Agent/src/chain.mjs",
-      "sha256": "694711926debfed8b78fcb2cba20d63ea801e1c7c0815b93d71fec00ae1c03c9",
+      "sha256": "f1a134594b1accbbb6ddd0d2c09cc78a081ca1e31fe9c5d675f5c3fd6ab8b19b",
       "executable": false
     },
     {
@@ -5495,12 +5595,17 @@
     },
     {
       "path": "packages/AGI_Employer/packages/AGI_Agent/src/config.mjs",
-      "sha256": "f5561aec8619da4840ab2e088b6d08e3eb22397a077300977b34cb1660f13686",
+      "sha256": "799585ad2fd49cf22e3fee474b160b98df7df972432b780ff58d4258c40ab795",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/packages/AGI_Agent/src/content.mjs",
       "sha256": "25bb8f18141f58ac419ba156ced707b5a51e8dad94609e705f025eceb1d6fbd9",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/packages/AGI_Agent/src/contract-profiles.mjs",
+      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
       "executable": false
     },
     {
@@ -6345,7 +6450,7 @@
     },
     {
       "path": "packages/AGI_Employer/packages/AGI_Node/src/chain.mjs",
-      "sha256": "1dff37c56ec30e235476352b12daebf34384c3092fb8b2543a48d6ec396f8da8",
+      "sha256": "c8d6b4891d02773af1e18a4f0239b2520147ea170e9277850bf141edc269371f",
       "executable": false
     },
     {
@@ -6360,12 +6465,17 @@
     },
     {
       "path": "packages/AGI_Employer/packages/AGI_Node/src/config.mjs",
-      "sha256": "14a996e8412be8dfbc7140536d39b7e22a55f530fa1cc2660162009fd40c2b5f",
+      "sha256": "a96203319ef5de147ea57b54518140acc89c5c6d851b105e3ff15ebe829fcde8",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/packages/AGI_Node/src/content.mjs",
       "sha256": "32c9ef43e42166d49245011462f403dead3d418bfdd988d1f8ec957e735121de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/packages/AGI_Node/src/contract-profiles.mjs",
+      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
       "executable": false
     },
     {
@@ -7205,7 +7315,7 @@
     },
     {
       "path": "packages/AGI_Employer/shared/operator/ops/config.mjs",
-      "sha256": "2eb1797b76cc62638b01572a240021f6fe3a34a6e42f62b9be2b81cb8eef67ac",
+      "sha256": "0ed659769a51059cecd87ca5b9e97fa8be40017aed141914981dc57bc0983e14",
       "executable": false
     },
     {
@@ -8064,6 +8174,96 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/BUILD_RECEIPT.json",
+      "sha256": "c99edfd7181a0e841c15061c60883b5824675fbc18d327d5fe2f9e72651c5d78",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifact-provenance.json",
+      "sha256": "b92fa2c93be2a1078a3cfaf8b7f3d05fff9bd71c010894db8caf3ba5cb40ea76",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/AGIJobManager.json",
+      "sha256": "0b8b087b8cb98891e39a5a1d5b11752a5b641b04f8eba5c5bd34ffdb0b4c7f10",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/BondMath.json",
+      "sha256": "ccbc631a7103dd89cd9f8a88a64516144217812a25ef8060d3e1ff573b5b4d38",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ENSOwnership.json",
+      "sha256": "00ae48e3b7e9a23847d2e23933faad98ae408674b7cbfb6c1fa48c0eb339d3c6",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/FailingERC20.json",
+      "sha256": "616b90173b27b6523b7d895c13c200e15d93e559ac29a8c78c5377337fbb28ec",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobSettlement.json",
+      "sha256": "cf0ba6c9e287a45878bbfa160ca8398f4e13bb6461fceac640fd053bd62973c0",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobValidation.json",
+      "sha256": "60b4e56fbf726a1556712e192c0aa69bd91614dea6ddff1706ad28eca50e63aa",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/MockERC20.json",
+      "sha256": "64f31b163d29166ea44f40043e3f802837696e972704ddcac6332e533afd0571",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/NftEligibility.json",
+      "sha256": "e4d386ba9567afdbd13058d34a167a60881845abe91f610b0d0cb4cd18a21e6a",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ReputationMath.json",
+      "sha256": "782490d92dae04432e0371190a568c16e45e787fd9583573611a4d823b9c80eb",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/TransferUtils.json",
+      "sha256": "d2e6158f4cef94c292a031ac1f79892b0edb15bca20cd81cedb53c6fcecb1d7e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/UriUtils.json",
+      "sha256": "b2a3bc3837bc434c125488a439625f52f3df2c6a05337cb6378433d73a426cc5",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196/compiler-inputs/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.json",
+      "sha256": "32020507c14c2347344cc3883e95808bc482fdbbd0c9461d7fad9e90e8f2e3af",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.17.0-b7218196.json",
+      "sha256": "a16ca49d23b91387c727277f0cabbcfec9860734cdba47f0ccecc93e5c443df7",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
+      "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Employer/shared/runtime/package.json",
       "sha256": "c7885a52925dae70b15d46e6c6f305695d714967f3be2d05f5d4c801eb0be550",
       "executable": false
@@ -8111,6 +8311,11 @@
     {
       "path": "packages/AGI_Employer/shared/runtime/src/content.mjs",
       "sha256": "5c18b90705f8e2223da9aa1a22668074eb0bf194d90f502582621312c1269829",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/src/contract-profiles.mjs",
+      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
       "executable": false
     },
     {
@@ -8285,7 +8490,7 @@
     },
     {
       "path": "packages/AGI_Employer/src/chain.mjs",
-      "sha256": "1dff37c56ec30e235476352b12daebf34384c3092fb8b2543a48d6ec396f8da8",
+      "sha256": "c8d6b4891d02773af1e18a4f0239b2520147ea170e9277850bf141edc269371f",
       "executable": false
     },
     {
@@ -8300,12 +8505,17 @@
     },
     {
       "path": "packages/AGI_Employer/src/config.mjs",
-      "sha256": "14a996e8412be8dfbc7140536d39b7e22a55f530fa1cc2660162009fd40c2b5f",
+      "sha256": "a96203319ef5de147ea57b54518140acc89c5c6d851b105e3ff15ebe829fcde8",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/src/content.mjs",
       "sha256": "32c9ef43e42166d49245011462f403dead3d418bfdd988d1f8ec957e735121de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/src/contract-profiles.mjs",
+      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
       "executable": false
     },
     {
@@ -10425,7 +10635,7 @@
     },
     {
       "path": "packages/AGI_Evidence/packages/AGI_Agent/src/chain.mjs",
-      "sha256": "694711926debfed8b78fcb2cba20d63ea801e1c7c0815b93d71fec00ae1c03c9",
+      "sha256": "f1a134594b1accbbb6ddd0d2c09cc78a081ca1e31fe9c5d675f5c3fd6ab8b19b",
       "executable": false
     },
     {
@@ -10435,12 +10645,17 @@
     },
     {
       "path": "packages/AGI_Evidence/packages/AGI_Agent/src/config.mjs",
-      "sha256": "f5561aec8619da4840ab2e088b6d08e3eb22397a077300977b34cb1660f13686",
+      "sha256": "799585ad2fd49cf22e3fee474b160b98df7df972432b780ff58d4258c40ab795",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/packages/AGI_Agent/src/content.mjs",
       "sha256": "25bb8f18141f58ac419ba156ced707b5a51e8dad94609e705f025eceb1d6fbd9",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/packages/AGI_Agent/src/contract-profiles.mjs",
+      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
       "executable": false
     },
     {
@@ -11285,7 +11500,7 @@
     },
     {
       "path": "packages/AGI_Evidence/packages/AGI_Node/src/chain.mjs",
-      "sha256": "1dff37c56ec30e235476352b12daebf34384c3092fb8b2543a48d6ec396f8da8",
+      "sha256": "c8d6b4891d02773af1e18a4f0239b2520147ea170e9277850bf141edc269371f",
       "executable": false
     },
     {
@@ -11300,12 +11515,17 @@
     },
     {
       "path": "packages/AGI_Evidence/packages/AGI_Node/src/config.mjs",
-      "sha256": "14a996e8412be8dfbc7140536d39b7e22a55f530fa1cc2660162009fd40c2b5f",
+      "sha256": "a96203319ef5de147ea57b54518140acc89c5c6d851b105e3ff15ebe829fcde8",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/packages/AGI_Node/src/content.mjs",
       "sha256": "32c9ef43e42166d49245011462f403dead3d418bfdd988d1f8ec957e735121de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/packages/AGI_Node/src/contract-profiles.mjs",
+      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
       "executable": false
     },
     {
@@ -12145,7 +12365,7 @@
     },
     {
       "path": "packages/AGI_Evidence/shared/operator/ops/config.mjs",
-      "sha256": "2eb1797b76cc62638b01572a240021f6fe3a34a6e42f62b9be2b81cb8eef67ac",
+      "sha256": "0ed659769a51059cecd87ca5b9e97fa8be40017aed141914981dc57bc0983e14",
       "executable": false
     },
     {
@@ -13004,6 +13224,96 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/BUILD_RECEIPT.json",
+      "sha256": "c99edfd7181a0e841c15061c60883b5824675fbc18d327d5fe2f9e72651c5d78",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifact-provenance.json",
+      "sha256": "b92fa2c93be2a1078a3cfaf8b7f3d05fff9bd71c010894db8caf3ba5cb40ea76",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/AGIJobManager.json",
+      "sha256": "0b8b087b8cb98891e39a5a1d5b11752a5b641b04f8eba5c5bd34ffdb0b4c7f10",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/BondMath.json",
+      "sha256": "ccbc631a7103dd89cd9f8a88a64516144217812a25ef8060d3e1ff573b5b4d38",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ENSOwnership.json",
+      "sha256": "00ae48e3b7e9a23847d2e23933faad98ae408674b7cbfb6c1fa48c0eb339d3c6",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/FailingERC20.json",
+      "sha256": "616b90173b27b6523b7d895c13c200e15d93e559ac29a8c78c5377337fbb28ec",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobSettlement.json",
+      "sha256": "cf0ba6c9e287a45878bbfa160ca8398f4e13bb6461fceac640fd053bd62973c0",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobValidation.json",
+      "sha256": "60b4e56fbf726a1556712e192c0aa69bd91614dea6ddff1706ad28eca50e63aa",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/MockERC20.json",
+      "sha256": "64f31b163d29166ea44f40043e3f802837696e972704ddcac6332e533afd0571",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/NftEligibility.json",
+      "sha256": "e4d386ba9567afdbd13058d34a167a60881845abe91f610b0d0cb4cd18a21e6a",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ReputationMath.json",
+      "sha256": "782490d92dae04432e0371190a568c16e45e787fd9583573611a4d823b9c80eb",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/TransferUtils.json",
+      "sha256": "d2e6158f4cef94c292a031ac1f79892b0edb15bca20cd81cedb53c6fcecb1d7e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/UriUtils.json",
+      "sha256": "b2a3bc3837bc434c125488a439625f52f3df2c6a05337cb6378433d73a426cc5",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196/compiler-inputs/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.json",
+      "sha256": "32020507c14c2347344cc3883e95808bc482fdbbd0c9461d7fad9e90e8f2e3af",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.17.0-b7218196.json",
+      "sha256": "a16ca49d23b91387c727277f0cabbcfec9860734cdba47f0ccecc93e5c443df7",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
+      "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Evidence/shared/runtime/package.json",
       "sha256": "c7885a52925dae70b15d46e6c6f305695d714967f3be2d05f5d4c801eb0be550",
       "executable": false
@@ -13051,6 +13361,11 @@
     {
       "path": "packages/AGI_Evidence/shared/runtime/src/content.mjs",
       "sha256": "5c18b90705f8e2223da9aa1a22668074eb0bf194d90f502582621312c1269829",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/src/contract-profiles.mjs",
+      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
       "executable": false
     },
     {
@@ -13225,7 +13540,7 @@
     },
     {
       "path": "packages/AGI_Evidence/src/chain.mjs",
-      "sha256": "1dff37c56ec30e235476352b12daebf34384c3092fb8b2543a48d6ec396f8da8",
+      "sha256": "c8d6b4891d02773af1e18a4f0239b2520147ea170e9277850bf141edc269371f",
       "executable": false
     },
     {
@@ -13240,12 +13555,17 @@
     },
     {
       "path": "packages/AGI_Evidence/src/config.mjs",
-      "sha256": "14a996e8412be8dfbc7140536d39b7e22a55f530fa1cc2660162009fd40c2b5f",
+      "sha256": "a96203319ef5de147ea57b54518140acc89c5c6d851b105e3ff15ebe829fcde8",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/src/content.mjs",
       "sha256": "32c9ef43e42166d49245011462f403dead3d418bfdd988d1f8ec957e735121de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/src/contract-profiles.mjs",
+      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
       "executable": false
     },
     {
@@ -15370,7 +15690,7 @@
     },
     {
       "path": "packages/AGI_Moderator/packages/AGI_Agent/src/chain.mjs",
-      "sha256": "694711926debfed8b78fcb2cba20d63ea801e1c7c0815b93d71fec00ae1c03c9",
+      "sha256": "f1a134594b1accbbb6ddd0d2c09cc78a081ca1e31fe9c5d675f5c3fd6ab8b19b",
       "executable": false
     },
     {
@@ -15380,12 +15700,17 @@
     },
     {
       "path": "packages/AGI_Moderator/packages/AGI_Agent/src/config.mjs",
-      "sha256": "f5561aec8619da4840ab2e088b6d08e3eb22397a077300977b34cb1660f13686",
+      "sha256": "799585ad2fd49cf22e3fee474b160b98df7df972432b780ff58d4258c40ab795",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/packages/AGI_Agent/src/content.mjs",
       "sha256": "25bb8f18141f58ac419ba156ced707b5a51e8dad94609e705f025eceb1d6fbd9",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/packages/AGI_Agent/src/contract-profiles.mjs",
+      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
       "executable": false
     },
     {
@@ -16230,7 +16555,7 @@
     },
     {
       "path": "packages/AGI_Moderator/packages/AGI_Node/src/chain.mjs",
-      "sha256": "1dff37c56ec30e235476352b12daebf34384c3092fb8b2543a48d6ec396f8da8",
+      "sha256": "c8d6b4891d02773af1e18a4f0239b2520147ea170e9277850bf141edc269371f",
       "executable": false
     },
     {
@@ -16245,12 +16570,17 @@
     },
     {
       "path": "packages/AGI_Moderator/packages/AGI_Node/src/config.mjs",
-      "sha256": "14a996e8412be8dfbc7140536d39b7e22a55f530fa1cc2660162009fd40c2b5f",
+      "sha256": "a96203319ef5de147ea57b54518140acc89c5c6d851b105e3ff15ebe829fcde8",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/packages/AGI_Node/src/content.mjs",
       "sha256": "32c9ef43e42166d49245011462f403dead3d418bfdd988d1f8ec957e735121de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/packages/AGI_Node/src/contract-profiles.mjs",
+      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
       "executable": false
     },
     {
@@ -17090,7 +17420,7 @@
     },
     {
       "path": "packages/AGI_Moderator/shared/operator/ops/config.mjs",
-      "sha256": "2eb1797b76cc62638b01572a240021f6fe3a34a6e42f62b9be2b81cb8eef67ac",
+      "sha256": "0ed659769a51059cecd87ca5b9e97fa8be40017aed141914981dc57bc0983e14",
       "executable": false
     },
     {
@@ -17949,6 +18279,96 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/BUILD_RECEIPT.json",
+      "sha256": "c99edfd7181a0e841c15061c60883b5824675fbc18d327d5fe2f9e72651c5d78",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifact-provenance.json",
+      "sha256": "b92fa2c93be2a1078a3cfaf8b7f3d05fff9bd71c010894db8caf3ba5cb40ea76",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/AGIJobManager.json",
+      "sha256": "0b8b087b8cb98891e39a5a1d5b11752a5b641b04f8eba5c5bd34ffdb0b4c7f10",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/BondMath.json",
+      "sha256": "ccbc631a7103dd89cd9f8a88a64516144217812a25ef8060d3e1ff573b5b4d38",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ENSOwnership.json",
+      "sha256": "00ae48e3b7e9a23847d2e23933faad98ae408674b7cbfb6c1fa48c0eb339d3c6",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/FailingERC20.json",
+      "sha256": "616b90173b27b6523b7d895c13c200e15d93e559ac29a8c78c5377337fbb28ec",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobSettlement.json",
+      "sha256": "cf0ba6c9e287a45878bbfa160ca8398f4e13bb6461fceac640fd053bd62973c0",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobValidation.json",
+      "sha256": "60b4e56fbf726a1556712e192c0aa69bd91614dea6ddff1706ad28eca50e63aa",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/MockERC20.json",
+      "sha256": "64f31b163d29166ea44f40043e3f802837696e972704ddcac6332e533afd0571",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/NftEligibility.json",
+      "sha256": "e4d386ba9567afdbd13058d34a167a60881845abe91f610b0d0cb4cd18a21e6a",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ReputationMath.json",
+      "sha256": "782490d92dae04432e0371190a568c16e45e787fd9583573611a4d823b9c80eb",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/TransferUtils.json",
+      "sha256": "d2e6158f4cef94c292a031ac1f79892b0edb15bca20cd81cedb53c6fcecb1d7e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/UriUtils.json",
+      "sha256": "b2a3bc3837bc434c125488a439625f52f3df2c6a05337cb6378433d73a426cc5",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196/compiler-inputs/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.json",
+      "sha256": "32020507c14c2347344cc3883e95808bc482fdbbd0c9461d7fad9e90e8f2e3af",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.17.0-b7218196.json",
+      "sha256": "a16ca49d23b91387c727277f0cabbcfec9860734cdba47f0ccecc93e5c443df7",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
+      "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Moderator/shared/runtime/package.json",
       "sha256": "c7885a52925dae70b15d46e6c6f305695d714967f3be2d05f5d4c801eb0be550",
       "executable": false
@@ -17996,6 +18416,11 @@
     {
       "path": "packages/AGI_Moderator/shared/runtime/src/content.mjs",
       "sha256": "5c18b90705f8e2223da9aa1a22668074eb0bf194d90f502582621312c1269829",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/src/contract-profiles.mjs",
+      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
       "executable": false
     },
     {
@@ -18170,7 +18595,7 @@
     },
     {
       "path": "packages/AGI_Moderator/src/chain.mjs",
-      "sha256": "1dff37c56ec30e235476352b12daebf34384c3092fb8b2543a48d6ec396f8da8",
+      "sha256": "c8d6b4891d02773af1e18a4f0239b2520147ea170e9277850bf141edc269371f",
       "executable": false
     },
     {
@@ -18185,12 +18610,17 @@
     },
     {
       "path": "packages/AGI_Moderator/src/config.mjs",
-      "sha256": "14a996e8412be8dfbc7140536d39b7e22a55f530fa1cc2660162009fd40c2b5f",
+      "sha256": "a96203319ef5de147ea57b54518140acc89c5c6d851b105e3ff15ebe829fcde8",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/src/content.mjs",
       "sha256": "32c9ef43e42166d49245011462f403dead3d418bfdd988d1f8ec957e735121de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/src/contract-profiles.mjs",
+      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
       "executable": false
     },
     {
@@ -20515,7 +20945,7 @@
     },
     {
       "path": "packages/AGI_Node/scripts/verify-contract-artifacts.mjs",
-      "sha256": "6743e4a33fcdaff30e0f65627c37e62f01a0cd94b6f116de90ceac0413884d93",
+      "sha256": "8e8288d51e8c222b6c8366b6639a39d73df4d430720ff78db70697f8633105f4",
       "executable": false
     },
     {
@@ -21169,6 +21599,96 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/BUILD_RECEIPT.json",
+      "sha256": "c99edfd7181a0e841c15061c60883b5824675fbc18d327d5fe2f9e72651c5d78",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifact-provenance.json",
+      "sha256": "b92fa2c93be2a1078a3cfaf8b7f3d05fff9bd71c010894db8caf3ba5cb40ea76",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/AGIJobManager.json",
+      "sha256": "0b8b087b8cb98891e39a5a1d5b11752a5b641b04f8eba5c5bd34ffdb0b4c7f10",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/BondMath.json",
+      "sha256": "ccbc631a7103dd89cd9f8a88a64516144217812a25ef8060d3e1ff573b5b4d38",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ENSOwnership.json",
+      "sha256": "00ae48e3b7e9a23847d2e23933faad98ae408674b7cbfb6c1fa48c0eb339d3c6",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/FailingERC20.json",
+      "sha256": "616b90173b27b6523b7d895c13c200e15d93e559ac29a8c78c5377337fbb28ec",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobSettlement.json",
+      "sha256": "cf0ba6c9e287a45878bbfa160ca8398f4e13bb6461fceac640fd053bd62973c0",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobValidation.json",
+      "sha256": "60b4e56fbf726a1556712e192c0aa69bd91614dea6ddff1706ad28eca50e63aa",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/MockERC20.json",
+      "sha256": "64f31b163d29166ea44f40043e3f802837696e972704ddcac6332e533afd0571",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/NftEligibility.json",
+      "sha256": "e4d386ba9567afdbd13058d34a167a60881845abe91f610b0d0cb4cd18a21e6a",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ReputationMath.json",
+      "sha256": "782490d92dae04432e0371190a568c16e45e787fd9583573611a4d823b9c80eb",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/TransferUtils.json",
+      "sha256": "d2e6158f4cef94c292a031ac1f79892b0edb15bca20cd81cedb53c6fcecb1d7e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/UriUtils.json",
+      "sha256": "b2a3bc3837bc434c125488a439625f52f3df2c6a05337cb6378433d73a426cc5",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196/compiler-inputs/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.json",
+      "sha256": "32020507c14c2347344cc3883e95808bc482fdbbd0c9461d7fad9e90e8f2e3af",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.17.0-b7218196.json",
+      "sha256": "a16ca49d23b91387c727277f0cabbcfec9860734cdba47f0ccecc93e5c443df7",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
+      "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Node/shared/runtime/package.json",
       "sha256": "c7885a52925dae70b15d46e6c6f305695d714967f3be2d05f5d4c801eb0be550",
       "executable": false
@@ -21216,6 +21736,11 @@
     {
       "path": "packages/AGI_Node/shared/runtime/src/content.mjs",
       "sha256": "5c18b90705f8e2223da9aa1a22668074eb0bf194d90f502582621312c1269829",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/src/contract-profiles.mjs",
+      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
       "executable": false
     },
     {
@@ -21390,7 +21915,7 @@
     },
     {
       "path": "packages/AGI_Node/src/chain.mjs",
-      "sha256": "1dff37c56ec30e235476352b12daebf34384c3092fb8b2543a48d6ec396f8da8",
+      "sha256": "c8d6b4891d02773af1e18a4f0239b2520147ea170e9277850bf141edc269371f",
       "executable": false
     },
     {
@@ -21405,12 +21930,17 @@
     },
     {
       "path": "packages/AGI_Node/src/config.mjs",
-      "sha256": "14a996e8412be8dfbc7140536d39b7e22a55f530fa1cc2660162009fd40c2b5f",
+      "sha256": "a96203319ef5de147ea57b54518140acc89c5c6d851b105e3ff15ebe829fcde8",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/src/content.mjs",
       "sha256": "32c9ef43e42166d49245011462f403dead3d418bfdd988d1f8ec957e735121de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/src/contract-profiles.mjs",
+      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
       "executable": false
     },
     {
@@ -24255,7 +24785,7 @@
     },
     {
       "path": "packages/AGI_Recovery/packages/AGI_Agent/src/chain.mjs",
-      "sha256": "694711926debfed8b78fcb2cba20d63ea801e1c7c0815b93d71fec00ae1c03c9",
+      "sha256": "f1a134594b1accbbb6ddd0d2c09cc78a081ca1e31fe9c5d675f5c3fd6ab8b19b",
       "executable": false
     },
     {
@@ -24265,12 +24795,17 @@
     },
     {
       "path": "packages/AGI_Recovery/packages/AGI_Agent/src/config.mjs",
-      "sha256": "f5561aec8619da4840ab2e088b6d08e3eb22397a077300977b34cb1660f13686",
+      "sha256": "799585ad2fd49cf22e3fee474b160b98df7df972432b780ff58d4258c40ab795",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/packages/AGI_Agent/src/content.mjs",
       "sha256": "25bb8f18141f58ac419ba156ced707b5a51e8dad94609e705f025eceb1d6fbd9",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/packages/AGI_Agent/src/contract-profiles.mjs",
+      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
       "executable": false
     },
     {
@@ -25115,7 +25650,7 @@
     },
     {
       "path": "packages/AGI_Recovery/packages/AGI_Node/src/chain.mjs",
-      "sha256": "1dff37c56ec30e235476352b12daebf34384c3092fb8b2543a48d6ec396f8da8",
+      "sha256": "c8d6b4891d02773af1e18a4f0239b2520147ea170e9277850bf141edc269371f",
       "executable": false
     },
     {
@@ -25130,12 +25665,17 @@
     },
     {
       "path": "packages/AGI_Recovery/packages/AGI_Node/src/config.mjs",
-      "sha256": "14a996e8412be8dfbc7140536d39b7e22a55f530fa1cc2660162009fd40c2b5f",
+      "sha256": "a96203319ef5de147ea57b54518140acc89c5c6d851b105e3ff15ebe829fcde8",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/packages/AGI_Node/src/content.mjs",
       "sha256": "32c9ef43e42166d49245011462f403dead3d418bfdd988d1f8ec957e735121de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/packages/AGI_Node/src/contract-profiles.mjs",
+      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
       "executable": false
     },
     {
@@ -25975,7 +26515,7 @@
     },
     {
       "path": "packages/AGI_Recovery/shared/operator/ops/config.mjs",
-      "sha256": "2eb1797b76cc62638b01572a240021f6fe3a34a6e42f62b9be2b81cb8eef67ac",
+      "sha256": "0ed659769a51059cecd87ca5b9e97fa8be40017aed141914981dc57bc0983e14",
       "executable": false
     },
     {
@@ -26834,6 +27374,96 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/BUILD_RECEIPT.json",
+      "sha256": "c99edfd7181a0e841c15061c60883b5824675fbc18d327d5fe2f9e72651c5d78",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifact-provenance.json",
+      "sha256": "b92fa2c93be2a1078a3cfaf8b7f3d05fff9bd71c010894db8caf3ba5cb40ea76",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/AGIJobManager.json",
+      "sha256": "0b8b087b8cb98891e39a5a1d5b11752a5b641b04f8eba5c5bd34ffdb0b4c7f10",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/BondMath.json",
+      "sha256": "ccbc631a7103dd89cd9f8a88a64516144217812a25ef8060d3e1ff573b5b4d38",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ENSOwnership.json",
+      "sha256": "00ae48e3b7e9a23847d2e23933faad98ae408674b7cbfb6c1fa48c0eb339d3c6",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/FailingERC20.json",
+      "sha256": "616b90173b27b6523b7d895c13c200e15d93e559ac29a8c78c5377337fbb28ec",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobSettlement.json",
+      "sha256": "cf0ba6c9e287a45878bbfa160ca8398f4e13bb6461fceac640fd053bd62973c0",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobValidation.json",
+      "sha256": "60b4e56fbf726a1556712e192c0aa69bd91614dea6ddff1706ad28eca50e63aa",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/MockERC20.json",
+      "sha256": "64f31b163d29166ea44f40043e3f802837696e972704ddcac6332e533afd0571",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/NftEligibility.json",
+      "sha256": "e4d386ba9567afdbd13058d34a167a60881845abe91f610b0d0cb4cd18a21e6a",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ReputationMath.json",
+      "sha256": "782490d92dae04432e0371190a568c16e45e787fd9583573611a4d823b9c80eb",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/TransferUtils.json",
+      "sha256": "d2e6158f4cef94c292a031ac1f79892b0edb15bca20cd81cedb53c6fcecb1d7e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/UriUtils.json",
+      "sha256": "b2a3bc3837bc434c125488a439625f52f3df2c6a05337cb6378433d73a426cc5",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196/compiler-inputs/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.json",
+      "sha256": "32020507c14c2347344cc3883e95808bc482fdbbd0c9461d7fad9e90e8f2e3af",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.17.0-b7218196.json",
+      "sha256": "a16ca49d23b91387c727277f0cabbcfec9860734cdba47f0ccecc93e5c443df7",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
+      "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Recovery/shared/runtime/package.json",
       "sha256": "c7885a52925dae70b15d46e6c6f305695d714967f3be2d05f5d4c801eb0be550",
       "executable": false
@@ -26881,6 +27511,11 @@
     {
       "path": "packages/AGI_Recovery/shared/runtime/src/content.mjs",
       "sha256": "5c18b90705f8e2223da9aa1a22668074eb0bf194d90f502582621312c1269829",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/src/contract-profiles.mjs",
+      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
       "executable": false
     },
     {
@@ -27055,7 +27690,7 @@
     },
     {
       "path": "packages/AGI_Recovery/src/chain.mjs",
-      "sha256": "1dff37c56ec30e235476352b12daebf34384c3092fb8b2543a48d6ec396f8da8",
+      "sha256": "c8d6b4891d02773af1e18a4f0239b2520147ea170e9277850bf141edc269371f",
       "executable": false
     },
     {
@@ -27070,12 +27705,17 @@
     },
     {
       "path": "packages/AGI_Recovery/src/config.mjs",
-      "sha256": "14a996e8412be8dfbc7140536d39b7e22a55f530fa1cc2660162009fd40c2b5f",
+      "sha256": "a96203319ef5de147ea57b54518140acc89c5c6d851b105e3ff15ebe829fcde8",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/src/content.mjs",
       "sha256": "32c9ef43e42166d49245011462f403dead3d418bfdd988d1f8ec957e735121de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/src/contract-profiles.mjs",
+      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
       "executable": false
     },
     {
@@ -28134,6 +28774,11 @@
       "executable": true
     },
     {
+      "path": "scripts/sync-contract-profiles.py",
+      "sha256": "af3279afc554f31522bb332a3f3db0e5b99cee188e7608ed072a9b5a722e9f65",
+      "executable": false
+    },
+    {
       "path": "scripts/sync-release-tools.py",
       "sha256": "98d1eacec0da27e71c516303d7f82a3d890d9a64b3764bafe0eae57529fece0f",
       "executable": false
@@ -28185,7 +28830,7 @@
     },
     {
       "path": "shared/operator/ops/config.mjs",
-      "sha256": "2eb1797b76cc62638b01572a240021f6fe3a34a6e42f62b9be2b81cb8eef67ac",
+      "sha256": "0ed659769a51059cecd87ca5b9e97fa8be40017aed141914981dc57bc0983e14",
       "executable": false
     },
     {
@@ -29044,6 +29689,96 @@
       "executable": false
     },
     {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/BUILD_RECEIPT.json",
+      "sha256": "c99edfd7181a0e841c15061c60883b5824675fbc18d327d5fe2f9e72651c5d78",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifact-provenance.json",
+      "sha256": "b92fa2c93be2a1078a3cfaf8b7f3d05fff9bd71c010894db8caf3ba5cb40ea76",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/AGIJobManager.json",
+      "sha256": "0b8b087b8cb98891e39a5a1d5b11752a5b641b04f8eba5c5bd34ffdb0b4c7f10",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/BondMath.json",
+      "sha256": "ccbc631a7103dd89cd9f8a88a64516144217812a25ef8060d3e1ff573b5b4d38",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ENSOwnership.json",
+      "sha256": "00ae48e3b7e9a23847d2e23933faad98ae408674b7cbfb6c1fa48c0eb339d3c6",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/FailingERC20.json",
+      "sha256": "616b90173b27b6523b7d895c13c200e15d93e559ac29a8c78c5377337fbb28ec",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobSettlement.json",
+      "sha256": "cf0ba6c9e287a45878bbfa160ca8398f4e13bb6461fceac640fd053bd62973c0",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/JobValidation.json",
+      "sha256": "60b4e56fbf726a1556712e192c0aa69bd91614dea6ddff1706ad28eca50e63aa",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/MockERC20.json",
+      "sha256": "64f31b163d29166ea44f40043e3f802837696e972704ddcac6332e533afd0571",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/NftEligibility.json",
+      "sha256": "e4d386ba9567afdbd13058d34a167a60881845abe91f610b0d0cb4cd18a21e6a",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/ReputationMath.json",
+      "sha256": "782490d92dae04432e0371190a568c16e45e787fd9583573611a4d823b9c80eb",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/TransferUtils.json",
+      "sha256": "d2e6158f4cef94c292a031ac1f79892b0edb15bca20cd81cedb53c6fcecb1d7e",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/artifacts/UriUtils.json",
+      "sha256": "b2a3bc3837bc434c125488a439625f52f3df2c6a05337cb6378433d73a426cc5",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196/compiler-inputs/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.json",
+      "sha256": "32020507c14c2347344cc3883e95808bc482fdbbd0c9461d7fad9e90e8f2e3af",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.17.0-b7218196.json",
+      "sha256": "a16ca49d23b91387c727277f0cabbcfec9860734cdba47f0ccecc93e5c443df7",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-legacy-db876a8.json",
+      "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
+      "executable": false
+    },
+    {
       "path": "shared/runtime/package.json",
       "sha256": "c7885a52925dae70b15d46e6c6f305695d714967f3be2d05f5d4c801eb0be550",
       "executable": false
@@ -29094,6 +29829,11 @@
       "executable": false
     },
     {
+      "path": "shared/runtime/src/contract-profiles.mjs",
+      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
+      "executable": false
+    },
+    {
       "path": "shared/runtime/src/control/system-preflight.mjs",
       "sha256": "1d411edb5d69120ce13f86706d106bfe6399074d48ec3a6f95daaeb441fe5a49",
       "executable": false
@@ -29135,7 +29875,7 @@
     },
     {
       "path": "shared/runtime-inventory.json",
-      "sha256": "149db6ee150a6f8c99ed18cabedecd9cf6c6d32d9806d64e3281d38a2cdf2664",
+      "sha256": "9199638fe3255fe87a48994c9cae0b0dde54e650de43af9cf1399476fdbbbb5a",
       "executable": false
     },
     {
@@ -29606,6 +30346,11 @@
     {
       "path": "tests/compute-identity-browser.mjs",
       "sha256": "b867fd86384b074ba320d938116073b3082a987feddf986542ba366418ec793c",
+      "executable": false
+    },
+    {
+      "path": "tests/contract-profiles.test.mjs",
+      "sha256": "a741a49cdb21613343ff83f1a9437378c6928703cbd0c361bc2b79e24f996c69",
       "executable": false
     },
     {

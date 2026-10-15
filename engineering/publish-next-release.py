@@ -13,6 +13,7 @@ import zipfile
 
 from release_tools import ROOT, REPOSITORY, LIMIT, require, sha
 from release_note_links import render_release_note_links
+from contract_profiles import CONTRACT_PROFILES
 
 
 def load(path):
@@ -76,6 +77,24 @@ def validate(metadata, audit, commit):
                         and run.get('verifiedLogs') == 19,
                         'Integration acceptance count differs')
                 integration_logs += run['verifiedLogs']
+    profiles = audit.get('contractProfiles', [])
+    profile_id = 'manager-1.17.0-b7218196'
+    profile = CONTRACT_PROFILES[profile_id]
+    require(len(profiles) == 2 and {row.get('architecture') for row in profiles} == {'x64', 'arm64'},
+            'Both saved-archive contract-profile architectures are required')
+    for row in profiles:
+        require(row.get('status') == 'PASS' and row.get('productionQualified') is False
+                and row.get('workflowCommit') == commit and str(row.get('workflowRun')) == run_id
+                and row.get('archiveSHA256') == metadata['sha256']
+                and row.get('sourceRevisionSHA256') == metadata['sourceRevisionSHA256']
+                and row.get('profile') == profile_id
+                and row.get('profileManifestSHA256') == profile['manifestSHA256']
+                and row.get('managerCommit') == profile['commit']
+                and row.get('managerTestsPassed') == profile['managerTests']
+                and row.get('standaloneIntegrationScripts') == 8
+                and row.get('contractArtifactsMatched') == 11
+                and row.get('verifiedLogs') == 12 and row.get('completeArchiveUnchanged') is True,
+                'Saved-archive contract-profile acceptance differs')
     require(audit.get('verifiedTapLogs') == native_logs and audit.get('verifiedIntegrationLogs') == integration_logs,
             'Audit log coverage differs')
 

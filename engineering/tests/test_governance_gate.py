@@ -27,5 +27,16 @@ class GovernanceGate(unittest.TestCase):
   self.assertEqual(jobs.count('\n  qualification-gate:'),1)
   aggregate=jobs.split('\n  qualification-gate:',1)[1].split('\n  publish:',1)[0]
   self.assertIn('    if: always()',aggregate)
-  self.assertIn('needs: [build, native, integration, successor, audit]',aggregate)
-  self.assertIn('needs: [build, native, integration, successor, audit, qualification-gate]',jobs.split('\n  publish:',1)[1])
+  self.assertIn('needs: [build, native, integration, profile-integration, successor, audit]',aggregate)
+  self.assertIn('needs: [build, native, integration, profile-integration, successor, audit, qualification-gate]',jobs.split('\n  publish:',1)[1])
+
+ def test_profile_gate_keeps_two_architectures_same_archive_and_no_root(self):
+  workflow=(ROOT/'.github/workflows/next-release.yml').read_text()
+  profile=workflow.split('\n  profile-integration:',1)[1].split('\n  audit:',1)[0]
+  self.assertIn('runner: ubuntu-24.04, arch: x64',profile)
+  self.assertIn('runner: ubuntu-24.04-arm, arch: arm64',profile)
+  self.assertIn('- *download_candidate',profile)
+  self.assertIn('baseline.install_node(root)',profile)
+  self.assertIn('--contract-profile manager-1.17.0-b7218196',profile)
+  self.assertNotIn('sudo',profile)
+  self.assertIn('--profile evidence/next-profile-x64 --profile evidence/next-profile-arm64',workflow)

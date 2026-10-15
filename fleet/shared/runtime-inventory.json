@@ -519,6 +519,78 @@
       "sha256": "4977a3f3c34caa709a41cf0cda4e9e60e2a6f60700b9069f9bbb16c6205f4da6"
     },
     {
+      "path": "contract-profiles/manager-1.17.0-b7218196.json",
+      "sha256": "a16ca49d23b91387c727277f0cabbcfec9860734cdba47f0ccecc93e5c443df7"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/BUILD_RECEIPT.json",
+      "sha256": "c99edfd7181a0e841c15061c60883b5824675fbc18d327d5fe2f9e72651c5d78"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifact-provenance.json",
+      "sha256": "b92fa2c93be2a1078a3cfaf8b7f3d05fff9bd71c010894db8caf3ba5cb40ea76"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/AGIJobManager.json",
+      "sha256": "0b8b087b8cb98891e39a5a1d5b11752a5b641b04f8eba5c5bd34ffdb0b4c7f10"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/BondMath.json",
+      "sha256": "ccbc631a7103dd89cd9f8a88a64516144217812a25ef8060d3e1ff573b5b4d38"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/ENSOwnership.json",
+      "sha256": "00ae48e3b7e9a23847d2e23933faad98ae408674b7cbfb6c1fa48c0eb339d3c6"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/FailingERC20.json",
+      "sha256": "616b90173b27b6523b7d895c13c200e15d93e559ac29a8c78c5377337fbb28ec"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/JobSettlement.json",
+      "sha256": "cf0ba6c9e287a45878bbfa160ca8398f4e13bb6461fceac640fd053bd62973c0"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/JobValidation.json",
+      "sha256": "60b4e56fbf726a1556712e192c0aa69bd91614dea6ddff1706ad28eca50e63aa"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/MockERC20.json",
+      "sha256": "64f31b163d29166ea44f40043e3f802837696e972704ddcac6332e533afd0571"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/NftEligibility.json",
+      "sha256": "e4d386ba9567afdbd13058d34a167a60881845abe91f610b0d0cb4cd18a21e6a"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/ReputationMath.json",
+      "sha256": "782490d92dae04432e0371190a568c16e45e787fd9583573611a4d823b9c80eb"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/TransferUtils.json",
+      "sha256": "d2e6158f4cef94c292a031ac1f79892b0edb15bca20cd81cedb53c6fcecb1d7e"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/artifacts/UriUtils.json",
+      "sha256": "b2a3bc3837bc434c125488a439625f52f3df2c6a05337cb6378433d73a426cc5"
+    },
+    {
+      "path": "contract-profiles/manager-1.17.0-b7218196/compiler-inputs/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.json",
+      "sha256": "32020507c14c2347344cc3883e95808bc482fdbbd0c9461d7fad9e90e8f2e3af"
+    },
+    {
+      "path": "contract-profiles/manager-legacy-db876a8.json",
+      "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac"
+    },
+    {
       "path": "package.json",
       "sha256": "c7885a52925dae70b15d46e6c6f305695d714967f3be2d05f5d4c801eb0be550"
     },
@@ -559,6 +631,10 @@
       "sha256": "5c18b90705f8e2223da9aa1a22668074eb0bf194d90f502582621312c1269829"
     },
     {
+      "path": "src/contract-profiles.mjs",
+      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0"
+    },
+    {
       "path": "src/control/system-preflight.mjs",
       "sha256": "1d411edb5d69120ce13f86706d106bfe6399074d48ec3a6f95daaeb441fe5a49"
     },
@@ -591,5 +667,5 @@
       "sha256": "a35fc86f210e298773a7c873236b3a0e72f16c895c34c62eccc0d8938241f808"
     }
   ],
-  "revisionSHA256": "d36fce5aa1dd5146b72de263e87b821e3f6dcbc132c88c518f97ab8ba752d4d6"
+  "revisionSHA256": "1fe7bbc2f6345c164c05df5ff62243d55329d80ece93ae4d3c8f19600d134e89"
 }

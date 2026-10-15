@@ -39,6 +39,32 @@ class PublicationAcceptance(unittest.TestCase):
                 'managerCommit': self.metadata['integration']['commit'], 'verifiedLogs': 19,
                 'productionSourcesMatched': 11, 'contractArtifactsMatched': 11})
 
+        profile_id = 'manager-1.17.0-b7218196'
+        profile = publisher.CONTRACT_PROFILES[profile_id]
+        self.audit['contractProfiles'] = [
+            {'architecture': arch, 'status': 'PASS', 'workflowCommit': self.commit,
+             'workflowRun': self.run_id, 'productionQualified': False,
+             'archiveSHA256': self.metadata['sha256'], 'sourceRevisionSHA256': self.metadata['sourceRevisionSHA256'],
+             'profile': profile_id, 'profileManifestSHA256': profile['manifestSHA256'],
+             'managerCommit': profile['commit'], 'managerTestsPassed': profile['managerTests'],
+             'standaloneIntegrationScripts': 8, 'contractArtifactsMatched': 11, 'verifiedLogs': 12,
+             'completeArchiveUnchanged': True} for arch in ('x64', 'arm64')]
+
+    def test_profile_proof_missing_or_mixed_is_rejected(self):
+        for key, value in [('archiveSHA256', '0' * 64), ('workflowCommit', 'd' * 40),
+                           ('workflowRun', '456'), ('managerCommit', 'e' * 40),
+                           ('profileManifestSHA256', 'f' * 64), ('managerTestsPassed', 780),
+                           ('verifiedLogs', 11), ('completeArchiveUnchanged', False),
+                           ('sourceRevisionSHA256', '0' * 64), ('profile', 'manager-legacy-db876a8')]:
+            changed = copy.deepcopy(self.audit)
+            changed['contractProfiles'][0][key] = value
+            with self.subTest(field=key), self.assertRaises(ValueError):
+                publisher.validate(self.metadata, changed, self.commit)
+        for rows in ([], self.audit['contractProfiles'][:1], [self.audit['contractProfiles'][0]] * 2):
+            changed = copy.deepcopy(self.audit); changed['contractProfiles'] = rows
+            with self.subTest(rows=len(rows)), self.assertRaises(ValueError):
+                publisher.validate(self.metadata, changed, self.commit)
+
     def test_complete_candidate_can_be_prepared(self):
         publisher.validate(self.metadata, self.audit, self.commit)
 
@@ -98,6 +124,8 @@ class PublicationAcceptance(unittest.TestCase):
             metadata.update(bytes=archive.stat().st_size, sha256=publisher.sha(archive))
             audit = copy.deepcopy(self.audit); audit['releaseSHA256'] = metadata['sha256']
             audit['successorAcceptance']['archiveSHA256'] = metadata['sha256']
+            for row in audit['contractProfiles']:
+                row['archiveSHA256'] = metadata['sha256']
             evidence = output / 'evidence.zip'; evidence.write_bytes(b'evidence fixture')
             manifest = {'workflowCommit': self.commit, 'workflowRun': self.run_id,
                 'sha256': metadata['sha256'], 'audit': audit,

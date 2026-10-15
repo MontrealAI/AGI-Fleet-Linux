@@ -83,5 +83,93 @@ class ContractCompatibility(unittest.TestCase):
             runner.compare_contracts(self.fleet, self.manager)
 
 
+import contract_profiles as profiles
+
+
+class ExplicitContractProfiles(unittest.TestCase):
+    def setUp(self):
+        import shutil
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        self.fleet, self.manager = self.root / 'fleet', self.root / 'manager'
+        source = Path(__file__).resolve().parents[2] / 'fleet'
+        shutil.copytree(source / 'shared/runtime/contract-profiles', self.fleet / 'shared/runtime/contract-profiles')
+        shutil.copytree(source / 'packages/AGI_Agent/contract', self.fleet / 'packages/AGI_Agent/contract')
+        self.profile = 'manager-1.17.0-b7218196'
+        self.bundle, self.manifest = profiles.contract_bundle(self.fleet, self.profile)
+        provenance = json.loads((self.bundle / 'artifact-provenance.json').read_text())
+        original = json.loads((self.bundle / 'compiler-inputs' / (provenance['artifacts']['AGIJobManager']['buildInfoId'] + '.json')).read_text())
+        for name in self.manifest['productionSources']:
+            file = self.manager / name.removeprefix('project/')
+            file.parent.mkdir(parents=True, exist_ok=True)
+            file.write_bytes(original['sources'][name]['content'].encode())
+        shutil.copytree(self.bundle / 'artifacts', self.manager / 'build/contracts')
+
+    def test_exact_new_profile_is_complete_and_default_still_rejects_it(self):
+        result = profiles.compare_contracts(self.fleet, self.manager, self.profile)
+        self.assertEqual(result['status'], 'PASS')
+        self.assertEqual(result['contractProfile'], self.profile)
+        self.assertEqual(result['bundledSourceCommit'], 'b721819639668f0074c244d516bbbe0cf57329a7')
+        self.assertEqual(len(result['productionSources']), 11)
+        self.assertEqual(len(result['artifacts']), 11)
+        with self.assertRaisesRegex(ValueError, 'production source changed'):
+            profiles.compare_contracts(self.fleet, self.manager)
+
+    def test_every_production_source_is_exact(self):
+        for name in self.manifest['productionSources']:
+            with self.subTest(name=name):
+                file = self.manager / name.removeprefix('project/')
+                before = file.read_bytes()
+                file.write_bytes(before + b'\n')
+                with self.assertRaisesRegex(ValueError, 'production source changed'):
+                    profiles.compare_contracts(self.fleet, self.manager, self.profile)
+                file.write_bytes(before)
+
+    def test_every_artifact_field_remains_exact(self):
+        for name in profiles.ARTIFACTS:
+            file = self.manager / 'build/contracts' / (name + '.json')
+            before = file.read_text()
+            for field in ['abi', 'bytecode', 'deployedBytecode', 'linkReferences', 'deployedLinkReferences', 'immutableReferences']:
+                with self.subTest(name=name, field=field):
+                    artifact = json.loads(before)
+                    artifact[field] = {'fixture': [{'start': 999999, 'length': 32}]} if field == 'immutableReferences' else None
+                    file.write_text(json.dumps(artifact))
+                    with self.assertRaisesRegex(ValueError, 'differs|differ'):
+                        profiles.compare_contracts(self.fleet, self.manager, self.profile)
+                    file.write_text(before)
+
+    def test_mixed_legacy_library_with_new_manager_is_rejected(self):
+        import shutil
+        shutil.copyfile(self.fleet / 'packages/AGI_Agent/contract/artifacts/ENSOwnership.json', self.manager / 'build/contracts/ENSOwnership.json')
+        with self.assertRaisesRegex(ValueError, 'Compiled ENSOwnership'):
+            profiles.compare_contracts(self.fleet, self.manager, self.profile)
+
+    def test_unknown_selectors_never_become_paths_or_hash_overrides(self):
+        for selector in ['../contract', '/tmp/contract', 'main', 'v1.17.0', 'f' * 64, {}, []]:
+            with self.subTest(selector=selector):
+                with self.assertRaisesRegex(ValueError, 'Unknown contract profile'):
+                    profiles.contract_bundle(self.fleet, selector)
+
+    def test_manifest_and_bundle_tampering_are_rejected(self):
+        manifest = self.fleet / 'shared/runtime/contract-profiles' / (self.profile + '.json')
+        before = manifest.read_bytes()
+        manifest.write_bytes(before + b'\n')
+        with self.assertRaisesRegex(ValueError, 'manifest integrity'):
+            profiles.contract_bundle(self.fleet, self.profile)
+        manifest.write_bytes(before)
+        artifact = self.bundle / 'artifacts/ENSOwnership.json'
+        artifact.write_bytes(artifact.read_bytes() + b'\n')
+        with self.assertRaisesRegex(ValueError, 'member integrity'):
+            profiles.contract_bundle(self.fleet, self.profile)
+
+    def test_profile_registry_matches_runtime_manifest_pins(self):
+        runtime = (Path(__file__).resolve().parents[2] / 'fleet/shared/runtime/src/contract-profiles.mjs').read_text()
+        for name, definition in profiles.CONTRACT_PROFILES.items():
+            self.assertIn(name, runtime)
+            self.assertIn(definition['manifestSHA256'], runtime)
+            self.assertIn(definition['commit'], runtime)
+
+
 if __name__ == '__main__':
     unittest.main()
