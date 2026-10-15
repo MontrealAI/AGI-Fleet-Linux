@@ -25,7 +25,7 @@ not a claim that this tool verifies Ubuntu OpenPGP signatures. No maintainer
 script is run. NumPy's selected wheels require glibc >=2.27. No operator `/lib`,
 `/usr/lib`, loader cache, host Python or site-packages enter the candidate mount.
 
-All source modules are exact Git blobs from Alpha 2355b3cb198a6fb2c948744d283f108ab6ce5ebc.
+All source modules are exact Git blobs from Alpha 94f6faf461c90ff9f35db5cd7b461bde416ebea4.
 The deterministic work closure also retains `surrogate_fitness.yaml` and Alpha's
 license. Optional agents/google_adk/faiss/sentence_transformers remain absent.
 The official interpreter's bounded-work stdlib/native closure remains included, but optional Tcl/Tk (which contains build-host RPATHs),

@@ -4,7 +4,7 @@
   "pythonVersion": "3.12.15",
   "source": {
     "repository": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0",
-    "commit": "2355b3cb198a6fb2c948744d283f108ab6ce5ebc",
+    "commit": "94f6faf461c90ff9f35db5cd7b461bde416ebea4",
     "requirementsSha256": "807e9de36cff92e1cecd7a6f1d651760f66ea4f8346dd799a139269f48c75790",
     "entrypoint": "alpha_factory_v1.core.runtime.fleet_work",
     "validator": "alpha_factory_v1.core.runtime.work_spec"
@@ -21,7 +21,7 @@
     "alpha_factory_v1/core/runtime/fleet_work.py": "235dc4da4a803db29075a5ed1e212832ac2db2c369b6e13cf2be3042324f60eb",
     "alpha_factory_v1/core/runtime/models.py": "9ecd2ccd5b8f17be6f94fda0bc887c831518ed7ca79e619ed03593742a11b5ab",
     "alpha_factory_v1/core/runtime/store.py": "340025deb6718fcb09a3fbbb8c16d47f6456e2c53cf3ae9d96b154f05e822c3c",
-    "alpha_factory_v1/core/runtime/work.py": "031f190ca6aaf1bbf2c521e3e3d9660f6a81e204ce838099df9b46c3371bbd0d",
+    "alpha_factory_v1/core/runtime/work.py": "0dae1e55376f991a364cbe748fb7eccc3c91be29cfb8ed8a9a43e8366fe4c2c9",
     "alpha_factory_v1/core/runtime/work_spec.py": "64fc1ac65ad850b7e8cf776d4481ff641ddcaed7492ed8df84d8de69c213b62f",
     "alpha_factory_v1/core/self_edit/__init__.py": "fc999d9d4be4661210afbcb31f485f45f4b9628b7961def04ce9b296d998475b",
     "alpha_factory_v1/core/self_edit/safety.py": "ea3e90723cb041b7e09c84359cb2bdeab604fb46853e5798d8aa77ba71ba4762",
@@ -38,7 +38,7 @@
     "alpha_factory_v1/core/simulation/surrogate_fitness.yaml": "e5cfb32f1d65149671481fd18aca01f9db5523cdfa28c934fbc4bcc7b6505484"
   },
   "requirementsSha256": "6936b2f57340fbfaacbcd86744da3c003230ca156ebac85b0f1b209a1308d9e0",
-  "productionTrustLockSha256": "460c42ef369a0cf9a1110555d693aa502573a1b6133100528fa4ac46d3951c90",
+  "productionTrustLockSha256": "02fc40ff24461dd424707dc3358469060fb39baf1bcd13080dcb938434ed587a",
   "targets": {
     "linux-x64": {
       "machine": "x86_64",
@@ -415,5 +415,5 @@
       ]
     }
   },
-  "contractFixtureSha256": "ab1f145253fc99b15669d70859ce092a0e3628b81e51655378ab8e2ae7104fde"
+  "contractFixtureSha256": "7e72cf1b1764c1c38efa662850999a6cf6583513fee870026ac29881f7347f34"
 }

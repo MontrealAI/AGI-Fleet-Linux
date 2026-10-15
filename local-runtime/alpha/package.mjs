@@ -3,7 +3,7 @@ import path from 'node:path';
 import {ROOT,need,keys,parseStrict,digest} from '../contracts.mjs';
 import {ALPHA_INSTALL_BASE,validateTargetSet,validateManifest,validateQualification,verifyTree,assertRootOwned,assertTrustedParents} from './trust.mjs';
 
-export const ALPHA_SOURCE_COMMIT='2355b3cb198a6fb2c948744d283f108ab6ce5ebc';
+export const ALPHA_SOURCE_COMMIT='94f6faf461c90ff9f35db5cd7b461bde416ebea4';
 export const ALPHA_VALIDATOR='alpha_factory_v1.core.runtime.work_spec';
 export const ALPHA_ENTRYPOINT='alpha_factory_v1.core.runtime.fleet_work';
 export const ALPHA_MARKET='agijobsv0-jobregistry-v2';
