@@ -3,6 +3,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PREFIX = 'agi-fleet-local-0.1.0-alpha.3'
+# Match supervisor/runtime.mjs sourceIdentity; docs outside its roots are exempt.
+MAX_RUNTIME_SOURCE_BYTES = 8_000_000
+
+def source_bytes(file, relative):
+    if relative == 'docs/local-skills':
+        return file.read_bytes()
+    message = ('Runtime source member exceeds 8000000 bytes: ' + str(file.relative_to(ROOT))
+               + '; install locked Fleet dependencies with npm ci --prefix fleet --ignore-scripts --omit=dev')
+    if file.stat().st_size > MAX_RUNTIME_SOURCE_BYTES:
+        raise ValueError(message)
+    with file.open('rb') as stream:
+        data = stream.read(MAX_RUNTIME_SOURCE_BYTES + 1)
+    if len(data) > MAX_RUNTIME_SOURCE_BYTES:
+        raise ValueError(message)
+    return data
+
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
@@ -24,7 +40,7 @@ def build(output):
                     continue
                 raise ValueError('Unexpected source link: ' + str(file))
             if file.is_file():
-                entries[file.relative_to(ROOT).as_posix()] = (file.read_bytes(), 0o755 if file.stat().st_mode & 0o111 else 0o644)
+                entries[file.relative_to(ROOT).as_posix()] = (source_bytes(file, relative), 0o755 if file.stat().st_mode & 0o111 else 0o644)
     for relative in ['LOCAL_SKILLS.md', 'LICENSE', 'fleet/package.json', 'fleet/package-lock.json']:
         entries[relative] = ((ROOT / relative).read_bytes(), 0o644)
     records = [{'path': name, 'bytes': len(data), 'sha256': sha(data), 'mode': mode} for name, (data, mode) in sorted(entries.items())]
