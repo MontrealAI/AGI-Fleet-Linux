@@ -1,0 +1,68 @@
+{
+  "schema": "agi-fleet/alpha-fixed-path-reviewed-input-references/v1",
+  "scope": "Reference metadata from coordinator-verified raw PR 47 artifacts; no fixed-path preparation or execution",
+  "coordinatorVerificationReceiptSha256": "eb6aa0b2b13e4d663ace3844468c14609ae28e6ed97df865ad063be0693d5884",
+  "sourceExpectationFile": "expected-pr47.json",
+  "alphaSourceCommit": "94f6faf461c90ff9f35db5cd7b461bde416ebea4",
+  "fixedPathProvisioning": "NOT_RUN",
+  "fixedPathAdmission": "NOT_RUN",
+  "productionQualified": false,
+  "productionAdmissionQualified": false,
+  "productionProvisioningQualified": false,
+  "productionTrustTargets": "UNPROVISIONED",
+  "targets": {
+    "linux-x64": {
+      "rawArtifactId": 11969784543,
+      "rawArtifactSha256": "76af4122a07217651573a45aa00694ccca66d38ff4f8600637bcfae8ab3f32bd",
+      "rawArtifactBytes": 59946774,
+      "archiveSha256": "bd87c72c175637407f96663f712ce55e0eda43f52e8732e833f59c10fa0721f9",
+      "treeSha256": "aeeb5f24d23c1c6b7d68e57c9b2750e159070fec1ffd4597a92c4fe6ebfd4ba4",
+      "adapterSha256": "b694c494edb611d280bb098fc05266900689a5f654326d790a6abf6e2d361327",
+      "nodeExecutableSha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c",
+      "inputsSha256": "508669d80b065a53f4b549884a53cd015471c5e1f1b378a61a6a8335045911e6",
+      "reportsSha256": {
+        "native-ipc": "fbc66c22e7acb0f57a4545b74549ad678b7d39b50874c5dbad220d8a1506de9e",
+        "native-candidate": "9da1bccc2cd959bbc6e4922870cdbd8eab5c6bfa450b3c674e58fba55f6210dd",
+        "reproduction": "1e002bb8cd9bfbe48d150aa80f0da0e55fb44aee1adaefff11d3b8f67ccc1f46"
+      },
+      "installation": "/opt/agi-fleet-alpha/linux-x64/bd87c72c175637407f96663f712ce55e0eda43f52e8732e833f59c10fa0721f9",
+      "archiveBytes": 58797220,
+      "manifestSha256": "d44408c660a7f09a6db5040c3581148a3864b6063112ede08c9d6b343a088357",
+      "nodeArchive": {
+        "platform": "linux-x64",
+        "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz",
+        "sha256": "fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6"
+      }
+    },
+    "linux-arm64": {
+      "rawArtifactId": 11968950893,
+      "rawArtifactSha256": "3e7a1bfee0db3cfb15b364f71a8443db1c9c4a5eb63276e0ab66683f5b7055af",
+      "rawArtifactBytes": 53807545,
+      "archiveSha256": "1eab22d3f173befac1a28ec8f4a884ce68ec544a1883ea762e12a691fe9e7592",
+      "treeSha256": "24dd641b7f027bf373d7d043e853dc1a5a5912d9516ec3f9c058ddd2599f6484",
+      "adapterSha256": "b694c494edb611d280bb098fc05266900689a5f654326d790a6abf6e2d361327",
+      "nodeExecutableSha256": "0f8949d1028f6d61506b2d5bc57e7e6fe893d7b1997509b7847294fc9c616584",
+      "inputsSha256": "508669d80b065a53f4b549884a53cd015471c5e1f1b378a61a6a8335045911e6",
+      "reportsSha256": {
+        "native-ipc": "08bfd8c02ac9907e85482a8681fcbd6c85cde022517fa2bb5a531b77aa2ba1c0",
+        "native-candidate": "40addeb3932c6a035baf1e4197300a6c731413bf53c3949b0c8bbe1225a14a97",
+        "reproduction": "034602baade489cd91af3c88242b48056b08b493c69d637adb529593dceb480b"
+      },
+      "installation": "/opt/agi-fleet-alpha/linux-arm64/1eab22d3f173befac1a28ec8f4a884ce68ec544a1883ea762e12a691fe9e7592",
+      "archiveBytes": 52638830,
+      "manifestSha256": "65360c48f72d5d3e1692310a15b3d78c75f9f6cb88ce6d7517b5ba15e2324bb2",
+      "nodeArchive": {
+        "platform": "linux-arm64",
+        "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-arm64.tar.xz",
+        "sha256": "6ad1325edbdb5649c379b75a237147a666c95d4f9ae8d340fef2d1575d289ad2"
+      }
+    }
+  },
+  "runtimeSourceTree": "7c52bc0cdd85b87f2219b46b6be6caeafa136b43",
+  "runtimeSourceFilesSha256": {
+    "fleet/package-lock.json": "2a50c4ebbe6dae4f3a7b52e6236fd5763e4c106793478b77d2be9dbf9b61b3c2",
+    "fleet/shared/runtime/compute/runtime-artifacts.lock.json": "b5750a4246d83a3fe9b33675f9e7083c334e80fa851d1f1d7fa1d3077cf8fddd",
+    "local-runtime/alpha/provision.mjs": "2d7e8f5f6128ef44abb9bdb89d4be05b279b4cec1fbe9d0211ca35e533464f53",
+    "local-runtime/prepare-engineering-host.py": "a0984ced7d3e04c49e65bb30f69386591e4603f7ff12409b58ed764a4734ccdf"
+  }
+}
