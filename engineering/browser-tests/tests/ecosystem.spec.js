@@ -19,6 +19,12 @@ for (const language of ['en', 'fr']) {
       expect(box.x).toBeGreaterThanOrEqual(0);
       expect(box.x + box.width).toBeLessThanOrEqual(320);
     }
+    for (const scale of [1, 2]) {
+      await page.evaluate(scale => { document.documentElement.style.fontSize = `${scale * 100}%`; }, scale);
+      const overflow = await map.locator('h2,h3,p,.ecosystem-kicker,a').evaluateAll(elements => elements.filter(element => element.scrollWidth > element.clientWidth + 1).map(element => element.textContent));
+      expect(overflow, `${language} at 320px and ${scale * 100}% text: every label and paragraph wraps`).toEqual([]);
+    }
+    await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
     await expect(map.locator('.ecosystem-boundary')).toContainText('JobRegistry');
     await expect(map.locator('.ecosystem-boundary')).toContainText('USDC');
     for (const width of [320, 1440]) {
