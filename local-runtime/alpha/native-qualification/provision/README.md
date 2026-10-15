@@ -1,6 +1,8 @@
 # Fixed-path Alpha qualification proposal (not activated)
 
-This source-only harness is unpublished and has no workflow hook. It has not run
+This source-only harness has no active workflow hook. The earlier immutable harness
+was published in inert PR 48; the merged-PR lifecycle change described below remains
+a separate local proposal. The fixed-path harness has not run
 `sudo`, provisioned `/opt`, activated an actor, or qualified native admission.
 The repository's production lock stays `UNPROVISIONED` with two null targets.
 Unit tests use conspicuously synthetic reports and cannot authenticate or qualify
@@ -59,8 +61,17 @@ integration commit; it is never implicitly this harness worktree.
 
 `prepare.py` reads the current fixed PR 47 and the specified successful workflow run and
 attempt from the fixed public GitHub API repository. It requires both native
-architecture jobs, an open same-repository PR, the exact head, and an integration
-commit whose tree equals that reviewed head. It rejects missing/ambiguous/expired
+architecture jobs, the exact same-repository head, and an integration commit whose
+tree equals that reviewed head. An open PR must explicitly be unmerged. The proposed
+alternative accepts only a closed, verified-merged PR whose separately fetched real
+Git merge object has that same tree and the same two ordered parents as the frozen
+tested integration commit. Closed-unmerged, squash/rebase, changed base lineage,
+unavailable objects and changed heads/trees are refused. The actual runtime checkout
+remains restricted to the original head or tested integration commit, never the
+later merge or moving main. See [MERGED_PR47_PROPOSAL.md](MERGED_PR47_PROPOSAL.md)
+for the rationale, exact gates and publication/approval sequence; the existing inert
+workflow still pins the preceding open-only harness until a separately reviewed repin.
+It rejects missing/ambiguous/expired
 artifacts, unavailable ZIP digests, pending or failed attempts, partial inventories,
 changed source hashes, dirty native evidence, incomplete tests and cleanup.
 The workflow path is fixed to `.github/workflows/alpha-native-ipc.yml`; a PR 40

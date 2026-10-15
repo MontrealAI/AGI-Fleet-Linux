@@ -34,7 +34,7 @@ ROOT = Path(__file__).resolve().parents[4]
 def remote_fixture():
     run = {'id': EXPECT['runId'], 'run_attempt': EXPECT['runAttempt'], 'status': 'completed', 'conclusion': 'success', 'repository': {'full_name': p.REPOSITORY}, 'path': p.WORKFLOW, 'event': 'pull_request', 'head_sha': EXPECT['headCommit'], 'pull_requests': [{'number': p.REVIEWED_PR, 'head': {'sha': EXPECT['headCommit']}}]}
     artifacts = [{'id': p.REVIEWED_ARTIFACTS[target]['id'], 'name': 'alpha-native-ipc-' + target, 'expired': False, 'digest': 'sha256:' + p.REVIEWED_ARTIFACTS[target]['sha256'], 'workflow_run': {'id': EXPECT['runId'], 'head_sha': EXPECT['headCommit']}, 'size_in_bytes': p.REVIEWED_ARTIFACTS[target]['bytes']} for target in p.TARGETS]
-    return {f'/pulls/{p.REVIEWED_PR}': {'fixture': SYNTHETIC, 'state': 'open', 'number': p.REVIEWED_PR, 'head': {'sha': EXPECT['headCommit'], 'repo': {'full_name': p.REPOSITORY}}}, RUN_ENDPOINT: run,
+    return {f'/pulls/{p.REVIEWED_PR}': {'fixture': SYNTHETIC, 'state': 'open', 'merged': False, 'number': p.REVIEWED_PR, 'head': {'sha': EXPECT['headCommit'], 'repo': {'full_name': p.REPOSITORY}}}, RUN_ENDPOINT: run,
             '/git/commits/' + EXPECT['testedCommit']: {'sha': EXPECT['testedCommit'], 'tree': {'sha': EXPECT['sourceTree']}}, '/git/commits/' + EXPECT['headCommit']: {'sha': EXPECT['headCommit'], 'tree': {'sha': EXPECT['sourceTree']}},
             RUN_ENDPOINT + '/jobs?per_page=100': {'total_count': 2, 'jobs': [{'name': target, 'status': 'completed', 'conclusion': 'success', 'run_attempt': EXPECT['runAttempt']} for target in p.TARGETS]},
             ARTIFACT_ENDPOINT: {'total_count': 2, 'artifacts': artifacts}}
@@ -169,6 +169,102 @@ class RemoteTests(unittest.TestCase):
     def test_exact_expectation_schema_and_types(self):
         for value in ({**EXPECT,'headCommit':'1'*40}, {**EXPECT,'sourceTree':'3'*40}, {**EXPECT,'sourceTree':'not-a-tree'}, {**EXPECT,'runId':True}, {**EXPECT,'runAttempt':0}, {**EXPECT,'url':'https://example.invalid'}, {k:v for k,v in EXPECT.items() if k!='headCommit'}):
             with self.assertRaises(ValueError): p.verify_remote(value, lambda _: self.fail('must not fetch'))
+
+
+class MergedLineageTests(unittest.TestCase):
+    BASE = 'b' * 40
+    MERGE = 'c' * 40
+
+    def fixture(self):
+        remote=remote_fixture()
+        remote[f'/pulls/{p.REVIEWED_PR}'].update(state='closed',merged=True,merged_at='2026-10-15T12:00:00Z',merge_commit_sha=self.MERGE,base={'ref':'main','repo':{'full_name':p.REPOSITORY}})
+        parents=[{'sha':self.BASE},{'sha':EXPECT['headCommit']}]
+        remote['/git/commits/'+EXPECT['testedCommit']]['parents']=copy.deepcopy(parents)
+        remote['/git/commits/'+self.MERGE]={'fixture':SYNTHETIC,'sha':self.MERGE,'tree':{'sha':EXPECT['sourceTree']},'parents':copy.deepcopy(parents)}
+        return remote
+
+    def test_closed_merged_requires_actual_git_object_and_retains_provenance(self):
+        remote=self.fixture();reads=[]
+        def fetch(endpoint):reads.append(endpoint);return remote[endpoint]
+        result=p.verify_remote(EXPECT,fetch)
+        self.assertIn('/git/commits/'+self.MERGE,reads)
+        self.assertEqual(result['prLifecycle'],'MERGED_EXACT_TESTED_LINEAGE')
+        self.assertEqual(result['mergeCommit']['fixture'],SYNTHETIC)
+        self.assertEqual(result['testedCommit']['sha'],EXPECT['testedCommit'])
+        self.assertEqual(set(result['artifacts']),set(p.TARGETS))
+        opened=p.verify_remote(EXPECT,remote_fixture().__getitem__)
+        self.assertIsNone(opened['mergeCommit']);self.assertEqual(opened['prLifecycle'],'OPEN_REVIEWED_HEAD')
+
+    def test_closed_unmerged_inconsistent_state_or_missing_merge_metadata_refused(self):
+        for change in ({'merged':False},{'merged':None},{'merged':'true'},{'state':'open'},{'state':'unknown'},
+                       {'merged_at':None},{'merged_at':''},{'merge_commit_sha':None},{'merge_commit_sha':'../unsafe'},
+                       {'merge_commit_sha':EXPECT['headCommit']},{'merge_commit_sha':EXPECT['testedCommit']},
+                       {'base':{'ref':'other','repo':{'full_name':p.REPOSITORY}}},
+                       {'base':{'ref':'main','repo':{'full_name':'untrusted/fork'}}}):
+            remote=self.fixture();remote[f'/pulls/{p.REVIEWED_PR}'].update(change)
+            with self.subTest(change=change),self.assertRaises(ValueError):p.verify_remote(EXPECT,remote.__getitem__)
+
+    def test_changed_head_tree_and_wrong_real_merge_object_refused(self):
+        for mutate in (lambda r:r[f'/pulls/{p.REVIEWED_PR}']['head'].update(sha='f'*40),
+                       lambda r:r['/git/commits/'+EXPECT['headCommit']]['tree'].update(sha='f'*40),
+                       lambda r:r['/git/commits/'+EXPECT['testedCommit']]['tree'].update(sha='f'*40),
+                       lambda r:r['/git/commits/'+self.MERGE].update(sha='f'*40),
+                       lambda r:r['/git/commits/'+self.MERGE]['tree'].update(sha='f'*40)):
+            remote=self.fixture();mutate(remote)
+            with self.assertRaises(ValueError):p.verify_remote(EXPECT,remote.__getitem__)
+
+    def test_wrong_missing_squashed_rebased_reordered_or_extra_merge_parents_refused(self):
+        for endpoint in ('/git/commits/'+self.MERGE,'/git/commits/'+EXPECT['testedCommit']):
+            for parents in (None,[],[{'sha':self.BASE}],[{'sha':'f'*40},{'sha':EXPECT['headCommit']}],
+                            [{'sha':EXPECT['headCommit']},{'sha':self.BASE}],
+                            [{'sha':self.BASE},{'sha':'f'*40}],
+                            [{'sha':self.BASE},{'sha':EXPECT['headCommit']},{'sha':'e'*40}],
+                            [{'sha':self.BASE},None]):
+                remote=self.fixture();remote[endpoint]['parents']=parents
+                with self.subTest(endpoint=endpoint,parents=parents),self.assertRaises(ValueError):p.verify_remote(EXPECT,remote.__getitem__)
+
+    def test_nonexistent_or_unavailable_real_merge_is_not_accepted_from_pr_flag(self):
+        remote=self.fixture();remote.pop('/git/commits/'+self.MERGE)
+        with self.assertRaises(KeyError):p.verify_remote(EXPECT,remote.__getitem__)
+        remote=self.fixture();remote['/git/commits/'+self.MERGE]=None
+        with self.assertRaises(ValueError):p.verify_remote(EXPECT,remote.__getitem__)
+        def failed_reader(endpoint):
+            if endpoint=='/git/commits/'+self.MERGE:raise OSError('SYNTHETIC_TLS_OR_API_UNAVAILABLE')
+            return remote[endpoint]
+        with self.assertRaises(OSError):p.verify_remote(EXPECT,failed_reader)
+
+    def test_merge_reader_uses_fixed_https_api_and_refuses_redirects(self):
+        # Mocked HTTP transport only: this never contacts GitHub or authenticates
+        # the synthetic commit. The production reader has no caller URL option.
+        endpoint='/git/commits/'+self.MERGE
+        payload=self.fixture()[endpoint]
+        with patch.object(p.urllib.request,'build_opener') as build:
+            response=build.return_value.open.return_value.__enter__.return_value
+            response.read.return_value=p.canonical(payload)
+            self.assertEqual(p.fetch_json(endpoint),payload)
+            request=build.return_value.open.call_args.args[0]
+            self.assertEqual(request.full_url,'https://api.github.com/repos/'+p.REPOSITORY+endpoint)
+            self.assertIsNone(request.get_header('Authorization'))
+            handler=build.call_args.args[0]
+            for destination in ('http://api.github.com/unsafe','https://untrusted.invalid/commit'):
+                with self.assertRaisesRegex(ValueError,'redirect refused'):
+                    handler.redirect_request(request,None,302,'redirect',{},destination)
+
+    def test_merged_status_does_not_bypass_exact_native_jobs_artifact_or_run_gates(self):
+        for mutate in (lambda r:r[RUN_ENDPOINT].update(conclusion='failure'),
+                       lambda r:r[RUN_ENDPOINT].update(run_attempt=2),
+                       lambda r:r[RUN_ENDPOINT+'/jobs?per_page=100']['jobs'][1].update(conclusion='failure'),
+                       lambda r:r[ARTIFACT_ENDPOINT]['artifacts'][0].update(id=999),
+                       lambda r:r[ARTIFACT_ENDPOINT]['artifacts'][1].update(digest='sha256:'+'f'*64)):
+            remote=self.fixture();mutate(remote)
+            with self.assertRaises(ValueError):p.verify_remote(EXPECT,remote.__getitem__)
+
+    def test_real_merge_is_never_an_additional_runtime_checkout(self):
+        with tempfile.TemporaryDirectory() as tmp,patch.object(p.os,'geteuid',return_value=1000),patch.object(p,'git',return_value=self.MERGE),patch.object(p,'verify_remote') as remote:
+            root=Path(tmp);source=root/'source';source.mkdir();output=root/'out'
+            with self.assertRaisesRegex(ValueError,'clean exact reviewed source'):
+                p.prepare(source,output,root/'synthetic-node',EXPECT,{},'linux-x64')
+            remote.assert_not_called();self.assertFalse(output.exists())
 
 
 class InputTests(unittest.TestCase):

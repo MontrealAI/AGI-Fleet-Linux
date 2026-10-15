@@ -141,3 +141,33 @@ expectation or existing security setting was changed. Actual preparation,
 provisioning, native fixed-path execution and timing remain NOT_RUN. Final
 independent review and user action-time approval are still required; no remote
 publication, dispatch or privileged action was performed.
+
+
+## PR 47 merged-lifecycle proposal (2026-10-15)
+
+This separate local delta follows reviewed inactive workflow commit
+`a1bf187125ae4230b29cf5111cca66123d7c8019`. Manual workflow registration requires
+default-branch presence; the proposal avoids making an open release PR a timing
+dependency without accepting abandoned or changed source. It adds only the closed,
+verified-merged case described in `MERGED_PR47_PROPOSAL.md`: a separately fetched
+real Git merge object must have the frozen tested tree and exactly the same two
+ordered parents as the pinned tested integration commit. Missing API proof,
+closed-unmerged, squash/rebase, advanced base, changed head/tree and wrong parents
+all fail closed. The real merge is retained as provenance but remains an invalid
+runtime checkout; only the original frozen head/tested merge are allowed.
+
+All exact run/attempt/artifact/source gates and historical expectations remain.
+The current published PR 48 and inactive workflow harness pin are unchanged. That
+workflow still selects the preceding open-only implementation; adoption requires
+independent review, authorized inert source publication, a reviewed exact harness
+repin, and final workflow/action-time approval. No authorization is supplied by
+this proposal or by a merge flag.
+
+**191 targeted source tests passed**: 62 Python harness tests (including eight new
+synthetic merged-lifecycle/reader tests), 22 inactive workflow tests, 10 Node
+cancellation tests, 45 focused Node runtime tests, 45 candidate-builder tests and
+7 native-harness unit tests. Existing closed-unmerged refusal, historic PR 42/46
+pins, exact source/runtime pin guards and workflow manifest checks pass. Fixture
+metadata and mocked HTTP transport are explicitly synthetic and do not establish
+a real PR merge or new native qualification. Actual preparation, provisioning,
+fixed-path runtime execution and production qualification remain NOT_RUN.

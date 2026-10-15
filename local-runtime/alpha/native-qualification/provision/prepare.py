@@ -125,6 +125,29 @@ def fetch_json(endpoint):
     return load(raw)
 
 
+def verified_merged_lineage(pr, tested, expect, fetch):
+    """Accept only the recorded two-parent merge of the exact tested lineage.
+
+    Metadata must come from the fixed HTTPS GitHub reader. The injected reader is
+    the existing synthetic-test seam, never a CLI option or an approval authority.
+    Neither this merge object nor a moving main checkout becomes runtime source.
+    """
+    need(pr.get('state') == 'closed' and pr.get('merged') is True, 'Closed PR was not verified merged')
+    need(isinstance(pr.get('merged_at'), str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z', pr['merged_at']) is not None, 'Merge time unavailable')
+    need(pr.get('base', {}).get('ref') == 'main' and pr.get('base', {}).get('repo', {}).get('full_name') == REPOSITORY, 'Merge destination is not the reviewed repository main branch')
+    merge_sha = pr.get('merge_commit_sha')
+    need(isinstance(merge_sha, str) and re.fullmatch('[a-f0-9]{40}', merge_sha) is not None and merge_sha not in (expect['headCommit'], expect['testedCommit']), 'Real merge commit identity unavailable')
+    parents = tested.get('parents')
+    need(isinstance(parents, list) and len(parents) == 2 and all(isinstance(x, dict) and isinstance(x.get('sha'), str) and re.fullmatch('[a-f0-9]{40}', x['sha']) is not None for x in parents), 'Tested merge parents unavailable')
+    parent_shas = [x['sha'] for x in parents]
+    need(parent_shas[1] == expect['headCommit'] and parent_shas[0] != expect['headCommit'], 'Tested merge does not bind the frozen head')
+    merged = fetch('/git/commits/' + merge_sha)
+    need(isinstance(merged, dict) and merged.get('sha') == merge_sha and merged.get('tree', {}).get('sha') == expect['sourceTree'], 'Real merge Git object/tree differs or is unavailable')
+    actual_parents = merged.get('parents')
+    need(isinstance(actual_parents, list) and [x.get('sha') if isinstance(x, dict) else None for x in actual_parents] == parent_shas, 'Real merge parents differ from the exact tested lineage')
+    return merged
+
+
 def verify_remote(expect, fetch=fetch_json):
     """The injected reader is solely for clearly marked unit fixtures, not CLI input."""
     need(set(expect) == {'headCommit', 'testedCommit', 'sourceTree', 'runId', 'runAttempt'}, 'Exact immutable run identity required')
@@ -135,7 +158,8 @@ def verify_remote(expect, fetch=fetch_json):
     need(expect == REVIEWED_EXPECTATION, 'Source/run differs from this harness reviewed PR lineage; review a pin update')
     run_id, attempt = expect['runId'], expect['runAttempt']
     pr = fetch(f'/pulls/{REVIEWED_PR}')
-    need(pr['state'] == 'open' and pr['number'] == REVIEWED_PR and pr['head']['sha'] == expect['headCommit'] and pr['head']['repo']['full_name'] == REPOSITORY, 'Reviewed PR head moved or repository mismatch')
+    need(pr['number'] == REVIEWED_PR and pr['head']['sha'] == expect['headCommit'] and pr['head']['repo']['full_name'] == REPOSITORY, 'Reviewed PR head moved or repository mismatch')
+    need((pr.get('state') == 'open' and pr.get('merged') is False) or (pr.get('state') == 'closed' and pr.get('merged') is True), 'PR is neither open nor verified merged')
     run = fetch(f'/actions/runs/{run_id}/attempts/{attempt}')
     need(run['id'] == run_id and run['run_attempt'] == attempt and run['status'] == 'completed' and run['conclusion'] == 'success', 'Exact native attempt has not passed')
     need(run['repository']['full_name'] == REPOSITORY and run['path'] == WORKFLOW and run['event'] == 'pull_request', 'Wrong native workflow provenance')
@@ -143,6 +167,7 @@ def verify_remote(expect, fetch=fetch_json):
     commit = fetch('/git/commits/' + expect['testedCommit'])
     head = fetch('/git/commits/' + expect['headCommit'])
     need(commit['sha'] == expect['testedCommit'] and head['sha'] == expect['headCommit'] and commit['tree']['sha'] == head['tree']['sha'] == expect['sourceTree'], 'Tested integration source differs from reviewed head tree')
+    merged = verified_merged_lineage(pr, commit, expect, fetch) if pr['state'] == 'closed' else None
     jobs = fetch(f'/actions/runs/{run_id}/attempts/{attempt}/jobs?per_page=100')
     need(jobs['total_count'] == len(jobs['jobs']) and len(jobs['jobs']) == 2, 'Native job inventory incomplete')
     for target in TARGETS:
@@ -158,7 +183,7 @@ def verify_remote(expect, fetch=fetch_json):
         need(a['expired'] is False and re.fullmatch('sha256:[a-f0-9]{64}', a.get('digest', '')) is not None and a['workflow_run']['id'] == run_id and a['workflow_run']['head_sha'] == expect['headCommit'], 'Artifact provenance/digest unavailable')
         need(type(a['id']) is int and a['id'] == REVIEWED_ARTIFACTS[target]['id'] and a['digest'] == 'sha256:' + REVIEWED_ARTIFACTS[target]['sha256'] and type(a['size_in_bytes']) is int and a['size_in_bytes'] == REVIEWED_ARTIFACTS[target]['bytes'], 'Raw artifact differs from the reviewed ID/digest/length')
         selected[target] = a
-    return {'pullRequest': pr, 'run': run, 'testedCommit': commit, 'headCommit': head, 'jobs': jobs, 'artifacts': selected}
+    return {'pullRequest': pr, 'run': run, 'testedCommit': commit, 'headCommit': head, 'jobs': jobs, 'artifacts': selected, 'mergeCommit': merged, 'prLifecycle': 'MERGED_EXACT_TESTED_LINEAGE' if merged is not None else 'OPEN_REVIEWED_HEAD'}
 
 
 def artifact_members(raw, expected_digest):
