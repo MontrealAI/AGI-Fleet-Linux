@@ -4,8 +4,8 @@ import os from 'node:os';
 import {spawn,spawnSync} from 'node:child_process';
 import {ROOT,need,keys,digest,canonical,parseStrict} from '../contracts.mjs';
 
-import {inspectAlphaPackage,refuseUnprovisionedAlpha} from '../alpha/package.mjs';
-import {validateAlphaInput} from '../alpha/contract.mjs';
+import {inspectAlphaPackage} from '../alpha/package.mjs';
+import {executeAlpha} from '../alpha/ipc.mjs';
 
 const BIN='/usr/bin/bwrap', LIMIT='/usr/bin/prlimit';
 function trusted(file,own=false) { const s=fs.statSync(file);need(s.isFile()&&(s.uid===0||own&&s.uid===process.getuid())&&!(s.mode&0o022),'SANDBOX_EXECUTABLE_UNTRUSTED');return fs.realpathSync(file); }
@@ -32,13 +32,11 @@ export class LinuxSandbox {
         need(false,code);
       }
       const bootId=fs.readFileSync('/proc/sys/kernel/random/boot_id','utf8').trim();
-      return {...report,supported:true,observedAt:Date.now(),bootId,identity:digest({backend:report.backend,node:digest(fs.readFileSync(process.execPath)),sandbox:digest(fs.readFileSync(BIN)),limiter:digest(fs.readFileSync(LIMIT)),platform:process.platform,arch:process.arch,os:os.release(),boot:bootId})};
+      return {...report,supported:true,observedAt:Date.now(),bootId,identity:digest({backend:report.backend,node:digest(fs.readFileSync(process.execPath)),sandbox:digest(fs.readFileSync(BIN)),limiter:digest(fs.readFileSync(LIMIT)),platform:process.platform,arch:process.arch,os:os.release(),boot:bootId,alphaRuntimeIdentity:report.alphaRun.runtimeIdentity??null,alphaTrustLockSha256:report.alphaRun.trustLockSha256??null})};
     }catch(e){return {...report,code:e.code==='ENOENT'?'SANDBOX_PREREQUISITE_MISSING':e.code||e.message,help:'Use the documented Linux prerequisites and rerun doctor. No host-shell fallback is permitted. Browser, desktop and macOS local execution require separate implementation and qualification.'};}
   }
-  async execute({role,task,directory,signal,expectedHost}) {
-    // The next separately reviewed phase must replace this refusal with a
-    // pinned, no-network, exact-stdin launcher. No ambient Python fallback.
-    if(task?.action==='alpha-run'){need(role==='agent','ROLE_ACTION_DENIED');validateAlphaInput(task.input);refuseUnprovisionedAlpha();}
+  async execute({role,task,directory,signal,expectedHost,revalidate}) {
+    if(task?.action==='alpha-run')return executeAlpha({role,task,signal,expectedHost,revalidate,inspectHost:()=>this.inspect()});
     const started=performance.now();
     need(expectedHost&&typeof expectedHost.identity==='string'&&typeof expectedHost.backend==='string','EXECUTION_BINDING_REQUIRED');
     const ready=this.inspect();need(ready.supported,ready.code);

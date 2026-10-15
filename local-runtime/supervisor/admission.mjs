@@ -2,11 +2,14 @@ import {VERSION,canonical,digest,packagePolicy,need} from '../contracts.mjs';
 import {validateTaskInput} from '../worker.mjs';
 import {publicOnly} from '../../fleet/successor/vendor/manager/site/assets/successor/safe.mjs';
 import {validateAlphaInput} from '../alpha/contract.mjs';
-import {ALPHA_PACKAGE_HELP,ALPHA_SOURCE_COMMIT} from '../alpha/package.mjs';
+import {ALPHA_PACKAGE_HELP,ALPHA_SOURCE_COMMIT,inspectAlphaPackage} from '../alpha/package.mjs';
 
 export const OFFLINE_LIMITS=Object.freeze({wallMs:15000,cpuSeconds:10,heapMiB:128,outputBytes:2000000,modelCalls:0,spendUSDC:'0',actions:1});
 const HELP={
   ALPHA_PACKAGE_UNPROVISIONED:ALPHA_PACKAGE_HELP,
+  ALPHA_RUNTIME_REBIND_REQUIRED:'The pinned Alpha installation or its runtime identity changed. Rerun doctor, explicitly reactivate the actor and request a new grant.',
+  ALPHA_PACKAGE_MISSING:ALPHA_PACKAGE_HELP,
+  ALPHA_ADAPTER_REQUALIFICATION_REQUIRED:ALPHA_PACKAGE_HELP,
   ALPHA_PACKAGE_REVIEW_REQUIRED:ALPHA_PACKAGE_HELP,
   ALPHA_TRUST_LOCK_INVALID:ALPHA_PACKAGE_HELP,
   ALPHA_TRUST_LOCK_MISSING:ALPHA_PACKAGE_HELP,
@@ -56,8 +59,13 @@ export function evaluateAdmission({actor,task,host,source,currentSource,hostId,a
   }catch(e){valid=false;const code=e.code||e.message;issues.push(problem(code,code!=='INDEPENDENT_REVIEW_NOT_QUALIFIED'));}
   if(valid&&alpha){
     // A synthetic backend is an internal test seam, never a native trust root.
-    // Native Alpha is intentionally unprovisioned in this contract-only stage.
-    if(nativeBackend||host.alphaRun?.supported!==true)issues.push(problem(host.alphaRun?.code||'ALPHA_PACKAGE_UNPROVISIONED'));
+    // Native admission independently checks the fixed installation. An asserted
+    // positive host descriptor (including a replaced inspect method) is not trust.
+    if(nativeBackend){
+      const installed=inspectAlphaPackage();
+      if(!installed.supported)issues.push(problem(installed.code));
+      else if(host.alphaRun?.supported!==true||host.alphaRun.runtimeIdentity!==installed.runtimeIdentity||actor.host?.alphaRuntimeIdentity!==installed.runtimeIdentity)issues.push(problem('ALPHA_RUNTIME_REBIND_REQUIRED'));
+    }else if(host.alphaRun?.supported!==true)issues.push(problem(host.alphaRun?.code||'ALPHA_PACKAGE_UNPROVISIONED'));
     else if(host.alphaRun?.sourceCommit!==ALPHA_SOURCE_COMMIT||!/^synthetic-/.test(host.alphaRun?.packageSha256||''))issues.push(problem('ALPHA_PACKAGE_REVIEW_REQUIRED'));
   }
   if(!host.supported)issues.push(problem(host.code||'SANDBOX_UNAVAILABLE'));
@@ -78,7 +86,7 @@ export function evaluateAdmission({actor,task,host,source,currentSource,hostId,a
     provider:{route:'none',model:null,authentication:'not-required',modelCalls:0},
     tools:{actions:pkg.policy.actions,capabilities:pkg.policy.capabilities,network:host.network||'none',inference:host.inference||'none',files:host.files||'per-run input only',browser:host.browser||'BLOCKED',desktop:host.desktop||'BLOCKED'},
     taskFamily:family,taskSha256:digest(task),permissions:'bounded-offline-only',review:{kind:task?.review??null,sourceActor:task?.sourceActor??null,sourceController:task?.sourceController??null,independent:false},
-    ...(alpha?{alpha:{sourceCommit:ALPHA_SOURCE_COMMIT,market:alpha.market,specSha256:alpha.specHash,normalizedMissionSemanticSha256:alpha.normalizedMissionSemanticSha256,outputBudget:alpha.budget,packageSha256:host.alphaRun?.packageSha256??null,trustLockSha256:host.alphaRun?.trustLockSha256??null,evidenceClass:nativeBackend?'BLOCKED_UNPROVISIONED':'SYNTHETIC_OR_UNVERIFIED'}}:{})};
+    ...(alpha?{alpha:{sourceCommit:ALPHA_SOURCE_COMMIT,market:alpha.market,specSha256:alpha.specHash,normalizedMissionSemanticSha256:alpha.normalizedMissionSemanticSha256,outputBudget:alpha.budget,packageSha256:host.alphaRun?.packageSha256??null,trustLockSha256:host.alphaRun?.trustLockSha256??null,runtimeIdentity:host.alphaRun?.runtimeIdentity??null,adapterSha256:host.alphaRun?.adapterSha256??null,treeSha256:host.alphaRun?.treeSha256??null,evidenceClass:nativeBackend?(issues.length?'NATIVE_ADMISSION_BLOCKED':'REVIEWED_NATIVE_PACKAGE'):'SYNTHETIC_OR_UNVERIFIED'}}:{})};
   const status=issues.some(i=>i.kind==='OUTSIDE_SCOPE')?'OUTSIDE_SCOPE':issues.length?'MISSING_PREREQUISITE':'SUPPORTABLE';
   return {schema:'agi-fleet/local-admission/v1',status,checkedAt:at,expiresAt:at+300000,recheck:'authorization and immediately before durable dispatch reservation',issues,
     binding,bindingSha256:digest(binding),

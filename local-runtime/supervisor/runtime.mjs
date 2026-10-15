@@ -56,7 +56,7 @@ export class LocalRuntime {
     return this.store.transaction(()=>{
       const actor=this.store.actor(uuid(input.actor));need(!actor.stopped&&!this.store.meta('stopped'),'STOP_RECONCILIATION_REQUIRED');
       const pkg=packagePolicy(actor.role);actor.packageSha256=pkg.sha256;actor.registrySha256=pkg.registry;
-      actor.host={schema:'agi-fleet/local-binding/v1',host:this.store.meta('host'),backend:host.backend,identity:host.identity,sourceSha256:this.source,authority:'bounded-offline-only',...(host.bootId?{bootId:host.bootId}:{})};
+      actor.host={schema:'agi-fleet/local-binding/v1',host:this.store.meta('host'),backend:host.backend,identity:host.identity,sourceSha256:this.source,authority:'bounded-offline-only',...(host.alphaRun?.runtimeIdentity?{alphaRuntimeIdentity:host.alphaRun.runtimeIdentity}:{}),...(host.bootId?{bootId:host.bootId}:{})};
       actor.generation++;actor.active=true;this.store.saveActor(actor);
       this.store.db.prepare("UPDATE grants SET state='revoked' WHERE actor=? AND state IN ('prepared','authorized')").run(actor.id);
       this.store.event('actor-activated',{actor:actor.id,generation:actor.generation});return actor;
@@ -136,11 +136,24 @@ export class LocalRuntime {
     let directory;
     try {
       directory=fs.mkdtempSync(path.join(this.directory,'runs',g.run.id+'-'));fs.chmodSync(directory,0o700);
-      const result=await this.backend.execute({role:actor.role,task:g.task,directory,signal:abort.signal,expectedHost:g.host});
-      abort.signal.throwIfAborted();
+      const revalidate=()=>{
+        abort.signal.throwIfAborted();this.scope(p,'run',actor.id);
+        const current=this.store.actor(actor.id),ready=this.ready(current),now=this.now();
+        need(current.generation===g.generation&&canonical(current.host)===canonical(g.host)&&current.packageSha256===g.packageSha256,'GRANT_REVOKED');
+        need(now>=g.createdAt&&now<g.expiresAt&&now>=this.store.meta('clock'),'GRANT_EXPIRED_OR_CLOCK_CHANGED');
+        const grantRow=this.store.db.prepare('SELECT state,value FROM grants WHERE id=?').get(g.id);
+        need(grantRow?.state==='consumed'&&digest(parseStrict(grantRow.value).task)===g.inputSha256,'GRANT_REVOKED');
+        need(this.store.db.prepare('SELECT state FROM runs WHERE id=?').get(g.run.id)?.state==='running','RUN_RESERVATION_CHANGED');
+        requireAdmission(this.admissionReport(current,g.task,{host:ready,intake:false}),g.admission);
+      };
+      const result=await this.backend.execute({role:actor.role,task:g.task,directory,signal:abort.signal,expectedHost:g.host,revalidate});
       // Validate every Alpha receipt in the supervisor, even for substituted
-      // test backends. A process exit or an asserted hash grants no authority.
-      if(g.task.action==='alpha-run')result.result=validateAlphaOutput(g.task.input,result.result);
+      // test backends. Retain positive closure evidence on late refusal without
+      // treating it as successful output or restoring the consumed grant.
+      if(g.task.action==='alpha-run'){
+        try{abort.signal.throwIfAborted();revalidate();result.result=validateAlphaOutput(g.task.input,result.result);}
+        catch(error){error.observation??=result.observation;throw error;}
+      }else abort.signal.throwIfAborted();
       need(result.observation?.processGroupGone===true,'CLEANUP_UNCONFIRMED');
       need(Buffer.byteLength(canonical(result))<=STORAGE_LIMITS.backendResult,'OUTPUT_LIMIT');
       const receipt={...result,outputSha256:digest(result.result),inputSha256:g.inputSha256,independentReview:false,sourceActor:actor.id,sourceController:actor.controller,authority:'none'};

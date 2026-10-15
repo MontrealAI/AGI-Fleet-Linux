@@ -23,6 +23,19 @@ function proof(runtime, value, result) {
     return {eligible:true,kind:'recorded-launch-refusal',observationSha256:digest(observation),externalEffects:'none; task launcher was not invoked'};
   if(observation?.backend==='linux-bwrap-offline/v1'&&observation.processGroupGone===true&&observation.privateNamespacesEnded===true&&observation.network==='none'&&observation.providerCalls===0)
     return {eligible:true,kind:'recorded-sandbox-closure',observationSha256:digest(observation),externalEffects:'none; offline backend only'};
+  // Alpha uses its own fixed native transport. A synthetic grant/host fixture,
+  // asserted EOF, missing phase or mismatched runtime cannot prove closure.
+  const alpha=value.admission?.binding?.alpha,phases=observation?.phases;
+  if(alpha?.evidenceClass==='REVIEWED_NATIVE_PACKAGE'&&/^[a-f0-9]{64}$/.test(alpha.runtimeIdentity||'')&&
+    value.host.alphaRuntimeIdentity===alpha.runtimeIdentity&&observation?.runtimeIdentity===alpha.runtimeIdentity&&
+    observation.backend==='linux-bwrap-alpha/v1'&&observation.evidenceClass==='NATIVE_FIXED_ALPHA_IPC'&&
+    observation.processGroupGone===true&&observation.privateNamespacesEnded===true&&observation.network==='none'&&observation.providerCalls===0&&
+    Array.isArray(phases)&&phases.length>=1&&phases.length<=2&&phases.every((phase,index)=>
+      phase?.backend==='linux-bwrap-alpha/v1'&&phase.evidenceClass==='NATIVE_FIXED_ALPHA_IPC'&&phase.phase===(index===0?'validate':'work')&&
+      phase.processGroupGone===true&&phase.privateNamespacesEnded===true&&phase.namespaceLifetimeEOF===true&&phase.network==='none'&&phase.providerCalls===0&&
+      Number.isSafeInteger(phase.status?.childPid)&&phase.status.childPid>0&&
+      ['pid','net','mnt','ipc','uts'].every(name=>Number.isSafeInteger(phase.status?.namespaces?.[name])&&phase.status.namespaces[name]>0)))
+    return {eligible:true,kind:'recorded-alpha-sandbox-closure',observationSha256:digest(observation),runtimeIdentity:alpha.runtimeIdentity,externalEffects:'none; fixed offline Alpha backend only'};
   const current=runtime.backend.inspect();
   if(current.backend==='linux-bwrap-offline/v1'&&typeof current.bootId==='string'&&typeof value.host.bootId==='string'&&current.bootId!==value.host.bootId)
     return {eligible:true,kind:'observed-host-reboot',previousBoot:value.host.bootId,currentBoot:current.bootId,externalEffects:'none; offline backend only'};
