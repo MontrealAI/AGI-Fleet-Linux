@@ -33,13 +33,16 @@ errors and hashes before assertions; no failed artifact is replaced by success.
 
 ## Full verification cost
 
-The driver repeats full manifest/tree/adapter hashing at the same frequency as the
-current production dispatch recheck (four checks per boundary), rather than timing
-only subprocess work. Grant receipts record full verification calls/milliseconds,
-whole grant wall time and the shared-deadline observation. This is a conservative
-workload simulation: root ownership/provisioning and the genuine reviewed native
-admission path remain explicitly unqualified. It does not establish cold-cache
-or arbitrary-host performance; a deadline failure remains a failed qualification.
+The driver adds four full manifest/tree/adapter checks per sequence boundary,
+rather than timing only subprocess work. Grant receipts record fixture verification
+calls/milliseconds, whole fixture grant wall time and the shared-deadline observation.
+This is a partial workload simulation, not conservative production-path timing:
+synthetic admission omits additional native package inspections before dispatch
+and at final supervisor revalidation, and omits the ordinary Linux sandbox probe.
+Root ownership/provisioning and genuine native admission remain unqualified.
+Only a subsequent actual fixed-path provisioning/admission journey can establish
+production-path timing. Cold-cache and arbitrary-host performance are not proved;
+a fixture deadline failure remains a failed qualification.
 
 ## Running
 
