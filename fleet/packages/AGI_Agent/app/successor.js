@@ -45,13 +45,20 @@
     $('guided').hidden=$('advanced').hidden=role!=='agent';$('context').hidden=$('context-label').hidden=role!=='agent';$('review').hidden=$('review-label').hidden=role!=='agent';
   }
   function download(name,value){const u=URL.createObjectURL(new Blob([typeof value==='string'?value:JSON.stringify(value,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),30000);}
-  function invalidate(){revision++;prepared=null;$('confirm').checked=false;$('execute').disabled=true;}
+  function invalidate(){revision++;prepared=null;$('confirm').checked=false;$('execute').disabled=true;$('preview').replaceChildren();$('preview-details').textContent='';}
   async function action(fn,urgent=false){if(busy&&!urgent)return;activeActions++;busy=true;try{await fn();}catch(e){$('message').textContent=(e.code?e.code+': ':'')+e.message;$('message').setAttribute('role','alert');}finally{activeActions--;busy=activeActions>0;}}
   async function readInput(id,max){const f=$(id).files[0];if(!f||f.size>max)throw Error(t('Choose a JSON file within the stated limit.','Choisissez un fichier JSON respectant la limite.'));const text=await f.text();return text;}
   $('language').onclick=()=>{fr=!fr;words();if(status)renderProject();if(prepared)renderPreview();};
-  $('file').onchange=()=>action(async()=>{invalidate();loaded=await readInput('file',96*1024*1024);showInputs();$('message').textContent=t('File loaded. Inspect before authorizing.','Fichier chargé. Examinez-le avant d’autoriser.');});
-  $('context').onchange=()=>action(async()=>{invalidate();context=await readInput('context',100000);});
-  $('review').onchange=()=>action(async()=>{review=await readInput('review',1000000);});
+  const fileRevisions=new Map();
+  function changedFile(id,max,clear,apply){
+    // New intent revokes the visible consent even during a pending inspection.
+    // Clear the previous input before reading; failed/reordered reads cannot restore it.
+    invalidate();clear();const token=(fileRevisions.get(id)??0)+1;fileRevisions.set(id,token);
+    return action(async()=>{try{const text=await readInput(id,max);JSON.parse(text);if(fileRevisions.get(id)!==token)return;apply(text);}catch(error){if(fileRevisions.get(id)===token)throw error;}},true);
+  }
+  $('file').onchange=()=>changedFile('file',96*1024*1024,()=>{loaded=null;$('inputs').replaceChildren();},text=>{loaded=text;showInputs();$('message').textContent=t('File loaded. Inspect before authorizing.','Fichier chargé. Examinez-le avant d’autoriser.');});
+  $('context').onchange=()=>changedFile('context',100000,()=>{context=undefined;},text=>{context=text;});
+  $('review').onchange=()=>changedFile('review',1000000,()=>{review=null;},text=>{review=text;});
   function showInputs(){
     $('inputs').replaceChildren();if(role!=='agent')return;const value=JSON.parse(loaded);
     for(const [i,f] of (value.plan?.immutableInputs??[]).entries()){
@@ -61,7 +68,7 @@
       $('inputs').append(label,input,button);
     }
   }
-  $('reviewer').onchange=()=>action(async()=>{invalidate();reviewer=JSON.parse(await readInput('reviewer',100000));});
+  $('reviewer').onchange=()=>changedFile('reviewer',100000,()=>{reviewer=null;},text=>{reviewer=JSON.parse(text);});
   for(const id of ['seconds','agent-cost','review-cost','public'])$(id).oninput=invalidate;
   async function guidedContext(){
     if(!loaded||!reviewer||!$('public').checked)throw Error(t('Choose the request and Node runtime, then review the public-input permission.','Choisissez la demande et le descripteur Node, puis vérifiez les droits des données publiques.'));
@@ -72,7 +79,7 @@
     return {schema:'successor-runtime-context/v1',runtimes:{agent:runtime.runtime,reviewer:reviewer.runtime},inputs:req.plan.immutableInputs.map((f,i)=>({name:f.name,uri:$('input-'+i).value,sha256:f.sha256,maxBytes:new TextEncoder().encode(f.content).length})),deadline:Math.floor(Date.now()/1000)+3600,settlement:{chainId:config.chainId,manager:config.manager.toLowerCase(),recovery:'Unfunded local Studio attempt. Preserve evidence; no automatic submission, settlement or reauthorization.'},budget:{maxAgentSeconds:seconds,maxReviewSeconds:seconds,maxAgentCostUSDC:$('agent-cost').value,maxReviewCostUSDC:$('review-cost').value},publicConsent:true};
   }
   $('runtime').onclick=()=>action(async()=>download('fleet-runtime-'+role+'.json',await call('/api/successor/runtime')));
-  $('prepare').onclick=()=>action(async()=>{invalidate();const version=revision;const input=role==='agent'?{request:loaded,context:context??await guidedContext()}:{handoff:loaded};if(version!==revision)return;const inspected=await call('/api/successor/prepare',input);if(version!==revision)return;prepared=inspected;renderPreview();$('message').textContent=t('Review this one-minute authorization. No work has started.','Examinez cette autorisation d’une minute. Aucun travail n’a démarré.');});
+  $('prepare').onclick=()=>action(async()=>{invalidate();const version=revision;if(!loaded)throw Error(t('Choose a valid request file before inspection.','Choisissez un fichier de demande valide avant l’examen.'));if(role==='agent'&&context===undefined)throw Error(t('Choose a valid runtime context file before inspection.','Choisissez un fichier de contexte valide avant l’examen.'));const input=role==='agent'?{request:loaded,context:context??await guidedContext()}:{handoff:loaded};if(version!==revision)return;const inspected=await call('/api/successor/prepare',input);if(version!==revision)return;prepared=inspected;renderPreview();$('message').textContent=t('Review this one-minute authorization. No work has started.','Examinez cette autorisation d’une minute. Aucun travail n’a démarré.');});
   $('confirm').onchange=()=>{$('execute').disabled=!prepared||!$('confirm').checked;};
   $('execute').onclick=()=>action(async()=>{const grant=prepared;invalidate();const version=revision;const answer=await call('/api/successor/execute',{ticket:grant.ticket,key:grant.key,confirm:true});if(version!==revision)return;$('message').textContent=t('Work started. Use Refresh results to see observed progress.','Travail démarré. Actualisez pour voir la progression observée.');await refresh();$('run').value=answer.key;renderProject();});
   $('revoke').onclick=()=>action(async()=>{invalidate();await call('/api/successor/revoke',{});$('message').textContent=t('Pending authorizations revoked.','Autorisations en attente révoquées.');},true);

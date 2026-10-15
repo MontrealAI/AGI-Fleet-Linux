@@ -8,12 +8,12 @@ export {need,keys,uuid,MAX_BYTES} from './primitives.mjs';
 
 export {parseStrict, canonical, COMPUTE_ROLES, roleContract};
 export const ROOT = fileURLToPath(new URL('../', import.meta.url));
-export const VERSION = '0.1.0-alpha.2';
+export const VERSION = '0.1.0-alpha.4';
 export const digest = value => crypto.createHash('sha256').update(typeof value === 'string' || Buffer.isBuffer(value) ? value : canonical(value)).digest('hex');
 export const id = () => crypto.randomUUID();
 export function label(value) { need(typeof value === 'string' && value.length > 0 && value.length <= 80 && !/[\u0000-\u001f\u007f]/u.test(value), 'LABEL_INVALID'); return value; }
 export function integer(value, min, max) { need(Number.isSafeInteger(value) && value >= min && value <= max, 'LIMIT_INVALID'); return value; }
-export const ACTIONS = Object.freeze({agent:['successor-run'], node:['successor-check'], moderator:['protocol-inspect'], employer:['protocol-inspect'], evidence:['evidence-inspect'], recovery:['protocol-inspect']});
+export const ACTIONS = Object.freeze({agent:['successor-run','alpha-run'], node:['successor-check'], moderator:['protocol-inspect'], employer:['protocol-inspect'], evidence:['evidence-inspect'], recovery:['protocol-inspect']});
 export function packagePolicy(role) {
   need(COMPUTE_ROLES.includes(role), 'ROLE_INVALID');
   const base = new URL(`../role-skills/agi-${role}/`, import.meta.url);

@@ -242,7 +242,7 @@ def publish(evidence, fleet, output, commit, run):
     with zipfile.ZipFile(evidence_file, 'x', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as target:
         for name, data in [('local-evidence.zip', (output / 'local-evidence.zip').read_bytes()),
                            ('local-audit.json', (output / 'local-audit.json').read_bytes()),
-                           ('fleet-regression-manifest.json', (fleet / 'Release-Manifest-v1.1.1.json').read_bytes()),
+                           ('fleet-regression-manifest.json', (fleet / f"Release-Manifest-v{regression['version']}.json").read_bytes()),
                            ('fleet-regression-evidence.zip', (fleet / regression['evidence']['name']).read_bytes())]:
             require(len(data) < LIMIT, 'Evidence member exceeds ceiling')
             info = zipfile.ZipInfo(name, (2026, 10, 14, 0, 0, 0))

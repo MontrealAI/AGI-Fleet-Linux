@@ -1,5 +1,5 @@
 import argparse,json
-REQUIRED={'build','native','integration','successor','audit'}
+REQUIRED={'build','native','integration','profile-integration','successor','audit'}
 def verify(needs):
     if set(needs)!=REQUIRED or any(needs[name].get('result')!='success' for name in REQUIRED):
         raise ValueError('Every required qualification child must succeed; missing, failed, cancelled and skipped results fail closed')

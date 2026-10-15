@@ -6,7 +6,9 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 
-const [fleetArg, managerArg, reportArg] = process.argv.slice(2);
+const [fleetArg, managerArg, reportArg, ...profileArgs] = process.argv.slice(2);
+assert.ok(profileArgs.length === 0 || (profileArgs.length === 2 && profileArgs[0] === '--contract-profile'), 'Use --contract-profile <reviewed-profile-id>');
+const contractProfile = profileArgs.length ? profileArgs[1] : undefined;
 assert.ok(fleetArg && managerArg && reportArg, 'Usage: node job-lifecycle.mjs <fleet> <manager> <report>');
 const fleet = path.resolve(fleetArg), managerRoot = path.resolve(managerArg);
 const agentRoot = path.join(fleet, 'packages/AGI_Agent');
@@ -92,6 +94,7 @@ try {
   dual = await rpc.dualFixture(connection.provider, directory);
 
   const base = {
+    ...(contractProfile ? { contractProfile } : {}),
     chainId: 31337, manager: addresses.AGIJobManager, deploymentBlock,
     confirmations: 1, trustedBuyers: [buyer.address],
   };
@@ -236,6 +239,7 @@ try {
   const report = {
     schema: 'agi-fleet-job-lifecycle/v1', status: 'PASS', chainId: 31337,
     managerArtifacts: 'freshly compiled AGIJobManager source',
+    ...(contractProfile ? { contractProfile: pin.contractProfile, contractProfileSHA256: pin.contractProfileSHA256 } : {}),
     linkedProductionContracts: Object.keys(pin.contracts).length,
     defaultVoteQuorum: 3, defaultReviewPeriodSeconds: 7 * 86400,
     agentGenerationCount: generations, publicationCount: publications,

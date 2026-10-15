@@ -69,3 +69,18 @@ test('storage failure leaves reconciliation uncertain and host STOP intact',asyn
     assert.equal(f.runtime.store.meta('stopped'),true);
   }finally{f.close();}
 });
+
+test('Alpha closure reconciliation binds native phase proof and runtime identity; synthetic authority never qualifies',async()=>{
+  const identity='a'.repeat(64),phase={backend:'linux-bwrap-alpha/v1',evidenceClass:'NATIVE_FIXED_ALPHA_IPC',phase:'validate',processGroupGone:true,privateNamespacesEnded:true,namespaceLifetimeEOF:true,network:'none',providerCalls:0,status:{childPid:123,namespaces:{pid:11,net:12,mnt:13,ipc:14,uts:15}}};
+  // Deliberately constructed record fixture. This does not demonstrate isolation.
+  for(const invalid of [null,'synthetic','missing-eof','wrong-runtime','missing-phase']){
+    const f=recoveryFixture();try{
+      const {run,g}=await uncertain(f),row=f.runtime.store.db.prepare('SELECT value FROM runs WHERE id=?').get(run),value=parseStrict(row.value);
+      value.host.alphaRuntimeIdentity=identity;value.admission={binding:{alpha:{evidenceClass:invalid==='synthetic'?'SYNTHETIC_OR_UNVERIFIED':'REVIEWED_NATIVE_PACKAGE',runtimeIdentity:identity}}};
+      const alphaObservation={backend:'linux-bwrap-alpha/v1',evidenceClass:'NATIVE_FIXED_ALPHA_IPC',runtimeIdentity:invalid==='wrong-runtime'?'b'.repeat(64):identity,processGroupGone:true,privateNamespacesEnded:true,network:'none',providerCalls:0,phases:invalid==='missing-phase'?[]:[{...phase,namespaceLifetimeEOF:invalid!=='missing-eof'}]};
+      f.runtime.store.db.prepare('UPDATE runs SET value=?,result=? WHERE id=?').run(canonical(value),canonical({error:'RUN_CANCELLED',observation:alphaObservation}),run);
+      const plan=await f.runtime.dispatch('reconciliation',{run},f.operator);assert.equal(plan.eligible,invalid===null);
+      if(invalid===null){assert.equal(plan.kind,'recorded-alpha-sandbox-closure');await f.runtime.dispatch('reconcile',{run,commitment:plan.commitment,confirm:true},f.operator);assert.equal(f.runtime.store.meta('stopped'),true);assert.equal(f.runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(g.grant).state,'consumed');}
+    }finally{f.close();}
+  }
+});

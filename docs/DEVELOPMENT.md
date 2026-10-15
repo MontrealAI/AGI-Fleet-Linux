@@ -1,6 +1,6 @@
 # Develop and reproduce AGI Fleet Linux
 
-The reviewed application source lives under `fleet/`: all six roles, shared runtime, 343 regression files, lockfiles and license notices. The **1.1.3** source identity is recorded in `engineering/next-release.json` and `fleet/source-inventory.json`. A source checkout alone is not an operator distribution.
+The reviewed application source lives under `fleet/`: all six roles, shared runtime, 344 saved-distribution regression files (including the generated current-guide test), lockfiles and license notices. The **1.1.4** source identity is recorded in `engineering/next-release.json` and `fleet/source-inventory.json`. A source checkout alone is not an operator distribution.
 
 ## Check a source change
 
@@ -19,7 +19,7 @@ For website changes, build with `python3 engineering/build-website.py`, check wi
 
 The Mac 1.20.2 build retains its **Linux 1.0.10 archive input**, identified by the exact version, size, SHA-256 and source inventory in `macos/release.json` and `macos/build.py`. A newer Linux published pointer or `fleet/` mirror must not retarget that Mac input. The Mac builder verifies the saved baseline archive, its manifests, source bytes, executable modes, inventory digest and source count before applying the Mac overlay. Changing this tooling creates new build inputs and requires fresh saved-archive qualification; it does not change or requalify the published Mac ZIP. Ordinary repository checks run the Mac engineering tests so unrelated Linux metadata changes cannot silently break that boundary.
 
-## Build the complete 1.1.3 candidate
+## Build the complete 1.1.4 candidate
 
 The builder downloads and verifies the frozen 1.0.9 ZIP, overlays exactly the inventoried source, incorporates current operator guides, regenerates the seven edition inventories/manifests and SBOMs, and validates the final extracted archive. It never creates accounts, opens a wallet or starts an operator service.
 
@@ -33,13 +33,15 @@ python3 engineering/build-next-release.py \
 
 Use `--archive /ABSOLUTE/PATH/AGI_Fleet_Linux_v1.0.9.zip` for an offline baseline. Its hash must match the frozen release. `--node` can identify the exact Node executable. Do not use the resulting candidate for funded work; publication requires the saved-archive qualification workflow.
 
-Output includes `AGI_Fleet_Linux_v1.1.3.zip`, `release.json`, packaging receipts, and final-extraction evidence. `release.json` identifies the bytes; it is not a claim that native or physical tests have passed.
+Output includes `AGI_Fleet_Linux_v1.1.4.zip`, `release.json`, packaging receipts, and final-extraction evidence. `release.json` identifies the bytes; it is not a claim that native or physical tests have passed.
 
 ## Qualify and publish
 
-Linux 1.1.3 binds the AGIJobManager source revision `e284550969ebd63e0460ea58d5fdd5fa3dfa6538`, derived from 1.16.1 with the engine 2 corrections, including all 780 Manager regressions. The original upstream 1.16.1 release is unchanged. The build metadata, each evidence binding and the independent audit retain the exact target. Publication additionally rejects mixed workflow runs, a different build commit and incomplete log coverage. Historical 1.0.9 and 1.0.10 results remain unchanged.
+Linux 1.1.4 binds the AGIJobManager source revision `b12cb2fd711934562af6d14b9edcd1614956434c`, derived from 1.16.1 with the engine 2 corrections, including all 780 Manager regressions. The original upstream 1.16.1 release is unchanged. The build metadata, each evidence binding and the independent audit retain the exact target. Publication additionally rejects mixed workflow runs, a different build commit and incomplete log coverage. Historical 1.0.9 and 1.0.10 results remain unchanged.
 
 The [next-release workflow](../.github/workflows/next-release.yml) builds once and distributes the same artifact to disposable x86-64 and ARM64 runners. It runs targeted/full native suites and AGIJobManager integration separately, then rechecks retained log hashes, test-source identity, exact counts and workflow provenance. Root runtime provisioning is limited to disposable GitHub-hosted runners; do not run that harness in an operator account or on a shared workstation.
+
+The current complete native gate requires 3,931 tests across 344 files. Its reviewed count basis is the prior exact PR #39 native run `38654643431` (3,917 tests across 343 files), plus the 14 new contract-profile regressions in one file. This establishes the expected gate only: fresh complete native execution on both architectures must pass for the saved candidate. Targeted native coverage remains 291 tests across 25 files.
 
 Pull requests run all qualification jobs without publishing. On `main`, changing `engineering/next-release.json` starts a release invocation; ordinary documentation pushes do not republish the fixed tag. Manual dispatch validates only unless `publish` is explicitly selected. Publication runs only after the independent audit passes. It uploads a draft release, verifies the remote asset digests, and publishes the prerelease. Existing differing assets are rejected rather than replaced. Every file must remain below 450,000,000 bytes. A stable production release additionally requires the [physical ledger](PHYSICAL_QUALIFICATION.md), which is still open.
 
@@ -54,11 +56,11 @@ python3 engineering/materialize-release.py --source-only --output /ABSOLUTE/PATH
 
 An offline ZIP can be supplied with `--archive`. Materialization verifies size, SHA-256, CRC, seven manifests, inventories and executable modes before extracting into an absent canonical directory.
 
-`engineering/current-release.json` preserves the 1.0.9 acceptance anchor for the historical audit tools; `engineering/next-release.json` describes the 1.1.3 source and required gates. After publication, the 1.1.3 manifest will be the authority for its archive identity and observed test results. This candidate remains unpublished until its exact-artifact gates and review pass. The [baseline engineering guide](../engineering/README.md) documents historical reproduction commands. Do not update historical constants to make a new candidate appear previously accepted.
+`engineering/current-release.json` preserves the 1.0.9 acceptance anchor for the historical audit tools; `engineering/next-release.json` describes the 1.1.4 source and required gates. After publication, the 1.1.4 manifest will be the authority for its archive identity and observed test results. This candidate remains unpublished until its exact-artifact gates and review pass. The [baseline engineering guide](../engineering/README.md) documents historical reproduction commands. Do not update historical constants to make a new candidate appear previously accepted.
 
 ## Authorized-workspace development preview
 
-New workstation capability work lives under [`workstation/`](../workstation/QUICKSTART.md), version `0.1.0-preview.1`. Its Linux engine records a historical **1.0.9** native workforce source basis in `workstation/candidate.json` and has its own source inventory, tests and qualification ledger. The native-workstation preview is **not included in the 1.1.3 Fleet ZIP**. Its reviewed public Studio format and explicit backup exclusion are incorporated into the 1.1.3 Agent and Node; the original overlay remains available below. The separate native preview does not modify a published Fleet archive or inherit acceptance from either the frozen 1.0.9 release or the 1.1.3 release track. Start the guided terminal menu with `npm --prefix workstation start` on a prepared task account; the engine itself uses Node built-ins and needs no npm dependency install. Read the quickstart before connecting a desktop.
+New workstation capability work lives under [`workstation/`](../workstation/QUICKSTART.md), version `0.1.0-preview.1`. Its Linux engine records a historical **1.0.9** native workforce source basis in `workstation/candidate.json` and has its own source inventory, tests and qualification ledger. The native-workstation preview is **not included in the 1.1.4 Fleet ZIP**. Its reviewed public Studio format and explicit backup exclusion are incorporated into the 1.1.4 Agent and Node; the original overlay remains available below. The separate native preview does not modify a published Fleet archive or inherit acceptance from either the frozen 1.0.9 release or the 1.1.4 release track. Start the guided terminal menu with `npm --prefix workstation start` on a prepared task account; the engine itself uses Node built-ins and needs no npm dependency install. Read the quickstart before connecting a desktop.
 
 The [Studio source overlay](../workstation/STUDIO.md) adds general-format imports to the top-level Agent and Node applications. To assemble a **disposable source fixture** for development outside this checkout:
 
@@ -79,6 +81,6 @@ The [exact-source review workflow](../.github/workflows/repository-review.yml) r
 
 After downloading the `exact-review-source` artifact, verify the inner ZIP with `SHA256SUMS.txt` and compare `source-receipt.json` with the workflow and commit being reviewed. Keep both identities when comparing a branch head with its tested integration tree. A successful engineering review does not replace the saved-archive native, browser, Manager integration or physical gates above.
 
-The publisher resolves local guide links against `docs/RELEASE_NOTES_1_1_3.md` and pins their public URLs to the exact validated commit. The original Markdown remains unchanged for offline installation guides. Missing or escaping local destinations stop preparation. Before making a release public, the publisher regenerates the expected note text from the checked-out source and exact asset identities, rejects changed text, and checks the remotely stored body. This prevents an edited notes artifact from silently replacing the reviewed instructions. The link relocator supports the repository's bounded Markdown guide format; it is not a general HTML sanitizer.
+The publisher resolves local guide links against `docs/RELEASE_NOTES_1_1_4.md` and pins their public URLs to the exact validated commit. The original Markdown remains unchanged for offline installation guides. Missing or escaping local destinations stop preparation. Before making a release public, the publisher regenerates the expected note text from the checked-out source and exact asset identities, rejects changed text, and checks the remotely stored body. This prevents an edited notes artifact from silently replacing the reviewed instructions. The link relocator supports the repository's bounded Markdown guide format; it is not a general HTML sanitizer.
 
 The [English starting guide](START_HERE.md) and [French starting guide](COMMENCER_ICI.md) distinguish current published qualification releases from Local Skills and native-workspace development previews. Keep their release labels aligned with the published manifests; do not advertise a draft branch as a released installer.

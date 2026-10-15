@@ -11,6 +11,8 @@ import {validateTaskInput} from '../worker.mjs';
 import {inspectReconciliation,reconcile} from './reconciliation.mjs';
 import {diagnostics} from './diagnostics.mjs';
 import {evaluateAdmission,requireAdmission,OFFLINE_LIMITS} from './admission.mjs';
+import {validateAlphaOutput} from '../alpha/contract.mjs';
+import {STORAGE_LIMITS,runHistoryUsage,encodeOutcome,encodeFailure} from './capacity.mjs';
 
 const ASSISTANT_ACTIONS=['status','inspect','prepare','run','cancel','output'];
 export function sourceIdentity() {
@@ -54,7 +56,7 @@ export class LocalRuntime {
     return this.store.transaction(()=>{
       const actor=this.store.actor(uuid(input.actor));need(!actor.stopped&&!this.store.meta('stopped'),'STOP_RECONCILIATION_REQUIRED');
       const pkg=packagePolicy(actor.role);actor.packageSha256=pkg.sha256;actor.registrySha256=pkg.registry;
-      actor.host={schema:'agi-fleet/local-binding/v1',host:this.store.meta('host'),backend:host.backend,identity:host.identity,sourceSha256:this.source,authority:'bounded-offline-only',...(host.bootId?{bootId:host.bootId}:{})};
+      actor.host={schema:'agi-fleet/local-binding/v1',host:this.store.meta('host'),backend:host.backend,identity:host.identity,sourceSha256:this.source,authority:'bounded-offline-only',...(host.alphaRun?.runtimeIdentity?{alphaRuntimeIdentity:host.alphaRun.runtimeIdentity}:{}),...(host.bootId?{bootId:host.bootId}:{})};
       actor.generation++;actor.active=true;this.store.saveActor(actor);
       this.store.db.prepare("UPDATE grants SET state='revoked' WHERE actor=? AND state IN ('prepared','authorized')").run(actor.id);
       this.store.event('actor-activated',{actor:actor.id,generation:actor.generation});return actor;
@@ -96,7 +98,7 @@ export class LocalRuntime {
     }
     const admission=requireAdmission(this.admissionReport(actor,input.task,{host}));
     const at=this.now();const grant={schema:'agi-fleet/local-grant/v1',id:id(),actor:actor.id,principal:p.hash,task:input.task,inputSha256:digest(input.task),packageSha256:actor.packageSha256,host:actor.host,generation:actor.generation,createdAt:at,expiresAt:at+300000,limits:OFFLINE_LIMITS,review:input.task.review,authority:'bounded-offline-only',admission};
-    this.store.transaction(()=>{const used=this.store.db.prepare('SELECT COALESCE(SUM(length(value)),0) AS bytes FROM grants').get().bytes;need(used+Buffer.byteLength(canonical(grant))<=32_000_000,'GRANT_HISTORY_FULL');this.store.db.prepare('INSERT INTO grants VALUES(?,?,?,?)').run(grant.id,actor.id,canonical(grant),'prepared');});
+    this.store.transaction(()=>{const used=this.store.db.prepare('SELECT COALESCE(SUM(length(CAST(value AS BLOB))),0) AS bytes FROM grants').get().bytes;need(used+Buffer.byteLength(canonical(grant))<=STORAGE_LIMITS.grants,'GRANT_HISTORY_FULL');this.store.db.prepare('INSERT INTO grants VALUES(?,?,?,?)').run(grant.id,actor.id,canonical(grant),'prepared');});
     return {grant:grant.id,commitment:digest(grant),actor:actor.id,task:grant.task,limits:grant.limits,expiresAt:grant.expiresAt,confirmationRequired:true,admission};
   }
   authorize(input,p) {
@@ -123,21 +125,40 @@ export class LocalRuntime {
       need(active.length<this.store.meta('maxConcurrent')&&!active.some(x=>x.actor===actor.id),'QUEUE_CAPACITY');
       const recent=this.store.db.prepare('SELECT actor,value FROM runs').all().filter(r=>parseStrict(r.value).reservedAt>now-86400000);
       need(recent.length<this.store.meta('maxRuns')&&recent.filter(r=>r.actor===actor.id).length<actor.maxRuns,'DAILY_BUDGET_EXHAUSTED');
-      const total=this.store.db.prepare('SELECT COUNT(*) AS count,COALESCE(SUM(length(value)+length(COALESCE(result,\'\'))),0) AS bytes FROM runs').get();
-      need(total.count<4096&&total.bytes<64_000_000,'HISTORY_CAPACITY_EXPORT_REQUIRED');
+      const run={id:id(),grant:grant.id,inputSha256:grant.inputSha256,reservedAt:now,role:actor.role,review:grant.review,sourceSha256:this.source,packageSha256:actor.packageSha256,host:actor.host,authority:'none',inference:'none',spendUSDC:'0',admission,storageReservationBytes:STORAGE_LIMITS.runReservation};
+      const total=runHistoryUsage(this.store.db),raw=canonical(run);
+      need(total.count<4096&&total.bytes+Buffer.byteLength(raw)+run.storageReservationBytes<=STORAGE_LIMITS.runs,'HISTORY_CAPACITY_EXPORT_REQUIRED');
       this.store.db.prepare("UPDATE grants SET state='consumed' WHERE id=?").run(grant.id);
-      this.store.set('clock',now);const run={id:id(),grant:grant.id,inputSha256:grant.inputSha256,reservedAt:now,role:actor.role,review:grant.review,sourceSha256:this.source,packageSha256:actor.packageSha256,host:actor.host,authority:'none',inference:'none',spendUSDC:'0',admission};
-      this.store.db.prepare("INSERT INTO runs VALUES(?,?,?,'running',?,NULL)").run(run.id,actor.id,grant.id,canonical(run));this.store.event('run-reserved',{id:run.id,actor:actor.id,grant:grant.id});return {...grant,run};
+      this.store.set('clock',now);
+      this.store.db.prepare("INSERT INTO runs VALUES(?,?,?,'running',?,NULL)").run(run.id,actor.id,grant.id,raw);this.store.event('run-reserved',{id:run.id,actor:actor.id,grant:grant.id});return {...grant,run};
     });
     const abort=new AbortController();this.active.set(g.run.id,{abort,actor:actor.id,grant:g.id,principal:p.hash});
     let directory;
     try {
       directory=fs.mkdtempSync(path.join(this.directory,'runs',g.run.id+'-'));fs.chmodSync(directory,0o700);
-      const result=await this.backend.execute({role:actor.role,task:g.task,directory,signal:abort.signal});
-      abort.signal.throwIfAborted();need(result.observation?.processGroupGone===true,'CLEANUP_UNCONFIRMED');
-      need(Buffer.byteLength(canonical(result))<=2_100_000,'OUTPUT_LIMIT');
+      const revalidate=()=>{
+        abort.signal.throwIfAborted();this.scope(p,'run',actor.id);
+        const current=this.store.actor(actor.id),ready=this.ready(current),now=this.now();
+        need(current.generation===g.generation&&canonical(current.host)===canonical(g.host)&&current.packageSha256===g.packageSha256,'GRANT_REVOKED');
+        need(now>=g.createdAt&&now<g.expiresAt&&now>=this.store.meta('clock'),'GRANT_EXPIRED_OR_CLOCK_CHANGED');
+        const grantRow=this.store.db.prepare('SELECT state,value FROM grants WHERE id=?').get(g.id);
+        need(grantRow?.state==='consumed'&&digest(parseStrict(grantRow.value).task)===g.inputSha256,'GRANT_REVOKED');
+        need(this.store.db.prepare('SELECT state FROM runs WHERE id=?').get(g.run.id)?.state==='running','RUN_RESERVATION_CHANGED');
+        requireAdmission(this.admissionReport(current,g.task,{host:ready,intake:false}),g.admission);
+      };
+      const result=await this.backend.execute({role:actor.role,task:g.task,directory,signal:abort.signal,expectedHost:g.host,revalidate});
+      // Validate every Alpha receipt in the supervisor, even for substituted
+      // test backends. Retain positive closure evidence on late refusal without
+      // treating it as successful output or restoring the consumed grant.
+      if(g.task.action==='alpha-run'){
+        try{abort.signal.throwIfAborted();revalidate();result.result=validateAlphaOutput(g.task.input,result.result);}
+        catch(error){error.observation??=result.observation;throw error;}
+      }else abort.signal.throwIfAborted();
+      need(result.observation?.processGroupGone===true,'CLEANUP_UNCONFIRMED');
+      need(Buffer.byteLength(canonical(result))<=STORAGE_LIMITS.backendResult,'OUTPUT_LIMIT');
       const receipt={...result,outputSha256:digest(result.result),inputSha256:g.inputSha256,independentReview:false,sourceActor:actor.id,sourceController:actor.controller,authority:'none'};
-      this.store.transaction(()=>{this.store.db.prepare("UPDATE runs SET state='complete',result=? WHERE id=?").run(canonical(receipt),g.run.id);this.store.event('run-complete',{id:g.run.id,outputSha256:receipt.outputSha256});});
+      const outcome=encodeOutcome(receipt);
+      this.store.transaction(()=>{this.store.db.prepare("UPDATE runs SET state='complete',result=? WHERE id=?").run(outcome,g.run.id);this.store.event('run-complete',{id:g.run.id,outputSha256:receipt.outputSha256});});
       return {run:g.run.id,state:'complete',receipt};
     } catch(e) {
       this.emergency=true;
@@ -145,7 +166,7 @@ export class LocalRuntime {
       for(const active of this.active.values())active.abort.abort();
       const code=/^[A-Z0-9_]{1,100}$/.test(e.code||e.message)?e.code||e.message:'FAILED_OR_UNCERTAIN';
       this.store.transaction(()=>{
-        this.store.db.prepare("UPDATE runs SET state='uncertain',result=? WHERE id=?").run(canonical({error:code,observation:e.observation??null}),g.run.id);
+        this.store.db.prepare("UPDATE runs SET state='uncertain',result=? WHERE id=?").run(encodeFailure(code,e.observation),g.run.id);
         this.store.db.prepare("UPDATE grants SET state='revoked' WHERE state IN ('prepared','authorized')").run();
         this.store.set('stopped',true);this.store.event('run-uncertain',{id:g.run.id,code});
       });throw Object.assign(new Error(code),{code,run:g.run.id});

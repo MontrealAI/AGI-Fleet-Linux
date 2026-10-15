@@ -12,6 +12,7 @@ import zipfile
 
 from next_release_tools import adapt_baseline, candidate_tools, load_candidate, load_module, provenance, verify_candidate, write_json
 from release_tools import ROOT, require, sha
+from saved_profile_audit import audit_saved_profile
 
 KEYS = ('tests', 'suites', 'pass', 'fail', 'cancelled', 'skipped', 'todo')
 BAD = ('fail', 'cancelled', 'skipped', 'todo')
@@ -199,8 +200,9 @@ def audit_successor(directory, candidate, commit, run_id):
     return result
 
 
-def audit(archive_path, candidate, native, integration, workflow_commit=None, workflow_run=None, successor=None):
+def audit(archive_path, candidate, native, integration, workflow_commit=None, workflow_run=None, successor=None, profiles=None):
     require(len(native) == len(integration) == 2, 'Exactly two native and integration architecture runs are required')
+    require(profiles is not None and len(profiles) == 2, 'Exactly two saved-archive profile runs are required')
     receipt = verify_candidate(archive_path, candidate)
     ledger = read_json(ROOT / 'validation/original-native-case-ledger.json')
     require(ledger['releaseSHA256'] == BASELINE_SHA and len(ledger['cases']) == 50, 'Original case ledger differs')
@@ -220,11 +222,13 @@ def audit(archive_path, candidate, native, integration, workflow_commit=None, wo
     commit, run_id = next(iter(commits)), next(iter(run_ids))
     require(not workflow_commit or commit == workflow_commit, 'Expected workflow commit differs')
     require(not workflow_run or run_id == str(workflow_run), 'Expected workflow run differs')
+    profile_runs = [audit_saved_profile(path, archive_path, candidate, commit, run_id) for path in profiles]
+    require({row['architecture'] for row in profile_runs} == {'x64', 'arm64'}, 'Both profile architectures are required')
     return {'schema': 'agi-next-release-independent-audit/v1', 'status': 'PASS',
             'version': candidate['version'], 'releaseSHA256': candidate['sha256'],
             'sourceRevisionSHA256': candidate['sourceRevisionSHA256'], 'workflowCommit': commit, 'workflowRun': run_id,
             'architectures': ['x64', 'arm64'], 'native': native_runs, 'integration': integration_runs,
-            'integrationTarget': candidate['integration'],
+            'integrationTarget': candidate['integration'], 'contractProfiles': profile_runs,
             'successorAcceptance': audit_successor(successor, candidate, commit, run_id),
             'verifiedTapLogs': sum(run['runs'][scope]['verifiedLogs'] for run in native_runs for scope in ('targeted', 'complete')),
             'verifiedIntegrationLogs': sum(run['verifiedLogs'] for run in integration_runs),
@@ -237,13 +241,14 @@ def main():
     parser.add_argument('--archive', type=Path, required=True)
     parser.add_argument('--native', type=Path, action='append', required=True)
     parser.add_argument('--integration', type=Path, action='append', required=True)
+    parser.add_argument('--profile', type=Path, action='append', required=True)
     parser.add_argument('--workflow-commit', default=os.environ.get('GITHUB_SHA'))
     parser.add_argument('--workflow-run', default=os.environ.get('GITHUB_RUN_ID'))
     parser.add_argument('--successor', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     candidate = load_candidate(args.metadata, args.archive)
-    result = audit(args.archive, candidate, args.native, args.integration, args.workflow_commit, args.workflow_run, args.successor)
+    result = audit(args.archive, candidate, args.native, args.integration, args.workflow_commit, args.workflow_run, args.successor, args.profile)
     require(not args.out.exists(), 'Audit output already exists')
     write_json(args.out, result)
     print(json.dumps({key: result[key] for key in ('status', 'version', 'releaseSHA256', 'workflowCommit', 'architectures',

@@ -4,6 +4,9 @@ import os from 'node:os';
 import {spawn,spawnSync} from 'node:child_process';
 import {ROOT,need,keys,digest,canonical,parseStrict} from '../contracts.mjs';
 
+import {inspectAlphaPackage} from '../alpha/package.mjs';
+import {executeAlpha} from '../alpha/ipc.mjs';
+
 const BIN='/usr/bin/bwrap', LIMIT='/usr/bin/prlimit';
 function trusted(file,own=false) { const s=fs.statSync(file);need(s.isFile()&&(s.uid===0||own&&s.uid===process.getuid())&&!(s.mode&0o022),'SANDBOX_EXECUTABLE_UNTRUSTED');return fs.realpathSync(file); }
 export function sandboxArguments() {
@@ -17,7 +20,7 @@ export function sandboxArguments() {
 }
 export class LinuxSandbox {
   inspect() {
-    const report={schema:'agi-fleet/local-host/v1',platform:process.platform,arch:process.arch,backend:'linux-bwrap-offline/v1',execution:'this host',inference:'none',network:'none',files:'per-run input only; no host writes',browser:'BLOCKED',desktop:'BLOCKED',productionQualified:false,physical:'NOT_RUN',supported:false};
+    const report={schema:'agi-fleet/local-host/v1',platform:process.platform,arch:process.arch,backend:'linux-bwrap-offline/v1',execution:'this host',inference:'none',network:'none',files:'per-run input only; no host writes',browser:'BLOCKED',desktop:'BLOCKED',productionQualified:false,physical:'NOT_RUN',supported:false,alphaRun:inspectAlphaPackage()};
     try {
       need(process.platform==='linux'&&['x64','arm64'].includes(process.arch),'PLATFORM_NOT_QUALIFIED');
       need(process.versions.node.split('.')[0]==='24'&&Number(process.versions.node.split('.')[1])>=19,'NODE_VERSION_UNSUPPORTED');
@@ -29,12 +32,16 @@ export class LinuxSandbox {
         need(false,code);
       }
       const bootId=fs.readFileSync('/proc/sys/kernel/random/boot_id','utf8').trim();
-      return {...report,supported:true,observedAt:Date.now(),bootId,identity:digest({backend:report.backend,node:digest(fs.readFileSync(process.execPath)),sandbox:digest(fs.readFileSync(BIN)),platform:process.platform,arch:process.arch,os:os.release(),boot:bootId})};
+      return {...report,supported:true,observedAt:Date.now(),bootId,identity:digest({backend:report.backend,node:digest(fs.readFileSync(process.execPath)),sandbox:digest(fs.readFileSync(BIN)),limiter:digest(fs.readFileSync(LIMIT)),platform:process.platform,arch:process.arch,os:os.release(),boot:bootId,alphaRuntimeIdentity:report.alphaRun.runtimeIdentity??null,alphaTrustLockSha256:report.alphaRun.trustLockSha256??null})};
     }catch(e){return {...report,code:e.code==='ENOENT'?'SANDBOX_PREREQUISITE_MISSING':e.code||e.message,help:'Use the documented Linux prerequisites and rerun doctor. No host-shell fallback is permitted. Browser, desktop and macOS local execution require separate implementation and qualification.'};}
   }
-  async execute({role,task,directory,signal}) {
+  async execute({role,task,directory,signal,expectedHost,revalidate}) {
+    if(task?.action==='alpha-run')return executeAlpha({role,task,signal,expectedHost,revalidate,inspectHost:()=>this.inspect()});
     const started=performance.now();
+    need(expectedHost&&typeof expectedHost.identity==='string'&&typeof expectedHost.backend==='string','EXECUTION_BINDING_REQUIRED');
     const ready=this.inspect();need(ready.supported,ready.code);
+    if(ready.identity!==expectedHost.identity||ready.backend!==expectedHost.backend||(ready.bootId??null)!==(expectedHost.bootId??null))
+      throw Object.assign(new Error('EXECUTION_HOST_CHANGED'),{code:'EXECUTION_HOST_CHANGED',observation:{backend:'linux-bwrap-offline/v1',launchAttempted:false,reason:'EXECUTION_HOST_CHANGED',network:'none',providerCalls:0}});
     const input=path.join(directory,'task.json');fs.writeFileSync(input,canonical({role,task}),{flag:'wx',mode:0o600});
     const command=[...sandboxArguments(),'--ro-bind',input,'/input/task.json','--chdir','/tmp','--','/node','--max-old-space-size=128','--v8-pool-size=1','/app/local-runtime/worker.mjs'];
     signal?.throwIfAborted();

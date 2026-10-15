@@ -15,6 +15,12 @@ spec.loader.exec_module(publisher)
 
 
 class PublicationAcceptance(unittest.TestCase):
+    def test_reserved_parallel_release_identity_cannot_publish(self):
+        metadata = copy.deepcopy(self.metadata)
+        metadata.update(version='1.1.3', tag='v1.1.3-qualification', name='AGI_Fleet_Linux_v1.1.3.zip')
+        with self.assertRaises(ValueError):
+            publisher.validate(metadata, self.audit, self.commit)
+
     def setUp(self):
         self.commit = 'a' * 40
         self.run_id = os.environ.get('GITHUB_RUN_ID', '123')
@@ -38,6 +44,32 @@ class PublicationAcceptance(unittest.TestCase):
             self.audit['integration'].append({**common, 'standaloneIntegrationScripts': 8, 'managerTestsPassed': 780,
                 'managerCommit': self.metadata['integration']['commit'], 'verifiedLogs': 19,
                 'productionSourcesMatched': 11, 'contractArtifactsMatched': 11})
+
+        profile_id = 'manager-1.17.0-b7218196'
+        profile = publisher.CONTRACT_PROFILES[profile_id]
+        self.audit['contractProfiles'] = [
+            {'architecture': arch, 'status': 'PASS', 'workflowCommit': self.commit,
+             'workflowRun': self.run_id, 'productionQualified': False,
+             'archiveSHA256': self.metadata['sha256'], 'sourceRevisionSHA256': self.metadata['sourceRevisionSHA256'],
+             'profile': profile_id, 'profileManifestSHA256': profile['manifestSHA256'],
+             'managerCommit': profile['commit'], 'managerTestsPassed': profile['managerTests'],
+             'standaloneIntegrationScripts': 8, 'contractArtifactsMatched': 11, 'verifiedLogs': 12,
+             'completeArchiveUnchanged': True} for arch in ('x64', 'arm64')]
+
+    def test_profile_proof_missing_or_mixed_is_rejected(self):
+        for key, value in [('archiveSHA256', '0' * 64), ('workflowCommit', 'd' * 40),
+                           ('workflowRun', '456'), ('managerCommit', 'e' * 40),
+                           ('profileManifestSHA256', 'f' * 64), ('managerTestsPassed', 780),
+                           ('verifiedLogs', 11), ('completeArchiveUnchanged', False),
+                           ('sourceRevisionSHA256', '0' * 64), ('profile', 'manager-legacy-db876a8')]:
+            changed = copy.deepcopy(self.audit)
+            changed['contractProfiles'][0][key] = value
+            with self.subTest(field=key), self.assertRaises(ValueError):
+                publisher.validate(self.metadata, changed, self.commit)
+        for rows in ([], self.audit['contractProfiles'][:1], [self.audit['contractProfiles'][0]] * 2):
+            changed = copy.deepcopy(self.audit); changed['contractProfiles'] = rows
+            with self.subTest(rows=len(rows)), self.assertRaises(ValueError):
+                publisher.validate(self.metadata, changed, self.commit)
 
     def test_complete_candidate_can_be_prepared(self):
         publisher.validate(self.metadata, self.audit, self.commit)
@@ -66,7 +98,7 @@ class PublicationAcceptance(unittest.TestCase):
                 publisher.validate(metadata, self.audit, self.commit)
 
     def test_published_guides_are_bound_to_the_validated_commit(self):
-        source = publisher.ROOT / 'docs/RELEASE_NOTES_1_1_3.md'
+        source = publisher.ROOT / 'docs/RELEASE_NOTES_1_1_4.md'
         before = source.read_bytes()
         notes = publisher.publication_notes([], self.commit, self.run_id)
         for path in ('successor/docs/GUIDE.md', 'successor/docs/ARCHITECTURE.md',
@@ -98,14 +130,16 @@ class PublicationAcceptance(unittest.TestCase):
             metadata.update(bytes=archive.stat().st_size, sha256=publisher.sha(archive))
             audit = copy.deepcopy(self.audit); audit['releaseSHA256'] = metadata['sha256']
             audit['successorAcceptance']['archiveSHA256'] = metadata['sha256']
+            for row in audit['contractProfiles']:
+                row['archiveSHA256'] = metadata['sha256']
             evidence = output / 'evidence.zip'; evidence.write_bytes(b'evidence fixture')
             manifest = {'workflowCommit': self.commit, 'workflowRun': self.run_id,
                 'sha256': metadata['sha256'], 'audit': audit,
                 'evidence': {'name': evidence.name, 'sha256': publisher.sha(evidence)}}
             publisher.write(release / 'release.json', metadata)
-            manifest_path = output / 'Release-Manifest-v1.1.3.json'; publisher.write(manifest_path, manifest)
+            manifest_path = output / 'Release-Manifest-v1.1.4.json'; publisher.write(manifest_path, manifest)
             assets = [archive, evidence, manifest_path]
-            (output / 'SHA256SUMS-v1.1.3.txt').write_text(''.join(publisher.sha(p) + '  ' + p.name + '\n' for p in assets))
+            (output / 'SHA256SUMS-v1.1.4.txt').write_text(''.join(publisher.sha(p) + '  ' + p.name + '\n' for p in assets))
             expected = publisher.publication_notes(assets, self.commit, self.run_id)
             (output / 'release-notes.md').write_text(expected + '\nUnreviewed instructions.\n')
             with mock.patch.dict(os.environ, {'GITHUB_SHA': self.commit, 'GITHUB_RUN_ID': self.run_id}):
