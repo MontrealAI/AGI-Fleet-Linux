@@ -40,3 +40,9 @@ class GovernanceGate(unittest.TestCase):
   self.assertIn('--contract-profile manager-1.17.0-b7218196',profile)
   self.assertNotIn('sudo',profile)
   self.assertIn('--profile evidence/next-profile-x64 --profile evidence/next-profile-arm64',workflow)
+
+ def test_local_skills_requalifies_packaged_fleet_changes(self):
+  workflow=(ROOT/'.github/workflows/local-skills.yml').read_text()
+  pull_request=workflow.split('  pull_request:',1)[1].split('  push:',1)[0]
+  self.assertIn("'fleet/**'",pull_request)
+  self.assertIn("'local-runtime/**'",pull_request)

@@ -1,7 +1,7 @@
 name: Local Skills development qualification
 on:
   pull_request:
-    paths: ['local-runtime/**', 'local-dashboard/**', 'role-skills/**', 'docs/local-skills/**', 'LOCAL_SKILLS.md', '.github/workflows/local-skills.yml']
+    paths: ['fleet/**', 'local-runtime/**', 'local-dashboard/**', 'role-skills/**', 'docs/local-skills/**', 'LOCAL_SKILLS.md', '.github/workflows/local-skills.yml']
   push:
     branches: [main]
     paths: ['local-runtime/preview-release.json']
