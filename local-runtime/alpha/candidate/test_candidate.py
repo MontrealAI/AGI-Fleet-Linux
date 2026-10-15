@@ -308,6 +308,59 @@ class CandidateTests(unittest.TestCase):
             with self.subTest(update=update), self.assertRaises(ValueError):
                 qualify.check_probe('cpu', {**good, **update}, 'pid:[host]', 'net:[host]')
 
+
+    def test_prelaunch_same_uid_daemon_is_excluded_only_with_matching_start_time(self):
+        daemon = self.root/'1296'; daemon.mkdir(); (daemon/'stat').write_text(self.cpu_stat(90, 2, 12345))
+        baseline = qualify.snapshot_process_identities(self.root)
+        self.assertEqual(baseline, {1296:12345})
+        ignored = {}
+        with patch('qualify.os.readlink', side_effect=PermissionError('nondumpable preexisting daemon')):
+            self.assertEqual(qualify.namespace_members('pid:[new-child]', baseline, self.root, ignored), [])
+        self.assertEqual(ignored, {'1296:12345':{'pid':1296, 'startTimeTicks':12345}})
+
+    def test_new_unreadable_same_uid_process_still_fails_closed(self):
+        baseline = qualify.snapshot_process_identities(self.root)
+        child = self.root/'2000'; child.mkdir(); (child/'stat').write_text(self.cpu_stat(0, 0, 54321))
+        with patch('qualify.os.readlink', side_effect=PermissionError('unknown descendant')), self.assertRaisesRegex(ValueError, 'new or reused'):
+            qualify.namespace_members('pid:[new-child]', baseline, self.root)
+
+    def test_reused_baseline_pid_with_new_start_time_still_fails_closed(self):
+        process = self.root/'1296'; process.mkdir(); (process/'stat').write_text(self.cpu_stat(90, 2, 12345))
+        baseline = qualify.snapshot_process_identities(self.root)
+        (process/'stat').write_text(self.cpu_stat(0, 0, 54321))
+        with patch('qualify.os.readlink', side_effect=PermissionError('reused PID')), self.assertRaisesRegex(ValueError, 'new or reused'):
+            qualify.namespace_members('pid:[new-child]', baseline, self.root)
+
+    def test_baseline_does_not_hide_readable_private_namespace_members(self):
+        process = self.root/'1296'; process.mkdir(); (process/'stat').write_text(self.cpu_stat(90, 2, 12345))
+        baseline = qualify.snapshot_process_identities(self.root)
+        with patch('qualify.os.readlink', return_value='pid:[new-child]'):
+            self.assertEqual(qualify.namespace_members('pid:[new-child]', baseline, self.root), [1296])
+
+    def test_baseline_requires_readable_current_start_time_on_namespace_denial(self):
+        process = self.root/'1296'; process.mkdir(); (process/'stat').write_text(self.cpu_stat(90, 2, 12345))
+        baseline = qualify.snapshot_process_identities(self.root)
+        with patch('qualify.os.readlink', side_effect=PermissionError('denied')), patch.object(Path, 'read_text', side_effect=PermissionError('stat denied')), self.assertRaisesRegex(ValueError, 'start time cannot be verified'):
+            qualify.namespace_members('pid:[new-child]', baseline, self.root)
+
+    def test_launch_baseline_is_captured_before_process_creation(self):
+        events = []
+        original = qualify.subprocess.Popen
+        def launch(*args, **kwargs):
+            events.append('launch')
+            return original(*args, **kwargs)
+        with patch('qualify.snapshot_process_identities', side_effect=lambda: events.append('snapshot') or {}), \
+             patch('qualify.subprocess.Popen', side_effect=launch), \
+             patch('qualify.command', return_value=[sys.executable, '-I', '-S', '-c', 'pass']):
+            qualify.run(self.root, 'probe', probe='isolation')
+        self.assertEqual(events, ['snapshot', 'launch'])
+
+    def test_cpu_sampler_forwards_the_same_proc_root_to_namespace_scan(self):
+        process = self.root/'123'; process.mkdir(); (process/'stat').write_text(self.cpu_stat(920, 2, 100))
+        with patch('qualify.namespace_members', return_value=[123]) as scan, patch('qualify.os.readlink', return_value='pid:[private]'):
+            qualify.sample_namespace_cpu({'pid:[private]': [123]}, {}, self.root)
+        scan.assert_called_once_with('pid:[private]', baseline=None, proc_root=self.root, ignored=None)
+
     def test_production_lock_remains_null(self):
         lock=json.loads((build.ALPHA/'package-lock.json').read_text())
         self.assertEqual(lock['state'],'UNPROVISIONED')

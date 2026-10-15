@@ -49,9 +49,28 @@ def command(root, mode, probe=None):
     return args
 
 
-def namespace_members(namespace):
+def snapshot_process_identities(proc_root=Path('/proc')):
+    """Capture readable same-UID PID/start-time identities before any launch.
+
+    A process that already exists cannot inhabit a newly created child PID
+    namespace. An unreadable stat is never added to this exemption set.
+    """
+    identities = {}
+    for process in proc_root.iterdir():
+        if process.name.isdigit():
+            try:
+                if process.stat().st_uid == os.getuid():
+                    identities[int(process.name)] = process_cpu_stat((process / 'stat').read_text())['startTimeTicks']
+            except (FileNotFoundError, ProcessLookupError, PermissionError):
+                # Absence of a verified baseline does not exempt later failures.
+                pass
+    return identities
+
+
+def namespace_members(namespace, baseline=None, proc_root=Path('/proc'), ignored=None):
     members = []
-    for p in Path('/proc').iterdir():
+    baseline = baseline or {}
+    for p in proc_root.iterdir():
         if p.name.isdigit():
             try:
                 if os.readlink(p / 'ns/pid') == namespace:
@@ -60,8 +79,17 @@ def namespace_members(namespace):
                 pass
             except PermissionError:
                 try:
-                    require(p.stat().st_uid != os.getuid(), 'CLEANUP_UNOBSERVABLE: own process namespace cannot be read')
-                except FileNotFoundError:
+                    if p.stat().st_uid == os.getuid():
+                        pid = int(p.name)
+                        try:
+                            start = process_cpu_stat((p / 'stat').read_text())['startTimeTicks']
+                        except PermissionError:
+                            raise ValueError('CLEANUP_UNOBSERVABLE: own process start time cannot be verified; pid=' + p.name)
+                        require(baseline.get(pid) == start,
+                                'CLEANUP_UNOBSERVABLE: new or reused own process namespace cannot be read; pid=' + p.name)
+                        if ignored is not None:
+                            ignored[str(pid) + ':' + str(start)] = {'pid': pid, 'startTimeTicks': start}
+                except (FileNotFoundError, ProcessLookupError):
                     pass
     return members
 
@@ -76,9 +104,9 @@ def process_cpu_stat(raw):
     return {'startTimeTicks': start, 'userTicks': user, 'systemTicks': system}
 
 
-def sample_namespace_cpu(namespaces, samples, proc_root=Path('/proc')):
+def sample_namespace_cpu(namespaces, samples, proc_root=Path('/proc'), *, baseline=None, ignored=None):
     for namespace in namespaces:
-        for pid in namespace_members(namespace):
+        for pid in namespace_members(namespace, baseline=baseline, proc_root=proc_root, ignored=ignored):
             try:
                 process = proc_root / str(pid)
                 if os.readlink(process / 'ns/pid') != namespace:
@@ -102,6 +130,8 @@ def run(root, mode, data=b'', probe=None, wall=15, cancel_after=None, output_lim
     clock_ticks = os.sysconf('SC_CLK_TCK')
     require(isinstance(clock_ticks, int) and clock_ticks > 0, 'Process CPU clock unavailable')
     started = time.monotonic()
+    baseline = snapshot_process_identities() if probe else {}
+    ignored_preexisting = {}
     usage_before = resource.getrusage(resource.RUSAGE_CHILDREN)
     process = subprocess.Popen(command(root, mode, probe), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE, start_new_session=True, env={'PATH': '/usr/bin:/bin'})
@@ -123,7 +153,7 @@ def run(root, mode, data=b'', probe=None, wall=15, cancel_after=None, output_lim
     try:
         while selector.get_map():
             if probe:
-                sample_namespace_cpu(observed_members, cpu_samples)
+                sample_namespace_cpu(observed_members, cpu_samples, baseline=baseline, ignored=ignored_preexisting)
             elapsed = time.monotonic() - started
             reason = reason or ('WALL_TIMEOUT' if elapsed >= wall else 'CANCELLED' if cancel_after is not None and elapsed >= cancel_after else None)
             if reason and killed_at is None:
@@ -161,7 +191,7 @@ def run(root, mode, data=b'', probe=None, wall=15, cancel_after=None, output_lim
                                         continue
                                     namespace = event.get('pidNamespace') if isinstance(event, dict) else None
                                     if namespace and namespace not in observed_members:
-                                        members = namespace_members(namespace)
+                                        members = namespace_members(namespace, baseline=baseline, ignored=ignored_preexisting)
                                         if members:
                                             observed_members[namespace] = members
         status = process.wait(timeout=5)
@@ -190,7 +220,7 @@ def run(root, mode, data=b'', probe=None, wall=15, cancel_after=None, output_lim
                 continue
             if isinstance(event, dict) and 'pidNamespace' in event:
                 require(event['pidNamespace'] in observed_members, 'CLEANUP_UNOBSERVABLE: no live private namespace member observed')
-                require(not namespace_members(event['pidNamespace']), 'CLEANUP_UNCONFIRMED: private namespace still has processes')
+                require(not namespace_members(event['pidNamespace'], baseline=baseline, ignored=ignored_preexisting), 'CLEANUP_UNCONFIRMED: private namespace still has processes')
                 observations.append(event)
     usage_after = resource.getrusage(resource.RUSAGE_CHILDREN)
     cpu_seconds = usage_after.ru_utime + usage_after.ru_stime - usage_before.ru_utime - usage_before.ru_stime
@@ -198,7 +228,9 @@ def run(root, mode, data=b'', probe=None, wall=15, cancel_after=None, output_lim
             'namespaceCpuSecondsObserved': sum(s['userTicks'] + s['systemTicks'] for s in cpu_samples.values()) / clock_ticks if probe else None,
             'namespaceCpuSamples': list(cpu_samples.values()), 'clockTicksPerSecond': clock_ticks, 'status': status, 'reason': reason, 'stdout': bytes(buffers['stdout']), 'stderr': bytes(buffers['stderr']),
             'wallMilliseconds': round((time.monotonic() - started) * 1000), 'processGroupGone': group_gone,
-            'probeObservations': observations, 'liveNamespaceMembersObserved': observed_members}
+            'probeObservations': observations, 'liveNamespaceMembersObserved': observed_members,
+            'prelaunchProcessIdentitySha256': sha(canonical(baseline)) if probe else None,
+            'verifiedPreexistingProcessesExcluded': list(ignored_preexisting.values())}
 
 
 def probe_attempt(probe, result):

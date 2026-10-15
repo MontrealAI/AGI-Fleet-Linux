@@ -96,7 +96,13 @@ probe attempts retain bounded stderr, exit status and observations before checks
 raise. CPU success requires the inherited 10/10-second soft/hard limits, SIGKILL
 and approximately ten CPU seconds sampled from live private-namespace `/proc`
 processes. Samples bind host PID plus process start time; parent rusage is labeled
-launcher-only and cannot satisfy the namespace CPU gate.
+launcher-only and cannot satisfy the namespace CPU gate. Before each probe launch,
+the harness snapshots readable same-UID PID/start-time identities. An unrelated
+nondumpable daemon is excluded from namespace scanning only if its current start
+time exactly matches that prelaunch snapshot; such an existing process cannot
+already inhabit the new child PID namespace. New, reused or otherwise unverified
+unreadable same-UID identities still fail closed. Every exclusion is retained in
+the observation; readable private-namespace members are never exempted.
 Incompatible hosts fail the job and retain failure evidence; tests never skip.
 
 Limits are at most 15 seconds wall, 10 seconds CPU, 512,000 stdout bytes, 8,192
