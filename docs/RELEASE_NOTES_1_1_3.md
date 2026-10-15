@@ -14,7 +14,7 @@ The separate Local Skills alpha.2 candidate adds explicit source/host/task admis
 
 The English and French landing pages also gain clearer contrast, layouts that reflow on narrow screens and with larger text, and diagram labels that do not overlap. New browser checks exercise navigation, all six role commands, guide search and copy fallback. Mac build tooling retains its original verified Linux archive input when the Linux download pointer advances; the published Mac 1.20.2 installer remains a separate release.
 
-The Builder and integration tests use the exact AGIJobManager source revision `e284550969ebd63e0460ea58d5fdd5fa3dfa6538`, derived from 1.16.1 with the engine 2 corrections. This identifies the reviewed source, rather than changing the existing upstream 1.16.1 release.
+The Builder and integration tests use the exact AGIJobManager source revision `b12cb2fd711934562af6d14b9edcd1614956434c`, derived from 1.16.1 with the engine 2 corrections. This identifies the reviewed source, rather than changing the existing upstream 1.16.1 release.
 
 Read the [practical qualification guide](../successor/docs/PRACTICAL_QUALIFICATION.md), [Builder journey](../successor/docs/GUIDE.md), [exact-version install guide](FRESH_INSTALL.md) and [physical qualification ledger](PHYSICAL_QUALIFICATION.md). Do not install until this exact archive has the required native and integration acceptance. Source/browser tests alone do not qualify an installer.
 
