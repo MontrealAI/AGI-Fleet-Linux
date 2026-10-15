@@ -8,6 +8,8 @@ on:
       - successor/**
       - website/**
       - engineering/build-website.py
+      - engineering/build-demo-directory.py
+      - engineering/test-demo-directory.py
       - engineering/check-website.py
       - engineering/browser-tests/**
       - engineering/current-release.json
@@ -25,6 +27,8 @@ on:
       - successor/**
       - website/**
       - engineering/build-website.py
+      - engineering/build-demo-directory.py
+      - engineering/test-demo-directory.py
       - engineering/check-website.py
       - engineering/browser-tests/**
       - engineering/current-release.json
@@ -58,7 +62,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Build from reviewed release metadata
-        run: python3 engineering/build-website.py
+        run: |
+          python3 engineering/test-demo-directory.py
+          python3 engineering/build-website.py
       - name: Check public files, links and JavaScript
         run: |
           python3 engineering/check-website.py

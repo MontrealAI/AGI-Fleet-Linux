@@ -12,6 +12,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {'index.html', 'fr.html', 'start.html', 'start-fr.html', 'mac.html', 'mac-fr.html', 'styles.css',
             'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'release.json', 'mac-release.json', 'install-mac.html', 'install-mac-fr.html', 'mac-setup.css', 'mac-setup.js'}
+REQUIRED |= {'demos.html', 'demos-fr.html', 'demo-directory.css'}
 REQUIRED |= {'successor.html', 'successor-fr.html', 'build-info.json'}
 ALLOWED = REQUIRED | {'.nojekyll', '404.html'}
 PROJECT_PATH = '/AGI-Fleet-Linux/'
