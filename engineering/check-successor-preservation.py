@@ -3,9 +3,22 @@
 import hashlib,json,re,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+PROFILE_ROLES=('Agent','Node','Employer','Moderator','Evidence','Recovery')
+PROFILE_PARENT_ROLES=('Employer','Moderator','Evidence','Recovery')
+PROFILE_RUNTIME_PATHS=frozenset(
+    [f'fleet/packages/AGI_{role}/src/{name}.mjs' for role in PROFILE_ROLES for name in ('chain','config')]
+    +[f'fleet/packages/AGI_{parent}/packages/AGI_{role}/src/{name}.mjs' for parent in PROFILE_PARENT_ROLES for role in ('Agent','Node') for name in ('chain','config')])
+PROFILE_OPERATOR_PATHS=frozenset(['fleet/shared/operator/ops/config.mjs']
+    +[f'fleet/packages/AGI_{role}/shared/operator/ops/config.mjs' for role in PROFILE_PARENT_ROLES])
+PROFILE_VERIFIER_PATHS=frozenset(f'fleet/packages/AGI_{role}/scripts/verify-contract-artifacts.mjs' for role in ('Agent','Node'))
+def require(condition,message):
+    if not condition:raise ValueError(message)
 def sha(b):return hashlib.sha256(b).hexdigest()
 def reason(name):
     p=Path(name)
+    if name in PROFILE_RUNTIME_PATHS:return 'Select only reviewed hash-pinned contract profiles and verify the entire selected deployment graph before transactions; omitted profile retains legacy defaults, budget and STOP identity.'
+    if name in PROFILE_OPERATOR_PATHS:return 'Carry the optional finite reviewed contract profile through operator configuration; retain omitted-profile legacy configuration and reject arbitrary profile overrides.'
+    if name in PROFILE_VERIFIER_PATHS:return 'Recompile the explicitly selected reviewed profile from its hash-bound compiler inputs and compare all 11 complete artifacts; preserve legacy default and exact equality checks.'
     if name in ('macos/build.py','macos/tests/test_build.py'):return 'Keep the Mac build bound to its original verified Linux archive as the active Linux download pointer and source advance; retain all archive-integrity and qualification requirements.'
     if name=='macos/preview/tests/test_materialize.py':return 'Compare the materialized basis to the exact current candidate instead of a stale version literal; retain the prior test in successor/history.'
     if name=='macos/preview/source-inventory.json':return 'Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification.'
@@ -24,17 +37,17 @@ def reason(name):
 def check():
     baseline=json.loads((ROOT/'successor/preservation-baseline.json').read_text());changed=[];unchanged=0
     for row in baseline['files']:
-        p=ROOT/row['path'];assert p.is_file() and not p.is_symlink(),'Original path missing: '+row['path']
-        assert bool(p.stat().st_mode&0o111)==(row['mode']=='100755'),'Executable mode changed: '+row['path']
+        p=ROOT/row['path'];require(p.is_file() and not p.is_symlink(),'Original path missing: '+row['path'])
+        require(bool(p.stat().st_mode&0o111)==(row['mode']=='100755'),'Executable mode changed: '+row['path'])
         content=p.read_bytes();digest=sha(content)
         if 'anchors' in row:
             now=set(re.findall(r'\bid=["\']([^"\']+)',content.decode()))
             missing=set(row['anchors'])-now
             # Generated release heading changes retain the old anchor as an explicit alias.
-            assert not missing,'Original anchors missing: '+row['path']+' '+str(missing)
+            require(not missing,'Original anchors missing: '+row['path']+' '+str(missing))
         if 'diagrams' in row:
             diagrams=[sha(s.encode()) for s in re.findall(r'```mermaid\s*\n(.*?)```',content.decode(),re.S)]
-            assert all(x in diagrams for x in row['diagrams']),'Original diagram changed: '+row['path']
+            require(all(x in diagrams for x in row['diagrams']),'Original diagram changed: '+row['path'])
         if digest==row['sha256']:unchanged+=1
         else:changed.append({'path':row['path'],'before':row['sha256'],'after':digest,'reason':reason(row['path'])})
     return {'schema':'agi-fleet/preservation-check/v1','status':'PASS','baselineCommit':baseline['commit'],'originalPaths':len(baseline['files']),'unchanged':unchanged,'modified':changed,'removed':[],'modeChanges':[],'anchorRemovals':[],'diagramRemovals':[]}
