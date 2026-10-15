@@ -3,12 +3,12 @@
   "status": "PASS",
   "baselineCommit": "811c20df46aebbb7537e5a8b8ebdd53e3f9579bd",
   "originalPaths": 5051,
-  "unchanged": 4834,
+  "unchanged": 4830,
   "modified": [
     {
       "path": ".github/workflows/next-release.yml",
       "before": "061830edfde4cb77caf8f4be45e3cb17eb8925b7b8e84f56842e3f23b50b7f48",
-      "after": "f5188c56a7e377a7ff5b12def0767310efe6e972bc8166a0ee4b814960df2e62",
+      "after": "cd3fb8c882e69c76f4b2bb9aba6e7e8734d6226b3bd06e7b29051b5725304e0a",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -18,51 +18,57 @@
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
+      "path": ".github/workflows/repository-checks.yml",
+      "before": "66485026754220bf5df03d9c2da71914b6dd3b16eacb4ba001c49ce11114f688",
+      "after": "ce26ee86a234f007bd11d6f006709c744ab94f6c3abe36445b70f29536f24c78",
+      "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
+    },
+    {
       "path": "README.md",
       "before": "3b64194922231e11e4980ba355a33b55d74da5b2449133365879e2bc5c01b55f",
-      "after": "3d56bc47dbe78c13a94876a73d67267cc1dcec8684ca56f3cfb3df8f711007a3",
+      "after": "6830acc03d323773d9f5530000d0633f89ae3f8cb4e8a7702c56a37e5af6f0fa",
       "reason": "Add bilingual Builder entry points without removing installation or release history."
     },
     {
       "path": "docs/DEVELOPMENT.md",
       "before": "c31890d0adfb2dde7e0e134671bbe3547f228083894a8be39b5d4a91c74a1f57",
-      "after": "eb8db76511bdc17328105f2bc489149ff6c1e159c2deed0082f6fb350e900b74",
+      "after": "fa5ff9eacbbef26815c78ea233b567455e2af36a1741023b464b9d5b9dd8fc3e",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
       "path": "docs/FRESH_INSTALL.md",
       "before": "4dee782ded141e988d8dbb15a8b0a097e855c38df732f090dfa641f459c3cd62",
-      "after": "34e645846bf2475849377b2ad6f50e289d59545d78677e98002fcb0287d27e05",
+      "after": "4ec0404a970e57cad7ec13799956ee8f747237d114b7a698bdd4b84b14dbe912",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
       "path": "docs/JOB_INTEGRATION.md",
       "before": "9a0b29f506191e35d4689499e8dea006f9d9a73c654416a260f56b39d0e6bb37",
-      "after": "ac9ed1e36102f500bb61d777c3744dd9ae7fd50191495eed80c096da69737a69",
+      "after": "9f7a1bbb19f884367024474f1977300d91746b4e07f54cf6136888c5035bbfbb",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
       "path": "docs/PHYSICAL_QUALIFICATION.md",
       "before": "8b99f97751cd74b807dd1272890cb2f9e8e23ee11db7d3d5313a425722f6e565",
-      "after": "36fcfb59230cc5d753010ceaaa3d532589ea64f5942fb101a3c1175efa96cdac",
+      "after": "1ba3e6f479340874cd734f0900e9e609c6e04dd3ea0071f3cb45de4186924e7a",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
       "path": "docs/TROUBLESHOOTING.md",
       "before": "b07263c7c4b1474cf9bb7e0ae8d3ecf4e11167eedc7e15e668bc6e7a1b29b1d7",
-      "after": "8531c96fe82a2faaef31b47ba64381f058961947a174546e96f69a2cd73c662c",
+      "after": "249187b9368a16ed859251f7c425ef5df144ef91f95148ff94ed677d38e9441a",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
       "path": "docs/physical-qualification-template.json",
       "before": "31e2cbce59857472e33a189a9b289209597c955f96a7fefcd6d785563188401c",
-      "after": "feec83d78717e6513deb6f67eaae4d0adfdce79c9a1e46db32fb8b56f6acd120",
+      "after": "e47da66a34705292f5c4c5f20bb5c351525aae0f0e08f8806d121771e07cb1d6",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
       "path": "engineering/README.md",
       "before": "af128b95a1360426fe07418d9bc5419d6bdac0f5fdfb39639f7ccd678a583118",
-      "after": "790e0c4d3e95eda6f248dc143f09db3ecba59f30d9faa9ec0233d68dad7fdd90",
+      "after": "352c19aa3d57d273b37c0389f0802394bf71ce54ad55ef4e74089634e3a35404",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -74,7 +80,7 @@
     {
       "path": "engineering/browser-tests/README.md",
       "before": "e0e6c3f2ecd357fc55497d6c52a1977e89c3505bcf75375b1e0dbbe052981e74",
-      "after": "b0c5c3923fb5bb63e2e76aee15b7486b91dfefcfdcc3d56c61935edf003c2c13",
+      "after": "33aba2b5541dd0e6f93bdec3d1ccf80b055307f4c95338422f5dd40997624113",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -92,7 +98,7 @@
     {
       "path": "engineering/build-next-release.py",
       "before": "1f4a132536813af8895a2ee94cb790064e015201ca9ea19c20839d9f9e2b23c9",
-      "after": "910a91fbd2b6a6d78dc37537f7ee07354ec252dac555510f4d066fa6ad694164",
+      "after": "ee76ca9b09582661fbc01af279d44fec73d835bb300a199efedaa21eb5bdd033",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -110,19 +116,19 @@
     {
       "path": "engineering/next-release.json",
       "before": "d58742455c297f27a00b9c8330bd6186df4003baa966eb42929eedd452ef4871",
-      "after": "1f0ebd8832c09de5b1ae2a80aa0dae97760bc1e994f66b6c53eb11b01322b438",
+      "after": "696d2cec14814299a36c20925df51dc31cd282d9f673f33d8cb48cbdd23ae124",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
       "path": "engineering/publish-next-release.py",
       "before": "e667c5e451220ac70b6bbe88e595f6e2c5ccda2c640f24b6e8df4ee9842ef61e",
-      "after": "5544b49de3cbed1b05c96a7e5821d5b29c012bbe81f676c685d2e5aa8eaeeb6b",
+      "after": "db1233c840b55702a477608761c097516b2dded880a133bf085181043bb1de7e",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
       "path": "engineering/published-release.json",
       "before": "116a7dcf39fa4a6999fd600b7843aae55959740daeb6c5386f2aabc3cd7ee4c6",
-      "after": "1f390bd712e178bbfadec779128e2f191555174c7343613b9c97ac0f347d6160",
+      "after": "67494f2d102216036a292125fa89074af33485ee559bd823acd4b3944d7b0eb9",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -134,7 +140,7 @@
     {
       "path": "engineering/tests/test_next_publication.py",
       "before": "ead890fa8f9c2c8f26fd391b9270534018b43c6166315882ffec53721046984d",
-      "after": "8d394d5b2a1c97c1fb61d9d10c52e23cc1b214ac33ac27b593fc15f79290afec",
+      "after": "1863b194a2d6b7543152ee28638af9262ba7f39165993d593696f7cba1f8c641",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -146,73 +152,73 @@
     {
       "path": "fleet/config/companion-releases.json",
       "before": "9f4d0a48f3570c68ed2e5a0d10927d9cf11fa37fdc9343eac576e6764235d180",
-      "after": "a678dfd9e65bbafec36bc001de0f4a346cd5f91a86fd6da676c715edc9aa9935",
+      "after": "a5509633ba472d7b110215bbb7d4d6e50bf91c7481522570dfbcfeb7ce0402bc",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/config/role-registry.json",
       "before": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
-      "after": "79bcb2a9fac8934db643c7dc7d68dc9f9a545b7e7014ae23dbf65d16ff272829",
+      "after": "490d8c91020970b6d246d1acfdc06ef3fdc4bcf8d0815a1c4aea80c58da3ba49",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/package-lock.json",
       "before": "5e36028a8f0149a285d9f8c2e9aa3d33ba0903657638d9375dc1fd1e76ff78b0",
-      "after": "21c1ac90b6a60dd14f14f5124fc7ec77e04c38d2f9757981e9e37a9b7f352b8f",
+      "after": "2b9d7fc41982f87dc44f4a230b69739741bf1591c8ddd0fa2b0493c844e573d0",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/package.json",
       "before": "96b7f7e1b7d93c4445fe519f8af4d7d4eddaee52fd94f8c3464134af379dd329",
-      "after": "081262a87d0fd30cf9e31cc7e4dae61ffce5fe4214273a8f96fca61f32ebfd64",
+      "after": "41be97de2752346105ed49b34f3d958419ab42887e16cbf79af610cda0ed04af",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Agent/AGI Agent.app/Contents/Info.plist",
       "before": "2ff390e265496c22847e726c9f218d862e5ff649b8515b75150c2a04fbc568af",
-      "after": "75f52c72d5352fe8c7ad503198fe8dc88907c9eab1aec10988e8eaeff848fb6b",
+      "after": "043e72da3a569019b1ae4c151765568f121cb1bb11f79293db1cd101ba3ed3f7",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Agent/Linux-Guide.html",
       "before": "1acb96623b927b22a226887f71c32d63495bd016a6983862f08528cfa6883dd0",
-      "after": "39b5f35041f72a5d6a0c16b086bef442bed9c2bd894b3c9fef8725e7c6352643",
+      "after": "72579493957299280b9758031f30d1af8a3cfb0c57ad4f6c7502a046e7bd5800",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Agent/Linux-Guide.txt",
       "before": "7a78c8dd0ddf8a57eede4da229c7ae28dc1b2992fde54bfc5b1aec83e4e49e44",
-      "after": "8548a19f77aa6a77199244953b7cd4b9ed0b8664b50331fde57cc7668ba15a4c",
+      "after": "f120ea5df2a01240069a46f906519ceb3b4dbcdfdd17c34629184e467cb5ea94",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Agent/README.html",
       "before": "1acb96623b927b22a226887f71c32d63495bd016a6983862f08528cfa6883dd0",
-      "after": "39b5f35041f72a5d6a0c16b086bef442bed9c2bd894b3c9fef8725e7c6352643",
+      "after": "72579493957299280b9758031f30d1af8a3cfb0c57ad4f6c7502a046e7bd5800",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Agent/README.md",
       "before": "08717cb328dd01e17a26d96124472794625526221d322c1adb45da8378c292ae",
-      "after": "dbbef690c0ac7428dabaf085341fe02941b1cd279921613d3cc75e7612fa6a89",
+      "after": "474b5bfc4487229685d2e0a59aa76ec2d01ad7fa61aafe0fa0e5e7cbc3211f96",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Agent/READ_ME_FIRST.txt",
       "before": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
-      "after": "84c9caa0890c40fcf97c4f835f62ac19e62120176ca0a2f98fc4ba75b5f9cb37",
+      "after": "489266ff02305d38f3e53e785e0bbbc16a733b4179b425f4504ee63639cf4be7",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Agent/START_HERE.html",
       "before": "1acb96623b927b22a226887f71c32d63495bd016a6983862f08528cfa6883dd0",
-      "after": "39b5f35041f72a5d6a0c16b086bef442bed9c2bd894b3c9fef8725e7c6352643",
+      "after": "72579493957299280b9758031f30d1af8a3cfb0c57ad4f6c7502a046e7bd5800",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Agent/START_HERE.md",
       "before": "08717cb328dd01e17a26d96124472794625526221d322c1adb45da8378c292ae",
-      "after": "dbbef690c0ac7428dabaf085341fe02941b1cd279921613d3cc75e7612fa6a89",
+      "after": "474b5bfc4487229685d2e0a59aa76ec2d01ad7fa61aafe0fa0e5e7cbc3211f96",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
@@ -224,7 +230,7 @@
     {
       "path": "fleet/packages/AGI_Agent/app/index.html",
       "before": "88115e028b621137c79ed370ccaa5eb9854329eefcb32e739bb92448313add82",
-      "after": "9d15818debbd35205d01a28e9a2990cc8cafa05aed3b164f3eb251a6c2d51831",
+      "after": "2cfb3f988e9b76d915e98d0aa0d6bafa979acff1d1b39e4d5613b669fe667c3a",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -236,19 +242,19 @@
     {
       "path": "fleet/packages/AGI_Agent/config/companion-releases.json",
       "before": "e09ebcb6a0dc0ed4ef3ed45b133f942895a7609ee43cfcb0dfd3ce9856ba3fea",
-      "after": "783d780bfa7177cdc1d316f4767461560967ddb25dca34825b543a378abc45b6",
+      "after": "9244badce2b4237fd42cee7ab49a4dbb94deb3f7a428ec442faa8958acdb4d78",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Agent/package-lock.json",
       "before": "3bb247fb4493a7d2172b6518c2eedcf2e9eacdbf5f678defd5e53b0bab075df1",
-      "after": "71a760ed6595758ae1927ed4393b299f7bd5b7b62d5905d6679e9ea78f640adc",
+      "after": "a65c9bb711e39a1f2102cf13c8e5b1e0ea9f8efabfa468bb210edc6a93c77249",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Agent/package.json",
       "before": "99ae1db8bb1465fed11cb71919f9a0bbc787d8a0174545c56506b327690d1c79",
-      "after": "286dd28682717fe4b49865a01f9ced193c67707579096eeff32f756b27c94b4a",
+      "after": "4ade39d1033eb828878f7f96673523dfead6e5bbacae5ee436f6d942e2a2f2ef",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
@@ -272,7 +278,7 @@
     {
       "path": "fleet/packages/AGI_Agent/src/control/controller.mjs",
       "before": "c236584791060b7e587ddc778a6739b3b6c7f2182fff7866bd0d6b7493a5d8e2",
-      "after": "ada31b40ab5ecb151e28307b62c9366874df91387594f9a7130267fa76249bdc",
+      "after": "8da955196ff99d1b5732b95b3124aaa009d4728407e62a56a7ac89e0c4d8d5a9",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -290,7 +296,7 @@
     {
       "path": "fleet/packages/AGI_Agent/src/control/server.mjs",
       "before": "a8016e111a06d27f71881b0224d56b01616d0431df6d887771662d9c99e6cc17",
-      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
+      "after": "da9ecccf96579a2a4da610f4567bd95040601286900ae0bee082f563b25c23e0",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -308,73 +314,73 @@
     {
       "path": "fleet/packages/AGI_Employer/AGI Employer.app/Contents/Info.plist",
       "before": "7c168e44f8fb33857010f08358d30901ad87705d22738c2ab74883baec539f48",
-      "after": "50f61f61c4a8d455853b35ad719d251fbdda1b900bb953e622694d5214d3eeb8",
+      "after": "ee1f7cd59497cdb96ca6baa23281894e1c41b44ec014db18df8cf5cf1a391f9b",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Employer/Linux-Guide.html",
       "before": "21e0cf3baac9396c5e32cf3aa136f9195a5cde5cddf938e0c8b6c57f638b1130",
-      "after": "913680843a42aefd8e9554869d51e0f35542ce0af2d722c0ecf4493f87d83b0c",
+      "after": "5399576c01d9e73f52f4584e18697415cca6af69af7b8ea4852fcf7d2c770583",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Employer/Linux-Guide.txt",
       "before": "298b5ef77115c3fe26baad6038e08e1aa45f9dc7af179d04cd63dc7ff953ef1a",
-      "after": "324d48d9f2381101b845df9469f3f5c0e342151c25340f86bad5bc0eaf758701",
+      "after": "9099274db8661135bfb6084e0c49bb3bba6d30479d5f9754d74f25b133827c47",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Employer/README.html",
       "before": "21e0cf3baac9396c5e32cf3aa136f9195a5cde5cddf938e0c8b6c57f638b1130",
-      "after": "913680843a42aefd8e9554869d51e0f35542ce0af2d722c0ecf4493f87d83b0c",
+      "after": "5399576c01d9e73f52f4584e18697415cca6af69af7b8ea4852fcf7d2c770583",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Employer/README.md",
       "before": "a03575392d9b319cf29b7e4b084d63307a7ac3721814d75b09a8b96b82bd9d45",
-      "after": "afc90b8ae8d6f18b902195c755860cfe5a2383d260d1634566a025621b47bffb",
+      "after": "d2bdb02c6822a579b35b93e73ff449babfdff68a84061d26c371aeee7071638d",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Employer/READ_ME_FIRST.txt",
       "before": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
-      "after": "84c9caa0890c40fcf97c4f835f62ac19e62120176ca0a2f98fc4ba75b5f9cb37",
+      "after": "489266ff02305d38f3e53e785e0bbbc16a733b4179b425f4504ee63639cf4be7",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Employer/START_HERE.html",
       "before": "21e0cf3baac9396c5e32cf3aa136f9195a5cde5cddf938e0c8b6c57f638b1130",
-      "after": "913680843a42aefd8e9554869d51e0f35542ce0af2d722c0ecf4493f87d83b0c",
+      "after": "5399576c01d9e73f52f4584e18697415cca6af69af7b8ea4852fcf7d2c770583",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Employer/START_HERE.md",
       "before": "a03575392d9b319cf29b7e4b084d63307a7ac3721814d75b09a8b96b82bd9d45",
-      "after": "afc90b8ae8d6f18b902195c755860cfe5a2383d260d1634566a025621b47bffb",
+      "after": "d2bdb02c6822a579b35b93e73ff449babfdff68a84061d26c371aeee7071638d",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Employer/config/companion-releases.json",
       "before": "7b416b9b2eb3dd0cace6009c9891f6cd9ef2ac12d8f874e565e336242c5dbce9",
-      "after": "3cf7472759954964c64222ed161976161c9f87fba20064ad3bc897582e148b58",
+      "after": "5473bfc25b30c59474c84294a55a32b1cb84b666e034a130850b63a39e34af83",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Employer/config/role-registry.json",
       "before": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
-      "after": "79bcb2a9fac8934db643c7dc7d68dc9f9a545b7e7014ae23dbf65d16ff272829",
+      "after": "490d8c91020970b6d246d1acfdc06ef3fdc4bcf8d0815a1c4aea80c58da3ba49",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Employer/package-lock.json",
       "before": "894fb125a5287d978986393bc8d08229d2a34ef69ffa289616818d496ae1dd8b",
-      "after": "9af769091e76846e4adfd43887b0b2c834466a136639f3939c25dffcaa55ba04",
+      "after": "d9f74bfe91fc6262edd0ada1672f63416f309aff1dc1b6bc61129ec787144d9e",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Employer/package.json",
       "before": "50cb7d7d7fe8567fa11bf583271cd301a793bb1e564d2185e6d4eab070a2e355",
-      "after": "31bbd0693d2554c2024e484ed9187386bbe31aee87b2972ac3a2ab1407c8e9d3",
+      "after": "59ab120c49ccdc0b374ef6ac48fa90becc1aa954ba99dfcf9e8d654b78f1c6c5",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
@@ -392,7 +398,7 @@
     {
       "path": "fleet/packages/AGI_Employer/packages/AGI_Agent/src/control/controller.mjs",
       "before": "e8575b35190bd4e8e8039200c17677b1e642248264a7a2a8c768fb95f3dd8203",
-      "after": "ada31b40ab5ecb151e28307b62c9366874df91387594f9a7130267fa76249bdc",
+      "after": "8da955196ff99d1b5732b95b3124aaa009d4728407e62a56a7ac89e0c4d8d5a9",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -410,7 +416,7 @@
     {
       "path": "fleet/packages/AGI_Employer/packages/AGI_Agent/src/control/server.mjs",
       "before": "e90d688d0d8b26c4bb40ca9fa5d5e489cae9d269ad4050100bbd701c95bb6c1a",
-      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
+      "after": "da9ecccf96579a2a4da610f4567bd95040601286900ae0bee082f563b25c23e0",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -440,7 +446,7 @@
     {
       "path": "fleet/packages/AGI_Employer/packages/AGI_Node/src/control/controller.mjs",
       "before": "3d65da5809ccd710ffb6f821b94ab106025ef67fd887bdb75f3cc4760a8deb4d",
-      "after": "31adc6ff9ae4ff7ba61ed1ab0dff146c1f007a68058315d7aa1864c02021ec7f",
+      "after": "d50b35a0a62d9d452df68eb9c2019ab7a0b8f11fde9f4414bfae1ade39f2c4f0",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -458,7 +464,7 @@
     {
       "path": "fleet/packages/AGI_Employer/packages/AGI_Node/src/control/server.mjs",
       "before": "764149b229280779c7f531e8c01b06f7108a960db7864b597291c2fe45195d74",
-      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
+      "after": "f4fefa4454a58810745cb18f64f1503c96148556a5a472088061e63402298936",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -494,79 +500,79 @@
     {
       "path": "fleet/packages/AGI_Employer/web/index.html",
       "before": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
-      "after": "ad1c962b6dc61be6a69d0e8971429cc39980097063e9836954988181cd0f60dc",
+      "after": "8e8a961e5d9c37a5f9fe2ebbf48c0d7ed7251693c7e434e0e6f431e3b5c93e49",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Evidence/AGI Evidence.app/Contents/Info.plist",
       "before": "331e280bc2c2326086de6d11ab598d14d2687dbaf5a9f0666500dadb57214d78",
-      "after": "09cba58d68daf9533614820a784aead4c145398311cb13568293dab18b6baf30",
+      "after": "78a95cb0e0a9961a2faf143649633379887630ae35d7ef08cb48964c4028b025",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Evidence/Linux-Guide.html",
       "before": "af1aafbe5f58c453c5dc92f43f15914b6015a64919e88daa06348ce10c3805c2",
-      "after": "a684976aa4e8620e8b11bbaa5347c0e72d2cfb1b4f72fadda22c69bf20e55aa9",
+      "after": "90c7c8ef076ad6539d5bde4151aef2cec4400555553ed23342033d3d86039eca",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Evidence/Linux-Guide.txt",
       "before": "b762f413d5c247f178fbe078b2d0b630abba34a9f3847383da677043e1e021d7",
-      "after": "f92794a86d3ecc19ed0790db7b2cd03caed38f98248af666f9fbd053ec873542",
+      "after": "db4bfdf18bd434908e7deee5a0d40465897be31fca78d914c2fbe5b6d5466fcf",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Evidence/README.html",
       "before": "af1aafbe5f58c453c5dc92f43f15914b6015a64919e88daa06348ce10c3805c2",
-      "after": "a684976aa4e8620e8b11bbaa5347c0e72d2cfb1b4f72fadda22c69bf20e55aa9",
+      "after": "90c7c8ef076ad6539d5bde4151aef2cec4400555553ed23342033d3d86039eca",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Evidence/README.md",
       "before": "39ecb8cac56d63d58f084ddbc6fa9ac79deceb2161add6aa3defb25dcc5b7b78",
-      "after": "5029f81931b7aa1249bc630376e10eb77dcb8c1457f57df84ceaf77e9a3aac1d",
+      "after": "51be19f9d2f2f3b1dbd619a60814b3a39f510e13b1230a11b6b32a6676288f20",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Evidence/READ_ME_FIRST.txt",
       "before": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
-      "after": "84c9caa0890c40fcf97c4f835f62ac19e62120176ca0a2f98fc4ba75b5f9cb37",
+      "after": "489266ff02305d38f3e53e785e0bbbc16a733b4179b425f4504ee63639cf4be7",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Evidence/START_HERE.html",
       "before": "af1aafbe5f58c453c5dc92f43f15914b6015a64919e88daa06348ce10c3805c2",
-      "after": "a684976aa4e8620e8b11bbaa5347c0e72d2cfb1b4f72fadda22c69bf20e55aa9",
+      "after": "90c7c8ef076ad6539d5bde4151aef2cec4400555553ed23342033d3d86039eca",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Evidence/START_HERE.md",
       "before": "39ecb8cac56d63d58f084ddbc6fa9ac79deceb2161add6aa3defb25dcc5b7b78",
-      "after": "5029f81931b7aa1249bc630376e10eb77dcb8c1457f57df84ceaf77e9a3aac1d",
+      "after": "51be19f9d2f2f3b1dbd619a60814b3a39f510e13b1230a11b6b32a6676288f20",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Evidence/config/companion-releases.json",
       "before": "0d9a3be9f13de986e3ca9f21612c868b7653475c021ae8c677d988dc0aeb303e",
-      "after": "a2cee0b12833bc1e9ca8696902cd4ddde0ffed764e3d07634871cf3b7b3fb9a3",
+      "after": "5e8d6acb7a7a7baa1e77c9b32b340018aca44b26c2da41ce87e82e49210b0879",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Evidence/config/role-registry.json",
       "before": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
-      "after": "79bcb2a9fac8934db643c7dc7d68dc9f9a545b7e7014ae23dbf65d16ff272829",
+      "after": "490d8c91020970b6d246d1acfdc06ef3fdc4bcf8d0815a1c4aea80c58da3ba49",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Evidence/package-lock.json",
       "before": "677efeab60af8c8ffbfb9cf4527490842eacdb0299f24b327e0f6b8ac9598c20",
-      "after": "275037a5fec70941e8e84fbcc2d2170eda82cda8fe69a3851310f5e27103ce96",
+      "after": "f26a1b61f25e480c48f6e14ef23721e6983ac68a873166b833673ffa4709c5cb",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Evidence/package.json",
       "before": "8d92e523dc89e4adaf1ce798c0fd7ded77656604ff1d6ba20ddbcf086f15f631",
-      "after": "de73a8ff0e7884f5e694c9b28666b3f8043ba3a8379821b56ad40fa037823c36",
+      "after": "3822ce336b9401c81d9baea184369310797934f834e7fa20dea10d4953308b73",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
@@ -584,7 +590,7 @@
     {
       "path": "fleet/packages/AGI_Evidence/packages/AGI_Agent/src/control/controller.mjs",
       "before": "e8575b35190bd4e8e8039200c17677b1e642248264a7a2a8c768fb95f3dd8203",
-      "after": "ada31b40ab5ecb151e28307b62c9366874df91387594f9a7130267fa76249bdc",
+      "after": "8da955196ff99d1b5732b95b3124aaa009d4728407e62a56a7ac89e0c4d8d5a9",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -602,7 +608,7 @@
     {
       "path": "fleet/packages/AGI_Evidence/packages/AGI_Agent/src/control/server.mjs",
       "before": "e90d688d0d8b26c4bb40ca9fa5d5e489cae9d269ad4050100bbd701c95bb6c1a",
-      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
+      "after": "da9ecccf96579a2a4da610f4567bd95040601286900ae0bee082f563b25c23e0",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -632,7 +638,7 @@
     {
       "path": "fleet/packages/AGI_Evidence/packages/AGI_Node/src/control/controller.mjs",
       "before": "3d65da5809ccd710ffb6f821b94ab106025ef67fd887bdb75f3cc4760a8deb4d",
-      "after": "31adc6ff9ae4ff7ba61ed1ab0dff146c1f007a68058315d7aa1864c02021ec7f",
+      "after": "d50b35a0a62d9d452df68eb9c2019ab7a0b8f11fde9f4414bfae1ade39f2c4f0",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -650,7 +656,7 @@
     {
       "path": "fleet/packages/AGI_Evidence/packages/AGI_Node/src/control/server.mjs",
       "before": "764149b229280779c7f531e8c01b06f7108a960db7864b597291c2fe45195d74",
-      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
+      "after": "f4fefa4454a58810745cb18f64f1503c96148556a5a472088061e63402298936",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -686,79 +692,79 @@
     {
       "path": "fleet/packages/AGI_Evidence/web/index.html",
       "before": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
-      "after": "ad1c962b6dc61be6a69d0e8971429cc39980097063e9836954988181cd0f60dc",
+      "after": "8e8a961e5d9c37a5f9fe2ebbf48c0d7ed7251693c7e434e0e6f431e3b5c93e49",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Moderator/AGI Moderator.app/Contents/Info.plist",
       "before": "49aaa7251c39fa929a8f28e0f88d1ba9d313fb7d919e941319501df5fd3825a0",
-      "after": "d384561f2e7959271954eabf3611bb5a3336481bd163fcc74a00ff6836fd76fd",
+      "after": "6cdbf1143c5a12d3454452775d02c1c6a516fd6de029619d89dde153781b1765",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Moderator/Linux-Guide.html",
       "before": "ebfcb64815a4f282d47dc06d553e603c2f81079d6f7c69b0c41429f5a2c8ba37",
-      "after": "14303a54c6e51d9f86680d0f7010ca4e8e6ad417519cba1028f59083a1918284",
+      "after": "44ae208e30806e7b1f0e6578152344aaf8f9d306b91d08ae7b70b22a79457b40",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Moderator/Linux-Guide.txt",
       "before": "a9636aec7f412251bb9ab31a966b52406091de52754ba902d2d24fa2ad0d9630",
-      "after": "0bb86c03742b221a7e4ced39db079b6588cbfe7e85d113bd15c485ae2894e38e",
+      "after": "8a357fae4c83104346f7841daa2ef0dae74cb6154842272eb1c912e4d511495d",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Moderator/README.html",
       "before": "ebfcb64815a4f282d47dc06d553e603c2f81079d6f7c69b0c41429f5a2c8ba37",
-      "after": "14303a54c6e51d9f86680d0f7010ca4e8e6ad417519cba1028f59083a1918284",
+      "after": "44ae208e30806e7b1f0e6578152344aaf8f9d306b91d08ae7b70b22a79457b40",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Moderator/README.md",
       "before": "1afc6d976500d3d997c18b87d044448a6745f397738ff16f501fcbabb5e2ba04",
-      "after": "4c503bb50f7a1f46a561fb8ef0d15fa44adb4a2b82eefad496f4380304d21392",
+      "after": "a2d56993759844b69f7f4d0728d0996b53cfffcd23294531dd18e3fde99b4fae",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Moderator/READ_ME_FIRST.txt",
       "before": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
-      "after": "84c9caa0890c40fcf97c4f835f62ac19e62120176ca0a2f98fc4ba75b5f9cb37",
+      "after": "489266ff02305d38f3e53e785e0bbbc16a733b4179b425f4504ee63639cf4be7",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Moderator/START_HERE.html",
       "before": "ebfcb64815a4f282d47dc06d553e603c2f81079d6f7c69b0c41429f5a2c8ba37",
-      "after": "14303a54c6e51d9f86680d0f7010ca4e8e6ad417519cba1028f59083a1918284",
+      "after": "44ae208e30806e7b1f0e6578152344aaf8f9d306b91d08ae7b70b22a79457b40",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Moderator/START_HERE.md",
       "before": "1afc6d976500d3d997c18b87d044448a6745f397738ff16f501fcbabb5e2ba04",
-      "after": "4c503bb50f7a1f46a561fb8ef0d15fa44adb4a2b82eefad496f4380304d21392",
+      "after": "a2d56993759844b69f7f4d0728d0996b53cfffcd23294531dd18e3fde99b4fae",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Moderator/config/companion-releases.json",
       "before": "6d84d4137affc2513470bbfe4cd60b04c9221e64fc75f33b125409bf698e86ab",
-      "after": "61c7fa9b77bebb35f8318b3bdb7326486f1547d41460323c197911e7d823bc1d",
+      "after": "a70f8b6d390c40cb43b5adbe5e3cd27182217d217e2e108607b44f05333479d6",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Moderator/config/role-registry.json",
       "before": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
-      "after": "79bcb2a9fac8934db643c7dc7d68dc9f9a545b7e7014ae23dbf65d16ff272829",
+      "after": "490d8c91020970b6d246d1acfdc06ef3fdc4bcf8d0815a1c4aea80c58da3ba49",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Moderator/package-lock.json",
       "before": "fff4493bd30a4495b9c41730596e34ed78a154bc9e3ebba94b47427b6cb5305c",
-      "after": "73479a5998a47c68f1e656fc0be110d24d96718259cc5b6bc1a4a44001dd7096",
+      "after": "32d5ce9e9f703a13860ebf886ccea334bafd1a17502d4f2f247f5e5f636ef06e",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Moderator/package.json",
       "before": "191d15e9be0796bad907bf470c25d4f0932d99fbb89fcd162f7ca5f0d14902df",
-      "after": "ffb7c54441b5df7611bb39d898f117251baed7008218380cff4d0aaa8c14f3de",
+      "after": "663a985c98c35cb18e8b907726594d7995bc0ae8a2c479934dce0f0236b3153d",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
@@ -776,7 +782,7 @@
     {
       "path": "fleet/packages/AGI_Moderator/packages/AGI_Agent/src/control/controller.mjs",
       "before": "e8575b35190bd4e8e8039200c17677b1e642248264a7a2a8c768fb95f3dd8203",
-      "after": "ada31b40ab5ecb151e28307b62c9366874df91387594f9a7130267fa76249bdc",
+      "after": "8da955196ff99d1b5732b95b3124aaa009d4728407e62a56a7ac89e0c4d8d5a9",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -794,7 +800,7 @@
     {
       "path": "fleet/packages/AGI_Moderator/packages/AGI_Agent/src/control/server.mjs",
       "before": "e90d688d0d8b26c4bb40ca9fa5d5e489cae9d269ad4050100bbd701c95bb6c1a",
-      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
+      "after": "da9ecccf96579a2a4da610f4567bd95040601286900ae0bee082f563b25c23e0",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -824,7 +830,7 @@
     {
       "path": "fleet/packages/AGI_Moderator/packages/AGI_Node/src/control/controller.mjs",
       "before": "3d65da5809ccd710ffb6f821b94ab106025ef67fd887bdb75f3cc4760a8deb4d",
-      "after": "31adc6ff9ae4ff7ba61ed1ab0dff146c1f007a68058315d7aa1864c02021ec7f",
+      "after": "d50b35a0a62d9d452df68eb9c2019ab7a0b8f11fde9f4414bfae1ade39f2c4f0",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -842,7 +848,7 @@
     {
       "path": "fleet/packages/AGI_Moderator/packages/AGI_Node/src/control/server.mjs",
       "before": "764149b229280779c7f531e8c01b06f7108a960db7864b597291c2fe45195d74",
-      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
+      "after": "f4fefa4454a58810745cb18f64f1503c96148556a5a472088061e63402298936",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -878,55 +884,55 @@
     {
       "path": "fleet/packages/AGI_Moderator/web/index.html",
       "before": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
-      "after": "ad1c962b6dc61be6a69d0e8971429cc39980097063e9836954988181cd0f60dc",
+      "after": "8e8a961e5d9c37a5f9fe2ebbf48c0d7ed7251693c7e434e0e6f431e3b5c93e49",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
       "path": "fleet/packages/AGI_Node/AGI Node.app/Contents/Info.plist",
       "before": "bde7964a81ab9ee4a6a6ff83cdc3da717bca48481bfe2641dbe0c37daeebabcf",
-      "after": "838f3271aadd372d1132ece9fe118117cbc5835306565aed09d543ff6a64d50c",
+      "after": "caf039c59bfdf404b1d1c9ed4281a9dc0ec324bdd627d816e305a901f9b11cf6",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Node/Linux-Guide.html",
       "before": "1d881788d028fa4c6bcd28f74b4e8218362991f6ee92e2c043375298b63c48bd",
-      "after": "f0aabc59ee9483a69c3eff02016b82f57a1d7b8461b4f2e6b478135fba707dd7",
+      "after": "47c6e65a49cd7f64ade2f67a6bd21b129e4c8f2a824f879f41f7b95de64aa7fe",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Node/Linux-Guide.txt",
       "before": "2654a3acd2eeaf43c312ec0fdfb8124f4cfff4996ea948281fbe7aeb88de41ea",
-      "after": "75ae126c9e500132b221d316992b1fb6b870ca65ed0b002165629e1af6d6b051",
+      "after": "2ad983efd2327a1cf4258d7db294e07bc11ca4ece62777d9c426b6006962232d",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Node/README.html",
       "before": "1d881788d028fa4c6bcd28f74b4e8218362991f6ee92e2c043375298b63c48bd",
-      "after": "f0aabc59ee9483a69c3eff02016b82f57a1d7b8461b4f2e6b478135fba707dd7",
+      "after": "47c6e65a49cd7f64ade2f67a6bd21b129e4c8f2a824f879f41f7b95de64aa7fe",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Node/README.md",
       "before": "b3f62d6bdd72730ba91819a5baa014ea7d295d4bff8b6de93d1e2065e8a2d2f3",
-      "after": "97cc3d780350a374539bac8af6c52e5bfd027813700d5d2fa39f8fa90fae5f63",
+      "after": "5ad2d6de1e3cc88480b27978344b808f2dfd005c9f30f4886a2db5d027784a0c",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Node/READ_ME_FIRST.txt",
       "before": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
-      "after": "84c9caa0890c40fcf97c4f835f62ac19e62120176ca0a2f98fc4ba75b5f9cb37",
+      "after": "489266ff02305d38f3e53e785e0bbbc16a733b4179b425f4504ee63639cf4be7",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Node/START_HERE.html",
       "before": "1d881788d028fa4c6bcd28f74b4e8218362991f6ee92e2c043375298b63c48bd",
-      "after": "f0aabc59ee9483a69c3eff02016b82f57a1d7b8461b4f2e6b478135fba707dd7",
+      "after": "47c6e65a49cd7f64ade2f67a6bd21b129e4c8f2a824f879f41f7b95de64aa7fe",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Node/START_HERE.md",
       "before": "b3f62d6bdd72730ba91819a5baa014ea7d295d4bff8b6de93d1e2065e8a2d2f3",
-      "after": "97cc3d780350a374539bac8af6c52e5bfd027813700d5d2fa39f8fa90fae5f63",
+      "after": "5ad2d6de1e3cc88480b27978344b808f2dfd005c9f30f4886a2db5d027784a0c",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
@@ -938,7 +944,7 @@
     {
       "path": "fleet/packages/AGI_Node/app/index.html",
       "before": "6f7d868c6df881d3e2c78f633337c8736d7da236035c302d26b7cfea1b4e37dc",
-      "after": "7ca7823c1339be7595ca6ad3debd8c1811de81e7b62b388466d71da1181bcf19",
+      "after": "4d893e57d11d319e2f0791d4b2483ea3adfc8830fb0623ffdc30689106cfa890",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -950,19 +956,19 @@
     {
       "path": "fleet/packages/AGI_Node/config/companion-releases.json",
       "before": "671420aba0de8b0da6b947b16cffe5d26da373cdd5dee3176f952c3e9b9dc384",
-      "after": "9dc4a2068657ea797f8559cff9be080429591ae6b83120db9a0804b39de0f046",
+      "after": "d791473faac18e02e93e12dbb8a22805b559553b901fc11898c6b951e587fa83",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Node/package-lock.json",
       "before": "9ad7285292c20b42c4a4ccdb26e0d808703305aaddf3817b5c2a0bad516b55c8",
-      "after": "19c4af51936e8303deb85a4c0226ec0d348a8b7e43d38731fcbba57b04dd54d2",
+      "after": "5f0fb62fe6c55d1065aa5489efd04a5231681523896a0697d1aa86737155898f",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Node/package.json",
       "before": "8316328a25e335163c8007a444aca02f64b697771da6d82a235b077119cf2775",
-      "after": "0221b08f82f4f2d57bd7b5e52dee63ec5c6c12206678856616f6a8d42440986e",
+      "after": "53509ac53bf1aff6c812f8e9a16ecfbc9d7d897ba336d43a7846dc40e00013b0",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
@@ -986,7 +992,7 @@
     {
       "path": "fleet/packages/AGI_Node/src/control/controller.mjs",
       "before": "8a81e97bbc33789673c0d3888b54a0a239aeb2f1b20007901e9523df6cad7945",
-      "after": "31adc6ff9ae4ff7ba61ed1ab0dff146c1f007a68058315d7aa1864c02021ec7f",
+      "after": "d50b35a0a62d9d452df68eb9c2019ab7a0b8f11fde9f4414bfae1ade39f2c4f0",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -1004,7 +1010,7 @@
     {
       "path": "fleet/packages/AGI_Node/src/control/server.mjs",
       "before": "bb77725f15d09bf79cc0be0626a47d3bbb7b0e21289083e958ab99c00d19de37",
-      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
+      "after": "f4fefa4454a58810745cb18f64f1503c96148556a5a472088061e63402298936",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -1022,73 +1028,73 @@
     {
       "path": "fleet/packages/AGI_Recovery/AGI Recovery.app/Contents/Info.plist",
       "before": "24994cedbd992ed94e2e5a1279f2c1bd3e8d82fa299b3acb08f249c1bb339129",
-      "after": "e64e99e73e56293dbf52a09e1875546c1476218f4339674e07ffb2a7bef279c3",
+      "after": "6cde976814e05ec9c2ae1e780182292d615869f5575afb26b3e9da68d4a1f3eb",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Recovery/Linux-Guide.html",
       "before": "00763c4192789917c06fc1625012c09ce722fc538a95a8b0425a5ad15ba5afc8",
-      "after": "52517d65a708cdc4e9d84ba8c6e77cc94df5e31681221ac19b2965ff00f65143",
+      "after": "79fcb641e32280b368d836d0df28b5ab64fe474a03bdfbcd6c02a7ddf08d8949",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Recovery/Linux-Guide.txt",
       "before": "3fc9df2b547f47ba3b3862ecda8275cdde6e10ea01ccd795caf2b3aaa7fca3d6",
-      "after": "d1c40fbd0ca845556f8270968bb912a46aaf5ea5ef9ec04ffb9d05b4b9443c9a",
+      "after": "05142dd8a49354789f3de43b662683c0f9bb4d291eac37324d4023dc7c457594",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Recovery/README.html",
       "before": "00763c4192789917c06fc1625012c09ce722fc538a95a8b0425a5ad15ba5afc8",
-      "after": "52517d65a708cdc4e9d84ba8c6e77cc94df5e31681221ac19b2965ff00f65143",
+      "after": "79fcb641e32280b368d836d0df28b5ab64fe474a03bdfbcd6c02a7ddf08d8949",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Recovery/README.md",
       "before": "8dbd50cd18005c3cff21723abb278d6d873b39a4dc4ddb9848538266c1c9b68c",
-      "after": "fc87ccabd134ffb525ae4127f09b7b59499dc04b77c252f89750581a36455720",
+      "after": "b057d907a9d1380ad1dc73f0928b5d9f86a3ed658633a4a539414e9aea68871c",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Recovery/READ_ME_FIRST.txt",
       "before": "6c1a05dfeeec6ca95de12a7f2625b9eca8593fb91f4ad8beb364ba35c673f281",
-      "after": "84c9caa0890c40fcf97c4f835f62ac19e62120176ca0a2f98fc4ba75b5f9cb37",
+      "after": "489266ff02305d38f3e53e785e0bbbc16a733b4179b425f4504ee63639cf4be7",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Recovery/START_HERE.html",
       "before": "00763c4192789917c06fc1625012c09ce722fc538a95a8b0425a5ad15ba5afc8",
-      "after": "52517d65a708cdc4e9d84ba8c6e77cc94df5e31681221ac19b2965ff00f65143",
+      "after": "79fcb641e32280b368d836d0df28b5ab64fe474a03bdfbcd6c02a7ddf08d8949",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Recovery/START_HERE.md",
       "before": "8dbd50cd18005c3cff21723abb278d6d873b39a4dc4ddb9848538266c1c9b68c",
-      "after": "fc87ccabd134ffb525ae4127f09b7b59499dc04b77c252f89750581a36455720",
+      "after": "b057d907a9d1380ad1dc73f0928b5d9f86a3ed658633a4a539414e9aea68871c",
       "reason": "Add offline Builder entry points to generated edition welcome; retain every existing installation and safety instruction."
     },
     {
       "path": "fleet/packages/AGI_Recovery/config/companion-releases.json",
       "before": "6e604249fba0238acc60f3f713e24c196cdf141394681762fa9906410e93297e",
-      "after": "d8f7074f0860ef91ee5b08684989b4accf29a83c5c75aca400eac51b4debb80f",
+      "after": "400c60045ab9840aeeb17bcb4f51ef42f80b0b8b146904d2bef7adcc7225cbd5",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Recovery/config/role-registry.json",
       "before": "53d9d771fbb56256c856ddb4b0b94ae5a4b23ceb94b487e4fefa5d3b91d2626b",
-      "after": "79bcb2a9fac8934db643c7dc7d68dc9f9a545b7e7014ae23dbf65d16ff272829",
+      "after": "490d8c91020970b6d246d1acfdc06ef3fdc4bcf8d0815a1c4aea80c58da3ba49",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Recovery/package-lock.json",
       "before": "9f9cbe00f2c98227ef3b71e784cccbb5acc0be6e3d6d615366e870914f80369c",
-      "after": "bd11a8a77a6124da7dd6b7aeb1aad61410f55f9fe6a9e009912f941aceab181d",
+      "after": "c0f06f6f3dafcd8c889a14322c7998741b395f5190e46230253e63597a1bf3f4",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
       "path": "fleet/packages/AGI_Recovery/package.json",
       "before": "e487140d41f703af9181505fb8b4b5b75f10908d653cd3dc229ef81261ee37a5",
-      "after": "42b32dde64230466ed0ca68555706e717b83449253f2be61f1ca7aa8e5a229a6",
+      "after": "2977e086ff601ee54cd3335ba7e5255f9dd9702f28c9b141c58f1105418358df",
       "reason": "Coordinate the seven Linux release identities; retain dependencies and protocol rules."
     },
     {
@@ -1106,7 +1112,7 @@
     {
       "path": "fleet/packages/AGI_Recovery/packages/AGI_Agent/src/control/controller.mjs",
       "before": "e8575b35190bd4e8e8039200c17677b1e642248264a7a2a8c768fb95f3dd8203",
-      "after": "ada31b40ab5ecb151e28307b62c9366874df91387594f9a7130267fa76249bdc",
+      "after": "8da955196ff99d1b5732b95b3124aaa009d4728407e62a56a7ac89e0c4d8d5a9",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -1124,7 +1130,7 @@
     {
       "path": "fleet/packages/AGI_Recovery/packages/AGI_Agent/src/control/server.mjs",
       "before": "e90d688d0d8b26c4bb40ca9fa5d5e489cae9d269ad4050100bbd701c95bb6c1a",
-      "after": "f126d9836246525f10d79dab7b1085a978c6cf7c159b59c37b822ccf859a8fc3",
+      "after": "da9ecccf96579a2a4da610f4567bd95040601286900ae0bee082f563b25c23e0",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -1154,7 +1160,7 @@
     {
       "path": "fleet/packages/AGI_Recovery/packages/AGI_Node/src/control/controller.mjs",
       "before": "3d65da5809ccd710ffb6f821b94ab106025ef67fd887bdb75f3cc4760a8deb4d",
-      "after": "31adc6ff9ae4ff7ba61ed1ab0dff146c1f007a68058315d7aa1864c02021ec7f",
+      "after": "d50b35a0a62d9d452df68eb9c2019ab7a0b8f11fde9f4414bfae1ade39f2c4f0",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -1172,7 +1178,7 @@
     {
       "path": "fleet/packages/AGI_Recovery/packages/AGI_Node/src/control/server.mjs",
       "before": "764149b229280779c7f531e8c01b06f7108a960db7864b597291c2fe45195d74",
-      "after": "4602317b47923d189742075f535dfc340b5b7c886a61d221c8000d47806932b3",
+      "after": "f4fefa4454a58810745cb18f64f1503c96148556a5a472088061e63402298936",
       "reason": "Add authenticated SUCCESSOR routes and expose already-validated compute runtime observations through the existing Controller."
     },
     {
@@ -1208,7 +1214,7 @@
     {
       "path": "fleet/packages/AGI_Recovery/web/index.html",
       "before": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
-      "after": "ad1c962b6dc61be6a69d0e8971429cc39980097063e9836954988181cd0f60dc",
+      "after": "8e8a961e5d9c37a5f9fe2ebbf48c0d7ed7251693c7e434e0e6f431e3b5c93e49",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
     },
     {
@@ -1238,19 +1244,25 @@
     {
       "path": "fleet/source-inventory.json",
       "before": "5955175faeb7bea6fc9623e59d6621247a4f258597e725e658600c011cf9ed68",
-      "after": "00fa00b5053e5a23c01170d5c05f03d3aea4cb0955fd0b68020d33d3c341db4c",
+      "after": "abb892ede6d1c27488fc5798e1e3ccacb74ed276796933543bcf047d0bec0881",
       "reason": "Regenerate exact source and role-copy integrity records; no qualification inferred."
     },
     {
       "path": "fleet/web/index.html",
       "before": "4aacb012278019fbb5d552a8d2ef8fee458bb65e19fe24b137534a6e7b40caec",
-      "after": "ad1c962b6dc61be6a69d0e8971429cc39980097063e9836954988181cd0f60dc",
+      "after": "8e8a961e5d9c37a5f9fe2ebbf48c0d7ed7251693c7e434e0e6f431e3b5c93e49",
       "reason": "Promote reviewed Studio format and explicit backup exclusion support; add installed Builder entry point while retaining existing actions."
+    },
+    {
+      "path": "macos/build.py",
+      "before": "84f3a59c7601ac923808cd73e75c93fd01449a7678e09427be1c3b37809add06",
+      "after": "a6fc699c01ba7022386f1392e281c18dfe35da99d5222afaf8872e5078d6b3ed",
+      "reason": "Keep the Mac build bound to its original verified Linux archive as the active Linux download pointer and source advance; retain all archive-integrity and qualification requirements."
     },
     {
       "path": "macos/preview/source-inventory.json",
       "before": "3d1b27886fec89aa8afed9a9fa34a82c18af79be49cce2e39b5f377e2ea34521",
-      "after": "8ff1b1970ccc2aa6097713fe05fe20eba5955b15b7bc4f9b01423aa8af9ccffe",
+      "after": "6098b9d53c1ccf5e33b00b0fb04faa149a0c1ee3fb4d51edaa6408cc7fb0d261",
       "reason": "Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification."
     },
     {
@@ -1260,15 +1272,21 @@
       "reason": "Compare the materialized basis to the exact current candidate instead of a stale version literal; retain the prior test in successor/history."
     },
     {
+      "path": "macos/tests/test_build.py",
+      "before": "bcfb0a945981605e6f63f224b67272ba837f5bdfbf0ebfe131fde945f7a05a9d",
+      "after": "417f905dedc8174112309bd808dcec81b7da24491ed87aeea12b154de96a377c",
+      "reason": "Keep the Mac build bound to its original verified Linux archive as the active Linux download pointer and source advance; retain all archive-integrity and qualification requirements."
+    },
+    {
       "path": "website/fr.html",
       "before": "17abf7fcbca259f3807984c3a7cfb514c49b05b4e26a02fc3d266db8f048d3fd",
-      "after": "98da975525a5c1d68ca3a830b5dd2c1bfbf4f050179a158181d03c20a3489ea0",
+      "after": "aa24221395ac3bb35e155c30bc05a4771bdd5d6eb923b7324191f635cb8df7e1",
       "reason": "Add Builder entry point; retain concurrent published-release installation links and existing routes."
     },
     {
       "path": "website/index.html",
       "before": "e25bd373576c8452379b8153a7b15fb49bebec5258a74fcc6c57a98ba428257a",
-      "after": "bab381e1ed132559ec302eb3eb919ca7ab99b3d0746c64399ca5f89f0e75bf39",
+      "after": "0a53de9d79b8bdb7862ac0cc4ccb1cdfc88f466adfa1c26a60d5decd63e9cecd",
       "reason": "Add Builder entry point; retain concurrent published-release installation links and existing routes."
     },
     {
@@ -1305,6 +1323,12 @@
       "path": "website/start.html",
       "before": "283c1b13a8c6dbbe208544b676e705eae812245e70831fffd3ec6d82664b9dd9",
       "after": "1d99bcb95c4f4c716ab2c81a83cac740c0c86bb6257aa58dbcd638534746fec2",
+      "reason": "Add Builder entry point; retain concurrent published-release installation links and existing routes."
+    },
+    {
+      "path": "website/styles.css",
+      "before": "f854fc683e4ec0d3add1c81378e6dd1538751cb425a217248dfd3bcb92679af2",
+      "after": "c3357bffe0145f5f2cb1e38889dd41c42b4ad0b61521d2d657c8c4b637f68ada",
       "reason": "Add Builder entry point; retain concurrent published-release installation links and existing routes."
     }
   ],

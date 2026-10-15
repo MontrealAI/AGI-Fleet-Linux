@@ -147,3 +147,83 @@ test('Saved Fleet: explicit method reuse and mapped changed data retain lineage,
     }finally{await context.close();}
   }
 });
+
+test('Saved Fleet: EN/FR history at 98/99/100 remains recoverable with bounded archival continuation',async({browser},info)=>{
+  test.setTimeout(60000);
+  const model=await load('successor/vendor/manager/site/assets/successor/model.mjs');
+  const {defaultMission}=await load('successor/vendor/manager/site/assets/successor/missions.mjs');
+  const {sha256}=await load('successor/vendor/manager/site/assets/successor/safe.mjs');
+  const contexts=[],errors=[],network=[],results=[];
+  async function offlinePage(){
+    const context=await browser.newContext({acceptDownloads:true,serviceWorkers:'block',viewport:{width:390,height:844}});contexts.push(context);
+    await context.route(/^https?:/,route=>{network.push(route.request().url());return route.abort();});
+    await context.addInitScript(()=>{window.__historyWalletCalls=0;window.ethereum={request(){window.__historyWalletCalls++;throw Error('Unexpected authority');}};});
+    const page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));await context.setOffline(true);return page;
+  }
+  try{
+    for(const lang of ['en','fr'])for(const count of [98,99,100]){
+      const page=await offlinePage();await page.goto(pathToFileURL(path.join(root,`docs/successor/My-SUCCESSOR-Omega-${lang}.html`)).href);
+      const source=await page.locator('#successor-source').evaluate(el=>JSON.parse(el.textContent));
+      let run=await model.runCandidate(await model.createSystem(defaultMission('analyst',lang)),'baseline',source.engineSha256),state=await model.chooseCandidate(run.state,run.candidate.id,'keep');
+      run=await model.runCandidate(state,'improved',source.engineSha256);state=await model.chooseCandidate(run.state,run.candidate.id,'replace');
+      while(state.chronicle.length<count)await model.appendEvent(state,'restored','0'.repeat(64));
+      const originalRaw=await model.exportCapsule(state,source);await restore(page,originalRaw);
+      expect(JSON.parse(await download(page,'#download-capsule')).payload.state).toEqual(state);
+      await expect(page.locator('#history-warning')).toHaveAttribute('role','alert');
+      expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+      if(count===100){
+        await expect(page.locator('#improve-local')).toBeDisabled();await expect(page.locator('#rollback')).toBeDisabled();
+        await page.locator('#public-consent').check();await page.locator('#run').click();await expect(page.locator('#error')).toContainText('HISTORY_LIMIT');
+        await expect(page.locator('#download-capsule')).toBeEnabled();
+      }
+      await page.locator('#history-consent').check();const previousRaw=await download(page,'#continue-history');
+      expect(JSON.parse(previousRaw).payload.state).toEqual(state);await expect(page.locator('#history-warning')).toContainText('1/100');
+      const continued=JSON.parse(await download(page,'#download-capsule'));
+      expect(continued.format).toBe('successor-portable/2');expect(model.historyEvents(continued.payload.state).slice(0,count)).toEqual(state.chronicle);
+      expect(continued.payload.state.candidates).toEqual(state.candidates);expect(continued.payload.state.active).toBe(state.active);expect(continued.payload.state.authority).toBe('none');
+      await page.locator('#public-consent').check();await page.locator('#run').click();await expect(page.locator('#history-warning')).toContainText('2/100');
+      await expect(page.frameLocator('#preview').getByText(/identical-id-once/)).toBeVisible();
+      await page.locator('#rollback').click();await expect(page.frameLocator('#preview').getByText(/every-row/)).toBeVisible();
+      const savedHTML=await download(page,'#download-html'),htmlPath=info.outputPath(`history-${lang}-${count}.html`);fs.writeFileSync(htmlPath,savedHTML);
+      const fresh=await offlinePage();await fresh.goto(pathToFileURL(htmlPath).href);await expect(fresh.locator('#restore-preview')).toBeVisible();
+      await fresh.locator('#restore-consent').check();await fresh.locator('#restore').click();await expect(fresh.locator('#restore-preview')).toBeHidden();
+      await fresh.locator('#public-consent').check();await fresh.locator('#run').click();await expect(fresh.locator('#history-warning')).toContainText('4/100');await expect(fresh.locator('#error')).toBeHidden();
+      const rerunRaw=await download(fresh,'#download-capsule'),rerun=(await model.inspectCapsule(rerunRaw)).capsule.payload.state;
+      expect(rerun.archives[0].events).toEqual(state.chronicle);expect(rerun.active).toBe(state.candidates[0].id);expect(rerun.authority).toBe('none');
+      if(count===100){
+        const overflow=structuredClone(state),record={sequence:100,action:'restored',subject:'0'.repeat(64),previous:state.chronicle.at(-1).sha256};overflow.chronicle.push({...record,sha256:await sha256(record)});
+        const payload={state:overflow,sourceManifest:source},invalid={format:'successor-portable/1',payload,sha256:await sha256(payload)};
+        await page.locator('#import-file').setInputFiles({name:'overflow.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(invalid))});await expect(page.locator('#error')).toContainText('CHRONICLE');await expect(page.locator('#restore-preview')).toBeHidden();
+        await page.screenshot({path:info.outputPath(`history-${lang}-100.png`),fullPage:true});
+      }
+      expect(await page.evaluate(()=>window.__historyWalletCalls)).toBe(0);
+      results.push({language:lang,originalEvents:count,originalCapsuleSHA256:digest(originalRaw),savedHTMLSHA256:digest(savedHTML),rerunCapsuleSHA256:digest(rerunRaw),restorationConsumesNoSlot:true,allEventsPreserved:true,archivalContinuationExplicit:true,rollbackReferencesPreserved:true,downloadedOfflineRerun:true,authority:'none'});
+    }
+    expect(errors).toEqual([]);expect(network).toEqual([]);
+    fs.writeFileSync(info.outputPath('history-journey.json'),JSON.stringify({schema:'agi-fleet/history-browser-journey/v1',browserVersion:browser.version(),archiveIdentity:process.env.FLEET_TEST_METADATA?JSON.parse(fs.readFileSync(process.env.FLEET_TEST_METADATA,'utf8')).sha256:null,scope:'saved Fleet distribution and actual downloaded standalone HTML; deterministic local work; no provider, host or independent user qualification',results},null,2)+'\n');
+  }finally{for(const context of contexts)await context.close();}
+});
+
+test('Saved Fleet: source-bearing capacity rejects selection without losing exports and preserves imported metadata',async({browser},info)=>{
+  test.setTimeout(90000);
+  const model=await load('successor/vendor/manager/site/assets/successor/model.mjs');
+  const {defaultMission}=await load('successor/vendor/manager/site/assets/successor/missions.mjs');
+  const {canonical}=await load('successor/vendor/manager/site/assets/successor/safe.mjs');
+  for(const lang of ['en','fr']){
+    const context=await browser.newContext({acceptDownloads:true,serviceWorkers:'block'}),page=await context.newPage();
+    try{
+      await context.setOffline(true);await page.goto(pathToFileURL(path.join(root,`docs/successor/My-SUCCESSOR-Omega-${lang}.html`)).href);
+      const source=await page.locator('#successor-source').evaluate(el=>JSON.parse(el.textContent));
+      const mission=defaultMission('analyst',lang);mission.input='id,category,value\n'+Array.from({length:1000},(_,i)=>'row'+i+','+('Category '+i).padEnd(79,'x')+',1').join('\n');
+      let state=await model.createSystem(mission);for(let i=0;i<11;i++)state=(await model.runCandidate(state,'baseline',i.toString(16).padStart(64,'0'))).state;
+      const size=(s,manifest)=>Buffer.byteLength(canonical({format:'successor-portable/1',payload:{state:s,sourceManifest:manifest},sha256:'0'.repeat(64)}));
+      async function fill(manifest){while(size(state,manifest)+2300<3999900)await model.appendEvent(state,'restored','x'.repeat(2000));const probe=structuredClone(state);await model.appendEvent(probe,'restored','x');await model.appendEvent(state,'restored','x'.repeat(3999900-size(probe,manifest)+1));}
+      await fill(source);const original=await model.exportCapsule(state,source);await restore(page,original);
+      await expect(page.locator('#keep-version')).toBeEnabled();await page.locator('#keep-version').click();await expect(page.locator('#error')).toContainText('CAPSULE_CAPACITY');
+      expect(await download(page,'#download-capsule')).toBe(original);expect(JSON.parse(await download(page,'#download-capsule')).payload.state.active).toBeNull();
+      await fill(null);const imported=await model.exportCapsule(state);await restore(page,imported);
+      expect(await download(page,'#download-capsule')).toBe(imported);
+      const saved=await download(page,'#download-html'),file=info.outputPath(`capacity-${lang}.html`);fs.writeFileSync(file,saved);const fresh=await context.newPage();await fresh.goto(pathToFileURL(file).href);await fresh.locator('#restore-preview').waitFor({state:'visible'});await fresh.locator('#restore-consent').check();await fresh.locator('#restore').click();await fresh.locator('#restore-preview').waitFor({state:'hidden'});expect(await download(fresh,'#download-capsule')).toBe(imported);
+    }finally{await context.close();}
+  }
+});

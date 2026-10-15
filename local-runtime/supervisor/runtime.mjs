@@ -10,6 +10,7 @@ import {successorOperation} from './successor.mjs';
 import {validateTaskInput} from '../worker.mjs';
 import {inspectReconciliation,reconcile} from './reconciliation.mjs';
 import {diagnostics} from './diagnostics.mjs';
+import {evaluateAdmission,requireAdmission,OFFLINE_LIMITS} from './admission.mjs';
 
 const ASSISTANT_ACTIONS=['status','inspect','prepare','run','cancel','output'];
 export function sourceIdentity() {
@@ -67,8 +68,18 @@ export class LocalRuntime {
     need(sourceIdentity()===this.source&&actor.host.sourceSha256===this.source,'RUNTIME_REBIND_REQUIRED');
     const h=this.backend.inspect();need(h.supported,h.code);need(h.identity===actor.host.identity,'HOST_REBIND_REQUIRED');return h;
   }
+  admissionReport(actor,task,{host=this.backend.inspect(),intake=true}={}) {
+    return evaluateAdmission({actor,task,host,source:this.source,currentSource:sourceIdentity(),hostId:this.store.meta('host'),at:this.now(),
+      paused:intake&&this.store.meta('paused'),stopped:this.emergency||this.stoppedActors.has(actor.id)||this.store.meta('stopped'),nativeBackend:this.backend instanceof LinuxSandbox});
+  }
+  admission(input,p) {
+    // Read-only admission uses the existing actor-scoped preparation permission.
+    // Preserve the exact pinned assistant credential/tool allowlist.
+    keys(input,['actor','task']);this.scope(p,'prepare',input.actor);
+    return this.admissionReport(this.store.actor(uuid(input.actor)),input.task);
+  }
   prepare(input,p) {
-    keys(input,['actor','task']);this.scope(p,'prepare',input.actor);const actor=this.store.actor(uuid(input.actor));this.ready(actor);
+    keys(input,['actor','task']);this.scope(p,'prepare',input.actor);const actor=this.store.actor(uuid(input.actor)),host=this.ready(actor);
     need(!this.store.meta('paused'),'INTAKE_PAUSED');validateTaskInput(actor.role,input.task);
     const publicView=structuredClone(input.task);
     if(input.task.action==='protocol-inspect') {
@@ -83,26 +94,31 @@ export class LocalRuntime {
       need(input.task.sourceActor!==actor.id&&input.task.sourceController!==actor.controller,'KNOWN_REVIEW_CONFLICT');
       need(false,'INDEPENDENT_REVIEW_NOT_QUALIFIED');
     }
-    const at=this.now();const grant={schema:'agi-fleet/local-grant/v1',id:id(),actor:actor.id,principal:p.hash,task:input.task,inputSha256:digest(input.task),packageSha256:actor.packageSha256,host:actor.host,generation:actor.generation,createdAt:at,expiresAt:at+300000,limits:{wallMs:15000,cpuSeconds:10,heapMiB:128,outputBytes:2000000,modelCalls:0,spendUSDC:'0',actions:1},review:input.task.review,authority:'bounded-offline-only'};
+    const admission=requireAdmission(this.admissionReport(actor,input.task,{host}));
+    const at=this.now();const grant={schema:'agi-fleet/local-grant/v1',id:id(),actor:actor.id,principal:p.hash,task:input.task,inputSha256:digest(input.task),packageSha256:actor.packageSha256,host:actor.host,generation:actor.generation,createdAt:at,expiresAt:at+300000,limits:OFFLINE_LIMITS,review:input.task.review,authority:'bounded-offline-only',admission};
     this.store.transaction(()=>{const used=this.store.db.prepare('SELECT COALESCE(SUM(length(value)),0) AS bytes FROM grants').get().bytes;need(used+Buffer.byteLength(canonical(grant))<=32_000_000,'GRANT_HISTORY_FULL');this.store.db.prepare('INSERT INTO grants VALUES(?,?,?,?)').run(grant.id,actor.id,canonical(grant),'prepared');});
-    return {grant:grant.id,commitment:digest(grant),actor:actor.id,task:grant.task,limits:grant.limits,expiresAt:grant.expiresAt,confirmationRequired:true};
+    return {grant:grant.id,commitment:digest(grant),actor:actor.id,task:grant.task,limits:grant.limits,expiresAt:grant.expiresAt,confirmationRequired:true,admission};
   }
   authorize(input,p) {
     this.scope(p,'authorize');keys(input,['grant','commitment','confirm']);need(input.confirm===true,'CONFIRM_REQUIRED');
     return this.store.transaction(()=>{
       const row=this.store.db.prepare('SELECT * FROM grants WHERE id=?').get(uuid(input.grant));need(row&&row.state==='prepared','GRANT_NOT_PREPARED');
       const g=parseStrict(row.value);need(digest(g)===input.commitment,'GRANT_CHANGED');need(this.now()>=g.createdAt&&this.now()<g.expiresAt,'GRANT_EXPIRED');
-      const actor=this.store.actor(g.actor);this.ready(actor);need(g.generation===actor.generation,'GRANT_REVOKED');
+      const actor=this.store.actor(g.actor),host=this.ready(actor);need(g.generation===actor.generation,'GRANT_REVOKED');
+      need(g.admission?.schema==='agi-fleet/local-admission/v1','ADMISSION_REPREPARE_REQUIRED');
+      requireAdmission(this.admissionReport(actor,g.task,{host,intake:false}),g.admission);
       this.store.db.prepare("UPDATE grants SET state='authorized' WHERE id=?").run(g.id);this.store.event('grant-authorized',{id:g.id,commitment:input.commitment});return {grant:g.id,state:'authorized'};
     });
   }
   async run(input,p) {
-    keys(input,['actor','grant']);this.scope(p,'run',input.actor);const actor=this.store.actor(uuid(input.actor));this.ready(actor);
+    keys(input,['actor','grant']);this.scope(p,'run',input.actor);const actor=this.store.actor(uuid(input.actor)),host=this.ready(actor);
     const g=this.store.transaction(()=>{
       const row=this.store.db.prepare('SELECT * FROM grants WHERE id=?').get(uuid(input.grant));need(row&&row.actor===actor.id&&row.state==='authorized','GRANT_UNAVAILABLE');
       const grant=parseStrict(row.value),now=this.now();need(grant.principal===p.hash,'GRANT_PRINCIPAL');
       need(now>=grant.createdAt&&now<grant.expiresAt&&now>=this.store.meta('clock'),'GRANT_EXPIRED_OR_CLOCK_CHANGED');
       need(grant.generation===actor.generation&&canonical(grant.host)===canonical(actor.host)&&grant.packageSha256===actor.packageSha256,'GRANT_REVOKED');
+      need(grant.admission?.schema==='agi-fleet/local-admission/v1','ADMISSION_REPREPARE_REQUIRED');
+      const admission=requireAdmission(this.admissionReport(actor,grant.task,{host,intake:false}),grant.admission);
       const active=this.store.db.prepare("SELECT actor FROM runs WHERE state='running'").all();
       need(active.length<this.store.meta('maxConcurrent')&&!active.some(x=>x.actor===actor.id),'QUEUE_CAPACITY');
       const recent=this.store.db.prepare('SELECT actor,value FROM runs').all().filter(r=>parseStrict(r.value).reservedAt>now-86400000);
@@ -110,7 +126,7 @@ export class LocalRuntime {
       const total=this.store.db.prepare('SELECT COUNT(*) AS count,COALESCE(SUM(length(value)+length(COALESCE(result,\'\'))),0) AS bytes FROM runs').get();
       need(total.count<4096&&total.bytes<64_000_000,'HISTORY_CAPACITY_EXPORT_REQUIRED');
       this.store.db.prepare("UPDATE grants SET state='consumed' WHERE id=?").run(grant.id);
-      this.store.set('clock',now);const run={id:id(),grant:grant.id,inputSha256:grant.inputSha256,reservedAt:now,role:actor.role,review:grant.review,sourceSha256:this.source,packageSha256:actor.packageSha256,host:actor.host,authority:'none',inference:'none',spendUSDC:'0'};
+      this.store.set('clock',now);const run={id:id(),grant:grant.id,inputSha256:grant.inputSha256,reservedAt:now,role:actor.role,review:grant.review,sourceSha256:this.source,packageSha256:actor.packageSha256,host:actor.host,authority:'none',inference:'none',spendUSDC:'0',admission};
       this.store.db.prepare("INSERT INTO runs VALUES(?,?,?,'running',?,NULL)").run(run.id,actor.id,grant.id,canonical(run));this.store.event('run-reserved',{id:run.id,actor:actor.id,grant:grant.id});return {...grant,run};
     });
     const abort=new AbortController();this.active.set(g.run.id,{abort,actor:actor.id,grant:g.id,principal:p.hash});
@@ -196,13 +212,13 @@ export class LocalRuntime {
     if(action==='diagnostics')return diagnostics(this,input,p);
     if(action==='reconciliation')return inspectReconciliation(this,input,p);
     if(action==='reconcile')return reconcile(this,input,p);
-    if(['project-assemble','project-select','project-export','project-import'].includes(action))return successorOperation(this,action,input,p);
-    const methods={create:'addActor',activate:'activate',prepare:'prepare',authorize:'authorize',run:'run',stop:'stop',cancel:'cancel',revoke:'revoke','revoke-client':'revokeClient',pause:'pause',resume:'resume',output:'output',export:'exportActor',import:'importActor'};
+    if(['project-assemble','project-select','project-export','project-import','project-continue-history'].includes(action))return successorOperation(this,action,input,p);
+    const methods={create:'addActor',activate:'activate',admission:'admission',prepare:'prepare',authorize:'authorize',run:'run',stop:'stop',cancel:'cancel',revoke:'revoke','revoke-client':'revokeClient',pause:'pause',resume:'resume',output:'output',export:'exportActor',import:'importActor'};
     if(action==='status')return this.status(p);
     if(action==='client-info'){this.scope(p,'status',p.actor);keys(input,[]);return {actor:p.actor,operator:p.operator,actions:p.actions};}
     if(action==='grant-inspect'){
       this.scope(p,'grant-inspect');keys(input,['grant']);const row=this.store.db.prepare('SELECT state,value FROM grants WHERE id=?').get(uuid(input.grant));need(row,'GRANT_UNAVAILABLE');
-      const g=parseStrict(row.value);return {grant:g.id,commitment:digest(g),actor:g.actor,task:g.task,limits:g.limits,expiresAt:g.expiresAt,state:row.state,preparingClient:g.principal===p.hash?'this-operator':'scoped-client',confirmationRequired:true};
+      const g=parseStrict(row.value);return {grant:g.id,commitment:digest(g),actor:g.actor,task:g.task,limits:g.limits,expiresAt:g.expiresAt,state:row.state,preparingClient:g.principal===p.hash?'this-operator':'scoped-client',confirmationRequired:true,admission:g.admission??null};
     }
     if(action==='doctor'){this.scope(p,'doctor');return this.doctor();}
     if(action==='example'){this.scope(p,'example');keys(input,['kind','language']);need(['analyst','website'].includes(input.kind)&&['en','fr'].includes(input.language),'EXAMPLE_INVALID');return defaultMission(input.kind,input.language);}

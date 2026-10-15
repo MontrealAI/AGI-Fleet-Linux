@@ -55,7 +55,7 @@ class PreviewReleaseTests(unittest.TestCase):
             self.write(logs / 'qualification.json', {'commit': self.commit, 'workflowRun': self.run, 'architecture': arch, 'archiveSHA256': R.sha(archive)})
             for name, scope in [('source', 'module'), ('extracted', 'module'), ('native-source', 'native'), ('native-archive', 'native')]:
                 self.tap(logs / (name + '.tap'), self.spec['tests'][scope])
-            (logs / 'installer.log').write_text('Ran 15 tests in 1.0s\n\nOK\n')
+            (logs / 'installer.log').write_text(f"Ran {self.spec['tests']['installer']} tests in 1.0s\n\nOK\n")
             pin = next(p for p in pins['archives'] if p['platform'] == 'linux-' + arch)
             installed = {'archiveSHA256': R.sha(archive), 'platform': 'linux', 'arch': arch,
                          'restartPreservedReservations': 2, 'oldGrantReplayed': False, 'provider': 'none',

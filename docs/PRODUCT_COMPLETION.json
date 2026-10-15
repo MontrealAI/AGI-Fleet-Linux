@@ -1,0 +1,667 @@
+{
+  "schema": "agi-fleet/additive-completion-backlog/v1",
+  "originalLocalRequirementsPreserved": 22,
+  "priorMandateRequirements": 14,
+  "supplementRequirements": 22,
+  "productionQualified": false,
+  "implementationEvidence": "Follow-up recovery/lifecycle candidate and upstream PR1571; see per-requirement source paths. Exact final-head CI and separately controlled qualification remain required.",
+  "entries": [
+    {
+      "id": "P01",
+      "requirement": "Product completion standard",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Close every original requirement and resource gate; this additive patch does not qualify the full product."
+    },
+    {
+      "id": "P02",
+      "requirement": "Inspect current reality before changing it",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "engineering/check-repository.py",
+        "docs/local-skills/baseline.json"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "P03",
+      "requirement": "Preserve existing functionality and boundaries",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "engineering/check-successor-preservation.py",
+        "successor/history/linux-1.1.1-maintenance/"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "P04",
+      "requirement": "Fix what \u201cchecked\u201d means",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "fleet/successor/vendor/manager/site/assets/successor/checker.mjs",
+        "successor/docs/PRACTICAL_QUALIFICATION.md"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "P05",
+      "requirement": "Make numeric reports readable, not merely overflow-free",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "fleet/successor/vendor/manager/site/assets/successor/missions.mjs",
+        "engineering/browser-tests/fleet-tests/execution.spec.js"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "P06",
+      "requirement": "Keep the chosen method useful on the next task",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "fleet/successor/vendor/manager/site/assets/successor/model.mjs",
+        "engineering/browser-tests/fleet-tests/execution.spec.js"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "P07",
+      "requirement": "Reduce preparation work without weakening semantics",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "fleet/successor/vendor/manager/site/assets/successor/mapping.mjs"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "P08",
+      "requirement": "Simplify the existing installed journey",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "successor/installed-ui.js"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "P09",
+      "requirement": "Prove three narrow, useful work families before broadening claims",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Implement qualified general task/provider/tool adapters, browser/desktop execution, protocol/signer roles and native Mac local mode before testing their complete journeys."
+    },
+    {
+      "id": "P10",
+      "requirement": "Instrument full cost and human effort",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "fleet/successor/outcomes.mjs",
+        "fleet/successor/outcome-cli.mjs"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "P11",
+      "requirement": "Run a genuine user and live-provider pilot",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Commission authorized physical/live environments and eligible independent review; observe 100 distinct tasks, ten consenting EN/FR users and paired baselines with actual costs."
+    },
+    {
+      "id": "P12",
+      "requirement": "Commission real environments separately",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Commission authorized physical/live environments and eligible independent review; observe 100 distinct tasks, ten consenting EN/FR users and paired baselines with actual costs."
+    },
+    {
+      "id": "P13",
+      "requirement": "Concrete acceptance cases",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "fleet/successor/vendor/manager/scripts/successor/portable.test.mjs",
+        "engineering/browser-tests/fleet-tests/execution.spec.js"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "P14",
+      "requirement": "Deliverables and release discipline",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "practical-assessment-2026-10-14",
+      "implementationEvidence": [
+        "engineering/next-release.json",
+        ".github/workflows/next-release.yml"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S01",
+      "requirement": "Establish the current baseline and a single completion backlog",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        "docs/PRODUCT_COMPLETION.json",
+        "docs/local-skills/acceptance.json"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S02",
+      "requirement": "Enforce repository governance instead of relying on convention",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "ADMINISTRATION_AND_INDEPENDENT_REVIEW_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        "engineering/governance/main-protection.json",
+        "engineering/governance/check_children.py",
+        "docs/GOVERNANCE.md"
+      ],
+      "nextGate": "Apply and read back repository governance through an Administration(write) connection; establish named eligible reviewers and future release/provenance policies."
+    },
+    {
+      "id": "S03",
+      "requirement": "Strengthen the existing release trust chain",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "ADMINISTRATION_AND_INDEPENDENT_REVIEW_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        "engineering/publish-next-release.py",
+        "docs/GOVERNANCE.md"
+      ],
+      "nextGate": "Apply and read back repository governance through an Administration(write) connection; establish named eligible reviewers and future release/provenance policies."
+    },
+    {
+      "id": "S04",
+      "requirement": "Make capability and qualification a real admission contract",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        "local-runtime/supervisor/admission.mjs",
+        "docs/local-skills/CAPABILITY_ADMISSION.md"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S05",
+      "requirement": "Give users three coherent entry paths",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S06",
+      "requirement": "Finish Local Skills as executable capabilities, not role labels",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Implement qualified general task/provider/tool adapters, browser/desktop execution, protocol/signer roles and native Mac local mode before testing their complete journeys."
+    },
+    {
+      "id": "S07",
+      "requirement": "Make uncertain external effects a first-class state",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S08",
+      "requirement": "Fix long-term history and capacity behavior",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        "fleet/successor/vendor/manager/site/assets/successor/model.mjs",
+        "fleet/successor/vendor/manager/scripts/successor/history-browser-test.mjs"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S09",
+      "requirement": "Treat installation, upgrades and removal as user journeys",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        "local-runtime/install.py",
+        "local-runtime/tests/test_install.py",
+        "docs/local-skills/INSTALL_AND_RECOVER.md"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S10",
+      "requirement": "Use powerful AI through measured, interchangeable adapters",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Implement qualified general task/provider/tool adapters, browser/desktop execution, protocol/signer roles and native Mac local mode before testing their complete journeys."
+    },
+    {
+      "id": "S11",
+      "requirement": "Exercise prompt injection and hostile artifacts end to end",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S12",
+      "requirement": "Make review independent, capacity-aware and outcome-specific",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S13",
+      "requirement": "Preserve project obligations and partial outcomes",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        "local-runtime/supervisor/successor.mjs",
+        "successor/installed-ui.js"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S14",
+      "requirement": "Make local ownership and privacy precise",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S15",
+      "requirement": "Make failures understandable without a developer",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        "successor/installed-ui.js",
+        "docs/local-skills/INSTALL_AND_RECOVER.md"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S16",
+      "requirement": "Turn useful workflows into evidence-backed recipes",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S17",
+      "requirement": "Make measurement difficult to game",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        "fleet/successor/outcomes.mjs",
+        "successor/docs/pilot-plan.json"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S18",
+      "requirement": "Qualify complete real-world journeys, including bad days",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Commission authorized physical/live environments and eligible independent review; observe 100 distinct tasks, ten consenting EN/FR users and paired baselines with actual costs."
+    },
+    {
+      "id": "S19",
+      "requirement": "Release gradually, support deliberately and control maintenance cost",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S20",
+      "requirement": "Validate commercial usefulness rather than assuming it",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Commission authorized physical/live environments and eligible independent review; observe 100 distinct tasks, ten consenting EN/FR users and paired baselines with actual costs."
+    },
+    {
+      "id": "S21",
+      "requirement": "Execute in gated, coherent increments",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "COMPONENT_IMPLEMENTED_QUALIFICATION_PENDING",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [
+        ".github/workflows/next-release.yml",
+        ".github/workflows/local-skills.yml"
+      ],
+      "nextGate": "Run and audit exact final-head component and saved-distribution checks; then complete the operational observations in the original mandate."
+    },
+    {
+      "id": "S22",
+      "requirement": "Final delivery standard",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "IMPLEMENTATION_OR_EXTERNAL_QUALIFICATION_OPEN",
+      "source": "additional-mandate-2026-10-14",
+      "implementationEvidence": [],
+      "nextGate": "Close every original requirement and resource gate; this additive patch does not qualify the full product."
+    },
+    {
+      "id": "LOCAL-A01",
+      "requirement": "Fresh local install",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A01",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A02",
+      "requirement": "Dedicated Fleet coexistence and removal",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A02",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A03",
+      "requirement": "Six bounded skills and duplicate roles",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A03",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A04",
+      "requirement": "Assistant invokes real runtime",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A04",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A05",
+      "requirement": "Agent and unrelated Node on one host",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A05",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A06",
+      "requirement": "Cross-role isolation",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A06",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A07",
+      "requirement": "Grants, replay and escalation",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A07",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A08",
+      "requirement": "Resource and budget concurrency",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A08",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A09",
+      "requirement": "Files, browser and desktop outputs",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A09",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A10",
+      "requirement": "Exclusive desktop and changed sessions",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "NOT_IMPLEMENTED",
+      "source": "docs/local-skills/acceptance.json#A10",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A11",
+      "requirement": "STOP and fault handling",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A11",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A12",
+      "requirement": "Crash side-effect reconciliation",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A12",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A13",
+      "requirement": "Honest review independence",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A13",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A14",
+      "requirement": "Read-only original evidence",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A14",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A15",
+      "requirement": "Safe export and hostile import",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A15",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A16",
+      "requirement": "Restore on a second compatible host",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A16",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A17",
+      "requirement": "Complete SUCCESSOR journey",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A17",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A18",
+      "requirement": "Protocol integration unchanged",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A18",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A19",
+      "requirement": "IPC and browser defenses",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A19",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A20",
+      "requirement": "EN/FR functional and accessibility",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A20",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A21",
+      "requirement": "Exact downloadable artifact",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "PARTIAL",
+      "source": "docs/local-skills/acceptance.json#A21",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    },
+    {
+      "id": "LOCAL-A22",
+      "requirement": "Physical targets and endurance",
+      "engineer": "MontrealAI",
+      "independentReviewer": null,
+      "status": "NOT_RUN",
+      "source": "docs/local-skills/acceptance.json#A22",
+      "implementationEvidence": [],
+      "nextGate": "Preserve the original acceptance row and complete its pending implementation and exact-artifact/operational observations."
+    }
+  ],
+  "resources": [
+    {
+      "owner": "repository-administrator",
+      "needs": "Administration(write), named eligible independent reviewers, branch/tag rules, immutable releases, private reporting and provenance attestations",
+      "status": "NOT_CONFIGURED"
+    },
+    {
+      "owner": "local-runtime-maintainers",
+      "needs": "Implemented general tools/live provider, operational protocol/signer roles, exclusive desktop leases and cross-host fencing, full resource guarantees, native Mac local implementation",
+      "status": "IMPLEMENTATION_INCOMPLETE"
+    },
+    {
+      "owner": "qualification-operators",
+      "needs": "Physical supported Linux/Mac hosts, explicit live budgets/provider access, independent eligible reviewers, ten consenting EN/FR users,100 distinct predeclared tasks and paired baselines",
+      "status": "NOT_RUN"
+    }
+  ]
+}

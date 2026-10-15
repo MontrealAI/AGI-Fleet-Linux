@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {fixture,task} from './helpers.mjs';
-import {createSystem,runCandidate,exportCapsule,validateState} from '../../fleet/successor/vendor/manager/site/assets/successor/model.mjs';
+import {createSystem,runCandidate,exportCapsule,validateState,appendEvent,historyEvents} from '../../fleet/successor/vendor/manager/site/assets/successor/model.mjs';
 import crypto from 'node:crypto';
+import {digest} from '../contracts.mjs';
 
 test('separately authorized internal review creates an unselected unchanged-format capsule; explicit choice and restore grant no authority',async()=>{
   const f=fixture();try{
@@ -47,5 +48,33 @@ test('concurrent validated imports cannot exceed the durable project limit',asyn
     assert.equal(results.filter(r=>r.status==='fulfilled').length,1);
     assert.equal(results.find(r=>r.status==='rejected').reason.message,'PROJECT_LIMIT');
     assert.equal(f.runtime.store.db.prepare('SELECT COUNT(*) AS n FROM projects').get().n,32);
+  }finally{f.close();}
+});
+
+for(const count of [98,99,100])test(`local project history ${count}: exact inactive restore and checkpoint-bound operator continuation`,async()=>{
+  const f=fixture();try{
+    let state=await createSystem(task().input.mission);while(state.chronicle.length<count)await appendEvent(state,'restored','0'.repeat(64));
+    const capsule=await exportCapsule(state),imported=await f.runtime.dispatch('project-import',{capsule,confirm:true},f.operator);
+    assert.deepEqual(imported.state,state);
+    const checkpoint=(await f.runtime.dispatch('project-export',{project:imported.project},f.operator)).capsule;
+    const input={project:imported.project,checkpointSha256:digest(checkpoint),confirm:true};
+    const a=f.create();const scoped=f.runtime.issueClient(a.id).principal;
+    await assert.rejects(f.runtime.dispatch('project-continue-history',input,scoped),/CLIENT_SCOPE_DENIED/);
+    await assert.rejects(f.runtime.dispatch('project-continue-history',{...input,confirm:false},f.operator),/CONFIRM_REQUIRED/);
+    await assert.rejects(f.runtime.dispatch('project-continue-history',{...input,checkpointSha256:'f'.repeat(64)},f.operator),/CHECKPOINT_CHANGED/);
+    const next=await f.runtime.dispatch('project-continue-history',input,f.operator);assert.equal(next.capacity.remaining,99);assert.equal(next.runAuthorized,false);assert.equal(next.authority,'none');
+    const after=JSON.parse((await f.runtime.dispatch('project-export',{project:imported.project},f.operator)).capsule).payload.state;
+    assert.deepEqual(historyEvents(after).slice(0,count),state.chronicle);assert.equal(after.authority,'none');assert.equal(f.runtime.status(f.operator).runs.length,0);
+  }finally{f.close();}
+});
+test('concurrent checkpoint continuations cannot overwrite committed project history',async()=>{
+  const f=fixture();try{
+    const state=await createSystem(task().input.mission);while(state.chronicle.length<100)await appendEvent(state,'restored','0'.repeat(64));
+    const capsule=await exportCapsule(state),imported=await f.runtime.dispatch('project-import',{capsule,confirm:true},f.operator);
+    const checkpoint=(await f.runtime.dispatch('project-export',{project:imported.project},f.operator)).capsule;
+    const input={project:imported.project,checkpointSha256:digest(checkpoint),confirm:true};
+    const results=await Promise.allSettled([f.runtime.dispatch('project-continue-history',input,f.operator),f.runtime.dispatch('project-continue-history',input,f.operator)]);
+    assert.equal(results.filter(r=>r.status==='fulfilled').length,1);assert.equal(results.find(r=>r.status==='rejected').reason.message,'PROJECT_CHANGED');
+    const after=JSON.parse((await f.runtime.dispatch('project-export',{project:imported.project},f.operator)).capsule).payload.state;await validateState(after);assert.equal(after.archives.length,1);assert.equal(after.chronicle.length,1);
   }finally{f.close();}
 });

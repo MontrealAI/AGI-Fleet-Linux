@@ -1,0 +1,17 @@
+# Review and release governance — activation required
+
+The read-only 14 October observation found main unprotected, no rulesets (including parents), and Linux 1.1.1 reporting immutable:false. These observations do not demonstrate a compromise. The current GitHub connector supports source/PR work but exposes no administration-setting mutation. **Enforcement remains NOT_CONFIGURED**, with the repository administrator as owner. No reviewer identity has been invented.
+
+The prepared [main-protection.json](../engineering/governance/main-protection.json) is a proposed distinct-account policy requiring stale-review dismissal, an independent approval, last-push approval, admin enforcement, conversation resolution and refusal of force-push/deletion. It is not activated. The repository owner explicitly authorized shared-account technical review and merge of PR #36 on 14 October 2026; that authorization governs this PR. A stable **Required release qualification** job fails when any saved-archive build/native/integration/browser/audit child fails, is missing, cancelled or skipped; the publisher keeps all earlier gates and adds this aggregate. Fixture success does not qualify physical hosts or live work.
+
+Before applying the policy, the administrator must:
+
+1. Choose the review arrangement deliberately. Under the owner-authorized shared-account arrangement, record a distinct review pass, its exact commit and findings in the PR even when the reviewer uses MontrealAI. GitHub will record COMMENT, not APPROVE, for an author-account review. Do not claim account separation. If enabling the proposed distinct-account policy, provision a separate eligible account and CODEOWNERS; shared-account comments cannot satisfy that GitHub rule.
+2. Require `repository` and `Required release qualification`. Qualification now runs on every pull request, including documentation changes, so the required aggregate can resolve consistently. Confirm exact check names and application identities from a completed final-head run before applying the policy.
+3. Apply/re-read branch protection through an Administration(write) connection, then verify a non-destructive draft test cannot merge without review/checks. Do not force-push main to test it. Preserve audited, narrowly scoped emergency access.
+4. In repository Settings → Releases, enable release immutability for future releases. Keep historical releases; do not recreate them. The existing publisher validates a complete draft before publishing final assets.
+5. Enable private vulnerability reporting and verify the advertised private route.
+
+Official instructions: [branch protection API](https://docs.github.com/en/rest/branches/branch-protection), [future release immutability](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/prevent-release-changes). Build provenance and SBOM attestations remain separate from correctness/operational evidence; existing per-edition SBOMs and license inventories are preserved. Artifact attestations and consumer verification remain an administrator/release-owner commissioning item.
+
+Required resources: an administration-capable GitHub connection, a recorded eligible reviewer arrangement, and completed final-head check identities. PR #36 has explicit owner authorization for shared-account technical review; it still requires completed applicable checks and resolution of technical findings. Until read-back enforcement evidence exists, no document or passing source test may report this requirement complete.

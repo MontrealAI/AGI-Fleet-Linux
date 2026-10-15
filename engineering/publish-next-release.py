@@ -34,8 +34,8 @@ def validate(metadata, audit, commit):
     require(re.fullmatch(r'[1-9][0-9]*', run_id) is not None, 'An exact workflow run is required')
     require(not os.environ.get('GITHUB_RUN_ID') or os.environ['GITHUB_RUN_ID'] == run_id,
             'Publication workflow run differs')
-    require(metadata['version'] == '1.1.2' and metadata['tag'] == 'v1.1.2-qualification'
-            and metadata['name'] == 'AGI_Fleet_Linux_v1.1.2.zip', 'Unexpected release identity')
+    require(metadata['version'] == '1.1.3' and metadata['tag'] == 'v1.1.3-qualification'
+            and metadata['name'] == 'AGI_Fleet_Linux_v1.1.3.zip', 'Unexpected release identity')
     require(0 < metadata['bytes'] < LIMIT and re.fullmatch('[0-9a-f]{64}', metadata['sha256']), 'Invalid archive identity')
     require(audit['status'] == 'PASS' and audit['releaseSHA256'] == metadata['sha256']
             and audit['productionQualified'] is False and audit['workflowCommit'] == commit,
@@ -83,7 +83,7 @@ def validate(metadata, audit, commit):
 def publication_notes(assets, commit, workflow_run):
     require(re.fullmatch(r'[1-9][0-9]*', str(workflow_run or '')) is not None,
             'Release notes require an exact workflow run')
-    source = 'docs/RELEASE_NOTES_1_1_2.md'
+    source = 'docs/RELEASE_NOTES_1_1_3.md'
     notes = render_release_note_links((ROOT / source).read_text(), root=ROOT,
         source=source, repository=REPOSITORY, commit=commit)
     notes += '\n## Published artifact identities\n\n| Asset | Bytes | SHA-256 |\n| --- | ---: | --- |\n'
@@ -100,9 +100,9 @@ def prepare(release, evidence, output):
     require(sha(archive) == metadata['sha256'] and archive.stat().st_size == metadata['bytes'], 'Candidate archive changed')
     require(not output.exists() and not output.is_symlink(), 'Publication output must be absent')
     output.mkdir()
-    name = 'Linux-Qualification-Evidence-v1.1.2.zip'
+    name = 'Linux-Qualification-Evidence-v1.1.3.zip'
     with zipfile.ZipFile(output / name, 'x', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as target:
-        for root, prefix in [(evidence, 'validation'), (release / 'AGI_Fleet_Linux_v1.1.2-checks', 'packaging')]:
+        for root, prefix in [(evidence, 'validation'), (release / 'AGI_Fleet_Linux_v1.1.3-checks', 'packaging')]:
             require(root.is_dir(), 'Missing retained evidence: ' + str(root))
             for path in sorted(root.rglob('*')):
                 require(not path.is_symlink(), 'Evidence links are forbidden')
@@ -119,21 +119,21 @@ def prepare(release, evidence, output):
         'operatorGate': 'OPEN_FOR_CONTROLLED_FRESH_INSTALL',
         'productionQualified': False, 'physicalQualification': 'NOT_RUN', 'audit': audit,
         'evidence': {'name': name, 'bytes': (output / name).stat().st_size, 'sha256': sha(output / name)}}
-    write(output / 'Release-Manifest-v1.1.2.json', manifest)
-    assets = [archive, output / name, output / 'Release-Manifest-v1.1.2.json']
-    (output / 'SHA256SUMS-v1.1.2.txt').write_text(''.join(sha(path) + '  ' + path.name + '\n' for path in assets))
+    write(output / 'Release-Manifest-v1.1.3.json', manifest)
+    assets = [archive, output / name, output / 'Release-Manifest-v1.1.3.json']
+    (output / 'SHA256SUMS-v1.1.3.txt').write_text(''.join(sha(path) + '  ' + path.name + '\n' for path in assets))
     (output / 'release-notes.md').write_text(publication_notes(assets, commit, manifest['workflowRun']))
     print(json.dumps({'status': 'PREPARED', 'assets': [p.name for p in assets], 'productionQualified': False}))
 
 
 def publish(release_dir, output):
     metadata = load(release_dir / 'release.json')
-    manifest = load(output / 'Release-Manifest-v1.1.2.json')
+    manifest = load(output / 'Release-Manifest-v1.1.3.json')
     commit = os.environ.get('GITHUB_SHA')
     validate(metadata, manifest['audit'], commit)
     require(manifest['workflowCommit'] == commit and manifest['sha256'] == metadata['sha256'], 'Publication identity differs')
     assets = [release_dir / metadata['name'], output / manifest['evidence']['name'],
-              output / 'Release-Manifest-v1.1.2.json', output / 'SHA256SUMS-v1.1.2.txt']
+              output / 'Release-Manifest-v1.1.3.json', output / 'SHA256SUMS-v1.1.3.txt']
     expected = {line.split('  ', 1)[1]: line.split('  ', 1)[0] for line in assets[-1].read_text().splitlines()}
     require(set(expected) == {p.name for p in assets[:-1]}, 'Checksum coverage differs')
     for path in assets:
@@ -163,7 +163,7 @@ def publish(release_dir, output):
         if error.code != 404:
             raise
         release = api('/releases', method='POST', data=json.dumps({'tag_name': metadata['tag'],
-            'target_commitish': commit, 'name': 'Linux 1.1.2 — exact-archive SUCCESSOR Ω + Fleet / AGIJobManager 1.16.1 qualification',
+            'target_commitish': commit, 'name': 'Linux 1.1.3 — exact-archive SUCCESSOR Ω + Fleet / AGIJobManager 1.16.1 qualification',
             'body': notes, 'draft': True, 'prerelease': True}).encode())
     require(release['prerelease'] is True and release['target_commitish'] == commit, 'Existing release targets different source')
     ref = api('/git/ref/tags/' + metadata['tag']) if not release['draft'] else None

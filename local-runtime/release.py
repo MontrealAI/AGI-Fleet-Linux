@@ -78,7 +78,7 @@ def audit(evidence, commit, run, specification=None):
     require(spec.get('schema') == 'agi-fleet/local-preview-release/v1' and spec.get('qualificationScope') == 'bounded-offline-linux-development-preview'
             and all(spec.get(k) is False for k in ('operatorInstaller', 'fullHandoffComplete', 'productionQualified'))
             and spec.get('physicalQualification') == spec.get('liveProviderQualification') == 'NOT_RUN' and spec.get('fundedWork') == 'DISABLED', 'Preview specification scope differs')
-    require(all(type(spec['tests'].get(k)) is int and spec['tests'][k] >= n for k, n in {'module':43, 'native':4, 'installer':15, 'browser':2}.items()), 'Required preview gates reduced')
+    require(all(type(spec['tests'].get(k)) is int and spec['tests'][k] >= n for k, n in {'module':55, 'native':4, 'installer':29, 'browser':2}.items()), 'Required preview gates reduced')
     archive_identity, observations = None, {}
     pins = load(ROOT / 'fleet/shared/runtime/compute/runtime-artifacts.lock.json')['node']
     for arch in ('x64', 'arm64'):
@@ -157,7 +157,8 @@ def bundle(evidence, output, commit, run):
 def validate_fleet(fleet, commit, run):
     sys.path.insert(0, str(ROOT / 'engineering'))
     publisher = module('fleet_preview_regression', ROOT / 'engineering/publish-next-release.py')
-    manifest = load(fleet / 'Release-Manifest-v1.1.1.json')
+    specification = load(ROOT / 'engineering/next-release.json')
+    manifest = load(fleet / f"Release-Manifest-v{specification['version']}.json")
     require(str(manifest.get('workflowRun')) == run and manifest.get('workflowCommit') == commit, 'Fleet workflow identity differs')
     publisher.validate(manifest, manifest['audit'], commit)
     artifact = fleet / manifest['evidence']['name']

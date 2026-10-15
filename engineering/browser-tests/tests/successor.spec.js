@@ -13,7 +13,12 @@ for(const lang of ['en','fr'])for(const width of [320,390,768,1440])test(`SUCCES
   const [capsule]=await Promise.all([page.waitForEvent('download'),page.locator('#download-capsule').click()]);const capsulePath=await capsule.path();
   const [offline]=await Promise.all([page.waitForEvent('download'),page.locator('#download-html').click()]);const htmlPath=testInfo.outputPath('My-SUCCESSOR-Omega.html');await offline.saveAs(htmlPath);
   const fresh=await browser.newContext({acceptDownloads:true});const restored=await fresh.newPage();await restored.goto('file://'+htmlPath);
-  await expect(restored.locator('#restore-preview')).toBeVisible();await restored.locator('#restore-consent').check();await restored.locator('#restore').click();await restored.locator('#public-consent').check();await restored.locator('#run').click();await expect(restored.locator('#result-summary')).toContainText(/Checks passed|Vérifications réussies/);await expect(restored.locator('#error')).toBeHidden();await expect(restored.locator('#keep-version')).toBeDisabled();
+  await expect(restored.locator('#restore-preview')).toBeVisible();await restored.locator('#restore-consent').check();
+  await restored.evaluate(()=>{const digest=crypto.subtle.digest.bind(crypto.subtle);crypto.subtle.digest=(...args)=>new Promise(resolve=>{window.__releaseRestore=()=>resolve(digest(...args));});});
+  await restored.locator('#restore').click();await restored.waitForFunction(()=>typeof window.__releaseRestore==='function');
+  await expect(restored.locator('#public-consent')).toBeDisabled();
+  await restored.evaluate(()=>{const release=window.__releaseRestore;const digest=SubtleCrypto.prototype.digest;crypto.subtle.digest=(...args)=>digest.apply(crypto.subtle,args);release();});
+  await expect(restored.locator('#restore-preview')).toBeHidden();await restored.locator('#public-consent').check();await restored.locator('#run').click();await expect(restored.locator('#result-summary')).toContainText(/Checks passed|Vérifications réussies/);await expect(restored.locator('#error')).toBeHidden();await expect(restored.locator('#keep-version')).toBeDisabled();
   await fresh.close();expect(JSON.parse(fs.readFileSync(capsulePath,'utf8')).payload.state.active).toBeTruthy();
   await page.locator('#language').click();await expect(page.locator('#fleet-export')).toBeEnabled();
   const results=await new AxeBuilder({page}).setLegacyMode(true).exclude('#preview').withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();expect(results.violations).toEqual([]);
@@ -21,6 +26,51 @@ for(const lang of ['en','fr'])for(const width of [320,390,768,1440])test(`SUCCES
   await page.screenshot({path:testInfo.outputPath('builder.png'),fullPage:true});await page.emulateMedia({media:'print'});expect(await page.locator('#results').isVisible()).toBe(true);
 });
 test.use({acceptDownloads:true});
+
+// Real installed UI, explicitly simulated RPC: cancellation must remain usable
+// while inspection is pending, and a late reply must not restore permission.
+for(const lang of ['en','fr'])for(const operation of ['stop','revoke'])for(const phase of ['inspection','context'])test(`Installed SUCCESSOR ${lang}: ${operation} interrupts pending ${phase}`,async({page})=>{
+  await page.setContent('<div class="studio-shell" data-role="agent"></div>');
+  await page.evaluate(phase=>{
+    window.__observed=[];
+    const read=File.prototype.text;
+    File.prototype.text=async function(){const text=await read.call(this);if(['fixture-context.json','fixture-reviewer.json'].includes(this.name))window.__contextRead=true;return text;};
+    window.api=async(url)=>{
+      window.__observed.push(url);
+      if(url==='/api/successor/prepare'&&phase==='inspection')return new Promise(resolve=>{window.__releaseInspection=()=>resolve({ticket:'fixture-ticket',key:'fixture-key'});});
+      if(url==='/api/successor/runtime'&&phase==='context')return new Promise(resolve=>{window.__releaseInspection=()=>resolve({runtime:{}});});
+      if(url==='/api/status')return {config:{manager:'0x1',chainId:31337}};
+      if(url==='/api/successor')return {runs:[],studio:{runs:[],blockers:[]}};
+      return {revoked:true};
+    };
+  },phase);
+  await page.addScriptTag({content:fs.readFileSync(new URL('../../../successor/installed-ui.js',import.meta.url),'utf8')});
+  if(lang==='fr')await page.locator('#omega-language').click();
+  await page.locator('#omega-file').setInputFiles({name:'fixture-request.json',mimeType:'application/json',buffer:Buffer.from('{"plan":{"immutableInputs":[]}}')});
+  await expect(page.locator('#omega-message')).toContainText(/File loaded|Fichier chargé/);
+  if(phase==='inspection'){
+    await page.locator('#omega-advanced').evaluate(el=>el.open=true);
+    await page.locator('#omega-context').setInputFiles({name:'fixture-context.json',mimeType:'application/json',buffer:Buffer.from('{}')});
+  }else{
+    await page.locator('#omega-reviewer').setInputFiles({name:'fixture-reviewer.json',mimeType:'application/json',buffer:Buffer.from('{"role":"reviewer","authority":"none","runtime":{}}')});
+    await page.locator('#omega-public').check();
+  }
+  // The context reader is asynchronous; wait for its action to finish.
+  await page.waitForFunction(()=>window.__contextRead===true);
+  await page.locator('#omega-prepare').click();
+  await page.waitForFunction(()=>typeof window.__releaseInspection==='function');
+  await page.locator('#omega-'+operation).click();
+  await page.waitForFunction(op=>window.__observed.includes('/api/successor/'+op),operation);
+  await page.evaluate(()=>window.__releaseInspection());
+  if(phase==='context'){
+    await page.waitForFunction(()=>window.__observed.includes('/api/status'));
+    expect(await page.evaluate(()=>window.__observed.includes('/api/successor/prepare'))).toBe(false);
+  }
+  await page.locator('#omega-confirm').check();
+  await expect(page.locator('#omega-execute')).toBeDisabled();
+  await expect(page.locator('#omega-preview')).toBeEmpty();
+  await expect(page.locator('#omega-message')).not.toContainText(/Review this one-minute|Examinez cette autorisation/);
+});
 
 test('SUCCESSOR preserves text on errors and unavailable storage; keyboard focus and isolated preview',async({page})=>{
   await page.addInitScript(()=>{Storage.prototype.setItem=()=>{throw Error('denied');};});await page.goto('/successor.html');

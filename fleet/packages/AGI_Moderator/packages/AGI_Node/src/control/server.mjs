@@ -232,6 +232,20 @@ export async function createControlServer(
         return;
       }
       if (url.pathname === "/api/successor/revoke") { json(successor().revoke()); return; }
+      // Cancellation may preempt only an asynchronous SUCCESSOR inspection.
+      // Configuration/restore mutations keep their existing exclusive gate.
+      if (["/api/successor/stop","/api/studio/cancel","/api/stop","/api/lock"].includes(url.pathname)) {
+        successorAdapter?.revoke();
+        if (controller.operationKind === "successor-inspection") {
+          controller.assertRestoreReady();
+          controller.cancellationDepth = (controller.cancellationDepth ?? 0) + 1;
+          try {
+            await successor().stop();
+            json(await (url.pathname === "/api/lock" ? controller.lock() : url.pathname === "/api/stop" ? controller.stop() : Promise.resolve({stopped:true})));
+            return;
+          } finally { controller.cancellationDepth--; }
+        }
+      }
       const actions = {
         "/api/successor/prepare": ["Inspecting the SUCCESSOR work", () => successor().prepare(input,session.csrf)],
         "/api/successor/execute": ["Authorizing the exact SUCCESSOR work", () => successor().execute(input,session.csrf)],
@@ -433,7 +447,7 @@ export async function createControlServer(
           url.pathname,
         )
           ? action[1]()
-          : controller.mutate(action[0], action[1], {interruptStudio:["/api/lock","/api/stop","/api/studio/cancel","/api/successor/stop"].includes(url.pathname)})),
+          : controller.mutate(action[0], action[1], {operationKind:["/api/successor/prepare","/api/successor/execute"].includes(url.pathname)?"successor-inspection":null,interruptStudio:["/api/lock","/api/stop","/api/studio/cancel","/api/successor/stop"].includes(url.pathname)})),
       );
     } catch (error) {
       const detail = publicError(error),

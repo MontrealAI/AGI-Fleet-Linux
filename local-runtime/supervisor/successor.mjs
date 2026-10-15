@@ -1,4 +1,4 @@
-import {createSystem,runCandidate,chooseCandidate,exportCapsule,inspectCapsule,restoreCapsule,validateState} from '../../fleet/successor/vendor/manager/site/assets/successor/model.mjs';
+import {createSystem,runCandidate,chooseCandidate,exportCapsule,inspectCapsule,restoreCapsule,validateState,continueHistory,historyCapacity} from '../../fleet/successor/vendor/manager/site/assets/successor/model.mjs';
 import {need,keys,uuid,id,canonical,parseStrict,digest} from '../contracts.mjs';
 
 export async function successorOperation(runtime,action,input,principal) {
@@ -20,6 +20,13 @@ export async function successorOperation(runtime,action,input,principal) {
     const inspected=await inspectCapsule(input.capsule),state=await restoreCapsule(inspected,true),project=id();save(project,state);return {project,state,authority:'none',qualification:'historical-only'};
   }
   if(action==='project-export'){keys(input,['project']);return {capsule:await exportCapsule(load(input.project).state),authority:'none'};}
+  if(action==='project-continue-history'){
+    keys(input,['project','checkpointSha256','confirm']);need(input.confirm===true,'CONFIRM_REQUIRED');
+    const snapshot=load(input.project),continued=await continueHistory(snapshot.state,true);
+    need(digest(continued.checkpoint)===input.checkpointSha256,'CHECKPOINT_CHANGED');
+    save(input.project,continued.state,snapshot.raw);
+    return {project:input.project,checkpointSha256:input.checkpointSha256,capacity:historyCapacity(continued.state),authority:'none',runAuthorized:false};
+  }
   if(action==='project-select'){
     keys(input,['project','candidate','decision','confirm']);need(input.confirm===true,'CONFIRM_REQUIRED');
     const snapshot=load(input.project),state=await chooseCandidate(snapshot.state,input.candidate,input.decision);

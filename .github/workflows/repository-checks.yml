@@ -20,6 +20,14 @@ jobs:
           git remote add origin "https://github.com/${REPOSITORY}.git"
           git fetch --depth=1 origin "$COMMIT"
           git checkout --detach FETCH_HEAD
+      - name: Validate workflow grammar with hash-pinned actionlint
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/actionlint"
+          curl --fail --location --silent --show-error https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz -o "$RUNNER_TEMP/actionlint/tool.tar.gz"
+          printf '%s  %s\n' 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8 "$RUNNER_TEMP/actionlint/tool.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/actionlint/tool.tar.gz" -C "$RUNNER_TEMP/actionlint" actionlint
+          "$RUNNER_TEMP/actionlint/actionlint" -shellcheck= -pyflakes=
       - name: Check evidence metadata, handoff links and source identity
         run: python3 engineering/check-repository.py
       - name: Exercise extraction safety and integrity failures

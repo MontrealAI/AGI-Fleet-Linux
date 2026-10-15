@@ -419,7 +419,7 @@ def build(args):
     spec = importlib.util.spec_from_file_location('candidate_preparation', root / 'scripts/prepare-release.py')
     preparation = importlib.util.module_from_spec(spec); spec.loader.exec_module(preparation)
     verified = preparation.verify_archive(destination)
-    if version in ('1.1.1', '1.1.2'):
+    if version in ('1.1.1', '1.1.2', '1.1.3'):
         verify_maintenance_archive(destination)
     gate_path = out / (prefix + '-checks/final-gate.json')
     gate = json.loads(gate_path.read_text())

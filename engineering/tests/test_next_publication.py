@@ -66,7 +66,7 @@ class PublicationAcceptance(unittest.TestCase):
                 publisher.validate(metadata, self.audit, self.commit)
 
     def test_published_guides_are_bound_to_the_validated_commit(self):
-        source = publisher.ROOT / 'docs/RELEASE_NOTES_1_1_2.md'
+        source = publisher.ROOT / 'docs/RELEASE_NOTES_1_1_3.md'
         before = source.read_bytes()
         notes = publisher.publication_notes([], self.commit, self.run_id)
         for path in ('successor/docs/GUIDE.md', 'successor/docs/ARCHITECTURE.md',
@@ -103,9 +103,9 @@ class PublicationAcceptance(unittest.TestCase):
                 'sha256': metadata['sha256'], 'audit': audit,
                 'evidence': {'name': evidence.name, 'sha256': publisher.sha(evidence)}}
             publisher.write(release / 'release.json', metadata)
-            manifest_path = output / 'Release-Manifest-v1.1.2.json'; publisher.write(manifest_path, manifest)
+            manifest_path = output / 'Release-Manifest-v1.1.3.json'; publisher.write(manifest_path, manifest)
             assets = [archive, evidence, manifest_path]
-            (output / 'SHA256SUMS-v1.1.2.txt').write_text(''.join(publisher.sha(p) + '  ' + p.name + '\n' for p in assets))
+            (output / 'SHA256SUMS-v1.1.3.txt').write_text(''.join(publisher.sha(p) + '  ' + p.name + '\n' for p in assets))
             expected = publisher.publication_notes(assets, self.commit, self.run_id)
             (output / 'release-notes.md').write_text(expected + '\nUnreviewed instructions.\n')
             with mock.patch.dict(os.environ, {'GITHUB_SHA': self.commit, 'GITHUB_RUN_ID': self.run_id}):

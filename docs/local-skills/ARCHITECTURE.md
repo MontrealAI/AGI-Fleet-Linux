@@ -20,6 +20,8 @@ The Node executable and sandbox tools must have trusted ownership and no group/w
 
 The process adapter applies wall timeout, CPU seconds, address-space, Node heap, file-size, file-descriptor and output limits. These are **not cgroup resident-memory, process-count or total-disk guarantees**. General subprocesses, model calls, network, browser and desktop are unavailable. Native tests must demonstrate actual OS effects before qualification. macOS needs its own account/session adapter; a Linux sandbox on a Mac will not count as native Mac coverage.
 
+The authenticated [`admission` contract](CAPABILITY_ADMISSION.md) derives `agi-fleet/local-admission/v1` from these same role/task/host descriptors. It records the exact supported task contract in the grant, then checks fresh source, machine/session, tool, offline-provider and review facts again before authorization and dispatch reservation. `SUPPORTABLE` means bounded runtime eligibility; component/native/live/independent/commercial qualification remains separate. Custom mission formats without an executor are rejected before reservation. Legacy grants without this binding require preparation again; no authority is restored or expanded.
+
 ## ADR 3: Authenticated transport
 
 The CLI uses a private Unix socket. The dashboard uses an IPv4-only loopback listener on an ephemeral port, exact Host/Origin rules, no CORS, no WebSocket upgrades, bounded strict JSON and bearer credentials in headers. IPv6 is not bound; malformed or alternative Host/Origin values are rejected. A scoped assistant client can inspect, prepare, run already-authorized work, cancel and read only its own outputs. It cannot authorize, activate, create actors or become another role. Public/offline Builder pages never receive a control token and cannot pair silently.
@@ -42,7 +44,7 @@ The public-input detector is a guardrail, not a comprehensive secret classifier.
 
 ## ADR 6: Versions and release gate
 
-Local runtime/skills start at `0.1.0-alpha.1` in a separate compatibility manifest. This is an unqualified development identity, not a published release. The additive work does not warrant a forced major bump or changes to published platform assets. The staged installer, software-only rollback and owned-resource removal preserve the external authority ledger. A maintenance reservation prevents service startup while code changes. The lifecycle checkpoint exercised a real saved-package install/start/run/remove; live adapters, physical observations, full accessibility and release qualification remain explicit requirements. The full acceptance matrix governs promotion; a source archive is not an operator installer.
+Local runtime/skills began at the preserved `0.1.0-alpha.1` checkpoint. The current `0.1.0-alpha.2` candidate has a separate compatibility manifest and requires fresh qualification of its exact source and package. It remains an unpublished development identity. The additive work does not warrant a forced major bump or changes to published platform assets. The staged installer, software-only rollback and owned-resource removal preserve the external authority ledger. A maintenance reservation prevents service startup while code changes. The lifecycle checkpoint exercised a real saved-package install/start/run/remove; live adapters, physical observations, full accessibility and release qualification remain explicit requirements. The full acceptance matrix governs promotion; a source archive is not an operator installer.
 
 ```mermaid
 flowchart TD

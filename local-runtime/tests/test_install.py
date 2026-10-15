@@ -29,9 +29,11 @@ class Installation(unittest.TestCase):
         self.temp.cleanup()
         os.umask(self.mask)
 
-    def archive(self, name='one', extra=None):
+    def archive(self, name='one', extra=None, empty=False):
         entries = {'LICENSE': b'Installer fixture only\n', 'local-runtime/validate.mjs': b'export const fixture=true;\n',
                    'local-runtime/cli/main.mjs': ('// Syntax-check fixture ' + name + '\n').encode()}
+        if empty:
+            entries['local-runtime/empty-owned.txt'] = b''
         records = [{'path': key, 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(), 'mode': 0o644} for key, data in entries.items()]
         manifest = {'schema': 'agi-fleet/local-source-preview/v1', 'version': '0.1.0-alpha.1', 'commit': '1' * 40,
                     'productionQualified': False, 'workingTreeDirty': False, 'files': records}
@@ -268,6 +270,208 @@ i['install'](Path(sys.argv[2]), sys.argv[3], Path(sys.argv[4]), Path(sys.argv[5]
         output = self.state / 'unknown-output'; output.write_bytes(b'keep')
         with self.assertRaisesRegex(ValueError, 'FRESH_STATE_REQUIRED'):
             self.install(pair)
+        self.assertEqual(output.read_bytes(), b'keep')
+
+    def test_preflight_is_read_only_and_distinguishes_inspection_from_execution(self):
+        archive, digest = self.archive()
+        before = set(self.base.iterdir())
+        result = I['preflight'](archive, digest, self.node, self.root, self.state)
+        self.assertTrue(result['readOnly'])
+        self.assertFalse(result['hostModified'])
+        self.assertEqual(set(self.base.iterdir()), before)
+        self.assertFalse(self.root.exists())
+        self.assertEqual(result['authority'], 'none')
+        self.assertIn('NOT_RUN', result['runtimeAdmission'])
+        self.assertEqual(result['crossHostAuthorityRestore'], 'BLOCKED_NOT_IMPLEMENTED')
+        self.assertEqual(next(x['status'] for x in result['checks'] if x['prerequisite'] == 'package identity'), 'present')
+
+    def test_preflight_reports_exact_bad_identity_and_existing_state_without_mutation(self):
+        archive, _ = self.archive()
+        self.state.mkdir(mode=0o700)
+        output = self.state / 'work'; output.write_bytes(b'committed')
+        result = I['preflight'](archive, '0' * 64, self.node, self.root, self.state)
+        self.assertFalse(result['readyForInstallInspection'])
+        codes = {x.get('code') for x in result['checks']}
+        self.assertIn('ARCHIVE_SHA256_MISMATCH', codes)
+        self.assertIn('FRESH_INSTALL_REQUIRED', codes)
+        self.assertEqual(output.read_bytes(), b'committed')
+        self.assertFalse(self.root.exists())
+
+    def test_preflight_reports_insufficient_staging_capacity_without_reserving_space(self):
+        archive, digest = self.archive()
+        low = G['shutil'].disk_usage(self.base)._replace(free=0)
+        with patch.object(G['shutil'], 'disk_usage', return_value=low):
+            result = I['preflight'](archive, digest, self.node, self.root, self.state)
+        self.assertFalse(result['readyForInstallInspection'])
+        self.assertIn('INSUFFICIENT_STAGE_DISK_SPACE', {x.get('code') for x in result['checks']})
+        self.assertFalse(self.root.exists())
+        self.assertFalse(self.state.exists())
+
+    def crash_removal(self, point):
+        script = '''
+import os, runpy, sys
+from pathlib import Path
+i = runpy.run_path(sys.argv[1]); g = i['uninstall'].__globals__; point = sys.argv[3]
+atomic = g['atomic']; unlink = os.unlink; rmdir = os.rmdir
+def interrupted_atomic(file, value):
+    atomic(file, value)
+    if file.name == 'pending-removal.json' and point == 'after-journal': os._exit(76)
+def interrupted_unlink(file, *args, **kwargs):
+    unlink(file, *args, **kwargs)
+    name = Path(str(file)).name
+    if name == 'LICENSE' and point == 'during-files': os._exit(76)
+    if name == 'pending-removal.json' and point == 'before-root-removal': os._exit(76)
+def interrupted_rmdir(file, *args, **kwargs):
+    rmdir(file, *args, **kwargs)
+    name = Path(str(file)).name
+    if name == 'versions' and point == 'after-versions': os._exit(76)
+    if name == Path(sys.argv[2]).name and point == 'after-root-removal' and kwargs.get('dir_fd') is not None:
+        parent = os.fstat(kwargs['dir_fd']); expected = Path(sys.argv[2]).parent.stat()
+        if (parent.st_dev, parent.st_ino) == (expected.st_dev, expected.st_ino): os._exit(76)
+g['atomic'] = interrupted_atomic; os.unlink = interrupted_unlink; os.rmdir = interrupted_rmdir
+os.umask(0o077); i['uninstall'](Path(sys.argv[2]))
+'''
+        result = subprocess.run([sys.executable, '-c', script, str(Path(__file__).resolve().parents[1] / 'install.py'),
+                                 str(self.root), point], capture_output=True, timeout=60)
+        self.assertEqual(result.returncode, 76, result.stderr)
+
+    def test_removal_crash_after_journal_recovers_and_preserves_state(self):
+        self.install()
+        output = self.state / 'work-and-reservations'; output.write_bytes(b'committed')
+        self.crash_removal('after-journal')
+        with self.assertRaisesRegex(ValueError, 'RESUME_REMOVAL_FIRST'):
+            I['installation'](self.root)
+        result = I['recover_maintenance'](self.root)
+        self.assertEqual(result['state'], 'removal-retry-required')
+        self.assertFalse(result['authorityRestored'])
+        I['uninstall'](self.root)
+        self.assertFalse(self.root.exists())
+        self.assertEqual(output.read_bytes(), b'committed')
+
+    def test_removal_crash_during_member_deletion_is_resumable(self):
+        self.install()
+        self.crash_removal('during-files')
+        self.assertTrue((self.root / 'pending-removal.json').exists())
+        I['recover_maintenance'](self.root)
+        I['uninstall'](self.root)
+        self.assertFalse(self.root.exists())
+        self.assertTrue(self.state.is_dir())
+
+    def test_removal_crash_after_versions_deleted_is_resumable(self):
+        self.install()
+        self.crash_removal('after-versions')
+        self.assertFalse((self.root / 'versions').exists())
+        I['recover_maintenance'](self.root)
+        I['uninstall'](self.root)
+        self.assertFalse(self.root.exists())
+
+    def test_removal_retry_rejects_changed_or_added_members_before_further_deletion(self):
+        self.install()
+        self.crash_removal('after-journal')
+        _, plan = I['removal_plan'](self.root)
+        owned = self.root / next(r['path'] for r in plan['files'] if r['path'].endswith('/LICENSE'))
+        original = owned.read_bytes(); owned.write_bytes(b'changed')
+        with self.assertRaisesRegex(ValueError, 'REMOVAL_MEMBER_CHANGED'):
+            I['recover_maintenance'](self.root)
+        self.assertTrue((self.root / 'installation.json').exists())
+        owned.write_bytes(original)
+        unknown = self.root / 'operator-note'; unknown.write_bytes(b'keep')
+        with self.assertRaisesRegex(ValueError, 'UNOWNED_INSTALLATION_CONTENT'):
+            I['recover_maintenance'](self.root)
+        self.assertEqual(unknown.read_bytes(), b'keep')
+
+    def test_pending_removal_cannot_be_started_with_a_live_owner(self):
+        self.install()
+        self.crash_removal('after-journal')
+        lock = self.root / 'operation.lock' / 'owner.json'
+        lock.write_text(json.dumps({'pid': os.getpid(), 'boot': I['boot_identity']()}))
+        with self.assertRaisesRegex(ValueError, 'INSTALLATION_OPERATION_STILL_ACTIVE'):
+            I['recover_maintenance'](self.root)
+
+    def test_final_removal_crash_after_journal_unlink_can_finish_empty_root(self):
+        self.install()
+        output = self.state / 'committed'; output.write_bytes(b'keep')
+        self.crash_removal('before-root-removal')
+        self.assertEqual(list(self.root.iterdir()), [])
+        self.assertTrue(I['completion_path'](self.root).exists())
+        result = I['uninstall'](self.root)
+        self.assertFalse(result['authorityRestored'])
+        self.assertFalse(self.root.exists())
+        self.assertFalse(I['completion_path'](self.root).exists())
+        self.assertEqual(output.read_bytes(), b'keep')
+
+    def test_final_removal_crash_after_root_removal_can_finish_receipt(self):
+        self.install()
+        self.crash_removal('after-root-removal')
+        self.assertFalse(self.root.exists())
+        self.assertTrue(I['completion_path'](self.root).exists())
+        result = I['recover_maintenance'](self.root)
+        self.assertFalse(result['authorityRestored'])
+        self.assertFalse(I['completion_path'](self.root).exists())
+        self.assertTrue(self.state.exists())
+
+    def test_final_removal_refuses_replaced_root_and_preserves_new_files(self):
+        self.install()
+        self.crash_removal('before-root-removal')
+        self.root.rename(self.base / 'original-empty-root')
+        self.root.mkdir(mode=0o700)
+        note = self.root / 'committed'; note.write_bytes(b'keep')
+        with self.assertRaisesRegex(ValueError, 'INSTALLATION_DIRECTORY_CHANGED'):
+            I['uninstall'](self.root)
+        self.assertEqual(note.read_bytes(), b'keep')
+        self.assertTrue(I['completion_path'](self.root).exists())
+
+    def test_parent_symlink_swap_after_plan_never_deletes_outside_member(self):
+        installed = self.install()
+        version = self.root / 'versions' / installed['archiveSHA256']
+        outside = self.base / 'outside-version'; (outside / 'application').mkdir(parents=True)
+        target = outside / 'application' / 'LICENSE'; target.write_bytes(b'outside committed work')
+        remove = G['remove_member']; swapped = False
+        def swap_parent(root_fd, row, plan, directory=False):
+            nonlocal swapped
+            if not swapped and row['path'].endswith('/application/LICENSE'):
+                swapped = True
+                version.rename(self.base / 'retained-original-version')
+                version.symlink_to(outside, target_is_directory=True)
+            return remove(root_fd, row, plan, directory)
+        with patch.dict(G, {'remove_member': swap_parent}):
+            with self.assertRaisesRegex(ValueError, 'REMOVAL_PARENT_CHANGED'):
+                I['uninstall'](self.root)
+        self.assertTrue(swapped)
+        self.assertEqual(target.read_bytes(), b'outside committed work')
+        self.assertTrue(self.state.exists())
+
+    def test_partial_completion_write_preserves_resumable_journal(self):
+        self.install()
+        dump = G['json'].dump
+        def interrupted_dump(value, stream, *args, **kwargs):
+            if value.get('schema') == 'agi-fleet/removal-completion/v1':
+                stream.write('{')
+                raise OSError('TEST_PARTIAL_COMPLETION_WRITE')
+            return dump(value, stream, *args, **kwargs)
+        with patch.object(G['json'], 'dump', interrupted_dump):
+            with self.assertRaisesRegex(OSError, 'TEST_PARTIAL_COMPLETION_WRITE'):
+                I['uninstall'](self.root)
+        self.assertFalse(I['completion_path'](self.root).exists())
+        self.assertTrue((self.root / 'pending-removal.json').is_file())
+        self.assertFalse(list(self.base.glob('.agi-fleet-removal-*.tmp')))
+        result = I['uninstall'](self.root)
+        self.assertFalse(self.root.exists())
+        self.assertTrue(self.state.exists())
+        self.assertFalse(result['authorityRestored'])
+
+    def test_receipt_owned_empty_code_file_can_be_removed_but_empty_metadata_stays_invalid(self):
+        installed = self.install(self.archive(empty=True))
+        empty = self.root / 'versions' / installed['archiveSHA256'] / 'application/local-runtime/empty-owned.txt'
+        self.assertEqual(empty.read_bytes(), b'')
+        metadata = self.root / 'installation.json'; original = metadata.read_bytes(); metadata.write_bytes(b'')
+        with self.assertRaisesRegex(ValueError, 'REGULAR_BOUNDED_FILE_REQUIRED'):
+            I['uninstall'](self.root)
+        self.assertTrue(empty.exists()); metadata.write_bytes(original)
+        output = self.state / 'kept-output'; output.write_bytes(b'keep')
+        result = I['uninstall'](self.root)
+        self.assertFalse(self.root.exists())
+        self.assertFalse(result['credentialsDeleted'])
         self.assertEqual(output.read_bytes(), b'keep')
 
 
