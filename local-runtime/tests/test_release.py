@@ -190,7 +190,22 @@ class PreviewReleaseTests(unittest.TestCase):
         self.assertIn('uses: ./.github/workflows/next-release.yml', local)
         self.assertIn('validation_only: true', local)
         self.assertIn('!inputs.validation_only &&', legacy)
-        self.assertIn('needs: [build, native, integration, successor, audit]', legacy)
+        def assert_profile_gates(workflow):
+            audit = workflow.split('\n  audit:\n', 1)[1].split('\n  qualification-gate:\n', 1)[0]
+            gate = workflow.split('\n  qualification-gate:\n', 1)[1].split('\n  publish:\n', 1)[0]
+            publish = workflow.split('\n  publish:\n', 1)[1]
+            self.assertIn('needs: [build, native, integration, profile-integration, successor]', audit)
+            self.assertIn('needs: [build, native, integration, profile-integration, successor, audit]', gate)
+            self.assertIn('needs: [build, native, integration, profile-integration, successor, audit, qualification-gate]', publish)
+        assert_profile_gates(legacy)
+        for section in ('audit', 'qualification-gate', 'publish'):
+            marker = '\n  ' + section + ':\n'
+            before, after = legacy.split(marker, 1)
+            broken = before + marker + after.replace('integration, profile-integration, successor', 'integration, successor', 1)
+            with self.subTest(missing_profile_gate=section), self.assertRaises(AssertionError):
+                assert_profile_gates(broken)
+        with self.assertRaises(AssertionError):
+            assert_profile_gates(legacy.replace('successor, audit, qualification-gate]', 'successor, audit]'))
         self.assertIn('cancel-in-progress: false', local)
         self.assertIn('cancel-in-progress: false', legacy)
 
