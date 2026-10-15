@@ -8,6 +8,27 @@ import re
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
+# Directory implementation assets are references, not executable demo journeys.
+# Historical SUCCESSOR mirrors retain their separate immutable source inventory.
+DIRECTORY_ASSETS = {
+    'engineering/browser-tests/tests/demo-directory.spec.js',
+    'engineering/build-demo-directory.py',
+    'engineering/test-demo-directory.py',
+    'website/demo-directory.css',
+    'website/demo-sources.json',
+    'website/demos-fr.html',
+    'website/demos.html',
+}
+NAMED_EXAMPLE = re.compile(r'(^|[-_.])(demos?|examples?|samples?)([-_.]|$)', re.I)
+
+
+def named_examples(tracked):
+    return sorted(path for path in tracked
+                  if path and not path.startswith('successor/history/')
+                  and path not in DIRECTORY_ASSETS
+                  and any(NAMED_EXAMPLE.search(part) for part in PurePosixPath(path).parts))
+
+
 FAMILIES = [
 ('acceptance', ('Check a good and bad delivery', 'Vérifier une bonne et une mauvaise livraison'), ('Offline rule evaluation', 'Évaluation de règles hors ligne'), ('Run actual acceptance rules over two synthetic catalogue deliveries and inspect approve/reject reasons.', 'Appliquez de vraies règles à deux livraisons synthétiques et examinez les raisons d’approbation ou de rejet.'), ('npm --prefix fleet run demo',), ('Formal criteria only. No wallet, network or transaction; passing rules is not general business-quality assurance.', 'Critères formels uniquement. Aucun portefeuille, réseau ou transaction ; les règles ne garantissent pas la qualité commerciale générale.'), 'fleet/tests/demo.mjs', None),
 ('roles', ('Explore local role dashboards', 'Explorer les tableaux de bord locaux'), ('Local fixture dashboards', 'Tableaux de bord de cas locaux'), ('Inspect synthetic approve, reject and abstain states in the role packages. Shared nested Node sources are implementation copies, not additional capabilities.', 'Examinez les états synthétiques approuvé, rejeté et abstention dans les paquets de rôles. Les sources Node imbriquées sont des copies partagées, pas des capacités supplémentaires.'), ('npm --prefix fleet/packages/AGI_Node run demo',), ('Install the documented locked package prerequisites and use the local URL printed by the command. Demo states are not live contract outcomes.', 'Installez les prérequis verrouillés documentés et utilisez l’adresse locale affichée. Les états de démonstration ne sont pas des résultats réels du contrat.'), 'fleet/packages/AGI_Node/README.md', None),
@@ -46,8 +67,8 @@ def generate(check=False):
     sources = json.loads((ROOT / 'website/demo-sources.json').read_text())
     paths = [p for group in sources.values() for p in group]
     if len(set(paths)) != len(paths): raise ValueError('Duplicate source path')
-    tracked = subprocess.check_output(['git', 'ls-files'], cwd=ROOT, text=True).splitlines()
-    named = [p for p in tracked if not p.startswith('successor/history/') and (re.search(r'(^|/)(examples|samples|demo|demos)(/|\.)', p) or re.search(r'(^|/)demo\.(mjs|tsx|ts|md)$', p, re.I)) and p not in {'website/demos.html', 'website/demos-fr.html'}]
+    tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT, text=True).split('\0')
+    named = named_examples(tracked)
     if set(named) - set(paths): raise ValueError('Unmapped named examples: ' + repr(set(named)-set(paths)))
     for path in paths + [f[6] for f in FAMILIES]:
         validate_source(path, set(tracked))
