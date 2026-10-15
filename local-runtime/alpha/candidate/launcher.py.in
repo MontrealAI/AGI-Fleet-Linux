@@ -1,0 +1,14 @@
+"""Fixed candidate entry point. No caller-controlled module, path or argument."""
+import sys
+
+if not (sys.flags.isolated and sys.flags.no_site and sys.flags.dont_write_bytecode):
+    raise SystemExit('ALPHA_ISOLATED_INTERPRETER_REQUIRED')
+if sys.executable != '/opt/alpha/python/bin/python3.12' or len(sys.argv) != 1:
+    raise SystemExit('ALPHA_FIXED_ENTRYPOINT_REQUIRED')
+# -I -S excludes ambient cwd/site/PYTHONPATH. Add only immutable mounted paths.
+sys.path[:] = ['/opt/alpha/source', '/opt/alpha/wheels',
+               '/opt/alpha/python/lib/python3.12',
+               '/opt/alpha/python/lib/python3.12/lib-dynload']
+import runpy
+sys.argv[:] = ['@MODULE@']
+runpy.run_module('@MODULE@', run_name='__main__', alter_sys=True)

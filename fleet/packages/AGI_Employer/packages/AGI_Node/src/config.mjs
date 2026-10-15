@@ -1,3 +1,4 @@
+import { contractProfileID } from './contract-profiles.mjs';
 import path from "node:path";
 import { getAddress, isAddress, parseUnits, ZeroAddress } from "ethers";
 import {
@@ -62,7 +63,8 @@ export function validateConfig(
 ) {
   c = { independenceReviewed: false, ...c };
   ensure(typeof c.independenceReviewed === "boolean", "CONFIG_INDEPENDENCE");
-  strictKeys(c, Object.keys(DEFAULT), "CONFIG_UNKNOWN_FIELD");
+  contractProfileID(c);
+  strictKeys(c, [...Object.keys(DEFAULT), "contractProfile"], "CONFIG_UNKNOWN_FIELD");
   ensure(
     Object.keys(DEFAULT).every((k) => k in c),
     "CONFIG_MISSING_FIELD",

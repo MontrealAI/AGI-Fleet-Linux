@@ -1,3 +1,4 @@
+import { contractProfileID } from '../../runtime/src/contract-profiles.mjs';
 import {roleContract} from '../../runtime/compute/roles.mjs';
 import { getAddress, ZeroAddress, parseUnits } from "ethers";
 import {
@@ -58,7 +59,8 @@ export const DEFAULT = {
 export function validateConfig(c) {
   if (c.maxClaimsPerCycle === undefined)
     c.maxClaimsPerCycle = DEFAULT.maxClaimsPerCycle;
-  strictKeys(c, Object.keys(DEFAULT), "CONFIG_FIELDS");
+  contractProfileID(c);
+  strictKeys(c, [...Object.keys(DEFAULT), "contractProfile"], "CONFIG_FIELDS");
   ensure(c.schema === DEFAULT.schema && ROLES.includes(c.role), "CONFIG_ROLE");
   ensure([1, 11155111, 31337].includes(c.chainId), "CONFIG_CHAIN");
   for (const k of ["manager", "wallet"]) {

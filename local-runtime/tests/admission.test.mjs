@@ -17,7 +17,7 @@ test('read-only admission explains inactive actors and is scoped without creatin
 test('admission binds existing descriptors, exact inputs, offline route and honest evidence; grant and dispatch retain it',async()=>{
   const f=fixture();try{
     const a=f.create(),g=f.prepare(a),report=g.admission;
-    assert.equal(report.status,'SUPPORTABLE');assert.equal(report.bindingSha256,digest(report.binding));assert.deepEqual(report.binding.tools.actions,['successor-run']);
+    assert.equal(report.status,'SUPPORTABLE');assert.equal(report.bindingSha256,digest(report.binding));assert.deepEqual(report.binding.tools.actions,['successor-run','alpha-run']);
     assert.equal(report.binding.taskSha256,digest(task()));assert.equal(report.binding.provider.model,null);assert.equal(report.binding.review.independent,false);
     assert.equal(report.qualification.hostProbe,'SYNTHETIC_OR_UNVERIFIED_PROBE');assert.equal(report.qualification.liveObserved,'NOT_RUN');assert.equal(report.qualification.operationallyQualified,false);
     assert.equal(report.qualification.componentTested,'REQUIRES_EXACT_SOURCE_EVIDENCE');assert.equal(report.qualification.nativeTested,'REQUIRES_EXACT_SOURCE_EVIDENCE');assert.equal(report.qualification.independentlyReviewed,'NOT_VERIFIED');

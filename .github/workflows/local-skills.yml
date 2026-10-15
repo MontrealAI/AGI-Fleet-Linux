@@ -1,7 +1,7 @@
 name: Local Skills development qualification
 on:
   pull_request:
-    paths: ['local-runtime/**', 'local-dashboard/**', 'role-skills/**', 'docs/local-skills/**', 'LOCAL_SKILLS.md', '.github/workflows/local-skills.yml']
+    paths: ['fleet/**', 'local-runtime/**', 'local-dashboard/**', 'role-skills/**', 'docs/local-skills/**', 'LOCAL_SKILLS.md', '.github/workflows/local-skills.yml']
   push:
     branches: [main]
     paths: ['local-runtime/preview-release.json']
@@ -85,7 +85,7 @@ jobs:
       - name: Build and verify a development archive, never an operator installer
         run: |
           python3 local-runtime/package.py --output "$RUNNER_TEMP/local-preview"
-          python3 local-runtime/package.py --verify "$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.2.zip"
+          python3 local-runtime/package.py --verify "$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.4.zip"
       - name: Exercise exact extracted bytes
         run: |
           set -euo pipefail
@@ -93,11 +93,11 @@ jobs:
           import os, stat, zipfile
           from pathlib import Path
           target=Path(os.environ['RUNNER_TEMP'])/'local-extracted'
-          with zipfile.ZipFile(Path(os.environ['RUNNER_TEMP'])/'local-preview/agi-fleet-local-0.1.0-alpha.2.zip') as z:
+          with zipfile.ZipFile(Path(os.environ['RUNNER_TEMP'])/'local-preview/agi-fleet-local-0.1.0-alpha.4.zip') as z:
             z.extractall(target)
             for i in z.infolist(): (target/i.filename).chmod(stat.S_IMODE(i.external_attr>>16))
           PY
-          cd "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.2"
+          cd "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.4"
           node local-runtime/validate.mjs
           node --test --test-reporter=tap local-runtime/tests/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/extracted.tap"
       - name: Require real native isolation and actual worker artifacts
@@ -108,10 +108,10 @@ jobs:
         if: ${{ !cancelled() }}
         run: |
           set -euo pipefail
-          node --test --test-reporter=tap "$RUNNER_TEMP"/local-extracted/agi-fleet-local-0.1.0-alpha.2/local-runtime/tests/native/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/native-archive.tap"
+          node --test --test-reporter=tap "$RUNNER_TEMP"/local-extracted/agi-fleet-local-0.1.0-alpha.4/local-runtime/tests/native/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/native-archive.tap"
       - name: Install the saved package and run the actual local service and worker
         run: |
-          AGI_LOCAL_PACKAGE_ARCHIVE="$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.2.zip" \
+          AGI_LOCAL_PACKAGE_ARCHIVE="$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.4.zip" \
           AGI_LOCAL_NODE_ARCHIVE="$RUNNER_TEMP/local-node.tar.xz" \
           AGI_LOCAL_INSTALL_EVIDENCE="$RUNNER_TEMP/local-host-evidence/installed-journey.json" \
             node local-runtime/qualification/installed-journey.mjs
@@ -125,7 +125,7 @@ jobs:
           for role in agent node moderator employer evidence recovery; do
             OPENCLAW_BIN="$RUNNER_TEMP/local-openclaw/node_modules/openclaw/openclaw.mjs" \
             AGI_LOCAL_OPENCLAW_EVIDENCE="$RUNNER_TEMP/local-host-evidence/openclaw-$role.json" \
-              node "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.2/local-runtime/qualification/openclaw-journey.mjs" "--role=$role"
+              node "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.4/local-runtime/qualification/openclaw-journey.mjs" "--role=$role"
           done
           python3 - <<'PY'
           import json, os
@@ -143,7 +143,7 @@ jobs:
           import hashlib, json, os
           from pathlib import Path
           base=Path(os.environ['RUNNER_TEMP'])
-          archive=base/'local-preview/agi-fleet-local-0.1.0-alpha.2.zip'
+          archive=base/'local-preview/agi-fleet-local-0.1.0-alpha.4.zip'
           (base/'local-host-evidence/qualification.json').write_text(json.dumps({
               'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],
               'architecture':os.environ['ARCH'],'archiveSHA256':hashlib.sha256(archive.read_bytes()).hexdigest()})+'\n')

@@ -9,10 +9,8 @@ import {
   ZeroAddress,
   ZeroHash,
 } from "ethers";
-import path from "node:path";
 import {
   ROOT,
-  readJSON,
   ensure,
   canonical,
   sha256,
@@ -22,22 +20,10 @@ import {
 import { AGENT_DECLARATION, shardFor } from "./work.mjs";
 import { DECLARATION } from "./review.mjs";
 import { rpcURL } from "./config.mjs";
-export const artifacts = Object.fromEntries(
-  [
-    "AGIJobManager",
-    "UriUtils",
-    "TransferUtils",
-    "BondMath",
-    "ReputationMath",
-    "ENSOwnership",
-    "NftEligibility",
-    "JobSettlement",
-    "JobValidation",
-  ].map((n) => [
-    n,
-    readJSON(path.join(ROOT, "contract/artifacts", n + ".json")),
-  ]),
-);
+import { loadContractProfile, contractProfileID, RUNTIME_CONTRACTS, profilePinFields,
+  assertProfilePin, matchProfileRuntime, assertPinnedGraph } from './contract-profiles.mjs';
+const legacyProfile = loadContractProfile(ROOT);
+export const artifacts = Object.freeze(Object.fromEntries(RUNTIME_CONTRACTS.map(name => [name, legacyProfile.artifacts[name]])));
 export const ABI = artifacts.AGIJobManager.abi;
 export const TOKEN_ABI = [
   "function decimals() view returns(uint8)",
@@ -49,51 +35,15 @@ export const NATIVE_USDC = {
   1: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
   11155111: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
 };
-export function matchRuntime(name, address, code, token, known = {}) {
-  const a = artifacts[name];
-  ensure(a, "UNRECOGNIZED_LIBRARY");
-  ensure(code.length === a.deployedBytecode.length, "RUNTIME_LENGTH_MISMATCH");
-  let expected = a.deployedBytecode;
-  const patch = (start, length, value) => {
-    ensure(value.length === length * 2, "RUNTIME_PATCH");
-    expected =
-      expected.slice(0, 2 + start * 2) +
-      value +
-      expected.slice(2 + (start + length) * 2);
-  };
-  for (const byName of Object.values(a.deployedLinkReferences))
-    for (const [lib, refs] of Object.entries(byName))
-      for (const ref of refs) {
-        const target = getAddress(
-          "0x" +
-            code.slice(2 + ref.start * 2, 2 + (ref.start + ref.length) * 2),
-        );
-        ensure(
-          target !== ZeroAddress && (!known[lib] || known[lib] === target),
-          "LIBRARY_ADDRESS_MISMATCH",
-        );
-        known[lib] = target;
-        patch(ref.start, ref.length, target.slice(2).toLowerCase());
-      }
-  for (const refs of Object.values(a.immutableReferences))
-    for (const ref of refs)
-      patch(
-        ref.start,
-        ref.length,
-        (name === "AGIJobManager" ? token : address)
-          .slice(2)
-          .toLowerCase()
-          .padStart(ref.length * 2, "0"),
-      );
-  ensure(
-    expected.toLowerCase() === code.toLowerCase(),
-    "RUNTIME_BYTECODE_MISMATCH",
-  );
-  return known;
+export function matchRuntime(name, address, code, token, known = {}, contractProfile) {
+  const profile = contractProfile === undefined ? legacyProfile : loadContractProfile(ROOT, contractProfile);
+  return matchProfileRuntime(profile, name, address, code, token, known);
 }
 export class Chain {
   constructor(c, provider = null) {
     this.c = c;
+    this.contractProfile = loadContractProfile(ROOT, contractProfileID(c));
+    this.artifacts = this.contractProfile.artifacts;
     if (provider) this.provider = provider;
     else {
       const request = new FetchRequest(rpcURL(c));
@@ -103,8 +53,8 @@ export class Chain {
         cacheTimeout: -1,
       });
     }
-    this.manager = new Contract(c.manager, ABI, this.provider);
-    this.iface = new Interface(ABI);
+    this.manager = new Contract(c.manager, this.artifacts.AGIJobManager.abi, this.provider);
+    this.iface = new Interface(this.artifacts.AGIJobManager.abi);
   }
   async head() {
     const network = await this.provider.getNetwork();
@@ -130,6 +80,7 @@ export class Chain {
     return Math.min(depth, final.number);
   }
   async enroll() {
+    const profileFields = profilePinFields(this.c, this.contractProfile);
     const head = await this.head();
     ensure(
       this.c.deploymentBlock > 0 &&
@@ -169,7 +120,7 @@ export class Chain {
       const name = todo.shift(),
         address = addresses[name],
         code = await this.provider.getCode(address, head.number);
-      matchRuntime(name, address, code, token, known);
+      matchProfileRuntime(this.contractProfile, name, address, code, token, known);
       codes[name] = { address, codeHash: keccak256(code) };
       for (const [lib, addr] of Object.entries(known)) {
         if (addresses[lib])
@@ -187,12 +138,14 @@ export class Chain {
       manager: getAddress(this.c.manager),
       token,
       deploymentBlock: this.c.deploymentBlock,
-      sourceTag: "v1.1.0",
-      sourceCommit: "db876a8021da6afcf7aa974489d13374e6d188b5",
+      sourceTag: this.contractProfile.sourceTag,
+      sourceCommit: this.contractProfile.sourceCommit,
+      ...profileFields,
       contracts: codes,
     };
   }
   async verify(pin) {
+    assertProfilePin(this.c, pin, this.contractProfile);
     const head = await this.head();
     await this.safeHeight(head);
     ensure(
@@ -202,13 +155,13 @@ export class Chain {
         Object.keys(pin.contracts).length === 9,
       "DEPLOYMENT_PIN_MISMATCH",
     );
-    await pool(Object.values(pin.contracts), 4, async (p) =>
-      ensure(
-        keccak256(await this.provider.getCode(p.address, head.number)) ===
-          p.codeHash,
-        "DEPLOYMENT_CODE_CHANGED",
-      ),
-    );
+    const codes = {};
+    await pool(Object.entries(pin.contracts), 4, async ([name, p]) => {
+      codes[name] = await this.provider.getCode(p.address, head.number);
+      ensure(keccak256(codes[name]) === p.codeHash, "DEPLOYMENT_CODE_CHANGED");
+    });
+    // Hashes alone cannot attest a pin that was relabelled with another profile.
+    assertPinnedGraph(this.contractProfile, pin, codes);
     ensure(
       getAddress(await this.manager.usdcToken({ blockTag: head.number })) ===
         pin.token,
@@ -222,7 +175,7 @@ export class Chain {
     this.identityCode = pin.contracts.ENSOwnership;
     this.ownership = new Contract(
       this.identityCode.address,
-      artifacts.ENSOwnership.abi,
+      this.artifacts.ENSOwnership.abi,
       this.provider,
     );
     return head;

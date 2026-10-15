@@ -26,13 +26,13 @@
     {
       "path": "README.md",
       "before": "3b64194922231e11e4980ba355a33b55d74da5b2449133365879e2bc5c01b55f",
-      "after": "6830acc03d323773d9f5530000d0633f89ae3f8cb4e8a7702c56a37e5af6f0fa",
+      "after": "03dfb2731fdd97ba5eb404614ec02db05495313c9049267411b63cabde47fc04",
       "reason": "Add bilingual Builder entry points without removing installation or release history."
     },
     {
       "path": "docs/DEVELOPMENT.md",
       "before": "c31890d0adfb2dde7e0e134671bbe3547f228083894a8be39b5d4a91c74a1f57",
-      "after": "fa5ff9eacbbef26815c78ea233b567455e2af36a1741023b464b9d5b9dd8fc3e",
+      "after": "25ecf7f568b936df1f68e3cd487c2c3266a4bea371d21f628d7e323a56fd5b51",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
@@ -44,7 +44,7 @@
     {
       "path": "docs/JOB_INTEGRATION.md",
       "before": "9a0b29f506191e35d4689499e8dea006f9d9a73c654416a260f56b39d0e6bb37",
-      "after": "9f7a1bbb19f884367024474f1977300d91746b4e07f54cf6136888c5035bbfbb",
+      "after": "e02815151c070083aa9c7fc78ed2ff9ee0d76d5a09f5a7a205e4009b84f0bc29",
       "reason": "Bind active commands and blank ledger to the new candidate; all physical observations remain empty and NOT_RUN."
     },
     {
@@ -116,7 +116,7 @@
     {
       "path": "engineering/next-release.json",
       "before": "d58742455c297f27a00b9c8330bd6186df4003baa966eb42929eedd452ef4871",
-      "after": "696d2cec14814299a36c20925df51dc31cd282d9f673f33d8cb48cbdd23ae124",
+      "after": "ac39f136e45f30f3915c1d4202b26897d4c224a03533fd8386595385c2e4650f",
       "reason": "Extend source-bound qualification, browser, saved-archive and publication gates for the distinct 1.1.0 candidate."
     },
     {
@@ -1244,7 +1244,7 @@
     {
       "path": "fleet/source-inventory.json",
       "before": "5955175faeb7bea6fc9623e59d6621247a4f258597e725e658600c011cf9ed68",
-      "after": "abb892ede6d1c27488fc5798e1e3ccacb74ed276796933543bcf047d0bec0881",
+      "after": "cfd09ce1cabddb6a9e5b3cd3ce9feb0ffc2ea4909e28a141b4f1e851f5bfb1b4",
       "reason": "Regenerate exact source and role-copy integrity records; no qualification inferred."
     },
     {
@@ -1262,7 +1262,7 @@
     {
       "path": "macos/preview/source-inventory.json",
       "before": "3d1b27886fec89aa8afed9a9fa34a82c18af79be49cce2e39b5f377e2ea34521",
-      "after": "6098b9d53c1ccf5e33b00b0fb04faa149a0c1ee3fb4d51edaa6408cc7fb0d261",
+      "after": "890330bae63a9308e046726b3aa9cbf38cca7236a000ee4fb88338d376be3d5e",
       "reason": "Rebind the current Mac preview input inventory to reviewed shared sources; preserve its prior bytes in successor/history; inherit no qualification."
     },
     {
@@ -1280,13 +1280,13 @@
     {
       "path": "website/fr.html",
       "before": "17abf7fcbca259f3807984c3a7cfb514c49b05b4e26a02fc3d266db8f048d3fd",
-      "after": "aa24221395ac3bb35e155c30bc05a4771bdd5d6eb923b7324191f635cb8df7e1",
+      "after": "1423fd5f430b7a06d6d405090654c9a0e881cdf73a9f4e4ee141367a32f65a5e",
       "reason": "Add Builder entry point; retain concurrent published-release installation links and existing routes."
     },
     {
       "path": "website/index.html",
       "before": "e25bd373576c8452379b8153a7b15fb49bebec5258a74fcc6c57a98ba428257a",
-      "after": "0a53de9d79b8bdb7862ac0cc4ccb1cdfc88f466adfa1c26a60d5decd63e9cecd",
+      "after": "43ab3e1996e9973a3dad96be2dd60eb0fe4f8f5098fc9067ae8b6b7fd99c89c5",
       "reason": "Add Builder entry point; retain concurrent published-release installation links and existing routes."
     },
     {
@@ -1328,7 +1328,7 @@
     {
       "path": "website/styles.css",
       "before": "f854fc683e4ec0d3add1c81378e6dd1538751cb425a217248dfd3bcb92679af2",
-      "after": "c3357bffe0145f5f2cb1e38889dd41c42b4ad0b61521d2d657c8c4b637f68ada",
+      "after": "0b1ee4e2f9b05cd85ab11520e342a7016c4d2294f6b271e031711d7e04b673ec",
       "reason": "Add Builder entry point; retain concurrent published-release installation links and existing routes."
     }
   ],

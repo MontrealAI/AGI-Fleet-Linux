@@ -29,15 +29,17 @@ class PublicationNoteRaceTests(unittest.TestCase):
         audit = copy.deepcopy(self.acceptance.audit)
         audit['releaseSHA256'] = metadata['sha256']
         audit['successorAcceptance']['archiveSHA256'] = metadata['sha256']
+        for row in audit['contractProfiles']:
+            row['archiveSHA256'] = metadata['sha256']
         evidence = self.output / 'evidence.zip'; evidence.write_bytes(b'evidence fixture')
         manifest = {'workflowCommit': self.acceptance.commit, 'workflowRun': self.acceptance.run_id,
             'sha256': metadata['sha256'], 'audit': audit,
             'evidence': {'name': evidence.name, 'sha256': self.publisher.sha(evidence)}}
         self.publisher.write(self.release / 'release.json', metadata)
-        manifest_path = self.output / 'Release-Manifest-v1.1.3.json'
+        manifest_path = self.output / 'Release-Manifest-v1.1.4.json'
         self.publisher.write(manifest_path, manifest)
         assets = [archive, evidence, manifest_path]
-        sums = self.output / 'SHA256SUMS-v1.1.3.txt'
+        sums = self.output / 'SHA256SUMS-v1.1.4.txt'
         sums.write_text(''.join(self.publisher.sha(p) + '  ' + p.name + '\n' for p in assets))
         self.notes = self.publisher.publication_notes(assets, self.acceptance.commit, self.acceptance.run_id)
         (self.output / 'release-notes.md').write_text(self.notes)

@@ -1,0 +1,667 @@
+{
+  "sourceCommit": "b721819639668f0074c244d516bbbe0cf57329a7",
+  "sourceTree": "e124551765f258813cce8ba1bc8bed9cd5ec244c",
+  "node": "22.23.2",
+  "solc": "0.8.37",
+  "hardhat": "3.17.0",
+  "commands": [
+    "npm ci --ignore-scripts",
+    "npm --prefix hardhat ci --ignore-scripts",
+    "node scripts/security/patch-openzeppelin-compiler.cjs",
+    "npm run build"
+  ],
+  "scope": "Local exact locked build of final source; not final-main CI certification or deployed-contract upgrade",
+  "artifacts": 91,
+  "compilerWarnings": 0,
+  "compilerErrors": 0,
+  "files": {
+    "build/contracts/AGIJobManager.json": {
+      "sha256": "0b8b087b8cb98891e39a5a1d5b11752a5b641b04f8eba5c5bd34ffdb0b4c7f10",
+      "bytes": 182562
+    },
+    "build/contracts/AGIJobManagerLike.json": {
+      "sha256": "195dd2c5d15055aa9e3ba3b7a406923244968c8da21a7843babfd1f244b4f97b",
+      "bytes": 1035
+    },
+    "build/contracts/AGIJobManagerOriginal.json": {
+      "sha256": "0a5db2dc4d6ce1f7d8712866823de7f2fb75a7bbbd91c9f7b0b17e8915d93768",
+      "bytes": 120903
+    },
+    "build/contracts/AGIJobPages.json": {
+      "sha256": "609518b49ffbf32dc010452a6bd0d65bf93c9f270573967fc1eefb6700e94dc8",
+      "bytes": 27792
+    },
+    "build/contracts/AGIReviewEscrow.json": {
+      "sha256": "821cc2437d9a3fd12b383863d318fc95ba4f29813ddc081744c550f3fe43dae4",
+      "bytes": 24364
+    },
+    "build/contracts/BondMath.json": {
+      "sha256": "ccbc631a7103dd89cd9f8a88a64516144217812a25ef8060d3e1ff573b5b4d38",
+      "bytes": 4869
+    },
+    "build/contracts/BoundedReturndataENS.json": {
+      "sha256": "5bb47c27a8f9a9a56e33c4d4cc13f235a7a404d4b1b2688eab4d6fa1ca493e5d",
+      "bytes": 4170
+    },
+    "build/contracts/BoundedReturndataNameWrapper.json": {
+      "sha256": "5772481f13b4c6f2ae054ed731d41d7b176db177ed5719ce40c34e8459dd8c95",
+      "bytes": 5596
+    },
+    "build/contracts/BoundedReturndataResolver.json": {
+      "sha256": "3f65930fc4403c05360f8f87a3dc7ade90d0fb88cb3ca107fa12e93a6acfaa6f",
+      "bytes": 4159
+    },
+    "build/contracts/ENS.json": {
+      "sha256": "417a6b1d471bc34382d5498b8b89f87f86e83863c351af95eec0cdf9591127ba",
+      "bytes": 757
+    },
+    "build/contracts/ENSJobPages.json": {
+      "sha256": "6432442183550e16ea095bfc5a867d989bb775667106cbf1f2dfd1d3b528beaa",
+      "bytes": 87569
+    },
+    "build/contracts/ENSOriginal.json": {
+      "sha256": "b1ac4654fdc1e5f81bf82d3796b7775f2599c1ceeabc866fc383bdf464be5d25",
+      "bytes": 795
+    },
+    "build/contracts/ENSOwnership.json": {
+      "sha256": "00ae48e3b7e9a23847d2e23933faad98ae408674b7cbfb6c1fa48c0eb339d3c6",
+      "bytes": 14584
+    },
+    "build/contracts/ERC20NoReturn.json": {
+      "sha256": "5e11a78af4343bb4356736d1cd93d7a78182cb73deb912e32609632859a64d77",
+      "bytes": 15202
+    },
+    "build/contracts/ERC721ReceiverEmployer.json": {
+      "sha256": "65d15ea3c2aa57ac6845c3e26a5553bf0be2295f5398eee8771b25283610246f",
+      "bytes": 8194
+    },
+    "build/contracts/EnsLabelUtils.json": {
+      "sha256": "7bf666b8a82ba295267f714bbdfd188290676422462b128a91265480b05d248f",
+      "bytes": 617
+    },
+    "build/contracts/EnsLabelUtilsHarness.json": {
+      "sha256": "4b227172c8f3992d907ad879fd757255995f08aa2ae5a219f8e89d5de93181ee",
+      "bytes": 2972
+    },
+    "build/contracts/FailTransferToken.json": {
+      "sha256": "9c6d4d64e576841a9350460c3cd6053ff9b9d6072ab420448e6db5daa4cfa80f",
+      "bytes": 14878
+    },
+    "build/contracts/FailingERC20.json": {
+      "sha256": "616b90173b27b6523b7d895c13c200e15d93e559ac29a8c78c5377337fbb28ec",
+      "bytes": 17091
+    },
+    "build/contracts/FalseAfterTransferUSDC.json": {
+      "sha256": "66af69d882128e81c01056e3abc51c37f7d193161b9d9ccfa756b74fac9f2c9b",
+      "bytes": 18791
+    },
+    "build/contracts/FeeOnTransferToken.json": {
+      "sha256": "ba8cd3fd543c5caba9bb9cd7ba85296c9093e4f39e8f5ed6fe1491ab620396f5",
+      "bytes": 15457
+    },
+    "build/contracts/ForceSendETH.json": {
+      "sha256": "c12ef95b5dd00947a7cee526eb8d96dd2d13de25690016f8a0d8918891ff763e",
+      "bytes": 1323
+    },
+    "build/contracts/GasBurnerENS.json": {
+      "sha256": "d555b9e833c2af0604cd2fcbc9f7d1f5a568fe8d8a27584779d1ba748f743057",
+      "bytes": 610
+    },
+    "build/contracts/GasGriefingReceiverEmployer.json": {
+      "sha256": "da99ff3ca56319c95f569c5e5f9eb1cb682d1144a083a2c2f2b665fbac9f3fe9",
+      "bytes": 7002
+    },
+    "build/contracts/HookGasBurner.json": {
+      "sha256": "3b0e553b640ce9a54c0423b0d021114439bfe0429d4bd1a2b3e5e52906ec1709",
+      "bytes": 1357
+    },
+    "build/contracts/HookToken.json": {
+      "sha256": "bece70919b5e807f19aee0997b2a7175538e635d98e7e9a1a277c1424229d702",
+      "bytes": 15496
+    },
+    "build/contracts/IAGIJobManagerCreateJob.json": {
+      "sha256": "ef2a6a2483f4716c717aabb62f111711e67c87ca825f6a1e6ab480ffb517dcaf",
+      "bytes": 1309
+    },
+    "build/contracts/IAGIJobManagerForReceiver.json": {
+      "sha256": "4a8b09ae032ba1ee5d09bda0cbf86598c8c7c3a5e84e2064a2b8b3735ff214bd",
+      "bytes": 2226
+    },
+    "build/contracts/IAGIJobManagerView.json": {
+      "sha256": "781cc2eceaf71adff7e40d357402412f8dcc8da32c016407cbe91ec629911aa5",
+      "bytes": 2458
+    },
+    "build/contracts/IENSJobPages.json": {
+      "sha256": "e1310427fcc1fdfd94cb292c1503de880ee012a1e084bbe4ebe0c425a6a71eb5",
+      "bytes": 4571
+    },
+    "build/contracts/IENSJobPagesLike.json": {
+      "sha256": "752b341343ac44a4a3d90cf140aa828933ff5680cd8a482ec7082593276897e7",
+      "bytes": 785
+    },
+    "build/contracts/IENSRegistry.json": {
+      "sha256": "06067353e58d9cb2e20e3dca27b4756e14041d108d19a2dbda85dbc0a41f3a16",
+      "bytes": 1874
+    },
+    "build/contracts/INameWrapper.json": {
+      "sha256": "3cc55852b25f467f4460c0b2c8be66df55c6bbb66d69042516026bdf8e3b3d73",
+      "bytes": 3309
+    },
+    "build/contracts/INameWrapperSubnameOwner.json": {
+      "sha256": "f706814d4c2cb1258c8b209c79ef195b6456182e24a8a7c589735e663b1ee530",
+      "bytes": 1248
+    },
+    "build/contracts/IPublicResolver.json": {
+      "sha256": "bf196371d00a7c0dff553ecfd7f752d81beb6cecf71bb952b9167aac3d0f0932",
+      "bytes": 1745
+    },
+    "build/contracts/IResolverManager.json": {
+      "sha256": "133aefd5ce12b9521cbd2b477406ece7b843938c3884dbe4f5462ce3b810a119",
+      "bytes": 785
+    },
+    "build/contracts/IReviewJobManager.json": {
+      "sha256": "5a98e3221e2c2c419cd1aa74faccb4f3600638c778ff9d55522011aeb886a3fa",
+      "bytes": 3161
+    },
+    "build/contracts/ITokenUriReader.json": {
+      "sha256": "984d561e1f836eeb9b26b3bbbc4490b6c930212b97d4b158f9739b1820f18837",
+      "bytes": 794
+    },
+    "build/contracts/InvalidBoolNameWrapper.json": {
+      "sha256": "d6f9c462f436d5e518469917b9899dbb70406d5a3f37c7da12c774cbc1e68278",
+      "bytes": 4806
+    },
+    "build/contracts/InvalidBoolReturnERC20.json": {
+      "sha256": "30efa067f1b14eb77df922b563055618fe436118f0f7c8a828a505d97c817db9",
+      "bytes": 6446
+    },
+    "build/contracts/JobSettlement.json": {
+      "sha256": "cf0ba6c9e287a45878bbfa160ca8398f4e13bb6461fceac640fd053bd62973c0",
+      "bytes": 17042
+    },
+    "build/contracts/JobValidation.json": {
+      "sha256": "60b4e56fbf726a1556712e192c0aa69bd91614dea6ddff1706ad28eca50e63aa",
+      "bytes": 10572
+    },
+    "build/contracts/MalformedApprovalNameWrapper.json": {
+      "sha256": "71ff1daacc656dce363f8a031ac630d47d5b69b2d1f3a4febf8221100f9c804b",
+      "bytes": 3700
+    },
+    "build/contracts/MalformedENSRegistry.json": {
+      "sha256": "201faefb03b53717c8168f083c5fae351f18349092f833ff8f5609304faeea9a",
+      "bytes": 2763
+    },
+    "build/contracts/MalformedNameWrapper.json": {
+      "sha256": "173a29e91704988222a525805496f3a8dd4608b863bc03547d393938b49cb1c0",
+      "bytes": 1133
+    },
+    "build/contracts/MalformedResolver.json": {
+      "sha256": "7ee39d06b3a7eb98bddf5792f390e4edab6cd0cb0e7dfe78ea6998b9a151c7e9",
+      "bytes": 1135
+    },
+    "build/contracts/MalformedReturnERC20.json": {
+      "sha256": "58dde12f0ec0f7dc2ea9ea7758f6490357035045ef37c72cca15ecbc6e9110a9",
+      "bytes": 6114
+    },
+    "build/contracts/MaliciousCompletionReceiver.json": {
+      "sha256": "205a62074ab2fe882b0a98fe76fa919afbf0f0088e66961be9d981a065995b3e",
+      "bytes": 11307
+    },
+    "build/contracts/MockAGIJobManagerView.json": {
+      "sha256": "ff839602eb18484ce3f237aa6976995fcee218aedd64f04f158a96e366e1d2b7",
+      "bytes": 11248
+    },
+    "build/contracts/MockBrokenERC721.json": {
+      "sha256": "0c0db881c8d975893af42bb267b4a240d6b052b268e099002cf9ca20ef9a53bf",
+      "bytes": 2051
+    },
+    "build/contracts/MockENS.json": {
+      "sha256": "454c096e97961902a7fc90ea92c9e353d84586b7a19a91f4c6e189a1d551537f",
+      "bytes": 3317
+    },
+    "build/contracts/MockENSJobPages.json": {
+      "sha256": "fe16e8c6a3afab4cbfaa045d0a80c9e768c0483a741f20e608f95e88ee54ecbb",
+      "bytes": 31544
+    },
+    "build/contracts/MockENSJobPagesMalformed.json": {
+      "sha256": "3a0241fea5ac3413dc8d363c1841af7b27632f51883c45a506fb930eb71d5d96",
+      "bytes": 5686
+    },
+    "build/contracts/MockENSRegistry.json": {
+      "sha256": "fd7637b42aa3684508585afdd612f7d0da408820cd1991fea34c31339cbc6683",
+      "bytes": 5007
+    },
+    "build/contracts/MockERC165Only.json": {
+      "sha256": "6213054fa1d5033b82c76e51a19b0d6cec4a2961f2286fe60b6e320539cd6549",
+      "bytes": 1248
+    },
+    "build/contracts/MockERC20.json": {
+      "sha256": "64f31b163d29166ea44f40043e3f802837696e972704ddcac6332e533afd0571",
+      "bytes": 14860
+    },
+    "build/contracts/MockERC721.json": {
+      "sha256": "e3843fc0eea3b2551d8ce751035b51eaf6bf448f6c6c8b08bd96f6e8015656c2",
+      "bytes": 20517
+    },
+    "build/contracts/MockERC721Only.json": {
+      "sha256": "f59fed528c2ae9b1937c0bdd9d8acba88f5747df18a9d937d27ec926d5e34683",
+      "bytes": 1248
+    },
+    "build/contracts/MockGasGriefERC721.json": {
+      "sha256": "7225e08a05261895aeea6208408c89fd27544b030dc4b0cdcf3f4a1171191523",
+      "bytes": 1197
+    },
+    "build/contracts/MockHookCaller.json": {
+      "sha256": "665bb43aba381c319038e1aca7b2f4e301972d5664f5d55ae9fac65f0371ce61",
+      "bytes": 5024
+    },
+    "build/contracts/MockLoopingERC721.json": {
+      "sha256": "a4ce24db17e1624f67fcca520551cd15dc185f38e167d29832df913cb5ba217e",
+      "bytes": 1928
+    },
+    "build/contracts/MockNameWrapper.json": {
+      "sha256": "1733b4504dd8cad76d63e2843f0629f81003a63e06072d41d760f0c7da76fccf",
+      "bytes": 20098
+    },
+    "build/contracts/MockNoSupportsInterface.json": {
+      "sha256": "edb3c73dab1af94f2c5f9efcc521bfbb819fb802c2943ec06d74fd4f07e26d81",
+      "bytes": 1033
+    },
+    "build/contracts/MockPublicResolver.json": {
+      "sha256": "ba0b83e250eb04276968e8afc2b26e82698d2ea3b1a92674641c95099dd0626a",
+      "bytes": 9849
+    },
+    "build/contracts/MockRescueERC1155.json": {
+      "sha256": "cbf13b2967a8ea21c73c1ec78ba4f880562bda75a783b5a7f9dcd641f9f1ace2",
+      "bytes": 3970
+    },
+    "build/contracts/MockRescueERC20.json": {
+      "sha256": "ae77d8fb17ed794e13dc181833c7cd2817f71c03f4e200c9e9c9274da2734927",
+      "bytes": 3004
+    },
+    "build/contracts/MockRescueERC20False.json": {
+      "sha256": "68c20225c60c7c40f3f8e82f6b0ac1558b11149d7bd76a84b60e8a7482d47000",
+      "bytes": 1294
+    },
+    "build/contracts/MockRescueERC721.json": {
+      "sha256": "3a95d625889ff41ccb00f7f23e4e75c6011c4696a689a8db40321d53a7547a86",
+      "bytes": 3061
+    },
+    "build/contracts/MockRescueMalformedReturn.json": {
+      "sha256": "11451ffed8b0b2de1b993b24fb5099541c4608661cb316a383b40b7b90fd607a",
+      "bytes": 1331
+    },
+    "build/contracts/MockResolver.json": {
+      "sha256": "f11492aed11bbf5867b03fb059ebeff0abd36c7aee3b684eb7bb29660c94188b",
+      "bytes": 1927
+    },
+    "build/contracts/MockUSDCControls.json": {
+      "sha256": "13ef6980d30e7976c7b716f3a15a06f033744b74a3494efe1fc8f3617b96be4e",
+      "bytes": 17841
+    },
+    "build/contracts/MockWrongDecimals.json": {
+      "sha256": "531fa835575aef5dbbdaefff2df45b4cd402925767b5d867f1d9dadb8ac421b5",
+      "bytes": 13976
+    },
+    "build/contracts/NameWrapper.json": {
+      "sha256": "cac059c65155142ba1b95e58b6f59b431c34d8d458a6475f6e742cda171ee346",
+      "bytes": 762
+    },
+    "build/contracts/NameWrapperOriginal.json": {
+      "sha256": "2c1ac3eba038e0e11e7ac118efa960f8acef2dc41762ecdf34cc7ca41bf1b820",
+      "bytes": 800
+    },
+    "build/contracts/NftEligibility.json": {
+      "sha256": "e4d386ba9567afdbd13058d34a167a60881845abe91f610b0d0cb4cd18a21e6a",
+      "bytes": 6287
+    },
+    "build/contracts/NonReceiverEmployer.json": {
+      "sha256": "3e0a505445ecd21adb65f1d11bb53a51074108ec86efda649f44dbdfab1ebdee",
+      "bytes": 5914
+    },
+    "build/contracts/OwnerRotationReceiver.json": {
+      "sha256": "1d48157d85356c480859d4160d5eaf62df758569dcad948a95b99e156e0c0090",
+      "bytes": 7996
+    },
+    "build/contracts/ReenteringEmployer.json": {
+      "sha256": "3df3bfee9ad9c94796de25395d696b2a58f766684a901e8aa078fcddf6f52124",
+      "bytes": 7980
+    },
+    "build/contracts/ReentrantReviewToken.json": {
+      "sha256": "09802f9c9282ef23ae41c50b5f82464748d9bccbd3122ab1ebeca59c6e9caca8",
+      "bytes": 24104
+    },
+    "build/contracts/ReputationHarness.json": {
+      "sha256": "80c5f523c90456283282c2e8f98e4905714b5f81719cd26dda7829693495dfe9",
+      "bytes": 2781
+    },
+    "build/contracts/ReputationMath.json": {
+      "sha256": "782490d92dae04432e0371190a568c16e45e787fd9583573611a4d823b9c80eb",
+      "bytes": 2995
+    },
+    "build/contracts/ResolverOriginal.json": {
+      "sha256": "3241fb30699c5e52e413ac290f66af877495ea41c69c306c8c6ca5f0f584ad2d",
+      "bytes": 804
+    },
+    "build/contracts/RevertingBalanceOfERC20.json": {
+      "sha256": "f6d83341e372e05be79e6217ad46e93cf3f90140a910d7f77d23dc264d6e8623",
+      "bytes": 6664
+    },
+    "build/contracts/RevertingENSRegistry.json": {
+      "sha256": "2452cba4508394b879965c30747609a8ce431ae5051b8ea02c2a051377b60aa4",
+      "bytes": 4811
+    },
+    "build/contracts/RevertingERC20.json": {
+      "sha256": "7f85ce504a68a1b377cbdcd9de523c06ec82409b58a19704bce008306ca0df01",
+      "bytes": 2653
+    },
+    "build/contracts/RevertingNameWrapper.json": {
+      "sha256": "ba46c3faef2a6c9148ada8ee4c2b7f86cc9db27368fdacd746ee84241f8b31f9",
+      "bytes": 2877
+    },
+    "build/contracts/RevertingResolver.json": {
+      "sha256": "c48d96f3bac1e5f2a07408b42d2d4b936b9a9bd71a2a33cd1056306fde62f188",
+      "bytes": 3263
+    },
+    "build/contracts/TokenURIReaderReceiver.json": {
+      "sha256": "52f7b89dbaa2cab5ff2cc3930fa8f47451f7919ed34b76c8ae2afbb2dc93af6c",
+      "bytes": 10636
+    },
+    "build/contracts/TransferUtils.json": {
+      "sha256": "d2e6158f4cef94c292a031ac1f79892b0edb15bca20cd81cedb53c6fcecb1d7e",
+      "bytes": 4146
+    },
+    "build/contracts/UriUtils.json": {
+      "sha256": "b2a3bc3837bc434c125488a439625f52f3df2c6a05337cb6378433d73a426cc5",
+      "bytes": 9611
+    },
+    "build/contracts/UtilsHarness.json": {
+      "sha256": "c075e51a4e87a1cc79977109657ce094fc6864e9b3fa32a962966d83ff3ae4cb",
+      "bytes": 17252
+    },
+    "contracts/AGIJobManager.sol": {
+      "sha256": "e9be32b61afb55818d4108f295c5b80d9e2f5649e4697b9a199f8c000d8285c4",
+      "bytes": 65030
+    },
+    "contracts/ens/ENSJobPages.sol": {
+      "sha256": "a53964a8fdc0968086978dc4ad97e6caf89ae98a5ee74d5ec2a744e5d57cdb7f",
+      "bytes": 34329
+    },
+    "contracts/ens/IENSJobPages.sol": {
+      "sha256": "e063fd72c7c52886e461ebbfc2142430cc42f91a76b6c013af2f464ddae78f5f",
+      "bytes": 902
+    },
+    "contracts/ens/IENSRegistry.sol": {
+      "sha256": "432c7d37db76dba1f3ce522ca40013530ee2e1024197bc2a280366ff9f9ff9e4",
+      "bytes": 394
+    },
+    "contracts/ens/INameWrapper.sol": {
+      "sha256": "182065cbe99804d03abef665ec6d927cfa4d91cc0804301d7893fe6a57fc58d3",
+      "bytes": 661
+    },
+    "contracts/ens/IPublicResolver.sol": {
+      "sha256": "87c6e8d65d352ae4d69d802ab01b070531199078d41a79ea3be934a479d2b48e",
+      "bytes": 320
+    },
+    "contracts/legacy/AGIJobManagerOriginal.sol": {
+      "sha256": "3a98e0735e8d056c15327a533e088d996e5fee60febfa973cb8f6166aff2ec3b",
+      "bytes": 31543
+    },
+    "contracts/periphery/AGIJobPages.sol": {
+      "sha256": "21b0011e798c73717524708af6af2aa244bc63dc29ec9172ee149ad5c6e898ad",
+      "bytes": 3829
+    },
+    "contracts/periphery/AGIReviewEscrow.sol": {
+      "sha256": "18724f4f0a631d05b2b528f77813216ddc5e9eb3dd334c4a7731a314fbdc714e",
+      "bytes": 7762
+    },
+    "contracts/test/BoundedReturndataENSMocks.sol": {
+      "sha256": "3530369cd9ef6567adc3516ba42b91ad9c600be90a467c4cdfb9172ad06a2b86",
+      "bytes": 3117
+    },
+    "contracts/test/CompletionNFTHolders.sol": {
+      "sha256": "371f526ed7601fbec99a8272aef45661d66db472fdce8728bf32e90a6833b67d",
+      "bytes": 3904
+    },
+    "contracts/test/ENSLivenessMocks.sol": {
+      "sha256": "d07b05a427002f7f03b9311555bb30c6f957119447eeb0670c0e4be7ec7a1a54",
+      "bytes": 759
+    },
+    "contracts/test/ERC20NoReturn.sol": {
+      "sha256": "d3bb3cb536cc476ed502ce0145b69fec50a927cdaebb196ccca0f8386f9e65f7",
+      "bytes": 814
+    },
+    "contracts/test/EnsLabelUtilsHarness.sol": {
+      "sha256": "7404df55f522fbd28d24609f97a2f46502749f6f16e4366c6f1326dc82e7d618",
+      "bytes": 240
+    },
+    "contracts/test/FailTransferToken.sol": {
+      "sha256": "46448e15779f275742381be1c7bc3892c371b57ffb6edad28bc59c5df1c65790",
+      "bytes": 487
+    },
+    "contracts/test/FailingERC20.sol": {
+      "sha256": "d457213bf1af1c221ca60fa533de675b04dee7d2c8ac00ac3641441a6be644a6",
+      "bytes": 1055
+    },
+    "contracts/test/FalseAfterTransferUSDC.sol": {
+      "sha256": "4b4f2a805ccfccb4cb62eac11a22ea4bb263a09616ed594b884a4d2c8667840b",
+      "bytes": 405
+    },
+    "contracts/test/FeeOnTransferToken.sol": {
+      "sha256": "028ee1fbb20a243ec229ab10de1d75e9f851fa897a04db98db744f7538a31385",
+      "bytes": 726
+    },
+    "contracts/test/HookGasBurner.sol": {
+      "sha256": "e31178d1105335ed79da11ff5e3a4c5e36eae4ec7cba3981b4524a8f587d3dc5",
+      "bytes": 282
+    },
+    "contracts/test/HookToken.sol": {
+      "sha256": "0a1e2114c9e3da7bff82abb44b8d606d9f826848026fb03ac0f32714c2a744e7",
+      "bytes": 764
+    },
+    "contracts/test/InvalidBoolNameWrapper.sol": {
+      "sha256": "93589a6f77ff3695a007fa826bf8ac3ab08f912a52368403b4212d37536982f3",
+      "bytes": 718
+    },
+    "contracts/test/InvalidBoolReturnERC20.sol": {
+      "sha256": "638ca0ee304935e1598b30b4d7f0ec9e2dc359dde0bff160d92b3b11ef74bb4c",
+      "bytes": 1106
+    },
+    "contracts/test/MalformedENSComponents.sol": {
+      "sha256": "0e27bc2c0e8349257235fe2322142cade6d224e8fb309c0abbf05b683bdf87b5",
+      "bytes": 887
+    },
+    "contracts/test/MalformedReturnERC20.sol": {
+      "sha256": "58dec19996b2956f355e7b3f8be31ae0e9a54c8c8449b575853489bcb929b1c1",
+      "bytes": 1335
+    },
+    "contracts/test/MaliciousCompletionReceiver.sol": {
+      "sha256": "ceb7ba77923c6421005509b5587c0a6acdbe4bd147b07de27ed525080d3e7d86",
+      "bytes": 1736
+    },
+    "contracts/test/MockAGIJobManagerView.sol": {
+      "sha256": "056c045321141486b59d3ba149d980a7445c0ed77bbb483df92ada740ed53e8f",
+      "bytes": 2072
+    },
+    "contracts/test/MockBrokenERC721.sol": {
+      "sha256": "478e2bd06f09bade70ebf4350be599e55cba858b4375a44e9d7137526733529b",
+      "bytes": 380
+    },
+    "contracts/test/MockENS.sol": {
+      "sha256": "57057dacfc94f4b1b4c9547b78c269ea1a936046931b2a12bad0c29da06f5d6b",
+      "bytes": 614
+    },
+    "contracts/test/MockENSJobPages.sol": {
+      "sha256": "1186ad51ad6948468ecdcccc44e5b0df6320a1d5747eb10eb537d694c93ad867",
+      "bytes": 4911
+    },
+    "contracts/test/MockENSJobPagesMalformed.sol": {
+      "sha256": "48bced65862b0075f91e1643f655d2a1b0235f00df30d37843932b3c11e2ad8b",
+      "bytes": 658
+    },
+    "contracts/test/MockENSRegistry.sol": {
+      "sha256": "5b361ae0815f930b008f1e948dadab1628ff52e929b8c367c80b291450fbbfd3",
+      "bytes": 942
+    },
+    "contracts/test/MockERC165Only.sol": {
+      "sha256": "1c9426c75e830e6739acab4116eed18243e5e056b3d36a2e3cf78c833716ed7c",
+      "bytes": 216
+    },
+    "contracts/test/MockERC20.sol": {
+      "sha256": "7710c6e658d39b8707d515a05902fb985572ff639b44a941aa70efe01f396504",
+      "bytes": 362
+    },
+    "contracts/test/MockERC721.sol": {
+      "sha256": "b43e8fab5b8e467d4e886d07ea6d4c0567573ef49080c3fc018610e09d58bc6f",
+      "bytes": 401
+    },
+    "contracts/test/MockERC721Only.sol": {
+      "sha256": "4b6ce80550f1219659bb4ff143bfb49af97b84c35c7921ca72926d52644f739d",
+      "bytes": 216
+    },
+    "contracts/test/MockGasGriefERC721.sol": {
+      "sha256": "d670417e5a78060ad2f7222f248690c2b89d8240dce2dd312946e92cbe11c7a6",
+      "bytes": 306
+    },
+    "contracts/test/MockHookCaller.sol": {
+      "sha256": "dafbc13035d9831586e430c1643b24f42ed0069e576e65b0d58ae33c6855e07b",
+      "bytes": 1134
+    },
+    "contracts/test/MockLoopingERC721.sol": {
+      "sha256": "3cbeba9b40a86ea2164bb1ca08f850cc64a6dfe7350c80d41123c04215d32e5f",
+      "bytes": 450
+    },
+    "contracts/test/MockNameWrapper.sol": {
+      "sha256": "01bcaefd1cab244edbaaabe6350347b21552bd964d0cd5f28863b6fe673b28a1",
+      "bytes": 3632
+    },
+    "contracts/test/MockNoSupportsInterface.sol": {
+      "sha256": "45041384d4baa4d6aa9938b7d8eba36e5b196a0971581b40696bae2d250a3acc",
+      "bytes": 173
+    },
+    "contracts/test/MockPublicResolver.sol": {
+      "sha256": "afd0f7e0248536ce64f3cc7c31fa88b548a5c87dd52f646a48017567ea1407ee",
+      "bytes": 1398
+    },
+    "contracts/test/MockResolver.sol": {
+      "sha256": "d77451f982723e3b58633c3510f4020a5caf834c3d56ac1571e480e0375a44cb",
+      "bytes": 364
+    },
+    "contracts/test/MockUSDCControls.sol": {
+      "sha256": "0329914204c103f12f8ba64aa23433e6331dd4731960cc3ced1291b9eaf6d906",
+      "bytes": 1031
+    },
+    "contracts/test/OwnerRotationReceiver.sol": {
+      "sha256": "cebb0a358464f893b25e38759a302f4bbdadb9ff5d0f6568db6970e632a93c72",
+      "bytes": 1028
+    },
+    "contracts/test/ReenteringEmployer.sol": {
+      "sha256": "622235ed7e365db9e6c4d82106b9bd1c132f0c2eda9abad2f3e4d5a98d0e2919",
+      "bytes": 1177
+    },
+    "contracts/test/ReentrantReviewToken.sol": {
+      "sha256": "939d4655a66ebba33be325aeca43f441072a3d1158061c9f8913711a1166c962",
+      "bytes": 1177
+    },
+    "contracts/test/ReputationHarness.sol": {
+      "sha256": "ff279b44b02c1944366d6ae8b75f10ee26d2083df316b331935b21966eb2049a",
+      "bytes": 597
+    },
+    "contracts/test/RescueMocks.sol": {
+      "sha256": "0f9277f7e599ca1ab36137dbcb45c9faf77bce6384e662c6b8a8e80c0050f083",
+      "bytes": 2217
+    },
+    "contracts/test/RevertingBalanceOfERC20.sol": {
+      "sha256": "e0832f3fb4336c5740766a7a7cde94728c11e2e2c3c51626255d9bfd7192995c",
+      "bytes": 1321
+    },
+    "contracts/test/RevertingENSComponents.sol": {
+      "sha256": "f7545235bc35c73611e8aae3ca679497e190ec96a900ea4da0abb159990ba0d7",
+      "bytes": 1538
+    },
+    "contracts/test/RevertingERC20.sol": {
+      "sha256": "b95d073d8f8ec609bbadb1328a9bed28cc3555cbe23c660f342e3c4d7bdabdc5",
+      "bytes": 381
+    },
+    "contracts/test/UtilsHarness.sol": {
+      "sha256": "5345b58f2d3d3eb874fd2737216deae7b2f77065f4fb6bf74063a29a3d84ff29",
+      "bytes": 2447
+    },
+    "contracts/utils/BondMath.sol": {
+      "sha256": "f082b47230121bd98c9a2c4c5c0957734461f2fbf612b2386e249fa4b4b3fa30",
+      "bytes": 1261
+    },
+    "contracts/utils/ENSOwnership.sol": {
+      "sha256": "244bcedf9ef9da775b3a663b2dcc4a221ea70810e1543ac0f255e3f0d3acaca0",
+      "bytes": 8634
+    },
+    "contracts/utils/EnsLabelUtils.sol": {
+      "sha256": "e7bf88fa5c3ecd85472e066c73dd76c2ce3b9f1f9700db27c4781e0577b358db",
+      "bytes": 1164
+    },
+    "contracts/utils/JobSettlement.sol": {
+      "sha256": "0e38c450b7461f36d30ec0aa06488135cf690dec0c8822b837f6f1b273a7cd93",
+      "bytes": 7809
+    },
+    "contracts/utils/JobState.sol": {
+      "sha256": "1840624830777ffbaedb5aada50d3f748f2f7aa89f788f329d9e598ff1b37459",
+      "bytes": 1359
+    },
+    "contracts/utils/JobValidation.sol": {
+      "sha256": "0f085da143a6ecbd3f7d941945a86dd54ad4bd27834457041f75bcab782a615d",
+      "bytes": 3454
+    },
+    "contracts/utils/NftEligibility.sol": {
+      "sha256": "f08254fbcdaad64a1e22c8f79b2cfc3ade0ee41c76dbb7c659bdfd196f7637dc",
+      "bytes": 5518
+    },
+    "contracts/utils/ReputationMath.sol": {
+      "sha256": "c742c3e7cb05a412405e8fe29d5283b1464e6c377ce98e2d8a360f96f3e3522c",
+      "bytes": 1002
+    },
+    "contracts/utils/TransferUtils.sol": {
+      "sha256": "797242b5d1ac32547e065a0989d8f407a3f5a22618e98681a332d3e85197ce36",
+      "bytes": 2223
+    },
+    "contracts/utils/UriUtils.sol": {
+      "sha256": "b3d5b14eed8b89f71781d2d7258e1bd88113db6a77984e1967c4eb341178647b",
+      "bytes": 4935
+    },
+    "hardhat/artifacts/build-info/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.json": {
+      "sha256": "e121ffd69dddcb58d90a59c98a04aa64182e56ccc0578a5a94b633a6e46b96bb",
+      "bytes": 372354
+    },
+    "hardhat/artifacts/build-info/solc-0_8_37-e57a67cf6480b203ed6e0d62566d9965e30cc4cc.output.json": {
+      "sha256": "62b6a975be0d7a1e30bb407d87c7df5ed63bbf097c2f5d266444749c5a2e77f5",
+      "bytes": 8614568
+    },
+    "hardhat/package-lock.json": {
+      "sha256": "e50fe3ab133c5dc6e2edb593beb86a332c2d8b9580cfc63acdf416fc812f3663",
+      "bytes": 76888
+    },
+    "hardhat/package.json": {
+      "sha256": "b6442cffa1302fc03c7f9ef8e7ecb8e0d8481d0e1d9ef2beb94599fc58f706c8",
+      "bytes": 3842
+    },
+    "hardhat.config.mjs": {
+      "sha256": "b5940a9aaadd51db303def4f733bdbe4854ab397b43977d85c0a121bdfab057d",
+      "bytes": 55
+    },
+    "package-lock.json": {
+      "sha256": "8da74ee7a60177d86578fde83036be7f8d7c9d0b37acba15ff99085beb7f7a46",
+      "bytes": 109186
+    },
+    "package.json": {
+      "sha256": "2192a23332d8e291cb3ae96a058cf2156edf1f47195b1964340ca1faf2def477",
+      "bytes": 4612
+    },
+    "scripts/security/openzeppelin-compiler-patches.json": {
+      "sha256": "d6b26417b011ef55012d092486ae4558235d3a45ad6b38028d2204289c1d7236",
+      "bytes": 1437
+    },
+    "scripts/security/patch-openzeppelin-compiler.cjs": {
+      "sha256": "4f673eb48f7ff62ed0b7305cbdb7e367a187b6468c9ef69698fe38468a395116",
+      "bytes": 2176
+    }
+  }
+}

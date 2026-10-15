@@ -2,7 +2,7 @@ export type Role = 'agent' | 'node' | 'moderator' | 'employer' | 'evidence' | 'r
 export type Workspace = 'files';
 export interface TaskV1 {
   schema: 'agi-fleet/local-task/v1';
-  action: 'successor-run' | 'successor-check' | 'protocol-inspect' | 'evidence-inspect';
+  action: 'alpha-run' | 'successor-run' | 'successor-check' | 'protocol-inspect' | 'evidence-inspect';
   workspace: Workspace;
   input: Record<string, unknown>;
   review: 'none' | 'internal' | 'independent';
@@ -66,3 +66,6 @@ export interface DiagnosticsV1 {
   economicAuthority: false;
   liveProviderQualification: 'NOT_RUN';
 }
+
+/** Exact UTF-8 JSON text, preserved unchanged; no command, path or runtime pins. */
+export interface AlphaInputV1 { workSpec: string }

@@ -1,6 +1,6 @@
 # Fresh Linux installation
 
-**Start with Agent on a dedicated Ubuntu Desktop 24.04 LTS host.** This guide is for **Linux 1.1.3**, a qualification prerelease. Download the complete Fleet archive from the [1.1.3 release page](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.3-qualification), and check that its release notes report completed native acceptance for your architecture before installing. Historical 1.0.9 or 1.1.0 results do not qualify this new archive. If the 1.1.3 release or its exact acceptance evidence is absent, stop: this source guide is not permission to install an unpublished candidate. The prior 1.1.0 guide remains available at its frozen release tag.
+**Start with Agent on a dedicated Ubuntu Desktop 24.04 LTS host.** This guide is for **Linux 1.1.4**, a qualification prerelease. Download the complete Fleet archive from the [1.1.4 release page](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.4-qualification), and check that its release notes report completed native acceptance for your architecture before installing. Historical 1.0.9 or 1.1.0 results do not qualify this new archive. If the 1.1.4 release or its exact acceptance evidence is absent, stop: this source guide is not permission to install an unpublished candidate. The prior 1.1.0 guide remains available at its frozen release tag.
 
 A successful installation is the start of physical qualification. Real OAuth/inference, live documents, cleanup, reboot and 72-hour endurance require observations on your machine. Record them in the [physical ledger](PHYSICAL_QUALIFICATION.md). Installation does not enable funded jobs or establish production readiness.
 
@@ -24,20 +24,20 @@ The signer holds its encrypted wallet; compute never receives that wallet. Both 
 
 ## 1. Download and verify — administrator
 
-Download these two assets together from the [release page](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.3-qualification):
+Download these two assets together from the [release page](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.4-qualification):
 
-- `AGI_Fleet_Linux_v1.1.3.zip` — the complete application, including all six roles.
-- `SHA256SUMS-v1.1.3.txt` — published checksums.
+- `AGI_Fleet_Linux_v1.1.4.zip` — the complete application, including all six roles.
+- `SHA256SUMS-v1.1.4.txt` — published checksums.
 
 Use a new download directory. Do not select GitHub's automatically generated **Source code** ZIP or a native evidence archive for installation. Each supplied archive is below 450,000,000 bytes.
 
 Open Terminal in the download directory and run:
 
 ```bash
-sha256sum --check --ignore-missing SHA256SUMS-v1.1.3.txt
+sha256sum --check --ignore-missing SHA256SUMS-v1.1.4.txt
 ```
 
-**Continue only when `AGI_Fleet_Linux_v1.1.3.zip: OK` appears and the command succeeds.** Missing evidence archives may be ignored; the Fleet ZIP may not. A checksum detects changed bytes; it is not independent publisher authentication.
+**Continue only when `AGI_Fleet_Linux_v1.1.4.zip: OK` appears and the command succeeds.** Missing evidence archives may be ignored; the Fleet ZIP may not. A checksum detects changed bytes; it is not independent publisher authentication.
 
 Ubuntu needs `unzip` for the next step. If it is missing, the administrator can install it:
 
@@ -48,12 +48,12 @@ sudo apt-get update && sudo apt-get install --yes unzip
 Extract into a new, stable directory. The following block stops at the first failed command; if the destination already exists, it does nothing. Preserve an existing destination and diagnose it before proceeding.
 
 ```bash
-sudo test ! -e /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3 &&
+sudo test ! -e /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4 &&
 sudo mkdir -p /opt/agi-fleet-linux &&
-sudo unzip -n AGI_Fleet_Linux_v1.1.3.zip -d /opt/agi-fleet-linux &&
-sudo chown -R root:root /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3 &&
-sudo chmod -R go-w /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3 &&
-/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3/Verify-Linux.sh
+sudo unzip -n AGI_Fleet_Linux_v1.1.4.zip -d /opt/agi-fleet-linux &&
+sudo chown -R root:root /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4 &&
+sudo chmod -R go-w /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4 &&
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/Verify-Linux.sh
 ```
 
 **Expected:** `status: PASS` and `editions: 7`, covering the Fleet and six role manifests/inventories. Preserve the original ZIP and checksum outside the application tree. Do not move or edit installed code after approval; its location and bytes form part of the runtime identity.
@@ -63,7 +63,7 @@ sudo chmod -R go-w /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3 &&
 Use new, unused account names. These examples are used throughout this guide; replace both names consistently if you choose others.
 
 ```bash
-sudo /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3/Prepare-Ubuntu.sh agisignerlinux1 agicomputelinux1
+sudo /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/Prepare-Ubuntu.sh agisignerlinux1 agicomputelinux1
 ```
 
 Review the proposed changes and type `PREPARE`. The helper verifies Docker's signing key, installs prerequisites and Docker Engine/CLI/rootless extras **29.8.2**, creates private `0700` homes, prompts for both account passwords, disables the newly installed root Docker service, and enables compute-only lingering with CPU/memory/PID delegation. It does not weaken AppArmor or grant access to the root Docker socket.
@@ -75,7 +75,7 @@ Review the proposed changes and type `PREPARE`. The helper verifies Docker's sig
 Use Ubuntu's login screen to log into **agisignerlinux1**. Open Terminal and run without `sudo`:
 
 ```bash
-/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3/packages/AGI_Agent/Launch.sh
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/packages/AGI_Agent/Launch.sh
 ```
 
 The launcher installs hash-verified Node **24.21.0** privately and opens the local signer UI. Create a new encrypted seed wallet and preserve its recovery information using the application's workflow. Do not import or fund an existing operator wallet for qualification. Native GNOME Secret Service support is available; a missing or locked keyring does not permit plaintext key storage.
@@ -87,7 +87,7 @@ In the **stopped, unlocked** signer, select workstation compute and export its p
 Switch to the administrator desktop. Replace `ACTUAL_SETUP_FILENAME.json` with the exported filename; quote the full path if it contains spaces.
 
 ```bash
-sudo /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3/Transfer-Setup.sh "/home/agisignerlinux1/Downloads/ACTUAL_SETUP_FILENAME.json" agicomputelinux1
+sudo /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/Transfer-Setup.sh "/home/agisignerlinux1/Downloads/ACTUAL_SETUP_FILENAME.json" agicomputelinux1
 ```
 
 **Expected:** the helper copies only the kit to `/home/agicomputelinux1/AGI-Setup/OpenClaw-Setup.json`, owned by compute with mode `0600`. It validates ownership, private paths, schema and distinct signer/compute identities. It refuses an existing `AGI-Setup` destination. Keep wallet files in the signer account; do not copy the signer's home or OAuth data.
@@ -97,13 +97,13 @@ sudo /opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3/Transfer-Setup.sh "/home/agisig
 Use Ubuntu's login screen to log into **agicomputelinux1**. Do not use `su`, `sudo -u` or a root terminal; a real session and D-Bus are required. Run the first command and continue only after it reports success:
 
 ```bash
-/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3/Prepare-Compute.sh
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/Prepare-Compute.sh
 ```
 
 **Expected:** `Rootless Docker ready.` Then run:
 
 ```bash
-/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3/packages/AGI_Agent/Install.sh --file /home/agicomputelinux1/AGI-Setup/OpenClaw-Setup.json
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/packages/AGI_Agent/Install.sh --file /home/agicomputelinux1/AGI-Setup/OpenClaw-Setup.json
 ```
 
 The installer independently checks the account, rootless socket, resource controls, disk, images and desktop. It prepares pinned OpenClaw **2026.9.5**. Follow the Agent's separate **Creator, Checker and Reviewer** OAuth prompts in this compute session. Review the exact policy digest before approving it. Other roles have different OAuth profiles; see the table below.
@@ -117,8 +117,8 @@ Accept removal of the imported temporary kit if offered after success. After bot
 In the compute desktop, run:
 
 ```bash
-/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3/packages/AGI_Agent/Inspect.sh
-/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.3/packages/AGI_Agent/Qualify-Linux.sh --cycles 1
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/packages/AGI_Agent/Inspect.sh
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/packages/AGI_Agent/Qualify-Linux.sh --cycles 1
 ```
 
 Read `Inspect.sh`'s fields, not just its exit status. Before work, expect `policy: PASS`, `host: PASS`, `computeSTOP: false`, and authenticated health with the correct role, `policyCurrent: true` and `stopped: false`. `health: null` is not readiness. Inspect can print a failed check while exiting successfully.

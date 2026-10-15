@@ -6,6 +6,7 @@ from pathlib import Path
 import stat
 import tempfile
 import unittest
+from unittest import mock
 import urllib.error
 import zipfile
 
@@ -106,6 +107,15 @@ class PreviewReleaseTests(unittest.TestCase):
                 self.audit()
         file.write_text(original)
 
+    def test_source_and_extracted_logs_require_every_current_module_case(self):
+        for name in ('source', 'extracted'):
+            file = self.evidence / 'local-skills-preview-x64/local-host-evidence' / (name + '.tap')
+            original = file.read_text()
+            self.tap(file, self.spec['tests']['module'] - 1)
+            with self.assertRaisesRegex(ValueError, 'Incomplete TAP acceptance'):
+                self.audit()
+            file.write_text(original)
+
     def test_installed_package_and_restart_evidence_are_required(self):
         file = self.evidence / 'local-skills-preview-x64/local-host-evidence/installed-journey.json'
         original = R.load(file)
@@ -181,9 +191,89 @@ class PreviewReleaseTests(unittest.TestCase):
         self.assertIn('uses: ./.github/workflows/next-release.yml', local)
         self.assertIn('validation_only: true', local)
         self.assertIn('!inputs.validation_only &&', legacy)
-        self.assertIn('needs: [build, native, integration, successor, audit]', legacy)
+        def assert_profile_gates(workflow):
+            audit = workflow.split('\n  audit:\n', 1)[1].split('\n  qualification-gate:\n', 1)[0]
+            gate = workflow.split('\n  qualification-gate:\n', 1)[1].split('\n  publish:\n', 1)[0]
+            publish = workflow.split('\n  publish:\n', 1)[1]
+            self.assertIn('needs: [build, native, integration, profile-integration, successor]', audit)
+            self.assertIn('needs: [build, native, integration, profile-integration, successor, audit]', gate)
+            self.assertIn('needs: [build, native, integration, profile-integration, successor, audit, qualification-gate]', publish)
+        assert_profile_gates(legacy)
+        for section in ('audit', 'qualification-gate', 'publish'):
+            marker = '\n  ' + section + ':\n'
+            before, after = legacy.split(marker, 1)
+            broken = before + marker + after.replace('integration, profile-integration, successor', 'integration, successor', 1)
+            with self.subTest(missing_profile_gate=section), self.assertRaises(AssertionError):
+                assert_profile_gates(broken)
+        with self.assertRaises(AssertionError):
+            assert_profile_gates(legacy.replace('successor, audit, qualification-gate]', 'successor, audit]'))
         self.assertIn('cancel-in-progress: false', local)
         self.assertIn('cancel-in-progress: false', legacy)
+
+    def fleet_fixture(self):
+        acceptance = R.module('local_fleet_publication_fixture',
+                              ROOT / 'engineering/tests/test_next_publication.py')
+        case = acceptance.PublicationAcceptance()
+        case.setUp()
+        fleet = self.root / 'fleet'
+        fleet.mkdir()
+        evidence = fleet / 'fleet-evidence.zip'
+        evidence.write_bytes(b'exact synthetic Fleet qualification evidence')
+        manifest = {**case.metadata, 'workflowRun': self.run,
+                    'audit': case.audit, 'evidence': R.identity(evidence)}
+        path = fleet / f"Release-Manifest-v{manifest['version']}.json"
+        self.write(path, manifest)
+        return fleet, path, manifest
+
+    def publication_environment(self):
+        return mock.patch.dict(R.os.environ, {
+            'GITHUB_REPOSITORY': R.REPOSITORY, 'GITHUB_REF': 'refs/heads/main',
+            'GITHUB_EVENT_NAME': 'push', 'GITHUB_RUN_ID': self.run})
+
+    def test_publication_bundles_exact_current_fleet_manifest(self):
+        with self.publication_environment():
+            fleet, path, manifest = self.fleet_fixture()
+            expected = path.read_bytes()
+            # A stale differently named file must never be substituted.
+            historical = fleet / 'Release-Manifest-v1.1.1.json'
+            historical.write_bytes(b'stale fixture')
+            output = self.root / 'published'
+            with mock.patch.object(R, 'publish_assets', return_value={'html_url': 'fixture'}) as publish:
+                R.publish(self.evidence, fleet, output, self.commit, self.run)
+            publish.assert_called_once()
+            self.assertEqual(historical.read_bytes(), b'stale fixture')
+            with zipfile.ZipFile(output / ('Local-Skills-Evidence-' + self.spec['version'] + '.zip')) as saved:
+                self.assertEqual(saved.read('fleet-regression-manifest.json'), expected)
+                self.assertEqual(saved.read('fleet-regression-evidence.zip'),
+                                 (fleet / manifest['evidence']['name']).read_bytes())
+
+    def test_publication_rejects_missing_current_fleet_manifest(self):
+        with self.publication_environment():
+            fleet, path, _ = self.fleet_fixture()
+            path.rename(fleet / 'Release-Manifest-v1.1.1.json')
+            output = self.root / 'published'
+            with mock.patch.object(R, 'publish_assets') as publish:
+                with self.assertRaisesRegex(ValueError, 'Unsafe JSON input'):
+                    R.publish(self.evidence, fleet, output, self.commit, self.run)
+            publish.assert_not_called()
+            self.assertFalse(output.exists())
+
+    def test_publication_rejects_wrong_version_in_current_fleet_manifest(self):
+        with self.publication_environment():
+            fleet, path, manifest = self.fleet_fixture()
+            output = self.root / 'published'
+            for version in ('0.0.0', '../../outside', '/absolute', None):
+                with self.subTest(version=version):
+                    if version is None:
+                        manifest.pop('version', None)
+                    else:
+                        manifest['version'] = version
+                    self.write(path, manifest)
+                    with mock.patch.object(R, 'publish_assets') as publish:
+                        with self.assertRaisesRegex(ValueError, 'Release specification differs: version'):
+                            R.publish(self.evidence, fleet, output, self.commit, self.run)
+                    publish.assert_not_called()
+                    self.assertFalse(output.exists())
 
     def api_fixture(self, wrong_asset=False, wrong_tag=False):
         self.asset = self.root / 'sample.zip'

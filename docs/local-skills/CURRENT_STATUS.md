@@ -12,9 +12,25 @@ The transactional development installer preserves private state and user outputs
 
 The new [capability admission contract](CAPABILITY_ADMISSION.md) checks an exact task without creating authority, records supported operations and limits in its grant, and rechecks bound configuration before authorization and dispatch. It distinguishes supportable work, missing prerequisites and unsupported scope; custom missions are refused before reservation. Its component tests do not qualify general tools, live providers, independent review or Mac local execution, and the original 22 acceptance requirements remain in force.
 
+The capacity/launch-boundary correction adds UTF-8 history accounting, atomic outcome-storage reservations that survive uncertainty/restart, and a final Linux executable/backend/boot check against the authorized binding. Seeded storage-pressure and synthetic host-drift regressions exercise these boundaries without claiming native resource or physical-session qualification. The history ceilings and consumed daily work budget remain intact. This does not implement cgroup memory/process limits, filesystem quotas, exclusive desktops or cross-host authority fencing; the complete A08 and A10 requirements remain open.
+
 For help, use **Preview support report** in the local dashboard, inspect its complete contents, and choose **Save this report**. Only readiness and aggregate counts are included. Credentials, actor names/identities, host identifiers, paths, tasks, outputs and event history are excluded. Nothing is uploaded automatically. A passing readiness probe does not commission the machine.
 
 ## Verified checkpoint, kept separate from new changes
+
+**Published update, 15 October 2026:** [Local Skills alpha.4](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.4)
+is available from source `7b5dda3d7dbcb9700a1408cf19bd7cf18404e068` after
+[workflow 38779593360](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38779593360)
+passed both architectures, browser acceptance, inherited Fleet qualification and
+the evidence audit. All four published assets were downloaded and checked;
+the 8,586,977-byte preview ZIP has SHA-256
+`c1999ce7e7ac3e5263b05a9bde3fb2e6b0d3233cc3e9304ce180167a2ad9283e`.
+All 2,911 inventoried member hashes and modes match the package manifest;
+517 tracked source files also match Git, with the remaining 2,394 members
+identified as bundled dependencies. This remains a development preview with
+`operatorInstaller: false`, `fullHandoffComplete: false`, and
+`productionQualified: false`. Physical, live-provider and independent economic
+review requirements below remain open. Earlier checkpoints are preserved below.
 
 [Local Skills workflow 38579981525](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38579981525) passed for PR head `08d227934ddeeca5d03bca6aea8df626af36338f`, using integration source `240815ee47cac500b257158f97aa86dba30b90bb`.
 
@@ -56,9 +72,18 @@ Local verification passed 120 engineering tests and the support-report privacy/a
 
 ## Français
 
+**Publication du 15 octobre 2026 :** l’[aperçu Local Skills alpha.4](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.4)
+est disponible après qualification de la même source sur x64 et ARM64. Les quatre
+fichiers publiés ont été téléchargés et vérifiés. Les 2 911 entrées de l’inventaire
+correspondent au manifeste; 517 fichiers sources et leurs permissions
+correspondent aussi à Git. Il reste un aperçu de développement : produit complet,
+installation opérateur et qualification de production restent désactivés.
+
 **La PR #26 reste un aperçu de développement, pas un produit Local Skills terminé ni une version à installer en production.** Sur Linux, le parcours hors ligne limité, l’installation transactionnelle et les six chemins Gateway/skill/moteur ont des observations réelles au point de contrôle indiqué ci-dessus. Le transport du modèle reste synthétique. Les versions Dedicated Fleet et Mac publiées ont leurs propres preuves.
 
 Les fonctions navigateur/bureau, les sessions exclusives, le mode local Mac, l’intégration complète du signataire et du protocole, l’examen indépendant et le verrouillage d’autorité entre ordinateurs restent à terminer. Les essais physiques, les fournisseurs réels, l’accessibilité humaine et l’endurance restent non réalisés. Des tests de composants réussis ne remplissent pas ces exigences.
+
+La correction des limites compte les octets UTF-8, réserve atomiquement la place du résultat et conserve cette réserve après une incertitude ou un redémarrage. Avant de lancer une tâche Linux, le moteur compare aussi les exécutables, le moteur et le démarrage avec l’autorisation. Les essais de pression de stockage et de changement d’hôte sont synthétiques. Ils ne prouvent ni les quotas physiques, ni les sessions de bureau exclusives, ni le verrouillage entre ordinateurs; A08 et A10 restent ouverts.
 
 Pour demander de l’aide, choisissez **Prévisualiser le rapport d’assistance**, examinez son contenu, puis **Enregistrer ce rapport** si vous souhaitez le partager. Le rapport exclut les identifiants privés, les identités des acteurs, les données des tâches et leurs résultats. Rien n’est téléversé. Conservez l’ARRÊT et les preuves si un résultat est incertain; ne rejouez pas une ancienne autorisation.
 

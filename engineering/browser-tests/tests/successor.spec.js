@@ -121,3 +121,9 @@ for(const lang of ['en','fr'])test(`SUCCESSOR ${lang}: restored method survives 
   for(const width of [320,390,768,1440]){await artifact.setViewportSize({width,height:1000});expect(await artifact.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);expect(await artifact.locator('td:not(:first-child)').evaluateAll(cells=>cells.every(cell=>getComputedStyle(cell).whiteSpace==='nowrap'))).toBe(true);await artifact.locator('.table-scroll').focus();await expect(artifact.locator('.table-scroll')).toBeFocused();await artifact.keyboard.press('ArrowRight');await artifact.screenshot({path:info.outputPath(`report-${width}.png`),fullPage:true});}
   await artifact.emulateMedia({media:'print'});await expect(artifact.locator('table')).toBeVisible();await fresh.close();
 });
+
+for(const lang of ['en','fr'])test(`SUCCESSOR ${lang}: replacement planning revokes stale handoff and Fleet export`,async({page})=>{
+  const {verifyReplacementHandoff}=await import('../helpers/handoff.mjs');
+  await page.goto(lang==='fr'?'/successor-fr.html':'/successor.html');
+  await verifyReplacementHandoff(page);
+});

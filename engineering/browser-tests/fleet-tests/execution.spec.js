@@ -167,7 +167,8 @@ test('Saved Fleet: EN/FR history at 98/99/100 remains recoverable with bounded a
       let run=await model.runCandidate(await model.createSystem(defaultMission('analyst',lang)),'baseline',source.engineSha256),state=await model.chooseCandidate(run.state,run.candidate.id,'keep');
       run=await model.runCandidate(state,'improved',source.engineSha256);state=await model.chooseCandidate(run.state,run.candidate.id,'replace');
       while(state.chronicle.length<count)await model.appendEvent(state,'restored','0'.repeat(64));
-      const originalRaw=await model.exportCapsule(state,source);await restore(page,originalRaw);
+      const workspaceSource=count===98?null:count===99?{...source,commit:'a'.repeat(40)}:source;
+      const originalRaw=await model.exportCapsule(state,workspaceSource);await restore(page,originalRaw);
       expect(JSON.parse(await download(page,'#download-capsule')).payload.state).toEqual(state);
       await expect(page.locator('#history-warning')).toHaveAttribute('role','alert');
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
@@ -177,9 +178,9 @@ test('Saved Fleet: EN/FR history at 98/99/100 remains recoverable with bounded a
         await expect(page.locator('#download-capsule')).toBeEnabled();
       }
       await page.locator('#history-consent').check();const previousRaw=await download(page,'#continue-history');
-      expect(JSON.parse(previousRaw).payload.state).toEqual(state);await expect(page.locator('#history-warning')).toContainText('1/100');
+      expect(JSON.parse(previousRaw)).toEqual(JSON.parse(originalRaw));await expect(page.locator('#history-warning')).toContainText('1/100');
       const continued=JSON.parse(await download(page,'#download-capsule'));
-      expect(continued.format).toBe('successor-portable/2');expect(model.historyEvents(continued.payload.state).slice(0,count)).toEqual(state.chronicle);
+      expect(continued.format).toBe('successor-portable/2');expect(continued.payload.sourceManifest).toEqual(workspaceSource);expect(model.historyEvents(continued.payload.state).slice(0,count)).toEqual(state.chronicle);
       expect(continued.payload.state.candidates).toEqual(state.candidates);expect(continued.payload.state.active).toBe(state.active);expect(continued.payload.state.authority).toBe('none');
       await page.locator('#public-consent').check();await page.locator('#run').click();await expect(page.locator('#history-warning')).toContainText('2/100');
       await expect(page.frameLocator('#preview').getByText(/identical-id-once/)).toBeVisible();
@@ -226,4 +227,122 @@ test('Saved Fleet: source-bearing capacity rejects selection without losing expo
       const saved=await download(page,'#download-html'),file=info.outputPath(`capacity-${lang}.html`);fs.writeFileSync(file,saved);const fresh=await context.newPage();await fresh.goto(pathToFileURL(file).href);await fresh.locator('#restore-preview').waitFor({state:'visible'});await fresh.locator('#restore-consent').check();await fresh.locator('#restore').click();await fresh.locator('#restore-preview').waitFor({state:'hidden'});expect(await download(fresh,'#download-capsule')).toBe(imported);
     }finally{await context.close();}
   }
+});
+
+for(const lang of ['en','fr'])test(`Saved Fleet ${lang}: replacement planning revokes stale handoff and Fleet export`,async({page})=>{
+  const {verifyReplacementHandoff}=await import('../helpers/handoff.mjs');
+  await page.context().setOffline(true);
+  await page.goto(pathToFileURL(path.join(root,`docs/successor/My-SUCCESSOR-Omega-${lang}.html`)).href);
+  await verifyReplacementHandoff(page);
+});
+
+function expectedOpaquePreviewAutomationDenial(text){
+  return /^Blocked script execution in '(?:about:blank|blob:null\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})' because the document's frame is sandboxed and the 'allow-scripts' permission is not set\.$/.test(text);
+}
+test('Legacy preview diagnostic classification retains unrelated CSS and script failures',()=>{
+  const denial=url=>`Blocked script execution in '${url}' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.`;
+  expect(expectedOpaquePreviewAutomationDenial(denial('about:blank'))).toBe(true);
+  expect(expectedOpaquePreviewAutomationDenial(denial('blob:null/01234567-89ab-cdef-0123-456789abcdef'))).toBe(true);
+  for(const message of [
+    "Refused to apply inline style because it violates the following Content Security Policy directive: style-src 'sha256-wrong'.",
+    "Refused to execute inline script because it violates the following Content Security Policy directive: script-src 'none'.",
+    "Blocked script execution in 'about:blank' for an unrelated reason.",
+    denial('https://example.org/script'),denial('blob:https://example.org/id'),denial('about:blank')+' unexpected detail'
+  ])expect(expectedOpaquePreviewAutomationDenial(message),message).toBe(false);
+});
+
+for(const lang of ['en','fr'])test(`Saved Fleet ${lang}: legacy capsule styling and source survive restore and rerun`,async({browser})=>{
+  const model=await load('successor/vendor/manager/site/assets/successor/model.mjs');
+  const {defaultMission}=await load('successor/vendor/manager/site/assets/successor/missions.mjs');
+  let state=await model.createSystem(defaultMission('analyst',lang));state.engine='successor-local/1';
+  const candidate=await model.freezeCandidate(state.mission,'baseline','0'.repeat(64),state.engine);for(const file of candidate.files)if(file.name.endsWith('.html'))expect(file.content).not.toMatch(/<script\b/i);state.candidates.push(candidate);await model.appendEvent(state,'candidate-checked',candidate.id);state=await model.chooseCandidate(state,candidate.id,'keep');
+  const context=await browser.newContext({acceptDownloads:true,serviceWorkers:'block'}),page=await context.newPage(),errors=[],sandboxDenials=[];
+  page.on('console',m=>{if(m.type()!=='error')return;const text=m.text();
+    // Chromium can report its automation utility injection into an opaque,
+    // intentionally script-disabled preview. Keep this narrow expected denial
+    // separate; every CSS CSP or other error still fails the regression.
+    if(expectedOpaquePreviewAutomationDenial(text))sandboxDenials.push(text);else errors.push(text);
+  });await context.route(/^https?:/,r=>r.abort());await context.setOffline(true);
+  try{
+    await page.goto(pathToFileURL(path.join(root,`docs/successor/My-SUCCESSOR-Omega-${lang}.html`)).href);await restore(page,await model.exportCapsule(state,null));
+    async function styled(){await expect(page.frameLocator('#preview').locator('table')).toBeVisible();const style=await page.frameLocator('#preview').locator('body').evaluate(el=>({font:getComputedStyle(el).fontFamily,color:getComputedStyle(el).color,margin:getComputedStyle(el).margin}));expect(style.font).toContain('system-ui');expect(style.color).toBe('rgb(35, 29, 54)');expect(style.margin).toBe('0px');}
+    await styled();expect((await page.locator('#preview').getAttribute('sandbox')??'').split(/\s+/)).not.toContain('allow-scripts');const restored=JSON.parse(await download(page,'#download-capsule'));expect(restored.payload.sourceManifest).toBeNull();expect(restored.payload.state.candidates[0].files).toEqual(candidate.files);
+    await page.locator('#public-consent').check();await page.locator('#run').click();await expect(page.locator('#history-warning')).toContainText('4/100');await styled();expect(errors).toEqual([]);
+  }finally{await context.close();}
+});
+
+for(const role of ['agent','node'])test(`Installed Fleet ${role}: changed file invalidates pending inspection and rejected replacement clears old input`,async({page})=>{
+  await page.setContent(`<main class="studio-shell" data-role="${role}"></main>`);
+  await page.evaluate(()=>{
+    window.calls=[];window.pending=[];
+    window.api=window.request=async(url,input)=>{
+      window.calls.push({url,input});
+      if(url.endsWith('/prepare'))return new Promise(resolve=>window.pending.push(resolve));
+      throw Error('UNEXPECTED_TEST_ROUTE');
+    };
+  });
+  await page.addScriptTag({path:path.join(root,`packages/AGI_${role==='agent'?'Agent':'Node'}/app/successor.js`)});
+  const file=page.locator('#omega-file'),upload=async(value)=>file.setInputFiles({name:'request.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(value))});
+  if(role==='agent'){
+    await page.locator('#omega-advanced').evaluate(e=>e.open=true);
+    await page.locator('#omega-context').setInputFiles({name:'context.json',mimeType:'application/json',buffer:Buffer.from('{}')});
+  }
+  await upload({plan:{immutableInputs:[]},marker:'original'});
+  await expect(page.locator('#omega-message')).toContainText('File loaded');
+  await page.locator('#omega-prepare').click();
+  await expect.poll(()=>page.evaluate(()=>window.pending.length)).toBe(1);
+  await upload({plan:{immutableInputs:[]},marker:'replacement'});
+  await page.evaluate(()=>window.pending.shift()({ticket:'old',key:'old',expiresAt:Date.now()+60000,specification:{prompt:'OLD',inputs:[],outputs:[]},observation:{runtime:{model:'fixture'}}}));
+  await expect(page.locator('#omega-preview')).toBeEmpty();
+  await page.locator('#omega-confirm').check();await expect(page.locator('#omega-execute')).toBeDisabled();
+  await page.locator('#omega-prepare').click();
+  await expect.poll(()=>page.evaluate(()=>window.calls.length)).toBe(2);
+  const captured=await page.evaluate(()=>window.calls[1].input);expect(JSON.parse(captured.request??captured.handoff).marker).toBe('replacement');
+  await page.evaluate(()=>window.pending.shift()({ticket:'fresh',key:'fresh',expiresAt:Date.now()+60000,specification:{prompt:'NEW',inputs:[],outputs:[]},observation:{runtime:{model:'fixture'}}}));
+  await expect(page.locator('#omega-preview')).toContainText('NEW');
+  await page.locator('#omega-confirm').check();await expect(page.locator('#omega-execute')).toBeEnabled();
+  // A cancelled/rejected file selection must not leave the prior input usable.
+  await file.setInputFiles([]);
+  await expect(page.locator('#omega-execute')).toBeDisabled();await expect(page.locator('#omega-preview')).toBeEmpty();
+  await page.locator('#omega-prepare').click();
+  await expect(page.locator('#omega-message')).toContainText('Choose a valid request file');
+  expect(await page.evaluate(()=>window.calls.length)).toBe(2);
+});
+
+for(const field of ['context','reviewer'])test(`Installed Fleet agent: ${field} replacement cancels an in-flight preview`,async({page})=>{
+  await page.setContent('<main class="studio-shell" data-role="agent"></main>');
+  await page.evaluate(()=>{window.pending=[];window.api=async()=>new Promise(resolve=>window.pending.push(resolve));});
+  await page.addScriptTag({path:path.join(root,'packages/AGI_Agent/app/successor.js')});
+  await page.locator('#omega-advanced').evaluate(e=>e.open=true);
+  await page.locator('#omega-context').setInputFiles({name:'context.json',mimeType:'application/json',buffer:Buffer.from('{}')});
+  await page.locator('#omega-file').setInputFiles({name:'request.json',mimeType:'application/json',buffer:Buffer.from('{"plan":{"immutableInputs":[]}}')});
+  await expect(page.locator('#omega-message')).toContainText('File loaded');
+  await page.locator('#omega-prepare').click();await expect.poll(()=>page.evaluate(()=>window.pending.length)).toBe(1);
+  await page.locator('#omega-'+field).setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{')});
+  await page.evaluate(()=>window.pending.shift()({ticket:'old',key:'old',expiresAt:Date.now()+60000,specification:{prompt:'OLD',inputs:[],outputs:[]},observation:{runtime:{model:'fixture'}}}));
+  await page.locator('#omega-confirm').check();await expect(page.locator('#omega-execute')).toBeDisabled();await expect(page.locator('#omega-preview')).toBeEmpty();
+  if(field==='context'){await page.locator('#omega-prepare').click();await expect(page.locator('#omega-message')).toContainText('valid runtime context');expect(await page.evaluate(()=>window.pending.length)).toBe(0);}
+});
+
+test('Installed Fleet: rejected review clears prior review and superseded read errors cannot replace fresh status',async({page})=>{
+  await page.setContent('<main class="studio-shell" data-role="agent"></main>');
+  await page.evaluate(()=>{window.calls=[];window.api=async(url,input)=>{window.calls.push({url,input});throw Error('TEST_CAPTURE_ONLY');};});
+  await page.addScriptTag({path:path.join(root,'packages/AGI_Agent/app/successor.js')});
+  const review=page.locator('#omega-review');
+  await review.setInputFiles({name:'review.json',mimeType:'application/json',buffer:Buffer.from('{"marker":"old"}')});
+  await expect.poll(async()=>{await page.locator('#omega-download').click();return page.evaluate(()=>window.calls.length);}).toBeGreaterThan(0);
+  expect(JSON.parse((await page.evaluate(()=>window.calls.at(-1))).input.review).marker).toBe('old');
+  await review.setInputFiles({name:'broken.json',mimeType:'application/json',buffer:Buffer.from('{')});
+  await expect(page.locator('#omega-message')).not.toHaveText('TEST_CAPTURE_ONLY');
+  await page.locator('#omega-download').click();expect((await page.evaluate(()=>window.calls.at(-1))).input.review).toBeNull();
+  await page.evaluate(()=>{
+    window.originalText=File.prototype.text;File.prototype.text=function(){if(this.name==='slow.json')return new Promise((resolve,reject)=>{window.rejectOldRead=reject;});return window.originalText.call(this);};
+  });
+  const file=page.locator('#omega-file');
+  await file.setInputFiles({name:'slow.json',mimeType:'application/json',buffer:Buffer.from('{}')});
+  await expect.poll(()=>page.evaluate(()=>typeof window.rejectOldRead)).toBe('function');
+  await file.setInputFiles({name:'fresh.json',mimeType:'application/json',buffer:Buffer.from('{"plan":{"immutableInputs":[]}}')});
+  await expect(page.locator('#omega-message')).toContainText('File loaded');
+  await page.evaluate(async()=>{window.rejectOldRead(Error('OLD_READ_ERROR'));await new Promise(resolve=>setTimeout(resolve,0));});
+  await expect(page.locator('#omega-message')).toContainText('File loaded');
 });
