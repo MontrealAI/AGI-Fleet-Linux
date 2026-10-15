@@ -1,45 +1,11 @@
 name: Website / GitHub Pages
 
+# The directory inventories every tracked path, including future demo/example
+# files outside today's website folders. Every PR and main push must check it.
 on:
   push:
     branches: [main]
-    paths:
-      - fleet/successor/**
-      - successor/**
-      - website/**
-      - engineering/build-website.py
-      - engineering/build-demo-directory.py
-      - engineering/test-demo-directory.py
-      - engineering/check-website.py
-      - engineering/browser-tests/**
-      - engineering/current-release.json
-      - engineering/published-release.json
-      - validation/**
-      - docs/**
-      - macos/docs/**
-      - macos/release.json
-      - macos/published-release.json
-      - README.md
-      - .github/workflows/pages.yml
   pull_request:
-    paths:
-      - fleet/successor/**
-      - successor/**
-      - website/**
-      - engineering/build-website.py
-      - engineering/build-demo-directory.py
-      - engineering/test-demo-directory.py
-      - engineering/check-website.py
-      - engineering/browser-tests/**
-      - engineering/current-release.json
-      - engineering/published-release.json
-      - validation/**
-      - docs/**
-      - macos/docs/**
-      - macos/release.json
-      - macos/published-release.json
-      - README.md
-      - .github/workflows/pages.yml
   workflow_dispatch:
 
 permissions:
