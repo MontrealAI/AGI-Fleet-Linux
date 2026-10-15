@@ -8,6 +8,7 @@ sys.path[:] = ['/opt/alpha/source', '/opt/alpha/wheels', '/opt/alpha/python/lib/
 import importlib.util
 import json
 import os
+import resource
 import socket
 import time
 from pathlib import Path
@@ -59,7 +60,9 @@ elif mode in ('timeout', 'cancel'):
     while True:
         time.sleep(1)
 elif mode == 'cpu':
-    print(json.dumps({**identity, 'probe': mode}), flush=True)
+    cpu_limit = resource.getrlimit(resource.RLIMIT_CPU)
+    assert cpu_limit == (10, 10), cpu_limit
+    print(json.dumps({**identity, 'probe': mode, 'cpuLimitSeconds': cpu_limit}), flush=True)
     while True:
         pass
 elif mode == 'output':

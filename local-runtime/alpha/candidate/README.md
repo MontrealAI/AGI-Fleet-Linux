@@ -90,7 +90,13 @@ isolation only. A separate fixed probe tests optional imports, absent host files
 read-only source, network isolation, wall timeout, cancellation, CPU and output
 limits, and disappearance of observed private PID namespaces/process groups. Detached child
 probes acknowledge successful setsid and stdio closure before parent readiness;
-CPU success requires SIGKILL and approximately ten consumed child CPU seconds.
+The probe script is read-only bound below the previously mounted private `/tmp`
+tmpfs, so setup never tries to create a file inside the immutable root. Failed
+probe attempts retain bounded stderr, exit status and observations before checks
+raise. CPU success requires the inherited 10/10-second soft/hard limits, SIGKILL
+and approximately ten CPU seconds sampled from live private-namespace `/proc`
+processes. Samples bind host PID plus process start time; parent rusage is labeled
+launcher-only and cannot satisfy the namespace CPU gate.
 Incompatible hosts fail the job and retain failure evidence; tests never skip.
 
 Limits are at most 15 seconds wall, 10 seconds CPU, 512,000 stdout bytes, 8,192

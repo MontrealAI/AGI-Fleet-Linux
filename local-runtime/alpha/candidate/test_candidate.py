@@ -225,12 +225,88 @@ class CandidateTests(unittest.TestCase):
         self.assertIn('manifest == expected', source)
         self.assertIn("len(fixture['cases']) == 4", source)
         self.assertIn("len(report['tests']) == 28", source)
-        self.assertIn("9 <= result['cpuSeconds'] <= 11", source)
+        self.assertIn("9 <= result['namespaceCpuSecondsObserved'] <= 11", source)
 
     def test_fixed_probe_detaches_child_and_closes_stdio(self):
         source = (build.HERE/'probe.py').read_text()
         self.assertIn('os.setsid()', source)
         self.assertIn('os.close(descriptor)', source)
+
+
+    def test_probe_readonly_mount_is_inside_previously_created_private_tmpfs(self):
+        with patch('qualify.trusted', side_effect=str):
+            argv = qualify.command(self.root, 'probe', 'isolation')
+        mounts = [i for i, arg in enumerate(argv) if arg == '--ro-bind']
+        self.assertEqual(len(mounts), 2)
+        self.assertEqual(argv[mounts[0] + 2], '/')
+        self.assertLess(mounts[0], argv.index('--tmpfs'))
+        self.assertLess(argv.index('--tmpfs'), mounts[1])
+        self.assertEqual(argv[argv.index('--tmpfs') + 1], '/tmp')
+        self.assertEqual(argv[mounts[1] + 2], '/tmp/candidate-probe.py')
+        self.assertEqual(argv[-2], '/tmp/candidate-probe.py')
+        self.assertNotIn('/candidate-probe.py', argv)
+        self.assertNotIn('--bind', argv)
+
+    def test_failed_probe_diagnostics_are_kept_before_fail_closed_check(self):
+        # Synthetic reproduction of a setup failure; no native qualification claim.
+        stderr = b"bwrap: Can't create file at /candidate-probe.py: Read-only file system\n"
+        code = 'import sys; sys.stderr.buffer.write(' + repr(stderr) + '); sys.exit(1)'
+        with patch('qualify.command', return_value=[sys.executable, '-I', '-S', '-c', code]):
+            result = qualify.run(self.root, 'probe', probe='isolation')
+        attempts = [qualify.probe_attempt('isolation', result)]
+        with self.assertRaisesRegex(ValueError, 'Read-only file system'):
+            qualify.check_probe('isolation', result, 'pid:[host]', 'net:[host]')
+        self.assertEqual(attempts[0]['stderr'], stderr.decode())
+        self.assertEqual(attempts[0]['stderrSha256'], build.sha(stderr))
+        self.assertEqual(attempts[0]['status'], 1)
+        self.assertEqual(attempts[0]['probeObservations'], [])
+
+    def cpu_stat(self, user, system, start):
+        fields = ['0'] * 24
+        fields[0] = 'R'
+        for index, value in [(11, user), (12, system), (19, start)]:
+            fields[index] = str(value)
+        return '123 (name with ) and spaces) ' + ' '.join(fields)
+
+    def test_process_cpu_parser_uses_own_ticks_not_child_ticks(self):
+        raw = self.cpu_stat(997, 2, 12345)
+        self.assertEqual(qualify.process_cpu_stat(raw), {'userTicks': 997, 'systemTicks': 2, 'startTimeTicks': 12345})
+        with self.assertRaises(ValueError):
+            qualify.process_cpu_stat('123 (short) R 1')
+
+    def test_namespace_cpu_samples_bind_pid_start_time_and_monotonic_ticks(self):
+        proc = self.root/'123'; proc.mkdir()
+        samples = {}
+        with patch('qualify.namespace_members', return_value=[123]), patch('qualify.os.readlink', return_value='pid:[private]'):
+            (proc/'stat').write_text(self.cpu_stat(920, 2, 100))
+            qualify.sample_namespace_cpu({'pid:[private]': [123]}, samples, self.root)
+            (proc/'stat').write_text(self.cpu_stat(990, 3, 100))
+            qualify.sample_namespace_cpu({'pid:[private]': [123]}, samples, self.root)
+            self.assertEqual(samples['123:100']['userTicks'], 990)
+            (proc/'stat').write_text(self.cpu_stat(1, 0, 200))
+            qualify.sample_namespace_cpu({'pid:[private]': [123]}, samples, self.root)
+            self.assertEqual(set(samples), {'123:100', '123:200'})
+            (proc/'stat').write_text(self.cpu_stat(989, 3, 100))
+            with self.assertRaisesRegex(ValueError, 'backwards'):
+                qualify.sample_namespace_cpu({'pid:[private]': [123]}, samples, self.root)
+
+    def test_cpu_sampling_does_not_attribute_reused_pid_outside_namespace(self):
+        proc = self.root/'123'; proc.mkdir(); (proc/'stat').write_text(self.cpu_stat(9999, 0, 200))
+        samples = {}
+        with patch('qualify.namespace_members', return_value=[123]), patch('qualify.os.readlink', side_effect=['pid:[private]', 'pid:[other]']):
+            qualify.sample_namespace_cpu({'pid:[private]': [123]}, samples, self.root)
+        self.assertEqual(samples, {})
+
+    def test_cpu_probe_needs_namespace_ticks_signal_and_exact_limit(self):
+        good = {'probeObservations': [{'pidNamespace':'pid:[private]', 'networkNamespace':'net:[private]', 'cpuLimitSeconds':[10,10]}],
+                'status':137, 'reason':None, 'stderr':b'', 'namespaceCpuSecondsObserved':9.98,
+                'launcherCpuSeconds':0.002, 'wallMilliseconds':10500}
+        qualify.check_probe('cpu', good, 'pid:[host]', 'net:[host]')
+        for update in [{'namespaceCpuSecondsObserved':0.002, 'launcherCpuSeconds':10}, {'status':1},
+                       {'wallMilliseconds':15001}, {'probeObservations':[{'pidNamespace':'pid:[private]',
+                        'networkNamespace':'net:[private]', 'cpuLimitSeconds':[11,11]}]}]:
+            with self.subTest(update=update), self.assertRaises(ValueError):
+                qualify.check_probe('cpu', {**good, **update}, 'pid:[host]', 'net:[host]')
 
     def test_production_lock_remains_null(self):
         lock=json.loads((build.ALPHA/'package-lock.json').read_text())

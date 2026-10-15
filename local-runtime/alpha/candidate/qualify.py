@@ -19,6 +19,7 @@ from build import HERE, ALPHA, read_lock, require, file_sha, canonical, sha, tre
 BIN = Path('/usr/bin/bwrap')
 LIMIT = Path('/usr/bin/prlimit')
 PYTHON = '/opt/alpha/python/bin/python3.12'
+PROBE_PATH = '/tmp/candidate-probe.py'
 MAX_STDOUT = 512_000
 MAX_STDERR = 8192
 
@@ -39,7 +40,9 @@ def command(root, mode, probe=None):
             '--setenv', 'OPENBLAS_NUM_THREADS', '1', '--setenv', 'OMP_NUM_THREADS', '1', '--chdir', '/tmp']
     if mode == 'probe':
         require(probe in ('isolation', 'timeout', 'cancel', 'cpu', 'output'), 'Unreviewed probe')
-        args += ['--ro-bind', str(HERE / 'probe.py'), '/candidate-probe.py', '--', PYTHON, '-I', '-S', '-B', '/candidate-probe.py', probe]
+        # The immutable root cannot create a new root-level bind destination.
+        # /tmp is a private tmpfs established above; the probe itself stays read-only.
+        args += ['--ro-bind', str(HERE / 'probe.py'), PROBE_PATH, '--', PYTHON, '-I', '-S', '-B', PROBE_PATH, probe]
     else:
         require(probe is None, 'Probe argument cannot enter work launcher')
         args += ['--', PYTHON, '-I', '-S', '-B', '/opt/alpha/launch-' + mode + '.py']
@@ -63,8 +66,41 @@ def namespace_members(namespace):
     return members
 
 
+def process_cpu_stat(raw):
+    # comm (field 2) can contain spaces or parentheses. Fields after its final
+    # closing parenthesis start with state (3), so utime/stime are offsets 11/12.
+    fields = raw[raw.rindex(')') + 2:].split()
+    require(len(fields) >= 20, 'CLEANUP_UNOBSERVABLE: incomplete process CPU stat')
+    user, system, start = (int(fields[index]) for index in (11, 12, 19))
+    require(min(user, system, start) >= 0, 'Invalid process CPU counters')
+    return {'startTimeTicks': start, 'userTicks': user, 'systemTicks': system}
+
+
+def sample_namespace_cpu(namespaces, samples, proc_root=Path('/proc')):
+    for namespace in namespaces:
+        for pid in namespace_members(namespace):
+            try:
+                process = proc_root / str(pid)
+                if os.readlink(process / 'ns/pid') != namespace:
+                    continue
+                counters = process_cpu_stat((process / 'stat').read_text())
+                if os.readlink(process / 'ns/pid') != namespace:
+                    continue
+            except (FileNotFoundError, ProcessLookupError):
+                continue
+            # PID start time prevents a reused host PID from contributing CPU.
+            key = str(pid) + ':' + str(counters['startTimeTicks'])
+            previous = samples.get(key)
+            require(previous is None or previous['pidNamespace'] == namespace, 'Process namespace identity changed')
+            require(previous is None or (counters['userTicks'] >= previous['userTicks'] and
+                    counters['systemTicks'] >= previous['systemTicks']), 'Process CPU counters moved backwards')
+            samples[key] = {'pid': pid, 'pidNamespace': namespace, **counters}
+
+
 def run(root, mode, data=b'', probe=None, wall=15, cancel_after=None, output_limit=MAX_STDOUT):
     require(0 < wall <= 15 and len(data) <= 512_000 and 0 < output_limit <= MAX_STDOUT, 'Candidate limits cannot be widened')
+    clock_ticks = os.sysconf('SC_CLK_TCK')
+    require(isinstance(clock_ticks, int) and clock_ticks > 0, 'Process CPU clock unavailable')
     started = time.monotonic()
     usage_before = resource.getrusage(resource.RUSAGE_CHILDREN)
     process = subprocess.Popen(command(root, mode, probe), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
@@ -81,10 +117,13 @@ def run(root, mode, data=b'', probe=None, wall=15, cancel_after=None, output_lim
         process.stdin.close()
     buffers = {'stdout': bytearray(), 'stderr': bytearray()}
     observed_members = {}
+    cpu_samples = {}
     reason = None
     killed_at = None
     try:
         while selector.get_map():
+            if probe:
+                sample_namespace_cpu(observed_members, cpu_samples)
             elapsed = time.monotonic() - started
             reason = reason or ('WALL_TIMEOUT' if elapsed >= wall else 'CANCELLED' if cancel_after is not None and elapsed >= cancel_after else None)
             if reason and killed_at is None:
@@ -155,9 +194,36 @@ def run(root, mode, data=b'', probe=None, wall=15, cancel_after=None, output_lim
                 observations.append(event)
     usage_after = resource.getrusage(resource.RUSAGE_CHILDREN)
     cpu_seconds = usage_after.ru_utime + usage_after.ru_stime - usage_before.ru_utime - usage_before.ru_stime
-    return {'cpuSeconds': cpu_seconds, 'status': status, 'reason': reason, 'stdout': bytes(buffers['stdout']), 'stderr': bytes(buffers['stderr']),
+    return {'launcherCpuSeconds': cpu_seconds,
+            'namespaceCpuSecondsObserved': sum(s['userTicks'] + s['systemTicks'] for s in cpu_samples.values()) / clock_ticks if probe else None,
+            'namespaceCpuSamples': list(cpu_samples.values()), 'clockTicksPerSecond': clock_ticks, 'status': status, 'reason': reason, 'stdout': bytes(buffers['stdout']), 'stderr': bytes(buffers['stderr']),
             'wallMilliseconds': round((time.monotonic() - started) * 1000), 'processGroupGone': group_gone,
             'probeObservations': observations, 'liveNamespaceMembersObserved': observed_members}
+
+
+def probe_attempt(probe, result):
+    return {'probe': probe, 'stdoutSha256': sha(result['stdout']), 'stdoutBytes': len(result['stdout']),
+            'stderrSha256': sha(result['stderr']), 'stderrBytes': len(result['stderr']),
+            'stderr': result['stderr'].decode('utf-8', errors='replace'),
+            **{k: v for k, v in result.items() if k not in ('stdout', 'stderr')}}
+
+
+def check_probe(probe, result, host_pidns, host_netns):
+    require(result['probeObservations'],
+            'Fixed ' + probe + ' probe did not run inside candidate; exit=' + str(result['status']) +
+            '; reason=' + str(result['reason']) + '; stderr=' + result['stderr'].decode(errors='replace'))
+    for event in result['probeObservations']:
+        require(event['pidNamespace'] != host_pidns and event['networkNamespace'] != host_netns,
+                'Private process/network namespace missing')
+    expected = {'isolation': None, 'timeout': 'WALL_TIMEOUT', 'cancel': 'CANCELLED', 'cpu': None, 'output': 'OUTPUT_LIMIT'}[probe]
+    require(result['reason'] == expected, 'Unexpected probe termination: ' + probe)
+    require(result['status'] == 0 if probe == 'isolation' else result['status'] != 0, 'Unexpected probe exit')
+    if probe == 'cpu':
+        require(all(event.get('cpuLimitSeconds') == [10, 10] for event in result['probeObservations']),
+                'CPU probe did not inherit the exact ten-second soft/hard limit')
+        require(result['status'] in (-signal.SIGKILL, 128 + signal.SIGKILL)
+                and 9 <= result['namespaceCpuSecondsObserved'] <= 11 and result['wallMilliseconds'] < 15000,
+                'CPU bound needs observed SIGKILL and approximately ten namespace CPU seconds')
 
 
 def verify_candidate(candidate, lock):
@@ -226,7 +292,7 @@ def qualify(candidate, evidence, cache, source):
               'contractBridgeSha256': file_sha(HERE / 'check-contract.mjs'),
               'fleetCommit': subprocess.check_output(['git', '-C', str(ALPHA.parents[1]), 'rev-parse', 'HEAD'], text=True).strip(),
               'fleetSourceDirty': bool(subprocess.check_output(['git', '-C', str(ALPHA.parents[1]), 'status', '--porcelain'], text=True).strip()),
-              'tests': [], 'status': 'FAILED', 'nativeExecutionObserved': False}
+              'tests': [], 'probeAttempts': [], 'status': 'FAILED', 'nativeExecutionObserved': False}
     evidence.parent.mkdir(parents=True, exist_ok=True)
     try:
         trusted(BIN)
@@ -279,19 +345,11 @@ def qualify(candidate, evidence, cache, source):
             for probe in ('isolation', 'timeout', 'cancel', 'cpu', 'output'):
                 result = run(root, 'probe', probe=probe, wall=1 if probe == 'timeout' else 15,
                              cancel_after=0.5 if probe == 'cancel' else None)
-                require(result['probeObservations'], 'Fixed probe did not run inside candidate')
-                for event in result['probeObservations']:
-                    require(event['pidNamespace'] != host_pidns and event['networkNamespace'] != host_netns,
-                            'Private process/network namespace missing')
-                expected = {'isolation': None, 'timeout': 'WALL_TIMEOUT', 'cancel': 'CANCELLED', 'cpu': None, 'output': 'OUTPUT_LIMIT'}[probe]
-                require(result['reason'] == expected, 'Unexpected probe termination: ' + probe)
-                require(result['status'] == 0 if probe == 'isolation' else result['status'] != 0, 'Unexpected probe exit')
-                if probe == 'cpu':
-                    require(result['status'] in (-signal.SIGKILL, 128 + signal.SIGKILL)
-                            and 9 <= result['cpuSeconds'] <= 11 and result['wallMilliseconds'] < 15000,
-                            'CPU bound needs observed SIGKILL and approximately ten consumed CPU seconds')
-                report['tests'].append({'probe': probe, 'stdoutSha256': sha(result.pop('stdout')),
-                                        **{k:v for k,v in result.items() if k != 'stderr'}})
+                # Persist diagnostics before any assertion can discard a failed result.
+                attempt = probe_attempt(probe, result)
+                report['probeAttempts'].append(attempt)
+                check_probe(probe, result, host_pidns, host_netns)
+                report['tests'].append(attempt)
         require(report['nativeExecutionObserved'] is True and len(report['tests']) == 28
                 and sum('case' in test for test in report['tests']) == 8
                 and sum('refusal' in test for test in report['tests']) == 14, 'Incomplete native candidate coverage')
