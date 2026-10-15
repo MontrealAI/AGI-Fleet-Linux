@@ -2,7 +2,7 @@
 
 PR #26 integrates the bounded Linux development preview described by its title. The full product described in [IMPLEMENTATION_HANDOFF.md](IMPLEMENTATION_HANDOFF.md) remains unfinished. Its 22 acceptance rows, `fullHandoffComplete: false` and `releaseEligible: false` are preserved; `releaseEligible` refers to that full product. None is a claim about completion of this narrower preview.
 
-The separate [preview specification](../../local-runtime/preview-release.json) names `0.1.0-alpha.3`, tag `v0.1.0-local-skills-preview.3`, and its mandatory observations. It permits only a clearly labeled prerelease with `operatorInstaller: false`, `productionQualified: false`, no physical/live-provider qualification and funded work disabled. It does not authorize Dedicated Fleet publication or new runtime capabilities.
+The separate [preview specification](../../local-runtime/preview-release.json) names `0.1.0-alpha.4`, tag `v0.1.0-local-skills-preview.4`, and its mandatory observations. It permits only a clearly labeled prerelease with `operatorInstaller: false`, `productionQualified: false`, no physical/live-provider qualification and funded work disabled. It does not authorize Dedicated Fleet publication or new runtime capabilities.
 
 ## Required before publication
 
@@ -16,10 +16,10 @@ Local publication requires all native, browser, local-audit and Fleet jobs. The 
 
 ## Published files and immutability
 
-- `agi-fleet-local-0.1.0-alpha.3.zip`: exact tested development package with locked JavaScript dependencies.
-- `Local-Skills-Evidence-0.1.0-alpha.3.zip`: native/browser/package observations, local audit and inherited Fleet regression evidence.
-- `Local-Skills-Manifest-0.1.0-alpha.3.json`: source/run/package/evidence identities, explicit scope and separately downloaded Node pins.
-- `SHA256SUMS-local-0.1.0-alpha.3.txt`: checksums for those three files.
+- `agi-fleet-local-0.1.0-alpha.4.zip`: exact tested development package with locked JavaScript dependencies.
+- `Local-Skills-Evidence-0.1.0-alpha.4.zip`: native/browser/package observations, local audit and inherited Fleet regression evidence.
+- `Local-Skills-Manifest-0.1.0-alpha.4.json`: source/run/package/evidence identities, explicit scope and separately downloaded Node pins.
+- `SHA256SUMS-local-0.1.0-alpha.4.txt`: checksums for those three files.
 
 A matching tag/release can be resumed only with identical target, canonical notes and assets. Differing tags, assets or published files are never replaced. The final publication repeats canonical notes, verifies remote asset digests, preserves prerelease classification and never makes this preview the default latest release. Each asset stays below 450 MB. Future changes require a fresh version/tag and qualification; documentation-only main changes do not silently rebuild this release.
 
@@ -31,4 +31,4 @@ Cette publication distincte rend disponible l’aperçu Linux limité de la PR #
 
 La publication vérifie à nouveau les fichiers et leurs empreintes. Elle ne remplace ni une étiquette ni un fichier publié et reste une préversion. Node est un prérequis séparé vérifié par empreinte. Le travail rémunéré, le bureau/navigateur général, le mode local Mac et l’examen indépendant restent désactivés; les essais physiques, les fournisseurs réels et l’accessibilité humaine restent à réaliser. Consultez [le guide de téléchargement](DOWNLOAD.md#français).
 
-This alpha.3 candidate is a new identity for bounded outcome reservations, execution-host binding, Alpha work contracts and inactive native IPC. The alpha.2 publication from PR #36 remains a separate immutable checkpoint. This candidate stays unpublished until its own exact-source and saved-package gates pass. Earlier artifacts and observations remain unchanged; none qualifies these new bytes.
+This alpha.4 candidate is a new identity for bounded outcome reservations, execution-host binding, Alpha work contracts and inactive native IPC. The alpha.2 publication queued from PR #36 and alpha.3 identity reserved by the earlier integration candidate remain separate checkpoints. This combined alpha.4 identity prevents concurrent publishers from targeting the same assets. This candidate stays unpublished until its own exact-source and saved-package gates pass. Earlier artifacts and observations remain unchanged; none qualifies these new bytes.

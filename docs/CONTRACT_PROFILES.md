@@ -42,7 +42,7 @@ After those inputs exist, the additive CI command is:
 ```sh
 python3 engineering/run-next-profile-integration.py \
   --metadata "$GITHUB_WORKSPACE/release/release.json" \
-  --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.3.zip" \
+  --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.4.zip" \
   --work "$RUNNER_TEMP/profile-work-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
   --evidence "$RUNNER_TEMP/profile-evidence-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
   --manager "$RUNNER_TEMP/manager-b7218196" \

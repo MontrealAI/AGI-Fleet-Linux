@@ -64,7 +64,7 @@ To check preservation, use `python3 engineering/check-repository.py --require-so
 
 ```sh
 python3 local-runtime/package.py --output /ABSOLUTE/ABSENT/preview-dist
-python3 local-runtime/package.py --verify /ABSOLUTE/preview-dist/agi-fleet-local-0.1.0-alpha.3.zip
+python3 local-runtime/package.py --verify /ABSOLUTE/preview-dist/agi-fleet-local-0.1.0-alpha.4.zip
 ```
 
 This archive includes source, the six skills, guides, original licenses and locked installed dependencies. Its manifest binds every member's bytes and mode, records the source commit and dirty-tree state, and explicitly says `operatorInstaller:false`. It is **not** a published or qualified installer. The new [installation and recovery tools](INSTALL_AND_RECOVER.md) operate on this development package and an exact hash-pinned Node archive. Native execution and full qualification remain separate gates. The script rejects archive/member sizes at 450,000,000 bytes and never overwrites existing output.

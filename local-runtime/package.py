@@ -2,7 +2,7 @@ import argparse, hashlib, json, os, stat, subprocess, zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PREFIX = 'agi-fleet-local-0.1.0-alpha.3'
+PREFIX = 'agi-fleet-local-0.1.0-alpha.4'
 # Match supervisor/runtime.mjs sourceIdentity; docs outside its roots are exempt.
 MAX_RUNTIME_SOURCE_BYTES = 8_000_000
 
@@ -48,7 +48,7 @@ def build(output):
         raise ValueError('Artifact member exceeds size ceiling')
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     dirty = bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=normal'], cwd=ROOT))
-    manifest = {'schema': 'agi-fleet/local-source-preview/v1', 'version': '0.1.0-alpha.3', 'commit': commit, 'workingTreeDirty': dirty, 'operatorInstaller': False, 'productionQualified': False, 'nativeAcceptance': 'NOT_RUN', 'files': records}
+    manifest = {'schema': 'agi-fleet/local-source-preview/v1', 'version': '0.1.0-alpha.4', 'commit': commit, 'workingTreeDirty': dirty, 'operatorInstaller': False, 'productionQualified': False, 'nativeAcceptance': 'NOT_RUN', 'files': records}
     entries['local-preview-manifest.json'] = ((json.dumps(manifest, sort_keys=True, indent=2) + '\n').encode(), 0o644)
     output.mkdir(mode=0o700)
     archive = output / (PREFIX + '.zip')

@@ -23,3 +23,13 @@ class SuccessorReleaseIdentity(unittest.TestCase):
             if row['path']=='macos/preview/tests/test_materialize.py':self.assertEqual(hashlib.sha256((ROOT/'successor/history/macos-preview-test-materialize-pre-successor.py').read_bytes()).hexdigest(),row['sha256']);continue
             if row['path']=='macos/preview/source-inventory.json':self.assertEqual(hashlib.sha256((ROOT/'successor/history/macos-preview-source-inventory-pre-successor.json').read_bytes()).hexdigest(),row['sha256']);continue
             if row['path'].startswith(('validation/','macos/')) or re.match(r'docs/RELEASE_NOTES_1_0_',row['path']):self.assertEqual(hashlib.sha256((ROOT/row['path']).read_bytes()).hexdigest(),row['sha256'],row['path'])
+    def test_combined_release_uses_distinct_reserved_identities(self):
+        self.assertEqual(self.spec['version'], '1.1.4')
+        self.assertEqual(self.spec['tag'], 'v1.1.4-qualification')
+        local=json.loads((ROOT/'local-runtime/preview-release.json').read_text())
+        self.assertEqual(local['version'], '0.1.0-alpha.4')
+        self.assertEqual(local['tag'], 'v0.1.0-local-skills-preview.4')
+        self.assertEqual(local['archive'], 'agi-fleet-local-0.1.0-alpha.4.zip')
+        self.assertFalse(local['productionQualified'])
+        self.assertTrue((ROOT/'docs/RELEASE_NOTES_1_1_3.md').is_file())
+        self.assertTrue((ROOT/'docs/RELEASE_NOTES_1_1_4.md').is_file())
