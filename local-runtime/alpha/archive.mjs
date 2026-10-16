@@ -5,9 +5,9 @@ import path from 'node:path';
 import {gunzipSync} from 'node:zlib';
 import {need,digest} from '../contracts.mjs';
 import {ALPHA_TREE_LIMIT,relativePath,verifyTree} from './trust.mjs';
-const utf8=new TextDecoder('utf-8',{fatal:true});
+const utf8=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true});
 function string(bytes){const zero=bytes.indexOf(0);return utf8.decode(zero<0?bytes:bytes.subarray(0,zero));}
-function octal(bytes){const text=string(bytes).trim();need(/^[0-7]+$/.test(text),'ALPHA_ARCHIVE_NUMBER_INVALID');const value=Number.parseInt(text,8);need(Number.isSafeInteger(value)&&value>=0,'ALPHA_ARCHIVE_NUMBER_INVALID');return value;}
+function octal(bytes){const text=string(bytes).replace(/^[\x20\t\r\n]+|[\x20\t\r\n]+$/g,'');need(/^[0-7]+$/.test(text),'ALPHA_ARCHIVE_NUMBER_INVALID');const value=Number.parseInt(text,8);need(Number.isSafeInteger(value)&&value>=0,'ALPHA_ARCHIVE_NUMBER_INVALID');return value;}
 function pax(bytes){
   const result={};let position=0;
   while(position<bytes.length){

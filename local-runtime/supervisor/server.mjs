@@ -2,7 +2,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import {ROOT,need,parseStrict,MAX_BYTES} from '../contracts.mjs';
-import {CAPSULE_ENVELOPE_BYTES} from '../primitives.mjs';
+import {CAPSULE_ENVELOPE_BYTES,decodeUTF8} from '../primitives.mjs';
 
 export function createServer(runtime,{port=0,socket=null}={}) {
   need(socket===null||path.dirname(socket)===runtime.directory,'SOCKET_SCOPE');
@@ -22,7 +22,7 @@ export function createServer(runtime,{port=0,socket=null}={}) {
       const maximum=['/v1/project-import','/v1/journey-import'].includes(req.url)?CAPSULE_ENVELOPE_BYTES:MAX_BYTES;
       need(!req.headers['content-length']||Number(req.headers['content-length'])<=maximum,'INPUT_LIMIT');
       let count=0,parts=[];for await(const part of req){count+=part.length;need(count<=maximum,'INPUT_LIMIT');parts.push(part);}
-      const input=parseStrict(Buffer.concat(parts).toString(),maximum);
+      const input=parseStrict(decodeUTF8(Buffer.concat(parts)),maximum);
       const value=await runtime.dispatch(req.url.slice(4),input,principal);reply(200,value);
     }catch(e){reply(400,{error:/^[A-Z0-9_]{1,100}$/.test(e.code||e.message)?e.code||e.message:'REQUEST_FAILED',...(e.run?{run:e.run}:{})});}
   });

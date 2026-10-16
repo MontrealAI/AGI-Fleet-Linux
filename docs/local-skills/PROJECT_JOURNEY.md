@@ -37,6 +37,25 @@ Actor-scoped assistant credentials cannot import or return project histories.
 Existing grants, reservations, expiry, STOP, recovery and source/host bindings
 remain mandatory; import and export never clear them.
 
+Before a request is created, imported or prepared, the receiver reserves room
+for the complete returned history. The fixed formatter supplies exact result
+bytes for this capacity calculation; it does not create an execution receipt.
+Each project execution/check enforces that fixed result and at most 16,000 bytes
+of canonical observation data. With `R0` and `J0` measured from exact canonical
+return/storage envelopes containing null observations, the conservative bounds
+are `R0 + 64,000` and `J0 + 128,000`: quoting each observation can expand at most
+twice in the return and four times in its stored string. UUIDs and hashes have
+fixed ASCII lengths, and all request quoting is measured exactly.
+
+Both bounds must fit the unchanged 4,000,000-byte caps before a grant is prepared.
+The maximum stored row is reserved atomically against the existing 32 MB journey
+budget, so later imports cannot consume its return headroom. Older unreserved
+rows must acquire that reservation before new work. A backend that violates its
+fixed result/observation contract fails before successful completion and retains
+the existing uncertain-run/STOP behavior. UTF-8 decoding rejects invalid bytes
+and preserves a BOM for the strict JSON parser to reject; it never removes a
+marker or replaces bytes before hashing imported files.
+
 The pinned Apache-2.0 Alpha validator closure and retained MIT compiler license
 are inventoried in `local-runtime/project/native-source.mjs`. They replay native
 Alpha records and verify the exact CSV mapping. They confer no interpreter,
@@ -71,3 +90,9 @@ pas un examen économique indépendant. Les contrôles de disponibilité, les
 autorisations distinctes et l'ARRÊT restent en vigueur. La qualification de
 production demeure fausse; les essais physiques ne sont pas remplacés par des
 tests de composants.
+
+La place du retour complet est réservée avant toute nouvelle autorisation. Les
+limites de 4 000 000 octets restent inchangées. Une demande trop grande est
+refusée avant de consommer un travail; les imports suivants ne peuvent pas
+occuper la place déjà réservée. Les octets UTF-8 invalides et les fichiers JSON
+avec marqueur BOM sont refusés sans normalisation silencieuse.

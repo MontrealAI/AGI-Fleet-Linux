@@ -169,6 +169,8 @@ def validate_fleet(fleet, commit, run):
 def notes(manifest, assets):
     commit, run = manifest['commit'], manifest['workflowRun']
     base = f'https://github.com/{REPOSITORY}/blob/{commit}/docs/local-skills/'
+    guide = {'0.1.0-alpha.4': 'DOWNLOAD.md', '0.1.0-alpha.5': 'DOWNLOAD_ALPHA_5.md'}.get(manifest.get('version'))
+    require(guide is not None, 'Version-matched download guide required')
     text = ('## Local Skills — Linux development preview / Aperçu de développement Linux\n\n'
             'One installation, multiple separate actors, six portable skills and a bilingual local dashboard. '
             'Try a zero-model-cost offline report, inspect its real files, authorize internal checking, and preserve a SUCCESSOR capsule.\n\n'
@@ -179,7 +181,7 @@ def notes(manifest, assets):
             '**Aperçu de développement, pas un produit Local Skills terminé ni qualifié pour la production.** '
             'Les parcours Linux x64/ARM64 hors ligne sont testés. Le bureau/navigateur local, le mode local Mac, '
             'les fournisseurs réels et le travail rémunéré ne sont pas qualifiés.\n\n'
-            f'[Start here / Commencer ici]({base}DOWNLOAD.md) · [Install and recover]({base}INSTALL_AND_RECOVER.md) '
+            f'[Start here / Commencer ici]({base}{guide}) · [Install and recover]({base}INSTALL_AND_RECOVER.md) '
             f'· [Remaining requirements]({base}acceptance.json)\n\n'
             'Download the named ZIP and checksum file below; verify before extracting. GitHub’s automatic source archives '
             'omit the packaged dependencies. Node 24.21.0 is a separately downloaded, hash-pinned prerequisite; the guide lists both architectures. '

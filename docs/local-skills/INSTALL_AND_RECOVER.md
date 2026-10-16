@@ -2,6 +2,8 @@
 
 These tools install the separately labeled development preview. They are not a production-qualified operator installer. Start with the [download and verification guide](DOWNLOAD.md). The package must come from the exact reviewed source and have a verified SHA-256. An archive checksum establishes identity, not correctness or authorization. Existing Dedicated Fleet installations use their existing installers.
 
+For the alpha.5 candidate, use its [version-matched EN/FR download guide](DOWNLOAD_ALPHA_5.md). The alpha.4 download instructions linked above are preserved for that published release; keep the guide, archive, checksum and extraction directory on the same version.
+
 ## English
 
 The installer does not need administrator privileges and does not start a service, activate an actor, connect a provider, install a skill in an assistant, or handle a wallet. Keep the application directory and private state directory separate and outside the source checkout. It accepts only the platform's existing pinned Node 24.21.0 archive; see `fleet/shared/runtime/compute/runtime-artifacts.lock.json`. Linux execution additionally needs the documented supported bubblewrap environment. Copying code on a Mac does not qualify a Mac execution backend.

@@ -8,7 +8,12 @@ export async function journeyOperation(runtime,action,input,principal){
     const current=db.prepare('SELECT value FROM journeys WHERE id=?').get(key);need((current?.value??null)===prior,'JOURNEY_CHANGED');
     if(prior===null)need(db.prepare('SELECT COUNT(*) AS n FROM journeys').get().n<32,'JOURNEY_LIMIT');
     const raw=canonical(value);need(Buffer.byteLength(raw)<=PROJECT_BYTES,'JOURNEY_CAPACITY');
-    const used=db.prepare('SELECT COALESCE(SUM(length(CAST(value AS BLOB))),0) AS bytes FROM journeys WHERE id<>?').get(key).bytes;need(used+Buffer.byteLength(raw)<=32_000_000,'JOURNEY_STORAGE_LIMIT');
+    need(Number.isSafeInteger(value.reservedBytes)&&value.reservedBytes>=Buffer.byteLength(raw)&&value.reservedBytes<=PROJECT_BYTES,'JOURNEY_RESERVATION_INVALID');
+    const invalid=db.prepare(`SELECT 1 FROM journeys WHERE json_type(value,'$.reservedBytes') IS NOT NULL AND
+      (json_type(value,'$.reservedBytes')!='integer' OR json_extract(value,'$.reservedBytes')<0 OR json_extract(value,'$.reservedBytes')>?) LIMIT 1`).get(PROJECT_BYTES);
+    need(!invalid,'JOURNEY_RESERVATION_INVALID');
+    const used=db.prepare(`SELECT COALESCE(SUM(MAX(length(CAST(value AS BLOB)),COALESCE(json_extract(value,'$.reservedBytes'),0))),0) AS bytes FROM journeys WHERE id<>?`).get(key).bytes;
+    need(used+value.reservedBytes<=32_000_000,'JOURNEY_STORAGE_LIMIT');
     db.prepare('INSERT INTO journeys VALUES(?,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(key,raw);
   });
   if(action==='journey-list'){
@@ -16,7 +21,7 @@ export async function journeyOperation(runtime,action,input,principal){
   }
   if(action==='journey-import'){
     keys(input,['request','confirm']);need(input.confirm===true,'CONFIRM_REQUIRED');const checked=await inspectProjectRequest(input.request),journey=id();
-    save(journey,{schema:'agi-fleet/local-journey/v1',request:input.request,project:checked.request.project,route:checked.request.route,returned:null});
+    save(journey,{schema:'agi-fleet/local-journey/v1',request:input.request,project:checked.request.project,route:checked.request.route,returned:null,reservedBytes:checked.capacity.storageUpperBytes});
     runtime.store.event('journey-imported-inert',{journey,requestSha256:digest(input.request),authority:'none'});
     return {journey,project:checked.request.project,route:checked.request.route,authority:'none',runAuthorized:false,productionQualified:false};
   }
@@ -30,14 +35,16 @@ export async function journeyOperation(runtime,action,input,principal){
     const binding=digest(snapshot.value.request);
     need(grant.projectRequestSha256===binding&&value.projectRequestSha256===binding&&receipt.projectRequestSha256===binding,'JOURNEY_PROJECT_BINDING');
     need(value.role==='agent'&&canonical(grant.task)===canonical(checked.request.task)&&receipt.inputSha256===digest(checked.request.task),'JOURNEY_EXECUTION_CHANGED');
-    return {request:checked.request,row,value,grant,receipt};
+    return {request:checked.request,capacity:checked.capacity,row,value,grant,receipt};
   };
   if(action==='journey-prepare'){
     keys(input,['journey','actor']);const snapshot=load(input.journey),checked=await inspectProjectRequest(snapshot.value.request);
+    if(snapshot.value.reservedBytes!==checked.capacity.storageUpperBytes)save(input.journey,{...snapshot.value,reservedBytes:checked.capacity.storageUpperBytes},snapshot.raw);
     return {journey:input.journey,...runtime.prepare({actor:input.actor,task:checked.request.task},principal,{projectRequestSha256:digest(snapshot.value.request)}),route:checked.request.route};
   }
   if(action==='journey-review-prepare'){
     keys(input,['journey','execution','actor']);const snapshot=load(input.journey),execution=await executionFor(snapshot,input.execution);
+    if(snapshot.value.reservedBytes!==execution.capacity.storageUpperBytes)save(input.journey,{...snapshot.value,reservedBytes:execution.capacity.storageUpperBytes},snapshot.raw);
     const task={schema:'agi-fleet/local-task/v1',action:'successor-check',workspace:'files',input:{...execution.request.task.input,files:execution.receipt.result.files},review:'internal',sourceActor:execution.row.actor,sourceController:execution.receipt.sourceController};
     return {journey:input.journey,execution:input.execution,...runtime.prepare({actor:input.actor,task},principal,{projectRequestSha256:digest(snapshot.value.request)}),reviewClass:'internal',independentReview:false};
   }
@@ -51,6 +58,6 @@ export async function journeyOperation(runtime,action,input,principal){
   const entry=(row,receipt)=>({runId:row.id,actorId:row.actor,controllerId:receipt.sourceController,raw:row.result,sha256:digest(row.result)});
   const returned=await sealProjectReturn({schema:'agi-fleet/project-return/v1',request:{raw:snapshot.value.request,sha256:digest(snapshot.value.request)},project:execution.request.project,route:execution.request.route,execution:entry(execution.row,execution.receipt),review:entry(review,reviewReceipt),reviewClass:'internal',independentReview:false,authority:'none',productionQualified:false,settlement:'not-connected'});
   need(snapshot.value.returned===null||snapshot.value.returned===returned,'JOURNEY_RETURN_ALREADY_RECORDED');
-  save(input.journey,{...snapshot.value,returned},snapshot.raw);runtime.store.event('journey-returned-internal',{journey:input.journey,execution:input.execution,review:input.review,sha256:digest(returned)});
+  save(input.journey,{...snapshot.value,returned,reservedBytes:execution.capacity.storageUpperBytes},snapshot.raw);runtime.store.event('journey-returned-internal',{journey:input.journey,execution:input.execution,review:input.review,sha256:digest(returned)});
   return {journey:input.journey,returned,authority:'none',independentReview:false,productionQualified:false,settlement:'not-connected'};
 }

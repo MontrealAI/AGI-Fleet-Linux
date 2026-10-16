@@ -86,6 +86,12 @@ test('EN/FR operator can inspect and approve an assistant request; execution sta
       // Real deterministic work and separate grants; declared synthetic OS boundary.
       const node=f.create('node'),original=await nativeProject(),request=await createProjectRequest(original,{language,route:'agijobsv0-jobregistry-v2'});
       await page.locator('#refresh').click();
+      await page.locator('#journeyFile').setInputFiles({name:'bom.json',mimeType:'application/json',buffer:Buffer.concat([Buffer.from([239,187,191]),Buffer.from(request)])});
+      await page.locator('#journeyImport').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('JSON'));
+      assert.equal(await page.locator('#journey option').count(),0);
+      await page.locator('#journeyFile').setInputFiles({name:'invalid-utf8.json',mimeType:'application/json',buffer:Buffer.from([255])});
+      await page.locator('#journeyImport').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('PROJECT_UTF8_REQUIRED'));
+      assert.equal(await page.locator('#journey option').count(),0);
       await page.locator('#journeyFile').setInputFiles({name:'fleet-request.json',mimeType:'application/json',buffer:Buffer.from(request)});
       await page.locator('#journeyImport').click();await page.waitForFunction(()=>document.getElementById('journey').options.length===1);
       assert.match(await page.locator('#journey').textContent(),/AGIALPHA/);

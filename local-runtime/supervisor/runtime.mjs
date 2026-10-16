@@ -8,6 +8,7 @@ import {LinuxSandbox} from '../platforms/linux.mjs';
 import {defaultMission} from '../../fleet/successor/vendor/manager/site/assets/successor/missions.mjs';
 import {successorOperation} from './successor.mjs';
 import {journeyOperation} from './journey.mjs';
+import {validateProjectOutcome,validateProjectReceipt} from '../project/transfer.mjs';
 import {validateTaskInput} from '../worker.mjs';
 import {inspectReconciliation,reconcile} from './reconciliation.mjs';
 import {diagnostics} from './diagnostics.mjs';
@@ -157,9 +158,14 @@ export class LocalRuntime {
         catch(error){error.observation??=result.observation;throw error;}
       }else abort.signal.throwIfAborted();
       need(result.observation?.processGroupGone===true,'CLEANUP_UNCONFIRMED');
+      let projectBudget=null;if(g.projectRequestSha256){projectBudget=await validateProjectOutcome(g.task,result.result,result.observation);revalidate();}
       need(Buffer.byteLength(canonical(result))<=STORAGE_LIMITS.backendResult,'OUTPUT_LIMIT');
       const receipt={...result,outputSha256:digest(result.result),inputSha256:g.inputSha256,independentReview:false,sourceActor:actor.id,sourceController:actor.controller,authority:'none',...(g.projectRequestSha256?{projectRequestSha256:g.projectRequestSha256}:{})};
       const outcome=encodeOutcome(receipt);
+      if(projectBudget){
+        need(Buffer.byteLength(outcome)<=projectBudget.receiptUpperBytes,'PROJECT_RECEIPT_CAPACITY');
+        await validateProjectReceipt(outcome,{task:g.task,runId:g.run.id,actorId:actor.id,controllerId:actor.controller,projectRequestSha256:g.projectRequestSha256});revalidate();
+      }
       this.store.transaction(()=>{this.store.db.prepare("UPDATE runs SET state='complete',result=? WHERE id=?").run(outcome,g.run.id);this.store.event('run-complete',{id:g.run.id,outputSha256:receipt.outputSha256});});
       return {run:g.run.id,state:'complete',receipt};
     } catch(e) {

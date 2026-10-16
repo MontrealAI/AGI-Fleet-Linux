@@ -5,7 +5,7 @@ separately authorized internal Node check, then return to the same Alpha project
 The exact upstream request, original native project, unit-preserving CSV task,
 explicit USDC or $AGIALPHA route and both receipts stay together. The local
 dashboard exposes the complete EN/FR import, prepare, authorize, run, check and
-save-return workflow. [Project guide](PROJECT_JOURNEY.md).
+save-return workflow. [Alpha.5 download and verification guide — English / Français](DOWNLOAD_ALPHA_5.md) · [Project guide](PROJECT_JOURNEY.md).
 
 An execution is bound to the exact project request in its reviewed grant,
 reservation and receipt. Identical CSV tasks cannot transplant work between
@@ -18,13 +18,22 @@ The dashboard also supplies an actionable bilingual no-JavaScript notice and
 keeps initial connection controls disabled until the application is loaded.
 Wrapping fixes support narrow screens and enlarged text without clipping.
 
+Requests now reserve their complete bounded return/storage envelope before any
+grant, including canonical quoting of exact request bytes and both receipts.
+The fixed result and 16 KB observation limit are enforced before successful
+completion. Near-limit and aggregate-storage regressions cover successful
+export plus refusal without consuming existing grants. UTF-8 file, CLI, status
+and archive decoding preserve BOM bytes for rejection instead of silently
+removing them. The alpha.5 release notes link its own EN/FR download guide;
+the published alpha.4 guide remains unchanged.
+
 This candidate uses `0.1.0-alpha.5` and a new release tag/archive identity.
 Published alpha.4 and Dedicated Fleet Linux/Mac assets are unchanged. The
 preserved alpha.4 specification retains its original 127-test source gate;
-alpha.5 requires 135 module tests and retains the native, installer, browser,
+alpha.5 requires 137 module tests and retains the native, installer, browser,
 inherited Fleet and independent audit gates. No threshold is reduced.
 
-The source has eight added project regressions, covering EN/FR, both routes,
+The source has ten added project regressions, covering EN/FR, both routes,
 separate authorization, invalid input/receipt changes and cross-project replay.
 Component, fixture and fallback-browser observations do not qualify an operator
 distribution. The exact saved candidate still needs x64 and ARM64 native and

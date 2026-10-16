@@ -31,11 +31,12 @@ test('fixed Alpha command mounts only candidate root, ephemeral devices/proc/tmp
 });
 test('trusted status requires complete private namespace IDs and separate execution status',()=>{
   assert.equal(parseAlphaStatus(status(),hostNamespaces).exitCode,0);
-  for(const raw of [status({'pid-namespace':1}),status({'net-namespace':2}),status({'child-pid':0}),status({},null),Buffer.from('{}\n{}\n{}\n'),Buffer.from('{"child-pid":1,"child-pid":2}\n')])assert.throws(()=>parseAlphaStatus(raw,hostNamespaces));
+  for(const raw of [status({'pid-namespace':1}),status({'net-namespace':2}),status({'child-pid':0}),status({},null),Buffer.from('{}\n{}\n{}\n'),Buffer.from('{"child-pid":1,"child-pid":2}\n'),Buffer.concat([Buffer.from([239,187,191]),status()])])assert.throws(()=>parseAlphaStatus(raw,hostNamespaces));
 });
 test('synthetic transport sends exact bytes, hard CPU limits and bounded output through fixed pipes',async()=>{
   const t=transport(({child,close})=>{child.stdio[3].write(status());child.stdout.write('public result');close();});const result=await t.promise;
   assert.equal(result.output,'public result');assert.equal(t.stdin().toString(),input.workSpec);assert.equal(t.seen().exe,'/usr/bin/prlimit');assert.ok(t.seen().args.includes('--cpu=5:5'));assert.deepEqual(t.seen().settings.stdio,['pipe','pipe','pipe','pipe','pipe']);assert.equal(t.seen().settings.shell,false);assert.equal(result.observation.privateNamespacesEnded,true);assert.equal(result.observation.evidenceClass,'SYNTHETIC_IPC_EVENTS');
+  const bom=transport(({child,close})=>{child.stdio[3].write(status());child.stdout.write(Buffer.concat([Buffer.from([239,187,191]),Buffer.from('public result')]));close();});assert.equal((await bom.promise).output,'\uFEFFpublic result');
 });
 test('synthetic transport refuses EOF with missing metadata, host namespaces or missing execution status',async()=>{
   for(const bytes of [Buffer.alloc(0),status({'pid-namespace':1}),status({},null)]){
