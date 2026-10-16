@@ -13,7 +13,7 @@ SOURCE = ROOT / 'website'
 OUTPUT = ROOT / '_site'
 REPO = 'https://github.com/MontrealAI/AGI-Fleet-Linux'
 PUBLIC_FILES = ('index.html', 'fr.html', 'start.html', 'start-fr.html', 'mac.html', 'mac-fr.html',
-                'styles.css', 'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'install-mac.html', 'install-mac-fr.html', 'mac-setup.css', 'mac-setup.js')
+                'demos.html', 'demos-fr.html', 'demo-directory.css', 'styles.css', 'app.js', 'onboarding.css', 'onboarding.js', 'favicon.svg', 'install-mac.html', 'install-mac-fr.html', 'mac-setup.css', 'mac-setup.js')
 
 
 def read_release():
@@ -311,7 +311,11 @@ def mac_release_tokens(release, published=False):
 
 def website_tokens(release):
     mac, published = read_mac_release()
-    return {**release_tokens(release), **mac_release_tokens(mac, published)}
+    tokens = {**release_tokens(release), **mac_release_tokens(mac, published)}
+    tokens['SOURCE_COMMIT'] = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    if not re.fullmatch(r'[0-9a-f]{40}', tokens['SOURCE_COMMIT']):
+        raise ValueError('Invalid website source commit')
+    return tokens
 
 
 def render(contents, suffix, tokens):
@@ -324,6 +328,7 @@ def render(contents, suffix, tokens):
 
 def build():
     release = read_release()
+    subprocess.run(['python3', str(ROOT / 'engineering/build-demo-directory.py'), '--check'], check=True)
     tokens = website_tokens(release)
     if OUTPUT.is_symlink():
         raise ValueError('Output must not be a symlink')
