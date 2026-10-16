@@ -6,6 +6,8 @@
 
 **Published qualification releases: Linux 1.1.4 and Local Skills alpha.4.** Both were published on 15 October 2026 after their exact saved-archive gates passed on x86-64 and ARM64. They add stronger artifact checks, readable reports, explicit reuse/mapping, bounded history continuation, task admission and lifecycle corrections. [Linux release notes](docs/RELEASE_NOTES_1_1_4.md) · [Local Skills release](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.4) · [Completion backlog and open gates](docs/PRODUCT_COMPLETION.json). Both remain prereleases with production qualification false; physical and live-provider commissioning remain open.
 
+**New source candidate: Local Skills alpha.5.** The [Alpha project journey](docs/local-skills/PROJECT_JOURNEY.md) preserves one project through bounded Fleet execution and a separately authorized internal check, with USDC and $AGIALPHA kept explicit. This is a source candidate pending its own saved-package qualification; the published downloads above are unchanged.
+
 **Linux 1.1.4 is the current controlled fresh-install qualification release.** [What changed](docs/RELEASE_NOTES_1_1_4.md). The free English/French Builder, authenticated Agent execution, separately authorized Node review, portable ownership and deliberate version choice remain available. [Download and release notes](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.4-qualification) · [Verified release evidence](validation/LINUX_1_1_4_RELEASE_ADDENDUM.md). Browser-only missions need no account, wallet, installation or provider key. Physical and live-provider commissioning remain open.
 
 **Local Skills alpha.4 · published separate Linux development preview:** [Download, verify and try it](docs/local-skills/DOWNLOAD.md) · [Télécharger et essayer en français](docs/local-skills/DOWNLOAD.md#français). One private installation, several actors and a zero-model-cost offline report. Full product acceptance remains open; funded work and general browser/desktop execution stay disabled.
@@ -71,6 +73,10 @@ The team frames this opportunity as an **approximately US$40 trillion annual tot
 The public sandbox is one work mode, **not the ceiling of the product's mission**. Native workstation paths use dedicated OS accounts: desktop control can reach everything that account can access. Keep them separate from your everyday account and the Fleet signer; a grant is not a per-site sandbox. Sign into approved applications yourself. These previews do not automatically publish private results or settle private jobs through AGIJobManager.
 
 **Larger public Studio tasks are retained in Linux 1.1.4 and available in both source previews:** [Linux Studio](successor/docs/GUIDE.md#keep-larger-work-safely) · [Preserved Linux source preview](workstation/STUDIO.md) · [Mac Studio](macos/preview/STUDIO.md). Agent and Node can import public `computer-work/v2` jobs with arbitrary declared file formats, up to **64 files and 64 MiB total**, exact-byte review handoffs and revision feedback. Large Studio work can be explicitly excluded from bounded wallet backups; keep its exported files separately. The quick editor remains v1. Imports preserve each job's exact runtime identities, permissions, criteria, budgets and deadlines, and grant no execution authority. The reviewed public Studio format and explicit backup exclusion were introduced in Linux 1.1.2 and remain included in Linux 1.1.4. The Mac additions remain outside its 1.20.2 ZIP; private or signed-in work belongs to the separate native workflow.
+
+## Ideas behind the workforce
+
+[Read four selected essays](https://montrealai.github.io/AGI-Fleet-Linux/#reading) on provider trust, governed autonomy, coordinated execution and the cost of verification. English/French summaries link to current guides. [Reading notes and version context](docs/READING.md).
 
 ## The potential of Fleet + AGIJobManager
 

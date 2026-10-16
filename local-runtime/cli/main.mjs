@@ -8,15 +8,15 @@ import {LocalRuntime} from '../supervisor/runtime.mjs';
 import {readPrivate,privateDirectory} from '../supervisor/store.mjs';
 import {createServer} from '../supervisor/server.mjs';
 import {need,parseStrict,canonical} from '../contracts.mjs';
-import {MAX_BYTES,CAPSULE_ENVELOPE_BYTES} from '../primitives.mjs';
+import {MAX_BYTES,CAPSULE_ENVELOPE_BYTES,decodeUTF8} from '../primitives.mjs';
 import {recoverService} from '../supervisor/recover-service.mjs';
 
 export async function client({state,tokenFile,action,input}) {
   privateDirectory(state);const token=readPrivate(tokenFile,100).toString().trim();
   return await new Promise((resolve,reject)=>{
     const req=http.request({socketPath:path.join(state,'control.sock'),method:'POST',path:'/v1/'+action,headers:{Host:'localhost',Authorization:'Bearer '+token,'Content-Type':'application/json'}},res=>{
-      const maximum=action==='project-export'?CAPSULE_ENVELOPE_BYTES:MAX_BYTES;
-      const parts=[];let n=0;res.on('data',b=>{n+=b.length;if(n>maximum)req.destroy(new Error('OUTPUT_LIMIT'));else parts.push(b);});res.on('end',()=>{try{const value=parseStrict(Buffer.concat(parts).toString(),maximum);need(res.statusCode===200,value.error||'REQUEST_FAILED');resolve(value);}catch(e){reject(e);}});
+      const maximum=['project-export','journey-export','journey-inspect'].includes(action)?CAPSULE_ENVELOPE_BYTES:MAX_BYTES;
+      const parts=[];let n=0;res.on('data',b=>{n+=b.length;if(n>maximum)req.destroy(new Error('OUTPUT_LIMIT'));else parts.push(b);});res.on('end',()=>{try{const value=parseStrict(decodeUTF8(Buffer.concat(parts)),maximum);need(res.statusCode===200,value.error||'REQUEST_FAILED');resolve(value);}catch(e){reject(e);}});
     });req.on('error',reject);req.setTimeout(25000,()=>req.destroy(new Error('CONTROL_TIMEOUT')));req.end(canonical(input));
   });
 }
@@ -56,7 +56,7 @@ export async function main(args=process.argv.slice(2)) {
     process.once('SIGINT',shutdown);process.once('SIGTERM',shutdown);return;
   }
   let input={},operation=action;
-  if(action==='request'){need(args.length===2&&/^[a-z-]+$/.test(args[0]),'ARGUMENTS_INVALID');operation=args[0];const maximum=operation==='project-import'?CAPSULE_ENVELOPE_BYTES:MAX_BYTES;input=parseStrict(readPrivate(path.resolve(args[1]),maximum).toString(),maximum);}
+  if(action==='request'){need(args.length===2&&/^[a-z-]+$/.test(args[0]),'ARGUMENTS_INVALID');operation=args[0];const maximum=['project-import','journey-import'].includes(operation)?CAPSULE_ENVELOPE_BYTES:MAX_BYTES;input=parseStrict(decodeUTF8(readPrivate(path.resolve(args[1]),maximum)),maximum);}
   else need(['status','doctor','diagnostics'].includes(action)&&args.length===0,'ARGUMENTS_INVALID');
   console.log(JSON.stringify(await client({state,tokenFile,action:operation,input}),null,2));
 }

@@ -27,6 +27,7 @@ export class Store {
       CREATE TABLE IF NOT EXISTS runs(id TEXT PRIMARY KEY, actor TEXT NOT NULL REFERENCES actors(id), grant_id TEXT UNIQUE NOT NULL, state TEXT NOT NULL, value TEXT NOT NULL, result TEXT);
       CREATE TABLE IF NOT EXISTS clients(hash TEXT PRIMARY KEY, value TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS projects(id TEXT PRIMARY KEY, value TEXT NOT NULL);
+      CREATE TABLE IF NOT EXISTS journeys(id TEXT PRIMARY KEY, value TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS events(seq INTEGER PRIMARY KEY, value TEXT NOT NULL);
     `);
     if (!this.meta('schema')) {

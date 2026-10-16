@@ -6,7 +6,7 @@ import {requireAlphaRuntime} from './package.mjs';
 import {validateAlphaInput,validateAlphaSpecValidation,validateAlphaOutput} from './contract.mjs';
 
 const BIN='/usr/bin/bwrap',LIMIT='/usr/bin/prlimit';
-const UTF8=new TextDecoder('utf-8',{fatal:true});
+const UTF8=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true});
 export const ALPHA_IPC_LIMITS=Object.freeze({wallMs:15000,cpuSecondsPerPhase:5,addressSpaceBytes:4294967296,fileBytes:1048576,openFiles:128,stderrBytes:8192,statusBytes:16384});
 const NAMESPACES=['pid','net','mnt','ipc','uts'];
 function trustedTool(file){const s=fs.lstatSync(file);need(s.isFile()&&!s.isSymbolicLink()&&s.uid===0&&(s.mode&0o022)===0,'SANDBOX_EXECUTABLE_UNTRUSTED');}
@@ -21,7 +21,7 @@ export function alphaSandboxArguments(rootfs,phase){
 }
 export function parseAlphaStatus(raw,hostNamespaces,{requireExit=true}={}){
   need(Buffer.isBuffer(raw)&&raw.length<=ALPHA_IPC_LIMITS.statusBytes,'ALPHA_STATUS_INVALID');
-  const lines=UTF8.decode(raw).trim().split('\n');need(lines.length>0&&lines.length<=2&&lines.every(x=>x.trim()),'ALPHA_STATUS_INVALID');
+  const lines=UTF8.decode(raw).replace(/^[\x20\t\r\n]+|[\x20\t\r\n]+$/g,'').split('\n');need(lines.length>0&&lines.length<=2&&lines.every(x=>x.trim()),'ALPHA_STATUS_INVALID');
   const start=parseStrict(lines[0],ALPHA_IPC_LIMITS.statusBytes);
   keys(start,['child-pid',...NAMESPACES.map(n=>n+'-namespace'),'cgroup-namespace'],['child-pid',...NAMESPACES.map(n=>n+'-namespace')]);
   need(Number.isSafeInteger(start['child-pid'])&&start['child-pid']>0,'ALPHA_STATUS_INVALID');

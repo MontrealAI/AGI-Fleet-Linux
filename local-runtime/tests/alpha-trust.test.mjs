@@ -80,7 +80,7 @@ test('archive rejects changed compressed bytes before decompression',()=>{
 });
 test('archive rejects checksums, special nodes, nonzero padding and trailing data',()=>{
   const f=fixture(),v=validateManifest(f.raw,f.target);
-  for(const transform of [b=>{b[0]^=1;return b;},b=>Buffer.concat([header('rootfs/',{type:'3',mode:0o555}),b.subarray(512)]),b=>{const index=b.indexOf(Buffer.from('synthetic interpreter, never executed'));b[index+36]=1;return b;},b=>Buffer.concat([b,Buffer.from('x')])]){const a=archive(f,transform);assert.throws(()=>decodePinnedArchive(a.raw,a.target,v));}
+  for(const transform of [b=>{b[0]^=1;return b;},b=>Buffer.concat([header('rootfs/',{type:'3',mode:0o555}),b.subarray(512)]),b=>Buffer.concat([header('\uFEFFrootfs/',{type:'5',mode:0o555}),b.subarray(512)]),b=>{const index=b.indexOf(Buffer.from('synthetic interpreter, never executed'));b[index+36]=1;return b;},b=>Buffer.concat([b,Buffer.from('x')])]){const a=archive(f,transform);assert.throws(()=>decodePinnedArchive(a.raw,a.target,v));}
 });
 test('tree detects changed file bytes, extra files, mode drift and hardlinks',t=>{
   for(const mutate of [dir=>{const p=path.join(dir,'opt/alpha/a/file');fs.chmodSync(p,0o644);fs.writeFileSync(p,'z');fs.chmodSync(p,0o444);},dir=>{fs.chmodSync(dir,0o755);fs.writeFileSync(path.join(dir,'extra'),'x');fs.chmodSync(dir,0o555);},dir=>fs.chmodSync(path.join(dir,'opt/alpha/a/file'),0o644),dir=>fs.linkSync(path.join(dir,'opt/alpha/a/file'),path.join(path.dirname(dir),'outside-hardlink'))]){

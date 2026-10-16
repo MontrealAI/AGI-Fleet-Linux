@@ -7,17 +7,42 @@ const say=(en,frText=en)=>{$('status').textContent=language==='fr'?frText:en;};
 Object.assign(fr,{resume:'Reprendre après examen des travaux inachevés',reconcile:'Clore cette tentative sans déclarer de réussite'});
 Object.assign(fr,{pending:'Demandes en attente de votre décision',pendingHelp:'Un assistant peut préparer un travail. Vous seul pouvez en autoriser la portée précise ici.',refresh:'Actualiser les demandes et les résultats'});
 Object.assign(fr,{support:'Besoin d’aide ?',supportHelp:'Prévisualisez un rapport contenant uniquement la disponibilité et des compteurs. Il exclut les identifiants, les noms et identités des acteurs, les données des tâches et leurs résultats. Examinez-le avant de choisir de le partager; rien n’est téléversé.',supportPreview:'Prévisualiser le rapport d’assistance',supportSave:'Enregistrer ce rapport'});
+Object.assign(fr,{journeyTitle:'Conserver l’historique d’un même projet Alpha',journeyHelp:'Importez une demande Fleet provenant de votre projet Alpha guidé. La route USDC ou $AGIALPHA choisie reste liée au projet. L’importation ne donne aucune permission. Autorisez l’exécution puis une vérification interne distincte par un Node. Enregistrez le retour pour Alpha. Les propositions de marché restent non financées.',journeyFile:'Fichier de demande de projet Fleet',journeyImport:'Importer sans exécuter',journeyChoose:'Projet enregistré',journeyInspect:'Examiner le projet conservé',journeyPrepare:'Préparer avec l’Agent sélectionné',journeyExecution:'Exécution Agent terminée',journeyNode:'Node actif pour une vérification interne distincte',journeyReviewPrepare:'Préparer la vérification Node',journeyReview:'Vérification Node terminée',journeyExport:'Vérifier et enregistrer le retour pour Alpha',journeyScope:'Cette vérification locale limitée porte sur les fichiers de cette tâche. Les historiques Manager/Jobs joints ne sont pas vérifiés ici; leurs récepteurs natifs doivent les valider. Cet examen reste interne et ne prouve ni réussite du projet, ni affectation, ni paiement, ni qualification de production. Les retours importés restent historiques.'});
 async function api(action,input={}){
   const r=await fetch('/v1/'+action,{method:'POST',headers:{Authorization:'Bearer '+credential,'Content-Type':'application/json'},body:JSON.stringify(input),cache:'no-store',redirect:'error'});
-  const v=await r.json();if(!r.ok)throw Error(v.error||'REQUEST_FAILED');return v;
+  const v=await r.json();if(!r.ok)throw Object.assign(Error(v.error||'REQUEST_FAILED'),{action});return v;
 }
 function button(text,fn){const b=document.createElement('button');b.type='button';b.textContent=text;b.addEventListener('click',()=>attempt(fn));return b;}
-async function attempt(fn){try{await fn();}catch(e){say('Blocked: '+e.message+'. Inspect readiness and the operator guide.','Bloqué : '+e.message+'. Consultez la disponibilité et le guide.');}}
+function journeyAdmissionMessage(code,action){
+  if(['JOURNEY_STORAGE_LIMIT','JOURNEY_LIMIT'].includes(code)&&action==='journey-import')return [
+    'Import refused: there is not enough history space to reserve the complete return. The 32 MB history budget includes reserved complete returns for pending and completed projects, with at most 32 rows. This import saved no project, started no execution and created or consumed no grant. Keep the original file and history. There is no room for this additional complete return; nothing was deleted or truncated.',
+    'Import refusé : l’espace d’historique ne suffit pas à réserver le retour complet. Le budget d’historique de 32 Mo comprend les retours complets réservés des projets en attente et terminés, avec au plus 32 entrées. Cet import n’a enregistré aucun projet, lancé aucune exécution, créé ni consommé aucune autorisation. Conservez le fichier original et l’historique. La place manque pour ce retour complet supplémentaire; rien n’a été supprimé ni tronqué.'
+  ];
+  if(!['journey-import','journey-prepare','journey-review-prepare'].includes(action)
+    ||!['PROJECT_RETURN_CAPACITY','PROJECT_TRANSFER_SIZE','OUTPUT_SIZE'].includes(code))return null;
+  const imported=action==='journey-import';
+  return [
+    'This request cannot fit its complete report, receipts and retained return. '+(imported?'This import saved no project, started no execution and created or consumed no grant. ':'No new grant was prepared or consumed and no execution started. ')+
+      'Keep the original file and existing history. Choose a smaller supported export or input; no history was truncated.',
+    'Cette demande ne peut pas contenir le rapport complet, les reçus et le retour conservé. '+(imported?"Cet import n’a enregistré aucun projet, lancé aucune exécution, créé ni consommé aucune autorisation. ":"Aucune nouvelle autorisation n’a été préparée ou consommée; aucune exécution n’a commencé. ")+
+      'Conservez le fichier original et l’historique existant. Choisissez un export ou des données plus petits et pris en charge; aucun historique n’a été tronqué.'
+  ];
+}
+async function attempt(fn){try{await fn();}catch(e){const message=journeyAdmissionMessage(e.message,e.action);if(message)say(...message);else say('Blocked: '+e.message+'. Inspect readiness and the operator guide.','Bloqué : '+e.message+'. Consultez la disponibilité et le guide.');}}
 function save(name,value,type='application/json'){
   const a=document.createElement('a'),url=URL.createObjectURL(new Blob([typeof value==='string'?value:JSON.stringify(value,null,2)],{type}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 async function refresh(){
+  const selectedJourney=$('journey').value,selectedExecution=$('journeyExecution').value,selectedReview=$('journeyReview').value;
   const s=await api('status');$('actors').replaceChildren();$('actor').replaceChildren();$('runs').replaceChildren();$('pending').replaceChildren();
+  $('journeyNode').replaceChildren();$('journeyExecution').replaceChildren();$('journeyReview').replaceChildren();
+  const option=(select,value,text)=>{const o=document.createElement('option');o.value=value;o.textContent=text;$(select).append(o);};
+  for(const a of s.actors)if(a.role==='node'&&a.active)option('journeyNode',a.id,a.name);
+  for(const r of s.runs)if(r.state==='complete'&&['agent','node'].includes(r.value.role))option(r.value.role==='agent'?'journeyExecution':'journeyReview',r.id,r.id);
+  if([...$('journeyExecution').options].some(o=>o.value===selectedExecution))$('journeyExecution').value=selectedExecution;
+  if([...$('journeyReview').options].some(o=>o.value===selectedReview))$('journeyReview').value=selectedReview;
+  const retained=await api('journey-list');$('journey').replaceChildren();for(const item of retained.journeys)option('journey',item.journey,item.project.projectId+' · '+item.project.cycleId+' · '+item.route.asset);
+  if([...$('journey').options].some(o=>o.value===selectedJourney))$('journey').value=selectedJourney;
   for(const g of s.pending){const row=document.createElement('div');row.className='run';row.textContent=g.action+' · '+g.actor+' · '+g.state+' ';
     row.append(button(language==='fr'?'Examiner cette demande':'Inspect this request',async()=>{
       prepared=await api('grant-inspect',{grant:g.grant});$('grantDetails').textContent=JSON.stringify(prepared,null,2);$('grant').hidden=false;
@@ -66,7 +91,7 @@ $('prepare').onclick=()=>attempt(async()=>{
   $('grantDetails').textContent=JSON.stringify(prepared,null,2);$('grant').hidden=false;$('run').disabled=true;$('authorize').disabled=false;say('Inspect the input, output scope and limits before authorizing.','Examinez les données et les limites avant d’autoriser.');
 });
 $('authorize').onclick=()=>attempt(async()=>{await api('authorize',{grant:prepared.grant,commitment:prepared.commitment,confirm:true});$('authorize').disabled=true;$('run').disabled=prepared.preparingClient==='scoped-client';say('Authorized once. The preparing client can run within five minutes.','Autorisé une seule fois. Le client ayant préparé la tâche peut l’exécuter dans les cinq minutes.');await refresh();});
-$('run').onclick=()=>attempt(async()=>{$('run').disabled=true;const v=await api('run',{actor:prepared.actor,grant:prepared.grant});$('output').textContent=JSON.stringify(v,null,2);await refresh();say('Complete. Inspect and save your real output files.','Terminé. Examinez et enregistrez les fichiers produits.');});
+$('run').onclick=()=>attempt(async()=>{$('run').disabled=true;const v=await api('run',{actor:prepared.actor,grant:prepared.grant});$('output').textContent=JSON.stringify(v,null,2);await refresh();if(prepared.journey){$('journey').value=prepared.journey;$(prepared.task.action==='successor-check'?'journeyReview':'journeyExecution').value=v.run;}say('Complete. Inspect and save your real output files.','Terminé. Examinez et enregistrez les fichiers produits.');});
 $('pause').onclick=()=>attempt(async()=>{await api('pause',{paused:true});say('New work paused; accepted work continues.','Nouveaux travaux suspendus; les travaux acceptés continuent.');});
 $('unpause').onclick=()=>attempt(async()=>{await api('pause',{paused:false});say('New work allowed, subject to STOP and readiness.','Nouveaux travaux permis, sous réserve de l’arrêt et de la disponibilité.');});
 $('stop').onclick=()=>attempt(async()=>{await api('stop',{actor:null});await refresh();});
@@ -76,3 +101,12 @@ $('resume').onclick=()=>attempt(async()=>{await api('resume',{confirm:true});awa
 
 $('supportPreview').onclick=()=>attempt(async()=>{supportReport=await api('diagnostics');$('supportDetails').textContent=JSON.stringify(supportReport,null,2);$('supportReport').hidden=false;$('supportDetails').focus();say('Review the report, then save it only if you want to share it.','Examinez le rapport, puis enregistrez-le seulement si vous souhaitez le partager.');});
 $('supportSave').onclick=()=>{if(supportReport)save('fleet-local-support.json',supportReport);};
+
+function showJourneyGrant(value){prepared=value;$('grantDetails').textContent=JSON.stringify(value,null,2);$('grant').hidden=false;$('authorize').disabled=false;$('run').disabled=true;$('grantDetails').focus();say('Inspect the exact project task and limits, then authorize this run.','Examinez la tâche du projet et ses limites, puis autorisez cette exécution.');}
+$('journeyImport').onclick=()=>attempt(async()=>{const file=$('journeyFile').files[0];if(!file)throw Error('PROJECT_FILE_REQUIRED');if(file.size>4_000_000)throw Object.assign(Error('PROJECT_TRANSFER_SIZE'),{action:'journey-import'});let raw;try{raw=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(await file.arrayBuffer());}catch{throw Error('PROJECT_UTF8_REQUIRED');}const result=await api('journey-import',{request:raw,confirm:true});await refresh();$('journey').value=result.journey;$('journeyDetails').textContent=JSON.stringify(result,null,2);say('Project retained. Execution requires a fresh explicit grant.','Projet conservé. Une nouvelle autorisation explicite est requise pour exécuter.');});
+$('journeyInspect').onclick=()=>attempt(async()=>{const result=await api('journey-inspect',{journey:$('journey').value});$('journeyDetails').textContent=JSON.stringify(result,null,2);$('journeyDetails').focus();});
+$('journeyPrepare').onclick=()=>attempt(async()=>showJourneyGrant(await api('journey-prepare',{journey:$('journey').value,actor:$('actor').value})));
+$('journeyReviewPrepare').onclick=()=>attempt(async()=>showJourneyGrant(await api('journey-review-prepare',{journey:$('journey').value,execution:$('journeyExecution').value,actor:$('journeyNode').value})));
+$('journeyExport').onclick=()=>attempt(async()=>{const result=await api('journey-export',{journey:$('journey').value,execution:$('journeyExecution').value,review:$('journeyReview').value,confirm:true});save('alpha-fleet-project-return.json',result.returned);$('journeyDetails').textContent=JSON.stringify({journey:result.journey,authority:result.authority,independentReview:false,productionQualified:false,settlement:result.settlement},null,2);say('Return saved. Import it into the same Alpha project as historical internal evidence.','Retour enregistré. Importez-le dans le même projet Alpha comme preuve interne historique.');});
+
+for(const id of ['language','token','connect'])$(id).disabled=false;
