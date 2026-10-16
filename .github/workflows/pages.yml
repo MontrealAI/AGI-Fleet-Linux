@@ -1,41 +1,11 @@
 name: Website / GitHub Pages
 
+# The directory inventories every tracked path, including future demo/example
+# files outside today's website folders. Every PR and main push must check it.
 on:
   push:
     branches: [main]
-    paths:
-      - fleet/successor/**
-      - successor/**
-      - website/**
-      - engineering/build-website.py
-      - engineering/check-website.py
-      - engineering/browser-tests/**
-      - engineering/current-release.json
-      - engineering/published-release.json
-      - validation/**
-      - docs/**
-      - macos/docs/**
-      - macos/release.json
-      - macos/published-release.json
-      - README.md
-      - .github/workflows/pages.yml
   pull_request:
-    paths:
-      - fleet/successor/**
-      - successor/**
-      - website/**
-      - engineering/build-website.py
-      - engineering/check-website.py
-      - engineering/browser-tests/**
-      - engineering/current-release.json
-      - engineering/published-release.json
-      - validation/**
-      - docs/**
-      - macos/docs/**
-      - macos/release.json
-      - macos/published-release.json
-      - README.md
-      - .github/workflows/pages.yml
   workflow_dispatch:
 
 permissions:
@@ -58,7 +28,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Build from reviewed release metadata
-        run: python3 engineering/build-website.py
+        run: |
+          python3 engineering/test-demo-directory.py
+          python3 engineering/build-website.py
       - name: Check public files, links and JavaScript
         run: |
           python3 engineering/check-website.py
