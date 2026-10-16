@@ -18,6 +18,20 @@ For help, use **Preview support report** in the local dashboard, inspect its com
 
 ## Verified checkpoint, kept separate from new changes
 
+**Published update, 15 October 2026:** [Local Skills alpha.4](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.4)
+is available from source `7b5dda3d7dbcb9700a1408cf19bd7cf18404e068` after
+[workflow 38779593360](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38779593360)
+passed both architectures, browser acceptance, inherited Fleet qualification and
+the evidence audit. All four published assets were downloaded and checked;
+the 8,586,977-byte preview ZIP has SHA-256
+`c1999ce7e7ac3e5263b05a9bde3fb2e6b0d3233cc3e9304ce180167a2ad9283e`.
+All 2,911 inventoried member hashes and modes match the package manifest;
+517 tracked source files also match Git, with the remaining 2,394 members
+identified as bundled dependencies. This remains a development preview with
+`operatorInstaller: false`, `fullHandoffComplete: false`, and
+`productionQualified: false`. Physical, live-provider and independent economic
+review requirements below remain open. Earlier checkpoints are preserved below.
+
 [Local Skills workflow 38579981525](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38579981525) passed for PR head `08d227934ddeeca5d03bca6aea8df626af36338f`, using integration source `240815ee47cac500b257158f97aa86dba30b90bb`.
 
 | Observed check | Linux x64 | Linux ARM64 |
@@ -57,6 +71,13 @@ The maintenance regression formerly asserted that `local-runtime/` could not exi
 Local verification passed 120 engineering tests and the support-report privacy/authorization and reconciliation cases. The full local supervisor run retains four failures caused by this workspace denying Unix-socket listening (`EPERM`); no test was skipped or weakened. The pinned browser download was unavailable here. Native IPC and EN/FR download/accessibility behavior therefore remain mandatory CI gates, including tests from the exact saved package.
 
 ## Français
+
+**Publication du 15 octobre 2026 :** l’[aperçu Local Skills alpha.4](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.4)
+est disponible après qualification de la même source sur x64 et ARM64. Les quatre
+fichiers publiés ont été téléchargés et vérifiés. Les 2 911 entrées de l’inventaire
+correspondent au manifeste; 517 fichiers sources et leurs permissions
+correspondent aussi à Git. Il reste un aperçu de développement : produit complet,
+installation opérateur et qualification de production restent désactivés.
 
 **La PR #26 reste un aperçu de développement, pas un produit Local Skills terminé ni une version à installer en production.** Sur Linux, le parcours hors ligne limité, l’installation transactionnelle et les six chemins Gateway/skill/moteur ont des observations réelles au point de contrôle indiqué ci-dessus. Le transport du modèle reste synthétique. Les versions Dedicated Fleet et Mac publiées ont leurs propres preuves.
 

@@ -2,7 +2,7 @@
 
 ## English
 
-This is additive, **unpublished source support**, not a new installer, deployment, contract migration or production qualification. Existing saved releases and the historical integration harness remain unchanged.
+This additive profile support is included in the [published Linux 1.1.4 qualification installer](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.4-qualification). Its exact saved archive passed the separate 792-test Manager 1.17.0 profile integration on both architectures; [published evidence and remaining gates](../validation/LINUX_1_1_4_RELEASE_ADDENDUM.md) identify the accepted bytes. This does not deploy or migrate a contract, qualify physical operation or authorize funded work. Earlier saved releases and their historical integration harness remain unchanged.
 
 ### Choose a complete graph
 
@@ -58,7 +58,7 @@ Maintain the canonical module and profile bundle under `fleet/shared/runtime/`. 
 
 ## Français
 
-Il s’agit d’un ajout au **code source non publié**, pas d’un nouvel installateur, d’un déploiement, d’une migration des contrats ou d’une qualification de production. Les versions archivées et le banc d’intégration historique restent inchangés.
+Ces profils sont inclus dans l’[installateur de qualification Linux 1.1.4 publié](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.4-qualification). Son archive exacte a réussi l’intégration distincte de 792 tests Manager 1.17.0 sur les deux architectures; les [preuves publiées et exigences restantes](../validation/LINUX_1_1_4_RELEASE_ADDENDUM.md) identifient les fichiers acceptés. Cela ne déploie ni ne migre de contrat, ne qualifie aucune installation physique et n’autorise aucun travail financé. Les versions antérieures et leur banc d’intégration historique restent inchangés.
 
 ### Choisir un ensemble complet
 
