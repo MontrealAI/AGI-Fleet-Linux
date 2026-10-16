@@ -92,6 +92,17 @@ test('EN/FR operator can inspect and approve an assistant request; execution sta
       await page.locator('#journeyFile').setInputFiles({name:'invalid-utf8.json',mimeType:'application/json',buffer:Buffer.from([255])});
       await page.locator('#journeyImport').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('PROJECT_UTF8_REQUIRED'));
       assert.equal(await page.locator('#journey option').count(),0);
+      // Valid request with retained JSON whitespace: it fits transport but not
+      // the complete return/history budget. Refusal must precede any mutation.
+      const beforeImport={journeys:f.runtime.store.db.prepare('SELECT COUNT(*) AS n FROM journeys').get().n,grants:f.runtime.store.db.prepare('SELECT COUNT(*) AS n FROM grants').get().n,runs:f.runtime.store.db.prepare('SELECT COUNT(*) AS n FROM runs').get().n};
+      await page.locator('#journeyFile').setInputFiles({name:'too-large-request.json',mimeType:'application/json',buffer:Buffer.from(' '.repeat(2_000_000)+request)});
+      await page.locator('#journeyImport').click();
+      await page.waitForFunction(()=>/saved no project|enregistré aucun projet/.test(document.getElementById('status').textContent));
+      const refusal=await page.locator('#status').textContent();
+      assert.match(refusal,language==='fr'?/Conservez le fichier original/:/Keep the original file/);
+      assert.match(refusal,language==='fr'?/aucun historique n’a été tronqué/:/no history was truncated/);
+      assert.equal(await page.locator('#journeyFile').evaluate(e=>e.files[0].name),'too-large-request.json');
+      for(const table of ['journeys','grants','runs'])assert.equal(f.runtime.store.db.prepare('SELECT COUNT(*) AS n FROM '+table).get().n,beforeImport[table]);
       await page.locator('#journeyFile').setInputFiles({name:'fleet-request.json',mimeType:'application/json',buffer:Buffer.from(request)});
       await page.locator('#journeyImport').click();await page.waitForFunction(()=>document.getElementById('journey').options.length===1);
       assert.match(await page.locator('#journey').textContent(),/AGIALPHA/);

@@ -47,10 +47,31 @@ are `R0 + 64,000` and `J0 + 128,000`: quoting each observation can expand at mos
 twice in the return and four times in its stored string. UUIDs and hashes have
 fixed ASCII lengths, and all request quoting is measured exactly.
 
+The capacity renderer and checker are pure deterministic, in-memory functions:
+no provider call, filesystem write, native execution or grant is involved. The
+renderer enforces the worker's existing 300,000-byte per-file ceiling before
+admission. A successful native observation has fixed fields, namespace IDs with
+at most 20 decimal digits, five nonnegative safe integers, and at most 100 ASCII
+stderr characters. Its maximum canonical size is 550 bytes, safely
+inside the 16,000-byte allowance; an invalid backend remains fail-closed.
+
+If import refuses this size, it saves no project, starts no execution and
+creates or consumes no grant. Keep the original file and existing history;
+choose a smaller supported export or input. A preparation refusal creates no
+new grant or execution and does not erase earlier work. Never truncate audit
+history to make a request fit. An export error must not be interpreted as proof
+that no earlier work occurred.
+
 Both bounds must fit the unchanged 4,000,000-byte caps before a grant is prepared.
 The maximum stored row is reserved atomically against the existing 32 MB journey
 budget, so later imports cannot consume its return headroom. Older unreserved
-rows must acquire that reservation before new work. A backend that violates its
+rows must acquire that reservation before new work. Each pending and completed
+row retains its calculated reservation, rather than a fixed 4 MB allocation.
+At most 32 rows fit, and eight near-maximum rows exhaust the 32 MB budget;
+smaller rows may allow more. Completing a return does not release that reserved
+history. A storage refusal saves no new project and creates or consumes no
+grant; preserve the original file and retained history. Nothing is discarded
+or silently truncated. A backend that violates its
 fixed result/observation contract fails before successful completion and retains
 the existing uncertain-run/STOP behavior. UTF-8 decoding rejects invalid bytes
 and preserves a BOM for the strict JSON parser to reject; it never removes a
@@ -96,3 +117,23 @@ limites de 4 000 000 octets restent inchangées. Une demande trop grande est
 refusée avant de consommer un travail; les imports suivants ne peuvent pas
 occuper la place déjà réservée. Les octets UTF-8 invalides et les fichiers JSON
 avec marqueur BOM sont refusés sans normalisation silencieuse.
+
+Le calcul de capacité emploie seulement le rendu et la vérification déterministes
+en mémoire, sans fournisseur, écriture de fichier, exécution native ni
+autorisation. Chaque fichier produit doit respecter la limite de 300 000 octets.
+Les champs bornés d’une observation native réussie occupent au plus 550
+octets, sous la réserve de 16 000 octets.
+
+Un refus d’importation pour taille n’enregistre aucun projet, ne lance aucune
+exécution et ne crée ni ne consomme d’autorisation. Conservez le fichier original
+et l’historique existant; choisissez un export ou des données plus petits et pris
+en charge. Un refus de préparation ne crée aucune nouvelle autorisation ou
+exécution et n’efface pas les travaux antérieurs. Ne tronquez pas l’historique.
+Un échec d’exportation ne signifie pas qu’aucun travail antérieur n’a eu lieu.
+
+Chaque projet en attente ou terminé conserve sa réserve calculée dans le budget
+de 32 Mo. La limite reste de 32 entrées; huit entrées proches de 4 Mo épuisent ce
+budget, tandis que des entrées plus petites peuvent être plus nombreuses.
+Terminer un retour ne libère pas sa réserve. Un refus faute de place ne conserve
+aucun nouveau projet, ne crée ni ne consomme d’autorisation. Gardez le fichier
+original et l’historique; rien n’est supprimé ni tronqué silencieusement.

@@ -8,7 +8,7 @@ The alpha.5 identity is a new source candidate for the project journey and requi
 
 ## Required before publication
 
-The final main commit must pass a coordinated Local Skills workflow. Both Linux x64 and ARM64 must pass 137 module tests on source and extracted bytes, 29 installer fixtures, four native cases on source and extracted bytes, actual saved installation/service/recovery/removal and all six actual Gateway/skill/sandbox paths. Gateway model transport is an explicitly synthetic local fixture. Two EN/FR browser journeys retain actual download/accessibility/reflow observations and four screenshots; browser worker execution is separately declared synthetic.
+The final main commit must pass a coordinated Local Skills workflow. Both Linux x64 and ARM64 must pass 150 module tests on source and extracted bytes, 29 installer fixtures, four native cases on source and extracted bytes, actual saved installation/service/recovery/removal and all six actual Gateway/skill/sandbox paths. Gateway model transport is an explicitly synthetic local fixture. Two EN/FR browser journeys retain actual download/accessibility/reflow observations and four screenshots; browser worker execution is separately declared synthetic.
 
 The auditor rejects missing, failing, skipped or ambiguous summaries, mismatched source/run identities, divergent architecture archives, missing lifecycle/role evidence and broader qualification claims. The shared strict installer verifier checks the saved package's paths, inventory, file hashes and modes. New changes always require new qualification; historical green runs cannot qualify changed bytes.
 

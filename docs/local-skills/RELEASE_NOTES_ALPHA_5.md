@@ -30,11 +30,13 @@ the published alpha.4 guide remains unchanged.
 This candidate uses `0.1.0-alpha.5` and a new release tag/archive identity.
 Published alpha.4 and Dedicated Fleet Linux/Mac assets are unchanged. The
 preserved alpha.4 specification retains its original 127-test source gate;
-alpha.5 requires 137 module tests and retains the native, installer, browser,
+alpha.5 requires 150 module tests and retains the native, installer, browser,
 inherited Fleet and independent audit gates. No threshold is reduced.
 
-The source has ten added project regressions, covering EN/FR, both routes,
-separate authorization, invalid input/receipt changes and cross-project replay.
+The source has 23 project regressions, including seven exact JSON/Unicode
+admission boundaries, maximum-sized observations, reservation persistence,
+output expansion and contextual EN/FR refusal guidance. The original route,
+authorization, UTF-8, receipt-integrity and cross-project replay cases remain.
 Component, fixture and fallback-browser observations do not qualify an operator
 distribution. The exact saved candidate still needs x64 and ARM64 native and
 installed journeys, the pinned browser gate and retained audit. Physical,

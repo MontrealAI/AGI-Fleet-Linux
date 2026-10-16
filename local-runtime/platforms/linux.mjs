@@ -18,6 +18,15 @@ export function sandboxArguments() {
   }
   return a;
 }
+// Kernel namespace identifiers are uint64-scale decimal IDs, not unbounded
+// worker text. Together with safe integers, these fields have a fixed JSON
+// ceiling before they enter a successful native receipt.
+export function validateWorkerObservation(w){
+  keys(w,['pidNamespace','networkNamespace','userCPUMicroseconds','systemCPUMicroseconds','maxRSSKiB','taskMilliseconds']);
+  need(/^pid:\[\d{1,20}\]$/.test(w.pidNamespace)&&/^net:\[\d{1,20}\]$/.test(w.networkNamespace),'WORKER_OBSERVATION_INVALID');
+  for(const key of ['userCPUMicroseconds','systemCPUMicroseconds','maxRSSKiB','taskMilliseconds'])need(Number.isSafeInteger(w[key])&&w[key]>=0,'WORKER_OBSERVATION_INVALID');
+  return w;
+}
 export class LinuxSandbox {
   inspect() {
     const report={schema:'agi-fleet/local-host/v1',platform:process.platform,arch:process.arch,backend:'linux-bwrap-offline/v1',execution:'this host',inference:'none',network:'none',files:'per-run input only; no host writes',browser:'BLOCKED',desktop:'BLOCKED',productionQualified:false,physical:'NOT_RUN',supported:false,alphaRun:inspectAlphaPackage()};
@@ -62,10 +71,9 @@ export class LinuxSandbox {
         try{
           need(groupGone,'CLEANUP_UNCONFIRMED');need(!problem,problem);need(status===0,'WORKER_FAILED');
           const envelope=parseStrict(Buffer.concat(stdout).toString(),2_000_000);keys(envelope,['result','workerObservation']);
-          const w=envelope.workerObservation;keys(w,['pidNamespace','networkNamespace','userCPUMicroseconds','systemCPUMicroseconds','maxRSSKiB','taskMilliseconds']);
-          need(/^pid:\[\d+\]$/.test(w.pidNamespace)&&/^net:\[\d+\]$/.test(w.networkNamespace),'WORKER_OBSERVATION_INVALID');
-          for(const key of ['userCPUMicroseconds','systemCPUMicroseconds','maxRSSKiB','taskMilliseconds'])need(Number.isSafeInteger(w[key])&&w[key]>=0,'WORKER_OBSERVATION_INVALID');
-          resolve({result:envelope.result,observation:{...observation,worker:w,wallMilliseconds:Math.ceil(performance.now()-started)}});
+          const w=validateWorkerObservation(envelope.workerObservation),wallMilliseconds=Math.ceil(performance.now()-started);
+          need(Number.isSafeInteger(wallMilliseconds)&&wallMilliseconds>=0,'WORKER_OBSERVATION_INVALID');
+          resolve({result:envelope.result,observation:{...observation,worker:w,wallMilliseconds}});
         }catch(e){e.observation=observation;reject(e);}
       });
       if(signal?.aborted&&!exited)abort();
