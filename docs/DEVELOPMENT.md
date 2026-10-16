@@ -56,7 +56,7 @@ python3 engineering/materialize-release.py --source-only --output /ABSOLUTE/PATH
 
 An offline ZIP can be supplied with `--archive`. Materialization verifies size, SHA-256, CRC, seven manifests, inventories and executable modes before extracting into an absent canonical directory.
 
-`engineering/current-release.json` preserves the 1.0.9 acceptance anchor for the historical audit tools; `engineering/next-release.json` describes the 1.1.4 source and required gates. After publication, the 1.1.4 manifest will be the authority for its archive identity and observed test results. This candidate remains unpublished until its exact-artifact gates and review pass. The [baseline engineering guide](../engineering/README.md) documents historical reproduction commands. Do not update historical constants to make a new candidate appear previously accepted.
+`engineering/current-release.json` preserves the 1.0.9 acceptance anchor for the historical audit tools; `engineering/next-release.json` describes the 1.1.4 source and required gates. Linux 1.1.4 is now published as a qualification prerelease; its published manifest is the authority for archive identity and observed results. The [download verification addendum](../validation/LINUX_1_1_4_RELEASE_ADDENDUM.md) records the exact assets and remaining physical gates. The [baseline engineering guide](../engineering/README.md) documents historical reproduction commands. Do not update historical constants to make a new candidate appear previously accepted.
 
 ## Authorized-workspace development preview
 
