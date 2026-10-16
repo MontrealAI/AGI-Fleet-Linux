@@ -12,6 +12,19 @@ The transactional development installer preserves private state and user outputs
 
 The new [capability admission contract](CAPABILITY_ADMISSION.md) checks an exact task without creating authority, records supported operations and limits in its grant, and rechecks bound configuration before authorization and dispatch. It distinguishes supportable work, missing prerequisites and unsupported scope; custom missions are refused before reservation. Its component tests do not qualify general tools, live providers, independent review or Mac local execution, and the original 22 acceptance requirements remain in force.
 
+The additive [Alpha project journey source implementation](PROJECT_JOURNEY.md)
+retains an exact upstream project request, its explicit USDC/$AGIALPHA route,
+bounded CSV execution and separately authorized internal Node check. Its return
+can be imported into Alpha as historical evidence. The native Alpha project and
+task mapping are validated; attached Manager/Jobs histories remain unverified
+historical claims until their native receivers validate them. This new source
+does not replace or inherit qualification from the published alpha.4 ZIP.
+
+The prepared source candidate is **Local Skills 0.1.0-alpha.5**, with a separate
+`v0.1.0-local-skills-preview.5` release identity. Its native, saved-package and
+physical gates are pending. The alpha.4 release, assets and evidence below are
+preserved unchanged.
+
 The capacity/launch-boundary correction adds UTF-8 history accounting, atomic outcome-storage reservations that survive uncertainty/restart, and a final Linux executable/backend/boot check against the authorized binding. Seeded storage-pressure and synthetic host-drift regressions exercise these boundaries without claiming native resource or physical-session qualification. The history ceilings and consumed daily work budget remain intact. This does not implement cgroup memory/process limits, filesystem quotas, exclusive desktops or cross-host authority fencing; the complete A08 and A10 requirements remain open.
 
 For help, use **Preview support report** in the local dashboard, inspect its complete contents, and choose **Save this report**. Only readiness and aggregate counts are included. Credentials, actor names/identities, host identifiers, paths, tasks, outputs and event history are excluded. Nothing is uploaded automatically. A passing readiness probe does not commission the machine.

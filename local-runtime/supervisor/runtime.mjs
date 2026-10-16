@@ -7,6 +7,7 @@ import {Store} from './store.mjs';
 import {LinuxSandbox} from '../platforms/linux.mjs';
 import {defaultMission} from '../../fleet/successor/vendor/manager/site/assets/successor/missions.mjs';
 import {successorOperation} from './successor.mjs';
+import {journeyOperation} from './journey.mjs';
 import {validateTaskInput} from '../worker.mjs';
 import {inspectReconciliation,reconcile} from './reconciliation.mjs';
 import {diagnostics} from './diagnostics.mjs';
@@ -80,7 +81,8 @@ export class LocalRuntime {
     keys(input,['actor','task']);this.scope(p,'prepare',input.actor);
     return this.admissionReport(this.store.actor(uuid(input.actor)),input.task);
   }
-  prepare(input,p) {
+  prepare(input,p,{projectRequestSha256=null}={}) {
+    need(projectRequestSha256===null||/^[a-f0-9]{64}$/.test(projectRequestSha256),'PROJECT_REQUEST_BINDING');
     keys(input,['actor','task']);this.scope(p,'prepare',input.actor);const actor=this.store.actor(uuid(input.actor)),host=this.ready(actor);
     need(!this.store.meta('paused'),'INTAKE_PAUSED');validateTaskInput(actor.role,input.task);
     const publicView=structuredClone(input.task);
@@ -97,9 +99,9 @@ export class LocalRuntime {
       need(false,'INDEPENDENT_REVIEW_NOT_QUALIFIED');
     }
     const admission=requireAdmission(this.admissionReport(actor,input.task,{host}));
-    const at=this.now();const grant={schema:'agi-fleet/local-grant/v1',id:id(),actor:actor.id,principal:p.hash,task:input.task,inputSha256:digest(input.task),packageSha256:actor.packageSha256,host:actor.host,generation:actor.generation,createdAt:at,expiresAt:at+300000,limits:OFFLINE_LIMITS,review:input.task.review,authority:'bounded-offline-only',admission};
+    const at=this.now();const grant={schema:'agi-fleet/local-grant/v1',id:id(),actor:actor.id,principal:p.hash,task:input.task,inputSha256:digest(input.task),packageSha256:actor.packageSha256,host:actor.host,generation:actor.generation,createdAt:at,expiresAt:at+300000,limits:OFFLINE_LIMITS,review:input.task.review,authority:'bounded-offline-only',admission,...(projectRequestSha256?{projectRequestSha256}:{})};
     this.store.transaction(()=>{const used=this.store.db.prepare('SELECT COALESCE(SUM(length(CAST(value AS BLOB))),0) AS bytes FROM grants').get().bytes;need(used+Buffer.byteLength(canonical(grant))<=STORAGE_LIMITS.grants,'GRANT_HISTORY_FULL');this.store.db.prepare('INSERT INTO grants VALUES(?,?,?,?)').run(grant.id,actor.id,canonical(grant),'prepared');});
-    return {grant:grant.id,commitment:digest(grant),actor:actor.id,task:grant.task,limits:grant.limits,expiresAt:grant.expiresAt,confirmationRequired:true,admission};
+    return {grant:grant.id,commitment:digest(grant),actor:actor.id,task:grant.task,limits:grant.limits,expiresAt:grant.expiresAt,confirmationRequired:true,admission,...(projectRequestSha256?{projectRequestSha256}:{})};
   }
   authorize(input,p) {
     this.scope(p,'authorize');keys(input,['grant','commitment','confirm']);need(input.confirm===true,'CONFIRM_REQUIRED');
@@ -125,7 +127,7 @@ export class LocalRuntime {
       need(active.length<this.store.meta('maxConcurrent')&&!active.some(x=>x.actor===actor.id),'QUEUE_CAPACITY');
       const recent=this.store.db.prepare('SELECT actor,value FROM runs').all().filter(r=>parseStrict(r.value).reservedAt>now-86400000);
       need(recent.length<this.store.meta('maxRuns')&&recent.filter(r=>r.actor===actor.id).length<actor.maxRuns,'DAILY_BUDGET_EXHAUSTED');
-      const run={id:id(),grant:grant.id,inputSha256:grant.inputSha256,reservedAt:now,role:actor.role,review:grant.review,sourceSha256:this.source,packageSha256:actor.packageSha256,host:actor.host,authority:'none',inference:'none',spendUSDC:'0',admission,storageReservationBytes:STORAGE_LIMITS.runReservation};
+      const run={id:id(),grant:grant.id,inputSha256:grant.inputSha256,reservedAt:now,role:actor.role,review:grant.review,sourceSha256:this.source,packageSha256:actor.packageSha256,host:actor.host,authority:'none',inference:'none',spendUSDC:'0',admission,storageReservationBytes:STORAGE_LIMITS.runReservation,...(grant.projectRequestSha256?{projectRequestSha256:grant.projectRequestSha256}:{})};
       const total=runHistoryUsage(this.store.db),raw=canonical(run);
       need(total.count<4096&&total.bytes+Buffer.byteLength(raw)+run.storageReservationBytes<=STORAGE_LIMITS.runs,'HISTORY_CAPACITY_EXPORT_REQUIRED');
       this.store.db.prepare("UPDATE grants SET state='consumed' WHERE id=?").run(grant.id);
@@ -156,7 +158,7 @@ export class LocalRuntime {
       }else abort.signal.throwIfAborted();
       need(result.observation?.processGroupGone===true,'CLEANUP_UNCONFIRMED');
       need(Buffer.byteLength(canonical(result))<=STORAGE_LIMITS.backendResult,'OUTPUT_LIMIT');
-      const receipt={...result,outputSha256:digest(result.result),inputSha256:g.inputSha256,independentReview:false,sourceActor:actor.id,sourceController:actor.controller,authority:'none'};
+      const receipt={...result,outputSha256:digest(result.result),inputSha256:g.inputSha256,independentReview:false,sourceActor:actor.id,sourceController:actor.controller,authority:'none',...(g.projectRequestSha256?{projectRequestSha256:g.projectRequestSha256}:{})};
       const outcome=encodeOutcome(receipt);
       this.store.transaction(()=>{this.store.db.prepare("UPDATE runs SET state='complete',result=? WHERE id=?").run(outcome,g.run.id);this.store.event('run-complete',{id:g.run.id,outputSha256:receipt.outputSha256});});
       return {run:g.run.id,state:'complete',receipt};
@@ -230,6 +232,7 @@ export class LocalRuntime {
     const a=this.addActor({role:v.role,name:v.name},p);a.sourceActor=v.sourceActor;this.store.saveActor(a);this.store.event('portable-import-inert',{actor:a.id,sourceActor:v.sourceActor});return a;
   }
   async dispatch(action,input,p) {
+    if(['journey-import','journey-list','journey-inspect','journey-prepare','journey-review-prepare','journey-export'].includes(action))return journeyOperation(this,action,input,p);
     if(action==='diagnostics')return diagnostics(this,input,p);
     if(action==='reconciliation')return inspectReconciliation(this,input,p);
     if(action==='reconcile')return reconcile(this,input,p);
@@ -239,7 +242,7 @@ export class LocalRuntime {
     if(action==='client-info'){this.scope(p,'status',p.actor);keys(input,[]);return {actor:p.actor,operator:p.operator,actions:p.actions};}
     if(action==='grant-inspect'){
       this.scope(p,'grant-inspect');keys(input,['grant']);const row=this.store.db.prepare('SELECT state,value FROM grants WHERE id=?').get(uuid(input.grant));need(row,'GRANT_UNAVAILABLE');
-      const g=parseStrict(row.value);return {grant:g.id,commitment:digest(g),actor:g.actor,task:g.task,limits:g.limits,expiresAt:g.expiresAt,state:row.state,preparingClient:g.principal===p.hash?'this-operator':'scoped-client',confirmationRequired:true,admission:g.admission??null};
+      const g=parseStrict(row.value);return {grant:g.id,commitment:digest(g),actor:g.actor,task:g.task,limits:g.limits,expiresAt:g.expiresAt,state:row.state,preparingClient:g.principal===p.hash?'this-operator':'scoped-client',confirmationRequired:true,admission:g.admission??null,...(g.projectRequestSha256?{projectRequestSha256:g.projectRequestSha256}:{})};
     }
     if(action==='doctor'){this.scope(p,'doctor');return this.doctor();}
     if(action==='example'){this.scope(p,'example');keys(input,['kind','language']);need(['analyst','website'].includes(input.kind)&&['en','fr'].includes(input.language),'EXAMPLE_INVALID');return defaultMission(input.kind,input.language);}

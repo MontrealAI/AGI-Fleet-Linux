@@ -19,7 +19,7 @@ export function createServer(runtime,{port=0,socket=null}={}) {
     if(req.method!=='POST'||!/^\/v1\/[a-z-]+$/.test(req.url)||req.headers['content-type']!=='application/json')return reply(404,{error:'ROUTE_INVALID'});
     try {
       const principal=runtime.authenticate(req.headers.authorization?.replace(/^Bearer /,''));
-      const maximum=req.url==='/v1/project-import'?CAPSULE_ENVELOPE_BYTES:MAX_BYTES;
+      const maximum=['/v1/project-import','/v1/journey-import'].includes(req.url)?CAPSULE_ENVELOPE_BYTES:MAX_BYTES;
       need(!req.headers['content-length']||Number(req.headers['content-length'])<=maximum,'INPUT_LIMIT');
       let count=0,parts=[];for await(const part of req){count+=part.length;need(count<=maximum,'INPUT_LIMIT');parts.push(part);}
       const input=parseStrict(Buffer.concat(parts).toString(),maximum);

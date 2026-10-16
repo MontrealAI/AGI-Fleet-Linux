@@ -2,11 +2,13 @@
 
 PR #26 integrates the bounded Linux development preview described by its title. The full product described in [IMPLEMENTATION_HANDOFF.md](IMPLEMENTATION_HANDOFF.md) remains unfinished. Its 22 acceptance rows, `fullHandoffComplete: false` and `releaseEligible: false` are preserved; `releaseEligible` refers to that full product. None is a claim about completion of this narrower preview.
 
-The separate [preview specification](../../local-runtime/preview-release.json) names `0.1.0-alpha.4`, tag `v0.1.0-local-skills-preview.4`, and its mandatory observations. It permits only a clearly labeled prerelease with `operatorInstaller: false`, `productionQualified: false`, no physical/live-provider qualification and funded work disabled. It does not authorize Dedicated Fleet publication or new runtime capabilities.
+The separate [preview specification](../../local-runtime/preview-release.json) names `0.1.0-alpha.5`, tag `v0.1.0-local-skills-preview.5`, and its mandatory observations. It permits only a clearly labeled prerelease with `operatorInstaller: false`, `productionQualified: false`, no physical/live-provider qualification and funded work disabled. It does not authorize Dedicated Fleet publication or new runtime capabilities.
+
+The alpha.5 identity is a new source candidate for the project journey and requires its own exact saved-package qualification. Published alpha.4 remains unchanged; its original specification is preserved in `successor/history/local-skills-alpha4-preview-release.json`. [Alpha.5 changes](RELEASE_NOTES_ALPHA_5.md).
 
 ## Required before publication
 
-The final main commit must pass a coordinated Local Skills workflow. Both Linux x64 and ARM64 must pass 55 module tests on source and extracted bytes, 29 installer fixtures, four native cases on source and extracted bytes, actual saved installation/service/recovery/removal and all six actual Gateway/skill/sandbox paths. Gateway model transport is an explicitly synthetic local fixture. Two EN/FR browser journeys retain actual download/accessibility/reflow observations and four screenshots; browser worker execution is separately declared synthetic.
+The final main commit must pass a coordinated Local Skills workflow. Both Linux x64 and ARM64 must pass 135 module tests on source and extracted bytes, 29 installer fixtures, four native cases on source and extracted bytes, actual saved installation/service/recovery/removal and all six actual Gateway/skill/sandbox paths. Gateway model transport is an explicitly synthetic local fixture. Two EN/FR browser journeys retain actual download/accessibility/reflow observations and four screenshots; browser worker execution is separately declared synthetic.
 
 The auditor rejects missing, failing, skipped or ambiguous summaries, mismatched source/run identities, divergent architecture archives, missing lifecycle/role evidence and broader qualification claims. The shared strict installer verifier checks the saved package's paths, inventory, file hashes and modes. New changes always require new qualification; historical green runs cannot qualify changed bytes.
 
@@ -16,10 +18,10 @@ Local publication requires all native, browser, local-audit and Fleet jobs. The 
 
 ## Published files and immutability
 
-- `agi-fleet-local-0.1.0-alpha.4.zip`: exact tested development package with locked JavaScript dependencies.
-- `Local-Skills-Evidence-0.1.0-alpha.4.zip`: native/browser/package observations, local audit and inherited Fleet regression evidence.
-- `Local-Skills-Manifest-0.1.0-alpha.4.json`: source/run/package/evidence identities, explicit scope and separately downloaded Node pins.
-- `SHA256SUMS-local-0.1.0-alpha.4.txt`: checksums for those three files.
+- `agi-fleet-local-0.1.0-alpha.5.zip`: exact tested development package with locked JavaScript dependencies.
+- `Local-Skills-Evidence-0.1.0-alpha.5.zip`: native/browser/package observations, local audit and inherited Fleet regression evidence.
+- `Local-Skills-Manifest-0.1.0-alpha.5.json`: source/run/package/evidence identities, explicit scope and separately downloaded Node pins.
+- `SHA256SUMS-local-0.1.0-alpha.5.txt`: checksums for those three files.
 
 A matching tag/release can be resumed only with identical target, canonical notes and assets. Differing tags, assets or published files are never replaced. The final publication repeats canonical notes, verifies remote asset digests, preserves prerelease classification and never makes this preview the default latest release. Each asset stays below 450 MB. Future changes require a fresh version/tag and qualification; documentation-only main changes do not silently rebuild this release.
 

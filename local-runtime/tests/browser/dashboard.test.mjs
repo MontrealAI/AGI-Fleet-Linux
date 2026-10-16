@@ -8,9 +8,13 @@ import AxeBuilder from '../../../engineering/browser-tests/node_modules/@axe-cor
 import {LocalRuntime} from '../../supervisor/runtime.mjs';
 import {createServer} from '../../supervisor/server.mjs';
 import {fixture,task} from '../helpers.mjs';
+import {nativeProject} from '../fixtures/project.mjs';
+import {createProjectRequest,inspectProjectReturn} from '../../project/transfer.mjs';
+
+const launch=()=>chromium.launch({headless:true,...(process.env.AGI_QA_CHROMIUM?{executablePath:process.env.AGI_QA_CHROMIUM}:{})});
 
 test('real EN/FR dashboard: authenticated onboarding, keyboard, mobile reflow and axe; native execution when ready',async()=>{
-  const browser=await chromium.launch({headless:true}),directory=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-dashboard-'));fs.chmodSync(directory,0o700);
+  const browser=await launch(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-dashboard-'));fs.chmodSync(directory,0o700);
   const runtime=new LocalRuntime(directory,{create:true}),s=createServer(runtime);
   try{
     const {url}=await s.start();
@@ -46,7 +50,7 @@ test('real EN/FR dashboard: authenticated onboarding, keyboard, mobile reflow an
   }finally{s.server.closeAllConnections();await new Promise(r=>s.server.close(r));runtime.close();fs.rmSync(directory,{recursive:true,force:true});await browser.close();}
 });
 test('EN/FR operator can inspect and approve an assistant request; execution stays with its scoped client (synthetic worker boundary)',async()=>{
-  const browser=await chromium.launch({headless:true});
+  const browser=await launch();
   try{for(const language of ['en','fr']){
     const f=fixture(),s=createServer(f.runtime);let context;
     try{
@@ -79,6 +83,24 @@ test('EN/FR operator can inspect and approve an assistant request; execution sta
       assert.equal(await page.locator('#authorize').isDisabled(),true);assert.equal(await page.locator('#run').isDisabled(),false);
       assert.equal(await page.locator('#grantDetails').getAttribute('tabindex'),'0');
       await page.locator('#run').click();await page.waitForFunction(()=>document.getElementById('output').textContent.includes('"state": "complete"'));
+      // Real deterministic work and separate grants; declared synthetic OS boundary.
+      const node=f.create('node'),original=await nativeProject(),request=await createProjectRequest(original,{language,route:'agijobsv0-jobregistry-v2'});
+      await page.locator('#refresh').click();
+      await page.locator('#journeyFile').setInputFiles({name:'fleet-request.json',mimeType:'application/json',buffer:Buffer.from(request)});
+      await page.locator('#journeyImport').click();await page.waitForFunction(()=>document.getElementById('journey').options.length===1);
+      assert.match(await page.locator('#journey').textContent(),/AGIALPHA/);
+      await page.locator('#journeyPrepare').click();await page.waitForFunction(()=>!document.getElementById('authorize').disabled);
+      await page.locator('#authorize').click();await page.waitForFunction(()=>!document.getElementById('run').disabled);
+      await page.locator('#run').click();await page.waitForFunction(()=>document.getElementById('output').textContent.includes('Énergie'));
+      await page.locator('#journeyNode').selectOption(node.id);await page.locator('#journeyReviewPrepare').click();
+      await page.waitForFunction(()=>!document.getElementById('authorize').disabled);
+      await page.locator('#authorize').click();await page.waitForFunction(()=>!document.getElementById('run').disabled);
+      await page.locator('#run').click();await page.waitForFunction(()=>document.getElementById('journeyReview').options.length===1);
+      const download=page.waitForEvent('download');await page.locator('#journeyExport').click();const file=await download;
+      const returned=await inspectProjectReturn(fs.readFileSync(await file.path(),'utf8'));
+      assert.equal(returned.request.upstream.raw,original);assert.equal(returned.request.route.asset,'AGIALPHA');assert.equal(returned.independentReview,false);
+      assert.equal(returned.reviewClass,'historical-internal');assert.equal(returned.productionQualified,false);
+      assert.match(await page.locator('#journeyExport').textContent(),language==='fr'?/retour pour Alpha/:/return for Alpha/);
       const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();assert.deepEqual(axe.violations.map(v=>v.id),[]);
     }finally{if(context)await context.close();s.server.closeAllConnections();if(s.server.listening)await new Promise(r=>s.server.close(r));f.close();}
   }}finally{await browser.close();}
