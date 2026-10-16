@@ -72,6 +72,10 @@ The public sandbox is one work mode, **not the ceiling of the product's mission*
 
 **Larger public Studio tasks are retained in Linux 1.1.4 and available in both source previews:** [Linux Studio](successor/docs/GUIDE.md#keep-larger-work-safely) · [Preserved Linux source preview](workstation/STUDIO.md) · [Mac Studio](macos/preview/STUDIO.md). Agent and Node can import public `computer-work/v2` jobs with arbitrary declared file formats, up to **64 files and 64 MiB total**, exact-byte review handoffs and revision feedback. Large Studio work can be explicitly excluded from bounded wallet backups; keep its exported files separately. The quick editor remains v1. Imports preserve each job's exact runtime identities, permissions, criteria, budgets and deadlines, and grant no execution authority. The reviewed public Studio format and explicit backup exclusion were introduced in Linux 1.1.2 and remain included in Linux 1.1.4. The Mac additions remain outside its 1.20.2 ZIP; private or signed-in work belongs to the separate native workflow.
 
+## Ideas behind the workforce
+
+[Read four selected essays](https://montrealai.github.io/AGI-Fleet-Linux/#reading) on provider trust, governed autonomy, coordinated execution and the cost of verification. English/French summaries link to current guides. [Reading notes and version context](docs/READING.md).
+
 ## The potential of Fleet + AGIJobManager
 
 **Our assessment: together, they could form a reusable workforce that turns a clear request into an independently checked outcome in the tools people already use.** Fleet supplies execution and review; AGIJobManager supplies funded work orders, participation rules and settlement. This is an architectural and commercial assessment, not a measured automation rate.
