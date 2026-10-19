@@ -33,8 +33,9 @@ def inspect_desk_focus(handoff,actions, *, table_focusable=False):
     expected=[{'tag':'div','id':None,'role':'region','tabindex':'0'}]+[{'tag':'input','id':'cm-qty-'+name,'role':None,'tabindex':None} for name in ['stellar','laurentian','boreal']]
     if elements[:4]!=expected:raise ValueError('DESK_FOCUS_ORDER_CHANGED')
     if len(elements)<5 or elements[4]['id']!='cm-desk-evaluate' or elements[4]['tag']!='button':raise ValueError('DESK_EVALUATE_FOCUS_CHANGED')
-    # Markup alone does not establish the actual runtime keyboard order.
-    # The reviewed renderer removes a nonoverflowing table from that order.
+    # Markup alone does not describe runtime focus: the reviewed desk removes the
+    # table from keyboard order when it fits. Actual native browser acceptance is
+    # required to validate layout at its fixed 1024x768 viewport.
     if not re.search(r'scrollRegion\.tabIndex\s*=\s*scrollRegion\.scrollWidth\s*>\s*scrollRegion\.clientWidth\s*\?\s*0\s*:\s*-1\s*;',handoff['task']['html']):raise ValueError('DESK_RUNTIME_FOCUS_RULE_CHANGED')
     prefix=[{'type':'move','x':500,'y':300}]
     if table_focusable:prefix.append({'type':'keypress','keys':['TAB']})
@@ -43,4 +44,4 @@ def inspect_desk_focus(handoff,actions, *, table_focusable=False):
         start=len(prefix)+index*3;group=actions[start:start+3]
         if len(group)!=3 or group[0]!={'type':'keypress','keys':['TAB']} or group[1]!={'type':'keypress','keys':['CTRL','A']} or group[2].get('type')!='type':raise ValueError('DESK_INPUT_ACTIONS_CHANGED')
     if actions[len(prefix)+9:len(prefix)+11]!=[{'type':'keypress','keys':['TAB']},{'type':'keypress','keys':['ENTER']}]:raise ValueError('DESK_SUBMIT_ACTIONS_CHANGED')
-    return {'schema':'agi-fleet/static-desk-focus-observation/v1','evidenceClass':'STATIC_DOM_FOCUS_CONTRACT_NO_BROWSER_EXECUTION','firstFocusableElements':elements[:5],'tableFocusableAssumption':table_focusable,'nativeViewport':list(NATIVE_VIEWPORT),'plannedActionCount':len(actions),'actualBrowserActions':None,'actualScreenshots':None,'browserAcceptanceStillRequired':True}
+    return {'schema':'agi-fleet/static-desk-focus-observation/v1','evidenceClass':'STATIC_MARKUP_AND_RUNTIME_RULE_NO_BROWSER_EXECUTION','firstFocusableElements':elements[:5],'staticFocusCandidates':elements[:5],'runtimeScrollFocusRule':'TABLE_REMOVED_WHEN_NOT_OVERFLOWING','tableFocusableAssumption':table_focusable,'nativeViewport':list(NATIVE_VIEWPORT),'plannedActionCount':len(actions),'actualBrowserActions':None,'actualScreenshots':None,'browserAcceptanceStillRequired':True}

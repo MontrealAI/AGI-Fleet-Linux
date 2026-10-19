@@ -26,12 +26,12 @@ class DeskFocusTests(unittest.TestCase):
     def test_new_focusable_before_inputs_requires_new_reviewed_actions(self):
         handoff,actions=fixture();handoff['task']['html']='<a href="#">New link</a>'+handoff['task']['html']
         with self.assertRaisesRegex(ValueError,'FOCUS_ORDER'):inspect_desk_focus(handoff,actions)
-    def test_changed_runtime_overflow_rule_requires_new_review(self):
-        handoff,actions=fixture();handoff['task']['html']=handoff['task']['html'].replace('? 0 : -1','? 0 : 0')
-        with self.assertRaisesRegex(ValueError,'RUNTIME_FOCUS_RULE'):inspect_desk_focus(handoff,actions)
     def test_positive_tabindex_requires_new_review(self):
         handoff,actions=fixture();handoff['task']['html']='<button tabindex="1">New first target</button>'+handoff['task']['html']
         with self.assertRaisesRegex(ValueError,'POSITIVE_TAB_ORDER'):inspect_desk_focus(handoff,actions)
+    def test_changed_runtime_overflow_rule_requires_new_review(self):
+        handoff,actions=fixture();handoff['task']['html']=handoff['task']['html'].replace('? 0 : -1','? 0 : 0')
+        with self.assertRaisesRegex(ValueError,'RUNTIME_FOCUS_RULE'):inspect_desk_focus(handoff,actions)
 
 
 if __name__=='__main__':unittest.main()

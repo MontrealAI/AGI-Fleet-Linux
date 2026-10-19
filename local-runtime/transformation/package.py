@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""Additive alpha.7 TI source preview; the alpha.6 builder/profile stay unchanged."""
+"""Alpha.7 source preview with shared alpha.6/alpha.7 dependency provenance."""
 import argparse
 import hashlib
 import json
@@ -53,12 +53,12 @@ def build(output):
         if base.resolve() != base or not base.is_dir():
             raise ValueError("TI_PACKAGE_MISSING_SOURCE: " + name)
         for file in sorted(base.rglob("*")):
-            if "__pycache__" in file.parts or file.suffix == ".pyc":
-                continue
-            if file.is_symlink() and file.parent.name == ".bin" and file.resolve().is_relative_to(ROOT / "fleet/node_modules"):
-                continue
             if file.is_symlink():
                 raise ValueError("TI_PACKAGE_SOURCE_LINK")
+            if file.relative_to(ROOT).as_posix() == "fleet/node_modules/.package-lock.json":
+                continue
+            if name != "fleet/node_modules" and ("__pycache__" in file.parts or file.suffix == ".pyc"):
+                continue
             if file.is_file():
                 entries[file.relative_to(ROOT).as_posix()] = regular(file)
     for file in [*ti_files(), INVENTORY, *(ROOT / n for n in EXTRA_FILES)]:

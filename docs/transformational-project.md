@@ -10,8 +10,10 @@ must refuse. A Computer Use rehearsal is a separate authorized route, not paid T
 
 The Linux dashboard remains version 1.1.5. TI is in the separate Local TI
 `0.1.0-alpha.7` source ZIP, whose retained role/runtime policies are alpha.6.
-The existing alpha.6 builder, release profile and all 6,272 Linux mirror records
-remain unchanged. Alpha.7 is not an operator installer or production qualification.
+Both current alpha.6 and alpha.7 builders now share the same dependency-byte
+provenance check. Their versions, runtime/release profiles and all 6,272 Linux
+mirror records remain unchanged. Alpha.7 is not an operator installer or production
+qualification.
 
 ## First steps
 
@@ -50,7 +52,7 @@ version qualifiée.
 Build with locked Fleet production dependencies installed:
 
 ```sh
-npm ci --prefix fleet --ignore-scripts --omit=dev
+npm ci --prefix fleet --ignore-scripts --omit=dev --no-audit --no-fund --bin-links=false
 python -B local-runtime/transformation/package.py --output /absolute/new-ti-package
 python -B local-runtime/transformation/package.py --verify /absolute/new-ti-package/agi-fleet-local-0.1.0-alpha.7.zip
 ```
@@ -64,14 +66,28 @@ requires clean committed source and both architecture jobs for those exact bytes
 The ignored `fleet/node_modules` members must also match the committed
 `dependency-reference.json`: every packaged file's bytes, length and normalized
 archive mode are compared before packaging. The manifest and package receipt bind
-that reference's exact digest. This is dependency provenance, not vulnerability,
-native-platform or production qualification.
+that reference's exact digest. Both current source-preview builders reject missing,
+extra, altered or differently executable dependency payloads before writing output.
+They reject symlinks and exclude only the generated root
+`fleet/node_modules/.package-lock.json`; a nested file with that name is still a
+checked payload. Building can remain offline after a matching normal installation.
+This is dependency provenance, not vulnerability, native-platform or production
+qualification.
+
+The canonical reference retains the original reviewed Node/npm installation
+metadata from #60. Its 2,393 payload rows were independently compared with all 14
+lock-integrity-verified production tarballs. Removing the generated root cache row
+was a payload-policy refinement, not a new installation or platform qualification.
 
 Reference maintenance is an explicit reviewed action. The following command
 creates a fresh private staging directory, copies only committed package and lock
 inputs, runs the pinned Node 24.21.0 / npm 11.19.0 locked installation with scripts
 disabled and development dependencies omitted, and records its complete packaged
-dependency inventory. It never blesses the existing ignored dependency tree.
+dependency inventory. Future refreshes also disable audit, funding notices and bin
+links, bound fetches/output/time, and preflight every complete-lock registry URL
+and SHA-512 integrity record. Their extra invocation controls are recorded
+separately from the retained historical installation. Refresh never blesses the
+existing ignored dependency tree.
 
 ```sh
 python -B local-runtime/transformation/dependency_reference.py --refresh --node /absolute/node-v24.21.0/bin/node --npm-cli /absolute/node-v24.21.0/lib/node_modules/npm/bin/npm-cli.js --cache /absolute/private-npm-cache --temporary-root /absolute/private-temp
@@ -82,6 +98,13 @@ Review the generated reference, package/lock hashes and producer environment,
 then commit both reference and source inventory. Qualification never refreshes
 them implicitly. The retained Linux x64 reference does not qualify ARM64; both
 existing saved-package/native architecture jobs remain required.
+
+Les constructeurs source alpha.6 et alpha.7 utilisent le même contrôle hors ligne
+des octets, tailles et modes des dépendances. Les fichiers manquants, ajoutés ou
+modifiés sont refusés avant toute archive. Seul le cache racine généré
+`fleet/node_modules/.package-lock.json` est exclu; les liens symboliques sont
+refusés. La référence conserve les métadonnées de son installation examinée; elle
+ne prouve aucune qualification native ou de production.
 Use the existing `local-runtime/install.py inspect/preflight/install` commands
 with the independently checked ZIP digest and pinned Node archive. Installation
 does not activate actors or execute TI. Invoke the new entrypoint from the

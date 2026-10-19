@@ -139,7 +139,7 @@ reach the existing loopback service, with all other browser origins refused;
 it makes no operating-system network-isolation claim. Native Alpha workers
 retain their network-none boundary throughout.
 
-The helper regressions cover source integrity,
+The 126 helper regressions (91 Node and 35 Python) cover source integrity,
 arithmetic, privacy and evidence custody. Protocol doubles in these tests are
 labelled as such and do not qualify actual browser execution. A successful
 hosted run on each supported architecture, exact-source review and same-run

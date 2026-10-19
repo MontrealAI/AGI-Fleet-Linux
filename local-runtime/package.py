@@ -5,6 +5,9 @@ ROOT = Path(__file__).resolve().parent.parent
 PREFIX = 'agi-fleet-local-0.1.0-alpha.6'
 # Match supervisor/runtime.mjs sourceIdentity; docs outside its roots are exempt.
 MAX_RUNTIME_SOURCE_BYTES = 8_000_000
+import runpy
+verify_dependency_provenance = runpy.run_path(str(ROOT / 'local-runtime/transformation/dependency_reference.py'))[
+    'verify_packaged_dependencies']
 
 def source_bytes(file, relative):
     if relative == 'docs/local-skills':
@@ -30,25 +33,26 @@ def build(output):
     entries = {}
     for relative in ['local-runtime', 'local-dashboard', 'role-skills', 'docs/local-skills', 'fleet/shared', 'fleet/successor', 'fleet/node_modules', 'fleet/packages/AGI_Agent/src/admission-core', 'fleet/packages/AGI_Node/src']:
         base = ROOT / relative
-        if not base.is_dir():
+        if base.is_symlink() or base.resolve() != base or not base.is_dir():
             raise ValueError('Missing locked dependencies or source: ' + relative)
         for file in sorted(base.rglob('*')):
-            if '__pycache__' in file.parts or file.suffix == '.pyc':
-                continue
             if file.is_symlink():
-                if file.parent.name == '.bin' and file.resolve().is_relative_to(ROOT / 'fleet/node_modules'):
-                    continue
                 raise ValueError('Unexpected source link: ' + str(file))
+            if file.relative_to(ROOT).as_posix() == 'fleet/node_modules/.package-lock.json':
+                continue
+            if relative != 'fleet/node_modules' and ('__pycache__' in file.parts or file.suffix == '.pyc'):
+                continue
             if file.is_file():
                 entries[file.relative_to(ROOT).as_posix()] = (source_bytes(file, relative), 0o755 if file.stat().st_mode & 0o111 else 0o644)
     for relative in ['LOCAL_SKILLS.md', 'LICENSE', 'fleet/package.json', 'fleet/package-lock.json']:
         entries[relative] = ((ROOT / relative).read_bytes(), 0o644)
+    dependency_provenance = verify_dependency_provenance(entries)
     records = [{'path': name, 'bytes': len(data), 'sha256': sha(data), 'mode': mode} for name, (data, mode) in sorted(entries.items())]
     if any(r['bytes'] >= 450_000_000 for r in records):
         raise ValueError('Artifact member exceeds size ceiling')
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     dirty = bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=normal'], cwd=ROOT))
-    manifest = {'schema': 'agi-fleet/local-source-preview/v1', 'version': '0.1.0-alpha.6', 'commit': commit, 'workingTreeDirty': dirty, 'operatorInstaller': False, 'productionQualified': False, 'nativeAcceptance': 'NOT_RUN', 'files': records}
+    manifest = {'schema': 'agi-fleet/local-source-preview/v1', 'version': '0.1.0-alpha.6', 'commit': commit, 'workingTreeDirty': dirty, 'operatorInstaller': False, 'productionQualified': False, 'nativeAcceptance': 'NOT_RUN', 'dependencyProvenance': dependency_provenance, 'files': records}
     entries['local-preview-manifest.json'] = ((json.dumps(manifest, sort_keys=True, indent=2) + '\n').encode(), 0o644)
     output.mkdir(mode=0o700)
     archive = output / (PREFIX + '.zip')
@@ -61,7 +65,7 @@ def build(output):
             z.writestr(info, data)
     if archive.stat().st_size >= 450_000_000:
         raise ValueError('Archive exceeds size ceiling')
-    result = {'schema': 'agi-fleet/local-package-receipt/v1', 'name': archive.name, 'bytes': archive.stat().st_size, 'sha256': sha(archive.read_bytes()), 'files': len(records), 'operatorInstaller': False, 'productionQualified': False}
+    result = {'schema': 'agi-fleet/local-package-receipt/v1', 'name': archive.name, 'bytes': archive.stat().st_size, 'sha256': sha(archive.read_bytes()), 'files': len(records), 'operatorInstaller': False, 'productionQualified': False, 'dependencyProvenance': dependency_provenance}
     (output / 'package-receipt.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result))
 
