@@ -17,6 +17,8 @@ ROOTS = ["local-runtime", "local-dashboard", "role-skills", "docs/local-skills",
 TI_ROOTS = ["local-runtime/transformation", "engineering/transformation"]
 TI_FILES = ["docs/transformational-project.md", ".github/workflows/transformational-project.yml"]
 EXTRA_FILES = ["LOCAL_SKILLS.md", "LICENSE", "fleet/package.json", "fleet/package-lock.json"]
+verify_dependency_provenance = runpy.run_path(str(Path(__file__).with_name('dependency_reference.py')))[
+    'verify_packaged_dependencies']
 def sha(data):
     return hashlib.sha256(data).hexdigest()
 def encoded(value):
@@ -61,11 +63,13 @@ def build(output):
                 entries[file.relative_to(ROOT).as_posix()] = regular(file)
     for file in [*ti_files(), INVENTORY, *(ROOT / n for n in EXTRA_FILES)]:
         entries[file.relative_to(ROOT).as_posix()] = regular(file)
+    dependency_provenance = verify_dependency_provenance(entries)
     commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     dirty = bool(subprocess.check_output(["git", "status", "--porcelain", "--untracked-files=normal", "--", *ROOTS, *TI_ROOTS, *TI_FILES, *EXTRA_FILES], cwd=ROOT))
     manifest = {"schema": "agi-fleet/local-source-preview/v1", "version": profile["version"], "commit": commit,
         "workingTreeDirty": dirty, "operatorInstaller": False, "productionQualified": False, "nativeAcceptance": "NOT_RUN",
-        "tiProfileSha256": sha(PROFILE.read_bytes()), "tiInventorySha256": sha(INVENTORY.read_bytes()), "files": rows(entries)}
+        "tiProfileSha256": sha(PROFILE.read_bytes()), "tiInventorySha256": sha(INVENTORY.read_bytes()),
+        "dependencyProvenance": dependency_provenance, "files": rows(entries)}
     entries["local-preview-manifest.json"] = encoded(manifest), 0o644
     if len(entries) > 25_000 or sum(len(data) for data, _ in entries.values()) >= 450_000_000:
         raise ValueError("TI_PACKAGE_CAPACITY")
@@ -82,7 +86,7 @@ def build(output):
     result = {"schema": "agi-fleet/ti-source-package-receipt/v1", "version": profile["version"], "commit": commit,
         "workingTreeDirty": dirty, "archive": archive.name, "sha256": sha(archive.read_bytes()), "bytes": archive.stat().st_size,
         "files": len(manifest["files"]), "inventorySha256": sha(INVENTORY.read_bytes()), "operatorInstaller": False,
-        "productionQualified": False, "scope": profile["scope"]}
+        "productionQualified": False, "scope": profile["scope"], "dependencyProvenance": dependency_provenance}
     (output / "package-receipt.json").write_bytes(encoded(result))
     print(json.dumps(result, sort_keys=True))
 def main():
