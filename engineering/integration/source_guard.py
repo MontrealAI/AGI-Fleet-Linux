@@ -1,5 +1,6 @@
 """Bind the installed importable source closure to exact Git objects before execution."""
 import hashlib
+import importlib.machinery
 from contextlib import contextmanager
 import os
 from pathlib import Path
@@ -8,7 +9,7 @@ import subprocess
 import sys
 import tempfile
 
-IMPORTABLE={'.py','.pyw','.so','.pyd','.mjs','.js','.json'}
+IMPORTABLE={'.py','.pyw','.pyc','.so','.pyd','.mjs','.js','.json'}
 ALPHA_SCOPES=[('alpha_factory_v1',False),('alpha_factory_v1/core',False),('alpha_factory_v1/core/runtime',True),('examples/successor-alpha',True),('examples/successor-workbench',True),('examples/build-successor',True),('examples/alpha-discovery',True),('docs/assets/successor',True)]
 JOBS_SCOPES=[('packages/successor-core/src',True),('scripts/pages',False),('website/assets',False),('integrations/alpha-agent',False)]
 
@@ -22,12 +23,18 @@ def git(root,*arguments):
 @contextmanager
 def source_only_imports():
     previous_prefix,previous_write=sys.pycache_prefix,sys.dont_write_bytecode
+    previous_hooks,previous_cache=list(sys.path_hooks),dict(sys.path_importer_cache)
+    class SourceOnlyLoader(importlib.machinery.SourceFileLoader):
+        def get_code(self,fullname):return self.source_to_code(self.get_data(self.path),self.path)
     with tempfile.TemporaryDirectory(prefix='fleet-computer-source-only-') as prefix:
         try:
             sys.pycache_prefix=prefix;sys.dont_write_bytecode=True
+            sys.path_hooks.insert(0,importlib.machinery.FileFinder.path_hook((SourceOnlyLoader,importlib.machinery.SOURCE_SUFFIXES),(importlib.machinery.ExtensionFileLoader,importlib.machinery.EXTENSION_SUFFIXES)))
+            sys.path_importer_cache.clear()
             yield
         finally:
             sys.pycache_prefix=previous_prefix;sys.dont_write_bytecode=previous_write
+            sys.path_hooks[:]=previous_hooks;sys.path_importer_cache.clear();sys.path_importer_cache.update(previous_cache)
 
 
 def verify_tree(root,scopes):
@@ -61,8 +68,18 @@ def verify_tree(root,scopes):
     return {'commit':commit,'files':snapshot}
 
 
+def root_import_scopes(root):
+    # sys.path includes the Alpha checkout: a top-level module/package can shadow
+    # an otherwise installed dependency. Legacy sourceless packages count too.
+    scopes=[('.',False)]
+    for child in Path(root).iterdir():
+        if child.name.startswith('.') or child.name=='node_modules':continue
+        if child.is_dir() and any(candidate.name.startswith('__init__.') and candidate.suffix in {'.py','.pyc','.so','.pyd'} for candidate in child.iterdir()):scopes.append((child.name,True))
+    return scopes
+
+
 def verify_sources(alpha,jobs):
-    return {'alpha':verify_tree(alpha,ALPHA_SCOPES),'jobs':verify_tree(jobs,JOBS_SCOPES)}
+    return {'alpha':verify_tree(alpha,ALPHA_SCOPES+root_import_scopes(alpha)),'jobs':verify_tree(jobs,JOBS_SCOPES)}
 
 
 def verify_dependency_lock(alpha,lock):

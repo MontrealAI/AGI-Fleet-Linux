@@ -46,6 +46,24 @@ class SourceGuardTests(unittest.TestCase):
         with guard.source_only_imports():
             selected=importlib.util.spec_from_file_location('verified_source_fixture',self.file);module=importlib.util.module_from_spec(selected);selected.loader.exec_module(module)
             self.assertEqual(module.VALUE,1)
+    def test_legacy_sourceless_package_cannot_shadow_reviewed_module(self):
+        from importlib._bootstrap_external import _code_to_timestamp_pyc
+        package=self.sources/'module';package.mkdir();(package/'__init__.pyc').write_bytes(_code_to_timestamp_pyc(compile('VALUE=2\n','harmless-constant-fixture','exec'),0,0))
+        actual=subprocess.check_output([sys.executable,'-B','-X','pycache_prefix='+str(self.root/'empty-cache'),'-c','import sys;sys.path.insert(0,sys.argv[1]);import module;print(module.VALUE)',str(self.sources)],text=True)
+        self.assertEqual(actual.strip(),'2')
+        with self.assertRaisesRegex(ValueError,'SOURCE_UNTRACKED_IMPORTABLE'):self.check()
+        import importlib
+        previous=list(sys.path)
+        try:
+            sys.path.insert(0,str(self.sources))
+            with guard.source_only_imports():self.assertEqual(importlib.import_module('module').VALUE,1)
+        finally:sys.path[:]=previous;sys.modules.pop('module',None)
+    def test_top_level_import_shadow_is_refused(self):
+        (self.root/'pydantic.py').write_text('VALUE=2\n')
+        with self.assertRaisesRegex(ValueError,'SOURCE_UNTRACKED_IMPORTABLE'):guard.verify_tree(self.root,guard.root_import_scopes(self.root))
+    def test_top_level_package_import_shadow_is_refused(self):
+        package=self.root/'pydantic';package.mkdir();(package/'__init__.py').write_text('VALUE=2\n')
+        with self.assertRaisesRegex(ValueError,'SOURCE_UNTRACKED_IMPORTABLE'):guard.verify_tree(self.root,guard.root_import_scopes(self.root))
     def test_replacement_refs_cannot_change_verified_commit_contents(self):
         original=self.git('rev-parse','HEAD').decode().strip();self.file.write_text('VALUE=2\n');self.git('add','sources');self.git('-c','user.name=Source fixture','-c','user.email=source-fixture@example.invalid','commit','--quiet','-m','Replacement fixture')
         replacement=self.git('rev-parse','HEAD').decode().strip();self.git('checkout','--quiet',original);self.git('replace',original,replacement);self.file.write_text('VALUE=2\n')

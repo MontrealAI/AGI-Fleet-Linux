@@ -43,8 +43,9 @@ export function verifyAlphaImportClosure(root,tracked){
   for(const name of fs.readdirSync(root)){
     if(name.startsWith('.')||name==='alpha_factory_v1'||name==='node_modules')continue;
     const file=path.join(root,name),stat=fs.lstatSync(file);
+    need(!stat.isSymbolicLink(),'COMPUTER_ALPHA_SOURCE');
     if(stat.isFile()&&/\.(?:py|pyc|pyd|so)$/.test(name))inspect(name,false);
-    if((stat.isDirectory()||stat.isSymbolicLink())&&fs.existsSync(path.join(file,'__init__.py'))){need(!stat.isSymbolicLink(),'COMPUTER_ALPHA_SOURCE');inspect(name,true);}
+    if(stat.isDirectory()&&fs.readdirSync(file).some(entry=>entry.startsWith('__init__.')&&/\.(?:py|pyc|pyd|so)$/.test(entry)))inspect(name,true);
   }
 }
 function source(root){
