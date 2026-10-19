@@ -429,12 +429,29 @@ class ReadOnlyRetryAPI(FakeAPI):
         self.fresh_draft = False
         self.fresh_full_release = False
         self.preview_is_latest = False
+        self.result_artifact_missing = False
+        self.result_artifact_bad_digest = False
+        self.result_log_artifact_id = 701
+        self.original_result = None
+        self.result_artifact_bytes = None
+        self.result_artifact = None
         self.collector = {'id': 401, 'run_attempt': 4, 'head_sha': SOURCE,
                           'head_branch': 'main', 'repository': {'full_name': release.REPOSITORY},
                           'head_repository': {'full_name': release.REPOSITORY},
                           'path': '.github/workflows/transformation-release.yml',
                           'event': 'workflow_dispatch', 'status': 'in_progress',
                           'conclusion': None, 'workflow_id': 88}
+
+    def retain_publication_result(self, result, *, members=None):
+        self.original_result = copy.deepcopy(result)
+        if members is None:
+            members = {'verification-result.json': release.encoded(result)}
+        self.result_artifact_bytes = zip_bytes(members)
+        self.result_artifact = {
+            'id': 701, 'name': 'ti-publication-verification-' + SOURCE + '-401-1',
+            'expired': False, 'workflow_run': {'id': 401, 'head_sha': SOURCE},
+            'size_in_bytes': len(self.result_artifact_bytes),
+            'digest': 'sha256:' + hashlib.sha256(self.result_artifact_bytes).hexdigest()}
 
     def __call__(self, path, method='GET', data=None, upload=False):
         route = urllib.parse.urlsplit(path).path
@@ -443,6 +460,11 @@ class ReadOnlyRetryAPI(FakeAPI):
             raise AssertionError('Read-only retry attempted an inert mutation')
         if route.startswith('/actions/') or route.startswith('/check-runs/'):
             self.events.append((method, path, copy.deepcopy(data), upload))
+            if route == '/actions/runs/401/artifacts':
+                rows = [] if self.result_artifact_missing else [copy.deepcopy(self.result_artifact)]
+                if self.result_artifact_bad_digest and rows:
+                    rows[0]['digest'] = 'sha256:' + '0' * 64
+                return {'artifacts': rows}
             if route == '/actions/runs/401':
                 return {**copy.deepcopy(self.collector), 'head_sha': self.collector_source}
             if route == '/actions/runs/401/attempts/1':
@@ -479,6 +501,19 @@ class ReadOnlyRetryAPI(FakeAPI):
         return super().__call__(path, method=method, data=data, upload=upload)
 
     def download(self, path, output, expected=None, maximum=release.LIMIT):
+        if path in ('/actions/jobs/501/logs', '/actions/artifacts/701/zip'):
+            self.events.append(('DOWNLOAD', path, copy.deepcopy(expected), False))
+            raw = (('Inert immutable upload log.\nhttps://github.com/' + release.REPOSITORY
+                    + '/actions/runs/401/artifacts/' + str(self.result_log_artifact_id) + '\n').encode()
+                   if path.endswith('/logs') else self.result_artifact_bytes)
+            if len(raw) >= maximum:
+                raise ValueError('inert artifact download exceeds bound')
+            with Path(output).open('xb') as stream:
+                stream.write(raw)
+            result = release.identity(output)
+            if expected is not None and any(result[key] != expected[key] for key in ('bytes', 'sha256')):
+                raise ValueError('inert original publication artifact digest differs')
+            return result
         asset_id = int(path.rsplit('/', 1)[1])
         for row in self.assets:
             if row['id'] == asset_id:
@@ -580,6 +615,11 @@ class InertRetryTests(unittest.TestCase):
         api.existing(plans[0], published)
         for row in api.assets:
             row.update({'uploader': {'login': 'github-actions[bot]'}, 'download_count': 9})
+        api.retain_publication_result({
+            'schema': 'agi-fleet/ti-publication-verification/v1', 'status': 'PUBLISHED_VERIFIED',
+            'url': api.release['html_url'], 'source': SOURCE, 'tag': release.TAG,
+            'assets': copy.deepcopy(plans[0]['assets']), 'productionQualified': False,
+            'verificationContext': copy.deepcopy(manifests[0]['publicationAuditContext'])})
         return published, current_output, manifests[0], manifests[1], plans[0], plans[1], api
 
     def rewrite_evidence(self, directory, member, raw):
@@ -662,11 +702,23 @@ class InertRetryTests(unittest.TestCase):
         self.assertEqual(result['assets'], old_plan['assets'], 'Retry must retain the original exact public assets')
         self.assertEqual(result['originalCollectorAuthentication']['attempt']['run_attempt'], 1)
         self.assertEqual(result['originalCollectorAuthentication']['run']['run_attempt'], 4)
+        custody = result['originalPublicationResult']
+        self.assertEqual(custody['result'], api.original_result)
+        self.assertEqual(custody['result']['assets'], old_plan['assets'])
+        self.assertEqual(custody['result']['verificationContext'], original['publicationAuditContext'])
+        self.assertEqual(custody['artifact']['metadata']['id'], 701)
+        self.assertEqual(custody['artifact']['metadata']['name'],
+                         'ti-publication-verification-' + SOURCE + '-401-1')
+        self.assertEqual(custody['artifact']['runAttempt'], 1)
+        self.assertEqual(custody['resultSHA256'], hashlib.sha256(release.encoded(api.original_result)).hexdigest())
         paths = [event[1] for event in api.events]
         for path in ('/actions/runs/401', '/actions/runs/401/attempts/1',
                      '/actions/workflows/88', '/check-runs/600', '/check-runs/601'):
             self.assertIn(path, paths, 'Historical collector must be authenticated through the real predicate')
         self.assertTrue(any(path.startswith('/actions/runs/401/attempts/1/jobs?') for path in paths))
+        self.assertTrue(any(path.startswith('/actions/runs/401/artifacts?') for path in paths))
+        self.assertIn(('DOWNLOAD', '/actions/jobs/501/logs'), [event[:2] for event in api.events])
+        self.assertIn(('DOWNLOAD', '/actions/artifacts/701/zip'), [event[:2] for event in api.events])
         self.assertFalse(any('/actions/runs/902' in path for path in paths), 'Do not relabel original publication as the current collector')
         self.assertTrue(all(row['download_count'] >= 11 for row in api.assets), 'Download counts must actually change during verification')
         refresh.assert_called_once_with(api, {**plan, '_output': str(current_output)})
@@ -692,6 +744,99 @@ class InertRetryTests(unittest.TestCase):
                 with patch.object(release, 'refresh_proof') as refresh, self.assertRaises(ValueError):
                     release.read_only_retry(api, current_output, plan)
                 self.assertIn('/actions/runs/401/attempts/1', [event[1] for event in api.events])
+                refresh.assert_not_called()
+                self.assertEqual(api.mutations(), [])
+
+    def test_original_result_asset_hash_set_and_order_must_match_public_bytes(self):
+        for change in ('missing-assets', 'wrong-hash', 'wrong-byte-count', 'wrong-order'):
+            with self.subTest(change=change):
+                case = self.root / change
+                case.mkdir()
+                with patch.object(self, 'root', case):
+                    _, current_output, _, _, _, plan, api = self.fixture()
+                altered = copy.deepcopy(api.original_result)
+                if change == 'missing-assets':
+                    altered.pop('assets')
+                elif change == 'wrong-hash':
+                    altered['assets'][0]['sha256'] = '0' * 64
+                elif change == 'wrong-byte-count':
+                    altered['assets'][0]['bytes'] += 1
+                else:
+                    altered['assets'].reverse()
+                api.retain_publication_result(altered)
+                with patch.object(release, 'refresh_proof') as refresh, self.assertRaises(ValueError):
+                    release.read_only_retry(api, current_output, plan)
+                self.assertIn(('DOWNLOAD', '/actions/artifacts/701/zip'), [event[:2] for event in api.events])
+                refresh.assert_not_called()
+                self.assertEqual(api.mutations(), [])
+
+    def test_original_result_cannot_claim_fresh_verifier_context_or_nonpublication_status(self):
+        for change in ('context', 'status', 'source', 'tag', 'url', 'production'):
+            with self.subTest(change=change):
+                case = self.root / change
+                case.mkdir()
+                with patch.object(self, 'root', case):
+                    _, current_output, _, current, _, plan, api = self.fixture()
+                altered = copy.deepcopy(api.original_result)
+                if change == 'context':
+                    altered['verificationContext'] = current['publicationAuditContext']
+                elif change == 'status':
+                    altered['status'] = 'AUDITED_NOT_PUBLISHED'
+                elif change == 'source':
+                    altered['source'] = DRIFT
+                elif change == 'tag':
+                    altered['tag'] = 'inert-other-tag'
+                elif change == 'url':
+                    altered['url'] = 'https://example.invalid/other-inert-release'
+                else:
+                    altered['productionQualified'] = True
+                api.retain_publication_result(altered)
+                with patch.object(release, 'refresh_proof') as refresh, self.assertRaises(ValueError):
+                    release.read_only_retry(api, current_output, plan)
+                refresh.assert_not_called()
+                self.assertEqual(api.mutations(), [])
+
+    def test_missing_original_result_artifact_refuses_without_mutation(self):
+        _, current_output, _, _, _, plan, api = self.fixture()
+        api.result_artifact_missing = True
+        with patch.object(release, 'refresh_proof') as refresh, self.assertRaises(ValueError):
+            release.read_only_retry(api, current_output, plan)
+        self.assertFalse(any(event[:2] == ('DOWNLOAD', '/actions/artifacts/701/zip') for event in api.events))
+        refresh.assert_not_called()
+        self.assertEqual(api.mutations(), [])
+
+    def test_original_result_artifact_digest_and_exact_job_log_id_are_both_required(self):
+        for change in ('digest', 'upload-log-id'):
+            with self.subTest(change=change):
+                case = self.root / change
+                case.mkdir()
+                with patch.object(self, 'root', case):
+                    _, current_output, _, _, _, plan, api = self.fixture()
+                if change == 'digest':
+                    api.result_artifact_bad_digest = True
+                else:
+                    api.result_log_artifact_id = 702
+                with patch.object(release, 'refresh_proof') as refresh, self.assertRaises(ValueError):
+                    release.read_only_retry(api, current_output, plan)
+                self.assertIn(('DOWNLOAD', '/actions/jobs/501/logs'), [event[:2] for event in api.events])
+                if change == 'upload-log-id':
+                    self.assertFalse(any(event[:2] == ('DOWNLOAD', '/actions/artifacts/701/zip') for event in api.events))
+                refresh.assert_not_called()
+                self.assertEqual(api.mutations(), [])
+
+    def test_original_result_artifact_requires_one_exact_regular_result_file(self):
+        for change in ('missing-file', 'extra-file'):
+            with self.subTest(change=change):
+                case = self.root / change
+                case.mkdir()
+                with patch.object(self, 'root', case):
+                    _, current_output, _, _, _, plan, api = self.fixture()
+                members = {'INERT.txt': b'Benign unqualified result attachment.\n'}
+                if change == 'extra-file':
+                    members['verification-result.json'] = release.encoded(api.original_result)
+                api.retain_publication_result(api.original_result, members=members)
+                with patch.object(release, 'refresh_proof') as refresh, self.assertRaises(ValueError):
+                    release.read_only_retry(api, current_output, plan)
                 refresh.assert_not_called()
                 self.assertEqual(api.mutations(), [])
 

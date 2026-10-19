@@ -281,7 +281,9 @@ never the latest full release. Existing tags/assets are never replaced or moved;
 an existing exact published set is checked read-only. Such a retry authenticates
 the original successful publication collector and qualified inputs, downloads
 and verifies its original unchanged assets, and records the current verification
-separately; it never relabels old evidence as a new run. API download counters
+separately. The original attempt's retained publication result and authenticated
+upload log must bind every public asset hash; missing or expired proof refuses
+the retry. It never relabels old evidence as a new run. API download counters
 may change without changing asset identity. An incomplete existing
 reservation requires owner inspection, not silent repair or replacement.
 
@@ -297,7 +299,9 @@ x64 ou arm64, extrayez-le, puis vérifiez et installez son ZIP intérieur intact
 Les manifestes, empreintes, revues et fichiers publiés doivent correspondre
 exactement. Une nouvelle vérification conserve la provenance du collecteur
 original et ses fichiers intacts; son contexte actuel est enregistré séparément,
-sans prétendre à une nouvelle exécution native. Aucun ancien fichier ni étiquette
+sans prétendre à une nouvelle exécution native. Le résultat conservé et le journal
+d’envoi authentifié de la tentative originale doivent lier toutes les empreintes
+publiées; une preuve absente ou expirée bloque cette vérification. Aucun ancien fichier ni étiquette
 n’est remplacé; aucune autorité,
 dépense ou qualification de production n’est accordée. La source main reste figée
 jusqu’à la vérification des trois publications, avant une mise à jour séparément

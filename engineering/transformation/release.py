@@ -29,6 +29,7 @@ TAG = 'v0.1.0-local-ti-preview.7'
 ARCHIVE = 'agi-fleet-local-' + VERSION + '.zip'
 TITLE = 'AGI Fleet Local TI 0.1.0 alpha.7 — source preview'
 SCHEMA = 'agi-fleet/ti-published-source-preview/v1'
+VERIFICATION_SCHEMA = 'agi-fleet/ti-publication-verification/v1'
 LIMIT = 450_000_000
 WORKFLOWS = {'ti': 'transformational-project.yml', 'local': 'local-skills.yml',
              'linux': 'next-release.yml', 'repository': 'repository-checks.yml',
@@ -934,6 +935,25 @@ def retry_bindings(original, current, published, current_output):
     return names
 
 
+def original_publication_result(api, collector, context, release, assets, work):
+    """Bind the original successful collector's retained result to public bytes."""
+    # The run endpoint may now show a later attempt. Artifact custody must use
+    # the authenticated historical attempt and its exact publish-job log.
+    original = {**collector, 'run': collector['attempt']}
+    name = 'ti-publication-verification-' + context['commit'] + '-' + context['workflowRun'] + '-' + context['workflowAttempt']
+    directory, record = artifact(api, original, name, work, 'original-publication-result', 'publish')
+    require(sorted(file.relative_to(directory).as_posix() for file in directory.rglob('*') if file.is_file())
+            == ['verification-result.json'], 'original publication result artifact coverage differs')
+    file = directory / 'verification-result.json'; result = load(file)
+    require(isinstance(result, dict) and set(result) == {'schema', 'status', 'url', 'source', 'tag', 'assets', 'productionQualified', 'verificationContext'}
+            and result.get('schema') == VERIFICATION_SCHEMA and result.get('status') == 'PUBLISHED_VERIFIED'
+            and result.get('source') == context['commit'] and result.get('tag') == TAG
+            and result.get('url') == release['html_url'] and result.get('verificationContext') == context
+            and result.get('assets') == assets and result.get('productionQualified') is False,
+            'original collector result does not bind the exact original public asset set')
+    return {'result': result, 'artifact': record, 'resultSHA256': digest(file)}
+
+
 def read_only_retry(api, output, plan):
     """Authenticate the original publication and verify its exact existing bytes."""
     source = plan['source']; current_main(api, source)
@@ -971,6 +991,8 @@ def read_only_retry(api, output, plan):
         ordered = [work / name for name in [*package_names, evidence_name, manifest_name]]
         require((work / checksum_name).read_text() == ''.join(digest(file) + '  ' + file.name + '\n' for file in ordered), 'original exact public checksum bytes differ')
         require(release.get('name') == TITLE and release.get('body') == notes(original, ordered), 'original canonical published notes differ')
+        original_assets = [identity(file) for file in [*ordered, work / checksum_name]]
+        publication_result = original_publication_result(api, collector, context, release, original_assets, work)
         original_plan = {'source': source, 'body': release['body']}
         remote = work / 'remote'; remote.mkdir()
         verify_remote(api, release, original_plan, {file.name: identity(file) for file in [*ordered, work / checksum_name]}, remote)
@@ -986,8 +1008,9 @@ def read_only_retry(api, output, plan):
         current_main(api, source); require(tag_commit(api, TAG) == source, 'existing tag changed during verification')
         result = {'status': 'ALREADY_PUBLISHED_EXACT_READ_ONLY', 'url': observed['html_url'], 'source': source,
                   'originalPublicationContext': context, 'originalCollectorAuthentication': collector,
+                  'originalPublicationResult': publication_result,
                   'verificationContext': current['publicationAuditContext'],
-                  'assets': [identity(file) for file in [*ordered, work / checksum_name]], 'productionQualified': False}
+                  'assets': original_assets, 'productionQualified': False}
     return result
 
 
@@ -1008,6 +1031,8 @@ def main():
             result = publish(api, output, lambda proof: refresh_proof(api, {**proof, '_output': str(output)}))
     else:
         result = {'status': 'AUDITED_NOT_PUBLISHED', 'source': plan['source'], 'assets': plan['assets'], 'productionQualified': False}
+    result = {'schema': VERIFICATION_SCHEMA, **result,
+              'verificationContext': load(output / ('Local-TI-Manifest-' + VERSION + '.json'))['publicationAuditContext']}
     (output / 'verification-result.json').write_bytes(encoded(result))
     print(json.dumps(result, indent=2))
 
