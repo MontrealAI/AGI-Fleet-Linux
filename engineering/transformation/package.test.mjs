@@ -59,6 +59,9 @@ extras=['LOCAL_SKILLS.md','LICENSE','fleet/package.json','fleet/package-lock.jso
 with tempfile.TemporaryDirectory() as raw:
  root=Path(raw)/'source';root.mkdir()
  g=m['build'].__globals__;g['ROOT']=root
+ # Isolate ordinary Git dirty metadata from the separately checked locked npm reference.
+ # This artificial archive is not dependency or release qualification.
+ g['verify_dependency_provenance']=lambda entries:{'scope':'INERT_GIT_DIRTY_METADATA_FIXTURE_ONLY'}
  g['PROFILE']=root/'local-runtime/transformation/release-profile.json'
  g['INVENTORY']=root/'local-runtime/transformation/source-inventory.json'
  for name in [*m['ROOTS'],*m['TI_ROOTS']]:(root/name).mkdir(parents=True,exist_ok=True)

@@ -100,6 +100,7 @@ jobs:
           python -B engineering/integration/service-package.py extract --archive "$RUNNER_TEMP/ti-package/agi-fleet-local-0.1.0-alpha.7.zip" --application "$RUNNER_TEMP/ti-application" --commit "$GITHUB_SHA" --observation "$PWD/reports/ti/package-observation.json"
       - name: Require actual native protocol and complete command-flow regressions from saved bytes
         run: |
+          python -B -m unittest discover -s "$RUNNER_TEMP/ti-application/engineering/transformation" -p test_dependency_reference.py -v
           TI_INSTALLED_SOURCES="$RUNNER_TEMP/ti-sources.json" TI_PYTHON="$RUNNER_TEMP/ti-python/bin/python" node --test "$RUNNER_TEMP/ti-application/engineering/transformation/"*.test.mjs 2>&1 | tee reports/ti/test-output.txt
           test "${PIPESTATUS[0]}" = 0
       - name: Require the existing sandbox prerequisites and immutable native worker

@@ -61,6 +61,27 @@ automatically by qualification. Every archive member has its own bytes, mode and
 SHA-256 in the existing installer-compatible manifest. The package receipt binds
 the archive and TI inventory; `workingTreeDirty` remains truthful. Publication
 requires clean committed source and both architecture jobs for those exact bytes.
+The ignored `fleet/node_modules` members must also match the committed
+`dependency-reference.json`: every packaged file's bytes, length and normalized
+archive mode are compared before packaging. The manifest and package receipt bind
+that reference's exact digest. This is dependency provenance, not vulnerability,
+native-platform or production qualification.
+
+Reference maintenance is an explicit reviewed action. The following command
+creates a fresh private staging directory, copies only committed package and lock
+inputs, runs the pinned Node 24.21.0 / npm 11.19.0 locked installation with scripts
+disabled and development dependencies omitted, and records its complete packaged
+dependency inventory. It never blesses the existing ignored dependency tree.
+
+```sh
+python -B local-runtime/transformation/dependency_reference.py --refresh --node /absolute/node-v24.21.0/bin/node --npm-cli /absolute/node-v24.21.0/lib/node_modules/npm/bin/npm-cli.js --cache /absolute/private-npm-cache --temporary-root /absolute/private-temp
+python -B local-runtime/transformation/package.py --refresh-inventory
+```
+
+Review the generated reference, package/lock hashes and producer environment,
+then commit both reference and source inventory. Qualification never refreshes
+them implicitly. The retained Linux x64 reference does not qualify ARM64; both
+existing saved-package/native architecture jobs remain required.
 Use the existing `local-runtime/install.py inspect/preflight/install` commands
 with the independently checked ZIP digest and pinned Node archive. Installation
 does not activate actors or execute TI. Invoke the new entrypoint from the
