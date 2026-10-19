@@ -12,6 +12,7 @@ builder=module('builder',ROOT/'engineering/build-next-release.py')
 preparation=module('preparation',ROOT/'fleet/scripts/prepare-release.py')
 spec=json.loads((ROOT/'engineering/next-release.json').read_text());source=ROOT/'fleet'
 prior=json.loads((source/'source-inventory.json').read_text())
+builder.update_application_versions(source,spec['version'])
 with tempfile.TemporaryDirectory(prefix='fleet-welcome-') as temporary:
     stage=Path(temporary);(stage/'config').mkdir();shutil.copyfile(source/'config/role-registry.json',stage/'config/role-registry.json');(stage/'NOTICE.md').write_text('Temporary root notice, not copied into the mirror.\n')
     builder.add_operator_guides(stage,ROOT,spec['version'],subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
