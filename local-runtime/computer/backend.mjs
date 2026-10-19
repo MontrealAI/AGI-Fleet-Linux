@@ -17,6 +17,18 @@ function containersGone(){
   const result=spawnSync('/usr/bin/docker',['container','ls','--all','--quiet','--filter','name=^/successor-computer-'],{encoding:'utf8',timeout:5000,maxBuffer:8192,env:computerEnvironment()});
   return result.status===0&&result.stdout.trim()==='';
 }
+// Leader exit is not closure. Observe both boundaries through the escalation
+// window; an unconfirmed Docker container is never treated as owned or removed.
+export async function waitForComputerCleanup(observe,escalate,forceKill,{now=()=>performance.now(),pause=milliseconds=>new Promise(resolve=>setTimeout(resolve,milliseconds))}={}){
+  const sample=()=>{try{const value=observe();return {processGroupGone:value?.processGroupGone===true,containerClosed:value?.containerClosed===true};}catch{return {processGroupGone:false,containerClosed:false};}};
+  const closed=value=>value.processGroupGone&&value.containerClosed;
+  let value=sample();if(closed(value))return value;
+  escalate();const deadline=now()+25000;
+  for(let polls=0;polls<250&&now()<deadline;polls++){await pause(100);value=sample();if(closed(value))return value;}
+  // Dispatch the bounded final escalation even if a synchronous Docker probe
+  // delayed the scheduled timer. The caller refuses a known-gone/invalid PGID.
+  forceKill();await pause(100);return sample();
+}
 export function computerArtifactInventory(directory){
   need(fs.realpathSync(directory)===directory,'COMPUTER_ARTIFACT_ROOT');let total=0;
   const artifacts=fs.readdirSync(directory).sort().map(name=>{need(NAMES.test(name),'COMPUTER_ARTIFACT_NAME');const raw=regular(path.join(directory,name),COMPUTER_LIMITS.artifactBytes);if(name.endsWith('.png'))need(raw.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')),'COMPUTER_ARTIFACT_MIME');else new TextDecoder('utf-8',{fatal:true}).decode(raw);total+=raw.length;return {name,mediaType:mime(name),sha256:digest(raw),bytes:raw.length};});
@@ -40,8 +52,12 @@ export async function executeComputer({configFile,role,task,directory,signal,exp
   return await new Promise((resolve,reject)=>{
     const command=computerInvocation(installed.profile,'run');let child;
     try{child=spawn(command.executable,command.args,{stdio:['pipe','pipe','pipe'],env:computerEnvironment(),detached:true,shell:false});}catch(error){command.close();reject(error);return;}
-    let stdout=[],stderr=[],outputBytes=0,errorBytes=0,problem=null,exited=false,killTimer;
-    const interrupt=code=>{problem??=code;if(!exited){try{process.kill(child.pid,'SIGTERM');}catch{};killTimer??=setTimeout(()=>{try{process.kill(-child.pid,'SIGKILL');}catch{}},20000);}};
+    let stdout=[],stderr=[],outputBytes=0,errorBytes=0,problem=null,exited=false,killTimer,knownGroupGone=false;
+    const validPid=()=>Number.isSafeInteger(child.pid)&&child.pid>0;
+    const groupGone=()=>{if(knownGroupGone)return true;if(!validPid())return false;try{process.kill(-child.pid,0);}catch(error){if(error.code==='ESRCH')knownGroupGone=true;}return knownGroupGone;};
+    const killGroup=()=>{if(!validPid()||groupGone())return;try{process.kill(-child.pid,'SIGKILL');}catch(error){if(error.code==='ESRCH')knownGroupGone=true;}};
+    const escalate=()=>{if(validPid()&&!groupGone())killTimer??=setTimeout(killGroup,20000);};
+    const interrupt=code=>{problem??=code;if(validPid()&&!exited&&!knownGroupGone)try{process.kill(child.pid,'SIGTERM');}catch{};escalate();};
     const abort=()=>interrupt('RUN_CANCELLED');signal?.addEventListener('abort',abort,{once:true});
     const timer=setTimeout(()=>interrupt('RUN_TIMEOUT'),Math.min(COMPUTER_LIMITS.wallMs,prepared.maxSeconds*1000+25000));
     let checking=false;
@@ -51,14 +67,19 @@ export async function executeComputer({configFile,role,task,directory,signal,exp
     child.stdin.on('error',()=>interrupt('COMPUTER_IPC_FAILED'));child.on('error',()=>{problem??='COMPUTER_LAUNCH_FAILED';});
     child.on('exit',()=>{exited=true;});
     child.on('close',async(status,exitSignal)=>{
-      clearTimeout(timer);clearTimeout(killTimer);clearInterval(checkTimer);signal?.removeEventListener('abort',abort);command.close();
-      let processGroupGone=false;try{process.kill(-child.pid,0);}catch(error){processGroupGone=error.code==='ESRCH';}
-      const containerClosed=containersGone();
+      clearTimeout(timer);clearInterval(checkTimer);signal?.removeEventListener('abort',abort);
+      const observe=()=>{const processGroupGone=groupGone();if(processGroupGone)clearTimeout(killTimer);return {processGroupGone,containerClosed:containersGone()};};
+      let cleanup={processGroupGone:false,containerClosed:false};
+      try{cleanup=validPid()?await waitForComputerCleanup(observe,escalate,killGroup):observe();}
+      catch{killGroup();problem??='CLEANUP_UNCONFIRMED';}
+      finally{clearTimeout(killTimer);try{command.close();}catch{problem??='CLEANUP_UNCONFIRMED';}}
+      const {processGroupGone,containerClosed}=cleanup;
       const observation={backend:'native-alpha-computer-scripted/v1',evidenceClass:'NATIVE_ALPHA_SCRIPTED_REHEARSAL',runtimeIdentity:installed.runtimeIdentity,
         processGroupGone,containerClosed,network:'exact-public-read-broker',providerCalls:0,providerCost:'SCRIPTED_ZERO_PROVIDER_REQUESTS',
         deviceCost:'UNKNOWN',exitStatus:status,signal:exitSignal,wallMilliseconds:Math.ceil(performance.now()-started),artifactDirectory:path.basename(directory)+'/computer'};
       try{
         if(fs.existsSync(output))observation.artifacts=computerArtifactInventory(output);
+        need(validPid(),problem??'COMPUTER_LAUNCH_FAILED');
         need(processGroupGone&&containerClosed,'CLEANUP_UNCONFIRMED');need(!problem,problem);
         const code=Buffer.concat(stderr).toString().trim();need(status===0,/^[A-Z0-9_]{1,100}$/.test(code)?code:'COMPUTER_FAILED_OR_UNCERTAIN');
         signal?.throwIfAborted();await revalidate();const result=parseStrict(Buffer.concat(stdout).toString(),16384);need(result.state==='review'&&result.providerRequests===0&&result.scriptedAdvice===true,'COMPUTER_NATIVE_RESULT');
