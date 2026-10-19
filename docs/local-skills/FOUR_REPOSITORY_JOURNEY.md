@@ -13,7 +13,8 @@ payment or on-chain authority.
 
 The [release guide's cost scopes](DOWNLOAD_ALPHA_6.md#reading-the-cost-observations)
 separate zero scripted-provider cost, unknown human/device costs, nine
-service-only CLI commands and differently scoped mock-chain gas. They do not
+conceptual service-only CLI alternative commands, separately recorded automated
+dashboard controls and differently scoped mock-chain gas. They do not
 claim savings or a cost advantage.
 
 | Open | Your action |
@@ -124,8 +125,8 @@ Utilisez seulement des données publiques non personnelles. La répétition
 scénarisée ne fait aucune requête à un fournisseur de modèles; son coût
 fournisseur est nul. Les coûts humains et matériels restent non mesurés.
 Les [périmètres du guide de publication](DOWNLOAD_ALPHA_6.md#français)
-distinguent les neuf commandes CLI du service, les étapes d’interface et de
-reprise, et les reçus de gaz simulé des deux routes. Ils ne prouvent ni
+distinguent les neuf commandes conceptuelles de l’autre parcours CLI du service,
+les contrôles d’interface automatisés et les reçus de gaz simulé des deux routes. Ils ne prouvent ni
 économies ni avantage de coût.
 
 1. Dans le formulaire de mission [Alpha](https://montrealai.github.io/AGI-Alpha-Agent-v0/successor/alpha/),

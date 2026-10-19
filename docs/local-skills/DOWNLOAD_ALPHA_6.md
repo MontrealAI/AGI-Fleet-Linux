@@ -92,7 +92,8 @@ cost superiority between the two assets or routes.
 | --- | --- |
 | Scripted provider | Zero requests and known zero provider cost; no live invoice was observed. |
 | Human elapsed effort and device cost | Unknown (`null`); neither is inferred from automated duration. |
-| Nine operator commands | Service/profile/actor/grant/export CLI sequence only; additional GUI and recovery steps are excluded. |
+| Nine conceptual commands | Alternative service/profile/actor/grant/export CLI sequence only; not observed user actions or a full journey count. |
+| Automated dashboard controls | Ordered controls and automation duration, separately from run HTTP request/response time; neither measures human effort. |
 | Manager mock-chain gas | Fourteen lifecycle receipts only; deployment and setup are excluded. |
 | Jobs mock-chain gas | All mined fixture transactions, including deployment and setup; the current fixture has 43 receipts. |
 
@@ -120,9 +121,12 @@ Le parcours facultatif **Utiliser votre projet Alpha dans un navigateur** reste 
 
 Les mesures ont des périmètres distincts. Le fournisseur scénarisé fait zéro
 requête et son coût est connu nul, sans observation de facture réelle. Le temps
-humain et le coût matériel restent inconnus (`null`). Les neuf commandes ne
-comptent que la séquence CLI service/profil/acteur/autorisation/export; les
-étapes supplémentaires d’interface et de reprise sont exclues. Le gaz simulé
+humain et le coût matériel restent inconnus (`null`). Les neuf commandes
+conceptuelles décrivent seulement l’autre parcours CLI service/profil/acteur/
+autorisation/export; ce ne sont ni des actions humaines observées ni le compte
+du parcours complet. Les contrôles d’interface automatisés et leur durée sont
+consignés séparément du temps requête/réponse d’exécution; aucun de ces temps
+ne mesure l’effort humain. Le gaz simulé
 Manager couvre seulement quatorze reçus de cycle, sans déploiement ni
 configuration. Celui de Jobs couvre toutes les transactions minées du test,
 y compris le déploiement et la configuration, soit actuellement 43 reçus.
