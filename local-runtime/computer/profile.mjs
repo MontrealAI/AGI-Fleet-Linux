@@ -2,6 +2,7 @@
 // Owner-installed control configuration; imported tasks cannot select code, tools or providers.
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
@@ -10,12 +11,16 @@ import {readPrivate} from '../private-file.mjs';
 import {decodeUTF8} from '../primitives.mjs';
 import {publicOnly} from '../../fleet/successor/vendor/manager/site/assets/successor/safe.mjs';
 
-export const ALPHA_COMPUTER_SOURCE=Object.freeze({commit:'cce4de8482bba35e337924515de965b757e6a20f',tree:'f8cfe4afe44cc2c7ed4043b48d0e795146cb856d'});
+export const ALPHA_COMPUTER_SOURCE=Object.freeze({commit:'7cf97aa3b36354b9ae5ab72e70aa88364a910313',tree:'8ff159a8f91db5fb4363cc736aeb66e7eefc07ea'});
 export const LAUNCHER=fileURLToPath(new URL('./launcher.py',import.meta.url));
 export const COMPUTER_LIMITS=Object.freeze({wallMs:150000,maxSeconds:120,maxActions:30,maxTurns:10,
   handoffBytes:1_000_000,artifactBytes:2_000_000,artifactTotalBytes:80_000_000,historyBytes:320_000_000});
 const ENV=Object.freeze({PATH:'/usr/bin:/bin',LANG:'C.UTF-8',PYTHONDONTWRITEBYTECODE:'1'});
 export const computerEnvironment=()=>({...ENV});
+export function computerInvocation(profile,mode){
+  const cache=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-computer-cache-'));fs.chmodSync(cache,0o700);
+  return {executable:profile.python,args:['-I','-S','-B','-X','pycache_prefix='+cache,LAUNCHER,mode],close:()=>fs.rmSync(cache,{recursive:true,force:true})};
+}
 function fileHash(file,maximum=32_000_000){
   need(path.isAbsolute(file)&&fs.realpathSync(file)===file,'COMPUTER_RUNTIME_PATH');
   const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);
@@ -57,7 +62,8 @@ export function validateComputerInput(input){
   return handoff;
 }
 export function callComputer(profile,mode,request={},timeout=15000){
-  const result=spawnSync(profile.python,['-E','-B',LAUNCHER,mode],{input:canonical({profile,...request}),encoding:'utf8',timeout,maxBuffer:2_100_000,env:computerEnvironment()});
+  const input=canonical({profile,...request}),command=computerInvocation(profile,mode);let result;
+  try{result=spawnSync(command.executable,command.args,{input,encoding:'utf8',timeout,maxBuffer:2_100_000,env:computerEnvironment()});}finally{command.close();}
   const code=String(result.stderr||'').trim();need(result.status===0,/^[A-Z0-9_]{1,100}$/.test(code)?code:'COMPUTER_NATIVE_VALIDATION_FAILED');
   return parseStrict(result.stdout,2_100_000);
 }
@@ -71,7 +77,7 @@ export function inspectComputerInstallation(configFile,{checkDocker=true}={}){
     need(profile.provider?.mode==='scripted-zero-cost','UNCOMMISSIONED_PROVIDER_COST');keys(profile.provider,['mode']);
     need(canonical(profile.source)===canonical(ALPHA_COMPUTER_SOURCE)&&/^sha256:[a-f0-9]{64}$/.test(profile.image),'COMPUTER_PROFILE_INVALID');
     keys(profile.fixture,['handoffSha256','actions']);need(/^[a-f0-9]{64}$/.test(profile.fixture.handoffSha256)&&Array.isArray(profile.fixture.actions)&&profile.fixture.actions.length<=30,'COMPUTER_FIXTURE_INVALID');
-    need(profile.fixtureSha256===digest(profile.fixture),'COMPUTER_FIXTURE_CHANGED');
+    need(profile.fixtureSha256===digest(profile.fixture),'COMPUTER_FIXTURE_CHANGED');publicOnly(canonical(profile.fixture.actions));
     const sourceSha256=source(profile.alphaRoot);need(fileHash(profile.python)===profile.pythonSha256,'COMPUTER_PYTHON_CHANGED');
     need(profile.runtimeFiles&&typeof profile.runtimeFiles==='object'&&!Array.isArray(profile.runtimeFiles)&&Object.keys(profile.runtimeFiles).length>0&&Object.keys(profile.runtimeFiles).length<=2048,'COMPUTER_RUNTIME_FILES');
     for(const [file,sha256] of Object.entries(profile.runtimeFiles))need(/^[a-f0-9]{64}$/.test(sha256)&&fileHash(file)===sha256,'COMPUTER_RUNTIME_CHANGED');
@@ -96,8 +102,8 @@ export function prepareComputer(input,installation){
     providerCost:'SCRIPTED_ZERO_PROVIDER_REQUESTS',deviceCost:'UNKNOWN',independentReview:false,productionQualified:false};
 }
 export function createComputerProfile({alphaRoot,python,image,handoffRaw,actions,output}){
-  validateComputerInput({handoffRaw,publicNonpersonal:true});need(/^sha256:[a-f0-9]{64}$/.test(image),'COMPUTER_IMAGE_INVALID');source(alphaRoot);
-  python=fs.realpathSync(python);const fixture={handoffSha256:digest(handoffRaw),actions},partial={alphaRoot,python};
+  validateComputerInput({handoffRaw,publicNonpersonal:true});publicOnly(canonical(actions));need(/^sha256:[a-f0-9]{64}$/.test(image),'COMPUTER_IMAGE_INVALID');source(alphaRoot);
+  need(path.isAbsolute(python)&&fs.realpathSync(python)===python,'COMPUTER_PYTHON_PHYSICAL_REQUIRED');const fixture={handoffSha256:digest(handoffRaw),actions},partial={alphaRoot,python};
   const probe=callComputer(partial,'probe');
   const profile={schema:'agi-fleet/alpha-computer-installation/v1',enabled:true,alphaRoot,source:ALPHA_COMPUTER_SOURCE,
     python,pythonSha256:fileHash(python),image,dockerSha256:fileHash('/usr/bin/docker'),provider:{mode:'scripted-zero-cost'},

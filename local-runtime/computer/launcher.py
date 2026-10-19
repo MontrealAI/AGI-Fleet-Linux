@@ -42,6 +42,16 @@ def main():
     if mode != "probe":
         fail(profile["provider"]["mode"] == "scripted-zero-cost", "UNCOMMISSIONED_PROVIDER_COST")
     install_source_only_imports(root)
+    # -I -S suppresses user site, executable .pth files and sitecustomize. Add
+    # only the explicitly installed physical interpreter/venv dependency root.
+    import sysconfig
+    prefix = Path(sys.executable).parent.parent
+    if (prefix / "pyvenv.cfg").is_file():
+        dependencies = prefix / "lib" / f"python{sys.version_info.major}.{sys.version_info.minor}" / "site-packages"
+    else:
+        dependencies = Path(sysconfig.get_path("purelib"))
+    fail(dependencies.is_dir() and dependencies.resolve() == dependencies, "COMPUTER_DEPENDENCY_ROOT")
+    sys.path.append(str(dependencies))
     from alpha_factory_v1.core.runtime.store import Journal
     from alpha_factory_v1.core.runtime.successor import computer
     from alpha_factory_v1.core.runtime.successor.computer_handoff import ComputerHandoff, write_computer_return
@@ -54,7 +64,9 @@ def main():
                 value = getattr(module, name, None)
                 if not value:
                     continue
-                path = Path(value).resolve()
+                original = Path(value).absolute()
+                path = original.resolve()
+                fail(path == original, "COMPUTER_RUNTIME_PATH")
                 if path.is_file():
                     fail(path.stat().st_size <= 32_000_000, "COMPUTER_RUNTIME_FILE_LIMIT")
                     files[str(path)] = hashlib.sha256(path.read_bytes()).hexdigest()

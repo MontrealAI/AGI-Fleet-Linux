@@ -28,3 +28,5 @@ test('complete former empty/protocol aggregate bypass is refused by installed ex
   await assert.rejects(verifyEvidence({root:dir,alphaRoot:process.env.FQR_VERIFY_ALPHA,jobsRoot:process.env.FQR_VERIFY_JOBS,managerRoot:process.env.FQR_VERIFY_MANAGER,expectedContext:producer}),/FOUR_REPO_|COMPUTER_/);
   assert.equal(fs.existsSync(path.join(dir,'compatibility-evidence.json')),false);
 });
+
+test('modified retained producer context is rejected against unchanged caller context before source imports',async()=>{const dir=path.join(root,'producer-substitution');fs.mkdirSync(dir);const trusted={repository:'MontrealAI/AGI-Fleet-Linux',commit:'1'.repeat(40),workflowRun:'1',workflowAttempt:'1'};fs.writeFileSync(path.join(dir,'execution-context.json'),JSON.stringify({...trusted,workflowAttempt:'2'}));await assert.rejects(verifyEvidence({root:dir,alphaRoot:root,jobsRoot:root,managerRoot:root,expectedContext:trusted}),/deep-equal/);assert.equal(fs.existsSync(path.join(dir,'compatibility-evidence.json')),false);});

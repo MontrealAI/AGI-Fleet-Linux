@@ -10,7 +10,7 @@ import {fixture,task} from './helpers.mjs';
 import {canonical,digest,parseStrict,id} from '../contracts.mjs';
 import {LocalRuntime} from '../supervisor/runtime.mjs';
 import {LinuxSandbox} from '../platforms/linux.mjs';
-import {validateComputerInput,inspectComputerInstallation,verifyAlphaImportClosure,ALPHA_COMPUTER_SOURCE,LAUNCHER,COMPUTER_LIMITS} from '../computer/profile.mjs';
+import {validateComputerInput,inspectComputerInstallation,verifyAlphaImportClosure,createComputerProfile,callComputer,ALPHA_COMPUTER_SOURCE,LAUNCHER,COMPUTER_LIMITS} from '../computer/profile.mjs';
 import {computerArtifactInventory} from '../computer/backend.mjs';
 
 const raw=canonical({schema:'successor-alpha-computer-handoff/v1',authority:'none',settlement:'not_connected',task:{input_rights:'synthetic'}});
@@ -24,6 +24,7 @@ test('Computer Use is disabled by default; public assertion, exact keys and live
   assert.equal(inspectComputerInstallation(null).code,'COMPUTER_DISABLED');
   assert.throws(()=>validateComputerInput({handoffRaw:raw,publicNonpersonal:false}),/COMPUTER_PUBLIC_NONPERSONAL_REQUIRED/);
   assert.throws(()=>validateComputerInput({handoffRaw:raw,publicNonpersonal:true,image:'attacker'}),/FIELDS_INVALID/);
+  assert.throws(()=>createComputerProfile({handoffRaw:raw,actions:[{type:'type',text:'password=synthetic-placeholder'}]}),/PRIVATE_INPUT/);
   assert.throws(()=>validateComputerInput({handoffRaw:'x'.repeat(COMPUTER_LIMITS.handoffBytes+1),publicNonpersonal:true}),/COMPUTER_HANDOFF_SIZE/);
   const f=fixture();try{const a=f.create();assert.throws(()=>f.prepare(a,computerTask()),/COMPUTER_DISABLED/);assert.equal(f.runtime.store.db.prepare('SELECT COUNT(*) AS n FROM grants').get().n,0);const native=new LinuxSandbox();native.inspect=()=>({supported:true,backend:'synthetic-readonly-descriptor',identity:'synthetic-host'});f.runtime.backend=native;assert.equal(f.runtime.admission({actor:a.id,task:null},f.operator).status,'OUTSIDE_SCOPE');}finally{f.close();}
   const directory=temporary();try{
@@ -81,7 +82,14 @@ test('Alpha import closure rejects masked tracked edits, untracked import packag
 });
 
 test('native launcher executes committed Python source even with timestamp-valid malicious cached bytecode',()=>{
-  const root=temporary();try{const script=`import importlib.util, py_compile, pathlib, os\np=pathlib.Path(${JSON.stringify(root)})/'cached_fixture.py'\np.write_text('VALUE=2\\n'); stamp=p.stat().st_mtime\npy_compile.compile(str(p),doraise=True)\np.write_text('VALUE=1\\n');os.utime(p,(stamp,stamp))\nspec=importlib.util.spec_from_file_location('fleet_launcher',${JSON.stringify(LAUNCHER)})\nmodule=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)\nmodule.install_source_only_imports(p.parent)\nimport cached_fixture\nassert cached_fixture.VALUE==1, 'malicious timestamp-valid cache executed'\nprint('source-only')\n`;const result=spawnSync('python',['-B','-c',script],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'source-only');}finally{fs.rmSync(root,{recursive:true,force:true});}
+  const root=temporary();try{const script=`import importlib.util, py_compile, pathlib, os\np=pathlib.Path(${JSON.stringify(root)})/'cached_fixture.py'\np.write_text('VALUE=2\\n'); stamp=p.stat().st_mtime\npy_compile.compile(str(p),doraise=True)\np.write_text('VALUE=1\\n');os.utime(p,(stamp,stamp))\nspec=importlib.util.spec_from_file_location('fleet_launcher',${JSON.stringify(LAUNCHER)})\nmodule=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)\nmodule.install_source_only_imports(p.parent)\nimport cached_fixture\nassert cached_fixture.VALUE==1, 'malicious timestamp-valid cache executed'\nprint('source-only')\n`;const result=spawnSync('python',['-B','-c',script],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'source-only');
+    const environment=path.join(root,'environment'),venv=spawnSync('python',['-m','venv','--copies','--without-pip',environment],{encoding:'utf8'});assert.equal(venv.status,0,venv.stderr);
+    const version=spawnSync(path.join(environment,'bin/python'),['-I','-S','-c','import sys; print(str(sys.version_info.major)+"."+str(sys.version_info.minor))'],{encoding:'utf8'}).stdout.trim(),site=path.join(environment,'lib','python'+version,'site-packages'),sentinel=path.join(root,'STARTUP_EXECUTED');
+    write(path.join(site,'unsafe.pth'),`import pathlib; pathlib.Path(${JSON.stringify(sentinel)}).write_text('unsafe')\n`);write(path.join(site,'sitecustomize.py'),`from pathlib import Path; Path(${JSON.stringify(sentinel)}).write_text('unsafe')\n`);
+    const modules={'alpha_factory_v1/__init__.py':'','alpha_factory_v1/core/__init__.py':'','alpha_factory_v1/core/runtime/__init__.py':'','alpha_factory_v1/core/runtime/store.py':'Journal = None\n','alpha_factory_v1/core/runtime/successor/__init__.py':'','alpha_factory_v1/core/runtime/successor/computer.py':'import sys\nassert sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode\n','alpha_factory_v1/core/runtime/successor/computer_handoff.py':'ComputerHandoff = write_computer_return = None\n','alpha_factory_v1/core/runtime/successor/protocol.py':'safe_json_loads = None\n'};
+    for(const [relative,content] of Object.entries(modules)){const file=path.join(root,relative);fs.mkdirSync(path.dirname(file),{recursive:true});write(file,content);}
+    const probe=callComputer({alphaRoot:root,python:path.join(environment,'bin/python')},'probe');assert.ok(Object.keys(probe.files).length>0);assert.equal(fs.existsSync(sentinel),false,'untracked .pth/sitecustomize startup executed');
+  }finally{fs.rmSync(root,{recursive:true,force:true});}
 });
 
 test('Computer Use reconciliation requires exact native closure and retains STOP, consumed budget and historical exports',async()=>{

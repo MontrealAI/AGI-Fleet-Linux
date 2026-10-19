@@ -116,6 +116,8 @@ jobs:
           FQR_ALPHA_COMMIT: ${{ steps.pins.outputs.alpha }}
         run: |
           set -euo pipefail
+          npm install --global npm@10.8.2 --ignore-scripts --no-audit --no-fund
+          test "$(npm --version)" = 10.8.2
           npm --prefix .integration-jobs ci --ignore-scripts --no-audit --no-fund
           cd .integration-jobs
           node --test test/scripts/four-repo-computer-lifecycle.test.cjs
@@ -144,7 +146,7 @@ jobs:
           FQR_EVIDENCE_FILE="$GITHUB_WORKSPACE/reports/four-repository-computer/manager-local-lifecycle.json" \
           node hardhat/scripts/four-repo-computer-lifecycle.cjs
       - name: Reconcile exact project, native result, currency drafts and both chain observations
-        run: node engineering/integration/verify-evidence.mjs "$PWD/reports/four-repository-computer" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" --expected-context "$(cat reports/four-repository-computer/execution-context.json)"
+        run: node engineering/integration/verify-evidence.mjs "$PWD/reports/four-repository-computer" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" --expected-context "$(node engineering/integration/execution-context.mjs)"
       - name: Assert no source changes or native container survives
         run: |
           test -z "$(git -C .integration-alpha status --porcelain --untracked-files=no)"

@@ -1,0 +1,206 @@
+name: Saved-package native Computer Use compatibility
+on:
+  workflow_call:
+    inputs:
+      architecture:
+        required: true
+        type: string
+      runner:
+        required: true
+        type: string
+      package-artifact:
+        required: true
+        type: string
+      archive-name:
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: saved-package-computer-${{ github.run_id }}-${{ github.run_attempt }}-${{ inputs.architecture }}
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  native-computer:
+    name: Saved package service and two disposable payment routes (${{ inputs.architecture }})
+    runs-on: ${{ inputs.runner }}
+    timeout-minutes: 45
+    steps:
+      - uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          persist-credentials: false
+      - name: Download the exact saved package from this same caller run
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: ${{ inputs.package-artifact }}
+          path: saved-package
+      - name: Validate the exact reviewed compatibility input pins
+        id: pins
+        run: |
+          python3 - <<'PY'
+          import json,os,re
+          from pathlib import Path
+          value=json.loads(Path('engineering/integration/compatibility-set.json').read_text())
+          assert value['schema']=='agi-fleet/four-repository-compatibility-inputs/v1'
+          assert value['publicNonPersonalOnly'] and not value['liveProvider'] and not value['fundedWork'] and not value['productionQualified']
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:
+              for key in ['alpha','jobs','manager']:
+                  assert re.fullmatch('[a-f0-9]{40}',value[key])
+                  output.write(key+'='+value[key]+'\n')
+          PY
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGI-Alpha-Agent-v0
+          ref: ${{ steps.pins.outputs.alpha }}
+          path: .integration-alpha
+          persist-credentials: false
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGIJobsv0
+          ref: ${{ steps.pins.outputs.jobs }}
+          path: .integration-jobs
+          persist-credentials: false
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGIJobManager
+          ref: ${{ steps.pins.outputs.manager }}
+          path: .integration-manager
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install the existing native Alpha session dependencies
+        run: |
+          python -B engineering/integration/source_guard.py --alpha-root "$PWD/.integration-alpha" --dependency-lock engineering/integration/requirements-native.lock
+          python -m pip install --require-hashes --only-binary=:all: -r engineering/integration/requirements-native.lock
+      - name: Inspect and extract the unchanged same-run saved package
+        env:
+          ARCH: ${{ inputs.architecture }}
+          ARCHIVE_NAME: ${{ inputs.archive-name }}
+        run: |
+          set -euo pipefail
+          test "$ARCH" = "$(node -p process.arch)"
+          test "$ARCHIVE_NAME" = agi-fleet-local-0.1.0-alpha.6.zip
+          test "${{ inputs.package-artifact }}" = "local-skills-preview-$ARCH"
+          mkdir -p reports/saved-package/computer-evidence
+          python -B engineering/integration/service-package.py extract --archive "$PWD/saved-package/local-preview/$ARCHIVE_NAME" --application "$RUNNER_TEMP/saved-computer-application" --commit "$GITHUB_SHA" --observation "$PWD/reports/saved-package/computer-evidence/package-observation.json"
+          node engineering/integration/execution-context.mjs "$ARCH" "$PWD/saved-package/local-preview/$ARCHIVE_NAME" > reports/saved-package/computer-evidence/execution-context.json
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap util-linux apparmor-profiles
+          sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY python3 local-runtime/prepare-engineering-host.py > reports/saved-package/computer-evidence/apparmor.json
+      - name: Require source orchestration and native inspector regressions
+        run: |
+          FQR_VERIFY_ALPHA="$PWD/.integration-alpha" FQR_VERIFY_JOBS="$PWD/.integration-jobs" FQR_VERIFY_MANAGER="$PWD/.integration-manager" node --test engineering/integration/*.test.mjs
+          python -B -m unittest discover -s engineering/integration -p 'test_*.py' -v
+      - name: Build the existing Alpha worker with observed immutable runtime provenance
+        id: image
+        run: |
+          set -euo pipefail
+          mkdir -p reports/saved-package/computer-evidence
+          BASE_TAG=mcr.microsoft.com/playwright/python:v1.63.0-noble
+          docker pull "$BASE_TAG"
+          docker image inspect "$BASE_TAG" > reports/saved-package/computer-evidence/base-image-inspect.json
+          BASE_DIGEST=$(docker image inspect --format '{{index .RepoDigests 0}}' "$BASE_TAG")
+          docker build --build-arg "BASE_IMAGE=$BASE_DIGEST" -f .integration-alpha/examples/successor-workbench/computer/Dockerfile -t successor-four-repository-worker .integration-alpha
+          IMAGE_ID=$(docker image inspect --format '{{.Id}}' successor-four-repository-worker)
+          docker image inspect successor-four-repository-worker > reports/saved-package/computer-evidence/worker-image-inspect.json
+          printf 'id=%s\n' "$IMAGE_ID" >> "$GITHUB_OUTPUT"
+          sha256sum .integration-alpha/examples/successor-workbench/computer/Dockerfile .integration-alpha/examples/successor-workbench/computer/requirements.lock .integration-alpha/alpha_factory_v1/core/runtime/successor/computer_worker.py > reports/saved-package/computer-evidence/runtime-source-SHA256SUMS.txt
+      - name: Prepare public synthetic missions without executing a browser
+        run: |
+          python -B engineering/integration/run-computer.py --alpha-root "$PWD/.integration-alpha" --jobs-root "$PWD/.integration-jobs" --output "$PWD/reports/saved-package/computer-evidence/accepted" --prepare-only
+          python -B engineering/integration/run-computer.py --alpha-root "$PWD/.integration-alpha" --jobs-root "$PWD/.integration-jobs" --output "$PWD/reports/saved-package/computer-evidence/rejected-late" --prepare-only --inject-error late
+      - name: Execute both cases through the actual extracted LocalRuntime service
+        env:
+          WORKER_IMAGE: ${{ steps.image.outputs.id }}
+        run: |
+          PYTHON_PHYSICAL=$(python -c 'import pathlib,sys; print(pathlib.Path(sys.executable).resolve())')
+          node engineering/integration/service-journey.mjs "$RUNNER_TEMP/saved-computer-application" "$PWD/.integration-alpha" "$PYTHON_PHYSICAL" "$WORKER_IMAGE" "$PWD/reports/saved-package/computer-evidence"
+          node engineering/integration/finalize-computer.mjs "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$PWD/reports/saved-package/computer-evidence/accepted"
+          node engineering/integration/finalize-computer.mjs "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$PWD/reports/saved-package/computer-evidence/rejected-late" rejected
+      - name: Select the supported Jobs and Manager Node runtime for disposable-chain acceptance
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.3'
+      - name: Compile and exercise the separate AGIALPHA mock-token lifecycle
+        env:
+          FQR_ALPHA_COMMIT: ${{ steps.pins.outputs.alpha }}
+        run: |
+          set -euo pipefail
+          npm install --global npm@10.8.2 --ignore-scripts --no-audit --no-fund
+          test "$(npm --version)" = 10.8.2
+          npm --prefix .integration-jobs ci --ignore-scripts --no-audit --no-fund
+          cd .integration-jobs
+          node --test test/scripts/four-repo-computer-lifecycle.test.cjs
+          npx hardhat compile
+          FQR_DRAFT_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/accepted/jobs-agialpha-draft.json" \
+          FQR_ALPHA_SOURCE="$GITHUB_WORKSPACE/.integration-alpha" \
+          FQR_INPUT_CLASS=ACTUAL_NATIVE_DOCKER_BROWSER_SCRIPTED_ADVICE \
+          FQR_EVIDENCE_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/jobs-local-lifecycle.json" \
+          npx hardhat run --no-compile --network hardhat integrations/alpha-agent/four-repo-computer-lifecycle.cjs
+      - name: Select the exact supported Manager runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.2'
+      - name: Compile and exercise the separate USDC mock-token lifecycle
+        run: |
+          set -euo pipefail
+          npm --prefix .integration-manager ci --ignore-scripts --no-audit --no-fund
+          npm --prefix .integration-manager/hardhat ci --ignore-scripts --no-audit --no-fund
+          cd .integration-manager
+          node --test hardhat/test/four-repo-computer-lifecycle.test.cjs
+          node scripts/security/patch-openzeppelin-compiler.cjs
+          npm --prefix hardhat run compile
+          FQR_DRAFT_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/accepted/manager-usdc-draft.json" \
+          FQR_ALPHA_SOURCE="$GITHUB_WORKSPACE/.integration-alpha" \
+          FQR_JOBS_SOURCE="$GITHUB_WORKSPACE/.integration-jobs" \
+          FQR_EVIDENCE_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/manager-local-lifecycle.json" \
+          node hardhat/scripts/four-repo-computer-lifecycle.cjs
+      - name: Reconcile the actual service return and both chain observations
+        env:
+          ARCH: ${{ inputs.architecture }}
+          ARCHIVE_NAME: ${{ inputs.archive-name }}
+        run: |
+          node engineering/integration/verify-evidence.mjs "$PWD/reports/saved-package/computer-evidence" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" --expected-context "$(node engineering/integration/execution-context.mjs "$ARCH" "$PWD/saved-package/local-preview/$ARCHIVE_NAME")"
+          python -B engineering/integration/service-package.py verify --archive "$PWD/saved-package/local-preview/$ARCHIVE_NAME" --application "$RUNNER_TEMP/saved-computer-application" --commit "$GITHUB_SHA" --observation "$PWD/reports/saved-package/computer-evidence/package-observation.json"
+          node engineering/integration/finish-service.mjs "$PWD/reports/saved-package/computer-evidence" "$PWD/reports/saved-package/local-host-evidence/computer-journey.json"
+      - name: Assert no source changes or native container survives
+        run: |
+          test -z "$(git -C .integration-alpha status --porcelain --untracked-files=no)"
+          test -z "$(git -C .integration-jobs status --porcelain --untracked-files=no)"
+          test -z "$(git -C .integration-manager status --porcelain --untracked-files=no)"
+          test -z "$(docker container ls --all --quiet --filter name=successor-computer-)"
+      - name: Retain public observations and exclude private generated journals
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: local-skills-computer-${{ inputs.architecture }}
+          if-no-files-found: error
+          path: |
+            reports/saved-package/local-host-evidence/computer-journey.json
+            reports/saved-package/computer-evidence/*.json
+            reports/saved-package/computer-evidence/*.txt
+            reports/saved-package/computer-evidence/*.zip
+            reports/saved-package/computer-evidence/accepted/*.json
+            reports/saved-package/computer-evidence/accepted/native/*.json
+            reports/saved-package/computer-evidence/accepted/native/*.png
+            reports/saved-package/computer-evidence/accepted/native/visible-text.txt
+            reports/saved-package/computer-evidence/rejected-late/*.json
+            reports/saved-package/computer-evidence/rejected-late/native/*.json
+            reports/saved-package/computer-evidence/rejected-late/native/*.png
+            reports/saved-package/computer-evidence/rejected-late/native/visible-text.txt
+            reports/saved-package/computer-evidence/interrupted/*.json
+            reports/saved-package/computer-evidence/interrupted/native/*.json
+            reports/saved-package/computer-evidence/interrupted/native/*.png
+            reports/saved-package/computer-evidence/interrupted/native/visible-text.txt
+            reports/saved-package/computer-evidence/recovered/*.json
+            reports/saved-package/computer-evidence/recovered/native/*.json
+            reports/saved-package/computer-evidence/recovered/native/*.png
+            reports/saved-package/computer-evidence/recovered/native/visible-text.txt

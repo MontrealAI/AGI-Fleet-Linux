@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawn,spawnSync} from 'node:child_process';
 import {need,keys,uuid,digest,canonical,parseStrict} from '../contracts.mjs';
-import {COMPUTER_LIMITS,LAUNCHER,computerEnvironment,inspectComputerInstallation,prepareComputer} from './profile.mjs';
+import {COMPUTER_LIMITS,computerInvocation,computerEnvironment,inspectComputerInstallation,prepareComputer} from './profile.mjs';
 
 const NAMES=/^(?:run\.json|receipt\.json|signed-receipt\.json|handoff\.json|computer-return\.json|visible-text\.txt|screen-\d{3}\.png)$/;
 const mime=name=>name.endsWith('.png')?'image/png':name.endsWith('.txt')?'text/plain':'application/json';
@@ -38,7 +38,8 @@ export async function executeComputer({configFile,role,task,directory,signal,exp
   const payload=canonical({profile:installed.profile,handoffRaw:task.input.handoffRaw,permit:prepared.permit,home,output});
   const started=performance.now();
   return await new Promise((resolve,reject)=>{
-    const child=spawn(installed.profile.python,['-E','-B',LAUNCHER,'run'],{stdio:['pipe','pipe','pipe'],env:computerEnvironment(),detached:true,shell:false});
+    const command=computerInvocation(installed.profile,'run');let child;
+    try{child=spawn(command.executable,command.args,{stdio:['pipe','pipe','pipe'],env:computerEnvironment(),detached:true,shell:false});}catch(error){command.close();reject(error);return;}
     let stdout=[],stderr=[],outputBytes=0,errorBytes=0,problem=null,exited=false,killTimer;
     const interrupt=code=>{problem??=code;if(!exited){try{process.kill(child.pid,'SIGTERM');}catch{};killTimer??=setTimeout(()=>{try{process.kill(-child.pid,'SIGKILL');}catch{}},20000);}};
     const abort=()=>interrupt('RUN_CANCELLED');signal?.addEventListener('abort',abort,{once:true});
@@ -50,7 +51,7 @@ export async function executeComputer({configFile,role,task,directory,signal,exp
     child.stdin.on('error',()=>interrupt('COMPUTER_IPC_FAILED'));child.on('error',()=>{problem??='COMPUTER_LAUNCH_FAILED';});
     child.on('exit',()=>{exited=true;});
     child.on('close',async(status,exitSignal)=>{
-      clearTimeout(timer);clearTimeout(killTimer);clearInterval(checkTimer);signal?.removeEventListener('abort',abort);
+      clearTimeout(timer);clearTimeout(killTimer);clearInterval(checkTimer);signal?.removeEventListener('abort',abort);command.close();
       let processGroupGone=false;try{process.kill(-child.pid,0);}catch(error){processGroupGone=error.code==='ESRCH';}
       const containerClosed=containersGone();
       const observation={backend:'native-alpha-computer-scripted/v1',evidenceClass:'NATIVE_ALPHA_SCRIPTED_REHEARSAL',runtimeIdentity:installed.runtimeIdentity,
