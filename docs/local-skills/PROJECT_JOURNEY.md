@@ -98,6 +98,26 @@ live-provider and independent economic-review commissioning remain NOT_RUN;
 all 22 full-product acceptance requirements remain open. Later source changes
 require their own applicable exact-package qualification.
 
+## Optional Computer Use source candidate
+
+The alpha.6 source adds a separate **Use your Alpha project in a browser**
+control. It accepts a native Alpha Computer Use handoff, preserves its exact
+UTF-8 bytes and returns the native `computer-return.json` for the same Alpha
+project. The existing CSV journey above remains available. This optional
+route requires a separately installed exact-source Docker/Python profile,
+an explicit public, non-personal confirmation and a fresh exact one-use grant.
+The profile binds a fixed bounded action sequence and the handoff digest;
+tasks cannot select providers or executable code. Provider requests and
+provider cost are zero, and live paid providers are denied before invocation.
+
+This new path is a source candidate until the actual installed service,
+native Docker browser, retained return, screenshots and both disposable
+mock-token outcomes pass its mandatory exact-package gate. Use the
+[alpha.6 guide](DOWNLOAD_ALPHA_6.md#optional-alpha-scripted-browser-rehearsal)
+and [operator configuration](../../local-runtime/computer/README.md) only
+with that version. A browser rehearsal is internal evidence, not independent
+acceptance, earnings, a wallet authorization or production qualification.
+
 ## Français
 
 Ce parcours est inclus dans l’[aperçu Linux Local Skills alpha.5 publié](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.5).
@@ -107,6 +127,17 @@ exacte et l’archive ont leurs propres résultats natifs et navigateur dans le
 Les 22 critères du produit complet restent ouverts; les fournisseurs réels,
 les essais physiques et l’examen économique indépendant restent non réalisés.
 Utilisez uniquement des données publiques non personnelles.
+
+Le candidat alpha.6 ajoute **Utiliser votre projet Alpha dans un navigateur**,
+un parcours facultatif distinct qui conserve les octets exacts de la demande
+Computer Use et le retour natif pour le même projet Alpha. Il exige un profil
+local installé séparément, une confirmation des données publiques non
+personnelles et une autorisation exacte à usage unique. Les requêtes et le
+coût fournisseur sont nuls; les fournisseurs payants sont refusés avant
+invocation. Ce candidat exige ses propres preuves sur le paquet installé,
+le navigateur réel, les captures et les deux chaînes de test jetables.
+Le parcours CSV existant ci-dessous reste disponible. Voir le
+[guide alpha.6](DOWNLOAD_ALPHA_6.md#français).
 
 Dans le tableau de bord local authentifié, choisissez **Conserver l'historique
 d'un même projet Alpha**. Importez la demande du projet, préparez la tâche avec

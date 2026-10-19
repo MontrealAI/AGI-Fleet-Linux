@@ -2,9 +2,9 @@
 
 [English](#english) · [Français](#français) · [Capabilities and remaining work](CURRENT_STATUS.md)
 
-**Version 0.1.0-alpha.6 · Linux x64 / ARM64 · development preview.** This separate package runs a bounded offline report, internal checking and six scoped skills. It is not the completed Local Skills product or a production-qualified installer. Funded work, general browser/desktop execution, native Mac local execution and independent economic review are disabled. The example makes no model calls.
+**Version 0.1.0-alpha.6 · Linux x64 / ARM64 · development preview.** This separate package runs a bounded offline report, internal checking and six scoped skills. It also includes an optional, separately configured Alpha scripted-browser rehearsal with zero provider requests. It is not the completed Local Skills product or a production-qualified installer. Funded work, general browser/desktop execution, native Mac local execution and independent economic review are disabled. The example makes no model calls.
 
-This version-specific guide is for the **alpha.6 source candidate**. Download only after its named release assets are published following exact-package qualification. The preserved [alpha.5 guide](DOWNLOAD_ALPHA_5.md) and [alpha.4 guide](DOWNLOAD.md) remain available for those earlier releases. [Alpha.5 changes and gates](RELEASE_NOTES_ALPHA_6.md).
+This version-specific guide is for the **alpha.6 source candidate**. Download only after its named release assets are published following exact-package qualification. The preserved [alpha.5 guide](DOWNLOAD_ALPHA_5.md) and [alpha.4 guide](DOWNLOAD.md) remain available for those earlier releases. [Alpha.6 changes and gates](RELEASE_NOTES_ALPHA_6.md).
 
 ## English
 
@@ -77,6 +77,12 @@ Keep the terminal running. Open the exact local dashboard URL printed by the lau
 
 To preserve an Alpha project, choose **Keep one Alpha project history**, import its Fleet request, prepare the exact Agent task, authorize and run it, then separately prepare and authorize the Node check. Save the return for the same Alpha project. The USDC or $AGIALPHA route remains explicit, and the local check is internal. See the [project journey guide](PROJECT_JOURNEY.md).
 
+### Optional Alpha scripted-browser rehearsal
+
+The normal `serve` command leaves this route disabled. After the exact package's native service gate has passed, an operator can follow the [Computer Use configuration guide](../../local-runtime/computer/README.md) to install its reviewed Alpha source, Python environment, immutable Docker image and private profile. The profile binds one exact public, non-personal handoff and a fixed bounded action sequence. It permits no live paid provider; changing the profile requires fresh activation and grants.
+
+Start the service with the documented absolute `--computer-config` path, then check readiness. In **Use your Alpha project in a browser**, choose that handoff file and confirm its public, non-personal inputs. **Prepare** starts no execution. Inspect the exact task above, authorize its one-use grant and run once. Inspect the receipt and screenshots, then choose **Save native return for Alpha** and import it into the same Alpha project. STOP, grant revocation and uncertainty records still apply. A successful rehearsal establishes neither independent acceptance nor earnings. Provider requests and provider cost are zero; device and human costs remain unmeasured.
+
 For help, choose **Preview support report**, inspect its contents and **Save this report** if useful. It excludes credentials, actor identities, task inputs and outputs. Nothing is uploaded automatically. See [install/update/rollback/removal](INSTALL_AND_RECOVER.md), [OpenClaw setup](OPENCLAW_CLIENT.md) and [what remains unfinished](CURRENT_STATUS.md).
 
 ## Français
@@ -92,5 +98,7 @@ For help, choose **Preview support report**, inspect its contents and **Save thi
 7. **Pour arrêter**, suspendez les nouvelles demandes, terminez les travaux acceptés, arrêtez l’hôte puis le processus. Si un résultat reste incertain, conservez l’état et suivez [Installer et reprendre](INSTALL_AND_RECOVER.md#français). Ne rejouez aucune ancienne autorisation.
 
 Pour le parcours Alpha, choisissez **Conserver l’historique d’un même projet Alpha**. Importez la demande Fleet, préparez et autorisez la tâche Agent, puis préparez et autorisez séparément la vérification Node. Enregistrez le retour pour le même projet. Les routes USDC et $AGIALPHA restent explicites; l’examen est interne. Consultez le [guide du projet](PROJECT_JOURNEY.md#français).
+
+Le parcours facultatif **Utiliser votre projet Alpha dans un navigateur** reste désactivé avec `serve` seul. Après la qualification native du paquet exact, suivez le [guide de configuration](../../local-runtime/computer/README.md) pour installer séparément le moteur et son profil privé. Le profil lie une demande publique non personnelle exacte à une suite bornée d’actions. Avec `serve --computer-config /chemin/absolu/profil.json`, vérifiez la disponibilité, choisissez cette demande et confirmez ses données publiques non personnelles. Préparer ne lance rien : examinez, autorisez et exécutez une seule fois. Enregistrez le retour natif et examinez les captures avant l’importation dans le même projet Alpha. Les fournisseurs payants sont refusés avant invocation; les requêtes et le coût fournisseur sont nuls. Les coûts humains et matériels restent non mesurés. L’ARRÊT et les preuves d’incertitude sont conservés.
 
 Pour demander de l’aide, choisissez **Prévisualiser le rapport d’assistance**, examinez-le, puis **Enregistrer ce rapport**. Aucun téléversement automatique n’a lieu. Les [limites actuelles](CURRENT_STATUS.md#français) et les 22 exigences du produit complet restent visibles.

@@ -1,9 +1,12 @@
 """Bind the installed importable source closure to exact Git objects before execution."""
 import hashlib
+from contextlib import contextmanager
 import os
 from pathlib import Path
 import re
 import subprocess
+import sys
+import tempfile
 
 IMPORTABLE={'.py','.pyw','.so','.pyd','.mjs','.js','.json'}
 ALPHA_SCOPES=[('alpha_factory_v1',False),('alpha_factory_v1/core',False),('alpha_factory_v1/core/runtime',True),('examples/successor-alpha',True),('examples/successor-workbench',True),('examples/build-successor',True),('examples/alpha-discovery',True),('docs/assets/successor',True)]
@@ -11,7 +14,20 @@ JOBS_SCOPES=[('packages/successor-core/src',True),('scripts/pages',False),('webs
 
 
 def git(root,*arguments):
-    return subprocess.check_output(['git',*arguments],cwd=root,timeout=30)
+    environment={key:value for key,value in os.environ.items() if not key.startswith('GIT_')}
+    environment.update({'GIT_CONFIG_GLOBAL':'/dev/null','GIT_CONFIG_SYSTEM':'/dev/null','GIT_CONFIG_NOSYSTEM':'1','GIT_NO_REPLACE_OBJECTS':'1','GIT_TERMINAL_PROMPT':'0'})
+    return subprocess.check_output(['git','--no-replace-objects','-c','core.fsmonitor=false',*arguments],cwd=root,timeout=30,env=environment)
+
+
+@contextmanager
+def source_only_imports():
+    previous_prefix,previous_write=sys.pycache_prefix,sys.dont_write_bytecode
+    with tempfile.TemporaryDirectory(prefix='fleet-computer-source-only-') as prefix:
+        try:
+            sys.pycache_prefix=prefix;sys.dont_write_bytecode=True
+            yield
+        finally:
+            sys.pycache_prefix=previous_prefix;sys.dont_write_bytecode=previous_write
 
 
 def verify_tree(root,scopes):

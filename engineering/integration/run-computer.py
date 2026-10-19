@@ -11,7 +11,7 @@ import subprocess
 import sys
 import threading
 import time
-from source_guard import verify_sources,verify_dependency_lock
+from source_guard import verify_sources,verify_dependency_lock,source_only_imports
 
 
 def main():
@@ -37,7 +37,8 @@ def main():
     selected=json.loads(Path(__file__).with_name('compatibility-set.json').read_text(encoding='utf-8'))
     if any(snapshot[name]['commit']!=selected[name] for name in ['alpha','jobs']):raise ValueError('Current checkouts must equal the selected exact compatibility source commits')
     verify_dependency_lock(alpha,Path(__file__).with_name('requirements-native.lock'))
-    bundle=json.loads(subprocess.check_output([args.node,str(Path(__file__).with_name('prepare-computer.mjs')),str(alpha),str(jobs)],timeout=90))
+    node_environment={key:value for key,value in os.environ.items() if key in {'PATH','HOME','LANG','LC_ALL','TZ','TMPDIR'}}
+    bundle=json.loads(subprocess.check_output([args.node,str(Path(__file__).with_name('prepare-computer.mjs')),str(alpha),str(jobs)],timeout=90,env=node_environment))
     for name,key in [('handoff.json','handoffRaw'),('frozen-mission-report.json','reportRaw'),('project.json','projectRaw')]:
         (out/name).write_text(bundle[key],encoding='utf-8');os.chmod(out/name,0o600)
     report=json.loads(bundle['reportRaw'])
@@ -51,6 +52,11 @@ def main():
     if args.prepare_only:
         if verify_sources(alpha,jobs)!=snapshot:raise ValueError('Source changed while preparing the inert handoff')
         print(json.dumps({'prepared':True,'executed':False,'output':str(out),'authority':'none'}));return
+    with source_only_imports():
+        return execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started)
+
+
+def execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started):
     sys.path.insert(0,str(alpha))
     from alpha_factory_v1.core.runtime.store import Journal
     from alpha_factory_v1.core.runtime.successor import computer

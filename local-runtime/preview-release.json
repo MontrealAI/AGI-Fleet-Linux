@@ -5,12 +5,21 @@
   "name": "AGI Fleet Local Skills 0.1.0 — Linux development preview",
   "archive": "agi-fleet-local-0.1.0-alpha.6.zip",
   "tests": {
-    "module": 150,
+    "module": 161,
     "native": 4,
     "installer": 29,
-    "browser": 2
+    "browser": 3
   },
-  "qualificationScope": "bounded-offline-linux-development-preview",
+  "qualificationScope": "bounded-offline-and-scripted-browser-linux-development-preview",
+  "computerUse": {
+    "mode": "scripted-zero-cost",
+    "default": "DISABLED",
+    "requiredArchitectures": ["x64", "arm64"],
+    "providerRequests": 0,
+    "providerCost": "ZERO_SCRIPTED_REHEARSAL",
+    "liveProviders": "DENIED_BEFORE_INVOCATION",
+    "savedPackageServiceGate": "REQUIRED"
+  },
   "operatorInstaller": false,
   "fullHandoffComplete": false,
   "productionQualified": false,

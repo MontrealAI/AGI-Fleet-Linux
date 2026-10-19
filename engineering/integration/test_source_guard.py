@@ -1,6 +1,7 @@
 import importlib.util
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -35,6 +36,20 @@ class SourceGuardTests(unittest.TestCase):
     def test_later_exact_source_change_produces_a_different_snapshot(self):
         before=self.check();self.file.write_text('VALUE=2\n');self.git('add','sources');self.git('-c','user.name=Source fixture','-c','user.email=source-fixture@example.invalid','commit','--quiet','-m','New synthetic source')
         self.assertNotEqual(self.check(),before)
+    def test_valid_cached_bytecode_cannot_override_verified_source_import(self):
+        from importlib._bootstrap_external import _code_to_timestamp_pyc
+        code=compile('VALUE=2\n',str(self.file),'exec');cached=Path(importlib.util.cache_from_source(str(self.file)));cached.parent.mkdir()
+        info=self.file.stat();cached.write_bytes(_code_to_timestamp_pyc(code,int(info.st_mtime),info.st_size))
+        self.check()
+        baseline=subprocess.check_output([sys.executable,'-B','-c','import sys;sys.path.insert(0,sys.argv[1]);import module;print(module.VALUE)',str(self.sources)],text=True)
+        self.assertEqual(baseline.strip(),'2')
+        with guard.source_only_imports():
+            selected=importlib.util.spec_from_file_location('verified_source_fixture',self.file);module=importlib.util.module_from_spec(selected);selected.loader.exec_module(module)
+            self.assertEqual(module.VALUE,1)
+    def test_replacement_refs_cannot_change_verified_commit_contents(self):
+        original=self.git('rev-parse','HEAD').decode().strip();self.file.write_text('VALUE=2\n');self.git('add','sources');self.git('-c','user.name=Source fixture','-c','user.email=source-fixture@example.invalid','commit','--quiet','-m','Replacement fixture')
+        replacement=self.git('rev-parse','HEAD').decode().strip();self.git('checkout','--quiet',original);self.git('replace',original,replacement);self.file.write_text('VALUE=2\n')
+        with self.assertRaisesRegex(ValueError,'SOURCE_GIT_BYTES_CHANGED'):self.check()
 
 
 if __name__=='__main__':unittest.main()

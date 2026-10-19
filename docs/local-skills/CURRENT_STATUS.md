@@ -28,6 +28,18 @@ below. Physical, live-provider and independent economic-review commissioning
 remain NOT_RUN; all 22 full-product acceptance requirements remain open. The
 alpha.4 release, assets and historical evidence below are preserved unchanged.
 
+The [alpha.6 source candidate](RELEASE_NOTES_ALPHA_6.md) adds an optional
+Alpha Computer Use route through the normal local service, task admission,
+one-use grants and output history. It is disabled by default and requires
+a separately installed exact-source Docker/Python profile. Its supported
+scope is a bounded scripted browser rehearsal with zero provider requests;
+live paid providers are denied before invocation. It does not inherit the
+alpha.5 observations below. Publication requires a new same-source/run/attempt
+saved-package service journey, actual browser/artifact proof, same-project
+Alpha return and both disposable mock-token lifecycle outcomes. Until those
+gates pass, this is source work in progress. Use public, non-personal inputs
+only; the 22 complete-product requirements remain open.
+
 The capacity/launch-boundary correction adds UTF-8 history accounting, atomic outcome-storage reservations that survive uncertainty/restart, and a final Linux executable/backend/boot check against the authorized binding. Seeded storage-pressure and synthetic host-drift regressions exercise these boundaries without claiming native resource or physical-session qualification. The history ceilings and consumed daily work budget remain intact. This does not implement cgroup memory/process limits, filesystem quotas, exclusive desktops or cross-host authority fencing; the complete A08 and A10 requirements remain open.
 
 For help, use **Preview support report** in the local dashboard, inspect its complete contents, and choose **Save this report**. Only readiness and aggregate counts are included. Credentials, actor names/identities, host identifiers, paths, tasks, outputs and event history are excluded. Nothing is uploaded automatically. A passing readiness probe does not commission the machine.
@@ -122,6 +134,17 @@ téléchargements. L’exécution demeure hors ligne et limitée. Les essais phy
 les fournisseurs réels et l’examen économique indépendant restent non réalisés;
 les 22 critères complets restent ouverts et le travail rémunéré désactivé.
 Ces observations ne qualifient pas une révision ultérieure.
+
+Le [candidat source alpha.6](RELEASE_NOTES_ALPHA_6.md) ajoute un parcours
+Alpha Computer Use facultatif dans le service local et ses autorisations
+habituelles. Il reste désactivé par défaut et exige un profil Docker/Python
+installé séparément. Cette répétition de navigateur bornée et scénarisée
+ne fait aucune requête fournisseur; les fournisseurs payants sont refusés
+avant invocation. Sa publication exige ses propres preuves sur le paquet
+sauvegardé exact : service réel, navigateur et captures, retour vers le même
+projet Alpha et deux cycles de jetons simulés. Les résultats alpha.5 ne sont
+pas hérités. Les données doivent être publiques non personnelles et les
+22 critères complets restent ouverts.
 
 **Publication du 15 octobre 2026 :** l’[aperçu Local Skills alpha.4](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.4)
 est disponible après qualification de la même source sur x64 et ARM64. Les quatre

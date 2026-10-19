@@ -69,11 +69,16 @@ jobs:
           python -m pip install --require-hashes --only-binary=:all: -r engineering/integration/requirements-native.lock
       - name: Require source orchestration and native inspector regressions
         run: |
-          node --test engineering/integration/bridge.test.mjs engineering/integration/independent-checker.test.mjs
+          FQR_VERIFY_ALPHA="$PWD/.integration-alpha" FQR_VERIFY_JOBS="$PWD/.integration-jobs" FQR_VERIFY_MANAGER="$PWD/.integration-manager" node --test engineering/integration/*.test.mjs
           node .integration-jobs/test/pages/four-repo-computer-receipt-native.mjs "$PWD/.integration-alpha"
           python -m py_compile engineering/integration/run-computer.py
           python -B -m unittest discover -s engineering/integration -p 'test_*.py' -v
           mkdir -p reports/four-repository-computer
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          Path('reports/four-repository-computer/execution-context.json').write_text(json.dumps({'repository':os.environ['GITHUB_REPOSITORY'],'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],'workflowAttempt':os.environ['GITHUB_RUN_ATTEMPT']},separators=(',',':'))+'\n')
+          PY
           git archive --format=zip --prefix=Fleet-Computer-Compatibility-Source/ HEAD engineering/integration .github/workflows/four-repository-computer.yml > reports/four-repository-computer/Fleet-Computer-Compatibility-Source.zip
           sha256sum reports/four-repository-computer/Fleet-Computer-Compatibility-Source.zip > reports/four-repository-computer/source-kit-SHA256SUMS.txt
       - name: Build the existing Alpha worker with observed immutable runtime provenance
@@ -139,7 +144,7 @@ jobs:
           FQR_EVIDENCE_FILE="$GITHUB_WORKSPACE/reports/four-repository-computer/manager-local-lifecycle.json" \
           node hardhat/scripts/four-repo-computer-lifecycle.cjs
       - name: Reconcile exact project, native result, currency drafts and both chain observations
-        run: node engineering/integration/verify-evidence.mjs "$PWD/reports/four-repository-computer"
+        run: node engineering/integration/verify-evidence.mjs "$PWD/reports/four-repository-computer" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" --expected-context "$(cat reports/four-repository-computer/execution-context.json)"
       - name: Assert no source changes or native container survives
         run: |
           test -z "$(git -C .integration-alpha status --porcelain --untracked-files=no)"

@@ -2,6 +2,8 @@ import copy
 import hashlib
 import importlib.util
 import json
+import os
+import re
 from pathlib import Path
 import stat
 import tempfile
@@ -23,6 +25,14 @@ class PreviewReleaseTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.evidence = self.root / 'evidence'
         self.commit, self.run = 'a' * 40, '123'
+        self.attempt = '1'
+        environment = mock.patch.dict(os.environ, {'GITHUB_RUN_ATTEMPT': self.attempt})
+        environment.start()
+        self.addCleanup(environment.stop)
+        # These are auditor fixtures, never native execution observations.
+        replay = mock.patch.object(R, 'replay_computer')
+        self.replay = replay.start()
+        self.addCleanup(replay.stop)
         self.spec = R.load(ROOT / 'local-runtime/preview-release.json')
         self.create_evidence()
 
@@ -53,7 +63,7 @@ class PreviewReleaseTests(unittest.TestCase):
                     info.external_attr = (stat.S_IFREG | 0o644) << 16
                     target.writestr(info, data)
             logs = folder / 'local-host-evidence'
-            self.write(logs / 'qualification.json', {'commit': self.commit, 'workflowRun': self.run, 'architecture': arch, 'archiveSHA256': R.sha(archive)})
+            self.write(logs / 'qualification.json', {'commit': self.commit, 'workflowRun': self.run, 'workflowAttempt': self.attempt, 'architecture': arch, 'archiveSHA256': R.sha(archive)})
             for name, scope in [('source', 'module'), ('extracted', 'module'), ('native-source', 'native'), ('native-archive', 'native')]:
                 self.tap(logs / (name + '.tap'), self.spec['tests'][scope])
             (logs / 'installer.log').write_text(f"Ran {self.spec['tests']['installer']} tests in 1.0s\n\nOK\n")
@@ -70,9 +80,25 @@ class PreviewReleaseTests(unittest.TestCase):
                            'liveProviderJudgment': False, 'independentReview': False}
                 gateway.update({k: True for k in ('actualGateway', 'actualRuntime', 'actualSandbox', 'skillObserved', 'separateAuthorization', 'scopedActor')})
                 self.write(logs / ('openclaw-' + role + '.json'), gateway)
+            computer = self.evidence / ('local-skills-computer-' + arch)
+            proof = computer / 'computer-evidence'
+            binding = {'repository': R.REPOSITORY, 'commit': self.commit, 'workflowRun': self.run, 'workflowAttempt': self.attempt,
+                       'architecture': arch, 'archiveSHA256': R.sha(archive)}
+            self.write(proof / 'execution-context.json', binding)
+            self.write(proof / 'accepted/computer-return.json', {'scope': 'synthetic release auditor fixture'})
+            self.write(proof / 'compatibility-evidence.json', {'scope': 'synthetic release auditor fixture'})
+            artifacts = [{'name': file.relative_to(proof).as_posix(), 'bytes': file.stat().st_size, 'sha256': R.sha(file)}
+                         for file in sorted(proof.rglob('*')) if file.is_file()]
+            lock = R.load(ROOT / 'engineering/integration/compatibility-set.json')
+            service = {key: True for key in ('actualIPC', 'prepare', 'exactGrant', 'oneUse', 'actualDocker', 'actualBrowser')}
+            service.update(nativeAlphaReturnSha256=R.sha(proof / 'accepted/computer-return.json'), returnExportSha256=R.sha(proof / 'accepted/computer-return.json'))
+            self.write(computer / 'local-host-evidence/computer-journey.json', {
+                'schema': 'agi-fleet/saved-package-computer-journey/v1', 'binding': binding, 'package': R.package_inventory(archive),
+                'service': service, 'sourceCommits': {**{name: lock[name] for name in ('alpha', 'jobs', 'manager')}, 'fleet': self.commit},
+                'compatibilityEvidenceSha256': R.sha(proof / 'compatibility-evidence.json'), 'artifacts': artifacts})
         browser = self.evidence / 'local-dashboard-observations'
-        self.write(browser / 'qualification.json', {'commit': self.commit, 'workflowRun': self.run, 'evidenceClass': 'BROWSER_WITH_DECLARED_SYNTHETIC_WORKER'})
-        self.tap(browser / 'browser.tap', 2)
+        self.write(browser / 'qualification.json', {'commit': self.commit, 'workflowRun': self.run, 'workflowAttempt': self.attempt, 'evidenceClass': 'BROWSER_WITH_DECLARED_SYNTHETIC_WORKER'})
+        self.tap(browser / 'browser.tap', self.spec['tests']['browser'])
         for lang in ('en', 'fr'):
             for size in ('desktop', 'mobile'):
                 (browser / (lang + '-' + size + '.png')).write_bytes(b'\x89PNG\r\n\x1a\nsynthetic fixture')
@@ -83,7 +109,10 @@ class PreviewReleaseTests(unittest.TestCase):
     def test_matching_fixture_audits_and_bundles_without_production_claim(self):
         result = self.audit()
         self.assertIn('/DOWNLOAD_ALPHA_6.md)', R.notes(result, []))
+        self.assertIn('zero provider requests and zero provider cost', R.notes(result, []))
+        self.assertIn('both disposable mock-token lifecycles', R.notes(result, []))
         self.assertIn('/DOWNLOAD.md)', R.notes({**result, 'version': '0.1.0-alpha.4'}, []))
+        self.assertNotIn('zero provider requests and zero provider cost', R.notes({**result, 'version': '0.1.0-alpha.4'}, []))
         with self.assertRaisesRegex(ValueError, 'Version-matched download guide required'):
             R.notes({**result, 'version': '0.1.0-alpha.99'}, [])
         self.assertEqual(result['status'], 'PASS')
@@ -101,6 +130,89 @@ class PreviewReleaseTests(unittest.TestCase):
         for commit, run in [('b' * 40, self.run), (self.commit, '999')]:
             with self.assertRaises(ValueError):
                 R.audit(self.evidence, commit, run, self.spec)
+
+    def test_computer_service_proof_is_required_from_each_exact_run_attempt_and_source_set(self):
+        for arch in ('x64', 'arm64'):
+            file = self.evidence / ('local-skills-computer-' + arch) / 'local-host-evidence/computer-journey.json'
+            original = file.read_bytes()
+            file.unlink()
+            with self.assertRaises(ValueError):
+                self.audit()
+            file.write_bytes(original)
+            for key, value in [('commit', 'b' * 40), ('workflowRun', '999'), ('workflowAttempt', '2'), ('architecture', 'foreign'), ('archiveSHA256', 'b' * 64)]:
+                receipt = R.load(file)
+                receipt['binding'][key] = value
+                self.write(file, receipt)
+                with self.subTest(architecture=arch, binding=key), self.assertRaisesRegex(ValueError, 'binding differs'):
+                    self.audit()
+                file.write_bytes(original)
+            receipt = R.load(file)
+            receipt['sourceCommits']['manager'] = 'b' * 40
+            self.write(file, receipt)
+            with self.assertRaisesRegex(ValueError, 'compatibility source set differs'):
+                self.audit()
+            file.write_bytes(original)
+        with mock.patch.dict(os.environ, {'GITHUB_RUN_ATTEMPT': ''}), self.assertRaisesRegex(ValueError, 'Exact workflow attempt required'):
+            self.audit()
+
+    def test_computer_service_flags_cannot_replace_unchanged_package_or_native_semantic_replay(self):
+        file = self.evidence / 'local-skills-computer-x64/local-host-evidence/computer-journey.json'
+        original = file.read_bytes()
+        receipt = R.load(file)
+        receipt['package']['inventoryAfterSha256'] = 'b' * 64
+        self.write(file, receipt)
+        with self.assertRaisesRegex(ValueError, 'extracted package changed or differs'):
+            self.audit()
+        file.write_bytes(original)
+        for key in ('actualIPC', 'prepare', 'exactGrant', 'oneUse', 'actualDocker', 'actualBrowser'):
+            receipt = R.load(file)
+            receipt['service'][key] = False
+            self.write(file, receipt)
+            with self.subTest(service=key), self.assertRaisesRegex(ValueError, 'Actual saved-package Computer Use service journey required'):
+                self.audit()
+            file.write_bytes(original)
+        self.replay.side_effect = ValueError('Synthetic native inspector refusal')
+        with self.assertRaisesRegex(ValueError, 'native inspector refusal'):
+            self.audit()
+
+    def test_computer_artifacts_are_exhaustive_exact_and_cannot_be_links(self):
+        proof = self.evidence / 'local-skills-computer-x64/computer-evidence'
+        file = proof / 'accepted/computer-return.json'
+        original = file.read_bytes()
+        file.write_bytes(original + b'changed')
+        with self.assertRaisesRegex(ValueError, 'artifact bytes differ'):
+            self.audit()
+        file.write_bytes(original)
+        extra = proof / 'unlisted.json'
+        extra.write_bytes(b'{}')
+        with self.assertRaisesRegex(ValueError, 'artifact coverage differs'):
+            self.audit()
+        extra.unlink()
+        file.unlink()
+        outside = self.root / 'outside-computer.json'
+        outside.write_bytes(original)
+        file.symlink_to(outside)
+        with self.assertRaisesRegex(ValueError, 'artifact links forbidden'):
+            self.audit()
+
+    def test_computer_retained_return_and_context_are_bound_to_the_receipt(self):
+        file = self.evidence / 'local-skills-computer-arm64/local-host-evidence/computer-journey.json'
+        original = file.read_bytes()
+        for key in ('nativeAlphaReturnSha256', 'returnExportSha256'):
+            receipt = R.load(file)
+            receipt['service'][key] = 'b' * 64
+            self.write(file, receipt)
+            with self.subTest(return_field=key), self.assertRaisesRegex(ValueError, 'native same-project return differs'):
+                self.audit()
+            file.write_bytes(original)
+        proof = file.parent.parent / 'computer-evidence'
+        context = proof / 'execution-context.json'
+        self.write(context, {**R.load(context), 'workflowAttempt': '2'})
+        receipt = R.load(file)
+        next(row for row in receipt['artifacts'] if row['name'] == 'execution-context.json').update(bytes=context.stat().st_size, sha256=R.sha(context))
+        self.write(file, receipt)
+        with self.assertRaisesRegex(ValueError, 'retained execution provenance differs'):
+            self.audit()
 
     def test_missing_or_failing_or_skipped_native_result_rejected(self):
         file = self.evidence / 'local-skills-preview-arm64/local-host-evidence/native-archive.tap'
@@ -191,7 +303,15 @@ class PreviewReleaseTests(unittest.TestCase):
     def test_publication_requires_full_fleet_and_keeps_legacy_publication_disabled(self):
         local = (ROOT / '.github/workflows/local-skills.yml').read_text()
         legacy = (ROOT / '.github/workflows/next-release.yml').read_text()
-        self.assertIn('needs: [native, browser, audit, fleet]', local)
+        self.assertIn('needs: [native, browser, computer, audit, fleet]', local)
+        self.assertIn('needs: [native, browser, computer]', local)
+        self.assertIn('uses: ./.github/workflows/four-repository-service.yml', local)
+        self.assertIn('package-artifact: local-skills-preview-${{ matrix.arch }}', local)
+        for section in ('audit', 'publish'):
+            selected = re.split(r'\n  [A-Za-z][A-Za-z0-9-]*:\n', local.split('\n  ' + section + ':\n', 1)[1], maxsplit=1)[0]
+            for repository in ('AGI-Alpha-Agent-v0', 'AGIJobsv0', 'AGIJobManager'):
+                self.assertIn('repository: MontrealAI/' + repository, selected)
+            self.assertIn('Install the hash-pinned native inspector runtime', selected)
         self.assertIn('uses: ./.github/workflows/next-release.yml', local)
         self.assertIn('validation_only: true', local)
         self.assertIn('!inputs.validation_only &&', legacy)

@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: MIT
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {requireNativeArtifacts,requireRejectedAllocation,verifyEvidence} from './verify-evidence.mjs';
+import {sha256} from './bridge.mjs';
+const root=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-proof-negative-'));
+process.on('exit',()=>fs.rmSync(root,{recursive:true,force:true}));
+for(const [name,value] of Object.entries({empty:{},protocol:{authority:'none',verified:false,receipt:{state:'review',cleanup:'VERIFIED',actions_reserved:1,screenshots:[]},execution:{provider:{model:'PROTOCOL_DOUBLE_NO_BROWSER'}}},flagsOnly:{authority:'none',verified:false,receipt:{state:'review',cleanup:'VERIFIED',actions_reserved:14,screenshots:Array.from({length:15},(_,i)=>({file:'screen-'+String(i).padStart(3,'0')+'.png',sha256:'0'.repeat(64)}))},execution:{provider:{model:'SCRIPTED_COMPUTER_FIXTURE_NOT_LIVE_MODEL',endpoint:'http://127.0.0.1/fixture-no-network'}}}}))test('rejects '+name+' rather than deriving browser execution from flags',()=>assert.throws(()=>requireNativeArtifacts(root,'accepted',value)));
+const mission={digest:'mission',requirements:{earlyUnits:1,earlyDay:7,totalUnits:1,finalDay:14,budgetCents:100},suppliers:[{id:'supplier',unitCents:50,freightCents:0,deliveryDay:7}]};
+const report={mission,digest:'report',frozen:{programDigest:'program'}};
+const positive={missionDigest:'mission',reportDigest:'report',frozenProgramDigest:'program',formulation:'actual_requirements',purchaseExecuted:false,plan:{allocations:[{supplierId:'supplier',units:1}],costCents:50},check:{valid:true,totals:{totalUnits:1,earlyUnits:1,costCents:50}}};
+const returned=result=>({observedText:'SUCCESSOR_COMPUTER_RESULT '+JSON.stringify(result)});
+test('rejects positive raw observation substituted for negative provenance',()=>assert.throws(()=>requireRejectedAllocation(report,returned(positive)),/Positive raw results/));
+test('negative oracle requires exact report and frozen-program bindings',()=>{const late=structuredClone(positive);late.plan.allocations[0].units=2;late.check.valid=false;assert.doesNotThrow(()=>requireRejectedAllocation(report,returned(late)));late.reportDigest='other';assert.throws(()=>requireRejectedAllocation(report,returned(late)));});
+test('complete former empty/protocol aggregate bypass is refused by installed exact-source inspectors',{skip:!process.env.FQR_VERIFY_ALPHA},async()=>{
+  const dir=path.join(root,'forgery');for(const relative of ['accepted','rejected-late'])fs.mkdirSync(path.join(dir,relative),{recursive:true});
+  const write=(name,value)=>fs.writeFileSync(path.join(dir,name),typeof value==='string'?value:JSON.stringify(value));
+  const producer={repository:'MontrealAI/AGI-Fleet-Linux',commit:'1'.repeat(40),workflowRun:'1',workflowAttempt:'1'};write('execution-context.json',producer);
+  const raw=JSON.stringify({authority:'none',verified:false,receipt:{state:'review',cleanup:'VERIFIED',actions_reserved:1,screenshots:[]},execution:{image:'sha256:'+'1'.repeat(64),provider:{model:'PROTOCOL_DOUBLE_NO_BROWSER'}},observedText:'PROTOCOL DOUBLE. NO BROWSER WAS EXECUTED.'});
+  const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.keys(x).sort().map(k=>[k,x[k]])):x);
+  const body={inputs:{handoffRaw:'{}',returnRaw:raw,reportRaw:'{}'},routes:{managerRaw:'{}',jobsRaw:'{}'},historyRaw:'{}',constraintCheck:{accepted:true,independentlyImplementedConstraintCheck:true,independentlyControlledEconomicReview:false}};
+  const journey=canonical({...body,sha256:sha256(canonical(body))});write('accepted/complete-journey.json',journey);
+  for(const [file,value] of Object.entries({'handoff.json':'{}','computer-return.json':raw,'frozen-mission-report.json':'{}','manager-usdc-draft.json':'{}','jobs-agialpha-draft.json':'{}','alpha-retained-history.json':'{}','integration-evidence.json':{journeySha256:sha256(journey)},'browser-evidence.json':{realBrowser:true,dockerIsolation:true,nativeSession:{actions:1,screenshots:0}}}))write('accepted/'+file,value);
+  write('jobs-local-lifecycle.json',{});write('manager-local-lifecycle.json',{});write('rejected-late/rejection-evidence.json',{actualBrowserResultRejected:true});
+  await assert.rejects(verifyEvidence({root:dir,alphaRoot:process.env.FQR_VERIFY_ALPHA,jobsRoot:process.env.FQR_VERIFY_JOBS,managerRoot:process.env.FQR_VERIFY_MANAGER,expectedContext:producer}),/FOUR_REPO_|COMPUTER_/);
+  assert.equal(fs.existsSync(path.join(dir,'compatibility-evidence.json')),false);
+});

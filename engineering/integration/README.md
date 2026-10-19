@@ -23,7 +23,10 @@ Use exact clean checkouts selected in `compatibility-set.json`. The hosted
 runner compares every imported source file against the selected HEAD Git blob,
 rejects linked or untracked importable files, and checks the complete source
 snapshot again after execution. Ignored interpreter caches are explicitly
-excluded. The host dependency lock contains fourteen unmodified package blocks
+excluded from inventory; native imports use a new empty bytecode-cache prefix,
+so existing caches cannot substitute executable code. Git replacement refs and
+filesystem-monitor hooks are disabled for source verification, and Node preload
+environment variables are not inherited. The host dependency lock contains fourteen unmodified package blocks
 from Alpha's existing hash-locked agent profile; installs require those hashes.
 The hosted
 workflow builds Alpha's existing reviewed Dockerfile, records the resolved base
@@ -80,3 +83,5 @@ La vérification arithmétique locale n'est ni une preuve indépendante ni une
 qualification de production. Aucun portefeuille réel, financement, déploiement,
 changement d'autorité ou modification ENS n'est effectué. Le journal privé de
 test et sa clé générée sont exclus des pièces publiques.
+
+The aggregate verifier replays the installed native inspectors, drafts, preserved project history and both arithmetic checks against the selected Git objects. It requires retained positive and negative PNG artifacts and refuses protocol doubles, empty envelopes and substitution of positive output for a negative case. Invoke `verify-evidence.mjs ROOT ALPHA JOBS MANAGER --expected-context JSON`; use `--read-only` to re-audit an existing aggregate. The expected GitHub repository, commit, run and attempt must come from the caller's independently checked producer record. Offline imported files alone do not attest actual execution.

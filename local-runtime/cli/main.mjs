@@ -15,15 +15,15 @@ export async function client({state,tokenFile,action,input}) {
   privateDirectory(state);const token=readPrivate(tokenFile,100).toString().trim();
   return await new Promise((resolve,reject)=>{
     const req=http.request({socketPath:path.join(state,'control.sock'),method:'POST',path:'/v1/'+action,headers:{Host:'localhost',Authorization:'Bearer '+token,'Content-Type':'application/json'}},res=>{
-      const maximum=['project-export','journey-export','journey-inspect'].includes(action)?CAPSULE_ENVELOPE_BYTES:MAX_BYTES;
+      const maximum=['project-export','journey-export','journey-inspect','computer-export'].includes(action)?CAPSULE_ENVELOPE_BYTES:MAX_BYTES;
       const parts=[];let n=0;res.on('data',b=>{n+=b.length;if(n>maximum)req.destroy(new Error('OUTPUT_LIMIT'));else parts.push(b);});res.on('end',()=>{try{const value=parseStrict(decodeUTF8(Buffer.concat(parts)),maximum);need(res.statusCode===200,value.error||'REQUEST_FAILED');resolve(value);}catch(e){reject(e);}});
-    });req.on('error',reject);req.setTimeout(25000,()=>req.destroy(new Error('CONTROL_TIMEOUT')));req.end(canonical(input));
+    });req.on('error',reject);req.setTimeout(action==='run'?180000:25000,()=>req.destroy(new Error('CONTROL_TIMEOUT')));req.end(canonical(input));
   });
 }
 export async function main(args=process.argv.slice(2)) {
   process.umask(0o077);
   const action=args.shift(),state=path.resolve(process.env.AGI_LOCAL_STATE||path.join(os.homedir(),'.local','state','agi-fleet-local'));
-  if(!action||action==='help'){console.log('AGI Fleet Local Skills — development preview\ninit | serve | status | doctor | diagnostics\nrequest ACTION PRIVATE_INPUT.json\nrecover-service --confirm\nUse AGI_LOCAL_STATE for a fresh state directory outside the checkout.\nAGI_LOCAL_TOKEN_FILE selects an operator or scoped actor credential (0600).\nNo funded work, native desktop or live provider support is qualified.');return;}
+  if(!action||action==='help'){console.log('AGI Fleet Local Skills — development preview\ninit | serve [--computer-config /absolute/private-profile.json] | status | doctor | diagnostics\nrequest ACTION PRIVATE_INPUT.json\nrecover-service --confirm\nUse AGI_LOCAL_STATE for a fresh state directory outside the checkout.\nAGI_LOCAL_TOKEN_FILE selects an operator or scoped actor credential (0600).\nThe optional Computer Use route is a zero-cost scripted browser rehearsal.\nNo funded work, general desktop or live provider support is qualified.');return;}
   const tokenFile=process.env.AGI_LOCAL_TOKEN_FILE||path.join(state,'operator.token');
   if(action==='init'){
     need(args.length===0&&!fs.existsSync(state),'FRESH_STATE_REQUIRED');
@@ -44,7 +44,8 @@ export async function main(args=process.argv.slice(2)) {
   }
   if(action==='recover-service'){need(args.length===1&&args[0]==='--confirm','CONFIRM_REQUIRED');console.log(JSON.stringify(await recoverService(state,{confirm:true})));return;}
   if(action==='serve'){
-    need(args.length===0,'ARGUMENTS_INVALID');const runtime=new LocalRuntime(state);
+    need(args.length===0||(args.length===2&&args[0]==='--computer-config'&&path.isAbsolute(args[1])),'ARGUMENTS_INVALID');
+    const runtime=new LocalRuntime(state,{computerConfigFile:args.length?args[1]:null});
     const socket=path.join(state,'control.sock');
     // Never remove an existing socket or guess that a supervisor is dead.
     const ipc=createServer(runtime,{socket});

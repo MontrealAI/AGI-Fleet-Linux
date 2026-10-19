@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {chromium} from '../../../engineering/browser-tests/node_modules/@playwright/test/index.mjs';
 import AxeBuilder from '../../../engineering/browser-tests/node_modules/@axe-core/playwright/dist/index.mjs';
 import {LocalRuntime} from '../../supervisor/runtime.mjs';
@@ -12,6 +13,49 @@ import {nativeProject} from '../fixtures/project.mjs';
 import {createProjectRequest,inspectProjectReturn} from '../../project/transfer.mjs';
 
 const launch=()=>chromium.launch({headless:true,...(process.env.AGI_QA_CHROMIUM?{executablePath:process.env.AGI_QA_CHROMIUM}:{})});
+
+test('EN/FR Computer Use UI preserves exact handoff, explicit consent and verified downloads (synthetic control API)',async()=>{
+  const browser=await launch(),sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+  const screenshot=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9ZQmcAAAAASUVORK5CYII=','base64');
+  const returnRaw=' {"schema":"synthetic-ui-return/v1","note":"é😀; no native execution qualification"}\n';
+  try{for(const language of ['en','fr']){
+    const f=fixture(),s=createServer(f.runtime);let context;
+    try{
+      const actor=f.create(),run=await f.run(actor,f.prepare(actor,task(language))),operator=f.runtime.issueClient();
+      const {url}=await s.start();context=await browser.newContext();const page=await context.newPage();
+      let prepared=[],authorityCalls=0,tamper=false;
+      const fulfill=(route,value,status=200)=>route.fulfill({status,contentType:'application/json',body:JSON.stringify(value)});
+      await page.route('**/v1/doctor',route=>fulfill(route,{schema:'agi-fleet/local-host/v1',supported:true,alphaComputer:{supported:true,mode:'scripted-zero-cost',productionQualified:false}}));
+      await page.route('**/v1/prepare',route=>{
+        const request=route.request().postDataJSON();prepared.push(request);
+        if(request.task.input.handoffRaw.startsWith('\uFEFF'))return fulfill(route,{error:'JSON_BOM'},400);
+        return fulfill(route,{grant:'synthetic-ui-grant',actor:actor.id,commitment:'a'.repeat(64),task:request.task,preparingClient:'this-operator',state:'prepared'});
+      });
+      for(const action of ['authorize','run'])await page.route('**/v1/'+action,route=>{authorityCalls++;return fulfill(route,{error:'UNEXPECTED_AUTHORITY'},400);});
+      await page.route('**/v1/output',route=>fulfill(route,{receipt:{result:{files:[{name:'computer-return.json',mediaType:'application/json',content:returnRaw}],artifacts:[{name:'0001.png',mediaType:'image/png',bytes:screenshot.length,sha256:sha(screenshot)}]}}}));
+      await page.route('**/v1/computer-export',route=>{assert.deepEqual(route.request().postDataJSON(),{actor:actor.id,run:run.run});return fulfill(route,{name:'computer-return.json',content:tamper?returnRaw+'changed':returnRaw,sha256:sha(returnRaw)});});
+      await page.route('**/v1/computer-artifact',route=>{assert.deepEqual(route.request().postDataJSON(),{actor:actor.id,run:run.run,name:'0001.png'});return fulfill(route,{name:'0001.png',mediaType:'image/png',contentBase64:screenshot.toString('base64'),sha256:sha(screenshot)});});
+      await page.goto(url);if(language==='fr')await page.locator('#language').click();
+      await page.locator('#token').fill(operator.token);await page.locator('#connect').click();await page.locator('#connected').waitFor({state:'visible'});
+      assert.equal(await page.locator('#computerPrepare').isDisabled(),true);assert.equal(await page.locator('#computerPublic').isChecked(),false);
+      await page.locator('#doctor').click();await page.waitForFunction(()=>document.getElementById('diagnostic').textContent.includes('alphaComputer'));
+      const upload=buffer=>page.locator('#computerFile').setInputFiles({name:'computer-handoff.json',mimeType:'application/json',buffer});
+      await upload(Buffer.from([255]));await page.locator('#computerPublic').check();await page.locator('#computerPrepare').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('COMPUTER_UTF8_REQUIRED'));assert.equal(prepared.length,0);
+      await upload(Buffer.alloc(1_000_001,32));assert.equal(await page.locator('#computerPublic').isChecked(),false);await page.locator('#computerPublic').check();await page.locator('#computerPrepare').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('COMPUTER_HANDOFF_LIMIT'));assert.equal(prepared.length,0);
+      const handoff=' \n{"schema":"synthetic-ui-handoff/v1","note":"é😀"}\n';
+      await upload(Buffer.concat([Buffer.from([239,187,191]),Buffer.from(handoff)]));await page.locator('#computerPublic').check();await page.locator('#computerPrepare').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('JSON_BOM'));assert.equal(prepared[0].task.input.handoffRaw,'\uFEFF'+handoff);
+      await upload(Buffer.from(handoff));assert.equal(await page.locator('#computerPrepare').isDisabled(),true);await page.locator('#computerPublic').check();await page.locator('#computerPrepare').click();await page.locator('#grant').waitFor({state:'visible'});
+      assert.deepEqual(prepared[1],{actor:actor.id,task:{schema:'agi-fleet/local-task/v1',action:'alpha-computer-run',workspace:'files',input:{handoffRaw:handoff,publicNonpersonal:true},review:'none',sourceActor:null,sourceController:null}});
+      assert.equal(authorityCalls,0);assert.equal(await page.locator('#computerPublic').isChecked(),false);assert.equal(await page.locator('#run').isDisabled(),true);
+      assert.match(await page.locator('#alphaComputer .badge').textContent(),language==='fr'?/scénarisée/:/scripted/);
+      await page.locator('#runs .run button').first().click();
+      let download=page.waitForEvent('download');await page.getByRole('button',{name:language==='fr'?'Enregistrer le retour natif pour Alpha':'Save native return for Alpha',exact:true}).click();let saved=await download;assert.equal(saved.suggestedFilename(),'computer-return.json');assert.equal(fs.readFileSync(await saved.path(),'utf8'),returnRaw);
+      download=page.waitForEvent('download');await page.getByRole('button',{name:(language==='fr'?'Enregistrer la capture ':'Save screenshot ')+'0001.png',exact:true}).click();saved=await download;assert.equal(saved.suggestedFilename(),'0001.png');assert.deepEqual(fs.readFileSync(await saved.path()),screenshot);
+      tamper=true;let downloads=0;page.on('download',()=>downloads++);await page.getByRole('button',{name:language==='fr'?'Enregistrer le retour natif pour Alpha':'Save native return for Alpha',exact:true}).click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('COMPUTER_ARTIFACT_INTEGRITY'));assert.equal(downloads,0);assert.equal(authorityCalls,0);
+      const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();assert.deepEqual(axe.violations.map(v=>v.id),[]);
+    }finally{if(context)await context.close();s.server.closeAllConnections();if(s.server.listening)await new Promise(resolve=>s.server.close(resolve));f.close();}
+  }}finally{await browser.close();}
+});
 
 test('real EN/FR dashboard: authenticated onboarding, keyboard, mobile reflow and axe; native execution when ready',async()=>{
   const browser=await launch(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-dashboard-'));fs.chmodSync(directory,0o700);
