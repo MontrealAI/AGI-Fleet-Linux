@@ -59,7 +59,7 @@ async function refresh(){
   for(const r of s.runs){const row=document.createElement('div');row.className='run';row.textContent=`${r.state} · ${r.value.role} · ${r.id} `;row.append(button(language==='fr'?'Voir le résultat':'View output',async()=>{
     const value=await api('output',{actor:r.actor,run:r.id});$('output').textContent=JSON.stringify(value,null,2);
     const files=value.receipt?.result?.files||[];for(const f of files){row.append(button((language==='fr'?'Enregistrer ':'Save ')+f.name,()=>save(f.name,f.content,f.mediaType)));}
-    appendComputerOutputs(row,r,value.receipt?.result);
+    appendComputerOutputs(row,{...r,state:value.state},value.receipt);
   }));
   if(r.state==='uncertain')row.append(button(language==='fr'?'Examiner la reprise':'Inspect recovery',async()=>{
     recovery=await api('reconciliation',{run:r.id});$('recovery').hidden=false;$('recoveryDetails').textContent=JSON.stringify(recovery,null,2);
@@ -133,24 +133,33 @@ async function checkedComputerBytes(bytes,expected){
   if(actual!==expected)throw Error('COMPUTER_ARTIFACT_INTEGRITY');
   return bytes;
 }
-function appendComputerOutputs(row,run,result){
-  if(!result||!Array.isArray(result.files)||!result.files.some(file=>file.name==='computer-return.json'))return;
-  row.append(button(language==='fr'?'Enregistrer le retour natif pour Alpha':'Save native return for Alpha',async()=>{
+function appendComputerOutputs(row,run,receipt){
+  row.querySelector('[data-computer-outputs]')?.remove();
+  const observation=receipt?.observation??receipt?.priorOutcome?.observation;
+  if(observation?.backend!=='native-alpha-computer-scripted/v1'||!Array.isArray(observation.artifacts))return;
+  const nativeReturn=observation.artifacts.find(file=>file.name==='computer-return.json'&&file.mediaType==='application/json'&&Number.isSafeInteger(file.bytes)&&file.bytes>0&&file.bytes<=2_000_000&&/^[a-f0-9]{64}$/.test(file.sha256));
+  if(!nativeReturn)return;
+  const outputs=document.createElement('div'),notice=document.createElement('p');outputs.dataset.computerOutputs='';
+  const completed=run.state==='complete'&&receipt?.result?.nativeState==='review';
+  notice.textContent=completed?(language==='fr'?'Preuves conservées de la répétition. Examinez-les avant d’accepter un résultat.':'Retained rehearsal evidence. Review it before accepting a result.'):(language==='fr'?'Tentative historique incomplète. L’export conserve les preuves sans déclarer de réussite ni accorder de permission.':'Historical incomplete attempt. Export preserves evidence without declaring success or granting permission.');
+  notice.dataset.computerEvidenceState=completed?'review':'incomplete';outputs.append(notice);row.append(outputs);
+  const exportButton=button(language==='fr'?'Enregistrer le retour natif pour Alpha':'Save native return for Alpha',async()=>{
     const value=await api('computer-export',{actor:run.actor,run:run.id});
     if(value.name!=='computer-return.json'||typeof value.content!=='string')throw Error('COMPUTER_RETURN_INVALID');
-    const bytes=new TextEncoder().encode(value.content);if(bytes.length>4_000_000)throw Error('COMPUTER_RETURN_LIMIT');
-    await checkedComputerBytes(bytes,value.sha256);save(value.name,value.content);
-    say('Native return saved. Import it into the same Alpha project and review its evidence before accepting any result.','Retour natif enregistré. Importez-le dans le même projet Alpha et examinez ses preuves avant d’accepter un résultat.');
-  }));
-  for(const artifact of (Array.isArray(result.artifacts)?result.artifacts:[]).slice(0,64)){
+    const bytes=new TextEncoder().encode(value.content);
+    if(bytes.length!==nativeReturn.bytes||value.sha256!==nativeReturn.sha256)throw Error('COMPUTER_ARTIFACT_INTEGRITY');
+    await checkedComputerBytes(bytes,nativeReturn.sha256);save(value.name,value.content);
+    say(completed?'Native return saved. Import it into the same Alpha project and review its evidence before accepting any result.':'Historical return saved without declaring success. Import it into the same Alpha project to retain this incomplete attempt.',completed?'Retour natif enregistré. Importez-le dans le même projet Alpha et examinez ses preuves avant d’accepter un résultat.':'Retour historique enregistré sans déclarer de réussite. Importez-le dans le même projet Alpha pour conserver cette tentative incomplète.');
+  });exportButton.dataset.computerExport='';outputs.append(exportButton);
+  for(const artifact of observation.artifacts.slice(0,64)){
     if(artifact.mediaType!=='image/png'||typeof artifact.name!=='string'||artifact.name.length>160||!artifact.name.split('/').every(part=>/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(part)&&part!=='.'&&part!=='..'))continue;
-    row.append(button((language==='fr'?'Enregistrer la capture ':'Save screenshot ')+artifact.name,async()=>{
+    const artifactButton=button((language==='fr'?'Enregistrer la capture ':'Save screenshot ')+artifact.name,async()=>{
       const value=await api('computer-artifact',{actor:run.actor,run:run.id,name:artifact.name});
       if(value.name!==artifact.name||value.mediaType!=='image/png'||value.sha256!==artifact.sha256||typeof value.contentBase64!=='string'||value.contentBase64.length>4_000_000||!/^[A-Za-z0-9+/]*={0,2}$/.test(value.contentBase64))throw Error('COMPUTER_ARTIFACT_INVALID');
       const bytes=Uint8Array.from(atob(value.contentBase64),c=>c.charCodeAt(0));
       if(bytes.length!==artifact.bytes||![137,80,78,71,13,10,26,10].every((n,i)=>bytes[i]===n))throw Error('COMPUTER_ARTIFACT_INVALID');
       await checkedComputerBytes(bytes,artifact.sha256);save(artifact.name.split('/').at(-1),bytes,'image/png');
-    }));
+    });artifactButton.dataset.computerArtifact=artifact.name;outputs.append(artifactButton);
   }
 }
 $('computerFile').onchange=()=>{$('computerPublic').checked=false;renderComputerReadiness();};

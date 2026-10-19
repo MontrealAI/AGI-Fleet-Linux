@@ -21,9 +21,10 @@ test('EN/FR Computer Use UI preserves exact handoff, explicit consent and verifi
   try{for(const language of ['en','fr']){
     const f=fixture(),s=createServer(f.runtime);let context;
     try{
-      const actor=f.create(),run=await f.run(actor,f.prepare(actor,task(language))),operator=f.runtime.issueClient();
+      const actor=f.create(),grant=f.prepare(actor,task(language));f.authorize(grant);
+      const run=await f.run(actor,grant),operator=f.runtime.issueClient();
       const {url}=await s.start();context=await browser.newContext();const page=await context.newPage();
-      let prepared=[],authorityCalls=0,tamper=false;
+      let prepared=[],authorityCalls=0,tamper=null,outputState='complete';
       const fulfill=(route,value,status=200)=>route.fulfill({status,contentType:'application/json',body:JSON.stringify(value)});
       await page.route('**/v1/doctor',route=>fulfill(route,{schema:'agi-fleet/local-host/v1',supported:true,alphaComputer:{supported:true,mode:'scripted-zero-cost',productionQualified:false}}));
       await page.route('**/v1/prepare',route=>{
@@ -32,9 +33,12 @@ test('EN/FR Computer Use UI preserves exact handoff, explicit consent and verifi
         return fulfill(route,{grant:'synthetic-ui-grant',actor:actor.id,commitment:'a'.repeat(64),task:request.task,preparingClient:'this-operator',state:'prepared'});
       });
       for(const action of ['authorize','run'])await page.route('**/v1/'+action,route=>{authorityCalls++;return fulfill(route,{error:'UNEXPECTED_AUTHORITY'},400);});
-      await page.route('**/v1/output',route=>fulfill(route,{receipt:{result:{files:[{name:'computer-return.json',mediaType:'application/json',content:returnRaw}],artifacts:[{name:'0001.png',mediaType:'image/png',bytes:screenshot.length,sha256:sha(screenshot)}]}}}));
-      await page.route('**/v1/computer-export',route=>{assert.deepEqual(route.request().postDataJSON(),{actor:actor.id,run:run.run});return fulfill(route,{name:'computer-return.json',content:tamper?returnRaw+'changed':returnRaw,sha256:sha(returnRaw)});});
-      await page.route('**/v1/computer-artifact',route=>{assert.deepEqual(route.request().postDataJSON(),{actor:actor.id,run:run.run,name:'0001.png'});return fulfill(route,{name:'0001.png',mediaType:'image/png',contentBase64:screenshot.toString('base64'),sha256:sha(screenshot)});});
+      // Match executeComputer's real output contract: retained artifact metadata,
+      // nativeState=review and no inline files. This is still a synthetic API.
+      const artifacts=[{name:'computer-return.json',mediaType:'application/json',bytes:Buffer.byteLength(returnRaw),sha256:sha(returnRaw)},{name:'screen-000.png',mediaType:'image/png',bytes:screenshot.length,sha256:sha(screenshot)}],observation={backend:'native-alpha-computer-scripted/v1',artifacts};
+      await page.route('**/v1/output',route=>fulfill(route,{state:outputState,receipt:outputState==='complete'?{result:{files:[],nativeState:'review',artifacts},observation}:outputState==='uncertain'?{code:'RUN_CANCELLED',observation}:{disposition:'closed-without-success',authority:'none',replayAllowed:false,priorOutcome:{code:'RUN_CANCELLED',observation}}}));
+      await page.route('**/v1/computer-export',route=>{assert.deepEqual(route.request().postDataJSON(),{actor:actor.id,run:run.run});const content=tamper==='return'?returnRaw+'changed':returnRaw;return fulfill(route,{name:'computer-return.json',content,sha256:tamper==='return'?sha(content):sha(returnRaw)});});
+      await page.route('**/v1/computer-artifact',route=>{assert.deepEqual(route.request().postDataJSON(),{actor:actor.id,run:run.run,name:'screen-000.png'});const bytes=tamper==='screenshot'?Buffer.concat([screenshot.subarray(0,-1),Buffer.from([0])]):screenshot;return fulfill(route,{name:'screen-000.png',mediaType:'image/png',contentBase64:bytes.toString('base64'),sha256:sha(screenshot)});});
       await page.goto(url);if(language==='fr')await page.locator('#language').click();
       await page.locator('#token').fill(operator.token);await page.locator('#connect').click();await page.locator('#connected').waitFor({state:'visible'});
       assert.equal(await page.locator('#computerPrepare').isDisabled(),true);assert.equal(await page.locator('#computerPublic').isChecked(),false);
@@ -50,8 +54,12 @@ test('EN/FR Computer Use UI preserves exact handoff, explicit consent and verifi
       assert.match(await page.locator('#alphaComputer .badge').textContent(),language==='fr'?/scénarisée/:/scripted/);
       await page.locator('#runs .run button').first().click();
       let download=page.waitForEvent('download');await page.getByRole('button',{name:language==='fr'?'Enregistrer le retour natif pour Alpha':'Save native return for Alpha',exact:true}).click();let saved=await download;assert.equal(saved.suggestedFilename(),'computer-return.json');assert.equal(fs.readFileSync(await saved.path(),'utf8'),returnRaw);
-      download=page.waitForEvent('download');await page.getByRole('button',{name:(language==='fr'?'Enregistrer la capture ':'Save screenshot ')+'0001.png',exact:true}).click();saved=await download;assert.equal(saved.suggestedFilename(),'0001.png');assert.deepEqual(fs.readFileSync(await saved.path()),screenshot);
-      tamper=true;let downloads=0;page.on('download',()=>downloads++);await page.getByRole('button',{name:language==='fr'?'Enregistrer le retour natif pour Alpha':'Save native return for Alpha',exact:true}).click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('COMPUTER_ARTIFACT_INTEGRITY'));assert.equal(downloads,0);assert.equal(authorityCalls,0);
+      download=page.waitForEvent('download');await page.locator('[data-computer-artifact="screen-000.png"]').click();saved=await download;assert.equal(saved.suggestedFilename(),'screen-000.png');assert.deepEqual(fs.readFileSync(await saved.path()),screenshot);
+      let downloads=0;page.on('download',()=>downloads++);
+      for(const kind of ['return','screenshot']){tamper=kind;await page.locator('#status').evaluate(element=>{element.textContent='';});await page.locator(kind==='return'?'[data-computer-export]':'[data-computer-artifact="screen-000.png"]').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('COMPUTER_ARTIFACT_INTEGRITY'));assert.equal(downloads,0);}
+      tamper=null;
+      for(const state of ['uncertain','reconciled']){outputState=state;await page.locator('#runs .run button').first().click();await page.locator('[data-computer-evidence-state="incomplete"]').waitFor();assert.equal(await page.locator('[data-computer-export]').count(),1);download=page.waitForEvent('download');await page.locator('[data-computer-export]').click();saved=await download;assert.equal(fs.readFileSync(await saved.path(),'utf8'),returnRaw);assert.match(await page.locator('#status').textContent(),language==='fr'?/sans déclarer de réussite/:/without declaring success/);download=page.waitForEvent('download');await page.locator('[data-computer-artifact="screen-000.png"]').click();saved=await download;assert.deepEqual(fs.readFileSync(await saved.path()),screenshot);}
+      assert.equal(authorityCalls,0);
       const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();assert.deepEqual(axe.violations.map(v=>v.id),[]);
     }finally{if(context)await context.close();s.server.closeAllConnections();if(s.server.listening)await new Promise(resolve=>s.server.close(resolve));f.close();}
   }}finally{await browser.close();}
