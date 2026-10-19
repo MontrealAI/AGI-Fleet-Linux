@@ -304,12 +304,22 @@ def notes(manifest, assets):
     return text + ''.join(f'| {p.name} | {p.stat().st_size:,} | `{sha(p)}` |\n' for p in assets) + '\n'
 
 
+def require_current_main(api, commit):
+    ref = api('/git/ref/heads/main')
+    require(re.fullmatch(r'[0-9a-f]{40}', commit or '') is not None
+            and isinstance(ref, dict) and ref.get('ref') == 'refs/heads/main'
+            and isinstance(ref.get('object'), dict)
+            and ref['object'].get('type') == 'commit' and ref['object'].get('sha') == commit,
+            'Publication source is not the exact current main commit')
+
+
 def publish_assets(api, spec, commit, assets, body):
     try:
         tag = api('/git/ref/tags/' + spec['tag'])
     except urllib.error.HTTPError as error:
         if error.code != 404:
             raise
+        require_current_main(api, commit)
         tag = api('/git/refs', method='POST', data=json.dumps({'ref': 'refs/tags/' + spec['tag'], 'sha': commit}).encode())
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Tag identity differs')
     try:
@@ -336,6 +346,7 @@ def publish_assets(api, spec, commit, assets, body):
     tag = api('/git/ref/tags/' + spec['tag'])
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Tag changed before publication')
     if observed['draft']:
+        require_current_main(api, commit)
         observed = api(f'/releases/{release["id"]}', method='PATCH', data=json.dumps({'draft': False, 'prerelease': True, 'make_latest': 'false', 'body': body}).encode())
     require(observed['draft'] is False and observed['prerelease'] is True and observed.get('body') == body, 'Published classification or notes differ')
     tag = api('/git/ref/tags/' + spec['tag'])

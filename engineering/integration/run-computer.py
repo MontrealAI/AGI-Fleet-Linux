@@ -53,12 +53,11 @@ def main():
     if args.prepare_only:
         if verify_sources(alpha,jobs)!=snapshot:raise ValueError('Source changed while preparing the inert handoff')
         print(json.dumps({'prepared':True,'executed':False,'output':str(out),'authority':'none'}));return
-    with source_only_imports():
-        return execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started)
+    with source_only_imports(alpha,snapshot['alpha']['commit']) as sdk_capture:
+        return execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started,sdk_capture)
 
 
-def execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started):
-    sys.path.insert(0,str(alpha))
+def execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started,sdk_capture):
     from alpha_factory_v1.core.runtime.store import Journal
     from alpha_factory_v1.core.runtime.successor import computer
     from alpha_factory_v1.core.runtime.successor.computer_handoff import ComputerHandoff,write_computer_return
@@ -109,7 +108,7 @@ def execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started):
     returned=json.loads((run_dir/'computer-return.json').read_text())
     (out/'computer-return.json').write_text(json.dumps(returned,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
     if verify_sources(alpha,jobs)!=snapshot:raise ValueError('Imported source changed during execution; retain this run and use a new exact source')
-    evidence={'schema':'agi-fleet/four-repository-computer-observation/v1','actuator':args.actuator,'realBrowser':True,'scriptedAdvice':True,'fixtureAdviceCalls':advisor.calls,'liveProvider':False,'dockerIsolation':args.actuator=='docker','providerBilledCost':0,'providerRequests':0,'humanMinutes':None,'deviceCost':None,'elapsedSeconds':time.monotonic()-started,'independentReview':False,'onChainTransactions':0,'productionQualified':False,'authority':'none','settlement':'not-connected','injectedError':args.inject_error,'nativeSession':{'state':returned['receipt']['state'],'actions':returned['receipt']['actions_reserved'],'turns':returned['receipt']['turns_reserved'],'screenshots':len(returned['receipt']['screenshots'])},'sourceCommits':{name:subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip() for name,root in [('alpha',alpha),('jobs',jobs)]},'sourceGitChanges':{name:subprocess.check_output(['git','status','--porcelain','--untracked-files=no'],cwd=root,text=True).splitlines() for name,root in [('alpha',alpha),('jobs',jobs)]},'stableSourceFiles':snapshot,'hostRuntime':{'python':sys.version.split()[0],**{name:importlib.metadata.version(name) for name in ['pydantic','httpx','cryptography']}}}
+    evidence={'schema':'agi-fleet/four-repository-computer-observation/v1','actuator':args.actuator,'realBrowser':True,'scriptedAdvice':True,'fixtureAdviceCalls':advisor.calls,'liveProvider':False,'dockerIsolation':args.actuator=='docker','providerBilledCost':0,'providerRequests':0,'humanMinutes':None,'deviceCost':None,'elapsedSeconds':time.monotonic()-started,'independentReview':False,'onChainTransactions':0,'productionQualified':False,'authority':'none','settlement':'not-connected','injectedError':args.inject_error,'nativeSession':{'state':returned['receipt']['state'],'actions':returned['receipt']['actions_reserved'],'turns':returned['receipt']['turns_reserved'],'screenshots':len(returned['receipt']['screenshots'])},'sourceCommits':{name:subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip() for name,root in [('alpha',alpha),('jobs',jobs)]},'sourceGitChanges':{name:subprocess.check_output(['git','status','--porcelain','--untracked-files=no'],cwd=root,text=True).splitlines() for name,root in [('alpha',alpha),('jobs',jobs)]},'stableSourceFiles':snapshot,'nativeSourceCapture':sdk_capture,'hostRuntime':{'python':sys.version.split()[0],**{name:importlib.metadata.version(name) for name in ['pydantic','httpx','cryptography']}}}
     (out/'browser-evidence.json').write_text(json.dumps(evidence,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(evidence,indent=2))
 

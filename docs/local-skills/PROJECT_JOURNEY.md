@@ -100,6 +100,10 @@ require their own applicable exact-package qualification.
 
 ## Optional Computer Use source candidate
 
+For the complete public mission, strategy approval, local grant, distinct asset
+proposal and portable-history path, follow the
+[four-repository browser guide (EN/FR)](FOUR_REPOSITORY_JOURNEY.md).
+
 The alpha.6 source adds a separate **Use your Alpha project in a browser**
 control. It accepts a native Alpha Computer Use handoff, preserves its exact
 UTF-8 bytes and returns the native `computer-return.json` for the same Alpha

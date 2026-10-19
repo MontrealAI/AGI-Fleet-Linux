@@ -1,5 +1,6 @@
 """Static exact-desk keyboard contract. This is not browser execution evidence."""
 from html.parser import HTMLParser
+import re
 
 NATIVE_VIEWPORT = (1024, 768)
 
@@ -32,6 +33,9 @@ def inspect_desk_focus(handoff,actions, *, table_focusable=False):
     expected=[{'tag':'div','id':None,'role':'region','tabindex':'0'}]+[{'tag':'input','id':'cm-qty-'+name,'role':None,'tabindex':None} for name in ['stellar','laurentian','boreal']]
     if elements[:4]!=expected:raise ValueError('DESK_FOCUS_ORDER_CHANGED')
     if len(elements)<5 or elements[4]['id']!='cm-desk-evaluate' or elements[4]['tag']!='button':raise ValueError('DESK_EVALUATE_FOCUS_CHANGED')
+    # Markup alone does not establish the actual runtime keyboard order.
+    # The reviewed renderer removes a nonoverflowing table from that order.
+    if not re.search(r'scrollRegion\.tabIndex\s*=\s*scrollRegion\.scrollWidth\s*>\s*scrollRegion\.clientWidth\s*\?\s*0\s*:\s*-1\s*;',handoff['task']['html']):raise ValueError('DESK_RUNTIME_FOCUS_RULE_CHANGED')
     prefix=[{'type':'move','x':500,'y':300}]
     if table_focusable:prefix.append({'type':'keypress','keys':['TAB']})
     if actions[:len(prefix)]!=prefix:raise ValueError('DESK_FOCUS_PREFIX_CHANGED')

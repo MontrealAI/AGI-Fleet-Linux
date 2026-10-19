@@ -113,56 +113,105 @@ jobs:
           docker image inspect successor-four-repository-worker > reports/saved-package/computer-evidence/worker-image-inspect.json
           printf 'id=%s\n' "$IMAGE_ID" >> "$GITHUB_OUTPUT"
           sha256sum .integration-alpha/examples/successor-workbench/computer/Dockerfile .integration-alpha/examples/successor-workbench/computer/requirements.lock .integration-alpha/alpha_factory_v1/core/runtime/successor/computer_worker.py > reports/saved-package/computer-evidence/runtime-source-SHA256SUMS.txt
-      - name: Prepare public synthetic missions without executing a browser
+      - name: Prepare public synthetic starter inputs without executing a browser
         run: |
           python -B engineering/integration/run-computer.py --alpha-root "$PWD/.integration-alpha" --jobs-root "$PWD/.integration-jobs" --output "$PWD/reports/saved-package/computer-evidence/accepted" --prepare-only
           python -B engineering/integration/run-computer.py --alpha-root "$PWD/.integration-alpha" --jobs-root "$PWD/.integration-jobs" --output "$PWD/reports/saved-package/computer-evidence/rejected-late" --prepare-only --inject-error late
-      - name: Execute both cases through the actual extracted LocalRuntime service
-        env:
-          WORKER_IMAGE: ${{ steps.image.outputs.id }}
-        run: |
-          PYTHON_PHYSICAL=$(python -c 'import pathlib,sys; print(pathlib.Path(sys.executable).resolve())')
-          node engineering/integration/service-journey.mjs "$RUNNER_TEMP/saved-computer-application" "$PWD/.integration-alpha" "$PYTHON_PHYSICAL" "$WORKER_IMAGE" "$PWD/reports/saved-package/computer-evidence"
-          node engineering/integration/finalize-computer.mjs "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$PWD/reports/saved-package/computer-evidence/accepted"
-          node engineering/integration/finalize-computer.mjs "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$PWD/reports/saved-package/computer-evidence/rejected-late" rejected
-      - name: Select the supported Jobs and Manager Node runtime for disposable-chain acceptance
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22.23.3'
-      - name: Compile and exercise the separate AGIALPHA mock-token lifecycle
-        env:
-          FQR_ALPHA_COMMIT: ${{ steps.pins.outputs.alpha }}
+      - name: Build the exact Jobs public interface and canonical local-chain contracts
         run: |
           set -euo pipefail
           npm install --global npm@10.8.2 --ignore-scripts --no-audit --no-fund
           test "$(npm --version)" = 10.8.2
           npm --prefix .integration-jobs ci --ignore-scripts --no-audit --no-fund
           cd .integration-jobs
+          (
+            cd demo/CULTURE-v0
+            corepack enable
+            CYPRESS_INSTALL_BINARY=0 corepack pnpm install --frozen-lockfile
+          )
           node --test test/scripts/four-repo-computer-lifecycle.test.cjs
+          node scripts/pages/build.mjs
           npx hardhat compile
-          FQR_DRAFT_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/accepted/jobs-agialpha-draft.json" \
-          FQR_ALPHA_SOURCE="$GITHUB_WORKSPACE/.integration-alpha" \
-          FQR_INPUT_CLASS=ACTUAL_NATIVE_DOCKER_BROWSER_SCRIPTED_ADVICE \
-          FQR_EVIDENCE_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/jobs-local-lifecycle.json" \
-          npx hardhat run --no-compile --network hardhat integrations/alpha-agent/four-repo-computer-lifecycle.cjs
-      - name: Select the exact supported Manager runtime
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22.23.2'
-      - name: Compile and exercise the separate USDC mock-token lifecycle
+      - name: Build the exact Manager public interface and canonical local-chain contracts
         run: |
           set -euo pipefail
           npm --prefix .integration-manager ci --ignore-scripts --no-audit --no-fund
           npm --prefix .integration-manager/hardhat ci --ignore-scripts --no-audit --no-fund
           cd .integration-manager
           node --test hardhat/test/four-repo-computer-lifecycle.test.cjs
+          node scripts/site/build.mjs
           node scripts/security/patch-openzeppelin-compiler.cjs
           npm --prefix hardhat run compile
-          FQR_DRAFT_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/accepted/manager-usdc-draft.json" \
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - name: Drive the actual Jobs forward controls and consume the downloaded native handoff
+        env:
+          WORKER_IMAGE: ${{ steps.image.outputs.id }}
+          ARCH: ${{ inputs.architecture }}
+          ARCHIVE_NAME: ${{ inputs.archive-name }}
+        run: |
+          set -euo pipefail
+          EVIDENCE="$PWD/reports/saved-package/computer-evidence"
+          EXPECTED=$(node engineering/integration/execution-context.mjs "$ARCH" "$PWD/saved-package/local-preview/$ARCHIVE_NAME")
+          node engineering/integration/verify-gui.mjs "$EVIDENCE" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" --expected-context "$EXPECTED" --record-builds --alpha-site "$PWD/.integration-alpha/docs" --jobs-site "$PWD/.integration-jobs/build/pages" --manager-site "$PWD/.integration-manager/build/pages"
+          node engineering/integration/run-gui.mjs forward "$EVIDENCE" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$WORKER_IMAGE"
+          node engineering/integration/verify-gui.mjs "$EVIDENCE" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" --expected-context "$EXPECTED" --accept-forward
+      - name: Execute GUI-produced handoff bytes through the actual saved LocalRuntime service and dashboard
+        env:
+          WORKER_IMAGE: ${{ steps.image.outputs.id }}
+        run: |
+          set -euo pipefail
+          PYTHON_PHYSICAL=$(python -c 'import pathlib,sys; print(pathlib.Path(sys.executable).resolve())')
+          node engineering/integration/service-journey.mjs "$RUNNER_TEMP/saved-computer-application" "$PWD/.integration-alpha" "$PYTHON_PHYSICAL" "$WORKER_IMAGE" "$PWD/reports/saved-package/computer-evidence"
+          node engineering/integration/finalize-computer.mjs "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$PWD/reports/saved-package/computer-evidence/accepted"
+          node engineering/integration/finalize-computer.mjs "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$PWD/reports/saved-package/computer-evidence/rejected-late" rejected
+      - name: Reopen the full native history in Alpha and produce both financial archives through real GUI controls
+        env:
+          WORKER_IMAGE: ${{ steps.image.outputs.id }}
+          ARCH: ${{ inputs.architecture }}
+          ARCHIVE_NAME: ${{ inputs.archive-name }}
+        run: |
+          set -euo pipefail
+          EVIDENCE="$PWD/reports/saved-package/computer-evidence"
+          node engineering/integration/run-gui.mjs complete "$EVIDENCE" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$WORKER_IMAGE"
+          node engineering/integration/verify-gui.mjs "$EVIDENCE" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" --expected-context "$(node engineering/integration/execution-context.mjs "$ARCH" "$PWD/saved-package/local-preview/$ARCHIVE_NAME")"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.3'
+      - name: Exercise the actual GUI-produced AGIALPHA draft on a fresh disposable chain
+        env:
+          FQR_ALPHA_COMMIT: ${{ steps.pins.outputs.alpha }}
+        run: |
+          cd .integration-jobs
+          FQR_DRAFT_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/gui/jobs-en/proposal.json" \
+          FQR_ALPHA_SOURCE="$GITHUB_WORKSPACE/.integration-alpha" \
+          FQR_INPUT_CLASS=ACTUAL_NATIVE_DOCKER_BROWSER_SCRIPTED_ADVICE \
+          FQR_EVIDENCE_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/jobs-local-lifecycle.json" \
+          npx hardhat run --no-compile --network hardhat integrations/alpha-agent/four-repo-computer-lifecycle.cjs
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.2'
+      - name: Exercise the actual GUI-produced USDC draft on a separate fresh disposable chain
+        env:
+          FQR_ALPHA_COMMIT: ${{ steps.pins.outputs.alpha }}
+          FQR_JOBS_COMMIT: ${{ steps.pins.outputs.jobs }}
+        run: |
+          cd .integration-manager
+          FQR_DRAFT_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/gui/manager-en/proposal.json" \
           FQR_ALPHA_SOURCE="$GITHUB_WORKSPACE/.integration-alpha" \
           FQR_JOBS_SOURCE="$GITHUB_WORKSPACE/.integration-jobs" \
           FQR_EVIDENCE_FILE="$GITHUB_WORKSPACE/reports/saved-package/computer-evidence/manager-local-lifecycle.json" \
           node hardhat/scripts/four-repo-computer-lifecycle.cjs
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
       - name: Reconcile the actual service return and both chain observations
         env:
           ARCH: ${{ inputs.architecture }}
@@ -188,6 +237,13 @@ jobs:
             reports/saved-package/computer-evidence/*.json
             reports/saved-package/computer-evidence/*.txt
             reports/saved-package/computer-evidence/*.zip
+            reports/saved-package/computer-evidence/forward/*.json
+            reports/saved-package/computer-evidence/forward/*.png
+            reports/saved-package/computer-evidence/gui/**/*.json
+            reports/saved-package/computer-evidence/gui/**/*.png
+            reports/saved-package/computer-evidence/gui/**/*.html
+            reports/saved-package/computer-evidence/accepted/dashboard/**/*.json
+            reports/saved-package/computer-evidence/accepted/dashboard/**/*.png
             reports/saved-package/computer-evidence/accepted/*.json
             reports/saved-package/computer-evidence/accepted/native/*.json
             reports/saved-package/computer-evidence/accepted/native/*.png

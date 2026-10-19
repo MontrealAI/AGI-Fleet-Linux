@@ -399,19 +399,45 @@ class PreviewReleaseTests(unittest.TestCase):
                     publish.assert_not_called()
                     self.assertFalse(output.exists())
 
-    def api_fixture(self, wrong_asset=False, wrong_tag=False):
+    def api_fixture(self, wrong_asset=False, wrong_tag=False, *, fresh=False, public=False, main_responses=None):
         self.asset = self.root / 'sample.zip'
         self.asset.write_bytes(b'exact synthetic publication fixture')
         record = {'name': self.asset.name, 'size': self.asset.stat().st_size, 'digest': 'sha256:' + R.sha(self.asset)}
         if wrong_asset:
             record['digest'] = 'sha256:' + 'b' * 64
-        release = {'id': 17, 'draft': True, 'prerelease': True, 'target_commitish': self.commit, 'body': 'canonical notes', 'assets': [record], 'html_url': 'fixture'}
+        release = {'id': 17, 'draft': not public, 'prerelease': True, 'target_commitish': self.commit, 'body': 'canonical notes', 'assets': [record], 'html_url': 'fixture'}
         self.calls = []
+        self.remote_release = release
+        state = {'tag': not fresh, 'release': not fresh}
+        responses = list(main_responses or [])
         def api(path, **kwargs):
             self.calls.append((path, kwargs))
-            if path.startswith('/git/ref/'):
+            method = kwargs.get('method', 'GET')
+            if path == '/git/ref/heads/main':
+                if responses:
+                    response = responses.pop(0)
+                    if isinstance(response, Exception):
+                        raise response
+                    return response
+                return {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': self.commit}}
+            if path.startswith('/git/ref/tags/'):
+                if not state['tag']:
+                    raise urllib.error.HTTPError(path, 404, 'Not found', {}, None)
                 return {'object': {'type': 'commit', 'sha': 'b' * 40 if wrong_tag else self.commit}}
-            if kwargs.get('method') == 'PATCH':
+            if path == '/git/refs' and method == 'POST':
+                state['tag'] = True
+                self.assertEqual(json.loads(kwargs['data'])['sha'], self.commit)
+                return {'object': {'type': 'commit', 'sha': self.commit}}
+            if path.startswith('/releases/tags/') and not state['release']:
+                raise urllib.error.HTTPError(path, 404, 'Not found', {}, None)
+            if path == '/releases' and method == 'POST':
+                state['release'] = True
+                release.update(json.loads(kwargs['data']), assets=[])
+            if '/assets?name=' in path and method == 'POST':
+                self.assertEqual(kwargs['data'], self.asset.read_bytes())
+                self.assertEqual(path.split('?name=', 1)[1], self.asset.name)
+                release['assets'].append(record)
+            if method == 'PATCH':
                 payload = json.loads(kwargs['data'])
                 self.assertEqual(payload, {'draft': False, 'prerelease': True, 'make_latest': 'false', 'body': 'canonical notes'})
                 release.update(payload)
@@ -423,7 +449,8 @@ class PreviewReleaseTests(unittest.TestCase):
         result = R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
         self.assertFalse(result['draft'])
         self.assertTrue(result['prerelease'])
-        self.assertEqual(sum(path.startswith('/git/ref/') for path, _ in self.calls), 3)
+        self.assertEqual(sum(path.startswith('/git/ref/tags/') for path, _ in self.calls), 3)
+        self.assertEqual(sum(path == '/git/ref/heads/main' for path, _ in self.calls), 1)
 
     def test_differing_tag_or_existing_asset_is_never_replaced(self):
         for wrong_asset, wrong_tag in [(True, False), (False, True)]:
@@ -431,6 +458,67 @@ class PreviewReleaseTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
             self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_stale_main_cannot_reserve_the_fresh_preview_tag(self):
+        stale = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': 'b' * 40}}
+        api = self.api_fixture(fresh=True, main_responses=[stale])
+        with self.assertRaisesRegex(ValueError, 'exact current main'):
+            R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_main_advance_after_preview_reservation_keeps_the_draft_private(self):
+        current = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': self.commit}}
+        stale = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': 'b' * 40}}
+        api = self.api_fixture(fresh=True, main_responses=[current, stale])
+        with self.assertRaisesRegex(ValueError, 'exact current main'):
+            R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertTrue(self.remote_release['draft'])
+        self.assertTrue(any(path == '/git/refs' and kwargs.get('method') == 'POST' for path, kwargs in self.calls))
+        self.assertFalse(any(kwargs.get('method') == 'PATCH' for _, kwargs in self.calls))
+
+    def test_current_main_can_reserve_and_publish_the_fresh_preview(self):
+        api = self.api_fixture(fresh=True)
+        result = R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertFalse(result['draft'])
+        self.assertEqual(sum(path == '/git/ref/heads/main' for path, _ in self.calls), 2)
+
+    def test_stale_main_cannot_publish_an_existing_preview_draft(self):
+        stale = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': 'b' * 40}}
+        api = self.api_fixture(main_responses=[stale])
+        with self.assertRaisesRegex(ValueError, 'exact current main'):
+            R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertTrue(self.remote_release['draft'])
+        self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_public_preview_retry_verifies_without_mutation_after_main_advances(self):
+        stale = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': 'b' * 40}}
+        api = self.api_fixture(public=True, main_responses=[stale])
+        result = R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertFalse(result['draft'])
+        self.assertFalse(any(path == '/git/ref/heads/main' for path, _ in self.calls))
+        self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_public_preview_retry_still_rejects_changed_tag_or_asset(self):
+        for wrong_asset, wrong_tag in [(True, False), (False, True)]:
+            with self.subTest(wrong_asset=wrong_asset, wrong_tag=wrong_tag):
+                api = self.api_fixture(wrong_asset, wrong_tag, public=True)
+                with self.assertRaises(ValueError):
+                    R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+                self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_invalid_main_response_fails_closed_before_preview_mutations(self):
+        invalid = [None, {}, {'object': {'type': 'commit', 'sha': self.commit}},
+            {'ref': 'refs/heads/other', 'object': {'type': 'commit', 'sha': self.commit}},
+            {'ref': 'refs/heads/main', 'object': {'type': 'tag', 'sha': self.commit}},
+            urllib.error.HTTPError('synthetic', 503, 'Unavailable', {}, None)]
+        for fresh in (True, False):
+            for response in invalid:
+                with self.subTest(fresh=fresh, response=type(response).__name__):
+                    api = self.api_fixture(fresh=fresh, main_responses=[response])
+                    with self.assertRaises((ValueError, urllib.error.HTTPError)):
+                        R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+                    self.assertTrue(self.remote_release['draft'])
+                    self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
 
 
 if __name__ == '__main__':

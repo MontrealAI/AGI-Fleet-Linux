@@ -28,6 +28,12 @@ It does not qualify general browser/desktop automation, native Mac execution,
 independent economic review or live signing/settlement. See the
 [operator configuration guide](../../local-runtime/computer/README.md).
 
+[Cost observations have explicit scopes](DOWNLOAD_ALPHA_6.md#reading-the-cost-observations):
+Manager's fourteen lifecycle gas receipts exclude deployment/setup, while Jobs
+counts all mined fixture receipts, including deployment/setup. The nine CLI
+commands cover the service sequence only. Human/device cost remains unknown;
+no savings, invoice verification or cost-superiority claim is made.
+
 `operatorInstaller`, `fullHandoffComplete` and `productionQualified` remain
 false. The original 22 complete-product acceptance cases remain open.
 Physical, live-provider, human-accessibility and endurance commissioning
@@ -55,3 +61,9 @@ ni examen économique indépendant n’est qualifié. Les 22 critères complets 
 les essais physiques, d’accessibilité humaine et d’endurance restent non
 réalisés. Le travail rémunéré et la qualification de production restent
 désactivés.
+
+Les [mesures de coût](DOWNLOAD_ALPHA_6.md#français) gardent leurs périmètres :
+quatorze reçus de cycle Manager sans déploiement/configuration, tous les reçus
+minés Jobs avec déploiement/configuration, et neuf commandes CLI du service
+seulement. Les coûts humains et matériels restent inconnus; aucune économie,
+facture vérifiée ni supériorité de coût n’est revendiquée.
