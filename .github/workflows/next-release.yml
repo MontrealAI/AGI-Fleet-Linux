@@ -1,4 +1,4 @@
-name: Linux 1.1.4 release qualification
+name: Linux 1.1.5 release qualification
 on:
   pull_request:
   push:
@@ -87,14 +87,14 @@ jobs:
           from pathlib import Path
           sys.path.insert(0,'engineering')
           from next_release_tools import load_candidate, verify_candidate, candidate_tools
-          archive=Path('release/AGI_Fleet_Linux_v1.1.4.zip')
+          archive=Path('release/AGI_Fleet_Linux_v1.1.5.zip')
           candidate=load_candidate('release/release.json',archive)
           verify_candidate(archive,candidate)
           candidate_tools(candidate).extract(archive,Path('saved-fleet'))
           PYCODE
       - name: Execute actual browser effects through the saved Controller and ComputeWorker
         env:
-          FLEET_TEST_ROOT: ${{ github.workspace }}/saved-fleet/AGI_Fleet_Linux_v1.1.4
+          FLEET_TEST_ROOT: ${{ github.workspace }}/saved-fleet/AGI_Fleet_Linux_v1.1.5
           FLEET_TEST_METADATA: ${{ github.workspace }}/release/release.json
         run: npm test --prefix engineering/browser-tests
       - name: Retain exact browser observations
@@ -128,7 +128,7 @@ jobs:
           set -euo pipefail
           sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY,GITHUB_RUN_ID,GITHUB_SHA python3 engineering/run-next-native.py \
             --metadata "$GITHUB_WORKSPACE/release/release.json" \
-            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.4.zip" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.5.zip" \
             --work "/root/agi-next-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             --evidence "$GITHUB_WORKSPACE/native-evidence"
       - name: Preserve evidence ownership
@@ -160,7 +160,7 @@ jobs:
         run: |
           python3 engineering/run-next-integration.py \
             --metadata "$GITHUB_WORKSPACE/release/release.json" \
-            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.4.zip" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.5.zip" \
             --work "$RUNNER_TEMP/agi-integration-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             --evidence "$GITHUB_WORKSPACE/integration-evidence"
       - name: Retain all integration evidence
@@ -172,15 +172,19 @@ jobs:
           if-no-files-found: error
           retention-days: 90
   profile-integration:
-    name: Saved-archive Manager 1.17 contract profile
+    name: Saved-archive ${{ matrix.profile }} contract profile
     needs: build
     strategy:
       fail-fast: false
       matrix:
         include:
-          - {runner: ubuntu-24.04, arch: x64}
-          - {runner: ubuntu-24.04-arm, arch: arm64}
+          - {runner: ubuntu-24.04, arch: x64, profile: manager-1.17.0-b7218196}
+          - {runner: ubuntu-24.04-arm, arch: arm64, profile: manager-1.17.0-b7218196}
+          - {runner: ubuntu-24.04, arch: x64, profile: manager-1.19.3-d0c2cbaf}
+          - {runner: ubuntu-24.04-arm, arch: arm64, profile: manager-1.19.3-d0c2cbaf}
     runs-on: ${{ matrix.runner }}
+    env:
+      CONTRACT_PROFILE: ${{ matrix.profile }}
     timeout-minutes: 45
     steps:
       - *checkout
@@ -196,7 +200,7 @@ jobs:
           root = Path(os.environ['RUNNER_TEMP']) / 'profile-tools'
           root.mkdir()
           node, arch = baseline.install_node(root)
-          profile = CONTRACT_PROFILES['manager-1.17.0-b7218196']
+          profile = CONTRACT_PROFILES[os.environ['CONTRACT_PROFILE']]
           with open(os.environ['GITHUB_ENV'], 'a') as output:
               output.write(f'PROFILE_NODE={node}/node\nPROFILE_NPM={node}/npm\nPROFILE_MANAGER_COMMIT={profile["commit"]}\n')
           with open(os.environ['GITHUB_PATH'], 'a') as output:
@@ -221,16 +225,16 @@ jobs:
         run: |
           python3 engineering/run-next-profile-integration.py \
             --metadata "$GITHUB_WORKSPACE/release/release.json" \
-            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.4.zip" \
+            --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.5.zip" \
             --work "$RUNNER_TEMP/profile-saved-work" \
             --evidence "$RUNNER_TEMP/profile-evidence" \
             --manager "$RUNNER_TEMP/profile-manager" --node "$PROFILE_NODE" \
-            --contract-profile manager-1.17.0-b7218196
+            --contract-profile "$CONTRACT_PROFILE"
       - name: Retain complete archive and profile observations
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         with:
-          name: next-profile-${{ matrix.arch }}
+          name: next-profile-${{ matrix.profile }}-${{ matrix.arch }}
           path: ${{ runner.temp }}/profile-evidence/
           if-no-files-found: error
           retention-days: 90
@@ -249,10 +253,11 @@ jobs:
       - name: Independently audit source-bound results
         run: |
           python3 engineering/audit-next-evidence.py \
-            --metadata release/release.json --archive release/AGI_Fleet_Linux_v1.1.4.zip \
+            --metadata release/release.json --archive release/AGI_Fleet_Linux_v1.1.5.zip \
             --native evidence/next-native-x64 --native evidence/next-native-arm64 \
             --integration evidence/next-integration-x64 --integration evidence/next-integration-arm64 \
-            --profile evidence/next-profile-x64 --profile evidence/next-profile-arm64 \
+            --profile evidence/next-profile-manager-1.17.0-b7218196-x64 --profile evidence/next-profile-manager-1.17.0-b7218196-arm64 \
+            --profile evidence/next-profile-manager-1.19.3-d0c2cbaf-x64 --profile evidence/next-profile-manager-1.19.3-d0c2cbaf-arm64 \
             --successor evidence/next-successor-browser --out evidence/audit.json
           python3 engineering/publish-next-release.py --prepare-only --release-dir release --evidence-dir evidence --output publication
       - name: Retain audited publication files

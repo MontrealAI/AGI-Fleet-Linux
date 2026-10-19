@@ -12,7 +12,7 @@ The transactional development installer preserves private state and user outputs
 
 The new [capability admission contract](CAPABILITY_ADMISSION.md) checks an exact task without creating authority, records supported operations and limits in its grant, and rechecks bound configuration before authorization and dispatch. It distinguishes supportable work, missing prerequisites and unsupported scope; custom missions are refused before reservation. Its component tests do not qualify general tools, live providers, independent review or Mac local execution, and the original 22 acceptance requirements remain in force.
 
-The additive [Alpha project journey source implementation](PROJECT_JOURNEY.md)
+The additive [Alpha project journey](PROJECT_JOURNEY.md)
 retains an exact upstream project request, its explicit USDC/$AGIALPHA route,
 bounded CSV execution and separately authorized internal Node check. Its return
 can be imported into Alpha as historical evidence. The native Alpha project and
@@ -20,16 +20,41 @@ task mapping are validated; attached Manager/Jobs histories remain unverified
 historical claims until their native receivers validate them. This new source
 does not replace or inherit qualification from the published alpha.4 ZIP.
 
-The prepared source candidate is **Local Skills 0.1.0-alpha.5**, with a separate
-`v0.1.0-local-skills-preview.5` release identity. Its native, saved-package and
-physical gates are pending. The alpha.4 release, assets and evidence below are
-preserved unchanged.
+**Local Skills 0.1.0-alpha.5 was published on 16 October 2026** as a separate
+[Linux development preview](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.5).
+Use its [version-matched EN/FR download guide](DOWNLOAD_ALPHA_5.md). Its exact
+saved package passed the bounded native, saved-package, browser and audit gates
+below. Physical, live-provider and independent economic-review commissioning
+remain NOT_RUN; all 22 full-product acceptance requirements remain open. The
+alpha.4 release, assets and historical evidence below are preserved unchanged.
 
 The capacity/launch-boundary correction adds UTF-8 history accounting, atomic outcome-storage reservations that survive uncertainty/restart, and a final Linux executable/backend/boot check against the authorized binding. Seeded storage-pressure and synthetic host-drift regressions exercise these boundaries without claiming native resource or physical-session qualification. The history ceilings and consumed daily work budget remain intact. This does not implement cgroup memory/process limits, filesystem quotas, exclusive desktops or cross-host authority fencing; the complete A08 and A10 requirements remain open.
 
 For help, use **Preview support report** in the local dashboard, inspect its complete contents, and choose **Save this report**. Only readiness and aggregate counts are included. Credentials, actor names/identities, host identifiers, paths, tasks, outputs and event history are excluded. Nothing is uploaded automatically. A passing readiness probe does not commission the machine.
 
 ## Verified checkpoint, kept separate from new changes
+
+**Published update, 16 October 2026:** [Local Skills alpha.5](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.5)
+identifies source `45759fb096faf8988f58ae5ea71248d0f35a97c7` and
+[coordinated workflow 38873664644, attempt 1](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38873664644).
+The workflow completed Linux x64/ARM64 native and saved-package journeys,
+EN/FR browser checks, package/evidence audits and the inherited Fleet regression
+gates. These are observations for that exact published source and package;
+later source changes require their own applicable qualification.
+
+| Published alpha.5 asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `agi-fleet-local-0.1.0-alpha.5.zip` | 8,679,646 | `a7a2f92635e9364e8e87e485707c96abead485ec0cfc00220d5af5cf7b076068` |
+| `Local-Skills-Evidence-0.1.0-alpha.5.zip` | 17,490,217 | `5d372c56c6d14a138e040c069aa702950a179417f69b94637477be681c2aad21` |
+| `Local-Skills-Manifest-0.1.0-alpha.5.json` | 113,531 | `d98ecfee7d908be264f5d89c36f485296a6712a366aaeb82f58e241609996e99` |
+
+The release metadata and successful workflow were checked on 19 October 2026.
+This documentation refresh does not claim a fresh independent download audit.
+The scope remains `bounded-offline-linux-development-preview`, with
+`operatorInstaller: false`, `fullHandoffComplete: false`,
+`productionQualified: false`, and funded work disabled. Browser/desktop
+execution, native Mac local execution, live providers and independently
+controlled economic review remain unavailable.
 
 **Published update, 15 October 2026:** [Local Skills alpha.4](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.4)
 is available from source `7b5dda3d7dbcb9700a1408cf19bd7cf18404e068` after
@@ -84,6 +109,19 @@ The maintenance regression formerly asserted that `local-runtime/` could not exi
 Local verification passed 120 engineering tests and the support-report privacy/authorization and reconciliation cases. The full local supervisor run retains four failures caused by this workspace denying Unix-socket listening (`EPERM`); no test was skipped or weakened. The pinned browser download was unavailable here. Native IPC and EN/FR download/accessibility behavior therefore remain mandatory CI gates, including tests from the exact saved package.
 
 ## Français
+
+**Publication du 16 octobre 2026 :** l’[aperçu Local Skills alpha.5](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.5)
+est disponible avec son [guide de téléchargement EN/FR](DOWNLOAD_ALPHA_5.md).
+La source exacte `45759fb096faf8988f58ae5ea71248d0f35a97c7` a terminé le
+[workflow 38873664644, tentative 1](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38873664644),
+y compris les parcours natifs et d’archive x64/ARM64, le navigateur EN/FR,
+les audits et les régressions Fleet héritées. Les tailles et empreintes
+publiées figurent ci-dessus; les métadonnées et le résultat du workflow ont
+été vérifiés le 19 octobre, sans prétendre à un nouvel audit indépendant des
+téléchargements. L’exécution demeure hors ligne et limitée. Les essais physiques,
+les fournisseurs réels et l’examen économique indépendant restent non réalisés;
+les 22 critères complets restent ouverts et le travail rémunéré désactivé.
+Ces observations ne qualifient pas une révision ultérieure.
 
 **Publication du 15 octobre 2026 :** l’[aperçu Local Skills alpha.4](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.4)
 est disponible après qualification de la même source sur x64 et ARM64. Les quatre

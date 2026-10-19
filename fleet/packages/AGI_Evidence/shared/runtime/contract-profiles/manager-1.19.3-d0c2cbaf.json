@@ -1,0 +1,37 @@
+{
+  "schema": "agi-fleet-contract-profile/v1",
+  "profile": "manager-1.19.3-d0c2cbaf",
+  "sourceCommit": "d0c2cbaf58b594e20d888c3fc744bada06172306",
+  "compiler": "0.8.37",
+  "productionSources": {
+    "project/contracts/AGIJobManager.sol": "3c0cfc462cc815bd8a432243c221eb6fd210880ec6178509a489265db18f7962",
+    "project/contracts/utils/BondMath.sol": "f082b47230121bd98c9a2c4c5c0957734461f2fbf612b2386e249fa4b4b3fa30",
+    "project/contracts/utils/ENSOwnership.sol": "244bcedf9ef9da775b3a663b2dcc4a221ea70810e1543ac0f255e3f0d3acaca0",
+    "project/contracts/utils/EnsLabelUtils.sol": "e7bf88fa5c3ecd85472e066c73dd76c2ce3b9f1f9700db27c4781e0577b358db",
+    "project/contracts/utils/JobSettlement.sol": "0e38c450b7461f36d30ec0aa06488135cf690dec0c8822b837f6f1b273a7cd93",
+    "project/contracts/utils/JobState.sol": "1840624830777ffbaedb5aada50d3f748f2f7aa89f788f329d9e598ff1b37459",
+    "project/contracts/utils/JobValidation.sol": "0f085da143a6ecbd3f7d941945a86dd54ad4bd27834457041f75bcab782a615d",
+    "project/contracts/utils/NftEligibility.sol": "f08254fbcdaad64a1e22c8f79b2cfc3ade0ee41c76dbb7c659bdfd196f7637dc",
+    "project/contracts/utils/ReputationMath.sol": "c742c3e7cb05a412405e8fe29d5283b1464e6c377ce98e2d8a360f96f3e3522c",
+    "project/contracts/utils/TransferUtils.sol": "797242b5d1ac32547e065a0989d8f407a3f5a22618e98681a332d3e85197ce36",
+    "project/contracts/utils/UriUtils.sol": "b3d5b14eed8b89f71781d2d7258e1bd88113db6a77984e1967c4eb341178647b"
+  },
+  "files": {
+    "BUILD_RECEIPT.json": "f969dc0d20f010706f4beac5301b17426add05244649a7161e4d0cfb6b6dc935",
+    "LICENSE": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+    "OPENZEPPELIN-LICENSE": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+    "artifact-provenance.json": "7e2f20e21bcd18d567032e45c3850f5580b18ea277093ad2bfaffe1aaebfb5ef",
+    "artifacts/AGIJobManager.json": "131135ef1464d1d80eb5e9c18f09e6a311051f6de59c2c1c76bb8a11a3b5cdfe",
+    "artifacts/BondMath.json": "661db19babee1ca7ba5a1ab6b4fd1f687cfece6876ae2eedf0a8253060cb644c",
+    "artifacts/ENSOwnership.json": "309efa9e2dd1ce58b40ac204536142cb4118fee147a440f6ee8df168037886de",
+    "artifacts/FailingERC20.json": "a24a3c721b4fc595f23d4b53a867590adeb542e4184aae01e72334defd510f28",
+    "artifacts/JobSettlement.json": "358799fafac2828f11e1199136a5febb8a24e0ef87079082bce3e5164e71b9c1",
+    "artifacts/JobValidation.json": "75362403791121dd152bf92cd3d4104183f5869ea82108fa83a8de1d7a206059",
+    "artifacts/MockERC20.json": "d16f2209c432228a75c377894b83013673ecb0463c08053c58dc4a2fe9fa930d",
+    "artifacts/NftEligibility.json": "b19917d2ff7493f25a10b38805f7940e37d33c9546e2cf2d7a3c6d47979d0fc2",
+    "artifacts/ReputationMath.json": "20210655124db86455747619eed37ceb91564d1f642367aab8ccdc379284fa19",
+    "artifacts/TransferUtils.json": "9066b87058bfd5aafa006a2fdf4163c3714c6965b0f9d9d03c7020971536e47e",
+    "artifacts/UriUtils.json": "84ffc8a8babaa373c5eefa2e2c9fda63dc3aedab1471a0063737ccab9b9b352d",
+    "compiler-inputs/solc-0_8_37-b7b32a9f69cd9c3361fc6ec4ef7ba6dfd27241cb.json": "76a949de02331f57f092c84cdf7c6e699e614d750f9867a7a45b5e02822ee28e"
+  }
+}

@@ -1,6 +1,7 @@
 # Keep one Alpha project history through Fleet
 
-This additive source preview accepts an explicit public-data project request,
+The published [Local Skills alpha.5 Linux development preview](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.5)
+accepts an explicit public, non-personal-data project request,
 produces the same integer CSV report through Fleet's existing bounded worker,
 and returns the original project, request, Agent execution and separately
 authorized internal Node check. Select **Keep one Alpha project history** in
@@ -87,12 +88,25 @@ must validate them before making claims about those stages. A checksum proves
 byte integrity, not who performed work. Even a structurally valid imported
 return remains historical and cannot grant new execution or review authority.
 
-This change is a source implementation, not a replacement for a published ZIP.
-`productionQualified` remains false, funded work remains disabled, and exact
-saved-package native/EN-FR browser qualification plus physical and independent
-economic-review commissioning remain separate release gates.
+The exact published alpha.5 source `45759fb096faf8988f58ae5ea71248d0f35a97c7`
+passed its saved-package native and EN/FR browser qualification in
+[workflow 38873664644](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38873664644).
+Use the [version-matched download guide](DOWNLOAD_ALPHA_5.md) and
+[published identities and scope](CURRENT_STATUS.md#verified-checkpoint-kept-separate-from-new-changes).
+`productionQualified` remains false and funded work remains disabled. Physical,
+live-provider and independent economic-review commissioning remain NOT_RUN;
+all 22 full-product acceptance requirements remain open. Later source changes
+require their own applicable exact-package qualification.
 
 ## Français
+
+Ce parcours est inclus dans l’[aperçu Linux Local Skills alpha.5 publié](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.5).
+Utilisez son [guide de téléchargement EN/FR](DOWNLOAD_ALPHA_5.md). La source
+exacte et l’archive ont leurs propres résultats natifs et navigateur dans le
+[workflow 38873664644](https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/38873664644).
+Les 22 critères du produit complet restent ouverts; les fournisseurs réels,
+les essais physiques et l’examen économique indépendant restent non réalisés.
+Utilisez uniquement des données publiques non personnelles.
 
 Dans le tableau de bord local authentifié, choisissez **Conserver l'historique
 d'un même projet Alpha**. Importez la demande du projet, préparez la tâche avec

@@ -37,9 +37,14 @@ class GovernanceGate(unittest.TestCase):
   self.assertIn('runner: ubuntu-24.04-arm, arch: arm64',profile)
   self.assertIn('- *download_candidate',profile)
   self.assertIn('baseline.install_node(root)',profile)
-  self.assertIn('--contract-profile manager-1.17.0-b7218196',profile)
+  self.assertIn('CONTRACT_PROFILE: ${{ matrix.profile }}',profile)
+  self.assertIn("CONTRACT_PROFILES[os.environ['CONTRACT_PROFILE']]",profile)
+  self.assertIn('--contract-profile "$CONTRACT_PROFILE"',profile)
   self.assertNotIn('sudo',profile)
-  self.assertIn('--profile evidence/next-profile-x64 --profile evidence/next-profile-arm64',workflow)
+  for profile_id in ['manager-1.17.0-b7218196','manager-1.19.3-d0c2cbaf']:
+   for runner,arch in [('ubuntu-24.04','x64'),('ubuntu-24.04-arm','arm64')]:
+    self.assertIn('runner: '+runner+', arch: '+arch+', profile: '+profile_id,profile)
+    self.assertIn('--profile evidence/next-profile-'+profile_id+'-'+arch,workflow)
 
  def test_local_skills_requalifies_packaged_fleet_changes(self):
   workflow=(ROOT/'.github/workflows/local-skills.yml').read_text()

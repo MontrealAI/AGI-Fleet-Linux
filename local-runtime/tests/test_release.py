@@ -82,7 +82,7 @@ class PreviewReleaseTests(unittest.TestCase):
 
     def test_matching_fixture_audits_and_bundles_without_production_claim(self):
         result = self.audit()
-        self.assertIn('/DOWNLOAD_ALPHA_5.md)', R.notes(result, []))
+        self.assertIn('/DOWNLOAD_ALPHA_6.md)', R.notes(result, []))
         self.assertIn('/DOWNLOAD.md)', R.notes({**result, 'version': '0.1.0-alpha.4'}, []))
         with self.assertRaisesRegex(ValueError, 'Version-matched download guide required'):
             R.notes({**result, 'version': '0.1.0-alpha.99'}, [])

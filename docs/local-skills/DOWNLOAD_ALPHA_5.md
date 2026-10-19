@@ -4,7 +4,7 @@
 
 **Version 0.1.0-alpha.5 · Linux x64 / ARM64 · development preview.** This separate package runs a bounded offline report, internal checking and six scoped skills. It is not the completed Local Skills product or a production-qualified installer. Funded work, general browser/desktop execution, native Mac local execution and independent economic review are disabled. The example makes no model calls.
 
-This version-specific guide is for the **alpha.5 candidate**. Download it only after the named release assets are published following qualification. The preserved [alpha.4 guide](DOWNLOAD.md) remains available for that earlier release. [Alpha.5 changes and gates](RELEASE_NOTES_ALPHA_5.md).
+This version-specific guide is for the **alpha.5 development preview published on 16 October 2026**. Its [exact source, package identities and completed bounded qualification](CURRENT_STATUS.md#verified-checkpoint-kept-separate-from-new-changes) remain separate from the open physical, live-provider and full-product gates. The preserved [alpha.4 guide](DOWNLOAD.md) remains available for that earlier release. [Alpha.5 changes and gates](RELEASE_NOTES_ALPHA_5.md).
 
 ## English
 

@@ -169,7 +169,7 @@ def validate_fleet(fleet, commit, run):
 def notes(manifest, assets):
     commit, run = manifest['commit'], manifest['workflowRun']
     base = f'https://github.com/{REPOSITORY}/blob/{commit}/docs/local-skills/'
-    guide = {'0.1.0-alpha.4': 'DOWNLOAD.md', '0.1.0-alpha.5': 'DOWNLOAD_ALPHA_5.md'}.get(manifest.get('version'))
+    guide = {'0.1.0-alpha.4': 'DOWNLOAD.md', '0.1.0-alpha.5': 'DOWNLOAD_ALPHA_5.md', '0.1.0-alpha.6': 'DOWNLOAD_ALPHA_6.md'}.get(manifest.get('version'))
     require(guide is not None, 'Version-matched download guide required')
     text = ('## Local Skills — Linux development preview / Aperçu de développement Linux\n\n'
             'One installation, multiple separate actors, six portable skills and a bilingual local dashboard. '
