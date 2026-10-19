@@ -278,7 +278,11 @@ package's `nativeAcceptance: NOT_RUN`. Before first visibility the publisher
 reserves and reads the exact-source tag, verifies the complete draft assets and
 canonical notes, and checks tag and current main again. It remains a prerelease,
 never the latest full release. Existing tags/assets are never replaced or moved;
-an existing exact published set is checked read-only. An incomplete existing
+an existing exact published set is checked read-only. Such a retry authenticates
+the original successful publication collector and qualified inputs, downloads
+and verifies its original unchanged assets, and records the current verification
+separately; it never relabels old evidence as a new run. API download counters
+may change without changing asset identity. An incomplete existing
 reservation requires owner inspection, not silent repair or replacement.
 
 La publication alpha.7 est manuelle et désactivée par défaut. Elle exige des
@@ -291,7 +295,10 @@ ou un contrôle synthétique ne prouve pas tous les contrôles natifs de l’int
 Si les ZIP diffèrent seulement par leur sérialisation, choisissez le conteneur
 x64 ou arm64, extrayez-le, puis vérifiez et installez son ZIP intérieur intact.
 Les manifestes, empreintes, revues et fichiers publiés doivent correspondre
-exactement. Aucun ancien fichier ni étiquette n’est remplacé; aucune autorité,
+exactement. Une nouvelle vérification conserve la provenance du collecteur
+original et ses fichiers intacts; son contexte actuel est enregistré séparément,
+sans prétendre à une nouvelle exécution native. Aucun ancien fichier ni étiquette
+n’est remplacé; aucune autorité,
 dépense ou qualification de production n’est accordée. La source main reste figée
 jusqu’à la vérification des trois publications, avant une mise à jour séparément
 examinée des liens de téléchargement et de l’état du site. Le document original

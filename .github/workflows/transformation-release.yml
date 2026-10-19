@@ -129,3 +129,11 @@ jobs:
           EXPECTED_SOURCE: ${{ inputs.expected-source }}
           SELECTORS: ${{ inputs.selectors }}
         run: python3 -B engineering/transformation/release.py --expected-source "$EXPECTED_SOURCE" --selectors "$SELECTORS" --output "$RUNNER_TEMP/ti-publication" --publish
+      - name: Retain the separate authenticated publication or read-only verification result
+        if: always()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: ti-publication-verification-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/ti-publication/verification-result.json
+          if-no-files-found: warn
+          retention-days: 90

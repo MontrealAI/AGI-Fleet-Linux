@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 
 SPEC = importlib.util.spec_from_file_location('ti_release_auth_fixture', Path(__file__).with_name('release.py'))
 R = importlib.util.module_from_spec(SPEC)
@@ -70,7 +71,7 @@ class ProducerAuthentication(unittest.TestCase):
         self.assertEqual(result['jobs'][0]['authenticatedCheck']['id'], 56)
 
     def test_stale_failed_wrong_source_and_substitute_application_refuse(self):
-        for change in ('stale-attempt', 'wrong-workflow', 'wrong-source', 'failed', 'skipped-step', 'other-app', 'wrong-check-source', 'newer-run'):
+        for change in ('stale-attempt', 'wrong-workflow', 'wrong-source', 'failed', 'skipped-step', 'missing-steps', 'empty-steps', 'post-only-steps', 'other-app', 'wrong-check-source', 'newer-run'):
             with self.subTest(change=change):
                 api = run_fixture()
                 if change == 'stale-attempt': api.mapping['/actions/runs/12']['run_attempt'] = 3
@@ -78,6 +79,9 @@ class ProducerAuthentication(unittest.TestCase):
                 if change == 'wrong-source': api.mapping['/actions/runs/12']['head_sha'] = H
                 if change == 'failed': api.mapping['/actions/runs/12']['conclusion'] = 'failure'
                 if change == 'skipped-step': api.mapping['/actions/runs/12/attempts/2/jobs?per_page=100&page=1']['jobs'][0]['steps'][0]['conclusion'] = 'skipped'
+                if change == 'missing-steps': api.mapping['/actions/runs/12/attempts/2/jobs?per_page=100&page=1']['jobs'][0].pop('steps')
+                if change == 'empty-steps': api.mapping['/actions/runs/12/attempts/2/jobs?per_page=100&page=1']['jobs'][0]['steps'] = []
+                if change == 'post-only-steps': api.mapping['/actions/runs/12/attempts/2/jobs?per_page=100&page=1']['jobs'][0]['steps'][0]['name'] = 'Post checkout'
                 if change == 'other-app': api.mapping['/check-runs/56']['app']['id'] = 99
                 if change == 'wrong-check-source': api.mapping['/check-runs/56']['head_sha'] = H
                 if change == 'newer-run':
@@ -92,6 +96,51 @@ class ProducerAuthentication(unittest.TestCase):
             with self.assertRaises(ValueError): R.audit(api, None, None, output)
             self.assertFalse(output.exists())
             self.assertEqual(api.calls, [])
+
+    def test_original_successful_collector_is_historical_not_relabelled(self):
+        api = run_fixture()
+        original = copy.deepcopy(api.mapping['/actions/runs/12/attempts/2'])
+        original.update(path='.github/workflows/transformation-release.yml', event='workflow_dispatch')
+        api.mapping['/actions/runs/12/attempts/2'] = original
+        api.mapping['/actions/runs/12'] = {**original, 'run_attempt': 3, 'status': 'in_progress', 'conclusion': None}
+        api.mapping['/actions/workflows/34'] = {'path': original['path']}
+        jobs = []
+        for number, name in enumerate(('audit', 'publish'), 56):
+            job = copy.deepcopy(api.mapping['/actions/runs/12/attempts/2/jobs?per_page=100&page=1']['jobs'][0])
+            job.update(id=number, name=name, check_run_url='https://api.github.com/repos/' + R.REPOSITORY + '/check-runs/' + str(number))
+            jobs.append(job)
+            api.mapping['/check-runs/' + str(number)] = {**copy.deepcopy(api.mapping['/check-runs/56']), 'id': number, 'name': name}
+        api.mapping['/actions/runs/12/attempts/2/jobs?per_page=100&page=1'] = {'jobs': jobs}
+        result = R.authenticate_run(api, '12:2', 'publication', S, historical_collector=True)
+        self.assertEqual(result['attempt']['run_attempt'], 2)
+        self.assertEqual(result['run']['run_attempt'], 3)
+        self.assertFalse(any('/runs?head_sha=' in path for path, _ in api.calls))
+        for change in ('wrong-source', 'failed-attempt', 'nonmanual-attempt', 'missing-publish'):
+            with self.subTest(change=change):
+                bad = InertAPI(copy.deepcopy(api.mapping))
+                if change == 'wrong-source': bad.mapping['/actions/runs/12/attempts/2']['head_sha'] = H
+                if change == 'failed-attempt': bad.mapping['/actions/runs/12/attempts/2']['conclusion'] = 'failure'
+                if change == 'nonmanual-attempt': bad.mapping['/actions/runs/12/attempts/2']['event'] = 'push'
+                if change == 'missing-publish': bad.mapping['/actions/runs/12/attempts/2/jobs?per_page=100&page=1']['jobs'].pop()
+                with self.assertRaises(ValueError): R.authenticate_run(bad, '12:2', 'publication', S, historical_collector=True)
+
+    def test_missing_main_metadata_refuses_without_effects(self):
+        api = InertAPI({'/git/ref/heads/main': None})
+        with self.assertRaises(ValueError): R.current_main(api, S)
+
+    def test_missing_collector_context_refuses_before_api_or_output(self):
+        for missing in ('GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT'):
+            with self.subTest(missing=missing), tempfile.TemporaryDirectory() as temporary:
+                api = InertAPI({})
+                output = Path(temporary) / 'not-created'
+                context = {'GITHUB_REPOSITORY': R.REPOSITORY, 'GITHUB_REF': 'refs/heads/main',
+                           'GITHUB_EVENT_NAME': 'workflow_dispatch', 'GITHUB_SHA': S,
+                           'GITHUB_RUN_ID': '12', 'GITHUB_RUN_ATTEMPT': '2'}
+                context.pop(missing)
+                with mock.patch.dict(R.os.environ, context, clear=True):
+                    with self.assertRaises(ValueError): R.audit(api, S, {**dict.fromkeys(R.WORKFLOWS, '12:2'), 'review': {}}, output)
+                self.assertFalse(output.exists())
+                self.assertEqual(api.calls, [])
 
 
 class ConfiguredReviewAuthentication(unittest.TestCase):
@@ -125,6 +174,40 @@ class ConfiguredReviewAuthentication(unittest.TestCase):
         fresh = {**api.mapping['/issues/comments/2'], 'id': 8, 'updated_at': '2026-10-19T00:01:00Z'}
         api.mapping['/issues/61/comments?per_page=100&page=1'].append(fresh)
         with self.assertRaises(ValueError): R.authenticate_review(api, selectors, S)
+
+
+class PrerequisiteLeaseAuthentication(unittest.TestCase):
+    def test_refresh_ignores_only_download_counters_and_preserves_original_records(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            producers = {kind: {'fixture': 'inert original producer', 'kind': kind} for kind in R.WORKFLOWS}
+            review = {'fixture': 'inert original review'}
+            previous = {}
+            mapping = {'/git/ref/heads/main': {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': S}}}
+            for number, key in enumerate(('linux', 'local'), 1):
+                release = {'id': number, 'draft': False, 'prerelease': True, 'body': 'Inert unchanged prerequisite notes.'}
+                asset = {'id': number * 10, 'name': key + '-inert.zip', 'size': 123,
+                         'digest': 'sha256:' + 'a' * 64, 'state': 'uploaded', 'download_count': 3,
+                         'uploader': {'id': 41898282, 'login': 'github-actions[bot]'}}
+                previous[key] = {'release': release, 'assets': [copy.deepcopy(asset)]}
+                mapping['/releases/' + str(number)] = release
+                mapping[f'/releases/{number}/assets?per_page=100&page=1'] = [{**asset, 'download_count': 47}]
+            manifest = {'producers': producers, 'review': review, 'prerequisites': previous}
+            (output / ('Local-TI-Manifest-' + R.VERSION + '.json')).write_bytes(R.encoded(manifest))
+            original = copy.deepcopy(manifest)
+            plan = {'source': S, 'selectors': {**dict.fromkeys(R.WORKFLOWS, '12:2'), 'review': {}}, '_output': str(output)}
+            api = InertAPI(mapping)
+            with mock.patch.object(R, 'authenticate_run', side_effect=lambda api, selector, kind, source: producers[kind]), \
+                    mock.patch.object(R, 'authenticate_review', return_value=review), mock.patch.object(R, 'tag_commit', return_value=S):
+                R.refresh_proof(api, plan)
+                for field, altered in (('id', 11), ('digest', 'sha256:' + 'b' * 64), ('size', 124),
+                                       ('state', 'new'), ('uploader', {'login': 'other-inert-user'})):
+                    with self.subTest(field=field):
+                        bad = InertAPI(copy.deepcopy(mapping))
+                        bad.mapping['/releases/1/assets?per_page=100&page=1'][0][field] = altered
+                        with self.assertRaises(ValueError): R.refresh_proof(bad, plan)
+            self.assertEqual(manifest, original, 'Historical metadata must remain unchanged')
+            self.assertEqual(R.load(output / ('Local-TI-Manifest-' + R.VERSION + '.json')), original)
 
 
 if __name__ == '__main__':

@@ -165,7 +165,7 @@ def current_main(api, source):
     require(re.fullmatch('[a-f0-9]{40}', source or '') is not None, 'exact source required')
     ref = api('/git/ref/heads/main')
     obj = ref.get('object') if isinstance(ref, dict) else None
-    require(ref.get('ref') == 'refs/heads/main' and isinstance(obj, dict)
+    require(isinstance(ref, dict) and ref.get('ref') == 'refs/heads/main' and isinstance(obj, dict)
             and obj.get('type') == 'commit' and obj.get('sha') == source, 'current main lease differs')
 
 
@@ -184,25 +184,35 @@ def tag_commit(api, tag):
     raise ValueError('TI_RELEASE: tag depth exceeded')
 
 
-def authenticate_run(api, selector, kind, source):
-    require(kind in WORKFLOWS and isinstance(selector, str) and re.fullmatch('[1-9][0-9]*:[1-9][0-9]*', selector), 'run:attempt selector required')
+def authenticate_run(api, selector, kind, source, *, historical_collector=False):
+    workflows = {**WORKFLOWS, 'publication': 'transformation-release.yml'}
+    require(kind in workflows and (not historical_collector or kind == 'publication')
+            and isinstance(selector, str) and re.fullmatch('[1-9][0-9]*:[1-9][0-9]*', selector), 'run:attempt selector required')
     run_id, attempt = map(int, selector.split(':'))
     run = api('/actions/runs/' + str(run_id))
     exact = api(f'/actions/runs/{run_id}/attempts/{attempt}')
-    for value in (run, exact):
-        require(value.get('id') == run_id and value.get('run_attempt') == attempt
+    for index, value in enumerate((run, exact)):
+        require(value.get('id') == run_id
                 and value.get('repository', {}).get('full_name') == REPOSITORY
                 and value.get('head_repository', {}).get('full_name') == REPOSITORY
                 and value.get('head_sha') == source and value.get('head_branch') == 'main'
-                and value.get('path') == '.github/workflows/' + WORKFLOWS[kind]
-                and value.get('event') in ('push', 'workflow_dispatch')
-                and value.get('status') == 'completed' and value.get('conclusion') == 'success', 'producer source/workflow/event/latest-attempt did not succeed')
+                and value.get('path') == '.github/workflows/' + workflows[kind]
+                and value.get('event') in ('push', 'workflow_dispatch'), 'producer source/workflow/event differs')
+        if historical_collector and index == 0:
+            # Original publication provenance remains historical when a later
+            # verification dispatch or attempt observes the immutable release.
+            require(type(value.get('run_attempt')) is int and value['run_attempt'] >= attempt, 'original collector attempt missing')
+        else:
+            require(value.get('run_attempt') == attempt and value.get('status') == 'completed'
+                    and value.get('conclusion') == 'success', 'producer latest/exact attempt did not succeed')
     require(kind != 'ti' or run['event'] == 'push', 'TI qualification must be the actual main push')
+    require(kind != 'publication' or all(value['event'] == 'workflow_dispatch' for value in (run, exact)), 'original collector must be the manual publication workflow')
     workflow = api('/actions/workflows/' + str(run['workflow_id']))
     require(workflow.get('path') == run['path'], 'producer workflow ID differs')
-    observed = pages(api, f'/actions/workflows/{run["workflow_id"]}/runs?head_sha={source}&branch=main', 'workflow_runs')
-    candidates = [row for row in observed if row.get('event') in ('push', 'workflow_dispatch')]
-    require(candidates and max(candidates, key=lambda row: (row.get('created_at', ''), row['id']))['id'] == run_id, 'a newer producer observation exists')
+    if not historical_collector:
+        observed = pages(api, f'/actions/workflows/{run["workflow_id"]}/runs?head_sha={source}&branch=main', 'workflow_runs')
+        candidates = [row for row in observed if row.get('event') in ('push', 'workflow_dispatch')]
+        require(candidates and max(candidates, key=lambda row: (row.get('created_at', ''), row['id']))['id'] == run_id, 'a newer producer observation exists')
     jobs = pages(api, f'/actions/runs/{run_id}/attempts/{attempt}/jobs', 'jobs')
     require(jobs and all(row.get('run_id') == run_id and row.get('run_attempt') == attempt
                         and row.get('head_sha') == source and row.get('status') == 'completed' for row in jobs), 'job provenance incomplete')
@@ -210,8 +220,11 @@ def authenticate_run(api, selector, kind, source):
         permitted_skip = kind == 'local' and row.get('name', '').endswith('/ publish')
         require(row.get('conclusion') == 'success' or (permitted_skip and row.get('conclusion') == 'skipped'), 'required job did not pass')
         if row.get('conclusion') == 'success':
-            require(all(step.get('status') == 'completed' and step.get('conclusion') == 'success'
-                        for step in row.get('steps', []) if not step.get('name', '').startswith(('Post ', 'Complete job'))), 'required producer step missing, failed or skipped')
+            steps = row.get('steps')
+            require(isinstance(steps, list) and bool(steps)
+                    and all(step.get('status') == 'completed' and step.get('conclusion') == 'success'
+                        for step in steps if not step.get('name', '').startswith(('Post ', 'Complete job'))), 'required producer step missing, failed or skipped')
+            require(any(not step.get('name', '').startswith(('Post ', 'Complete job')) for step in steps), 'required producer steps absent')
         match = re.fullmatch(r'https://api.github.com/repos/' + REPOSITORY + r'/check-runs/([1-9][0-9]*)', row.get('check_run_url', ''))
         require(match is not None, 'actual producer check ID required')
         check = api('/check-runs/' + match[1])
@@ -223,7 +236,7 @@ def authenticate_run(api, selector, kind, source):
     names = [row['name'] for row in jobs if row['conclusion'] == 'success']
     required = {'ti': ['TI saved preview and native Docker (x64)', 'TI saved preview and native Docker (arm64)', 'Required native TI source-preview qualification'],
                 'local': ['browser', 'audit', 'publish'], 'linux': ['build', 'audit', 'publish', 'Required release qualification'],
-                'repository': ['repository'], 'sourceReview': ['review']}[kind]
+                'repository': ['repository'], 'sourceReview': ['review'], 'publication': ['audit', 'publish']}[kind]
     require(all(name in names for name in required), 'mandatory producer jobs absent')
     return {'run': run, 'attempt': exact, 'jobs': jobs}
 
@@ -698,6 +711,8 @@ def audit(api, source, selections, output):
     require(not output.exists() and output.parent.resolve() == output.parent, 'new physical publication output required')
     require(os.environ.get('GITHUB_REPOSITORY') == REPOSITORY and os.environ.get('GITHUB_REF') == 'refs/heads/main'
             and os.environ.get('GITHUB_EVENT_NAME') == 'workflow_dispatch' and os.environ.get('GITHUB_SHA') == source
+            and re.fullmatch('[1-9][0-9]*', os.environ.get('GITHUB_RUN_ID', ''))
+            and re.fullmatch('[1-9][0-9]*', os.environ.get('GITHUB_RUN_ATTEMPT', ''))
             and subprocess.check_output(['git', '--no-replace-objects', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip() == source, 'authorized exact-main manual workflow required')
     for arguments in (['diff', '--quiet', '--no-ext-diff', source, '--'], ['diff', '--cached', '--quiet', '--no-ext-diff', '--']):
         require(subprocess.run(['git', '--no-replace-objects', *arguments], cwd=ROOT, check=False).returncode == 0, 'source checkout differs from committed source')
@@ -811,7 +826,10 @@ def publish(api, output, refresh):
         require(existing_tag == source and len(existing) == 1 and existing[0].get('draft') is False, 'existing tag/draft cannot be moved or resumed')
         with tempfile.TemporaryDirectory(prefix='ti-readonly-existing-') as temporary:
             release = api('/releases/' + str(existing[0]['id']))
+            require(release.get('draft') is False and release.get('prerelease') is True, 'fresh existing release is not a public prerelease')
             verify_remote(api, release, plan, {row['name']: row for row in plan['assets']}, Path(temporary))
+        latest = maybe(api, '/releases/latest')
+        require(latest is None or latest.get('id') != release['id'], 'existing preview became latest full release')
         return {'status': 'ALREADY_PUBLISHED_EXACT_READ_ONLY', 'url': release['html_url'], 'source': source}
     require(not existing, 'existing draft reservation differs; no replacement')
     current_main(api, source)
@@ -858,7 +876,119 @@ def refresh_proof(api, plan):
         release = api('/releases/' + str(previous['release']['id']))
         require(tag_commit(api, tag) == plan['source'] and release.get('draft') is False and release.get('prerelease') is True
                 and release.get('body') == previous['release'].get('body')
-                and pages(api, f'/releases/{release["id"]}/assets') == previous['assets'], 'prerequisite public source/assets changed')
+                and stable_asset_set(pages(api, f'/releases/{release["id"]}/assets')) == stable_asset_set(previous['assets']), 'prerequisite public source/assets changed')
+
+
+def stable_api(value):
+    """Exclude only the download counter of actual API asset records.
+
+    Full original records remain retained. IDs, names, bytes, digests, state,
+    uploader and every other field still participate in the integrity comparison.
+    """
+    if isinstance(value, dict):
+        asset = {'id', 'name', 'size', 'digest'} <= set(value)
+        return {key: stable_api(item) for key, item in value.items()
+                if not (asset and key == 'download_count')}
+    if isinstance(value, list):
+        return [stable_api(item) for item in value]
+    return value
+
+
+def stable_asset_set(records):
+    return sorted((stable_api(row) for row in records), key=lambda row: (row['name'], row['id']))
+
+
+def retry_bindings(original, current, published, current_output):
+    """Verify original immutable bytes against freshly audited qualified inputs.
+
+    The old collector is not relabelled as the current verification run. Outer
+    ZIP serialization and retained API download counters are metadata; native
+    reports, receipts and the actually qualified inner archives must stay exact.
+    """
+    excluded = {'publicationAuditContext', 'evidence', 'packageAssets'}
+    require(stable_api({key: value for key, value in original.items() if key not in excluded}) ==
+            stable_api({key: value for key, value in current.items() if key not in excluded}), 'existing qualification/source/producer bindings differ')
+    names = ([ARCHIVE] if original.get('packageMode') == 'IDENTICAL_RAW_ARCHIVES_BOTH_NATIVE_ARCHITECTURES' else
+             ['Local-TI-Package-' + VERSION + '-' + arch + '.zip' for arch in ('x64', 'arm64')])
+    require(original.get('packageMode') in ('IDENTICAL_RAW_ARCHIVES_BOTH_NATIVE_ARCHITECTURES',
+            'DISTINCT_RAW_SERIALIZATION_IDENTICAL_SOURCE_MEMBERS_ARCH_LABELLED_CONTAINERS')
+            and original.get('packageAssets') == [identity(published / name) for name in names], 'existing package container identities differ')
+    evidence_name = 'Local-TI-Evidence-' + VERSION + '.zip'
+    require(original.get('evidence') == identity(published / evidence_name), 'existing exact evidence bytes differ')
+    metadata = {'authenticated-producers.json', 'configured-owner-review.json', 'source-review.json', 'prerequisite-releases.json'}
+    with zipfile.ZipFile(published / evidence_name) as old, zipfile.ZipFile(current_output / evidence_name) as fresh:
+        require(old.namelist() == fresh.namelist() and len(old.namelist()) == len(set(old.namelist())), 'existing evidence coverage differs')
+        for name in old.namelist():
+            old_raw, fresh_raw = old.read(name), fresh.read(name)
+            require((stable_api(decode(old_raw)) == stable_api(decode(fresh_raw))) if name in metadata else old_raw == fresh_raw,
+                    'existing retained report/receipt/proof bytes differ: ' + name)
+        if names == [ARCHIVE]:
+            require(identity(published / ARCHIVE) == current['packages']['x64']['archive'] == current['packages']['arm64']['archive'], 'existing common package is not both actual qualified archives')
+        else:
+            for arch, name in zip(('x64', 'arm64'), names):
+                with zipfile.ZipFile(published / name) as container:
+                    require(sorted(container.namelist()) == [ARCHIVE, 'package-receipt.json'], 'existing architecture container layout differs')
+                    require(sha(container.read(ARCHIVE)) == current['packages'][arch]['archive']['sha256']
+                            and len(container.read(ARCHIVE)) == current['packages'][arch]['archive']['bytes']
+                            and container.read('package-receipt.json') == fresh.read(arch + '/package-receipt.json'), 'existing untouched qualified inner ZIP/receipt differs')
+    return names
+
+
+def read_only_retry(api, output, plan):
+    """Authenticate the original publication and verify its exact existing bytes."""
+    source = plan['source']; current_main(api, source)
+    require(tag_commit(api, TAG) == source, 'existing tag source differs')
+    release = api('/releases/tags/' + TAG)
+    require(release.get('draft') is False and release.get('prerelease') is True
+            and release.get('tag_name') == TAG and release.get('target_commitish') == source, 'existing publication is not a matching public prerelease')
+    assets = pages(api, f'/releases/{release["id"]}/assets')
+    names = {row['name'] for row in assets}
+    manifest_name = 'Local-TI-Manifest-' + VERSION + '.json'
+    evidence_name = 'Local-TI-Evidence-' + VERSION + '.zip'
+    checksum_name = 'SHA256SUMS-local-ti-' + VERSION + '.txt'
+    common = {ARCHIVE, evidence_name, manifest_name, checksum_name}
+    separate = {'Local-TI-Package-' + VERSION + '-' + arch + '.zip' for arch in ('x64', 'arm64')} | {evidence_name, manifest_name, checksum_name}
+    require(len(names) == len(assets) and names in (common, separate), 'existing exact public asset set differs')
+    current = load(output / manifest_name)
+    with tempfile.TemporaryDirectory(prefix='ti-original-publication-') as temporary:
+        work = Path(temporary)
+        for row in assets:
+            require(row.get('state') == 'uploaded' and row.get('uploader', {}).get('login') == 'github-actions[bot]'
+                    and re.fullmatch('sha256:[a-f0-9]{64}', row.get('digest', '')), 'existing public asset origin/digest missing')
+            api.download('/releases/assets/' + str(row['id']), work / row['name'],
+                         {'bytes': row['size'], 'sha256': row['digest'].removeprefix('sha256:')})
+        original = load(work / manifest_name)
+        require(original.get('schema') == SCHEMA and original.get('source') == {'commit': source, 'tree': plan['tree']}, 'existing published source schema differs')
+        package_names = retry_bindings(original, current, work, output)
+        context = original.get('publicationAuditContext')
+        require(isinstance(context, dict) and set(context) == {'repository', 'commit', 'workflowRun', 'workflowAttempt', 'event', 'workflow'}
+                and context.get('repository') == REPOSITORY and context.get('commit') == source
+                and context.get('event') == 'workflow_dispatch' and context.get('workflow') == '.github/workflows/transformation-release.yml'
+                and re.fullmatch('[1-9][0-9]*', context.get('workflowRun', ''))
+                and re.fullmatch('[1-9][0-9]*', context.get('workflowAttempt', '')), 'original publication collector identity missing')
+        collector = authenticate_run(api, context['workflowRun'] + ':' + context['workflowAttempt'],
+                                     'publication', source, historical_collector=True)
+        ordered = [work / name for name in [*package_names, evidence_name, manifest_name]]
+        require((work / checksum_name).read_text() == ''.join(digest(file) + '  ' + file.name + '\n' for file in ordered), 'original exact public checksum bytes differ')
+        require(release.get('name') == TITLE and release.get('body') == notes(original, ordered), 'original canonical published notes differ')
+        original_plan = {'source': source, 'body': release['body']}
+        remote = work / 'remote'; remote.mkdir()
+        verify_remote(api, release, original_plan, {file.name: identity(file) for file in [*ordered, work / checksum_name]}, remote)
+        # Fresh classification is checked after all downloads, not inferred from
+        # an earlier list row. This branch contains no API mutation operation.
+        observed = api('/releases/' + str(release['id']))
+        require(observed.get('draft') is False and observed.get('prerelease') is True
+                and observed.get('name') == TITLE and observed.get('body') == release['body'], 'fresh existing release classification/notes differ')
+        require(stable_asset_set(pages(api, f'/releases/{release["id"]}/assets')) == stable_asset_set(assets), 'existing public asset lease changed')
+        latest = maybe(api, '/releases/latest')
+        require(latest is None or latest.get('id') != release['id'], 'existing preview is latest full release')
+        refresh_proof(api, {**plan, '_output': str(output)})
+        current_main(api, source); require(tag_commit(api, TAG) == source, 'existing tag changed during verification')
+        result = {'status': 'ALREADY_PUBLISHED_EXACT_READ_ONLY', 'url': observed['html_url'], 'source': source,
+                  'originalPublicationContext': context, 'originalCollectorAuthentication': collector,
+                  'verificationContext': current['publicationAuditContext'],
+                  'assets': [identity(file) for file in [*ordered, work / checksum_name]], 'productionQualified': False}
+    return result
 
 
 def main():
@@ -872,9 +1002,13 @@ def main():
     output = args.output.absolute()
     plan = audit(api, args.expected_source, decode(args.selectors), output)
     if args.publish:
-        result = publish(api, output, lambda proof: refresh_proof(api, {**proof, '_output': str(output)}))
+        if tag_commit(api, TAG) is not None:
+            result = read_only_retry(api, output, plan)
+        else:
+            result = publish(api, output, lambda proof: refresh_proof(api, {**proof, '_output': str(output)}))
     else:
         result = {'status': 'AUDITED_NOT_PUBLISHED', 'source': plan['source'], 'assets': plan['assets'], 'productionQualified': False}
+    (output / 'verification-result.json').write_bytes(encoded(result))
     print(json.dumps(result, indent=2))
 
 

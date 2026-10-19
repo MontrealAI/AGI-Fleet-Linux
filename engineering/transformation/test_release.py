@@ -420,5 +420,281 @@ class InertReleaseTests(unittest.TestCase):
         self.assertFalse(any(event[0] == 'PATCH' for event in api.events))
 
 
+class ReadOnlyRetryAPI(FakeAPI):
+    """Original collector metadata and immutable assets; never a live API."""
+
+    def __init__(self):
+        super().__init__()
+        self.collector_source = SOURCE
+        self.fresh_draft = False
+        self.fresh_full_release = False
+        self.preview_is_latest = False
+        self.collector = {'id': 401, 'run_attempt': 4, 'head_sha': SOURCE,
+                          'head_branch': 'main', 'repository': {'full_name': release.REPOSITORY},
+                          'head_repository': {'full_name': release.REPOSITORY},
+                          'path': '.github/workflows/transformation-release.yml',
+                          'event': 'workflow_dispatch', 'status': 'in_progress',
+                          'conclusion': None, 'workflow_id': 88}
+
+    def __call__(self, path, method='GET', data=None, upload=False):
+        route = urllib.parse.urlsplit(path).path
+        if method != 'GET':
+            self.events.append((method, path, copy.deepcopy(data), upload))
+            raise AssertionError('Read-only retry attempted an inert mutation')
+        if route.startswith('/actions/') or route.startswith('/check-runs/'):
+            self.events.append((method, path, copy.deepcopy(data), upload))
+            if route == '/actions/runs/401':
+                return {**copy.deepcopy(self.collector), 'head_sha': self.collector_source}
+            if route == '/actions/runs/401/attempts/1':
+                return {**copy.deepcopy(self.collector), 'head_sha': self.collector_source,
+                        'run_attempt': 1, 'status': 'completed', 'conclusion': 'success'}
+            if route == '/actions/workflows/88':
+                return {'id': 88, 'path': self.collector['path']}
+            if route == '/actions/runs/401/attempts/1/jobs':
+                return {'jobs': [
+                    {'id': 500 + index, 'name': name, 'run_id': 401, 'run_attempt': 1,
+                     'head_sha': SOURCE, 'status': 'completed', 'conclusion': 'success',
+                     'steps': [{'name': 'Inert retained collector step', 'status': 'completed',
+                                'conclusion': 'success'}],
+                     'check_run_url': 'https://api.github.com/repos/' + release.REPOSITORY
+                                      + '/check-runs/' + str(600 + index)}
+                    for index, name in enumerate(('audit', 'publish'))]}
+            if route in ('/check-runs/600', '/check-runs/601'):
+                number = int(route.rsplit('/', 1)[1])
+                return {'id': number, 'head_sha': SOURCE,
+                        'name': ('audit', 'publish')[number - 600],
+                        'status': 'completed', 'conclusion': 'success',
+                        'app': {'id': 15368, 'slug': 'github-actions', 'owner': {'login': 'github'}}}
+            raise AssertionError('Unexpected collector fixture API: ' + path)
+        if route == '/releases/tags/' + release.TAG:
+            self.events.append((method, path, None, False))
+            return copy.deepcopy(self.release)
+        if route == '/releases/7' and (self.fresh_draft or self.fresh_full_release):
+            self.events.append((method, path, None, False))
+            return {**copy.deepcopy(self.release), 'draft': self.fresh_draft,
+                    'prerelease': not self.fresh_full_release}
+        if route == '/releases/latest' and self.preview_is_latest:
+            self.events.append((method, path, None, False))
+            return copy.deepcopy(self.release)
+        return super().__call__(path, method=method, data=data, upload=upload)
+
+    def download(self, path, output, expected=None, maximum=release.LIMIT):
+        asset_id = int(path.rsplit('/', 1)[1])
+        for row in self.assets:
+            if row['id'] == asset_id:
+                row['download_count'] = row.get('download_count', 0) + 1
+        return super().download(path, output, expected=expected, maximum=maximum)
+
+
+class InertRetryTests(unittest.TestCase):
+    """Reverify original bytes using fresh inputs without relabelling the run."""
+
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory(prefix='fleet-ti-retry-inert-', dir='/dev/shm')
+        self.root = Path(self.temporary.name)
+        self.temp_patch = patch.object(tempfile, 'tempdir', str(self.root))
+        self.temp_patch.start()
+        self.addCleanup(self.temporary.cleanup)
+        self.addCleanup(self.temp_patch.stop)
+
+    @staticmethod
+    def context(run, attempt):
+        return {'repository': release.REPOSITORY, 'commit': SOURCE,
+                'workflowRun': str(run), 'workflowAttempt': str(attempt),
+                'event': 'workflow_dispatch', 'workflow': '.github/workflows/transformation-release.yml'}
+
+    @staticmethod
+    def prerequisite_asset(counter):
+        return {'id': 81, 'name': 'Inert-prerequisite.zip', 'size': 123,
+                'digest': 'sha256:' + 'a' * 64, 'download_count': counter,
+                'state': 'uploaded', 'uploader': {'login': 'github-actions[bot]'}}
+
+    def fixture(self, *, separate=False):
+        published = self.root / 'published'
+        current_output = self.root / 'current'
+        published.mkdir()
+        current_output.mkdir()
+        mode = ('DISTINCT_RAW_SERIALIZATION_IDENTICAL_SOURCE_MEMBERS_ARCH_LABELLED_CONTAINERS'
+                if separate else 'IDENTICAL_RAW_ARCHIVES_BOTH_NATIVE_ARCHITECTURES')
+        packages = {}
+        receipts = {}
+        package_names = []
+        for arch in ('x64', 'arm64'):
+            inner = zip_bytes({'INERT.txt': b'Qualified-input comparison fixture only.\n'},
+                              comment=arch.encode() if separate else b'')
+            raw_identity = {'name': release.ARCHIVE, 'bytes': len(inner),
+                            'sha256': hashlib.sha256(inner).hexdigest()}
+            packages[arch] = {'archive': raw_identity,
+                              'manifestSHA256': hashlib.sha256(b'Inert common manifest.').hexdigest()}
+            receipts[arch] = release.encoded({'fixture': 'inert', 'architecture': arch,
+                                              'archive': raw_identity})
+            if separate:
+                name = 'Local-TI-Package-' + release.VERSION + '-' + arch + '.zip'
+                package_names.append(name)
+                members = {release.ARCHIVE: inner, 'package-receipt.json': receipts[arch]}
+                (published / name).write_bytes(zip_bytes(members, comment=b'original container'))
+                (current_output / name).write_bytes(zip_bytes(members, comment=b'new serialization'))
+            elif arch == 'x64':
+                package_names.append(release.ARCHIVE)
+                (published / release.ARCHIVE).write_bytes(inner)
+                (current_output / release.ARCHIVE).write_bytes(inner)
+        producers = {kind: {'run': {'id': index, 'run_attempt': 2}}
+                     for index, kind in enumerate(release.WORKFLOWS, 100)}
+        base = {'schema': release.SCHEMA, 'source': {'commit': SOURCE, 'tree': TREE},
+                'packageMode': mode, 'packages': packages, 'producers': producers,
+                'architectures': {arch: {'reportInventorySHA256': hashlib.sha256(arch.encode()).hexdigest()}
+                                  for arch in ('x64', 'arm64')}}
+        manifests = []
+        plans = []
+        evidence_name = 'Local-TI-Evidence-' + release.VERSION + '.zip'
+        for directory, counter, context in ((published, 3, self.context(401, 1)),
+                                             (current_output, 47, self.context(902, 3))):
+            prerequisite = {'assets': [self.prerequisite_asset(counter)]}
+            evidence = {'authenticated-producers.json': release.encoded(producers),
+                        'configured-owner-review.json': release.encoded({'fixture': 'inert', 'commit': SOURCE}),
+                        'source-review.json': release.encoded({'fixture': 'inert', 'tree': TREE}),
+                        'prerequisite-releases.json': release.encoded(prerequisite)}
+            for arch in ('x64', 'arm64'):
+                evidence[arch + '/package-receipt.json'] = receipts[arch]
+                evidence[arch + '/reports/execution-context.json'] = release.encoded(
+                    {'fixture': 'inert retained report', 'commit': SOURCE, 'architecture': arch,
+                     'qualificationProducer': '100:2'})
+            (directory / evidence_name).write_bytes(zip_bytes(evidence, comment=context['workflowRun'].encode()))
+            manifest = {**copy.deepcopy(base), 'prerequisites': prerequisite,
+                        'publicationAuditContext': context,
+                        'evidence': release.identity(directory / evidence_name),
+                        'packageAssets': [release.identity(directory / name) for name in package_names]}
+            manifest_name = 'Local-TI-Manifest-' + release.VERSION + '.json'
+            manifest_file = directory / manifest_name
+            manifest_file.write_bytes(release.encoded(manifest))
+            ordered = [directory / name for name in [*package_names, evidence_name, manifest_name]]
+            checksum = directory / ('SHA256SUMS-local-ti-' + release.VERSION + '.txt')
+            checksum.write_text(''.join(release.digest(file) + '  ' + file.name + '\n' for file in ordered))
+            plan = {'schema': 'agi-fleet/ti-publication-plan/v1', 'source': SOURCE, 'tree': TREE,
+                    'tag': release.TAG, 'name': release.TITLE, 'body': release.notes(manifest, ordered),
+                    'assets': [release.identity(file) for file in [*ordered, checksum]],
+                    'manifestSHA256': release.digest(manifest_file), 'selectors': {'fixture': 'fresh inputs'}}
+            manifests.append(manifest)
+            plans.append(plan)
+        api = ReadOnlyRetryAPI()
+        api.existing(plans[0], published)
+        for row in api.assets:
+            row.update({'uploader': {'login': 'github-actions[bot]'}, 'download_count': 9})
+        return published, current_output, manifests[0], manifests[1], plans[0], plans[1], api
+
+    def rewrite_evidence(self, directory, member, raw):
+        file = directory / ('Local-TI-Evidence-' + release.VERSION + '.zip')
+        with zipfile.ZipFile(file) as saved:
+            members = {name: saved.read(name) for name in saved.namelist()}
+        members[member] = raw
+        file.write_bytes(zip_bytes(members))
+        return release.identity(file)
+
+    def test_only_actual_asset_download_counter_is_ignored(self):
+        original = {'asset': self.prerequisite_asset(3), 'report': {'download_count': 3, 'fixture': 'inert'}}
+        newer = copy.deepcopy(original)
+        newer['asset']['download_count'] = 47
+        self.assertEqual(release.stable_api(original), release.stable_api(newer))
+        self.assertEqual(original['asset']['download_count'], 3, 'Original API evidence must remain intact')
+        newer['report']['download_count'] = 47
+        self.assertNotEqual(release.stable_api(original), release.stable_api(newer))
+        for key, value in (('id', 82), ('size', 124), ('digest', 'sha256:' + 'b' * 64),
+                           ('uploader', {'login': 'inert-other-uploader'}), ('state', 'new')):
+            altered = self.prerequisite_asset(47)
+            altered[key] = value
+            with self.subTest(field=key):
+                self.assertNotEqual(release.stable_api(self.prerequisite_asset(3)), release.stable_api(altered))
+
+    def test_equal_inputs_allow_original_bytes_with_distinct_collectors_and_counters(self):
+        published, current_output, original, current, _, _, _ = self.fixture()
+        original_before, current_before = copy.deepcopy(original), copy.deepcopy(current)
+        self.assertNotEqual(original['publicationAuditContext'], current['publicationAuditContext'])
+        self.assertNotEqual(original['evidence'], current['evidence'])
+        self.assertEqual(release.retry_bindings(original, current, published, current_output), [release.ARCHIVE])
+        self.assertEqual(original, original_before)
+        self.assertEqual(current, current_before)
+
+    def test_different_outer_containers_preserve_exact_original_inner_zip_and_receipt(self):
+        published, current_output, original, current, _, _, _ = self.fixture(separate=True)
+        names = release.retry_bindings(original, current, published, current_output)
+        self.assertEqual(len(names), 2)
+        for name in names:
+            self.assertNotEqual((published / name).read_bytes(), (current_output / name).read_bytes())
+            with zipfile.ZipFile(published / name) as old, zipfile.ZipFile(current_output / name) as fresh:
+                for member in (release.ARCHIVE, 'package-receipt.json'):
+                    self.assertEqual(old.read(member), fresh.read(member))
+
+    def test_changed_qualified_source_or_producer_is_not_a_retry(self):
+        published, current_output, original, current, _, _, _ = self.fixture()
+        changed_source = copy.deepcopy(current)
+        changed_source['source']['commit'] = DRIFT
+        changed_producer = copy.deepcopy(current)
+        changed_producer['producers']['ti']['run']['id'] += 1
+        for altered in (changed_source, changed_producer):
+            with self.subTest(altered=altered), self.assertRaises(ValueError):
+                release.retry_bindings(original, altered, published, current_output)
+
+    def test_rehashed_original_outer_container_cannot_change_qualified_inner_zip(self):
+        published, current_output, original, current, _, _, _ = self.fixture(separate=True)
+        name = original['packageAssets'][0]['name']
+        with zipfile.ZipFile(published / name) as old:
+            receipt = old.read('package-receipt.json')
+        (published / name).write_bytes(zip_bytes({release.ARCHIVE: zip_bytes({'INERT.txt': b'Changed benign inner package.\n'}),
+                                                 'package-receipt.json': receipt}))
+        original['packageAssets'][0] = release.identity(published / name)
+        with self.assertRaises(ValueError):
+            release.retry_bindings(original, current, published, current_output)
+
+    def test_rehashed_original_evidence_cannot_change_retained_report_bytes(self):
+        published, current_output, original, current, _, _, _ = self.fixture()
+        original['evidence'] = self.rewrite_evidence(published, 'x64/reports/execution-context.json',
+                                                     b'{"fixture":"different benign report"}\n')
+        with self.assertRaises(ValueError):
+            release.retry_bindings(original, current, published, current_output)
+
+    def test_full_retry_authenticates_historical_collector_and_preserves_both_contexts(self):
+        _, current_output, original, current, old_plan, plan, api = self.fixture()
+        with patch.object(release, 'refresh_proof') as refresh:
+            result = release.read_only_retry(api, current_output, plan)
+        self.assertEqual(result['status'], 'ALREADY_PUBLISHED_EXACT_READ_ONLY')
+        self.assertEqual(result['originalPublicationContext'], original['publicationAuditContext'])
+        self.assertEqual(result['verificationContext'], current['publicationAuditContext'])
+        self.assertEqual(result['assets'], old_plan['assets'], 'Retry must retain the original exact public assets')
+        self.assertEqual(result['originalCollectorAuthentication']['attempt']['run_attempt'], 1)
+        self.assertEqual(result['originalCollectorAuthentication']['run']['run_attempt'], 4)
+        paths = [event[1] for event in api.events]
+        for path in ('/actions/runs/401', '/actions/runs/401/attempts/1',
+                     '/actions/workflows/88', '/check-runs/600', '/check-runs/601'):
+            self.assertIn(path, paths, 'Historical collector must be authenticated through the real predicate')
+        self.assertTrue(any(path.startswith('/actions/runs/401/attempts/1/jobs?') for path in paths))
+        self.assertFalse(any('/actions/runs/902' in path for path in paths), 'Do not relabel original publication as the current collector')
+        self.assertTrue(all(row['download_count'] >= 11 for row in api.assets), 'Download counts must actually change during verification')
+        refresh.assert_called_once_with(api, {**plan, '_output': str(current_output)})
+        self.assertEqual(api.mutations(), [])
+
+    def test_original_collector_api_source_mismatch_refuses_without_writes(self):
+        _, current_output, _, _, _, plan, api = self.fixture()
+        api.collector_source = DRIFT
+        with patch.object(release, 'refresh_proof') as refresh, self.assertRaises(ValueError):
+            release.read_only_retry(api, current_output, plan)
+        self.assertIn('/actions/runs/401/attempts/1', [event[1] for event in api.events])
+        refresh.assert_not_called()
+        self.assertEqual(api.mutations(), [])
+
+    def test_fresh_existing_release_draft_full_or_latest_classification_refuses(self):
+        for field in ('fresh_draft', 'fresh_full_release', 'preview_is_latest'):
+            with self.subTest(classification=field):
+                case = self.root / field
+                case.mkdir()
+                with patch.object(self, 'root', case):
+                    _, current_output, _, _, _, plan, api = self.fixture()
+                setattr(api, field, True)
+                with patch.object(release, 'refresh_proof') as refresh, self.assertRaises(ValueError):
+                    release.read_only_retry(api, current_output, plan)
+                self.assertIn('/actions/runs/401/attempts/1', [event[1] for event in api.events])
+                refresh.assert_not_called()
+                self.assertEqual(api.mutations(), [])
+
+
 if __name__ == '__main__':
     unittest.main()
