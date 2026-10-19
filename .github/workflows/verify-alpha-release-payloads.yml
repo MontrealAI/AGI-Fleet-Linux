@@ -1,0 +1,103 @@
+name: Verify final Alpha release payloads
+
+on:
+  push:
+    branches: [evidence/ti-compatible-set-20261019]
+    paths:
+      - docs/release-evidence/ti-compatible-set-20261019/release-input.json
+
+permissions:
+  contents: read
+
+concurrency:
+  group: alpha-public-payload-verification-20261019
+  cancel-in-progress: false
+
+jobs:
+  normal-alpha-install:
+    if: github.repository == 'MontrealAI/AGI-Fleet-Linux' && github.ref == 'refs/heads/evidence/ti-compatible-set-20261019'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: '3.12'
+      - name: Check the verifier with benign public-data units
+        run: python -I -B docs/release-evidence/ti-compatible-set-20261019/test_release_payloads.py -v
+      - name: Read the committed final release source identity
+        id: source
+        run: |
+          python -I - <<'PY'
+          import json, os, pathlib, re
+          value = json.loads(pathlib.Path("docs/release-evidence/ti-compatible-set-20261019/release-input.json").read_text())
+          commit = value["release"]["commit"]
+          if not re.fullmatch(r"[0-9a-f]{40}", commit):
+              raise SystemExit("FINAL_RELEASE_COMMIT_REQUIRED")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write("commit=" + commit + "\n")
+          PY
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          repository: MontrealAI/AGI-Alpha-Agent-v0
+          ref: ${{ steps.source.outputs.commit }}
+          path: .alpha-release-source
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Authenticate public release bytes and exact Git payload before installation
+        run: |
+          python -I docs/release-evidence/ti-compatible-set-20261019/verify-release-payloads.py \
+            --verifier-root "$GITHUB_WORKSPACE" \
+            --contract "$GITHUB_WORKSPACE/docs/release-evidence/ti-compatible-set-20261019/release-input.json" \
+            --source-root "$GITHUB_WORKSPACE/.alpha-release-source" \
+            --release-dir "$RUNNER_TEMP/alpha-release-assets" \
+            --output "$RUNNER_TEMP/alpha-payload-preflight" --download --no-log
+      - name: Run the unchanged final release normal installer once
+        run: |
+          python -I - <<'PY'
+          import hashlib, json, os, pathlib, subprocess, sys, time
+          temporary = pathlib.Path(os.environ["RUNNER_TEMP"])
+          preflight = json.loads((temporary / "alpha-payload-preflight/receipt.json").read_text())
+          installer = temporary / "alpha-release-assets/normal-install-agent.py"
+          if hashlib.sha256(installer.read_bytes()).hexdigest() != preflight["installer"]["sha256"]:
+              raise SystemExit("NORMAL_INSTALLER_BYTES_CHANGED")
+          started = time.monotonic()
+          # The original supported installer installs all locked dependencies, the wheel,
+          # performs pip check and invokes the installed CLI --version.
+          subprocess.run([sys.executable, str(installer), "--release-dir",
+              str(temporary / "alpha-release-assets"), "--venv", str(temporary / "normal-alpha")], check=True)
+          observation = {
+              "schema": "alpha-normal-install-observation/v1",
+              "producer": preflight["producer"],
+              "installer": preflight["installer"],
+              "wheelSha256": preflight["releaseAssets"]["wheel"]["sha256"],
+              "requirementsSha256": preflight["releaseAssets"]["requirements"]["sha256"],
+              "profile": "UNCHANGED_INSTALL_AGENT_HASH_LOCKED_DEPS_WHEEL_PIPCHECK_CLI",
+              "exitCode": 0,
+              "elapsedMilliseconds": round((time.monotonic() - started) * 1000, 3),
+          }
+          target = temporary / "normal-install-observation.json"
+          with target.open("x") as output:
+              json.dump(observation, output, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+          PY
+      - name: Observe every physical payload and emit the bounded public receipt
+        run: |
+          SITE="$(python -I -S -c 'import sys,sysconfig; print(sysconfig.get_path("purelib",vars={"base":sys.argv[1],"platbase":sys.argv[1]}))' "$RUNNER_TEMP/normal-alpha")"
+          python -I docs/release-evidence/ti-compatible-set-20261019/verify-release-payloads.py \
+            --verifier-root "$GITHUB_WORKSPACE" \
+            --contract "$GITHUB_WORKSPACE/docs/release-evidence/ti-compatible-set-20261019/release-input.json" \
+            --source-root "$GITHUB_WORKSPACE/.alpha-release-source" \
+            --release-dir "$RUNNER_TEMP/alpha-release-assets" \
+            --venv "$RUNNER_TEMP/normal-alpha" --site-packages "$SITE" \
+            --normal-install-observation "$RUNNER_TEMP/normal-install-observation.json" \
+            --output "$RUNNER_TEMP/alpha-payload-observation"
+      - name: Retain the exact public observation bytes
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: alpha-release-payload-observation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/alpha-payload-observation/
+          if-no-files-found: error
