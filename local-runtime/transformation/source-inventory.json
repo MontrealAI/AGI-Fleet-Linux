@@ -1,16 +1,22 @@
 {
   "files": [
     {
-      "bytes": 14049,
+      "bytes": 5410,
       "mode": 420,
-      "path": ".github/workflows/transformational-project.yml",
-      "sha256": "18309c04ef60b86b1d63b7693c2066706ee722ba8c3a1db76beec0aae769bc19"
+      "path": ".github/workflows/transformation-release.yml",
+      "sha256": "8ad424b22d27f8e8c6d87084d70b83d0e10ef3246c435f55dae1496024778cf4"
     },
     {
-      "bytes": 16464,
+      "bytes": 14433,
+      "mode": 420,
+      "path": ".github/workflows/transformational-project.yml",
+      "sha256": "3c8d0d89b3cb1bd4da07d6eb7096e5e18944093da5c8e4012d8343afa1bac954"
+    },
+    {
+      "bytes": 20216,
       "mode": 420,
       "path": "docs/transformational-project.md",
-      "sha256": "c862492f79a4c33cf7fa9d4e061cb75197a903c682f95ffee474ab73a53549fb"
+      "sha256": "642b44db3b8671bc8f4b609bc8d76d7dc9000dcdc260ddfb3af426ae1cf37a65"
     },
     {
       "bytes": 12894,
@@ -31,10 +37,10 @@
       "sha256": "04e2b6099ac650bf34594bd878f329b5597923e9cfa272db4b167daf46987936"
     },
     {
-      "bytes": 14108,
+      "bytes": 14128,
       "mode": 420,
       "path": "engineering/transformation/package.test.mjs",
-      "sha256": "e2c2ea0098d6a8f0f867e38ecaf3cd0f82a87a2f9b59f950ec55f4ccc7d0f42c"
+      "sha256": "3cac8ac6700ac5f023d4cfbe603175e2497e0f22056f575a1f63f577ae2b9249"
     },
     {
       "bytes": 7743,
@@ -43,16 +49,34 @@
       "sha256": "6f769c3c4861fc913390bbb0fede54bd589959942d8b0165599c7de7d6c3d21f"
     },
     {
+      "bytes": 64127,
+      "mode": 420,
+      "path": "engineering/transformation/release.py",
+      "sha256": "0f7c87b24b0ddc753ac5600e769014c175904f36dfcacf5d3d99e249def11ba2"
+    },
+    {
       "bytes": 949,
       "mode": 420,
       "path": "engineering/transformation/source-pins.json",
       "sha256": "a4b7784540f011cc84d5a1d3628048a7fdbf9ab8b40ca74cfd31c1d2ab95f55c"
     },
     {
-      "bytes": 12952,
+      "bytes": 13251,
       "mode": 420,
       "path": "engineering/transformation/test_dependency_reference.py",
-      "sha256": "2f560acb4e0f36758d3de24b3bf6eee873f16736ceb61071f912aa88bc5096c3"
+      "sha256": "4f5a0e4546f20a8f2af8c3d775828dc7d6cd3d45a97dd5cafc74b667c2e7be67"
+    },
+    {
+      "bytes": 21225,
+      "mode": 420,
+      "path": "engineering/transformation/test_release.py",
+      "sha256": "35918b47a1ed2a902bbb701269de4ff7f70cf82c5a1562a4c1a14fd53768e7db"
+    },
+    {
+      "bytes": 8798,
+      "mode": 420,
+      "path": "engineering/transformation/test_release_auth.py",
+      "sha256": "00ac7381c75fb862a07da80333bd6c60581092791cf9154d6da84b14417554af"
     },
     {
       "bytes": 12157,
@@ -91,10 +115,10 @@
       "sha256": "d9a53d9a65008c9abc6584ea2f2f329fcab8007a6914e459f94cac83ac107070"
     },
     {
-      "bytes": 6639,
+      "bytes": 6699,
       "mode": 420,
       "path": "local-runtime/transformation/package.py",
-      "sha256": "cb4b442ba62e28905b099dadb00c245ef8fbf70bf750391e296e92bee074dc14"
+      "sha256": "b9cb24143a244a7ff63e81b19a2ec22e52b47d9750c58506e8eda4745ffc5bec"
     },
     {
       "bytes": 12730,

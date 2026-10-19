@@ -243,6 +243,60 @@ It checks one-use authorization, retained return/capture, closure and unchanged
 saved-package inventory. It does not replace any legacy browser/native/package
 gate or claim independent scientific/economic acceptance.
 
+## Publication of the bounded alpha.7 preview
+
+The separate `Local TI alpha.7 retained-evidence publication` workflow is manual
+and does not publish by default. It is source work until its own review and all
+required exact-main observations complete. Its selectors identify actual TI,
+Local Skills alpha.6, Linux 1.1.5, repository-check and exact-source-review
+`run:attempt` pairs plus the genuine configured summary, receipt and eligible
+technical review IDs. Selectors are never imported success claims. The auditor
+authenticates the original jobs, application/check IDs, exact-attempt artifact
+uploads and retained bytes, checks the actual normal-installed application/Node,
+and reuses the unchanged alpha.6 semantic auditor for its distinct service
+STOP/reconcile/fresh-attempt and installed-service requirements. The dedicated
+two-action/three-turn TI case does not claim its own in-flight STOP. Existing
+dashboard evidence must retain its actual scope; full native GUI control coverage
+is not implied by completed-export views or synthetic controls.
+
+Publication requires the exact frozen current main commit, successful required
+gates and actual public alpha.6/Linux prerequisites at that source. It verifies
+every TI package member/mode against Git and the committed dependency reference.
+When both actual architecture ZIPs are byte-identical, the public package keeps
+the canonical `agi-fleet-local-0.1.0-alpha.7.zip` name. If only ZIP serialization
+differs while all source members and manifests match, two explicit
+`Local-TI-Package-0.1.0-alpha.7-x64.zip` / `-arm64.zip` outer containers preserve
+each untouched tested inner ZIP and its receipt. Extract the matching outer
+container first, then supply its canonical inner ZIP and independently verified
+digest to the normal installer. Divergent members or manifests refuse.
+
+The detached `Local-TI-Manifest-0.1.0-alpha.7.json`,
+`Local-TI-Evidence-0.1.0-alpha.7.zip` and
+`SHA256SUMS-local-ti-0.1.0-alpha.7.txt` bind the real source, producer attempts,
+reviews, package assets and retained observations. They do not rewrite the built
+package's `nativeAcceptance: NOT_RUN`. Before first visibility the publisher
+reserves and reads the exact-source tag, verifies the complete draft assets and
+canonical notes, and checks tag and current main again. It remains a prerelease,
+never the latest full release. Existing tags/assets are never replaced or moved;
+an existing exact published set is checked read-only. An incomplete existing
+reservation requires owner inspection, not silent repair or replacement.
+
+La publication alpha.7 est manuelle et désactivée par défaut. Elle exige des
+preuves réelles pour la même source main figée, les deux architectures,
+l’application et Node installés, les examens authentifiés et les publications
+alpha.6/Linux distinctes. Le parcours TI borné ne revendique pas son propre
+ARRÊT en cours d’exécution : le contrôle alpha.6 inchangé reste obligatoire.
+Les preuves d’interface conservent leur portée réelle; une vue d’export terminé
+ou un contrôle synthétique ne prouve pas tous les contrôles natifs de l’interface.
+Si les ZIP diffèrent seulement par leur sérialisation, choisissez le conteneur
+x64 ou arm64, extrayez-le, puis vérifiez et installez son ZIP intérieur intact.
+Les manifestes, empreintes, revues et fichiers publiés doivent correspondre
+exactement. Aucun ancien fichier ni étiquette n’est remplacé; aucune autorité,
+dépense ou qualification de production n’est accordée. La source main reste figée
+jusqu’à la vérification des trois publications, avant une mise à jour séparément
+examinée des liens de téléchargement et de l’état du site. Le document original
+et son URL restent inchangés.
+
 For local inspectable browser evidence only,
 `engineering/transformation/headless-lab.mjs` requires an explicit
 `--confirm-test-only-host-browser` and absolute project, source configuration,

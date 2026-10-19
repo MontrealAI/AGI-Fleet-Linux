@@ -125,7 +125,7 @@ test('normal installed qualification binds installer receipt, application and No
   const text=fs.readFileSync(workflow,'utf8');
   assert.equal((text.match(/TI_APPLICATION: \$\{\{ steps\.installed\.outputs\.application \}\}/g)||[]).length,2);
   assert.equal((text.match(/TI_NODE: \$\{\{ steps\.installed\.outputs\.node \}\}/g)||[]).length,2);
-  assert.match(text,/"\$TI_NODE" --test "\$TI_APPLICATION\/engineering\/transformation\/"\*\.test\.mjs/);
+  assert.match(text,/"\$TI_NODE" --test --test-reporter=tap "\$TI_APPLICATION\/engineering\/transformation\/"\*\.test\.mjs/);
   assert.match(text,/"\$TI_NODE" "\$TI_APPLICATION\/engineering\/transformation\/qualify\.mjs" "\$TI_APPLICATION"/);
   assert.match(text,/installer\['verify_version'\]\(Path\(binding\['installation'\]\),binding\['archiveSHA256'\]\)/);
   const result=execFileSync(process.env.TI_PYTHON,['-I','-B','-c',String.raw`

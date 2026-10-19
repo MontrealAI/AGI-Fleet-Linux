@@ -15,7 +15,8 @@ INVENTORY = ROOT / "local-runtime/transformation/source-inventory.json"
 ROOTS = ["local-runtime", "local-dashboard", "role-skills", "docs/local-skills", "fleet/shared", "fleet/successor",
         "fleet/node_modules", "fleet/packages/AGI_Agent/src/admission-core", "fleet/packages/AGI_Node/src"]
 TI_ROOTS = ["local-runtime/transformation", "engineering/transformation"]
-TI_FILES = ["docs/transformational-project.md", ".github/workflows/transformational-project.yml"]
+TI_FILES = ["docs/transformational-project.md", ".github/workflows/transformational-project.yml",
+            ".github/workflows/transformation-release.yml"]
 EXTRA_FILES = ["LOCAL_SKILLS.md", "LICENSE", "fleet/package.json", "fleet/package-lock.json"]
 verify_dependency_provenance = runpy.run_path(str(Path(__file__).with_name('dependency_reference.py')))[
     'verify_packaged_dependencies']

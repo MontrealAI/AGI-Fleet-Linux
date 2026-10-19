@@ -84,7 +84,9 @@ jobs:
               assert subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()==p[key]['commit']
               assert subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD^{tree}'],text=True).strip()==p[key]['tree']
               if key!='computer':config[key]={'root':str(root),'commit':p[key]['commit']}
-          Path(os.environ['RUNNER_TEMP'],'ti-sources.json').write_text(json.dumps(config))
+          source_configuration=json.dumps(config)
+          Path(os.environ['RUNNER_TEMP'],'ti-sources.json').write_text(source_configuration)
+          Path('reports/ti/installed-sources.json').write_text(source_configuration)
           Path('reports/ti/source-pins.json').write_text(json.dumps(p,indent=2)+'\n')
           PY
           test "$(node -p process.arch)" = '${{ matrix.arch }}'
@@ -100,8 +102,9 @@ jobs:
           python -B engineering/integration/service-package.py extract --archive "$RUNNER_TEMP/ti-package/agi-fleet-local-0.1.0-alpha.7.zip" --application "$RUNNER_TEMP/ti-application" --commit "$GITHUB_SHA" --observation "$PWD/reports/ti/package-observation.json"
       - name: Require actual native protocol and complete command-flow regressions from saved bytes
         run: |
-          python -B -m unittest discover -s "$RUNNER_TEMP/ti-application/engineering/transformation" -p test_dependency_reference.py -v
-          TI_INSTALLED_SOURCES="$RUNNER_TEMP/ti-sources.json" TI_PYTHON="$RUNNER_TEMP/ti-python/bin/python" node --test "$RUNNER_TEMP/ti-application/engineering/transformation/"*.test.mjs 2>&1 | tee reports/ti/test-output.txt
+          python -B -m unittest discover -s "$RUNNER_TEMP/ti-application/engineering/transformation" -p 'test_*.py' -v 2>&1 | tee reports/ti/python-test-output.txt
+          test "${PIPESTATUS[0]}" = 0
+          TI_INSTALLED_SOURCES="$RUNNER_TEMP/ti-sources.json" TI_PYTHON="$RUNNER_TEMP/ti-python/bin/python" node --test --test-reporter=tap "$RUNNER_TEMP/ti-application/engineering/transformation/"*.test.mjs 2>&1 | tee reports/ti/test-output.txt
           test "${PIPESTATUS[0]}" = 0
       - name: Require the existing sandbox prerequisites and immutable native worker
         id: image
@@ -163,8 +166,9 @@ jobs:
           TI_APPLICATION: ${{ steps.installed.outputs.application }}
           TI_NODE: ${{ steps.installed.outputs.node }}
         run: |
-          python -B -m unittest discover -s "$TI_APPLICATION/engineering/transformation" -p test_dependency_reference.py -v
-          TI_INSTALLED_SOURCES="$RUNNER_TEMP/ti-sources.json" TI_PYTHON="$RUNNER_TEMP/ti-python/bin/python" "$TI_NODE" --test "$TI_APPLICATION/engineering/transformation/"*.test.mjs 2>&1 | tee reports/ti/installed-test-output.txt
+          python -B -m unittest discover -s "$TI_APPLICATION/engineering/transformation" -p 'test_*.py' -v 2>&1 | tee reports/ti/installed-python-test-output.txt
+          test "${PIPESTATUS[0]}" = 0
+          TI_INSTALLED_SOURCES="$RUNNER_TEMP/ti-sources.json" TI_PYTHON="$RUNNER_TEMP/ti-python/bin/python" "$TI_NODE" --test --test-reporter=tap "$TI_APPLICATION/engineering/transformation/"*.test.mjs 2>&1 | tee reports/ti/installed-test-output.txt
           test "${PIPESTATUS[0]}" = 0
       - name: Require actual installed-preview command journey and one-use native browser return
         env:
@@ -202,7 +206,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
-          name: ti-source-preview-${{ matrix.arch }}
+          name: ti-source-preview-${{ matrix.arch }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             reports/ti
             ${{ runner.temp }}/ti-package

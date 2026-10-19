@@ -101,6 +101,12 @@ class BuilderDependencyProvenance(unittest.TestCase):
                            'docs/transformational-project.md': b'public fixture\n',
                            '.github/workflows/transformational-project.yml': b'public fixture\n'}.items():
             (root / name).write_bytes(data)
+        if edition == 'alpha7':
+            for name in module['TI_FILES']:
+                target = root / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                if not target.exists():
+                    target.write_bytes(b'inert declared source input fixture\n')
         for name, (data, mode) in members.items():
             target = root / 'fleet/node_modules' / name
             target.parent.mkdir(parents=True, exist_ok=True)
