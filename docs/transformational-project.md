@@ -13,6 +13,38 @@ The Linux dashboard remains version 1.1.5. TI is in the separate Local TI
 The existing alpha.6 builder, release profile and all 6,272 Linux mirror records
 remain unchanged. Alpha.7 is not an operator installer or production qualification.
 
+## First steps
+
+**SOURCE PREVIEW:** these entry points do not establish a qualified release.
+
+1. Open [Alpha’s free TI workspace](https://montrealai.github.io/AGI-Alpha-Agent-v0/transformational-intelligence/)
+   and choose only public, non-personal source material.
+2. To run a new campaign in Fleet, export Alpha’s initial project (revision zero)
+   and follow the `start` path below. For completed exported history, follow
+   `import`. Keep the campaign UUID and return to that same saved Fleet project
+   for later steps.
+3. Inspect the retained native result and the separate currency records. Native
+   spending caps are **0 USDC and 0 AGIALPHA**; positive paid TI requests must
+   refuse. Importing history grants no execution, spending or trust authority.
+   Browser work and method reuse retain their separate existing controls below.
+
+## Premiers pas
+
+**SOURCE PREVIEW / APERÇU SOURCE :** ces points d’entrée ne constituent pas une
+version qualifiée.
+
+1. Ouvrez [l’espace TI gratuit d’Alpha](https://montrealai.github.io/AGI-Alpha-Agent-v0/transformational-intelligence/)
+   et choisissez uniquement des sources publiques sans données personnelles.
+2. Pour exécuter une nouvelle campagne dans Fleet, exportez le projet initial
+   d’Alpha (révision zéro), puis suivez le parcours `start` ci-dessous. Pour un
+   historique exporté terminé, suivez `import`. Conservez l’UUID de campagne et
+   retrouvez ce même projet Fleet enregistré pour les étapes suivantes.
+3. Consultez le résultat natif conservé et les relevés distincts des deux monnaies.
+   Les plafonds natifs sont de **0 USDC et 0 AGIALPHA**; toute demande TI payante
+   positive doit être refusée. L’importation d’un historique n’accorde aucun droit
+   d’exécution, de dépense ou de confiance. Le travail dans le navigateur et la
+   réutilisation des méthodes gardent leurs contrôles distincts décrits ci-dessous.
+
 ## Install and inspect the source preview
 
 Build with locked Fleet production dependencies installed:
