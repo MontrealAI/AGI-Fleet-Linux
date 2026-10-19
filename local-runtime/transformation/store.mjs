@@ -1,5 +1,6 @@
 // Reuse the existing private, synchronous transactional Fleet ledger.
 import {Store} from '../supervisor/store.mjs';
+import path from 'node:path';
 import {canonical, need} from '../primitives.mjs';
 import {inspectTIProject, TI_PROJECT_SCHEMA} from './project.mjs';
 
@@ -12,10 +13,15 @@ export class TIProjectStore {
     if (!row) return null;
     await inspectTIProject(row.value,this.receivers); return row.value;
   }
-  async save(raw,expected=null) {
+  async save(raw,expected=null,{nativeHome=null}={}) {
     const checked = await inspectTIProject(raw,this.receivers), id=checked.project.projectId;
     return this.store.transaction(()=>{
       const prior = this.store.db.prepare('SELECT value FROM projects WHERE id=?').get(id)?.value ?? null;
+      if(nativeHome!==null) {
+        need(checked.project.revision===0&&nativeHome===path.join(this.store.directory,'native-'+id),'TI_INITIAL_LOCAL_HOME_REQUIRED');
+        const key='ti-native-home:'+id,old=this.store.meta(key);
+        need(old===null||old===nativeHome,'TI_LOCAL_HOME_CHANGED');this.store.set(key,nativeHome);
+      }
       if(prior===raw)return raw;
       need(prior===expected,'TI_PROJECT_REVISION_CONFLICT');
       if (prior!==null) {
