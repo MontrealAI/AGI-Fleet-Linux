@@ -4,12 +4,38 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL,fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
-import {need} from '../primitives.mjs';
+import {need,parseStrict,decodeUTF8} from '../primitives.mjs';
 import {createTIReceivers} from './receivers.mjs';
 
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const bridge=fileURLToPath(new URL('./native.py',import.meta.url));
 const bridgeSha=sha(fs.readFileSync(bridge));
+let frozenPins;
+function shippedPins() {
+  if(frozenPins)return frozenPins;
+  // This is application source, never a path from operator configuration or CWD.
+  // Load lazily: the separate alpha.6 package does not ship the TI pin file.
+  const raw=fs.readFileSync(new URL('../../engineering/transformation/source-pins.json',import.meta.url));
+  need(raw.length<=1_000_000,'TI_INSTALLED_PINS');
+  const value=parseStrict(decodeUTF8(raw),1_000_000);
+  need(value?.schema==='agi-fleet/ti-installed-source-pins/v1'&&value.publicNonpersonalOnly===true
+    &&value.paidTI===false&&value.liveProvider===false&&value.productionQualified===false
+    &&value.importedAuthority==='none','TI_INSTALLED_PINS');
+  const repositories={alpha:'MontrealAI/AGI-Alpha-Agent-v0',manager:'MontrealAI/AGIJobManager',jobs:'MontrealAI/AGIJobsv0'},pins={};
+  for(const [name,repository] of Object.entries(repositories)){
+    const pin=value[name];
+    need(pin?.repository===repository&&/^[a-f0-9]{40}$/.test(pin.commit)&&/^[a-f0-9]{40}$/.test(pin.tree),'TI_INSTALLED_PINS');
+    pins[name]=Object.freeze({commit:pin.commit,tree:pin.tree});
+  }
+  return frozenPins=Object.freeze(pins);
+}
+/** Metadata-only check against this application's shipped, immutable pin record. */
+export function requireInstalledTIPin(name,commit,tree) {
+  const pins=shippedPins(),pin=Object.hasOwn(pins,name)?pins[name]:null;
+  need(pin&&commit===pin.commit,'TI_INSTALLED_COMMIT');
+  need(tree===pin.tree,'TI_INSTALLED_TREE');
+  return pin;
+}
 const environment=()=>Object.fromEntries(Object.entries(process.env).filter(([key])=>
   ['PATH','HOME','LANG','LC_ALL','TZ','TMPDIR','LD_LIBRARY_PATH'].includes(key)));
 export function gitBytes(root,args) {
@@ -17,12 +43,17 @@ export function gitBytes(root,args) {
     env:{...environment(),GIT_CONFIG_GLOBAL:'/dev/null',GIT_CONFIG_SYSTEM:'/dev/null'},
     maxBuffer:40_000_000,timeout:30_000});
 }
-function capture(source,prefixes,destination,select=()=>true) {
-  need(path.isAbsolute(source.root)&&fs.realpathSync(source.root)===source.root,'TI_INSTALLED_ROOT');
-  need(/^[a-f0-9]{40}$/.test(source.commit),'TI_INSTALLED_COMMIT');
+function selectedSource(name,configured) {
+  const pin=shippedPins()[name],source=Object.freeze({root:configured?.root,commit:configured?.commit});
+  need(/^[a-f0-9]{40}$/.test(source.commit)&&source.commit===pin.commit,'TI_INSTALLED_COMMIT');
+  need(typeof source.root==='string'&&path.isAbsolute(source.root)&&fs.realpathSync(source.root)===source.root,'TI_INSTALLED_ROOT');
   need(fs.realpathSync(gitBytes(source.root,['rev-parse','--show-toplevel']).toString().trim())===source.root,'TI_INSTALLED_REPOSITORY');
   need(gitBytes(source.root,['cat-file','-t',source.commit]).toString().trim()==='commit','TI_INSTALLED_COMMIT');
   const tree=gitBytes(source.root,['rev-parse',source.commit+'^{tree}']).toString().trim();
+  return Object.freeze({root:source.root,...requireInstalledTIPin(name,source.commit,tree)});
+}
+function capture(source,prefixes,destination,select=()=>true) {
+  const tree=source.tree;
   const rows=gitBytes(source.root,['ls-tree','-rz','-l','--full-tree',source.commit,'--',...prefixes]).toString('utf8').split('\0').filter(Boolean);
   need(rows.length>0&&rows.length<=2048,'TI_INSTALLED_SOURCE_COUNT');
   fs.mkdirSync(destination,{mode:0o700});
@@ -46,15 +77,17 @@ function capture(source,prefixes,destination,select=()=>true) {
 /** roots/commits are operator CLI configuration, never read from a project. */
 export async function openInstalledTI(sources,directory) {
   need(path.isAbsolute(directory)&&fs.realpathSync(path.dirname(directory))===path.dirname(directory),'TI_CAPTURE_DIRECTORY');
+  // Finish all three identity checks before writing captures or importing targets.
+  const selected=Object.freeze(Object.fromEntries(['alpha','manager','jobs'].map(name=>[name,selectedSource(name,sources?.[name])])));
   fs.mkdirSync(directory,{mode:0o700});
   const records={};
-  records.alpha=capture(sources.alpha,[
+  records.alpha=capture(selected.alpha,[
     'alpha_factory_v1','examples/transformational-intelligence','docs/assets/successor',
     'examples/successor-alpha','examples/successor-workbench','examples/build-successor'],path.join(directory,'alpha'),
     name=>!name.startsWith('alpha_factory_v1/')||name.endsWith('.py')
       ||name.startsWith('alpha_factory_v1/core/runtime/')||name.startsWith('alpha_factory_v1/utils/'));
-  records.manager=capture(sources.manager,['scripts/integrations/transformational-work-request.mjs','site/assets/successor/safe.mjs'],path.join(directory,'manager'));
-  records.jobs=capture(sources.jobs,['integrations/alpha-agent/transformational-work-request.mjs',
+  records.manager=capture(selected.manager,['scripts/integrations/transformational-work-request.mjs','site/assets/successor/safe.mjs'],path.join(directory,'manager'));
+  records.jobs=capture(selected.jobs,['integrations/alpha-agent/transformational-work-request.mjs',
     'integrations/alpha-agent/vendor/alpha/docs/assets/successor/engine.mjs'],path.join(directory,'jobs'));
   const load=(name,file)=>import(pathToFileURL(path.join(directory,name,file)).href);
   const [alpha,computer,project,manager,jobs]=await Promise.all([
