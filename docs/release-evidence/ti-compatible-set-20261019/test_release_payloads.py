@@ -86,6 +86,12 @@ class PublicDataUnits(unittest.TestCase):
         self.assertEqual(set(record), set(files))
         self.assertEqual(actual_dist, dist)
 
+    def test_installed_record_row_bound(self):
+        ordinary = "".join("public/" + str(index) + ".txt,,\n" for index in range(8192)).encode()
+        self.assertEqual(len(VERIFIER.parse_record(ordinary)), 8192)
+        with self.assertRaisesRegex(ValueError, "RECORD_ROW_BOUND"):
+            VERIFIER.parse_record(ordinary + b"public/extra.txt,,\n")
+
     def test_exact_legacy_mode_exception_set(self):
         self.assertEqual(VERIFIER.LEGACY_MODES, {
             "alpha_factory_v1/demos/alpha_agi_business_v1/scripts/setup_config.py",

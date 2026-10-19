@@ -16,11 +16,11 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import re
+import selectors
 import stat
 import subprocess
 import sys
 import time
-import threading
 import tomllib
 import urllib.parse
 import urllib.request
@@ -102,25 +102,37 @@ def git(root, *args, cap=LIMIT):
     process = subprocess.Popen(["git", "--no-replace-objects", "-c", "core.fsmonitor=false",
         "-c", "core.hooksPath=" + os.devnull, "-C", str(root), *args],
         env=env, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-    expired = threading.Event()
-    def stop():
-        expired.set()
-        if process.poll() is None:
-            process.kill()
-    watchdog = threading.Timer(30, stop)
-    watchdog.daemon = True
-    watchdog.start()
+    deadline = time.monotonic() + 30
+    reader = selectors.DefaultSelector()
     try:
-        result = process.stdout.read(cap + 1)
-        require(len(result) <= cap and not expired.is_set(), "GIT_BOUND_OR_DEADLINE")
-        require(process.wait(timeout=5) == 0 and not expired.is_set(), "GIT_READ")
-        return result
+        os.set_blocking(process.stdout.fileno(), False)
+        reader.register(process.stdout, selectors.EVENT_READ)
+        chunks, received = [], 0
+        while True:
+            remaining = deadline - time.monotonic()
+            require(remaining > 0, "GIT_DEADLINE")
+            if not reader.select(min(remaining, 0.25)):
+                continue
+            try:
+                chunk = os.read(process.stdout.fileno(), min(65536, cap + 1 - received))
+            except BlockingIOError:
+                continue
+            if not chunk:
+                break
+            received += len(chunk)
+            require(received <= cap, "GIT_BOUND")
+            chunks.append(chunk)
+        remaining = deadline - time.monotonic()
+        require(remaining > 0 and process.wait(timeout=remaining) == 0, "GIT_READ")
+        return b"".join(chunks)
     finally:
-        watchdog.cancel()
+        # Closing our read end is bounded even if some other process retains a writer.
+        # This is a Git read deadline, not a claim of descendant containment.
+        reader.close()
+        process.stdout.close()
         if process.poll() is None:
             process.kill()
         process.wait(timeout=5)
-        process.stdout.close()
 
 def tree(root, commit):
     require(HEX40.fullmatch(commit), "COMMIT_REQUIRED")
@@ -182,7 +194,8 @@ def authenticate(contract):
     actual, release_raw = api("releases/" + str(release["id"]))
     require(actual["id"] == release["id"] and actual["tag_name"] == release["tag"]
             and actual["draft"] is False and actual["published_at"]
-            and actual["prerelease"] is False, "PUBLIC_RELEASE_REQUIRED")
+            and actual["prerelease"] is False and actual.get("immutable") is True, "IMMUTABLE_PUBLIC_RELEASE_REQUIRED")
+    release_raw["observedImmutable"] = actual["immutable"]
     ref, ref_raw = api("git/ref/tags/" + urllib.parse.quote(release["tag"], safe=""))
     target = ref["object"]
     tag_objects = [ref_raw]
@@ -280,6 +293,7 @@ def release_files(contract, assets, folder, download):
 def parse_record(raw, names=None, self_name=None):
     entries = {}
     for row in csv.reader(io.StringIO(raw.decode("utf-8"), newline="")):
+        require(len(entries) < 8192, "RECORD_ROW_BOUND")
         require(len(row) == 3 and row[0] not in entries, "RECORD_ROWS")
         name, digest, size = row
         require("\\" not in name and not PurePosixPath(name).is_absolute()
@@ -396,6 +410,7 @@ def installation(venv, site, payload, values, modes, dist, project, observation_
         item["physicalMode"] = format(mode, "04o")
         item["installedRecordHashPresent"] = check_record_entry(installed[name], data, required=False)
         coverage.append(name)
+    generated_bytes = 0
     for name, entry in sorted(installed.items()):
         if name in coverage or name == record_name:
             continue
@@ -414,6 +429,8 @@ def installation(venv, site, payload, values, modes, dist, project, observation_
                     and candidate.name in scripts, "UNSUPPORTED_INSTALLED_RECORD_PATH")
             kind = "GENERATED_ENTRYPOINT"
         data, mode = regular_bytes(candidate)
+        generated_bytes += len(data)
+        require(generated_bytes <= TOTAL_LIMIT, "INSTALLED_GENERATED_BYTES_BOUND")
         hash_present = check_record_entry(entry, data, required=False)
         if name in values:
             require(data == values[name] and mode == modes[name], "INSTALLED_METADATA_CHANGED")
