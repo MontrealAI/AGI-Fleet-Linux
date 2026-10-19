@@ -7,12 +7,25 @@ import os from 'node:os';
 import {spawnSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-const [application,sources,python,computerAlpha,image,output]=process.argv.slice(2);
-for(const name of [application,sources,python,computerAlpha,output])assert.ok(path.isAbsolute(name??''));
+const [application,sources,python,computerAlpha,image,output,installationBinding]=process.argv.slice(2);
+for(const name of [application,sources,python,computerAlpha,output,installationBinding])assert.ok(path.isAbsolute(name??''));
 assert.match(image,/^sha256:[a-f0-9]{64}$/);assert.equal(fs.realpathSync(python),python);
-const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'ti-saved-native-'));process.umask(0o077);
-const state=path.join(temporary,'project'),profile=path.join(temporary,'profile.json');
+process.umask(0o077);
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
+const installation=JSON.parse(fs.readFileSync(installationBinding,'utf8'));
+assert.equal(installation.schema,'agi-fleet/ti-normal-installation-binding/v1');
+assert.equal(fs.realpathSync(application),application);assert.equal(installation.application,application);
+assert.equal(fs.realpathSync(process.execPath),process.execPath);assert.equal(installation.nodeExecutable,process.execPath);
+const nodeHash=createHash('sha256');for await(const chunk of fs.createReadStream(process.execPath))nodeHash.update(chunk);
+assert.equal(nodeHash.digest('hex'),installation.nodeBinarySHA256);
+assert.equal(hash(fs.readFileSync(path.join(application,'local-preview-manifest.json'))),installation.manifestSHA256);
+assert.equal(process.getuid(),installation.uid);assert.notEqual(installation.uid,0);
+assert.equal(installation.started,false);assert.equal(installation.authority,'none');
+const installedManifest=JSON.parse(fs.readFileSync(path.join(application,'local-preview-manifest.json'),'utf8'));
+assert.equal(installedManifest.commit,installation.sourceCommit);assert.equal(installedManifest.workingTreeDirty,false);
+if(process.env.GITHUB_SHA!==undefined)assert.equal(installation.sourceCommit,process.env.GITHUB_SHA);
+const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'ti-saved-native-'));
+const state=path.join(temporary,'project'),profile=path.join(temporary,'profile.json');
 const cli=path.join(application,'local-runtime/transformation/cli.mjs');
 const commands=[];
 function command(args,{failure=null}={}) {
@@ -58,15 +71,17 @@ try {
     }
     assert.match(fs.readFileSync(path.join(native,'visible-text.txt'),'utf8'),/Independent usefulness review pending/);
     const manifest=JSON.parse(fs.readFileSync(path.join(application,'local-preview-manifest.json'),'utf8'));
-    assert.equal(manifest.workingTreeDirty,false);
+    assert.equal(manifest.workingTreeDirty,false);assert.equal(manifest.commit,installation.sourceCommit);
     const value={schema:'agi-fleet/ti-saved-native-qualification/v1',projectId:first.projectId,
       sourcePreviewVersion:'0.1.0-alpha.7',executionClass:'EXISTING_NATIVE_DOCKER_SCRIPTED_BROWSER',
       exactGrant:true,oneUse:true,replayRefused:true,retainedCaptureIdempotent:true,
       actualBrowser:true,containerClosed:true,processGroupGone:true,providerRequests:0,
+      installationExecution:'NORMAL_INSTALLER_APPLICATION_AND_NODE',installation,
       image,computerAlpha,sourceIdentity:{fleetCommit:manifest.commit,manifestSha256:hash(fs.readFileSync(path.join(application,'local-preview-manifest.json'))),
         sourceConfigurationSha256:hash(fs.readFileSync(sources)),pins:JSON.parse(fs.readFileSync(path.join(application,'engineering/transformation/source-pins.json'),'utf8'))},
       executionContext:{githubRunId:process.env.GITHUB_RUN_ID??null,githubRunAttempt:process.env.GITHUB_RUN_ATTEMPT??null,
         githubSha:process.env.GITHUB_SHA??null,architecture:process.arch,node:process.version,
+        application,nodeExecutable:process.execPath,uid:process.getuid(),
         pythonVersion:spawnSync(python,['--version'],{encoding:'utf8'}).stdout.trim()},
       independentReview:false,productionQualified:false,authority:'none'};
     fs.writeFileSync(path.join(output,'qualification.json'),JSON.stringify(value,null,2)+'\n',{flag:'wx',mode:0o600});

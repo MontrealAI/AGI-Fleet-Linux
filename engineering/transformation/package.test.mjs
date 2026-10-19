@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import fs from 'node:fs';
 const builder=fileURLToPath(new URL('../../local-runtime/transformation/package.py',import.meta.url));
 test('finite TI inventory binds exact source bytes and refuses drift before packaging',()=>{
   const result=execFileSync(process.env.TI_PYTHON,['-B','-c',String.raw`
@@ -117,4 +118,88 @@ with tempfile.TemporaryDirectory() as raw:
 print('DIRTY_INCLUDED_INPUTS_PASS 10_SCENARIOS')
 `],{encoding:'utf8',timeout:30_000});
   assert.match(result,/DIRTY_INCLUDED_INPUTS_PASS 10_SCENARIOS/);
+});
+
+test('normal installed qualification binds installer receipt, application and Node',()=>{
+  const workflow=fileURLToPath(new URL('../../.github/workflows/transformational-project.yml',import.meta.url));
+  const text=fs.readFileSync(workflow,'utf8');
+  assert.equal((text.match(/TI_APPLICATION: \$\{\{ steps\.installed\.outputs\.application \}\}/g)||[]).length,2);
+  assert.equal((text.match(/TI_NODE: \$\{\{ steps\.installed\.outputs\.node \}\}/g)||[]).length,2);
+  assert.match(text,/"\$TI_NODE" --test "\$TI_APPLICATION\/engineering\/transformation\/"\*\.test\.mjs/);
+  assert.match(text,/"\$TI_NODE" "\$TI_APPLICATION\/engineering\/transformation\/qualify\.mjs" "\$TI_APPLICATION"/);
+  assert.match(text,/installer\['verify_version'\]\(Path\(binding\['installation'\]\),binding\['archiveSHA256'\]\)/);
+  const result=execFileSync(process.env.TI_PYTHON,['-I','-B','-c',String.raw`
+import hashlib,json,os,re,tempfile,textwrap,urllib.request
+from pathlib import Path
+from unittest import mock
+workflow=Path(${JSON.stringify(workflow)}).read_text()
+start=workflow.index('      - name: Require the unchanged unprivileged installer with the new source-preview manifest')
+end=workflow.index('      - name: Require native command controls from the normal installed application and Node',start)
+step=workflow[start:end]
+assert '\n        id: installed\n' in step
+code=textwrap.dedent(step.split("python3 - <<'PY'\n",1)[1].rsplit('\n          PY',1)[0])
+code=code.replace('$'+'{{ matrix.arch }}','x64')
+source='a'*40
+cases=['valid','archive','source','version','installation','state','started','authority','node-hash','manifest-hash','root','syntax']
+for scenario in cases:
+ with tempfile.TemporaryDirectory(prefix='ti-install-argument-fixture-') as temporary:
+  root=Path(temporary).resolve();workspace=root/'workspace';workspace.mkdir();runner=root/'runner';runner.mkdir()
+  (workspace/'reports/ti').mkdir(parents=True)
+  lock=workspace/'fleet/shared/runtime/compute/runtime-artifacts.lock.json';lock.parent.mkdir(parents=True)
+  node_archive=b'inert Node archive fixture';lock.write_text(json.dumps({'node':{'archives':[{'platform':'linux-x64','url':'https://example.invalid/inert-node-fixture','sha256':hashlib.sha256(node_archive).hexdigest()}]}}))
+  package=runner/'ti-package';package.mkdir();archive=b'inert source package fixture';archive_sha=hashlib.sha256(archive).hexdigest()
+  (package/'agi-fleet-local-0.1.0-alpha.7.zip').write_bytes(archive)
+  inventory=b'{}\n';manifest=json.dumps({'commit':source,'workingTreeDirty':False}).encode();node=b'inert installed Node fixture'
+  package_receipt={'sha256':archive_sha,'archive':'agi-fleet-local-0.1.0-alpha.7.zip','commit':source,'version':'0.1.0-alpha.7','inventorySha256':hashlib.sha256(inventory).hexdigest()}
+  (package/'package-receipt.json').write_text(json.dumps(package_receipt))
+  outputs=root/'github-output';outputs.write_text('');installation=runner/'ti-installed';state=runner/'ti-installed-state'
+  app=installation/'versions'/archive_sha/'application';runtime=installation/'versions'/archive_sha/'runtime/node';checked=[]
+  def download(url,target):
+   assert url=='https://example.invalid/inert-node-fixture';Path(target).write_bytes(node_archive)
+  def check_output(argv,**kwargs):
+   assert argv[:3]==['python3','-B','local-runtime/install.py']
+   if argv[3]=='preflight':return json.dumps({'readyForInstallInspection':True})
+   assert argv[3]=='install' and argv[-1]=='--confirm'
+   assert argv[argv.index('--root')+1]==str(installation) and argv[argv.index('--state')+1]==str(state)
+   (app/'local-runtime/transformation').mkdir(parents=True);runtime.parent.mkdir(parents=True)
+   runtime.write_bytes(node);runtime.chmod(0o755)
+   (app/'local-runtime/transformation/cli.mjs').write_text('// inert CLI fixture\n')
+   (app/'local-runtime/transformation/source-inventory.json').write_bytes(inventory)
+   (app/'local-preview-manifest.json').write_bytes(manifest)
+   value={'installation':str(installation),'state':str(state),'archiveSHA256':archive_sha,'sourceCommit':source,'version':'0.1.0-alpha.7','started':False,'authority':'none','node':{'binarySHA256':hashlib.sha256(node).hexdigest()},'manifestSHA256':hashlib.sha256(manifest).hexdigest()}
+   if scenario=='archive':value['archiveSHA256']='0'*64
+   if scenario=='source':value['sourceCommit']='b'*40
+   if scenario=='version':value['version']='0.1.0-alpha.6'
+   if scenario=='installation':value['installation']=str(root/'separate-extraction')
+   if scenario=='state':value['state']=str(root/'different-state')
+   if scenario=='started':value['started']=True
+   if scenario=='authority':value['authority']='fixture-invalid-authority'
+   if scenario=='node-hash':value['node']['binarySHA256']='0'*64
+   if scenario=='manifest-hash':value['manifestSHA256']='0'*64
+   return json.dumps(value)
+  def run(argv,**kwargs):
+   assert argv==[str(runtime),'--check',str(app/'local-runtime/transformation/cli.mjs')] and kwargs['check'] is True
+   checked.append(argv)
+   if scenario=='syntax':raise RuntimeError('inert syntax-check failure')
+  original=Path.cwd()
+  try:
+   os.chdir(workspace)
+   with mock.patch.dict(os.environ,{'RUNNER_TEMP':str(runner),'GITHUB_OUTPUT':str(outputs),'GITHUB_SHA':source}),mock.patch('os.getuid',return_value=0 if scenario=='root' else 1001),mock.patch('urllib.request.urlretrieve',side_effect=download),mock.patch('subprocess.check_output',side_effect=check_output),mock.patch('subprocess.run',side_effect=run):
+    try:exec(compile(code,'<inert normal-installer argument fixture>','exec'),{})
+    except (AssertionError,RuntimeError):
+     assert scenario!='valid',scenario
+     assert outputs.read_bytes()==b'' and not (workspace/'reports/ti/installed-binding.json').exists(),scenario
+    else:
+     assert scenario=='valid',scenario
+     observed=dict(line.split('=',1) for line in outputs.read_text().splitlines())
+     assert observed=={'application':str(app),'node':str(runtime),'archive':archive_sha}
+     binding=json.loads((workspace/'reports/ti/installed-binding.json').read_bytes())
+     assert binding['application']==str(app) and binding['nodeExecutable']==str(runtime)
+     assert binding['sourceCommit']==source and binding['archiveSHA256']==archive_sha
+     assert binding['uid']==1001 and binding['started'] is False and binding['authority']=='none'
+     assert checked==[[str(runtime),'--check',str(app/'local-runtime/transformation/cli.mjs')]]
+  finally:os.chdir(original)
+print('NORMAL_INSTALLER_ARGUMENT_BINDING_PASS 12_INERT_SCENARIOS_NO_INSTALL_OR_EXECUTION')
+`],{encoding:'utf8',timeout:30_000});
+  assert.match(result,/NORMAL_INSTALLER_ARGUMENT_BINDING_PASS 12_INERT_SCENARIOS_NO_INSTALL_OR_EXECUTION/);
 });

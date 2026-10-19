@@ -119,10 +119,12 @@ jobs:
           docker image inspect successor-ti-worker > reports/ti/worker-image-inspect.json
           printf 'id=%s\n' "$IMAGE_ID" >> "$GITHUB_OUTPUT"
       - name: Require the unchanged unprivileged installer with the new source-preview manifest
+        id: installed
         run: |
           python3 - <<'PY'
           import hashlib,json,os,subprocess,urllib.request
           from pathlib import Path
+          assert os.getuid()!=0, 'Installed qualification requires the unprivileged runner'
           pins=json.loads(Path('fleet/shared/runtime/compute/runtime-artifacts.lock.json').read_bytes())
           item=next(p for p in pins['node']['archives'] if p['platform']=='linux-${{ matrix.arch }}')
           archive=Path(os.environ['RUNNER_TEMP'])/'ti-node.tar.xz';urllib.request.urlretrieve(item['url'],archive)
@@ -136,15 +138,51 @@ jobs:
           assert json.loads(preflight)['readyForInstallInspection']
           result=subprocess.check_output(['python3','-B','local-runtime/install.py','install',*args,'--confirm'],text=True)
           Path('reports/ti/install-receipt.json').write_text(result)
-          app=root/'versions'/receipt['sha256']/'application';runtime=root/'versions'/receipt['sha256']/'runtime/node'
+          installed=json.loads(result)
+          assert installed['installation']==str(root) and installed['state']==str(state)
+          assert installed['archiveSHA256']==receipt['sha256'] and installed['sourceCommit']==receipt['commit']==os.environ['GITHUB_SHA']
+          assert installed['version']==receipt['version']=='0.1.0-alpha.7' and installed['started'] is False and installed['authority']=='none'
+          app=root/'versions'/installed['archiveSHA256']/'application';runtime=root/'versions'/installed['archiveSHA256']/'runtime/node'
+          assert app.resolve()==app and runtime.resolve()==runtime and runtime.is_file() and os.access(runtime,os.X_OK)
+          def digest(file):
+              with file.open('rb') as raw:return hashlib.file_digest(raw,'sha256').hexdigest()
+          assert digest(runtime)==installed['node']['binarySHA256']
+          assert digest(app/'local-preview-manifest.json')==installed['manifestSHA256']
+          assert digest(app/'local-runtime/transformation/source-inventory.json')==receipt['inventorySha256']
           subprocess.run([str(runtime),'--check',str(app/'local-runtime/transformation/cli.mjs')],check=True)
-          assert (app/'local-runtime/transformation/source-inventory.json').is_file()
-          assert not json.loads(result)['started']
+          binding={'schema':'agi-fleet/ti-normal-installation-binding/v1','application':str(app),'nodeExecutable':str(runtime),
+                   'installation':str(root),'state':str(state),'archiveSHA256':installed['archiveSHA256'],'sourceCommit':installed['sourceCommit'],
+                   'manifestSHA256':installed['manifestSHA256'],'nodeBinarySHA256':installed['node']['binarySHA256'],
+                   'installerReceiptSHA256':hashlib.sha256(result.encode()).hexdigest(),'uid':os.getuid(),'started':False,'authority':'none'}
+          Path('reports/ti/installed-binding.json').write_text(json.dumps(binding,indent=2)+'\n')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:
+              output.write('application='+str(app)+'\nnode='+str(runtime)+'\narchive='+installed['archiveSHA256']+'\n')
           PY
-      - name: Require actual saved-preview command journey and one-use native browser return
+      - name: Require native command controls from the normal installed application and Node
+        env:
+          TI_APPLICATION: ${{ steps.installed.outputs.application }}
+          TI_NODE: ${{ steps.installed.outputs.node }}
         run: |
-          node engineering/transformation/qualify.mjs "$RUNNER_TEMP/ti-application" "$RUNNER_TEMP/ti-sources.json" "$RUNNER_TEMP/ti-python/bin/python" "$PWD/.ti-computer" '${{ steps.image.outputs.id }}' "$PWD/reports/ti/journey"
+          python -B -m unittest discover -s "$TI_APPLICATION/engineering/transformation" -p test_dependency_reference.py -v
+          TI_INSTALLED_SOURCES="$RUNNER_TEMP/ti-sources.json" TI_PYTHON="$RUNNER_TEMP/ti-python/bin/python" "$TI_NODE" --test "$TI_APPLICATION/engineering/transformation/"*.test.mjs 2>&1 | tee reports/ti/installed-test-output.txt
+          test "${PIPESTATUS[0]}" = 0
+      - name: Require actual installed-preview command journey and one-use native browser return
+        env:
+          TI_APPLICATION: ${{ steps.installed.outputs.application }}
+          TI_NODE: ${{ steps.installed.outputs.node }}
+        run: |
+          "$TI_NODE" "$TI_APPLICATION/engineering/transformation/qualify.mjs" "$TI_APPLICATION" "$RUNNER_TEMP/ti-sources.json" "$RUNNER_TEMP/ti-python/bin/python" "$PWD/.ti-computer" '${{ steps.image.outputs.id }}' "$PWD/reports/ti/journey" "$PWD/reports/ti/installed-binding.json"
           python -B engineering/integration/service-package.py verify --archive "$RUNNER_TEMP/ti-package/agi-fleet-local-0.1.0-alpha.7.zip" --application "$RUNNER_TEMP/ti-application" --commit "$GITHUB_SHA" --observation "$PWD/reports/ti/package-observation.json"
+          python -B - <<'PY'
+          import json,runpy
+          from pathlib import Path
+          binding=json.loads(Path('reports/ti/installed-binding.json').read_bytes())
+          installer=runpy.run_path('local-runtime/install.py')
+          receipt=installer['verify_version'](Path(binding['installation']),binding['archiveSHA256'])
+          assert receipt['sourceCommit']==binding['sourceCommit'] and receipt['manifestSHA256']==binding['manifestSHA256']
+          assert receipt['node']['binarySHA256']==binding['nodeBinarySHA256']
+          Path('reports/ti/installed-after.json').write_text(json.dumps({'unchanged':True,'receipt':receipt},indent=2)+'\n')
+          PY
       - name: Bind public retained artifacts to this exact workflow execution
         if: always()
         run: |
