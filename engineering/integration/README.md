@@ -40,9 +40,12 @@ native permit and signed receipt. Resolving a tag before recording its digest
 does not establish cross-time reproducibility; retain the observed base digest
 for an exact replay. There is no host fallback in the Docker command.
 The source-kit ZIP packages the exact helper Git bytes, their compatibility
-inputs and the shared installed SDK-capture launcher. Its extracted capture path
-is checked before image build; it requires the four source checkouts and is not
-a Fleet installer.
+inputs, the shared installed SDK-capture launcher and the checker's reviewed
+strict JSON parser. Both the extracted Node verifier import and SDK capture path
+are checked before image build; the kit requires the four source checkouts and
+is not a Fleet installer. The retained evidence inventory follows the public
+upload allowlist. Native journal auxiliaries and key-labeled files are excluded
+before opening them and are not required to re-audit the public artifact.
 After the real browser result passes both native receivers, the same exact
 drafts are exercised on two separate in-process chains with ID 31337. Jobs
 uses its existing registry, a mock token and controlled validation; Manager
@@ -139,7 +142,7 @@ reach the existing loopback service, with all other browser origins refused;
 it makes no operating-system network-isolation claim. Native Alpha workers
 retain their network-none boundary throughout.
 
-The 126 helper regressions (91 Node and 35 Python) cover source integrity,
+The helper regressions cover source integrity,
 arithmetic, privacy and evidence custody. Protocol doubles in these tests are
 labelled as such and do not qualify actual browser execution. A successful
 hosted run on each supported architecture, exact-source review and same-run
