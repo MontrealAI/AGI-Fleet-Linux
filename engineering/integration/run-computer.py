@@ -11,7 +11,7 @@ import subprocess
 import sys
 import threading
 import time
-from desk_focus import inspect_desk_focus
+from desk_focus import NATIVE_VIEWPORT,desk_actions,inspect_desk_focus
 from source_guard import verify_sources,verify_dependency_lock,source_only_imports
 
 
@@ -45,11 +45,9 @@ def main():
     report=json.loads(bundle['reportRaw'])
     quantities={entry['supplierId']:entry['units'] for entry in report['frozen']['plan']['allocations']}
     if args.inject_error=='late':quantities={'laurentian':report['mission']['requirements']['totalUnits']}
-    # The exact renderer exposes its supplier table as the first keyboard focus target.
-    actions=[{'type':'move','x':500,'y':300},{'type':'keypress','keys':['TAB']}]
-    for supplier in ['stellar','laurentian','boreal']:
-        actions.extend([{'type':'keypress','keys':['TAB']},{'type':'keypress','keys':['CTRL','A']},{'type':'type','text':str(quantities.get(supplier,0))}])
-    actions.extend([{'type':'keypress','keys':['TAB']},{'type':'keypress','keys':['ENTER']},{'type':'scroll','x':900,'y':700,'scroll_x':0,'scroll_y':450},{'type':'wait'}])
+    # At the native 1024px viewport the renderer removes the nonoverflowing
+    # table from tab order. The first TAB must reach Stellar's quantity input.
+    actions=desk_actions(quantities)
     (out/'desk-focus-observation.json').write_text(json.dumps(inspect_desk_focus(json.loads(bundle['handoffRaw']),actions),indent=2)+'\n',encoding='utf-8')
     (out/'actions.json').write_text(json.dumps(actions,separators=(',',':')),encoding='utf-8');os.chmod(out/'actions.json',0o600)
     if args.prepare_only:
@@ -64,6 +62,7 @@ def execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started):
     from alpha_factory_v1.core.runtime.store import Journal
     from alpha_factory_v1.core.runtime.successor import computer
     from alpha_factory_v1.core.runtime.successor.computer_handoff import ComputerHandoff,write_computer_return
+    if (computer.WIDTH,computer.HEIGHT)!=NATIVE_VIEWPORT:raise ValueError('Native viewport changed; review the browser focus fixture')
     handoff=ComputerHandoff.model_validate_json(bundle['handoffRaw'])
     batches=[actions[index:index+5] for index in range(0,len(actions),5)]
     class ScriptedAdvice:
