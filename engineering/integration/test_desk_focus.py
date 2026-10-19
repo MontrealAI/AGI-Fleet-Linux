@@ -1,21 +1,28 @@
 """Contract tests use inert HTML only and never claim keyboard/browser execution."""
 import unittest
-from desk_focus import inspect_desk_focus
+from desk_focus import desk_actions,inspect_desk_focus
 
 
-def fixture():
+def fixture(*,table_focusable=False):
     html='<div tabindex="0" role="region"><table></table></div>'+''.join('<input id="cm-qty-'+name+'">' for name in ['stellar','laurentian','boreal'])+'<button id="cm-desk-evaluate">Evaluate</button>'
-    actions=[{'type':'move','x':500,'y':300},{'type':'keypress','keys':['TAB']}]
-    for quantity in ['10','30','0']:actions += [{'type':'keypress','keys':['TAB']},{'type':'keypress','keys':['CTRL','A']},{'type':'type','text':quantity}]
+    actions=desk_actions({'stellar':10,'laurentian':30},table_focusable=table_focusable)
     return {'task':{'html':html}},actions
 
 
 class DeskFocusTests(unittest.TestCase):
-    def test_supplier_table_is_crossed_before_typing(self):
+    def test_native_viewport_types_first_supplier_without_extra_tab(self):
         handoff,actions=fixture();result=inspect_desk_focus(handoff,actions);self.assertIsNone(result['actualBrowserActions']);self.assertTrue(result['browserAcceptanceStillRequired'])
-    def test_inherited_actions_without_table_traversal_are_refused(self):
-        handoff,actions=fixture();del actions[1]
+    def test_inherited_extra_tab_is_refused_at_native_viewport(self):
+        handoff,actions=fixture();actions.insert(1,{'type':'keypress','keys':['TAB']})
         with self.assertRaises(ValueError):inspect_desk_focus(handoff,actions)
+    def test_overflowing_table_requires_explicit_traversal(self):
+        handoff,actions=fixture(table_focusable=True);result=inspect_desk_focus(handoff,actions,table_focusable=True)
+        self.assertTrue(result['tableFocusableAssumption'])
+        del actions[1]
+        with self.assertRaises(ValueError):inspect_desk_focus(handoff,actions,table_focusable=True)
+    def test_missing_submit_is_refused(self):
+        handoff,actions=fixture();del actions[11]
+        with self.assertRaisesRegex(ValueError,'SUBMIT'):inspect_desk_focus(handoff,actions)
     def test_new_focusable_before_inputs_requires_new_reviewed_actions(self):
         handoff,actions=fixture();handoff['task']['html']='<a href="#">New link</a>'+handoff['task']['html']
         with self.assertRaisesRegex(ValueError,'FOCUS_ORDER'):inspect_desk_focus(handoff,actions)
