@@ -1,6 +1,7 @@
 """Bind the installed importable source closure to exact Git objects before execution."""
 import hashlib
 import importlib.machinery
+import importlib.util
 from contextlib import contextmanager
 import os
 from pathlib import Path
@@ -9,9 +10,9 @@ import subprocess
 import sys
 import tempfile
 
-IMPORTABLE={'.py','.pyw','.pyc','.so','.pyd','.mjs','.js','.json'}
-ALPHA_SCOPES=[('alpha_factory_v1',False),('alpha_factory_v1/core',False),('alpha_factory_v1/core/runtime',True),('examples/successor-alpha',True),('examples/successor-workbench',True),('examples/build-successor',True),('examples/alpha-discovery',True),('docs/assets/successor',True)]
-JOBS_SCOPES=[('packages/successor-core/src',True),('scripts/pages',False),('website/assets',False),('integrations/alpha-agent',False)]
+IMPORTABLE={'.py','.pyw','.pyc','.so','.pyd','.mjs','.js','.json','.html','.css'}
+ALPHA_SCOPES=[('alpha_factory_v1',False),('alpha_factory_v1/core',False),('alpha_factory_v1/core/runtime',True),('examples/successor-alpha',True),('examples/successor-workbench',True),('examples/build-successor',True),('examples/alpha-discovery',True),('docs/assets/successor',True),('docs/successor/alpha',True)]
+JOBS_SCOPES=[('packages/successor-core/src',True),('scripts/pages',False),('website/assets',False),('integrations/alpha-agent',False),('integrations/alpha-agent/vendor/alpha-computer',True)]
 
 
 def git(root,*arguments):
@@ -21,9 +22,19 @@ def git(root,*arguments):
 
 
 @contextmanager
-def source_only_imports():
+def source_only_imports(alpha_root=None, expected_commit=None):
     previous_prefix,previous_write=sys.pycache_prefix,sys.dont_write_bytecode
     previous_hooks,previous_cache=list(sys.path_hooks),dict(sys.path_importer_cache)
+    previous_meta,previous_path=list(sys.meta_path),list(sys.path)
+    previous_alpha={name for name in sys.modules if name=='alpha_factory_v1' or name.startswith('alpha_factory_v1.')}
+    if alpha_root is not None:
+        # The installed launcher owns the shared verifier; installed runtime
+        # packages intentionally do not depend on this engineering directory.
+        launcher=Path(__file__).resolve().parents[2]/'local-runtime/computer/launcher.py'
+        selected=importlib.util.spec_from_file_location('fleet_alpha_source_snapshot',launcher)
+        bridge=importlib.util.module_from_spec(selected);selected.loader.exec_module(bridge)
+        snapshot=bridge.capture_alpha_sources(alpha_root,expected_commit)
+    else:snapshot=None
     class SourceOnlyLoader(importlib.machinery.SourceFileLoader):
         def get_code(self,fullname):return self.source_to_code(self.get_data(self.path),self.path)
     with tempfile.TemporaryDirectory(prefix='fleet-computer-source-only-') as prefix:
@@ -31,16 +42,21 @@ def source_only_imports():
             sys.pycache_prefix=prefix;sys.dont_write_bytecode=True
             sys.path_hooks.insert(0,importlib.machinery.FileFinder.path_hook((SourceOnlyLoader,importlib.machinery.SOURCE_SUFFIXES),(importlib.machinery.ExtensionFileLoader,importlib.machinery.EXTENSION_SUFFIXES)))
             sys.path_importer_cache.clear()
-            yield
+            if snapshot is not None:bridge.install_source_only_imports(alpha_root,snapshot)
+            yield dict(snapshot.summary) if snapshot is not None else {'mode':'SOURCE_ONLY_LEGACY_TEST_FIXTURE'}
         finally:
             sys.pycache_prefix=previous_prefix;sys.dont_write_bytecode=previous_write
             sys.path_hooks[:]=previous_hooks;sys.path_importer_cache.clear();sys.path_importer_cache.update(previous_cache)
+            sys.meta_path[:]=previous_meta;sys.path[:]=previous_path
+            if snapshot is not None:
+                for name in list(sys.modules):
+                    if name not in previous_alpha and (name=='alpha_factory_v1' or name.startswith('alpha_factory_v1.')):sys.modules.pop(name,None)
 
 
 def verify_tree(root,scopes):
     root=Path(root).resolve(strict=True)
     commit=git(root,'rev-parse','HEAD').decode().strip()
-    tracked=set(git(root,'ls-tree','-r','--name-only',commit).decode().splitlines())
+    tracked=set(git(root,'ls-tree','-r','--name-only','-z',commit).decode().split('\0'))
     paths=set()
     for relative,recursive in scopes:
         directory=root/relative
@@ -69,8 +85,8 @@ def verify_tree(root,scopes):
 
 
 def root_import_scopes(root):
-    # sys.path includes the Alpha checkout: a top-level module/package can shadow
-    # an otherwise installed dependency. Legacy sourceless packages count too.
+    # Admission also rejects checkout entries that could shadow an installed
+    # dependency. Protected imports omit the root; legacy packages count too.
     scopes=[('.',False)]
     for child in Path(root).iterdir():
         if child.name.startswith('.') or child.name=='node_modules':continue

@@ -105,4 +105,37 @@ for (const language of ['en', 'fr']) {
     for (const check of await checks.all()) await check.check();
     await expect(page.locator('#checklist-status')).toContainText(language === 'fr' ? 'qualification reste' : 'qualification is still required');
   });
+
+  test(`${language}: new project guides are discoverable without changing the stable Fleet download`, async ({ page }) => {
+    const suffix = language === 'fr' ? '#français' : '';
+    const base = 'https://github.com/MontrealAI/AGI-Fleet-Linux/blob/main/docs/local-skills/';
+    const previewURL = `${base}DOWNLOAD_ALPHA_6.md${suffix}`;
+    const journeyURL = `${base}FOUR_REPOSITORY_JOURNEY.md${suffix}`;
+    await page.goto(path);
+    const search = page.locator('#resource-search');
+    await search.fill('alpha.6');
+    const preview = page.locator('.resource-card:visible');
+    await expect(preview).toHaveCount(1);
+    await expect(preview).toHaveAttribute('href', previewURL);
+    await expect(preview).toContainText(language === 'fr' ? 'CANDIDAT SOURCE' : 'SOURCE CANDIDATE');
+    await expect(preview).toContainText(language === 'fr' ? 'après publication' : 'after the named assets are published');
+    await search.fill(language === 'fr' ? 'quatre dépôts' : 'four repositories');
+    const journey = page.locator('.resource-card:visible');
+    await expect(journey).toHaveCount(1);
+    await expect(journey).toHaveAttribute('href', journeyURL);
+    await expect(journey).toContainText(language === 'fr' ? 'non signées' : 'unsigned');
+    await journey.focus();
+    await expect(journey).toBeFocused();
+    await search.fill('');
+    await expect(page.locator(`.resource-card[href="${base}DOWNLOAD.md${suffix}"]`)).toContainText('alpha.4');
+    await page.locator('.welcome-copy a').filter({ hasText: language === 'fr' ? 'Trouver ma prochaine étape' : 'Find my next step' }).click();
+    const help = page.locator('#help');
+    await expect(help.locator(`a[href="${journeyURL}"]`)).toBeVisible();
+    await expect(help.locator(`a[href="${previewURL}"]`)).toBeVisible();
+    await expect(help).toContainText(language === 'fr' ? 'qualification du paquet exact' : 'exact-package qualification');
+    await expect(help).toContainText(language === 'fr' ? 'aucune exécution, aucun paiement ni accès au portefeuille' : 'no execution, payment or wallet access');
+    const release = await (await page.request.get('/release.json')).json();
+    await expect(page.locator('#release-link')).toHaveAttribute('href', `https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/${release.tag}`);
+    await expect(page.locator('#download-link')).toHaveAttribute('href', `https://github.com/MontrealAI/AGI-Fleet-Linux/releases/download/${release.tag}/${release.name}`);
+  });
 }

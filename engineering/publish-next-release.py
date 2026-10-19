@@ -24,6 +24,15 @@ def write(path, value):
     Path(path).write_text(json.dumps(value, indent=2) + '\n')
 
 
+def require_current_main(api, commit):
+    ref = api('/git/ref/heads/main')
+    require(re.fullmatch(r'[0-9a-f]{40}', commit or '') is not None
+            and isinstance(ref, dict) and ref.get('ref') == 'refs/heads/main'
+            and isinstance(ref.get('object'), dict)
+            and ref['object'].get('type') == 'commit' and ref['object'].get('sha') == commit,
+            'Publication source is not the exact current main commit')
+
+
 def validate(metadata, audit, commit):
     require(re.fullmatch(r'[0-9a-f]{40}', commit or '') is not None, 'An exact workflow commit is required')
     specification = load(ROOT / 'engineering/next-release.json')
@@ -176,6 +185,7 @@ def publish(release_dir, output):
     except urllib.error.HTTPError as error:
         if error.code != 404:
             raise
+        require_current_main(api, commit)
         tag = api('/git/refs', method='POST', data=json.dumps({'ref': 'refs/tags/' + metadata['tag'], 'sha': commit}).encode())
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Release tag targets different source')
     try:
@@ -207,7 +217,8 @@ def publish(release_dir, output):
         and remote[p.name]['size'] == p.stat().st_size for p in assets), 'Remote publication verification failed')
     tag = api('/git/ref/tags/' + metadata['tag'])
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Tag changed before publication')
-    if release['draft']:
+    if observed['draft']:
+        require_current_main(api, commit)
         observed = api(f'/releases/{release["id"]}', method='PATCH', data=json.dumps({'draft': False, 'prerelease': True, 'make_latest': 'false', 'body': notes}).encode())
     require(not observed['draft'] and observed['prerelease'], 'Release publication classification differs')
     require(observed.get('body') == notes, 'Published release notes differ from reviewed publication text')

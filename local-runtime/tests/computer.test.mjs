@@ -4,13 +4,14 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import vm from 'node:vm';
 import {spawnSync} from 'node:child_process';
-import {createHash} from 'node:crypto';
+import {createHash,webcrypto} from 'node:crypto';
 import {fixture,task} from './helpers.mjs';
 import {canonical,digest,parseStrict,id} from '../contracts.mjs';
 import {LocalRuntime} from '../supervisor/runtime.mjs';
 import {LinuxSandbox} from '../platforms/linux.mjs';
-import {validateComputerInput,inspectComputerInstallation,verifyAlphaImportClosure,createComputerProfile,callComputer,ALPHA_COMPUTER_SOURCE,LAUNCHER,COMPUTER_LIMITS} from '../computer/profile.mjs';
+import {validateComputerInput,inspectComputerInstallation,verifyAlphaImportClosure,createComputerProfile,callComputer,hashComputerExecutable,ALPHA_COMPUTER_SOURCE,LAUNCHER,COMPUTER_LIMITS,COMPUTER_EXECUTABLE_BYTES} from '../computer/profile.mjs';
 import {computerArtifactInventory} from '../computer/backend.mjs';
 
 const raw=canonical({schema:'successor-alpha-computer-handoff/v1',authority:'none',settlement:'not_connected',task:{input_rights:'synthetic'}});
@@ -19,6 +20,21 @@ const preparation={runtimeIdentity:'a'.repeat(64),permit:'b'.repeat(64),handoffS
 function synthetic(options={}){return fixture({inspect:()=>({supported:true,backend:'synthetic-boundary',identity:'synthetic-host',alphaComputer:{mode:'scripted-zero-cost',runtimeIdentity:preparation.runtimeIdentity,evidenceClass:'SYNTHETIC_COMPUTER_REHEARSAL',preparation}}),execute:async()=>({result:{files:[],scriptedAdvice:true,providerRequests:0,authority:'none',independentReview:false},observation:{processGroupGone:true,providerCalls:0,runtimeIdentity:preparation.runtimeIdentity,evidenceClass:'SYNTHETIC_COMPUTER_REHEARSAL'}}),...options});}
 const temporary=()=>fs.mkdtempSync(path.join(os.tmpdir(),'fleet-computer-test-'));
 const write=(file,bytes)=>fs.writeFileSync(file,bytes,{mode:0o600});
+function executableHashBounds(directory){
+  const file=path.join(directory,'benign-executable-bytes'),descriptor=fs.openSync(file,'wx',0o700);try{fs.ftruncateSync(descriptor,33_000_000);}finally{fs.closeSync(descriptor);}
+  const reference=spawnSync('/usr/bin/sha256sum',[file],{encoding:'utf8'});assert.equal(reference.status,0,reference.stderr);const expected=reference.stdout.slice(0,64),readFile=fs.readFileSync;
+  try{fs.readFileSync=()=>{throw Error('whole-file allocation is forbidden');};assert.equal(hashComputerExecutable(file),expected,'trusted executable above32MB uses bounded streaming');}finally{fs.readFileSync=readFile;}
+  const fd=fs.openSync(file,'r+');try{fs.writeSync(fd,Buffer.from([1]),0,1,0);}finally{fs.closeSync(fd);}assert.notEqual(hashComputerExecutable(file),expected,'exact executable byte drift changes its digest');
+  for(const mode of [0o600,0o702]){fs.chmodSync(file,mode);assert.throws(()=>hashComputerExecutable(file),/COMPUTER_RUNTIME_FILE/);}fs.chmodSync(file,0o700);
+  const alias=path.join(directory,'executable-alias');fs.symlinkSync(file,alias);assert.throws(()=>hashComputerExecutable(alias),/COMPUTER_RUNTIME_PATH/);fs.unlinkSync(alias);
+  fs.truncateSync(file,COMPUTER_EXECUTABLE_BYTES+1);assert.throws(()=>hashComputerExecutable(file),/COMPUTER_RUNTIME_FILE/,'128MiB remains a hard executable ceiling');
+  write(file,'safe');const read=fs.readSync,requests=[];
+  try{fs.readSync=(...args)=>{requests.push(args[3]);if(requests.length===1)fs.appendFileSync(file,'changed');return read(...args);};assert.throws(()=>hashComputerExecutable(file),/COMPUTER_RUNTIME_CHANGED/);}finally{fs.readSync=read;}
+  assert.deepEqual(requests,[5],'a growing file is read at most its initial size plus one byte');
+  const sourceRoot=path.join(directory,'source-limit'),packageRoot=path.join(sourceRoot,'alpha_factory_v1'),tracked=new Map();fs.mkdirSync(packageRoot,{recursive:true});
+  for(const relative of ['alpha_factory_v1/__init__.py','requirements-agent.lock','alpha_factory_v1/oversized.py']){write(path.join(sourceRoot,relative),'');tracked.set(relative,createHash('sha1').update('blob 0\0').digest('hex'));}
+  fs.truncateSync(path.join(packageRoot,'oversized.py'),32_000_001);assert.throws(()=>verifyAlphaImportClosure(sourceRoot,tracked),/COMPUTER_UNTRACKED_IMPORT/,'source files retain the original32MB bound');
+}
 
 test('Computer Use is disabled by default; public assertion, exact keys and live cost modes fail closed',()=>{
   assert.equal(inspectComputerInstallation(null).code,'COMPUTER_DISABLED');
@@ -65,6 +81,30 @@ test('native artifact exports retain actor scope, fixed names and exact hashes a
     const artifacts=computerArtifactInventory(directory),observation={backend:'native-alpha-computer-scripted/v1',artifactDirectory:run+'-fixture/computer',artifacts};
     f.runtime.store.db.prepare("INSERT INTO runs VALUES(?,?,?,'complete',?,?)").run(run,a.id,g.grant,canonical({reservedAt:Date.now()}),canonical({observation}));f.runtime.stop({actor:null},f.operator);f.backend.inspect=()=>({supported:false,code:'COMPUTER_DISABLED'});
     const returned=await f.runtime.dispatch('computer-export',{actor:a.id,run},own);assert.equal(returned.sha256,digest(returned.content));const png=await f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'screen-000.png'},own);assert.equal(digest(Buffer.from(png.contentBase64,'base64')),png.sha256);
+    const element=()=>({dataset:{},children:[],parent:null,append(value){value.parent=this;this.children.push(value);},querySelector(){return this.children.find(value=>Object.hasOwn(value.dataset,'computerOutputs'))??null;},remove(){this.parent.children=this.parent.children.filter(value=>value!==this);}});
+    const saved=[],context={document:{querySelectorAll:()=>[],getElementById:()=>({}),createElement:element},TextEncoder,Uint8Array,crypto:webcrypto,atob,
+      dispatch:(action,input)=>f.runtime.dispatch(action,input,own),retain:(...value)=>saved.push(value)};
+    const script=fs.readFileSync(new URL('../../local-dashboard/app.js',import.meta.url),'utf8');
+    vm.runInNewContext(script+';button=(label,fn)=>({label,run:fn,dataset:{}});api=dispatch;save=retain;globalThis.outputs=appendComputerOutputs;globalThis.setLanguage=value=>{language=value;};',context);
+    for(const language of ['en','fr']){
+      context.setLanguage(language);const row=element();
+      for(const state of ['complete','uncertain','reconciled']){
+        const failure={code:'RUN_CANCELLED',observation},receipt=state==='complete'?{result:{files:[],artifacts,nativeState:'review'},observation}:state==='uncertain'?failure:{priorOutcome:failure,disposition:'closed-without-success'};
+        f.runtime.store.db.prepare('UPDATE runs SET state=?,result=? WHERE id=?').run(state,canonical(receipt),run);
+        const retained=f.runtime.store.db.prepare('SELECT state,result FROM runs WHERE id=?').get(run);
+        context.outputs(row,{actor:a.id,id:run,state},receipt);
+        assert.equal(row.children.length,1,'repeated output views replace native controls');const outputs=row.children[0],buttons=outputs.children.filter(value=>typeof value.run==='function');
+        assert.equal(buttons.length,2,'retained backend artifact shape exposes native return and screenshot');assert.equal(outputs.children[0].dataset.computerEvidenceState,state==='complete'?'review':'incomplete');
+        assert.equal(buttons[0].label,language==='fr'?'Enregistrer le retour natif pour Alpha':'Save native return for Alpha');
+        assert.equal(buttons[1].label,(language==='fr'?'Enregistrer la capture ':'Save screenshot ')+'screen-000.png');
+        await buttons[0].run();assert.equal(saved.at(-1)[0],'computer-return.json');assert.equal(saved.at(-1)[1],returned.content);
+        await buttons[1].run();assert.equal(saved.at(-1)[0],'screen-000.png');assert.deepEqual(Buffer.from(saved.at(-1)[1]),Buffer.from(png.contentBase64,'base64'));
+        assert.deepEqual(f.runtime.store.db.prepare('SELECT state,result FROM runs WHERE id=?').get(run),retained,'read-only exports preserve actual retained success/failure/reconciliation state');
+      }
+    }
+    for(const receipt of [null,{result:{files:[{name:'computer-return.json'}]}},{observation:{backend:'unrelated',artifacts}},{observation:{...observation,artifacts:[]}},{observation:{...observation,artifacts:[{name:'computer-return.json',mediaType:'image/png'}]}}]){
+      const row=element();context.outputs(row,{actor:a.id,id:run},receipt);assert.equal(row.children.length,0,'missing native-return JSON inventory cannot offer computer downloads');
+    }
     await assert.rejects(f.runtime.dispatch('computer-export',{actor:a.id,run},other),/CLIENT_SCOPE_DENIED/);await assert.rejects(f.runtime.dispatch('computer-export',{actor:b.id,run},own),/CLIENT_SCOPE_DENIED/);
     await assert.rejects(f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'../computer-return.json'},own),/COMPUTER_ARTIFACT_NAME/);
     write(path.join(directory,'screen-000.png'),'changed');await assert.rejects(f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'screen-000.png'},own),/COMPUTER_ARTIFACT_CHANGED/);
@@ -82,13 +122,16 @@ test('Alpha import closure rejects masked tracked edits, untracked import packag
 });
 
 test('native launcher executes committed Python source even with timestamp-valid malicious cached bytecode',()=>{
-  const root=temporary();try{const script=`import importlib.util, py_compile, pathlib, os\np=pathlib.Path(${JSON.stringify(root)})/'cached_fixture.py'\np.write_text('VALUE=2\\n'); stamp=p.stat().st_mtime\npy_compile.compile(str(p),doraise=True)\np.write_text('VALUE=1\\n');os.utime(p,(stamp,stamp))\nspec=importlib.util.spec_from_file_location('fleet_launcher',${JSON.stringify(LAUNCHER)})\nmodule=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)\nmodule.install_source_only_imports(p.parent)\nimport cached_fixture\nassert cached_fixture.VALUE==1, 'malicious timestamp-valid cache executed'\nprint('source-only')\n`;const result=spawnSync('python',['-B','-c',script],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'source-only');
+  const root=temporary();try{executableHashBounds(root);const script=`import importlib.util, py_compile, pathlib, os\np=pathlib.Path(${JSON.stringify(root)})/'cached_fixture.py'\np.write_text('VALUE=2\\n'); stamp=p.stat().st_mtime\npy_compile.compile(str(p),doraise=True)\np.write_text('VALUE=1\\n');os.utime(p,(stamp,stamp))\nspec=importlib.util.spec_from_file_location('fleet_launcher',${JSON.stringify(LAUNCHER)})\nmodule=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)\nmodule.install_source_only_imports(p.parent)\nimport cached_fixture\nassert cached_fixture.VALUE==1, 'malicious timestamp-valid cache executed'\nprint('source-only')\n`;const result=spawnSync('python',['-B','-c',script],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'source-only');
     const environment=path.join(root,'environment'),venv=spawnSync('python',['-m','venv','--copies','--without-pip',environment],{encoding:'utf8'});assert.equal(venv.status,0,venv.stderr);
     const version=spawnSync(path.join(environment,'bin/python'),['-I','-S','-c','import sys; print(str(sys.version_info.major)+"."+str(sys.version_info.minor))'],{encoding:'utf8'}).stdout.trim(),site=path.join(environment,'lib','python'+version,'site-packages'),sentinel=path.join(root,'STARTUP_EXECUTED');
     write(path.join(site,'unsafe.pth'),`import pathlib; pathlib.Path(${JSON.stringify(sentinel)}).write_text('unsafe')\n`);write(path.join(site,'sitecustomize.py'),`from pathlib import Path; Path(${JSON.stringify(sentinel)}).write_text('unsafe')\n`);
     const modules={'alpha_factory_v1/__init__.py':'','alpha_factory_v1/core/__init__.py':'','alpha_factory_v1/core/runtime/__init__.py':'','alpha_factory_v1/core/runtime/store.py':'Journal = None\n','alpha_factory_v1/core/runtime/successor/__init__.py':'','alpha_factory_v1/core/runtime/successor/computer.py':'import sys\nassert sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode\n','alpha_factory_v1/core/runtime/successor/computer_handoff.py':'ComputerHandoff = write_computer_return = None\n','alpha_factory_v1/core/runtime/successor/protocol.py':'safe_json_loads = None\n'};
     for(const [relative,content] of Object.entries(modules)){const file=path.join(root,relative);fs.mkdirSync(path.dirname(file),{recursive:true});write(file,content);}
-    const probe=callComputer({alphaRoot:root,python:path.join(environment,'bin/python')},'probe');assert.ok(Object.keys(probe.files).length>0);assert.equal(fs.existsSync(sentinel),false,'untracked .pth/sitecustomize startup executed');
+    const git=(...args)=>{const result=spawnSync('/usr/bin/git',['-C',root,...args],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);return result.stdout.trim();};
+    git('init','--quiet');git('add','alpha_factory_v1');git('-c','user.name=Source fixture','-c','user.email=source-fixture@example.invalid','commit','--quiet','-m','Synthetic installed SDK fixture');
+    const source={commit:git('rev-parse','HEAD'),tree:git('rev-parse','HEAD^{tree}')};
+    const probe=callComputer({alphaRoot:root,python:path.join(environment,'bin/python'),source},'probe');assert.ok(Object.keys(probe.files).length>0);assert.equal(probe.nativeSourceCapture.mode,'CAPTURED_ALPHA_GIT_SOURCE');assert.equal(probe.nativeSourceCapture.commit,source.commit);assert.equal(probe.nativeSourceCapture.moduleCount,Object.keys(modules).length);assert.equal(fs.existsSync(sentinel),false,'untracked .pth/sitecustomize startup executed');
   }finally{fs.rmSync(root,{recursive:true,force:true});}
 });
 

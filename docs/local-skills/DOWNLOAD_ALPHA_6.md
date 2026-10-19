@@ -83,6 +83,23 @@ The normal `serve` command leaves this route disabled. After the exact package's
 
 Start the service with the documented absolute `--computer-config` path, then check readiness. In **Use your Alpha project in a browser**, choose that handoff file and confirm its public, non-personal inputs. **Prepare** starts no execution. Inspect the exact task above, authorize its one-use grant and run once. Inspect the receipt and screenshots, then choose **Save native return for Alpha** and import it into the same Alpha project. STOP, grant revocation and uncertainty records still apply. A successful rehearsal establishes neither independent acceptance nor earnings. Provider requests and provider cost are zero; device and human costs remain unmeasured.
 
+### Reading the cost observations
+
+The qualification reports use distinct scopes; they do not establish savings or
+cost superiority between the two assets or routes.
+
+| Observation | Exact scope |
+| --- | --- |
+| Scripted provider | Zero requests and known zero provider cost; no live invoice was observed. |
+| Human elapsed effort and device cost | Unknown (`null`); neither is inferred from automated duration. |
+| Nine operator commands | Service/profile/actor/grant/export CLI sequence only; additional GUI and recovery steps are excluded. |
+| Manager mock-chain gas | Fourteen lifecycle receipts only; deployment and setup are excluded. |
+| Jobs mock-chain gas | All mined fixture transactions, including deployment and setup; the current fixture has 43 receipts. |
+
+Mock-chain gas is a software observation, not a Mainnet fee or real-token
+expense. Read the saved report's actual receipt inventory and scope with its
+numbers. See the [complete four-repository path](FOUR_REPOSITORY_JOURNEY.md).
+
 For help, choose **Preview support report**, inspect its contents and **Save this report** if useful. It excludes credentials, actor identities, task inputs and outputs. Nothing is uploaded automatically. See [install/update/rollback/removal](INSTALL_AND_RECOVER.md), [OpenClaw setup](OPENCLAW_CLIENT.md) and [what remains unfinished](CURRENT_STATUS.md).
 
 ## Français
@@ -100,5 +117,17 @@ For help, choose **Preview support report**, inspect its contents and **Save thi
 Pour le parcours Alpha, choisissez **Conserver l’historique d’un même projet Alpha**. Importez la demande Fleet, préparez et autorisez la tâche Agent, puis préparez et autorisez séparément la vérification Node. Enregistrez le retour pour le même projet. Les routes USDC et $AGIALPHA restent explicites; l’examen est interne. Consultez le [guide du projet](PROJECT_JOURNEY.md#français).
 
 Le parcours facultatif **Utiliser votre projet Alpha dans un navigateur** reste désactivé avec `serve` seul. Après la qualification native du paquet exact, suivez le [guide de configuration](../../local-runtime/computer/README.md) pour installer séparément le moteur et son profil privé. Le profil lie une demande publique non personnelle exacte à une suite bornée d’actions. Avec `serve --computer-config /chemin/absolu/profil.json`, vérifiez la disponibilité, choisissez cette demande et confirmez ses données publiques non personnelles. Préparer ne lance rien : examinez, autorisez et exécutez une seule fois. Enregistrez le retour natif et examinez les captures avant l’importation dans le même projet Alpha. Les fournisseurs payants sont refusés avant invocation; les requêtes et le coût fournisseur sont nuls. Les coûts humains et matériels restent non mesurés. L’ARRÊT et les preuves d’incertitude sont conservés.
+
+Les mesures ont des périmètres distincts. Le fournisseur scénarisé fait zéro
+requête et son coût est connu nul, sans observation de facture réelle. Le temps
+humain et le coût matériel restent inconnus (`null`). Les neuf commandes ne
+comptent que la séquence CLI service/profil/acteur/autorisation/export; les
+étapes supplémentaires d’interface et de reprise sont exclues. Le gaz simulé
+Manager couvre seulement quatorze reçus de cycle, sans déploiement ni
+configuration. Celui de Jobs couvre toutes les transactions minées du test,
+y compris le déploiement et la configuration, soit actuellement 43 reçus.
+Ces périmètres ne prouvent ni économies ni supériorité de coût et ne sont pas
+des frais Mainnet ou une dépense réelle de jetons. Consultez l’inventaire exact
+du rapport et le [parcours complet des quatre dépôts](FOUR_REPOSITORY_JOURNEY.md#français).
 
 Pour demander de l’aide, choisissez **Prévisualiser le rapport d’assistance**, examinez-le, puis **Enregistrer ce rapport**. Aucun téléversement automatique n’a lieu. Les [limites actuelles](CURRENT_STATUS.md#français) et les 22 exigences du produit complet restent visibles.

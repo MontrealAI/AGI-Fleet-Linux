@@ -1,13 +1,17 @@
 // SPDX-License-Identifier: MIT
 import fs from 'node:fs';
 import path from 'node:path';
-import {pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createComputerJourney,inspectComputerJourney,sha256} from './bridge.mjs';
+import {createVerifiedModuleLoader,verifyModuleClosure,INSPECTOR_SCOPES} from './verify-source.mjs';
 const [alphaRoot,jobsRoot,managerRoot,evidenceRoot,mode='accepted',fleetRoot=path.resolve(path.dirname(new URL(import.meta.url).pathname),'../..')]=process.argv.slice(2);
 for(const directory of [alphaRoot,jobsRoot,managerRoot,evidenceRoot])if(!path.isAbsolute(directory??''))throw Error('Absolute reviewed checkout and evidence paths required');
 if(!['accepted','rejected','protocol'].includes(mode))throw Error('Unsupported evidence mode');
-const load=(root,relative)=>import(pathToFileURL(path.join(root,relative)).href);
+const lock=JSON.parse(fs.readFileSync(new URL('./compatibility-set.json',import.meta.url)));
+const selected=[['alpha',alphaRoot],['jobs',jobsRoot],['manager',managerRoot]],loaders=new Map();
+try{
+for(const [name,root]of selected)loaders.set(root,createVerifiedModuleLoader(root,lock[name],INSPECTOR_SCOPES[name]));
+const load=(root,relative)=>loaders.get(root).importModule(relative);
 const alpha=await load(alphaRoot,'examples/successor-alpha/computer.mjs');
 const jobs=await load(jobsRoot,'integrations/alpha-agent/four-repo-computer-receipt.mjs');
 const manager=await load(managerRoot,'scripts/integrations/four-repo-computer-receipt.mjs');
@@ -36,9 +40,11 @@ if(mode==='rejected'){
   let failure;try{await createComputerJourney(inputs,options);}catch(error){failure=error;}
   if(!failure)throw Error('Invalid actual browser allocation was accepted');
   const result={schema:'agi-fleet/four-repository-negative-observation/v1',actualBrowserResultRejected:true,errorCode:failure.code??failure.message,authority:'none',settlement:'not-connected'};
+  for(const [name,root]of selected)verifyModuleClosure(root,lock[name],INSPECTOR_SCOPES[name]);
   fs.writeFileSync(path.join(evidenceRoot,'rejection-evidence.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(result));
 }else{
   const started=performance.now(),raw=await createComputerJourney(inputs,options),journey=await inspectComputerJourney(raw,options);
+  for(const [name,root]of selected)verifyModuleClosure(root,lock[name],INSPECTOR_SCOPES[name]);
   fs.writeFileSync(path.join(evidenceRoot,'complete-journey.json'),raw,{flag:'wx'});
   fs.writeFileSync(path.join(evidenceRoot,'manager-usdc-draft.json'),journey.routes.managerRaw,{flag:'wx'});
   fs.writeFileSync(path.join(evidenceRoot,'jobs-agialpha-draft.json'),journey.routes.jobsRaw,{flag:'wx'});
@@ -50,3 +56,6 @@ if(mode==='rejected'){
     sameProjectRetained:true,paymentRoutes:['USDC unsigned proposed budget','AGIALPHA unsigned proposed allowance'],currencyConversion:false,actualSettlement:false,independentlyImplementedConstraintCheck:journey.constraintCheck.independentlyImplementedConstraintCheck,independentlyControlledEconomicReview:false,independentEconomicReview:false,protectedEvaluation:false,fleetProductionDispatch:false,productionQualified:false,authority:'none',remaining:['Scripted advice does not establish live model quality.','Quoted synthetic allocation is not realized savings.','Device cost and human effort remain unmeasured.','Local arithmetic checks are not independently controlled economic review.','Fleet engineering orchestrates this rehearsal; production browser dispatch remains unavailable.','No real-wallet signing, Mainnet transaction, funded admission or activation occurred.']};
   fs.writeFileSync(path.join(evidenceRoot,'integration-evidence.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(result,null,2));
 }
+
+for(const [name,root]of selected)verifyModuleClosure(root,lock[name],INSPECTOR_SCOPES[name]);
+}finally{for(const loader of [...loaders.values()].reverse())loader.dispose();}

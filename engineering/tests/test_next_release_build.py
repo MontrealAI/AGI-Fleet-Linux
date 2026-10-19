@@ -131,6 +131,22 @@ class CandidateBuilder(unittest.TestCase):
                     self.assertTrue((app / relative).is_file(), relative)
                 self.assertIn('Production qualification remains pending', guide)
 
+    def test_reviewed_current_welcomes_match_the_release_builder(self):
+        repository = Path(__file__).resolve().parents[2]
+        specification = json.loads((repository / 'engineering/next-release.json').read_text())
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            m.write_json(root / 'config/role-registry.json', json.loads((repository / 'fleet/config/role-registry.json').read_text()))
+            (root / 'NOTICE.md').write_text('Temporary staging notice.\n')
+            m.add_operator_guides(root, repository, specification['version'], 'a' * 40)
+            names = ['README.md', 'README.html', 'START_HERE.md', 'START_HERE.html', 'Linux-Guide.html', 'Linux-Guide.txt', 'READ_ME_FIRST.txt']
+            for role, app in m.edition_paths(root):
+                if role == 'fleet':
+                    continue
+                for name in names:
+                    relative = app.relative_to(root) / name
+                    self.assertEqual((repository / 'fleet' / relative).read_bytes(), (app / name).read_bytes(), str(relative))
+
     def test_new_manifests_do_not_reuse_previous_acceptance(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

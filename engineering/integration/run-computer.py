@@ -45,8 +45,9 @@ def main():
     report=json.loads(bundle['reportRaw'])
     quantities={entry['supplierId']:entry['units'] for entry in report['frozen']['plan']['allocations']}
     if args.inject_error=='late':quantities={'laurentian':report['mission']['requirements']['totalUnits']}
-    # The exact renderer exposes its supplier table as the first keyboard focus target.
-    actions=[{'type':'move','x':500,'y':300},{'type':'keypress','keys':['TAB']}]
+    # At the native 1024px viewport the reviewed runtime removes a non-overflowing
+    # supplier table from tab order. The first TAB focuses the Stellar input.
+    actions=[{'type':'move','x':500,'y':300}]
     for supplier in ['stellar','laurentian','boreal']:
         actions.extend([{'type':'keypress','keys':['TAB']},{'type':'keypress','keys':['CTRL','A']},{'type':'type','text':str(quantities.get(supplier,0))}])
     actions.extend([{'type':'keypress','keys':['TAB']},{'type':'keypress','keys':['ENTER']},{'type':'scroll','x':900,'y':700,'scroll_x':0,'scroll_y':450},{'type':'wait'}])
@@ -55,12 +56,11 @@ def main():
     if args.prepare_only:
         if verify_sources(alpha,jobs)!=snapshot:raise ValueError('Source changed while preparing the inert handoff')
         print(json.dumps({'prepared':True,'executed':False,'output':str(out),'authority':'none'}));return
-    with source_only_imports():
-        return execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started)
+    with source_only_imports(alpha,snapshot['alpha']['commit']) as sdk_capture:
+        return execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started,sdk_capture)
 
 
-def execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started):
-    sys.path.insert(0,str(alpha))
+def execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started,sdk_capture):
     from alpha_factory_v1.core.runtime.store import Journal
     from alpha_factory_v1.core.runtime.successor import computer
     from alpha_factory_v1.core.runtime.successor.computer_handoff import ComputerHandoff,write_computer_return
@@ -110,7 +110,7 @@ def execute_native(args,alpha,jobs,out,bundle,snapshot,actions,started):
     returned=json.loads((run_dir/'computer-return.json').read_text())
     (out/'computer-return.json').write_text(json.dumps(returned,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
     if verify_sources(alpha,jobs)!=snapshot:raise ValueError('Imported source changed during execution; retain this run and use a new exact source')
-    evidence={'schema':'agi-fleet/four-repository-computer-observation/v1','actuator':args.actuator,'realBrowser':True,'scriptedAdvice':True,'fixtureAdviceCalls':advisor.calls,'liveProvider':False,'dockerIsolation':args.actuator=='docker','providerBilledCost':0,'providerRequests':0,'humanMinutes':None,'deviceCost':None,'elapsedSeconds':time.monotonic()-started,'independentReview':False,'onChainTransactions':0,'productionQualified':False,'authority':'none','settlement':'not-connected','injectedError':args.inject_error,'nativeSession':{'state':returned['receipt']['state'],'actions':returned['receipt']['actions_reserved'],'turns':returned['receipt']['turns_reserved'],'screenshots':len(returned['receipt']['screenshots'])},'sourceCommits':{name:subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip() for name,root in [('alpha',alpha),('jobs',jobs)]},'sourceGitChanges':{name:subprocess.check_output(['git','status','--porcelain','--untracked-files=no'],cwd=root,text=True).splitlines() for name,root in [('alpha',alpha),('jobs',jobs)]},'stableSourceFiles':snapshot,'hostRuntime':{'python':sys.version.split()[0],**{name:importlib.metadata.version(name) for name in ['pydantic','httpx','cryptography']}}}
+    evidence={'schema':'agi-fleet/four-repository-computer-observation/v1','actuator':args.actuator,'realBrowser':True,'scriptedAdvice':True,'fixtureAdviceCalls':advisor.calls,'liveProvider':False,'dockerIsolation':args.actuator=='docker','providerBilledCost':0,'providerRequests':0,'humanMinutes':None,'deviceCost':None,'elapsedSeconds':time.monotonic()-started,'independentReview':False,'onChainTransactions':0,'productionQualified':False,'authority':'none','settlement':'not-connected','injectedError':args.inject_error,'nativeSession':{'state':returned['receipt']['state'],'actions':returned['receipt']['actions_reserved'],'turns':returned['receipt']['turns_reserved'],'screenshots':len(returned['receipt']['screenshots'])},'sourceCommits':{name:subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip() for name,root in [('alpha',alpha),('jobs',jobs)]},'sourceGitChanges':{name:subprocess.check_output(['git','status','--porcelain','--untracked-files=no'],cwd=root,text=True).splitlines() for name,root in [('alpha',alpha),('jobs',jobs)]},'stableSourceFiles':snapshot,'nativeSourceCapture':sdk_capture,'hostRuntime':{'python':sys.version.split()[0],**{name:importlib.metadata.version(name) for name in ['pydantic','httpx','cryptography']}}}
     (out/'browser-evidence.json').write_text(json.dumps(evidence,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(evidence,indent=2))
 

@@ -11,22 +11,29 @@ import {readPrivate} from '../private-file.mjs';
 import {decodeUTF8} from '../primitives.mjs';
 import {publicOnly} from '../../fleet/successor/vendor/manager/site/assets/successor/safe.mjs';
 
-export const ALPHA_COMPUTER_SOURCE=Object.freeze({commit:'7cf97aa3b36354b9ae5ab72e70aa88364a910313',tree:'8ff159a8f91db5fb4363cc736aeb66e7eefc07ea'});
+export const ALPHA_COMPUTER_SOURCE=Object.freeze({commit:'aa4d565ede01a102140c4cc9a1a52b06a750f381',tree:'792bdb8ce39b2473e80490c630b1d647d6557252'});
 export const LAUNCHER=fileURLToPath(new URL('./launcher.py',import.meta.url));
 export const COMPUTER_LIMITS=Object.freeze({wallMs:150000,maxSeconds:120,maxActions:30,maxTurns:10,
   handoffBytes:1_000_000,artifactBytes:2_000_000,artifactTotalBytes:80_000_000,historyBytes:320_000_000});
+export const COMPUTER_EXECUTABLE_BYTES=128*1024*1024;
 const ENV=Object.freeze({PATH:'/usr/bin:/bin',LANG:'C.UTF-8',PYTHONDONTWRITEBYTECODE:'1'});
 export const computerEnvironment=()=>({...ENV});
 export function computerInvocation(profile,mode){
   const cache=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-computer-cache-'));fs.chmodSync(cache,0o700);
   return {executable:profile.python,args:['-I','-S','-B','-X','pycache_prefix='+cache,LAUNCHER,mode],close:()=>fs.rmSync(cache,{recursive:true,force:true})};
 }
-function fileHash(file,maximum=32_000_000){
+function fileHash(file,maximum=32_000_000,executable=false){
   need(path.isAbsolute(file)&&fs.realpathSync(file)===file,'COMPUTER_RUNTIME_PATH');
   const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);
-  try{const stat=fs.fstatSync(fd);need(stat.isFile()&&(stat.uid===0||stat.uid===process.getuid())&&!(stat.mode&0o022)&&stat.size<=maximum,'COMPUTER_RUNTIME_FILE');return digest(fs.readFileSync(fd));}
+  try{
+    const before=fs.fstatSync(fd);need(before.isFile()&&(before.uid===0||before.uid===process.getuid())&&!(before.mode&0o022)&&before.size<=maximum&&(!executable||(before.size>0&&Boolean(before.mode&0o111))),'COMPUTER_RUNTIME_FILE');
+    const hash=createHash('sha256'),buffer=Buffer.alloc(65536);let length=0,remaining=before.size+1;
+    while(remaining){const count=fs.readSync(fd,buffer,0,Math.min(buffer.length,remaining),null);if(count===0)break;hash.update(buffer.subarray(0,count));length+=count;remaining-=count;}
+    const after=fs.fstatSync(fd);need(length===before.size&&['dev','ino','mode','size','mtimeMs','ctimeMs'].every(key=>before[key]===after[key]),'COMPUTER_RUNTIME_CHANGED');return hash.digest('hex');
+  }
   finally{fs.closeSync(fd);}
 }
+export function hashComputerExecutable(file){return fileHash(file,COMPUTER_EXECUTABLE_BYTES,true);}
 function git(root,args){const result=spawnSync('/usr/bin/git',['--no-replace-objects','-c','core.fsmonitor=false','-C',root,...args],{encoding:'utf8',timeout:10000,maxBuffer:4_000_000,env:{...ENV,GIT_CONFIG_GLOBAL:'/dev/null',GIT_CONFIG_SYSTEM:'/dev/null',GIT_CONFIG_NOSYSTEM:'1',GIT_NO_REPLACE_OBJECTS:'1'}});need(result.status===0,'COMPUTER_ALPHA_SOURCE');return result.stdout.trim();}
 export function verifyAlphaImportClosure(root,tracked){
   need(path.isAbsolute(root)&&fs.realpathSync(root)===root,'COMPUTER_ALPHA_SOURCE');const rootStat=fs.statSync(root);need((rootStat.uid===0||rootStat.uid===process.getuid())&&!(rootStat.mode&0o022),'COMPUTER_ALPHA_SOURCE');
@@ -79,11 +86,11 @@ export function inspectComputerInstallation(configFile,{checkDocker=true}={}){
     need(canonical(profile.source)===canonical(ALPHA_COMPUTER_SOURCE)&&/^sha256:[a-f0-9]{64}$/.test(profile.image),'COMPUTER_PROFILE_INVALID');
     keys(profile.fixture,['handoffSha256','actions']);need(/^[a-f0-9]{64}$/.test(profile.fixture.handoffSha256)&&Array.isArray(profile.fixture.actions)&&profile.fixture.actions.length<=30,'COMPUTER_FIXTURE_INVALID');
     need(profile.fixtureSha256===digest(profile.fixture),'COMPUTER_FIXTURE_CHANGED');publicOnly(canonical(profile.fixture.actions));
-    const sourceSha256=source(profile.alphaRoot);need(fileHash(profile.python)===profile.pythonSha256,'COMPUTER_PYTHON_CHANGED');
+    const sourceSha256=source(profile.alphaRoot);need(hashComputerExecutable(profile.python)===profile.pythonSha256,'COMPUTER_PYTHON_CHANGED');
     need(profile.runtimeFiles&&typeof profile.runtimeFiles==='object'&&!Array.isArray(profile.runtimeFiles)&&Object.keys(profile.runtimeFiles).length>0&&Object.keys(profile.runtimeFiles).length<=2048,'COMPUTER_RUNTIME_FILES');
     for(const [file,sha256] of Object.entries(profile.runtimeFiles))need(/^[a-f0-9]{64}$/.test(sha256)&&fileHash(file)===sha256,'COMPUTER_RUNTIME_CHANGED');
     if(checkDocker){
-      need(fileHash('/usr/bin/docker')===profile.dockerSha256,'COMPUTER_DOCKER_CHANGED');
+      need(hashComputerExecutable('/usr/bin/docker')===profile.dockerSha256,'COMPUTER_DOCKER_CHANGED');
       const image=spawnSync('/usr/bin/docker',['image','inspect','--format','{{.Id}}',profile.image],{encoding:'utf8',timeout:5000,maxBuffer:8192,env:ENV});need(image.status===0&&image.stdout.trim()===profile.image,'COMPUTER_IMAGE_UNAVAILABLE');
     }
     const runtimeIdentity=digest({profile:digest(raw),sourceSha256,launcher:fileHash(LAUNCHER),runtimeFiles:profile.runtimeFiles,python:profile.pythonSha256,docker:profile.dockerSha256});
@@ -105,9 +112,9 @@ export function prepareComputer(input,installation){
 export function createComputerProfile({alphaRoot,python,image,handoffRaw,actions,output}){
   validateComputerInput({handoffRaw,publicNonpersonal:true});publicOnly(canonical(actions));need(/^sha256:[a-f0-9]{64}$/.test(image),'COMPUTER_IMAGE_INVALID');source(alphaRoot);
   need(path.isAbsolute(python)&&fs.realpathSync(python)===python,'COMPUTER_PYTHON_PHYSICAL_REQUIRED');const fixture={handoffSha256:digest(handoffRaw),actions},partial={alphaRoot,python};
-  const probe=callComputer(partial,'probe');
+  const probe=callComputer({...partial,source:ALPHA_COMPUTER_SOURCE},'probe');
   const profile={schema:'agi-fleet/alpha-computer-installation/v1',enabled:true,alphaRoot,source:ALPHA_COMPUTER_SOURCE,
-    python,pythonSha256:fileHash(python),image,dockerSha256:fileHash('/usr/bin/docker'),provider:{mode:'scripted-zero-cost'},
+    python,pythonSha256:hashComputerExecutable(python),image,dockerSha256:hashComputerExecutable('/usr/bin/docker'),provider:{mode:'scripted-zero-cost'},
     fixture,fixtureSha256:digest(fixture),runtimeFiles:probe.files};
   callComputer(profile,'prepare',{handoffRaw});need(path.isAbsolute(output),'COMPUTER_PROFILE_PATH');
   const fd=fs.openSync(output,'wx',0o600);try{fs.writeFileSync(fd,canonical(profile));fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
