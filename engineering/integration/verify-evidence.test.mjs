@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
-import {deriveNativeSourceCapture,requireNativeSourceCapture,requireNativeArtifacts,requireRejectedAllocation,verifyEvidence} from './verify-evidence.mjs';
+import {collectPublicEvidenceArtifacts,deriveNativeSourceCapture,requireNativeSourceCapture,requireNativeArtifacts,requireRejectedAllocation,verifyEvidence} from './verify-evidence.mjs';
 import {sha256} from './bridge.mjs';
 const root=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-proof-negative-'));
 process.on('exit',()=>fs.rmSync(root,{recursive:true,force:true}));
@@ -43,4 +43,37 @@ test('Git-derived SDK inventory agrees with Python Unicode ordering and escapes 
   const expected=JSON.parse(execFileSync('python3',['-B','-c',"import hashlib,json,pathlib,sys; root=pathlib.Path(sys.argv[1]); files={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'alpha_factory_v1').glob('*.py')}; print(json.dumps({'mode':'CAPTURED_ALPHA_GIT_SOURCE','commit':sys.argv[2],'moduleCount':len(files),'sourceBytes':sum(p.stat().st_size for p in (root/'alpha_factory_v1').glob('*.py')),'sourceSha256':hashlib.sha256(json.dumps(files,sort_keys=True,separators=(',',':')).encode()).hexdigest()}))",fixture,commit],{encoding:'utf8'}));
   assert.deepEqual(deriveNativeSourceCapture(fixture,commit),expected);
   fs.writeFileSync(path.join(fixture,'alpha_factory_v1/__init__.py'),'VALUE = 2\n');assert.deepEqual(deriveNativeSourceCapture(fixture,commit),expected,'Expected bytes come from reviewed Git objects, not a mutable worktree');
+});
+
+test('public evidence inventory retains only the uploaded native artifact allowlist',()=>{
+  const directory=path.join(root,'public-inventory'),excluded=new Set();
+  for(const name of ['accepted','rejected-late']){
+    fs.mkdirSync(path.join(directory,name,'native'),{recursive:true});
+    for(const file of ['run.json','receipt.json','signed-receipt.json','handoff.json','computer-return.json','visible-text.txt','screen-000.png'])fs.writeFileSync(path.join(directory,name,'native',file),'public fixture');
+    for(const file of ['source-key.txt','unpublished-notes.txt','unpublished.json']){const target=path.join(directory,name,'native',file);fs.writeFileSync(target,'');excluded.add(target);}
+    fs.writeFileSync(path.join(directory,name,'browser-evidence.json'),'{}');
+  }
+  fs.writeFileSync(path.join(directory,'execution-context.json'),'{}');fs.writeFileSync(path.join(directory,'compatibility-evidence.json'),'{}');
+  const originalRead=fs.readFileSync;let records;
+  fs.readFileSync=function(file,...args){assert(!excluded.has(file),'An unpublished fixture must be filtered before opening');return originalRead.call(this,file,...args);};
+  try{records=collectPublicEvidenceArtifacts(directory);}finally{fs.readFileSync=originalRead;}
+  const names=records.map(record=>record.name);
+  assert.equal(records.length,17);assert(names.includes('accepted/native/visible-text.txt'));assert(names.includes('rejected-late/native/signed-receipt.json'));
+  assert(names.every(name=>!name.includes('source-key')&&!name.includes('unpublished')&&!name.includes('compatibility-evidence')));
+  for(const record of records){const raw=fs.readFileSync(path.join(directory,record.name));assert.equal(record.bytes,raw.length);assert.equal(record.sha256,sha256(raw));}
+});
+
+test('an extracted source kit loads its verifier with the packaged safe parser',()=>{
+  const repository=path.resolve(path.dirname(new URL(import.meta.url).pathname),'../..');
+  const workflow=fs.readFileSync(path.join(repository,'.github/workflows/four-repository-computer.yml'),'utf8');
+  const line=workflow.split('\n').find(value=>value.trim().startsWith('git archive --format=zip --prefix=Fleet-Computer-Compatibility-Source/ HEAD '));assert(line);
+  const paths=line.split(' HEAD ')[1].split(' > ')[0].split(' '),safe='fleet/successor/vendor/manager/site/assets/successor/safe.mjs';assert(paths.includes(safe));
+  const directory=path.join(root,'extracted-kit');fs.mkdirSync(directory);
+  const archive=path.join(directory,'source.zip');fs.writeFileSync(archive,execFileSync('/usr/bin/git',['-C',repository,'archive','--format=zip','HEAD',...paths],{maxBuffer:4_000_000}));
+  execFileSync('python3',['-B','-c','import sys,zipfile; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])',archive,directory]);
+  const entry=path.join(directory,'engineering/integration/verify-evidence.mjs');
+  const code='const kit=await import(process.argv[1]); if(typeof kit.verifyEvidence!=="function") throw Error("SOURCE_KIT_VERIFIER_MISSING");';
+  assert.doesNotThrow(()=>execFileSync(process.execPath,['--input-type=module','-e',code,new URL('file://'+entry).href],{cwd:directory,stdio:'pipe',timeout:30_000}));
+  fs.unlinkSync(path.join(directory,safe));
+  assert.throws(()=>execFileSync(process.execPath,['--input-type=module','-e',code,new URL('file://'+entry).href],{cwd:directory,stdio:'pipe',timeout:30_000}),error=>String(error.stderr).includes('ERR_MODULE_NOT_FOUND'));
 });

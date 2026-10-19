@@ -79,22 +79,23 @@ jobs:
           from pathlib import Path
           Path('reports/four-repository-computer/execution-context.json').write_text(json.dumps({'repository':os.environ['GITHUB_REPOSITORY'],'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],'workflowAttempt':os.environ['GITHUB_RUN_ATTEMPT']},separators=(',',':'))+'\n')
           PY
-          git archive --format=zip --prefix=Fleet-Computer-Compatibility-Source/ HEAD engineering/integration local-runtime/computer/launcher.py .github/workflows/four-repository-computer.yml .github/workflows/four-repository-service.yml > reports/four-repository-computer/Fleet-Computer-Compatibility-Source.zip
+          git archive --format=zip --prefix=Fleet-Computer-Compatibility-Source/ HEAD engineering/integration local-runtime/computer/launcher.py fleet/successor/vendor/manager/site/assets/successor/safe.mjs .github/workflows/four-repository-computer.yml .github/workflows/four-repository-service.yml > reports/four-repository-computer/Fleet-Computer-Compatibility-Source.zip
           sha256sum reports/four-repository-computer/Fleet-Computer-Compatibility-Source.zip > reports/four-repository-computer/source-kit-SHA256SUMS.txt
           python -B - "$PWD/.integration-alpha" <<'PY'
-          import json,sys,tempfile,zipfile
+          import json,subprocess,sys,tempfile,zipfile
           from pathlib import Path
           with tempfile.TemporaryDirectory(prefix='fleet-source-kit-check-') as temporary:
               with zipfile.ZipFile('reports/four-repository-computer/Fleet-Computer-Compatibility-Source.zip') as archive:
                   archive.extractall(temporary)
               kit=Path(temporary)/'Fleet-Computer-Compatibility-Source'
+              subprocess.run(['node','--input-type=module','-e','const kit=await import(process.argv[1]); if(typeof kit.verifyEvidence!=="function") throw Error("SOURCE_KIT_VERIFIER_MISSING");',(kit/'engineering/integration/verify-evidence.mjs').as_uri()],cwd=temporary,check=True,timeout=30)
               sys.path.insert(0,str(kit/'engineering/integration'))
               from source_guard import source_only_imports
               commit=json.loads((kit/'engineering/integration/compatibility-set.json').read_text())['alpha']
               with source_only_imports(Path(sys.argv[1]),commit) as capture:
                   from alpha_factory_v1.core.runtime.successor.computer_handoff import ComputerHandoff
                   assert capture['mode']=='CAPTURED_ALPHA_GIT_SOURCE' and capture['commit']==commit
-          print('Extracted source kit captured the exact Alpha SDK; no session executed.')
+          print('Extracted source kit loaded its verifier and captured the exact Alpha SDK; no session executed.')
           PY
       - name: Build the existing Alpha worker with observed immutable runtime provenance
         id: image
