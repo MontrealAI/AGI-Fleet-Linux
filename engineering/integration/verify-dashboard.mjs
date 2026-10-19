@@ -2,8 +2,39 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import {inflateSync} from 'node:zlib';
 import {sha256} from './bridge.mjs';
-export function inspectDashboardEvidence(root){
+const canonical=value=>JSON.stringify(value,(_,item)=>item&&typeof item==='object'&&!Array.isArray(item)?Object.fromEntries(Object.keys(item).sort().map(key=>[key,item[key]])):item);
+function crc32(raw){let value=0xffffffff;for(const byte of raw){value^=byte;for(let bit=0;bit<8;bit++)value=(value>>>1)^((value&1)?0xedb88320:0);}return (value^0xffffffff)>>>0;}
+export function inspectDashboardPng(raw,{width=1440,height=1100}={}){
+  assert(Buffer.isBuffer(raw)&&raw.length>40&&raw.length<=1_500_000);assert(raw.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')));
+  let position=8,header=false,ended=false,channels,idat=[],compressed=0;
+  while(position<raw.length){assert(position+12<=raw.length);const size=raw.readUInt32BE(position),end=position+12+size;assert(end<=raw.length);const kind=raw.toString('ascii',position+4,position+8),body=raw.subarray(position+8,end-4);assert.equal(crc32(raw.subarray(position+4,end-4)),raw.readUInt32BE(end-4));
+    if(!header){assert.equal(kind,'IHDR');assert.equal(size,13);assert.equal(body.readUInt32BE(0),width);assert.equal(body.readUInt32BE(4),height);assert.equal(body[8],8);assert([2,6].includes(body[9]));assert.deepEqual([...body.subarray(10)],[0,0,0]);channels=body[9]===6?4:3;header=true;}
+    else if(kind==='IDAT'){idat.push(body);compressed+=body.length;assert(compressed<=1_500_000);}
+    else if(kind==='IEND'){assert.equal(size,0);assert(idat.length);ended=true;assert.equal(end,raw.length);}
+    else assert(/^[a-z][A-Za-z]{3}$/.test(kind),'Only bounded ancillary PNG chunks may accompany the image');
+    position=end;if(ended)break;
+  }
+  assert(header&&ended&&width>0&&height>0&&width<=1440&&height<=1100);const row=width*channels+1,expected=row*height;assert(expected<=7_000_000);const pixels=inflateSync(Buffer.concat(idat),{maxOutputLength:expected+1});assert.equal(pixels.length,expected);for(let y=0;y<height;y++)assert(pixels[y*row]<=4);return {width,height};
+}
+export function inspectDashboardControlObservation(value,{mode,language,resume=false,actor,image,grant=null,taskSha256=null,terminal=null,stop=null,plan=null,reconciled=null,driverSha256=sha256(fs.readFileSync(new URL('./fleet-dashboard-export.py',import.meta.url)))}={}){
+  assert(['execute','interrupt','stop','reconcile'].includes(mode));assert(['en','fr'].includes(language));assert.equal(typeof resume,'boolean');
+  assert.equal(value.schema,'agi-fleet/real-dashboard-control-observation/v1');assert.equal(value.evidenceClass,'REAL_CHROMIUM_ACTUAL_SAVED_SERVICE_CONTROLS');assert.equal(value.driverSha256,driverSha256);assert.equal(value.mode,mode);assert.equal(value.language,language);assert.equal(value.actor,actor);assert.equal(value.image,image);assert.equal(value.networkMode,'host; driver restricts every request to the existing loopback service origin');assert.equal(value.osNetworkIsolationClaim,false);assert.equal(value.nativeWorkerNetwork,'none');assert.equal(value.credentialFieldMasked,true);assert.equal(value.credentialFieldCleared,true);assert.equal(value.credentialRetainedInEvidence,false);assert.equal(value.traceRecorded,false);assert.equal(value.providerRequests,0);assert.equal(value.realWallets,false);assert.deepEqual(value.unexpectedExternalRequests,[]);assert.deepEqual(value.pageErrors,[]);assert.equal(typeof value.browserVersion,'string');assert(value.browserVersion.length>0);assert.equal(typeof value.playwrightVersion,'string');assert(value.playwrightVersion.length>0);
+  const expected=['connect',...(language==='fr'?['language-fr']:[])];let stages;
+  if(mode==='execute'||mode==='interrupt'){
+    expected.push(...(resume?['resume']:[]),'activate','doctor','select-actor','upload-exact-handoff','confirm-public-inputs','computerPrepare','authorize','run',...(mode==='interrupt'?['stop']:[]),'refresh');stages=mode==='interrupt'?['prepared','before-stop','terminal']:['prepared','terminal'];
+    assert.deepEqual(value.preparation,{grant:grant.grant,actor,commitment:grant.commitment,taskSha256});assert.deepEqual(value.authorization,{grant:grant.grant,state:'authorized'});assert.deepEqual(value.run,{id:terminal.run,state:terminal.state??null,error:terminal.error??null,receiptSha256:terminal.receipt?sha256(canonical(terminal.receipt)):null});assert(Number.isFinite(value.runRequestElapsedSeconds)&&value.runRequestElapsedSeconds>0);
+  }else{assert.equal(value.runRequestElapsedSeconds,null);for(const key of ['preparation','authorization','run'])assert(!Object.hasOwn(value,key));}
+  if(mode==='stop'){expected.push('stop');stages=['stopped'];}
+  if(mode==='reconcile'){expected.push('inspect-recovery','reconcile','refresh');stages=['reconciliation','reconciled'];assert.deepEqual(value.reconciliation,Object.fromEntries(['run','commitment','eligible','kind','replayAllowed','observationSha256'].map(key=>[key,plan[key]])));assert.deepEqual(value.reconciled,{run:plan.run,state:reconciled.state,receiptSha256:sha256(canonical(reconciled.receipt))});}
+  else for(const key of ['reconciliation','reconciled'])assert(!Object.hasOwn(value,key));
+  if(stop)assert.deepEqual(value.stop,{state:stop.state,cleanup:stop.cleanup});else assert(!Object.hasOwn(value,'stop'));
+  assert.deepEqual(value.automationSteps,expected);assert.equal(value.automationStepCount,expected.length);assert(Number.isFinite(value.guiAutomatedElapsedSeconds)&&value.guiAutomatedElapsedSeconds>0&&value.guiAutomatedElapsedSeconds>=(value.runRequestElapsedSeconds??0));assert.equal(value.humanElapsedMinutes,null);assert.equal(value.deviceCost,null);
+  assert.deepEqual(value.screenshots.map(row=>row.stage),stages);for(const screenshot of value.screenshots){assert.equal(screenshot.mediaType,'image/png');assert(typeof screenshot.contentBase64==='string'&&screenshot.contentBase64.length<=2_000_000);const raw=Buffer.from(screenshot.contentBase64,'base64');assert.equal(raw.toString('base64'),screenshot.contentBase64);assert.equal(raw.length,screenshot.bytes);assert.equal(sha256(raw),screenshot.sha256);inspectDashboardPng(raw);}
+  return value;
+}
+export function inspectDashboardEvidence(root,producer){
   const bytes=name=>fs.readFileSync(path.join(root,name)),read=name=>JSON.parse(bytes(name)),native=read('accepted/computer-return.json'),service=read('service-observation.json'),proof=read('accepted/service-case.json'),browser=read('accepted/dashboard/dashboard-export-evidence.json');
   assert.equal(browser.schema,'agi-fleet/real-dashboard-export-observation/v1');assert.equal(browser.evidenceClass,'REAL_CHROMIUM_ACTUAL_SAVED_SERVICE_OUTPUT');assert.equal(browser.image,native.execution.image);assert.equal(browser.driverSha256,sha256(fs.readFileSync(new URL('./fleet-dashboard-export.py',import.meta.url))));assert.equal(browser.osNetworkIsolationClaim,false);assert.equal(browser.nativeWorkerNetwork,'none');assert.equal(browser.traceRecorded,false);assert.equal(browser.credentialRetainedInEvidence,false);assert.equal(browser.providerRequests,0);assert.equal(browser.realWallets,false);assert.deepEqual(browser.unexpectedExternalRequests,[]);assert.deepEqual(browser.pageErrors,[]);assert.equal(browser.cases.length,2);
   assert.deepEqual(proof.serviceReceipt.result.files,[],'Native service returns an artifact manifest, not invented inline files');
@@ -14,5 +45,18 @@ export function inspectDashboardEvidence(root){
     assert.match(record.artifact.file,/^screen-\d{3}\.png$/);const observed=native.receipt.screenshots.find(item=>item.file===record.artifact.file);assert(observed);assert.equal(sha256(bytes(prefix+'/'+record.artifact.file)),observed.sha256);assert.equal(record.artifact.sha256,observed.sha256);assert.equal(record.artifact.bytes,bytes('accepted/native/'+record.artifact.file).length);assert.equal(service.dashboard.artifactSha256,observed.sha256);
     const screenshot=bytes(prefix+'/dashboard.png');assert(screenshot.length<8_000_000);assert(screenshot.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')));
   }
-  return {actualDashboardExportSemanticallyReplayed:true,languages:['en','fr'],nativeReturnSha256:returnSha,downstreamInputFile:'accepted/dashboard/en/computer-return.json',ephemeralCredentialInEvidence:false,networkMode:browser.networkMode,nativeWorkerNetwork:'none'};
+  assert(['x64','arm64'].includes(producer.architecture));assert.equal(service.architecture,producer.architecture);const language=producer.architecture==='arm64'?'fr':'en',opposite=language==='en'?'fr':'en',recovery=read('service-stop-recovery.json');
+  const specifications=[
+    ['accepted/dashboard-control-execution.json',{mode:'execute',language,grant:proof.preparation,taskSha256:proof.taskSha256,terminal:{run:proof.run,state:'complete',receipt:proof.serviceReceipt}}],
+    ['accepted/dashboard-control-stop.json',{mode:'stop',language,stop:{state:'STOP',cleanup:'no-active-worker'}}],
+    ['interrupted/dashboard-control-execution.json',{mode:'interrupt',language:opposite,resume:true,grant:recovery.stoppedGrant,taskSha256:sha256(canonical(recovery.stoppedGrant.task)),terminal:recovery.refused,stop:recovery.stop}],
+    ['interrupted/dashboard-control-reconciliation.json',{mode:'reconcile',language:opposite,plan:recovery.reconciliation,reconciled:recovery.reconciled}],
+    ['recovered/dashboard-control-execution.json',{mode:'execute',language,resume:true,grant:recovery.freshGrant,taskSha256:sha256(canonical(recovery.freshGrant.task)),terminal:recovery.freshRun}]
+  ];
+  const observations=specifications.map(([file,expected])=>({file,sha256:sha256(bytes(file)),value:inspectDashboardControlObservation(read(file),{...expected,actor:proof.actor,image:native.execution.image})}));
+  assert.deepEqual(service.dashboardAutomation,{scope:'AUTOMATED_SAVED_SERVICE_GUI_CONTROLS_ONLY_EXCLUDES_PROFILE_SETUP_AND_OTHER_SITES',observations:observations.map(({file,sha256})=>({file,sha256})),automationStepCount:observations.reduce((sum,row)=>sum+row.value.automationStepCount,0),guiAutomatedElapsedSeconds:observations.reduce((sum,row)=>sum+row.value.guiAutomatedElapsedSeconds,0),humanElapsedMinutes:null,deviceCost:null});
+  assert.equal(recovery.runElapsedScope,'RUN_HTTP_REQUEST_RESPONSE_ONLY');assert.equal(recovery.stopRunRequestElapsedSeconds,observations[2].value.runRequestElapsedSeconds);assert.equal(recovery.recoveryRunRequestElapsedSeconds,observations[4].value.runRequestElapsedSeconds);assert.equal(recovery.humanElapsedMinutes,null);assert.equal(recovery.deviceCost,null);
+  for(const prefix of ['accepted','rejected-late']){const measured=read(prefix+'/browser-evidence.json');assert.equal(measured.elapsedScope,'RUN_HTTP_REQUEST_RESPONSE_ONLY');assert(Number.isFinite(measured.elapsedSeconds)&&measured.elapsedSeconds>0);}assert.equal(read('accepted/browser-evidence.json').elapsedSeconds,observations[0].value.runRequestElapsedSeconds);
+  assert.deepEqual(service.operatorEffort,{scope:'CONCEPTUAL_SERVICE_CLI_ALTERNATIVE_ONLY_EXCLUDES_GUI_AND_RECOVERY',completeJourneyManualStepCount:null,conceptualOperatorCommands:['install-exact-profile','start-service','create-actor','activate-actor','issue-scoped-client','prepare-task','authorize-exact-grant','run-one-use-grant','export-native-return'],commandCount:9,authorizingCommandCount:2,measuredHumanCommands:false,humanElapsedMinutes:null,manualEconomicReview:'NOT_RUN'});
+  return {actualDashboardExportSemanticallyReplayed:true,actualDashboardControlSequenceSemanticallyReplayed:true,controlLanguages:{execute:language,interruptAndReconcile:opposite},controlObservations:observations.map(({file,sha256})=>({file,sha256})),languages:['en','fr'],nativeReturnSha256:returnSha,downstreamInputFile:'accepted/dashboard/en/computer-return.json',ephemeralCredentialInEvidence:false,networkMode:browser.networkMode,nativeWorkerNetwork:'none'};
 }
