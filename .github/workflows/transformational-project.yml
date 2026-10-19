@@ -1,0 +1,178 @@
+name: Native TI persistent project source-preview qualification
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: ti-project-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  native-ti:
+    name: TI saved preview and native Docker (${{ matrix.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {arch: x64, runner: ubuntu-24.04}
+          - {arch: arm64, runner: ubuntu-24.04-arm}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    steps:
+      - uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          persist-credentials: false
+      - name: Require explicit immutable source pins
+        id: pins
+        run: |
+          python3 - <<'PY'
+          import json,os,re
+          from pathlib import Path
+          p=json.loads(Path('engineering/transformation/source-pins.json').read_bytes())
+          assert p['schema']=='agi-fleet/ti-installed-source-pins/v1'
+          assert p['publicNonpersonalOnly'] and not p['paidTI'] and not p['liveProvider'] and not p['productionQualified']
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              for key in ['alpha','manager','jobs','computer']:
+                  assert re.fullmatch('[a-f0-9]{40}',p[key]['commit']) and re.fullmatch('[a-f0-9]{40}',p[key]['tree'])
+                  out.write(key+'='+p[key]['commit']+'\n')
+          PY
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGI-Alpha-Agent-v0
+          ref: ${{ steps.pins.outputs.alpha }}
+          path: .ti-alpha
+          persist-credentials: false
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGIJobManager
+          ref: ${{ steps.pins.outputs.manager }}
+          path: .ti-manager
+          persist-credentials: false
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGIJobsv0
+          ref: ${{ steps.pins.outputs.jobs }}
+          path: .ti-jobs
+          persist-credentials: false
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGI-Alpha-Agent-v0
+          ref: ${{ steps.pins.outputs.computer }}
+          path: .ti-computer
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Verify exact source identities and create only operator installation configuration
+        run: |
+          mkdir -p reports/ti
+          python3 - <<'PY'
+          import json,os,subprocess
+          from pathlib import Path
+          p=json.loads(Path('engineering/transformation/source-pins.json').read_bytes()); config={}
+          for key in ['alpha','manager','jobs','computer']:
+              root=Path('.ti-'+key).resolve()
+              assert subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()==p[key]['commit']
+              assert subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD^{tree}'],text=True).strip()==p[key]['tree']
+              if key!='computer':config[key]={'root':str(root),'commit':p[key]['commit']}
+          Path(os.environ['RUNNER_TEMP'],'ti-sources.json').write_text(json.dumps(config))
+          Path('reports/ti/source-pins.json').write_text(json.dumps(p,indent=2)+'\n')
+          PY
+          test "$(node -p process.arch)" = '${{ matrix.arch }}'
+          python -B engineering/integration/source_guard.py --alpha-root "$PWD/.ti-computer" --dependency-lock engineering/integration/requirements-native.lock
+          python -m venv --copies "$RUNNER_TEMP/ti-python"
+          "$RUNNER_TEMP/ti-python/bin/python" -m pip install --require-hashes --only-binary=:all: -r engineering/integration/requirements-native.lock
+          npm ci --prefix fleet --ignore-scripts --omit=dev
+      - name: Build and inspect the finite alpha.7 source preview without changing legacy inventories
+        run: |
+          python -B local-runtime/transformation/package.py --output "$RUNNER_TEMP/ti-package"
+          python -B local-runtime/transformation/package.py --verify "$RUNNER_TEMP/ti-package/agi-fleet-local-0.1.0-alpha.7.zip"
+          cp "$RUNNER_TEMP/ti-package/package-receipt.json" reports/ti/
+          python -B engineering/integration/service-package.py extract --archive "$RUNNER_TEMP/ti-package/agi-fleet-local-0.1.0-alpha.7.zip" --application "$RUNNER_TEMP/ti-application" --commit "$GITHUB_SHA" --observation "$PWD/reports/ti/package-observation.json"
+      - name: Require actual native protocol and complete command-flow regressions from saved bytes
+        run: |
+          TI_INSTALLED_SOURCES="$RUNNER_TEMP/ti-sources.json" TI_PYTHON="$RUNNER_TEMP/ti-python/bin/python" node --test "$RUNNER_TEMP/ti-application/engineering/transformation/"*.test.mjs 2>&1 | tee reports/ti/test-output.txt
+          test "${PIPESTATUS[0]}" = 0
+      - name: Require the existing sandbox prerequisites and immutable native worker
+        id: image
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap util-linux apparmor-profiles
+          sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY python3 local-runtime/prepare-engineering-host.py > reports/ti/apparmor.json
+          BASE_TAG=mcr.microsoft.com/playwright/python:v1.63.0-noble
+          docker pull "$BASE_TAG"
+          docker image inspect "$BASE_TAG" > reports/ti/base-image-inspect.json
+          BASE_DIGEST=$(docker image inspect --format '{{index .RepoDigests 0}}' "$BASE_TAG")
+          docker build --build-arg "BASE_IMAGE=$BASE_DIGEST" -f .ti-computer/examples/successor-workbench/computer/Dockerfile -t successor-ti-worker .ti-computer
+          IMAGE_ID=$(docker image inspect --format '{{.Id}}' successor-ti-worker)
+          docker image inspect successor-ti-worker > reports/ti/worker-image-inspect.json
+          printf 'id=%s\n' "$IMAGE_ID" >> "$GITHUB_OUTPUT"
+      - name: Require the unchanged unprivileged installer with the new source-preview manifest
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,subprocess,urllib.request
+          from pathlib import Path
+          pins=json.loads(Path('fleet/shared/runtime/compute/runtime-artifacts.lock.json').read_bytes())
+          item=next(p for p in pins['node']['archives'] if p['platform']=='linux-${{ matrix.arch }}')
+          archive=Path(os.environ['RUNNER_TEMP'])/'ti-node.tar.xz';urllib.request.urlretrieve(item['url'],archive)
+          assert hashlib.sha256(archive.read_bytes()).hexdigest()==item['sha256']
+          receipt=json.loads(Path(os.environ['RUNNER_TEMP'],'ti-package/package-receipt.json').read_bytes())
+          root=Path(os.environ['RUNNER_TEMP'])/'ti-installed';state=Path(os.environ['RUNNER_TEMP'])/'ti-installed-state'
+          args=['--archive',str(Path(os.environ['RUNNER_TEMP'],'ti-package',receipt['archive'])),'--sha256',receipt['sha256'],
+                '--node-archive',str(archive),'--root',str(root),'--state',str(state)]
+          preflight=subprocess.check_output(['python3','-B','local-runtime/install.py','preflight',*args],text=True)
+          Path('reports/ti/install-preflight.json').write_text(preflight)
+          assert json.loads(preflight)['readyForInstallInspection']
+          result=subprocess.check_output(['python3','-B','local-runtime/install.py','install',*args,'--confirm'],text=True)
+          Path('reports/ti/install-receipt.json').write_text(result)
+          app=root/'versions'/receipt['sha256']/'application';runtime=root/'versions'/receipt['sha256']/'runtime/node'
+          subprocess.run([str(runtime),'--check',str(app/'local-runtime/transformation/cli.mjs')],check=True)
+          assert (app/'local-runtime/transformation/source-inventory.json').is_file()
+          assert not json.loads(result)['started']
+          PY
+      - name: Require actual saved-preview command journey and one-use native browser return
+        run: |
+          node engineering/transformation/qualify.mjs "$RUNNER_TEMP/ti-application" "$RUNNER_TEMP/ti-sources.json" "$RUNNER_TEMP/ti-python/bin/python" "$PWD/.ti-computer" '${{ steps.image.outputs.id }}' "$PWD/reports/ti/journey"
+          python -B engineering/integration/service-package.py verify --archive "$RUNNER_TEMP/ti-package/agi-fleet-local-0.1.0-alpha.7.zip" --application "$RUNNER_TEMP/ti-application" --commit "$GITHUB_SHA" --observation "$PWD/reports/ti/package-observation.json"
+      - name: Bind public retained artifacts to this exact workflow execution
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,platform,subprocess
+          from pathlib import Path
+          root=Path('reports/ti');root.mkdir(parents=True,exist_ok=True)
+          value={'fleetCommit':os.environ['GITHUB_SHA'],'runId':os.environ['GITHUB_RUN_ID'],'runAttempt':os.environ['GITHUB_RUN_ATTEMPT'],
+                 'matrixArchitecture':'${{ matrix.arch }}','machine':platform.machine(),'node':subprocess.check_output(['node','--version'],text=True).strip(),
+                 'python':platform.python_version(),'productionQualified':False}
+          (root/'execution-context.json').write_text(json.dumps(value,indent=2)+'\n')
+          files=[{'path':p.relative_to(root).as_posix(),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+                 for p in sorted(root.rglob('*')) if p.is_file() and p.name!='artifact-checksums.json']
+          (root/'artifact-checksums.json').write_text(json.dumps({'files':files},indent=2)+'\n')
+          PY
+      - name: Retain public evidence and the exact source-preview archive
+        if: always()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: ti-source-preview-${{ matrix.arch }}
+          path: |
+            reports/ti
+            ${{ runner.temp }}/ti-package
+          if-no-files-found: error
+          retention-days: 30
+  qualification:
+    name: Required native TI source-preview qualification
+    if: always()
+    needs: [native-ti]
+    runs-on: ubuntu-24.04
+    steps:
+      - run: test '${{ needs.native-ti.result }}' = success
