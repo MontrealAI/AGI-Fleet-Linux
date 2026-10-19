@@ -4,7 +4,27 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import fs from 'node:fs';
+import os from 'node:os';
+import {requireInstalledTIPin} from '../../local-runtime/transformation/installed.mjs';
 const builder=fileURLToPath(new URL('../../local-runtime/transformation/package.py',import.meta.url));
+test('installed TI metadata uses frozen application pins without loading target sources',()=>{
+  const pins=JSON.parse(fs.readFileSync(new URL('./source-pins.json',import.meta.url),'utf8'));
+  const previous=process.cwd(),empty=fs.mkdtempSync(os.tmpdir()+'/ti-pin-metadata-');
+  try{
+    // An empty CWD supplies neither pins nor target repositories. Only trusted
+    // Fleet metadata is inspected; openInstalledTI/nativeCLI are never called.
+    process.chdir(empty);
+    for(const name of ['alpha','manager','jobs']){
+      const pin=pins[name],record=requireInstalledTIPin(name,pin.commit,pin.tree);
+      assert.deepEqual(record,{commit:pin.commit,tree:pin.tree});assert(Object.isFrozen(record));
+      assert.throws(()=>{record.tree=null;},TypeError);
+      assert.throws(()=>requireInstalledTIPin(name,undefined,pin.tree),{code:'TI_INSTALLED_COMMIT'});
+      assert.throws(()=>requireInstalledTIPin(name,pin.commit,undefined),{code:'TI_INSTALLED_TREE'});
+      assert.equal(requireInstalledTIPin(name,pin.commit,pin.tree),record);
+    }
+    assert.throws(()=>requireInstalledTIPin('computer',pins.computer.commit,pins.computer.tree),{code:'TI_INSTALLED_COMMIT'});
+  }finally{process.chdir(previous);fs.rmSync(empty,{recursive:true,force:true});}
+});
 test('finite TI inventory binds exact source bytes and refuses drift before packaging',()=>{
   const result=execFileSync(process.env.TI_PYTHON,['-B','-c',String.raw`
 import json,runpy,tempfile,shutil
