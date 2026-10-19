@@ -11,6 +11,7 @@ import subprocess
 import sys
 import threading
 import time
+from desk_focus import inspect_desk_focus
 from source_guard import verify_sources,verify_dependency_lock,source_only_imports
 
 
@@ -44,10 +45,12 @@ def main():
     report=json.loads(bundle['reportRaw'])
     quantities={entry['supplierId']:entry['units'] for entry in report['frozen']['plan']['allocations']}
     if args.inject_error=='late':quantities={'laurentian':report['mission']['requirements']['totalUnits']}
-    actions=[{'type':'move','x':500,'y':300}]
+    # The exact renderer exposes its supplier table as the first keyboard focus target.
+    actions=[{'type':'move','x':500,'y':300},{'type':'keypress','keys':['TAB']}]
     for supplier in ['stellar','laurentian','boreal']:
         actions.extend([{'type':'keypress','keys':['TAB']},{'type':'keypress','keys':['CTRL','A']},{'type':'type','text':str(quantities.get(supplier,0))}])
     actions.extend([{'type':'keypress','keys':['TAB']},{'type':'keypress','keys':['ENTER']},{'type':'scroll','x':900,'y':700,'scroll_x':0,'scroll_y':450},{'type':'wait'}])
+    (out/'desk-focus-observation.json').write_text(json.dumps(inspect_desk_focus(json.loads(bundle['handoffRaw']),actions),indent=2)+'\n',encoding='utf-8')
     (out/'actions.json').write_text(json.dumps(actions,separators=(',',':')),encoding='utf-8');os.chmod(out/'actions.json',0o600)
     if args.prepare_only:
         if verify_sources(alpha,jobs)!=snapshot:raise ValueError('Source changed while preparing the inert handoff')
