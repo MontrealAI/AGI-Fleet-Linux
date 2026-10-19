@@ -1,0 +1,191 @@
+name: Four-repository native Computer Use compatibility
+on:
+  pull_request:
+    paths: ['engineering/integration/**', '.github/workflows/four-repository-computer.yml']
+  push:
+    branches: [main, 'integration/four-repository-computer']
+    paths: ['engineering/integration/**', '.github/workflows/four-repository-computer.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: four-repository-computer-${{ github.ref }}-${{ github.sha }}
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  native-computer:
+    name: Native Docker browser and exact source interfaces
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          persist-credentials: false
+      - name: Validate the exact reviewed compatibility input pins
+        id: pins
+        run: |
+          python3 - <<'PY'
+          import json,os,re
+          from pathlib import Path
+          value=json.loads(Path('engineering/integration/compatibility-set.json').read_text())
+          assert value['schema']=='agi-fleet/four-repository-compatibility-inputs/v1'
+          assert value['publicNonPersonalOnly'] and not value['liveProvider'] and not value['fundedWork'] and not value['productionQualified']
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:
+              for key in ['alpha','jobs','manager']:
+                  assert re.fullmatch('[a-f0-9]{40}',value[key])
+                  output.write(key+'='+value[key]+'\n')
+          PY
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGI-Alpha-Agent-v0
+          ref: ${{ steps.pins.outputs.alpha }}
+          path: .integration-alpha
+          persist-credentials: false
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGIJobsv0
+          ref: ${{ steps.pins.outputs.jobs }}
+          path: .integration-jobs
+          persist-credentials: false
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGIJobManager
+          ref: ${{ steps.pins.outputs.manager }}
+          path: .integration-manager
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install the existing native Alpha session dependencies
+        run: |
+          python -B engineering/integration/source_guard.py --alpha-root "$PWD/.integration-alpha" --dependency-lock engineering/integration/requirements-native.lock
+          python -m pip install --require-hashes --only-binary=:all: -r engineering/integration/requirements-native.lock
+      - name: Require source orchestration and native inspector regressions
+        run: |
+          FQR_VERIFY_ALPHA="$PWD/.integration-alpha" FQR_VERIFY_JOBS="$PWD/.integration-jobs" FQR_VERIFY_MANAGER="$PWD/.integration-manager" node --test engineering/integration/*.test.mjs
+          node .integration-jobs/test/pages/four-repo-computer-receipt-native.mjs "$PWD/.integration-alpha"
+          python -m py_compile engineering/integration/run-computer.py
+          python -B -m unittest discover -s engineering/integration -p 'test_*.py' -v
+          mkdir -p reports/four-repository-computer
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          Path('reports/four-repository-computer/execution-context.json').write_text(json.dumps({'repository':os.environ['GITHUB_REPOSITORY'],'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],'workflowAttempt':os.environ['GITHUB_RUN_ATTEMPT']},separators=(',',':'))+'\n')
+          PY
+          git archive --format=zip --prefix=Fleet-Computer-Compatibility-Source/ HEAD engineering/integration local-runtime/computer/launcher.py .github/workflows/four-repository-computer.yml .github/workflows/four-repository-service.yml > reports/four-repository-computer/Fleet-Computer-Compatibility-Source.zip
+          sha256sum reports/four-repository-computer/Fleet-Computer-Compatibility-Source.zip > reports/four-repository-computer/source-kit-SHA256SUMS.txt
+          python -B - "$PWD/.integration-alpha" <<'PY'
+          import json,sys,tempfile,zipfile
+          from pathlib import Path
+          with tempfile.TemporaryDirectory(prefix='fleet-source-kit-check-') as temporary:
+              with zipfile.ZipFile('reports/four-repository-computer/Fleet-Computer-Compatibility-Source.zip') as archive:
+                  archive.extractall(temporary)
+              kit=Path(temporary)/'Fleet-Computer-Compatibility-Source'
+              sys.path.insert(0,str(kit/'engineering/integration'))
+              from source_guard import source_only_imports
+              commit=json.loads((kit/'engineering/integration/compatibility-set.json').read_text())['alpha']
+              with source_only_imports(Path(sys.argv[1]),commit) as capture:
+                  from alpha_factory_v1.core.runtime.successor.computer_handoff import ComputerHandoff
+                  assert capture['mode']=='CAPTURED_ALPHA_GIT_SOURCE' and capture['commit']==commit
+          print('Extracted source kit captured the exact Alpha SDK; no session executed.')
+          PY
+      - name: Build the existing Alpha worker with observed immutable runtime provenance
+        id: image
+        run: |
+          set -euo pipefail
+          mkdir -p reports/four-repository-computer
+          BASE_TAG=mcr.microsoft.com/playwright/python:v1.63.0-noble
+          docker pull "$BASE_TAG"
+          docker image inspect "$BASE_TAG" > reports/four-repository-computer/base-image-inspect.json
+          BASE_DIGEST=$(docker image inspect --format '{{index .RepoDigests 0}}' "$BASE_TAG")
+          docker build --build-arg "BASE_IMAGE=$BASE_DIGEST" -f .integration-alpha/examples/successor-workbench/computer/Dockerfile -t successor-four-repository-worker .integration-alpha
+          IMAGE_ID=$(docker image inspect --format '{{.Id}}' successor-four-repository-worker)
+          docker image inspect successor-four-repository-worker > reports/four-repository-computer/worker-image-inspect.json
+          printf 'id=%s\n' "$IMAGE_ID" >> "$GITHUB_OUTPUT"
+          sha256sum .integration-alpha/examples/successor-workbench/computer/Dockerfile .integration-alpha/examples/successor-workbench/computer/requirements.lock .integration-alpha/alpha_factory_v1/core/runtime/successor/computer_worker.py > reports/four-repository-computer/runtime-source-SHA256SUMS.txt
+      - name: Execute the current project-bound native session with real Chromium
+        env:
+          WORKER_IMAGE: ${{ steps.image.outputs.id }}
+        run: |
+          python -B engineering/integration/run-computer.py --alpha-root "$PWD/.integration-alpha" --jobs-root "$PWD/.integration-jobs" --output "$PWD/reports/four-repository-computer/accepted" --image "$WORKER_IMAGE"
+          node engineering/integration/finalize-computer.mjs "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$PWD/reports/four-repository-computer/accepted"
+      - name: Reject an actual late allocation without erasing its native history
+        env:
+          WORKER_IMAGE: ${{ steps.image.outputs.id }}
+        run: |
+          python -B engineering/integration/run-computer.py --alpha-root "$PWD/.integration-alpha" --jobs-root "$PWD/.integration-jobs" --output "$PWD/reports/four-repository-computer/rejected-late" --image "$WORKER_IMAGE" --inject-error late
+          node engineering/integration/finalize-computer.mjs "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" "$PWD/reports/four-repository-computer/rejected-late" rejected
+      - name: Select the supported Jobs and Manager Node runtime for disposable-chain acceptance
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.3'
+      - name: Compile and exercise the separate AGIALPHA mock-token lifecycle
+        env:
+          FQR_ALPHA_COMMIT: ${{ steps.pins.outputs.alpha }}
+        run: |
+          set -euo pipefail
+          npm install --global npm@10.8.2 --ignore-scripts --no-audit --no-fund
+          test "$(npm --version)" = 10.8.2
+          npm --prefix .integration-jobs ci --ignore-scripts --no-audit --no-fund
+          cd .integration-jobs
+          node --test test/scripts/four-repo-computer-lifecycle.test.cjs
+          npx hardhat compile
+          FQR_DRAFT_FILE="$GITHUB_WORKSPACE/reports/four-repository-computer/accepted/jobs-agialpha-draft.json" \
+          FQR_ALPHA_SOURCE="$GITHUB_WORKSPACE/.integration-alpha" \
+          FQR_INPUT_CLASS=ACTUAL_NATIVE_DOCKER_BROWSER_SCRIPTED_ADVICE \
+          FQR_EVIDENCE_FILE="$GITHUB_WORKSPACE/reports/four-repository-computer/jobs-local-lifecycle.json" \
+          npx hardhat run --no-compile --network hardhat integrations/alpha-agent/four-repo-computer-lifecycle.cjs
+      - name: Select the exact supported Manager runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.2'
+      - name: Compile and exercise the separate USDC mock-token lifecycle
+        env:
+          FQR_ALPHA_COMMIT: ${{ steps.pins.outputs.alpha }}
+          FQR_JOBS_COMMIT: ${{ steps.pins.outputs.jobs }}
+        run: |
+          set -euo pipefail
+          npm --prefix .integration-manager ci --ignore-scripts --no-audit --no-fund
+          npm --prefix .integration-manager/hardhat ci --ignore-scripts --no-audit --no-fund
+          cd .integration-manager
+          node --test hardhat/test/four-repo-computer-lifecycle.test.cjs
+          node scripts/security/patch-openzeppelin-compiler.cjs
+          npm --prefix hardhat run compile
+          FQR_DRAFT_FILE="$GITHUB_WORKSPACE/reports/four-repository-computer/accepted/manager-usdc-draft.json" \
+          FQR_ALPHA_SOURCE="$GITHUB_WORKSPACE/.integration-alpha" \
+          FQR_JOBS_SOURCE="$GITHUB_WORKSPACE/.integration-jobs" \
+          FQR_EVIDENCE_FILE="$GITHUB_WORKSPACE/reports/four-repository-computer/manager-local-lifecycle.json" \
+          node hardhat/scripts/four-repo-computer-lifecycle.cjs
+      - name: Reconcile exact project, native result, currency drafts and both chain observations
+        run: node engineering/integration/verify-evidence.mjs "$PWD/reports/four-repository-computer" "$PWD/.integration-alpha" "$PWD/.integration-jobs" "$PWD/.integration-manager" --expected-context "$(node engineering/integration/execution-context.mjs)"
+      - name: Assert no source changes or native container survives
+        run: |
+          test -z "$(git -C .integration-alpha status --porcelain --untracked-files=no)"
+          test -z "$(git -C .integration-jobs status --porcelain --untracked-files=no)"
+          test -z "$(git -C .integration-manager status --porcelain --untracked-files=no)"
+          test -z "$(docker container ls --all --quiet --filter name=successor-computer-)"
+      - name: Retain public observations and exclude private generated journals
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: four-repository-native-computer-${{ github.sha }}
+          if-no-files-found: error
+          path: |
+            reports/four-repository-computer/*.json
+            reports/four-repository-computer/*.txt
+            reports/four-repository-computer/*.zip
+            reports/four-repository-computer/accepted/*.json
+            reports/four-repository-computer/accepted/native/*.json
+            reports/four-repository-computer/accepted/native/*.png
+            reports/four-repository-computer/accepted/native/visible-text.txt
+            reports/four-repository-computer/rejected-late/*.json
+            reports/four-repository-computer/rejected-late/native/*.json
+            reports/four-repository-computer/rejected-late/native/*.png
+            reports/four-repository-computer/rejected-late/native/visible-text.txt

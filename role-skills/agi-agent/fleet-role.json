@@ -1,14 +1,16 @@
 {
   "schema": "agi-fleet/role-package/v1",
   "role": "agent",
-  "version": "0.1.0-alpha.5",
-  "runtime": "0.1.0-alpha.5",
+  "version": "0.1.0-alpha.6",
+  "runtime": "0.1.0-alpha.6",
   "actions": [
     "successor-run",
-    "alpha-run"
+    "alpha-run",
+    "alpha-computer-run"
   ],
   "capabilities": [
-    "bounded-offline"
+    "bounded-offline",
+    "optional-scripted-browser-rehearsal"
   ],
   "settlementAuthority": false
 }

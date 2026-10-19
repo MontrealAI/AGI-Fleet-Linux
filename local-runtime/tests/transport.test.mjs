@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
+import {spawnSync} from 'node:child_process';
+import os from 'node:os';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {fixture} from './helpers.mjs';
 import {createServer} from '../supervisor/server.mjs';
 import {client} from '../cli/main.mjs';
@@ -8,6 +12,15 @@ import fs from 'node:fs';
 import {createSystem,runCandidate,exportCapsule} from '../../fleet/successor/vendor/manager/site/assets/successor/model.mjs';
 import {defaultMission} from '../../fleet/successor/vendor/manager/site/assets/successor/missions.mjs';
 import {MAX_BYTES,CAPSULE_ENVELOPE_BYTES} from '../primitives.mjs';
+
+test('optional Computer Use CLI refuses ambiguous or relative configuration before creating state',()=>{
+  const parent=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-computer-cli-'));
+  try{for(const args of [['serve','--computer-config'],['serve','--computer-config','relative.json'],['serve','--computer-config','/tmp/profile.json','--computer-config','/tmp/other.json'],['serve','--unknown','/tmp/profile.json']]){
+    const state=path.join(parent,'absent-state');
+    const result=spawnSync(process.execPath,[fileURLToPath(new URL('../cli/main.mjs',import.meta.url)),...args],{env:{...process.env,AGI_LOCAL_STATE:state},encoding:'utf8'});
+    assert.equal(result.status,1);assert.match(result.stderr,/ARGUMENTS_INVALID/);assert.equal(fs.existsSync(state),false);
+  }}finally{fs.rmSync(parent,{recursive:true,force:true});}
+});
 
 test('HTTP rejects missing credentials, foreign Host/Origin, null Origin, unknown routes and scoped escalation',async()=>{
   const f=fixture(),s=createServer(f.runtime);try{const {url}=await s.start(),t=f.runtime.issueClient();

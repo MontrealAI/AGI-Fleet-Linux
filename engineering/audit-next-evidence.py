@@ -13,6 +13,7 @@ import zipfile
 from next_release_tools import adapt_baseline, candidate_tools, load_candidate, load_module, provenance, verify_candidate, write_json
 from release_tools import ROOT, require, sha
 from saved_profile_audit import audit_saved_profile
+from contract_profiles import RELEASE_CONTRACT_PROFILES
 
 KEYS = ('tests', 'suites', 'pass', 'fail', 'cancelled', 'skipped', 'todo')
 BAD = ('fail', 'cancelled', 'skipped', 'todo')
@@ -202,7 +203,8 @@ def audit_successor(directory, candidate, commit, run_id):
 
 def audit(archive_path, candidate, native, integration, workflow_commit=None, workflow_run=None, successor=None, profiles=None):
     require(len(native) == len(integration) == 2, 'Exactly two native and integration architecture runs are required')
-    require(profiles is not None and len(profiles) == 2, 'Exactly two saved-archive profile runs are required')
+    require(profiles is not None and len(profiles) == 2 * len(RELEASE_CONTRACT_PROFILES),
+            'Every reviewed saved-archive profile requires both architecture runs')
     receipt = verify_candidate(archive_path, candidate)
     ledger = read_json(ROOT / 'validation/original-native-case-ledger.json')
     require(ledger['releaseSHA256'] == BASELINE_SHA and len(ledger['cases']) == 50, 'Original case ledger differs')
@@ -222,8 +224,14 @@ def audit(archive_path, candidate, native, integration, workflow_commit=None, wo
     commit, run_id = next(iter(commits)), next(iter(run_ids))
     require(not workflow_commit or commit == workflow_commit, 'Expected workflow commit differs')
     require(not workflow_run or run_id == str(workflow_run), 'Expected workflow run differs')
-    profile_runs = [audit_saved_profile(path, archive_path, candidate, commit, run_id) for path in profiles]
-    require({row['architecture'] for row in profile_runs} == {'x64', 'arm64'}, 'Both profile architectures are required')
+    profile_runs = []
+    for path in profiles:
+        profile_id = read_json(Path(path) / 'summary.json').get('profile')
+        require(profile_id in RELEASE_CONTRACT_PROFILES, 'Unrequired profile cannot replace release qualification')
+        profile_runs.append(audit_saved_profile(path, archive_path, candidate, commit, run_id, expected_profile=profile_id))
+    expected_profiles = {(profile, arch) for profile in RELEASE_CONTRACT_PROFILES for arch in ('x64', 'arm64')}
+    require({(row['profile'], row['architecture']) for row in profile_runs} == expected_profiles,
+            'Every reviewed profile requires distinct x64 and arm64 evidence')
     return {'schema': 'agi-next-release-independent-audit/v1', 'status': 'PASS',
             'version': candidate['version'], 'releaseSHA256': candidate['sha256'],
             'sourceRevisionSHA256': candidate['sourceRevisionSHA256'], 'workflowCommit': commit, 'workflowRun': run_id,

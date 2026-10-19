@@ -18,7 +18,7 @@ const mutate=(c,fn)=>{const s=JSON.parse(c.workSpec);fn(s);return {...c,workSpec
 
 test('Alpha package is explicitly unprovisioned; role action is scoped and task pins cannot grant trust',async()=>{
   assert.equal(inspectAlphaPackage().supported,false);assert.equal(inspectAlphaPackage().code,'ALPHA_PACKAGE_UNPROVISIONED');
-  assert.equal(inspectAlphaPackage().packageSha256,null);assert.deepEqual(packagePolicy('agent').policy.actions,['successor-run','alpha-run']);
+  assert.equal(inspectAlphaPackage().packageSha256,null);assert.deepEqual(packagePolicy('agent').policy.actions,['successor-run','alpha-run','alpha-computer-run']);
   for(const role of ['node','employer','moderator','evidence','recovery'])assert.throws(()=>validateTaskInput(role,task()),/ROLE_ACTION_DENIED/);
   for(const key of ['command','interpreter','packageSha256','sourceCommit','manifest','runtimePath','alphaValidation'])assert.throws(()=>validateAlphaInput({...task().input,[key]:'self-asserted'}),/FIELDS_INVALID/);
   await assert.rejects(perform('agent',task()),/ALPHA_PACKAGE_UNPROVISIONED/);

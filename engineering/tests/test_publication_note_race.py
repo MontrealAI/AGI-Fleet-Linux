@@ -1,4 +1,5 @@
 import copy
+import hashlib
 import io
 import json
 import os
@@ -7,6 +8,7 @@ import sys
 import tempfile
 from types import SimpleNamespace
 import unittest
+import urllib.error
 from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -36,10 +38,10 @@ class PublicationNoteRaceTests(unittest.TestCase):
             'sha256': metadata['sha256'], 'audit': audit,
             'evidence': {'name': evidence.name, 'sha256': self.publisher.sha(evidence)}}
         self.publisher.write(self.release / 'release.json', metadata)
-        manifest_path = self.output / 'Release-Manifest-v1.1.4.json'
+        manifest_path = self.output / 'Release-Manifest-v1.1.5.json'
         self.publisher.write(manifest_path, manifest)
         assets = [archive, evidence, manifest_path]
-        sums = self.output / 'SHA256SUMS-v1.1.4.txt'
+        sums = self.output / 'SHA256SUMS-v1.1.5.txt'
         sums.write_text(''.join(self.publisher.sha(p) + '  ' + p.name + '\n' for p in assets))
         self.notes = self.publisher.publication_notes(assets, self.acceptance.commit, self.acceptance.run_id)
         (self.output / 'release-notes.md').write_text(self.notes)
@@ -51,11 +53,40 @@ class PublicationNoteRaceTests(unittest.TestCase):
         self.patches = []
         self.concurrent_body = None
         self.returned_body = None
+        self.tag_exists = self.release_exists = True
+        self.main_commit = self.acceptance.commit
+        self.main_responses = []
+        self.main_reads = 0
+        self.calls = []
 
     def api(self, path, token, **kwargs):
         method = kwargs.get('method', 'GET')
+        self.calls.append((path, method))
+        if path.endswith('/git/ref/heads/main'):
+            self.main_reads += 1
+            if self.main_responses:
+                response = self.main_responses.pop(0)
+                if isinstance(response, Exception):
+                    raise response
+                return response
+            return {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': self.main_commit}}
         if '/git/ref/tags/' in path:
+            if not self.tag_exists:
+                raise urllib.error.HTTPError(path, 404, 'Not found', {}, None)
             return {'object': {'type': 'commit', 'sha': self.acceptance.commit}}
+        if path.endswith('/git/refs') and method == 'POST':
+            self.tag_exists = True
+            self.assertEqual(json.loads(kwargs['data'])['sha'], self.acceptance.commit)
+            return {'object': {'type': 'commit', 'sha': self.acceptance.commit}}
+        if path.endswith('/releases') and method == 'POST':
+            self.release_exists = True
+            self.remote.update(json.loads(kwargs['data']), assets=[])
+            return copy.deepcopy(self.remote)
+        if '/assets?name=' in path and method == 'POST':
+            data = kwargs['data']
+            self.remote['assets'].append({'name': path.split('?name=', 1)[1], 'size': len(data),
+                'digest': 'sha256:' + hashlib.sha256(data).hexdigest()})
+            return copy.deepcopy(self.remote['assets'][-1])
         if method == 'PATCH':
             payload = json.loads(kwargs['data'])
             self.patches.append(payload)
@@ -65,6 +96,8 @@ class PublicationNoteRaceTests(unittest.TestCase):
                 result['body'] = self.returned_body
             return result
         if '/releases/tags/' in path:
+            if not self.release_exists:
+                raise urllib.error.HTTPError(path, 404, 'Not found', {}, None)
             return copy.deepcopy(self.remote)
         if path.endswith('/releases/123'):
             checked_snapshot = copy.deepcopy(self.remote)
@@ -106,9 +139,72 @@ class PublicationNoteRaceTests(unittest.TestCase):
 
     def test_matching_already_published_release_is_not_mutated(self):
         self.remote['draft'] = False
+        self.main_commit = 'b' * 40
         self.publish()
         self.assertEqual(self.patches, [])
+        self.assertEqual(self.main_reads, 0)
+        self.assertFalse(any(method != 'GET' for _, method in self.calls))
         self.assertEqual(self.remote['body'], self.notes)
+
+    def test_public_release_retry_still_rejects_changed_remote_assets(self):
+        self.remote['draft'] = False
+        self.main_commit = 'b' * 40
+        self.remote['assets'][0]['digest'] = 'sha256:' + '0' * 64
+        with self.assertRaisesRegex(ValueError, 'Existing asset differs'):
+            self.publish()
+        self.assertFalse(any(method != 'GET' for _, method in self.calls))
+
+    def test_stale_run_cannot_reserve_a_fresh_release_tag(self):
+        self.tag_exists = self.release_exists = False
+        self.main_commit = 'b' * 40
+        with self.assertRaisesRegex(ValueError, 'exact current main'):
+            self.publish()
+        self.assertEqual(self.main_reads, 1)
+        self.assertFalse(any(method != 'GET' for _, method in self.calls))
+
+    def test_main_advance_after_reservation_keeps_the_release_private(self):
+        self.tag_exists = self.release_exists = False
+        self.main_responses = [
+            {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': self.acceptance.commit}},
+            {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': 'b' * 40}}]
+        with self.assertRaisesRegex(ValueError, 'exact current main'):
+            self.publish()
+        self.assertTrue(self.tag_exists)
+        self.assertEqual(self.main_reads, 2)
+        self.assertTrue(self.remote['draft'])
+        self.assertEqual(self.patches, [])
+
+    def test_current_main_can_reserve_and_publish_the_exact_release(self):
+        self.tag_exists = self.release_exists = False
+        self.publish()
+        self.assertEqual(self.main_reads, 2)
+        self.assertFalse(self.remote['draft'])
+        mutations = [(path, method) for path, method in self.calls if method != 'GET']
+        self.assertTrue(mutations[0][0].endswith('/git/refs'))
+        self.assertEqual(mutations[-1][1], 'PATCH')
+
+    def test_existing_draft_cannot_be_published_from_a_superseded_main(self):
+        self.main_commit = 'b' * 40
+        with self.assertRaisesRegex(ValueError, 'exact current main'):
+            self.publish()
+        self.assertTrue(self.remote['draft'])
+        self.assertFalse(any(method != 'GET' for _, method in self.calls))
+
+    def test_invalid_main_response_fails_closed_at_both_boundaries(self):
+        invalid = [None, {}, {'object': {'type': 'commit', 'sha': self.acceptance.commit}},
+            {'ref': 'refs/heads/other', 'object': {'type': 'commit', 'sha': self.acceptance.commit}},
+            {'ref': 'refs/heads/main', 'object': {'type': 'tag', 'sha': self.acceptance.commit}},
+            urllib.error.HTTPError('synthetic', 503, 'Unavailable', {}, None)]
+        for reserve in (True, False):
+            for response in invalid:
+                with self.subTest(reserve=reserve, response=type(response).__name__):
+                    self.tag_exists = self.release_exists = not reserve
+                    self.main_responses = [response]
+                    self.calls = []
+                    with self.assertRaises((ValueError, urllib.error.HTTPError)):
+                        self.publish()
+                    self.assertTrue(self.remote['draft'])
+                    self.assertFalse(any(method != 'GET' for _, method in self.calls))
 
 
 if __name__ == '__main__':

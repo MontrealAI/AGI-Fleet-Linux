@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { AbiCoder, getAddress, Interface, keccak256 } from 'ethers';
-import { LEGACY_CONTRACT_PROFILE as LEGACY, MANAGER_117_CONTRACT_PROFILE as CURRENT,
+import { LEGACY_CONTRACT_PROFILE as LEGACY, MANAGER_117_CONTRACT_PROFILE as CURRENT, MANAGER_1193_CONTRACT_PROFILE as LATEST,
   RUNTIME_CONTRACTS, CONTRACT_ARTIFACTS, loadContractProfile, contractProfileID } from '../shared/runtime/src/contract-profiles.mjs';
 import { Chain as AgentChain, matchRuntime } from '../packages/AGI_Agent/src/chain.mjs';
 import { Transactions } from '../packages/AGI_Agent/src/transactions.mjs';
@@ -24,7 +24,7 @@ import { acquireWalletLease as nodeLease } from '../packages/AGI_Node/src/wallet
 const fleet = fileURLToPath(new URL('..', import.meta.url));
 const agentRoot = path.join(fleet, 'packages/AGI_Agent');
 const address = n => getAddress('0x' + n.toString(16).padStart(40, '0'));
-const profiles = Object.fromEntries([LEGACY, CURRENT].map(id => [id, loadContractProfile(agentRoot, id)]));
+const profiles = Object.fromEntries([LEGACY, CURRENT, LATEST].map(id => [id, loadContractProfile(agentRoot, id)]));
 function config(patch = {}) {
   return agentConfig({ ...structuredClone(AGENT_DEFAULT), chainId: 31337,
     manager: address(10), agent: address(30), deploymentBlock: 1,
@@ -83,7 +83,7 @@ test('finite optional profile selectors preserve omitted legacy config and autho
   assert.notEqual(operatorBinding(o, pin), operatorBinding({ ...o, contractProfile: CURRENT }, pin));
 });
 
-test('both reviewed bundles bind exactly eleven artifacts and immutable complete provenance', () => {
+test('all reviewed bundles bind exactly eleven artifacts and immutable complete provenance', () => {
   for (const profile of Object.values(profiles)) {
     assert.deepEqual(Object.keys(profile.artifacts).sort(), [...CONTRACT_ARTIFACTS].sort());
     assert.ok(Object.isFrozen(profile.artifacts.ENSOwnership.deployedLinkReferences));
@@ -95,8 +95,8 @@ test('both reviewed bundles bind exactly eleven artifacts and immutable complete
 });
 
 for (const [label, Chain] of [['Agent', AgentChain], ['Node', NodeChain], ['Operator', OperatorChain]]) {
-  test(label + ' enrolls and revalidates complete coherent legacy and explicit 1.17 graphs', async () => {
-    for (const id of [undefined, LEGACY, CURRENT]) {
+  test(label + ' enrolls and revalidates complete coherent legacy and explicit Manager graphs', async () => {
+    for (const id of [undefined, LEGACY, CURRENT, LATEST]) {
       const f = fixture(id), c = config(id ? { contractProfile: id } : {}), chain = new Chain(c, f.provider);
       const pin = await chain.enroll();
       assert.equal(pin.sourceCommit, f.profile.sourceCommit);
@@ -137,6 +137,29 @@ test('mixed 1.17 manager and legacy ENS library fail enrollment and relabelled-p
   await assert.rejects(new AgentChain(config(), fixture(CURRENT).provider).enroll(), /RUNTIME_(BYTECODE|LENGTH)_MISMATCH/);
 });
 
+test('current 1.19.3 profile refuses previous-generation code and pins before any signing', async () => {
+  for (const previous of [LEGACY, CURRENT]) {
+    const f = fixture(LATEST), c = config({ contractProfile: LATEST });
+    const chain = new AgentChain(c, f.provider), pin = await chain.enroll();
+    const prior = fixture(previous);
+    f.codes.AGIJobManager = prior.codes.AGIJobManager;
+    await assert.rejects(chain.enroll(), /RUNTIME_(BYTECODE|LENGTH)_MISMATCH/);
+    const changed = structuredClone(pin);
+    changed.contracts.AGIJobManager.codeHash = keccak256(f.codes.AGIJobManager);
+    await assert.rejects(chain.verify(changed), /RUNTIME_(BYTECODE|LENGTH)_MISMATCH/);
+    const priorPin = await new AgentChain(config({ contractProfile: previous }), prior.provider).enroll();
+    const before = f.calls();
+    await assert.rejects(chain.verify(priorPin), /DEPLOYMENT_CONTRACT_PROFILE_MISMATCH/);
+    assert.equal(f.calls(), before);
+  }
+  assert.equal(profiles[LATEST].sourceCommit, 'd0c2cbaf58b594e20d888c3fc744bada06172306');
+  const input = JSON.parse(fs.readFileSync(path.join(profiles[LATEST].base, 'compiler-inputs', profiles[LATEST].provenance.artifacts.AGIJobManager.buildInfoId + '.json')));
+  assert.equal(input.settings.viaIR, true);
+  assert.equal(input.settings.optimizer.runs, 40);
+  assert.equal(input.settings.evmVersion, 'shanghai');
+  assert.ok(!/[LE]/.test(input.settings.optimizer.details.yulDetails.optimizerSteps));
+});
+
 test('rehashed pin graph cannot substitute an address, token immutable, member or linked target', async () => {
   for (const mutate of [
     p => { p.contracts.AGIJobManager.address = address(99); },
@@ -174,6 +197,7 @@ test('all fourteen standalone and nested role adapters resolve the same reviewed
     for (const base of bases) {
       const module = await import(pathToFileURL(path.join(base, 'src/contract-profiles.mjs')));
       assert.equal(module.loadContractProfile(base, CURRENT).manifestSHA256, profiles[CURRENT].manifestSHA256);
+      assert.equal(module.loadContractProfile(base, LATEST).manifestSHA256, profiles[LATEST].manifestSHA256);
       assert.equal(module.loadContractProfile(base).manifestSHA256, profiles[LEGACY].manifestSHA256);
       count++;
     }

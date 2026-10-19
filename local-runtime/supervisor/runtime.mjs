@@ -15,6 +15,8 @@ import {diagnostics} from './diagnostics.mjs';
 import {evaluateAdmission,requireAdmission,OFFLINE_LIMITS} from './admission.mjs';
 import {validateAlphaOutput} from '../alpha/contract.mjs';
 import {STORAGE_LIMITS,runHistoryUsage,encodeOutcome,encodeFailure} from './capacity.mjs';
+import {inspectComputerInstallation} from '../computer/profile.mjs';
+import {computerOutputOperation,requireComputerCapacity} from '../computer/backend.mjs';
 
 const ASSISTANT_ACTIONS=['status','inspect','prepare','run','cancel','output'];
 export function sourceIdentity() {
@@ -31,8 +33,9 @@ export function sourceIdentity() {
   return digest(entries);
 }
 export class LocalRuntime {
-  constructor(directory,{create=false,backend=new LinuxSandbox(),now=Date.now}={}) {
-    this.store=new Store(directory,{create});this.backend=backend;this.now=now;this.active=new Map();this.stoppedActors=new Set();this.source=sourceIdentity();this.directory=directory;
+  constructor(directory,{create=false,backend=null,computerConfigFile=null,now=Date.now}={}) {
+    need(computerConfigFile===null||path.isAbsolute(computerConfigFile),'COMPUTER_PROFILE_PATH');need(backend===null||computerConfigFile===null,'COMPUTER_BACKEND_CONFIGURATION');
+    this.store=new Store(directory,{create});this.backend=backend??new LinuxSandbox({computerConfigFile});this.now=now;this.active=new Map();this.stoppedActors=new Set();this.source=sourceIdentity();this.directory=directory;
     fs.mkdirSync(path.join(directory,'runs'),{recursive:true,mode:0o700});
   }
   issueClient(actor=null) {
@@ -58,7 +61,7 @@ export class LocalRuntime {
     return this.store.transaction(()=>{
       const actor=this.store.actor(uuid(input.actor));need(!actor.stopped&&!this.store.meta('stopped'),'STOP_RECONCILIATION_REQUIRED');
       const pkg=packagePolicy(actor.role);actor.packageSha256=pkg.sha256;actor.registrySha256=pkg.registry;
-      actor.host={schema:'agi-fleet/local-binding/v1',host:this.store.meta('host'),backend:host.backend,identity:host.identity,sourceSha256:this.source,authority:'bounded-offline-only',...(host.alphaRun?.runtimeIdentity?{alphaRuntimeIdentity:host.alphaRun.runtimeIdentity}:{}),...(host.bootId?{bootId:host.bootId}:{})};
+      actor.host={schema:'agi-fleet/local-binding/v1',host:this.store.meta('host'),backend:host.backend,identity:host.identity,sourceSha256:this.source,authority:'bounded-offline-only',...(host.alphaRun?.runtimeIdentity?{alphaRuntimeIdentity:host.alphaRun.runtimeIdentity}:{}),...(host.alphaComputer?.runtimeIdentity?{alphaComputerRuntimeIdentity:host.alphaComputer.runtimeIdentity}:{}),...(host.bootId?{bootId:host.bootId}:{})};
       actor.generation++;actor.active=true;this.store.saveActor(actor);
       this.store.db.prepare("UPDATE grants SET state='revoked' WHERE actor=? AND state IN ('prepared','authorized')").run(actor.id);
       this.store.event('actor-activated',{actor:actor.id,generation:actor.generation});return actor;
@@ -74,7 +77,8 @@ export class LocalRuntime {
   }
   admissionReport(actor,task,{host=this.backend.inspect(),intake=true}={}) {
     return evaluateAdmission({actor,task,host,source:this.source,currentSource:sourceIdentity(),hostId:this.store.meta('host'),at:this.now(),
-      paused:intake&&this.store.meta('paused'),stopped:this.emergency||this.stoppedActors.has(actor.id)||this.store.meta('stopped'),nativeBackend:this.backend instanceof LinuxSandbox});
+      paused:intake&&this.store.meta('paused'),stopped:this.emergency||this.stoppedActors.has(actor.id)||this.store.meta('stopped'),nativeBackend:this.backend instanceof LinuxSandbox,
+      computerInstallation:this.backend instanceof LinuxSandbox&&task?.action==='alpha-computer-run'?inspectComputerInstallation(this.backend.computerConfigFile):null});
   }
   admission(input,p) {
     // Read-only admission uses the existing actor-scoped preparation permission.
@@ -100,7 +104,8 @@ export class LocalRuntime {
       need(false,'INDEPENDENT_REVIEW_NOT_QUALIFIED');
     }
     const admission=requireAdmission(this.admissionReport(actor,input.task,{host}));
-    const at=this.now();const grant={schema:'agi-fleet/local-grant/v1',id:id(),actor:actor.id,principal:p.hash,task:input.task,inputSha256:digest(input.task),packageSha256:actor.packageSha256,host:actor.host,generation:actor.generation,createdAt:at,expiresAt:at+300000,limits:OFFLINE_LIMITS,review:input.task.review,authority:'bounded-offline-only',admission,...(projectRequestSha256?{projectRequestSha256}:{})};
+    if(input.task.action==='alpha-computer-run')requireComputerCapacity(this);
+    const at=this.now();const grant={schema:'agi-fleet/local-grant/v1',id:id(),actor:actor.id,principal:p.hash,task:input.task,inputSha256:digest(input.task),packageSha256:actor.packageSha256,host:actor.host,generation:actor.generation,createdAt:at,expiresAt:at+300000,limits:admission.acceptedContract.limits,review:input.task.review,authority:admission.binding.permissions,admission,...(projectRequestSha256?{projectRequestSha256}:{})};
     this.store.transaction(()=>{const used=this.store.db.prepare('SELECT COALESCE(SUM(length(CAST(value AS BLOB))),0) AS bytes FROM grants').get().bytes;need(used+Buffer.byteLength(canonical(grant))<=STORAGE_LIMITS.grants,'GRANT_HISTORY_FULL');this.store.db.prepare('INSERT INTO grants VALUES(?,?,?,?)').run(grant.id,actor.id,canonical(grant),'prepared');});
     return {grant:grant.id,commitment:digest(grant),actor:actor.id,task:grant.task,limits:grant.limits,expiresAt:grant.expiresAt,confirmationRequired:true,admission,...(projectRequestSha256?{projectRequestSha256}:{})};
   }
@@ -128,7 +133,7 @@ export class LocalRuntime {
       need(active.length<this.store.meta('maxConcurrent')&&!active.some(x=>x.actor===actor.id),'QUEUE_CAPACITY');
       const recent=this.store.db.prepare('SELECT actor,value FROM runs').all().filter(r=>parseStrict(r.value).reservedAt>now-86400000);
       need(recent.length<this.store.meta('maxRuns')&&recent.filter(r=>r.actor===actor.id).length<actor.maxRuns,'DAILY_BUDGET_EXHAUSTED');
-      const run={id:id(),grant:grant.id,inputSha256:grant.inputSha256,reservedAt:now,role:actor.role,review:grant.review,sourceSha256:this.source,packageSha256:actor.packageSha256,host:actor.host,authority:'none',inference:'none',spendUSDC:'0',admission,storageReservationBytes:STORAGE_LIMITS.runReservation,...(grant.projectRequestSha256?{projectRequestSha256:grant.projectRequestSha256}:{})};
+      const run={id:id(),grant:grant.id,inputSha256:grant.inputSha256,reservedAt:now,role:actor.role,review:grant.review,sourceSha256:this.source,packageSha256:actor.packageSha256,host:actor.host,authority:'none',inference:grant.task.action==='alpha-computer-run'?'scripted-zero-cost':'none',spendUSDC:'0',admission,storageReservationBytes:STORAGE_LIMITS.runReservation,...(grant.projectRequestSha256?{projectRequestSha256:grant.projectRequestSha256}:{})};
       const total=runHistoryUsage(this.store.db),raw=canonical(run);
       need(total.count<4096&&total.bytes+Buffer.byteLength(raw)+run.storageReservationBytes<=STORAGE_LIMITS.runs,'HISTORY_CAPACITY_EXPORT_REQUIRED');
       this.store.db.prepare("UPDATE grants SET state='consumed' WHERE id=?").run(grant.id);
@@ -149,13 +154,21 @@ export class LocalRuntime {
         need(this.store.db.prepare('SELECT state FROM runs WHERE id=?').get(g.run.id)?.state==='running','RUN_RESERVATION_CHANGED');
         requireAdmission(this.admissionReport(current,g.task,{host:ready,intake:false}),g.admission);
       };
-      const result=await this.backend.execute({role:actor.role,task:g.task,directory,signal:abort.signal,expectedHost:g.host,revalidate});
+      const result=await this.backend.execute({role:actor.role,task:g.task,directory,signal:abort.signal,expectedHost:g.host,revalidate,approval:g.admission.binding.computer??null,computerHome:path.join(this.directory,'alpha-computer-home')});
       // Validate every Alpha receipt in the supervisor, even for substituted
       // test backends. Retain positive closure evidence on late refusal without
       // treating it as successful output or restoring the consumed grant.
       if(g.task.action==='alpha-run'){
         try{abort.signal.throwIfAborted();revalidate();result.result=validateAlphaOutput(g.task.input,result.result);}
         catch(error){error.observation??=result.observation;throw error;}
+      }else if(g.task.action==='alpha-computer-run'){
+        try{
+          abort.signal.throwIfAborted();revalidate();
+          need(result.result?.scriptedAdvice===true&&result.result?.providerRequests===0&&result.result?.authority==='none'&&result.result?.independentReview===false,'COMPUTER_RESULT_SCOPE');
+          need(result.observation?.runtimeIdentity===g.admission.binding.computer.runtimeIdentity&&result.observation?.providerCalls===0,'COMPUTER_RESULT_BINDING');
+          const expected=g.admission.binding.computer.evidenceClass;
+          need(result.observation?.evidenceClass===expected,'COMPUTER_EVIDENCE_CLASS');
+        }catch(error){error.observation??=result.observation;throw error;}
       }else abort.signal.throwIfAborted();
       need(result.observation?.processGroupGone===true,'CLEANUP_UNCONFIRMED');
       let projectBudget=null;if(g.projectRequestSha256){projectBudget=await validateProjectOutcome(g.task,result.result,result.observation);revalidate();}
@@ -238,6 +251,7 @@ export class LocalRuntime {
     const a=this.addActor({role:v.role,name:v.name},p);a.sourceActor=v.sourceActor;this.store.saveActor(a);this.store.event('portable-import-inert',{actor:a.id,sourceActor:v.sourceActor});return a;
   }
   async dispatch(action,input,p) {
+    if(['computer-export','computer-artifact'].includes(action))return computerOutputOperation(this,action,input,p);
     if(['journey-import','journey-list','journey-inspect','journey-prepare','journey-review-prepare','journey-export'].includes(action))return journeyOperation(this,action,input,p);
     if(action==='diagnostics')return diagnostics(this,input,p);
     if(action==='reconciliation')return inspectReconciliation(this,input,p);

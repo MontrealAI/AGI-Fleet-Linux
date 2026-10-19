@@ -2,6 +2,8 @@ import copy
 import hashlib
 import importlib.util
 import json
+import os
+import re
 from pathlib import Path
 import stat
 import tempfile
@@ -23,6 +25,14 @@ class PreviewReleaseTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.evidence = self.root / 'evidence'
         self.commit, self.run = 'a' * 40, '123'
+        self.attempt = '1'
+        environment = mock.patch.dict(os.environ, {'GITHUB_RUN_ATTEMPT': self.attempt})
+        environment.start()
+        self.addCleanup(environment.stop)
+        # These are auditor fixtures, never native execution observations.
+        replay = mock.patch.object(R, 'replay_computer')
+        self.replay = replay.start()
+        self.addCleanup(replay.stop)
         self.spec = R.load(ROOT / 'local-runtime/preview-release.json')
         self.create_evidence()
 
@@ -53,7 +63,7 @@ class PreviewReleaseTests(unittest.TestCase):
                     info.external_attr = (stat.S_IFREG | 0o644) << 16
                     target.writestr(info, data)
             logs = folder / 'local-host-evidence'
-            self.write(logs / 'qualification.json', {'commit': self.commit, 'workflowRun': self.run, 'architecture': arch, 'archiveSHA256': R.sha(archive)})
+            self.write(logs / 'qualification.json', {'commit': self.commit, 'workflowRun': self.run, 'workflowAttempt': self.attempt, 'architecture': arch, 'archiveSHA256': R.sha(archive)})
             for name, scope in [('source', 'module'), ('extracted', 'module'), ('native-source', 'native'), ('native-archive', 'native')]:
                 self.tap(logs / (name + '.tap'), self.spec['tests'][scope])
             (logs / 'installer.log').write_text(f"Ran {self.spec['tests']['installer']} tests in 1.0s\n\nOK\n")
@@ -70,9 +80,25 @@ class PreviewReleaseTests(unittest.TestCase):
                            'liveProviderJudgment': False, 'independentReview': False}
                 gateway.update({k: True for k in ('actualGateway', 'actualRuntime', 'actualSandbox', 'skillObserved', 'separateAuthorization', 'scopedActor')})
                 self.write(logs / ('openclaw-' + role + '.json'), gateway)
+            computer = self.evidence / ('local-skills-computer-' + arch)
+            proof = computer / 'computer-evidence'
+            binding = {'repository': R.REPOSITORY, 'commit': self.commit, 'workflowRun': self.run, 'workflowAttempt': self.attempt,
+                       'architecture': arch, 'archiveSHA256': R.sha(archive)}
+            self.write(proof / 'execution-context.json', binding)
+            self.write(proof / 'accepted/computer-return.json', {'scope': 'synthetic release auditor fixture'})
+            self.write(proof / 'compatibility-evidence.json', {'scope': 'synthetic release auditor fixture'})
+            artifacts = [{'name': file.relative_to(proof).as_posix(), 'bytes': file.stat().st_size, 'sha256': R.sha(file)}
+                         for file in sorted(proof.rglob('*')) if file.is_file()]
+            lock = R.load(ROOT / 'engineering/integration/compatibility-set.json')
+            service = {key: True for key in ('actualIPC', 'prepare', 'exactGrant', 'oneUse', 'actualDocker', 'actualBrowser')}
+            service.update(nativeAlphaReturnSha256=R.sha(proof / 'accepted/computer-return.json'), returnExportSha256=R.sha(proof / 'accepted/computer-return.json'))
+            self.write(computer / 'local-host-evidence/computer-journey.json', {
+                'schema': 'agi-fleet/saved-package-computer-journey/v1', 'binding': binding, 'package': R.package_inventory(archive),
+                'service': service, 'sourceCommits': {**{name: lock[name] for name in ('alpha', 'jobs', 'manager')}, 'fleet': self.commit},
+                'compatibilityEvidenceSha256': R.sha(proof / 'compatibility-evidence.json'), 'artifacts': artifacts})
         browser = self.evidence / 'local-dashboard-observations'
-        self.write(browser / 'qualification.json', {'commit': self.commit, 'workflowRun': self.run, 'evidenceClass': 'BROWSER_WITH_DECLARED_SYNTHETIC_WORKER'})
-        self.tap(browser / 'browser.tap', 2)
+        self.write(browser / 'qualification.json', {'commit': self.commit, 'workflowRun': self.run, 'workflowAttempt': self.attempt, 'evidenceClass': 'BROWSER_WITH_DECLARED_SYNTHETIC_WORKER'})
+        self.tap(browser / 'browser.tap', self.spec['tests']['browser'])
         for lang in ('en', 'fr'):
             for size in ('desktop', 'mobile'):
                 (browser / (lang + '-' + size + '.png')).write_bytes(b'\x89PNG\r\n\x1a\nsynthetic fixture')
@@ -82,8 +108,11 @@ class PreviewReleaseTests(unittest.TestCase):
 
     def test_matching_fixture_audits_and_bundles_without_production_claim(self):
         result = self.audit()
-        self.assertIn('/DOWNLOAD_ALPHA_5.md)', R.notes(result, []))
+        self.assertIn('/DOWNLOAD_ALPHA_6.md)', R.notes(result, []))
+        self.assertIn('zero provider requests and zero provider cost', R.notes(result, []))
+        self.assertIn('both disposable mock-token lifecycles', R.notes(result, []))
         self.assertIn('/DOWNLOAD.md)', R.notes({**result, 'version': '0.1.0-alpha.4'}, []))
+        self.assertNotIn('zero provider requests and zero provider cost', R.notes({**result, 'version': '0.1.0-alpha.4'}, []))
         with self.assertRaisesRegex(ValueError, 'Version-matched download guide required'):
             R.notes({**result, 'version': '0.1.0-alpha.99'}, [])
         self.assertEqual(result['status'], 'PASS')
@@ -101,6 +130,89 @@ class PreviewReleaseTests(unittest.TestCase):
         for commit, run in [('b' * 40, self.run), (self.commit, '999')]:
             with self.assertRaises(ValueError):
                 R.audit(self.evidence, commit, run, self.spec)
+
+    def test_computer_service_proof_is_required_from_each_exact_run_attempt_and_source_set(self):
+        for arch in ('x64', 'arm64'):
+            file = self.evidence / ('local-skills-computer-' + arch) / 'local-host-evidence/computer-journey.json'
+            original = file.read_bytes()
+            file.unlink()
+            with self.assertRaises(ValueError):
+                self.audit()
+            file.write_bytes(original)
+            for key, value in [('commit', 'b' * 40), ('workflowRun', '999'), ('workflowAttempt', '2'), ('architecture', 'foreign'), ('archiveSHA256', 'b' * 64)]:
+                receipt = R.load(file)
+                receipt['binding'][key] = value
+                self.write(file, receipt)
+                with self.subTest(architecture=arch, binding=key), self.assertRaisesRegex(ValueError, 'binding differs'):
+                    self.audit()
+                file.write_bytes(original)
+            receipt = R.load(file)
+            receipt['sourceCommits']['manager'] = 'b' * 40
+            self.write(file, receipt)
+            with self.assertRaisesRegex(ValueError, 'compatibility source set differs'):
+                self.audit()
+            file.write_bytes(original)
+        with mock.patch.dict(os.environ, {'GITHUB_RUN_ATTEMPT': ''}), self.assertRaisesRegex(ValueError, 'Exact workflow attempt required'):
+            self.audit()
+
+    def test_computer_service_flags_cannot_replace_unchanged_package_or_native_semantic_replay(self):
+        file = self.evidence / 'local-skills-computer-x64/local-host-evidence/computer-journey.json'
+        original = file.read_bytes()
+        receipt = R.load(file)
+        receipt['package']['inventoryAfterSha256'] = 'b' * 64
+        self.write(file, receipt)
+        with self.assertRaisesRegex(ValueError, 'extracted package changed or differs'):
+            self.audit()
+        file.write_bytes(original)
+        for key in ('actualIPC', 'prepare', 'exactGrant', 'oneUse', 'actualDocker', 'actualBrowser'):
+            receipt = R.load(file)
+            receipt['service'][key] = False
+            self.write(file, receipt)
+            with self.subTest(service=key), self.assertRaisesRegex(ValueError, 'Actual saved-package Computer Use service journey required'):
+                self.audit()
+            file.write_bytes(original)
+        self.replay.side_effect = ValueError('Synthetic native inspector refusal')
+        with self.assertRaisesRegex(ValueError, 'native inspector refusal'):
+            self.audit()
+
+    def test_computer_artifacts_are_exhaustive_exact_and_cannot_be_links(self):
+        proof = self.evidence / 'local-skills-computer-x64/computer-evidence'
+        file = proof / 'accepted/computer-return.json'
+        original = file.read_bytes()
+        file.write_bytes(original + b'changed')
+        with self.assertRaisesRegex(ValueError, 'artifact bytes differ'):
+            self.audit()
+        file.write_bytes(original)
+        extra = proof / 'unlisted.json'
+        extra.write_bytes(b'{}')
+        with self.assertRaisesRegex(ValueError, 'artifact coverage differs'):
+            self.audit()
+        extra.unlink()
+        file.unlink()
+        outside = self.root / 'outside-computer.json'
+        outside.write_bytes(original)
+        file.symlink_to(outside)
+        with self.assertRaisesRegex(ValueError, 'artifact links forbidden'):
+            self.audit()
+
+    def test_computer_retained_return_and_context_are_bound_to_the_receipt(self):
+        file = self.evidence / 'local-skills-computer-arm64/local-host-evidence/computer-journey.json'
+        original = file.read_bytes()
+        for key in ('nativeAlphaReturnSha256', 'returnExportSha256'):
+            receipt = R.load(file)
+            receipt['service'][key] = 'b' * 64
+            self.write(file, receipt)
+            with self.subTest(return_field=key), self.assertRaisesRegex(ValueError, 'native same-project return differs'):
+                self.audit()
+            file.write_bytes(original)
+        proof = file.parent.parent / 'computer-evidence'
+        context = proof / 'execution-context.json'
+        self.write(context, {**R.load(context), 'workflowAttempt': '2'})
+        receipt = R.load(file)
+        next(row for row in receipt['artifacts'] if row['name'] == 'execution-context.json').update(bytes=context.stat().st_size, sha256=R.sha(context))
+        self.write(file, receipt)
+        with self.assertRaisesRegex(ValueError, 'retained execution provenance differs'):
+            self.audit()
 
     def test_missing_or_failing_or_skipped_native_result_rejected(self):
         file = self.evidence / 'local-skills-preview-arm64/local-host-evidence/native-archive.tap'
@@ -191,7 +303,15 @@ class PreviewReleaseTests(unittest.TestCase):
     def test_publication_requires_full_fleet_and_keeps_legacy_publication_disabled(self):
         local = (ROOT / '.github/workflows/local-skills.yml').read_text()
         legacy = (ROOT / '.github/workflows/next-release.yml').read_text()
-        self.assertIn('needs: [native, browser, audit, fleet]', local)
+        self.assertIn('needs: [native, browser, computer, audit, fleet]', local)
+        self.assertIn('needs: [native, browser, computer]', local)
+        self.assertIn('uses: ./.github/workflows/four-repository-service.yml', local)
+        self.assertIn('package-artifact: local-skills-preview-${{ matrix.arch }}', local)
+        for section in ('audit', 'publish'):
+            selected = re.split(r'\n  [A-Za-z][A-Za-z0-9-]*:\n', local.split('\n  ' + section + ':\n', 1)[1], maxsplit=1)[0]
+            for repository in ('AGI-Alpha-Agent-v0', 'AGIJobsv0', 'AGIJobManager'):
+                self.assertIn('repository: MontrealAI/' + repository, selected)
+            self.assertIn('Install the hash-pinned native inspector runtime', selected)
         self.assertIn('uses: ./.github/workflows/next-release.yml', local)
         self.assertIn('validation_only: true', local)
         self.assertIn('!inputs.validation_only &&', legacy)
@@ -279,19 +399,45 @@ class PreviewReleaseTests(unittest.TestCase):
                     publish.assert_not_called()
                     self.assertFalse(output.exists())
 
-    def api_fixture(self, wrong_asset=False, wrong_tag=False):
+    def api_fixture(self, wrong_asset=False, wrong_tag=False, *, fresh=False, public=False, main_responses=None):
         self.asset = self.root / 'sample.zip'
         self.asset.write_bytes(b'exact synthetic publication fixture')
         record = {'name': self.asset.name, 'size': self.asset.stat().st_size, 'digest': 'sha256:' + R.sha(self.asset)}
         if wrong_asset:
             record['digest'] = 'sha256:' + 'b' * 64
-        release = {'id': 17, 'draft': True, 'prerelease': True, 'target_commitish': self.commit, 'body': 'canonical notes', 'assets': [record], 'html_url': 'fixture'}
+        release = {'id': 17, 'draft': not public, 'prerelease': True, 'target_commitish': self.commit, 'body': 'canonical notes', 'assets': [record], 'html_url': 'fixture'}
         self.calls = []
+        self.remote_release = release
+        state = {'tag': not fresh, 'release': not fresh}
+        responses = list(main_responses or [])
         def api(path, **kwargs):
             self.calls.append((path, kwargs))
-            if path.startswith('/git/ref/'):
+            method = kwargs.get('method', 'GET')
+            if path == '/git/ref/heads/main':
+                if responses:
+                    response = responses.pop(0)
+                    if isinstance(response, Exception):
+                        raise response
+                    return response
+                return {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': self.commit}}
+            if path.startswith('/git/ref/tags/'):
+                if not state['tag']:
+                    raise urllib.error.HTTPError(path, 404, 'Not found', {}, None)
                 return {'object': {'type': 'commit', 'sha': 'b' * 40 if wrong_tag else self.commit}}
-            if kwargs.get('method') == 'PATCH':
+            if path == '/git/refs' and method == 'POST':
+                state['tag'] = True
+                self.assertEqual(json.loads(kwargs['data'])['sha'], self.commit)
+                return {'object': {'type': 'commit', 'sha': self.commit}}
+            if path.startswith('/releases/tags/') and not state['release']:
+                raise urllib.error.HTTPError(path, 404, 'Not found', {}, None)
+            if path == '/releases' and method == 'POST':
+                state['release'] = True
+                release.update(json.loads(kwargs['data']), assets=[])
+            if '/assets?name=' in path and method == 'POST':
+                self.assertEqual(kwargs['data'], self.asset.read_bytes())
+                self.assertEqual(path.split('?name=', 1)[1], self.asset.name)
+                release['assets'].append(record)
+            if method == 'PATCH':
                 payload = json.loads(kwargs['data'])
                 self.assertEqual(payload, {'draft': False, 'prerelease': True, 'make_latest': 'false', 'body': 'canonical notes'})
                 release.update(payload)
@@ -303,7 +449,8 @@ class PreviewReleaseTests(unittest.TestCase):
         result = R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
         self.assertFalse(result['draft'])
         self.assertTrue(result['prerelease'])
-        self.assertEqual(sum(path.startswith('/git/ref/') for path, _ in self.calls), 3)
+        self.assertEqual(sum(path.startswith('/git/ref/tags/') for path, _ in self.calls), 3)
+        self.assertEqual(sum(path == '/git/ref/heads/main' for path, _ in self.calls), 1)
 
     def test_differing_tag_or_existing_asset_is_never_replaced(self):
         for wrong_asset, wrong_tag in [(True, False), (False, True)]:
@@ -311,6 +458,67 @@ class PreviewReleaseTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
             self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_stale_main_cannot_reserve_the_fresh_preview_tag(self):
+        stale = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': 'b' * 40}}
+        api = self.api_fixture(fresh=True, main_responses=[stale])
+        with self.assertRaisesRegex(ValueError, 'exact current main'):
+            R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_main_advance_after_preview_reservation_keeps_the_draft_private(self):
+        current = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': self.commit}}
+        stale = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': 'b' * 40}}
+        api = self.api_fixture(fresh=True, main_responses=[current, stale])
+        with self.assertRaisesRegex(ValueError, 'exact current main'):
+            R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertTrue(self.remote_release['draft'])
+        self.assertTrue(any(path == '/git/refs' and kwargs.get('method') == 'POST' for path, kwargs in self.calls))
+        self.assertFalse(any(kwargs.get('method') == 'PATCH' for _, kwargs in self.calls))
+
+    def test_current_main_can_reserve_and_publish_the_fresh_preview(self):
+        api = self.api_fixture(fresh=True)
+        result = R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertFalse(result['draft'])
+        self.assertEqual(sum(path == '/git/ref/heads/main' for path, _ in self.calls), 2)
+
+    def test_stale_main_cannot_publish_an_existing_preview_draft(self):
+        stale = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': 'b' * 40}}
+        api = self.api_fixture(main_responses=[stale])
+        with self.assertRaisesRegex(ValueError, 'exact current main'):
+            R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertTrue(self.remote_release['draft'])
+        self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_public_preview_retry_verifies_without_mutation_after_main_advances(self):
+        stale = {'ref': 'refs/heads/main', 'object': {'type': 'commit', 'sha': 'b' * 40}}
+        api = self.api_fixture(public=True, main_responses=[stale])
+        result = R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+        self.assertFalse(result['draft'])
+        self.assertFalse(any(path == '/git/ref/heads/main' for path, _ in self.calls))
+        self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_public_preview_retry_still_rejects_changed_tag_or_asset(self):
+        for wrong_asset, wrong_tag in [(True, False), (False, True)]:
+            with self.subTest(wrong_asset=wrong_asset, wrong_tag=wrong_tag):
+                api = self.api_fixture(wrong_asset, wrong_tag, public=True)
+                with self.assertRaises(ValueError):
+                    R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+                self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
+
+    def test_invalid_main_response_fails_closed_before_preview_mutations(self):
+        invalid = [None, {}, {'object': {'type': 'commit', 'sha': self.commit}},
+            {'ref': 'refs/heads/other', 'object': {'type': 'commit', 'sha': self.commit}},
+            {'ref': 'refs/heads/main', 'object': {'type': 'tag', 'sha': self.commit}},
+            urllib.error.HTTPError('synthetic', 503, 'Unavailable', {}, None)]
+        for fresh in (True, False):
+            for response in invalid:
+                with self.subTest(fresh=fresh, response=type(response).__name__):
+                    api = self.api_fixture(fresh=fresh, main_responses=[response])
+                    with self.assertRaises((ValueError, urllib.error.HTTPError)):
+                        R.publish_assets(api, self.spec, self.commit, [self.asset], 'canonical notes')
+                    self.assertTrue(self.remote_release['draft'])
+                    self.assertFalse(any(kwargs.get('method') in ('PATCH', 'DELETE', 'POST') for _, kwargs in self.calls))
 
 
 if __name__ == '__main__':

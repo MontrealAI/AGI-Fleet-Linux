@@ -26,7 +26,7 @@ for role, row in roles.items():
         adapter = package / 'src/contract-profiles.mjs'
         expected = f"""import * as shared from '{runtime}/src/contract-profiles.mjs';
 import {{ NodeError }} from './util.mjs';
-export {{ LEGACY_CONTRACT_PROFILE, MANAGER_117_CONTRACT_PROFILE, RUNTIME_CONTRACTS, CONTRACT_ARTIFACTS }} from '{runtime}/src/contract-profiles.mjs';
+export {{ LEGACY_CONTRACT_PROFILE, MANAGER_117_CONTRACT_PROFILE, MANAGER_1193_CONTRACT_PROFILE, RUNTIME_CONTRACTS, CONTRACT_ARTIFACTS }} from '{runtime}/src/contract-profiles.mjs';
 const checked = fn => (...args) => {{
   try {{ return fn(...args); }}
   catch (error) {{

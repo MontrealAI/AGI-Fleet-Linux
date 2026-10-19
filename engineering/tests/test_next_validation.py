@@ -46,9 +46,9 @@ class CandidateAdapters(unittest.TestCase):
         self.assertEqual(before, {name: shared.sha(ENGINEERING / name) for name in shared.BASELINES})
 
     def test_native_requires_reviewed_profile_test_counts(self):
-        self.assertEqual(candidate()['native']['complete'], {'tests': 3931, 'files': 344})
+        self.assertEqual(candidate()['native']['complete'], {'tests': 3932, 'files': 344})
         for counts in ({'tests': 3917, 'files': 343}, {'tests': 3930, 'files': 344},
-                       {'tests': 3931, 'files': 343}, {'tests': 3932, 'files': 344}):
+                       {'tests': 3932, 'files': 343}, {'tests': 3933, 'files': 344}):
             changed = candidate()
             changed['native']['complete'] = counts
             with self.subTest(counts=counts), self.assertRaisesRegex(ValueError, 'explicit review'):
