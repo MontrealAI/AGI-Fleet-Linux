@@ -4,8 +4,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import vm from 'node:vm';
 import {spawnSync} from 'node:child_process';
-import {createHash} from 'node:crypto';
+import {createHash,webcrypto} from 'node:crypto';
 import {fixture,task} from './helpers.mjs';
 import {canonical,digest,parseStrict,id} from '../contracts.mjs';
 import {LocalRuntime} from '../supervisor/runtime.mjs';
@@ -65,6 +66,22 @@ test('native artifact exports retain actor scope, fixed names and exact hashes a
     const artifacts=computerArtifactInventory(directory),observation={backend:'native-alpha-computer-scripted/v1',artifactDirectory:run+'-fixture/computer',artifacts};
     f.runtime.store.db.prepare("INSERT INTO runs VALUES(?,?,?,'complete',?,?)").run(run,a.id,g.grant,canonical({reservedAt:Date.now()}),canonical({observation}));f.runtime.stop({actor:null},f.operator);f.backend.inspect=()=>({supported:false,code:'COMPUTER_DISABLED'});
     const returned=await f.runtime.dispatch('computer-export',{actor:a.id,run},own);assert.equal(returned.sha256,digest(returned.content));const png=await f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'screen-000.png'},own);assert.equal(digest(Buffer.from(png.contentBase64,'base64')),png.sha256);
+    const saved=[],context={document:{querySelectorAll:()=>[],getElementById:()=>({})},TextEncoder,Uint8Array,crypto:webcrypto,atob,
+      dispatch:(action,input)=>f.runtime.dispatch(action,input,own),retain:(...value)=>saved.push(value)};
+    const script=fs.readFileSync(new URL('../../local-dashboard/app.js',import.meta.url),'utf8');
+    vm.runInNewContext(script+';button=(label,fn)=>({label,run:fn});api=dispatch;save=retain;globalThis.outputs=appendComputerOutputs;globalThis.setLanguage=value=>{language=value;};',context);
+    for(const language of ['en','fr']){
+      context.setLanguage(language);const buttons=[],row={append:value=>buttons.push(value)};
+      context.outputs(row,{actor:a.id,id:run},{files:[],artifacts,nativeState:'review'});
+      assert.equal(buttons.length,2,'actual backend result shape exposes native return and screenshot');
+      assert.equal(buttons[0].label,language==='fr'?'Enregistrer le retour natif pour Alpha':'Save native return for Alpha');
+      assert.equal(buttons[1].label,(language==='fr'?'Enregistrer la capture ':'Save screenshot ')+'screen-000.png');
+      await buttons[0].run();assert.equal(saved.at(-1)[0],'computer-return.json');assert.equal(saved.at(-1)[1],returned.content);
+      await buttons[1].run();assert.equal(saved.at(-1)[0],'screen-000.png');assert.deepEqual(Buffer.from(saved.at(-1)[1]),Buffer.from(png.contentBase64,'base64'));
+    }
+    for(const result of [null,{files:[{name:'computer-return.json'}]},{files:[],artifacts:[]},{files:[],artifacts:[{name:'computer-return.json',mediaType:'image/png'}]}]){
+      const buttons=[];context.outputs({append:value=>buttons.push(value)},{actor:a.id,id:run},result);assert.equal(buttons.length,0,'missing native-return JSON inventory cannot offer computer downloads');
+    }
     await assert.rejects(f.runtime.dispatch('computer-export',{actor:a.id,run},other),/CLIENT_SCOPE_DENIED/);await assert.rejects(f.runtime.dispatch('computer-export',{actor:b.id,run},own),/CLIENT_SCOPE_DENIED/);
     await assert.rejects(f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'../computer-return.json'},own),/COMPUTER_ARTIFACT_NAME/);
     write(path.join(directory,'screen-000.png'),'changed');await assert.rejects(f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'screen-000.png'},own),/COMPUTER_ARTIFACT_CHANGED/);

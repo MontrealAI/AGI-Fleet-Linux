@@ -134,7 +134,7 @@ async function checkedComputerBytes(bytes,expected){
   return bytes;
 }
 function appendComputerOutputs(row,run,result){
-  if(!result||!Array.isArray(result.files)||!result.files.some(file=>file.name==='computer-return.json'))return;
+  if(!result||!Array.isArray(result.artifacts)||!result.artifacts.some(artifact=>artifact.name==='computer-return.json'&&artifact.mediaType==='application/json'))return;
   row.append(button(language==='fr'?'Enregistrer le retour natif pour Alpha':'Save native return for Alpha',async()=>{
     const value=await api('computer-export',{actor:run.actor,run:run.id});
     if(value.name!=='computer-return.json'||typeof value.content!=='string')throw Error('COMPUTER_RETURN_INVALID');
