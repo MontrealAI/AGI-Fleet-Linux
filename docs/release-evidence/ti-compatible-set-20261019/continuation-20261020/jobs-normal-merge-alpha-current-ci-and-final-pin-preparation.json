@@ -1,0 +1,451 @@
+{
+  "state": {
+    "asOf": "2026-10-20T20:44:03.629Z",
+    "completion": false,
+    "userGoal": "Qualified normal merges, fresh releases, exact public installed-package ONE journey, all four live sites",
+    "jobs": {
+      "pr": 4005,
+      "source": "604d10094f3b7fede53406ae0e40f9f489155a3b",
+      "tree": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+      "main": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+      "status": "PR4005 normal merged after all23originalworkflow groups,37requiredcontexts and103checks97SUCCESS6expectedSKIP, clear currentreview/0open findings. Current finalmain d023a717bd01cad92b51b86a69d64d1fef8e51a0 preserves exact reviewed604d tree. Original finalmain workflows and publisher now running; no source release yet.",
+      "fix": "Owned private external output; guide and publisher harnesses aligned",
+      "targetedBenignTests": {
+        "pass": 7,
+        "fail": 0
+      },
+      "evidence": {
+        "commit": "6d314bbbdd133ac25a1689db8e3548546a5fdc6f",
+        "tree": "80f4b67463e35d2bc3a09d54a820f0a1654f4caf"
+      },
+      "next": "Require exact d023 allfinalmain normal workflows/processed-service/native/compiler/API/archive checks and original Qualified rc.16publisher actualrelease; no intermediate finish.",
+      "pythonReviewComment": 6299575988,
+      "javascript": {
+        "run": 39482430424,
+        "producer": 118834137073,
+        "collector": 118839993292,
+        "results": 43,
+        "quality": 8,
+        "securityLike": 35,
+        "evidence": "dc9882788b1e48628e8a8f54b130b9a1cc224b05"
+      },
+      "currentSourceGroups": {
+        "success": 22,
+        "in_progress": 1
+      },
+      "preparedInstall": {
+        "commit": "604d10094f3b7fede53406ae0e40f9f489155a3b",
+        "tree": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+        "parent": "d8544f8173b3c01faa88d50e7145ec455bc5e170",
+        "branchMoved": true,
+        "records": {
+          "scannerReview": {
+            "canonicalBytes": 47492,
+            "canonicalSha256": "3baad51943b136139bcb7d8fa1cb16864c9056679eb67a9cde94a44a72c42d19",
+            "source": "d8544f8173b3c01faa88d50e7145ec455bc5e170"
+          },
+          "pythonScannerReview": {
+            "canonicalBytes": 742109,
+            "canonicalSha256": "fc3768fe2d8ba646a9fd95e2a905ae833e2439a809fb930509c2223f500d4549",
+            "source": "d8544f8173b3c01faa88d50e7145ec455bc5e170"
+          },
+          "notesReview": {
+            "canonicalBytes": 70062,
+            "canonicalSha256": "8a56a48a0722b82228bb8840e10968df1545eab79cc62bbabd4011a477e1e725",
+            "source": "d8544f8173b3c01faa88d50e7145ec455bc5e170"
+          }
+        }
+      },
+      "reviewedS1": {
+        "source": "d8544f8173b3c01faa88d50e7145ec455bc5e170",
+        "tree": "14140fc8a3ce95e0ca5b15a421dc97ed190ec735",
+        "pythonComment": 6299575988,
+        "javascriptComment": 6300064255
+      },
+      "reconciliations": {
+        "javascript": {
+          "bytes": 14484,
+          "sha256": "efc8b90ed922d73ec2bd1298f4e9c18b378f82b92f5fac0b963cffc95aeeaa13",
+          "status": "PASS_STATIC"
+        },
+        "python": {
+          "bytes": 8369,
+          "sha256": "d15451efc4b7ee8852625d16fd1b46303c1184e70ffb65f233982f43884fbb1a",
+          "status": "BOUNDED_POLICY_PASS",
+          "unexplainedParserCounterDelta": "8→6; retained separately, no whole-report equality claim"
+        }
+      },
+      "normalMerge": {
+        "sha": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+        "tree": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+        "parents": [
+          "5cd671e6f3f3a29e12cede966842f4bc99ece59f",
+          "604d10094f3b7fede53406ae0e40f9f489155a3b"
+        ],
+        "reviewedCommit": "604d10094f3b7fede53406ae0e40f9f489155a3b",
+        "evidence": "829c1e582bd94ac247d9a12eb61d0ed9dd1fd07e"
+      }
+    },
+    "alpha": {
+      "main": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+      "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+      "oldReviewedMergedMain": "558f798a9b9cc73c1db01905858aad8852e11092",
+      "normalDescendant": true,
+      "unchangedPriorLeaves": 3609,
+      "addedPapers": [
+        "docs/Out_Evolve.pdf",
+        "docs/Out_Evolve.tex",
+        "docs/The_World_as_an_Output.pdf",
+        "docs/The_World_as_an_Output.tex"
+      ],
+      "agentRun": 39484204330,
+      "agentAttempt": 1,
+      "agentJobs": {
+        "success": 27,
+        "inProgress": 2,
+        "regression": 118845385781,
+        "historical": 118845385952
+      },
+      "legacyRun": 39484204335,
+      "legacyAttempt": 1,
+      "legacyStatus": "Current a6 legacy39484204335 now IN_PROGRESS; intermediate10639480361058 completedCANCELLED historical only.",
+      "release": "v1.36.0 actual404/notpublished",
+      "prior558OperatorBlocker": "SUPERSEDED_HISTORICAL_NOT_CURRENT_BLOCKER: newer owner paper commits changed main; follow new current source. Proposed558rootreplay aborted before mutation.",
+      "requiredNext": "Follow current exactmain fullCI/publisher, preserve all new papers, obtain current source continuity/review binding before final source selection and refresh Fleet Alpha/computer pins to actual published source.",
+      "evidence": {
+        "commit": "cdb5672231a2ff8f508c78e5e9b082eeaadc0a37",
+        "tree": "c7709c2f43426fd449eae38ce66a4c9c133ac7a5"
+      },
+      "currentSourceContinuityReview": {
+        "status": "PASS_STATIC_ONLY",
+        "source": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+        "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+        "evidence": "a5ae385888959b6a7fcbc982fcf5f8d321ec9a66",
+        "comment": 6301065552
+      }
+    },
+    "fleet": {
+      "pr": 61,
+      "source": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "tree": "ed382a6ac343bc6b1759af072bca4cb1aa031c92",
+      "status": "All10original current Fleet442workflow groupsSUCCESS, including Linuxx64/ARM64/native/audit/aggregate. Public releases and final pins/eligible owner stillrequired;2originalP1threads intentionallyOPEN.",
+      "blockers": [
+        {
+          "owner": "Eligible independent Fleet functional owner",
+          "next": "Review final exact source and explicitly authorize recovery/source-custody dispositions; blocked agent lane cannot be retried or substituted."
+        },
+        {
+          "owner": "Root release coordinator",
+          "next": "After actual fresh Jobs and current Alpha a6d20-or-later publications, refresh BOTH final Jobs/Alpha pins and computer profile/README tuples, then full fresh Fleet qualification and eligible owner review."
+        }
+      ],
+      "evidence": {
+        "commit": "51c26d4a116c812a20849d21466883ec3c147a06",
+        "tree": "b6fab8216d6e5fe00434548f96e618fcad8c469d"
+      },
+      "pinPreparation": {
+        "status": "UNCOMMITTED only; pending actual Alpha/Jobspublications",
+        "paths": 5,
+        "proposedTree": "ffbab0168604c563a7c8df3bf3b7dce8153ba60e"
+      }
+    },
+    "manager": {
+      "source": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "release": "v1.19.5",
+      "releaseId": 417952385,
+      "status": "Released and frozen; final live verification still required"
+    },
+    "final": {
+      "publicInstalledONE": false,
+      "D": false,
+      "E": false,
+      "T": false,
+      "allFourFinalLive": false,
+      "rootReadbackExpansion": {
+        "status": "11offlineunitsPASS plus independent static reviewPASS; no finalF",
+        "paths": 22,
+        "gitBlob": "e46db1d0b9136ed73ef3847b4e5591ff1df0c826",
+        "evidence": "6fcbde029f077f349d184470535a252f0173b84f"
+      }
+    },
+    "storage": {
+      "free": "29GB available / 4%used",
+      "deleted": false,
+      "paidCommitment": false
+    },
+    "mainnet": {
+      "lookup": "Completed read-only block identity/timestamp matched retained ENS",
+      "stateChanges": 0
+    }
+  },
+  "pinPreparation": {
+    "status": "UNCOMMITTED_PREPARATION_ONLY_NO_OBJECTS_OR_REFS_CREATED_PENDING_BOTH_ACTUAL_RELEASES",
+    "source": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+    "baseTree": "ed382a6ac343bc6b1759af072bca4cb1aa031c92",
+    "proposedTree": "ffbab0168604c563a7c8df3bf3b7dce8153ba60e",
+    "mapping": [
+      [
+        "558f798a9b9cc73c1db01905858aad8852e11092",
+        "a6d20a93c7c5b7430bf42d2367701b350513e90d"
+      ],
+      [
+        "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+        "15d5101fee02fe2cc81d015b2af4a048ff9d9a22"
+      ],
+      [
+        "5cd671e6f3f3a29e12cede966842f4bc99ece59f",
+        "d023a717bd01cad92b51b86a69d64d1fef8e51a0"
+      ],
+      [
+        "2390e38d2c5ade29f11cf6656b8f0732cba2fe5a",
+        "d12a01aeb823ba667ba5e6d15df2c9cfa633d674"
+      ]
+    ],
+    "files": [
+      {
+        "path": "engineering/integration/compatibility-set.json",
+        "mode": "100644",
+        "type": "blob",
+        "before": "4a96553faf9bbf681e0e864081b9085ad269a8aa",
+        "sha": "0e8b566c6a5da01b8ffc1b48ac1c4dca8c95cff7",
+        "bytes": 461,
+        "sha256": "d0980fc620e315381f88f6f6ad3ea2e00f18ed49f44d084d13a7cf0e47a82a21",
+        "content": "{\n  \"schema\": \"agi-fleet/four-repository-compatibility-inputs/v1\",\n  \"alpha\": \"a6d20a93c7c5b7430bf42d2367701b350513e90d\",\n  \"jobs\": \"d023a717bd01cad92b51b86a69d64d1fef8e51a0\",\n  \"manager\": \"4d4c32685eebf23b0aa35dbb45abe23ac8a261cb\",\n  \"fleet\": \"workflow-checked-out-commit\",\n  \"scope\": \"candidate-unqualified-until-hosted-native-workflow-passes\",\n  \"publicNonPersonalOnly\": true,\n  \"liveProvider\": false,\n  \"fundedWork\": false,\n  \"productionQualified\": false\n}\n",
+        "replacements": [
+          {
+            "from": "558f798a9b9cc73c1db01905858aad8852e11092",
+            "to": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+            "count": 1
+          },
+          {
+            "from": "5cd671e6f3f3a29e12cede966842f4bc99ece59f",
+            "to": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "path": "engineering/transformation/source-pins.json",
+        "mode": "100644",
+        "type": "blob",
+        "before": "310e0eeee14bd7e8728f65edef3c19c393d94b41",
+        "sha": "eba6144cabcbd0399fb0078fb35beced2b00246b",
+        "bytes": 1012,
+        "sha256": "ac2c622e8a0e8c36a792f16e673b89e597efb1ebda89dcb4a7c7d9b7732edb55",
+        "content": "{\n  \"schema\": \"agi-fleet/ti-installed-source-pins/v1\",\n  \"alpha\": {\n    \"repository\": \"MontrealAI/AGI-Alpha-Agent-v0\",\n    \"commit\": \"a6d20a93c7c5b7430bf42d2367701b350513e90d\",\n    \"tree\": \"15d5101fee02fe2cc81d015b2af4a048ff9d9a22\"\n  },\n  \"manager\": {\n    \"repository\": \"MontrealAI/AGIJobManager\",\n    \"commit\": \"4d4c32685eebf23b0aa35dbb45abe23ac8a261cb\",\n    \"tree\": \"3676cb41be9c5c5110cc266e0ff6f7c20bfbec86\"\n  },\n  \"jobs\": {\n    \"repository\": \"MontrealAI/AGIJobsv0\",\n    \"commit\": \"d023a717bd01cad92b51b86a69d64d1fef8e51a0\",\n    \"tree\": \"d12a01aeb823ba667ba5e6d15df2c9cfa633d674\"\n  },\n  \"computer\": {\n    \"repository\": \"MontrealAI/AGI-Alpha-Agent-v0\",\n    \"commit\": \"a6d20a93c7c5b7430bf42d2367701b350513e90d\",\n    \"tree\": \"15d5101fee02fe2cc81d015b2af4a048ff9d9a22\"\n  },\n  \"computerScope\": \"current-Alpha-source; fresh-installed-native-browser-qualification-required\",\n  \"publicNonpersonalOnly\": true,\n  \"paidTI\": false,\n  \"liveProvider\": false,\n  \"importedAuthority\": \"none\",\n  \"productionQualified\": false\n}\n",
+        "replacements": [
+          {
+            "from": "558f798a9b9cc73c1db01905858aad8852e11092",
+            "to": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+            "count": 2
+          },
+          {
+            "from": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+            "to": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+            "count": 2
+          },
+          {
+            "from": "5cd671e6f3f3a29e12cede966842f4bc99ece59f",
+            "to": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+            "count": 1
+          },
+          {
+            "from": "2390e38d2c5ade29f11cf6656b8f0732cba2fe5a",
+            "to": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "path": "local-runtime/computer/profile.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "before": "4d46889a1b455106c81d4bd5f289fcd82f22e977",
+        "sha": "e21cf7f9dd4d6256757e55e8028cdefbf7a1cf36",
+        "bytes": 12617,
+        "sha256": "994fb91d070f5df692406835ae8913b8700e3fc8cc9e14a3f6793b39ff980554",
+        "content": "// SPDX-License-Identifier: MIT\n// Owner-installed control configuration; imported tasks cannot select code, tools or providers.\nimport fs from 'node:fs';\nimport path from 'node:path';\nimport os from 'node:os';\nimport {spawnSync} from 'node:child_process';\nimport {createHash} from 'node:crypto';\nimport {fileURLToPath} from 'node:url';\nimport {need,keys,digest,canonical,parseStrict} from '../contracts.mjs';\nimport {readPrivate} from '../private-file.mjs';\nimport {decodeUTF8} from '../primitives.mjs';\nimport {publicOnly} from '../../fleet/successor/vendor/manager/site/assets/successor/safe.mjs';\n\nexport const ALPHA_COMPUTER_SOURCE=Object.freeze({commit:'a6d20a93c7c5b7430bf42d2367701b350513e90d',tree:'15d5101fee02fe2cc81d015b2af4a048ff9d9a22'});\nexport const LAUNCHER=fileURLToPath(new URL('./launcher.py',import.meta.url));\nexport const COMPUTER_LIMITS=Object.freeze({wallMs:150000,maxSeconds:120,maxActions:30,maxTurns:10,\n  handoffBytes:1_000_000,artifactBytes:2_000_000,artifactTotalBytes:80_000_000,historyBytes:320_000_000});\nexport const COMPUTER_EXECUTABLE_BYTES=128*1024*1024;\nconst ENV=Object.freeze({PATH:'/usr/bin:/bin',LANG:'C.UTF-8',PYTHONDONTWRITEBYTECODE:'1'});\nexport const computerEnvironment=()=>({...ENV});\nexport function computerInvocation(profile,mode){\n  const cache=fs.mkdtempSync(path.join(os.tmpdir(),'fleet-computer-cache-'));fs.chmodSync(cache,0o700);\n  return {executable:profile.python,args:['-I','-S','-B','-X','pycache_prefix='+cache,LAUNCHER,mode],close:()=>fs.rmSync(cache,{recursive:true,force:true})};\n}\nfunction fileHash(file,maximum=32_000_000,executable=false){\n  need(path.isAbsolute(file)&&fs.realpathSync(file)===file,'COMPUTER_RUNTIME_PATH');\n  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);\n  try{\n    const before=fs.fstatSync(fd);need(before.isFile()&&(before.uid===0||before.uid===process.getuid())&&!(before.mode&0o022)&&before.size<=maximum&&(!executable||(before.size>0&&Boolean(before.mode&0o111))),'COMPUTER_RUNTIME_FILE');\n    const hash=createHash('sha256'),buffer=Buffer.alloc(65536);let length=0,remaining=before.size+1;\n    while(remaining){const count=fs.readSync(fd,buffer,0,Math.min(buffer.length,remaining),null);if(count===0)break;hash.update(buffer.subarray(0,count));length+=count;remaining-=count;}\n    const after=fs.fstatSync(fd);need(length===before.size&&['dev','ino','mode','size','mtimeMs','ctimeMs'].every(key=>before[key]===after[key]),'COMPUTER_RUNTIME_CHANGED');return hash.digest('hex');\n  }\n  finally{fs.closeSync(fd);}\n}\nexport function hashComputerExecutable(file){return fileHash(file,COMPUTER_EXECUTABLE_BYTES,true);}\nfunction git(root,args){const result=spawnSync('/usr/bin/git',['--no-replace-objects','-c','core.fsmonitor=false','-C',root,...args],{encoding:'utf8',timeout:10000,maxBuffer:4_000_000,env:{...ENV,GIT_CONFIG_GLOBAL:'/dev/null',GIT_CONFIG_SYSTEM:'/dev/null',GIT_CONFIG_NOSYSTEM:'1',GIT_NO_REPLACE_OBJECTS:'1'}});need(result.status===0,'COMPUTER_ALPHA_SOURCE');return result.stdout.trim();}\nexport function verifyAlphaImportClosure(root,tracked){\n  need(path.isAbsolute(root)&&fs.realpathSync(root)===root,'COMPUTER_ALPHA_SOURCE');const rootStat=fs.statSync(root);need((rootStat.uid===0||rootStat.uid===process.getuid())&&!(rootStat.mode&0o022),'COMPUTER_ALPHA_SOURCE');\n  const inspect=(relative,recursive)=>{\n    const file=path.join(root,relative),stat=fs.lstatSync(file);need(!stat.isSymbolicLink()&&fs.realpathSync(file)===file&&(stat.uid===0||stat.uid===process.getuid())&&!(stat.mode&0o022),'COMPUTER_ALPHA_SOURCE');\n    if(stat.isDirectory()){\n      if(path.basename(relative)==='__pycache__')return;\n      if(recursive)for(const name of fs.readdirSync(file))inspect(relative?relative+'/'+name:name,true);\n    }else if(/\\.(?:py|pyc|pyd|so)$/.test(relative)||relative==='requirements-agent.lock'){\n      need(stat.isFile()&&tracked.has(relative)&&stat.size<=32_000_000,'COMPUTER_UNTRACKED_IMPORT');const raw=fs.readFileSync(file);need(createHash('sha1').update('blob '+raw.length+'\\0').update(raw).digest('hex')===tracked.get(relative),'COMPUTER_ALPHA_SOURCE');\n    }\n  };\n  inspect('alpha_factory_v1',true);inspect('requirements-agent.lock',false);\n  for(const name of fs.readdirSync(root)){\n    if(name.startsWith('.')||name==='alpha_factory_v1'||name==='node_modules')continue;\n    const file=path.join(root,name),stat=fs.lstatSync(file);\n    need(!stat.isSymbolicLink(),'COMPUTER_ALPHA_SOURCE');\n    if(stat.isFile()&&/\\.(?:py|pyc|pyd|so)$/.test(name))inspect(name,false);\n    if(stat.isDirectory()&&fs.readdirSync(file).some(entry=>entry.startsWith('__init__.')&&/\\.(?:py|pyc|pyd|so)$/.test(entry)))inspect(name,true);\n  }\n}\nfunction source(root){\n  need(git(root,['rev-parse','HEAD'])===ALPHA_COMPUTER_SOURCE.commit&&git(root,['rev-parse','HEAD^{tree}'])===ALPHA_COMPUTER_SOURCE.tree,'COMPUTER_ALPHA_SOURCE');\n  const rows=git(root,['ls-tree','-r',ALPHA_COMPUTER_SOURCE.commit]).split('\\n'),tracked=new Map();\n  for(const row of rows){const match=/^(100644|100755) blob ([a-f0-9]{40})\\t(.+)$/.exec(row);if(match)tracked.set(match[3],match[2]);}\n  verifyAlphaImportClosure(root,tracked);return digest(rows);\n}\nexport function validateComputerInput(input){\n  keys(input,['handoffRaw','publicNonpersonal']);need(input.publicNonpersonal===true,'COMPUTER_PUBLIC_NONPERSONAL_REQUIRED');\n  need(typeof input.handoffRaw==='string'&&Buffer.byteLength(input.handoffRaw)<=COMPUTER_LIMITS.handoffBytes,'COMPUTER_HANDOFF_SIZE');\n  publicOnly(input.handoffRaw);const handoff=parseStrict(input.handoffRaw,COMPUTER_LIMITS.handoffBytes);\n  need(handoff.schema==='successor-alpha-computer-handoff/v1'&&handoff.authority==='none'&&handoff.settlement==='not_connected','COMPUTER_HANDOFF_SCHEMA');\n  need(['public','synthetic'].includes(handoff.task?.input_rights),'COMPUTER_PUBLIC_NONPERSONAL_REQUIRED');\n  return handoff;\n}\nexport function callComputer(profile,mode,request={},timeout=15000){\n  const input=canonical({profile,...request}),command=computerInvocation(profile,mode);let result;\n  try{result=spawnSync(command.executable,command.args,{input,encoding:'utf8',timeout,maxBuffer:2_100_000,env:computerEnvironment()});}finally{command.close();}\n  const code=String(result.stderr||'').trim();need(result.status===0,/^[A-Z0-9_]{1,100}$/.test(code)?code:'COMPUTER_NATIVE_VALIDATION_FAILED');\n  return parseStrict(result.stdout,2_100_000);\n}\nexport function inspectComputerInstallation(configFile,{checkDocker=true}={}){\n  const disabled={supported:false,code:'COMPUTER_DISABLED',productionQualified:false,liveProvider:'UNCOMMISSIONED_PROVIDER_COST'};\n  if(configFile===null||configFile===undefined)return disabled;\n  try{\n    need(path.isAbsolute(configFile)&&fs.realpathSync(configFile)===configFile,'COMPUTER_PROFILE_PATH');const parent=fs.statSync(path.dirname(configFile));need(parent.uid===process.getuid()&&!(parent.mode&0o077),'COMPUTER_PROFILE_PARENT');const raw=readPrivate(configFile,2_000_000),profile=parseStrict(decodeUTF8(raw),2_000_000);\n    keys(profile,['schema','enabled','alphaRoot','source','python','pythonSha256','image','dockerSha256','provider','fixture','fixtureSha256','runtimeFiles']);\n    need(profile.schema==='agi-fleet/alpha-computer-installation/v1'&&profile.enabled===true,'COMPUTER_PROFILE_INVALID');\n    need(profile.provider?.mode==='scripted-zero-cost','UNCOMMISSIONED_PROVIDER_COST');keys(profile.provider,['mode']);\n    need(canonical(profile.source)===canonical(ALPHA_COMPUTER_SOURCE)&&/^sha256:[a-f0-9]{64}$/.test(profile.image),'COMPUTER_PROFILE_INVALID');\n    keys(profile.fixture,['handoffSha256','actions']);need(/^[a-f0-9]{64}$/.test(profile.fixture.handoffSha256)&&Array.isArray(profile.fixture.actions)&&profile.fixture.actions.length<=30,'COMPUTER_FIXTURE_INVALID');\n    need(profile.fixtureSha256===digest(profile.fixture),'COMPUTER_FIXTURE_CHANGED');publicOnly(canonical(profile.fixture.actions));\n    const sourceSha256=source(profile.alphaRoot);need(hashComputerExecutable(profile.python)===profile.pythonSha256,'COMPUTER_PYTHON_CHANGED');\n    need(profile.runtimeFiles&&typeof profile.runtimeFiles==='object'&&!Array.isArray(profile.runtimeFiles)&&Object.keys(profile.runtimeFiles).length>0&&Object.keys(profile.runtimeFiles).length<=2048,'COMPUTER_RUNTIME_FILES');\n    for(const [file,sha256] of Object.entries(profile.runtimeFiles))need(/^[a-f0-9]{64}$/.test(sha256)&&fileHash(file)===sha256,'COMPUTER_RUNTIME_CHANGED');\n    if(checkDocker){\n      need(hashComputerExecutable('/usr/bin/docker')===profile.dockerSha256,'COMPUTER_DOCKER_CHANGED');\n      const image=spawnSync('/usr/bin/docker',['image','inspect','--format','{{.Id}}',profile.image],{encoding:'utf8',timeout:5000,maxBuffer:8192,env:ENV});need(image.status===0&&image.stdout.trim()===profile.image,'COMPUTER_IMAGE_UNAVAILABLE');\n    }\n    const runtimeIdentity=digest({profile:digest(raw),sourceSha256,launcher:fileHash(LAUNCHER),runtimeFiles:profile.runtimeFiles,python:profile.pythonSha256,docker:profile.dockerSha256});\n    return {supported:true,code:null,mode:'scripted-zero-cost',runtimeIdentity,alphaCommit:profile.source.commit,image:profile.image,\n      provider:{mode:'scripted-zero-cost',model:'SCRIPTED_ZERO_COST_REHEARSAL_'+profile.fixtureSha256},productionQualified:false,\n      liveProvider:'UNCOMMISSIONED_PROVIDER_COST',profile};\n  }catch(error){return {...disabled,code:/^[A-Z0-9_]{1,100}$/.test(error.code||error.message)?error.code||error.message:'COMPUTER_CONFIGURATION_INVALID'};}\n}\nconst PREPARED=new Map();\nexport function prepareComputer(input,installation){\n  validateComputerInput(input);need(installation?.supported,installation?.code||'COMPUTER_DISABLED');\n  need(digest(input.handoffRaw)===installation.profile.fixture.handoffSha256,'COMPUTER_FIXTURE_BINDING');\n  const key=installation.runtimeIdentity+':'+digest(input.handoffRaw);let prepared=PREPARED.get(key);\n  if(!prepared){prepared=callComputer(installation.profile,'prepare',{handoffRaw:input.handoffRaw});if(PREPARED.size>=128)PREPARED.clear();PREPARED.set(key,prepared);}\n  return {...prepared,runtimeIdentity:installation.runtimeIdentity,alphaCommit:installation.alphaCommit,image:installation.image,\n    evidenceClass:'NATIVE_ALPHA_SCRIPTED_REHEARSAL',artifactReservationBytes:COMPUTER_LIMITS.artifactTotalBytes,\n    providerCost:'SCRIPTED_ZERO_PROVIDER_REQUESTS',deviceCost:'UNKNOWN',independentReview:false,productionQualified:false};\n}\nexport function createComputerProfile({alphaRoot,python,image,handoffRaw,actions,output}){\n  validateComputerInput({handoffRaw,publicNonpersonal:true});publicOnly(canonical(actions));need(/^sha256:[a-f0-9]{64}$/.test(image),'COMPUTER_IMAGE_INVALID');source(alphaRoot);\n  need(path.isAbsolute(python)&&fs.realpathSync(python)===python,'COMPUTER_PYTHON_PHYSICAL_REQUIRED');const fixture={handoffSha256:digest(handoffRaw),actions},partial={alphaRoot,python};\n  const probe=callComputer({...partial,source:ALPHA_COMPUTER_SOURCE},'probe');\n  const profile={schema:'agi-fleet/alpha-computer-installation/v1',enabled:true,alphaRoot,source:ALPHA_COMPUTER_SOURCE,\n    python,pythonSha256:hashComputerExecutable(python),image,dockerSha256:hashComputerExecutable('/usr/bin/docker'),provider:{mode:'scripted-zero-cost'},\n    fixture,fixtureSha256:digest(fixture),runtimeFiles:probe.files};\n  callComputer(profile,'prepare',{handoffRaw});need(path.isAbsolute(output),'COMPUTER_PROFILE_PATH');\n  const fd=fs.openSync(output,'wx',0o600);try{fs.writeFileSync(fd,canonical(profile));fs.fsyncSync(fd);}finally{fs.closeSync(fd);}\n  return {profile:output,authority:'none',executionStarted:false,providerRequests:0,next:'Start the service with --computer-config, inspect doctor, activate and prepare a new exact one-use grant.'};\n}\nif(process.argv[1]===fileURLToPath(import.meta.url)){\n  try{const args=process.argv.slice(2),values={};need(args.length===12,'COMPUTER_PROFILE_ARGUMENTS');for(let index=0;index<args.length;index+=2){need(['--alpha-root','--python','--image','--handoff','--actions','--output'].includes(args[index])&&!Object.hasOwn(values,args[index]),'COMPUTER_PROFILE_ARGUMENTS');values[args[index]]=args[index+1];}\n    console.log(JSON.stringify(createComputerProfile({alphaRoot:path.resolve(values['--alpha-root']),python:path.resolve(values['--python']),image:values['--image'],handoffRaw:decodeUTF8(readPrivate(path.resolve(values['--handoff']),1_000_000)),actions:parseStrict(decodeUTF8(readPrivate(path.resolve(values['--actions']),100000)),100000),output:path.resolve(values['--output'])})));}\n  catch(error){console.error(JSON.stringify({error:error.code||'COMPUTER_PROFILE_FAILED'}));process.exitCode=1;}\n}\n",
+        "replacements": [
+          {
+            "from": "558f798a9b9cc73c1db01905858aad8852e11092",
+            "to": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+            "count": 1
+          },
+          {
+            "from": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+            "to": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "path": "local-runtime/computer/README.md",
+        "mode": "100644",
+        "type": "blob",
+        "before": "41dbc4614fd98f16667035ac0b46bb4a4a52e4f6",
+        "sha": "1f6e0d5ce21b43de4c2b7c324ca832f577a0a756",
+        "bytes": 9147,
+        "sha256": "ec00da125ca877cb64371ad71ebbc73c804a867f1369b18e90160fc330bd86a5",
+        "content": "# Optional Alpha Computer Use rehearsal\n\nThis optional Linux x64/ARM64 route executes an owner-installed, fixed action fixture in Alpha's real Docker browser. It is disabled by default. It makes **zero model-provider requests** and is labelled a scripted rehearsal in its admission, native return and history. Device, Docker, human review and other execution costs remain UNKNOWN. This route does not commission paid work, verify commercial acceptance, establish independent review, sign transactions or connect settlement. Every live provider configuration is refused with `UNCOMMISSIONED_PROVIDER_COST` before invocation.\n\nThe existing deterministic CSV routes and immutable historical installations remain separate. Imported project or handoff data cannot choose an executable, Python environment, source checkout, image, model, endpoint or action sequence.\n\n## Install an exact private profile\n\nUse a disposable engineering installation for qualification. Keep the Fleet state and configuration outside either source checkout, in an owner-controlled directory with permissions 0700. Use an absolute, physical Alpha checkout at commit `a6d20a93c7c5b7430bf42d2367701b350513e90d`, tree `15d5101fee02fe2cc81d015b2af4a048ff9d9a22`, with its hash-locked Python runtime dependencies installed. Source files and their import directories must be real, trusted-owner files, without group/world write permissions. Tracked importable bytes are checked independently of Git's index flags; untracked importable source and symlink import directories are rejected. The launcher executes Python source rather than preexisting cached bytecode. Use a physical interpreter binary or a virtual environment created with `python -m venv --copies`; symlink interpreter paths are refused. The installed Python executable and loaded runtime dependency files are fingerprinted. Isolated startup suppresses user site, executable `.pth` files and `sitecustomize`; dependencies must be installed directly in that interpreter’s or physical virtual environment’s `site-packages`. Each invocation uses a new empty bytecode-cache prefix before Python starts, and writes no bytecode.\n\nInstall the normal Fleet Linux bubblewrap/prlimit prerequisites and `/usr/bin/docker`. Build the reviewed Alpha Computer Use image using Alpha's `examples/successor-workbench/computer/Dockerfile`. Obtain and independently inspect its immutable `sha256:` image ID; mutable tags are rejected. The Docker binary and exact available image ID are checked during admission and dispatch. No general host-browser fallback is available. A managed Alpha browser container already present on the host blocks dispatch; use a dedicated engineering host without concurrent standalone Alpha sessions.\n\nEvery protected invocation captures Alpha's pure Python SDK through bounded regular-file descriptors and verifies those same retained bytes against the exact Git objects and file modes. Imports and lazy imports compile that private capture; added Alpha modules, preloaded Alpha contexts and checkout dependency shadows are refused. The native reader frame is checked against the captured reader and browser source before a permit or child can proceed. Its original dependency frame remains unchanged. The owner-installed interpreter, standard library and fourteen hash-locked third-party dependency blocks, including native extensions, remain an explicit trusted installation boundary; this guard does not snapshot that whole environment. The browser executes the separately pinned immutable Docker image. The engineering host-laboratory fallback does not qualify this installed Docker guarantee. Public resource data read through retained physical filenames remains under its existing custody rules.\n\nPrepare two private 0600 JSON files: the exact UTF-8 `successor-alpha-computer-handoff/v1` document containing public nonpersonal or synthetic inputs, and an owner-reviewed array of native Alpha primitive actions. For example, `[{\"type\":\"wait\"}]` is a bounded rehearsal action. The fixture must fit the imported task's bounds and Fleet's ceilings: 30 actions, 10 turns and 120 seconds. Scripted completion follows the fixed actions; it does not assert task acceptance. Keep the handoff bytes unchanged. The profile permits only their exact SHA256 and the exact installed actions.\n\nFrom the Fleet checkout, create the installation profile with the following command, replacing the absolute paths and immutable image ID:\n\n```sh\nnode local-runtime/computer/profile.mjs \\\n  --alpha-root /absolute/reviewed-alpha-checkout \\\n  --python /absolute/physical/python-executable \\\n  --image sha256:EXACT_IMAGE_ID \\\n  --handoff /absolute/private-config/handoff.json \\\n  --actions /absolute/private-config/actions.json \\\n  --output /absolute/private-config/computer-profile.json\n```\n\nCreation writes a new 0600 profile, validates the native handoff and fingerprints the installation; it does not start a session or grant authority. It refuses to overwrite an existing file. No provider credential is required or accepted. The profile and its containing directory must remain private and owner controlled. Configuration changes require service restart, fresh activation and new grants; old approvals never inherit the new profile.\n\n## Prepare, authorize, run and export\n\nInitialize a fresh Fleet state with the existing CLI, then start the service explicitly:\n\n```sh\nnode local-runtime/cli/main.mjs serve \\\n  --computer-config /absolute/private-config/computer-profile.json\n```\n\nThe CLI retains its existing `AGI_LOCAL_STATE` and private credential-file configuration. Inspect `doctor.alphaComputer` before activating an Agent. Its `supported` field describes installed capability; it does not establish hosted qualification or commercial readiness.\n\nIn the EN/FR local dashboard, select the active Agent and upload the exact public handoff under **Use your Alpha project in a browser**, labelled **Optional scripted rehearsal**. Confirm the initially unchecked public nonpersonal input assertion. Prepare only; then inspect the task, installation identity, image, native permit and limits, and separately authorize the exact grant using the existing operator controls. Run once. A scoped assistant can prepare and use its own approved grant; it cannot authorize itself or access another actor's output.\n\nThe service task schema is the existing `agi-fleet/local-task/v1`: action `alpha-computer-run`, workspace `files` (the inert handoff carrier), input `{ \"handoffRaw\": \"exact UTF-8 document\", \"publicNonpersonal\": true }`, review `none`, and null `sourceActor`/`sourceController`. The usual `/v1/prepare`, `/v1/authorize`, `/v1/run`, `/v1/stop`, and `/v1/cancel` authentication, origin and role controls apply. No imported document is rendered as active HTML in the dashboard.\n\nInspect the stored run output, native local signature, screenshot manifest and final visible text. The native signature attributes local observations; it is not independent economic review. Download `computer-return.json` with `/v1/computer-export` using `{actor,run}`, or a manifest artifact with `/v1/computer-artifact` using `{actor,run,name}`. The dashboard verifies download hashes. There are no caller-supplied filesystem paths or artifact URLs. Exact artifact names, MIME, ownership, size and SHA256 are checked; each artifact is at most 2 MB, each admitted run reserves 80 MB, and 320 MB of retained Computer Use reservations blocks further admission. No history is pruned automatically. Export the same native return for Alpha's inert history importer and the separately reviewed supplier integration; exporting grants no downstream execution or settlement authority.\n\nSTOP immediately prevents new actions and requests cancellation of the in-flight native session. Native cleanup must positively close its process group and Docker container. A failed, interrupted or uncertain attempt consumes its one-use grant and reservations, preserves its evidence, stops intake and cannot replay. Reconciliation can record confirmed closure without success; it does not restore authority or release the reservation. A service restart invalidates unused grants and quarantines interrupted work. Explicit recovery, activation and a new exact grant remain necessary; the retained Alpha replay guard also refuses a repeated native permit.\n\nCompleted and retained interrupted native returns/artifacts remain read-only exportable after STOP or removal of the optional configuration. They cannot be executed by export. Preserve them as historical evidence; do not alter old deployment records or previous installations.\n\n## Qualification\n\nModule boundary tests and the dashboard's explicitly synthetic transport test do not prove native execution. Release qualification requires the hosted service path: private profile → LocalRuntime service → exact operator grant → worker → actual immutable Alpha Docker image → native signed receipt, screenshots and visible text → native history export and independent supplier checks. No paid provider, production actor, on-chain activation or funded settlement is exercised by that fixture.\n",
+        "replacements": [
+          {
+            "from": "558f798a9b9cc73c1db01905858aad8852e11092",
+            "to": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+            "count": 1
+          },
+          {
+            "from": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+            "to": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "path": "local-runtime/transformation/source-inventory.json",
+        "mode": "100644",
+        "type": "blob",
+        "before": "1d7404d01c1f27d98853a1b3c89d3b26c04e03b0",
+        "sha": "9e3007fc5afffe7178cabba1701f81968928c8a9",
+        "bytes": 4835,
+        "sha256": "3bba50e220052ef0937e13f315daac44dd7670fab49c5471b299a44e3159a5e4",
+        "content": "{\n  \"files\": [\n    {\n      \"bytes\": 5864,\n      \"mode\": 420,\n      \"path\": \".github/workflows/transformation-release.yml\",\n      \"sha256\": \"72f0970abbf86953d28299a3aec31d65061ba8a9b31f564b5969bd0ecca56eb3\"\n    },\n    {\n      \"bytes\": 16196,\n      \"mode\": 420,\n      \"path\": \".github/workflows/transformational-project.yml\",\n      \"sha256\": \"2ab64d4e0578b0bfec40c4fe103c5a534636cd821034c1ff7b98f06d2003c9d9\"\n    },\n    {\n      \"bytes\": 22226,\n      \"mode\": 420,\n      \"path\": \"docs/transformational-project.md\",\n      \"sha256\": \"047c2ffeb48212f8072813687116012458198dfda3af55df2adc1f263c475dc9\"\n    },\n    {\n      \"bytes\": 12894,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/cli.test.mjs\",\n      \"sha256\": \"f84c3f8b7cb8386f164f206ffcd1c4e380a1ad90a35ccbe301f6fdf4d6142e54\"\n    },\n    {\n      \"bytes\": 4848,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/headless-lab.mjs\",\n      \"sha256\": \"c0fde064b00c536d2d2f019e4f8be2ddcf1239dfe253d560e1e55d3561acbdb9\"\n    },\n    {\n      \"bytes\": 6075,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/headless_lab.py\",\n      \"sha256\": \"04e2b6099ac650bf34594bd878f329b5597923e9cfa272db4b167daf46987936\"\n    },\n    {\n      \"bytes\": 15499,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/package.test.mjs\",\n      \"sha256\": \"0994c706080cb9561fd54e6f341208efbfba78924dd5115dddf4680bfa829ecb\"\n    },\n    {\n      \"bytes\": 8695,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/qualify.mjs\",\n      \"sha256\": \"742309fa0f141c1bbb4512874efb474b24ab8887b86dea4f143d6e4edb0d0f5a\"\n    },\n    {\n      \"bytes\": 77761,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/release.py\",\n      \"sha256\": \"24345b7459670facf43b62efd28e6b4caa068fdfbbb71276ef3313c42c70cb40\"\n    },\n    {\n      \"bytes\": 1012,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/source-pins.json\",\n      \"sha256\": \"ac2c622e8a0e8c36a792f16e673b89e597efb1ebda89dcb4a7c7d9b7732edb55\"\n    },\n    {\n      \"bytes\": 13251,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/test_dependency_reference.py\",\n      \"sha256\": \"4f5a0e4546f20a8f2af8c3d775828dc7d6cd3d45a97dd5cafc74b667c2e7be67\"\n    },\n    {\n      \"bytes\": 47758,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/test_release.py\",\n      \"sha256\": \"17cb0180c0b213f9f58d22aeaea9d6bacb2ec0e8323409788ade87b83f8057f2\"\n    },\n    {\n      \"bytes\": 15324,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/test_release_auth.py\",\n      \"sha256\": \"516283852840206780e992bf2de0229e14e005299732e6e29a967f7198942641\"\n    },\n    {\n      \"bytes\": 14418,\n      \"mode\": 420,\n      \"path\": \"engineering/transformation/ti-project.test.mjs\",\n      \"sha256\": \"00b9bca2a510605df28785f7742caeb7c0fa215697473cbf3aaa0ee5719d5794\"\n    },\n    {\n      \"bytes\": 24062,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/cli.mjs\",\n      \"sha256\": \"f60ddb913474bf3e83c2f3cbb723414ac854c17c8580f6a3ed5d6ff61ca74a03\"\n    },\n    {\n      \"bytes\": 457257,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/dependency-reference.json\",\n      \"sha256\": \"3f6f756ea7b6d7755d6dc0d223f1b0ea40e18576be6b2745ed1f8ed4648ca162\"\n    },\n    {\n      \"bytes\": 10216,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/dependency_reference.py\",\n      \"sha256\": \"e418617100c3a5d8eba88f71203031d4d34e03ecbf09a1661adb3e5ebf81aa23\"\n    },\n    {\n      \"bytes\": 16220,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/installed.mjs\",\n      \"sha256\": \"f56c3f1389d6f14135a2d4e8ad11421f1419831914a44d62f968500e23db04e6\"\n    },\n    {\n      \"bytes\": 1848,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/native.py\",\n      \"sha256\": \"d9a53d9a65008c9abc6584ea2f2f329fcab8007a6914e459f94cac83ac107070\"\n    },\n    {\n      \"bytes\": 6699,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/package.py\",\n      \"sha256\": \"b9cb24143a244a7ff63e81b19a2ec22e52b47d9750c58506e8eda4745ffc5bec\"\n    },\n    {\n      \"bytes\": 12730,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/project.mjs\",\n      \"sha256\": \"92cf8af7c408ab18bddfc5d8bcde8b3199580dcd04ea57345687a38f93f70e75\"\n    },\n    {\n      \"bytes\": 3275,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/receivers.mjs\",\n      \"sha256\": \"a16010c0ecf4cdeb5d6f2e2edde9ff4342874ce7f1cc1d20d2c4ef3b75a7d512\"\n    },\n    {\n      \"bytes\": 855,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/release-profile.json\",\n      \"sha256\": \"74537a7354534427652f93d08c8c62320631f476584e14941e8a89422f160ac2\"\n    },\n    {\n      \"bytes\": 2538,\n      \"mode\": 420,\n      \"path\": \"local-runtime/transformation/store.mjs\",\n      \"sha256\": \"1dc78e85c3c83d8e821799adbf57397280fa2962f012e17759ea8b153e5f6d19\"\n    }\n  ],\n  \"schema\": \"agi-fleet/ti-source-inventory/v1\",\n  \"version\": \"0.1.0-alpha.7\"\n}\n",
+        "replacements": [
+          {
+            "from": "a9e83731bd955c62f6295a307737e3fcf5b2bcbfd9de545ad7115ed43bcff777",
+            "to": "ac2c622e8a0e8c36a792f16e673b89e597efb1ebda89dcb4a7c7d9b7732edb55",
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "unchangedLeaves": 6908,
+    "checksWaived": false,
+    "requirements": [
+      "Actual current Alpha and Jobs releases must exist and match proposed identities before adoption.",
+      "Fresh full final source CI, current configured and eligible functional-owner review, actual normal captures/installation required.",
+      "No earlier native/public/source qualification transferred to this uncommitted plan."
+    ]
+  },
+  "rootHelperReview": {
+    "alphaSourceContext": {
+      "all3609PriorLeavesAndModesUnchanged": true,
+      "baselineCommit": "558f798a9b9cc73c1db01905858aad8852e11092",
+      "baselineLeaves": 3609,
+      "baselineTree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+      "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+      "currentLeaves": 3613,
+      "docsDir": "docs",
+      "helperPathsExactlyCorrespondToDocsRelativeNames": true,
+      "mkdocs": {
+        "bytes": 12352,
+        "gitBlob": "7e53d58878db30bc9651a30744986673d780733f",
+        "sha256": "4863107b29d2cb84bf75943c5ce0acdac9f6e2c54f561f0556bcf80437bb04e2"
+      },
+      "mkdocsConfigUnchanged": true,
+      "newFiles": [
+        {
+          "blob": "a2a333187388e961a91c2fd67696adc09641c3ed",
+          "bytes": 399909,
+          "mode": "100644",
+          "path": "docs/Out_Evolve.pdf"
+        },
+        {
+          "blob": "d2a1abdc373076d2f872ff824878988136d75c0b",
+          "bytes": 4246,
+          "mode": "100644",
+          "path": "docs/Out_Evolve.tex"
+        },
+        {
+          "blob": "b474ad005a7c6fd8339fcbed80c51c5c5fb85284",
+          "bytes": 313266,
+          "mode": "100644",
+          "path": "docs/The_World_as_an_Output.pdf"
+        },
+        {
+          "blob": "c351982e1159c09f196868c4f76ee31faf392a65",
+          "bytes": 85948,
+          "mode": "100644",
+          "path": "docs/The_World_as_an_Output.tex"
+        }
+      ],
+      "noListedExclusionMatchesTheFourAddedPaths": true,
+      "onlyFourRegular100644FilesAdded": true,
+      "publicationInferenceOnly": "The literal URLs correspond to files under unchanged docs_dir docs and no matching listed exclusion; actual final publisher inventories and HTTPS bytes remain unverified.",
+      "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+      "sourceCustodyEvidenceCommit": "cdb5672231a2ff8f508c78e5e9b082eeaadc0a37",
+      "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22"
+    },
+    "evidence": {
+      "commit": "b404779625524aa86803c4e0e9834fd70b1316e0",
+      "prefix": "docs/release-evidence/ti-compatible-set-20261019/four-pages-readback/owner-paper-extension/",
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "tree": "fb9ef2a9eeb0cd2d50dc44b59bb3718ad1d20bb4"
+    },
+    "findings": [],
+    "helperAfter": {
+      "bytes": 22415,
+      "gitBlob": "e46db1d0b9136ed73ef3847b4e5591ff1df0c826",
+      "sha256": "d9399dc19af28f3c26f0adc5ac20cfe7241a9133bf8d020792f15ff9509a5289"
+    },
+    "helperBefore": {
+      "bytes": 22311,
+      "gitBlob": "6685ae5d08d11d939185b2a0f490073cfcbcefb1",
+      "sha256": "c30a0798f002780f92889d211642549cb3f3c7ae80a92b96068b9eb3d474302d"
+    },
+    "helperDelta": {
+      "addedPaths": [
+        "Out_Evolve.pdf",
+        "Out_Evolve.tex",
+        "The_World_as_an_Output.pdf",
+        "The_World_as_an_Output.tex"
+      ],
+      "all18OriginalPathsAndOrderPreserved": true,
+      "all22PathsUnique": true,
+      "allOtherHelperBytesExact": true,
+      "insertedBytes": 104,
+      "insertedTextSha256": "1406f510fe759dda5f3f471605b4280f9fc937573fcb1a3f4eca683e01cfe785",
+      "insertionOffsetZeroBased": 2613,
+      "newPaperCount": 22,
+      "oldPaperCount": 18,
+      "removedBytes": 0,
+      "removingOnlyInsertionReconstructsEntireOriginalHelper": true
+    },
+    "nonclaims": [
+      "No helper/project/test execution, helper networking, target-site or binary/PDF/ZIP fetching, archive extraction, source/ref changes, comments, approvals, delegation, signing or provider operation occurred.",
+      "Paper binaries and their SHA256 content were not fetched or reviewed; Git tree identities, regular modes and source filenames are metadata observations only. No retry or alternate binary route was attempted.",
+      "This is not live HTTP/browser evidence, paper-content validation, public release admission, final installed journey acceptance or overall qualification.",
+      "This is not Fleet functional-owner implementation/recovery/source-custody clearance and does not replace the separately required eligible owner review."
+    ],
+    "reviewer": "installed_acceptance",
+    "schema": "independent-owner-paper-readback-extension-static-review/1",
+    "scope": "Only the four-literal-path extension of root's bounded public HTTPS readback helper and its finite-inventory test-source synchronization.",
+    "status": "PASS_STATIC_PAPER_INVENTORY_EXTENSION",
+    "testDelta": {
+      "allOtherTestBytesExact": true,
+      "changes": "Declare the four exact new_owner_papers; extend the exact PAPERS and observed paper-path sequence assertions; change strict unique count18 to22.",
+      "executionByThisReviewer": false,
+      "existingUnitMethods": 11,
+      "inverseTextChangesReconstructEntireOriginalTests": true,
+      "onlyExistingFiniteInventoryTestChanged": true,
+      "originalHashMismatchSentinelsAndAssertionsPreserved": true,
+      "unitMethodNamesAndOrderUnchanged": true,
+      "upstreamOfflineValidation": "Root reports original11 offline units passed; this receipt does not independently claim execution or live evidence."
+    },
+    "testsAfter": {
+      "bytes": 13949,
+      "gitBlob": "5875e359c82587afe9d647a13c514dacdef4c456",
+      "sha256": "b0375f5844e9a4609f4c2a6818ddf957a90815d6e3840b87121bf7bb9512c2fc"
+    },
+    "testsBefore": {
+      "bytes": 13759,
+      "gitBlob": "4a297f161e9b014c360588770cc6275dda703eb7",
+      "sha256": "34596a76400f53dd3d5c676619d99f73a2f4bfae33da8fee9b1425de7ed02e0f"
+    },
+    "unchangedBoundaries": [
+      "Fixed HTTPS origin montrealai.github.io and finite four-site roots; GET only, no origin authentication or cookies, redirects refused.",
+      "Independent expected metadata/source/release inputs and Fleet websiteCommit T versus releaseCommit S remain distinct.",
+      "JSON/file/total-byte/file-count/deadline/read/length bounds and strict input/path/metadata checks remain unchanged.",
+      "Original PDF/ZIP/UTF8 type checks, optional independently supplied paper SHA256 equality and public-only output/nonclaims remain unchanged."
+    ]
+  }
+}
