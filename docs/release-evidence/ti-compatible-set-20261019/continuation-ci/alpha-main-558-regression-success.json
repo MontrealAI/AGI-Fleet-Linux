@@ -1,0 +1,42 @@
+{
+  "schema": "agi-fleet/alpha-main-original-regression-success/1",
+  "source": "558f798a9b9cc73c1db01905858aad8852e11092",
+  "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+  "run": 39459544592,
+  "attempt": 1,
+  "job": 118755441882,
+  "conclusion": "success",
+  "fullOfflineTestSummary": "3517 passed, 61 skipped, 4 xfailed, 192 warnings in 3111.92s (0:51:51)",
+  "coverageLines": [
+    "2026-10-20T17:43:15.5939705Z Required test coverage of 80% reached. Total coverage: 83.28%"
+  ],
+  "allTwelveStrictMypyChecksSucceeded": true,
+  "ruffAndRepositoryAndAllPreservationChecksSucceeded": true,
+  "originalSixtyMinuteBudgetUnchanged": true,
+  "log": {
+    "bytes": 966078,
+    "sha256": "dba2962b0acda7ba2f6c8648836b1c869a3318818c37be8c19ac08e1e485460e",
+    "gitBlob": "1128d6d1056cc5996572821496d2d5a4d98750d6"
+  },
+  "artifact": {
+    "id": 12285339004,
+    "name": "regression",
+    "size_in_bytes": 493161,
+    "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/artifacts/12285339004",
+    "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/artifacts/12285339004/zip",
+    "expired": false,
+    "created_at": "2026-10-20T17:47:22Z",
+    "expires_at": "2027-01-18T16:40:41Z",
+    "updated_at": "2026-10-20T17:47:22Z",
+    "digest": "sha256:0b5f1ccb87235ef56b176988461c1f4b43e8ad9cb0070c3214d3c3acbf8a4669",
+    "workflow_run": {
+      "id": 39459544592,
+      "repository_id": 922805069,
+      "head_repository_id": 922805069,
+      "head_branch": "main",
+      "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092"
+    }
+  },
+  "observedAt": "2026-10-20T17:50:15.946Z",
+  "limits": "Original exact-main regression success only; no local project execution or independent regression-artifact ZIP GET. Genuine main integration/historical CI, package/Pages/public acceptance/original publisher/immutable asset readback and final installed/public live gates remain mandatory."
+}
