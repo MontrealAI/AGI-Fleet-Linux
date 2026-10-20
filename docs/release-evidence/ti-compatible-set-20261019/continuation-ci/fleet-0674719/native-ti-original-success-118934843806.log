@@ -1,0 +1,1543 @@
+﻿2026-10-20T22:59:18.9717961Z Current runner version: '2.338.0'
+2026-10-20T22:59:18.9747231Z ##[group]Runner Image Provisioner
+2026-10-20T22:59:18.9748312Z Hosted Compute Agent
+2026-10-20T22:59:18.9748972Z Version: 20261012.601
+2026-10-20T22:59:18.9749786Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-20T22:59:18.9750532Z Build Date: 2026-10-12T17:48:21Z
+2026-10-20T22:59:18.9751225Z Worker ID: {57b36506-5899-430f-ae3a-627abbd1f552}
+2026-10-20T22:59:18.9752551Z Region: southcentralus
+2026-10-20T22:59:18.9753185Z Cloud: Azure
+2026-10-20T22:59:18.9753797Z ##[endgroup]
+2026-10-20T22:59:18.9755850Z ##[group]Operating System
+2026-10-20T22:59:18.9756492Z Ubuntu
+2026-10-20T22:59:18.9757167Z 24.04.5
+2026-10-20T22:59:18.9757701Z LTS
+2026-10-20T22:59:18.9758256Z ##[endgroup]
+2026-10-20T22:59:18.9758881Z ##[group]Runner Image
+2026-10-20T22:59:18.9759491Z Image: ubuntu-24.04-arm
+2026-10-20T22:59:18.9760240Z Version: 20261012.149.1
+2026-10-20T22:59:18.9761806Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24-arm64/20261012.149/images/ubuntu/Ubuntu2404-Arm64-Readme.md
+2026-10-20T22:59:18.9763516Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24-arm64%2F20261012.149
+2026-10-20T22:59:18.9764487Z ##[endgroup]
+2026-10-20T22:59:18.9765835Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T22:59:18.9768540Z Contents: read
+2026-10-20T22:59:18.9769286Z Metadata: read
+2026-10-20T22:59:18.9769857Z ##[endgroup]
+2026-10-20T22:59:18.9772757Z Secret source: Actions
+2026-10-20T22:59:18.9773997Z Cache mode: write
+2026-10-20T22:59:18.9774932Z Prepare workflow directory
+2026-10-20T22:59:19.0229504Z Prepare all required actions
+2026-10-20T22:59:19.0280346Z Getting action download info
+2026-10-20T22:59:19.3078236Z Download action repository 'step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a' (SHA:f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a)
+2026-10-20T22:59:20.1145199Z Download action repository 'actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+2026-10-20T22:59:20.1736093Z Download action repository 'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-20T22:59:20.3031365Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-20T22:59:20.4064787Z Download action repository 'actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f' (SHA:bbbca2ddaa5d8feaa63e36b76fdaad77386f024f)
+2026-10-20T22:59:20.6720688Z Complete job name: TI saved preview and native Docker (arm64)
+2026-10-20T22:59:20.7711695Z ##[group]Run step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a
+2026-10-20T22:59:20.7713789Z with:
+2026-10-20T22:59:20.7714553Z   egress-policy: audit
+2026-10-20T22:59:20.7720306Z   token: ***
+2026-10-20T22:59:20.7721117Z   disable-telemetry: false
+2026-10-20T22:59:20.7722099Z   disable-sudo: false
+2026-10-20T22:59:20.7723013Z   disable-sudo-and-containers: false
+2026-10-20T22:59:20.7724040Z   disable-file-monitoring: false
+2026-10-20T22:59:20.7725295Z env:
+2026-10-20T22:59:20.7726139Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:20.7726991Z ##[endgroup]
+2026-10-20T22:59:20.8842508Z [harden-runner] pre-step
+2026-10-20T22:59:20.8843717Z [!] Current Configuration: 
+2026-10-20T22:59:20.8848389Z {"repo":"MontrealAI/AGI-Fleet-Linux","run_id":"39511938381","correlation_id":"8bc47d75-bef7-4a87-8d02-4544d35f871d","working_directory":"/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux","api_url":"https://agent.api.stepsecurity.io/v1","allowed_endpoints":"","egress_policy":"audit","disable_telemetry":false,"disable_sudo":false,"disable_sudo_and_containers":false,"disable_file_monitoring":false,"private":false,"is_github_hosted":true,"is_debug":false,"one_time_key":""}
+2026-10-20T22:59:20.8852755Z 
+2026-10-20T22:59:20.8853587Z [32mView security insights and recommended policy at:[0m
+2026-10-20T22:59:20.8855036Z https://app.stepsecurity.io/github/MontrealAI/AGI-Fleet-Linux/actions/runs/39511938381
+2026-10-20T22:59:20.8856984Z RUNNER_NAME: GitHub Actions 1000245435
+2026-10-20T22:59:21.3697001Z Runner IP Address: 23.98.186.225
+2026-10-20T22:59:21.3868647Z Step Security Job Correlation ID: 8bc47d75-bef7-4a87-8d02-4544d35f871d
+2026-10-20T22:59:21.3869987Z [!] Checking TLS_STATUS: MontrealAI
+2026-10-20T22:59:21.5648810Z [!] TLS_NOT_ENABLED: MontrealAI
+2026-10-20T22:59:21.5650191Z ARM runners are not supported in the Harden-Runner community tier.
+2026-10-20T22:59:21.5868551Z ##[group]Run step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a
+2026-10-20T22:59:21.5869128Z with:
+2026-10-20T22:59:21.5869381Z   egress-policy: audit
+2026-10-20T22:59:21.5872367Z   token: ***
+2026-10-20T22:59:21.5872688Z   disable-telemetry: false
+2026-10-20T22:59:21.5873042Z   disable-sudo: false
+2026-10-20T22:59:21.5873333Z   disable-sudo-and-containers: false
+2026-10-20T22:59:21.5873672Z   disable-file-monitoring: false
+2026-10-20T22:59:21.5873952Z env:
+2026-10-20T22:59:21.5874193Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:21.5874526Z   STATE_disableSudo: false
+2026-10-20T22:59:21.5874830Z   STATE_disableSudoAndContainers: false
+2026-10-20T22:59:21.5875157Z   STATE_monitorStatusCode: 200
+2026-10-20T22:59:21.5875451Z   STATE_addSummary: true
+2026-10-20T22:59:21.5875790Z   STATE_correlation_id: 8bc47d75-bef7-4a87-8d02-4544d35f871d
+2026-10-20T22:59:21.5876158Z   STATE_isTLS: false
+2026-10-20T22:59:21.5876447Z ##[endgroup]
+2026-10-20T22:59:21.6426837Z [harden-runner] main-step
+2026-10-20T22:59:21.6599081Z ##[group]Run actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+2026-10-20T22:59:21.6599601Z with:
+2026-10-20T22:59:21.6599970Z   persist-credentials: false
+2026-10-20T22:59:21.6600291Z   repository: MontrealAI/AGI-Fleet-Linux
+2026-10-20T22:59:21.6603200Z   token: ***
+2026-10-20T22:59:21.6603532Z   ssh-strict: true
+2026-10-20T22:59:21.6603907Z   ssh-user: git
+2026-10-20T22:59:21.6604251Z   clean: true
+2026-10-20T22:59:21.6604637Z   sparse-checkout-cone-mode: true
+2026-10-20T22:59:21.6604943Z   fetch-depth: 1
+2026-10-20T22:59:21.6605232Z   fetch-tags: false
+2026-10-20T22:59:21.6605485Z   show-progress: true
+2026-10-20T22:59:21.6605739Z   lfs: false
+2026-10-20T22:59:21.6605975Z   submodules: false
+2026-10-20T22:59:21.6606239Z   set-safe-directory: true
+2026-10-20T22:59:21.6606505Z env:
+2026-10-20T22:59:21.6606751Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:21.6607038Z ##[endgroup]
+2026-10-20T22:59:21.7387821Z Syncing repository: MontrealAI/AGI-Fleet-Linux
+2026-10-20T22:59:21.7389686Z ##[group]Getting Git version info
+2026-10-20T22:59:21.7390232Z Working directory is '/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux'
+2026-10-20T22:59:21.7390949Z [command]/usr/bin/git version
+2026-10-20T22:59:21.7416727Z git version 2.55.0
+2026-10-20T22:59:21.7434489Z ##[endgroup]
+2026-10-20T22:59:21.7447441Z Temporarily overriding HOME='/home/runner/work/_temp/cb9e65a1-521d-4a55-b9ec-d4841cfc2da7' before making global git config changes
+2026-10-20T22:59:21.7448392Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:59:21.7452123Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux
+2026-10-20T22:59:21.7484541Z Deleting the contents of '/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux'
+2026-10-20T22:59:21.7488881Z ##[group]Initializing the repository
+2026-10-20T22:59:21.7493383Z [command]/usr/bin/git init /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux
+2026-10-20T22:59:21.7557517Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T22:59:21.7558218Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T22:59:21.7559066Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T22:59:21.7559509Z hint: call:
+2026-10-20T22:59:21.7559748Z hint:
+2026-10-20T22:59:21.7560107Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T22:59:21.7560465Z hint:
+2026-10-20T22:59:21.7560808Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T22:59:21.7562081Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T22:59:21.7562534Z hint:
+2026-10-20T22:59:21.7562798Z hint: 	git branch -m <name>
+2026-10-20T22:59:21.7563074Z hint:
+2026-10-20T22:59:21.7563531Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T22:59:21.7564193Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/
+2026-10-20T22:59:21.7567671Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGI-Fleet-Linux
+2026-10-20T22:59:21.7599653Z ##[endgroup]
+2026-10-20T22:59:21.7600180Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:59:21.7603961Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T22:59:21.7631912Z ##[endgroup]
+2026-10-20T22:59:21.7632421Z ##[group]Setting up auth
+2026-10-20T22:59:21.7638298Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:21.7665674Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:21.7938141Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:21.7967712Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:21.8156021Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T22:59:21.8193140Z ##[endgroup]
+2026-10-20T22:59:21.8193705Z ##[group]Fetching the repository
+2026-10-20T22:59:21.8201306Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9fe11ba746ee1b088d117235dd76bff7180e5b47:refs/remotes/pull/61/merge
+2026-10-20T22:59:22.7312845Z From https://github.com/MontrealAI/AGI-Fleet-Linux
+2026-10-20T22:59:22.7313438Z  * [new ref]         9fe11ba746ee1b088d117235dd76bff7180e5b47 -> pull/61/merge
+2026-10-20T22:59:22.7316891Z ##[endgroup]
+2026-10-20T22:59:22.7317282Z ##[group]Determining the checkout info
+2026-10-20T22:59:22.7319313Z ##[endgroup]
+2026-10-20T22:59:22.7325311Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T22:59:22.7365492Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:59:22.7395988Z ##[group]Checking out the ref
+2026-10-20T22:59:22.7396424Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/61/merge
+2026-10-20T22:59:23.0787713Z Note: switching to 'refs/remotes/pull/61/merge'.
+2026-10-20T22:59:23.0788061Z 
+2026-10-20T22:59:23.0788270Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T22:59:23.0788730Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T22:59:23.0789225Z state without impacting any branches by switching back to a branch.
+2026-10-20T22:59:23.0789681Z 
+2026-10-20T22:59:23.0813243Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T22:59:23.0822972Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T22:59:23.0823241Z 
+2026-10-20T22:59:23.0823344Z   git switch -c <new-branch-name>
+2026-10-20T22:59:23.0823503Z 
+2026-10-20T22:59:23.0823648Z Or undo this operation with:
+2026-10-20T22:59:23.0823796Z 
+2026-10-20T22:59:23.0823879Z   git switch -
+2026-10-20T22:59:23.0823997Z 
+2026-10-20T22:59:23.0824216Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T22:59:23.0840433Z 
+2026-10-20T22:59:23.0840951Z HEAD is now at 9fe11ba Merge 0674719f6749786c3591a15219364bfec94c336f into 45759fb096faf8988f58ae5ea71248d0f35a97c7
+2026-10-20T22:59:23.0842319Z ##[endgroup]
+2026-10-20T22:59:23.0843004Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T22:59:23.0855680Z 9fe11ba746ee1b088d117235dd76bff7180e5b47
+2026-10-20T22:59:23.0875255Z ##[group]Removing auth
+2026-10-20T22:59:23.0879106Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:23.0906720Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:23.1109103Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:23.1128807Z http.https://github.com/.extraheader
+2026-10-20T22:59:23.1136817Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T22:59:23.1165734Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:23.1367018Z ##[endgroup]
+2026-10-20T22:59:23.1492860Z ##[group]Run python3 - <<'PY'
+2026-10-20T22:59:23.1493267Z [36;1mpython3 - <<'PY'[0m
+2026-10-20T22:59:23.1493500Z [36;1mimport json,os,re[0m
+2026-10-20T22:59:23.1493721Z [36;1mfrom pathlib import Path[0m
+2026-10-20T22:59:23.1494108Z [36;1mp=json.loads(Path('engineering/transformation/source-pins.json').read_bytes())[0m
+2026-10-20T22:59:23.1494594Z [36;1massert p['schema']=='agi-fleet/ti-installed-source-pins/v1'[0m
+2026-10-20T22:59:23.1495161Z [36;1massert p['publicNonpersonalOnly'] and not p['paidTI'] and not p['liveProvider'] and not p['productionQualified'][0m
+2026-10-20T22:59:23.1495704Z [36;1mwith open(os.environ['GITHUB_OUTPUT'],'a') as out:[0m
+2026-10-20T22:59:23.1496050Z [36;1m    for key in ['alpha','manager','jobs','computer']:[0m
+2026-10-20T22:59:23.1496531Z [36;1m        assert re.fullmatch('[a-f0-9]{40}',p[key]['commit']) and re.fullmatch('[a-f0-9]{40}',p[key]['tree'])[0m
+2026-10-20T22:59:23.1497037Z [36;1m        out.write(key+'='+p[key]['commit']+'\n')[0m
+2026-10-20T22:59:23.1497336Z [36;1mPY[0m
+2026-10-20T22:59:23.1602218Z shell: /usr/bin/bash -e {0}
+2026-10-20T22:59:23.1602488Z env:
+2026-10-20T22:59:23.1602670Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:23.1602895Z ##[endgroup]
+2026-10-20T22:59:23.2074441Z ##[group]Run actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+2026-10-20T22:59:23.2074842Z with:
+2026-10-20T22:59:23.2075052Z   repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:59:23.2075334Z   ref: a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:59:23.2075583Z   path: .ti-alpha
+2026-10-20T22:59:23.2075771Z   persist-credentials: false
+2026-10-20T22:59:23.2078064Z   token: ***
+2026-10-20T22:59:23.2078234Z   ssh-strict: true
+2026-10-20T22:59:23.2078413Z   ssh-user: git
+2026-10-20T22:59:23.2078577Z   clean: true
+2026-10-20T22:59:23.2078757Z   sparse-checkout-cone-mode: true
+2026-10-20T22:59:23.2078979Z   fetch-depth: 1
+2026-10-20T22:59:23.2079149Z   fetch-tags: false
+2026-10-20T22:59:23.2079329Z   show-progress: true
+2026-10-20T22:59:23.2079534Z   lfs: false
+2026-10-20T22:59:23.2079696Z   submodules: false
+2026-10-20T22:59:23.2079882Z   set-safe-directory: true
+2026-10-20T22:59:23.2080080Z env:
+2026-10-20T22:59:23.2080252Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:23.2080646Z ##[endgroup]
+2026-10-20T22:59:23.2783579Z Syncing repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:59:23.2787267Z ##[group]Getting Git version info
+2026-10-20T22:59:23.2787903Z Working directory is '/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-alpha'
+2026-10-20T22:59:23.2817677Z [command]/usr/bin/git version
+2026-10-20T22:59:23.2853891Z git version 2.55.0
+2026-10-20T22:59:23.2872342Z ##[endgroup]
+2026-10-20T22:59:23.2885725Z Temporarily overriding HOME='/home/runner/work/_temp/9d57d2dc-0b0e-47e3-9eef-f9070dcb4b0c' before making global git config changes
+2026-10-20T22:59:23.2886460Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:59:23.2890106Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-alpha
+2026-10-20T22:59:23.2924789Z ##[group]Initializing the repository
+2026-10-20T22:59:23.2929860Z [command]/usr/bin/git init /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-alpha
+2026-10-20T22:59:23.2965552Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T22:59:23.2966302Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T22:59:23.2966942Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T22:59:23.2967421Z hint: call:
+2026-10-20T22:59:23.2967715Z hint:
+2026-10-20T22:59:23.2968095Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T22:59:23.2968493Z hint:
+2026-10-20T22:59:23.2968870Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T22:59:23.2969450Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T22:59:23.2969946Z hint:
+2026-10-20T22:59:23.2970294Z hint: 	git branch -m <name>
+2026-10-20T22:59:23.2970657Z hint:
+2026-10-20T22:59:23.2971329Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T22:59:23.2972715Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-alpha/.git/
+2026-10-20T22:59:23.2974747Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:59:23.3005254Z ##[endgroup]
+2026-10-20T22:59:23.3005779Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:59:23.3009265Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T22:59:23.3037954Z ##[endgroup]
+2026-10-20T22:59:23.3038273Z ##[group]Setting up auth
+2026-10-20T22:59:23.3044985Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:23.3073636Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:23.3269290Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:23.3300389Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:23.3495111Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T22:59:23.3535565Z ##[endgroup]
+2026-10-20T22:59:23.3535935Z ##[group]Fetching the repository
+2026-10-20T22:59:23.3544571Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:59:27.3731094Z From https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:59:27.3731754Z  * branch            a6d20a93c7c5b7430bf42d2367701b350513e90d -> FETCH_HEAD
+2026-10-20T22:59:27.3736014Z ##[endgroup]
+2026-10-20T22:59:27.3736582Z ##[group]Determining the checkout info
+2026-10-20T22:59:27.3738213Z ##[endgroup]
+2026-10-20T22:59:27.3744169Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T22:59:27.3783550Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:59:27.3810488Z ##[group]Checking out the ref
+2026-10-20T22:59:27.3815994Z [command]/usr/bin/git checkout --progress --force a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:59:27.8551337Z Note: switching to 'a6d20a93c7c5b7430bf42d2367701b350513e90d'.
+2026-10-20T22:59:27.8551792Z 
+2026-10-20T22:59:27.8551987Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T22:59:27.8552425Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T22:59:27.8552849Z state without impacting any branches by switching back to a branch.
+2026-10-20T22:59:27.8553100Z 
+2026-10-20T22:59:27.8553263Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T22:59:27.8554090Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T22:59:27.8554330Z 
+2026-10-20T22:59:27.8554423Z   git switch -c <new-branch-name>
+2026-10-20T22:59:27.8554589Z 
+2026-10-20T22:59:27.8554675Z Or undo this operation with:
+2026-10-20T22:59:27.8554813Z 
+2026-10-20T22:59:27.8554888Z   git switch -
+2026-10-20T22:59:27.8554989Z 
+2026-10-20T22:59:27.8555182Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T22:59:27.8555461Z 
+2026-10-20T22:59:27.8555559Z HEAD is now at a6d20a9 The World as an Output
+2026-10-20T22:59:27.8585446Z ##[endgroup]
+2026-10-20T22:59:27.8621731Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T22:59:27.8646013Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:59:27.8654856Z ##[group]Removing auth
+2026-10-20T22:59:27.8670640Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:27.8685524Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:27.8868408Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:27.8887545Z http.https://github.com/.extraheader
+2026-10-20T22:59:27.8894457Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T22:59:27.8924071Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:27.9111246Z ##[endgroup]
+2026-10-20T22:59:27.9267512Z ##[group]Run actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+2026-10-20T22:59:27.9267927Z with:
+2026-10-20T22:59:27.9268117Z   repository: MontrealAI/AGIJobManager
+2026-10-20T22:59:27.9268385Z   ref: 4d4c32685eebf23b0aa35dbb45abe23ac8a261cb
+2026-10-20T22:59:27.9268664Z   path: .ti-manager
+2026-10-20T22:59:27.9268850Z   persist-credentials: false
+2026-10-20T22:59:27.9271134Z   token: ***
+2026-10-20T22:59:27.9271315Z   ssh-strict: true
+2026-10-20T22:59:27.9271731Z   ssh-user: git
+2026-10-20T22:59:27.9271923Z   clean: true
+2026-10-20T22:59:27.9272111Z   sparse-checkout-cone-mode: true
+2026-10-20T22:59:27.9272341Z   fetch-depth: 1
+2026-10-20T22:59:27.9272521Z   fetch-tags: false
+2026-10-20T22:59:27.9272701Z   show-progress: true
+2026-10-20T22:59:27.9272884Z   lfs: false
+2026-10-20T22:59:27.9273051Z   submodules: false
+2026-10-20T22:59:27.9273235Z   set-safe-directory: true
+2026-10-20T22:59:27.9273436Z env:
+2026-10-20T22:59:27.9273617Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:27.9273861Z ##[endgroup]
+2026-10-20T22:59:27.9946114Z Syncing repository: MontrealAI/AGIJobManager
+2026-10-20T22:59:28.0034922Z ##[group]Getting Git version info
+2026-10-20T22:59:28.0042371Z Working directory is '/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-manager'
+2026-10-20T22:59:28.0043012Z [command]/usr/bin/git version
+2026-10-20T22:59:28.0043224Z git version 2.55.0
+2026-10-20T22:59:28.0043947Z ##[endgroup]
+2026-10-20T22:59:28.0045135Z Temporarily overriding HOME='/home/runner/work/_temp/c77527b5-15ab-421b-a9d4-67ed59b73e22' before making global git config changes
+2026-10-20T22:59:28.0045805Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:59:28.0046728Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-manager
+2026-10-20T22:59:28.0076518Z ##[group]Initializing the repository
+2026-10-20T22:59:28.0081300Z [command]/usr/bin/git init /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-manager
+2026-10-20T22:59:28.0113816Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T22:59:28.0114868Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T22:59:28.0115496Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T22:59:28.0116191Z hint: call:
+2026-10-20T22:59:28.0116347Z hint:
+2026-10-20T22:59:28.0116712Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T22:59:28.0117075Z hint:
+2026-10-20T22:59:28.0117356Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T22:59:28.0117897Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T22:59:28.0118234Z hint:
+2026-10-20T22:59:28.0118487Z hint: 	git branch -m <name>
+2026-10-20T22:59:28.0118773Z hint:
+2026-10-20T22:59:28.0119072Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T22:59:28.0119733Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-manager/.git/
+2026-10-20T22:59:28.0124486Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGIJobManager
+2026-10-20T22:59:28.0149792Z ##[endgroup]
+2026-10-20T22:59:28.0150153Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:59:28.0153556Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T22:59:28.0179025Z ##[endgroup]
+2026-10-20T22:59:28.0179347Z ##[group]Setting up auth
+2026-10-20T22:59:28.0184834Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:28.0210911Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:28.0402168Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:28.0430502Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:28.0616216Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T22:59:28.0652631Z ##[endgroup]
+2026-10-20T22:59:28.0652982Z ##[group]Fetching the repository
+2026-10-20T22:59:28.0660805Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 4d4c32685eebf23b0aa35dbb45abe23ac8a261cb
+2026-10-20T22:59:29.7470984Z From https://github.com/MontrealAI/AGIJobManager
+2026-10-20T22:59:29.7471421Z  * branch            4d4c32685eebf23b0aa35dbb45abe23ac8a261cb -> FETCH_HEAD
+2026-10-20T22:59:29.7474536Z ##[endgroup]
+2026-10-20T22:59:29.7474889Z ##[group]Determining the checkout info
+2026-10-20T22:59:29.7476557Z ##[endgroup]
+2026-10-20T22:59:29.7481822Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T22:59:29.7518231Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:59:29.7541824Z ##[group]Checking out the ref
+2026-10-20T22:59:29.7546058Z [command]/usr/bin/git checkout --progress --force 4d4c32685eebf23b0aa35dbb45abe23ac8a261cb
+2026-10-20T22:59:29.8605088Z Note: switching to '4d4c32685eebf23b0aa35dbb45abe23ac8a261cb'.
+2026-10-20T22:59:29.8605587Z 
+2026-10-20T22:59:29.8605946Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T22:59:29.8606431Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T22:59:29.8606863Z state without impacting any branches by switching back to a branch.
+2026-10-20T22:59:29.8607114Z 
+2026-10-20T22:59:29.8607285Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T22:59:29.8607683Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T22:59:29.8607914Z 
+2026-10-20T22:59:29.8608005Z   git switch -c <new-branch-name>
+2026-10-20T22:59:29.8608192Z 
+2026-10-20T22:59:29.8608276Z Or undo this operation with:
+2026-10-20T22:59:29.8608420Z 
+2026-10-20T22:59:29.8608490Z   git switch -
+2026-10-20T22:59:29.8608598Z 
+2026-10-20T22:59:29.8608783Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T22:59:29.8609383Z 
+2026-10-20T22:59:29.8609602Z HEAD is now at 4d4c326 Merge pull request #1611: qualify v1.19.5 source and publication
+2026-10-20T22:59:29.8615523Z ##[endgroup]
+2026-10-20T22:59:29.8650517Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T22:59:29.8671211Z 4d4c32685eebf23b0aa35dbb45abe23ac8a261cb
+2026-10-20T22:59:29.8679627Z ##[group]Removing auth
+2026-10-20T22:59:29.8690750Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:29.8716364Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:29.8896971Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:29.8915271Z http.https://github.com/.extraheader
+2026-10-20T22:59:29.8920700Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T22:59:29.8949494Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:29.9132093Z ##[endgroup]
+2026-10-20T22:59:29.9272465Z ##[group]Run actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+2026-10-20T22:59:29.9272888Z with:
+2026-10-20T22:59:29.9273076Z   repository: MontrealAI/AGIJobsv0
+2026-10-20T22:59:29.9273328Z   ref: 83065adf18a6ee987f8fa479a496a052d35db682
+2026-10-20T22:59:29.9273576Z   path: .ti-jobs
+2026-10-20T22:59:29.9273762Z   persist-credentials: false
+2026-10-20T22:59:29.9276028Z   token: ***
+2026-10-20T22:59:29.9276194Z   ssh-strict: true
+2026-10-20T22:59:29.9276372Z   ssh-user: git
+2026-10-20T22:59:29.9276536Z   clean: true
+2026-10-20T22:59:29.9276717Z   sparse-checkout-cone-mode: true
+2026-10-20T22:59:29.9276942Z   fetch-depth: 1
+2026-10-20T22:59:29.9277114Z   fetch-tags: false
+2026-10-20T22:59:29.9277315Z   show-progress: true
+2026-10-20T22:59:29.9277493Z   lfs: false
+2026-10-20T22:59:29.9277657Z   submodules: false
+2026-10-20T22:59:29.9277843Z   set-safe-directory: true
+2026-10-20T22:59:29.9278039Z env:
+2026-10-20T22:59:29.9278206Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:29.9278451Z ##[endgroup]
+2026-10-20T22:59:29.9960766Z Syncing repository: MontrealAI/AGIJobsv0
+2026-10-20T22:59:29.9966750Z ##[group]Getting Git version info
+2026-10-20T22:59:29.9967135Z Working directory is '/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-jobs'
+2026-10-20T22:59:29.9996858Z [command]/usr/bin/git version
+2026-10-20T22:59:30.0030391Z git version 2.55.0
+2026-10-20T22:59:30.0047894Z ##[endgroup]
+2026-10-20T22:59:30.0060905Z Temporarily overriding HOME='/home/runner/work/_temp/458d02fb-4228-4381-986e-00d190f99b1e' before making global git config changes
+2026-10-20T22:59:30.0061712Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:59:30.0065702Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-jobs
+2026-10-20T22:59:30.0096185Z ##[group]Initializing the repository
+2026-10-20T22:59:30.0100752Z [command]/usr/bin/git init /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-jobs
+2026-10-20T22:59:30.0134886Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T22:59:30.0135410Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T22:59:30.0135862Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T22:59:30.0136201Z hint: call:
+2026-10-20T22:59:30.0136355Z hint:
+2026-10-20T22:59:30.0136566Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T22:59:30.0136827Z hint:
+2026-10-20T22:59:30.0137077Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T22:59:30.0137518Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T22:59:30.0138195Z hint:
+2026-10-20T22:59:30.0138359Z hint: 	git branch -m <name>
+2026-10-20T22:59:30.0138552Z hint:
+2026-10-20T22:59:30.0138832Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T22:59:30.0139394Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-jobs/.git/
+2026-10-20T22:59:30.0145114Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGIJobsv0
+2026-10-20T22:59:30.0174697Z ##[endgroup]
+2026-10-20T22:59:30.0175046Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:59:30.0178363Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T22:59:30.0207903Z ##[endgroup]
+2026-10-20T22:59:30.0208219Z ##[group]Setting up auth
+2026-10-20T22:59:30.0214486Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:30.0245524Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:30.0448521Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:30.0479971Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:30.0678514Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T22:59:30.0717958Z ##[endgroup]
+2026-10-20T22:59:30.0718290Z ##[group]Fetching the repository
+2026-10-20T22:59:30.0726892Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 83065adf18a6ee987f8fa479a496a052d35db682
+2026-10-20T22:59:35.5598339Z From https://github.com/MontrealAI/AGIJobsv0
+2026-10-20T22:59:35.5598771Z  * branch            83065adf18a6ee987f8fa479a496a052d35db682 -> FETCH_HEAD
+2026-10-20T22:59:35.5601651Z ##[endgroup]
+2026-10-20T22:59:35.5602028Z ##[group]Determining the checkout info
+2026-10-20T22:59:35.5604211Z ##[endgroup]
+2026-10-20T22:59:35.5610468Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T22:59:35.5647045Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:59:35.5670053Z ##[group]Checking out the ref
+2026-10-20T22:59:35.5674683Z [command]/usr/bin/git checkout --progress --force 83065adf18a6ee987f8fa479a496a052d35db682
+2026-10-20T22:59:36.0381844Z Note: switching to '83065adf18a6ee987f8fa479a496a052d35db682'.
+2026-10-20T22:59:36.0382163Z 
+2026-10-20T22:59:36.0382351Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T22:59:36.0382788Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T22:59:36.0383223Z state without impacting any branches by switching back to a branch.
+2026-10-20T22:59:36.0383479Z 
+2026-10-20T22:59:36.0383650Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T22:59:36.0384090Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T22:59:36.0384323Z 
+2026-10-20T22:59:36.0384417Z   git switch -c <new-branch-name>
+2026-10-20T22:59:36.0384569Z 
+2026-10-20T22:59:36.0384672Z Or undo this operation with:
+2026-10-20T22:59:36.0384819Z 
+2026-10-20T22:59:36.0384889Z   git switch -
+2026-10-20T22:59:36.0384994Z 
+2026-10-20T22:59:36.0385182Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T22:59:36.0385466Z 
+2026-10-20T22:59:36.0385684Z HEAD is now at 83065ad Merge PR #4006: qualify complete Python archive component comparison
+2026-10-20T22:59:36.0417732Z ##[endgroup]
+2026-10-20T22:59:36.0453126Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T22:59:36.0473549Z 83065adf18a6ee987f8fa479a496a052d35db682
+2026-10-20T22:59:36.0482929Z ##[group]Removing auth
+2026-10-20T22:59:36.0493431Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:36.0519841Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:36.0714516Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:36.0734013Z http.https://github.com/.extraheader
+2026-10-20T22:59:36.0740553Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T22:59:36.0772117Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:36.0955012Z ##[endgroup]
+2026-10-20T22:59:36.1089855Z ##[group]Run actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+2026-10-20T22:59:36.1090225Z with:
+2026-10-20T22:59:36.1090417Z   repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:59:36.1090711Z   ref: a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:59:36.1090960Z   path: .ti-computer
+2026-10-20T22:59:36.1091156Z   persist-credentials: false
+2026-10-20T22:59:36.1093777Z   token: ***
+2026-10-20T22:59:36.1093952Z   ssh-strict: true
+2026-10-20T22:59:36.1094125Z   ssh-user: git
+2026-10-20T22:59:36.1094290Z   clean: true
+2026-10-20T22:59:36.1094473Z   sparse-checkout-cone-mode: true
+2026-10-20T22:59:36.1094694Z   fetch-depth: 1
+2026-10-20T22:59:36.1094867Z   fetch-tags: false
+2026-10-20T22:59:36.1095053Z   show-progress: true
+2026-10-20T22:59:36.1095235Z   lfs: false
+2026-10-20T22:59:36.1095398Z   submodules: false
+2026-10-20T22:59:36.1095583Z   set-safe-directory: true
+2026-10-20T22:59:36.1095780Z env:
+2026-10-20T22:59:36.1095948Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:36.1096187Z ##[endgroup]
+2026-10-20T22:59:36.1789943Z Syncing repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:59:36.1812692Z ##[group]Getting Git version info
+2026-10-20T22:59:36.1813302Z Working directory is '/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-computer'
+2026-10-20T22:59:36.1839915Z [command]/usr/bin/git version
+2026-10-20T22:59:36.1874898Z git version 2.55.0
+2026-10-20T22:59:36.1893562Z ##[endgroup]
+2026-10-20T22:59:36.1907802Z Temporarily overriding HOME='/home/runner/work/_temp/3fffae40-81ac-43e3-8093-ef8ac7b814d1' before making global git config changes
+2026-10-20T22:59:36.1908619Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:59:36.1912097Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-computer
+2026-10-20T22:59:36.1944497Z ##[group]Initializing the repository
+2026-10-20T22:59:36.1949602Z [command]/usr/bin/git init /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-computer
+2026-10-20T22:59:36.1985977Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T22:59:36.1987991Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T22:59:36.1988752Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T22:59:36.1989226Z hint: call:
+2026-10-20T22:59:36.1989498Z hint:
+2026-10-20T22:59:36.1989828Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T22:59:36.1990218Z hint:
+2026-10-20T22:59:36.1990593Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T22:59:36.1991159Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T22:59:36.1991791Z hint:
+2026-10-20T22:59:36.1992299Z hint: 	git branch -m <name>
+2026-10-20T22:59:36.1992557Z hint:
+2026-10-20T22:59:36.1992854Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T22:59:36.1993457Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-computer/.git/
+2026-10-20T22:59:36.1995946Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:59:36.2024995Z ##[endgroup]
+2026-10-20T22:59:36.2025342Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:59:36.2029306Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T22:59:36.2057143Z ##[endgroup]
+2026-10-20T22:59:36.2057588Z ##[group]Setting up auth
+2026-10-20T22:59:36.2064077Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:36.2091929Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:36.2280348Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:36.2310359Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:36.2498161Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T22:59:36.2536034Z ##[endgroup]
+2026-10-20T22:59:36.2536391Z ##[group]Fetching the repository
+2026-10-20T22:59:36.2544374Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:59:40.1827091Z From https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:59:40.1827543Z  * branch            a6d20a93c7c5b7430bf42d2367701b350513e90d -> FETCH_HEAD
+2026-10-20T22:59:40.1831424Z ##[endgroup]
+2026-10-20T22:59:40.1831869Z ##[group]Determining the checkout info
+2026-10-20T22:59:40.1834066Z ##[endgroup]
+2026-10-20T22:59:40.1839644Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T22:59:40.1877314Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:59:40.1903777Z ##[group]Checking out the ref
+2026-10-20T22:59:40.1908705Z [command]/usr/bin/git checkout --progress --force a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:59:40.6613326Z Note: switching to 'a6d20a93c7c5b7430bf42d2367701b350513e90d'.
+2026-10-20T22:59:40.6613638Z 
+2026-10-20T22:59:40.6613820Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T22:59:40.6614261Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T22:59:40.6614687Z state without impacting any branches by switching back to a branch.
+2026-10-20T22:59:40.6614937Z 
+2026-10-20T22:59:40.6615105Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T22:59:40.6615508Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T22:59:40.6615745Z 
+2026-10-20T22:59:40.6615829Z   git switch -c <new-branch-name>
+2026-10-20T22:59:40.6616017Z 
+2026-10-20T22:59:40.6616100Z Or undo this operation with:
+2026-10-20T22:59:40.6616244Z 
+2026-10-20T22:59:40.6616314Z   git switch -
+2026-10-20T22:59:40.6616419Z 
+2026-10-20T22:59:40.6616630Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T22:59:40.6616907Z 
+2026-10-20T22:59:40.6617009Z HEAD is now at a6d20a9 The World as an Output
+2026-10-20T22:59:40.6648960Z ##[endgroup]
+2026-10-20T22:59:40.6684361Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T22:59:40.6705090Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:59:40.6714452Z ##[group]Removing auth
+2026-10-20T22:59:40.6718101Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:40.6752126Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:40.6936810Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:40.6956306Z http.https://github.com/.extraheader
+2026-10-20T22:59:40.6962657Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T22:59:40.6991255Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:40.7177296Z ##[endgroup]
+2026-10-20T22:59:40.7325028Z ##[group]Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+2026-10-20T22:59:40.7325408Z with:
+2026-10-20T22:59:40.7325575Z   node-version: 24.21.0
+2026-10-20T22:59:40.7325774Z   always-auth: false
+2026-10-20T22:59:40.7325962Z   check-latest: false
+2026-10-20T22:59:40.7328194Z   token: ***
+2026-10-20T22:59:40.7328357Z env:
+2026-10-20T22:59:40.7328526Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:40.7328735Z ##[endgroup]
+2026-10-20T22:59:40.8631046Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/arm64
+2026-10-20T22:59:40.8635941Z (node:2872) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T22:59:40.8636622Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T22:59:40.8637940Z ##[group]Environment details
+2026-10-20T22:59:42.6944124Z node: v24.21.0
+2026-10-20T22:59:42.6944558Z npm: 11.19.0
+2026-10-20T22:59:42.6944852Z yarn: 1.22.22
+2026-10-20T22:59:42.6945360Z ##[endgroup]
+2026-10-20T22:59:42.7062733Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-10-20T22:59:42.7063132Z with:
+2026-10-20T22:59:42.7063301Z   python-version: 3.12
+2026-10-20T22:59:42.7063496Z   check-latest: false
+2026-10-20T22:59:42.7065703Z   token: ***
+2026-10-20T22:59:42.7065880Z   update-environment: true
+2026-10-20T22:59:42.7066092Z   allow-prereleases: false
+2026-10-20T22:59:42.7066295Z   freethreaded: false
+2026-10-20T22:59:42.7066474Z env:
+2026-10-20T22:59:42.7066641Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:42.7066850Z ##[endgroup]
+2026-10-20T22:59:42.8212675Z ##[group]Installed versions
+2026-10-20T22:59:42.8596900Z (node:2903) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T22:59:42.8597705Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T22:59:42.8602485Z Successfully set up CPython (3.12.15)
+2026-10-20T22:59:42.8602946Z ##[endgroup]
+2026-10-20T22:59:42.8679267Z ##[group]Run set -euo pipefail
+2026-10-20T22:59:42.8679617Z [36;1mset -euo pipefail[0m
+2026-10-20T22:59:42.8679869Z [36;1mtest "$RUNNER_ENVIRONMENT" = github-hosted[0m
+2026-10-20T22:59:42.8680205Z [36;1msudo /usr/bin/python3 - "$pythonLocation" <<'PYTHON'[0m
+2026-10-20T22:59:42.8680510Z [36;1mimport os,re,stat,sys[0m
+2026-10-20T22:59:42.8680736Z [36;1mfrom pathlib import Path[0m
+2026-10-20T22:59:42.8680968Z [36;1massert os.getuid()==0[0m
+2026-10-20T22:59:42.8681187Z [36;1mroot=Path(sys.argv[1])[0m
+2026-10-20T22:59:42.8681850Z [36;1massert re.fullmatch(r'/opt/hostedtoolcache/Python/3[.]12[.][0-9]+/(?:x64|arm64)',str(root))[0m
+2026-10-20T22:59:42.8682378Z [36;1massert root.resolve(strict=True)==root and root.is_dir()[0m
+2026-10-20T22:59:42.8682707Z [36;1mregular=directories=writable=0[0m
+2026-10-20T22:59:42.8683076Z [36;1mfor current,names,files in os.walk(root,topdown=False,followlinks=False):[0m
+2026-10-20T22:59:42.8683479Z [36;1m    for name in [*files,*names]:[0m
+2026-10-20T22:59:42.8683769Z [36;1m        item=Path(current)/name;before=item.lstat()[0m
+2026-10-20T22:59:42.8684236Z [36;1m        if stat.S_ISLNK(before.st_mode):continue[0m
+2026-10-20T22:59:42.8684695Z [36;1m        assert stat.S_ISREG(before.st_mode) or stat.S_ISDIR(before.st_mode)[0m
+2026-10-20T22:59:42.8685073Z [36;1m        assert not before.st_mode & 0o6000[0m
+2026-10-20T22:59:42.8685368Z [36;1m        writable+=bool(before.st_mode & 0o022)[0m
+2026-10-20T22:59:42.8685677Z [36;1m        os.chown(item,0,0,follow_symlinks=False)[0m
+2026-10-20T22:59:42.8686075Z [36;1m        os.chmod(item,stat.S_IMODE(before.st_mode) & ~0o022,follow_symlinks=False)[0m
+2026-10-20T22:59:42.8686858Z [36;1m        after=item.lstat()[0m
+2026-10-20T22:59:42.8687152Z [36;1m        assert after.st_uid==0 and not after.st_mode & 0o022[0m
+2026-10-20T22:59:42.8687610Z [36;1m        assert before.st_size==after.st_size and before.st_mtime_ns==after.st_mtime_ns[0m
+2026-10-20T22:59:42.8688143Z [36;1m        regular+=stat.S_ISREG(before.st_mode);directories+=stat.S_ISDIR(before.st_mode)[0m
+2026-10-20T22:59:42.8688692Z [36;1mbefore=root.stat();os.chown(root,0,0);os.chmod(root,stat.S_IMODE(before.st_mode) & ~0o022)[0m
+2026-10-20T22:59:42.8689475Z [36;1mprint(f'Hosted Python custody: {regular} regular files, {directories+1} directories, {writable} writable entries tightened; runtime content unchanged.')[0m
+2026-10-20T22:59:42.8690083Z [36;1mPYTHON[0m
+2026-10-20T22:59:42.8806222Z shell: /usr/bin/bash -e {0}
+2026-10-20T22:59:42.8806462Z env:
+2026-10-20T22:59:42.8806644Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:42.8806931Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:42.8807364Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T22:59:42.8807829Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:42.8808191Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:42.8808560Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:42.8809010Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T22:59:42.8809325Z ##[endgroup]
+2026-10-20T22:59:43.4689873Z Hosted Python custody: 8914 regular files, 472 directories, 9385 writable entries tightened; runtime content unchanged.
+2026-10-20T22:59:43.4792878Z ##[group]Run mkdir -p reports/ti
+2026-10-20T22:59:43.4793250Z [36;1mmkdir -p reports/ti[0m
+2026-10-20T22:59:43.4793470Z [36;1mpython3 - <<'PY'[0m
+2026-10-20T22:59:43.4793689Z [36;1mimport json,os,subprocess[0m
+2026-10-20T22:59:43.4793932Z [36;1mfrom pathlib import Path[0m
+2026-10-20T22:59:43.4794357Z [36;1mp=json.loads(Path('engineering/transformation/source-pins.json').read_bytes()); config={}[0m
+2026-10-20T22:59:43.4794866Z [36;1mfor key in ['alpha','manager','jobs','computer']:[0m
+2026-10-20T22:59:43.4795169Z [36;1m    root=Path('.ti-'+key).resolve()[0m
+2026-10-20T22:59:43.4795647Z [36;1m    assert subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()==p[key]['commit'][0m
+2026-10-20T22:59:43.4796346Z [36;1m    assert subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD^{tree}'],text=True).strip()==p[key]['tree'][0m
+2026-10-20T22:59:43.4796971Z [36;1m    if key!='computer':config[key]={'root':str(root),'commit':p[key]['commit']}[0m
+2026-10-20T22:59:43.4797371Z [36;1msource_configuration=json.dumps(config)[0m
+2026-10-20T22:59:43.4797786Z [36;1mPath(os.environ['RUNNER_TEMP'],'ti-sources.json').write_text(source_configuration)[0m
+2026-10-20T22:59:43.4798305Z [36;1mPath('reports/ti/installed-sources.json').write_text(source_configuration)[0m
+2026-10-20T22:59:43.4798822Z [36;1mPath('reports/ti/source-pins.json').write_text(json.dumps(p,indent=2)+'\n')[0m
+2026-10-20T22:59:43.4799188Z [36;1mPY[0m
+2026-10-20T22:59:43.4799391Z [36;1mtest "$(node -p process.arch)" = 'arm64'[0m
+2026-10-20T22:59:43.4800141Z [36;1mpython -B engineering/integration/source_guard.py --alpha-root "$PWD/.ti-computer" --dependency-lock engineering/integration/requirements-native.lock[0m
+2026-10-20T22:59:43.4800835Z [36;1mpython -m venv --copies "$RUNNER_TEMP/ti-python"[0m
+2026-10-20T22:59:43.4801469Z [36;1m"$RUNNER_TEMP/ti-python/bin/python" -m pip install --require-hashes --only-binary=:all: -r engineering/integration/requirements-native.lock[0m
+2026-10-20T22:59:43.4802276Z [36;1mnpm ci --prefix fleet --ignore-scripts --omit=dev[0m
+2026-10-20T22:59:43.4835991Z shell: /usr/bin/bash -e {0}
+2026-10-20T22:59:43.4836221Z env:
+2026-10-20T22:59:43.4836398Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:43.4836684Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:43.4837307Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T22:59:43.4837706Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:43.4838068Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:43.4838425Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:43.4838787Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T22:59:43.4839083Z ##[endgroup]
+2026-10-20T22:59:44.0487945Z Verified exact Alpha hash-locked native dependency blocks: 14
+2026-10-20T22:59:48.0325067Z Collecting annotated-types==0.8.0 (from -r engineering/integration/requirements-native.lock (line 3))
+2026-10-20T22:59:48.0982161Z   Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+2026-10-20T22:59:48.1709679Z Collecting anyio==4.15.1 (from -r engineering/integration/requirements-native.lock (line 7))
+2026-10-20T22:59:48.1858407Z   Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+2026-10-20T22:59:48.2327735Z Collecting certifi==2026.7.22 (from -r engineering/integration/requirements-native.lock (line 13))
+2026-10-20T22:59:48.2461361Z   Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+2026-10-20T22:59:48.3472029Z Collecting cffi==2.1.1 (from -r engineering/integration/requirements-native.lock (line 19))
+2026-10-20T22:59:48.3605376Z   Downloading cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (222 kB)
+2026-10-20T22:59:48.5198790Z Collecting cryptography==50.0.1 (from -r engineering/integration/requirements-native.lock (line 121))
+2026-10-20T22:59:48.5339252Z   Downloading cryptography-50.0.1-cp311-abi3-manylinux_2_34_aarch64.whl (4.7 MB)
+2026-10-20T22:59:48.6217368Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 53.8 MB/s eta 0:00:00
+2026-10-20T22:59:48.6418029Z Collecting h11==0.16.0 (from -r engineering/integration/requirements-native.lock (line 169))
+2026-10-20T22:59:48.6549444Z   Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+2026-10-20T22:59:48.6767274Z Collecting httpcore==1.0.9 (from -r engineering/integration/requirements-native.lock (line 175))
+2026-10-20T22:59:48.6903275Z   Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+2026-10-20T22:59:48.7133962Z Collecting httpx==0.28.1 (from -r engineering/integration/requirements-native.lock (line 179))
+2026-10-20T22:59:48.7266655Z   Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+2026-10-20T22:59:48.7477336Z Collecting idna==3.20 (from -r engineering/integration/requirements-native.lock (line 183))
+2026-10-20T22:59:48.7642135Z   Downloading idna-3.20-py3-none-any.whl (69 kB)
+2026-10-20T22:59:48.7832920Z Collecting pycparser==3.0 (from -r engineering/integration/requirements-native.lock (line 189))
+2026-10-20T22:59:48.7969286Z   Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+2026-10-20T22:59:48.8716020Z Collecting pydantic==2.13.5 (from -r engineering/integration/requirements-native.lock (line 193))
+2026-10-20T22:59:48.8852198Z   Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+2026-10-20T22:59:49.3401440Z Collecting pydantic-core==2.46.5 (from -r engineering/integration/requirements-native.lock (line 202))
+2026-10-20T22:59:49.3579165Z   Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (2.0 MB)
+2026-10-20T22:59:49.3723959Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 140.0 MB/s eta 0:00:00
+2026-10-20T22:59:49.3935940Z Collecting typing-extensions==4.16.0 (from -r engineering/integration/requirements-native.lock (line 324))
+2026-10-20T22:59:49.4068977Z   Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-20T22:59:49.4243879Z Collecting typing-inspection==0.4.4 (from -r engineering/integration/requirements-native.lock (line 335))
+2026-10-20T22:59:49.4374222Z   Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+2026-10-20T22:59:49.4758103Z Installing collected packages: typing-extensions, pycparser, idna, h11, certifi, annotated-types, typing-inspection, pydantic-core, httpcore, cffi, anyio, pydantic, httpx, cryptography
+2026-10-20T22:59:50.3029499Z Successfully installed annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 cffi-2.1.1 cryptography-50.0.1 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 typing-extensions-4.16.0 typing-inspection-0.4.4
+2026-10-20T22:59:50.4208371Z 
+2026-10-20T22:59:50.4208878Z [notice] A new release of pip is available: 25.0.1 -> 26.2.2
+2026-10-20T22:59:50.4209514Z [notice] To update, run: /home/runner/work/_temp/ti-python/bin/python -m pip install --upgrade pip
+2026-10-20T22:59:52.6427228Z 
+2026-10-20T22:59:52.6427856Z added 14 packages, and audited 15 packages in 2s
+2026-10-20T22:59:52.6428158Z 
+2026-10-20T22:59:52.6428904Z 5 packages are looking for funding
+2026-10-20T22:59:52.6429915Z   run `npm fund` for details
+2026-10-20T22:59:52.6438007Z 
+2026-10-20T22:59:52.6438184Z found 0 vulnerabilities
+2026-10-20T22:59:52.6670275Z ##[group]Run python -B local-runtime/transformation/package.py --output "$RUNNER_TEMP/ti-package"
+2026-10-20T22:59:52.6671041Z [36;1mpython -B local-runtime/transformation/package.py --output "$RUNNER_TEMP/ti-package"[0m
+2026-10-20T22:59:52.6671922Z [36;1mpython -B local-runtime/transformation/package.py --verify "$RUNNER_TEMP/ti-package/agi-fleet-local-0.1.0-alpha.7.zip"[0m
+2026-10-20T22:59:52.6672551Z [36;1mcp "$RUNNER_TEMP/ti-package/package-receipt.json" reports/ti/[0m
+2026-10-20T22:59:52.6673608Z [36;1mpython -B engineering/integration/service-package.py extract --archive "$RUNNER_TEMP/ti-package/agi-fleet-local-0.1.0-alpha.7.zip" --application "$RUNNER_TEMP/ti-application" --commit "$GITHUB_SHA" --observation "$PWD/reports/ti/package-observation.json"[0m
+2026-10-20T22:59:52.6708752Z shell: /usr/bin/bash -e {0}
+2026-10-20T22:59:52.6708983Z env:
+2026-10-20T22:59:52.6709162Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:52.6709489Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:52.6709891Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T22:59:52.6710302Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:52.6710657Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:52.6711012Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:52.6711374Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T22:59:52.6711979Z ##[endgroup]
+2026-10-20T22:59:54.0484205Z {"archive": "agi-fleet-local-0.1.0-alpha.7.zip", "bytes": 9103928, "commit": "9fe11ba746ee1b088d117235dd76bff7180e5b47", "dependencyProvenance": {"bytes": 20199495, "excludedGeneratedMembers": [".package-lock.json"], "files": 2393, "inputs": {"fleet/package-lock.json": {"bytes": 53716, "sha256": "2f2e466e273c64badd26e270096c61094d24334fc630bd8e2e911dce8e489b60"}, "fleet/package.json": {"bytes": 1441, "sha256": "f5e711b35f13610b3e7f769c29fe2e49c5994b987ddd835236ffbbd369b8b222"}}, "method": "captured-members-equal-reviewed-fresh-public-npm-reference", "referenceEnvironment": {"command": ["npm", "ci", "--ignore-scripts", "--omit=dev"], "context": "fresh private staging install; no existing node_modules input", "exitCode": 0, "machine": "x86_64", "node": "v24.21.0", "nodeBinarySha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c", "npm": "11.19.0", "npmCliSha256": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7", "system": "Linux"}, "referenceSha256": "3f6f756ea7b6d7755d6dc0d223f1b0ea40e18576be6b2745ed1f8ed4648ca162", "schema": "agi-fleet/ti-locked-dependency-reference/v1", "scope": "packaged bytes equal the reviewed fresh locked npm reference; target native qualification remains required"}, "files": 2982, "inventorySha256": "40d2dc2be2a5e1ec2a67f69c21a2c01af3c975abf4219065034121cd81a3581e", "operatorInstaller": false, "productionQualified": false, "schema": "agi-fleet/ti-source-package-receipt/v1", "scope": "persistent-public-native-ti-project-free-inspection-source-preview", "sha256": "479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a", "version": "0.1.0-alpha.7", "workingTreeDirty": false}
+2026-10-20T22:59:54.4871802Z {"status": "PASS", "version": "0.1.0-alpha.7", "files": 2982, "productionQualified": false}
+2026-10-20T22:59:55.8415374Z {"archiveSHA256":"479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a","package":{"manifestSha256":"257e055af13b89751f72b5e211fdf354bca1dac9558721a324ebaef3778c18af","inventoryBeforeSha256":"d36d42af2d292493d85869977753b3b0d35d009d9938c31ea419c4c64be9d0b2","inventoryAfterSha256":"d36d42af2d292493d85869977753b3b0d35d009d9938c31ea419c4c64be9d0b2","unchanged":true},"application":"/home/runner/work/_temp/ti-application"}
+2026-10-20T22:59:55.8542775Z ##[group]Run python -B -m unittest discover -s "$RUNNER_TEMP/ti-application/engineering/transformation" -p 'test_*.py' -v 2>&1 | tee reports/ti/python-test-output.txt
+2026-10-20T22:59:55.8543935Z [36;1mpython -B -m unittest discover -s "$RUNNER_TEMP/ti-application/engineering/transformation" -p 'test_*.py' -v 2>&1 | tee reports/ti/python-test-output.txt[0m
+2026-10-20T22:59:55.8544590Z [36;1mtest "${PIPESTATUS[0]}" = 0[0m
+2026-10-20T22:59:55.8545475Z [36;1mTI_INSTALLED_SOURCES="$RUNNER_TEMP/ti-sources.json" TI_PYTHON="$RUNNER_TEMP/ti-python/bin/python" node --test --test-reporter=tap "$RUNNER_TEMP/ti-application/engineering/transformation/"*.test.mjs 2>&1 | tee reports/ti/test-output.txt[0m
+2026-10-20T22:59:55.8546458Z [36;1mtest "${PIPESTATUS[0]}" = 0[0m
+2026-10-20T22:59:55.8580125Z shell: /usr/bin/bash -e {0}
+2026-10-20T22:59:55.8580527Z env:
+2026-10-20T22:59:55.8580707Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T22:59:55.8581025Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:55.8581429Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T22:59:55.8582009Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:55.8582369Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:55.8582727Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T22:59:55.8583104Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T22:59:55.8583400Z ##[endgroup]
+2026-10-20T22:59:56.5934613Z test_both_builders_refuse_missing_extra_content_and_mode_mismatches_before_output (test_dependency_reference.BuilderDependencyProvenance.test_both_builders_refuse_missing_extra_content_and_mode_mismatches_before_output) ... ok
+2026-10-20T22:59:56.6321694Z test_both_builders_reject_dependency_symlinks_including_generated_cache (test_dependency_reference.BuilderDependencyProvenance.test_both_builders_reject_dependency_symlinks_including_generated_cache) ... ok
+2026-10-20T22:59:56.7015939Z test_both_builders_share_exact_verifier_and_exclude_only_generated_root_cache (test_dependency_reference.BuilderDependencyProvenance.test_both_builders_share_exact_verifier_and_exclude_only_generated_root_cache) ... ok
+2026-10-20T22:59:56.7017445Z test_different_package_or_lock_identity_is_not_blessed (test_dependency_reference.DependencyReference.test_different_package_or_lock_identity_is_not_blessed) ... ok
+2026-10-20T22:59:56.7018623Z test_exact_captured_receipt_bytes_are_bound (test_dependency_reference.DependencyReference.test_exact_captured_receipt_bytes_are_bound) ... ok
+2026-10-20T22:59:56.7019788Z test_exact_reference_accepts_complete_bytes_and_modes (test_dependency_reference.DependencyReference.test_exact_reference_accepts_complete_bytes_and_modes) ... ok
+2026-10-20T22:59:56.7022855Z test_future_refresh_requires_public_integrity_for_the_complete_lock (test_dependency_reference.DependencyReference.test_future_refresh_requires_public_integrity_for_the_complete_lock) ... ok
+2026-10-20T22:59:56.7024782Z test_incomplete_installation_metadata_is_rejected (test_dependency_reference.DependencyReference.test_incomplete_installation_metadata_is_rejected) ... ok
+2026-10-20T22:59:56.7026258Z test_inert_metadata_differences_are_not_reference_matches (test_dependency_reference.DependencyReference.test_inert_metadata_differences_are_not_reference_matches) ... ok
+2026-10-20T22:59:56.7047003Z test_altered_remote_digest_prevents_visibility_patch (test_release.InertReleaseTests.test_altered_remote_digest_prevents_visibility_patch) ... ok
+2026-10-20T22:59:56.7058391Z test_changed_prepared_asset_has_no_public_effects (test_release.InertReleaseTests.test_changed_prepared_asset_has_no_public_effects) ... ok
+2026-10-20T22:59:56.7066786Z test_different_manifest_members_refuse_before_any_output_asset (test_release.InertReleaseTests.test_different_manifest_members_refuse_before_any_output_asset) ... ok
+2026-10-20T22:59:56.7084557Z test_downloaded_remote_bytes_are_checked_even_if_metadata_matches (test_release.InertReleaseTests.test_downloaded_remote_bytes_are_checked_even_if_metadata_matches) ... ok
+2026-10-20T22:59:56.7098187Z test_edited_plan_notes_cannot_replace_canonical_source_notes (test_release.InertReleaseTests.test_edited_plan_notes_cannot_replace_canonical_source_notes) ... ok
+2026-10-20T22:59:56.7107905Z test_equal_manifest_objects_with_different_member_bytes_are_not_zip_only_variation (test_release.InertReleaseTests.test_equal_manifest_objects_with_different_member_bytes_are_not_zip_only_variation) ... ok
+2026-10-20T22:59:56.7127710Z test_existing_exact_complete_release_is_strictly_read_only (test_release.InertReleaseTests.test_existing_exact_complete_release_is_strictly_read_only) ... ok
+2026-10-20T22:59:56.7142907Z test_existing_release_with_different_asset_is_never_repaired (test_release.InertReleaseTests.test_existing_release_with_different_asset_is_never_repaired) ... ok
+2026-10-20T22:59:56.7156912Z test_existing_tag_at_different_source_is_never_moved (test_release.InertReleaseTests.test_existing_tag_at_different_source_is_never_moved) ... ok
+2026-10-20T22:59:56.7159092Z test_extra_member_and_executable_mode_drift_refuse_before_dependency_check (test_release.InertReleaseTests.test_extra_member_and_executable_mode_drift_refuse_before_dependency_check) ... ok
+2026-10-20T22:59:56.7183429Z test_fresh_publication_verifies_tag_and_assets_before_first_release_visibility (test_release.InertReleaseTests.test_fresh_publication_verifies_tag_and_assets_before_first_release_visibility) ... ok
+2026-10-20T22:59:56.7191699Z test_identical_qualified_raw_archives_keep_one_untouched_canonical_zip (test_release.InertReleaseTests.test_identical_qualified_raw_archives_keep_one_untouched_canonical_zip) ... ok
+2026-10-20T22:59:56.7200809Z test_initial_source_drift_has_no_public_effects (test_release.InertReleaseTests.test_initial_source_drift_has_no_public_effects) ... ok
+2026-10-20T22:59:56.7203564Z test_null_plan_refuses_before_api_requests_or_mutations (test_release.InertReleaseTests.test_null_plan_refuses_before_api_requests_or_mutations) ... ok
+2026-10-20T22:59:56.7304746Z test_packaged_source_is_compared_with_independent_git_bytes (test_release.InertReleaseTests.test_packaged_source_is_compared_with_independent_git_bytes) ... ok
+2026-10-20T22:59:56.7319232Z test_remote_notes_edit_prevents_visibility_patch (test_release.InertReleaseTests.test_remote_notes_edit_prevents_visibility_patch) ... ok
+2026-10-20T22:59:56.7338654Z test_source_drift_after_upload_keeps_release_draft (test_release.InertReleaseTests.test_source_drift_after_upload_keeps_release_draft) ... ok
+2026-10-20T22:59:56.7357541Z test_tag_drift_after_upload_keeps_release_draft (test_release.InertReleaseTests.test_tag_drift_after_upload_keeps_release_draft) ... ok
+2026-10-20T22:59:56.7375817Z test_zip_serialization_difference_preserves_each_inner_zip_and_receipt (test_release.InertReleaseTests.test_zip_serialization_difference_preserves_each_inner_zip_and_receipt) ... ok
+2026-10-20T22:59:56.7402919Z test_changed_qualified_source_or_producer_is_not_a_retry (test_release.InertRetryTests.test_changed_qualified_source_or_producer_is_not_a_retry) ... ok
+2026-10-20T22:59:56.7445269Z test_different_outer_containers_preserve_exact_original_inner_zip_and_receipt (test_release.InertRetryTests.test_different_outer_containers_preserve_exact_original_inner_zip_and_receipt) ... ok
+2026-10-20T22:59:56.7479291Z test_equal_inputs_allow_original_bytes_with_distinct_collectors_and_counters (test_release.InertRetryTests.test_equal_inputs_allow_original_bytes_with_distinct_collectors_and_counters) ... ok
+2026-10-20T22:59:56.7654550Z test_fresh_existing_release_draft_full_or_latest_classification_refuses (test_release.InertRetryTests.test_fresh_existing_release_draft_full_or_latest_classification_refuses) ... ok
+2026-10-20T22:59:56.7715450Z test_full_retry_authenticates_historical_collector_and_preserves_both_contexts (test_release.InertRetryTests.test_full_retry_authenticates_historical_collector_and_preserves_both_contexts) ... ok
+2026-10-20T22:59:56.7762347Z test_missing_original_result_artifact_refuses_without_mutation (test_release.InertRetryTests.test_missing_original_result_artifact_refuses_without_mutation) ... ok
+2026-10-20T22:59:56.7764101Z test_only_actual_asset_download_counter_is_ignored (test_release.InertRetryTests.test_only_actual_asset_download_counter_is_ignored) ... ok
+2026-10-20T22:59:56.7806045Z test_original_collector_api_source_mismatch_refuses_without_writes (test_release.InertRetryTests.test_original_collector_api_source_mismatch_refuses_without_writes) ... ok
+2026-10-20T22:59:56.7898715Z test_original_result_artifact_digest_and_exact_job_log_id_are_both_required (test_release.InertRetryTests.test_original_result_artifact_digest_and_exact_job_log_id_are_both_required) ... ok
+2026-10-20T22:59:56.8000769Z test_original_result_artifact_requires_one_exact_regular_result_file (test_release.InertRetryTests.test_original_result_artifact_requires_one_exact_regular_result_file) ... ok
+2026-10-20T22:59:56.8207740Z test_original_result_asset_hash_set_and_order_must_match_public_bytes (test_release.InertRetryTests.test_original_result_asset_hash_set_and_order_must_match_public_bytes) ... ok
+2026-10-20T22:59:56.8515740Z test_original_result_cannot_claim_fresh_verifier_context_or_nonpublication_status (test_release.InertRetryTests.test_original_result_cannot_claim_fresh_verifier_context_or_nonpublication_status) ... ok
+2026-10-20T22:59:56.8549011Z test_rehashed_original_evidence_cannot_change_retained_report_bytes (test_release.InertRetryTests.test_rehashed_original_evidence_cannot_change_retained_report_bytes) ... ok
+2026-10-20T22:59:56.8590220Z test_rehashed_original_outer_container_cannot_change_qualified_inner_zip (test_release.InertRetryTests.test_rehashed_original_outer_container_cannot_change_qualified_inner_zip) ... ok
+2026-10-20T22:59:56.8591854Z test_historical_success_cannot_replace_latest_review (test_release_auth.ConfiguredReviewAuthentication.test_historical_success_cannot_replace_latest_review) ... ok
+2026-10-20T22:59:56.8595619Z test_normal_merge_equal_tree_retains_comment_identity (test_release_auth.ConfiguredReviewAuthentication.test_normal_merge_equal_tree_retains_comment_identity) ... ok
+2026-10-20T22:59:56.8604116Z test_null_unresolved_stale_bot_and_nonmerge_review_refuse (test_release_auth.ConfiguredReviewAuthentication.test_null_unresolved_stale_bot_and_nonmerge_review_refuse) ... ok
+2026-10-20T22:59:56.8630134Z test_refresh_ignores_only_download_counters_and_preserves_original_records (test_release_auth.PrerequisiteLeaseAuthentication.test_refresh_ignores_only_download_counters_and_preserves_original_records) ... ok
+2026-10-20T22:59:56.8631625Z test_exact_original_attempt_and_check_application (test_release_auth.ProducerAuthentication.test_exact_original_attempt_and_check_application) ... ok
+2026-10-20T22:59:56.8647129Z test_missing_collector_context_refuses_before_api_or_output (test_release_auth.ProducerAuthentication.test_missing_collector_context_refuses_before_api_or_output) ... ok
+2026-10-20T22:59:56.8648557Z test_missing_main_metadata_refuses_without_effects (test_release_auth.ProducerAuthentication.test_missing_main_metadata_refuses_without_effects) ... ok
+2026-10-20T22:59:56.8650127Z test_missing_source_proof_has_no_api_or_publication_effect (test_release_auth.ProducerAuthentication.test_missing_source_proof_has_no_api_or_publication_effect) ... ok
+2026-10-20T22:59:56.8655241Z test_original_successful_collector_is_historical_not_relabelled (test_release_auth.ProducerAuthentication.test_original_successful_collector_is_historical_not_relabelled) ... ok
+2026-10-20T22:59:56.8661160Z test_stale_failed_wrong_source_and_substitute_application_refuse (test_release_auth.ProducerAuthentication.test_stale_failed_wrong_source_and_substitute_application_refuse) ... ok
+2026-10-20T22:59:56.8662172Z 
+2026-10-20T22:59:56.8662602Z ----------------------------------------------------------------------
+2026-10-20T22:59:56.8662939Z Ran 52 tests in 0.521s
+2026-10-20T22:59:56.8663066Z 
+2026-10-20T22:59:56.8663137Z OK
+2026-10-20T22:59:56.9440380Z TAP version 13
+2026-10-20T23:00:10.6983751Z # Subtest: actual EIO after native initialization resumes exact project and journal identity
+2026-10-20T23:00:10.7022884Z ok 1 - actual EIO after native initialization resumes exact project and journal identity
+2026-10-20T23:00:10.7023467Z   ---
+2026-10-20T23:00:10.7023696Z   duration_ms: 11667.716061
+2026-10-20T23:00:10.7023911Z   type: 'test'
+2026-10-20T23:00:10.7024079Z   ...
+2026-10-20T23:00:14.3833366Z # Subtest: malformed UTF8 is rejected without normalization or project retention
+2026-10-20T23:00:14.3834574Z ok 2 - malformed UTF8 is rejected without normalization or project retention
+2026-10-20T23:00:14.3835205Z   ---
+2026-10-20T23:00:14.3835578Z   duration_ms: 1838.002599
+2026-10-20T23:00:14.3835949Z   type: 'test'
+2026-10-20T23:00:14.3836365Z   ...
+2026-10-20T23:00:14.3837286Z # Subtest: existing output is rejected before a demo creates a native campaign
+2026-10-20T23:00:14.3846060Z ok 3 - existing output is rejected before a demo creates a native campaign
+2026-10-20T23:00:14.3853682Z   ---
+2026-10-20T23:00:14.3854263Z   duration_ms: 1848.913131
+2026-10-20T23:00:14.3854788Z   type: 'test'
+2026-10-20T23:00:14.3855326Z   ...
+2026-10-20T23:01:23.0473136Z # Subtest: actual non-demo controls, frozen confirmation, recovery refresh and handoff remain one project
+2026-10-20T23:01:23.0481167Z ok 4 - actual non-demo controls, frozen confirmation, recovery refresh and handoff remain one project
+2026-10-20T23:01:23.0482032Z   ---
+2026-10-20T23:01:23.0482420Z   duration_ms: 68625.274504
+2026-10-20T23:01:23.0482720Z   type: 'test'
+2026-10-20T23:01:23.0482933Z   ...
+2026-10-20T23:01:23.0738112Z # Subtest: installed TI metadata uses frozen application pins without loading target sources
+2026-10-20T23:01:23.0739090Z ok 5 - installed TI metadata uses frozen application pins without loading target sources
+2026-10-20T23:01:23.0741032Z   ---
+2026-10-20T23:01:23.0741366Z   duration_ms: 4.138886
+2026-10-20T23:01:23.0741777Z   type: 'test'
+2026-10-20T23:01:23.0742070Z   ...
+2026-10-20T23:01:23.0742781Z # Subtest: finite TI inventory binds exact source bytes and refuses drift before packaging
+2026-10-20T23:01:23.0743681Z ok 6 - finite TI inventory binds exact source bytes and refuses drift before packaging
+2026-10-20T23:01:23.0744265Z   ---
+2026-10-20T23:01:23.0744587Z   duration_ms: 66.374026
+2026-10-20T23:01:23.0745054Z   type: 'test'
+2026-10-20T23:01:23.0745301Z   ...
+2026-10-20T23:01:23.0745916Z # Subtest: source preview reports every tracked and untracked extra packaged input
+2026-10-20T23:01:23.0746756Z ok 7 - source preview reports every tracked and untracked extra packaged input
+2026-10-20T23:01:23.0747274Z   ---
+2026-10-20T23:01:23.0747778Z   duration_ms: 242.77045
+2026-10-20T23:01:23.0748198Z   type: 'test'
+2026-10-20T23:01:23.0748635Z   ...
+2026-10-20T23:01:23.0749334Z # Subtest: normal installed qualification binds installer receipt, application and Node
+2026-10-20T23:01:23.0750133Z ok 8 - normal installed qualification binds installer receipt, application and Node
+2026-10-20T23:01:23.0750795Z   ---
+2026-10-20T23:01:23.0751175Z   duration_ms: 223.706546
+2026-10-20T23:01:23.0751844Z   type: 'test'
+2026-10-20T23:01:23.0752158Z   ...
+2026-10-20T23:01:23.0753901Z # Subtest: actual native campaign and both real currency receivers retain one inert project
+2026-10-20T23:01:23.0754655Z ok 9 - actual native campaign and both real currency receivers retain one inert project
+2026-10-20T23:01:23.0755226Z   ---
+2026-10-20T23:01:23.0755964Z   duration_ms: 463.561311
+2026-10-20T23:01:23.0756593Z   type: 'test'
+2026-10-20T23:01:23.0757170Z   ...
+2026-10-20T23:01:23.0757842Z # Subtest: exact source summary is visible inert HTML and uses the real native handoff
+2026-10-20T23:01:23.0759001Z ok 10 - exact source summary is visible inert HTML and uses the real native handoff
+2026-10-20T23:01:23.0759628Z   ---
+2026-10-20T23:01:23.0759953Z   duration_ms: 90.169098
+2026-10-20T23:01:23.0760305Z   type: 'test'
+2026-10-20T23:01:23.0760536Z   ...
+2026-10-20T23:01:23.0761315Z # Subtest: private persistent history reopens and import is idempotent without grants
+2026-10-20T23:01:23.0762464Z ok 11 - private persistent history reopens and import is idempotent without grants
+2026-10-20T23:01:23.0762886Z   ---
+2026-10-20T23:01:23.0763158Z   duration_ms: 977.982837
+2026-10-20T23:01:23.0763414Z   type: 'test'
+2026-10-20T23:01:23.0763621Z   ...
+2026-10-20T23:01:23.0764124Z # Subtest: rehashed authority, route, request and evidence substitutions refuse
+2026-10-20T23:01:23.0764736Z ok 12 - rehashed authority, route, request and evidence substitutions refuse
+2026-10-20T23:01:23.0765177Z   ---
+2026-10-20T23:01:23.0765397Z   duration_ms: 102.167455
+2026-10-20T23:01:23.0765629Z   type: 'test'
+2026-10-20T23:01:23.0765916Z   ...
+2026-10-20T23:01:23.0766425Z # Subtest: internally consistent new engine bindings cannot choose their own trusted route context
+2026-10-20T23:01:23.0767215Z ok 13 - internally consistent new engine bindings cannot choose their own trusted route context
+2026-10-20T23:01:23.0767669Z   ---
+2026-10-20T23:01:23.0767886Z   duration_ms: 39.041477
+2026-10-20T23:01:23.0768204Z   type: 'test'
+2026-10-20T23:01:23.0768427Z   ...
+2026-10-20T23:01:23.0768859Z # Subtest: out-of-order and incomplete evidence cannot claim a later phase
+2026-10-20T23:01:23.0769428Z ok 14 - out-of-order and incomplete evidence cannot claim a later phase
+2026-10-20T23:01:23.0769788Z   ---
+2026-10-20T23:01:23.0770081Z   duration_ms: 156.004958
+2026-10-20T23:01:23.0770339Z   type: 'test'
+2026-10-20T23:01:23.0770617Z   ...
+2026-10-20T23:01:23.0771106Z # Subtest: actual frozen native export can advance to completed without invented wire fields
+2026-10-20T23:01:23.0772060Z ok 15 - actual frozen native export can advance to completed without invented wire fields
+2026-10-20T23:01:23.0772574Z   ---
+2026-10-20T23:01:23.0772798Z   duration_ms: 48.685762
+2026-10-20T23:01:23.0773105Z   type: 'test'
+2026-10-20T23:01:23.0773326Z   ...
+2026-10-20T23:01:23.0773758Z # Subtest: every parsed event is screened before any receiver or persistence
+2026-10-20T23:01:23.0774409Z ok 16 - every parsed event is screened before any receiver or persistence
+2026-10-20T23:01:23.0774790Z   ---
+2026-10-20T23:01:23.0775069Z   duration_ms: 201.075279
+2026-10-20T23:01:23.0775326Z   type: 'test'
+2026-10-20T23:01:23.0775577Z   ...
+2026-10-20T23:01:23.0776115Z # Subtest: actual isolated native API adapter performs a fresh campaign in a distinct journal
+2026-10-20T23:01:23.0776819Z ok 17 - actual isolated native API adapter performs a fresh campaign in a distinct journal
+2026-10-20T23:01:23.0777283Z   ---
+2026-10-20T23:01:23.0777518Z   duration_ms: 4077.95884
+2026-10-20T23:01:23.0777773Z   type: 'test'
+2026-10-20T23:01:23.0778036Z   ...
+2026-10-20T23:01:23.0778495Z # Subtest: failed source capture removes only its newly created installation directory
+2026-10-20T23:01:23.0779174Z ok 18 - failed source capture removes only its newly created installation directory
+2026-10-20T23:01:23.0779616Z   ---
+2026-10-20T23:01:23.0779842Z   duration_ms: 13547.540295
+2026-10-20T23:01:23.0780135Z   type: 'test'
+2026-10-20T23:01:23.0780362Z   ...
+2026-10-20T23:01:23.0780878Z # Subtest: failed captured module load deregisters hooks and removes its installation capture
+2026-10-20T23:01:23.0781791Z ok 19 - failed captured module load deregisters hooks and removes its installation capture
+2026-10-20T23:01:23.0782273Z   ---
+2026-10-20T23:01:23.0782556Z   duration_ms: 6836.91444
+2026-10-20T23:01:23.0782810Z   type: 'test'
+2026-10-20T23:01:23.0783384Z   ...
+2026-10-20T23:01:23.0783906Z # Subtest: an existing installation directory is preserved when setup refuses it
+2026-10-20T23:01:23.0784529Z ok 20 - an existing installation directory is preserved when setup refuses it
+2026-10-20T23:01:23.0784971Z   ---
+2026-10-20T23:01:23.0785185Z   duration_ms: 81.935049
+2026-10-20T23:01:23.0785464Z   type: 'test'
+2026-10-20T23:01:23.0785716Z   ...
+2026-10-20T23:01:23.0785921Z 1..20
+2026-10-20T23:01:23.0786178Z # tests 20
+2026-10-20T23:01:23.0786383Z # suites 0
+2026-10-20T23:01:23.0786616Z # pass 20
+2026-10-20T23:01:23.0786861Z # fail 0
+2026-10-20T23:01:23.0787480Z # cancelled 0
+2026-10-20T23:01:23.0787872Z # skipped 0
+2026-10-20T23:01:23.0788121Z # todo 0
+2026-10-20T23:01:23.0788413Z # duration_ms 86153.909981
+2026-10-20T23:01:23.0838042Z ##[group]Run set -euo pipefail
+2026-10-20T23:01:23.0838477Z [36;1mset -euo pipefail[0m
+2026-10-20T23:01:23.0838749Z [36;1msudo apt-get update[0m
+2026-10-20T23:01:23.0839252Z [36;1msudo apt-get install -y bubblewrap util-linux apparmor-profiles[0m
+2026-10-20T23:01:23.0840077Z [36;1msudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY python3 local-runtime/prepare-engineering-host.py > reports/ti/apparmor.json[0m
+2026-10-20T23:01:23.0840885Z [36;1mBASE_TAG=mcr.microsoft.com/playwright/python:v1.63.0-noble[0m
+2026-10-20T23:01:23.0841260Z [36;1mdocker pull "$BASE_TAG"[0m
+2026-10-20T23:01:23.0842522Z [36;1mdocker image inspect "$BASE_TAG" > reports/ti/base-image-inspect.json[0m
+2026-10-20T23:01:23.0843219Z [36;1mBASE_DIGEST=$(docker image inspect --format '{{index .RepoDigests 0}}' "$BASE_TAG")[0m
+2026-10-20T23:01:23.0844096Z [36;1mdocker build --build-arg "BASE_IMAGE=$BASE_DIGEST" -f .ti-computer/examples/successor-workbench/computer/Dockerfile -t successor-ti-worker .ti-computer[0m
+2026-10-20T23:01:23.0844934Z [36;1mIMAGE_ID=$(docker image inspect --format '{{.Id}}' successor-ti-worker)[0m
+2026-10-20T23:01:23.0845479Z [36;1mdocker image inspect successor-ti-worker > reports/ti/worker-image-inspect.json[0m
+2026-10-20T23:01:23.0846044Z [36;1mprintf 'id=%s\n' "$IMAGE_ID" >> "$GITHUB_OUTPUT"[0m
+2026-10-20T23:01:23.0881127Z shell: /usr/bin/bash -e {0}
+2026-10-20T23:01:23.0881419Z env:
+2026-10-20T23:01:23.0881870Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T23:01:23.0882308Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:01:23.0882754Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T23:01:23.0883272Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:01:23.0883698Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:01:23.0884122Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:01:23.0884585Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T23:01:23.0885152Z ##[endgroup]
+2026-10-20T23:01:23.2187566Z Get:1 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-10-20T23:01:23.3836228Z Get:2 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
+2026-10-20T23:01:23.4013815Z Get:3 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [565 kB]
+2026-10-20T23:01:23.4102981Z Get:4 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [626 kB]
+2026-10-20T23:01:23.5201053Z Hit:5 http://ports.ubuntu.com/ubuntu-ports noble InRelease
+2026-10-20T23:01:23.5672490Z Get:6 http://ports.ubuntu.com/ubuntu-ports noble-updates InRelease [126 kB]
+2026-10-20T23:01:23.7722479Z Get:7 http://ports.ubuntu.com/ubuntu-ports noble-backports InRelease [126 kB]
+2026-10-20T23:01:23.8692957Z Get:8 http://ports.ubuntu.com/ubuntu-ports noble-security InRelease [126 kB]
+2026-10-20T23:01:23.9384941Z Get:9 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 Packages [1452 kB]
+2026-10-20T23:01:24.1732608Z Get:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/main Translation-en [308 kB]
+2026-10-20T23:01:24.2291849Z Get:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/universe arm64 Packages [1747 kB]
+2026-10-20T23:01:24.3461284Z Get:12 http://ports.ubuntu.com/ubuntu-ports noble-updates/universe Translation-en [342 kB]
+2026-10-20T23:01:24.3979418Z Get:13 http://ports.ubuntu.com/ubuntu-ports noble-updates/restricted arm64 Packages [2678 kB]
+2026-10-20T23:01:24.5033105Z Get:14 http://ports.ubuntu.com/ubuntu-ports noble-updates/restricted Translation-en [411 kB]
+2026-10-20T23:01:24.5534544Z Get:15 http://ports.ubuntu.com/ubuntu-ports noble-security/main arm64 Packages [1205 kB]
+2026-10-20T23:01:24.6102174Z Get:16 http://ports.ubuntu.com/ubuntu-ports noble-security/main Translation-en [231 kB]
+2026-10-20T23:01:24.6588781Z Get:17 http://ports.ubuntu.com/ubuntu-ports noble-security/universe arm64 Packages [1298 kB]
+2026-10-20T23:01:24.7165979Z Get:18 http://ports.ubuntu.com/ubuntu-ports noble-security/universe Translation-en [246 kB]
+2026-10-20T23:01:24.8518301Z Get:19 http://ports.ubuntu.com/ubuntu-ports noble-security/restricted arm64 Packages [2573 kB]
+2026-10-20T23:01:24.9198769Z Get:20 http://ports.ubuntu.com/ubuntu-ports noble-security/restricted Translation-en [392 kB]
+2026-10-20T23:01:29.7833114Z Fetched 14.5 MB in 2s (7384 kB/s)
+2026-10-20T23:01:30.9365020Z Reading package lists...
+2026-10-20T23:01:30.9690778Z Reading package lists...
+2026-10-20T23:01:31.2477173Z Building dependency tree...
+2026-10-20T23:01:31.2484673Z Reading state information...
+2026-10-20T23:01:31.4863553Z util-linux is already the newest version (2.39.3-9ubuntu6.6).
+2026-10-20T23:01:31.4864833Z The following additional packages will be installed:
+2026-10-20T23:01:31.4871149Z   apparmor libapparmor1
+2026-10-20T23:01:31.4879216Z Suggested packages:
+2026-10-20T23:01:31.4879629Z   apparmor-profiles-extra apparmor-utils
+2026-10-20T23:01:31.5136108Z The following NEW packages will be installed:
+2026-10-20T23:01:31.5143065Z   apparmor-profiles bubblewrap
+2026-10-20T23:01:31.5146979Z The following packages will be upgraded:
+2026-10-20T23:01:31.5155680Z   apparmor libapparmor1
+2026-10-20T23:01:31.9229279Z 2 upgraded, 2 newly installed, 0 to remove and 85 not upgraded.
+2026-10-20T23:01:31.9230107Z Need to get 765 kB of archives.
+2026-10-20T23:01:31.9230590Z After this operation, 503 kB of additional disk space will be used.
+2026-10-20T23:01:31.9231811Z Get:1 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libapparmor1 arm64 4.0.1really4.0.1-0ubuntu0.24.04.9 [51.9 kB]
+2026-10-20T23:01:32.3441737Z Get:2 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 apparmor arm64 4.0.1really4.0.1-0ubuntu0.24.04.9 [624 kB]
+2026-10-20T23:01:33.0557462Z Get:3 http://ports.ubuntu.com/ubuntu-ports noble-security/main arm64 bubblewrap arm64 0.9.0-1ubuntu0.3 [50.0 kB]
+2026-10-20T23:01:33.1978322Z Get:4 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 apparmor-profiles all 4.0.1really4.0.1-0ubuntu0.24.04.9 [39.6 kB]
+2026-10-20T23:01:33.4481229Z Preconfiguring packages ...
+2026-10-20T23:01:33.5144057Z Fetched 765 kB in 2s (456 kB/s)
+2026-10-20T23:01:33.5881769Z (Reading database ... 
+2026-10-20T23:01:33.5882512Z (Reading database ... 5%
+2026-10-20T23:01:33.5883211Z (Reading database ... 10%
+2026-10-20T23:01:33.5883609Z (Reading database ... 15%
+2026-10-20T23:01:33.5883923Z (Reading database ... 20%
+2026-10-20T23:01:33.5884322Z (Reading database ... 25%
+2026-10-20T23:01:33.5884613Z (Reading database ... 30%
+2026-10-20T23:01:33.5884925Z (Reading database ... 35%
+2026-10-20T23:01:33.5885233Z (Reading database ... 40%
+2026-10-20T23:01:33.5885537Z (Reading database ... 45%
+2026-10-20T23:01:33.5885897Z (Reading database ... 50%
+2026-10-20T23:01:33.7096583Z (Reading database ... 55%
+2026-10-20T23:01:33.9882315Z (Reading database ... 60%
+2026-10-20T23:01:34.2476399Z (Reading database ... 65%
+2026-10-20T23:01:34.4909713Z (Reading database ... 70%
+2026-10-20T23:01:34.7920457Z (Reading database ... 75%
+2026-10-20T23:01:35.0807820Z (Reading database ... 80%
+2026-10-20T23:01:35.5540138Z (Reading database ... 85%
+2026-10-20T23:01:36.0123069Z (Reading database ... 90%
+2026-10-20T23:01:36.4580442Z (Reading database ... 95%
+2026-10-20T23:01:36.4581841Z (Reading database ... 100%
+2026-10-20T23:01:36.4582422Z (Reading database ... 203258 files and directories currently installed.)
+2026-10-20T23:01:36.4622746Z Preparing to unpack .../libapparmor1_4.0.1really4.0.1-0ubuntu0.24.04.9_arm64.deb ...
+2026-10-20T23:01:36.4796963Z Unpacking libapparmor1:arm64 (4.0.1really4.0.1-0ubuntu0.24.04.9) over (4.0.1really4.0.1-0ubuntu0.24.04.8) ...
+2026-10-20T23:01:36.5209113Z Preparing to unpack .../apparmor_4.0.1really4.0.1-0ubuntu0.24.04.9_arm64.deb ...
+2026-10-20T23:01:36.9767471Z Unpacking apparmor (4.0.1really4.0.1-0ubuntu0.24.04.9) over (4.0.1really4.0.1-0ubuntu0.24.04.8) ...
+2026-10-20T23:01:37.2937282Z Selecting previously unselected package bubblewrap.
+2026-10-20T23:01:37.3127408Z Preparing to unpack .../bubblewrap_0.9.0-1ubuntu0.3_arm64.deb ...
+2026-10-20T23:01:37.3134704Z Unpacking bubblewrap (0.9.0-1ubuntu0.3) ...
+2026-10-20T23:01:37.3435783Z Selecting previously unselected package apparmor-profiles.
+2026-10-20T23:01:37.3614948Z Preparing to unpack .../apparmor-profiles_4.0.1really4.0.1-0ubuntu0.24.04.9_all.deb ...
+2026-10-20T23:01:37.4107720Z Unpacking apparmor-profiles (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+2026-10-20T23:01:37.4588129Z Setting up bubblewrap (0.9.0-1ubuntu0.3) ...
+2026-10-20T23:01:37.4623557Z Setting up libapparmor1:arm64 (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+2026-10-20T23:01:37.4635131Z Setting up apparmor (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+2026-10-20T23:01:37.5887442Z Installing new version of config file /etc/apparmor.d/transmission ...
+2026-10-20T23:01:38.3102399Z Reloading AppArmor profiles 
+2026-10-20T23:01:38.3913455Z Skipping profile in /etc/apparmor.d/disable: usr.bin.firefox
+2026-10-20T23:01:38.5935725Z Setting up apparmor-profiles (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+2026-10-20T23:01:39.2860146Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-10-20T23:01:39.2920662Z Not building database; man-db/auto-update is not 'true'.
+2026-10-20T23:01:39.2933851Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+2026-10-20T23:01:42.0026065Z 
+2026-10-20T23:01:42.0026696Z Running kernel seems to be up-to-date.
+2026-10-20T23:01:42.0027005Z 
+2026-10-20T23:01:42.0027317Z Restarting services...
+2026-10-20T23:01:42.0204205Z  /etc/needrestart/restart.d/systemd-manager
+2026-10-20T23:01:42.2130950Z  systemctl restart php8.3-fpm.service
+2026-10-20T23:03:12.5169877Z Job for php8.3-fpm.service failed because a timeout was exceeded.
+2026-10-20T23:03:12.5170886Z See "systemctl status php8.3-fpm.service" and "journalctl -xeu php8.3-fpm.service" for details.
+2026-10-20T23:03:12.5178409Z 
+2026-10-20T23:03:12.5178674Z Service restarts being deferred:
+2026-10-20T23:03:12.5179126Z  /etc/needrestart/restart.d/dbus.service
+2026-10-20T23:03:12.5179346Z 
+2026-10-20T23:03:12.5179596Z No containers need to be restarted.
+2026-10-20T23:03:12.5179782Z 
+2026-10-20T23:03:12.5180272Z User sessions running outdated binaries:
+2026-10-20T23:03:12.5180717Z  runner @ user manager service: systemd[1379]
+2026-10-20T23:03:12.5288677Z 
+2026-10-20T23:03:12.5289562Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-10-20T23:03:14.1437909Z v1.63.0-noble: Pulling from playwright/python
+2026-10-20T23:03:14.2380949Z 9332cde1e070: Pulling fs layer
+2026-10-20T23:03:14.2381433Z 474fe87140eb: Pulling fs layer
+2026-10-20T23:03:14.2381932Z e877fc261f13: Pulling fs layer
+2026-10-20T23:03:14.2382350Z 1689366660dd: Pulling fs layer
+2026-10-20T23:03:14.2382632Z 1689366660dd: Waiting
+2026-10-20T23:03:14.4953606Z 9332cde1e070: Verifying Checksum
+2026-10-20T23:03:14.4954967Z 9332cde1e070: Download complete
+2026-10-20T23:03:14.5663180Z 474fe87140eb: Verifying Checksum
+2026-10-20T23:03:14.5663601Z 474fe87140eb: Download complete
+2026-10-20T23:03:14.7804717Z e877fc261f13: Verifying Checksum
+2026-10-20T23:03:14.7812528Z e877fc261f13: Download complete
+2026-10-20T23:03:15.4354962Z 9332cde1e070: Pull complete
+2026-10-20T23:03:18.3726047Z 1689366660dd: Verifying Checksum
+2026-10-20T23:03:18.3726761Z 1689366660dd: Download complete
+2026-10-20T23:03:20.8186624Z 474fe87140eb: Pull complete
+2026-10-20T23:03:21.3888178Z e877fc261f13: Pull complete
+2026-10-20T23:03:35.4008295Z 1689366660dd: Pull complete
+2026-10-20T23:03:35.4039211Z Digest: sha256:72bd171a9ffc2b4b59532aaa6210e21014d07093120dc25528870c0b840da1f0
+2026-10-20T23:03:35.4048520Z Status: Downloaded newer image for mcr.microsoft.com/playwright/python:v1.63.0-noble
+2026-10-20T23:03:35.4056134Z mcr.microsoft.com/playwright/python:v1.63.0-noble
+2026-10-20T23:03:37.6827209Z #0 building with "default" instance using docker driver
+2026-10-20T23:03:37.6827615Z 
+2026-10-20T23:03:37.6827868Z #1 [internal] load build definition from Dockerfile
+2026-10-20T23:03:37.6828279Z #1 transferring dockerfile: 603B 0.0s done
+2026-10-20T23:03:37.6829549Z #1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${BASE_IMAGE} results in empty or invalid base image name (line 4)
+2026-10-20T23:03:37.6830162Z #1 DONE 0.0s
+2026-10-20T23:03:37.6830312Z 
+2026-10-20T23:03:37.6831033Z #2 [internal] load metadata for mcr.microsoft.com/playwright/python@sha256:72bd171a9ffc2b4b59532aaa6210e21014d07093120dc25528870c0b840da1f0
+2026-10-20T23:03:37.6832123Z #2 DONE 0.0s
+2026-10-20T23:03:37.6832272Z 
+2026-10-20T23:03:37.6832415Z #3 [internal] load .dockerignore
+2026-10-20T23:03:37.6832842Z #3 transferring context: 1.53kB done
+2026-10-20T23:03:37.6833150Z #3 DONE 0.0s
+2026-10-20T23:03:37.6833305Z 
+2026-10-20T23:03:37.6833900Z #4 [1/4] FROM mcr.microsoft.com/playwright/python@sha256:72bd171a9ffc2b4b59532aaa6210e21014d07093120dc25528870c0b840da1f0
+2026-10-20T23:03:37.6834480Z #4 DONE 0.0s
+2026-10-20T23:03:37.6834613Z 
+2026-10-20T23:03:37.6834744Z #5 [internal] load build context
+2026-10-20T23:03:37.6835130Z #5 transferring context: 14.24kB done
+2026-10-20T23:03:37.6835425Z #5 DONE 0.0s
+2026-10-20T23:03:37.6835543Z 
+2026-10-20T23:03:37.6836043Z #6 [2/4] COPY examples/successor-workbench/computer/requirements.lock /opt/successor/requirements.lock
+2026-10-20T23:03:37.6836532Z #6 DONE 0.0s
+2026-10-20T23:03:37.6836664Z 
+2026-10-20T23:03:37.6837053Z #7 [3/4] RUN python -m pip install --no-cache-dir --require-hashes -r /opt/successor/requirements.lock
+2026-10-20T23:03:38.2196215Z #7 0.687 Collecting greenlet==3.5.6 (from -r /opt/successor/requirements.lock (line 7))
+2026-10-20T23:03:38.3773814Z #7 0.765   Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl (611 kB)
+2026-10-20T23:03:38.3774965Z #7 0.845      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 611.7/611.7 kB 9.8 MB/s  0:00:00
+2026-10-20T23:03:38.5777374Z #7 0.880 Collecting playwright==1.63.0 (from -r /opt/successor/requirements.lock (line 88))
+2026-10-20T23:03:38.5778305Z #7 0.895   Downloading playwright-1.63.0-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (47.9 MB)
+2026-10-20T23:03:39.1531317Z #7 1.510      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 47.9/47.9 MB 80.6 MB/s  0:00:00
+2026-10-20T23:03:39.1532265Z #7 1.557 Collecting pyee==13.0.1 (from -r /opt/successor/requirements.lock (line 98))
+2026-10-20T23:03:39.1533023Z #7 1.568   Downloading pyee-13.0.1-py3-none-any.whl (15 kB)
+2026-10-20T23:03:39.1533716Z #7 1.587 Collecting typing-extensions==4.16.0 (from -r /opt/successor/requirements.lock (line 102))
+2026-10-20T23:03:39.1534435Z #7 1.600   Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-20T23:03:39.1535128Z #7 1.621 Installing collected packages: typing-extensions, greenlet, pyee, playwright
+2026-10-20T23:03:39.8362037Z #7 2.304 
+2026-10-20T23:03:39.9886934Z #7 2.305 Successfully installed greenlet-3.5.6 playwright-1.63.0 pyee-13.0.1 typing-extensions-4.16.0
+2026-10-20T23:03:39.9889339Z #7 2.305 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+2026-10-20T23:03:39.9890736Z #7 2.306 
+2026-10-20T23:03:39.9891198Z #7 2.306 [notice] A new release of pip is available: 26.2.1 -> 26.2.2
+2026-10-20T23:03:40.1299855Z #7 2.306 [notice] To update, run: python -m pip install --upgrade pip
+2026-10-20T23:03:40.3699304Z #7 DONE 2.8s
+2026-10-20T23:03:40.5389019Z 
+2026-10-20T23:03:40.5390152Z #8 [4/4] COPY alpha_factory_v1/core/runtime/successor/computer_worker.py /opt/successor/computer_worker.py
+2026-10-20T23:03:40.5391102Z #8 DONE 0.0s
+2026-10-20T23:03:40.5391380Z 
+2026-10-20T23:03:40.5392074Z #9 exporting to image
+2026-10-20T23:03:40.5392539Z #9 exporting layers
+2026-10-20T23:03:41.2941203Z #9 exporting layers 0.9s done
+2026-10-20T23:03:41.3066617Z #9 writing image sha256:85b28c0af07c734261b36e594313e5855ff7e91cbb2c0a6df303ca9841a67a08 done
+2026-10-20T23:03:41.3067961Z #9 naming to docker.io/library/successor-ti-worker done
+2026-10-20T23:03:41.3068398Z #9 DONE 0.9s
+2026-10-20T23:03:41.3068518Z 
+2026-10-20T23:03:41.3069151Z  [33m1 warning found (use docker --debug to expand):
+2026-10-20T23:03:41.3070083Z [0m - InvalidDefaultArgInFrom: Default value for ARG ${BASE_IMAGE} results in empty or invalid base image name (line 4)
+2026-10-20T23:03:41.3500476Z ##[group]Run python3 - <<'PY'
+2026-10-20T23:03:41.3500963Z [36;1mpython3 - <<'PY'[0m
+2026-10-20T23:03:41.3501371Z [36;1mimport hashlib,json,os,subprocess,urllib.request[0m
+2026-10-20T23:03:41.3502232Z [36;1mfrom pathlib import Path[0m
+2026-10-20T23:03:41.3502706Z [36;1massert os.getuid()!=0, 'Installed qualification requires the unprivileged runner'[0m
+2026-10-20T23:03:41.3503391Z [36;1mpins=json.loads(Path('fleet/shared/runtime/compute/runtime-artifacts.lock.json').read_bytes())[0m
+2026-10-20T23:03:41.3504020Z [36;1mitem=next(p for p in pins['node']['archives'] if p['platform']=='linux-arm64')[0m
+2026-10-20T23:03:41.3504696Z [36;1marchive=Path(os.environ['RUNNER_TEMP'])/'ti-node.tar.xz';urllib.request.urlretrieve(item['url'],archive)[0m
+2026-10-20T23:03:41.3505323Z [36;1massert hashlib.sha256(archive.read_bytes()).hexdigest()==item['sha256'][0m
+2026-10-20T23:03:41.3506068Z [36;1mreceipt=json.loads(Path(os.environ['RUNNER_TEMP'],'ti-package/package-receipt.json').read_bytes())[0m
+2026-10-20T23:03:41.3506796Z [36;1mroot=Path(os.environ['RUNNER_TEMP'])/'ti-installed';state=Path(os.environ['RUNNER_TEMP'])/'ti-installed-state'[0m
+2026-10-20T23:03:41.3507574Z [36;1margs=['--archive',str(Path(os.environ['RUNNER_TEMP'],'ti-package',receipt['archive'])),'--sha256',receipt['sha256'],[0m
+2026-10-20T23:03:41.3508218Z [36;1m      '--node-archive',str(archive),'--root',str(root),'--state',str(state)][0m
+2026-10-20T23:03:41.3508861Z [36;1mpreflight=subprocess.check_output(['python3','-B','local-runtime/install.py','preflight',*args],text=True)[0m
+2026-10-20T23:03:41.3509547Z [36;1mPath('reports/ti/install-preflight.json').write_text(preflight)[0m
+2026-10-20T23:03:41.3510014Z [36;1massert json.loads(preflight)['readyForInstallInspection'][0m
+2026-10-20T23:03:41.3510677Z [36;1mresult=subprocess.check_output(['python3','-B','local-runtime/install.py','install',*args,'--confirm'],text=True)[0m
+2026-10-20T23:03:41.3511312Z [36;1mPath('reports/ti/install-receipt.json').write_text(result)[0m
+2026-10-20T23:03:41.3512110Z [36;1minstalled=json.loads(result)[0m
+2026-10-20T23:03:41.3512641Z [36;1massert installed['installation']==str(root) and installed['state']==str(state)[0m
+2026-10-20T23:03:41.3513363Z [36;1massert installed['archiveSHA256']==receipt['sha256'] and installed['sourceCommit']==receipt['commit']==os.environ['GITHUB_SHA'][0m
+2026-10-20T23:03:41.3514256Z [36;1massert installed['version']==receipt['version']=='0.1.0-alpha.7' and installed['started'] is False and installed['authority']=='none'[0m
+2026-10-20T23:03:41.3515138Z [36;1mapp=root/'versions'/installed['archiveSHA256']/'application';runtime=root/'versions'/installed['archiveSHA256']/'runtime/node'[0m
+2026-10-20T23:03:41.3515970Z [36;1massert app.resolve()==app and runtime.resolve()==runtime and runtime.is_file() and os.access(runtime,os.X_OK)[0m
+2026-10-20T23:03:41.3516546Z [36;1mdef digest(file):[0m
+2026-10-20T23:03:41.3517219Z [36;1m    with file.open('rb') as raw:return hashlib.file_digest(raw,'sha256').hexdigest()[0m
+2026-10-20T23:03:41.3517750Z [36;1massert digest(runtime)==installed['node']['binarySHA256'][0m
+2026-10-20T23:03:41.3518273Z [36;1massert digest(app/'local-preview-manifest.json')==installed['manifestSHA256'][0m
+2026-10-20T23:03:41.3518959Z [36;1massert digest(app/'local-runtime/transformation/source-inventory.json')==receipt['inventorySha256'][0m
+2026-10-20T23:03:41.3519707Z [36;1msubprocess.run([str(runtime),'--check',str(app/'local-runtime/transformation/cli.mjs')],check=True)[0m
+2026-10-20T23:03:41.3520492Z [36;1mbinding={'schema':'agi-fleet/ti-normal-installation-binding/v1','application':str(app),'nodeExecutable':str(runtime),[0m
+2026-10-20T23:03:41.3521374Z [36;1m         'installation':str(root),'state':str(state),'archiveSHA256':installed['archiveSHA256'],'sourceCommit':installed['sourceCommit'],[0m
+2026-10-20T23:03:41.3522398Z [36;1m         'manifestSHA256':installed['manifestSHA256'],'nodeBinarySHA256':installed['node']['binarySHA256'],[0m
+2026-10-20T23:03:41.3523428Z [36;1m         'installerReceiptSHA256':hashlib.sha256(result.encode()).hexdigest(),'uid':os.getuid(),'started':False,'authority':'none'}[0m
+2026-10-20T23:03:41.3524282Z [36;1mPath('reports/ti/installed-binding.json').write_text(json.dumps(binding,indent=2)+'\n')[0m
+2026-10-20T23:03:41.3524829Z [36;1mwith open(os.environ['GITHUB_OUTPUT'],'a') as output:[0m
+2026-10-20T23:03:41.3525419Z [36;1m    output.write('application='+str(app)+'\nnode='+str(runtime)+'\narchive='+installed['archiveSHA256']+'\n')[0m
+2026-10-20T23:03:41.3525950Z [36;1mPY[0m
+2026-10-20T23:03:41.3560914Z shell: /usr/bin/bash -e {0}
+2026-10-20T23:03:41.3561200Z env:
+2026-10-20T23:03:41.3561753Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T23:03:41.3562132Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:03:41.3562584Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T23:03:41.3563128Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:03:41.3563539Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:03:41.3564011Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:03:41.3564451Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T23:03:41.3564789Z ##[endgroup]
+2026-10-20T23:03:49.7125226Z ##[group]Run python -B -m unittest discover -s "$TI_APPLICATION/engineering/transformation" -p 'test_*.py' -v 2>&1 | tee reports/ti/installed-python-test-output.txt
+2026-10-20T23:03:49.7126412Z [36;1mpython -B -m unittest discover -s "$TI_APPLICATION/engineering/transformation" -p 'test_*.py' -v 2>&1 | tee reports/ti/installed-python-test-output.txt[0m
+2026-10-20T23:03:49.7127101Z [36;1mtest "${PIPESTATUS[0]}" = 0[0m
+2026-10-20T23:03:49.7128105Z [36;1mTI_INSTALLED_SOURCES="$RUNNER_TEMP/ti-sources.json" TI_PYTHON="$RUNNER_TEMP/ti-python/bin/python" "$TI_NODE" --test --test-reporter=tap "$TI_APPLICATION/engineering/transformation/"*.test.mjs 2>&1 | tee reports/ti/installed-test-output.txt[0m
+2026-10-20T23:03:49.7129099Z [36;1mtest "${PIPESTATUS[0]}" = 0[0m
+2026-10-20T23:03:49.7163901Z shell: /usr/bin/bash -e {0}
+2026-10-20T23:03:49.7164341Z env:
+2026-10-20T23:03:49.7164568Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T23:03:49.7164999Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:03:49.7165468Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T23:03:49.7165929Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:03:49.7166366Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:03:49.7166793Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:03:49.7167240Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T23:03:49.7167932Z   TI_APPLICATION: /home/runner/work/_temp/ti-installed/versions/479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a/application
+2026-10-20T23:03:49.7169098Z   TI_NODE: /home/runner/work/_temp/ti-installed/versions/479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a/runtime/node
+2026-10-20T23:03:49.7169732Z ##[endgroup]
+2026-10-20T23:03:50.1669122Z test_both_builders_refuse_missing_extra_content_and_mode_mismatches_before_output (test_dependency_reference.BuilderDependencyProvenance.test_both_builders_refuse_missing_extra_content_and_mode_mismatches_before_output) ... ok
+2026-10-20T23:03:50.2043891Z test_both_builders_reject_dependency_symlinks_including_generated_cache (test_dependency_reference.BuilderDependencyProvenance.test_both_builders_reject_dependency_symlinks_including_generated_cache) ... ok
+2026-10-20T23:03:50.2701282Z test_both_builders_share_exact_verifier_and_exclude_only_generated_root_cache (test_dependency_reference.BuilderDependencyProvenance.test_both_builders_share_exact_verifier_and_exclude_only_generated_root_cache) ... ok
+2026-10-20T23:03:50.2703301Z test_different_package_or_lock_identity_is_not_blessed (test_dependency_reference.DependencyReference.test_different_package_or_lock_identity_is_not_blessed) ... ok
+2026-10-20T23:03:50.2704593Z test_exact_captured_receipt_bytes_are_bound (test_dependency_reference.DependencyReference.test_exact_captured_receipt_bytes_are_bound) ... ok
+2026-10-20T23:03:50.2705936Z test_exact_reference_accepts_complete_bytes_and_modes (test_dependency_reference.DependencyReference.test_exact_reference_accepts_complete_bytes_and_modes) ... ok
+2026-10-20T23:03:50.2707429Z test_future_refresh_requires_public_integrity_for_the_complete_lock (test_dependency_reference.DependencyReference.test_future_refresh_requires_public_integrity_for_the_complete_lock) ... ok
+2026-10-20T23:03:50.2723435Z test_incomplete_installation_metadata_is_rejected (test_dependency_reference.DependencyReference.test_incomplete_installation_metadata_is_rejected) ... ok
+2026-10-20T23:03:50.2724993Z test_inert_metadata_differences_are_not_reference_matches (test_dependency_reference.DependencyReference.test_inert_metadata_differences_are_not_reference_matches) ... ok
+2026-10-20T23:03:50.2730453Z test_altered_remote_digest_prevents_visibility_patch (test_release.InertReleaseTests.test_altered_remote_digest_prevents_visibility_patch) ... ok
+2026-10-20T23:03:50.2741180Z test_changed_prepared_asset_has_no_public_effects (test_release.InertReleaseTests.test_changed_prepared_asset_has_no_public_effects) ... ok
+2026-10-20T23:03:50.2749853Z test_different_manifest_members_refuse_before_any_output_asset (test_release.InertReleaseTests.test_different_manifest_members_refuse_before_any_output_asset) ... ok
+2026-10-20T23:03:50.2766205Z test_downloaded_remote_bytes_are_checked_even_if_metadata_matches (test_release.InertReleaseTests.test_downloaded_remote_bytes_are_checked_even_if_metadata_matches) ... ok
+2026-10-20T23:03:50.2779440Z test_edited_plan_notes_cannot_replace_canonical_source_notes (test_release.InertReleaseTests.test_edited_plan_notes_cannot_replace_canonical_source_notes) ... ok
+2026-10-20T23:03:50.2789052Z test_equal_manifest_objects_with_different_member_bytes_are_not_zip_only_variation (test_release.InertReleaseTests.test_equal_manifest_objects_with_different_member_bytes_are_not_zip_only_variation) ... ok
+2026-10-20T23:03:50.2806624Z test_existing_exact_complete_release_is_strictly_read_only (test_release.InertReleaseTests.test_existing_exact_complete_release_is_strictly_read_only) ... ok
+2026-10-20T23:03:50.2820771Z test_existing_release_with_different_asset_is_never_repaired (test_release.InertReleaseTests.test_existing_release_with_different_asset_is_never_repaired) ... ok
+2026-10-20T23:03:50.2834434Z test_existing_tag_at_different_source_is_never_moved (test_release.InertReleaseTests.test_existing_tag_at_different_source_is_never_moved) ... ok
+2026-10-20T23:03:50.2836087Z test_extra_member_and_executable_mode_drift_refuse_before_dependency_check (test_release.InertReleaseTests.test_extra_member_and_executable_mode_drift_refuse_before_dependency_check) ... ok
+2026-10-20T23:03:50.2859746Z test_fresh_publication_verifies_tag_and_assets_before_first_release_visibility (test_release.InertReleaseTests.test_fresh_publication_verifies_tag_and_assets_before_first_release_visibility) ... ok
+2026-10-20T23:03:50.2868342Z test_identical_qualified_raw_archives_keep_one_untouched_canonical_zip (test_release.InertReleaseTests.test_identical_qualified_raw_archives_keep_one_untouched_canonical_zip) ... ok
+2026-10-20T23:03:50.2877448Z test_initial_source_drift_has_no_public_effects (test_release.InertReleaseTests.test_initial_source_drift_has_no_public_effects) ... ok
+2026-10-20T23:03:50.2879956Z test_null_plan_refuses_before_api_requests_or_mutations (test_release.InertReleaseTests.test_null_plan_refuses_before_api_requests_or_mutations) ... ok
+2026-10-20T23:03:50.2980991Z test_packaged_source_is_compared_with_independent_git_bytes (test_release.InertReleaseTests.test_packaged_source_is_compared_with_independent_git_bytes) ... ok
+2026-10-20T23:03:50.2995590Z test_remote_notes_edit_prevents_visibility_patch (test_release.InertReleaseTests.test_remote_notes_edit_prevents_visibility_patch) ... ok
+2026-10-20T23:03:50.3014063Z test_source_drift_after_upload_keeps_release_draft (test_release.InertReleaseTests.test_source_drift_after_upload_keeps_release_draft) ... ok
+2026-10-20T23:03:50.3032668Z test_tag_drift_after_upload_keeps_release_draft (test_release.InertReleaseTests.test_tag_drift_after_upload_keeps_release_draft) ... ok
+2026-10-20T23:03:50.3050835Z test_zip_serialization_difference_preserves_each_inner_zip_and_receipt (test_release.InertReleaseTests.test_zip_serialization_difference_preserves_each_inner_zip_and_receipt) ... ok
+2026-10-20T23:03:50.3078005Z test_changed_qualified_source_or_producer_is_not_a_retry (test_release.InertRetryTests.test_changed_qualified_source_or_producer_is_not_a_retry) ... ok
+2026-10-20T23:03:50.3120086Z test_different_outer_containers_preserve_exact_original_inner_zip_and_receipt (test_release.InertRetryTests.test_different_outer_containers_preserve_exact_original_inner_zip_and_receipt) ... ok
+2026-10-20T23:03:50.3152794Z test_equal_inputs_allow_original_bytes_with_distinct_collectors_and_counters (test_release.InertRetryTests.test_equal_inputs_allow_original_bytes_with_distinct_collectors_and_counters) ... ok
+2026-10-20T23:03:50.3325952Z test_fresh_existing_release_draft_full_or_latest_classification_refuses (test_release.InertRetryTests.test_fresh_existing_release_draft_full_or_latest_classification_refuses) ... ok
+2026-10-20T23:03:50.3384752Z test_full_retry_authenticates_historical_collector_and_preserves_both_contexts (test_release.InertRetryTests.test_full_retry_authenticates_historical_collector_and_preserves_both_contexts) ... ok
+2026-10-20T23:03:50.3432064Z test_missing_original_result_artifact_refuses_without_mutation (test_release.InertRetryTests.test_missing_original_result_artifact_refuses_without_mutation) ... ok
+2026-10-20T23:03:50.3434306Z test_only_actual_asset_download_counter_is_ignored (test_release.InertRetryTests.test_only_actual_asset_download_counter_is_ignored) ... ok
+2026-10-20T23:03:50.3474886Z test_original_collector_api_source_mismatch_refuses_without_writes (test_release.InertRetryTests.test_original_collector_api_source_mismatch_refuses_without_writes) ... ok
+2026-10-20T23:03:50.3565902Z test_original_result_artifact_digest_and_exact_job_log_id_are_both_required (test_release.InertRetryTests.test_original_result_artifact_digest_and_exact_job_log_id_are_both_required) ... ok
+2026-10-20T23:03:50.3665443Z test_original_result_artifact_requires_one_exact_regular_result_file (test_release.InertRetryTests.test_original_result_artifact_requires_one_exact_regular_result_file) ... ok
+2026-10-20T23:03:50.3867081Z test_original_result_asset_hash_set_and_order_must_match_public_bytes (test_release.InertRetryTests.test_original_result_asset_hash_set_and_order_must_match_public_bytes) ... ok
+2026-10-20T23:03:50.4167971Z test_original_result_cannot_claim_fresh_verifier_context_or_nonpublication_status (test_release.InertRetryTests.test_original_result_cannot_claim_fresh_verifier_context_or_nonpublication_status) ... ok
+2026-10-20T23:03:50.4200324Z test_rehashed_original_evidence_cannot_change_retained_report_bytes (test_release.InertRetryTests.test_rehashed_original_evidence_cannot_change_retained_report_bytes) ... ok
+2026-10-20T23:03:50.4239556Z test_rehashed_original_outer_container_cannot_change_qualified_inner_zip (test_release.InertRetryTests.test_rehashed_original_outer_container_cannot_change_qualified_inner_zip) ... ok
+2026-10-20T23:03:50.4241070Z test_historical_success_cannot_replace_latest_review (test_release_auth.ConfiguredReviewAuthentication.test_historical_success_cannot_replace_latest_review) ... ok
+2026-10-20T23:03:50.4246468Z test_normal_merge_equal_tree_retains_comment_identity (test_release_auth.ConfiguredReviewAuthentication.test_normal_merge_equal_tree_retains_comment_identity) ... ok
+2026-10-20T23:03:50.4254834Z test_null_unresolved_stale_bot_and_nonmerge_review_refuse (test_release_auth.ConfiguredReviewAuthentication.test_null_unresolved_stale_bot_and_nonmerge_review_refuse) ... ok
+2026-10-20T23:03:50.4280524Z test_refresh_ignores_only_download_counters_and_preserves_original_records (test_release_auth.PrerequisiteLeaseAuthentication.test_refresh_ignores_only_download_counters_and_preserves_original_records) ... ok
+2026-10-20T23:03:50.4282222Z test_exact_original_attempt_and_check_application (test_release_auth.ProducerAuthentication.test_exact_original_attempt_and_check_application) ... ok
+2026-10-20T23:03:50.4297924Z test_missing_collector_context_refuses_before_api_or_output (test_release_auth.ProducerAuthentication.test_missing_collector_context_refuses_before_api_or_output) ... ok
+2026-10-20T23:03:50.4299496Z test_missing_main_metadata_refuses_without_effects (test_release_auth.ProducerAuthentication.test_missing_main_metadata_refuses_without_effects) ... ok
+2026-10-20T23:03:50.4301178Z test_missing_source_proof_has_no_api_or_publication_effect (test_release_auth.ProducerAuthentication.test_missing_source_proof_has_no_api_or_publication_effect) ... ok
+2026-10-20T23:03:50.4305645Z test_original_successful_collector_is_historical_not_relabelled (test_release_auth.ProducerAuthentication.test_original_successful_collector_is_historical_not_relabelled) ... ok
+2026-10-20T23:03:50.4311929Z test_stale_failed_wrong_source_and_substitute_application_refuse (test_release_auth.ProducerAuthentication.test_stale_failed_wrong_source_and_substitute_application_refuse) ... ok
+2026-10-20T23:03:50.4312904Z 
+2026-10-20T23:03:50.4313427Z ----------------------------------------------------------------------
+2026-10-20T23:03:50.4313922Z Ran 52 tests in 0.505s
+2026-10-20T23:03:50.4314094Z 
+2026-10-20T23:03:50.4314220Z OK
+2026-10-20T23:03:50.4904261Z TAP version 13
+2026-10-20T23:04:03.5283647Z # Subtest: actual EIO after native initialization resumes exact project and journal identity
+2026-10-20T23:04:03.5285171Z ok 1 - actual EIO after native initialization resumes exact project and journal identity
+2026-10-20T23:04:03.5286445Z   ---
+2026-10-20T23:04:03.5286903Z   duration_ms: 11206.806316
+2026-10-20T23:04:03.5287337Z   type: 'test'
+2026-10-20T23:04:03.5287824Z   ...
+2026-10-20T23:04:07.1889486Z # Subtest: malformed UTF8 is rejected without normalization or project retention
+2026-10-20T23:04:07.1902264Z ok 2 - malformed UTF8 is rejected without normalization or project retention
+2026-10-20T23:04:07.1906018Z   ---
+2026-10-20T23:04:07.1906905Z   duration_ms: 1841.676647
+2026-10-20T23:04:07.1907238Z   type: 'test'
+2026-10-20T23:04:07.1907622Z   ...
+2026-10-20T23:04:07.1914244Z # Subtest: existing output is rejected before a demo creates a native campaign
+2026-10-20T23:04:07.1914902Z ok 3 - existing output is rejected before a demo creates a native campaign
+2026-10-20T23:04:07.1915392Z   ---
+2026-10-20T23:04:07.1915628Z   duration_ms: 1821.148678
+2026-10-20T23:04:07.1915920Z   type: 'test'
+2026-10-20T23:04:07.1916187Z   ...
+2026-10-20T23:05:15.9761285Z # Subtest: actual non-demo controls, frozen confirmation, recovery refresh and handoff remain one project
+2026-10-20T23:05:15.9762894Z ok 4 - actual non-demo controls, frozen confirmation, recovery refresh and handoff remain one project
+2026-10-20T23:05:15.9763419Z   ---
+2026-10-20T23:05:15.9763780Z   duration_ms: 68749.783464
+2026-10-20T23:05:15.9764099Z   type: 'test'
+2026-10-20T23:05:15.9764368Z   ...
+2026-10-20T23:05:15.9893696Z # Subtest: installed TI metadata uses frozen application pins without loading target sources
+2026-10-20T23:05:15.9894913Z ok 5 - installed TI metadata uses frozen application pins without loading target sources
+2026-10-20T23:05:15.9895724Z   ---
+2026-10-20T23:05:15.9896421Z   duration_ms: 4.131797
+2026-10-20T23:05:15.9897406Z   type: 'test'
+2026-10-20T23:05:15.9897691Z   ...
+2026-10-20T23:05:15.9898384Z # Subtest: finite TI inventory binds exact source bytes and refuses drift before packaging
+2026-10-20T23:05:15.9899191Z ok 6 - finite TI inventory binds exact source bytes and refuses drift before packaging
+2026-10-20T23:05:15.9899618Z   ---
+2026-10-20T23:05:15.9899908Z   duration_ms: 65.046177
+2026-10-20T23:05:15.9900186Z   type: 'test'
+2026-10-20T23:05:15.9900466Z   ...
+2026-10-20T23:05:15.9900951Z # Subtest: source preview reports every tracked and untracked extra packaged input
+2026-10-20T23:05:15.9901844Z ok 7 - source preview reports every tracked and untracked extra packaged input
+2026-10-20T23:05:15.9902358Z   ---
+2026-10-20T23:05:15.9902593Z   duration_ms: 237.142725
+2026-10-20T23:05:15.9902933Z   type: 'test'
+2026-10-20T23:05:15.9903176Z   ...
+2026-10-20T23:05:15.9903717Z # Subtest: normal installed qualification binds installer receipt, application and Node
+2026-10-20T23:05:15.9904398Z ok 8 - normal installed qualification binds installer receipt, application and Node
+2026-10-20T23:05:15.9904803Z   ---
+2026-10-20T23:05:15.9905074Z   duration_ms: 226.241956
+2026-10-20T23:05:15.9905373Z   type: 'test'
+2026-10-20T23:05:15.9905622Z   ...
+2026-10-20T23:05:15.9906156Z # Subtest: actual native campaign and both real currency receivers retain one inert project
+2026-10-20T23:05:15.9906828Z ok 9 - actual native campaign and both real currency receivers retain one inert project
+2026-10-20T23:05:15.9907373Z   ---
+2026-10-20T23:05:15.9907615Z   duration_ms: 462.207254
+2026-10-20T23:05:15.9907897Z   type: 'test'
+2026-10-20T23:05:15.9908111Z   ...
+2026-10-20T23:05:15.9908540Z # Subtest: exact source summary is visible inert HTML and uses the real native handoff
+2026-10-20T23:05:15.9909540Z ok 10 - exact source summary is visible inert HTML and uses the real native handoff
+2026-10-20T23:05:15.9910033Z   ---
+2026-10-20T23:05:15.9910305Z   duration_ms: 91.049675
+2026-10-20T23:05:15.9910554Z   type: 'test'
+2026-10-20T23:05:15.9910764Z   ...
+2026-10-20T23:05:15.9911332Z # Subtest: private persistent history reopens and import is idempotent without grants
+2026-10-20T23:05:15.9913864Z ok 11 - private persistent history reopens and import is idempotent without grants
+2026-10-20T23:05:15.9914399Z   ---
+2026-10-20T23:05:15.9914641Z   duration_ms: 225.127148
+2026-10-20T23:05:15.9914886Z   type: 'test'
+2026-10-20T23:05:15.9915172Z   ...
+2026-10-20T23:05:15.9915640Z # Subtest: rehashed authority, route, request and evidence substitutions refuse
+2026-10-20T23:05:15.9916300Z ok 12 - rehashed authority, route, request and evidence substitutions refuse
+2026-10-20T23:05:15.9916686Z   ---
+2026-10-20T23:05:15.9916889Z   duration_ms: 105.070378
+2026-10-20T23:05:15.9917196Z   type: 'test'
+2026-10-20T23:05:15.9917402Z   ...
+2026-10-20T23:05:15.9917959Z # Subtest: internally consistent new engine bindings cannot choose their own trusted route context
+2026-10-20T23:05:15.9918698Z ok 13 - internally consistent new engine bindings cannot choose their own trusted route context
+2026-10-20T23:05:15.9919134Z   ---
+2026-10-20T23:05:15.9919407Z   duration_ms: 40.630369
+2026-10-20T23:05:15.9919648Z   type: 'test'
+2026-10-20T23:05:15.9919926Z   ...
+2026-10-20T23:05:15.9920343Z # Subtest: out-of-order and incomplete evidence cannot claim a later phase
+2026-10-20T23:05:15.9920915Z ok 14 - out-of-order and incomplete evidence cannot claim a later phase
+2026-10-20T23:05:15.9921930Z   ---
+2026-10-20T23:05:15.9922167Z   duration_ms: 152.388564
+2026-10-20T23:05:15.9922462Z   type: 'test'
+2026-10-20T23:05:15.9922724Z   ...
+2026-10-20T23:05:15.9923256Z # Subtest: actual frozen native export can advance to completed without invented wire fields
+2026-10-20T23:05:15.9924028Z ok 15 - actual frozen native export can advance to completed without invented wire fields
+2026-10-20T23:05:15.9924465Z   ---
+2026-10-20T23:05:15.9924710Z   duration_ms: 46.294427
+2026-10-20T23:05:15.9924984Z   type: 'test'
+2026-10-20T23:05:15.9925212Z   ...
+2026-10-20T23:05:15.9925678Z # Subtest: every parsed event is screened before any receiver or persistence
+2026-10-20T23:05:15.9926269Z ok 16 - every parsed event is screened before any receiver or persistence
+2026-10-20T23:05:15.9926679Z   ---
+2026-10-20T23:05:15.9926927Z   duration_ms: 163.543931
+2026-10-20T23:05:15.9927215Z   type: 'test'
+2026-10-20T23:05:15.9927477Z   ...
+2026-10-20T23:05:15.9927956Z # Subtest: actual isolated native API adapter performs a fresh campaign in a distinct journal
+2026-10-20T23:05:15.9928692Z ok 17 - actual isolated native API adapter performs a fresh campaign in a distinct journal
+2026-10-20T23:05:15.9929147Z   ---
+2026-10-20T23:05:15.9929397Z   duration_ms: 3785.695199
+2026-10-20T23:05:15.9929698Z   type: 'test'
+2026-10-20T23:05:15.9929932Z   ...
+2026-10-20T23:05:15.9930409Z # Subtest: failed source capture removes only its newly created installation directory
+2026-10-20T23:05:15.9931087Z ok 18 - failed source capture removes only its newly created installation directory
+2026-10-20T23:05:15.9931862Z   ---
+2026-10-20T23:05:15.9932231Z   duration_ms: 13965.562218
+2026-10-20T23:05:15.9932519Z   type: 'test'
+2026-10-20T23:05:15.9932762Z   ...
+2026-10-20T23:05:15.9933279Z # Subtest: failed captured module load deregisters hooks and removes its installation capture
+2026-10-20T23:05:15.9934036Z ok 19 - failed captured module load deregisters hooks and removes its installation capture
+2026-10-20T23:05:15.9934562Z   ---
+2026-10-20T23:05:15.9934789Z   duration_ms: 7121.072643
+2026-10-20T23:05:15.9935416Z   type: 'test'
+2026-10-20T23:05:15.9935670Z   ...
+2026-10-20T23:05:15.9936131Z # Subtest: an existing installation directory is preserved when setup refuses it
+2026-10-20T23:05:15.9936800Z ok 20 - an existing installation directory is preserved when setup refuses it
+2026-10-20T23:05:15.9937189Z   ---
+2026-10-20T23:05:15.9937655Z   duration_ms: 79.590019
+2026-10-20T23:05:15.9937995Z   type: 'test'
+2026-10-20T23:05:15.9938221Z   ...
+2026-10-20T23:05:15.9938467Z 1..20
+2026-10-20T23:05:15.9938677Z # tests 20
+2026-10-20T23:05:15.9938913Z # suites 0
+2026-10-20T23:05:15.9939163Z # pass 20
+2026-10-20T23:05:15.9939369Z # fail 0
+2026-10-20T23:05:15.9939617Z # cancelled 0
+2026-10-20T23:05:15.9939846Z # skipped 0
+2026-10-20T23:05:15.9940105Z # todo 0
+2026-10-20T23:05:15.9940365Z # duration_ms 85515.807236
+2026-10-20T23:05:16.0068564Z ##[group]Run "$TI_NODE" "$TI_APPLICATION/engineering/transformation/qualify.mjs" "$TI_APPLICATION" "$RUNNER_TEMP/ti-sources.json" "$RUNNER_TEMP/ti-python/bin/python" "$PWD/.ti-computer" 'sha256:85b28c0af07c734261b36e594313e5855ff7e91cbb2c0a6df303ca9841a67a08' "$PWD/reports/ti/journey" "$PWD/reports/ti/installed-binding.json"
+2026-10-20T23:05:16.0070732Z [36;1m"$TI_NODE" "$TI_APPLICATION/engineering/transformation/qualify.mjs" "$TI_APPLICATION" "$RUNNER_TEMP/ti-sources.json" "$RUNNER_TEMP/ti-python/bin/python" "$PWD/.ti-computer" 'sha256:85b28c0af07c734261b36e594313e5855ff7e91cbb2c0a6df303ca9841a67a08' "$PWD/reports/ti/journey" "$PWD/reports/ti/installed-binding.json"[0m
+2026-10-20T23:05:16.0072886Z [36;1mpython -B engineering/integration/service-package.py verify --archive "$RUNNER_TEMP/ti-package/agi-fleet-local-0.1.0-alpha.7.zip" --application "$RUNNER_TEMP/ti-application" --commit "$GITHUB_SHA" --observation "$PWD/reports/ti/package-observation.json"[0m
+2026-10-20T23:05:16.0073886Z [36;1mpython -B - <<'PY'[0m
+2026-10-20T23:05:16.0074101Z [36;1mimport json,runpy[0m
+2026-10-20T23:05:16.0074315Z [36;1mfrom pathlib import Path[0m
+2026-10-20T23:05:16.0074930Z [36;1mbinding=json.loads(Path('reports/ti/installed-binding.json').read_bytes())[0m
+2026-10-20T23:05:16.0075375Z [36;1minstaller=runpy.run_path('local-runtime/install.py')[0m
+2026-10-20T23:05:16.0075862Z [36;1mreceipt=installer['verify_version'](Path(binding['installation']),binding['archiveSHA256'])[0m
+2026-10-20T23:05:16.0076533Z [36;1massert receipt['sourceCommit']==binding['sourceCommit'] and receipt['manifestSHA256']==binding['manifestSHA256'][0m
+2026-10-20T23:05:16.0077122Z [36;1massert receipt['node']['binarySHA256']==binding['nodeBinarySHA256'][0m
+2026-10-20T23:05:16.0077719Z [36;1mPath('reports/ti/installed-after.json').write_text(json.dumps({'unchanged':True,'receipt':receipt},indent=2)+'\n')[0m
+2026-10-20T23:05:16.0078199Z [36;1mPY[0m
+2026-10-20T23:05:16.0112114Z shell: /usr/bin/bash -e {0}
+2026-10-20T23:05:16.0112358Z env:
+2026-10-20T23:05:16.0112539Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T23:05:16.0112823Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:16.0113227Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T23:05:16.0113628Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:16.0113982Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:16.0114332Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:16.0114689Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T23:05:16.0115329Z   TI_APPLICATION: /home/runner/work/_temp/ti-installed/versions/479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a/application
+2026-10-20T23:05:16.0116212Z   TI_NODE: /home/runner/work/_temp/ti-installed/versions/479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a/runtime/node
+2026-10-20T23:05:16.0116756Z ##[endgroup]
+2026-10-20T23:05:50.4910407Z {"schema":"agi-fleet/ti-saved-native-qualification/v1","projectId":"10997cf9-339c-4c3b-9c40-42a0c8bab340","sourcePreviewVersion":"0.1.0-alpha.7","executionClass":"EXISTING_NATIVE_DOCKER_SCRIPTED_BROWSER","exactGrant":true,"oneUse":true,"replayRefused":true,"retainedCaptureIdempotent":true,"explicitRecoveryStopped":true,"recoveryNoReplay":true,"actualBrowser":true,"containerClosed":true,"processGroupGone":true,"providerRequests":0,"installationExecution":"NORMAL_INSTALLER_APPLICATION_AND_NODE","installation":{"schema":"agi-fleet/ti-normal-installation-binding/v1","application":"/home/runner/work/_temp/ti-installed/versions/479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a/application","nodeExecutable":"/home/runner/work/_temp/ti-installed/versions/479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a/runtime/node","installation":"/home/runner/work/_temp/ti-installed","state":"/home/runner/work/_temp/ti-installed-state","archiveSHA256":"479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a","sourceCommit":"9fe11ba746ee1b088d117235dd76bff7180e5b47","manifestSHA256":"257e055af13b89751f72b5e211fdf354bca1dac9558721a324ebaef3778c18af","nodeBinarySHA256":"0f8949d1028f6d61506b2d5bc57e7e6fe893d7b1997509b7847294fc9c616584","installerReceiptSHA256":"b464f1e265e0f43b1a8f567f3527021d77162461aa9bfaa6567ad5fe11da8979","uid":1001,"started":false,"authority":"none"},"image":"sha256:85b28c0af07c734261b36e594313e5855ff7e91cbb2c0a6df303ca9841a67a08","computerAlpha":"/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-computer","sourceIdentity":{"fleetCommit":"9fe11ba746ee1b088d117235dd76bff7180e5b47","manifestSha256":"257e055af13b89751f72b5e211fdf354bca1dac9558721a324ebaef3778c18af","sourceConfigurationSha256":"367f4cf5662b16b33935bbbaa9e06a2eb33a820a70329a0bc23c3ba447fe22a8","pins":{"schema":"agi-fleet/ti-installed-source-pins/v1","alpha":{"repository":"MontrealAI/AGI-Alpha-Agent-v0","commit":"a6d20a93c7c5b7430bf42d2367701b350513e90d","tree":"15d5101fee02fe2cc81d015b2af4a048ff9d9a22"},"manager":{"repository":"MontrealAI/AGIJobManager","commit":"4d4c32685eebf23b0aa35dbb45abe23ac8a261cb","tree":"3676cb41be9c5c5110cc266e0ff6f7c20bfbec86"},"jobs":{"repository":"MontrealAI/AGIJobsv0","commit":"83065adf18a6ee987f8fa479a496a052d35db682","tree":"77ded62b991e8cca28bfd849593153f61ac72d86"},"computer":{"repository":"MontrealAI/AGI-Alpha-Agent-v0","commit":"a6d20a93c7c5b7430bf42d2367701b350513e90d","tree":"15d5101fee02fe2cc81d015b2af4a048ff9d9a22"},"computerScope":"current-Alpha-source; fresh-installed-native-browser-qualification-required","publicNonpersonalOnly":true,"paidTI":false,"liveProvider":false,"importedAuthority":"none","productionQualified":false}},"executionContext":{"githubRunId":"39511938381","githubRunAttempt":"1","githubSha":"9fe11ba746ee1b088d117235dd76bff7180e5b47","architecture":"arm64","node":"v24.21.0","application":"/home/runner/work/_temp/ti-installed/versions/479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a/application","nodeExecutable":"/home/runner/work/_temp/ti-installed/versions/479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a/runtime/node","uid":1001,"pythonVersion":"Python 3.12.15"},"independentReview":false,"productionQualified":false,"authority":"none"}
+2026-10-20T23:05:51.1204034Z {"archiveSHA256":"479cc6cc2422a9ca1b4eca9ba40df26bd5d6fea81838c61dfcea7148e170695a","package":{"manifestSha256":"257e055af13b89751f72b5e211fdf354bca1dac9558721a324ebaef3778c18af","inventoryBeforeSha256":"d36d42af2d292493d85869977753b3b0d35d009d9938c31ea419c4c64be9d0b2","inventoryAfterSha256":"d36d42af2d292493d85869977753b3b0d35d009d9938c31ea419c4c64be9d0b2","unchanged":true},"application":"/home/runner/work/_temp/ti-application"}
+2026-10-20T23:05:51.8591734Z ##[group]Run python3 - <<'PY'
+2026-10-20T23:05:51.8592107Z [36;1mpython3 - <<'PY'[0m
+2026-10-20T23:05:51.8592369Z [36;1mimport hashlib,json,os,platform,subprocess[0m
+2026-10-20T23:05:51.8592666Z [36;1mfrom pathlib import Path[0m
+2026-10-20T23:05:51.8592986Z [36;1mroot=Path('reports/ti');root.mkdir(parents=True,exist_ok=True)[0m
+2026-10-20T23:05:51.8593595Z [36;1mvalue={'fleetCommit':os.environ['GITHUB_SHA'],'runId':os.environ['GITHUB_RUN_ID'],'runAttempt':os.environ['GITHUB_RUN_ATTEMPT'],[0m
+2026-10-20T23:05:51.8594442Z [36;1m       'matrixArchitecture':'arm64','machine':platform.machine(),'node':subprocess.check_output(['node','--version'],text=True).strip(),[0m
+2026-10-20T23:05:51.8595098Z [36;1m       'python':platform.python_version(),'productionQualified':False}[0m
+2026-10-20T23:05:51.8595581Z [36;1m(root/'execution-context.json').write_text(json.dumps(value,indent=2)+'\n')[0m
+2026-10-20T23:05:51.8596244Z [36;1mfiles=[{'path':p.relative_to(root).as_posix(),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}[0m
+2026-10-20T23:05:51.8596900Z [36;1m       for p in sorted(root.rglob('*')) if p.is_file() and p.name!='artifact-checksums.json'][0m
+2026-10-20T23:05:51.8597460Z [36;1m(root/'artifact-checksums.json').write_text(json.dumps({'files':files},indent=2)+'\n')[0m
+2026-10-20T23:05:51.8597857Z [36;1mPY[0m
+2026-10-20T23:05:51.8632637Z shell: /usr/bin/bash -e {0}
+2026-10-20T23:05:51.8632869Z env:
+2026-10-20T23:05:51.8633073Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T23:05:51.8633363Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:51.8633765Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T23:05:51.8634162Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:51.8634515Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:51.8634870Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:51.8635240Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T23:05:51.8635540Z ##[endgroup]
+2026-10-20T23:05:51.9120381Z ##[group]Run actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+2026-10-20T23:05:51.9120817Z with:
+2026-10-20T23:05:51.9121156Z   name: ti-source-preview-arm64-9fe11ba746ee1b088d117235dd76bff7180e5b47-39511938381-1
+2026-10-20T23:05:51.9121831Z   path: reports/ti
+/home/runner/work/_temp/ti-package
+
+2026-10-20T23:05:51.9122386Z   if-no-files-found: error
+2026-10-20T23:05:51.9122586Z   retention-days: 30
+2026-10-20T23:05:51.9122774Z   compression-level: 6
+2026-10-20T23:05:51.9122963Z   overwrite: false
+2026-10-20T23:05:51.9123150Z   include-hidden-files: false
+2026-10-20T23:05:51.9123361Z   archive: true
+2026-10-20T23:05:51.9123527Z env:
+2026-10-20T23:05:51.9123695Z   PYTHONDONTWRITEBYTECODE: 1
+2026-10-20T23:05:51.9123972Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:51.9124366Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib/pkgconfig
+2026-10-20T23:05:51.9124790Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:51.9125142Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:51.9125498Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/arm64
+2026-10-20T23:05:51.9125859Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/arm64/lib
+2026-10-20T23:05:51.9126157Z ##[endgroup]
+2026-10-20T23:05:52.0388923Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-20T23:05:52.0393015Z The least common ancestor is /home/runner/work. This will be the root directory of the artifact
+2026-10-20T23:05:52.0393583Z With the provided path, there will be 58 files uploaded
+2026-10-20T23:05:52.0394525Z Artifact name is valid!
+2026-10-20T23:05:52.0395250Z Root directory input is valid!
+2026-10-20T23:05:52.3188610Z Uploading artifact: ti-source-preview-arm64-9fe11ba746ee1b088d117235dd76bff7180e5b47-39511938381-1.zip
+2026-10-20T23:05:52.3219526Z Beginning upload of artifact content to blob storage
+2026-10-20T23:05:53.2103782Z Uploaded bytes 8388608
+2026-10-20T23:05:53.2912087Z Uploaded bytes 9000358
+2026-10-20T23:05:53.3344212Z Finished uploading artifact content to blob storage!
+2026-10-20T23:05:53.3345533Z SHA256 digest of uploaded artifact is 45c6519181167c523062f8132ac95ee1482b566b6847e02e0f1fb6bac70e0d95
+2026-10-20T23:05:53.3346058Z Finalizing artifact upload
+2026-10-20T23:05:53.6280967Z Artifact ti-source-preview-arm64-9fe11ba746ee1b088d117235dd76bff7180e5b47-39511938381-1 successfully finalized. Artifact ID 12306074339
+2026-10-20T23:05:53.6282601Z Artifact ti-source-preview-arm64-9fe11ba746ee1b088d117235dd76bff7180e5b47-39511938381-1 has been successfully uploaded! Final size is 9000358 bytes. Artifact ID is 12306074339
+2026-10-20T23:05:53.6284229Z Artifact download URL: https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39511938381/artifacts/12306074339
+2026-10-20T23:05:53.6444738Z Post job cleanup.
+2026-10-20T23:05:53.7472971Z (node:58578) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T23:05:53.7473977Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T23:05:53.7585593Z Post job cleanup.
+2026-10-20T23:05:53.8626064Z (node:58586) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T23:05:53.8626842Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T23:05:53.8748217Z Post job cleanup.
+2026-10-20T23:05:53.9471217Z [command]/usr/bin/git version
+2026-10-20T23:05:53.9509651Z git version 2.55.0
+2026-10-20T23:05:53.9558462Z Temporarily overriding HOME='/home/runner/work/_temp/1581be47-0321-45b4-b016-0aee054e8c41' before making global git config changes
+2026-10-20T23:05:53.9559272Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T23:05:53.9564118Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-computer
+2026-10-20T23:05:53.9601414Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T23:05:53.9632978Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T23:05:53.9845256Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T23:05:53.9879366Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T23:05:54.0224474Z Post job cleanup.
+2026-10-20T23:05:54.0941097Z [command]/usr/bin/git version
+2026-10-20T23:05:54.0980148Z git version 2.55.0
+2026-10-20T23:05:54.1015189Z Temporarily overriding HOME='/home/runner/work/_temp/5b2091a1-a437-40bf-8930-37fd586a9683' before making global git config changes
+2026-10-20T23:05:54.1015996Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T23:05:54.1020628Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-jobs
+2026-10-20T23:05:54.1060104Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T23:05:54.1093402Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T23:05:54.1298472Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T23:05:54.1330469Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T23:05:54.1680744Z Post job cleanup.
+2026-10-20T23:05:54.2424261Z [command]/usr/bin/git version
+2026-10-20T23:05:54.2462291Z git version 2.55.0
+2026-10-20T23:05:54.2497922Z Temporarily overriding HOME='/home/runner/work/_temp/068afa7a-cf11-49b5-8f1d-13a78fc6a853' before making global git config changes
+2026-10-20T23:05:54.2498735Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T23:05:54.2506314Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-manager
+2026-10-20T23:05:54.2545440Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T23:05:54.2576922Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T23:05:54.2774030Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T23:05:54.2807370Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T23:05:54.3138088Z Post job cleanup.
+2026-10-20T23:05:54.3856981Z [command]/usr/bin/git version
+2026-10-20T23:05:54.3895888Z git version 2.55.0
+2026-10-20T23:05:54.3930795Z Temporarily overriding HOME='/home/runner/work/_temp/95699447-e010-450a-9eec-c3a6d42e3959' before making global git config changes
+2026-10-20T23:05:54.3931787Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T23:05:54.3936153Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.ti-alpha
+2026-10-20T23:05:54.3976409Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T23:05:54.4008499Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T23:05:54.4216725Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T23:05:54.4249438Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T23:05:54.4581051Z Post job cleanup.
+2026-10-20T23:05:54.5295574Z [command]/usr/bin/git version
+2026-10-20T23:05:54.5333247Z git version 2.55.0
+2026-10-20T23:05:54.5367420Z Temporarily overriding HOME='/home/runner/work/_temp/62a40ea5-8e37-4a8f-b1f2-cc6f1b1c9ae0' before making global git config changes
+2026-10-20T23:05:54.5368346Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T23:05:54.5372480Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux
+2026-10-20T23:05:54.5407727Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T23:05:54.5437747Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T23:05:54.5636247Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T23:05:54.5667240Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T23:05:54.5994485Z Post job cleanup.
+2026-10-20T23:05:54.6541213Z [harden-runner] post-step
+2026-10-20T23:05:54.6654925Z Cleaning up orphan processes
+2026-10-20T23:05:54.7067087Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
