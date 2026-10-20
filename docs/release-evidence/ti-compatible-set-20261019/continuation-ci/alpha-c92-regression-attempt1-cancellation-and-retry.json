@@ -1,0 +1,69 @@
+{
+  "schema": "ti-continuation/alpha-inspected-regression-cancellation/v1",
+  "source": "c92b91fc012f14041307d0ba4b59c4b7a98cc933",
+  "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+  "run": 39437019881,
+  "attempt": 1,
+  "job": 118677209970,
+  "jobConclusion": "cancelled",
+  "runConclusion": "cancelled",
+  "jobStartLogTime": "2026-10-20T14:31:11.6002884Z",
+  "cancellationLogTime": "2026-10-20T15:31:23.6689956Z",
+  "literalCancellation": "The operation was canceled.",
+  "configuredJobTimeoutMinutes": 60,
+  "deadlineInference": "Elapsed time aligns with the configured job deadline; no independent server cancellation cause is claimed.",
+  "offlineSuite": {
+    "passed": 3517,
+    "skipped": 61,
+    "xfailed": 4,
+    "coveragePercent": 83.28,
+    "elapsedSeconds": 3202.89
+  },
+  "strictChecks": {
+    "completedCommandsWithSuccessMessages": 10,
+    "entireStep": "NOT_COMPLETED"
+  },
+  "artifact": {
+    "id": 12276679283,
+    "name": "regression",
+    "size_in_bytes": 268697,
+    "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/artifacts/12276679283",
+    "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/artifacts/12276679283/zip",
+    "expired": false,
+    "created_at": "2026-10-20T15:31:24Z",
+    "expires_at": "2027-01-18T14:11:40Z",
+    "updated_at": "2026-10-20T15:31:24Z",
+    "digest": "sha256:39066eaf3997d20cf2b24a239375b12a553894a8b053cc4c2591a06f51ebbedc",
+    "workflow_run": {
+      "id": 39437019881,
+      "repository_id": 922805069,
+      "head_repository_id": 922805069,
+      "head_branch": "qualification/ti-public-source-20261020",
+      "head_sha": "c92b91fc012f14041307d0ba4b59c4b7a98cc933"
+    }
+  },
+  "logBytes": 965389,
+  "logSha256": "c243aac598c946d2472d721c9480967368593ca22f773e3e949606847d353a23",
+  "retryAdmission": {
+    "source": "c92b91fc012f14041307d0ba4b59c4b7a98cc933",
+    "run": 39437019881,
+    "originalAttempt": 1,
+    "originalJob": 118677209970,
+    "originalConclusion": "cancelled",
+    "fullOfflineRegression": {
+      "passed": 3517,
+      "skipped": 61,
+      "xfailed": 4,
+      "coveragePercent": 83.28,
+      "elapsedSeconds": 3202.89
+    },
+    "remainingRequiredGate": "strict types and repository checks",
+    "reason": "One unchanged retry after inspected cancellation at approximately the original 60-minute job deadline; original full result retained, no scope/time/threshold changes",
+    "retryCount": 1,
+    "admittedAt": "2026-10-20T15:34:27.544Z"
+  },
+  "allOriginalRequiredChecksRetained": true,
+  "qualificationComplete": false,
+  "releasePublished": false,
+  "observedAt": "2026-10-20T15:38:06.968Z"
+}
