@@ -83,6 +83,8 @@ export async function openInstalledTI(sources,directory) {
   // Finish all three identity checks before writing captures or importing targets.
   const selected=Object.freeze(Object.fromEntries(['alpha','manager','jobs'].map(name=>[name,selectedSource(name,sources?.[name])])));
   fs.mkdirSync(directory,{mode:0o700});
+  let hooks;
+  try {
   const records={},snapshots={alpha:new Map(),manager:new Map(),jobs:new Map()};
   records.alpha=capture(selected.alpha,[
     'alpha_factory_v1','examples/transformational-intelligence','docs/assets/successor',
@@ -98,7 +100,7 @@ export async function openInstalledTI(sources,directory) {
     for(const [file,bytes] of files)moduleSources.set(pathToFileURL(path.join(directory,name,file)).href,bytes);
   const captureURL=pathToFileURL(directory+path.sep).href;
   const owned=url=>typeof url==='string'&&url.startsWith(captureURL);
-  const hooks=registerHooks({
+  hooks=registerHooks({
     resolve(specifier,context,nextResolve) {
       if(owned(context.parentURL)||owned(specifier)) {
         if(isBuiltin(specifier))return nextResolve(specifier,context);
@@ -117,7 +119,6 @@ export async function openInstalledTI(sources,directory) {
     },
   });
   const load=(name,file)=>import(pathToFileURL(path.join(directory,name,file)).href);
-  try {
   const attempts=await Promise.allSettled([
     load('alpha','examples/transformational-intelligence/inspector.mjs'),
     load('alpha','examples/successor-alpha/computer.mjs'),load('alpha','examples/successor-alpha/project.mjs'),
@@ -139,7 +140,11 @@ export async function openInstalledTI(sources,directory) {
   const files=Object.freeze(Object.fromEntries(Object.entries(records.alpha.files).map(([name,value])=>[name,Object.freeze({...value})])));
   installationSnapshots.set(installed,{root:installed.alphaRoot,files,bytes:snapshots.alpha});
   return installed;
-  } catch(error){hooks.deregister();throw error;}
+  } catch(error){
+    // This invocation created the directory; failed setup owns only these reproducible captures.
+    try {hooks?.deregister();} finally {fs.rmSync(directory,{recursive:true,force:true});}
+    throw error;
+  }
 }
 /** Isolated thin native API adapter. The complete Alpha CLI/package has separate gates. */
 export function nativeCLI(installed,python,home,args) {

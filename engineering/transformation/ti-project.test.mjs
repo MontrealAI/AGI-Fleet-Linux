@@ -4,6 +4,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import module,{syncBuiltinESMExports} from 'node:module';
+import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
 import {canonical} from '../../local-runtime/primitives.mjs';
 import {createTIProject,appendTIProject,inspectTIProject,summaryHTML,createSummaryHandoff} from '../../local-runtime/transformation/project.mjs';
@@ -162,4 +164,43 @@ test('actual isolated native API adapter performs a fresh campaign in a distinct
   fs.writeFileSync(path.join(cache,'__init__.cpython-312.pyc'),'synthetic-cache-marker');
   try {assert.throws(()=>nativeCLI(installed,process.env.TI_PYTHON,home,['verify']),/TI_CAPTURE_EXTRA_SOURCE/);}
   finally {fs.rmSync(cache,{recursive:true});}
+});
+
+test('failed source capture removes only its newly created installation directory',async()=>{
+  const write=fs.writeFileSync;
+  for(const role of ['alpha','manager','jobs']){
+    const directory=path.join(root,'capture-write-failure-'+role),failure=Object.assign(Error('Synthetic capture write failure'),{code:'EIO'});
+    fs.writeFileSync=function(file,...args){
+      if(String(file).startsWith(path.join(directory,role)+path.sep))throw failure;
+      return write.call(this,file,...args);
+    };
+    try {await assert.rejects(openInstalledTI(sources,directory),error=>error===failure);}
+    finally {fs.writeFileSync=write;}
+    assert.equal(fs.existsSync(directory),false);
+    assert.equal(fs.existsSync(installed.alphaRoot),true);
+  }
+});
+test('failed captured module load deregisters hooks and removes its installation capture',async()=>{
+  const directory=path.join(root,'capture-load-failure'),failure=Error('Synthetic captured module load failure');
+  const target=pathToFileURL(path.join(directory,'alpha/examples/transformational-intelligence/inspector.mjs')).href;
+  const register=module.registerHooks;let deregistered=false;
+  module.registerHooks=function(hooks){
+    const active=register({...hooks,load(url,...args){
+      if(url===target)throw failure;
+      return hooks.load(url,...args);
+    }});
+    return {deregister(){deregistered=true;return active.deregister();}};
+  };
+  syncBuiltinESMExports();
+  try {await assert.rejects(openInstalledTI(sources,directory),error=>error===failure);}
+  finally {module.registerHooks=register;syncBuiltinESMExports();}
+  assert.equal(deregistered,true);
+  assert.equal(fs.existsSync(directory),false);
+  assert.equal(fs.existsSync(installed.alphaRoot),true);
+});
+test('an existing installation directory is preserved when setup refuses it',async()=>{
+  const directory=path.join(root,'existing-capture'),marker=path.join(directory,'keep.txt');
+  fs.mkdirSync(directory,{mode:0o700});fs.writeFileSync(marker,'existing caller output');
+  await assert.rejects(openInstalledTI(sources,directory),error=>error.code==='EEXIST');
+  assert.equal(fs.readFileSync(marker,'utf8'),'existing caller output');
 });
