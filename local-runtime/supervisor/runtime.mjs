@@ -129,8 +129,15 @@ export class LocalRuntime {
       need(grant.generation===actor.generation&&canonical(grant.host)===canonical(actor.host)&&grant.packageSha256===actor.packageSha256,'GRANT_REVOKED');
       need(grant.admission?.schema==='agi-fleet/local-admission/v1','ADMISSION_REPREPARE_REQUIRED');
       const admission=requireAdmission(this.admissionReport(actor,grant.task,{host,intake:false}),grant.admission);
-      const active=this.store.db.prepare("SELECT actor FROM runs WHERE state='running'").all();
+      const active=this.store.db.prepare("SELECT actor,grant_id FROM runs WHERE state='running'").all();
       need(active.length<this.store.meta('maxConcurrent')&&!active.some(x=>x.actor===actor.id),'QUEUE_CAPACITY');
+      // BEGIN IMMEDIATE reserves one native Computer slot before any backend
+      // availability probe. The running row remains held through final cleanup.
+      if(grant.task.action==='alpha-computer-run')need(!active.some(row=>{
+        const retained=this.store.db.prepare('SELECT value FROM grants WHERE id=?').get(row.grant_id);
+        need(retained,'RUN_RESERVATION_CHANGED');
+        return parseStrict(retained.value).task?.action==='alpha-computer-run';
+      }),'QUEUE_CAPACITY');
       const recent=this.store.db.prepare('SELECT actor,value FROM runs').all().filter(r=>parseStrict(r.value).reservedAt>now-86400000);
       need(recent.length<this.store.meta('maxRuns')&&recent.filter(r=>r.actor===actor.id).length<actor.maxRuns,'DAILY_BUDGET_EXHAUSTED');
       const run={id:id(),grant:grant.id,inputSha256:grant.inputSha256,reservedAt:now,role:actor.role,review:grant.review,sourceSha256:this.source,packageSha256:actor.packageSha256,host:actor.host,authority:'none',inference:grant.task.action==='alpha-computer-run'?'scripted-zero-cost':'none',spendUSDC:'0',admission,storageReservationBytes:STORAGE_LIMITS.runReservation,...(grant.projectRequestSha256?{projectRequestSha256:grant.projectRequestSha256}:{})};
