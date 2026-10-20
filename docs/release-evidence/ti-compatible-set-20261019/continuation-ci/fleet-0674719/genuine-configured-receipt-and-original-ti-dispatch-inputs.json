@@ -1,0 +1,1309 @@
+{
+  "observedAt": "2026-10-20T23:42:28.605Z",
+  "source": "0674719f6749786c3591a15219364bfec94c336f",
+  "tree": "d78839054676930c377b9b1b8181513e8d9c8501",
+  "originalConfiguredRequest": {
+    "id": 6304226969,
+    "body": "@codex review\n\nRequired configured-review receipt completion for exact unchanged head0674719f6749786c3591a15219364bfec94c336f. The current genuine summary6275717324 is completed/clear at this exact source, but the complete98-item issue-comment collection contains no genuine codex-review-receipt:v1 for0674719. The unchanged original TI publisher engineering/transformation/release.py authenticate_review() requires BOTH the actual current configured summary and a genuine matching configured receipt; the old442 receipt cannot qualify067.\n\nPlease perform the configured source review on this exact current head and retain its genuine matching receipt. This request concerns the configured-review gate only. It does not replace, reroute, authorize or assert the separately required eligible independent functional-owner review; the two original P1 owner dispositions and all original native/publication/immutable-release checks remain required. No merge, publication or approval is requested by this comment."
+  },
+  "configuredSummary": {
+    "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/issues/comments/6275717324",
+    "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#issuecomment-6275717324",
+    "issue_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/issues/61",
+    "id": 6275717324,
+    "node_id": "IC_kwDOVDDqRc8AAAABdg_YzA",
+    "user": {
+      "login": "chatgpt-codex-connector[bot]",
+      "id": 199175422,
+      "node_id": "BOT_kgDOC98s_g",
+      "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+      "html_url": "https://github.com/apps/chatgpt-codex-connector",
+      "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "created_at": "2026-10-19T19:40:40Z",
+    "updated_at": "2026-10-20T23:39:02Z",
+    "body": "<!-- codex-pull-request-review-summary -->\n<!-- codex-review-state:v1 {\"code_review\":{\"commit_sha\":\"0674719f6749786c3591a15219364bfec94c336f\",\"has_any_findings\":false,\"has_unresolved_findings\":false,\"status\":\"completed\"},\"security_review\":{\"commit_sha\":null,\"has_any_findings\":null,\"has_unresolved_findings\":null,\"status\":null}} -->\n\n## Codex Review Summary\n\nThis comment shows the latest Codex review activity on this pull request.\n\n| Review | Status | Commit | Review trigger |\n| --- | --- | --- | --- |\n| 📝 **Code Review** | ✅ **Completed** <relative-time datetime=\"2026-10-20T23:39:01.557956Z\">2026-10-20T23:39:01.557956Z</relative-time> | `0674719` | Manual request |\n\n\n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\" or \"@codex security review\".\n\nCodex reacts with 👀 while any review is running, comments if it has suggestions, and reacts with 👍 once all reviews finish with no findings.\n\n</details>",
+    "author_association": "NONE",
+    "reactions": {
+      "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/issues/comments/6275717324/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": {
+      "id": 1144995,
+      "client_id": "Iv23liVemv8A9if9v0F2",
+      "slug": "chatgpt-codex-connector",
+      "node_id": "A_kwHOAOQ6Gs4AEXij",
+      "owner": {
+        "login": "openai",
+        "id": 14957082,
+        "node_id": "MDEyOk9yZ2FuaXphdGlvbjE0OTU3MDgy",
+        "avatar_url": "https://avatars.githubusercontent.com/u/14957082?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/openai",
+        "html_url": "https://github.com/openai",
+        "followers_url": "https://api.github.com/users/openai/followers",
+        "following_url": "https://api.github.com/users/openai/following{/other_user}",
+        "gists_url": "https://api.github.com/users/openai/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/openai/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/openai/subscriptions",
+        "organizations_url": "https://api.github.com/users/openai/orgs",
+        "repos_url": "https://api.github.com/users/openai/repos",
+        "events_url": "https://api.github.com/users/openai/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/openai/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "name": "ChatGPT Codex Connector",
+      "description": "Bring ChatGPT and Codex to your GitHub repositories.",
+      "external_url": "https://www.chatgpt.com",
+      "html_url": "https://github.com/apps/chatgpt-codex-connector",
+      "created_at": "2025-02-14T01:37:05Z",
+      "updated_at": "2026-09-23T18:52:59Z",
+      "permissions": {
+        "actions": "write",
+        "checks": "read",
+        "contents": "write",
+        "emails": "read",
+        "issues": "write",
+        "metadata": "read",
+        "pull_requests": "write",
+        "statuses": "read",
+        "workflows": "write"
+      },
+      "events": [
+        "check_run",
+        "check_suite",
+        "commit_comment",
+        "issues",
+        "issue_comment",
+        "pull_request",
+        "pull_request_review",
+        "pull_request_review_comment",
+        "pull_request_review_thread",
+        "repository",
+        "status",
+        "sub_issues"
+      ]
+    },
+    "minimized": null
+  },
+  "state": {
+    "commit_sha": "0674719f6749786c3591a15219364bfec94c336f",
+    "has_any_findings": false,
+    "has_unresolved_findings": false,
+    "status": "completed"
+  },
+  "genuineMatchingReceipt": {
+    "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/issues/comments/6304261878",
+    "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#issuecomment-6304261878",
+    "issue_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/issues/61",
+    "id": 6304261878,
+    "node_id": "IC_kwDOVDDqRc8AAAABd8Nm9g",
+    "user": {
+      "login": "chatgpt-codex-connector[bot]",
+      "id": 199175422,
+      "node_id": "BOT_kgDOC98s_g",
+      "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+      "html_url": "https://github.com/apps/chatgpt-codex-connector",
+      "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "created_at": "2026-10-20T23:39:00Z",
+    "updated_at": "2026-10-20T23:39:00Z",
+    "body": "<!-- codex-review-receipt:v1 -->\n\nCodex Review: Didn't find any major issues. :+1:\n\n**Reviewed commit:** `0674719f67`\n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+    "author_association": "NONE",
+    "reactions": {
+      "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/issues/comments/6304261878/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": {
+      "id": 1144995,
+      "client_id": "Iv23liVemv8A9if9v0F2",
+      "slug": "chatgpt-codex-connector",
+      "node_id": "A_kwHOAOQ6Gs4AEXij",
+      "owner": {
+        "login": "openai",
+        "id": 14957082,
+        "node_id": "MDEyOk9yZ2FuaXphdGlvbjE0OTU3MDgy",
+        "avatar_url": "https://avatars.githubusercontent.com/u/14957082?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/openai",
+        "html_url": "https://github.com/openai",
+        "followers_url": "https://api.github.com/users/openai/followers",
+        "following_url": "https://api.github.com/users/openai/following{/other_user}",
+        "gists_url": "https://api.github.com/users/openai/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/openai/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/openai/subscriptions",
+        "organizations_url": "https://api.github.com/users/openai/orgs",
+        "repos_url": "https://api.github.com/users/openai/repos",
+        "events_url": "https://api.github.com/users/openai/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/openai/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "name": "ChatGPT Codex Connector",
+      "description": "Bring ChatGPT and Codex to your GitHub repositories.",
+      "external_url": "https://www.chatgpt.com",
+      "html_url": "https://github.com/apps/chatgpt-codex-connector",
+      "created_at": "2025-02-14T01:37:05Z",
+      "updated_at": "2026-09-23T18:52:59Z",
+      "permissions": {
+        "actions": "write",
+        "checks": "read",
+        "contents": "write",
+        "emails": "read",
+        "issues": "write",
+        "metadata": "read",
+        "pull_requests": "write",
+        "statuses": "read",
+        "workflows": "write"
+      },
+      "events": [
+        "check_run",
+        "check_suite",
+        "commit_comment",
+        "issues",
+        "issue_comment",
+        "pull_request",
+        "pull_request_review",
+        "pull_request_review_comment",
+        "pull_request_review_thread",
+        "repository",
+        "status",
+        "sub_issues"
+      ]
+    },
+    "minimized": null
+  },
+  "configuredGateComplete": true,
+  "completeIssueCommentCollection": {
+    "count": 100,
+    "pages": 2,
+    "page2Count": 0,
+    "allIds": [
+      6275712258,
+      6275717324,
+      6275779004,
+      6277742403,
+      6278154130,
+      6278187685,
+      6278225145,
+      6278364747,
+      6278418203,
+      6278517085,
+      6278528232,
+      6278553594,
+      6278628807,
+      6278720169,
+      6278720752,
+      6278849759,
+      6278889320,
+      6278892347,
+      6278974172,
+      6278998272,
+      6279013309,
+      6279042209,
+      6279077702,
+      6279311433,
+      6279609050,
+      6279832288,
+      6279942236,
+      6280470947,
+      6280529736,
+      6280558095,
+      6282012593,
+      6282090301,
+      6282504325,
+      6282506346,
+      6282536798,
+      6282542875,
+      6282677046,
+      6282732910,
+      6282753999,
+      6282828882,
+      6283003614,
+      6283110785,
+      6283173449,
+      6283264919,
+      6283428626,
+      6283961215,
+      6284328927,
+      6284350248,
+      6284390172,
+      6284503984,
+      6284783859,
+      6284886309,
+      6285032971,
+      6285087092,
+      6285263121,
+      6285456615,
+      6285526042,
+      6285599166,
+      6285610246,
+      6285686609,
+      6285751179,
+      6285810138,
+      6286233358,
+      6286479199,
+      6286487518,
+      6286604294,
+      6286873554,
+      6287719585,
+      6287946104,
+      6287970780,
+      6288582988,
+      6288616772,
+      6289247885,
+      6289480667,
+      6289539564,
+      6289604293,
+      6289689737,
+      6289696169,
+      6290414327,
+      6290454179,
+      6291181364,
+      6293457346,
+      6294473961,
+      6297361413,
+      6297732694,
+      6297793574,
+      6297832004,
+      6297893695,
+      6297901212,
+      6298052125,
+      6298053206,
+      6298112526,
+      6298824920,
+      6301151568,
+      6301892233,
+      6303494517,
+      6303723464,
+      6304071125,
+      6304226969,
+      6304261878
+    ]
+  },
+  "actualPRReviewCollection": [
+    {
+      "id": 5576964869,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTGm7BQ",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "Independent read-only normal-union review: **CLEAR within the source-preservation and ordinary positive-fixture scope** at `2e2f33f43c898898d94ab53a667906fa6a580e9f`, tree `b3d5a44c0c4960de064db5eb0147d31e26e924e7`.\n\nI read the latest issue52 coordination first. Public API and local immutable Git objects agree on ordered parents `834af0f1978e316b581dde468a8189a14e57964f` and `1dbcf40a85e8c23168197ed9f8d8f2c5f7b6b071`. Compared with834, the union changes exactly the four previously reviewed public-source-kit/readback paths. The workflow, verifier and regression file are exact1db Git objects/modes; the README retains that correction with nonnumeric helper-count prose.\n\n- Both alpha.6 and alpha.7 builders retain834's shared captured-entry dependency verifier, exact serialized reference and manifest/receipt provenance. All2,393 payload rows, byte lengths and modes remain bound. The prior14-public-tarball proof and historical reference metadata are preserved; this review performed no new installation or refresh. Only the generated root `.package-lock.json` is omitted; the link-refusal/source-inventory rules are unchanged.\n- The source kit retains the missing safe-parser dependency and existing launcher, plus its extracted-verifier import check. Public native artifact names are filtered before opening files, matching the uploaded allowlist. No key-file contents were opened or retained.\n- I compared129 pre-existing runtime/dashboard/role paths againstca182: all remain exact except the already reviewed shared-builder wiring and literal provisional Alpha source identity. The current-main first-reservation/previsibility publisher guards, immutable SDK capture/physical worker frame, exact grants, STOP/reconciliation/read-only recovery exports, complete GUI/history checks and required audit/publish gates remain preserved. Existing EN/FR alpha.6/journey resource links and stable release placeholders remain.\n- The existing version-materialization correction and both source inventories are exact834. It covers the previously observed first-Agent old-version plist/index failure; fresh all-role saved archives still need actual qualification. No excluded-source or required-gate relaxation was found in this review.\n\n**Nine independent ordinary checks passed on these exact bytes:** two canonical inert-reference/receipt cases; both actual package builders and their generated-root-cache invariance checks; all2,393 retained public payloads against the reference; exact40-file Git ZIP/comment/bytes followed by extraction and pure Node verifier import; and a17-file ordinary public artifact byte/length/hash inventory. All40 kit source Git modes are100644. These checks performed no negative security-reproduction fixture, browser/native/model/provider/wallet/chain execution, scanner, workflow dispatch, source/ref mutation or publication.\n\nThe common pins remain explicitly provisional (`productionQualified:false`, no live provider or funded work). The planned finite final-pin child requires fresh exact-source review and all mandatory CI, saved-package/both-architecture native/browser/service/recovery, security evidence, release and live-site checks. This scoped source review does not qualify those outcomes or replace their gates.",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5576964869",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5576964869"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-19T19:56:08Z",
+      "commit_id": "2e2f33f43c898898d94ab53a667906fa6a580e9f"
+    },
+    {
+      "id": 5578380922,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTH9Weg",
+      "user": {
+        "login": "chatgpt-codex-connector[bot]",
+        "id": 199175422,
+        "node_id": "BOT_kgDOC98s_g",
+        "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+        "html_url": "https://github.com/apps/chatgpt-codex-connector",
+        "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "<!-- codex-review-receipt:v1 -->\n\n\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `8e288e98d4`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5578380922",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "NONE",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5578380922"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-19T22:10:13Z",
+      "commit_id": "8e288e98d403b2b8b222bb33da59ca89783e5bbf"
+    },
+    {
+      "id": 5578389470,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTH933g",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "Owner-authorized independent technical source review — SCOPED_SOURCE_CLEAR\n\nReviewer role: separate Codex source/hash and integration reviewers in the independent release-verification lane; submitted using the shared MontrealAI account. Owner authorization: explicit independent exact-source/technical-owner review request in issue52#6278424724, under CONTRIBUTING.md at this commit (blob494607053fe0d8c6617bba4b38abb8288ee8c044), and the existing October19 implementation/review/publication authorization. This is an engineering-agent technical COMMENT record; it does not establish distinct human/GitHub identity or organizational/economic independence, and is not a GitHub APPROVE.\n\nExact reviewed commit8e288e98d403b2b8b222bb33da59ca89783e5bbf, treefd3c5e2692d4011d5b0401fa23f33e256ed99860, sole normal parenta05b117c0a8f32150895bb0808a265f2a8801721. Root and separate reviewers authenticated complete nontruncated public trees: exactly five regular100644 metadata changes,6,893 other leaves/blobIDs/modes preserved. All24 finite TI inventory rows independently match actual Git bytes/size/mode, SHA2562c73198c252498b6fd74ce239fb198786dc6fe23fbcad75a118d39a7fe8e02ae; only source-pins row changes. The profile executable delta is only the Alpha source tuple; schemas, default-off flags, capture/authorization/STOP/grant/GUI/publisher behavior remain intact. No wildcard or source-inventory exception.\n\nAuthentic selected tuples agree throughout: Alpha/computer b71ffb48→dc9a9cf1, Jobs52a750f7→18a035c4, Manager917691f0→8c50d40e. Alpha's b71 SDK differs from historical272/aa4 and must be freshly captured/installed/executed; static full current SDK expectation is603modules/3,578,259bytes, digestc941887130cc074bdba4a933fd2263394f737876d0b508c632be5a6044d724bc, not an observed runtime result. Jobs52 is reviewed frozen S1 source while its unchanged27-file compiler selector retains actual5b5 producer. Manager917 and its fixed Alpha272 source record remain source roles. Actual future main/releaseM/tag/assets/physical-installed observations require the separate authenticated E mapping and fresh execution; no record/schema/asset exception or historical result relabelling.\n\nCurrent exact8e source kit independently contains41 Git-matching files, ZIP138,474bytes/SHA2566c2eb4c464a24d9010e9ce476e9b65f5a8b9c51c60e023a4903cefdc1253387b; extracted Node24.21 verifier import and three Python AST checks pass. Prior independent integrated21-path publisher/root/dashboard review remains bound to identical parent blobs (61#6278225145), including original producer/attempt/artifact custody, physical-install bindings, inherited STOP replay, tag-before-visibility, GET-only original-result retry and private boundary review. No actionable source finding in these reviewed scopes; disposition SCOPED_SOURCE_CLEAR, not qualification approval.\n\nNo runtime/native/browser/security/scanner execution, source/ref move, package build/install, dispatch or publication by these final-pin reviewers. Preserve the ONE complete configured review6278418203 and every genuine exact-source CI/security/x64+ARM/native/GUI/STOP/recovery/saved-installed/postmerge/public-asset/live gate before a qualified merge or release claim. No stale/skipped green, fabricated APPROVED review, wallet/ENS/authority or production-activation authorization.",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5578389470",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5578389470"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-19T22:11:18Z",
+      "commit_id": "8e288e98d403b2b8b222bb33da59ca89783e5bbf"
+    },
+    {
+      "id": 5580179576,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTJrIeA",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5580179576",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5580179576"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T02:44:53Z",
+      "commit_id": "987f0e0993ab46bb1dd8293f013d7b37e140e2ac"
+    },
+    {
+      "id": 5580179888,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTJrJsA",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5580179888",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5580179888"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T02:44:56Z",
+      "commit_id": "987f0e0993ab46bb1dd8293f013d7b37e140e2ac"
+    },
+    {
+      "id": 5580180163,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTJrKww",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5580180163",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5580180163"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T02:44:59Z",
+      "commit_id": "987f0e0993ab46bb1dd8293f013d7b37e140e2ac"
+    },
+    {
+      "id": 5580538444,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTKBCTA",
+      "user": {
+        "login": "chatgpt-codex-connector[bot]",
+        "id": 199175422,
+        "node_id": "BOT_kgDOC98s_g",
+        "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+        "html_url": "https://github.com/apps/chatgpt-codex-connector",
+        "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "<!-- codex-review-receipt:v1 -->\n\n\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `b73e140fea`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5580538444",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "NONE",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5580538444"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T03:47:46Z",
+      "commit_id": "b73e140feab0163867c7233366c1d7204236e6be"
+    },
+    {
+      "id": 5581483497,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTK6t6Q",
+      "user": {
+        "login": "chatgpt-codex-connector[bot]",
+        "id": 199175422,
+        "node_id": "BOT_kgDOC98s_g",
+        "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+        "html_url": "https://github.com/apps/chatgpt-codex-connector",
+        "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "<!-- codex-review-receipt:v1 -->\n\n\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `0ddd69b13c`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581483497",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "NONE",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581483497"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T06:27:48Z",
+      "commit_id": "0ddd69b13c4fc8af272cf7c3f41a9c16ee47f2cf"
+    },
+    {
+      "id": 5581685733,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTLHD5Q",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581685733",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581685733"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T06:54:49Z",
+      "commit_id": "4958c412dc1a1f276b4d4ecd9fae4bf4ab4c6d98"
+    },
+    {
+      "id": 5581703187,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTLIIEw",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581703187",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581703187"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T06:56:49Z",
+      "commit_id": "4958c412dc1a1f276b4d4ecd9fae4bf4ab4c6d98"
+    },
+    {
+      "id": 5581882422,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTLTENg",
+      "user": {
+        "login": "chatgpt-codex-connector[bot]",
+        "id": 199175422,
+        "node_id": "BOT_kgDOC98s_g",
+        "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+        "html_url": "https://github.com/apps/chatgpt-codex-connector",
+        "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "<!-- codex-review-receipt:v1 -->\n\n\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `1fd01fce04`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581882422",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "NONE",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581882422"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T07:18:17Z",
+      "commit_id": "1fd01fce04b04f0ac9a47ddfbe8294488e08f5ed"
+    },
+    {
+      "id": 5581907447,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTLUl9w",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581907447",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581907447"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T07:20:58Z",
+      "commit_id": "9c3e99a2319a7cb0a1c164549b0a5d430b1f9eda"
+    },
+    {
+      "id": 5581994936,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTLZ7uA",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581994936",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5581994936"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T07:30:20Z",
+      "commit_id": "9c3e99a2319a7cb0a1c164549b0a5d430b1f9eda"
+    },
+    {
+      "id": 5582510089,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTL5YCQ",
+      "user": {
+        "login": "chatgpt-codex-connector[bot]",
+        "id": 199175422,
+        "node_id": "BOT_kgDOC98s_g",
+        "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+        "html_url": "https://github.com/apps/chatgpt-codex-connector",
+        "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "<!-- codex-review-receipt:v1 -->\n\n\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `bb4ed66f6d`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5582510089",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "NONE",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5582510089"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T08:20:05Z",
+      "commit_id": "bb4ed66f6df1fa8bdf0bebb5b7d710d77803c543"
+    },
+    {
+      "id": 5582641742,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTMBaTg",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5582641742",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5582641742"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T08:32:55Z",
+      "commit_id": "3e333d99f639e85d9df4c4e25f1f701a59529e19"
+    },
+    {
+      "id": 5582866199,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTMPHFw",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5582866199",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5582866199"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T08:54:28Z",
+      "commit_id": "3e333d99f639e85d9df4c4e25f1f701a59529e19"
+    },
+    {
+      "id": 5583182804,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTMib1A",
+      "user": {
+        "login": "chatgpt-codex-connector[bot]",
+        "id": 199175422,
+        "node_id": "BOT_kgDOC98s_g",
+        "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+        "html_url": "https://github.com/apps/chatgpt-codex-connector",
+        "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "<!-- codex-review-receipt:v1 -->\n\n\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `5e1bf523b8`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5583182804",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "NONE",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5583182804"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T09:23:55Z",
+      "commit_id": "5e1bf523b815d0b22238ec89209f3de16b13aee4"
+    },
+    {
+      "id": 5583710564,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTNCpZA",
+      "user": {
+        "login": "chatgpt-codex-connector[bot]",
+        "id": 199175422,
+        "node_id": "BOT_kgDOC98s_g",
+        "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+        "html_url": "https://github.com/apps/chatgpt-codex-connector",
+        "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "<!-- codex-review-receipt:v1 -->\n\n\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `ba053c573d`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5583710564",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "NONE",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5583710564"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T10:16:29Z",
+      "commit_id": "ba053c573d1b70937ac1a879b8a0c174679f936b"
+    },
+    {
+      "id": 5584382752,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTNrrIA",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5584382752",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5584382752"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T11:29:20Z",
+      "commit_id": "0e7d71a45aa864d22cbc8dc2efabd364c7d1add1"
+    },
+    {
+      "id": 5584383169,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTNrswQ",
+      "user": {
+        "login": "MontrealAI",
+        "id": 24208299,
+        "node_id": "MDQ6VXNlcjI0MjA4Mjk5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24208299?u=c07b30b3d9456b11c0aa4a5ac99353b0107cde3a&v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MontrealAI",
+        "html_url": "https://github.com/MontrealAI",
+        "followers_url": "https://api.github.com/users/MontrealAI/followers",
+        "following_url": "https://api.github.com/users/MontrealAI/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MontrealAI/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MontrealAI/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MontrealAI/subscriptions",
+        "organizations_url": "https://api.github.com/users/MontrealAI/orgs",
+        "repos_url": "https://api.github.com/users/MontrealAI/repos",
+        "events_url": "https://api.github.com/users/MontrealAI/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MontrealAI/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5584383169",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "OWNER",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5584383169"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T11:29:23Z",
+      "commit_id": "0e7d71a45aa864d22cbc8dc2efabd364c7d1add1"
+    },
+    {
+      "id": 5589498033,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTSj4sQ",
+      "user": {
+        "login": "chatgpt-codex-connector[bot]",
+        "id": 199175422,
+        "node_id": "BOT_kgDOC98s_g",
+        "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+        "html_url": "https://github.com/apps/chatgpt-codex-connector",
+        "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "<!-- codex-review-receipt:v1 -->\n\n\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `425b589e33`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5589498033",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "NONE",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5589498033"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T18:09:59Z",
+      "commit_id": "425b589e3304019b58ce8660d81687f294a25a93"
+    },
+    {
+      "id": 5589570661,
+      "node_id": "PRR_kwDOVDDqRc8AAAABTSoUZQ",
+      "user": {
+        "login": "chatgpt-codex-connector[bot]",
+        "id": 199175422,
+        "node_id": "BOT_kgDOC98s_g",
+        "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D",
+        "html_url": "https://github.com/apps/chatgpt-codex-connector",
+        "followers_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chatgpt-codex-connector%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "<!-- codex-review-receipt:v1 -->\n\n\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `cfc6afc6c2`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+      "state": "COMMENTED",
+      "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5589570661",
+      "pull_request_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61",
+      "author_association": "NONE",
+      "_links": {
+        "html": {
+          "href": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#pullrequestreview-5589570661"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/pulls/61"
+        }
+      },
+      "submitted_at": "2026-10-20T18:16:04Z",
+      "commit_id": "cfc6afc6c253d752ae3351bf57a7b07177eaffce"
+    }
+  ],
+  "exactHeadOwnerReviewMissing": true,
+  "standaloneConversationCommentInsufficient": true,
+  "originalTIDispatchInputTemplate": {
+    "recordType": "ORIGINAL_TI_DISPATCH_INPUTS_WORKING_TEMPLATE_NOT_SUBMITTED",
+    "sourceCandidateReviewedH": "0674719f6749786c3591a15219364bfec94c336f",
+    "sourceTree": "d78839054676930c377b9b1b8181513e8d9c8501",
+    "originalWorkflow": {
+      "path": ".github/workflows/transformation-release.yml",
+      "gitBlob": "ef7bccdcb8bb183d863ba699bab8056824e3511d",
+      "bytes": 5864,
+      "sha256": "72f0970abbf86953d28299a3aec31d65061ba8a9b31f564b5969bd0ecca56eb3",
+      "trigger": "workflow_dispatch only",
+      "inputs": [
+        "expected-source",
+        "selectors",
+        "publish"
+      ]
+    },
+    "originalAuditor": {
+      "path": "engineering/transformation/release.py",
+      "gitBlob": "0a2396e8a87d65af6117fd598270a33a05a3c10c",
+      "bytes": 77761,
+      "sha256": "24345b7459670facf43b62efd28e6b4caa068fdfbbb71276ef3313c42c70cb40"
+    },
+    "dispatchInputs": {
+      "ref": "refs/heads/main",
+      "expected-source": null,
+      "selectors": {
+        "ti": null,
+        "local": null,
+        "linux": null,
+        "repository": null,
+        "sourceReview": null,
+        "review": {
+          "pull": 61,
+          "summary": 6275717324,
+          "receipt": 6304261878,
+          "ownerReview": null
+        }
+      },
+      "publish": true
+    },
+    "requiredSelectorMeanings": {
+      "ti": "Actual final merged mainS push transformational-project.yml run:attempt",
+      "local": "Actual same mainS local-skills.yml SUCCESS including audit/publish",
+      "linux": "Actual same mainS next-release.yml SUCCESS including audit/publish/Required release qualification",
+      "repository": "Actual same mainS repository-checks.yml run:attempt",
+      "sourceReview": "Actual same mainS repository-review.yml run:attempt",
+      "review": "Genuine configured summary and matching receipt plus eligible exact-head GitHub PR review API ID. Auditor authenticates normal H-to-S merge and exact whole-tree equality."
+    },
+    "currentAdditionalGates": {
+      "configuredReceipt": {
+        "state": "GENUINE_COMPLETED_CLEAR_CURRENT_SOURCE_RECEIPT_AUTHENTICATED",
+        "summary": 6275717324,
+        "receipt": 6304261878,
+        "source": "0674719f6749786c3591a15219364bfec94c336f",
+        "completeIssueCommentCount": 100,
+        "requestComment": 6304226969
+      },
+      "eligibleOwnerReview": {
+        "state": "MISSING",
+        "requiredGitHubAPIRecord": "/pulls/61/reviews/{ownerReview}",
+        "requiredCommit": "0674719f6749786c3591a15219364bfec94c336f",
+        "requiredBodyTerms": [
+          "reviewer",
+          "role",
+          "owner",
+          "authoriz",
+          "finding",
+          "disposition"
+        ],
+        "requiredSourceClearDisposition": "Genuine reviewed findings must permit Disposition: SCOPED_SOURCE_CLEAR (or original accepted CLEAR variants); no prefilling/approval fabrication.",
+        "allowedRecords": "Eligible separate account APPROVED, or explicitly authorized shared MontrealAI owner account COMMENTED; actual API association and identity required. A top-level issue comment alone cannot satisfy original auditor."
+      }
+    },
+    "gatePreservation": [
+      "Do not fill producer selectors with current PR runs: original auditor requires actual mainS source and latest successful attempt.",
+      "Do not move tags, change source, alter triggers, fabricate workflow_dispatch, invent receipt/review IDs, replace owner review or skip original checks.",
+      "Dispatch publish=true only on actual final qualified normal mainS after all original main publication prerequisites succeed.",
+      "Original public-package ONE remains separate and must run once after all actual immutable public component releases."
+    ],
+    "submitted": false,
+    "completed": false,
+    "createdAt": "2026-10-20T23:37:10.934Z",
+    "repositoryReleaseImmutabilitySetting": {
+      "state": "UNKNOWN_CONNECTOR_CANNOT_READ_ADMIN_ENDPOINT",
+      "readback": {
+        "error": "HTTPError: 400: GitHub Fetch URL is not an allowed public GitHub repository or search endpoint. (Response: None)",
+        "error_code": "INVALID_ARGUMENT"
+      },
+      "next": "Fleet administrator must confirm release immutability enabled before Linux/LocalSkills/TI publishers run; final consumer still requires actual immutable:true on selected public releases."
+    }
+  },
+  "limitations": [
+    "Only the configured-review receipt blocker is resolved here.",
+    "Linux original native qualification remains active; eligible independent functional-owner review and required immutable publications remain outstanding.",
+    "No dispatch, normal merge, public-package consumer, final E/T/F or publication approval is asserted."
+  ]
+}
