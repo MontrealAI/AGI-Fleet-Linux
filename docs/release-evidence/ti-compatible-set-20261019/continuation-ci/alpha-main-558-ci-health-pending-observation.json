@@ -1,0 +1,17 @@
+{
+  "schema": "agi-fleet/alpha-main-ci-health-pending-observation/1",
+  "source": "558f798a9b9cc73c1db01905858aad8852e11092",
+  "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+  "run": 39463592192,
+  "event": "schedule",
+  "attempt": 1,
+  "job": 118769014925,
+  "conclusion": "failure",
+  "reason": "Original watchdog's five-minute observation ended while exact-main ci.yml39459545474 remained in_progress (age34.2m, within its stated45m grace). Log reports non-green pending workflow, not a failed integration test. Underlying Python3.11/3.12 test jobs remain active and must actually succeed.",
+  "genuinePendingJobs": [
+    118755235989,
+    118755236075
+  ],
+  "nextAction": "Retain failure. Await the genuine underlying exact-main integration result and a normal successful exact-source CI Health observation. No timeout/scope/criteria change, synthetic result or premature release qualification.",
+  "observedAt": "2026-10-20T17:17:10.833Z"
+}
