@@ -472,7 +472,7 @@ def audit_ti_reports(root, package, source, producer, arch):
             and qualification.get('executionClass') == 'EXISTING_NATIVE_DOCKER_SCRIPTED_BROWSER'
             and qualification.get('installationExecution') == 'NORMAL_INSTALLER_APPLICATION_AND_NODE'
             and qualification.get('installation') == binding
-            and all(qualification.get(key) is True for key in ('exactGrant', 'oneUse', 'replayRefused', 'retainedCaptureIdempotent', 'actualBrowser', 'containerClosed', 'processGroupGone'))
+            and all(qualification.get(key) is True for key in ('exactGrant', 'oneUse', 'replayRefused', 'retainedCaptureIdempotent', 'actualBrowser', 'containerClosed', 'processGroupGone', 'explicitRecoveryStopped', 'recoveryNoReplay'))
             and qualification.get('providerRequests') == 0 and qualification.get('independentReview') is False
             and qualification.get('productionQualified') is False and qualification.get('authority') == 'none', 'installed native TI journey incomplete')
     require(execution.get('githubRunId') == str(run['id']) and execution.get('githubRunAttempt') == str(run['run_attempt'])
@@ -501,7 +501,7 @@ def audit_ti_reports(root, package, source, producer, arch):
     require(len(returns) == len(handoffs) == 1
             and (root / 'journey/native-artifacts/computer-return.json').read_text() == returns[0]
             and (root / 'journey/native-artifacts/handoff.json').read_text() == handoffs[0], 'native raw return/handoff differs from same project history')
-    for directory in ('demo', 'completed', 'capture'):
+    for directory in ('demo', 'completed', 'capture', 'recovered'):
         folder = root / 'journey' / directory
         saved = load(folder / 'checksums.json')
         require(saved.get('authority') == 'none' and saved.get('independentReview') is False and saved.get('productionQualified') is False, 'public project export scope differs')
@@ -509,8 +509,9 @@ def audit_ti_reports(root, package, source, producer, arch):
                   for file in sorted(folder.iterdir()) if file.is_file() and file.name != 'checksums.json']
         require(saved.get('files') == actual, 'project export byte inventory differs')
     commands = load(root / 'journey/commands.json')['commands']
-    require(len(commands) == 6, 'complete dedicated command sequence required')
-    require([row['argv'][2] for row in commands] == ['demo', 'browser-prepare', 'browser-run', 'browser-run', 'browser-run', 'browser-capture'], 'dedicated command sequence differs')
+    require(len(commands) == 7, 'complete dedicated command sequence plus explicit stopped recovery required')
+    require([row['argv'][2] for row in commands[:6]] == ['demo', 'browser-prepare', 'browser-run', 'browser-run', 'browser-run', 'browser-capture'], 'dedicated command sequence differs')
+    require(commands[6]['argv'][2] == 'browser-capture' and '--recover-interrupted-browser' in commands[6]['argv'], 'explicit stopped recovery command required')
     for index, row in enumerate(commands):
         require(row['argv'][:2] == [binding['nodeExecutable'], binding['application'] + '/local-runtime/transformation/cli.mjs']
                 and row.get('signal') is None and row.get('status') == (1 if index in (2, 4) else 0), 'actual installed command/refusal differs')
@@ -518,6 +519,14 @@ def audit_ti_reports(root, package, source, producer, arch):
     completed = decode(commands[3]['stdout']); captured = decode(commands[5]['stdout'])
     require(completed.get('nativeState') == 'complete' and completed.get('authority') == 'none'
             and captured.get('recovery') == 'retained-history-only-no-replay', 'native return/capture completion differs')
+    recovered = decode(commands[6]['stdout'])
+    recovery = load(root / 'journey/recovered/browser-recovery.json')
+    require(recovered.get('recoveryStopped') is True and recovered.get('nativeReturnRecovered') is True
+            and recovery.get('schema') == 'agi-fleet/ti-browser-recovery/v1' and recovery.get('stopped') is True
+            and recovery.get('replayAllowed') is False and recovery.get('cleanupReestablished') is False
+            and recovery.get('retainedState') == 'complete' and recovery.get('authority') == 'none'
+            and (root / 'journey/recovered/project.json').read_bytes() == (root / 'journey/completed/project.json').read_bytes(),
+            'explicit recovery must retain STOP and the exact original project without new cleanup or replay claims')
     tests = sum(len(re.findall(r'^test\(', file.read_text(), re.M)) for file in (ROOT / 'engineering/transformation').glob('*.test.mjs'))
     for name in ('test-output.txt', 'installed-test-output.txt'):
         tap(root / name, tests)

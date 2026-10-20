@@ -186,8 +186,18 @@ The native return is attached to the same campaign and remains pending review.
 `browser-capture --project UUID --output /absolute/new-capture` reads a retained
 nonrunning native attempt after failure or output trouble. It performs no new
 activation, authorization or execution. It preserves incomplete/uncertain evidence
-and never restores consumed grants. The underlying LocalRuntime STOP,
-reconciliation and no-replay requirements remain in force. `attach-computer
+and never restores consumed grants. Each browser CLI operation holds the existing private
+control endpoint and records its grant/source fence, so recovery refuses a still-live operator command.
+A running legacy ledger without that fence requires explicit operator review; absence of a socket alone
+is not proof that an older raw CLI stopped. If a fenced process died without closing its ledger, explicitly add `--recover-interrupted-browser` to `browser-capture`. The existing service
+recovery verifies the stale endpoint and performs its durable STOP transition: unused grants revoke,
+running rows become uncertain and actors become inactive. No profile, activation or new execution is
+used. A bound retained native return still passes the original artifact and project verifiers. If no
+outcome was durably recorded, export preserves the original project with `browser-recovery.json`,
+marks the return unavailable and makes no new cleanup or success claim; original private files stay
+untouched. Positive closure evidence and the normal explicit reconciliation remain necessary. Recovery
+does not clear STOP, reset consumed grants, erase old runs or automatically prepare a replacement.
+The underlying LocalRuntime STOP, reconciliation and no-replay requirements remain in force. `attach-computer
 --project UUID --file /absolute/computer-return.json --output /absolute/new-return`
 can attach an externally supplied exact return after the existing native verifier
 checks its binding; this import does not independently trust its signer.

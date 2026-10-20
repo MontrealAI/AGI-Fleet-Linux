@@ -2,11 +2,12 @@
 // One private project history; every execution/review control remains explicit.
 import fs from 'node:fs';
 import path from 'node:path';
+import net from 'node:net';
 import {parseArgs} from 'node:util';
 import {randomUUID,createHash} from 'node:crypto';
 import {canonical,parseStrict,need,uuid,decodeUTF8} from '../primitives.mjs';
 import {readPrivate} from '../private-file.mjs';
-import {privateDirectory} from '../supervisor/store.mjs';
+import {Store,privateDirectory} from '../supervisor/store.mjs';
 import {TIProjectStore} from './store.mjs';
 import {openInstalledTI,nativeCLI} from './installed.mjs';
 import {createTIProject,appendTIProject,inspectTIProject,summaryHTML,createSummaryHandoff} from './project.mjs';
@@ -14,7 +15,7 @@ import {createTIProject,appendTIProject,inspectTIProject,summaryHTML,createSumma
 const sha=value=>createHash('sha256').update(typeof value==='string'||ArrayBuffer.isView(value)?value:canonical(value)).digest('hex');
 const options={};
 for(const name of ['state','sources','python','project','file','output','binding','operation','freeze','trust','producer','behavior','signed','context','profile','grant','commitment'])options[name]={type:'string'};
-for(const name of ['confirm-public-demo','confirm-native-browser'])options[name]={type:'boolean',default:false};
+for(const name of ['confirm-public-demo','confirm-native-browser','recover-interrupted-browser'])options[name]={type:'boolean',default:false};
 const {values:v,positionals}=parseArgs({options,allowPositionals:true});
 const action=positionals[0];
 function raw(file,max=12_000_000) {
@@ -24,6 +25,22 @@ function raw(file,max=12_000_000) {
   finally {fs.closeSync(fd);}
 }
 function write(file,value) {fs.writeFileSync(file,typeof value==='string'?value:canonical(value),{mode:0o600,flag:'wx'});}
+async function openBrowserRuntime(directory,options={}) {
+  // Own the same private endpoint used by normal service recovery before
+  // opening or changing its ledger. A live CLI must never look abandoned.
+  privateDirectory(directory,{create:options.create===true});
+  const fence=net.createServer(connection=>connection.destroy());let runtime;
+  try {
+    await new Promise((resolve,reject)=>{fence.once('error',reject);fence.listen(path.join(directory,'control.sock'),resolve);});
+    fs.chmodSync(path.join(directory,'control.sock'),0o600);
+    const {LocalRuntime}=await import('../supervisor/runtime.mjs');
+    runtime=new LocalRuntime(directory,options);
+    return {runtime,close:async()=>{try{await new Promise(resolve=>fence.close(resolve));}finally{runtime.close();}}};
+  } catch(error) {
+    try{runtime?.close();}finally{if(fence.listening)await new Promise(resolve=>fence.close(resolve));}
+    throw error;
+  }
+}
 let installed,store;
 try {
   need(path.isAbsolute(v.state??'')&&path.isAbsolute(v.sources??''),'TI_EXPLICIT_INSTALLATION_REQUIRED');
@@ -60,7 +77,7 @@ try {
     if(checked.nativeRaw===eventRaw)return prior;
     return saveExtension(prior,checked.native===null?'native-result':'native-update',eventRaw);
   }
-  async function publish(project) {
+  async function publish(project,browserRecovery=null) {
     need(path.isAbsolute(v.output??'')&&fs.realpathSync(path.dirname(v.output))===path.dirname(v.output),'TI_NEW_OUTPUT_REQUIRED');
     const checked=await inspectTIProject(project,history);
     fs.mkdirSync(v.output,{mode:0o700});
@@ -72,6 +89,7 @@ try {
     const selection=store.store.meta('ti-library-route:'+checked.project.projectId);
     if(selection)write(path.join(v.output,'reuse-selection.json'),selection);
     write(path.join(v.output,'sources.json'),installed.records);
+    if(browserRecovery!==null)write(path.join(v.output,'browser-recovery.json'),browserRecovery);
     const files=fs.readdirSync(v.output).sort().map(name=>({name,sha256:sha(fs.readFileSync(path.join(v.output,name))),bytes:fs.statSync(path.join(v.output,name)).size}));
     write(path.join(v.output,'checksums.json'),{files,authority:'none',independentReview:false,productionQualified:false});
     return {projectId:checked.project.projectId,revision:checked.project.revision,output:v.output,
@@ -166,8 +184,7 @@ try {
     const readiness=new LinuxSandbox({computerConfigFile:v.profile}).inspect();
     need(readiness.supported,readiness.code);need(readiness.alphaComputer?.supported,readiness.alphaComputer?.code??'TI_BROWSER_PROFILE_REQUIRED');
     const directory=path.join(v.state,'browser-'+id);
-    const {LocalRuntime}=await import('../supervisor/runtime.mjs');
-    const runtime=new LocalRuntime(directory,{create:!fs.existsSync(directory),computerConfigFile:v.profile});
+    const opened=await openBrowserRuntime(directory,{create:!fs.existsSync(directory),computerConfigFile:v.profile}),{runtime}=opened;
     try {
       need(runtime.store.db.prepare('SELECT COUNT(*) AS n FROM runs').get().n===0,'TI_BROWSER_EXISTING_ATTEMPT_REVIEW_REQUIRED');
       let credential=runtime.store.meta('ti-browser-credential'),principal;
@@ -190,38 +207,68 @@ try {
         runtime.store.set('ti-browser-session',{projectId:id,actor:actor.id,grant:grant.grant,commitment:grant.commitment,prepared:grant});
       }
       result={projectId:id,prepared:grant,executed:false,next:'Inspect this exact task/profile/limits, then separately authorize its grant and commitment.',authority:'none'};
-    } finally {runtime.close();}
+    } finally {await opened.close();}
   } else if(action==='browser-run') {
     need(v['confirm-native-browser']===true,'TI_NATIVE_BROWSER_CONFIRMATION_REQUIRED');
     const id=uuid(v.project),project=await store.get(id);need(project,'TI_PROJECT_UNKNOWN');
-    const directory=path.join(v.state,'browser-'+id),{LocalRuntime}=await import('../supervisor/runtime.mjs');
-    const runtime=new LocalRuntime(directory,{computerConfigFile:v.profile});
+    const directory=path.join(v.state,'browser-'+id);
+    const opened=await openBrowserRuntime(directory,{computerConfigFile:v.profile}),{runtime}=opened;
     try {
       const session=runtime.store.meta('ti-browser-session');
       need(session?.projectId===id&&session.grant===v.grant&&session.commitment===v.commitment,'TI_EXACT_BROWSER_GRANT_REQUIRED');
       const principal=runtime.authenticate(decodeUTF8(readPrivate(runtime.store.meta('ti-browser-credential'))));
       need(runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(session.grant)?.state==='prepared','GRANT_UNAVAILABLE');
+      runtime.store.transaction(()=>{
+        const marker={schema:'agi-fleet/ti-browser-endpoint-fence/v1',grant:session.grant,sourceSha256:runtime.source};
+        runtime.store.set('ti-browser-run-fence',marker);runtime.store.event('ti-browser-endpoint-fenced',marker);
+      });
       runtime.authorize({grant:session.grant,commitment:session.commitment,confirm:true},principal);
       const completed=await runtime.run({actor:session.actor,grant:session.grant},principal);
       const returned=await runtime.dispatch('computer-export',{actor:session.actor,run:completed.run},principal);
       const next=await saveExtension(project,'computer-return',returned.content);
       result=await publish(next);result.nativeState=completed.state;
       result.executionClass='existing-native-scripted-browser-route';
-    } finally {runtime.close();}
+    } finally {await opened.close();}
   } else if(action==='browser-capture') {
     const id=uuid(v.project),project=await store.get(id);need(project,'TI_PROJECT_UNKNOWN');
-    const directory=path.join(v.state,'browser-'+id),{LocalRuntime}=await import('../supervisor/runtime.mjs');
-    // Read-only recovery uses no profile, activation, authorization or new run.
-    const runtime=new LocalRuntime(directory);
+    const directory=path.join(v.state,'browser-'+id);
+    // A durable restart transition is explicit; it never resumes or replays.
+    if(v['recover-interrupted-browser']) {
+      // Legacy raw commands had no endpoint: absence alone cannot establish
+      // that one of those writers stopped. Retain them for explicit review.
+      const observed=new Store(directory);
+      try {
+        const marker=observed.meta('ti-browser-run-fence');
+        const running=observed.db.prepare("SELECT grant_id,value FROM runs WHERE state='running'").all();
+        need(running.every(row=>marker?.schema==='agi-fleet/ti-browser-endpoint-fence/v1'
+          &&marker.grant===row.grant_id&&marker.sourceSha256===parseStrict(row.value).sourceSha256),
+          'TI_BROWSER_UNFENCED_RECOVERY_REVIEW_REQUIRED');
+      } finally {observed.close();}
+      const {recoverService}=await import('../supervisor/recover-service.mjs');
+      await recoverService(directory,{confirm:true});
+    }
+    const opened=await openBrowserRuntime(directory),{runtime}=opened;
     try {
       const session=runtime.store.meta('ti-browser-session');need(session?.projectId===id,'TI_BROWSER_SESSION_REQUIRED');
-      const row=runtime.store.db.prepare('SELECT id,state FROM runs WHERE actor=? AND grant_id=?').get(session.actor,session.grant);
+      const row=runtime.store.db.prepare('SELECT id,state,result FROM runs WHERE actor=? AND grant_id=?').get(session.actor,session.grant);
       need(row&&row.state!=='running','TI_BROWSER_CLOSED_RUN_REQUIRED');
       const principal=runtime.authenticate(decodeUTF8(readPrivate(runtime.store.meta('ti-browser-credential'))));
-      const returned=await runtime.dispatch('computer-export',{actor:session.actor,run:row.id},principal);
-      result=await publish(await saveExtension(project,'computer-return',returned.content));
-      result.recovery='retained-history-only-no-replay';result.nativeState=row.state;
-    } finally {runtime.close();}
+      const missingOutcome=row.state==='uncertain'&&row.result===null;
+      need(!missingOutcome||runtime.store.meta('stopped')===true,'TI_BROWSER_RECOVERY_STOP_REQUIRED');
+      let retained=project;
+      if(!missingOutcome) {
+        const returned=await runtime.dispatch('computer-export',{actor:session.actor,run:row.id},principal);
+        retained=await saveExtension(project,'computer-return',returned.content);
+      }
+      const recovery=v['recover-interrupted-browser']||missingOutcome?{
+        schema:'agi-fleet/ti-browser-recovery/v1',projectId:id,run:row.id,retainedState:row.state,
+        stopped:runtime.store.meta('stopped')===true,replayAllowed:false,nativeReturnRecovered:!missingOutcome,
+        cleanupReestablished:false,authority:'none',next:'Inspect retained native files and obtain positive closure evidence before reconciliation; never reset or replay the consumed grant.'}:null;
+      result=await publish(retained,recovery);
+      result.recovery=missingOutcome?'interrupted-attempt-retained-no-replay':'retained-history-only-no-replay';
+      result.nativeState=row.state;result.nativeReturnRecovered=!missingOutcome;
+      if(recovery)result.recoveryStopped=recovery.stopped;
+    } finally {await opened.close();}
   } else if(['library-review','library-control','library-route'].includes(action)) {
     const id=uuid(v.project);await current(id);let project=await store.get(id);need(project,'TI_PROJECT_UNKNOWN');
     const checked=await inspectTIProject(project,history);need(checked.archive,'TI_LOCAL_ARCHIVE_REQUIRED');

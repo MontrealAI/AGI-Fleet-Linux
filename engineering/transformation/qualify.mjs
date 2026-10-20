@@ -54,11 +54,19 @@ try {
   assert.equal(captured.recovery,'retained-history-only-no-replay');
   const a=fs.readFileSync(path.join(output,'completed/project.json')),b=fs.readFileSync(path.join(output,'capture/project.json'));
   assert.deepEqual(a,b);
+  const recovered=command(['browser-capture','--project',first.projectId,'--recover-interrupted-browser','--output',path.join(output,'recovered')]);
+  assert.equal(recovered.recovery,'retained-history-only-no-replay');assert.equal(recovered.recoveryStopped,true);
+  assert.equal(recovered.nativeReturnRecovered,true);
+  assert.deepEqual(a,fs.readFileSync(path.join(output,'recovered/project.json')));
+  const recovery=JSON.parse(fs.readFileSync(path.join(output,'recovered/browser-recovery.json'),'utf8'));
+  assert.equal(recovery.stopped,true);assert.equal(recovery.replayAllowed,false);assert.equal(recovery.cleanupReestablished,false);
   const {LocalRuntime}=await import(pathToFileURL(path.join(application,'local-runtime/supervisor/runtime.mjs')));
   const runtime=new LocalRuntime(path.join(state,'browser-'+first.projectId));
   try {
     const session=runtime.store.meta('ti-browser-session'),principal=runtime.authenticate(fs.readFileSync(runtime.store.meta('ti-browser-credential'),'utf8'));
     const row=runtime.store.db.prepare('SELECT * FROM runs WHERE grant_id=?').get(session.grant);
+    assert.equal(runtime.store.meta('stopped'),true);assert(runtime.store.listActors().every(actor=>actor.active===false&&actor.host===null));
+    assert.equal(runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(session.grant).state,'consumed');
     assert.equal(row.state,'complete');const receipt=JSON.parse(row.result);
     assert.equal(receipt.observation.backend,'native-alpha-computer-scripted/v1');
     assert.equal(receipt.observation.processGroupGone,true);assert.equal(receipt.observation.containerClosed,true);
@@ -74,7 +82,7 @@ try {
     assert.equal(manifest.workingTreeDirty,false);assert.equal(manifest.commit,installation.sourceCommit);
     const value={schema:'agi-fleet/ti-saved-native-qualification/v1',projectId:first.projectId,
       sourcePreviewVersion:'0.1.0-alpha.7',executionClass:'EXISTING_NATIVE_DOCKER_SCRIPTED_BROWSER',
-      exactGrant:true,oneUse:true,replayRefused:true,retainedCaptureIdempotent:true,
+      exactGrant:true,oneUse:true,replayRefused:true,retainedCaptureIdempotent:true,explicitRecoveryStopped:true,recoveryNoReplay:true,
       actualBrowser:true,containerClosed:true,processGroupGone:true,providerRequests:0,
       installationExecution:'NORMAL_INSTALLER_APPLICATION_AND_NODE',installation,
       image,computerAlpha,sourceIdentity:{fleetCommit:manifest.commit,manifestSha256:hash(fs.readFileSync(path.join(application,'local-preview-manifest.json'))),
