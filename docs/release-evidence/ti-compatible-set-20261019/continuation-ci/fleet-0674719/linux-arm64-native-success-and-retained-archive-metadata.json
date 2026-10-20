@@ -1,0 +1,289 @@
+{
+  "observedAt": "2026-10-20T23:53:00.543Z",
+  "sourceHead": "0674719f6749786c3591a15219364bfec94c336f",
+  "tree": "d78839054676930c377b9b1b8181513e8d9c8501",
+  "runId": 39511938378,
+  "attempt": 1,
+  "originalJob": {
+    "id": 118937622171,
+    "run_id": 39511938378,
+    "workflow_name": "Linux 1.1.5 release qualification",
+    "head_branch": "integration/ti-custody-packaging-20261019",
+    "run_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/runs/39511938378",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOVDDqRc8AAAAbsTwWmw",
+    "head_sha": "0674719f6749786c3591a15219364bfec94c336f",
+    "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/jobs/118937622171",
+    "html_url": "https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39511938378/job/118937622171",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-20T23:06:31Z",
+    "started_at": "2026-10-20T23:06:36Z",
+    "completed_at": "2026-10-20T23:51:06Z",
+    "name": "native (ubuntu-24.04-arm, arm64)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-20T23:06:37Z",
+        "completed_at": "2026-10-20T23:06:37Z"
+      },
+      {
+        "name": "Fetch the exact workflow commit",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-20T23:06:37Z",
+        "completed_at": "2026-10-20T23:06:38Z"
+      },
+      {
+        "name": "Download this run's saved candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-20T23:06:38Z",
+        "completed_at": "2026-10-20T23:06:47Z"
+      },
+      {
+        "name": "Exercise targeted cases and complete native suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-20T23:06:47Z",
+        "completed_at": "2026-10-20T23:51:04Z"
+      },
+      {
+        "name": "Preserve evidence ownership",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-20T23:51:04Z",
+        "completed_at": "2026-10-20T23:51:04Z"
+      },
+      {
+        "name": "Retain every native test log",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-20T23:51:04Z",
+        "completed_at": "2026-10-20T23:51:05Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-20T23:51:05Z",
+        "completed_at": "2026-10-20T23:51:05Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/check-runs/118937622171",
+    "labels": [
+      "ubuntu-24.04-arm"
+    ],
+    "runner_id": 1000245458,
+    "runner_name": "GitHub Actions 1000245458",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  "originalJobLogIdentity": {
+    "bytes": 37504,
+    "sha256": "9c53628ad8a15159ca1a9776866ac43ede49cd7599de7c95e9c1f114dc3b2db7",
+    "gitBlob": "8bfa15ddd81489433cb30bbce901739fc97b7ac8",
+    "jobId": 118937622171,
+    "sourceHead": "0674719f6749786c3591a15219364bfec94c336f",
+    "testedTree": "d78839054676930c377b9b1b8181513e8d9c8501",
+    "runId": 39511938378,
+    "attempt": 1
+  },
+  "originalArtifactCollection": {
+    "total_count": 9,
+    "artifacts": [
+      {
+        "id": 12307924668,
+        "node_id": "MDg6QXJ0aWZhY3QxMjMwNzkyNDY2OA==",
+        "name": "next-native-arm64",
+        "size_in_bytes": 1195320,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12307924668",
+        "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12307924668/zip",
+        "expired": false,
+        "digest": "sha256:1bba69dff4642e839d8f5baa4cef249139d4e6cb8c11a3630e239dc9f36e3b88",
+        "created_at": "2026-10-20T23:51:05Z",
+        "updated_at": "2026-10-20T23:51:05Z",
+        "expires_at": "2027-01-18T22:59:12Z",
+        "workflow_run": {
+          "id": 39511938378,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "0674719f6749786c3591a15219364bfec94c336f"
+        }
+      },
+      {
+        "id": 12307475122,
+        "node_id": "MDg6QXJ0aWZhY3QxMjMwNzQ3NTEyMg==",
+        "name": "next-integration-arm64",
+        "size_in_bytes": 33835,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12307475122",
+        "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12307475122/zip",
+        "expired": false,
+        "digest": "sha256:fa5ecc6988954461d1f30b2cd28b7929d8efe25ad31506b0476ff0a341bced4a",
+        "created_at": "2026-10-20T23:11:52Z",
+        "updated_at": "2026-10-20T23:11:52Z",
+        "expires_at": "2027-01-18T22:59:12Z",
+        "workflow_run": {
+          "id": 39511938378,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "0674719f6749786c3591a15219364bfec94c336f"
+        }
+      },
+      {
+        "id": 12306985751,
+        "node_id": "MDg6QXJ0aWZhY3QxMjMwNjk4NTc1MQ==",
+        "name": "next-profile-manager-1.19.3-d0c2cbaf-arm64",
+        "size_in_bytes": 1706735,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306985751",
+        "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306985751/zip",
+        "expired": false,
+        "digest": "sha256:9834a16546e98e6d8d8644e7dbab14055dbd9c9b90de2bf64a55649d91beeb54",
+        "created_at": "2026-10-20T23:14:32Z",
+        "updated_at": "2026-10-20T23:14:32Z",
+        "expires_at": "2027-01-18T22:59:12Z",
+        "workflow_run": {
+          "id": 39511938378,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "0674719f6749786c3591a15219364bfec94c336f"
+        }
+      },
+      {
+        "id": 12306950515,
+        "node_id": "MDg6QXJ0aWZhY3QxMjMwNjk1MDUxNQ==",
+        "name": "next-profile-manager-1.17.0-b7218196-x64",
+        "size_in_bytes": 1706753,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306950515",
+        "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306950515/zip",
+        "expired": false,
+        "digest": "sha256:1e7ee62809f2843de2c9e3aa57304555dcec4782656dfcab2c26081cf3df1a6c",
+        "created_at": "2026-10-20T23:13:19Z",
+        "updated_at": "2026-10-20T23:13:19Z",
+        "expires_at": "2027-01-18T22:59:12Z",
+        "workflow_run": {
+          "id": 39511938378,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "0674719f6749786c3591a15219364bfec94c336f"
+        }
+      },
+      {
+        "id": 12306632674,
+        "node_id": "MDg6QXJ0aWZhY3QxMjMwNjYzMjY3NA==",
+        "name": "next-successor-browser",
+        "size_in_bytes": 8674207,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306632674",
+        "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306632674/zip",
+        "expired": false,
+        "digest": "sha256:75e9f0cc81204afe807d9bf499beae4842aa70c787bc781a3e25b81ee7bd647b",
+        "created_at": "2026-10-20T23:08:23Z",
+        "updated_at": "2026-10-20T23:08:23Z",
+        "expires_at": "2027-01-18T22:59:12Z",
+        "workflow_run": {
+          "id": 39511938378,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "0674719f6749786c3591a15219364bfec94c336f"
+        }
+      },
+      {
+        "id": 12306553493,
+        "node_id": "MDg6QXJ0aWZhY3QxMjMwNjU1MzQ5Mw==",
+        "name": "next-profile-manager-1.17.0-b7218196-arm64",
+        "size_in_bytes": 1706746,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306553493",
+        "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306553493/zip",
+        "expired": false,
+        "digest": "sha256:a022ec3037d34a732ec234992aaf18568ba044cbe963ec338913436cb4a21e8b",
+        "created_at": "2026-10-20T23:13:06Z",
+        "updated_at": "2026-10-20T23:13:06Z",
+        "expires_at": "2027-01-18T22:59:12Z",
+        "workflow_run": {
+          "id": 39511938378,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "0674719f6749786c3591a15219364bfec94c336f"
+        }
+      },
+      {
+        "id": 12306432574,
+        "node_id": "MDg6QXJ0aWZhY3QxMjMwNjQzMjU3NA==",
+        "name": "linux-next-candidate",
+        "size_in_bytes": 438308192,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306432574",
+        "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306432574/zip",
+        "expired": false,
+        "digest": "sha256:35c63eb6f826d02553dafef6d5fa329826cb4379355734193d56465190c116c2",
+        "created_at": "2026-10-20T23:06:28Z",
+        "updated_at": "2026-10-20T23:06:28Z",
+        "expires_at": "2026-11-19T23:06:23Z",
+        "workflow_run": {
+          "id": 39511938378,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "0674719f6749786c3591a15219364bfec94c336f"
+        }
+      },
+      {
+        "id": 12306208617,
+        "node_id": "MDg6QXJ0aWZhY3QxMjMwNjIwODYxNw==",
+        "name": "next-profile-manager-1.19.3-d0c2cbaf-x64",
+        "size_in_bytes": 1706680,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306208617",
+        "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12306208617/zip",
+        "expired": false,
+        "digest": "sha256:5b7b3b223af12fc80defffbe09a913fe56b7c3a75b2d228f7c747d04eceaab1b",
+        "created_at": "2026-10-20T23:12:23Z",
+        "updated_at": "2026-10-20T23:12:23Z",
+        "expires_at": "2027-01-18T22:59:12Z",
+        "workflow_run": {
+          "id": 39511938378,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "0674719f6749786c3591a15219364bfec94c336f"
+        }
+      },
+      {
+        "id": 12305799719,
+        "node_id": "MDg6QXJ0aWZhY3QxMjMwNTc5OTcxOQ==",
+        "name": "next-integration-x64",
+        "size_in_bytes": 33856,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12305799719",
+        "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/artifacts/12305799719/zip",
+        "expired": false,
+        "digest": "sha256:14d5aa5f3b7ec4cb76a968428b619ac2e37bc5e8977bae7989fd200623165b0e",
+        "created_at": "2026-10-20T23:12:08Z",
+        "updated_at": "2026-10-20T23:12:08Z",
+        "expires_at": "2027-01-18T22:59:12Z",
+        "workflow_run": {
+          "id": 39511938378,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "0674719f6749786c3591a15219364bfec94c336f"
+        }
+      }
+    ]
+  },
+  "wholeLinuxWorkflowQualified": false,
+  "remaining": "Original x64 native suite still active; eligible owner and actual immutable publications still required.",
+  "finalCombinedQualification": null
+}
