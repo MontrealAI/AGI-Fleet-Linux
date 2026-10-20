@@ -38,7 +38,12 @@ try{
     await createComputerProfile({alphaRoot,python,image,handoffRaw,actions,output:profile});
     // This profile has public synthetic inputs and no credential fields. Journals stay private.
     fs.copyFileSync(profile,path.join(directory,'service-profile.json'));
-    await start(profile);const host=await request('doctor');assert.equal(host.supported,true);assert.equal(host.alphaComputer.supported,true);
+    await start(profile);const host=await request('doctor');
+    const readiness={schema:'agi-fleet/saved-service-readiness/v1',case:name,architecture:process.arch,
+      host:{supported:host.supported,code:host.code??null},
+      alphaComputer:{supported:host.alphaComputer?.supported??false,code:host.alphaComputer?.code??null}};
+    fs.writeFileSync(path.join(directory,'service-readiness.json'),JSON.stringify(readiness,null,2)+'\n',{flag:'wx',mode:0o600});
+    assert.equal(host.supported,true,JSON.stringify(readiness));assert.equal(host.alphaComputer.supported,true,JSON.stringify(readiness));
     const actor=await request('create',{role:'agent',name:'Disposable saved-package Computer Use rehearsal'});if(name!=='accepted')await request('activate',{actor:actor.id,confirm:true});
     const scoped=await request('client',{actor:actor.id});
     const task={schema:'agi-fleet/local-task/v1',action:'alpha-computer-run',workspace:'files',input:{handoffRaw,publicNonpersonal:true},review:'none',sourceActor:null,sourceController:null};
