@@ -78,7 +78,9 @@ test('native artifact exports retain actor scope, fixed names and exact hashes a
   const f=synthetic();try{
     const a=f.create(),b=f.create(),own=f.runtime.issueClient(a.id).principal,other=f.runtime.issueClient(b.id).principal,g=f.prepare(a,computerTask()),run=id(),directory=path.join(f.directory,'runs',run+'-fixture','computer');fs.mkdirSync(directory,{recursive:true,mode:0o700});
     write(path.join(directory,'computer-return.json'),'{"authority":"none"}');write(path.join(directory,'screen-000.png'),Buffer.from('89504e470d0a1a0a00000000','hex'));
+    write(path.join(directory,'source-key.txt'),'public verification key fixture');
     const artifacts=computerArtifactInventory(directory),observation={backend:'native-alpha-computer-scripted/v1',artifactDirectory:run+'-fixture/computer',artifacts};
+    assert(artifacts.every(record=>record.name!=='source-key.txt'),'native source verification key remains outside public artifact inventory');
     f.runtime.store.db.prepare("INSERT INTO runs VALUES(?,?,?,'complete',?,?)").run(run,a.id,g.grant,canonical({reservedAt:Date.now()}),canonical({observation}));f.runtime.stop({actor:null},f.operator);f.backend.inspect=()=>({supported:false,code:'COMPUTER_DISABLED'});
     const returned=await f.runtime.dispatch('computer-export',{actor:a.id,run},own);assert.equal(returned.sha256,digest(returned.content));const png=await f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'screen-000.png'},own);assert.equal(digest(Buffer.from(png.contentBase64,'base64')),png.sha256);
     const element=()=>({dataset:{},children:[],parent:null,append(value){value.parent=this;this.children.push(value);},querySelector(){return this.children.find(value=>Object.hasOwn(value.dataset,'computerOutputs'))??null;},remove(){this.parent.children=this.parent.children.filter(value=>value!==this);}});
@@ -107,6 +109,7 @@ test('native artifact exports retain actor scope, fixed names and exact hashes a
     }
     await assert.rejects(f.runtime.dispatch('computer-export',{actor:a.id,run},other),/CLIENT_SCOPE_DENIED/);await assert.rejects(f.runtime.dispatch('computer-export',{actor:b.id,run},own),/CLIENT_SCOPE_DENIED/);
     await assert.rejects(f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'../computer-return.json'},own),/COMPUTER_ARTIFACT_NAME/);
+    await assert.rejects(f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'source-key.txt'},own),/COMPUTER_ARTIFACT_NAME/);
     write(path.join(directory,'screen-000.png'),'changed');await assert.rejects(f.runtime.dispatch('computer-artifact',{actor:a.id,run,name:'screen-000.png'},own),/COMPUTER_ARTIFACT_CHANGED/);
     fs.unlinkSync(path.join(directory,'computer-return.json'));fs.symlinkSync('/etc/hostname',path.join(directory,'computer-return.json'));await assert.rejects(f.runtime.dispatch('computer-export',{actor:a.id,run},own),/ELOOP/);
   }finally{f.close();}

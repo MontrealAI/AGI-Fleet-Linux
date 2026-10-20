@@ -31,7 +31,7 @@ export async function waitForComputerCleanup(observe,escalate,forceKill,{now=()=
 }
 export function computerArtifactInventory(directory){
   need(fs.realpathSync(directory)===directory,'COMPUTER_ARTIFACT_ROOT');let total=0;
-  const artifacts=fs.readdirSync(directory).sort().map(name=>{need(NAMES.test(name),'COMPUTER_ARTIFACT_NAME');const raw=regular(path.join(directory,name),COMPUTER_LIMITS.artifactBytes);if(name.endsWith('.png'))need(raw.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')),'COMPUTER_ARTIFACT_MIME');else new TextDecoder('utf-8',{fatal:true}).decode(raw);total+=raw.length;return {name,mediaType:mime(name),sha256:digest(raw),bytes:raw.length};});
+  const artifacts=fs.readdirSync(directory).sort().filter(name=>name!=='source-key.txt').map(name=>{need(NAMES.test(name),'COMPUTER_ARTIFACT_NAME');const raw=regular(path.join(directory,name),COMPUTER_LIMITS.artifactBytes);if(name.endsWith('.png'))need(raw.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')),'COMPUTER_ARTIFACT_MIME');else new TextDecoder('utf-8',{fatal:true}).decode(raw);total+=raw.length;return {name,mediaType:mime(name),sha256:digest(raw),bytes:raw.length};});
   need(artifacts.length<=40&&total<=COMPUTER_LIMITS.artifactTotalBytes,'COMPUTER_ARTIFACT_CAPACITY');return artifacts;
 }
 export function requireComputerCapacity(runtime){
