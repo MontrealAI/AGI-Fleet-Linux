@@ -1,0 +1,59 @@
+{
+  "commit": "76df308b9661274c0de9193047f111b3953737a2",
+  "tree": "e45b1d9dfad0e600cb6fa4f41eb8770e0bb07d64",
+  "parents": [
+    "9a7d7dff9a971f9dfe99f83fcd8bbeddb2b874f3"
+  ],
+  "scope": "Independent source-only preservation and documented static-admission review; no final qualification.",
+  "fullTree": {
+    "untruncated": true,
+    "leaves": 3608,
+    "changedLeaves": 2,
+    "unchangedLeavesAndModes": 3606,
+    "samePaths": true
+  },
+  "identities": [
+    {
+      "path": "alpha_factory_v1/core/runtime/successor/transformation_source_audit.py",
+      "blob": "bdc4b42ec309caa14b8c44d1a15cc674c2c04bf5",
+      "bytes": 75895,
+      "sha256": "5126d30de843d5f3fff77efca8f3bcc9f1cf088e6fe77526964edcf1d24cf624",
+      "mode": "100644"
+    },
+    {
+      "path": "examples/transformational-source-audit/README.md",
+      "blob": "fee0f220b981f0eeb13af096e6750821449f5806",
+      "bytes": 14998,
+      "sha256": "bcfa1202478d51024907152b47255481bd7c4539bf6eebaed437ee347e0a696b",
+      "mode": "100644"
+    }
+  ],
+  "staticChecks": {
+    "wholeModuleInverseRestoresExact9a": true,
+    "guideInverseRestoresExact9aGuide": true,
+    "onlyChangedTopLevelAST": [
+      "_screen_source_assignments"
+    ],
+    "receivingPolicyPairWrapperTypeSelectorAndEmptyGuards": "Byte-identical after removing the two new refusal clauses.",
+    "literalJoinFoldAndIndependentCommonScreen": "Unchanged; new refusal branch excludes join.",
+    "sourceNodeDepthSharedWorkBounds": "Unchanged; added clauses classify/refuse before invoking formatting or producing an output.",
+    "outsideScreeningModule": "AST-identical; exact whole-text inverse also passed."
+  },
+  "policy": "Cached str/bytes receiver non-join methods refuse; explicit str/bytes instance-method spellings with cached positional receiver refuse except fromhex/maketrans class/static factories; cached text-left percent and builtin format with cached first positional text refuse. Factory outputs, aliases, arbitrary runtime receivers, dynamic values and universal privacy are not certified.",
+  "compatibilityEvidence": "Primary separately reports retained draft classification failure and final three unchanged ordinary positives. This reviewer did not repeat those tests.",
+  "preservedComponents": "Both guide/scanner changes are narrow. All other source, worker cache/assets, fixtures, papers, release/publication gates, declarations and numerical/cost assertions retain exact Git identities.",
+  "limits": "Not a proof of arbitrary Python runtime behavior, aliases, imported/external inputs, privacy or physical resource usage. Operators must classify inputs as public and non-personal.",
+  "notPerformed": [
+    "target module imports",
+    "product tests",
+    "constructed formatting/security inputs or payloads",
+    "parser behavior experiments",
+    "journal or key reads",
+    "native/provider/model/process execution",
+    "SDK inventory rederivation",
+    "ref changes",
+    "review trigger",
+    "dispatch",
+    "cancellation"
+  ]
+}

@@ -1,0 +1,1269 @@
+{
+  "schema": "four-repository-assessment/manager-e-component/v1",
+  "recordType": "PARTIAL_MANAGER_COMPONENT_NOT_FINAL_E_MANIFEST",
+  "preparedAt": "2026-10-20T04:50:27.501584+00:00",
+  "repository": "MontrealAI/AGIJobManager",
+  "scope": "Manager v1.19.5 software release and actual postpublication Pages artifact/source/public-metadata binding only. Assembled from retained public proof; no new download, build, CI refresh, target execution or publication.",
+  "componentStatus": {
+    "softwareRelease": "PUBLISHED_IMMUTABLE",
+    "pages": "DEPLOYED_AND_ACTUAL_RAW_METADATA_ARTIFACT_HTTP_MATCHED",
+    "finalConnectedFourRepositoryQualification": "PENDING",
+    "finalEManifest": "NOT_ASSEMBLED_OR_APPROVED_BY_THIS_RECORD"
+  },
+  "sourceRoles": {
+    "reviewedCandidate": {
+      "commit": "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8",
+      "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+      "url": "https://github.com/MontrealAI/AGIJobManager/commit/a6ce48f3fc6884e1a5fd0963f3d27baa038052c8",
+      "role": "Reviewed PR source, retained separately from actual main qualification and publication"
+    },
+    "mergedMain": {
+      "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+      "orderedParents": [
+        "d0c2cbaf58b594e20d888c3fc744bada06172306",
+        "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8"
+      ],
+      "url": "https://github.com/MontrealAI/AGIJobManager/commit/4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "normalMerge": true
+    },
+    "pullRequest": {
+      "number": 1611,
+      "url": "https://github.com/MontrealAI/AGIJobManager/pull/1611"
+    },
+    "treeRelation": {
+      "reviewedAndMergedTreesEqual": true,
+      "verifiedFromRetainedGitObjects": true,
+      "mainQualificationNotTransferredFromPr": true
+    }
+  },
+  "release": {
+    "id": 417952385,
+    "tag": "v1.19.5",
+    "name": "v1.19.5 — Operator guidance and deployment evidence",
+    "url": "https://github.com/MontrealAI/AGIJobManager/releases/tag/v1.19.5",
+    "publishedAt": "2026-10-20T02:55:05Z",
+    "draft": false,
+    "prerelease": false,
+    "immutable": true,
+    "annotatedTag": {
+      "ref": "refs/tags/v1.19.5",
+      "tagObject": "eea8726413ed5bafc71f65b4eccd6233e89f055c",
+      "peeledCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "peeledType": "commit"
+    },
+    "publisher": {
+      "id": 39358807008,
+      "workflow_id": 380574549,
+      "path": ".github/workflows/publish-v114.yml",
+      "event": "workflow_dispatch",
+      "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "job": 118419845112,
+      "jobConclusion": "success",
+      "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39358807008",
+      "jobUrl": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39358807008/job/118419845112",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Verify publication source checkout",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Wait for all eight exact-source workflows",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Refuse superseded or unready publication",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Consume completed exact-source runs and immutable candidate artifact",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Verify complete published download inventory",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Attest exact-source release assembly",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Verify artifact, repository, workflow and source attestation bindings",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Validate evidence, create draft, verify assets, then publish",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        }
+      ]
+    },
+    "exactAssetCount": 9,
+    "assets": [
+      {
+        "name": "agijobmanager-usdc.html",
+        "assetId": 658090700,
+        "bytes": 556849,
+        "sha256": "544a4cc7990d4c5032db460f8c6e611a66a21b7720bf8b8ba406d05bf550e28b",
+        "state": "uploaded",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/download/v1.19.5/agijobmanager-usdc.html",
+        "evidence": "Retained actual public release API, cross-checked with checksum/qualification metadata where applicable",
+        "independentlyRetrievedRawBytesInThisLane": false
+      },
+      {
+        "name": "AGIJobManager-v1.19.5-COMPLETE.zip",
+        "assetId": 658090278,
+        "bytes": 32284267,
+        "sha256": "b47bb8c6b4bf94ba9fcdb60af4da1b4e98bb78b64448492ea0dcb4b23d2dc14e",
+        "state": "uploaded",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/download/v1.19.5/AGIJobManager-v1.19.5-COMPLETE.zip",
+        "evidence": "Retained actual public release API, cross-checked with checksum/qualification metadata where applicable",
+        "independentlyRetrievedRawBytesInThisLane": false
+      },
+      {
+        "name": "My-SUCCESSOR-Omega-en.html",
+        "assetId": 658090393,
+        "bytes": 747848,
+        "sha256": "52cdba3a407e582d791c0efdd7f76083ef0317ad75a339786de4fa7fe88875eb",
+        "state": "uploaded",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/download/v1.19.5/My-SUCCESSOR-Omega-en.html",
+        "evidence": "Retained actual public release API, cross-checked with checksum/qualification metadata where applicable",
+        "independentlyRetrievedRawBytesInThisLane": false
+      },
+      {
+        "name": "My-SUCCESSOR-Omega-fr.html",
+        "assetId": 658090461,
+        "bytes": 749825,
+        "sha256": "baad311922848b3957062ce4268a7155c5a33cdbad9a7dff806b33ab87f299c7",
+        "state": "uploaded",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/download/v1.19.5/My-SUCCESSOR-Omega-fr.html",
+        "evidence": "Retained actual public release API, cross-checked with checksum/qualification metadata where applicable",
+        "independentlyRetrievedRawBytesInThisLane": false
+      },
+      {
+        "name": "QUALIFICATION.json",
+        "assetId": 658090522,
+        "bytes": 3953,
+        "sha256": "69553975459b0786b8b8052a39fa1405f14b5000cf0e9751515f3b3d953417ee",
+        "state": "uploaded",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/download/v1.19.5/QUALIFICATION.json",
+        "evidence": "Retained actual public release API, cross-checked with checksum/qualification metadata where applicable",
+        "independentlyRetrievedRawBytesInThisLane": true
+      },
+      {
+        "name": "RELEASE_MANIFEST.json",
+        "assetId": 658090554,
+        "bytes": 306668,
+        "sha256": "3cd52bc4bce0bf8a5e7b7a5c627c561efd78881f04d8edff187685ac77a429b4",
+        "state": "uploaded",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/download/v1.19.5/RELEASE_MANIFEST.json",
+        "evidence": "Retained actual public release API, cross-checked with checksum/qualification metadata where applicable",
+        "independentlyRetrievedRawBytesInThisLane": true
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "assetId": 658090745,
+        "bytes": 739,
+        "sha256": "9c009329d40387a1025dbe6eee7e95e5598df685b6fc3a7b6cf9d5cbf118d191",
+        "state": "uploaded",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/download/v1.19.5/SHA256SUMS.txt",
+        "evidence": "Retained actual public release API, cross-checked with checksum/qualification metadata where applicable",
+        "independentlyRetrievedRawBytesInThisLane": true
+      },
+      {
+        "name": "SOURCE_MANIFEST.json",
+        "assetId": 658090616,
+        "bytes": 5877,
+        "sha256": "f3babcae57288f0840c47e811e6f27a66fe5c4b52893690d2c1007d72ea89f32",
+        "state": "uploaded",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/download/v1.19.5/SOURCE_MANIFEST.json",
+        "evidence": "Retained actual public release API, cross-checked with checksum/qualification metadata where applicable",
+        "independentlyRetrievedRawBytesInThisLane": false
+      },
+      {
+        "name": "SUCCESSOR-Omega-editable-source.zip",
+        "assetId": 658090656,
+        "bytes": 436999,
+        "sha256": "a5c81e27976c7f3dc13e25cea5871d311720840560af00157216646f6b7fddbd",
+        "state": "uploaded",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/download/v1.19.5/SUCCESSOR-Omega-editable-source.zip",
+        "evidence": "Retained actual public release API, cross-checked with checksum/qualification metadata where applicable",
+        "independentlyRetrievedRawBytesInThisLane": false
+      }
+    ],
+    "checksumBinding": {
+      "payloadCount": 8,
+      "excludes": "SHA256SUMS.txt itself",
+      "allEightMatchActualApiDigests": true,
+      "qualificationCoreDigestCount": 7,
+      "allSevenMatchActualApiDigests": true
+    },
+    "independentlyRetrievedRawMetadataFiles": [
+      {
+        "path": "restored-public-evidence/manager195/independent-metadata/QUALIFICATION.json",
+        "bytes": 3953,
+        "sha256": "69553975459b0786b8b8052a39fa1405f14b5000cf0e9751515f3b3d953417ee"
+      },
+      {
+        "path": "restored-public-evidence/manager195/independent-metadata/SHA256SUMS.txt",
+        "bytes": 739,
+        "sha256": "9c009329d40387a1025dbe6eee7e95e5598df685b6fc3a7b6cf9d5cbf118d191"
+      },
+      {
+        "path": "restored-public-evidence/manager195/independent-metadata/RELEASE_MANIFEST.json",
+        "bytes": 306668,
+        "sha256": "3cd52bc4bce0bf8a5e7b7a5c627c561efd78881f04d8edff187685ac77a429b4"
+      }
+    ],
+    "completePayloadCustody": "Primary release owner authenticated actual main candidate and seven core release payload bytes. This lane independently retrieved only the three small metadata assets; no second COMPLETE/candidate collector.",
+    "actualMainCandidateArtifact": {
+      "id": 12233839355,
+      "node_id": "MDg6QXJ0aWZhY3QxMjIzMzgzOTM1NQ==",
+      "name": "AGIJobManager-v1.19.5-candidate-4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "size_in_bytes": 32889524,
+      "url": "https://api.github.com/repos/MontrealAI/AGIJobManager/actions/artifacts/12233839355",
+      "archive_download_url": "https://api.github.com/repos/MontrealAI/AGIJobManager/actions/artifacts/12233839355/zip",
+      "expired": false,
+      "digest": "sha256:edaf7ad5bcaf8de1a456eb17261deebb942572575cc9840087c42791ee369dd4",
+      "created_at": "2026-10-20T01:38:46Z",
+      "updated_at": "2026-10-20T01:38:46Z",
+      "expires_at": "2027-01-18T01:10:39Z",
+      "workflow_run": {
+        "id": 39351959758,
+        "repository_id": 1142965004,
+        "head_repository_id": 1142965004,
+        "head_branch": "main",
+        "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb"
+      },
+      "byteCustody": "Primary owner; independently read API identity only in this lane"
+    },
+    "releaseManifest": {
+      "schemaVersion": 2,
+      "stage": "source-package",
+      "qualificationStatement": "Finite reviewed native-transformation source identity only. Exact-final-source qualification and publication must be verified in external QUALIFICATION.json.",
+      "releaseProfile": "manager-transformational-v1",
+      "sourcePolicy": {
+        "releaseProfile": "manager-transformational-v1",
+        "manifestPath": "config/manager-transformational-v1.json",
+        "manifestSha256": "0781d64b5ec5aff35174c750edc41fe23c0967d17b83654457c73cbe8cde2491",
+        "verifierSha256": "1e9f62e4b1ea1fdac3f6aeaeeaf400af04655b4fb3b90b23d55ebcded2356727"
+      },
+      "declaredPayloads": 1606,
+      "declaredSourcePayloads": 1595,
+      "declaredRegularFiles": 1605,
+      "declaredReviewedSymlinks": 1,
+      "physicalArchiveGitTreeVerification": "Primary public receipt; this lane reviewed metadata only"
+    }
+  },
+  "actualMainQualification": {
+    "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+    "sourceTree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+    "requiredWorkflowCount": 8,
+    "allActualMainPushAttemptOneSucceeded": true,
+    "sourceRuns": [
+      {
+        "id": 39351959802,
+        "workflow_id": 227679439,
+        "path": ".github/workflows/ci.yml",
+        "event": "push",
+        "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39351959802"
+      },
+      {
+        "id": 39351959864,
+        "workflow_id": 233934213,
+        "path": ".github/workflows/ui.yml",
+        "event": "push",
+        "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39351959864"
+      },
+      {
+        "id": 39351959882,
+        "workflow_id": 234091292,
+        "path": ".github/workflows/docs.yml",
+        "event": "push",
+        "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39351959882"
+      },
+      {
+        "id": 39351959900,
+        "workflow_id": 235356704,
+        "path": ".github/workflows/security-verification.yml",
+        "event": "push",
+        "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39351959900"
+      },
+      {
+        "id": 39351959884,
+        "workflow_id": 360551933,
+        "path": ".github/workflows/mainnet-fork.yml",
+        "event": "push",
+        "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39351959884"
+      },
+      {
+        "id": 39351959758,
+        "workflow_id": 359958889,
+        "path": ".github/workflows/current-state-release.yml",
+        "event": "push",
+        "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39351959758"
+      },
+      {
+        "id": 39351959797,
+        "workflow_id": 238389304,
+        "path": ".github/workflows/pages.yml",
+        "event": "push",
+        "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39351959797"
+      },
+      {
+        "id": 39351959847,
+        "workflow_id": 385973317,
+        "path": ".github/workflows/alpha-project-handoff.yml",
+        "event": "push",
+        "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39351959847"
+      }
+    ],
+    "qualifiedScope": "Software qualification. Historical mainnet evidence is separate; no public-chain writes or intake activation.",
+    "mainQualificationPagesDeployment": "Source qualification run 39351959797 had deployment intentionally skipped; actual public deployment is separate postpublication run 39361508964."
+  },
+  "actualPostpublicationPages": {
+    "run": {
+      "id": 39361508964,
+      "event": "workflow_run",
+      "head_sha": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "workflowPath": ".github/workflows/pages.yml",
+      "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39361508964"
+    },
+    "buildUploadJob": {
+      "id": 118428526921,
+      "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39361508964/job/118428526921",
+      "conclusion": "success"
+    },
+    "deployJob": {
+      "id": 118433349741,
+      "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39361508964/job/118433349741",
+      "conclusion": "success"
+    },
+    "jobReadback": [
+      {
+        "id": 118428526921,
+        "name": "Build and check website",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 39361508964,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Verify qualified source checkout",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Authenticate published source before automatic Pages publication",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Run actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Build and verify static pages",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "SUCCESSOR local and adversarial checks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Install browser test dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Install test browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Verify mobile, desktop and bilingual interactions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "SUCCESSOR browser, accessibility and isolated worker rehearsal",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Retain SUCCESSOR checks and screenshots",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Upload Pages artifact",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Post Run actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27
+          }
+        ]
+      },
+      {
+        "id": 118433349741,
+        "name": "Publish GitHub Pages",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 39361508964,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Recheck current main immediately before publishing Pages",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Configure Pages",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Deploy website",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          }
+        ]
+      }
+    ],
+    "artifact": {
+      "id": 12238091816,
+      "name": "github-pages",
+      "producerRun": 39361508964,
+      "producerAttempt": 1,
+      "url": "https://github.com/MontrealAI/AGIJobManager/actions/runs/39361508964/artifacts/12238091816",
+      "outerZip": {
+        "bytes": 1821807,
+        "sha256": "5bf030cce5136cff3e394a91cce5ebc3fc967ea9801051ee9a2e8d76553df9c8",
+        "apiAndUploadIdentityMatched": true
+      },
+      "innerTar": {
+        "bytes": 5734400,
+        "sha256": "58ee580eb857d123a98cbf0648721d465407edbf85ffbef704b2e430a6193427",
+        "zipCrcVerified": true,
+        "members": 103
+      },
+      "localFile": {
+        "path": "restored-public-evidence/manager195/pages-anchor/github-pages-12238091816.zip",
+        "bytes": 1821807,
+        "sha256": "5bf030cce5136cff3e394a91cce5ebc3fc967ea9801051ee9a2e8d76553df9c8"
+      },
+      "acquisitionCountInThisLane": 1
+    },
+    "rawBuildInfo": {
+      "bytes": 18883,
+      "sha256": "3fe5879a4ebb80dbffdf152a0653bfb28c603bb6cb19bd1e3c77b41cb9d2c2bf",
+      "member": "build-info.json",
+      "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "sourceVersion": "1.19.5",
+      "publicUrl": "https://montrealai.github.io/AGIJobManager/build-info.json",
+      "localFile": {
+        "path": "restored-public-evidence/manager195/pages-anchor/build-info.json",
+        "bytes": 18883,
+        "sha256": "3fe5879a4ebb80dbffdf152a0653bfb28c603bb6cb19bd1e3c77b41cb9d2c2bf"
+      }
+    },
+    "payloadProof": {
+      "listedFilesCount": 67,
+      "regularFileCountIncludingMetadata": 68,
+      "allListedBytesAndHashesMatched": true,
+      "tarMembers": 103,
+      "outerZipMember": "artifact.tar",
+      "zipCrcVerified": true,
+      "archiveOnlyDirectoriesAndRegularFiles": true,
+      "filesystemExtractionPerformed": false,
+      "targetCodeExecuted": false,
+      "listedFiles": [
+        {
+          "path": "404.html",
+          "bytes": 459,
+          "sha256": "d789577485037eb7cbb20e9fe3b421943ca9edc5bd052c971bc780996f52a650"
+        },
+        {
+          "path": "agijobmanager-usdc.html",
+          "bytes": 556849,
+          "sha256": "544a4cc7990d4c5032db460f8c6e611a66a21b7720bf8b8ba406d05bf550e28b"
+        },
+        {
+          "path": "agijobmanager.html",
+          "bytes": 235024,
+          "sha256": "fa941979957adee21178c5a8f90aa06fdc05cd8bd310e314ded12e5bbe28ee83"
+        },
+        {
+          "path": "agijobmanagerv0.html",
+          "bytes": 556849,
+          "sha256": "544a4cc7990d4c5032db460f8c6e611a66a21b7720bf8b8ba406d05bf550e28b"
+        },
+        {
+          "path": "assets/app.mjs",
+          "bytes": 4141,
+          "sha256": "8af3ff80c9bf00af37c71ed70a2731cb9bbb1b2ed060ecf4b7cf95026b559a86"
+        },
+        {
+          "path": "assets/computer-receipt/adapter.mjs",
+          "bytes": 4597,
+          "sha256": "63ec1d7bd10c56f93728edc2efb0188070db8dfa87249b0d33b56bfdcbbbc1ed"
+        },
+        {
+          "path": "assets/computer-receipt/app.mjs",
+          "bytes": 6533,
+          "sha256": "d8be78b60d4d73d8d079650f6872edb75d14684fed8648244cdb6b7a93b49122"
+        },
+        {
+          "path": "assets/computer-receipt/copy.mjs",
+          "bytes": 10120,
+          "sha256": "cb2dcf355f046297fbd68f5531dc86a3fb734c81008f9ea03a8cd7506903cc9b"
+        },
+        {
+          "path": "assets/computer-receipt/history.mjs",
+          "bytes": 8174,
+          "sha256": "3241f1ea47e465807ccb006f5e860e8ffd05ee44b554216932f1ff6c1198bd43"
+        },
+        {
+          "path": "assets/computer-receipt/inspectors.mjs",
+          "bytes": 555,
+          "sha256": "43dc878f0f1b89d381a5cbb88f2ff9046d00e6787daf1f82a2fec5c3623eb48c"
+        },
+        {
+          "path": "assets/computer-receipt/sources.json",
+          "bytes": 6018,
+          "sha256": "584a04bb85b3f512af9028e31269c21893fc890b5e9bae3833b7fb105d119cc4"
+        },
+        {
+          "path": "assets/computer-receipt/style.css",
+          "bytes": 1781,
+          "sha256": "4e90b4e44bd946b8719cc463d2df834081d9c92eae52c5d60dc5511d835a40a3"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/LICENSE",
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/docs/assets/successor/engine.mjs",
+          "bytes": 22341,
+          "sha256": "38c4f38978bf9fc29f207bae3adee0755bc6530d04502a36c491cc430787e488"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/build-successor/model.mjs",
+          "bytes": 13848,
+          "sha256": "8ea94108ef2ed27bce0fcff0b5d312f2e8f6db6584246cc66ab8c1c8d9281175"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/build-successor/vendor/agijobs/compiler.mjs",
+          "bytes": 13787,
+          "sha256": "5e4fc86d78af7a22e915d8b19803fc219cb68b9b73201f47cf1f643f19380762"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/build-successor/vendor/agijobs/domain.mjs",
+          "bytes": 17209,
+          "sha256": "2869bb750a408e12ada19f6d0b216d47c3b9f67fc66039db4372dae8430e47a3"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/build-successor/vendor/agijobs/integrity.mjs",
+          "bytes": 3776,
+          "sha256": "164000134cc9c8b54209c420a348e3e5c324ebf7ff8f71fc84dc44812345c428"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/build-successor/vendor/agijobs/templates.mjs",
+          "bytes": 6313,
+          "sha256": "bc035b1c38b36d2db24031ac92fb193946df9cf4f180120394506a8802be2b31"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/successor-alpha/computer.mjs",
+          "bytes": 23024,
+          "sha256": "496e8ba214acff9a4460adc77fcc291f7c7960ac697741d704bb687261580947"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/successor-alpha/continuity.mjs",
+          "bytes": 16663,
+          "sha256": "0b13673d291a6a76618f3c289e234bfdc238acad0a8bb154a4f0a67e69ed8e1e"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/successor-alpha/engine.mjs",
+          "bytes": 26409,
+          "sha256": "09a673d124b9ddcf47e29250f1aad4fa737ce99cdc2364afbfb9911ec9579ea2"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/successor-alpha/learning.mjs",
+          "bytes": 3335,
+          "sha256": "6cc68c0f03559bb1f3af5489d975a45a0081822e09ef53c14986f1621a206d69"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/successor-alpha/project.mjs",
+          "bytes": 15189,
+          "sha256": "9ea8c39f87d894e79c3e64cc66d3acea55ec30eb7737ef461b14abfb2aabde86"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/successor-alpha/research.mjs",
+          "bytes": 27959,
+          "sha256": "cac318319051de4dc1fdbe2d8a148416b3ceffe206d7fc64f111f2fe6f099c8a"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/examples/successor-workbench/engine.mjs",
+          "bytes": 26854,
+          "sha256": "f36f4c3fa45124901755bbb530a8161e98c164f5a66e9b8f932548f5286c93d7"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/source-identity.mjs",
+          "bytes": 3405,
+          "sha256": "9791f7d0cfb35eba9d9fd7bbd24be45cbe029440145fa580deaec1e4e6521a00"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/alpha-computer/source-manifest.json",
+          "bytes": 3389,
+          "sha256": "0e0ae12b6f9d1a6f2f9f0650b141e1fb6ef5eb554ad62b2bf82f0d5a247a29b7"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/LICENSE",
+          "bytes": 1068,
+          "sha256": "70842e0e7ae73b3ce65baa06a1c62b466bdb694570301969031cc48d9ac705d1"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/integrations/alpha-agent/four-repo-computer-receipt.mjs",
+          "bytes": 7674,
+          "sha256": "e089a426dab2d301595f1cb8f63057a21107c7484439cfcb3975895a67d21b94"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/packages/successor-core/src/compiler.mjs",
+          "bytes": 13787,
+          "sha256": "5e4fc86d78af7a22e915d8b19803fc219cb68b9b73201f47cf1f643f19380762"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/packages/successor-core/src/computer-mission.mjs",
+          "bytes": 54323,
+          "sha256": "b28fa657e51c49970f1465773afd4c96ceaa16e08e28555ee7b066c51b7949cf"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/packages/successor-core/src/domain.mjs",
+          "bytes": 17209,
+          "sha256": "2869bb750a408e12ada19f6d0b216d47c3b9f67fc66039db4372dae8430e47a3"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/packages/successor-core/src/integrity.mjs",
+          "bytes": 3776,
+          "sha256": "164000134cc9c8b54209c420a348e3e5c324ebf7ff8f71fc84dc44812345c428"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/packages/successor-core/src/templates.mjs",
+          "bytes": 6313,
+          "sha256": "bc035b1c38b36d2db24031ac92fb193946df9cf4f180120394506a8802be2b31"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/scripts/pages/computer-mission.mjs",
+          "bytes": 13651,
+          "sha256": "c8f43a608795ecfbc5de1c570eea900fd2a49b7da8d390764604c0a1027c614d"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/scripts/pages/computer-receipt.mjs",
+          "bytes": 3340,
+          "sha256": "8291a51d64696632a4c8cc8c6b2ef35f6ea2039da506170f56b0595dfebe0450"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/source-manifest.json",
+          "bytes": 3170,
+          "sha256": "dab5e9435167cc572d0f4c7c7ed9346de94f60338739cd2e272a03d869a9c268"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/website/assets/computer-desk-runtime-source.mjs",
+          "bytes": 8218,
+          "sha256": "596bb0604df28242cea0b00bc94fd3b0ff013be4cba923eeb945f034b5be2455"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/website/assets/computer-desk.mjs",
+          "bytes": 22058,
+          "sha256": "a79c3b8639caf90ec091f9da900d1794fd44ebb595d676e6b0a9d472af3cc772"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/website/assets/computer-mission-copy.mjs",
+          "bytes": 22452,
+          "sha256": "ec6624978429a6eac22fcd554fe823b5ba309714b1b939372cdae6485a3942cd"
+        },
+        {
+          "path": "assets/computer-receipt/vendor/jobs-computer/website/assets/computer-receipt-copy.mjs",
+          "bytes": 9583,
+          "sha256": "21e08c3a28ac0efb93d94eac10c3efe32ee4eaec654ac3ee378854d12ee63684"
+        },
+        {
+          "path": "assets/employer-model.mjs",
+          "bytes": 24327,
+          "sha256": "c6bd8ede88fe374482eae3b37555b47cede037d77b085e7942cabd3b9953b497"
+        },
+        {
+          "path": "assets/employer.css",
+          "bytes": 23309,
+          "sha256": "eb0bacc4a5bcf523dd3c03883919da78bb42bf86048df24792a79cfac7c7429d"
+        },
+        {
+          "path": "assets/employer.mjs",
+          "bytes": 28047,
+          "sha256": "dc20c3c18773f940eb1c695dd1843e17ee73d98bd6d602d24b1dd460be6f0224"
+        },
+        {
+          "path": "assets/home.css",
+          "bytes": 34185,
+          "sha256": "67de906174e9cb662dea096dfd5303db203b694001191164796e3fb739d31a02"
+        },
+        {
+          "path": "assets/mark.svg",
+          "bytes": 351,
+          "sha256": "0fdce1efc811624523cfe120db1c321625eb19ce5d7671bd47f48fe72743f558"
+        },
+        {
+          "path": "assets/payments.mjs",
+          "bytes": 1137,
+          "sha256": "7010eef450f05e8382c4f5ea9659fa83f61a3149b29e7577568723ef7a7f47cd"
+        },
+        {
+          "path": "assets/style.css",
+          "bytes": 25367,
+          "sha256": "7eb795642d0cbd17684c160de8963c666921e90d39fcc5ff779e2d7a7913a465"
+        },
+        {
+          "path": "assets/successor/safe.mjs",
+          "bytes": 4629,
+          "sha256": "d15c86c61369278e0bbf2ca8d3b1bd5f4ef3091c7cc7943f06afbe95e7b99ab6"
+        },
+        {
+          "path": "assets/workflows.css",
+          "bytes": 3104,
+          "sha256": "867e2315081e9ec6ed2a9cdb5fea2d6913720fd3d55fd3e7bae5e0accbaa6964"
+        },
+        {
+          "path": "computer-receipt/index.html",
+          "bytes": 5512,
+          "sha256": "9fe9444b9c080b9774d30acb35a3caab7113e5500e9eeada3b234f81e013d282"
+        },
+        {
+          "path": "employers/index.html",
+          "bytes": 23362,
+          "sha256": "8da8534f6b9c8713342d211d22731c16cd5bcd76a15222c6fa81751cb4c9eecc"
+        },
+        {
+          "path": "fr/computer-receipt/index.html",
+          "bytes": 6107,
+          "sha256": "282bfb293d961001f9f08804be737f44a77d1326deffe3fcda5031c50e7b9a3c"
+        },
+        {
+          "path": "fr/employers/index.html",
+          "bytes": 25198,
+          "sha256": "1565bdee7f16033168b9dbf9ed3a5bc1c5e1a44896c444b669c2c4f2a81798cc"
+        },
+        {
+          "path": "fr/index.html",
+          "bytes": 55111,
+          "sha256": "38c3e35fb95a55446384382b763deebba2d41dcf93f3590895eb391d4a286de7"
+        },
+        {
+          "path": "fr/successor/index.html",
+          "bytes": 749825,
+          "sha256": "baad311922848b3957062ce4268a7155c5a33cdbad9a7dff806b33ab87f299c7"
+        },
+        {
+          "path": "fr/workflows/index.html",
+          "bytes": 36129,
+          "sha256": "4ca91bbef965abfe8eb6d7b6b449f0fe61550d72759e131c695f84d6c9e1b537"
+        },
+        {
+          "path": "index.html",
+          "bytes": 51679,
+          "sha256": "e26b747f346ff53f0bbbb4fa0cbb8ac92ef3d8b9cdb805c78fe1d3f3da3cb3b5"
+        },
+        {
+          "path": "sitemap.xml",
+          "bytes": 699,
+          "sha256": "09ea9f18791fcb83d11eda7f6b2949dc079a778f55933a2c08a857ab7208afb2"
+        },
+        {
+          "path": "successor/downloads/MANAGER_CONTEXT.json",
+          "bytes": 6435,
+          "sha256": "600a836130be2e3c1594d0c3cc291c9fa04d0e17ecfa0adda1038523be8ee97e"
+        },
+        {
+          "path": "successor/downloads/My-SUCCESSOR-Omega-en.html",
+          "bytes": 747848,
+          "sha256": "52cdba3a407e582d791c0efdd7f76083ef0317ad75a339786de4fa7fe88875eb"
+        },
+        {
+          "path": "successor/downloads/My-SUCCESSOR-Omega-fr.html",
+          "bytes": 749825,
+          "sha256": "baad311922848b3957062ce4268a7155c5a33cdbad9a7dff806b33ab87f299c7"
+        },
+        {
+          "path": "successor/downloads/SOURCE_MANIFEST.json",
+          "bytes": 5877,
+          "sha256": "f3babcae57288f0840c47e811e6f27a66fe5c4b52893690d2c1007d72ea89f32"
+        },
+        {
+          "path": "successor/downloads/SUCCESSOR-Omega-editable-source.zip",
+          "bytes": 436999,
+          "sha256": "a5c81e27976c7f3dc13e25cea5871d311720840560af00157216646f6b7fddbd"
+        },
+        {
+          "path": "successor/index.html",
+          "bytes": 747848,
+          "sha256": "52cdba3a407e582d791c0efdd7f76083ef0317ad75a339786de4fa7fe88875eb"
+        },
+        {
+          "path": "workflows/index.html",
+          "bytes": 35195,
+          "sha256": "644b172a62294d9946eb2faa855f8391045bb6cb2d1cf9366433e413bfca415c"
+        }
+      ]
+    },
+    "publicHttpObservation": {
+      "url": "https://montrealai.github.io/AGIJobManager/build-info.json",
+      "status": 200,
+      "bytes": 18883,
+      "sha256": "3fe5879a4ebb80dbffdf152a0653bfb28c603bb6cb19bd1e3c77b41cb9d2c2bf",
+      "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "sourceVersion": "1.19.5",
+      "files": 67
+    },
+    "artifactRawMetadataEqualsIndependentHttpBytes": true,
+    "evidenceChronology": "The earlier unchanged API/metadata receipt records its then-pending Pages-byte expectation. The later actual Pages anchor receipt closes that expectation without rewriting the earlier receipt.",
+    "publicRoot": "https://montrealai.github.io/AGIJobManager/",
+    "sourceLogEvidence": [
+      "2026-10-20T03:00:14.0449515Z QUALIFIED_SOURCE_COMMIT=4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "2026-10-20T03:01:11.5041138Z Published immutable release, exact source, all eight qualification workflows and complete attested asset inventory authenticated for Pages."
+    ],
+    "deployLogEvidence": [
+      "2026-10-20T03:12:55.7506149Z   PAGES_SOURCE: 4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "2026-10-20T03:12:58.0660015Z Created deployment for 4d4c32685eebf23b0aa35dbb45abe23ac8a261cb, ID: 4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "2026-10-20T03:13:03.2720912Z Evaluated environment url: https://montrealai.github.io/AGIJobManager/"
+    ]
+  },
+  "historicalComponentRoles": {
+    "nativeTransformationQualification": {
+      "schema": "agijobmanager/transformation-qualification/v1",
+      "alphaRepository": "MontrealAI/AGI-Alpha-Agent-v0",
+      "alphaCommit": "272b4de86bdc306ebf547750717983e467f5fcfd",
+      "alphaTree": "7e3a171a3f4a256723d6b480c64104264021b456",
+      "fixturePath": "examples/transformational-intelligence/campaign.json",
+      "fixtureSha256": "fa5f570e89c20cffd0df844869047a7c0594c5460c3e95df5ada44592ea4fd20",
+      "boundary": "free-inspection-positive-payment-refused",
+      "role": "Historical pinned Alpha source used by this released Manager native qualification. alphaTree is an Alpha tree, not a Jobs commit.",
+      "doesNotQualifyFinalCombinedJourney": true
+    },
+    "computerReceiptVendorReceivers": {
+      "manifestPath": "assets/computer-receipt/sources.json",
+      "manifestBytes": 6018,
+      "manifestSha256": "584a04bb85b3f512af9028e31269c21893fc890b5e9bae3833b7fb105d119cc4",
+      "manifestSchema": "agijobmanager/computer-receipt-browser-sources/v1",
+      "receivers": {
+        "alpha-computer": {
+          "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+          "commit": "3616afd029a8ae4ffe6d995674ecc2417408761e",
+          "tree": "8c5a6bf2019cbc113816b51234f76a123a147f6f",
+          "entry": "examples/successor-alpha/computer.mjs"
+        },
+        "jobs-computer": {
+          "repository": "MontrealAI/AGIJobsv0",
+          "commit": "26ad85348189aa5dce14fbdc6c9f533e21be6aa9",
+          "tree": "c5a50ba64727affa3c9816e35135bd1286611483",
+          "entry": "integrations/alpha-agent/four-repo-computer-receipt.mjs"
+        }
+      },
+      "manifestFileCount": 30,
+      "manifestEntriesCheckedAgainstActualPagesBytes": true,
+      "fileCounts": {
+        "alpha": 16,
+        "jobs": 14
+      },
+      "role": "Retained reviewed historical receiver module closures; not a claim that current upstream releases or the final combined installed journey were executed",
+      "files": {
+        "vendor/alpha-computer/LICENSE": {
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        "vendor/alpha-computer/docs/assets/successor/engine.mjs": {
+          "bytes": 22341,
+          "sha256": "38c4f38978bf9fc29f207bae3adee0755bc6530d04502a36c491cc430787e488"
+        },
+        "vendor/alpha-computer/examples/build-successor/model.mjs": {
+          "bytes": 13848,
+          "sha256": "8ea94108ef2ed27bce0fcff0b5d312f2e8f6db6584246cc66ab8c1c8d9281175"
+        },
+        "vendor/alpha-computer/examples/build-successor/vendor/agijobs/compiler.mjs": {
+          "bytes": 13787,
+          "sha256": "5e4fc86d78af7a22e915d8b19803fc219cb68b9b73201f47cf1f643f19380762"
+        },
+        "vendor/alpha-computer/examples/build-successor/vendor/agijobs/domain.mjs": {
+          "bytes": 17209,
+          "sha256": "2869bb750a408e12ada19f6d0b216d47c3b9f67fc66039db4372dae8430e47a3"
+        },
+        "vendor/alpha-computer/examples/build-successor/vendor/agijobs/integrity.mjs": {
+          "bytes": 3776,
+          "sha256": "164000134cc9c8b54209c420a348e3e5c324ebf7ff8f71fc84dc44812345c428"
+        },
+        "vendor/alpha-computer/examples/build-successor/vendor/agijobs/templates.mjs": {
+          "bytes": 6313,
+          "sha256": "bc035b1c38b36d2db24031ac92fb193946df9cf4f180120394506a8802be2b31"
+        },
+        "vendor/alpha-computer/examples/successor-alpha/computer.mjs": {
+          "bytes": 23024,
+          "sha256": "496e8ba214acff9a4460adc77fcc291f7c7960ac697741d704bb687261580947"
+        },
+        "vendor/alpha-computer/examples/successor-alpha/continuity.mjs": {
+          "bytes": 16663,
+          "sha256": "0b13673d291a6a76618f3c289e234bfdc238acad0a8bb154a4f0a67e69ed8e1e"
+        },
+        "vendor/alpha-computer/examples/successor-alpha/engine.mjs": {
+          "bytes": 26409,
+          "sha256": "09a673d124b9ddcf47e29250f1aad4fa737ce99cdc2364afbfb9911ec9579ea2"
+        },
+        "vendor/alpha-computer/examples/successor-alpha/learning.mjs": {
+          "bytes": 3335,
+          "sha256": "6cc68c0f03559bb1f3af5489d975a45a0081822e09ef53c14986f1621a206d69"
+        },
+        "vendor/alpha-computer/examples/successor-alpha/project.mjs": {
+          "bytes": 15189,
+          "sha256": "9ea8c39f87d894e79c3e64cc66d3acea55ec30eb7737ef461b14abfb2aabde86"
+        },
+        "vendor/alpha-computer/examples/successor-alpha/research.mjs": {
+          "bytes": 27959,
+          "sha256": "cac318319051de4dc1fdbe2d8a148416b3ceffe206d7fc64f111f2fe6f099c8a"
+        },
+        "vendor/alpha-computer/examples/successor-workbench/engine.mjs": {
+          "bytes": 26854,
+          "sha256": "f36f4c3fa45124901755bbb530a8161e98c164f5a66e9b8f932548f5286c93d7"
+        },
+        "vendor/alpha-computer/source-identity.mjs": {
+          "bytes": 3405,
+          "sha256": "9791f7d0cfb35eba9d9fd7bbd24be45cbe029440145fa580deaec1e4e6521a00"
+        },
+        "vendor/alpha-computer/source-manifest.json": {
+          "bytes": 3389,
+          "sha256": "0e0ae12b6f9d1a6f2f9f0650b141e1fb6ef5eb554ad62b2bf82f0d5a247a29b7"
+        },
+        "vendor/jobs-computer/LICENSE": {
+          "bytes": 1068,
+          "sha256": "70842e0e7ae73b3ce65baa06a1c62b466bdb694570301969031cc48d9ac705d1"
+        },
+        "vendor/jobs-computer/integrations/alpha-agent/four-repo-computer-receipt.mjs": {
+          "bytes": 7674,
+          "sha256": "e089a426dab2d301595f1cb8f63057a21107c7484439cfcb3975895a67d21b94"
+        },
+        "vendor/jobs-computer/packages/successor-core/src/compiler.mjs": {
+          "bytes": 13787,
+          "sha256": "5e4fc86d78af7a22e915d8b19803fc219cb68b9b73201f47cf1f643f19380762"
+        },
+        "vendor/jobs-computer/packages/successor-core/src/computer-mission.mjs": {
+          "bytes": 54323,
+          "sha256": "b28fa657e51c49970f1465773afd4c96ceaa16e08e28555ee7b066c51b7949cf"
+        },
+        "vendor/jobs-computer/packages/successor-core/src/domain.mjs": {
+          "bytes": 17209,
+          "sha256": "2869bb750a408e12ada19f6d0b216d47c3b9f67fc66039db4372dae8430e47a3"
+        },
+        "vendor/jobs-computer/packages/successor-core/src/integrity.mjs": {
+          "bytes": 3776,
+          "sha256": "164000134cc9c8b54209c420a348e3e5c324ebf7ff8f71fc84dc44812345c428"
+        },
+        "vendor/jobs-computer/packages/successor-core/src/templates.mjs": {
+          "bytes": 6313,
+          "sha256": "bc035b1c38b36d2db24031ac92fb193946df9cf4f180120394506a8802be2b31"
+        },
+        "vendor/jobs-computer/scripts/pages/computer-mission.mjs": {
+          "bytes": 13651,
+          "sha256": "c8f43a608795ecfbc5de1c570eea900fd2a49b7da8d390764604c0a1027c614d"
+        },
+        "vendor/jobs-computer/scripts/pages/computer-receipt.mjs": {
+          "bytes": 3340,
+          "sha256": "8291a51d64696632a4c8cc8c6b2ef35f6ea2039da506170f56b0595dfebe0450"
+        },
+        "vendor/jobs-computer/source-manifest.json": {
+          "bytes": 3170,
+          "sha256": "dab5e9435167cc572d0f4c7c7ed9346de94f60338739cd2e272a03d869a9c268"
+        },
+        "vendor/jobs-computer/website/assets/computer-desk-runtime-source.mjs": {
+          "bytes": 8218,
+          "sha256": "596bb0604df28242cea0b00bc94fd3b0ff013be4cba923eeb945f034b5be2455"
+        },
+        "vendor/jobs-computer/website/assets/computer-desk.mjs": {
+          "bytes": 22058,
+          "sha256": "a79c3b8639caf90ec091f9da900d1794fd44ebb595d676e6b0a9d472af3cc772"
+        },
+        "vendor/jobs-computer/website/assets/computer-mission-copy.mjs": {
+          "bytes": 22452,
+          "sha256": "ec6624978429a6eac22fcd554fe823b5ba309714b1b939372cdae6485a3942cd"
+        },
+        "vendor/jobs-computer/website/assets/computer-receipt-copy.mjs": {
+          "bytes": 9583,
+          "sha256": "21e08c3a28ac0efb93d94eac10c3efe32ee4eaec654ac3ee378854d12ee63684"
+        }
+      }
+    },
+    "successorBuilder": {
+      "commit": "2478198819227d4414e17fe90a04e8137d543241",
+      "tree": "df22390a8955c68a45f4c5b515b807b9112adbca",
+      "componentVersion": "1.19.4",
+      "engineSha256": "58fd794b4089a29f9290c555fa083db73a70f16f4d0c54adb48950af3346175a",
+      "packageSha256": "4a2665e1e4b26b2123e42b5e624f02faae783efed41d763f3bb89dea1b268f08",
+      "sourceVerification": {
+        "mode": "git-object-pin",
+        "sourceCommit": "2478198819227d4414e17fe90a04e8137d543241",
+        "sourceTree": "df22390a8955c68a45f4c5b515b807b9112adbca",
+        "completeSourceFiles": 34
+      },
+      "role": "Immutable Builder source identity. Component version 1.19.4 is not a claim that v1.19.4 was published."
+    },
+    "deploymentEvidence": {
+      "historicalEvidencePath": "config/mainnet/agi-jobs-usdc.json",
+      "latestDeploymentPath": "config/mainnet/manager-8815-2026-10-17.json",
+      "record": {
+        "recordDate": "2026-10-17",
+        "recordType": "owner-reported-execution-and-readback-projection",
+        "notLiveState": true,
+        "manager": "0x3a9B3A0712e066de4265404Fa5ff4171fE29a3F8",
+        "deployedSourceCommit": "8815ed3181778664595f951befd672afbd7a9352",
+        "reportedAuthorityBlock": 26214525,
+        "exactMatches": 6,
+        "retainedSimilarMatches": 3
+      },
+      "role": "Historical owner-reported deployment record, explicitly not live chain state; previous deployments remain read-only."
+    }
+  },
+  "retainedEvidence": {
+    "independentMetadataReceipt": {
+      "path": "restored-public-evidence/manager195/independent-metadata/independent-review-receipt.json",
+      "bytes": 2755,
+      "sha256": "022fcdf67274d953313175787eedadd7c8235c7183f1a7f9fcc993e97c5920ee"
+    },
+    "independentPagesAnchorReceipt": {
+      "path": "restored-public-evidence/manager195/pages-anchor/pages-anchor-receipt.json",
+      "bytes": 13761,
+      "sha256": "4370e9fe73a411f6e30457e9c883fb41c7cc2ed796a45c7135ef7539c4f6dd48"
+    },
+    "apiReadback": {
+      "path": "restored-public-evidence/manager195/independent-metadata/api-readback.json",
+      "bytes": 15910,
+      "sha256": "adc244b24efff4297ae8c97f2d9044ddf367d8f528803aa240914a918263242c"
+    },
+    "boundedMetadataRetrievalReceipt": {
+      "path": "restored-public-evidence/manager195/independent-metadata/retrieval-receipt.json",
+      "bytes": 1688,
+      "sha256": "dd1c743533f4085feaf43eaa8ccba101d029216e059dedf47975a838f7bc6ff7"
+    },
+    "publicReceipts": [
+      {
+        "role": "Reviewed PR source all-eight milestone, distinct from merged-main qualification",
+        "url": "https://github.com/MontrealAI/AGIJobManager/pull/1611#issuecomment-6280959260"
+      },
+      {
+        "role": "Normal merge identity",
+        "url": "https://github.com/MontrealAI/AGIJobManager/pull/1611#issuecomment-6280963270"
+      },
+      {
+        "role": "Primary actual release/tag/publisher/nine-asset and core byte proof",
+        "url": "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6282334378",
+        "reportedReceiptSha256": "f6ebc26d7eed74ab36b314833c527364777eafade158b04bfef8121c18a98172"
+      },
+      {
+        "role": "Primary public HTTP twelve-route and bilingual browser receipt",
+        "url": "https://github.com/MontrealAI/AGIJobManager/pull/1611#issuecomment-6282640804",
+        "reportedReceiptBytes": 3626,
+        "reportedReceiptSha256": "a7ecaa51a7ce0b1fea683cede5375a7fe3c2fe44a41c16e6acc52a2e6418a255"
+      },
+      {
+        "role": "Primary live publication hub handoff",
+        "url": "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6282641044"
+      },
+      {
+        "role": "One-copy small Pages artifact custody reservation",
+        "url": "https://github.com/MontrealAI/AGIJobManager/pull/1611#issuecomment-6282929742"
+      },
+      {
+        "role": "Completed independent actual Pages artifact to HTTP raw metadata anchor",
+        "url": "https://github.com/MontrealAI/AGIJobManager/pull/1611#issuecomment-6282996405",
+        "localReceiptSha256": "4370e9fe73a411f6e30457e9c883fb41c7cc2ed796a45c7135ef7539c4f6dd48"
+      }
+    ]
+  },
+  "assemblyChecks": {
+    "exactNineUniqueAssetNames": true,
+    "threeLocalMetadataSizesAndSha256MatchApi": true,
+    "eightChecksumPayloadsMatchApi": true,
+    "sevenQualificationPayloadsMatchApi": true,
+    "eightQualifierIdsWorkflowPathsAndMainShaMatchActualRetainedApi": true,
+    "annotatedTagPeelsToQualifiedMain": true,
+    "reviewedAndMergedGitTreesEqual": true,
+    "actualPagesOuterInnerRawAndSixtySevenPayloadHashesMatch": true,
+    "allThirtyReceiverManifestEntriesMatchActualPagesPayloads": true,
+    "rawMetadataHashMatchesRetainedIndependentPublicHttpObservation": true
+  },
+  "pendingForFinalFourRepositoryE": [
+    "Independent binding review of this Manager component before grafting into the final all-four record",
+    "Authenticated actual release/source/payload mappings for the other three components",
+    "Fresh connected installed four-repository journey qualification with exact inputs, native outputs, producers and evidence",
+    "Assembly and review of final E; this partial component does not fill or approve it"
+  ],
+  "authorityAndPrivacyBoundary": {
+    "inputs": "Public non-personal repository/release/Actions/Pages records only",
+    "realWalletSigningFundingActivationOrAuthorityChanges": false,
+    "historicalDeploymentsReadOnly": true,
+    "ubuntuHardhatKeyHandling": "Preserved local hidden ephemeral entry; no deployer key acquired, stored, printed or passed in arguments, environment files, history or logs by this verification",
+    "macStudioLedgerGovernance": "Preserved; no Ledger or signing action",
+    "ensConfiguration": "Separate authorized work; no ENS configuration action in this record"
+  }
+}

@@ -1,0 +1,409 @@
+{
+  "schema": "fleet/pin-component-source-peer/v1",
+  "disposition": "FIVE_FILE_METADATA_SOURCE_CLEAR_WITH_PARENT_REVIEW_HOLD",
+  "scope": "Only actual 0ddd five-file pin child relative to its actual 0b13 parent, plus inherited d4 runtime identity and exact source/inventory metadata. No functional review of 0b13 corrective code.",
+  "commit": "0ddd69b13c4fc8af272cf7c3f41a9c16ee47f2cf",
+  "tree": "c760c818c39a95d1a6c74d2b6488be6ed2f4b191",
+  "parents": [
+    "0b13d3ffb25381dc2ebf9c39abda24824660fd3b"
+  ],
+  "parentChain": [
+    "0b13d3ffb25381dc2ebf9c39abda24824660fd3b",
+    "d4ef063a187f7cb4e6a9d5444ab4c22ae49fd3ab"
+  ],
+  "sourceTrees": {
+    "alpha": "e45b1d9dfad0e600cb6fa4f41eb8770e0bb07d64",
+    "jobs": "651310e14930967b1be1de86143b88657f3fe53a",
+    "manager": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86"
+  },
+  "beforeLeaves": 6898,
+  "afterLeaves": 6898,
+  "unchanged": "All four complete pre-inventory files restore byte-exact with only the advertised Alpha commit/tree inverse. Reverting the sole source-pins row hash restores the entire previous inventory. Policy/scopes/schema/versions/guards/counts/permissions/tests are unchanged in this child.",
+  "changes": [
+    {
+      "path": "engineering/integration/compatibility-set.json",
+      "mode": "100644",
+      "bytes": 461,
+      "blob": "140f507de23af60f485a0c464ac3d4b49e4fd88e",
+      "blobMatches": true,
+      "oldBlobMatches": true,
+      "sha256": "85fe77817886c5ee60cf0854a79152ece797dc8a9d0d1b2055cff7b534ad08f2",
+      "inverseExact": true,
+      "newCommitLiterals": 1,
+      "newTreeLiterals": 0
+    },
+    {
+      "path": "engineering/transformation/source-pins.json",
+      "mode": "100644",
+      "bytes": 949,
+      "blob": "7ea15bfee5d62e9bd4ebafcceaaebdbaef4a343a",
+      "blobMatches": true,
+      "oldBlobMatches": true,
+      "sha256": "3f25e940de090bafb2da3e4546653fe00505023143a7e6f2776c3a4d8e572def",
+      "inverseExact": true,
+      "newCommitLiterals": 2,
+      "newTreeLiterals": 2
+    },
+    {
+      "path": "local-runtime/computer/README.md",
+      "mode": "100644",
+      "bytes": 9147,
+      "blob": "bbb0221491507b102592c0db8c4b175b4501708a",
+      "blobMatches": true,
+      "oldBlobMatches": true,
+      "sha256": "4eaefba17f3400d604b39b82d360aca70d0160c2fc0ab18bb8844a6e51f19168",
+      "inverseExact": true,
+      "newCommitLiterals": 1,
+      "newTreeLiterals": 1
+    },
+    {
+      "path": "local-runtime/computer/profile.mjs",
+      "mode": "100644",
+      "bytes": 12617,
+      "blob": "bbc30fb23920cc64488fd23f12a5c821fb7a585a",
+      "blobMatches": true,
+      "oldBlobMatches": true,
+      "sha256": "c3aa5348bdca3d64723e5eb236d4afda789653d669c7262199d6687e56597851",
+      "inverseExact": true,
+      "newCommitLiterals": 1,
+      "newTreeLiterals": 1
+    },
+    {
+      "path": "local-runtime/transformation/source-inventory.json",
+      "mode": "100644",
+      "bytes": 4833,
+      "blob": "47fbc447297d7558f7b9bd6744e2652e4070a7e1",
+      "blobMatches": true,
+      "oldBlobMatches": true,
+      "sha256": "495fe540a29cffb29550faabaacb91ff6f94d40eff750c3decd597edc781c79d",
+      "inverseExact": true,
+      "newCommitLiterals": 0,
+      "newTreeLiterals": 0
+    }
+  ],
+  "removed": [],
+  "treeProofs": {
+    "before": {
+      "root": "5ee88ac7ac86ce08503a83ebc288d42e33b1608f",
+      "objects": 1064,
+      "mismatch": 0
+    },
+    "after": {
+      "root": "c760c818c39a95d1a6c74d2b6488be6ed2f4b191",
+      "objects": 1064,
+      "mismatch": 0
+    }
+  },
+  "runtime": {
+    "expected": "72fb52177bc8a292f84efb1794051c9d072faf8f",
+    "actual": {
+      "path": "local-runtime/supervisor/runtime.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "72fb52177bc8a292f84efb1794051c9d072faf8f",
+      "size": 27168,
+      "url": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/git/blobs/72fb52177bc8a292f84efb1794051c9d072faf8f"
+    },
+    "preserved": true
+  },
+  "inventory": {
+    "oldRows": 24,
+    "newRows": 24,
+    "sameTopFields": true,
+    "changedRows": [
+      {
+        "bytes": 949,
+        "mode": 420,
+        "path": "engineering/transformation/source-pins.json",
+        "sha256": "3f25e940de090bafb2da3e4546653fe00505023143a7e6f2776c3a4d8e572def"
+      }
+    ],
+    "actualRows": [
+      {
+        "path": ".github/workflows/transformation-release.yml",
+        "gitBlob": "ef7bccdcb8bb183d863ba699bab8056824e3511d",
+        "bytes": 5864,
+        "mode": 420,
+        "sha256": "72f0970abbf86953d28299a3aec31d65061ba8a9b31f564b5969bd0ecca56eb3",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": ".github/workflows/transformational-project.yml",
+        "gitBlob": "cfc487c6ea5fde08d972009c1fe2e174b6670883",
+        "bytes": 16196,
+        "mode": 420,
+        "sha256": "2ab64d4e0578b0bfec40c4fe103c5a534636cd821034c1ff7b98f06d2003c9d9",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "docs/transformational-project.md",
+        "gitBlob": "f877e162355401179446a423cb5eb1f917dba28b",
+        "bytes": 21074,
+        "mode": 420,
+        "sha256": "bcf7a986e7d9eb4a1d69a1c681473432da7890da8c11d59e10f60214ab276001",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/cli.test.mjs",
+        "gitBlob": "504c208872f1d9968bf7af25b5ee9f7c52f24cfa",
+        "bytes": 12894,
+        "mode": 420,
+        "sha256": "f84c3f8b7cb8386f164f206ffcd1c4e380a1ad90a35ccbe301f6fdf4d6142e54",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/headless-lab.mjs",
+        "gitBlob": "6c7833515d6c9a40436f9d08199e72df3952b493",
+        "bytes": 4848,
+        "mode": 420,
+        "sha256": "c0fde064b00c536d2d2f019e4f8be2ddcf1239dfe253d560e1e55d3561acbdb9",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/headless_lab.py",
+        "gitBlob": "a43dbcbb3f84a087491c3b6b1c639777e65cc168",
+        "bytes": 6075,
+        "mode": 420,
+        "sha256": "04e2b6099ac650bf34594bd878f329b5597923e9cfa272db4b167daf46987936",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/package.test.mjs",
+        "gitBlob": "7815925af38a46ebfde713de0fbecf323a8a4ad9",
+        "bytes": 15499,
+        "mode": 420,
+        "sha256": "0994c706080cb9561fd54e6f341208efbfba78924dd5115dddf4680bfa829ecb",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/qualify.mjs",
+        "gitBlob": "d340b4202a681f1508f881966326667194b90acf",
+        "bytes": 7743,
+        "mode": 420,
+        "sha256": "6f769c3c4861fc913390bbb0fede54bd589959942d8b0165599c7de7d6c3d21f",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/release.py",
+        "gitBlob": "221e528b6ec7fbea06fd308976f085cf35746523",
+        "bytes": 76718,
+        "mode": 420,
+        "sha256": "794f8ed310239a30f70fa7d9b6f991cd630a92c100101eb0b0b3f2ab2cfff28f",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/source-pins.json",
+        "gitBlob": "7ea15bfee5d62e9bd4ebafcceaaebdbaef4a343a",
+        "bytes": 949,
+        "mode": 420,
+        "sha256": "3f25e940de090bafb2da3e4546653fe00505023143a7e6f2776c3a4d8e572def",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/test_dependency_reference.py",
+        "gitBlob": "871929d2d466f0c666065babd404c61c8d3219f1",
+        "bytes": 13251,
+        "mode": 420,
+        "sha256": "4f5a0e4546f20a8f2af8c3d775828dc7d6cd3d45a97dd5cafc74b667c2e7be67",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/test_release.py",
+        "gitBlob": "1a70714ce9f37d827b94b8e977103fed37d9e035",
+        "bytes": 47758,
+        "mode": 420,
+        "sha256": "17cb0180c0b213f9f58d22aeaea9d6bacb2ec0e8323409788ade87b83f8057f2",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/test_release_auth.py",
+        "gitBlob": "31374bfb480e4d5d70c1763d1761919f935e6eec",
+        "bytes": 15324,
+        "mode": 420,
+        "sha256": "516283852840206780e992bf2de0229e14e005299732e6e29a967f7198942641",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "engineering/transformation/ti-project.test.mjs",
+        "gitBlob": "324329df213224f8e80fc64ff5b7af5b83d0c54c",
+        "bytes": 12157,
+        "mode": 420,
+        "sha256": "25c681487aec74548e719955e77a149c78369bd30005935735e237dcace676e9",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/cli.mjs",
+        "gitBlob": "ffc51f42cb9a255120efdb930e66fe29fa84844f",
+        "bytes": 20991,
+        "mode": 420,
+        "sha256": "31adb8eaefac76da7d8da42b2c218eed9c78c7160d6486b05cb8729034c76818",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/dependency-reference.json",
+        "gitBlob": "54690d6cde99a2caffa4acabbf605fd6e1702b46",
+        "bytes": 457257,
+        "mode": 420,
+        "sha256": "3f6f756ea7b6d7755d6dc0d223f1b0ea40e18576be6b2745ed1f8ed4648ca162",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/dependency_reference.py",
+        "gitBlob": "6b270468e376c772a563edc57cadb8fad640cec8",
+        "bytes": 10216,
+        "mode": 420,
+        "sha256": "e418617100c3a5d8eba88f71203031d4d34e03ecbf09a1661adb3e5ebf81aa23",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/installed.mjs",
+        "gitBlob": "6f2902238e7611dbf5aeef0fa394fab068e52f4c",
+        "bytes": 9467,
+        "mode": 420,
+        "sha256": "3760918e7e6f0d38a3567712bfc453ae1e1aeee2952402e3b084f7ed5f6aa9fb",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/native.py",
+        "gitBlob": "785279de0c8432fc0a40975394e921c46ad2283a",
+        "bytes": 1848,
+        "mode": 420,
+        "sha256": "d9a53d9a65008c9abc6584ea2f2f329fcab8007a6914e459f94cac83ac107070",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/package.py",
+        "gitBlob": "38eeac7f3effa93841965e4c45c5de66c5a12322",
+        "bytes": 6699,
+        "mode": 420,
+        "sha256": "b9cb24143a244a7ff63e81b19a2ec22e52b47d9750c58506e8eda4745ffc5bec",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/project.mjs",
+        "gitBlob": "094d6b7f964b69ead72b335ca42a19f5ab8b16e3",
+        "bytes": 12730,
+        "mode": 420,
+        "sha256": "92cf8af7c408ab18bddfc5d8bcde8b3199580dcd04ea57345687a38f93f70e75",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/receivers.mjs",
+        "gitBlob": "a95004be52cc665a5af535d04e2be01ea0365943",
+        "bytes": 3275,
+        "mode": 420,
+        "sha256": "a16010c0ecf4cdeb5d6f2e2edde9ff4342874ce7f1cc1d20d2c4ef3b75a7d512",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/release-profile.json",
+        "gitBlob": "c9c68e7552b104b50fa1f13ab2bb49bdaf2838a8",
+        "bytes": 855,
+        "mode": 420,
+        "sha256": "74537a7354534427652f93d08c8c62320631f476584e14941e8a89422f160ac2",
+        "blobMatches": true,
+        "recordMatches": true
+      },
+      {
+        "path": "local-runtime/transformation/store.mjs",
+        "gitBlob": "84e0704a4bf2872efd9dbc68f7d99bcc80a35832",
+        "bytes": 2538,
+        "mode": 420,
+        "sha256": "1dc78e85c3c83d8e821799adbf57397280fa2962f012e17759ea8b153e5f6d19",
+        "blobMatches": true,
+        "recordMatches": true
+      }
+    ],
+    "actualMismatches": [],
+    "sameOrderedPaths": true
+  },
+  "selectedPins": {
+    "schema": "agi-fleet/ti-installed-source-pins/v1",
+    "alpha": {
+      "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+      "commit": "76df308b9661274c0de9193047f111b3953737a2",
+      "tree": "e45b1d9dfad0e600cb6fa4f41eb8770e0bb07d64"
+    },
+    "manager": {
+      "repository": "MontrealAI/AGIJobManager",
+      "commit": "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8",
+      "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86"
+    },
+    "jobs": {
+      "repository": "MontrealAI/AGIJobsv0",
+      "commit": "f2a8d2382b9a40814579f7a8be44046f247e0fd7",
+      "tree": "651310e14930967b1be1de86143b88657f3fe53a"
+    },
+    "computer": {
+      "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+      "commit": "76df308b9661274c0de9193047f111b3953737a2",
+      "tree": "e45b1d9dfad0e600cb6fa4f41eb8770e0bb07d64"
+    },
+    "computerScope": "preserved-existing-native-browser-profile; distinct-from-TI-discovery-source",
+    "publicNonpersonalOnly": true,
+    "paidTI": false,
+    "liveProvider": false,
+    "importedAuthority": "none",
+    "productionQualified": false
+  },
+  "compatibility": {
+    "schema": "agi-fleet/four-repository-compatibility-inputs/v1",
+    "alpha": "76df308b9661274c0de9193047f111b3953737a2",
+    "jobs": "f2a8d2382b9a40814579f7a8be44046f247e0fd7",
+    "manager": "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8",
+    "fleet": "workflow-checked-out-commit",
+    "scope": "candidate-unqualified-until-hosted-native-workflow-passes",
+    "publicNonPersonalOnly": true,
+    "liveProvider": false,
+    "fundedWork": false,
+    "productionQualified": false
+  },
+  "strictComputerDeclaration": "export const ALPHA_COMPUTER_SOURCE=Object.freeze({commit:'76df308b9661274c0de9193047f111b3953737a2',tree:'e45b1d9dfad0e600cb6fa4f41eb8770e0bb07d64'});",
+  "priorRuntimeReview": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#issuecomment-6283264919",
+  "ownerHandoff": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/61#issuecomment-6284783859",
+  "roles": {
+    "alpha": "76df is reviewed candidate H, not merged-main M or published software qualification.",
+    "jobs": "f2 remains the declared reviewed S1 source; actual installed-review history/main S2/M/release evidence stays separate.",
+    "manager": "a6 remains reviewed H/tree3676; actual published main4d/v1.19.5/tree3676 stays a separately authenticated E role."
+  },
+  "sdk": "Not derived or transferred by this review. Primary/Alpha owner's actual selected-source SDK proof remains separately owned.",
+  "remaining": [
+    "Independent source review of separate 0b13 corrective functions remains unresolved per public61#6284503984; no SOURCE_CLEAR is supplied for that parent here.",
+    "Fresh complete configured CODE review and all final-source qualification/main/release/E/T/live gates remain mandatory.",
+    "Historical native/install/wheel/SDK/retained-fixture proofs are not relabelled as final-source qualification."
+  ],
+  "actions": {
+    "purePublicGitMetadataAndHashReadback": true,
+    "sourceChanges": false,
+    "refChanges": false,
+    "targetImports": false,
+    "tests": false,
+    "securityOrProcessFixtures": false,
+    "browserNativeModelOrAcceptance": false,
+    "artifactDownloads": false,
+    "dispatch": false,
+    "statusPolling": "One normal-cadence owner-intent/PR readback, then static public object verification only."
+  }
+}

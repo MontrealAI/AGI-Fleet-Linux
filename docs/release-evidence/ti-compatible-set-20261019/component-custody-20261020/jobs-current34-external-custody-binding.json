@@ -1,0 +1,45 @@
+{
+  "schema": "four-repository-assessment/current34-external-custody-binding/v1",
+  "reviewedAt": "2026-10-20T06:17:59.003841+00:00",
+  "scope": "Metadata/custody and actual retained physical approved-S1 binding only; no current34 raw archive reacquisition/reexecution.",
+  "currentCustody": {
+    "commit": "8cfcc263a953418065ee687626cc82cd1a7795c2",
+    "path": "docs/release-evidence/ti-compatible-set-20261019/s1-reviews/current34-canonical-push-closure.json",
+    "gitBlob": "9274f4526e26923c0b74defdfb33979d00aaefac",
+    "bytes": 7183,
+    "sha256": "f254b6701f614bfb5b6ba6f72ed64738a7d0723d323a0b90b0c801c16c57ca20",
+    "publicComparison": "https://github.com/MontrealAI/AGIJobsv0/pull/4001#issuecomment-6284525727",
+    "physicalCurrentRawCustodian": "Existing primary collector/reviewer; external custody, not reacquired by this root"
+  },
+  "sourceRoles": {
+    "approvedS1": "f2a8d2382b9a40814579f7a8be44046f247e0fd7",
+    "current": "34bc6891087c1d0144e360e9aa39968c2c3c0371",
+    "currentTree": "9721bfae0553c3790f24391bdcefdd7bd34c0f09",
+    "run": 39367269208,
+    "attempt": 1,
+    "artifact": 12241892781,
+    "currentArchiveSha256": "8ea57aa64790a7ab52bd4c2c00805a3087067d3e8823f9e43f96d98e8382e33e",
+    "currentRawSarifSha256": "f3035c0b90196cf01b9136884f4a6fb5c8ba0fe69280c3d4654033ef48d0e691"
+  },
+  "independentRetainedS1Checks": {
+    "actualRetainedS1ZipReused": true,
+    "completeToolCanonicalSha256": "d390b601d2daa2d7b0938378e8e579668746fbd31a4bd688df77a5f982bba7f4",
+    "all201RulesCanonicalSha256": "3f289986a511171f266b625e69bb545e0dfd68af9ade62084e151ddba16b3a08",
+    "all43OrderedFullResultHashesMatchPriorRootReviewAndCurrentCustody": true,
+    "successfulExtractionPaths": 830,
+    "successfulExtractionPathsSha256": "959e8aebc581ba2ecdf97c64de306660f9eacafdbe500efb4041363cd931772c",
+    "requiredExtractionPaths": 87,
+    "requiredExtractionPathsSha256": "6879a41ea6f6a0ab9f40ca61bc08f8dcaee897407a5bec0a0829a1f9af938a27",
+    "missing": 0,
+    "configSha256": "07d7be878097a38520bcf09147b62c75064cb3d707317ad34e028c1f46ba8155"
+  },
+  "limitations": {
+    "currentRawPhysicalComparisonByThisRoot": false,
+    "currentRawPhysicalComparisonReusedFromPublicPrimaryReceipt": true,
+    "rawS1AndCurrentEqualityClaimed": false,
+    "allRequiredCurrentWorkflowsFinishedClaimed": false,
+    "finalMainS2OrReleaseQualificationClaimed": false,
+    "productionOrAuthorityApproval": false,
+    "sharedWorkspaceAndGitHubIdentity": true
+  }
+}

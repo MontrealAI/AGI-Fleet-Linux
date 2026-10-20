@@ -1,0 +1,103 @@
+{
+  "schema": "four-repository-assessment/component-custody-index/v1",
+  "createdAt": "2026-10-20T06:32:58.012549+00:00",
+  "scope": "Exact storage of existing public non-personal technical source/component receipts; not final E, a qualification or a publication approval. No source, test, workflow, authority or canonical-ref change.",
+  "sourceRoles": {
+    "alphaReviewedH": "76df308b9661274c0de9193047f111b3953737a2",
+    "fleetPinCandidate": "0ddd69b13c4fc8af272cf7c3f41a9c16ee47f2cf",
+    "jobsReviewedS1": "f2a8d2382b9a40814579f7a8be44046f247e0fd7",
+    "jobsMetadataCandidate": "34bc6891087c1d0144e360e9aa39968c2c3c0371",
+    "managerActualM": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb"
+  },
+  "limitations": [
+    "Fleet0b13 independent source review remains HOLD after automated screening stopped both attempts; this capsule contains no review of that correction.",
+    "Alpha SDK is a reviewed source-candidate inventory, not a physical capture, wheel installation, native/platform acceptance or release.",
+    "Jobs current34 raw comparison remains primary external physical custody; root reused its retained physical S1 and authenticated the actual public metadata.",
+    "Manager is a completed component; prior Alpha and Jobs qualification histories are not final combined journey evidence.",
+    "Current candidates can be corrected only by the existing primary writer; fresh exact main, releases, installed journey, D/E/T/F remain separately evidenced.",
+    "Technical peers share workspace and GitHub identity; no distinct human, organization or economic control is asserted."
+  ],
+  "files": [
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/alpha-76-sdk-source-candidate.json",
+      "originalLocalPath": "assessment/alpha-76-immutable-sdk-source-candidate.json",
+      "bytes": 170411,
+      "sha256": "ec5b9f8c2a81980158318017a2b3d68e00d492c619b6e3bdd48355651a2845ac",
+      "gitBlob": "3816d47f7fbdf7d6618578da87f82646fb8da06f",
+      "mode": "100644",
+      "role": "SOURCE_CANDIDATE_ONLY"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/alpha-76-preservation-policy-peer.json",
+      "originalLocalPath": "assessment/alpha-76-preservation-policy-source-peer.json",
+      "bytes": 3000,
+      "sha256": "2cf970e7c1743f12c47235913355d208dd5f5a197a49ac488ae621ecda5bd1af",
+      "gitBlob": "c515fd917ab0f82fbe2f137f64cf2aa17183e832",
+      "mode": "100644",
+      "role": "SCOPED_SOURCE_PEER"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/fleet-0ddd-pin-delta-peer.json",
+      "originalLocalPath": "assessment/fleet-0ddd-five-pin-source-peer.json",
+      "bytes": 15637,
+      "sha256": "deb813842acf4d9f3b0765bfcca89a6dc59de9bd6c58311c49746d824bb39237",
+      "gitBlob": "85dcaf6ba513e26ee3005eec922068e713b634f6",
+      "mode": "100644",
+      "role": "FIVE_FILE_METADATA_ONLY_PARENT_0B13_HOLD"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/jobs-current34-external-custody-binding.json",
+      "originalLocalPath": "assessment/jobs-34bc-final-peer/current34-external-custody-binding-review.json",
+      "bytes": 2471,
+      "sha256": "40ebf98ed3aca62dc967887212d51e1cf55f90d4360e0f523d85718c971950d8",
+      "gitBlob": "b347026c5de83d808670fdeafde369b339ca2f2a",
+      "mode": "100644",
+      "role": "EXTERNAL_CURRENT_RAW_CUSTODY_AND_RETAINED_S1_JOIN"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/jobs-current34-primary-closure-record.json",
+      "originalLocalPath": "assessment/jobs-34bc-final-peer/current34-closure-custody-8cfcc263.json",
+      "bytes": 7183,
+      "sha256": "f254b6701f614bfb5b6ba6f72ed64738a7d0723d323a0b90b0c801c16c57ca20",
+      "gitBlob": "9274f4526e26923c0b74defdfb33979d00aaefac",
+      "mode": "100644",
+      "role": "EXACT_COPY_OF_PRIMARY_PUBLIC_CUSTODY_RECORD"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/manager-1.19.5-component.json",
+      "originalLocalPath": "assessment/manager-e-component.json",
+      "bytes": 53373,
+      "sha256": "6f47b77645d65203f5da65d871ac296a0ae02683cc8dff0b07a0d6bb932e4eb6",
+      "gitBlob": "0a2d142ee93f8b014550a1b342975e526530ceb2",
+      "mode": "100644",
+      "role": "PUBLISHED_COMPONENT_ONLY"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/manager-1.19.5-component-peer.json",
+      "originalLocalPath": "assessment/manager-e-component-independent-peer.json",
+      "bytes": 5351,
+      "sha256": "6695f3b8ed30ee926993047f7191428b1da1abf418de65071a1eeaec7a5c7101",
+      "gitBlob": "a600f0a5cbda0b16a45f12162eec8785859e3392",
+      "mode": "100644",
+      "role": "COMPONENT_BINDING_PEER"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/manager-1.19.5-independent-inert-ui.json",
+      "originalLocalPath": "assessment/manager195-independent-inert-ui.json",
+      "bytes": 2274,
+      "sha256": "a67d284247d24f293c18a50ec869a613620f2cba683c965fd8dfed0097442091",
+      "gitBlob": "09d1cc0cc6d8febf2b69aa14e782c8c553615fc5",
+      "mode": "100644",
+      "role": "DESKTOP_INERT_UI_ONLY"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/manager-1.19.5-fr-inert-ui.jpg",
+      "originalLocalPath": "/workspace/scratch/manager-v1.19.5-fr-1792470097668.jpg",
+      "bytes": 111608,
+      "sha256": "a4808d1390e3ca6536e221f29cbf58edf9e1a418d0c619913840176249b6fcaf",
+      "gitBlob": "e14fbc76dda47dc5a9d3633e39da413347a68dda",
+      "mode": "100644",
+      "role": "PUBLIC_MANAGER_UI_SCREENSHOT"
+    }
+  ]
+}

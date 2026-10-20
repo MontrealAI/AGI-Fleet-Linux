@@ -1,0 +1,59 @@
+{
+  "scope": "LIVE_INERT_PUBLIC_MANAGER_UI_ONLY_NOT_CONNECTED_JOURNEY",
+  "observedAt": "2026-10-20T04:23:00.114541+00:00",
+  "site": "https://montrealai.github.io/AGIJobManager/",
+  "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+  "version": "1.19.5",
+  "checks": {
+    "englishLandingRendered": true,
+    "largerTextAriaPressedTrueObserved": true,
+    "largerTextOriginalFalseRestored": true,
+    "languageNavigationToFrench": true,
+    "frenchLanguage": "fr",
+    "frenchTitle": "AGI Jobs — Votre prochain projet commence ici.",
+    "frenchHeading": "Votre prochain projet.Commence ici.",
+    "frenchFooterVersion": "v1.19.5",
+    "footerSourceLinksContainActual4d": true,
+    "viewport": {
+      "width": 1363,
+      "height": 936
+    },
+    "documentScrollWidth": 1348,
+    "horizontalOverflowObserved": false,
+    "receiptPages": {
+      "fr": {
+        "url": "https://montrealai.github.io/AGIJobManager/fr/computer-receipt/",
+        "documentLanguage": "fr",
+        "publicConsentChecked": false,
+        "restoreConsentChecked": false,
+        "prepareDisabled": true,
+        "restoreDisabled": true,
+        "resultHidden": true,
+        "budgetEmpty": true
+      },
+      "en": {
+        "url": "https://montrealai.github.io/AGIJobManager/computer-receipt/",
+        "documentLanguage": "en",
+        "publicConsentChecked": false,
+        "restoreConsentChecked": false,
+        "prepareDisabled": true,
+        "restoreDisabled": true,
+        "resultHidden": true,
+        "budgetEmpty": true
+      }
+    },
+    "englishFrenchReceiptLanguageSwitch": true
+  },
+  "screenshot": {
+    "path": "/workspace/scratch/manager-v1.19.5-fr-1792470097668.jpg",
+    "bytes": 111608,
+    "sha256": "a4808d1390e3ca6536e221f29cbf58edf9e1a418d0c619913840176249b6fcaf"
+  },
+  "limitations": [
+    "Existing cloud browser session; storage was neither read nor cleared. No claim of isolated new storage context.",
+    "Desktop viewport only; exact-source hosted UI checks carry responsive qualification.",
+    "Initial AX checkbox role lookup had no DOM match; corrected by observing actual button/aria-pressed control.",
+    "No project/file upload or prepare/authorize/run/wallet/provider/chain/ENS action occurred."
+  ],
+  "supportedJourneyExecuted": false
+}
