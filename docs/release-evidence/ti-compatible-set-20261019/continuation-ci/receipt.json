@@ -1,0 +1,105 @@
+{
+  "schema": "agi-fleet/release-continuation-ci-custody/v1",
+  "observedAt": "2026-10-20T11:19:27.727Z",
+  "complete": false,
+  "scope": "Original public GitHub job logs retained verbatim as decoded UTF-8; not a release qualification or final handoff.",
+  "currentSource": {
+    "alpha": {
+      "commit": "875165bdd3d54c8dde4ebfcacb6a45cda41a86f2",
+      "tree": "f0f1a0f3a140be7c998f17d581c3a3a7356976fe",
+      "pr": 4841
+    },
+    "fleet": {
+      "commit": "0e7d71a45aa864d22cbc8dc2efabd364c7d1add1",
+      "tree": "ceb1716d03618469fc5ccf6dc17e87b38e24d249",
+      "pr": 61
+    },
+    "jobs": {
+      "commit": "c0761b4f129911ef4f700932a331db159032f6e7",
+      "tree": "e8e2cb3c80629c352cd7cc71bc68d48da5384bd6",
+      "pr": 4003
+    },
+    "manager": {
+      "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+      "release": "v1.19.5",
+      "releaseId": 417952385
+    }
+  },
+  "logs": [
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-ba05-x64-job-118578034612.log",
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "job": 118578034612,
+      "blob": "3e430b7ea326965c9e19fa9dcb5e27028c86810a",
+      "bytes": 515104,
+      "sha256": "5cebb346ea51f86f0e773f3f9b9e12cb3a73a1156dbbf6e3905feb3adcab3ff2"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-ba05-arm64-job-118578034425.log",
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "job": 118578034425,
+      "blob": "d5373b74dea5141027f4bf7cf495513ad988e292",
+      "bytes": 442136,
+      "sha256": "e3a5182eefc5f746c92bc988e262758e994be5b6167a07fbfd63f40e65ff0516"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/alpha-aa93-quality-job-118566970133.log",
+      "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+      "job": 118566970133,
+      "blob": "4a4664052d9ad0fb97035e43677df4d7c718f2fc",
+      "bytes": 945963,
+      "sha256": "6f07448ba3473bf73124a174b8629dd568db257e77d315664a91df9639c0f984"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/jobs-85966-validation-job-118592782048.log",
+      "repository": "MontrealAI/AGIJobsv0",
+      "job": 118592782048,
+      "blob": "22f60c88f88b63fb9db297c50e6438fe7cd77e0a",
+      "bytes": 764026,
+      "sha256": "9fdb378215cf63fdaf58e0ea9dc00f1dbe6483f3fe6bed2e00f5529774526da1"
+    }
+  ],
+  "remaining": [
+    {
+      "owner": "Alpha required hosted CI",
+      "nextAction": "Complete all original current-head gates and inspect actual failed logs before any normal merge."
+    },
+    {
+      "owner": "Jobs source/review owner",
+      "nextAction": "Complete current-head original validation, fresh full raw JS/Python scanner review and installed native review; install only genuine finite review records."
+    },
+    {
+      "owner": "Fleet eligible owner review lane",
+      "nextAction": "Obtain genuine eligible review through an authorized available owner process; automatic safety review rejected the existing lane for possible cybersecurity risk. It has not been retried or substituted."
+    },
+    {
+      "owner": "Fleet qualification and release owner",
+      "nextAction": "Pass all original current-head gates, refresh coherent actual released S2 and SDK pins, then normal qualified merge/publication."
+    },
+    {
+      "owner": "Workspace execution/browser platform",
+      "nextAction": "Restore command/file/browser access; last read-only command probe was unresponsive. Do not infer local checks or new file saves passed."
+    },
+    {
+      "owner": "Root final acceptance",
+      "nextAction": "After actual immutable publications, admit the single installed-public-package journey, retain its independent artifacts, then authenticate distinct Pages T and verify all four live sites."
+    }
+  ],
+  "mainnet": {
+    "lookupOnly": true,
+    "number": 26227598,
+    "hash": "0x280b9d8f09ce5b7dc47783d00e8b036e2b4fbe94c241d589a48b8a25184a0cc7",
+    "timestamp": "2026-10-19T15:44:23.000000Z",
+    "retainedSnapshotHashMatched": true,
+    "originalEnsObservationTime": null
+  },
+  "localExecution": "UNAVAILABLE_NO_LOCAL_RUNTIME_PASS_CLAIM",
+  "connectedJourneyAdmitted": false,
+  "liveOnlyVerificationAdmitted": false,
+  "paidStorageCommitment": false,
+  "deletionsPerformed": false,
+  "mainnetTransactions": 0,
+  "humanMinutes": null,
+  "deviceCost": null
+}
