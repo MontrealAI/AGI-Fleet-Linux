@@ -1,0 +1,45 @@
+{
+  "schema": "agialpha/static-source-assessment/v1",
+  "source": "c92b91fc012f14041307d0ba4b59c4b7a98cc933",
+  "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+  "parent": "a0930886bda766ed88ce0af5579da0fb6e669f22",
+  "reviewer": "existing independent source-assessment lane /root/installed_acceptance",
+  "scope": "Static source only; not eligible Fleet owner or release qualification",
+  "files": [
+    {
+      "path": "alpha_factory_v1/core/runtime/successor/transformation_source_audit.py",
+      "sha": "b64254a10156075765aa45e5f6cf13be5b37cfb5",
+      "size": 78383,
+      "sha256": "2ad225701952de359a6faf69f9239812f3962ade671bc5a707cb58ac23da95ab",
+      "mode": "100644",
+      "type": "blob"
+    },
+    {
+      "path": "examples/transformational-source-audit/README.md",
+      "sha": "54edac3aacfe20531ca8eaa58ca3f103e4d71484",
+      "size": 15252,
+      "sha256": "9be835d5488554da50d041dafa928148ab1fef2614029146be0e624e872f02da",
+      "mode": "100644",
+      "type": "blob"
+    }
+  ],
+  "assessment": "CLEAR_IN_BOUNDED_SCOPE",
+  "rationale": "Exact two-file inverse verified against parent. Existing bounded reverse AST walk marks comprehension-containing subtrees bottom-up once; JOIN-only refusal preserves shared literal_sequence/zip handling and retained fixture runtime-name join. No submitted method/iterator/predicate is executed. All existing node/literal/shared-byte/depth budgets and preconstruction charging remain.",
+  "limits": [
+    "Runtime-name values and aliases remain unresolved, outside static claim.",
+    "No targeted credential payload or security reproduction constructed/executed.",
+    "No local formatter/test pass; full original hosted tests/review/Agent/main publication remain required."
+  ],
+  "currentConfiguredReview": {
+    "commentId": 6292797378,
+    "conclusion": "CLEAR",
+    "source": "c92b91fc012f14041307d0ba4b59c4b7a98cc933"
+  },
+  "currentTI": {
+    "run": 39435806096,
+    "job": 118672375803,
+    "conclusion": "SUCCESS",
+    "focusedTestsPassed": 334,
+    "offlineBrowser": "SUCCESS"
+  }
+}

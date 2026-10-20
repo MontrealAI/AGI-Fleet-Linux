@@ -1,0 +1,44 @@
+{
+  "schema": "agi-fleet/intermediate-ci-custody/v1",
+  "observedAt": "2026-10-20T14:12:49.081Z",
+  "finalEvidence": false,
+  "finalConnectedJourney": "NOT_RUN",
+  "allFourFinalLiveSites": "NOT_VERIFIED",
+  "alpha": {
+    "source": "c92b91fc012f14041307d0ba4b59c4b7a98cc933",
+    "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+    "mainPreserved": "b7f017e91a18adb3a79b34e03dc0158896ef7570",
+    "qualificationRun": 39437019881,
+    "attempt": 1,
+    "admissionComment": 6292875660,
+    "state": "QUEUED",
+    "noPreviousAgentRunsAtAdmission": true,
+    "originalD262Failure": "RETAINED_NOT_TRANSFERRED",
+    "sdkFinalDigest": null,
+    "release": "NOT_PUBLISHED"
+  },
+  "jobs": {
+    "source": "c3e943189a00bffa2e4dda265c6bd010b4930944",
+    "tree": "e0a252f91288f798c7ede5f72c2ba2869316d927",
+    "completeScannerCustody": "49e239d62e5128d203b938deb9d76e0b34ccfe2a",
+    "branch": "evidence/rc16-codeql-c3e943-20261020",
+    "freshSourceConfiguredReview": 6292363810,
+    "validationTestsPassed": 150,
+    "workflowGroupsSuccess": 21,
+    "workflowGroupsTotal": 23,
+    "reviewInstallation": "PENDING_INDEPENDENT_FULL_PACKET_ASSESSMENT",
+    "release": "NOT_PUBLISHED"
+  },
+  "fleet": {
+    "source": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+    "workflowGroupsSuccess": 10,
+    "finalCompanionPins": "PENDING_ACTUAL_ALPHA_JOBS_PUBLICATIONS",
+    "eligibleOwner": "BLOCKED_AUTOMATIC_APPROVAL_REVIEW_REJECTED_ACTION_FOR_POSSIBLE_CYBERSECURITY_RISK",
+    "release": "NOT_PUBLISHED"
+  },
+  "manager": {
+    "source": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+    "release": "v1.19.5",
+    "immutable": true
+  }
+}
