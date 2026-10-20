@@ -1,0 +1,1406 @@
+{
+  "status": {
+    "asOf": "2026-10-20T22:25:18.161Z",
+    "completion": false,
+    "userGoal": "Qualified normal merges, fresh releases, exact public installed-package ONE journey, all four live sites",
+    "jobs": {
+      "pr": 4006,
+      "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+      "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+      "main": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+      "status": "Strict reviewed S2 ff64 normallyadopted afterbothindependentinstallPASS; originalfresh23workflowgroups/exact-headconfiguredreviewinprogress; no currentmerge/release.",
+      "fix": "Owned private external output; guide and publisher harnesses aligned",
+      "targetedBenignTests": {
+        "pass": 7,
+        "fail": 0
+      },
+      "evidence": {
+        "commit": "6d314bbbdd133ac25a1689db8e3548546a5fdc6f",
+        "tree": "80f4b67463e35d2bc3a09d54a820f0a1654f4caf"
+      },
+      "next": "AuthenticatecompletefreshS2packets and requestindependentreference/semantic/source/losslessreconciliation; requireall23groups/37contexts+clearexactheadreview+zeroopenfindings, thennormalmergeandalloriginalfinalMainpublicationgates.",
+      "pythonReviewComment": 6299575988,
+      "javascript": {
+        "run": 39482430424,
+        "producer": 118834137073,
+        "collector": 118839993292,
+        "results": 43,
+        "quality": 8,
+        "securityLike": 35,
+        "evidence": "dc9882788b1e48628e8a8f54b130b9a1cc224b05"
+      },
+      "currentSourceGroups": {
+        "success": 21,
+        "failure": 1
+      },
+      "preparedInstall": {
+        "commit": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+        "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+        "parent": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "branchMoved": true,
+        "records": {
+          "scannerReview": {
+            "bytes": 47528,
+            "sha256": "edb4d5c7d2531f968b10dbfd9a37227f84ccc8762a63aa6d10d1ce9bc98c8717",
+            "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3"
+          },
+          "pythonScannerReview": {
+            "bytes": 742109,
+            "sha256": "e54b0f8afba18fe55e3edac35bf973afdc2319ce910bc6c1def11bec85b00ee6",
+            "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3"
+          },
+          "notesReview": {
+            "bytes": 70098,
+            "sha256": "694e98e07d6482f7d633aa3cfdac39f02706b749d7222b41a9ca81790c3abe12",
+            "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3"
+          }
+        },
+        "proof": {
+          "parent": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+          "parentTree": "5501717cfafc956be8432139766c63a34c69aa8f",
+          "commit": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+          "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+          "totalLeaves": 5185,
+          "unchangedLeaves": 5183,
+          "changed": [
+            {
+              "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "46bc7625b8b56ff17b8d2bcdeaf435a9c362f8d1",
+              "size": 186240,
+              "url": "https://api.github.com/repos/MontrealAI/AGIJobsv0/git/blobs/46bc7625b8b56ff17b8d2bcdeaf435a9c362f8d1"
+            },
+            {
+              "path": "scripts/release/source-profile-rc16.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "fa13b44bbc29302db81ebe098f4d9906f60746fa",
+              "size": 909750,
+              "url": "https://api.github.com/repos/MontrealAI/AGIJobsv0/git/blobs/fa13b44bbc29302db81ebe098f4d9906f60746fa"
+            }
+          ],
+          "allModesAndOtherLeavesPreserved": true,
+          "onlyThreeSlotsChanged": true,
+          "exactOuterBytes": true
+        },
+        "status": "NORMAL_ADOPTED_TWO_INDEPENDENT_STATIC_INSTALLATION_PASSES_AND_HOSTED166_VALIDATION_PASS"
+      },
+      "reviewedS1": {
+        "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "tree": "5501717cfafc956be8432139766c63a34c69aa8f",
+        "pythonComment": 6302356351,
+        "javascriptComment": 6302617066,
+        "sourceChecks": {
+          "observedAt": "2026-10-20T21:50:34.443Z",
+          "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+          "tree": "5501717cfafc956be8432139766c63a34c69aa8f",
+          "workflowGroups": 23,
+          "allWorkflowGroupsSuccess": true,
+          "requiredContextNames": [
+            "Lint & static checks",
+            "ICS fixture validation",
+            "Tests",
+            "Python unit tests",
+            "Python integration tests",
+            "Load-simulation reports",
+            "Python coverage enforcement",
+            "HGM guardrails",
+            "Owner control assurance",
+            "Foundry",
+            "Coverage thresholds",
+            "Phase 6 readiness",
+            "Phase 8 readiness",
+            "Kardashev II readiness",
+            "ASI Take-Off Demonstration",
+            "Zenith Sapience Demonstration",
+            "AGI Labor Market Grand Demo",
+            "Sovereign Mesh Demo — build",
+            "Sovereign Constellation Demo — build",
+            "Celestial Archon Demonstration",
+            "Hypernova Governance Demonstration",
+            "Branch protection guard",
+            "CI summary",
+            "Invariant tests",
+            "Slither static analysis",
+            "forge-fuzz",
+            "webapp-ci",
+            "build (node-runner)",
+            "build (validator-runner)",
+            "build (gateway)",
+            "build (webapp)",
+            "build (owner-console)",
+            "orchestrator-e2e",
+            "CodeQL analysis",
+            "Inherited security boundaries and browser regressions",
+            "Pinned native transformation compatibility",
+            "Python integration CodeQL analysis"
+          ],
+          "required": [
+            {
+              "name": "Lint & static checks",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145614,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "ICS fixture validation",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145379,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Tests",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145069,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Python unit tests",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145310,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Python integration tests",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145464,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Load-simulation reports",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145313,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Python coverage enforcement",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118898737825,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "HGM guardrails",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587765,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Owner control assurance",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901464048,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Foundry",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587793,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Coverage thresholds",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587768,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Phase 6 readiness",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587714,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Phase 8 readiness",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587901,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Kardashev II readiness",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587943,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "ASI Take-Off Demonstration",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587848,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Zenith Sapience Demonstration",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901588108,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "AGI Labor Market Grand Demo",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587748,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Sovereign Mesh Demo — build",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901588020,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Sovereign Constellation Demo — build",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587960,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Celestial Archon Demonstration",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587804,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Hypernova Governance Demonstration",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587979,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Branch protection guard",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145390,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "CI summary",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905374319,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Invariant tests",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901588026,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Slither static analysis",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897142821,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                },
+                {
+                  "id": 118897033726,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "forge-fuzz",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897144195,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "webapp-ci",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143595,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (node-runner)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884320,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (validator-runner)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884362,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (gateway)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884283,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (webapp)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884240,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (owner-console)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884372,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "orchestrator-e2e",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897142914,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "CodeQL analysis",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143110,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                },
+                {
+                  "id": 118897034212,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Inherited security boundaries and browser regressions",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143515,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Pinned native transformation compatibility",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143666,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Python integration CodeQL analysis",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143002,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                },
+                {
+                  "id": 118897033924,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            }
+          ],
+          "checkCount": 103,
+          "checkCounts": {
+            "success": 97,
+            "skipped": 6
+          },
+          "openThreads": 0,
+          "configuredReview": {
+            "url": "https://github.com/MontrealAI/AGIJobsv0/pull/4006#issuecomment-6301887032",
+            "body": "<!-- codex-pull-request-review-summary -->\n<!-- codex-review-state:v1 {\"code_review\":{\"commit_sha\":\"5d859a6965ed1d32727bf43ddfbe469e76accdb3\",\"has_any_findings\":false,\"has_unresolved_findings\":false,\"status\":\"completed\"},\"security_review\":{\"commit_sha\":null,\"has_any_findings\":null,\"has_unresolved_findings\":null,\"status\":null}} -->\n\n## Codex Review Summary\n\nThis comment shows the latest Codex review activity on this pull request.\n\n| Review | Status | Commit | Review trigger |\n| --- | --- | --- | --- |\n| 📝 **Code Review** | ✅ **Completed** <relative-time datetime=\"2026-10-20T21:30:34.955178Z\">2026-10-20T21:30:34.955178Z</relative-time> | `5d859a6` | PR opened |\n\n\n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\" or \"@codex security review\".\n\nCodex reacts with 👀 while any review is running, comments if it has suggestions, and reacts with 👍 once all reviews finish with no findings.\n\n</details>",
+            "user": {
+              "login": "chatgpt-codex-connector[bot]",
+              "name": "chatgpt-codex-connector[bot]",
+              "email": null,
+              "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+              "id": 199175422
+            },
+            "id": 6301887032,
+            "pull_request_review_id": null,
+            "in_reply_to_id": null,
+            "created_at": "2026-10-20T21:29:01Z",
+            "updated_at": "2026-10-20T21:30:35Z",
+            "review": null,
+            "side": null,
+            "line": null,
+            "start_line": null,
+            "path": null,
+            "body_html": "\n\n<h2 dir=\"auto\">Codex Review Summary</h2>\n<p dir=\"auto\">This comment shows the latest Codex review activity on this pull request.</p>\n<markdown-accessiblity-table><table role=\"table\">\n<thead>\n<tr>\n<th>Review</th>\n<th>Status</th>\n<th>Commit</th>\n<th>Review trigger</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>📝 <strong>Code Review</strong></td>\n<td>✅ <strong>Completed</strong> <relative-time datetime=\"2026-10-20T21:30:34.955178Z\">2026-10-20T21:30:34.955178Z</relative-time></td>\n<td><code class=\"notranslate\">5d859a6</code></td>\n<td>PR opened</td>\n</tr>\n</tbody>\n</table></markdown-accessiblity-table>\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br>\n<p dir=\"auto\"><a href=\"https://chatgpt.com/codex/cloud/settings/general\" rel=\"nofollow\">Your team has set up Codex to review pull requests in this repo</a>. Reviews are triggered when you</p>\n<ul dir=\"auto\">\n<li>Open a pull request for review</li>\n<li>Mark a draft as ready</li>\n<li>Comment \"<a class=\"user-mention notranslate\" data-hovercard-type=\"user\" data-hovercard-url=\"/users/codex/hovercard\" data-octo-click=\"hovercard-link-click\" data-octo-dimensions=\"link_type:self\" href=\"https://github.com/codex\">@codex</a> review\" or \"<a class=\"user-mention notranslate\" data-hovercard-type=\"user\" data-hovercard-url=\"/users/codex/hovercard\" data-octo-click=\"hovercard-link-click\" data-octo-dimensions=\"link_type:self\" href=\"https://github.com/codex\">@codex</a> security review\".</li>\n</ul>\n<p dir=\"auto\">Codex reacts with 👀 while any review is running, comments if it has suggestions, and reacts with 👍 once all reviews finish with no findings.</p>\n</details>"
+          },
+          "qualification": "SOURCE_CHECKS_SUCCESS_FRESH_FULL_REVIEW_AND_STRICT_INSTALL_STILL_REQUIRED"
+        },
+        "pythonReceipt": {
+          "commit": "5e379f5832c8bd29f65efb34f6932f9894ba17dc",
+          "sha256": "e15a5e6e246af2943ea5071f9cf8a7c4032a802c048c8816c1b1e415db113ca6"
+        },
+        "javascriptReceipt": {
+          "commit": "2ced0e05db205b79a101a230c265b2ca3801502a",
+          "sha256": "5851c51787c4546fc2dd68fa5ce233431a086a796dde300e98edc6587e372918"
+        }
+      },
+      "reconciliations": null,
+      "normalMerge": null,
+      "finalMainPrerequisites": null,
+      "failedPublisher": {
+        "run": 39494233776,
+        "attempt": 1,
+        "job": 118878025830,
+        "message": "Current/reviewed complete Python scanner semantics differ",
+        "evidence": "d9a4bf41e679a15aad60e7c0cddb80a7d2d4b81c",
+        "unchangedRetry": false
+      },
+      "proposedS1": {
+        "commit": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "tree": "5501717cfafc956be8432139766c63a34c69aa8f",
+        "parent": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+        "paths": 4,
+        "otherLeavesExact": 5181,
+        "allThreeSlotsNull": true,
+        "selectedBenignTests": {
+          "pass": 3,
+          "fail": 0
+        },
+        "syntaxChecks": 2,
+        "staticPeerReview": "PASS retained9e501f153b793cfbc345993eef76113549bbd128",
+        "branchMoved": true
+      },
+      "priorNormalMerge": {
+        "sha": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+        "tree": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+        "parents": [
+          "5cd671e6f3f3a29e12cede966842f4bc99ece59f",
+          "604d10094f3b7fede53406ae0e40f9f489155a3b"
+        ],
+        "reviewedCommit": "604d10094f3b7fede53406ae0e40f9f489155a3b",
+        "evidence": "829c1e582bd94ac247d9a12eb61d0ed9dd1fd07e"
+      },
+      "priorFinalMainPrerequisites": {
+        "source": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+        "tree": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+        "workflows": 21,
+        "requiredContexts": 37,
+        "status": "ALL_SUCCESS",
+        "evidence": "218de8af8ec73b1e5c9fac00bbd292706d577fe1",
+        "publisherStillRequired": true
+      },
+      "historicalReconciliations604": {
+        "javascript": {
+          "bytes": 14484,
+          "sha256": "efc8b90ed922d73ec2bd1298f4e9c18b378f82b92f5fac0b963cffc95aeeaa13",
+          "status": "PASS_STATIC"
+        },
+        "python": {
+          "bytes": 8369,
+          "sha256": "d15451efc4b7ee8852625d16fd1b46303c1184e70ffb65f233982f43884fbb1a",
+          "status": "BOUNDED_POLICY_PASS",
+          "unexplainedParserCounterDelta": "8→6; retained separately, no whole-report equality claim"
+        }
+      },
+      "configuredS2Review": {
+        "id": 6303048939,
+        "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+        "status": "CLEAR",
+        "openThreads": 0
+      },
+      "s2Packets": {
+        "python": {
+          "commit": "093870a63b4a16b8430b295b77ff88239f904c45",
+          "tree": "caa4ca7fdac520d6a58c68c8cabaa7740344da4a",
+          "branch": "evidence/rc16-codeql-c3e943-20261020",
+          "files": [
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/collector-log-part-1.log",
+              "bytes": 900000,
+              "sha": "219ab7099e55a3f1e402d811ff082c6cdc94ef32",
+              "sha256": "0417ac612262413914eb589cdff223b7d3bd671a5a2048c6bea751bb8b3c300d"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/collector-log-part-2.log",
+              "bytes": 360768,
+              "sha": "c08f1b0643c77f8ca245e5e153d11587fcd25dbf",
+              "sha256": "f1767b4ec5838969c034fff1762e8f554da19e14274bc8811db97ac9472197ce"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/original.zip",
+              "bytes": 106962,
+              "sha": "714dc5937c7e20184b7208adfd035fe20d474899",
+              "sha256": "1bfb604a498d2f09730315e39f0b2e88ab07b9e8ae7c07e3cb3b6c327fbfedd7"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/python.sarif",
+              "bytes": 788624,
+              "sha": "730828c65de1a914b0683861fc67cb456bf6cfdf",
+              "sha256": "3ab5ec4d3d8d8e9ba8e4856d3f467e38d19b1bfc40ce20c977592d50bae9104d"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/source-extraction.json",
+              "bytes": 13261,
+              "sha": "ba05cf98b70e2954e3fd7fafd98aaa6785e93d3c",
+              "sha256": "a707dcb1854fe0a52e559f55336e7004e63b88525ee59ea04ca66c58601ea650"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/source-scope-after.json",
+              "bytes": 1541,
+              "sha": "7eaa4cb0e62b9eb3d7473877463e3cdf49bc5778",
+              "sha256": "0d422bc61a7393590643600c3f767746056d735d4d0f710728ef2f894714d1b1"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/source-scope-before.json",
+              "bytes": 1541,
+              "sha": "7eaa4cb0e62b9eb3d7473877463e3cdf49bc5778",
+              "sha256": "0d422bc61a7393590643600c3f767746056d735d4d0f710728ef2f894714d1b1"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/collector-capture.json",
+              "bytes": 28667,
+              "sha": "00ed43a0077c398ed8bb8943651d32179fdc6b5b",
+              "sha256": "07c3a9468fca81537e5826a9b8ef4c996ad7a983ef5227cc7ae6c748ac31703c"
+            }
+          ],
+          "manifest": {
+            "schema": "agijobsv0/codeql-review-byte-log/1",
+            "type": "manifest",
+            "repository": "MontrealAI/AGIJobsv0",
+            "language": "python",
+            "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+            "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+            "ref": "refs/heads/fix/processed-codeql-release-proof-20261020",
+            "workflow": ".github/workflows/static-analysis-python-integrations.yml",
+            "sourceFiles": {
+              "workflow": {
+                "path": ".github/workflows/static-analysis-python-integrations.yml",
+                "blob": "0d1220ce9b561ae8feeee9e47bb6a0ff4226c3c0",
+                "sha256": "5b08a73d05cea31c09e8bf23a34b742c2fd85a47b7fbea52a94f70fd9c3ce077"
+              },
+              "collector": {
+                "path": "scripts/release/emit-codeql-review-rc16.cjs",
+                "blob": "95c96fecba7e1bee728f190b4a0c1dc0da2fc979",
+                "sha256": "f72e89026b0c0b5d5638fef2cf9c7678f6fac5850afb5de439aa9d309411b6db"
+              }
+            },
+            "run": {
+              "id": 39506898518,
+              "attempt": 1,
+              "number": 75,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "branch": "fix/processed-codeql-release-proof-20261020",
+              "event": "push",
+              "workflow": ".github/workflows/static-analysis-python-integrations.yml",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            "producerJob": {
+              "id": 118917969470,
+              "runId": 39506898518,
+              "attempt": 1,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "key": "codeql-python",
+              "name": "Python integration CodeQL analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "uploadStepId": "codeql_raw"
+            },
+            "collectorJob": {
+              "id": 118918505639,
+              "runId": 39506898518,
+              "attempt": 1,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "key": "codeql-review-bytes",
+              "name": "Complete Python CodeQL review bytes",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            "artifact": {
+              "id": 12304171500,
+              "name": "python-codeql-security-report-ff64fc432d641a04521fbe265c658d2dfbe35fd4-39506898518-1",
+              "bytes": 106962,
+              "githubDigest": "sha256:1bfb604a498d2f09730315e39f0b2e88ab07b9e8ae7c07e3cb3b6c327fbfedd7",
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "runId": 39506898518,
+              "headBranch": "fix/processed-codeql-release-proof-20261020"
+            },
+            "acquisitionCount": 1,
+            "chunkBytes": 12288,
+            "reviewStatus": "UNAPPROVED_REQUIRES_FULL_REVIEW_AND_FINAL_PRODUCER_SUCCESS",
+            "streams": [
+              {
+                "name": "original.zip",
+                "bytes": 106962,
+                "sha256": "1bfb604a498d2f09730315e39f0b2e88ab07b9e8ae7c07e3cb3b6c327fbfedd7",
+                "chunks": 9
+              },
+              {
+                "name": "python.sarif",
+                "bytes": 788624,
+                "sha256": "3ab5ec4d3d8d8e9ba8e4856d3f467e38d19b1bfc40ce20c977592d50bae9104d",
+                "chunks": 65
+              },
+              {
+                "name": "source-extraction.json",
+                "bytes": 13261,
+                "sha256": "a707dcb1854fe0a52e559f55336e7004e63b88525ee59ea04ca66c58601ea650",
+                "chunks": 2
+              },
+              {
+                "name": "source-scope-after.json",
+                "bytes": 1541,
+                "sha256": "0d422bc61a7393590643600c3f767746056d735d4d0f710728ef2f894714d1b1",
+                "chunks": 1
+              },
+              {
+                "name": "source-scope-before.json",
+                "bytes": 1541,
+                "sha256": "0d422bc61a7393590643600c3f767746056d735d4d0f710728ef2f894714d1b1",
+                "chunks": 1
+              }
+            ]
+          },
+          "status": "COMPLETE_ORIGINAL_PACKET_RETAINED_INDEPENDENT_RECONCILIATION_IN_PROGRESS"
+        },
+        "javascript": {
+          "commit": "8a48658a0f38ed129b6b6e769103768c42d01960",
+          "tree": "b438d7e82612c3d9b327206eefe1f143ae958ffc",
+          "branch": "evidence/rc16-codeql-c3e943-20261020",
+          "files": [
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-1.log",
+              "bytes": 899999,
+              "sha": "030023b5dc4fe0b8bbbbb706252727a365f88eda",
+              "sha256": "ba388cff6e7a5a28c2e418053b2b51bc7a44bcbe7ad181bc46289d2d7a490045"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-2.log",
+              "bytes": 900000,
+              "sha": "a26e0eed5b2a405f3e93a841ac8463319ff28588",
+              "sha256": "9c5f206a21ec00716818fb1409f767769d3417f271abfe956050e41c7b22e248"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-3.log",
+              "bytes": 900000,
+              "sha": "cb6aa4738bd8848acfc86778796a941ffdb8407e",
+              "sha256": "da65de90c1660212ecb30cbf793d338f58b9fa42b7f05365faa4cb6b6f2cb041"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-4.log",
+              "bytes": 508559,
+              "sha": "ea0b37afff3362ea22e170ee43637ef536f59f64",
+              "sha256": "37662fc7f97a1d245b69ee2130a39a68a82fba0983ccb69ebb198210783879a2"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/original.zip",
+              "bytes": 200486,
+              "sha": "e9cb60169840db63edc67dd4d4024eeaaa921f10",
+              "sha256": "8f97ecca7453b48b449c65b2ab7f624a816dc0b86bdb0f21892457a403096fc4"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/javascript.sarif",
+              "bytes": 2091597,
+              "sha": "b8bb04c13cf2c2ed0cb19e056ebc953cec0bbe3c",
+              "sha256": "cacacde69731969f15575f35ef9dc414d41d3dbd15f92422fcd9402e7814e05c"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/source-extraction.json",
+              "bytes": 52235,
+              "sha": "48ae89621f86ef1ff018b3fccfc5032d42fcfb29",
+              "sha256": "e122a2870a27b95b1c9ed6c59ca610ce9b85117e6014c49a038caac75336f93f"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/source-scope-after.json",
+              "bytes": 5620,
+              "sha": "15c45d134f9112a97963948b8c408a0928353537",
+              "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/source-scope-before.json",
+              "bytes": 5620,
+              "sha": "15c45d134f9112a97963948b8c408a0928353537",
+              "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-capture.json",
+              "bytes": 34289,
+              "sha": "28a3411dd1c85e07fe0398afd8d2d582cde87cb4",
+              "sha256": "7075e1bed4284963a2b5ebcf040308ad6181c15ea4ed7221ce83dab4d7dd09be"
+            }
+          ],
+          "manifest": {
+            "schema": "agijobsv0/codeql-review-byte-log/1",
+            "type": "manifest",
+            "repository": "MontrealAI/AGIJobsv0",
+            "language": "javascript",
+            "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+            "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+            "ref": "refs/heads/fix/processed-codeql-release-proof-20261020",
+            "workflow": ".github/workflows/static-analysis.yml",
+            "sourceFiles": {
+              "workflow": {
+                "path": ".github/workflows/static-analysis.yml",
+                "blob": "da884644bf8b483c5ab6a643ce491c40b87898f6",
+                "sha256": "8b577905c4b4e2a173180a8883262869de7e5f9861a7dd6d1f36e316519e60ce"
+              },
+              "collector": {
+                "path": "scripts/release/emit-codeql-review-rc16.cjs",
+                "blob": "95c96fecba7e1bee728f190b4a0c1dc0da2fc979",
+                "sha256": "f72e89026b0c0b5d5638fef2cf9c7678f6fac5850afb5de439aa9d309411b6db"
+              }
+            },
+            "run": {
+              "id": 39506898382,
+              "attempt": 1,
+              "number": 4170,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "branch": "fix/processed-codeql-release-proof-20261020",
+              "event": "push",
+              "workflow": ".github/workflows/static-analysis.yml",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            "producerJob": {
+              "id": 118917969048,
+              "runId": 39506898382,
+              "attempt": 1,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "key": "codeql",
+              "name": "CodeQL analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "uploadStepId": "codeql_raw"
+            },
+            "collectorJob": {
+              "id": 118919553008,
+              "runId": 39506898382,
+              "attempt": 1,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "key": "codeql-review-bytes",
+              "name": "Complete JavaScript CodeQL review bytes",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            "artifact": {
+              "id": 12303942313,
+              "name": "codeql-security-report-ff64fc432d641a04521fbe265c658d2dfbe35fd4-39506898382-1",
+              "bytes": 200486,
+              "githubDigest": "sha256:8f97ecca7453b48b449c65b2ab7f624a816dc0b86bdb0f21892457a403096fc4",
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "runId": 39506898382,
+              "headBranch": "fix/processed-codeql-release-proof-20261020"
+            },
+            "acquisitionCount": 1,
+            "chunkBytes": 12288,
+            "reviewStatus": "UNAPPROVED_REQUIRES_FULL_REVIEW_AND_FINAL_PRODUCER_SUCCESS",
+            "streams": [
+              {
+                "name": "original.zip",
+                "bytes": 200486,
+                "sha256": "8f97ecca7453b48b449c65b2ab7f624a816dc0b86bdb0f21892457a403096fc4",
+                "chunks": 17
+              },
+              {
+                "name": "javascript.sarif",
+                "bytes": 2091597,
+                "sha256": "cacacde69731969f15575f35ef9dc414d41d3dbd15f92422fcd9402e7814e05c",
+                "chunks": 171
+              },
+              {
+                "name": "source-extraction.json",
+                "bytes": 52235,
+                "sha256": "e122a2870a27b95b1c9ed6c59ca610ce9b85117e6014c49a038caac75336f93f",
+                "chunks": 5
+              },
+              {
+                "name": "source-scope-after.json",
+                "bytes": 5620,
+                "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd",
+                "chunks": 1
+              },
+              {
+                "name": "source-scope-before.json",
+                "bytes": 5620,
+                "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd",
+                "chunks": 1
+              }
+            ]
+          },
+          "status": "COMPLETE_ORIGINAL_PACKET_RETAINED_INDEPENDENT_RECONCILIATION_IN_PROGRESS"
+        }
+      },
+      "s2CurrentGroups": [
+        {
+          "id": 39506904191,
+          "name": "CULTURE Demo CI",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 39506904249,
+          "name": "containers",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 39506904311,
+          "name": "contracts-ci",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 39506904165,
+          "name": "torch-tests",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904241,
+          "name": "Qualified rc.16 source release",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904171,
+          "name": "Validator Constellation Demo CI",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904193,
+          "name": "actionlint",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904163,
+          "name": "webapp",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904116,
+          "name": "SUCCESSOR Computer Use",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904308,
+          "name": "Escrow replay regression",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904175,
+          "name": "e2e",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904296,
+          "name": "Demo observatory Pages",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 39506904144,
+          "name": "Native transformation compatibility",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904108,
+          "name": "static-analysis-python-integrations",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904561,
+          "name": "apps-images",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904168,
+          "name": "fuzz",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506904159,
+          "name": "static-analysis",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 39506904122,
+          "name": "ci (v2)",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 39506904230,
+          "name": "Production rehearsal",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 39506904125,
+          "name": "Inherited security regressions",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506898518,
+          "name": "static-analysis-python-integrations",
+          "event": "push",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506898382,
+          "name": "static-analysis",
+          "event": "push",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 39506898385,
+          "name": "CULTURE Demo CI",
+          "event": "push",
+          "attempt": 1,
+          "status": "in_progress",
+          "conclusion": null
+        }
+      ],
+      "reconciliationS1": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+      "reconciliationS2": "ff64fc432d641a04521fbe265c658d2dfbe35fd4"
+    },
+    "alpha": {
+      "main": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+      "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+      "oldReviewedMergedMain": "558f798a9b9cc73c1db01905858aad8852e11092",
+      "normalDescendant": true,
+      "unchangedPriorLeaves": 3609,
+      "addedPapers": [
+        "docs/Out_Evolve.pdf",
+        "docs/Out_Evolve.tex",
+        "docs/The_World_as_an_Output.pdf",
+        "docs/The_World_as_an_Output.tex"
+      ],
+      "agentRun": 39484204330,
+      "agentAttempt": 2,
+      "agentJobs": {
+        "success": 27,
+        "cancelled": 1,
+        "inProgress": 1,
+        "regression": 118845385781,
+        "historical": 118845385952
+      },
+      "legacyRun": 39484204335,
+      "legacyAttempt": 1,
+      "legacyStatus": "Current exacta6 fullCI39484204335:1 completedSUCCESS; all12jobs includingboth3563passedcoveragecells,threshold80%passed83.80/84.09.",
+      "release": "v1.36.0 actual404/notpublished",
+      "prior558OperatorBlocker": "SUPERSEDED_HISTORICAL_NOT_CURRENT_BLOCKER: newer owner paper commits changed main; follow new current source. Proposed558rootreplay aborted before mutation.",
+      "requiredNext": "Follow current exactmain fullCI/publisher, preserve all new papers, obtain current source continuity/review binding before final source selection and refresh Fleet Alpha/computer pins to actual published source.",
+      "evidence": {
+        "commit": "cdb5672231a2ff8f508c78e5e9b082eeaadc0a37",
+        "tree": "c7709c2f43426fd449eae38ce66a4c9c133ac7a5"
+      },
+      "currentSourceContinuityReview": {
+        "status": "PASS_STATIC_ONLY",
+        "source": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+        "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+        "evidence": "a5ae385888959b6a7fcbc982fcf5f8d321ec9a66",
+        "comment": 6301065552
+      },
+      "currentBlocker": {
+        "owner": "Alpha original hosted Agent workflow / root release coordinator",
+        "state": "Attempt2 regressionactive; originalcancel/deadlinefailurefullyretained,nochangesorwaivers.",
+        "next": "Require actual original regressionPASS plus strict/package/pages/publisher success and authenticatedrelease/tag/assets.",
+        "evidence": "f56cea7a776c85978c4af067f1218485dd9573df"
+      },
+      "agentStatus": "Originalfailed-onlyretryadmitted,sourceunchanged,successfuloriginaljobspreserved; retriedhistoricalSUCCESS,regressionactive,downstreampackage/pages/publishstillrequired."
+    },
+    "fleet": {
+      "pr": 61,
+      "source": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "tree": "ed382a6ac343bc6b1759af072bca4cb1aa031c92",
+      "status": "All10original current Fleet442workflow groupsSUCCESS, including Linuxx64/ARM64/native/audit/aggregate. Public releases and final pins/eligible owner stillrequired;2originalP1threads intentionallyOPEN.",
+      "blockers": [
+        {
+          "owner": "Eligible independent Fleet functional owner",
+          "next": "Review final exact source and explicitly authorize recovery/source-custody dispositions; blocked agent lane cannot be retried or substituted."
+        },
+        {
+          "owner": "Root release coordinator",
+          "next": "After actual fresh Jobs and current Alpha a6d20-or-later publications, refresh BOTH final Jobs/Alpha pins and computer profile/README tuples, then full fresh Fleet qualification and eligible owner review."
+        }
+      ],
+      "evidence": {
+        "commit": "51c26d4a116c812a20849d21466883ec3c147a06",
+        "tree": "b6fab8216d6e5fe00434548f96e618fcad8c469d"
+      },
+      "pinPreparation": {
+        "status": "SUSPENDED; old d023 did not publish, future actual Jobs identity required",
+        "source": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+        "proposedTreeHistoricalOnly": "ffbab0168604c563a7c8df3bf3b7dce8153ba60e"
+      }
+    },
+    "manager": {
+      "source": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "release": "v1.19.5",
+      "releaseId": 417952385,
+      "status": "Released and frozen; final live verification still required"
+    },
+    "final": {
+      "publicInstalledONE": false,
+      "D": false,
+      "E": false,
+      "T": false,
+      "allFourFinalLive": false,
+      "rootReadbackExpansion": {
+        "status": "12offlineunitsPASS and independent static sourcebinding reviewPASS, notliveF",
+        "paths": 22,
+        "gitBlob": "96b7607765941a8171cf4255a261922bc75d3135",
+        "evidence": "4870f31c0e075a91a25c27e58d8aec9a17aa2622"
+      }
+    },
+    "storage": {
+      "free": "29GB available / 4%used",
+      "deleted": false,
+      "paidCommitment": false
+    },
+    "mainnet": {
+      "lookup": "Completed read-only block identity/timestamp matched retained ENS",
+      "stateChanges": 0
+    }
+  },
+  "jobsEvidence": {
+    "commit": "8a48658a0f38ed129b6b6e769103768c42d01960",
+    "tree": "b438d7e82612c3d9b327206eefe1f143ae958ffc",
+    "branch": "evidence/rc16-codeql-c3e943-20261020",
+    "files": [
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-1.log",
+        "bytes": 899999,
+        "sha": "030023b5dc4fe0b8bbbbb706252727a365f88eda",
+        "sha256": "ba388cff6e7a5a28c2e418053b2b51bc7a44bcbe7ad181bc46289d2d7a490045"
+      },
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-2.log",
+        "bytes": 900000,
+        "sha": "a26e0eed5b2a405f3e93a841ac8463319ff28588",
+        "sha256": "9c5f206a21ec00716818fb1409f767769d3417f271abfe956050e41c7b22e248"
+      },
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-3.log",
+        "bytes": 900000,
+        "sha": "cb6aa4738bd8848acfc86778796a941ffdb8407e",
+        "sha256": "da65de90c1660212ecb30cbf793d338f58b9fa42b7f05365faa4cb6b6f2cb041"
+      },
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-4.log",
+        "bytes": 508559,
+        "sha": "ea0b37afff3362ea22e170ee43637ef536f59f64",
+        "sha256": "37662fc7f97a1d245b69ee2130a39a68a82fba0983ccb69ebb198210783879a2"
+      },
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/original.zip",
+        "bytes": 200486,
+        "sha": "e9cb60169840db63edc67dd4d4024eeaaa921f10",
+        "sha256": "8f97ecca7453b48b449c65b2ab7f624a816dc0b86bdb0f21892457a403096fc4"
+      },
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/javascript.sarif",
+        "bytes": 2091597,
+        "sha": "b8bb04c13cf2c2ed0cb19e056ebc953cec0bbe3c",
+        "sha256": "cacacde69731969f15575f35ef9dc414d41d3dbd15f92422fcd9402e7814e05c"
+      },
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/source-extraction.json",
+        "bytes": 52235,
+        "sha": "48ae89621f86ef1ff018b3fccfc5032d42fcfb29",
+        "sha256": "e122a2870a27b95b1c9ed6c59ca610ce9b85117e6014c49a038caac75336f93f"
+      },
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/source-scope-after.json",
+        "bytes": 5620,
+        "sha": "15c45d134f9112a97963948b8c408a0928353537",
+        "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd"
+      },
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/source-scope-before.json",
+        "bytes": 5620,
+        "sha": "15c45d134f9112a97963948b8c408a0928353537",
+        "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd"
+      },
+      {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-capture.json",
+        "bytes": 34289,
+        "sha": "28a3411dd1c85e07fe0398afd8d2d582cde87cb4",
+        "sha256": "7075e1bed4284963a2b5ebcf040308ad6181c15ea4ed7221ce83dab4d7dd09be"
+      }
+    ]
+  },
+  "strictSourceAdoptionEvidence": "0b1c053fe76dee25b3cb929ae4ac8fe7a42ab3c5",
+  "installedSource": {
+    "commit": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+    "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+    "recordHashes": {
+      "scannerReview": {
+        "bytes": 47528,
+        "sha256": "edb4d5c7d2531f968b10dbfd9a37227f84ccc8762a63aa6d10d1ce9bc98c8717",
+        "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3"
+      },
+      "pythonScannerReview": {
+        "bytes": 742109,
+        "sha256": "e54b0f8afba18fe55e3edac35bf973afdc2319ce910bc6c1def11bec85b00ee6",
+        "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3"
+      },
+      "notesReview": {
+        "bytes": 70098,
+        "sha256": "694e98e07d6482f7d633aa3cfdac39f02706b749d7222b41a9ca81790c3abe12",
+        "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3"
+      }
+    }
+  },
+  "independentInstallationReceipts": {
+    "javascript": {
+      "commit": "5a2c84dd228fed6c5bf740b66b3c0c5aec0aeee8",
+      "bytes": 12621,
+      "sha256": "cc44f9c1c0d0c60eebd395e29b5f5c47745c7d88424b51ac87cc8fd8dbe4acad"
+    },
+    "python": {
+      "commit": "d22cade7105a04724ebfa573feac279c606b5afb",
+      "bytes": 9077,
+      "sha256": "0a5b25d25681ca326c8a298b740e32f7ee9c0379194920b14506260ca8693c09"
+    }
+  },
+  "rootFinalReadback": {
+    "content": "#!/usr/bin/env python3\n\"\"\"Local, opt-in HTTP readback; no browser, release API or execution attestation.\n\nCLI requires --read-live, --expected PATH and a new --output PATH. Expected is\nan independently authenticated JSON object with exactly alpha/jobs/manager/fleet.\nalpha/jobs/manager require commit (full SHA) and version. Fleet requires\nwebsiteCommit T, releaseCommit S, version, releaseTag, releaseWorkflowRun and\nreleaseArchive {name,bytes,sha256}. Each site may additionally supply\nmetadataSha256 from its authenticated Pages artifact. Alpha may additionally\nsupply paperSha256 {fixed public paper path: SHA256} and paperGitBlobs\n{fixed public paper path: independently authenticated Git blob ID}. No URLs are accepted.\n\nNo release identities are discovered or defaulted. Jobs catalog has no version;\nits caller-supplied version is retained as unverified release context only.\nHTTP success and served self-declared inventories do not authenticate a producer,\nrelease, rendered UI, native/model execution, installation or on-chain state.\n\"\"\"\nfrom __future__ import annotations\n\nimport argparse\nimport contextlib\nimport hashlib\nimport http.client\nimport json\nimport math\nimport re\nimport signal\nimport time\nimport urllib.error\nimport urllib.request\nfrom html.parser import HTMLParser\nfrom pathlib import Path\nfrom urllib.parse import quote, urlencode, urlsplit\n\nHOST = \"montrealai.github.io\"\nROOTS = {\"alpha\": \"/AGI-Alpha-Agent-v0/\", \"jobs\": \"/AGIJobsv0/\",\n         \"manager\": \"/AGIJobManager/\", \"fleet\": \"/AGI-Fleet-Linux/\"}\nMETADATA = {\"alpha\": \"release.json\", \"jobs\": \"catalog.json\",\n            \"manager\": \"build-info.json\", \"fleet\": \"build-info.json\"}\nSHA = re.compile(r\"[0-9a-f]{40}\\Z\")\nDIGEST = re.compile(r\"[0-9a-f]{64}\\Z\")\nVERSION = re.compile(r\"[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][A-Za-z0-9.-]+)?\\Z\")\nJSON_LIMIT = 4 * 1024 * 1024\nFILE_LIMIT = 64 * 1024 * 1024\nTOTAL_LIMIT = 256 * 1024 * 1024\nFILE_COUNT_LIMIT = 1024\nOVERALL_SECONDS = 600\nREQUEST_SECONDS = 20\nPAPERS = tuple(f\"{name}.{suffix}\" for name in\n               (\"Transformational_Intelligence\", \"Beyond_the_Original_Problem\",\n                \"Beyond_the_Production_Frontier\") for suffix in (\"pdf\", \"tex\")) + tuple(\n    f\"{name}_LaTeX.zip\" for name in (\"Transformational_Intelligence\",\n    \"Beyond_the_Original_Problem\", \"Beyond_the_Production_Frontier\")) + (\n    \"assets/whitepaper_v0.1.0-alphav15.pdf\",\n    \"manuscript/AGI_ALPHA_Unified_Publication_Final.pdf\",\n    \"Earn_the_Next_Experiment.pdf\",\n    \"Earn_the_Next_Experiment.tex\",\n    \"Earn_the_Next_Experiment_LaTeX.zip\",\n    \"Invent_the_Economy.pdf\",\n    \"Invent_the_Economy.tex\",\n    \"Invent_the_Economy_LaTeX.zip\",\n    \"SUCCESSOR_Omega_Invent_the_Economy_Business_Brief.pdf\",\n    \"Out_Evolve.pdf\", \"Out_Evolve.tex\",\n    \"The_World_as_an_Output.pdf\", \"The_World_as_an_Output.tex\")\nROUTES = {\n    \"alpha\": ((\"\", \"en\", None), (\"successor/alpha/\", \"en\", None),\n              (\"successor/alpha/\", None, \"fr\"),\n              (\"transformational-intelligence/\", None, None),\n              (\"agent/SUCCESSOR_COMPUTER_USE/\", None, None),\n              (\"manuscript/\", None, None),\n              (\"PILOT_PLAYBOOK/\", None, None)),\n    \"jobs\": ((\"\", None, None), (\"start/\", \"en\", None),\n             (\"start/fr/\", \"fr\", None), (\"successor/computer/\", \"en\", None),\n             (\"successor/computer/fr/\", \"fr\", None),\n             (\"successor/computer/desk/\", \"en\", None),\n             (\"successor/computer/desk/fr/\", \"fr\", None)),\n    \"manager\": ((\"\", \"en\", None), (\"fr/\", \"fr\", None),\n                (\"computer-receipt/\", \"en\", None),\n                (\"fr/computer-receipt/\", \"fr\", None),\n                (\"successor/\", \"en\", None), (\"fr/successor/\", \"fr\", None)),\n    \"fleet\": ((\"index.html\", \"en\", None), (\"fr.html\", \"fr\", None),\n              (\"start.html\", \"en\", None), (\"start-fr.html\", \"fr\", None),\n              (\"successor.html\", \"en\", None), (\"successor-fr.html\", \"fr\", None)),\n}\n\n\ndef need(value, message):\n    if not value:\n        raise ValueError(message)\n\n\ndef digest(raw):\n    return hashlib.sha256(raw).hexdigest()\n\n\ndef integer(value, minimum=0, maximum=FILE_LIMIT):\n    return type(value) is int and minimum <= value <= maximum\n\n\ndef object_pairs(pairs):\n    result = {}\n    for key, value in pairs:\n        need(key not in result, \"duplicate JSON property\")\n        result[key] = value\n    return result\n\n\ndef json_object(raw):\n    need(len(raw) <= JSON_LIMIT, \"JSON exceeds limit\")\n    value = json.loads(raw.decode(\"utf-8\", errors=\"strict\"),\n                       object_pairs_hook=object_pairs,\n                       parse_constant=lambda _: (_ for _ in ()).throw(ValueError(\"nonfinite JSON\")),\n                       parse_float=finite_float)\n    need(isinstance(value, dict), \"JSON object required\")\n    return value\n\n\ndef finite_float(token):\n    value = float(token)\n    need(math.isfinite(value), \"nonfinite JSON number\")\n    return value\n\n\ndef safe_path(value, *, empty=False, flat=False):\n    need(isinstance(value, str) and (value or empty) and len(value) <= 512,\n         \"invalid public relative path\")\n    need(not value.startswith(\"/\") and not any(ord(c) < 32 or ord(c) == 127 for c in value)\n         and not any(c in value for c in \"\\\\%?#:\") and \"//\" not in value,\n         \"unsafe public relative path\")\n    parts = value.rstrip(\"/\").split(\"/\") if value else []\n    need(all(part not in (\"\", \".\", \"..\") and not part.startswith(\".\") for part in parts),\n         \"unsafe path segment\")\n    need(not flat or len(parts) == 1, \"flat public file required\")\n    return value\n\n\ndef validate_expected(value):\n    need(set(value) == set(ROOTS), \"all four independently supplied site expectations required\")\n    for name in ROOTS:\n        row = value[name]\n        need(isinstance(row, dict), \"site expectation object required\")\n        base = {\"commit\", \"version\"} if name != \"fleet\" else {\n            \"websiteCommit\", \"releaseCommit\", \"version\", \"releaseTag\",\n            \"releaseWorkflowRun\", \"releaseArchive\"}\n        allowed = base | {\"metadataSha256\"} | ({\"paperSha256\", \"paperGitBlobs\"} if name == \"alpha\" else set())\n        need(base <= set(row) <= allowed, \"missing or unknown expectation fields: \" + name)\n        for key in (\"commit\",) if name != \"fleet\" else (\"websiteCommit\", \"releaseCommit\"):\n            need(isinstance(row[key], str) and SHA.fullmatch(row[key]) and row[key] != \"0\" * 40,\n                 \"actual full source commit required: \" + name)\n        need(isinstance(row[\"version\"], str) and VERSION.fullmatch(row[\"version\"]),\n             \"actual version required: \" + name)\n        if \"metadataSha256\" in row:\n            need(isinstance(row[\"metadataSha256\"], str) and DIGEST.fullmatch(row[\"metadataSha256\"]),\n                 \"invalid independently supplied metadata hash\")\n        if name == \"alpha\" and \"paperSha256\" in row:\n            papers = row[\"paperSha256\"]\n            need(isinstance(papers, dict) and set(papers) <= set(PAPERS), \"unknown paper hash path\")\n            need(all(isinstance(h, str) and DIGEST.fullmatch(h) for h in papers.values()), \"invalid paper hash\")\n        if name == \"alpha\" and \"paperGitBlobs\" in row:\n            blobs = row[\"paperGitBlobs\"]\n            need(isinstance(blobs, dict) and set(blobs) <= set(PAPERS), \"unknown paper source-blob path\")\n            need(all(isinstance(h, str) and SHA.fullmatch(h) and h != \"0\" * 40\n                     for h in blobs.values()), \"invalid paper source blob\")\n        if name == \"fleet\":\n            need(isinstance(row[\"releaseTag\"], str) and re.fullmatch(r\"v[0-9A-Za-z.+-]{1,80}\", row[\"releaseTag\"]), \"release tag required\")\n            need(isinstance(row[\"releaseWorkflowRun\"], str) and re.fullmatch(r\"[1-9][0-9]*\", row[\"releaseWorkflowRun\"]), \"actual release run required\")\n            archive = row[\"releaseArchive\"]\n            need(isinstance(archive, dict) and set(archive) == {\"name\", \"bytes\", \"sha256\"}, \"release archive identity required\")\n            safe_path(archive[\"name\"], flat=True)\n            need(integer(archive[\"bytes\"], 1, 2_000_000_000) and isinstance(archive[\"sha256\"], str)\n                 and DIGEST.fullmatch(archive[\"sha256\"]), \"invalid release archive identity\")\n    return value\n\n\ndef request_target(name, relative, commit, language=None):\n    need(name in ROOTS and isinstance(commit, str) and SHA.fullmatch(commit), \"invalid request identity\")\n    safe_path(relative, empty=True)\n    need(language in (None, \"fr\"), \"only source-declared public language query is allowed\")\n    query = {\"readback\": commit}\n    if language is not None:\n        query[\"lang\"] = language\n    return ROOTS[name] + quote(relative, safe=\"/\") + \"?\" + urlencode(query)\n\n\n@contextlib.contextmanager\ndef wall_deadline(seconds):\n    need(hasattr(signal, \"setitimer\"), \"bounded Unix local verifier required\")\n    def expired(_signum, _frame):\n        raise TimeoutError(\"public HTTP readback deadline exceeded\")\n    old_handler = signal.signal(signal.SIGALRM, expired)\n    previous = signal.setitimer(signal.ITIMER_REAL, seconds)\n    started = time.monotonic()\n    try:\n        yield\n    finally:\n        signal.setitimer(signal.ITIMER_REAL, 0)\n        signal.signal(signal.SIGALRM, old_handler)\n        if previous[0]:\n            signal.setitimer(signal.ITIMER_REAL, max(0.000001, previous[0] - (time.monotonic() - started)), previous[1])\n\n\nclass NoRedirect(urllib.request.HTTPRedirectHandler):\n    def redirect_request(self, request, file, code, message, headers, new_url):\n        return None\n\n\nclass PublicHTTP:\n    \"\"\"Fixed TLS origin; ordinary managed proxy transport, no origin credentials.\"\"\"\n    def __init__(self):\n        self.total = 0\n        self.count = 0\n        self.deadline = time.monotonic() + OVERALL_SECONDS\n        # Preserve urllib's normal platform transport. Do not inspect, override or\n        # log proxy configuration. No cookie jar/origin-auth handler is installed.\n        self.opener = urllib.request.build_opener(NoRedirect())\n\n    def get(self, target, limit):\n        need(target.startswith(tuple(ROOTS.values())) and not target.startswith(\"//\"), \"unexpected HTTP target\")\n        parsed = urlsplit(target)\n        need(not parsed.scheme and not parsed.netloc and not parsed.fragment, \"relative fixed-host target required\")\n        need(self.count < FILE_COUNT_LIMIT and self.total < TOTAL_LIMIT, \"public download budget exceeded\")\n        remaining = self.deadline - time.monotonic()\n        need(remaining > 0 and integer(limit, 1, FILE_LIMIT), \"public deadline or read limit exceeded\")\n        self.count += 1\n        request = urllib.request.Request(\"https://\" + HOST + target, method=\"GET\", headers={\n            \"Cache-Control\": \"no-cache\", \"Pragma\": \"no-cache\", \"Accept-Encoding\": \"identity\",\n            \"User-Agent\": \"Four-Pages-Public-Readback/1\"})\n        response = None\n        try:\n            with wall_deadline(min(REQUEST_SECONDS, remaining)):\n                response = self.opener.open(request, timeout=min(REQUEST_SECONDS, remaining))\n                need(response.status == 200, \"public response must be HTTP 200 (redirects refused)\")\n                need(response.getheader(\"Content-Encoding\", \"identity\").lower() in (\"\", \"identity\"), \"encoded response refused\")\n                declared = response.getheader(\"Content-Length\")\n                if declared is not None:\n                    need(re.fullmatch(r\"[0-9]+\", declared) is not None and int(declared) <= limit, \"declared response exceeds bound\")\n                content = bytearray()\n                while True:\n                    need(self.deadline > time.monotonic(), \"public deadline exceeded\")\n                    chunk = response.read(min(64 * 1024, limit + 1 - len(content)))\n                    if not chunk:\n                        break\n                    content.extend(chunk)\n                    self.total += len(chunk)\n                    need(len(content) <= limit and self.total <= TOTAL_LIMIT, \"actual response exceeds budget\")\n                if declared is not None:\n                    need(len(content) == int(declared), \"truncated response\")\n                return bytes(content), response.getheader(\"Content-Type\", \"\")\n        except (OSError, http.client.HTTPException, urllib.error.URLError) as error:\n            if isinstance(error, urllib.error.HTTPError):\n                error.close()\n            raise ValueError(\"public HTTP transport failed; platform transport details omitted\") from None\n        finally:\n            if response is not None:\n                response.close()\n\n\nclass HTMLSummary(HTMLParser):\n    def __init__(self):\n        super().__init__(convert_charrefs=True)\n        self.language = None\n        self.title_parts = []\n        self.in_title = False\n        self.links = set()\n        self.html = False\n\n    def handle_starttag(self, tag, attrs):\n        attrs = dict(attrs)\n        if tag == \"html\":\n            self.html = True\n            self.language = attrs.get(\"lang\")\n        self.in_title = self.in_title or tag == \"title\"\n        if tag == \"a\" and isinstance(attrs.get(\"href\"), str):\n            link = urlsplit(attrs[\"href\"])\n            if link.scheme == \"https\" and link.netloc == HOST and not link.query:\n                self.links.add(\"https://\" + HOST + link.path + (\"#\" + link.fragment if link.fragment else \"\"))\n\n    def handle_endtag(self, tag):\n        if tag == \"title\":\n            self.in_title = False\n\n    def handle_data(self, data):\n        if self.in_title:\n            self.title_parts.append(data)\n\n\ndef inventory(metadata, name):\n    files = metadata.get(\"files\")\n    need(isinstance(files, dict) and 1 <= len(files) <= FILE_COUNT_LIMIT, \"finite served inventory required\")\n    result = {}\n    for file, row in files.items():\n        safe_path(file, flat=name == \"fleet\")\n        need(file not in (\"build-info.json\", \".nojekyll\"), \"self/build-only file must not be promised served\")\n        if name == \"manager\":\n            need(isinstance(row, dict) and set(row) == {\"bytes\", \"sha256\"}\n                 and integer(row[\"bytes\"]) and isinstance(row[\"sha256\"], str) and DIGEST.fullmatch(row[\"sha256\"]), \"invalid Manager inventory row\")\n            result[file] = row\n        else:\n            need(isinstance(row, str) and DIGEST.fullmatch(row), \"invalid Fleet inventory row\")\n            result[file] = {\"sha256\": row}\n    if name == \"manager\":\n        excluded = metadata.get(\"buildOnlyFiles\")\n        need(isinstance(excluded, dict) and set(excluded) == {\".nojekyll\"}, \"unexpected Manager build-only exclusions\")\n    return result\n\n\ndef metadata_identity(name, value, expected):\n    if name == \"alpha\":\n        need(value.get(\"schema\") == 1 and value.get(\"commit\") == expected[\"commit\"]\n             and value.get(\"version\") == expected[\"version\"]\n             and value.get(\"url\") == \"https://\" + HOST + ROOTS[name], \"Alpha served release identity differs\")\n    elif name == \"jobs\":\n        need(value.get(\"schemaVersion\") == 2 and value.get(\"revision\") == expected[\"commit\"]\n             and value.get(\"basePath\") == ROOTS[name], \"Jobs served catalog identity differs\")\n        need(integer(value.get(\"directories\"), 1, 1_000_000) and integer(value.get(\"guides\"), 1, 1_000_000), \"empty Jobs catalog\")\n        need(isinstance(value.get(\"successorRoutes\"), list) and {\"successor/computer/\", \"successor/computer/fr/\"} <= set(value[\"successorRoutes\"]), \"Jobs native routes absent\")\n    elif name == \"manager\":\n        need(value.get(\"sourceCommit\") == expected[\"commit\"] and value.get(\"sourceVersion\") == expected[\"version\"], \"Manager served build identity differs\")\n        inventory(value, name)\n    else:\n        need(value.get(\"schema\") == \"agi-fleet-pages-build/v1\" and value.get(\"commit\") == expected[\"websiteCommit\"]\n             and value.get(\"productionQualified\") is False, \"Fleet served website identity differs\")\n        inventory(value, name)\n\n\ndef fleet_release_identity(value, expected):\n    archive = expected[\"releaseArchive\"]\n    need(value.get(\"schema\") == \"agi-linux-published-release/v1\"\n         and value.get(\"workflowCommit\") == expected[\"releaseCommit\"]\n         and value.get(\"version\") == expected[\"version\"] and value.get(\"tag\") == expected[\"releaseTag\"]\n         and str(value.get(\"workflowRun\")) == expected[\"releaseWorkflowRun\"]\n         and all(value.get(k) == archive[k] for k in (\"name\", \"bytes\", \"sha256\"))\n         and value.get(\"productionQualified\") is False, \"Fleet served selected release differs from actual S\")\n\n\ndef readback(expected, transport):\n    validate_expected(expected)\n    cache, records, metadata = {}, [], {}\n    def get(name, relative, *, limit=FILE_LIMIT, language=None):\n        commit = expected[name].get(\"commit\", expected[name].get(\"websiteCommit\"))\n        target = request_target(name, relative, commit, language)\n        if target not in cache:\n            raw, media = transport.get(target, limit)\n            need(len(raw) <= limit, \"transport response exceeds bound\")\n            cache[target] = (raw, media)\n            records.append({\"site\": name, \"path\": relative, \"languageQuery\": language,\n                            \"url\": \"https://\" + HOST + target, \"bytes\": len(raw), \"sha256\": digest(raw)})\n        return cache[target]\n    # All four machine identities and selected Fleet S must pass before payload reads.\n    for name in ROOTS:\n        raw, _ = get(name, METADATA[name], limit=JSON_LIMIT)\n        if \"metadataSha256\" in expected[name]:\n            need(digest(raw) == expected[name][\"metadataSha256\"], \"independent metadata hash differs\")\n        metadata[name] = json_object(raw)\n        metadata_identity(name, metadata[name], expected[name])\n    raw, _ = get(\"fleet\", \"release.json\", limit=JSON_LIMIT)\n    fleet_release_identity(json_object(raw), expected[\"fleet\"])\n    hashed = {}\n    for name in (\"manager\", \"fleet\"):\n        rows = inventory(metadata[name], name)\n        for file, row in sorted(rows.items()):\n            raw, _ = get(name, file, limit=max(row.get(\"bytes\", 0), 1) if \"bytes\" in row else FILE_LIMIT)\n            need(digest(raw) == row[\"sha256\"] and (\"bytes\" not in row or len(raw) == row[\"bytes\"]), \"served inventory bytes/hash differ: \" + name + \"/\" + file)\n        hashed[name] = len(rows)\n    html = []\n    for name, routes in ROUTES.items():\n        for relative, language, query in routes:\n            raw, media = get(name, relative, language=query)\n            if name in (\"manager\", \"fleet\"):\n                member = relative + \"index.html\" if not relative or relative.endswith(\"/\") else relative\n                row = inventory(metadata[name], name).get(member)\n                need(row is not None and digest(raw) == row[\"sha256\"]\n                     and (\"bytes\" not in row or len(raw) == row[\"bytes\"]),\n                     \"journey alias differs from inventoried HTML: \" + name + \"/\" + relative)\n            need(\"text/html\" in media.lower(), \"journey route is not HTML\")\n            summary = HTMLSummary()\n            summary.feed(raw.decode(\"utf-8\", errors=\"strict\"))\n            title = \"\".join(summary.title_parts).strip()\n            need(summary.html and title, \"HTML route has no document/title\")\n            if language is not None:\n                need(summary.language == language, \"static HTML language differs\")\n            html.append({\"site\": name, \"path\": relative, \"languageQuery\": query,\n                         \"staticHtmlLanguage\": summary.language, \"title\": title,\n                         \"canonicalHostLinks\": sorted(summary.links)})\n    papers = []\n    for relative in PAPERS:\n        raw, _ = get(\"alpha\", relative)\n        if relative.endswith(\".pdf\"):\n            need(raw.startswith(b\"%PDF-\"), \"paper is not a PDF\")\n        elif relative.endswith(\".zip\"):\n            need(raw.startswith(b\"PK\\x03\\x04\"), \"paper source is not a ZIP\")\n        else:\n            need(bool(raw.decode(\"utf-8\", errors=\"strict\").strip()), \"empty TeX source\")\n        wanted = expected[\"alpha\"].get(\"paperSha256\", {}).get(relative)\n        if wanted is not None:\n            need(digest(raw) == wanted, \"independent paper hash differs\")\n        blob_digest = hashlib.sha1()\n        blob_digest.update(f\"blob {len(raw)}\\0\".encode(\"ascii\"))\n        blob_digest.update(raw)\n        source_blob = blob_digest.hexdigest()\n        wanted_blob = expected[\"alpha\"].get(\"paperGitBlobs\", {}).get(relative)\n        if wanted_blob is not None:\n            need(source_blob == wanted_blob, \"independent paper source blob differs\")\n        papers.append({\"path\": relative, \"sha256\": digest(raw), \"independentExpectedHashCompared\": wanted is not None,\n                       \"gitBlob\": source_blob, \"independentExpectedGitBlobCompared\": wanted_blob is not None})\n    return {\"schema\": \"local/four-pages-public-http-readback/v1\", \"scope\": \"BOUNDED_PUBLIC_HTTP_BYTES_ONLY\",\n            \"expected\": expected, \"metadataIdentityMatched\": True, \"inventoryFilesCompared\": hashed,\n            \"metadataExpectedHashCompared\": {name: \"metadataSha256\" in expected[name] for name in ROOTS},\n            \"jobsVersionNotServedByCatalog\": expected[\"jobs\"][\"version\"], \"routes\": html, \"papers\": papers,\n            \"observations\": records, \"totalDownloadedBytes\": sum(row[\"bytes\"] for row in records),\n            \"producerAuthenticatedByThisHelper\": False, \"releaseAuthenticatedByThisHelper\": False,\n            \"servedInventoryIndependentlyAuthenticatedByThisHelper\": False,\n            \"renderedUiTested\": False, \"browserUsed\": False, \"nativeOrModelAcceptance\": False,\n            \"installationChecked\": False, \"walletOrOnChainAction\": False,\n            \"limitations\": [\"Caller must authenticate final source/release/deployment context independently.\",\n                \"Served inventories are self-declared unless caller binds their metadata hash to the tested artifact.\",\n                \"Static HTTP cannot exercise language toggles, controls, downloads or archive restore.\",\n                \"Paper source/content binding requires independently supplied hashes; HTTP/type checks alone are insufficient.\",\n                \"Historical Builder/deployment/Mac pins are retained and are not equated to website commits.\"]}\n\n\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"--expected\", type=Path, required=True)\n    parser.add_argument(\"--output\", type=Path, required=True)\n    parser.add_argument(\"--read-live\", action=\"store_true\", help=\"explicitly allow public HTTPS reads after final inputs are supplied\")\n    args = parser.parse_args()\n    need(args.read_live, \"no network without explicit --read-live and actual final expectations\")\n    need(not args.output.exists(), \"output must not exist\")\n    with args.expected.open(\"rb\") as source:\n        raw = source.read(JSON_LIMIT + 1)\n    expected = validate_expected(json_object(raw))\n    started = time.monotonic()\n    with wall_deadline(OVERALL_SECONDS):\n        result = readback(expected, PublicHTTP())\n    result[\"elapsedSeconds\"] = round(time.monotonic() - started, 6)\n    result[\"expectedInputSha256\"] = digest(raw)\n    with args.output.open(\"x\", encoding=\"utf-8\") as output:\n        output.write(json.dumps(result, ensure_ascii=True, allow_nan=False, sort_keys=True, indent=2) + \"\\n\")\n    print(json.dumps({\"schema\": result[\"schema\"], \"httpBytesObserved\": True,\n                      \"files\": len(result[\"observations\"]), \"producerAuthenticatedByThisHelper\": False}))\n\n\nif __name__ == \"__main__\":\n    main()\n",
+    "gitBlob": "96b7607765941a8171cf4255a261922bc75d3135",
+    "bytes": 23365,
+    "sha256": "9ceed16e4b799f571c4a3ec4432947443790354dd7e3450c9a83f6701a2e59a7",
+    "independentReview": "4870f31c0e075a91a25c27e58d8aec9a17aa2622",
+    "liveExecuted": false,
+    "requiredNewPaperExpectedFragment": {
+      "source": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+      "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+      "paperGitBlobs": {
+        "Out_Evolve.pdf": "a2a333187388e961a91c2fd67696adc09641c3ed",
+        "Out_Evolve.tex": "d2a1abdc373076d2f872ff824878988136d75c0b",
+        "The_World_as_an_Output.pdf": "b474ad005a7c6fd8339fcbed80c51c5c5fb85284",
+        "The_World_as_an_Output.tex": "c351982e1159c09f196868c4f76ee31faf392a65"
+      },
+      "paperSha256": {
+        "Out_Evolve.tex": "9860db55e36d18a8bab17b1dadfede7d5938449b10bb4dd48bf3be7f996e5e40",
+        "The_World_as_an_Output.tex": "21bd28bd6adc322c8d5a0c02183065b03971eddd89676df6310f6c3ba74b008b"
+      },
+      "status": "AUTHENTICATED_SOURCE_EXPECTATIONS_ONLY_ACTUAL_FINAL_RELEASE_MUST_MATCH_BEFORE_LIVE_USE"
+    }
+  },
+  "eStillUnqualified": true,
+  "completion": false
+}
