@@ -1,0 +1,40 @@
+{
+  "schema": "ti-continuation/current-source-wallet-result/v1",
+  "source": "c92b91fc012f14041307d0ba4b59c4b7a98cc933",
+  "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+  "run": 39437019881,
+  "attempt": 1,
+  "job": 118677210971,
+  "jobConclusion": "success",
+  "suite": "two_cycle_interruption_browser",
+  "suiteConclusion": "passed",
+  "retainedSuiteFolder": "20261020T143053391147Z-two_cycle_interruption_browser-6b3912ba",
+  "artifact": {
+    "id": 12273541180,
+    "name": "ascension-current-audit",
+    "size_in_bytes": 29343520,
+    "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/artifacts/12273541180",
+    "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/artifacts/12273541180/zip",
+    "expired": false,
+    "created_at": "2026-10-20T14:36:26Z",
+    "expires_at": "2027-01-18T14:11:40Z",
+    "updated_at": "2026-10-20T14:36:26Z",
+    "digest": "sha256:48c9e59fca8b5ec969d85d3be63bb68accb5e015f355ee7bea8f98ce2a914bc5",
+    "workflow_run": {
+      "id": 39437019881,
+      "repository_id": 922805069,
+      "head_repository_id": 922805069,
+      "head_branch": "qualification/ti-public-source-20261020",
+      "head_sha": "c92b91fc012f14041307d0ba4b59c4b7a98cc933"
+    }
+  },
+  "logSha256": "97a58192bec6437424a4a0aca753d2fc7ea4604f65070dfe0adb286cc2c3419b",
+  "logBytes": 250785,
+  "historicalD262FailureRetained": true,
+  "historicalFailureCause": "unknown",
+  "fixCausalityClaim": false,
+  "qualificationComplete": false,
+  "finalPublicInstalledJourney": false,
+  "liveSitesVerified": false,
+  "observedAt": "2026-10-20T14:57:25.029Z"
+}
