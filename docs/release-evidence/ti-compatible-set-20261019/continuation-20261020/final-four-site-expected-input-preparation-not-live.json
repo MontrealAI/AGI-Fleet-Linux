@@ -1,0 +1,84 @@
+{
+  "status": "PENDING_FINAL_FLEET_S_T_AND_IMMUTABLE_RELEASES_NOT_RUN",
+  "helper": {
+    "gitBlob": "96b7607765941a8171cf4255a261922bc75d3135",
+    "bytes": 23365,
+    "sha256": "9ceed16e4b799f571c4a3ec4432947443790354dd7e3450c9a83f6701a2e59a7",
+    "independentReviewBlob": "90a7e50ddd7559c188aa970be4aa73f1af543884",
+    "independentReviewSha256": "5becc49c104ed15a855f9278d8c64787d1ed2dc619190b9d585c732ae47508a3",
+    "offlineUnitsPreviouslyPass": 12,
+    "offlineUnitsRerun": false,
+    "liveExecuted": false
+  },
+  "siteExpectationDraft": {
+    "alpha": {
+      "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+      "version": "1.36.0",
+      "paperGitBlobs": {
+        "Out_Evolve.pdf": "a2a333187388e961a91c2fd67696adc09641c3ed",
+        "Out_Evolve.tex": "d2a1abdc373076d2f872ff824878988136d75c0b",
+        "The_World_as_an_Output.pdf": "b474ad005a7c6fd8339fcbed80c51c5c5fb85284",
+        "The_World_as_an_Output.tex": "c351982e1159c09f196868c4f76ee31faf392a65"
+      },
+      "paperSha256": {
+        "Out_Evolve.tex": "9860db55e36d18a8bab17b1dadfede7d5938449b10bb4dd48bf3be7f996e5e40",
+        "The_World_as_an_Output.tex": "21bd28bd6adc322c8d5a0c02183065b03971eddd89676df6310f6c3ba74b008b"
+      }
+    },
+    "jobs": {
+      "commit": "83065adf18a6ee987f8fa479a496a052d35db682",
+      "version": null
+    },
+    "manager": {
+      "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "version": "1.19.5"
+    },
+    "fleet": {
+      "websiteCommit": null,
+      "releaseCommit": null,
+      "version": "1.1.5",
+      "releaseTag": "v1.1.5",
+      "releaseWorkflowRun": null,
+      "releaseArchive": null
+    }
+  },
+  "currentActualAlphaPaperSources": [
+    {
+      "path": "docs/Out_Evolve.pdf",
+      "gitBlob": "a2a333187388e961a91c2fd67696adc09641c3ed",
+      "bytes": 399909,
+      "mode": "100644",
+      "sha256": null
+    },
+    {
+      "path": "docs/Out_Evolve.tex",
+      "gitBlob": "d2a1abdc373076d2f872ff824878988136d75c0b",
+      "bytes": 4246,
+      "mode": "100644",
+      "sha256": "9860db55e36d18a8bab17b1dadfede7d5938449b10bb4dd48bf3be7f996e5e40"
+    },
+    {
+      "path": "docs/The_World_as_an_Output.pdf",
+      "gitBlob": "b474ad005a7c6fd8339fcbed80c51c5c5fb85284",
+      "bytes": 313266,
+      "mode": "100644",
+      "sha256": null
+    },
+    {
+      "path": "docs/The_World_as_an_Output.tex",
+      "gitBlob": "c351982e1159c09f196868c4f76ee31faf392a65",
+      "bytes": 85948,
+      "mode": "100644",
+      "sha256": "21bd28bd6adc322c8d5a0c02183065b03971eddd89676df6310f6c3ba74b008b"
+    }
+  ],
+  "requiredBeforeExecution": [
+    "Actual immutable releases with authenticated exact source/tag/assets, not merely existing mutable Alpha publication or reserved Jobs tag.",
+    "All three Fleet publications from same actual qualified merged mainS after required eligible owner review.",
+    "ONE actual public normal-installed-package connected journey with original completeD and independently reviewed E.",
+    "Separate website-only commitT from exactS and original hosted all-four-site live verification."
+  ],
+  "noFinalFClaim": true,
+  "mainnetSigningOrTransactions": false,
+  "createdAt": "2026-10-20T23:23:43.019Z"
+}
