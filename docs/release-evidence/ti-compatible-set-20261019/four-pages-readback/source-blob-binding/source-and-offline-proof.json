@@ -1,0 +1,68 @@
+{
+  "schema": "root-http-readback-source-blob-binding/1",
+  "asOf": "2026-10-20T21:04:00.060Z",
+  "status": "OFFLINE_VALIDATED_PENDING_INDEPENDENT_STATIC_REVIEW_NOT_LIVE_EVIDENCE",
+  "purpose": "Bind all four new paper HTTP payloads to independently authenticated current source Git object identities without any early source-PDF binary retrieval.",
+  "baseHelper": {
+    "bytes": 22415,
+    "gitBlob": "e46db1d0b9136ed73ef3847b4e5591ff1df0c826",
+    "sha256": "d9399dc19af28f3c26f0adc5ac20cfe7241a9133bf8d020792f15ff9509a5289"
+  },
+  "helper": {
+    "bytes": 23365,
+    "gitBlob": "96b7607765941a8171cf4255a261922bc75d3135",
+    "sha256": "9ceed16e4b799f571c4a3ec4432947443790354dd7e3450c9a83f6701a2e59a7"
+  },
+  "baseTests": {
+    "bytes": 13949,
+    "gitBlob": "5875e359c82587afe9d647a13c514dacdef4c456",
+    "sha256": "b0375f5844e9a4609f4c2a6818ddf957a90815d6e3840b87121bf7bb9512c2fc"
+  },
+  "tests": {
+    "bytes": 15808,
+    "gitBlob": "3edbf0466f9f6b58cb24a76a9de45a9b854463d2",
+    "sha256": "4203ffb3c62ed895afa803814b3d67c8a38bd9ee623bf89182a17b47bf7f8544"
+  },
+  "expectedSource": {
+    "source": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+    "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+    "paperGitBlobs": {
+      "Out_Evolve.pdf": "a2a333187388e961a91c2fd67696adc09641c3ed",
+      "Out_Evolve.tex": "d2a1abdc373076d2f872ff824878988136d75c0b",
+      "The_World_as_an_Output.pdf": "b474ad005a7c6fd8339fcbed80c51c5c5fb85284",
+      "The_World_as_an_Output.tex": "c351982e1159c09f196868c4f76ee31faf392a65"
+    },
+    "paperSha256": {
+      "Out_Evolve.tex": "9860db55e36d18a8bab17b1dadfede7d5938449b10bb4dd48bf3be7f996e5e40",
+      "The_World_as_an_Output.tex": "21bd28bd6adc322c8d5a0c02183065b03971eddd89676df6310f6c3ba74b008b"
+    },
+    "status": "AUTHENTICATED_SOURCE_EXPECTATIONS_ONLY_ACTUAL_FINAL_RELEASE_MUST_MATCH_BEFORE_LIVE_USE"
+  },
+  "delta": "Only add optional finite Alpha paperGitBlobs selector, strict40lowercasehex/nonzero validation, standard incremental Git blob hashing/header equality, and observed Git identity comparison fields. Preserve existing22paths/order, SHA256 checks, metadata/source/release/TvsS, HTTPS/GET/redirect and all resource/failure guards.",
+  "gitObjectProtocol": "SHA1(ASCII('blob '+decimalByteLength+'\\0') followed by the exact raw bytes); incremental hashing avoids a second full payload copy. SHA256 remains calculated and all previous independently supplied SHA256 requirements remain enforced.",
+  "offlineValidation": {
+    "command": "python3 -m unittest -v test_readback.py",
+    "tests": 12,
+    "pass": 12,
+    "fail": 0,
+    "networkRequests": 0,
+    "existing11MethodsRetained": true,
+    "newMethod": "test_independent_source_blob_checks_bind_paper_bytes_and_refuse_invalid_selectors",
+    "independentExpectedIdsProducedBy": "git hash-object --stdin without -w, no repository/state writes",
+    "knownGitTestIds": [
+      {
+        "text": "%PDF-unit",
+        "gitBlob": "5fec9e62964e5054b1c614600eb469777009f10d"
+      },
+      {
+        "text": "unit TeX",
+        "gitBlob": "1852d3b7d2f9669af2a41b6b10b7e72a2b86e37d"
+      }
+    ],
+    "coverage": "Actual Git-generated expected IDs accepted; valid-type changed PDF and TeX refused; unknown paths, zero/wrong-length/nonstring identifiers refused before transport."
+  },
+  "limits": [
+    "Not final F, E, T, installed journey, release qualification or Fleet functional-owner review.",
+    "No source-PDF binary retrieval, compilation/rendering, provider/wallet/RPC access or chain/state action."
+  ]
+}
