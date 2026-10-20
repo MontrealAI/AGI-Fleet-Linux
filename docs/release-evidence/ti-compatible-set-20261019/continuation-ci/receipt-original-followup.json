@@ -1,0 +1,72 @@
+{
+  "schema": "agi-fleet/release-continuation-original-ci-log-custody/v1",
+  "complete": false,
+  "observedAt": "2026-10-20T12:02:37.192Z",
+  "originalPublicDecodedLogs": [
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/alpha-875-windows313-smoke-job-118591351027.log",
+      "blob": "49a204718127fe8e4698c73087c942df336b1dc7",
+      "bytes": 905980,
+      "sha256": "d4f288023286cd08b1c7139b41f29e526571d2bfbbe1c06ba9601d5cb0bc5fa2",
+      "encoding": "UTF-8 of original GitHub decoded public job log"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-0e7-x64-saved-job-118608045412.log",
+      "blob": "8c3cef03a62ab01bf19be9ae94d7bb2722bf0242",
+      "bytes": 728862,
+      "sha256": "c966d2b9043a520607d09dc86765ca26e9393cefc1b8cf9d7708d5ea7267765a",
+      "encoding": "UTF-8 of original GitHub decoded public job log"
+    }
+  ],
+  "alpha": {
+    "source": "875165bdd3d54c8dde4ebfcacb6a45cda41a86f2",
+    "smokeRun": 39411869856,
+    "attempt": 1,
+    "failedJob": 118591351027,
+    "failed": 1,
+    "passed": 1046,
+    "skipped": 4,
+    "otherSmokePlatformJobsPassed": 8,
+    "newSource": "74f42026399333af332c5e699156e81104ac4f05",
+    "change": "Only deterministic test fixture actual request/control/response ordering; no timeout increases or production/SDK changes",
+    "owner": "Root release coordinator; original hosted CI",
+    "nextAction": "Require fresh74f original checks and current configured review; finish/audit875Agent separately before admitting exact-current qualification"
+  },
+  "fleet": {
+    "source": "0e7d71a45aa864d22cbc8dc2efabd364c7d1add1",
+    "run": 39413598428,
+    "attempt": 1,
+    "failedJob": 118608045412,
+    "architecture": "x64",
+    "actualStoppedReceipt": {
+      "state": "interrupted",
+      "allReportedBindingPredicates": true,
+      "actionsReserved": 5,
+      "turnsReserved": 1,
+      "elapsedMilliseconds": 3346
+    },
+    "laterFailure": "DASHBOARD_DRIVER_FAILED at recovery controls; exception details deliberately not exposed to protect credentials",
+    "sourceReadFinding": "Driver parses recoveryDetails before waiting for the async-rendered recovery panel/control",
+    "candidateOnly": {
+      "blob": "c223b86db5c48e7451d4d65c26d6482f4b917e60",
+      "sha256": "313a874a61b428ac5173a14e69b7ec2e52908712a1f370be7202d5c60d360d2b",
+      "change": "Await visible actual recovery panel and existing enabled reconciliation assertion before plan JSON read; unexecuted"
+    },
+    "owner": "Root source coordinator; original CI; eligible Fleet owner review remains unavailable",
+    "nextAction": "Observe current ARM run; full configured current source review and all original saved-package/recovery checks after source correction; no runtime success inferred from source"
+  },
+  "jobs": {
+    "source": "c0761b4f129911ef4f700932a331db159032f6e7",
+    "reviewEvidenceCommit": "903667965c86e54c929cf4624cc4c35d967f5e93",
+    "nextAction": "Finish independent exact three-slot install check, then fresh final-head normal qualification/merge/main publication"
+  },
+  "limits": {
+    "notFinalEquivalenceManifest": true,
+    "noSourceKeysLocksSessionsOrPriorEvidenceDeleted": true,
+    "noSigningOrTransactions": true,
+    "noPaidStorageCommitment": true,
+    "noLocallyExecutedScenarios": true,
+    "noFakeOwnerApproval": true,
+    "noOriginalFailureWaivedOrRerun": true
+  }
+}
