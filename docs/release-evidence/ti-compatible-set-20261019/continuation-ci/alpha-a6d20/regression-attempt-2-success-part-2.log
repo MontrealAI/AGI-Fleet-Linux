@@ -1,0 +1,686 @@
+10.0-py3-none-any.whl (48 kB)
+2026-10-20T21:57:04.4743901Z Downloading eth_keys-0.8.0-py3-none-any.whl (20 kB)
+2026-10-20T21:57:04.4904947Z Downloading eth_rlp-3.0.0-py3-none-any.whl (15 kB)
+2026-10-20T21:57:04.5068538Z Downloading eth_typing-6.0.0-py3-none-any.whl (19 kB)
+2026-10-20T21:57:04.5234186Z Downloading eth_utils-6.0.0-py3-none-any.whl (102 kB)
+2026-10-20T21:57:04.5400604Z Downloading cytoolz-1.2.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.2 MB)
+2026-10-20T21:57:04.5803511Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 74.7 MB/s  0:00:00
+2026-10-20T21:57:04.5956538Z Downloading eth_hash-0.8.0-py3-none-any.whl (8.0 kB)
+2026-10-20T21:57:04.6120161Z Downloading hexbytes-2.0.0-py3-none-any.whl (18 kB)
+2026-10-20T21:57:04.6283304Z Downloading rlp-5.0.0-py3-none-any.whl (19 kB)
+2026-10-20T21:57:04.6463299Z Downloading toolz-1.2.0-py3-none-any.whl (60 kB)
+2026-10-20T21:57:04.8468639Z Installing collected packages: ckzg, toolz, pycryptodome, parsimonious, hexbytes, eth-typing, eth-hash, bitarray, cytoolz, eth-utils, rlp, eth-keys, eth-abi, eth-rlp, eth-keyfile, eth-account
+2026-10-20T21:57:05.4482502Z 
+2026-10-20T21:57:05.4573994Z Successfully installed bitarray-3.12.3 ckzg-2.1.8 cytoolz-1.2.0 eth-abi-6.0.0 eth-account-0.13.7 eth-hash-0.8.0 eth-keyfile-0.8.1 eth-keys-0.8.0 eth-rlp-3.0.0 eth-typing-6.0.0 eth-utils-6.0.0 hexbytes-2.0.0 parsimonious-0.10.0 pycryptodome-3.24.1 rlp-5.0.0 toolz-1.2.0
+2026-10-20T21:57:06.8066592Z All required packages available.
+2026-10-20T21:57:09.5964321Z Wheelhouse /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/wheels has no wheels; falling back to network installs
+2026-10-20T21:57:09.5964818Z WARNING: Missing required packages: google_adk
+2026-10-20T21:57:09.5965195Z   - Google ADK not available. Install with: pip install google-adk
+2026-10-20T21:57:09.5966060Z Attempting automatic install (timeout 600s): /opt/hostedtoolcache/Python/3.12.15/x64/bin/python -m pip install --quiet google-adk
+2026-10-20T21:57:10.1614309Z Install completed, verifying …
+2026-10-20T21:57:10.1614610Z [32mopenai_agents 0.0.17 detected[0m
+2026-10-20T21:57:10.1615172Z Environment OK
+2026-10-20T21:57:11.2531454Z No broken requirements found.
+2026-10-20T21:57:11.6772143Z 
+2026-10-20T21:57:11.6772745Z added 1 package, and audited 2 packages in 367ms
+2026-10-20T21:57:11.6776143Z 
+2026-10-20T21:57:11.6776248Z found 0 vulnerabilities
+2026-10-20T21:57:14.5241238Z npm warn deprecated @web3-storage/did-mailto@2.1.0: Web3.storage became storacha.network, please upgrade to @storacha/did-mailto
+2026-10-20T21:57:14.5538545Z npm warn deprecated @web3-storage/filecoin-client@3.3.5: Web3.storage became storacha.network, please upgrade to @storacha/filecoin-client
+2026-10-20T21:57:14.6278672Z npm warn deprecated @web3-storage/blob-index@1.0.5: Web3.storage became storacha.network, please upgrade to @storacha/blob-index
+2026-10-20T21:57:14.7927575Z npm warn deprecated @web3-storage/capabilities@18.1.0: Web3.storage became storacha.network, please upgrade to @storacha/capabilities
+2026-10-20T21:57:14.8005596Z npm warn deprecated @web3-storage/upload-client@17.1.4: Web3.storage became storacha.network, please upgrade to @storacha/upload-client
+2026-10-20T21:57:14.8320142Z npm warn deprecated @web3-storage/access@20.3.0: Web3.storage became storacha.network, please upgrade to @storacha/access
+2026-10-20T21:57:15.6683241Z npm warn deprecated @web3-storage/w3up-client@17.3.0: Web3.storage became storacha.network, please upgrade to @storacha/client
+2026-10-20T21:57:16.0296785Z npm warn deprecated glob@11.1.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-20T21:57:18.3332985Z 
+2026-10-20T21:57:18.3333644Z > insight-browser-v1@1.4.0 preinstall
+2026-10-20T21:57:18.3334498Z > node -e "const m=parseInt(process.versions.node); if(m<22){console.error('Node.js 22+ is required. Current version: '+process.versions.node); process.exit(1);} "
+2026-10-20T21:57:18.3335020Z 
+2026-10-20T21:57:18.3665071Z 
+2026-10-20T21:57:18.3666152Z added 852 packages, and audited 853 packages in 7s
+2026-10-20T21:57:18.3666430Z 
+2026-10-20T21:57:18.3666760Z 215 packages are looking for funding
+2026-10-20T21:57:18.3667296Z   run `npm fund` for details
+2026-10-20T21:57:18.3673216Z 
+2026-10-20T21:57:18.3673454Z found 0 vulnerabilities
+2026-10-20T21:57:18.4632449Z 
+2026-10-20T21:57:18.4633033Z > insight-browser-v1@1.4.0 build
+2026-10-20T21:57:18.4633344Z > node build.js
+2026-10-20T21:57:18.4633457Z 
+2026-10-20T21:57:21.7599752Z Detected placeholder assets, running fetch_assets.py...
+2026-10-20T21:57:22.1771914Z Skipping wasm_llm assets because FETCH_ASSETS_SKIP_LLM is set.
+2026-10-20T21:57:22.1772804Z Fetching wasm/pyodide.js from https://cdn.jsdelivr.net/pyodide/v0.28.0/full/pyodide.js...
+2026-10-20T21:57:22.1773373Z Resolved Pyodide URL: https://cdn.jsdelivr.net/pyodide/v0.28.0/full/pyodide.js
+2026-10-20T21:57:22.1773776Z Fetched wasm/pyodide.js via primary mirror
+2026-10-20T21:57:22.1774297Z Fetching wasm/pyodide.asm.wasm from https://cdn.jsdelivr.net/pyodide/v0.28.0/full/pyodide.asm.wasm...
+2026-10-20T21:57:22.1774904Z Resolved Pyodide URL: https://cdn.jsdelivr.net/pyodide/v0.28.0/full/pyodide.asm.wasm
+2026-10-20T21:57:22.1775552Z Fetched wasm/pyodide.asm.wasm via primary mirror
+2026-10-20T21:57:22.1776074Z Fetching wasm/pyodide-lock.json from https://cdn.jsdelivr.net/pyodide/v0.28.0/full/pyodide-lock.json...
+2026-10-20T21:57:22.1776685Z Resolved Pyodide URL: https://cdn.jsdelivr.net/pyodide/v0.28.0/full/pyodide-lock.json
+2026-10-20T21:57:22.1777113Z Fetched wasm/pyodide-lock.json via primary mirror
+2026-10-20T21:57:22.1777443Z Skipping lib/bundle.esm.min.js, already exists
+2026-10-20T21:57:22.1777749Z Skipping lib/workbox-sw.js, already exists
+2026-10-20T21:57:22.1778036Z All assets verified successfully
+2026-10-20T21:57:22.2333999Z ▲ [WARNING] Using direct eval with a bundler is not recommended and may cause problems [direct-eval]
+2026-10-20T21:57:22.2334397Z 
+2026-10-20T21:57:22.2334956Z     lib/bundle.esm.min.js:1:72311:
+2026-10-20T21:57:22.2335594Z       1 │ ...quire(moduleName){try{var mod=eval("quire".replace(/^/,"re"))(mo...
+2026-10-20T21:57:22.2336011Z         ╵                                  ~~~~
+2026-10-20T21:57:22.2336179Z 
+2026-10-20T21:57:22.2336485Z   You can read more about direct eval and bundling here: https://esbuild.github.io/link/direct-eval
+2026-10-20T21:57:22.2336808Z 
+2026-10-20T21:57:22.3644432Z /*! 🌼 daisyUI 5.7.47 */
+2026-10-20T21:57:22.9487247Z One of the glob patterns doesn't match any files. Please remove or fix the following: {
+2026-10-20T21:57:22.9487699Z   "globDirectory": "dist",
+2026-10-20T21:57:22.9487971Z   "globPattern": "assets/pyodide.*",
+2026-10-20T21:57:22.9488183Z   "globIgnores": [
+2026-10-20T21:57:22.9488345Z     "**/node_modules/**/*",
+2026-10-20T21:57:22.9488477Z     "sw.build.js",
+2026-10-20T21:57:22.9488588Z     "sw.js"
+2026-10-20T21:57:22.9488689Z   ]
+2026-10-20T21:57:22.9488789Z }
+2026-10-20T21:57:22.9489028Z One of the glob patterns doesn't match any files. Please remove or fix the following: {
+2026-10-20T21:57:22.9489264Z   "globDirectory": "dist",
+2026-10-20T21:57:22.9489444Z   "globPattern": "assets/insight_browser_quickstart.pdf",
+2026-10-20T21:57:22.9489613Z   "globIgnores": [
+2026-10-20T21:57:22.9489729Z     "**/node_modules/**/*",
+2026-10-20T21:57:22.9489853Z     "sw.build.js",
+2026-10-20T21:57:22.9489956Z     "sw.js"
+2026-10-20T21:57:22.9490054Z   ]
+2026-10-20T21:57:22.9490147Z }
+2026-10-20T21:57:23.6094696Z Installing dependencies...
+2026-10-20T21:57:23.6127410Z Switching to root user to install dependencies...
+2026-10-20T21:57:23.6729767Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-20T21:57:23.7075878Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-10-20T21:57:23.7086291Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-10-20T21:57:23.7087253Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-10-20T21:57:23.7106320Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-10-20T21:57:23.7142687Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-10-20T21:57:23.7897504Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
+2026-10-20T21:57:23.7976689Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [565 kB]
+2026-10-20T21:57:23.8042072Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [626 kB]
+2026-10-20T21:57:23.8247266Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1397 kB]
+2026-10-20T21:57:23.8272583Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [308 kB]
+2026-10-20T21:57:23.8296428Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1704 kB]
+2026-10-20T21:57:23.8348806Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [342 kB]
+2026-10-20T21:57:23.8367758Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1805 kB]
+2026-10-20T21:57:23.8443508Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [411 kB]
+2026-10-20T21:57:23.8990153Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1145 kB]
+2026-10-20T21:57:23.9030796Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [231 kB]
+2026-10-20T21:57:23.9044196Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1222 kB]
+2026-10-20T21:57:23.9085707Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [246 kB]
+2026-10-20T21:57:23.9523186Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1713 kB]
+2026-10-20T21:57:23.9579656Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [392 kB]
+2026-10-20T21:57:28.7316848Z Fetched 12.5 MB in 1s (13.8 MB/s)
+2026-10-20T21:57:29.2792160Z Reading package lists...
+2026-10-20T21:57:29.2973236Z Reading package lists...
+2026-10-20T21:57:29.4449354Z Building dependency tree...
+2026-10-20T21:57:29.4455004Z Reading state information...
+2026-10-20T21:57:29.5523997Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+2026-10-20T21:57:29.5524601Z libasound2t64 set to manually installed.
+2026-10-20T21:57:29.5525119Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-20T21:57:29.5525628Z libatk-bridge2.0-0t64 set to manually installed.
+2026-10-20T21:57:29.5525973Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-20T21:57:29.5526283Z libatk1.0-0t64 set to manually installed.
+2026-10-20T21:57:29.5526643Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-20T21:57:29.5526979Z libatspi2.0-0t64 set to manually installed.
+2026-10-20T21:57:29.5527303Z libcairo2 is already the newest version (1.18.0-3build1).
+2026-10-20T21:57:29.5527599Z libcairo2 set to manually installed.
+2026-10-20T21:57:29.5527814Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+2026-10-20T21:57:29.5528020Z libcups2t64 set to manually installed.
+2026-10-20T21:57:29.5528232Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+2026-10-20T21:57:29.5528470Z libdbus-1-3 set to manually installed.
+2026-10-20T21:57:29.5528800Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+2026-10-20T21:57:29.5529008Z libdrm2 set to manually installed.
+2026-10-20T21:57:29.5529215Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+2026-10-20T21:57:29.5529413Z libgbm1 set to manually installed.
+2026-10-20T21:57:29.5529622Z libglib2.0-0t64 is already the newest version (2.80.0-6ubuntu3.9).
+2026-10-20T21:57:29.5529839Z libglib2.0-0t64 set to manually installed.
+2026-10-20T21:57:29.5530058Z libnspr4 is already the newest version (2:4.35-1.1build1).
+2026-10-20T21:57:29.5530253Z libnspr4 set to manually installed.
+2026-10-20T21:57:29.5530454Z libnss3 is already the newest version (2:3.98-1ubuntu0.2).
+2026-10-20T21:57:29.5530719Z libnss3 set to manually installed.
+2026-10-20T21:57:29.5530939Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+2026-10-20T21:57:29.5531148Z libpango-1.0-0 set to manually installed.
+2026-10-20T21:57:29.5531359Z libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+2026-10-20T21:57:29.5531552Z libx11-6 set to manually installed.
+2026-10-20T21:57:29.5531738Z libxcb1 is already the newest version (1.15-1ubuntu2).
+2026-10-20T21:57:29.5531921Z libxcb1 set to manually installed.
+2026-10-20T21:57:29.5532127Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+2026-10-20T21:57:29.5532335Z libxcomposite1 set to manually installed.
+2026-10-20T21:57:29.5532812Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+2026-10-20T21:57:29.5533012Z libxdamage1 set to manually installed.
+2026-10-20T21:57:29.5533299Z libxext6 is already the newest version (2:1.3.4-1build2).
+2026-10-20T21:57:29.5533588Z libxext6 set to manually installed.
+2026-10-20T21:57:29.5533891Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+2026-10-20T21:57:29.5534200Z libxfixes3 set to manually installed.
+2026-10-20T21:57:29.5534523Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2026-10-20T21:57:29.5534849Z libxkbcommon0 set to manually installed.
+2026-10-20T21:57:29.5535167Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+2026-10-20T21:57:29.5535636Z libxrandr2 set to manually installed.
+2026-10-20T21:57:29.5535990Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+2026-10-20T21:57:29.5536276Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+2026-10-20T21:57:29.5536492Z libfontconfig1 set to manually installed.
+2026-10-20T21:57:29.5536718Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+2026-10-20T21:57:29.5536934Z libfreetype6 set to manually installed.
+2026-10-20T21:57:29.5537143Z fonts-liberation is already the newest version (1:2.1.5-3).
+2026-10-20T21:57:29.5537597Z fonts-liberation set to manually installed.
+2026-10-20T21:57:29.5537934Z The following additional packages will be installed:
+2026-10-20T21:57:29.5538281Z   xfonts-encodings xfonts-utils xserver-common
+2026-10-20T21:57:29.5538560Z Recommended packages:
+2026-10-20T21:57:29.5538763Z   fonts-ipafont-mincho fonts-tlwg-loma xfonts-base
+2026-10-20T21:57:29.5773930Z The following NEW packages will be installed:
+2026-10-20T21:57:29.5779745Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+2026-10-20T21:57:29.5780067Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+2026-10-20T21:57:29.5780274Z   xfonts-utils
+2026-10-20T21:57:29.5784823Z The following packages will be upgraded:
+2026-10-20T21:57:29.5785081Z   xserver-common xvfb
+2026-10-20T21:57:29.5916588Z 2 upgraded, 9 newly installed, 0 to remove and 83 not upgraded.
+2026-10-20T21:57:29.5916827Z Need to get 22.0 MB of archives.
+2026-10-20T21:57:29.5917052Z After this operation, 79.5 MB of additional disk space will be used.
+2026-10-20T21:57:29.6874803Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-20T21:57:29.6875228Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+2026-10-20T21:57:29.9428255Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+2026-10-20T21:57:30.0396417Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+2026-10-20T21:57:30.0792767Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+2026-10-20T21:57:30.1625700Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+2026-10-20T21:57:30.4475848Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-10-20T21:57:30.5633330Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-10-20T21:57:30.6836052Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+2026-10-20T21:57:30.8036836Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+2026-10-20T21:57:30.9246568Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.9 [35.0 kB]
+2026-10-20T21:57:31.0436578Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.9 [877 kB]
+2026-10-20T21:57:31.3231902Z Fetched 22.0 MB in 2s (14.2 MB/s)
+2026-10-20T21:57:31.3589018Z Selecting previously unselected package fonts-ipafont-gothic.
+2026-10-20T21:57:31.3845708Z (Reading database ... 
+2026-10-20T21:57:31.3845936Z (Reading database ... 5%
+2026-10-20T21:57:31.3846154Z (Reading database ... 10%
+2026-10-20T21:57:31.3846381Z (Reading database ... 15%
+2026-10-20T21:57:31.3846600Z (Reading database ... 20%
+2026-10-20T21:57:31.3846800Z (Reading database ... 25%
+2026-10-20T21:57:31.3847000Z (Reading database ... 30%
+2026-10-20T21:57:31.3847200Z (Reading database ... 35%
+2026-10-20T21:57:31.3847402Z (Reading database ... 40%
+2026-10-20T21:57:31.3847605Z (Reading database ... 45%
+2026-10-20T21:57:31.3847805Z (Reading database ... 50%
+2026-10-20T21:57:31.3882197Z (Reading database ... 55%
+2026-10-20T21:57:31.4551628Z (Reading database ... 60%
+2026-10-20T21:57:31.7007359Z (Reading database ... 65%
+2026-10-20T21:57:31.9050040Z (Reading database ... 70%
+2026-10-20T21:57:32.0531596Z (Reading database ... 75%
+2026-10-20T21:57:32.2268596Z (Reading database ... 80%
+2026-10-20T21:57:32.3952078Z (Reading database ... 85%
+2026-10-20T21:57:32.5248072Z (Reading database ... 90%
+2026-10-20T21:57:32.7200603Z (Reading database ... 95%
+2026-10-20T21:57:32.7200900Z (Reading database ... 100%
+2026-10-20T21:57:32.7201263Z (Reading database ... 203540 files and directories currently installed.)
+2026-10-20T21:57:32.7237315Z Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+2026-10-20T21:57:32.7311396Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-20T21:57:32.9398625Z Selecting previously unselected package fonts-freefont-ttf.
+2026-10-20T21:57:32.9491951Z Preparing to unpack .../01-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+2026-10-20T21:57:32.9496941Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-20T21:57:33.0514554Z Selecting previously unselected package fonts-tlwg-loma-otf.
+2026-10-20T21:57:33.0678123Z Preparing to unpack .../02-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+2026-10-20T21:57:33.0684732Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-20T21:57:33.0849532Z Selecting previously unselected package fonts-unifont.
+2026-10-20T21:57:33.0943258Z Preparing to unpack .../03-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+2026-10-20T21:57:33.0948933Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+2026-10-20T21:57:33.3006186Z Selecting previously unselected package fonts-wqy-zenhei.
+2026-10-20T21:57:33.3098518Z Preparing to unpack .../04-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+2026-10-20T21:57:33.3170713Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-20T21:57:33.7233670Z Selecting previously unselected package xfonts-encodings.
+2026-10-20T21:57:33.7328651Z Preparing to unpack .../05-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-10-20T21:57:33.7334161Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-20T21:57:33.7721196Z Selecting previously unselected package xfonts-utils.
+2026-10-20T21:57:33.7814263Z Preparing to unpack .../06-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-10-20T21:57:33.7819629Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-10-20T21:57:33.8306233Z Selecting previously unselected package xfonts-cyrillic.
+2026-10-20T21:57:33.8436831Z Preparing to unpack .../07-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+2026-10-20T21:57:33.8444793Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-20T21:57:33.9051029Z Selecting previously unselected package xfonts-scalable.
+2026-10-20T21:57:33.9322595Z Preparing to unpack .../08-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+2026-10-20T21:57:33.9342192Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-20T21:57:33.9773075Z Preparing to unpack .../09-xserver-common_2%3a21.1.12-1ubuntu1.9_all.deb ...
+2026-10-20T21:57:33.9788781Z Unpacking xserver-common (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+2026-10-20T21:57:34.0062894Z Preparing to unpack .../10-xvfb_2%3a21.1.12-1ubuntu1.9_amd64.deb ...
+2026-10-20T21:57:34.0080596Z Unpacking xvfb (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+2026-10-20T21:57:34.0599925Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-20T21:57:34.0694747Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-20T21:57:34.0713236Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-20T21:57:34.0729306Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-20T21:57:34.0746597Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-20T21:57:34.0797089Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+2026-10-20T21:57:34.0810939Z Setting up xserver-common (2:21.1.12-1ubuntu1.9) ...
+2026-10-20T21:57:34.0827038Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+2026-10-20T21:57:34.0845997Z Setting up xvfb (2:21.1.12-1ubuntu1.9) ...
+2026-10-20T21:57:34.0861567Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-10-20T21:57:34.0894425Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-20T21:57:34.1127181Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-20T21:57:34.1452165Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-10-20T21:57:34.1469569Z Not building database; man-db/auto-update is not 'true'.
+2026-10-20T21:57:34.1479738Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-10-20T21:57:34.6268149Z 
+2026-10-20T21:57:34.6268617Z Running kernel seems to be up-to-date.
+2026-10-20T21:57:34.6269056Z 
+2026-10-20T21:57:34.6269140Z No services need to be restarted.
+2026-10-20T21:57:34.6269239Z 
+2026-10-20T21:57:34.6269319Z No containers need to be restarted.
+2026-10-20T21:57:34.6269416Z 
+2026-10-20T21:57:34.6269513Z No user sessions are running outdated binaries.
+2026-10-20T21:57:34.6269623Z 
+2026-10-20T21:57:34.6269771Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-10-20T21:57:35.2458614Z Downloading Chromium 139.0.7258.5 (playwright build v1181) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1181/chromium-linux.zip
+2026-10-20T21:57:35.4078100Z |                                                                                |   0% of 172.5 MiB
+2026-10-20T21:57:35.6024670Z |■■■■■■■■                                                                        |  10% of 172.5 MiB
+2026-10-20T21:57:35.7071595Z |■■■■■■■■■■■■■■■■                                                                |  20% of 172.5 MiB
+2026-10-20T21:57:35.8158054Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 172.5 MiB
+2026-10-20T21:57:35.9396705Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 172.5 MiB
+2026-10-20T21:57:36.0797776Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 172.5 MiB
+2026-10-20T21:57:36.2052238Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 172.5 MiB
+2026-10-20T21:57:36.3543638Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 172.5 MiB
+2026-10-20T21:57:36.4854373Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 172.5 MiB
+2026-10-20T21:57:36.6137592Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 172.5 MiB
+2026-10-20T21:57:36.7228642Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 172.5 MiB
+2026-10-20T21:57:38.6934782Z Chromium 139.0.7258.5 (playwright build v1181) downloaded to /home/runner/.cache/ms-playwright/chromium-1181
+2026-10-20T21:57:38.6935905Z Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+2026-10-20T21:57:38.9206511Z |                                                                                |   0% of 2.3 MiB
+2026-10-20T21:57:38.9706109Z |■■■■■■■■                                                                        |  10% of 2.3 MiB
+2026-10-20T21:57:39.0034218Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
+2026-10-20T21:57:39.0213990Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
+2026-10-20T21:57:39.0364427Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
+2026-10-20T21:57:39.0531349Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
+2026-10-20T21:57:39.0589941Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
+2026-10-20T21:57:39.0721103Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
+2026-10-20T21:57:39.0761045Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
+2026-10-20T21:57:39.0823506Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
+2026-10-20T21:57:39.0945197Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
+2026-10-20T21:57:39.1257520Z FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+2026-10-20T21:57:39.1259436Z Downloading Chromium Headless Shell 139.0.7258.5 (playwright build v1181) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1181/chromium-headless-shell-linux.zip
+2026-10-20T21:57:39.2717908Z |                                                                                |   0% of 104.8 MiB
+2026-10-20T21:57:39.4686251Z |■■■■■■■■                                                                        |  10% of 104.8 MiB
+2026-10-20T21:57:39.5324461Z |■■■■■■■■■■■■■■■■                                                                |  20% of 104.8 MiB
+2026-10-20T21:57:39.5870796Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 104.8 MiB
+2026-10-20T21:57:39.6361496Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 104.8 MiB
+2026-10-20T21:57:39.6892800Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 104.8 MiB
+2026-10-20T21:57:39.7468260Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 104.8 MiB
+2026-10-20T21:57:39.8036901Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 104.8 MiB
+2026-10-20T21:57:39.8561362Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 104.8 MiB
+2026-10-20T21:57:39.9081536Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 104.8 MiB
+2026-10-20T21:57:39.9772572Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 104.8 MiB
+2026-10-20T21:57:41.1681742Z Chromium Headless Shell 139.0.7258.5 (playwright build v1181) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1181
+2026-10-20T21:57:41.3896347Z ##[group]Run mkdir -p evidence
+2026-10-20T21:57:41.3896620Z [36;1mmkdir -p evidence[0m
+2026-10-20T21:57:41.3896927Z [36;1m# The full suite owns shared browser assets and cleans them after use.[0m
+2026-10-20T21:57:41.3897632Z [36;1mALPHA_PYTEST_OWNER_PID=$$ python -m scripts.run_local_tests tests/test_orchestrator_backoff.py tests/test_insight_orchestrator_restart.py -q --junitxml=evidence/restarts.xml[0m
+2026-10-20T21:57:41.3948454Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T21:57:41.3948632Z env:
+2026-10-20T21:57:41.3948747Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T21:57:41.3948892Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T21:57:41.3949029Z   NO_DISCLAIMER: 1
+2026-10-20T21:57:41.3949173Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:57:41.3949400Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-20T21:57:41.3949620Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:57:41.3949845Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:57:41.3950047Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:57:41.3950250Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-20T21:57:41.3950420Z ##[endgroup]
+2026-10-20T21:57:48.0910966Z ..                                                                       [100%]
+2026-10-20T21:57:48.0911676Z - generated xml file: /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/evidence/restarts.xml -
+2026-10-20T21:57:48.0912109Z 2 passed in 4.80s
+2026-10-20T21:57:48.5293458Z ##[group]Run python -m scripts.validate_demo_catalog --smoke --output evidence/demo-catalog.json
+2026-10-20T21:57:48.5294013Z [36;1mpython -m scripts.validate_demo_catalog --smoke --output evidence/demo-catalog.json[0m
+2026-10-20T21:57:48.5343342Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T21:57:48.5343518Z env:
+2026-10-20T21:57:48.5343629Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T21:57:48.5343773Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T21:57:48.5343911Z   NO_DISCLAIMER: 1
+2026-10-20T21:57:48.5344059Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:57:48.5344282Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-20T21:57:48.5344500Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:57:48.5344710Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:57:48.5344907Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:57:48.5345128Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-20T21:57:48.5345299Z ##[endgroup]
+2026-10-20T21:57:48.6606322Z PASSED alpha_agi_business_2_v1 (1 runs)
+2026-10-20T21:57:48.7420394Z PASSED alpha_agi_business_3_v1 (1 runs)
+2026-10-20T21:57:48.7877535Z PASSED alpha_agi_business_v1 (1 runs)
+2026-10-20T21:57:48.8445868Z PASSED alpha_agi_insight_v0 (1 runs)
+2026-10-20T21:57:53.0367865Z PASSED alpha_agi_insight_v1 (1 runs)
+2026-10-20T21:57:53.0951608Z PASSED alpha_agi_marketplace_v1 (1 runs)
+2026-10-20T21:57:58.1832160Z PASSED alpha_super_planner_v1 (1 runs)
+2026-10-20T21:57:58.9873663Z PASSED cross_industry_alpha_factory (1 runs)
+2026-10-20T21:57:59.0604176Z PASSED era_of_experience (1 runs)
+2026-10-20T21:57:59.1433839Z PASSED finance_alpha (1 runs)
+2026-10-20T21:57:59.4707485Z PASSED macro_sentinel (1 runs)
+2026-10-20T21:57:59.6092594Z PASSED meta_agentic_agi (2 runs)
+2026-10-20T21:57:59.7481844Z PASSED meta_agentic_agi_v2 (2 runs)
+2026-10-20T21:57:59.9353682Z PASSED meta_agentic_agi_v3 (1 runs)
+2026-10-20T21:58:00.0744677Z PASSED meta_agentic_tree_search_v0 (1 runs)
+2026-10-20T21:58:00.4869891Z PASSED omni_factory_demo (1 runs)
+2026-10-20T21:58:00.5414558Z PASSED solving_agi_governance (1 runs)
+2026-10-20T21:58:01.4333763Z PASSED sovereign_agentic_agialpha_agent_v0 (1 runs)
+2026-10-20T21:58:01.4349647Z Validated 26 catalog entries; exercised 18 finite commands
+2026-10-20T21:58:01.4481444Z ##[group]Run mkdir -p evidence
+2026-10-20T21:58:01.4481737Z [36;1mmkdir -p evidence[0m
+2026-10-20T21:58:01.4482312Z [36;1mpython -m scripts.run_local_tests -q --cov --cov-config=pyproject.toml --cov-fail-under=80 --cov-report=xml:evidence/coverage.xml --junitxml=evidence/regression.xml[0m
+2026-10-20T21:58:01.4482941Z [36;1mcp .coverage evidence/coverage.data[0m
+2026-10-20T21:58:01.4550630Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T21:58:01.4550944Z env:
+2026-10-20T21:58:01.4551129Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T21:58:01.4551371Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T21:58:01.4551593Z   NO_DISCLAIMER: 1
+2026-10-20T21:58:01.4551834Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:58:01.4552206Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-20T21:58:01.4552568Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:58:01.4552909Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:58:01.4553225Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T21:58:01.4553543Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-20T21:58:01.4553812Z ##[endgroup]
+2026-10-20T21:59:44.9210621Z ........................................................................ [  2%]
+2026-10-20T22:00:00.9560525Z ........................................................................ [  4%]
+2026-10-20T22:00:33.3466192Z ........................................................................ [  6%]
+2026-10-20T22:01:20.0473360Z ........................................................................ [  8%]
+2026-10-20T22:02:02.9093493Z ........................................................................ [ 10%]
+2026-10-20T22:02:26.0883494Z ........................................................................ [ 12%]
+2026-10-20T22:03:10.1280628Z ........................................................................ [ 14%]
+2026-10-20T22:03:31.7231272Z ................................................................s....... [ 16%]
+2026-10-20T22:04:18.0438610Z ........................................................................ [ 18%]
+2026-10-20T22:06:52.7699693Z ........................................................................ [ 20%]
+2026-10-20T22:09:29.0279794Z ........................................................................ [ 22%]
+2026-10-20T22:10:46.2630129Z ........................................................................ [ 24%]
+2026-10-20T22:11:09.7254960Z ........................................................................ [ 26%]
+2026-10-20T22:11:42.0500849Z ........................................................................ [ 28%]
+2026-10-20T22:12:38.0194350Z ........................................................................ [ 30%]
+2026-10-20T22:12:58.9763845Z ........................................................................ [ 32%]
+2026-10-20T22:13:45.3767360Z .................................................s...s....xx.ss......... [ 34%]
+2026-10-20T22:14:37.7108065Z ....................x..................ss............................... [ 36%]
+2026-10-20T22:15:20.0609971Z ........x............................................................... [ 38%]
+2026-10-20T22:16:47.3409107Z .......................ss...................s........................... [ 40%]
+2026-10-20T22:17:09.1526275Z ........................................................................ [ 42%]
+2026-10-20T22:17:30.3181209Z ........................................................................ [ 44%]
+2026-10-20T22:17:56.3215697Z ........................................................................ [ 46%]
+2026-10-20T22:18:18.5009027Z ........................................................................ [ 48%]
+2026-10-20T22:19:03.5567814Z ........................................................................ [ 50%]
+2026-10-20T22:19:50.7173882Z ........................................................................ [ 52%]
+2026-10-20T22:21:19.2917544Z ........................................................................ [ 54%]
+2026-10-20T22:24:27.4764793Z .........................................s.............................. [ 56%]
+2026-10-20T22:25:07.6105639Z .........................................s...s.......................... [ 58%]
+2026-10-20T22:25:36.8077744Z ...........................................s............................ [ 60%]
+2026-10-20T22:26:04.7420211Z ........................................................................ [ 62%]
+2026-10-20T22:26:53.4617123Z ........................................................................ [ 64%]
+2026-10-20T22:27:23.4033611Z ........................................................................ [ 66%]
+2026-10-20T22:27:51.3936240Z ........................................................................ [ 68%]
+2026-10-20T22:28:25.5895308Z ........................................................................ [ 70%]
+2026-10-20T22:29:24.0138799Z ...............................sss..........s.......s................... [ 72%]
+2026-10-20T22:29:45.3372652Z ........................................................................ [ 74%]
+2026-10-20T22:30:10.8967935Z ........s............................................................... [ 76%]
+2026-10-20T22:30:44.8264989Z .............ss.....................................................s... [ 78%]
+2026-10-20T22:31:30.2319274Z ....................s...............................s................... [ 80%]
+2026-10-20T22:32:49.1794280Z .......................ss.s................................ssss......... [ 82%]
+2026-10-20T22:33:16.0023547Z ........................................................................ [ 84%]
+2026-10-20T22:33:43.6415994Z ........................................................................ [ 86%]
+2026-10-20T22:34:29.3368085Z ........................................................................ [ 88%]
+2026-10-20T22:35:03.9363369Z .................................................................s...... [ 90%]
+2026-10-20T22:35:32.9586748Z ........................................................................ [ 92%]
+2026-10-20T22:36:28.0504174Z .........................s.............................................. [ 94%]
+2026-10-20T22:36:57.5298037Z s....................................................................... [ 96%]
+2026-10-20T22:38:11.0164732Z ....................................s................................... [ 98%]
+2026-10-20T22:38:47.4299757Z s.............................ssssss                                     [100%]
+2026-10-20T22:38:47.4300275Z =============================== warnings summary ===============================
+2026-10-20T22:38:47.4300848Z ../../../../../opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/websockets/legacy/__init__.py:6
+2026-10-20T22:38:47.4302066Z   /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+2026-10-20T22:38:47.4302723Z     warnings.warn(  # deprecated in 14.0 - 2024-11-09
+2026-10-20T22:38:47.4302860Z 
+2026-10-20T22:38:47.4303091Z ../../../../../opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/jupyter_client/connect.py:22
+2026-10-20T22:38:47.4303649Z   /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/jupyter_client/connect.py:22: DeprecationWarning: Jupyter is migrating its paths to use standard platformdirs
+2026-10-20T22:38:47.4304420Z   given by the platformdirs library.  To remove this warning and
+2026-10-20T22:38:47.4304681Z   see the appropriate new directories, set the environment variable
+2026-10-20T22:38:47.4304939Z   `JUPYTER_PLATFORM_DIRS=1` and then run `jupyter --paths`.
+2026-10-20T22:38:47.4305185Z   The use of platformdirs will be the default in `jupyter_core` v6
+2026-10-20T22:38:47.4305810Z     from jupyter_core.paths import jupyter_data_dir, jupyter_runtime_dir, secure_write
+2026-10-20T22:38:47.4305996Z 
+2026-10-20T22:38:47.4306271Z tests/runtime/test_budget_browser.py::test_actual_forms_exact_units_keyboard_localization_and_accessibility
+2026-10-20T22:38:47.4306920Z   /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+2026-10-20T22:38:47.4307448Z     from websockets.server import WebSocketServerProtocol
+2026-10-20T22:38:47.4307580Z 
+2026-10-20T22:38:47.4307683Z tests/test_agent_aiga_entrypoint.py: 2 warnings
+2026-10-20T22:38:47.4307882Z tests/test_aiga_service.py: 2 warnings
+2026-10-20T22:38:47.4308078Z tests/test_aiga_service_readiness.py: 8 warnings
+2026-10-20T22:38:47.4308496Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/alpha_factory_v1/demos/aiga_meta_evolution/agent_aiga_entrypoint.py:442: DeprecationWarning: 
+2026-10-20T22:38:47.4308918Z           on_event is deprecated, use lifespan event handlers instead.
+2026-10-20T22:38:47.4309112Z   
+2026-10-20T22:38:47.4309238Z           Read more about it in the
+2026-10-20T22:38:47.4309497Z           [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2026-10-20T22:38:47.4309726Z           
+2026-10-20T22:38:47.4309849Z     @app.on_event("startup")
+2026-10-20T22:38:47.4309938Z 
+2026-10-20T22:38:47.4310036Z tests/test_agent_aiga_entrypoint.py: 4 warnings
+2026-10-20T22:38:47.4310236Z tests/test_aiga_service.py: 4 warnings
+2026-10-20T22:38:47.4310431Z tests/test_aiga_service_readiness.py: 16 warnings
+2026-10-20T22:38:47.4310776Z   /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/fastapi/applications.py:4495: DeprecationWarning: 
+2026-10-20T22:38:47.4311134Z           on_event is deprecated, use lifespan event handlers instead.
+2026-10-20T22:38:47.4311315Z   
+2026-10-20T22:38:47.4311438Z           Read more about it in the
+2026-10-20T22:38:47.4311690Z           [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2026-10-20T22:38:47.4311915Z           
+2026-10-20T22:38:47.4312052Z     return self.router.on_event(event_type)
+2026-10-20T22:38:47.4312161Z 
+2026-10-20T22:38:47.4312258Z tests/test_agent_aiga_entrypoint.py: 2 warnings
+2026-10-20T22:38:47.4312449Z tests/test_aiga_service.py: 2 warnings
+2026-10-20T22:38:47.4312639Z tests/test_aiga_service_readiness.py: 8 warnings
+2026-10-20T22:38:47.4313042Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/alpha_factory_v1/demos/aiga_meta_evolution/agent_aiga_entrypoint.py:481: DeprecationWarning: 
+2026-10-20T22:38:47.4313450Z           on_event is deprecated, use lifespan event handlers instead.
+2026-10-20T22:38:47.4313635Z   
+2026-10-20T22:38:47.4313756Z           Read more about it in the
+2026-10-20T22:38:47.4314004Z           [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2026-10-20T22:38:47.4314227Z           
+2026-10-20T22:38:47.4314346Z     @app.on_event("shutdown")
+2026-10-20T22:38:47.4314441Z 
+2026-10-20T22:38:47.4314558Z tests/test_agents.py::test_grpc_bus_tls_message_exchange
+2026-10-20T22:38:47.4314786Z tests/test_agents.py::test_grpc_bus_tls_bad_token
+2026-10-20T22:38:47.4315614Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/test_agents.py:73: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-10-20T22:38:47.4316403Z     .not_valid_before(datetime.utcnow())
+2026-10-20T22:38:47.4316509Z 
+2026-10-20T22:38:47.4316622Z tests/test_agents.py::test_grpc_bus_tls_message_exchange
+2026-10-20T22:38:47.4316845Z tests/test_agents.py::test_grpc_bus_tls_bad_token
+2026-10-20T22:38:47.4317589Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/test_agents.py:74: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-10-20T22:38:47.4318218Z     .not_valid_after(datetime.utcnow() + timedelta(days=1))
+2026-10-20T22:38:47.4318354Z 
+2026-10-20T22:38:47.4318445Z tests/test_bus_tls.py::test_bus_tls_accept
+2026-10-20T22:38:47.4318654Z tests/test_bus_tls.py::test_bus_tls_reject_bad_token
+2026-10-20T22:38:47.4319323Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/test_bus_tls.py:44: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-10-20T22:38:47.4319922Z     .not_valid_before(datetime.utcnow())
+2026-10-20T22:38:47.4320027Z 
+2026-10-20T22:38:47.4320116Z tests/test_bus_tls.py::test_bus_tls_accept
+2026-10-20T22:38:47.4320320Z tests/test_bus_tls.py::test_bus_tls_reject_bad_token
+2026-10-20T22:38:47.4320997Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/test_bus_tls.py:45: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-10-20T22:38:47.4321616Z     .not_valid_after(datetime.utcnow() + timedelta(days=1))
+2026-10-20T22:38:47.4321747Z 
+2026-10-20T22:38:47.4321940Z tests/test_curriculum_boundaries.py::test_legacy_archive_creates_database_and_preserves_rows
+2026-10-20T22:38:47.4322794Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/alpha_factory_v1/demos/meta_agentic_agi_v3/meta_agentic_search/archive.py:584: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-10-20T22:38:47.4323518Z     ts=datetime.utcnow().isoformat(timespec="seconds") + "Z",
+2026-10-20T22:38:47.4323654Z 
+2026-10-20T22:38:47.4323770Z tests/test_evolution_worker.py::test_mutate_returns_child
+2026-10-20T22:38:47.4324021Z tests/test_evolution_worker.py::test_mutate_cleanup_nested
+2026-10-20T22:38:47.4324733Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/alpha_factory_v1/demos/alpha_agi_insight_v1/src/evolution_worker.py:42: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+2026-10-20T22:38:47.4325456Z     tf.extract(member, base)
+2026-10-20T22:38:47.4325561Z 
+2026-10-20T22:38:47.4325667Z tests/test_evolve.py::test_evolve_stops_on_cost_cap
+2026-10-20T22:38:47.4325903Z tests/test_evolve.py::test_bandit_early_stop_reduces_cost
+2026-10-20T22:38:47.4326299Z   /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/_pytest/python.py:157: RuntimeWarning: coroutine '_op' was never awaited
+2026-10-20T22:38:47.4326645Z     result = testfunction(**testargs)
+2026-10-20T22:38:47.4326863Z   Enable tracemalloc to get traceback where the object was allocated.
+2026-10-20T22:38:47.4327214Z   See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+2026-10-20T22:38:47.4327426Z 
+2026-10-20T22:38:47.4327542Z tests/test_evolve.py::test_bandit_early_stop_reduces_cost
+2026-10-20T22:38:47.4327944Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/alpha_factory_v1/core/evolve.py:162: RuntimeWarning: coroutine '_op' was never awaited
+2026-10-20T22:38:47.4328278Z     await _phase_loop(
+2026-10-20T22:38:47.4328572Z   Enable tracemalloc to get traceback where the object was allocated.
+2026-10-20T22:38:47.4328904Z   See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+2026-10-20T22:38:47.4329111Z 
+2026-10-20T22:38:47.4329228Z tests/test_evolve.py::test_bandit_early_stop_reduces_cost
+2026-10-20T22:38:47.4329622Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/alpha_factory_v1/core/evolve.py:192: RuntimeWarning: coroutine '_op' was never awaited
+2026-10-20T22:38:47.4329952Z     await _phase_loop(
+2026-10-20T22:38:47.4330226Z   Enable tracemalloc to get traceback where the object was allocated.
+2026-10-20T22:38:47.4330557Z   See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+2026-10-20T22:38:47.4330767Z 
+2026-10-20T22:38:47.4330893Z tests/test_muzero_planning.py::TestMiniMu::test_play_episode
+2026-10-20T22:38:47.4331167Z tests/test_muzero_planning.py::TestMiniMu::test_policy_distribution
+2026-10-20T22:38:47.4331685Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/alpha_factory_v1/demos/muzero_planning/minimuzero.py:255: RuntimeWarning: PyTorch unavailable: uniform policy, no learned model
+2026-10-20T22:38:47.4332229Z     warnings.warn("PyTorch unavailable: uniform policy, no learned model", RuntimeWarning)
+2026-10-20T22:38:47.4332421Z 
+2026-10-20T22:38:47.4332529Z tests/test_notebooks.py::test_macro_sentinel_notebook
+2026-10-20T22:38:47.4333449Z   /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+2026-10-20T22:38:47.4334220Z     validate(nb)
+2026-10-20T22:38:47.4334289Z 
+2026-10-20T22:38:47.4334472Z tests/test_openai_bridge_runtime.py::TestAIGABridgeRuntime::test_history_after_evolve
+2026-10-20T22:38:49.7808984Z   <frozen runpy>:128: RuntimeWarning: 'alpha_factory_v1.demos.aiga_meta_evolution.openai_agents_bridge' found in sys.modules after import of package 'alpha_factory_v1.demos.aiga_meta_evolution', but prior to execution of 'alpha_factory_v1.demos.aiga_meta_evolution.openai_agents_bridge'; this may result in unpredictable behaviour
+2026-10-20T22:38:49.7809703Z 
+2026-10-20T22:38:49.7809909Z tests/test_orchestrator_bus_tls_env.py::test_orchestrator_bus_tls_env
+2026-10-20T22:38:49.7810730Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/test_orchestrator_bus_tls_env.py:45: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-10-20T22:38:49.7811383Z     .not_valid_before(datetime.utcnow())
+2026-10-20T22:38:49.7811492Z 
+2026-10-20T22:38:49.7811641Z tests/test_orchestrator_bus_tls_env.py::test_orchestrator_bus_tls_env
+2026-10-20T22:38:49.7812399Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/test_orchestrator_bus_tls_env.py:46: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-10-20T22:38:49.7813072Z     .not_valid_after(datetime.utcnow() + timedelta(days=1))
+2026-10-20T22:38:49.7813206Z 
+2026-10-20T22:38:49.7813346Z tests/test_orchestrator_lifecycle.py::test_orchestrator_lifecycle
+2026-10-20T22:38:49.7813832Z   /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/alpha_factory_v1/backend/services/api_server_service.py:61: RuntimeWarning: coroutine 'Server.stop' was never awaited
+2026-10-20T22:38:49.7814231Z     self._grpc_server.stop(0)
+2026-10-20T22:38:49.7814445Z   Enable tracemalloc to get traceback where the object was allocated.
+2026-10-20T22:38:49.7814794Z   See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+2026-10-20T22:38:49.7815665Z 
+2026-10-20T22:38:49.7815945Z tests/test_world_model_notebook_exec.py::test_notebook_runs
+2026-10-20T22:38:49.7816729Z   /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/papermill/parameterize.py:26: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-10-20T22:38:49.7817533Z     "current_datetime_utc": datetime.utcnow(),
+2026-10-20T22:38:49.7817649Z 
+2026-10-20T22:38:49.7817762Z tests/test_world_model_notebook_exec.py: 118 warnings
+2026-10-20T22:38:49.7818464Z   /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/papermill/engines.py:125: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-10-20T22:38:49.7819303Z     return datetime.datetime.utcnow()
+2026-10-20T22:38:49.7819469Z 
+2026-10-20T22:38:49.7819726Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-10-20T22:38:49.7820361Z - generated xml file: /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/evidence/regression.xml -
+2026-10-20T22:38:49.7820921Z ================================ tests coverage ================================
+2026-10-20T22:38:49.7821384Z _______________ coverage: platform linux, python 3.12.15-final-0 _______________
+2026-10-20T22:38:49.7821645Z 
+2026-10-20T22:38:49.7821815Z Coverage XML written to file evidence/coverage.xml
+2026-10-20T22:38:49.7822228Z Required test coverage of 80% reached. Total coverage: 83.28%
+2026-10-20T22:38:49.7822478Z 
+2026-10-20T22:38:49.7822853Z --------------------------------------------- benchmark 'critics': 1 tests --------------------------------------------
+2026-10-20T22:38:49.7823548Z Name (time in us)             Min       Max    Mean  StdDev  Median     IQR  Outliers  OPS (Kops/s)  Rounds  Iterations
+2026-10-20T22:38:49.7824214Z -----------------------------------------------------------------------------------------------------------------------
+2026-10-20T22:38:49.7824883Z test_latency_benchmark     1.7120  465.8240  1.9207  3.1765  1.8420  0.0800   135;872      520.6528   53425           1
+2026-10-20T22:38:49.7825643Z -----------------------------------------------------------------------------------------------------------------------
+2026-10-20T22:38:49.7825952Z 
+2026-10-20T22:38:49.7826316Z ------------------------------------------ benchmark 'simulation': 1 tests ------------------------------------------
+2026-10-20T22:38:49.7826990Z Name (time in ms)                Min      Max    Mean  StdDev  Median     IQR  Outliers       OPS  Rounds  Iterations
+2026-10-20T22:38:49.7827627Z ---------------------------------------------------------------------------------------------------------------------
+2026-10-20T22:38:49.7828281Z test_simulation_benchmark     4.5762  10.0511  5.8238  0.7509  5.8464  0.4325     31;27  171.7093     134           1
+2026-10-20T22:38:49.7828934Z ---------------------------------------------------------------------------------------------------------------------
+2026-10-20T22:38:49.7829238Z 
+2026-10-20T22:38:49.7829313Z Legend:
+2026-10-20T22:38:49.7829732Z   Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
+2026-10-20T22:38:49.7830222Z   OPS: Operations Per Second, computed as 1 / Mean
+2026-10-20T22:38:49.7830661Z 3517 passed, 61 skipped, 4 xfailed, 192 warnings in 2445.46s (0:40:45)
+2026-10-20T22:38:53.4395937Z ##[group]Run python -m mypy --config-file mypy-runtime.ini
+2026-10-20T22:38:53.4396218Z [36;1mpython -m mypy --config-file mypy-runtime.ini[0m
+2026-10-20T22:38:53.4396606Z [36;1mpython -m mypy --strict --follow-imports=skip scripts/release_packs.py scripts/check_successor_preservation.py scripts/successor_evidence.py[0m
+2026-10-20T22:38:53.4396986Z [36;1mpython -m mypy --config-file mypy-business3.ini[0m
+2026-10-20T22:38:53.4397329Z [36;1mpython -m mypy --config-file mypy-governance.ini[0m
+2026-10-20T22:38:53.4397536Z [36;1mpython -m mypy --config-file mypy-discovery.ini[0m
+2026-10-20T22:38:53.4397743Z [36;1mpython -m mypy --config-file mypy-experience.ini[0m
+2026-10-20T22:38:53.4397942Z [36;1mpython -m mypy --config-file mypy-mats.ini[0m
+2026-10-20T22:38:53.4398141Z [36;1mpython -m mypy --config-file mypy-curriculum.ini[0m
+2026-10-20T22:38:53.4398342Z [36;1mpython -m mypy --config-file mypy-muzero.ini[0m
+2026-10-20T22:38:53.4398558Z [36;1mpython -m mypy --config-file mypy-finance.ini[0m
+2026-10-20T22:38:53.4398782Z [36;1mpython -m mypy --config-file mypy-sovereign.ini[0m
+2026-10-20T22:38:53.4398970Z [36;1mpython -m mypy --config-file mypy.ini[0m
+2026-10-20T22:38:53.4399147Z [36;1mpython scripts/ruff_targets.py --run[0m
+2026-10-20T22:38:53.4399378Z [36;1mpython -m scripts.check_agent_preservation > evidence/preservation.json[0m
+2026-10-20T22:38:53.4399714Z [36;1mpython -m scripts.check_successor_preservation --output evidence/successor-preservation.json[0m
+2026-10-20T22:38:53.4400029Z [36;1mpython -m scripts.check_manuscript > evidence/manuscript.json[0m
+2026-10-20T22:38:53.4400309Z [36;1mpython -m scripts.check_factory_readiness > evidence/factory-preservation.json[0m
+2026-10-20T22:38:53.4454315Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T22:38:53.4454506Z env:
+2026-10-20T22:38:53.4454626Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T22:38:53.4454781Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T22:38:53.4454936Z   NO_DISCLAIMER: 1
+2026-10-20T22:38:53.4455092Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T22:38:53.4455662Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-20T22:38:53.4455900Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T22:38:53.4456112Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T22:38:53.4456332Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T22:38:53.4456546Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-20T22:38:53.4456730Z ##[endgroup]
+2026-10-20T22:39:56.4785460Z Success: no issues found in 54 source files
+2026-10-20T22:39:57.3487922Z Success: no issues found in 3 source files
+2026-10-20T22:39:57.9440546Z Success: no issues found in 2 source files
+2026-10-20T22:39:58.1606845Z Success: no issues found in 2 source files
+2026-10-20T22:39:58.3830083Z Success: no issues found in 2 source files
+2026-10-20T22:39:58.6377336Z Success: no issues found in 3 source files
+2026-10-20T22:39:58.9034142Z Success: no issues found in 3 source files
+2026-10-20T22:39:59.3321635Z Success: no issues found in 6 source files
+2026-10-20T22:40:00.7182756Z Success: no issues found in 7 source files
+2026-10-20T22:40:01.0730774Z Success: no issues found in 5 source files
+2026-10-20T22:40:55.5925143Z Success: no issues found in 4 source files
+2026-10-20T22:40:56.9179255Z Success: no issues found in 32 source files
+2026-10-20T22:40:56.9885726Z All checks passed!
+2026-10-20T22:40:57.0145253Z All checks passed!
+2026-10-20T22:40:57.0378505Z All checks passed!
+2026-10-20T22:40:57.0636174Z All checks passed!
+2026-10-20T22:40:57.0983818Z All checks passed!
+2026-10-20T22:40:57.1244799Z All checks passed!
+2026-10-20T22:40:57.1498905Z All checks passed!
+2026-10-20T22:40:57.1693679Z All checks passed!
+2026-10-20T22:41:00.7818480Z {"schema": "agialpha.successor.preservation.v1", "baseline": "aab4995ee87f7fb575180931c79b8bf86e26d50d", "files_preserved": 2731, "media_bytes_preserved": 167, "mermaid_blocks_preserved": 94, "changed_files": 270}
+2026-10-20T22:41:01.1058103Z ##[group]Run actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+2026-10-20T22:41:01.1058337Z with:
+2026-10-20T22:41:01.1058444Z   name: regression
+2026-10-20T22:41:01.1058552Z   path: evidence/
+2026-10-20T22:41:01.1058667Z   if-no-files-found: error
+2026-10-20T22:41:01.1058795Z   compression-level: 6
+2026-10-20T22:41:01.1059039Z   overwrite: false
+2026-10-20T22:41:01.1059156Z   include-hidden-files: false
+2026-10-20T22:41:01.1059282Z   archive: true
+2026-10-20T22:41:01.1059386Z env:
+2026-10-20T22:41:01.1059492Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T22:41:01.1059637Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T22:41:01.1059773Z   NO_DISCLAIMER: 1
+2026-10-20T22:41:01.1059916Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T22:41:01.1060141Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-20T22:41:01.1060360Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T22:41:01.1060592Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T22:41:01.1060790Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T22:41:01.1060994Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-20T22:41:01.1061163Z ##[endgroup]
+2026-10-20T22:41:01.1916271Z With the provided path, there will be 12 files uploaded
+2026-10-20T22:41:01.1918852Z Artifact name is valid!
+2026-10-20T22:41:01.1919093Z Root directory input is valid!
+2026-10-20T22:41:01.4780046Z Uploading artifact: regression.zip
+2026-10-20T22:41:01.4802379Z Beginning upload of artifact content to blob storage
+2026-10-20T22:41:01.8964347Z Uploaded bytes 492572
+2026-10-20T22:41:01.9397702Z Finished uploading artifact content to blob storage!
+2026-10-20T22:41:01.9398396Z SHA256 digest of uploaded artifact is f207fb1bac01c8133d4b9706af5c43efc3cdad68e1dfdbfeb59a0bfaad574499
+2026-10-20T22:41:01.9398749Z Finalizing artifact upload
+2026-10-20T22:41:02.2622475Z Artifact regression successfully finalized. Artifact ID 12305490870
+2026-10-20T22:41:02.2623210Z Artifact regression has been successfully uploaded! Final size is 492572 bytes. Artifact ID is 12305490870
+2026-10-20T22:41:02.2625602Z Artifact download URL: https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39484204330/artifacts/12305490870
+2026-10-20T22:41:02.2754710Z Post job cleanup.
+2026-10-20T22:41:02.3678704Z Post job cleanup.
+2026-10-20T22:41:02.4537627Z Post job cleanup.
+2026-10-20T22:41:02.5056552Z [command]/usr/bin/git version
+2026-10-20T22:41:02.5085569Z git version 2.55.0
+2026-10-20T22:41:02.5108859Z Temporarily overriding HOME='/home/runner/work/_temp/eec0e540-c8a7-4b95-b1cc-e5f661911853' before making global git config changes
+2026-10-20T22:41:02.5109671Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:41:02.5110374Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T22:41:02.5133946Z Removing SSH command configuration
+2026-10-20T22:41:02.5137564Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:41:02.5160771Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:41:02.5323925Z Removing HTTP extra header
+2026-10-20T22:41:02.5326733Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:41:02.5348244Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:41:02.5509892Z Removing includeIf entries pointing to credentials config files
+2026-10-20T22:41:02.5513632Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:41:02.5534965Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:41:02.5799021Z Cleaning up orphan processes
