@@ -1,0 +1,278 @@
+{
+  "schema": "four-repository-assessment/jobs-observed-flow-annotation-static-disposition/v1",
+  "observedAt": "2026-10-20T17:03:18.888Z",
+  "reviewClass": "NARROW_STATIC_SOURCE_DISPOSITION_FOR_ORIGINAL_WRAPPER_TAXA_FINDING",
+  "reviewerRole": "e_current_binding",
+  "disposition": "SUPPORTED_OBSERVED_FORM_ADMITTED_IN_SOURCE_NO_REMAINING_SCOPED_SOURCE_DEFECT_IDENTIFIED",
+  "subject": {
+    "repository": "MontrealAI/AGIJobsv0",
+    "pr": 4004,
+    "originalInlineFinding": 4326973743,
+    "originalThread": "PRRT_kwDOPXlfds6uZwKx",
+    "originalFindingTitle": "Allow CodeQL nonempty thread-flow taxa",
+    "original532HoldRemainsHistoricalEvidence": true,
+    "original532HoldUrl": "https://github.com/MontrealAI/AGIJobsv0/blob/79e62e6e35374f496e7edd84d94ac2ef65f3f5d7/docs/release-evidence/ti-compatible-set-20261020/jobs-53235ef/javascript/original-taxa-admission-hold.json",
+    "currentThreadClosureClaimed": false
+  },
+  "exactSource": {
+    "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+    "tree": "b404541f60ef7a927e085299c7159864a15ff53f",
+    "soleParent": "53235ef944416bf8491fb44a1c7d8f193e509be7",
+    "path": "scripts/release/source-scanner-gates-rc16.cjs",
+    "mode": "100644",
+    "bytes": 43231,
+    "sha256": "2890b3ee716f9cb54e1d004819c9d9a0b379325861ec27ec86ba78a1afd21c3d",
+    "gitBlob": "6c72c824a971b3222f432a26be6efab2bbcdf5e8",
+    "baseline": {
+      "commit": "53235ef944416bf8491fb44a1c7d8f193e509be7",
+      "path": "scripts/release/source-scanner-gates-rc16.cjs",
+      "bytes": 41288,
+      "sha256": "7fcad4ec9659c8f71988803ec3edc00f1eec3f73ab02d3895ebfc3051b0eebbb",
+      "gitBlob": "27845bee64e68b75aaaefa8ec860303f2c0d50f1"
+    },
+    "publicCommitAndNontruncatedTreeBindingsChecked": true,
+    "completeTreeDeltaLeafCount": 4,
+    "unchangedOtherTrackedLeaves": 5181
+  },
+  "scope": {
+    "reviewed": "Only the source-visible handling of the original release-wrapper nonempty thread-flow taxa finding, its preservation controls and the fresh null-review baseline.",
+    "unsupportedConclusion": "This disposition is not a broad SARIF validator, security audit, eligible-owner review, runtime qualification or approval to resolve the review thread."
+  },
+  "sourceObservation": {
+    "supportedForm": "Exactly one index-free record with id Config and exactly one property CodeQL/DataflowRole equal to step.",
+    "typedOwners": {
+      "anchor": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 333,
+        "endLine": 339,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L333-L339"
+      },
+      "observation": "Object identities are registered only by traversing typed results, codeFlows, threadFlows and inline locations arrays. Array and nonarray-object helpers validate each traversed structural level."
+    },
+    "completePropertiesInclusiveWalk": {
+      "anchor": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 340,
+        "endLine": 373,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L340-L373"
+      },
+      "observation": "The new walk visits every object entry, including property bags. Any encountered nonempty taxa array requires a registered inline thread-flow location owner and singleton multiplicity."
+    },
+    "closedObservedForm": {
+      "anchor": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 344,
+        "endLine": 364,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L344-L364"
+      },
+      "exactFieldsHelper": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 855,
+        "endLine": 858,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L855-L858"
+      },
+      "observation": "The annotation and its properties must be nonarray objects with exactly the specified keys and case-sensitive literal values. Ordinal, GUID, component, additional fields, other identifiers or roles, and multiple entries are not admitted."
+    },
+    "bothOriginalRunsBeforeMapping": {
+      "anchor": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 374,
+        "endLine": 379,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L374-L379"
+      },
+      "observation": "The validator is called on both source and reference originals before scanner tool mapping."
+    },
+    "unchangedFullRecordClone": {
+      "anchor": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 557,
+        "endLine": 575,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L557-L575"
+      },
+      "observation": "The existing complete JSON clone and accounted index changes remain. The added admission validator does not rewrite, sort, project or delete annotation fields."
+    },
+    "unchangedInverseTransport": {
+      "anchor": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 579,
+        "endLine": 609,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L579-L609"
+      },
+      "observation": "Reference self-validation, forward transport, reverse transport and equality with the entire original source run remain. Full raw and transported result hashes remain in the witness."
+    },
+    "releaseWrapperStillUsesTransport": {
+      "reviewedDocumentBranch": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 688,
+        "endLine": 703,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L688-L703"
+      },
+      "wrapperOptionsAndInvocation": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 1219,
+        "endLine": 1231,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L1219-L1231"
+      },
+      "observation": "The integrated wrapper still supplies reviewedDocument, selects reference transport, and verifies the original reviewed report as well. No raw-parser fallback or transport bypass was added."
+    },
+    "fullResultHashesAndInventory": {
+      "resultHash": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 217,
+        "endLine": 230,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L217-L230"
+      },
+      "completeReviewedInventory": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 732,
+        "endLine": 735,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L732-L735"
+      },
+      "observation": "Complete result hashing and complete reviewed inventory equality remain unchanged."
+    }
+  },
+  "retainedControls": {
+    "exactInverseTextDeltaReconstructsBaselineSource": true,
+    "sourceDelta": {
+      "insertedBlock": {
+        "startLine": 331,
+        "endLine": 375,
+        "bytes": 2012,
+        "sha256": "689b96729d6559b8f0e49139accf71d23d625597dc7d0bbe5f451b4a368b0a9e"
+      },
+      "removedBaselineLine": {
+        "line": 505,
+        "meaning": "The blanket empty-only result/thread-flow taxa guard is replaced by the preceding complete admission walk."
+      },
+      "allOtherWrapperBytesIdenticalTo532": true
+    },
+    "retainedAnchors": {
+      "sarifSchemePointerRefusal": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 319,
+        "endLine": 330,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L319-L330"
+      },
+      "componentTaxaRelationshipsAndExternalForms": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 380,
+        "endLine": 391,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L380-L391"
+      },
+      "descriptorIndexAndIdentityValidation": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 471,
+        "endLine": 500,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L471-L500"
+      },
+      "artifactIndexAndUriIdentityValidation": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 528,
+        "endLine": 542,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L528-L542"
+      },
+      "genericUnsupportedIndexedSurfaceRefusal": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 558,
+        "endLine": 568,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L558-L568"
+      },
+      "wholeRunInverseAndCompleteResultWitness": {
+        "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+        "path": "scripts/release/source-scanner-gates-rc16.cjs",
+        "startLine": 585,
+        "endLine": 609,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/blob/689a34e3b70659984d537af5410977a4eaa77e77/scripts/release/source-scanner-gates-rc16.cjs#L585-L609"
+      }
+    },
+    "observation": "The retained controls are verified by exact source-byte comparison after removing only the added admission block and restoring the former blanket guard. Their runtime correctness is not established here."
+  },
+  "nullReviewBaseline": {
+    "profile": {
+      "path": "scripts/release/source-profile-rc16.json",
+      "bytes": 25749,
+      "sha256": "f73ab57cf4822aa1cbb208305ad2e85d678361569041b461ca2970f0070bb7b9",
+      "gitBlob": "f79b73a82cc2783b184d4e0080889eba98aeb8d8",
+      "exactHistoricalNullBlobRestored": true,
+      "scannerReview": null,
+      "pythonScannerReview": null,
+      "basis": "The canonical tree binds the exact previously read null profile blob; its parsed current review values are both null."
+    },
+    "notes": {
+      "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+      "bytes": 106592,
+      "sha256": "326ed0a6248022fc4ed562c39163339fc3560eace2e5ebee8131730678665351",
+      "gitBlob": "764ca8c93a4e9b5d11b9c4feefe29bdeed17d32a",
+      "currentMarker": "rc16-scanner-review",
+      "currentMarkerLine": 1534,
+      "currentMarkerCount": 1,
+      "currentReviewPayload": null,
+      "historicalReviewCommentBlocksByteIdentical": true,
+      "sourceExplanationAdded": true
+    },
+    "installedApprovalTransferred": false,
+    "freshExactSourceReviewAndChecksStillRequired": true
+  },
+  "producerObservationSeparation": {
+    "primaryHandoff": {
+      "id": 6296346273,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/pull/4004#issuecomment-6296346273",
+      "createdAt": "2026-10-20T16:55:19Z"
+    },
+    "primaryNotes": {
+      "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+      "commit": "689a34e3b70659984d537af5410977a4eaa77e77",
+      "startLine": 1503,
+      "endLine": 1532
+    },
+    "primaryReported": "The exact supported annotation was observed in both original 562 and 532 producer reports; the notes record five annotations.",
+    "independentlyConfirmedFromActualReportsByThisPeer": false,
+    "staticallyConfirmed": "The exact canonical source admits that declared literal shape at registered inline thread-flow owners on both originals and retains complete-record transport."
+  },
+  "alternateProposal": {
+    "commit": "f1e81822293062b3121ad2c256edc594f8d5e627",
+    "status": "UNADOPTED",
+    "alternatePeerStoppedOnCanonicalOwnershipChange": true,
+    "alternatePeerApprovalOrPeerEvidenceBlobCreated": false
+  },
+  "limitations": {
+    "broadSarifOrTaxonomySupportClaimed": false,
+    "formalSarifSchemaValidationPerformed": false,
+    "rawSarifArchiveSecurityFixtureOrProducerArtifactRead": false,
+    "projectCodeImportedOrExecuted": false,
+    "testsReproductionScansOrWorkflowActionsPerformed": false,
+    "runtimeCompatibilityOrCostMeasured": false,
+    "wholePrOrIntegratedCompatibilitySetQualified": false,
+    "reviewSubmittedOrThreadClosed": false,
+    "ownerEligibilityOrDistinctHumanReviewVerified": false,
+    "canonicalSourceCommitRefOrWorkflowWritten": false,
+    "gateWaiverOrSigningFundingDeploymentActivationAuthorityChange": false
+  },
+  "findings": [],
+  "remainingUncertainty": [
+    "Actual producer documents and successful execution of the declared supported path were not inspected or reproduced here.",
+    "All forms outside the exact declared literal profile remain unsupported; this is intentional scope, not a claim of general valid-SARIF acceptance.",
+    "Fresh required reviews, tests and final integrated qualification remain separate from this static source disposition."
+  ],
+  "actionsPerformed": [
+    "Reused existing public source, tree and owner-handoff reads",
+    "In-memory source comparison and UTF-8/Git/SHA hashing",
+    "Created this one unreferenced Fleet evidence blob only"
+  ]
+}
