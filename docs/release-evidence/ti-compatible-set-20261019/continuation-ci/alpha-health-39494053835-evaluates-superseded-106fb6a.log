@@ -1,0 +1,308 @@
+﻿2026-10-20T20:41:02.3447912Z Current runner version: '2.338.0'
+2026-10-20T20:41:02.3472211Z ##[group]Runner Image Provisioner
+2026-10-20T20:41:02.3473117Z Hosted Compute Agent
+2026-10-20T20:41:02.3473720Z Version: 20261015.610
+2026-10-20T20:41:02.3474452Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-20T20:41:02.3475241Z Build Date: 2026-10-14T17:06:54Z
+2026-10-20T20:41:02.3476004Z Worker ID: {4a015045-795a-4869-b5a6-26de7f5699e4}
+2026-10-20T20:41:02.3477140Z Region: westus
+2026-10-20T20:41:02.3477748Z Cloud: Azure
+2026-10-20T20:41:02.3478400Z ##[endgroup]
+2026-10-20T20:41:02.3479964Z ##[group]Operating System
+2026-10-20T20:41:02.3480919Z Ubuntu
+2026-10-20T20:41:02.3481589Z 24.04.5
+2026-10-20T20:41:02.3482130Z LTS
+2026-10-20T20:41:02.3482747Z ##[endgroup]
+2026-10-20T20:41:02.3483438Z ##[group]Runner Image
+2026-10-20T20:41:02.3484139Z Image: ubuntu-24.04
+2026-10-20T20:41:02.3484846Z Version: 20261018.339.1
+2026-10-20T20:41:02.3486163Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T20:41:02.3487854Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+2026-10-20T20:41:02.3488862Z ##[endgroup]
+2026-10-20T20:41:02.3490798Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T20:41:02.3492746Z Actions: write
+2026-10-20T20:41:02.3493546Z Checks: read
+2026-10-20T20:41:02.3494147Z Contents: read
+2026-10-20T20:41:02.3494758Z Metadata: read
+2026-10-20T20:41:02.3495346Z PullRequests: read
+2026-10-20T20:41:02.3495913Z Statuses: read
+2026-10-20T20:41:02.3496518Z ##[endgroup]
+2026-10-20T20:41:02.3498672Z Secret source: Actions
+2026-10-20T20:41:02.3499732Z Cache mode: write
+2026-10-20T20:41:02.3500671Z Prepare workflow directory
+2026-10-20T20:41:02.4065928Z Prepare all required actions
+2026-10-20T20:41:02.4114305Z Getting action download info
+2026-10-20T20:41:02.7529248Z Download action repository 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-10-20T20:41:02.8648011Z Download action repository 'actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405' (SHA:a309ff8b426b58ec0e2a45f0f869d46889d02405)
+2026-10-20T20:41:03.0825107Z Complete job name: CI watchdog
+2026-10-20T20:41:03.1550030Z ##[group]Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+2026-10-20T20:41:03.1551449Z with:
+2026-10-20T20:41:03.1551947Z   repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T20:41:03.1555800Z   token: ***
+2026-10-20T20:41:03.1556241Z   ssh-strict: true
+2026-10-20T20:41:03.1556685Z   ssh-user: git
+2026-10-20T20:41:03.1557132Z   persist-credentials: true
+2026-10-20T20:41:03.1557623Z   clean: true
+2026-10-20T20:41:03.1558068Z   sparse-checkout-cone-mode: true
+2026-10-20T20:41:03.1558606Z   fetch-depth: 1
+2026-10-20T20:41:03.1559049Z   fetch-tags: false
+2026-10-20T20:41:03.1559500Z   show-progress: true
+2026-10-20T20:41:03.1559951Z   lfs: false
+2026-10-20T20:41:03.1560558Z   submodules: false
+2026-10-20T20:41:03.1561020Z   set-safe-directory: true
+2026-10-20T20:41:03.1561776Z env:
+2026-10-20T20:41:03.1562195Z   ADMIN_GITHUB_TOKEN: 
+2026-10-20T20:41:03.1562791Z   AGIALPHA_ADDRESS: 0xa61a3b3a130a9c20768eebf97e21515a6046a1fa
+2026-10-20T20:41:03.1563499Z   AGIALPHA_DECIMALS: 18
+2026-10-20T20:41:03.1563962Z ##[endgroup]
+2026-10-20T20:41:03.2583796Z Syncing repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T20:41:03.2585720Z ##[group]Getting Git version info
+2026-10-20T20:41:03.2586871Z Working directory is '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T20:41:03.2588303Z [command]/usr/bin/git version
+2026-10-20T20:41:03.2654653Z git version 2.55.0
+2026-10-20T20:41:03.2678352Z ##[endgroup]
+2026-10-20T20:41:03.2692538Z Temporarily overriding HOME='/home/runner/work/_temp/c69af6a2-0d5e-4cce-bebb-79a021af537a' before making global git config changes
+2026-10-20T20:41:03.2694650Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T20:41:03.2698561Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T20:41:03.2746206Z Deleting the contents of '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T20:41:03.2750596Z ##[group]Initializing the repository
+2026-10-20T20:41:03.2754754Z [command]/usr/bin/git init /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T20:41:03.2867616Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T20:41:03.2869047Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T20:41:03.2871169Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T20:41:03.2872578Z hint: call:
+2026-10-20T20:41:03.2873606Z hint:
+2026-10-20T20:41:03.2874849Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T20:41:03.2876291Z hint:
+2026-10-20T20:41:03.2877685Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T20:41:03.2879792Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T20:41:03.2881668Z hint:
+2026-10-20T20:41:03.2882718Z hint: 	git branch -m <name>
+2026-10-20T20:41:03.2883886Z hint:
+2026-10-20T20:41:03.2885261Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T20:41:03.2887441Z Initialized empty Git repository in /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/
+2026-10-20T20:41:03.2891074Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T20:41:03.2937751Z ##[endgroup]
+2026-10-20T20:41:03.2939073Z ##[group]Disabling automatic garbage collection
+2026-10-20T20:41:03.2942446Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T20:41:03.2975770Z ##[endgroup]
+2026-10-20T20:41:03.2977214Z ##[group]Setting up auth
+2026-10-20T20:41:03.2978273Z Removing SSH command configuration
+2026-10-20T20:41:03.2984066Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T20:41:03.3018327Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T20:41:03.3375043Z Removing HTTP extra header
+2026-10-20T20:41:03.3381117Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T20:41:03.3415053Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T20:41:03.3636156Z Removing includeIf entries pointing to credentials config files
+2026-10-20T20:41:03.3642063Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T20:41:03.3674617Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T20:41:03.3907965Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T20:41:03.3945270Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:03.3978252Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:03.4049153Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:03.4085771Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:03.4114735Z ##[endgroup]
+2026-10-20T20:41:03.4116106Z ##[group]Fetching the repository
+2026-10-20T20:41:03.4123867Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a6d20a93c7c5b7430bf42d2367701b350513e90d:refs/remotes/origin/main
+2026-10-20T20:41:08.5924061Z From https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T20:41:08.5926559Z  * [new ref]         a6d20a93c7c5b7430bf42d2367701b350513e90d -> origin/main
+2026-10-20T20:41:08.5942131Z [command]/usr/bin/git branch --list --remote origin/main
+2026-10-20T20:41:08.5966724Z   origin/main
+2026-10-20T20:41:08.5976201Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-10-20T20:41:08.5999831Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:41:08.6005676Z ##[endgroup]
+2026-10-20T20:41:08.6006936Z ##[group]Determining the checkout info
+2026-10-20T20:41:08.6008412Z ##[endgroup]
+2026-10-20T20:41:08.6011197Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T20:41:08.6059070Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T20:41:08.6087960Z ##[group]Checking out the ref
+2026-10-20T20:41:08.6091033Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-20T20:41:09.2702067Z Switched to a new branch 'main'
+2026-10-20T20:41:09.2706313Z branch 'main' set up to track 'origin/main'.
+2026-10-20T20:41:09.2770011Z ##[endgroup]
+2026-10-20T20:41:09.2815985Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T20:41:09.2842235Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:41:09.3091058Z ##[group]Run default_branch=main
+2026-10-20T20:41:09.3091544Z [36;1mdefault_branch=main[0m
+2026-10-20T20:41:09.3091882Z [36;1meval_branch="$default_branch"[0m
+2026-10-20T20:41:09.3092237Z [36;1mpolicy_branch="$default_branch"[0m
+2026-10-20T20:41:09.3092566Z [36;1meval_sha="$GITHUB_SHA"[0m
+2026-10-20T20:41:09.3092879Z [36;1m[0m
+2026-10-20T20:41:09.3093177Z [36;1mif [[ "workflow_run" == "workflow_run" ]]; then[0m
+2026-10-20T20:41:09.3093740Z [36;1m  workflow_head=$(jq -r '.workflow_run.head_branch // empty' "$GITHUB_EVENT_PATH")[0m
+2026-10-20T20:41:09.3094380Z [36;1m  eval_sha=$(jq -r '.workflow_run.head_sha // empty' "$GITHUB_EVENT_PATH")[0m
+2026-10-20T20:41:09.3094961Z [36;1m  event_type=$(jq -r '.workflow_run.event // empty' "$GITHUB_EVENT_PATH")[0m
+2026-10-20T20:41:09.3095578Z [36;1m  pr_base=$(jq -r '.workflow_run.pull_requests[0].base.ref // empty' "$GITHUB_EVENT_PATH")[0m
+2026-10-20T20:41:09.3096081Z [36;1m[0m
+2026-10-20T20:41:09.3096403Z [36;1m  if [[ -n "$workflow_head" ]]; then[0m
+2026-10-20T20:41:09.3096753Z [36;1m    eval_branch="$workflow_head"[0m
+2026-10-20T20:41:09.3097072Z [36;1m  fi[0m
+2026-10-20T20:41:09.3097307Z [36;1m[0m
+2026-10-20T20:41:09.3097629Z [36;1m  if [[ "$event_type" == "pull_request" && -n "$pr_base" ]]; then[0m
+2026-10-20T20:41:09.3098048Z [36;1m    policy_branch="$pr_base"[0m
+2026-10-20T20:41:09.3098356Z [36;1m  fi[0m
+2026-10-20T20:41:09.3098590Z [36;1mfi[0m
+2026-10-20T20:41:09.3098841Z [36;1m[0m
+2026-10-20T20:41:09.3099197Z [36;1mprintf 'CI_EVAL_BRANCH=%s\nCI_POLICY_BRANCH=%s\nCI_EVAL_SHA=%s\n' \[0m
+2026-10-20T20:41:09.3099725Z [36;1m  "$eval_branch" "$policy_branch" "$eval_sha" >> "$GITHUB_ENV"[0m
+2026-10-20T20:41:09.3269912Z shell: /usr/bin/bash -e {0}
+2026-10-20T20:41:09.3270497Z env:
+2026-10-20T20:41:09.3270771Z   ADMIN_GITHUB_TOKEN: 
+2026-10-20T20:41:09.3271165Z   AGIALPHA_ADDRESS: 0xa61a3b3a130a9c20768eebf97e21515a6046a1fa
+2026-10-20T20:41:09.3271616Z   AGIALPHA_DECIMALS: 18
+2026-10-20T20:41:09.3271932Z ##[endgroup]
+2026-10-20T20:41:09.3619294Z ##[group]Run python scripts/check_agialpha_config.py
+2026-10-20T20:41:09.3619804Z [36;1mpython scripts/check_agialpha_config.py[0m
+2026-10-20T20:41:09.3668034Z shell: /usr/bin/bash -e {0}
+2026-10-20T20:41:09.3668368Z env:
+2026-10-20T20:41:09.3668630Z   ADMIN_GITHUB_TOKEN: 
+2026-10-20T20:41:09.3669008Z   AGIALPHA_ADDRESS: 0xa61a3b3a130a9c20768eebf97e21515a6046a1fa
+2026-10-20T20:41:09.3669431Z   AGIALPHA_DECIMALS: 18
+2026-10-20T20:41:09.3669900Z   CI_EVAL_BRANCH: main
+2026-10-20T20:41:09.3670333Z   CI_POLICY_BRANCH: main
+2026-10-20T20:41:09.3670692Z   CI_EVAL_SHA: 106fb6a0cd8508fb2ffd854dfc7690bb87d7d0fb
+2026-10-20T20:41:09.3671068Z ##[endgroup]
+2026-10-20T20:41:09.8598556Z AGIALPHA configuration is consistent:
+2026-10-20T20:41:09.8599290Z   address: 0xA61a3B3a130a9c20768EEBF97E21515A6046a1fA
+2026-10-20T20:41:09.8599705Z   decimals: 18
+2026-10-20T20:41:09.8779691Z ##[group]Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+2026-10-20T20:41:09.8780512Z with:
+2026-10-20T20:41:09.8780787Z   python-version: 3.12
+2026-10-20T20:41:09.8781065Z   check-latest: false
+2026-10-20T20:41:09.8783643Z   token: ***
+2026-10-20T20:41:09.8783903Z   update-environment: true
+2026-10-20T20:41:09.8784206Z   allow-prereleases: false
+2026-10-20T20:41:09.8784492Z   freethreaded: false
+2026-10-20T20:41:09.8784747Z env:
+2026-10-20T20:41:09.8784985Z   ADMIN_GITHUB_TOKEN: 
+2026-10-20T20:41:09.8785321Z   AGIALPHA_ADDRESS: 0xa61a3b3a130a9c20768eebf97e21515a6046a1fa
+2026-10-20T20:41:09.8785746Z   AGIALPHA_DECIMALS: 18
+2026-10-20T20:41:09.8786041Z   CI_EVAL_BRANCH: main
+2026-10-20T20:41:09.8786307Z   CI_POLICY_BRANCH: main
+2026-10-20T20:41:09.8786626Z   CI_EVAL_SHA: 106fb6a0cd8508fb2ffd854dfc7690bb87d7d0fb
+2026-10-20T20:41:09.8786978Z ##[endgroup]
+2026-10-20T20:41:10.0145382Z ##[group]Installed versions
+2026-10-20T20:41:10.0257562Z Successfully set up CPython (3.12.15)
+2026-10-20T20:41:10.0258657Z ##[endgroup]
+2026-10-20T20:41:10.0374615Z ##[group]Run python -m pip install --upgrade pip
+2026-10-20T20:41:10.0375090Z [36;1mpython -m pip install --upgrade pip[0m
+2026-10-20T20:41:10.0375573Z [36;1m# keep runtime lean by installing only the libraries required by the[0m
+2026-10-20T20:41:10.0376017Z [36;1m# watchdog scripts.[0m
+2026-10-20T20:41:10.0376331Z [36;1mpython -m pip install pyyaml[0m
+2026-10-20T20:41:10.0438791Z shell: /usr/bin/bash -e {0}
+2026-10-20T20:41:10.0439109Z env:
+2026-10-20T20:41:10.0439352Z   ADMIN_GITHUB_TOKEN: 
+2026-10-20T20:41:10.0439728Z   AGIALPHA_ADDRESS: 0xa61a3b3a130a9c20768eebf97e21515a6046a1fa
+2026-10-20T20:41:10.0440482Z   AGIALPHA_DECIMALS: 18
+2026-10-20T20:41:10.0440795Z   CI_EVAL_BRANCH: main
+2026-10-20T20:41:10.0441066Z   CI_POLICY_BRANCH: main
+2026-10-20T20:41:10.0441392Z   CI_EVAL_SHA: 106fb6a0cd8508fb2ffd854dfc7690bb87d7d0fb
+2026-10-20T20:41:10.0441828Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T20:41:10.0442382Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-20T20:41:10.0442868Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T20:41:10.0443303Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T20:41:10.0443735Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T20:41:10.0444179Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-20T20:41:10.0444552Z ##[endgroup]
+2026-10-20T20:41:12.1134779Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages (26.2.1)
+2026-10-20T20:41:12.2836983Z Collecting pip
+2026-10-20T20:41:12.3913820Z   Downloading pip-26.2.2-py3-none-any.whl.metadata (4.6 kB)
+2026-10-20T20:41:12.4165143Z Downloading pip-26.2.2-py3-none-any.whl (1.8 MB)
+2026-10-20T20:41:12.5226547Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 30.3 MB/s  0:00:00
+2026-10-20T20:41:12.6721464Z Installing collected packages: pip
+2026-10-20T20:41:12.6735667Z   Attempting uninstall: pip
+2026-10-20T20:41:12.6748755Z     Found existing installation: pip 26.2.1
+2026-10-20T20:41:12.7724821Z     Uninstalling pip-26.2.1:
+2026-10-20T20:41:12.7798490Z       Successfully uninstalled pip-26.2.1
+2026-10-20T20:41:13.7187765Z Successfully installed pip-26.2.2
+2026-10-20T20:41:14.7425273Z Collecting pyyaml
+2026-10-20T20:41:14.8170515Z   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-20T20:41:14.8334657Z Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+2026-10-20T20:41:14.9366357Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 9.4 MB/s  0:00:00
+2026-10-20T20:41:14.9558797Z Installing collected packages: pyyaml
+2026-10-20T20:41:15.0167958Z Successfully installed pyyaml-6.0.3
+2026-10-20T20:41:15.0609385Z ##[group]Run HARD_WORKFLOW="pr-ci.yml"
+2026-10-20T20:41:15.0609791Z [36;1mHARD_WORKFLOW="pr-ci.yml"[0m
+2026-10-20T20:41:15.0610089Z [36;1mRERUN_ARGS=()[0m
+2026-10-20T20:41:15.0610597Z [36;1mDISPATCH_ARGS=(--dispatch-missing)[0m
+2026-10-20T20:41:15.0610961Z [36;1mif [[ "workflow_run" == "workflow_run" ]]; then[0m
+2026-10-20T20:41:15.0611435Z [36;1m  source_workflow=$(jq -r '.workflow_run.name // empty' "$GITHUB_EVENT_PATH")[0m
+2026-10-20T20:41:15.0612003Z [36;1m  if [[ "$source_workflow" == "🚀 Integration CI — Insight Demo" ]]; then[0m
+2026-10-20T20:41:15.0612431Z [36;1m    HARD_WORKFLOW="ci.yml"[0m
+2026-10-20T20:41:15.0612701Z [36;1m  fi[0m
+2026-10-20T20:41:15.0613071Z [36;1m  # A completed workflow_run already guarantees a concrete run exists.[0m
+2026-10-20T20:41:15.0613587Z [36;1m  # Avoid extra dispatches in this context and only rerun failed runs.[0m
+2026-10-20T20:41:15.0614004Z [36;1m  DISPATCH_ARGS=()[0m
+2026-10-20T20:41:15.0614451Z [36;1m  # Repo-Healer marks run_attempt<2 as report-only; keep one automatic rerun[0m
+2026-10-20T20:41:15.0615043Z [36;1m  # path for failed workflow_run contexts so AUTOPATCH_SAFE can activate.[0m
+2026-10-20T20:41:15.0615470Z [36;1m  RERUN_ARGS+=("--rerun-failed")[0m
+2026-10-20T20:41:15.0615753Z [36;1mfi[0m
+2026-10-20T20:41:15.0615955Z [36;1m[0m
+2026-10-20T20:41:15.0616186Z [36;1mpython scripts/check_ci_status.py \[0m
+2026-10-20T20:41:15.0616522Z [36;1m  --token "${GITHUB_TOKEN}" \[0m
+2026-10-20T20:41:15.0616808Z [36;1m  --wait-minutes 5 \[0m
+2026-10-20T20:41:15.0617087Z [36;1m  --pending-grace-minutes 45 \[0m
+2026-10-20T20:41:15.0617395Z [36;1m  --stale-minutes 90 \[0m
+2026-10-20T20:41:15.0617668Z [36;1m  --cancel-stale \[0m
+2026-10-20T20:41:15.0617929Z [36;1m  "${DISPATCH_ARGS[@]}" \[0m
+2026-10-20T20:41:15.0618198Z [36;1m  "${RERUN_ARGS[@]}" \[0m
+2026-10-20T20:41:15.0618464Z [36;1m  --poll-seconds 30 \[0m
+2026-10-20T20:41:15.0618744Z [36;1m  --workflow "$HARD_WORKFLOW" \[0m
+2026-10-20T20:41:15.0619054Z [36;1m  --commit "${CI_EVAL_SHA}" \[0m
+2026-10-20T20:41:15.0619344Z [36;1m  --branch "${CI_EVAL_BRANCH}" \[0m
+2026-10-20T20:41:15.0619644Z [36;1m  --ref "${CI_EVAL_BRANCH}"[0m
+2026-10-20T20:41:15.0672342Z shell: /usr/bin/bash -e {0}
+2026-10-20T20:41:15.0672616Z env:
+2026-10-20T20:41:15.0672834Z   ADMIN_GITHUB_TOKEN: 
+2026-10-20T20:41:15.0673154Z   AGIALPHA_ADDRESS: 0xa61a3b3a130a9c20768eebf97e21515a6046a1fa
+2026-10-20T20:41:15.0673539Z   AGIALPHA_DECIMALS: 18
+2026-10-20T20:41:15.0673779Z   CI_EVAL_BRANCH: main
+2026-10-20T20:41:15.0674021Z   CI_POLICY_BRANCH: main
+2026-10-20T20:41:15.0674318Z   CI_EVAL_SHA: 106fb6a0cd8508fb2ffd854dfc7690bb87d7d0fb
+2026-10-20T20:41:15.0674716Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T20:41:15.0675192Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-20T20:41:15.0675654Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T20:41:15.0676055Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T20:41:15.0676459Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-20T20:41:15.0676871Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-20T20:41:15.0679595Z   GITHUB_TOKEN: ***
+2026-10-20T20:41:15.0679836Z ##[endgroup]
+2026-10-20T20:41:15.7583444Z ⚠️ actions write operations disabled (token has read-only repository permissions); running in read-only mode.
+2026-10-20T20:41:16.1543399Z 
+2026-10-20T20:41:16.1543950Z Found non-green workflows:
+2026-10-20T20:41:16.1544654Z - ci.yml: cancelled age=96.4m (branch=main sha=106fb6a0cd8508fb2ffd854dfc7690bb87d7d0fb)
+2026-10-20T20:41:16.1545608Z   https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39480361058
+2026-10-20T20:41:16.1668505Z ##[error]Process completed with exit code 1.
+2026-10-20T20:41:16.1842659Z Post job cleanup.
+2026-10-20T20:41:16.2685068Z [command]/usr/bin/git version
+2026-10-20T20:41:16.2723480Z git version 2.55.0
+2026-10-20T20:41:16.2764874Z Temporarily overriding HOME='/home/runner/work/_temp/3b374e1f-fa07-4663-935d-7cd50ee6dd4d' before making global git config changes
+2026-10-20T20:41:16.2766260Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T20:41:16.2771555Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T20:41:16.2805279Z Removing SSH command configuration
+2026-10-20T20:41:16.2811945Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T20:41:16.2848092Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T20:41:16.3118055Z Removing HTTP extra header
+2026-10-20T20:41:16.3123859Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T20:41:16.3157006Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T20:41:16.3388619Z Removing includeIf entries pointing to credentials config files
+2026-10-20T20:41:16.3396211Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T20:41:16.3423561Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T20:41:16.3424878Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T20:41:16.3426231Z includeif.gitdir:/github/workspace/.git.path
+2026-10-20T20:41:16.3427265Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T20:41:16.3434403Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T20:41:16.3456993Z /home/runner/work/_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:16.3467676Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:16.3503671Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T20:41:16.3526131Z /home/runner/work/_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:16.3535702Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:16.3570664Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-20T20:41:16.3593404Z /github/runner_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:16.3602380Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:16.3635141Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T20:41:16.3657381Z /github/runner_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:16.3667130Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config
+2026-10-20T20:41:16.3729422Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T20:41:16.3987921Z Removing credentials config '/home/runner/work/_temp/git-credentials-a88c95b0-2a7f-4411-8668-3b5bb5ee9473.config'
+2026-10-20T20:41:16.4155313Z Cleaning up orphan processes
