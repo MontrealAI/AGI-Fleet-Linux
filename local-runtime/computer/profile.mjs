@@ -11,7 +11,7 @@ import {readPrivate} from '../private-file.mjs';
 import {decodeUTF8} from '../primitives.mjs';
 import {publicOnly} from '../../fleet/successor/vendor/manager/site/assets/successor/safe.mjs';
 
-export const ALPHA_COMPUTER_SOURCE=Object.freeze({commit:'0c969c961cf00e7312cd8cc786e4787fc69d8a85',tree:'8a9ab2b52ef09f52dd711fececda54cfb8ff7f97'});
+export const ALPHA_COMPUTER_SOURCE=Object.freeze({commit:'fc6ae7564cafdf423d5cd6d7354038a5d65c2ce2',tree:'c5ee6b335578acfacd05bcaa9c8751dd2bd2ac9f'});
 export const LAUNCHER=fileURLToPath(new URL('./launcher.py',import.meta.url));
 export const COMPUTER_LIMITS=Object.freeze({wallMs:150000,maxSeconds:120,maxActions:30,maxTurns:10,
   handoffBytes:1_000_000,artifactBytes:2_000_000,artifactTotalBytes:80_000_000,historyBytes:320_000_000});
