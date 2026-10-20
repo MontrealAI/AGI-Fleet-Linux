@@ -1,0 +1,163 @@
+{
+  "schema": "agi-fleet/intermediate-ci-custody/v1",
+  "observedAt": "2026-10-20T13:43:35.210Z",
+  "finalEvidence": false,
+  "finalInstalledJourney": "NOT_RUN",
+  "liveFourSites": "NOT_VERIFIED",
+  "sourceStates": {
+    "jobs": {
+      "main": "b9ddbd9d7d0b5d5c3e472b978e0967036033ed10",
+      "qualifiedPr": 4003,
+      "release": "NOT_PUBLISHED",
+      "failure": "Both final-main CodeQL capture steps failed closed; publisher failed its exact-source gate",
+      "unreviewedFollowup": "331112216733854f8ece6936f9822a6f672481fe"
+    },
+    "alpha": {
+      "source": "d2626b932008f7f5edca9fdce6dd6197818e16af",
+      "qualificationRun": 39424897418,
+      "attempt": 1,
+      "failedJob": 118635286888,
+      "regression": "IN_PROGRESS",
+      "release": "NOT_PUBLISHED",
+      "rootCause": "UNPROVEN"
+    },
+    "fleet": {
+      "source": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+      "workflowGroups": 10,
+      "conclusion": "success",
+      "release": "BLOCKED_FINAL_PINS_AND_ELIGIBLE_OWNER"
+    },
+    "manager": {
+      "source": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "release": "v1.19.5",
+      "releaseId": 417952385,
+      "immutable": true
+    }
+  },
+  "alphaOriginalArtifact": {
+    "id": 12266926156,
+    "name": "ascension-current-audit",
+    "size_in_bytes": 6156391,
+    "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/artifacts/12266926156",
+    "archive_download_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/artifacts/12266926156/zip",
+    "expired": false,
+    "created_at": "2026-10-20T13:02:30Z",
+    "expires_at": "2027-01-18T12:46:31Z",
+    "updated_at": "2026-10-20T13:02:30Z",
+    "digest": "sha256:f46ec7a829d06569c5f14cb991918c94d1628cdcff2d2fe37dbce9f92cb83dea",
+    "workflow_run": {
+      "id": 39424897418,
+      "repository_id": 922805069,
+      "head_repository_id": 922805069,
+      "head_branch": "qualification/ti-public-source-20261020",
+      "head_sha": "d2626b932008f7f5edca9fdce6dd6197818e16af"
+    }
+  },
+  "alphaOriginalOutputInspection": {
+    "meta": {
+      "artifact": 12266926156,
+      "chunks": 1,
+      "failedJob": 118635286888,
+      "inspectionCommit": "a5b41b5a10aa1ed47d11c0f992a1a0f010c68daa",
+      "inspectionRun": 39428638336,
+      "member": "release-evidence/current-acceptance/20261020T130038000726Z-two_cycle_interruption_browser-49d44457/output.txt",
+      "memberBytes": 2470,
+      "memberSha256": "f404d0adc82e51fc1967ffd5ba51b353f360049721cc0a2a2822de7e31609b05",
+      "method": "Authenticated retained ZIP member read; no extraction or test execution.",
+      "schema": "agi-alpha/retained-audit-inspection/v1",
+      "source": "d2626b932008f7f5edca9fdce6dd6197818e16af",
+      "sourceAttempt": 1,
+      "sourceRun": 39424897418,
+      "zipBytes": 6156391,
+      "zipSha256": "f46ec7a829d06569c5f14cb991918c94d1628cdcff2d2fe37dbce9f92cb83dea"
+    },
+    "footer": {
+      "bytes": 2470,
+      "chunks": 1,
+      "sha256": "f404d0adc82e51fc1967ffd5ba51b353f360049721cc0a2a2822de7e31609b05"
+    },
+    "rawBytes": 2470,
+    "rawSha256": "f404d0adc82e51fc1967ffd5ba51b353f360049721cc0a2a2822de7e31609b05",
+    "job": 118647534641,
+    "run": 39428638336
+  },
+  "alphaExistingDiagnosticObservations": [
+    {
+      "document": {
+        "captureError": "TimeoutError",
+        "console": [],
+        "operation": "interruption-reconcile",
+        "pageErrors": [],
+        "schema": "agialpha.disposable-action-failure.v1",
+        "state": null,
+        "transaction": "0x34003f90090cc8353cfe36dc6a3e4e3dea054f7c5d8717c52bf1b087968b4dae"
+      },
+      "member": "release-evidence/current-acceptance/20261020T130038000726Z-two_cycle_interruption_browser-49d44457/artifacts/action-failure-interruption-reconcile.json",
+      "name": "action-failure-interruption-reconcile.json",
+      "present": true,
+      "rawBytes": 272,
+      "rawSha256": "47fb22d85d7f9d75c1c9f63c81d1cae7fa7aec4d0a7d1d712d62de392196fe3f",
+      "scope": "Original existing public-state diagnostic values; no new page or RPC observation."
+    },
+    {
+      "name": "reconciliation-failure.json",
+      "present": false
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/alpha-d262-agent-wallet-job-118635286888.log",
+      "sha": "753d34846649d5a2c6cd8cb7af59b1b49dcd61ae",
+      "size": 251705,
+      "sha256": "435c2d160a96c90c60725372e94ef42002009a6214a0a347dd63cb73eaf42b9b",
+      "mode": "100644",
+      "type": "blob"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/alpha-d262-original-two-cycle-output.txt",
+      "sha": "eb0449b4f7386dacd0a998954d1bf5979796102d",
+      "size": 2470,
+      "sha256": "f404d0adc82e51fc1967ffd5ba51b353f360049721cc0a2a2822de7e31609b05",
+      "mode": "100644",
+      "type": "blob"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/alpha-d262-original-interruption-reconcile.json",
+      "sha": "61e7c6e7183e216c1002ae7bd1e3997e6f664ac1",
+      "size": 272,
+      "sha256": "47fb22d85d7f9d75c1c9f63c81d1cae7fa7aec4d0a7d1d712d62de392196fe3f",
+      "mode": "100644",
+      "type": "blob"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/jobs-b9dd-js-service-capture-job-118644093170.log",
+      "sha": "b8e08d5a5cba899fbc1755cd9e79adadeb625c61",
+      "size": 1334187,
+      "sha256": "eecfbff0c649730f617ed958b7db0b3d41420b3cb3677ee00c2f204f44432f93",
+      "mode": "100644",
+      "type": "blob"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/jobs-b9dd-python-service-capture-job-118644095496.log",
+      "sha": "1255afa556b57b9e9b6f95523b1d39231a2c4b47",
+      "size": 1000463,
+      "sha256": "c125252e19a6bebccba2ad68125edb2241dde17689d70ec91e66c588eadb23d1",
+      "mode": "100644",
+      "type": "blob"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/jobs-b98-source-binding-validation-job-118654136780.log",
+      "sha": "5e2a356a66a85b8dcc60e463e5e630073e18d884",
+      "size": 750542,
+      "sha256": "8d4daa76207ffd6e399b02bd3fe598ae5990208767d602c6f4955382e87a2696",
+      "mode": "100644",
+      "type": "blob"
+    }
+  ],
+  "qualificationLimits": [
+    "Closed-code diagnostics do not establish the cause of failed main captures.",
+    "Original Alpha assertion failures remain failures; no cause or repair inferred.",
+    "Metadata-only archive inspection did not execute browser, project code, tests or chain operations.",
+    "All original source-binding, scanner, owner, publication and final consumer gates remain required."
+  ]
+}

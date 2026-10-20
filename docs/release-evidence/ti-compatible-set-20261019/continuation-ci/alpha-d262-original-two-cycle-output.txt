@@ -1,0 +1,36 @@
+Interruption restore: upload
+Interruption restore: mint
+Traceback (most recent call last):
+  File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/nova-studio/cycle-interruptions-browser.py", line 1003, in <module>
+    main()
+  File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/nova-studio/cycle-interruptions-browser.py", line 683, in main
+    first = cycle(1, {"coefficients": [0, 0, 0, 0, 1], "lower": 0, "upper": 3, "steps": 2, "tolerancePpm": 10}, 1)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/nova-studio/cycle-interruptions-browser.py", line 438, in cycle
+    action("attest")
+  File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/nova-studio/cycle-interruptions-browser.py", line 311, in action
+    return finish(
+           ^^^^^^^
+  File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/nova-studio/cycle-interruptions-browser.py", line 297, in finish
+    expect(page.locator("#deployment-choice")).to_be_enabled(timeout=30000)
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 20294, in to_be_enabled
+    self._sync(self._impl_obj.to_be_enabled(enabled=enabled, timeout=timeout))
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_assertions.py", line 718, in to_be_enabled
+    await self._expect_impl(
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_assertions.py", line 83, in _expect_impl
+    raise AssertionError(
+AssertionError: Locator expected to be enabled
+Actual value: disabled 
+Call log:
+  - Expect "to_be_enabled" with timeout 30000ms
+  - waiting for locator("#deployment-choice")
+    3 × locator resolved to <select disabled id="deployment-choice">…</select>
+      - unexpected value "disabled"
+
+Error: Browser cycle acceptance exit 1
+    at ChildProcess.<anonymous> (/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/tests/contracts/scripts/ascension-cycle.js:505:91)
+    at ChildProcess.emit (node:events:518:28)
+    at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12)
