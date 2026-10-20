@@ -1,0 +1,62 @@
+{
+  "schema": "release-continuation-observation/v1",
+  "observedAt": "2026-10-20T12:44:25.465Z",
+  "complete": false,
+  "finalEquivalenceManifest": false,
+  "method": "Original decoded public GitHub hosted-job logs; independently hashed UTF-8 bytes. No local reproduction or gate change.",
+  "logs": [
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/alpha-d262-successor-mission-job-118624675772.log",
+      "repo": "MontrealAI/AGI-Alpha-Agent-v0",
+      "source": "d2626b932008f7f5edca9fdce6dd6197818e16af",
+      "run": 39421901572,
+      "job": 118624675772,
+      "conclusion": "failure",
+      "bytes": 154381,
+      "sha256": "f0c99089ff48f8d099626c3a9c0cdbe3cef45bd7712bb2b4f46d899e5f47173a",
+      "sha": "cc0907a80cf770a89458e367f34dc11caf73a4bd"
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/jobs-9fb-validation-job-118620043663.log",
+      "repo": "MontrealAI/AGIJobsv0",
+      "source": "9fbda3bf3db075ce056aa0015204295ca3537007",
+      "run": 39420528063,
+      "job": 118620043663,
+      "conclusion": "success",
+      "bytes": 740246,
+      "sha256": "a2ff8492f9556685c85c0d91345a8fcd91a76e0b71683f0e746a62d96349670a",
+      "sha": "47ee3c0da1e14c1d0cc09c49ddda2ddd6dda8244"
+    }
+  ],
+  "observations": {
+    "jobsCurrentValidation": {
+      "tests": 148,
+      "passed": 148,
+      "failed": 0,
+      "skipped": 0,
+      "currentFullReviewComment": 6290883687,
+      "finalMainAndPublication": "PENDING"
+    },
+    "alphaCurrent": {
+      "focusedTITestsPassed": 334,
+      "fullReviewComment": 6290862018,
+      "successorMission": "FAILED: Playwright execution context destroyed at original test line144; source-only assessment requested6291084934",
+      "agentCurrent": "NOT_ADMITTED"
+    },
+    "alphaPreviousAgent": {
+      "source": "875165bdd3d54c8dde4ebfcacb6a45cda41a86f2",
+      "run": 39412613136,
+      "originalJobs": 32,
+      "success": 30,
+      "expectedSkipped": 2,
+      "scope": "Earlier source only; no outcome transferred to d262"
+    },
+    "fleetOwner": {
+      "status": "UNAVAILABLE",
+      "reason": "Automatic approval review rejected the eligible owner-review action for possible cybersecurity risk; not retried or substituted.",
+      "required": true
+    },
+    "finalPublicJourney": "NOT_RUN",
+    "finalFourLiveSites": "NOT_RUN"
+  }
+}
