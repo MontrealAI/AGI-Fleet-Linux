@@ -1,0 +1,40 @@
+{
+  "schema": "four-repository-assessment/jobs-genuine-service-check-readback/v1",
+  "observedAt": "2026-10-20T16:20:03.440Z",
+  "repository": "MontrealAI/AGIJobsv0",
+  "headSha": "562af17e55d2a24bb206e222a6c6f73d933d56b6",
+  "collectionRecords": 103,
+  "allPagesRead": true,
+  "checks": [
+    {
+      "id": 118731707245,
+      "name": "Slither",
+      "head_sha": "562af17e55d2a24bb206e222a6c6f73d933d56b6",
+      "status": "completed",
+      "conclusion": "success",
+      "appId": 57789,
+      "ownerId": 9919,
+      "title": "No new alerts in code changed by this pull request",
+      "annotations_count": 0,
+      "completed_at": "2026-10-20T16:15:34Z",
+      "details_url": "https://github.com/MontrealAI/AGIJobsv0/runs/118731707245",
+      "html_url": "https://github.com/MontrealAI/AGIJobsv0/runs/118731707245"
+    },
+    {
+      "id": 118729421729,
+      "name": "CodeQL",
+      "head_sha": "562af17e55d2a24bb206e222a6c6f73d933d56b6",
+      "status": "completed",
+      "conclusion": "success",
+      "appId": 57789,
+      "ownerId": 9919,
+      "title": "No new alerts in code changed by this pull request",
+      "annotations_count": 0,
+      "completed_at": "2026-10-20T16:12:36Z",
+      "details_url": "https://github.com/MontrealAI/AGIJobsv0/runs/118729421729",
+      "html_url": "https://github.com/MontrealAI/AGIJobsv0/runs/118729421729"
+    }
+  ],
+  "scope": "ACTUAL_GITHUB_SERVICE_METADATA_ONLY_NOT_RAW_REVIEW_INSTALLATION_MAIN_OR_RELEASE_QUALIFICATION",
+  "mutations": false
+}

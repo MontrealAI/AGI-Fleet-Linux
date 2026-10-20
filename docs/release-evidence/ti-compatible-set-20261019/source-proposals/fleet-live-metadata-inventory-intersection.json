@@ -1,0 +1,41 @@
+{
+  "schema": "four-repository-assessment/fleet-metadata-inventory-intersection/v1",
+  "observedAt": "2026-10-20T16:22:53.179Z",
+  "scope": "DECLARED_SOURCE_INVENTORY_MEMBERSHIP_ONLY_NOT_BUILD_OR_NATIVE_QUALIFICATION",
+  "sourceCommit": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+  "proposalCommit": "b550df7ab779825c5b99d7eaa10a2be7983234af",
+  "changedPaths": [
+    "engineering/integration/public-live-input.schema.json",
+    "engineering/integration/public_live_inputs.py",
+    "engineering/integration/public-live-sites.mjs",
+    "engineering/integration/PUBLIC_RELEASE_CONSUMER.md",
+    "engineering/integration/test_public_release_metadata.py"
+  ],
+  "inventories": [
+    {
+      "path": "local-runtime/transformation/source-inventory.json",
+      "sha": "530055b26569fa8943a906b5fc3481a1e015b0c4",
+      "overlap": []
+    },
+    {
+      "path": "fleet/source-inventory.json",
+      "sha": "04494e4f0e658779bcba7f6ab59db490eb4b054d",
+      "overlap": []
+    },
+    {
+      "path": "macos/preview/source-inventory.json",
+      "sha": "559d98e430ed72f87a92bc9f25d568d85385643c",
+      "overlap": []
+    },
+    {
+      "path": "workstation/source-inventory.json",
+      "sha": "08c6dbe572b31032af5c3dce95b80bb455cfc629",
+      "overlap": []
+    }
+  ],
+  "conclusion": "No changed proposal path or basename occurs in these four current declared source inventories. The finite metadata correction does not require changing their file entries. This is not their full hash/gate qualification; final companion changes may require actual inventory refresh.",
+  "historicalInventoriesChanged": false,
+  "projectCodeExecuted": false,
+  "sourceOrRefChangedByInspection": false,
+  "finalCompanionInventoryRefreshStillRequired": true
+}

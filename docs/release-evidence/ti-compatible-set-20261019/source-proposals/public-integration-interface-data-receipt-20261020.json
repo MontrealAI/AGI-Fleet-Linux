@@ -1,0 +1,613 @@
+{
+  "schema": "agi-fleet/public-integration-interface-data-receipt/v1",
+  "assembledAt": "2026-10-20T16:18:10.714Z",
+  "classification": "DATA_ONLY_STATIC_SOURCE_AND_DECLARED_JSON_INTERFACE_COMPARISON",
+  "sourceSnapshots": {
+    "fleet669": {
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "commit": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+      "tree": "71b9af9d3ebf0cba865df6639c08c8ddf11697f0",
+      "files": [
+        {
+          "path": "engineering/integration/public_release_assets.py",
+          "gitBlob": "d2643a0714c76e941774af4af37d22a35fdf9865",
+          "mode": "100644",
+          "bytes": 15614
+        },
+        {
+          "path": "engineering/integration/public_release_common.py",
+          "gitBlob": "31f8ea6686a41b6bf0de629d7ad633b26c91d99e",
+          "mode": "100644",
+          "bytes": 13700
+        },
+        {
+          "path": "engineering/integration/public_release_install.py",
+          "gitBlob": "328df7ae8ac89495b8a91dab4de277bcd89afba5",
+          "mode": "100644",
+          "bytes": 19361
+        },
+        {
+          "path": "engineering/integration/public-release-source-transition.cjs",
+          "gitBlob": "9a1d85f4453d095286f3e8bbf71b8f554b9a6d53",
+          "mode": "100644",
+          "bytes": 2822
+        }
+      ]
+    },
+    "jobs562": {
+      "repository": "MontrealAI/AGIJobsv0",
+      "commit": "562af17e55d2a24bb206e222a6c6f73d933d56b6",
+      "tree": "ac85dec951e7975424d4d0b40b4fce4f89e85c1d",
+      "soleParent": "8f633cde97ef5a291823e01bbe691e8afd170150",
+      "parentTree": "1a47148d81807c20ec3b103cbcbb18dbe5c077f0",
+      "files": [
+        {
+          "path": "scripts/release/source-profile-rc16.cjs",
+          "gitBlob": "c404a769260301cc52f0c948e91241ab6f4a87a7",
+          "mode": "100644",
+          "bytes": 31036
+        },
+        {
+          "path": "scripts/release/source-profile-rc16.json",
+          "gitBlob": "f79b73a82cc2783b184d4e0080889eba98aeb8d8",
+          "mode": "100644",
+          "bytes": 25749
+        },
+        {
+          "path": "scripts/release/qualify-source-release-rc16.cjs",
+          "gitBlob": "31c25ea3123a20958ecfd096d1aa07b25573d048",
+          "mode": "100644",
+          "bytes": 30904
+        },
+        {
+          "path": "scripts/release/publish-source-release-rc16.cjs",
+          "gitBlob": "7d28b17cf5f90aa4cd3ab3989ba658982ec9c48e",
+          "mode": "100644",
+          "bytes": 65362
+        }
+      ]
+    },
+    "jobs3986": {
+      "repository": "MontrealAI/AGIJobsv0",
+      "pr": 3986,
+      "commit": "818b3a246871e4cd4dde86558dbb91ef82b15eef",
+      "tree": "b1c3bb0f4b8d64e0d23376d6b6ef3722c4c67b0d",
+      "baseCommit": "bd45f34de1c1e58986aafb4b0e5c48bc155839ca",
+      "baseTree": "a49fa5d32272555e62431363f1ffd36b84ea87be",
+      "capturedPrState": "open",
+      "capturedDraft": true,
+      "capturedMerged": false,
+      "files": [
+        {
+          "path": "docs/conventional-tty-deployment.md",
+          "gitBlob": "17c6cac197877427fc565ca1d025963fe35dc43a",
+          "mode": "100644",
+          "bytes": 5786
+        },
+        {
+          "path": "docs/deployment-external-manual.md",
+          "gitBlob": "af389882be544924dacba65210b9f9a51512e9aa",
+          "mode": "100644",
+          "bytes": 10397
+        }
+      ]
+    },
+    "manager4d": {
+      "repository": "MontrealAI/AGIJobManager",
+      "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+      "role": "RELEASED_SOURCE_REFERENCE_NOT_A_FRESH_RELEASE_API_VERIFICATION",
+      "files": [
+        {
+          "path": "docs/deployment/ubuntu-ephemeral-creator.md",
+          "gitBlob": "63b5375083e5dce93a635aaee32de246e3071beb",
+          "mode": "100644",
+          "bytes": 12444
+        },
+        {
+          "path": "docs/deployment/core-external-signing.md",
+          "gitBlob": "c4797dbca0e1e99fa7d38b5e7d4f75dbf7b23139",
+          "mode": "100644",
+          "bytes": 16784
+        }
+      ]
+    },
+    "manager1590": {
+      "repository": "MontrealAI/AGIJobManager",
+      "pr": 1590,
+      "commit": "d20a79bf68d1ef1f4249733ced8003c6de62cda1",
+      "tree": "1d659bb7abdfd88d0ee59be144d7254ca8cbc560",
+      "baseCommit": "6eeac125ae69d68c6a67291604541fd887f76a85",
+      "baseTree": "c368bcba7dbd2bbb262143715250009f7e28256a",
+      "baseBranch": "review/manual-ledger-campaign-companion-20261016",
+      "capturedPrState": "open",
+      "capturedDraft": true,
+      "capturedMerged": false,
+      "files": [
+        {
+          "path": "docs/deployment/UBUNTU_HARDHAT_CREATION.md",
+          "gitBlob": "be453349a98cdbe96157c07b83ccd91b7c3467a9",
+          "mode": "100644",
+          "bytes": 25993
+        },
+        {
+          "path": "tools/ledger-campaign-companion/JOBS_NATIVE_EN_FR.md",
+          "gitBlob": "d63361097b44a1cb5852ea2b30f3aa283e3e670c",
+          "mode": "100644",
+          "bytes": 12845
+        },
+        {
+          "path": "tools/ledger-campaign-companion/COORDINATOR_COMPATIBILITY.json",
+          "gitBlob": "bd4184ad7a53762093fb0ba328f99e095217a2dd",
+          "mode": "100644",
+          "bytes": 35267
+        }
+      ]
+    }
+  },
+  "sourceStateLimit": "Commit/tree identities are immutable captured sources. PR draft/state labels are the preceding public metadata observations, not a fresh current-state or review qualification assertion.",
+  "publicReleaseConsumerReview": {
+    "sourceRoles": [
+      "fleet669",
+      "jobs562"
+    ],
+    "finding": "NO_CONCRETE_ADDITIONAL_CONSUMER_PATCH_JUSTIFIED_BY_562_REPAIR_ALONE",
+    "scope": "Selected Jobs asset roles, declared profile/provenance fields and source-metadata verifier exports only; no scanner correctness or functional owner review.",
+    "selectedJobsRoles": [
+      "source",
+      "provenance",
+      "sourceProfile",
+      "checksums"
+    ],
+    "expectedSelectedNames": {
+      "source": "<actual-tag>-source.zip",
+      "provenance": "provenance.json",
+      "sourceProfile": "source-profile-rc16.json",
+      "checksums": "SHA256SUMS.txt"
+    },
+    "consumerInputClosure": {
+      "selectedRoleSetClosed": true,
+      "requiresAllReleaseAssetsSelected": false,
+      "additionalPublisherEvidenceDoesNotCreateFifthRole": true
+    },
+    "consumerProvenanceFields": [
+      "repository",
+      "sha",
+      "tree",
+      "tag",
+      "productionApproved"
+    ],
+    "consumerProductionApprovedValue": false,
+    "declaredJobsProvenanceSchema": "agijobsv0/source-release-provenance/1",
+    "declaredJobsSourceProfile": {
+      "schema": "agijobsv0/source-release-profile/v1",
+      "releaseVersion": "2.1.0-rc.16",
+      "tag": "source-v2.1.0-rc.16"
+    },
+    "declaredPublisherExpectedAssetCount": 25,
+    "metadataExports": {
+      "profileModule": "scripts/release/source-profile-rc16.cjs",
+      "preservedExports": [
+        "profile",
+        "verifySourceScope"
+      ],
+      "profileVerifierArguments": [
+        "git",
+        "sha",
+        "version",
+        "lock",
+        "policy"
+      ],
+      "compilerVerifierModule": "scripts/release/qualify-source-release-rc16.cjs",
+      "compilerVerifierExport": "verifySourceScope",
+      "compilerVerifierArgumentsSuppliedByConsumer": [
+        "git",
+        "sha",
+        "version",
+        "policy"
+      ],
+      "consumerUsesJobsOriginalStaticVerifiers": true,
+      "publishedProfileComparedWithExportedProfile": true,
+      "hardcodedConsumerTransportPolicyV1AssumptionFound": false,
+      "nestedScannerTransportCorrectnessAssessed": false
+    },
+    "relationTo8f": {
+      "allFourAnchoredJobsInterfaceFilesSameBlobAndMode": true,
+      "changedPathsOnly": [
+        "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+        "scripts/release/source-scanner-gates-rc16.cjs",
+        "test/scripts/source-release-integrated-rc16.test.cjs"
+      ],
+      "rawScannerHandlerOrTestFixtureReadForThisDelta": false
+    },
+    "sourceAnchors": [
+      {
+        "sourceRole": "fleet669",
+        "path": "engineering/integration/public_release_assets.py",
+        "lines": [
+          20,
+          65,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          95,
+          96,
+          97
+        ],
+        "meaning": "Closed selected roles and sourceProfile-backed Jobs transition identity."
+      },
+      {
+        "sourceRole": "fleet669",
+        "path": "engineering/integration/public_release_install.py",
+        "lines": [
+          29,
+          32,
+          33,
+          36,
+          37,
+          38,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          83
+        ],
+        "meaning": "Selected checksum coverage, provenance source identity and archive prefix expectation."
+      },
+      {
+        "sourceRole": "fleet669",
+        "path": "engineering/integration/public-release-source-transition.cjs",
+        "lines": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29
+        ],
+        "meaning": "Original Jobs metadata module exports, sourceProfile equality and verifier calls."
+      },
+      {
+        "sourceRole": "jobs562",
+        "path": "scripts/release/qualify-source-release-rc16.cjs",
+        "lines": [
+          345,
+          346,
+          347,
+          348,
+          349,
+          819,
+          820,
+          821,
+          822,
+          823,
+          825,
+          828,
+          892,
+          911
+        ],
+        "meaning": "Preserved compiler metadata signature, provenance identity fields and export."
+      },
+      {
+        "sourceRole": "jobs562",
+        "path": "scripts/release/source-profile-rc16.cjs",
+        "lines": [
+          572,
+          573,
+          574,
+          575,
+          576,
+          719,
+          721,
+          726,
+          727,
+          728,
+          730,
+          733,
+          735,
+          738,
+          804,
+          805,
+          822
+        ],
+        "meaning": "Profile verifier signature, returned metadata and exported API."
+      },
+      {
+        "sourceRole": "jobs562",
+        "path": "scripts/release/publish-source-release-rc16.cjs",
+        "lines": [
+          64,
+          66,
+          67,
+          68,
+          84,
+          88,
+          91,
+          304,
+          305,
+          306,
+          307,
+          308
+        ],
+        "meaning": "Declared publisher asset names and profile identity check."
+      }
+    ],
+    "existingUnprovenPrerequisites": [
+      "Actual immutable release identity and exact released main source.",
+      "Actual public asset IDs, sizes, digests and checksum bytes.",
+      "Full released source archive prefix, Git-leaf closure and mode checks.",
+      "Final companion pin update to the real released compatibility set.",
+      "Successful authenticated installed-package consumption and original required qualification."
+    ],
+    "actualReleaseOrArchiveProofSupplied": false,
+    "noNewValidatorOrGateProposed": true
+  },
+  "deploymentInterfaceDependencyReview": {
+    "sourceRoles": [
+      "jobs3986",
+      "manager4d",
+      "manager1590"
+    ],
+    "finding": "NO_DOCUMENTED_1590_DEPENDENCY_FOR_STANDALONE_3986_CONVENTIONAL_CREATION",
+    "scope": "Public documentation, declared input fields, registry metadata and exact Git path presence; no cryptographic key-handler implementation read.",
+    "jobsConventional": {
+      "runSchema": "jobs-conventional-tty-v1",
+      "requiredDeclaredFields": [
+        "schema",
+        "sourceCommit",
+        "sourceTree",
+        "network",
+        "creator",
+        "governor",
+        "config",
+        "configSha256",
+        "output",
+        "lockDirectory",
+        "firstNonce",
+        "rpcUrl",
+        "fees",
+        "resume"
+      ],
+      "feeFieldNames": [
+        "gasLimit",
+        "maxFeePerGas",
+        "maxPriorityFeePerGas",
+        "maxTotalCost"
+      ],
+      "resumeFieldNames": [
+        "coordinator",
+        "evidence",
+        "evidenceSha256"
+      ],
+      "journalDescription": "Ordinary staged writer and direct/v1 authority journal.",
+      "externalManualSignerRequiredByThisDeclaredRoute": false,
+      "documentedManagerImportRequired": false,
+      "governanceContinuation": "Separate subsequent Mac/Ledger governor work; no automatic unpause or old deployment mutation."
+    },
+    "releasedManager": {
+      "runSchema": "manager-tty-creator-run-v1",
+      "runFieldNames": [
+        "schema",
+        "mode",
+        "catalog",
+        "catalogSha256",
+        "buildId",
+        "config",
+        "session",
+        "lockDirectory",
+        "finalityTimeoutSeconds",
+        "pollIntervalSeconds"
+      ],
+      "configSchema": "manager-core-creation-config-v1",
+      "documentedGraph": "Eight linked libraries plus one Manager.",
+      "documentedJobsConventionalImportFound": false,
+      "campaignCompanionPrefix": "tools/ledger-campaign-companion/",
+      "campaignCompanionPrefixPresentInObservedCompleteTree": false,
+      "completeTreeEntryCount": 1848,
+      "absenceClaimLimit": "Exact companion-prefix absence and documented interface surfaces only; not an exhaustive proof about all possible import mechanisms."
+    },
+    "separateDraft1590": {
+      "terminalRunSchema": "ubuntu-hardhat-terminal-v1",
+      "commonDeclaredFields": [
+        "schema",
+        "project",
+        "checkout",
+        "runtimeCheckout",
+        "nodeSha256",
+        "toolSourceSha256",
+        "rpcUrl"
+      ],
+      "jobsSpecificDeclaredFields": [
+        "profilePath",
+        "profileSha256",
+        "deploymentConfigPath"
+      ],
+      "registeredJobsCommit": "9a79f38ad9edc448dc0b8d8cfa6157ee0c6f2bc5",
+      "registeredJobsTree": "720312acac83eddeeb76644e1e22f53578e91784",
+      "jobsProfile": "jobs-external-manual-v1",
+      "jobsPlanSchema": "jobs-external-plan-v1",
+      "jobsPacketSchema": "jobs-external-envelope-v1",
+      "jobsOperationSchema": "jobs-external-operation-v1",
+      "handoffReviewFieldNames": [
+        "planHash",
+        "unsignedHash",
+        "policyHash"
+      ],
+      "journalVersion": 2,
+      "creatorProfile": "empty-code-eoa-type2",
+      "selectedMarkerCreatorQualified": false,
+      "companionTransportQualified": false,
+      "adapterUsesOriginalPinnedJobsFunctions": [
+        "loadExternalProfile",
+        "runCommand"
+      ],
+      "conventional818RunIsDeclaredAdapterInput": false,
+      "sourceAndProtocolPinsAreSeparateFrom818AndCurrentMain": true
+    },
+    "compatibilityConclusion": {
+      "schemasNotInterchangeableByDeclaration": true,
+      "commonLockSchema": "creator-nonce-lock-v1",
+      "sharedLockNamespaceDoesNotEstablishSessionCompatibility": true,
+      "automaticConversionOrImportDocumented": false,
+      "managerUSDCAndJobsAGIALPHATokenRoutesRemainSeparate": true
+    },
+    "ownerDependencies": [
+      "Existing Jobs creator-route owners retain3986 and exact-source conventional-route review and qualification.",
+      "Existing operator/adapter owners retain1590, its stacked branch, source registrations and any separately chosen uniform-terminal integration.",
+      "1590's older9a79 external-manual evidence does not qualify818 conventionalTTY or current-main source.",
+      "Any chosen adapter update needs its actual source/interface checks and existing required review/qualification; this receipt adds no new gate.",
+      "Device, bootstrap, provider and actual production-plan acceptance remain separate from source compatibility.",
+      "No requirement to merge1590 is inferred solely from the operational preservation boundaries or from this limited receipt."
+    ],
+    "sourceAnchors": [
+      {
+        "sourceRole": "jobs3986",
+        "path": "docs/conventional-tty-deployment.md",
+        "lines": [
+          3,
+          4,
+          5,
+          6,
+          10,
+          22,
+          26,
+          48,
+          49,
+          91,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112
+        ],
+        "meaning": "Standalone conventional run schema, direct/v1 journal and separate governance continuation."
+      },
+      {
+        "sourceRole": "jobs3986",
+        "path": "docs/deployment-external-manual.md",
+        "lines": [
+          9,
+          11,
+          21,
+          30,
+          40
+        ],
+        "meaning": "Separate external-manual plan and journalv2; ENS/governor commissioning remains outside that profile."
+      },
+      {
+        "sourceRole": "manager4d",
+        "path": "docs/deployment/ubuntu-ephemeral-creator.md",
+        "lines": [
+          24,
+          26,
+          27,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          82,
+          83,
+          85,
+          125
+        ],
+        "meaning": "Manager-only run/config inputs and graph, with separate Ledger governance."
+      },
+      {
+        "sourceRole": "manager4d",
+        "path": "docs/deployment/core-external-signing.md",
+        "lines": [
+          3,
+          24,
+          29,
+          33,
+          34,
+          36,
+          37,
+          38,
+          39
+        ],
+        "meaning": "Manager core-session commands and creator lock, not a declared Jobs-conventional importer."
+      },
+      {
+        "sourceRole": "manager1590",
+        "path": "docs/deployment/UBUNTU_HARDHAT_CREATION.md",
+        "lines": [
+          11,
+          13,
+          15,
+          41,
+          42,
+          43,
+          44,
+          48,
+          52,
+          67,
+          69,
+          119,
+          121
+        ],
+        "meaning": "Separate terminal bootstrap and pinned Jobs external-manual profile; physical and production acceptance remain separate."
+      },
+      {
+        "sourceRole": "manager1590",
+        "path": "tools/ledger-campaign-companion/JOBS_NATIVE_EN_FR.md",
+        "lines": [
+          3,
+          9,
+          21,
+          35,
+          37,
+          41,
+          47,
+          48,
+          49,
+          51,
+          52,
+          56,
+          57
+        ],
+        "meaning": "Original pinned native functions and external protocol, with browser transport explicitly unqualified."
+      }
+    ],
+    "ensOwnershipOrWorkstreamChanged": false,
+    "fullUnseenBriefScopeDetermined": false,
+    "noNewDeploymentOrSigningPermissionImplied": true
+  },
+  "nonClaims": {
+    "actualReleaseVerifiedByThisReceipt": false,
+    "actualArchiveInspected": false,
+    "packageInstalled": false,
+    "projectCodeImportedOrExecuted": false,
+    "testsOrRuntimeProbesRun": false,
+    "scannersExecutedOrRawScannerResultsRead": false,
+    "keyHandlerImplementationsReadForDeploymentReview": false,
+    "keysTokensAccountsOrPrivateContextUsed": false,
+    "signingFundingDeploymentActivationOrAuthorityChanged": false,
+    "deviceOrLedgerCustodyVerified": false,
+    "currentMainQualifiedByThisReceipt": false,
+    "eligibleFunctionalOrOwnerReviewProvided": false,
+    "productQualification": false
+  },
+  "relatedBoundaryCustody": {
+    "blob": "734759cbcf24e789534d40474689258200f19ad7",
+    "sha256": "0f05943aff2f141f9477a79ff06eac262fd82c1beda160922872c2dbe2de7142",
+    "scope": "Prior data-only boundary/3986 source map, not product qualification."
+  }
+}
