@@ -1,0 +1,156 @@
+{
+  "asOf": "2026-10-20T20:38:36.838Z",
+  "completion": false,
+  "userGoal": "Qualified normal merges, fresh releases, exact public installed-package ONE journey, all four live sites",
+  "jobs": {
+    "pr": 4005,
+    "source": "604d10094f3b7fede53406ae0e40f9f489155a3b",
+    "tree": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+    "main": "5cd671e6f3f3a29e12cede966842f4bc99ece59f",
+    "status": "S2 604d normal original23workflow groups22SUCCESS, containers targeted attempt2 originalARM retry running after retained npm ECONNRESET; no merge yet. Genuine current JS full43result/8quality lossless reconciliation PASS, Python bounded unchanged-policy reconciliation PASS with numeric noncore parser telemetry8→6 explicitly retained unexplained. Hosted163/163 source validation and real-Git testsPASS.",
+    "fix": "Owned private external output; guide and publisher harnesses aligned",
+    "targetedBenignTests": {
+      "pass": 7,
+      "fail": 0
+    },
+    "evidence": {
+      "commit": "9c9ddd8123d2f7fdc2365393ac3774b1f3beab15",
+      "tree": "df0a70f328aac6762c35ca69285b01e3ce1cd9bc"
+    },
+    "next": "Require one targeted original ARM container retrySUCCESS plus all23groups/37requiredcontexts/latest reviews0open/freshbase-preview-source-release checks, then normal merge and exact finalmain original publisher.",
+    "pythonReviewComment": 6299575988,
+    "javascript": {
+      "run": 39482430424,
+      "producer": 118834137073,
+      "collector": 118839993292,
+      "results": 43,
+      "quality": 8,
+      "securityLike": 35,
+      "evidence": "dc9882788b1e48628e8a8f54b130b9a1cc224b05"
+    },
+    "currentSourceGroups": {
+      "success": 22,
+      "in_progress": 1
+    },
+    "preparedInstall": {
+      "commit": "604d10094f3b7fede53406ae0e40f9f489155a3b",
+      "tree": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+      "parent": "d8544f8173b3c01faa88d50e7145ec455bc5e170",
+      "branchMoved": true,
+      "records": {
+        "scannerReview": {
+          "canonicalBytes": 47492,
+          "canonicalSha256": "3baad51943b136139bcb7d8fa1cb16864c9056679eb67a9cde94a44a72c42d19",
+          "source": "d8544f8173b3c01faa88d50e7145ec455bc5e170"
+        },
+        "pythonScannerReview": {
+          "canonicalBytes": 742109,
+          "canonicalSha256": "fc3768fe2d8ba646a9fd95e2a905ae833e2439a809fb930509c2223f500d4549",
+          "source": "d8544f8173b3c01faa88d50e7145ec455bc5e170"
+        },
+        "notesReview": {
+          "canonicalBytes": 70062,
+          "canonicalSha256": "8a56a48a0722b82228bb8840e10968df1545eab79cc62bbabd4011a477e1e725",
+          "source": "d8544f8173b3c01faa88d50e7145ec455bc5e170"
+        }
+      }
+    },
+    "reviewedS1": {
+      "source": "d8544f8173b3c01faa88d50e7145ec455bc5e170",
+      "tree": "14140fc8a3ce95e0ca5b15a421dc97ed190ec735",
+      "pythonComment": 6299575988,
+      "javascriptComment": 6300064255
+    },
+    "reconciliations": {
+      "javascript": {
+        "bytes": 14484,
+        "sha256": "efc8b90ed922d73ec2bd1298f4e9c18b378f82b92f5fac0b963cffc95aeeaa13",
+        "status": "PASS_STATIC"
+      },
+      "python": {
+        "bytes": 8369,
+        "sha256": "d15451efc4b7ee8852625d16fd1b46303c1184e70ffb65f233982f43884fbb1a",
+        "status": "BOUNDED_POLICY_PASS",
+        "unexplainedParserCounterDelta": "8→6; retained separately, no whole-report equality claim"
+      }
+    }
+  },
+  "alpha": {
+    "main": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+    "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+    "oldReviewedMergedMain": "558f798a9b9cc73c1db01905858aad8852e11092",
+    "normalDescendant": true,
+    "unchangedPriorLeaves": 3609,
+    "addedPapers": [
+      "docs/Out_Evolve.pdf",
+      "docs/Out_Evolve.tex",
+      "docs/The_World_as_an_Output.pdf",
+      "docs/The_World_as_an_Output.tex"
+    ],
+    "agentRun": 39484204330,
+    "agentAttempt": 1,
+    "agentJobs": {
+      "success": 27,
+      "inProgress": 2,
+      "regression": 118845385781,
+      "historical": 118845385952
+    },
+    "legacyRun": 39484204335,
+    "legacyAttempt": 1,
+    "legacyStatus": "pending/no jobs yet; intermediate106 CI39480361058 still running two full test matrices",
+    "release": "v1.36.0 actual404/notpublished",
+    "prior558OperatorBlocker": "SUPERSEDED_HISTORICAL_NOT_CURRENT_BLOCKER: newer owner paper commits changed main; follow new current source. Proposed558rootreplay aborted before mutation.",
+    "requiredNext": "Follow current exactmain fullCI/publisher, preserve all new papers, obtain current source continuity/review binding before final source selection and refresh Fleet Alpha/computer pins to actual published source.",
+    "evidence": {
+      "commit": "cdb5672231a2ff8f508c78e5e9b082eeaadc0a37",
+      "tree": "c7709c2f43426fd449eae38ce66a4c9c133ac7a5"
+    }
+  },
+  "fleet": {
+    "pr": 61,
+    "source": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+    "tree": "ed382a6ac343bc6b1759af072bca4cb1aa031c92",
+    "status": "All10original current Fleet442workflow groupsSUCCESS, including Linuxx64/ARM64/native/audit/aggregate. Public releases and final pins/eligible owner stillrequired;2originalP1threads intentionallyOPEN.",
+    "blockers": [
+      {
+        "owner": "Eligible independent Fleet functional owner",
+        "next": "Review final exact source and explicitly authorize recovery/source-custody dispositions; blocked agent lane cannot be retried or substituted."
+      },
+      {
+        "owner": "Root release coordinator",
+        "next": "After actual fresh Jobs and current Alpha a6d20-or-later publications, refresh BOTH final Jobs/Alpha pins and computer profile/README tuples, then full fresh Fleet qualification and eligible owner review."
+      }
+    ],
+    "evidence": {
+      "commit": "51c26d4a116c812a20849d21466883ec3c147a06",
+      "tree": "b6fab8216d6e5fe00434548f96e618fcad8c469d"
+    }
+  },
+  "manager": {
+    "source": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+    "release": "v1.19.5",
+    "releaseId": 417952385,
+    "status": "Released and frozen; final live verification still required"
+  },
+  "final": {
+    "publicInstalledONE": false,
+    "D": false,
+    "E": false,
+    "T": false,
+    "allFourFinalLive": false,
+    "rootReadbackExpansion": {
+      "status": "11offlineunitsPASS; independent static review in progress, notliveF",
+      "paths": 22,
+      "commit": "b404779625524aa86803c4e0e9834fd70b1316e0"
+    }
+  },
+  "storage": {
+    "freeBytes": 31060398080,
+    "deleted": false,
+    "paidCommitment": false
+  },
+  "mainnet": {
+    "lookup": "Completed read-only block identity/timestamp matched retained ENS",
+    "stateChanges": 0
+  }
+}
