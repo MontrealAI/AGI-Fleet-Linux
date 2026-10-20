@@ -1,0 +1,211 @@
+﻿2026-10-20T21:56:01.7044994Z Current runner version: '2.338.0'
+2026-10-20T21:56:01.7070888Z ##[group]Runner Image Provisioner
+2026-10-20T21:56:01.7071839Z Hosted Compute Agent
+2026-10-20T21:56:01.7072464Z Version: 20261015.610
+2026-10-20T21:56:01.7073166Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-20T21:56:01.7073977Z Build Date: 2026-10-14T17:06:54Z
+2026-10-20T21:56:01.7074700Z Worker ID: {679397a2-473c-47d4-91bb-365b94e19d13}
+2026-10-20T21:56:01.7075441Z Region: westus
+2026-10-20T21:56:01.7076021Z Cloud: Azure
+2026-10-20T21:56:01.7076602Z ##[endgroup]
+2026-10-20T21:56:01.7078420Z ##[group]Operating System
+2026-10-20T21:56:01.7079394Z Ubuntu
+2026-10-20T21:56:01.7079951Z 24.04.5
+2026-10-20T21:56:01.7080590Z LTS
+2026-10-20T21:56:01.7081189Z ##[endgroup]
+2026-10-20T21:56:01.7082189Z ##[group]Runner Image
+2026-10-20T21:56:01.7082813Z Image: ubuntu-24.04
+2026-10-20T21:56:01.7083361Z Version: 20261018.339.1
+2026-10-20T21:56:01.7084746Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T21:56:01.7086387Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+2026-10-20T21:56:01.7087358Z ##[endgroup]
+2026-10-20T21:56:01.7088559Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T21:56:01.7090803Z Actions: read
+2026-10-20T21:56:01.7091405Z Contents: read
+2026-10-20T21:56:01.7092085Z Metadata: read
+2026-10-20T21:56:01.7092648Z ##[endgroup]
+2026-10-20T21:56:01.7095254Z Secret source: Actions
+2026-10-20T21:56:01.7096336Z Cache mode: write
+2026-10-20T21:56:01.7097322Z Prepare workflow directory
+2026-10-20T21:56:01.7554215Z Prepare all required actions
+2026-10-20T21:56:01.7603953Z Getting action download info
+2026-10-20T21:56:02.1112302Z Download action repository 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-10-20T21:56:02.2172659Z Download action repository 'actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f' (SHA:bbbca2ddaa5d8feaa63e36b76fdaad77386f024f)
+2026-10-20T21:56:02.3974966Z Complete job name: historical-ci
+2026-10-20T21:56:02.4783735Z ##[group]Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+2026-10-20T21:56:02.4784839Z with:
+2026-10-20T21:56:02.4785294Z   persist-credentials: false
+2026-10-20T21:56:02.4785858Z   repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T21:56:02.4789976Z   token: ***
+2026-10-20T21:56:02.4790476Z   ssh-strict: true
+2026-10-20T21:56:02.4790920Z   ssh-user: git
+2026-10-20T21:56:02.4791346Z   clean: true
+2026-10-20T21:56:02.4791785Z   sparse-checkout-cone-mode: true
+2026-10-20T21:56:02.4792312Z   fetch-depth: 1
+2026-10-20T21:56:02.4792745Z   fetch-tags: false
+2026-10-20T21:56:02.4793192Z   show-progress: true
+2026-10-20T21:56:02.4793633Z   lfs: false
+2026-10-20T21:56:02.4794044Z   submodules: false
+2026-10-20T21:56:02.4794500Z   set-safe-directory: true
+2026-10-20T21:56:02.4795223Z env:
+2026-10-20T21:56:02.4795665Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T21:56:02.4796213Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T21:56:02.4796777Z   NO_DISCLAIMER: 1
+2026-10-20T21:56:02.4797236Z ##[endgroup]
+2026-10-20T21:56:02.5844875Z Syncing repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T21:56:02.5846827Z ##[group]Getting Git version info
+2026-10-20T21:56:02.5847723Z Working directory is '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T21:56:02.5849791Z [command]/usr/bin/git version
+2026-10-20T21:56:02.5914140Z git version 2.55.0
+2026-10-20T21:56:02.5938048Z ##[endgroup]
+2026-10-20T21:56:02.5953618Z Temporarily overriding HOME='/home/runner/work/_temp/d95e4189-5c47-4749-a3de-16b47d8a7946' before making global git config changes
+2026-10-20T21:56:02.5955838Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T21:56:02.5959362Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T21:56:02.6014720Z Deleting the contents of '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T21:56:02.6019948Z ##[group]Initializing the repository
+2026-10-20T21:56:02.6024852Z [command]/usr/bin/git init /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T21:56:02.6131899Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T21:56:02.6133570Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T21:56:02.6135532Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T21:56:02.6137092Z hint: call:
+2026-10-20T21:56:02.6137975Z hint:
+2026-10-20T21:56:02.6139258Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T21:56:02.6140444Z hint:
+2026-10-20T21:56:02.6141613Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T21:56:02.6143589Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T21:56:02.6145150Z hint:
+2026-10-20T21:56:02.6145952Z hint: 	git branch -m <name>
+2026-10-20T21:56:02.6146923Z hint:
+2026-10-20T21:56:02.6148172Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T21:56:02.6150551Z Initialized empty Git repository in /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/
+2026-10-20T21:56:02.6153686Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T21:56:02.6201257Z ##[endgroup]
+2026-10-20T21:56:02.6202641Z ##[group]Disabling automatic garbage collection
+2026-10-20T21:56:02.6206267Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T21:56:02.6241573Z ##[endgroup]
+2026-10-20T21:56:02.6242920Z ##[group]Setting up auth
+2026-10-20T21:56:02.6243945Z Removing SSH command configuration
+2026-10-20T21:56:02.6250640Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T21:56:02.6285761Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T21:56:02.6639967Z Removing HTTP extra header
+2026-10-20T21:56:02.6646405Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T21:56:02.6682671Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T21:56:02.6936520Z Removing includeIf entries pointing to credentials config files
+2026-10-20T21:56:02.6944139Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T21:56:02.6983542Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T21:56:02.7231766Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T21:56:02.7276122Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:02.7312272Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:02.7351446Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:02.7387395Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:02.7425328Z ##[endgroup]
+2026-10-20T21:56:02.7426545Z ##[group]Fetching the repository
+2026-10-20T21:56:02.7434958Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a6d20a93c7c5b7430bf42d2367701b350513e90d:refs/remotes/origin/main
+2026-10-20T21:56:06.1771432Z From https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T21:56:06.1774232Z  * [new ref]         a6d20a93c7c5b7430bf42d2367701b350513e90d -> origin/main
+2026-10-20T21:56:06.1784477Z [command]/usr/bin/git branch --list --remote origin/main
+2026-10-20T21:56:06.1812921Z   origin/main
+2026-10-20T21:56:06.1822144Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-10-20T21:56:06.1846704Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:56:06.1853452Z ##[endgroup]
+2026-10-20T21:56:06.1854841Z ##[group]Determining the checkout info
+2026-10-20T21:56:06.1856215Z ##[endgroup]
+2026-10-20T21:56:06.1859064Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T21:56:06.1912027Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T21:56:06.1944886Z ##[group]Checking out the ref
+2026-10-20T21:56:06.1948287Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-20T21:56:06.8655774Z Switched to a new branch 'main'
+2026-10-20T21:56:06.8659741Z branch 'main' set up to track 'origin/main'.
+2026-10-20T21:56:06.8720357Z ##[endgroup]
+2026-10-20T21:56:06.8769604Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T21:56:06.8796478Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:56:06.8807541Z ##[group]Removing auth
+2026-10-20T21:56:06.8808131Z Removing SSH command configuration
+2026-10-20T21:56:06.8812207Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T21:56:06.8845326Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T21:56:06.9086492Z Removing HTTP extra header
+2026-10-20T21:56:06.9091214Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T21:56:06.9127939Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T21:56:06.9370196Z Removing includeIf entries pointing to credentials config files
+2026-10-20T21:56:06.9374692Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T21:56:06.9414808Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T21:56:06.9416154Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T21:56:06.9416876Z includeif.gitdir:/github/workspace/.git.path
+2026-10-20T21:56:06.9417424Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T21:56:06.9426173Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T21:56:06.9452376Z /home/runner/work/_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:06.9462775Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:06.9501877Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T21:56:06.9529215Z /home/runner/work/_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:06.9540251Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:06.9577427Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-20T21:56:06.9605497Z /github/runner_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:06.9614543Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:06.9649797Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T21:56:06.9673771Z /github/runner_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:06.9684722Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config
+2026-10-20T21:56:06.9722168Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T21:56:06.9960366Z Removing credentials config '/home/runner/work/_temp/git-credentials-15994876-30fe-4fd8-8abe-548e8c13ddda.config'
+2026-10-20T21:56:06.9971331Z ##[endgroup]
+2026-10-20T21:56:07.0206565Z ##[group]Run python -m scripts.wait_for_release_ci
+2026-10-20T21:56:07.0207118Z [36;1mpython -m scripts.wait_for_release_ci[0m
+2026-10-20T21:56:07.0370765Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T21:56:07.0371223Z env:
+2026-10-20T21:56:07.0371496Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T21:56:07.0371844Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T21:56:07.0372175Z   NO_DISCLAIMER: 1
+2026-10-20T21:56:07.0375121Z   GH_TOKEN: ***
+2026-10-20T21:56:07.0375396Z ##[endgroup]
+2026-10-20T21:56:08.9315387Z Historical CI passed for a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:56:08.9565992Z ##[group]Run echo "name=historical-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+2026-10-20T21:56:08.9566751Z [36;1mecho "name=historical-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"[0m
+2026-10-20T21:56:08.9620850Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T21:56:08.9621236Z env:
+2026-10-20T21:56:08.9621454Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T21:56:08.9621729Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T21:56:08.9622012Z   NO_DISCLAIMER: 1
+2026-10-20T21:56:08.9622228Z ##[endgroup]
+2026-10-20T21:56:08.9791272Z ##[group]Run actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+2026-10-20T21:56:08.9791747Z with:
+2026-10-20T21:56:08.9791961Z   name: historical-ci-39484204330-2
+2026-10-20T21:56:08.9792221Z   path: evidence/
+2026-10-20T21:56:08.9792441Z   if-no-files-found: warn
+2026-10-20T21:56:08.9792694Z   compression-level: 6
+2026-10-20T21:56:08.9792939Z   overwrite: false
+2026-10-20T21:56:08.9793156Z   include-hidden-files: false
+2026-10-20T21:56:08.9793391Z   archive: true
+2026-10-20T21:56:08.9793585Z env:
+2026-10-20T21:56:08.9793793Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T21:56:08.9794076Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T21:56:08.9794344Z   NO_DISCLAIMER: 1
+2026-10-20T21:56:08.9794569Z ##[endgroup]
+2026-10-20T21:56:09.1349396Z With the provided path, there will be 4 files uploaded
+2026-10-20T21:56:09.1354664Z Artifact name is valid!
+2026-10-20T21:56:09.1355330Z Root directory input is valid!
+2026-10-20T21:56:09.7028250Z Uploading artifact: historical-ci-39484204330-2.zip
+2026-10-20T21:56:09.7067193Z Beginning upload of artifact content to blob storage
+2026-10-20T21:56:10.0109287Z Uploaded bytes 10392
+2026-10-20T21:56:10.0858508Z Finished uploading artifact content to blob storage!
+2026-10-20T21:56:10.0859997Z SHA256 digest of uploaded artifact is 6b8f6ef9e66b4bf0004685b5c90edc3cd21a60b34948806788dfe995809fa2b2
+2026-10-20T21:56:10.0860978Z Finalizing artifact upload
+2026-10-20T21:56:10.4718100Z Artifact historical-ci-39484204330-2 successfully finalized. Artifact ID 12303162809
+2026-10-20T21:56:10.4719793Z Artifact historical-ci-39484204330-2 has been successfully uploaded! Final size is 10392 bytes. Artifact ID is 12303162809
+2026-10-20T21:56:10.4721694Z Artifact download URL: https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39484204330/artifacts/12303162809
+2026-10-20T21:56:10.4943382Z Post job cleanup.
+2026-10-20T21:56:10.5857442Z [command]/usr/bin/git version
+2026-10-20T21:56:10.5897592Z git version 2.55.0
+2026-10-20T21:56:10.5940971Z Temporarily overriding HOME='/home/runner/work/_temp/39852464-69dc-4482-8fb7-3ff9c030a472' before making global git config changes
+2026-10-20T21:56:10.5942322Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T21:56:10.5947465Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T21:56:10.5983107Z Removing SSH command configuration
+2026-10-20T21:56:10.5989523Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T21:56:10.6029745Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T21:56:10.6275905Z Removing HTTP extra header
+2026-10-20T21:56:10.6282409Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T21:56:10.6321650Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T21:56:10.6561257Z Removing includeIf entries pointing to credentials config files
+2026-10-20T21:56:10.6569086Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T21:56:10.6606188Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T21:56:10.7020684Z Evaluate and set job outputs
+2026-10-20T21:56:10.7026300Z Set output 'artifact-name'
+2026-10-20T21:56:10.7028231Z Cleaning up orphan processes
