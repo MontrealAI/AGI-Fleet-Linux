@@ -51,7 +51,32 @@ export async function rehearseRecovery({application,alphaRoot,python,image,evide
     for(const record of records){assert.match(record.name,/^(?:run\.json|receipt\.json|signed-receipt\.json|handoff\.json|computer-return\.json|visible-text\.txt|screen-\d{3}\.png)$/);const artifact=await request('computer-artifact',{actor:actor.id,run,name:record.name},scopedToken),raw=Buffer.from(artifact.contentBase64,'base64');assert.equal(sha256(raw),record.sha256);assert.equal(raw.length,record.bytes);fs.writeFileSync(path.join(directory,'native',record.name),raw,{flag:'wx',mode:0o600});}
     return exported;
   }
-  const stoppedReturn=await retain(interrupted,observed.run,outcome.receipt.observation.artifacts),stoppedNative=await alpha.inspectComputerReturn(stoppedRaw,stoppedReturn.content);assert(['interrupted','stopped'].includes(stoppedNative.returned.receipt.state));assert.equal(stoppedNative.returned.receipt.cleanup,'VERIFIED');assert(stoppedNative.returned.receipt.actions_reserved>=1);
+  const stoppedReturn=await retain(interrupted,observed.run,outcome.receipt.observation.artifacts);
+  // Retain only public scalar checks before the unchanged native inspector.
+  // A failed receipt remains rejected; no signed payload or journal is logged.
+  const returned=JSON.parse(stoppedReturn.content),handoff=JSON.parse(stoppedRaw),receipt=returned.receipt;
+  const {digest:nativeDigest}=await import(pathToFileURL(path.join(alphaRoot,'docs/assets/successor/engine.mjs')));
+  const expectedCommitment=await nativeDigest('computer-task',{task:handoff.task,provider:returned.execution.provider,image:returned.execution.image,worker_sha256:returned.execution.workerSha256,execution_context:returned.executionContext});
+  const boundedInteger=(value,maximum)=>Number.isSafeInteger(value)&&!Object.is(value,-0)&&value>=0&&value<=maximum;
+  const receiptBinding={schema:'agi-fleet/stopped-native-receipt-binding-diagnostic/v1',
+    returnCommitmentMatches:returned.taskCommitment===expectedCommitment,
+    receiptCommitmentMatches:receipt?.commitment===expectedCommitment,
+    runIdShape:typeof receipt?.run_id==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(receipt.run_id),
+    executionContextMatches:receipt?.execution_context===returned.executionContext,
+    providerMatches:canonical(receipt?.provider??null)===canonical(returned.execution.provider),
+    authorityEmpty:Array.isArray(receipt?.authority)&&receipt.authority.length===0,
+    billingUnknown:receipt?.billing==='UNKNOWN',
+    state:['running','closing','review','interrupted','stopped','quarantined'].includes(receipt?.state)?receipt.state:'OTHER',
+    actionsBounded:boundedInteger(receipt?.actions_reserved,handoff.task.max_actions),
+    turnsBounded:boundedInteger(receipt?.turns_reserved,handoff.task.max_turns),
+    elapsedBounded:boundedInteger(receipt?.elapsed_milliseconds,86400000),
+    actionsReserved:Number.isSafeInteger(receipt?.actions_reserved)?receipt.actions_reserved:null,
+    turnsReserved:Number.isSafeInteger(receipt?.turns_reserved)?receipt.turns_reserved:null,
+    elapsedMilliseconds:Number.isSafeInteger(receipt?.elapsed_milliseconds)?receipt.elapsed_milliseconds:null,
+    maxActions:handoff.task.max_actions,maxTurns:handoff.task.max_turns};
+  fs.writeFileSync(path.join(interrupted,'receipt-binding-diagnostic.json'),JSON.stringify(receiptBinding,null,2)+'\n',{flag:'wx',mode:0o600});
+  console.log(JSON.stringify(receiptBinding));
+  const stoppedNative=await alpha.inspectComputerReturn(stoppedRaw,stoppedReturn.content);assert(['interrupted','stopped'].includes(stoppedNative.returned.receipt.state));assert.equal(stoppedNative.returned.receipt.cleanup,'VERIFIED');assert(stoppedNative.returned.receipt.actions_reserved>=1);
   assert.equal(execFileSync('/usr/bin/docker',['container','ls','--all','--quiet','--filter','name=^/successor-computer-'],{encoding:'utf8',timeout:5000,env:{PATH:'/usr/bin:/bin'}}).trim(),'');
   await stopChild();await start(stopProfile);assert.equal((await request('status')).stopped,true);
   const refusedAfterRestart=await request('run',{actor:actor.id,grant:stoppedGrant.grant},scopedToken,{failure:true});assert.match(refusedAfterRestart.error,/STOP_RECONCILIATION_REQUIRED|GRANT_UNAVAILABLE/);
