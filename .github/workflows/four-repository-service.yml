@@ -123,6 +123,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y bubblewrap util-linux apparmor-profiles
           sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY python3 local-runtime/prepare-engineering-host.py > reports/saved-package/computer-evidence/apparmor.json
+      - name: Prepare only the exact probed hosted runtime files
+        run: |
+          python -B engineering/integration/prepare-hosted-runtime.py "$RUNNER_TEMP/saved-computer-application" "$PWD/.integration-alpha" > reports/saved-package/computer-evidence/toolcache-permission-preparation.json
       - name: Require source orchestration and native inspector regressions
         run: |
           FQR_VERIFY_ALPHA="$PWD/.integration-alpha" FQR_VERIFY_JOBS="$PWD/.integration-jobs" FQR_VERIFY_MANAGER="$PWD/.integration-manager" node --test engineering/integration/*.test.mjs
