@@ -1,0 +1,293 @@
+{
+  "schema": "agijobsv0/corrective-source-adoption/1",
+  "observedAt": "2026-10-20T21:29:41.197Z",
+  "repository": "MontrealAI/AGIJobsv0",
+  "priorMergedPR": 4005,
+  "failedActualMain": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+  "source": {
+    "commit": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+    "tree": "5501717cfafc956be8432139766c63a34c69aa8f",
+    "parents": [
+      "d023a717bd01cad92b51b86a69d64d1fef8e51a0"
+    ]
+  },
+  "branch": "fix/processed-codeql-release-proof-20261020",
+  "adoption": {
+    "priorHead": "604d10094f3b7fede53406ae0e40f9f489155a3b",
+    "normalFastForward": true,
+    "force": false,
+    "result": {
+      "success": true
+    }
+  },
+  "pr": {
+    "url": "https://github.com/MontrealAI/AGIJobsv0/pull/4006",
+    "number": 4006,
+    "state": "open",
+    "merged": false,
+    "mergeable": false,
+    "draft": false,
+    "body": "The actual-main source publisher for merged PR #4005 stopped at the Python archive comparison on d023a717bd01cad92b51b86a69d64d1fef8e51a0. It compared complete component metadata in raw descriptor order instead of using the existing complete Python component predicate. No release or tag was created.\n\nThis change applies the existing predicate before comparing every remaining summary field strictly. Complete descriptors, duplicate ordering and multiplicity, component positions, raw bytes, reference validation and all archive/source/publisher gates remain required. The three independent review records are reset to null because the executable source changed. Three ordinary metadata units cover reorder equivalence, refusal of changed descriptor/duplicate/component data, and strict outer fields; prior assertions are preserved.\n\nValidation: three selected benign metadata units and two syntax checks passed locally. Independent read-only static review passed for exact commit 5d859a6965ed1d32727bf43ddfbe469e76accdb3 / tree 5501717cfafc956be8432139766c63a34c69aa8f, authenticating all four changed leaves and all 5,181 unchanged leaves/modes. Receipt: https://github.com/MontrealAI/AGI-Fleet-Linux/blob/9e501f153b793cfbc345993eef76113549bbd128/docs/release-evidence/ti-compatible-set-20261019/continuation-20261020/jobs-5d859-independent-static-source-review.json\n\nThis is source review only. Fresh original S1 scans/full result and notes reviews, strict three-slot installation, complete S1/S2 CI, configured exact-head review, normal qualified merge and all original final-main publication gates must pass. Old approvals do not qualify the new source; the d023 complete raw reports have not been claimed equivalent.",
+    "title": "fix(release): apply complete Python component semantics to archive comparison",
+    "base": "main",
+    "base_sha": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+    "head": "fix/processed-codeql-release-proof-20261020",
+    "head_sha": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+    "head_repo_id": 1031364470,
+    "head_repo_full_name": "MontrealAI/AGIJobsv0",
+    "merge_commit_sha": null,
+    "user": {
+      "login": "MontrealAI",
+      "name": "MontrealAI",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/24208299?v=4",
+      "id": 24208299
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-20T21:28:50Z",
+    "updated_at": "2026-10-20T21:28:50Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 1,
+    "changed_files": 4,
+    "additions": 106,
+    "deletions": 7963,
+    "display_url": "https://github.com/MontrealAI/AGIJobsv0/pull/4006",
+    "display_title": "fix(release): apply complete Python component semantics to archive comparison"
+  },
+  "independentStaticReview": {
+    "evidenceCommit": "9e501f153b793cfbc345993eef76113549bbd128",
+    "gitBlob": "302db1d7fad5d0091173bff64ca216caae416813",
+    "bytes": 6915,
+    "sha256": "09ea8ab64aa0a655fa7a8996825cd9aef34dc5457be0919811221ea4464ac14d",
+    "status": "PASS_SOURCE_ONLY"
+  },
+  "allThreeSlotsNull": true,
+  "qualification": {
+    "status": "ORIGINAL_FRESH_WORKFLOWS_STARTED_NOT_QUALIFIED",
+    "runs": [
+      {
+        "id": 39500699884,
+        "name": "apps-images",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699057,
+        "name": "static-analysis-python-integrations",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699083,
+        "name": "Qualified rc.16 source release",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699108,
+        "name": "e2e",
+        "event": "pull_request",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699074,
+        "name": "Validator Constellation Demo CI",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699067,
+        "name": "Demo observatory Pages",
+        "event": "pull_request",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699123,
+        "name": "actionlint",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699072,
+        "name": "containers",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699167,
+        "name": "Production rehearsal",
+        "event": "pull_request",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699116,
+        "name": "static-analysis",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699184,
+        "name": "torch-tests",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699250,
+        "name": "webapp",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699254,
+        "name": "SUCCESSOR Computer Use",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699169,
+        "name": "Inherited security regressions",
+        "event": "pull_request",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699274,
+        "name": "Native transformation compatibility",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699276,
+        "name": "fuzz",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699325,
+        "name": "CULTURE Demo CI",
+        "event": "pull_request",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699319,
+        "name": "ci (v2)",
+        "event": "pull_request",
+        "status": "queued",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699097,
+        "name": "Escrow replay regression",
+        "event": "pull_request",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500699023,
+        "name": "contracts-ci",
+        "event": "pull_request",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500666767,
+        "name": "static-analysis-python-integrations",
+        "event": "push",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500666856,
+        "name": "CULTURE Demo CI",
+        "event": "push",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      },
+      {
+        "id": 39500666780,
+        "name": "static-analysis",
+        "event": "push",
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "attempt": 1
+      }
+    ]
+  },
+  "notEstablished": [
+    "current full source-bound scanner review",
+    "strict metadata-only review installation",
+    "all required S1/S2 checks",
+    "final-main qualification",
+    "fresh release",
+    "final connected public-installed journey",
+    "four final live checks"
+  ],
+  "coordinatorComment": {
+    "id": 6301892233
+  }
+}
