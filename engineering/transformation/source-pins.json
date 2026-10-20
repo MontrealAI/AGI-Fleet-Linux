@@ -1,10 +1,26 @@
 {
   "schema": "agi-fleet/ti-installed-source-pins/v1",
-  "alpha": {"repository": "MontrealAI/AGI-Alpha-Agent-v0", "commit": "288ffcddc0f5a989b95b9787240569cf4b96a5c4", "tree": "414e058eb11d19f8d0853b033d36112992d3141e"},
-  "manager": {"repository": "MontrealAI/AGIJobManager", "commit": "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8", "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86"},
-  "jobs": {"repository": "MontrealAI/AGIJobsv0", "commit": "f2a8d2382b9a40814579f7a8be44046f247e0fd7", "tree": "651310e14930967b1be1de86143b88657f3fe53a"},
-  "computer": {"repository": "MontrealAI/AGI-Alpha-Agent-v0", "commit": "288ffcddc0f5a989b95b9787240569cf4b96a5c4", "tree": "414e058eb11d19f8d0853b033d36112992d3141e"},
-  "computerScope": "preserved-existing-native-browser-profile; distinct-from-TI-discovery-source",
+  "alpha": {
+    "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+    "commit": "558f798a9b9cc73c1db01905858aad8852e11092",
+    "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89"
+  },
+  "manager": {
+    "repository": "MontrealAI/AGIJobManager",
+    "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+    "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86"
+  },
+  "jobs": {
+    "repository": "MontrealAI/AGIJobsv0",
+    "commit": "5cd671e6f3f3a29e12cede966842f4bc99ece59f",
+    "tree": "2390e38d2c5ade29f11cf6656b8f0732cba2fe5a"
+  },
+  "computer": {
+    "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+    "commit": "558f798a9b9cc73c1db01905858aad8852e11092",
+    "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89"
+  },
+  "computerScope": "current-Alpha-source; fresh-installed-native-browser-qualification-required",
   "publicNonpersonalOnly": true,
   "paidTI": false,
   "liveProvider": false,
