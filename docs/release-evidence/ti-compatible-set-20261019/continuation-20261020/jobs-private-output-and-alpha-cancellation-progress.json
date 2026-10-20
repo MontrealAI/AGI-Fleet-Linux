@@ -1,0 +1,96 @@
+{
+  "asOf": "2026-10-20T19:29:00.916Z",
+  "completion": false,
+  "userGoal": "Qualified normal merges, fresh releases, exact public installed-package ONE journey, all four live sites",
+  "jobs": {
+    "pr": 4005,
+    "source": "d8544f8173b3c01faa88d50e7145ec455bc5e170",
+    "tree": "14140fc8a3ce95e0ca5b15a421dc97ed190ec735",
+    "main": "5cd671e6f3f3a29e12cede966842f4bc99ece59f",
+    "status": "Current hosted required validation passed163/163; configured exact-source review clear; genuine Python packet captured and undergoing independent static review; fresh JavaScript scan running; all three review slots NULL",
+    "fix": "Owned private external output; guide and publisher harnesses aligned",
+    "targetedBenignTests": {
+      "pass": 7,
+      "fail": 0
+    },
+    "evidence": {
+      "commit": "94a976797798e409dc141053a158b17b4b7a3205",
+      "tree": "ceacaad495533d2b59ac3d31b336f1dfb5d04780"
+    },
+    "next": "Wait actual source JS/PY packets and configured review; complete independent current-source result review, install exact records, qualify child, merge normally, verify main publisher."
+  },
+  "alpha": {
+    "main": "558f798a9b9cc73c1db01905858aad8852e11092",
+    "legacyRun": 39459545474,
+    "attempt": 3,
+    "status": "All required attempt-2 validations including Python 3.12 and Integration matrix passed, but optional Deploy remained cancelled. One unchanged targeted cancelled-job retry queued; aggregate success not yet earned.",
+    "agentRun": 39459544592,
+    "agentAttempt": 2,
+    "agentStatus": "Cancelled observer before legacy matrix completion; package/pages/publish cancelled. No further observer retry before genuine legacy success.",
+    "release": "v1.36.0 not published",
+    "evidence": {
+      "commit": "35b51c987a3ff80e1f132b2d750119fc3c3c57d7",
+      "tree": "cb3fb4fd64a4a8742ac64e49d430c760fc3babb9"
+    },
+    "optionalDeployRetry": {
+      "admission": {
+        "schema": "alpha-cancelled-optional-job-retry/v1",
+        "source": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "workflowRun": 39459545474,
+        "priorAttempt": 2,
+        "jobId": 118828297024,
+        "jobName": "Deploy",
+        "priorConclusion": "cancelled",
+        "sameSourceRequired": true,
+        "condition": "needs.owner-check.result == 'success' && startsWith(github.ref, 'refs/tags/')",
+        "ref": "refs/heads/main",
+        "conditionMustRemainFalse": true,
+        "reason": "All required validations and Integration matrix passed; the retained cancelled tag-only dependent keeps the aggregate workflow cancelled. One unchanged targeted job retry allows GitHub to reevaluate its original condition; no source, condition, timeout or gate changes are authorized.",
+        "noTagOrDeploymentDispatch": true
+      },
+      "result": {
+        "success": true
+      },
+      "status": "pending",
+      "attempt": 3
+    }
+  },
+  "fleet": {
+    "pr": 61,
+    "source": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+    "tree": "ed382a6ac343bc6b1759af072bca4cb1aa031c92",
+    "status": "9/10 workflow groups success; Linux ARM64 native test still running. Native TI both arches 20/20 twice success; configured exact-source review clear.",
+    "blockers": [
+      {
+        "owner": "Eligible independent Fleet functional owner",
+        "next": "Review final exact source and explicitly authorize recovery/source-custody dispositions; blocked agent lane cannot be retried or substituted."
+      },
+      {
+        "owner": "Root release coordinator",
+        "next": "Refresh Jobs/Alpha final pins only after actual fresh publications, then requalify full Fleet and normal merge."
+      }
+    ]
+  },
+  "manager": {
+    "source": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+    "release": "v1.19.5",
+    "releaseId": 417952385,
+    "status": "Released and frozen; final live verification still required"
+  },
+  "final": {
+    "publicInstalledONE": false,
+    "D": false,
+    "E": false,
+    "T": false,
+    "allFourFinalLive": false
+  },
+  "storage": {
+    "freeBytes": 31060398080,
+    "deleted": false,
+    "paidCommitment": false
+  },
+  "mainnet": {
+    "lookup": "Completed read-only block identity/timestamp matched retained ENS",
+    "stateChanges": 0
+  }
+}
