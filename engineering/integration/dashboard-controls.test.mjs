@@ -19,8 +19,18 @@ test('private NDJSON protocol waits for inspected preparation and authorization 
 test('early child exit cancels a pending step and returns only a generic error',async()=>{
   let signal;await assert.rejects(privateDashboardControlDriver(process.execPath,['-e',emit(event)+'setTimeout(()=>process.exit(0),25);'],{input:{publicProtocolFixture:true},timeout:2000,expectedPhases:['prepared','complete'],handlers:{prepared:async(_,context)=>{signal=context.signal;return new Promise(()=>{});}}}),error=>error.message==='DASHBOARD_DRIVER_FAILED'&&error.cause===undefined&&error.stderr===undefined);assert.equal(signal.aborted,true);
 });
-test('bounded idle protocol timeout cancels a pending step',async()=>{
-  let signal;await assert.rejects(privateDashboardControlDriver(process.execPath,['-e',emit(event)+'setInterval(()=>{},1000);'],{input:{publicProtocolFixture:true},timeout:200,expectedPhases:['prepared','complete'],handlers:{prepared:async(_,context)=>{signal=context.signal;return new Promise(()=>{});}}}),/DASHBOARD_DRIVER_FAILED/);assert.equal(signal.aborted,true);
+test('bounded idle protocol timeout cancels a pending step',{timeout:15000},async context=>{
+  // Child startup uses real time; advance the existing deadline only after handler entry.
+  context.mock.timers.enable({apis:['setTimeout']});
+  let signal,beforeDeadline,atDeadline;
+  await assert.rejects(privateDashboardControlDriver(process.execPath,['-e',emit(event)+'setInterval(()=>{},1000);'],{
+    input:{publicProtocolFixture:true},timeout:200,signal:AbortSignal.timeout(10000),expectedPhases:['prepared','complete'],
+    handlers:{prepared:async(_,stepContext)=>{
+      signal=stepContext.signal;context.mock.timers.tick(199);beforeDeadline=signal.aborted;
+      context.mock.timers.tick(1);atDeadline=signal.aborted;return new Promise(()=>{});
+    }}
+  }),/DASHBOARD_DRIVER_FAILED/);
+  assert.equal(beforeDeadline,false);assert.equal(atDeadline,true);assert.equal(signal.aborted,true);
 });
 function crc32(raw){let crc=0xffffffff;for(const byte of raw){crc^=byte;for(let i=0;i<8;i++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return (crc^0xffffffff)>>>0;}
 function chunk(name,raw){const kind=Buffer.from(name),size=Buffer.alloc(4),crc=Buffer.alloc(4);size.writeUInt32BE(raw.length);crc.writeUInt32BE(crc32(Buffer.concat([kind,raw])));return Buffer.concat([size,kind,raw,crc]);}

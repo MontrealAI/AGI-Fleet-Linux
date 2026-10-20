@@ -28,6 +28,16 @@ async function request(action,input={},credential=operator,{failure=false}={}){
 }
 async function stopChild(){if(!child)return;child.kill('SIGTERM');assert.deepEqual(await exit,{code:0,signal:null});child=null;}
 const dashboardConnection=()=>({url:address.url,token:operator});
+// Metadata only: never copy interpreter/runtime contents or private journal data.
+function readinessFileMetadata(file,role){
+  try{
+    const stat=fs.lstatSync(file);
+    return {role,file,bytes:stat.size,mode:'0o'+(stat.mode&0o7777).toString(8),
+      owner:stat.uid===0?'root':stat.uid===process.getuid()?'current-process':'other',
+      regular:stat.isFile(),physicalPath:fs.realpathSync(file)===file,
+      sharedWritable:Boolean(stat.mode&0o022),executable:Boolean(stat.mode&0o111)};
+  }catch{return {role,file,unavailable:true};}
+}
 const executablePrerequisites=[['python',python],['docker','/usr/bin/docker']].map(([role,file])=>{const stat=fs.lstatSync(file);return {role,bytes:stat.size,mode:stat.mode&0o777,owner:stat.uid===0?'root':stat.uid===process.getuid()?'current-process':'other',regular:stat.isFile(),physicalPath:fs.realpathSync(file)===file,executable:Boolean(stat.mode&0o111),legacy32MBThresholdExceeded:stat.size>32_000_000};});
 fs.writeFileSync(path.join(evidence,'runtime-executable-prerequisites.json'),JSON.stringify({schema:'agi-fleet/runtime-executable-prerequisites/v1',architecture:process.arch,maximumExecutableBytes:128*1024*1024,executables:executablePrerequisites},null,2)+'\n',{flag:'wx',mode:0o600});
 const all=[],controlFiles=[];let recovery,dashboard;
@@ -39,9 +49,16 @@ try{
     // This profile has public synthetic inputs and no credential fields. Journals stay private.
     fs.copyFileSync(profile,path.join(directory,'service-profile.json'));
     await start(profile);const host=await request('doctor');
+    const runtimeFiles=Object.keys(JSON.parse(fs.readFileSync(profile,'utf8')).runtimeFiles);
+    const runtimeMetadata=runtimeFiles.map(file=>readinessFileMetadata(file,'computer-runtime'));
     const readiness={schema:'agi-fleet/saved-service-readiness/v1',case:name,architecture:process.arch,
       host:{supported:host.supported,code:host.code??null},
-      alphaComputer:{supported:host.alphaComputer?.supported??false,code:host.alphaComputer?.code??null}};
+      alphaComputer:{supported:host.alphaComputer?.supported??false,code:host.alphaComputer?.code??null},
+      executableFiles:[['node',process.execPath],['python',python],['docker','/usr/bin/docker'],
+        ['bubblewrap','/usr/bin/bwrap'],['limiter','/usr/bin/prlimit']].map(([role,file])=>readinessFileMetadata(file,role)),
+      computerRuntimeFilesInspected:runtimeMetadata.length,
+      computerRuntimeFileFailures:runtimeMetadata.filter(file=>file.unavailable||!file.regular||!file.physicalPath||
+        file.owner==='other'||file.sharedWritable||file.bytes>32_000_000)};
     fs.writeFileSync(path.join(directory,'service-readiness.json'),JSON.stringify(readiness,null,2)+'\n',{flag:'wx',mode:0o600});
     assert.equal(host.supported,true,JSON.stringify(readiness));assert.equal(host.alphaComputer.supported,true,JSON.stringify(readiness));
     const actor=await request('create',{role:'agent',name:'Disposable saved-package Computer Use rehearsal'});if(name!=='accepted')await request('activate',{actor:actor.id,confirm:true});
