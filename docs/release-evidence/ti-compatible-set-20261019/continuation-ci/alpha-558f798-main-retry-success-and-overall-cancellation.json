@@ -1,0 +1,2921 @@
+{
+  "schema": "alpha-main-integration-retry-evidence/v1",
+  "source": "558f798a9b9cc73c1db01905858aad8852e11092",
+  "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+  "runId": 39459545474,
+  "attempt": 2,
+  "python312": {
+    "jobId": 118793812764,
+    "conclusion": "success",
+    "tests": {
+      "passed": 3563,
+      "skipped": 51,
+      "xfailed": 4
+    },
+    "coverage": 84.09,
+    "log": {
+      "bytes": 1312503,
+      "sha256": "99456de642ca80f560a9e3d23bb6f1b69fe0ae6015cf89f5115ecfcbfd103037",
+      "gitBlob": "07a1dd6239bf2ca1e5d086f86f974f9554f3cfce"
+    }
+  },
+  "integrationMatrix": {
+    "jobId": 118830380280,
+    "conclusion": "success",
+    "rawLogGitBlob": "e06bd375d708ea1a8d9af62f99aea0eed6e42937"
+  },
+  "overallConclusion": "cancelled",
+  "remainingBlockers": [
+    "Tag-only Deploy job is cancelled rather than skipped in original main attempt; aggregate workflow remains cancelled despite all required validation passing.",
+    "Agent historical-ci observer was cancelled at 19:05:39Z before Integration matrix completed; publication has not run."
+  ],
+  "rawJobs": {
+    "total_count": 15,
+    "jobs": [
+      {
+        "id": 118793812764,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKm7HA",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793812764",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793812764",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T17:58:50Z",
+        "completed_at": "2026-10-20T19:07:26Z",
+        "name": "✅ Pytest (3.12)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T17:58:51Z",
+            "completed_at": "2026-10-20T17:58:52Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T17:58:52Z",
+            "completed_at": "2026-10-20T17:58:58Z"
+          },
+          {
+            "name": "Check for binary diffs (pre-build)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T17:58:58Z",
+            "completed_at": "2026-10-20T17:58:58Z"
+          },
+          {
+            "name": "Ensure pip cache directory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T17:58:58Z",
+            "completed_at": "2026-10-20T17:58:59Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T17:58:59Z",
+            "completed_at": "2026-10-20T17:58:59Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T17:58:59Z",
+            "completed_at": "2026-10-20T17:59:03Z"
+          },
+          {
+            "name": "Free disk space",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T17:59:03Z",
+            "completed_at": "2026-10-20T18:01:27Z"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T18:01:27Z",
+            "completed_at": "2026-10-20T18:05:19Z"
+          },
+          {
+            "name": "Ensure npm cache path lifecycle contract",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T18:05:19Z",
+            "completed_at": "2026-10-20T18:05:19Z"
+          },
+          {
+            "name": "Verify environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T18:05:19Z",
+            "completed_at": "2026-10-20T18:05:26Z"
+          },
+          {
+            "name": "Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T18:05:26Z",
+            "completed_at": "2026-10-20T18:05:33Z"
+          },
+          {
+            "name": "Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-20T18:05:33Z",
+            "completed_at": "2026-10-20T18:05:41Z"
+          },
+          {
+            "name": "Configure npm",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-20T18:05:41Z",
+            "completed_at": "2026-10-20T18:05:42Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-env",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T18:05:42Z",
+            "completed_at": "2026-10-20T18:06:08Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T18:06:08Z",
+            "completed_at": "2026-10-20T18:06:16Z"
+          },
+          {
+            "name": "Install insight browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-20T18:06:16Z",
+            "completed_at": "2026-10-20T18:06:21Z"
+          },
+          {
+            "name": "Update browserslist database (Insight demo)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-20T18:06:21Z",
+            "completed_at": "2026-10-20T18:06:24Z"
+          },
+          {
+            "name": "Audit insight browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18,
+            "started_at": "2026-10-20T18:06:24Z",
+            "completed_at": "2026-10-20T18:06:24Z"
+          },
+          {
+            "name": "Install the locked Insight Chromium runtime",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-20T18:06:24Z",
+            "completed_at": "2026-10-20T18:06:43Z"
+          },
+          {
+            "name": "Run insight browser tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20,
+            "started_at": "2026-10-20T18:06:43Z",
+            "completed_at": "2026-10-20T18:07:00Z"
+          },
+          {
+            "name": "Install web dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21,
+            "started_at": "2026-10-20T18:07:00Z",
+            "completed_at": "2026-10-20T18:07:11Z"
+          },
+          {
+            "name": "Update browserslist database (Web client)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22,
+            "started_at": "2026-10-20T18:07:11Z",
+            "completed_at": "2026-10-20T18:07:13Z"
+          },
+          {
+            "name": "Audit web dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23,
+            "started_at": "2026-10-20T18:07:13Z",
+            "completed_at": "2026-10-20T18:07:14Z"
+          },
+          {
+            "name": "Type check insight browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24,
+            "started_at": "2026-10-20T18:07:14Z",
+            "completed_at": "2026-10-20T18:07:17Z"
+          },
+          {
+            "name": "Verify protobuf",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-20T18:07:17Z",
+            "completed_at": "2026-10-20T18:07:17Z"
+          },
+          {
+            "name": "Clean caches before pytest",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-20T18:07:17Z",
+            "completed_at": "2026-10-20T18:07:27Z"
+          },
+          {
+            "name": "Install the locked runtime accessibility auditor",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-20T18:07:27Z",
+            "completed_at": "2026-10-20T18:07:27Z"
+          },
+          {
+            "name": "Run tests with coverage",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-20T18:07:27Z",
+            "completed_at": "2026-10-20T19:07:08Z"
+          },
+          {
+            "name": "Mutation tests",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 29,
+            "started_at": "2026-10-20T19:07:08Z",
+            "completed_at": "2026-10-20T19:07:08Z"
+          },
+          {
+            "name": "Run benchmark",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30,
+            "started_at": "2026-10-20T19:07:08Z",
+            "completed_at": "2026-10-20T19:07:19Z"
+          },
+          {
+            "name": "Check benchmark result",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31,
+            "started_at": "2026-10-20T19:07:19Z",
+            "completed_at": "2026-10-20T19:07:19Z"
+          },
+          {
+            "name": "Upload benchmark results",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 32,
+            "started_at": "2026-10-20T19:07:19Z",
+            "completed_at": "2026-10-20T19:07:20Z"
+          },
+          {
+            "name": "Generate benchmark comment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 33,
+            "started_at": "2026-10-20T19:07:20Z",
+            "completed_at": "2026-10-20T19:07:20Z"
+          },
+          {
+            "name": "Comment benchmark",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 34,
+            "started_at": "2026-10-20T19:07:20Z",
+            "completed_at": "2026-10-20T19:07:20Z"
+          },
+          {
+            "name": "Check coverage report",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 35,
+            "started_at": "2026-10-20T19:07:20Z",
+            "completed_at": "2026-10-20T19:07:20Z"
+          },
+          {
+            "name": "Upload pytest results",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 36,
+            "started_at": "2026-10-20T19:07:20Z",
+            "completed_at": "2026-10-20T19:07:21Z"
+          },
+          {
+            "name": "Upload coverage",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 37,
+            "started_at": "2026-10-20T19:07:21Z",
+            "completed_at": "2026-10-20T19:07:22Z"
+          },
+          {
+            "name": "Post Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 70,
+            "started_at": "2026-10-20T19:07:22Z",
+            "completed_at": "2026-10-20T19:07:22Z"
+          },
+          {
+            "name": "Post Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 71,
+            "started_at": "2026-10-20T19:07:22Z",
+            "completed_at": "2026-10-20T19:07:22Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 72,
+            "started_at": "2026-10-20T19:07:22Z",
+            "completed_at": "2026-10-20T19:07:22Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 73,
+            "started_at": "2026-10-20T19:07:22Z",
+            "completed_at": "2026-10-20T19:07:22Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 74,
+            "started_at": "2026-10-20T19:07:22Z",
+            "completed_at": "2026-10-20T19:07:22Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 75,
+            "started_at": "2026-10-20T19:07:22Z",
+            "completed_at": "2026-10-20T19:07:22Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793812764",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244449,
+        "runner_name": "GitHub Actions 1000244449",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793813133,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKm8jQ",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793813133",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793813133",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T16:40:45Z",
+        "completed_at": "2026-10-20T16:40:57Z",
+        "name": "Verify owner",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:40:46Z",
+            "completed_at": "2026-10-20T16:40:47Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:40:47Z",
+            "completed_at": "2026-10-20T16:40:54Z"
+          },
+          {
+            "name": "Run ./.github/actions/ensure-owner",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 3,
+            "started_at": "2026-10-20T16:40:54Z",
+            "completed_at": "2026-10-20T16:40:54Z"
+          },
+          {
+            "name": "Run owner_lower=\"${GITHUB_REPOSITORY_OWNER,,}\"",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:40:54Z",
+            "completed_at": "2026-10-20T16:40:54Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:40:54Z",
+            "completed_at": "2026-10-20T16:40:54Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:40:54Z",
+            "completed_at": "2026-10-20T16:40:55Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793813133",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244208,
+        "runner_name": "GitHub Actions 1000244208",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793814228,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKnA1A",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793814228",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793814228",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T16:41:58Z",
+        "completed_at": "2026-10-20T16:49:07Z",
+        "name": "Windows Smoke",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:42:01Z",
+            "completed_at": "2026-10-20T16:42:08Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:42:08Z",
+            "completed_at": "2026-10-20T16:42:24Z"
+          },
+          {
+            "name": "Check for binary diffs (pre-build)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:42:24Z",
+            "completed_at": "2026-10-20T16:42:26Z"
+          },
+          {
+            "name": "Ensure pip cache directory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:42:26Z",
+            "completed_at": "2026-10-20T16:42:28Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T16:42:28Z",
+            "completed_at": "2026-10-20T16:42:44Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T16:42:44Z",
+            "completed_at": "2026-10-20T16:42:49Z"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T16:42:49Z",
+            "completed_at": "2026-10-20T16:46:53Z"
+          },
+          {
+            "name": "Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:46:53Z",
+            "completed_at": "2026-10-20T16:47:07Z"
+          },
+          {
+            "name": "Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:47:07Z",
+            "completed_at": "2026-10-20T16:47:07Z"
+          },
+          {
+            "name": "Configure npm",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T16:47:07Z",
+            "completed_at": "2026-10-20T16:47:08Z"
+          },
+          {
+            "name": "Show tool versions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T16:47:08Z",
+            "completed_at": "2026-10-20T16:47:33Z"
+          },
+          {
+            "name": "Verify environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-20T16:47:33Z",
+            "completed_at": "2026-10-20T16:47:41Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-20T16:47:41Z",
+            "completed_at": "2026-10-20T16:47:48Z"
+          },
+          {
+            "name": "Build web assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T16:47:48Z",
+            "completed_at": "2026-10-20T16:48:26Z"
+          },
+          {
+            "name": "Run smoke tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T16:48:26Z",
+            "completed_at": "2026-10-20T16:48:55Z"
+          },
+          {
+            "name": "Post Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-20T16:48:55Z",
+            "completed_at": "2026-10-20T16:49:00Z"
+          },
+          {
+            "name": "Post Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-20T16:49:00Z",
+            "completed_at": "2026-10-20T16:49:01Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-20T16:49:01Z",
+            "completed_at": "2026-10-20T16:49:03Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-20T16:49:03Z",
+            "completed_at": "2026-10-20T16:49:03Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30,
+            "started_at": "2026-10-20T16:49:03Z",
+            "completed_at": "2026-10-20T16:49:05Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31,
+            "started_at": "2026-10-20T16:49:05Z",
+            "completed_at": "2026-10-20T16:49:05Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793814228",
+        "labels": [
+          "windows-latest"
+        ],
+        "runner_id": 1000244213,
+        "runner_name": "GitHub Actions 1000244213",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793814518,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKnB9g",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793814518",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793814518",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T16:46:04Z",
+        "completed_at": "2026-10-20T17:54:50Z",
+        "name": "✅ Pytest (3.11)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:46:05Z",
+            "completed_at": "2026-10-20T16:46:06Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:46:06Z",
+            "completed_at": "2026-10-20T16:46:13Z"
+          },
+          {
+            "name": "Check for binary diffs (pre-build)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:46:13Z",
+            "completed_at": "2026-10-20T16:46:13Z"
+          },
+          {
+            "name": "Ensure pip cache directory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:46:13Z",
+            "completed_at": "2026-10-20T16:46:13Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T16:46:13Z",
+            "completed_at": "2026-10-20T16:46:14Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T16:46:14Z",
+            "completed_at": "2026-10-20T16:46:19Z"
+          },
+          {
+            "name": "Free disk space",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T16:46:19Z",
+            "completed_at": "2026-10-20T16:47:23Z"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:47:23Z",
+            "completed_at": "2026-10-20T16:51:46Z"
+          },
+          {
+            "name": "Ensure npm cache path lifecycle contract",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:51:46Z",
+            "completed_at": "2026-10-20T16:51:46Z"
+          },
+          {
+            "name": "Verify environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T16:51:46Z",
+            "completed_at": "2026-10-20T16:51:55Z"
+          },
+          {
+            "name": "Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T16:51:55Z",
+            "completed_at": "2026-10-20T16:52:03Z"
+          },
+          {
+            "name": "Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-20T16:52:03Z",
+            "completed_at": "2026-10-20T16:52:10Z"
+          },
+          {
+            "name": "Configure npm",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-20T16:52:10Z",
+            "completed_at": "2026-10-20T16:52:10Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-env",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T16:52:10Z",
+            "completed_at": "2026-10-20T16:52:31Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T16:52:31Z",
+            "completed_at": "2026-10-20T16:52:38Z"
+          },
+          {
+            "name": "Install insight browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-20T16:52:38Z",
+            "completed_at": "2026-10-20T16:52:46Z"
+          },
+          {
+            "name": "Update browserslist database (Insight demo)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-20T16:52:46Z",
+            "completed_at": "2026-10-20T16:52:49Z"
+          },
+          {
+            "name": "Audit insight browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18,
+            "started_at": "2026-10-20T16:52:49Z",
+            "completed_at": "2026-10-20T16:52:50Z"
+          },
+          {
+            "name": "Install the locked Insight Chromium runtime",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-20T16:52:50Z",
+            "completed_at": "2026-10-20T16:53:15Z"
+          },
+          {
+            "name": "Run insight browser tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20,
+            "started_at": "2026-10-20T16:53:15Z",
+            "completed_at": "2026-10-20T16:53:30Z"
+          },
+          {
+            "name": "Install web dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21,
+            "started_at": "2026-10-20T16:53:30Z",
+            "completed_at": "2026-10-20T16:53:45Z"
+          },
+          {
+            "name": "Update browserslist database (Web client)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22,
+            "started_at": "2026-10-20T16:53:45Z",
+            "completed_at": "2026-10-20T16:53:48Z"
+          },
+          {
+            "name": "Audit web dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23,
+            "started_at": "2026-10-20T16:53:48Z",
+            "completed_at": "2026-10-20T16:53:49Z"
+          },
+          {
+            "name": "Type check insight browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24,
+            "started_at": "2026-10-20T16:53:49Z",
+            "completed_at": "2026-10-20T16:53:53Z"
+          },
+          {
+            "name": "Verify protobuf",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-20T16:53:53Z",
+            "completed_at": "2026-10-20T16:53:53Z"
+          },
+          {
+            "name": "Clean caches before pytest",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-20T16:53:53Z",
+            "completed_at": "2026-10-20T16:53:58Z"
+          },
+          {
+            "name": "Install the locked runtime accessibility auditor",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-20T16:53:58Z",
+            "completed_at": "2026-10-20T16:53:58Z"
+          },
+          {
+            "name": "Run tests with coverage",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-20T16:53:58Z",
+            "completed_at": "2026-10-20T17:54:27Z"
+          },
+          {
+            "name": "Mutation tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-20T17:54:27Z",
+            "completed_at": "2026-10-20T17:54:30Z"
+          },
+          {
+            "name": "Run benchmark",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30,
+            "started_at": "2026-10-20T17:54:30Z",
+            "completed_at": "2026-10-20T17:54:43Z"
+          },
+          {
+            "name": "Check benchmark result",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31,
+            "started_at": "2026-10-20T17:54:43Z",
+            "completed_at": "2026-10-20T17:54:43Z"
+          },
+          {
+            "name": "Upload benchmark results",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 32,
+            "started_at": "2026-10-20T17:54:43Z",
+            "completed_at": "2026-10-20T17:54:44Z"
+          },
+          {
+            "name": "Generate benchmark comment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 33,
+            "started_at": "2026-10-20T17:54:44Z",
+            "completed_at": "2026-10-20T17:54:44Z"
+          },
+          {
+            "name": "Comment benchmark",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 34,
+            "started_at": "2026-10-20T17:54:44Z",
+            "completed_at": "2026-10-20T17:54:44Z"
+          },
+          {
+            "name": "Check coverage report",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 35,
+            "started_at": "2026-10-20T17:54:44Z",
+            "completed_at": "2026-10-20T17:54:44Z"
+          },
+          {
+            "name": "Upload pytest results",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 36,
+            "started_at": "2026-10-20T17:54:44Z",
+            "completed_at": "2026-10-20T17:54:45Z"
+          },
+          {
+            "name": "Upload coverage",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 37,
+            "started_at": "2026-10-20T17:54:45Z",
+            "completed_at": "2026-10-20T17:54:46Z"
+          },
+          {
+            "name": "Post Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 70,
+            "started_at": "2026-10-20T17:54:46Z",
+            "completed_at": "2026-10-20T17:54:46Z"
+          },
+          {
+            "name": "Post Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 71,
+            "started_at": "2026-10-20T17:54:46Z",
+            "completed_at": "2026-10-20T17:54:46Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 72,
+            "started_at": "2026-10-20T17:54:46Z",
+            "completed_at": "2026-10-20T17:54:46Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 73,
+            "started_at": "2026-10-20T17:54:46Z",
+            "completed_at": "2026-10-20T17:54:46Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 74,
+            "started_at": "2026-10-20T17:54:46Z",
+            "completed_at": "2026-10-20T17:54:47Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 75,
+            "started_at": "2026-10-20T17:54:47Z",
+            "completed_at": "2026-10-20T17:54:47Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793814518",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244220,
+        "runner_name": "GitHub Actions 1000244220",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793814604,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKnCTA",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793814604",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793814604",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T16:47:02Z",
+        "completed_at": "2026-10-20T16:47:39Z",
+        "name": "🧪 Insight Browser ESLint",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:47:03Z",
+            "completed_at": "2026-10-20T16:47:04Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:47:04Z",
+            "completed_at": "2026-10-20T16:47:10Z"
+          },
+          {
+            "name": "Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:47:10Z",
+            "completed_at": "2026-10-20T16:47:17Z"
+          },
+          {
+            "name": "Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:47:17Z",
+            "completed_at": "2026-10-20T16:47:23Z"
+          },
+          {
+            "name": "Configure npm",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T16:47:23Z",
+            "completed_at": "2026-10-20T16:47:23Z"
+          },
+          {
+            "name": "Clean Insight Browser install",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T16:47:23Z",
+            "completed_at": "2026-10-20T16:47:24Z"
+          },
+          {
+            "name": "Install insight browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T16:47:24Z",
+            "completed_at": "2026-10-20T16:47:35Z"
+          },
+          {
+            "name": "Lint insight browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:47:35Z",
+            "completed_at": "2026-10-20T16:47:37Z"
+          },
+          {
+            "name": "Post Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T16:47:37Z",
+            "completed_at": "2026-10-20T16:47:37Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T16:47:37Z",
+            "completed_at": "2026-10-20T16:47:37Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-20T16:47:37Z",
+            "completed_at": "2026-10-20T16:47:37Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-20T16:47:37Z",
+            "completed_at": "2026-10-20T16:47:38Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793814604",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244224,
+        "runner_name": "GitHub Actions 1000244224",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793814639,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKnCbw",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793814639",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793814639",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T16:47:15Z",
+        "completed_at": "2026-10-20T16:51:58Z",
+        "name": "🧹 Ruff + 🏷️ Mypy (3.11)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:47:16Z",
+            "completed_at": "2026-10-20T16:47:17Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:47:17Z",
+            "completed_at": "2026-10-20T16:47:23Z"
+          },
+          {
+            "name": "Check for binary diffs",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:47:23Z",
+            "completed_at": "2026-10-20T16:47:23Z"
+          },
+          {
+            "name": "Ensure pip cache directory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:47:23Z",
+            "completed_at": "2026-10-20T16:47:23Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T16:47:23Z",
+            "completed_at": "2026-10-20T16:47:24Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T16:47:24Z",
+            "completed_at": "2026-10-20T16:47:27Z"
+          },
+          {
+            "name": "Show tool versions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T16:47:27Z",
+            "completed_at": "2026-10-20T16:47:27Z"
+          },
+          {
+            "name": "Cache pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:47:27Z",
+            "completed_at": "2026-10-20T16:47:28Z"
+          },
+          {
+            "name": "Install lint tools",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:47:28Z",
+            "completed_at": "2026-10-20T16:48:32Z"
+          },
+          {
+            "name": "Install pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T16:48:32Z",
+            "completed_at": "2026-10-20T16:48:33Z"
+          },
+          {
+            "name": "Run pre-commit checks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T16:48:33Z",
+            "completed_at": "2026-10-20T16:51:49Z"
+          },
+          {
+            "name": "Remove pre-commit cache from lint scope",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-20T16:51:49Z",
+            "completed_at": "2026-10-20T16:51:53Z"
+          },
+          {
+            "name": "Fail on uncommitted changes",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-20T16:51:53Z",
+            "completed_at": "2026-10-20T16:51:53Z"
+          },
+          {
+            "name": "Ruff lint",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T16:51:53Z",
+            "completed_at": "2026-10-20T16:51:53Z"
+          },
+          {
+            "name": "Mypy type-check",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T16:51:53Z",
+            "completed_at": "2026-10-20T16:51:56Z"
+          },
+          {
+            "name": "Post Cache pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-20T16:51:56Z",
+            "completed_at": "2026-10-20T16:51:56Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-20T16:51:56Z",
+            "completed_at": "2026-10-20T16:51:56Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30,
+            "started_at": "2026-10-20T16:51:56Z",
+            "completed_at": "2026-10-20T16:51:56Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31,
+            "started_at": "2026-10-20T16:51:56Z",
+            "completed_at": "2026-10-20T16:51:56Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793814639",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244226,
+        "runner_name": "GitHub Actions 1000244226",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793814726,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKnCxg",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793814726",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793814726",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T16:42:01Z",
+        "completed_at": "2026-10-20T16:46:54Z",
+        "name": "📜 MkDocs",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:42:02Z",
+            "completed_at": "2026-10-20T16:42:03Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:42:03Z",
+            "completed_at": "2026-10-20T16:42:10Z"
+          },
+          {
+            "name": "Check for binary diffs (pre-build)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:42:10Z",
+            "completed_at": "2026-10-20T16:42:10Z"
+          },
+          {
+            "name": "Ensure pip cache directory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:42:10Z",
+            "completed_at": "2026-10-20T16:42:12Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T16:42:12Z",
+            "completed_at": "2026-10-20T16:42:18Z"
+          },
+          {
+            "name": "Free disk space",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T16:42:18Z",
+            "completed_at": "2026-10-20T16:43:37Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T16:43:37Z",
+            "completed_at": "2026-10-20T16:43:38Z"
+          },
+          {
+            "name": "Cache pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:43:38Z",
+            "completed_at": "2026-10-20T16:43:45Z"
+          },
+          {
+            "name": "Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:43:45Z",
+            "completed_at": "2026-10-20T16:43:53Z"
+          },
+          {
+            "name": "Install Python baseline dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T16:43:53Z",
+            "completed_at": "2026-10-20T16:45:40Z"
+          },
+          {
+            "name": "Verify environment dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T16:45:40Z",
+            "completed_at": "2026-10-20T16:45:47Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-20T16:45:47Z",
+            "completed_at": "2026-10-20T16:45:56Z"
+          },
+          {
+            "name": "Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-20T16:45:56Z",
+            "completed_at": "2026-10-20T16:46:05Z"
+          },
+          {
+            "name": "Configure npm",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T16:46:05Z",
+            "completed_at": "2026-10-20T16:46:05Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-env",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T16:46:05Z",
+            "completed_at": "2026-10-20T16:46:15Z"
+          },
+          {
+            "name": "Install insight browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-20T16:46:15Z",
+            "completed_at": "2026-10-20T16:46:24Z"
+          },
+          {
+            "name": "Build insight browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-20T16:46:24Z",
+            "completed_at": "2026-10-20T16:46:35Z"
+          },
+          {
+            "name": "Install pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18,
+            "started_at": "2026-10-20T16:46:35Z",
+            "completed_at": "2026-10-20T16:46:36Z"
+          },
+          {
+            "name": "Lint docs with pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-20T16:46:36Z",
+            "completed_at": "2026-10-20T16:46:46Z"
+          },
+          {
+            "name": "Build documentation",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20,
+            "started_at": "2026-10-20T16:46:46Z",
+            "completed_at": "2026-10-20T16:46:50Z"
+          },
+          {
+            "name": "Check for binary diffs (post-build)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21,
+            "started_at": "2026-10-20T16:46:50Z",
+            "completed_at": "2026-10-20T16:46:50Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 37,
+            "started_at": "2026-10-20T16:46:50Z",
+            "completed_at": "2026-10-20T16:46:50Z"
+          },
+          {
+            "name": "Post Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 38,
+            "started_at": "2026-10-20T16:46:50Z",
+            "completed_at": "2026-10-20T16:46:50Z"
+          },
+          {
+            "name": "Post Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 39,
+            "started_at": "2026-10-20T16:46:50Z",
+            "completed_at": "2026-10-20T16:46:50Z"
+          },
+          {
+            "name": "Post Cache pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 40,
+            "started_at": "2026-10-20T16:46:50Z",
+            "completed_at": "2026-10-20T16:46:51Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 41,
+            "started_at": "2026-10-20T16:46:51Z",
+            "completed_at": "2026-10-20T16:46:51Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 42,
+            "started_at": "2026-10-20T16:46:51Z",
+            "completed_at": "2026-10-20T16:46:51Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 43,
+            "started_at": "2026-10-20T16:46:51Z",
+            "completed_at": "2026-10-20T16:46:51Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793814726",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244214,
+        "runner_name": "GitHub Actions 1000244214",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793814830,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKnDLg",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793814830",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793814830",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T16:47:07Z",
+        "completed_at": "2026-10-20T16:52:56Z",
+        "name": "🧹 Ruff + 🏷️ Mypy (3.12)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:47:08Z",
+            "completed_at": "2026-10-20T16:47:09Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:47:09Z",
+            "completed_at": "2026-10-20T16:47:22Z"
+          },
+          {
+            "name": "Check for binary diffs",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:47:22Z",
+            "completed_at": "2026-10-20T16:47:22Z"
+          },
+          {
+            "name": "Ensure pip cache directory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:47:22Z",
+            "completed_at": "2026-10-20T16:47:23Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T16:47:23Z",
+            "completed_at": "2026-10-20T16:47:23Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T16:47:23Z",
+            "completed_at": "2026-10-20T16:47:31Z"
+          },
+          {
+            "name": "Show tool versions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T16:47:31Z",
+            "completed_at": "2026-10-20T16:47:33Z"
+          },
+          {
+            "name": "Cache pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:47:33Z",
+            "completed_at": "2026-10-20T16:47:33Z"
+          },
+          {
+            "name": "Install lint tools",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:47:33Z",
+            "completed_at": "2026-10-20T16:48:55Z"
+          },
+          {
+            "name": "Install pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T16:48:55Z",
+            "completed_at": "2026-10-20T16:48:56Z"
+          },
+          {
+            "name": "Run pre-commit checks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T16:48:56Z",
+            "completed_at": "2026-10-20T16:52:45Z"
+          },
+          {
+            "name": "Remove pre-commit cache from lint scope",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-20T16:52:45Z",
+            "completed_at": "2026-10-20T16:52:49Z"
+          },
+          {
+            "name": "Fail on uncommitted changes",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-20T16:52:49Z",
+            "completed_at": "2026-10-20T16:52:49Z"
+          },
+          {
+            "name": "Ruff lint",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T16:52:49Z",
+            "completed_at": "2026-10-20T16:52:49Z"
+          },
+          {
+            "name": "Mypy type-check",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T16:52:49Z",
+            "completed_at": "2026-10-20T16:52:52Z"
+          },
+          {
+            "name": "Post Cache pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-20T16:52:52Z",
+            "completed_at": "2026-10-20T16:52:52Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-20T16:52:52Z",
+            "completed_at": "2026-10-20T16:52:53Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30,
+            "started_at": "2026-10-20T16:52:53Z",
+            "completed_at": "2026-10-20T16:52:53Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31,
+            "started_at": "2026-10-20T16:52:53Z",
+            "completed_at": "2026-10-20T16:52:53Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793814830",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244225,
+        "runner_name": "GitHub Actions 1000244225",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793814854,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKnDRg",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793814854",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793814854",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T16:46:11Z",
+        "completed_at": "2026-10-20T16:54:08Z",
+        "name": "📚 Docs Build",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:46:12Z",
+            "completed_at": "2026-10-20T16:46:13Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:46:13Z",
+            "completed_at": "2026-10-20T16:46:20Z"
+          },
+          {
+            "name": "Check for binary diffs (pre-build)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:46:20Z",
+            "completed_at": "2026-10-20T16:46:20Z"
+          },
+          {
+            "name": "Ensure pip cache directory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:46:20Z",
+            "completed_at": "2026-10-20T16:46:21Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T16:46:21Z",
+            "completed_at": "2026-10-20T16:46:27Z"
+          },
+          {
+            "name": "Free disk space",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T16:46:27Z",
+            "completed_at": "2026-10-20T16:48:40Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T16:48:40Z",
+            "completed_at": "2026-10-20T16:48:41Z"
+          },
+          {
+            "name": "Cache pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:48:41Z",
+            "completed_at": "2026-10-20T16:48:47Z"
+          },
+          {
+            "name": "Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:48:47Z",
+            "completed_at": "2026-10-20T16:48:59Z"
+          },
+          {
+            "name": "Configure npm",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T16:48:59Z",
+            "completed_at": "2026-10-20T16:48:59Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-env",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T16:48:59Z",
+            "completed_at": "2026-10-20T16:49:11Z"
+          },
+          {
+            "name": "Install Python baseline dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-20T16:49:11Z",
+            "completed_at": "2026-10-20T16:50:27Z"
+          },
+          {
+            "name": "Verify environment dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-20T16:50:27Z",
+            "completed_at": "2026-10-20T16:50:32Z"
+          },
+          {
+            "name": "Install insight browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T16:50:32Z",
+            "completed_at": "2026-10-20T16:50:38Z"
+          },
+          {
+            "name": "Install web client dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T16:50:38Z",
+            "completed_at": "2026-10-20T16:50:51Z"
+          },
+          {
+            "name": "Build web client",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-20T16:50:51Z",
+            "completed_at": "2026-10-20T16:51:17Z"
+          },
+          {
+            "name": "Update browserslist database (Insight demo)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-20T16:51:17Z",
+            "completed_at": "2026-10-20T16:51:20Z"
+          },
+          {
+            "name": "Update browserslist database (Web client)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18,
+            "started_at": "2026-10-20T16:51:20Z",
+            "completed_at": "2026-10-20T16:51:23Z"
+          },
+          {
+            "name": "Install pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-20T16:51:23Z",
+            "completed_at": "2026-10-20T16:51:23Z"
+          },
+          {
+            "name": "Lint docs with pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20,
+            "started_at": "2026-10-20T16:51:23Z",
+            "completed_at": "2026-10-20T16:51:31Z"
+          },
+          {
+            "name": "Build insight browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21,
+            "started_at": "2026-10-20T16:51:31Z",
+            "completed_at": "2026-10-20T16:51:54Z"
+          },
+          {
+            "name": "Build gallery site",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22,
+            "started_at": "2026-10-20T16:51:54Z",
+            "completed_at": "2026-10-20T16:53:08Z"
+          },
+          {
+            "name": "Reclaim disk before Playwright",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23,
+            "started_at": "2026-10-20T16:53:08Z",
+            "completed_at": "2026-10-20T16:53:22Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24,
+            "started_at": "2026-10-20T16:53:22Z",
+            "completed_at": "2026-10-20T16:53:31Z"
+          },
+          {
+            "name": "Check Insight SRI",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-20T16:53:31Z",
+            "completed_at": "2026-10-20T16:53:31Z"
+          },
+          {
+            "name": "Detect Pyodide changes",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-20T16:53:31Z",
+            "completed_at": "2026-10-20T16:53:31Z"
+          },
+          {
+            "name": "Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-20T16:53:31Z",
+            "completed_at": "2026-10-20T16:53:38Z"
+          },
+          {
+            "name": "Install Playwright system dependencies (Python)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-20T16:53:38Z",
+            "completed_at": "2026-10-20T16:53:55Z"
+          },
+          {
+            "name": "Install Playwright browsers (Python)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-20T16:53:55Z",
+            "completed_at": "2026-10-20T16:53:55Z"
+          },
+          {
+            "name": "Verify demo pages",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30,
+            "started_at": "2026-10-20T16:53:55Z",
+            "completed_at": "2026-10-20T16:54:00Z"
+          },
+          {
+            "name": "Verify Insight PWA offline",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31,
+            "started_at": "2026-10-20T16:54:00Z",
+            "completed_at": "2026-10-20T16:54:03Z"
+          },
+          {
+            "name": "Check for binary diffs (post-build)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 32,
+            "started_at": "2026-10-20T16:54:03Z",
+            "completed_at": "2026-10-20T16:54:03Z"
+          },
+          {
+            "name": "Post Cache Playwright browsers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 59,
+            "started_at": "2026-10-20T16:54:03Z",
+            "completed_at": "2026-10-20T16:54:03Z"
+          },
+          {
+            "name": "Post Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 60,
+            "started_at": "2026-10-20T16:54:03Z",
+            "completed_at": "2026-10-20T16:54:03Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 61,
+            "started_at": "2026-10-20T16:54:03Z",
+            "completed_at": "2026-10-20T16:54:03Z"
+          },
+          {
+            "name": "Post Cache pre-commit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 62,
+            "started_at": "2026-10-20T16:54:03Z",
+            "completed_at": "2026-10-20T16:54:03Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 63,
+            "started_at": "2026-10-20T16:54:03Z",
+            "completed_at": "2026-10-20T16:54:03Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 64,
+            "started_at": "2026-10-20T16:54:03Z",
+            "completed_at": "2026-10-20T16:54:04Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 65,
+            "started_at": "2026-10-20T16:54:04Z",
+            "completed_at": "2026-10-20T16:54:04Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793814854",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244221,
+        "runner_name": "GitHub Actions 1000244221",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793814908,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKnDfA",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793814908",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793814908",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:47Z",
+        "started_at": "2026-10-20T16:41:53Z",
+        "completed_at": "2026-10-20T16:46:01Z",
+        "name": "macOS Smoke",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:41:54Z",
+            "completed_at": "2026-10-20T16:41:54Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:41:54Z",
+            "completed_at": "2026-10-20T16:42:06Z"
+          },
+          {
+            "name": "Check for binary diffs (pre-build)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:42:06Z",
+            "completed_at": "2026-10-20T16:42:07Z"
+          },
+          {
+            "name": "Ensure pip cache directory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:42:07Z",
+            "completed_at": "2026-10-20T16:42:07Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T16:42:07Z",
+            "completed_at": "2026-10-20T16:42:38Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T16:42:38Z",
+            "completed_at": "2026-10-20T16:42:42Z"
+          },
+          {
+            "name": "Install dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T16:42:42Z",
+            "completed_at": "2026-10-20T16:44:12Z"
+          },
+          {
+            "name": "Install macOS extras",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:44:12Z",
+            "completed_at": "2026-10-20T16:44:13Z"
+          },
+          {
+            "name": "Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:44:13Z",
+            "completed_at": "2026-10-20T16:44:26Z"
+          },
+          {
+            "name": "Configure npm",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T16:44:26Z",
+            "completed_at": "2026-10-20T16:44:27Z"
+          },
+          {
+            "name": "Show tool versions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T16:44:27Z",
+            "completed_at": "2026-10-20T16:44:27Z"
+          },
+          {
+            "name": "Verify environment",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-20T16:44:27Z",
+            "completed_at": "2026-10-20T16:44:37Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-20T16:44:37Z",
+            "completed_at": "2026-10-20T16:44:47Z"
+          },
+          {
+            "name": "Build web assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T16:44:47Z",
+            "completed_at": "2026-10-20T16:45:19Z"
+          },
+          {
+            "name": "Run smoke tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T16:45:19Z",
+            "completed_at": "2026-10-20T16:45:53Z"
+          },
+          {
+            "name": "Post Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-20T16:45:53Z",
+            "completed_at": "2026-10-20T16:45:54Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-20T16:45:54Z",
+            "completed_at": "2026-10-20T16:45:54Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-20T16:45:54Z",
+            "completed_at": "2026-10-20T16:45:54Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30,
+            "started_at": "2026-10-20T16:45:54Z",
+            "completed_at": "2026-10-20T16:45:55Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31,
+            "started_at": "2026-10-20T16:45:55Z",
+            "completed_at": "2026-10-20T16:45:59Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793814908",
+        "labels": [
+          "macos-latest"
+        ],
+        "runner_id": 1000244212,
+        "runner_name": "GitHub Actions 1000244212",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793815297,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKnFAQ",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793815297",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793815297",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:48Z",
+        "started_at": "2026-10-20T16:46:57Z",
+        "completed_at": "2026-10-20T16:47:17Z",
+        "name": "✅ Actionlint",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:46:58Z",
+            "completed_at": "2026-10-20T16:46:59Z"
+          },
+          {
+            "name": "Pull ghcr.io/reviewdog/action-actionlint:v1.69.0",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:46:59Z",
+            "completed_at": "2026-10-20T16:47:04Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:47:04Z",
+            "completed_at": "2026-10-20T16:47:11Z"
+          },
+          {
+            "name": "Lint workflows",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:47:11Z",
+            "completed_at": "2026-10-20T16:47:14Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:47:14Z",
+            "completed_at": "2026-10-20T16:47:14Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:47:14Z",
+            "completed_at": "2026-10-20T16:47:15Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793815297",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244223,
+        "runner_name": "GitHub Actions 1000244223",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118793856214,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqKpk1g",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118793856214",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118793856214",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T17:58:53Z",
+        "started_at": "2026-10-20T16:47:20Z",
+        "completed_at": "2026-10-20T16:57:19Z",
+        "name": "🐳 Docker build",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T16:47:21Z",
+            "completed_at": "2026-10-20T16:47:23Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T16:47:23Z",
+            "completed_at": "2026-10-20T16:47:30Z"
+          },
+          {
+            "name": "Free disk space",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T16:47:30Z",
+            "completed_at": "2026-10-20T16:49:35Z"
+          },
+          {
+            "name": "Ensure pip cache directory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T16:49:35Z",
+            "completed_at": "2026-10-20T16:49:36Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T16:49:36Z",
+            "completed_at": "2026-10-20T16:49:39Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-20T16:49:39Z",
+            "completed_at": "2026-10-20T16:49:39Z"
+          },
+          {
+            "name": "Export repo_owner_lower",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-20T16:49:39Z",
+            "completed_at": "2026-10-20T16:49:39Z"
+          },
+          {
+            "name": "Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-20T16:49:39Z",
+            "completed_at": "2026-10-20T16:49:50Z"
+          },
+          {
+            "name": "Configure npm",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T16:49:50Z",
+            "completed_at": "2026-10-20T16:49:50Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-env",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T16:49:50Z",
+            "completed_at": "2026-10-20T16:49:59Z"
+          },
+          {
+            "name": "Install insight browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T16:49:59Z",
+            "completed_at": "2026-10-20T16:50:08Z"
+          },
+          {
+            "name": "Update browserslist database (Insight demo)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-20T16:50:08Z",
+            "completed_at": "2026-10-20T16:50:11Z"
+          },
+          {
+            "name": "Install web client dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-20T16:50:11Z",
+            "completed_at": "2026-10-20T16:50:27Z"
+          },
+          {
+            "name": "Update browserslist database (Web client)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-20T16:50:27Z",
+            "completed_at": "2026-10-20T16:50:30Z"
+          },
+          {
+            "name": "Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-20T16:50:30Z",
+            "completed_at": "2026-10-20T16:50:38Z"
+          },
+          {
+            "name": "Audit insight browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-20T16:50:38Z",
+            "completed_at": "2026-10-20T16:50:38Z"
+          },
+          {
+            "name": "Install the locked Insight Chromium runtime",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-20T16:50:38Z",
+            "completed_at": "2026-10-20T16:51:03Z"
+          },
+          {
+            "name": "Run insight browser tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18,
+            "started_at": "2026-10-20T16:51:03Z",
+            "completed_at": "2026-10-20T16:51:18Z"
+          },
+          {
+            "name": "Type check insight browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-20T16:51:18Z",
+            "completed_at": "2026-10-20T16:51:24Z"
+          },
+          {
+            "name": "Build web client",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20,
+            "started_at": "2026-10-20T16:51:24Z",
+            "completed_at": "2026-10-20T16:51:55Z"
+          },
+          {
+            "name": "Archive web client dist",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21,
+            "started_at": "2026-10-20T16:51:55Z",
+            "completed_at": "2026-10-20T16:51:56Z"
+          },
+          {
+            "name": "Install cosign",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22,
+            "started_at": "2026-10-20T16:51:56Z",
+            "completed_at": "2026-10-20T16:51:59Z"
+          },
+          {
+            "name": "Sign web client artifact",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23,
+            "started_at": "2026-10-20T16:51:59Z",
+            "completed_at": "2026-10-20T16:52:00Z"
+          },
+          {
+            "name": "Verify web client signature",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24,
+            "started_at": "2026-10-20T16:52:00Z",
+            "completed_at": "2026-10-20T16:52:02Z"
+          },
+          {
+            "name": "Check web client artifact",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-20T16:52:02Z",
+            "completed_at": "2026-10-20T16:52:02Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-20T16:52:02Z",
+            "completed_at": "2026-10-20T16:52:04Z"
+          },
+          {
+            "name": "Ensure Chrome for Axe",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-20T16:52:04Z",
+            "completed_at": "2026-10-20T16:52:04Z"
+          },
+          {
+            "name": "Accessibility audit",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-20T16:52:04Z",
+            "completed_at": "2026-10-20T16:52:07Z"
+          },
+          {
+            "name": "Reclaim disk before Docker build",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-20T16:52:07Z",
+            "completed_at": "2026-10-20T16:52:13Z"
+          },
+          {
+            "name": "Build image",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30,
+            "started_at": "2026-10-20T16:52:13Z",
+            "completed_at": "2026-10-20T16:56:59Z"
+          },
+          {
+            "name": "Smoke test image",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31,
+            "started_at": "2026-10-20T16:56:59Z",
+            "completed_at": "2026-10-20T16:57:15Z"
+          },
+          {
+            "name": "Login to GHCR",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 32,
+            "started_at": "2026-10-20T16:57:15Z",
+            "completed_at": "2026-10-20T16:57:15Z"
+          },
+          {
+            "name": "Push image",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 33,
+            "started_at": "2026-10-20T16:57:15Z",
+            "completed_at": "2026-10-20T16:57:15Z"
+          },
+          {
+            "name": "Install cosign",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 34,
+            "started_at": "2026-10-20T16:57:15Z",
+            "completed_at": "2026-10-20T16:57:15Z"
+          },
+          {
+            "name": "Sign image",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 35,
+            "started_at": "2026-10-20T16:57:15Z",
+            "completed_at": "2026-10-20T16:57:15Z"
+          },
+          {
+            "name": "Verify image signature",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 36,
+            "started_at": "2026-10-20T16:57:15Z",
+            "completed_at": "2026-10-20T16:57:15Z"
+          },
+          {
+            "name": "Post Run ./.github/actions/setup-insight-assets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 69,
+            "started_at": "2026-10-20T16:57:15Z",
+            "completed_at": "2026-10-20T16:57:16Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 70,
+            "started_at": "2026-10-20T16:57:16Z",
+            "completed_at": "2026-10-20T16:57:16Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 71,
+            "started_at": "2026-10-20T16:57:16Z",
+            "completed_at": "2026-10-20T16:57:16Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 72,
+            "started_at": "2026-10-20T16:57:16Z",
+            "completed_at": "2026-10-20T16:57:16Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 73,
+            "started_at": "2026-10-20T16:57:16Z",
+            "completed_at": "2026-10-20T16:57:16Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118793856214",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244227,
+        "runner_name": "GitHub Actions 1000244227",
+        "runner_group_id": null,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118828293718,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqrfeVg",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118828293718",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118828293718",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T19:07:26Z",
+        "started_at": "2026-10-20T19:11:26Z",
+        "completed_at": "2026-10-20T19:11:38Z",
+        "name": "🔒 Branch protection guardrails",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T19:11:27Z",
+            "completed_at": "2026-10-20T19:11:27Z"
+          },
+          {
+            "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T19:11:27Z",
+            "completed_at": "2026-10-20T19:11:34Z"
+          },
+          {
+            "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T19:11:34Z",
+            "completed_at": "2026-10-20T19:11:34Z"
+          },
+          {
+            "name": "Verify $AGIALPHA configuration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-20T19:11:34Z",
+            "completed_at": "2026-10-20T19:11:35Z"
+          },
+          {
+            "name": "Verify branch protection on main",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-20T19:11:35Z",
+            "completed_at": "2026-10-20T19:11:35Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-20T19:11:35Z",
+            "completed_at": "2026-10-20T19:11:36Z"
+          },
+          {
+            "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-20T19:11:36Z",
+            "completed_at": "2026-10-20T19:11:36Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-20T19:11:36Z",
+            "completed_at": "2026-10-20T19:11:36Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118828293718",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244709,
+        "runner_name": "GitHub Actions 1000244709",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 118828297024,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqrfrQA",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118828297024",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118828297024",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "created_at": "2026-10-20T19:07:26Z",
+        "started_at": "2026-10-20T19:07:26Z",
+        "completed_at": "2026-10-20T19:07:26Z",
+        "name": "📦 Deploy",
+        "steps": [],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118828297024",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": null,
+        "runner_name": null,
+        "runner_group_id": null,
+        "runner_group_name": null
+      },
+      {
+        "id": 118830380280,
+        "run_id": 39459545474,
+        "workflow_name": "🚀 Integration CI — Insight Demo",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474",
+        "run_attempt": 2,
+        "node_id": "CR_kwDONwDjTc8AAAAbqte0-A",
+        "head_sha": "558f798a9b9cc73c1db01905858aad8852e11092",
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/actions/jobs/118830380280",
+        "html_url": "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474/job/118830380280",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-20T19:11:38Z",
+        "started_at": "2026-10-20T19:15:29Z",
+        "completed_at": "2026-10-20T19:15:32Z",
+        "name": "Integration matrix",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-20T19:15:30Z",
+            "completed_at": "2026-10-20T19:15:30Z"
+          },
+          {
+            "name": "Require every main-branch validation job to succeed",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-20T19:15:30Z",
+            "completed_at": "2026-10-20T19:15:30Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-20T19:15:30Z",
+            "completed_at": "2026-10-20T19:15:30Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/check-runs/118830380280",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000244722,
+        "runner_name": "GitHub Actions 1000244722",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      }
+    ]
+  },
+  "limitsUnchanged": true
+}

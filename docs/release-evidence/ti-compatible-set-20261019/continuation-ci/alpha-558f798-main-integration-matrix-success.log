@@ -1,0 +1,116 @@
+﻿2026-10-20T19:15:30.0780307Z Current runner version: '2.337.0'
+2026-10-20T19:15:30.0804370Z ##[group]Runner Image Provisioner
+2026-10-20T19:15:30.0805257Z Hosted Compute Agent
+2026-10-20T19:15:30.0805783Z Version: 20261015.610
+2026-10-20T19:15:30.0806411Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-20T19:15:30.0807086Z Build Date: 2026-10-14T17:06:54Z
+2026-10-20T19:15:30.0807709Z Worker ID: {cf9d94df-7531-4213-8252-89c5cf03fa7c}
+2026-10-20T19:15:30.0808394Z Region: westus3
+2026-10-20T19:15:30.0808889Z Cloud: Azure
+2026-10-20T19:15:30.0809354Z ##[endgroup]
+2026-10-20T19:15:30.0810677Z ##[group]Operating System
+2026-10-20T19:15:30.0811259Z Ubuntu
+2026-10-20T19:15:30.0811812Z 24.04.5
+2026-10-20T19:15:30.0812282Z LTS
+2026-10-20T19:15:30.0812767Z ##[endgroup]
+2026-10-20T19:15:30.0813700Z ##[group]Runner Image
+2026-10-20T19:15:30.0814276Z Image: ubuntu-24.04
+2026-10-20T19:15:30.0814820Z Version: 20261018.339.1
+2026-10-20T19:15:30.0816011Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T19:15:30.0817406Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+2026-10-20T19:15:30.0818300Z ##[endgroup]
+2026-10-20T19:15:30.0819466Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T19:15:30.0821375Z Actions: write
+2026-10-20T19:15:30.0821969Z Contents: read
+2026-10-20T19:15:30.0822500Z Metadata: read
+2026-10-20T19:15:30.0823045Z ##[endgroup]
+2026-10-20T19:15:30.0825278Z Secret source: Actions
+2026-10-20T19:15:30.0826142Z Cache mode: write
+2026-10-20T19:15:30.0826837Z Prepare workflow directory
+2026-10-20T19:15:30.1410812Z Prepare all required actions
+2026-10-20T19:15:30.1474154Z Complete job name: Integration matrix
+2026-10-20T19:15:30.2035310Z ##[group]Run python - <<'PY'
+2026-10-20T19:15:30.2036011Z [36;1mpython - <<'PY'[0m
+2026-10-20T19:15:30.2036742Z [36;1mimport json, os[0m
+2026-10-20T19:15:30.2037412Z [36;1mresults = json.loads(os.environ['JOB_RESULTS'])[0m
+2026-10-20T19:15:30.2038440Z [36;1mfailures = {name: item['result'] for name, item in results.items() if item['result'] != 'success'}[0m
+2026-10-20T19:15:30.2039391Z [36;1mif not results or failures:[0m
+2026-10-20T19:15:30.2040164Z [36;1m    raise SystemExit(f'Integration validation is incomplete: {failures}')[0m
+2026-10-20T19:15:30.2041227Z [36;1mprint(f'All {len(results)} required validation jobs passed, including every matrix variant.')[0m
+2026-10-20T19:15:30.2042169Z [36;1mPY[0m
+2026-10-20T19:15:30.3075905Z shell: /usr/bin/bash -e {0}
+2026-10-20T19:15:30.3077428Z env:
+2026-10-20T19:15:30.3078344Z   DOCKER_IMAGE: agi-insight-demo
+2026-10-20T19:15:30.3079592Z   SANDBOX_IMAGE: selfheal-sandbox:latest
+2026-10-20T19:15:30.3080646Z   PYTHONUTF8: 1
+2026-10-20T19:15:30.3081671Z   PIP_NO_INPUT: 1
+2026-10-20T19:15:30.3083323Z   COSIGN_CERT_IDENTITY_REGEX: https://github.com/MontrealAI/AGI-Alpha-Agent-v0/.github/workflows/ci.yml@.*
+2026-10-20T19:15:30.3085525Z   COSIGN_CERT_ISSUER: https://token.actions.githubusercontent.com
+2026-10-20T19:15:30.3087457Z   PLAYWRIGHT_BROWSERS_PATH: /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.tmp/ms-playwright
+2026-10-20T19:15:30.3089709Z   FETCH_ASSETS_DIR: /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.tmp/insight-assets
+2026-10-20T19:15:30.3091906Z   INSIGHT_ASSET_ROOT: /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.tmp/insight-assets
+2026-10-20T19:15:30.3094223Z   PYODIDE_CACHE_DIR: /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.tmp/pyodide-cache
+2026-10-20T19:15:30.3099042Z   NODE_LOCKFILES: tests/browser/package-lock.json
+alpha_factory_v1/demos/alpha_agi_insight_v1/insight_browser_v1/package-lock.json
+alpha_factory_v1/core/interface/web_client/package-lock.json
+alpha_factory_v1/core/interface/web_client/staking/package-lock.json
+alpha_factory_v1/demos/alpha_agi_insight_v1/src/interface/web_client/package-lock.json
+
+2026-10-20T19:15:30.3103780Z   PYODIDE_BASE_URL: https://cdn.jsdelivr.net/pyodide/v0.28.0/full
+2026-10-20T19:15:30.3105400Z   HF_GPT2_BASE_URL: https://huggingface.co/openai-community/gpt2/resolve/main
+2026-10-20T19:15:30.3107183Z   A11Y_THRESHOLD: 95
+2026-10-20T19:15:30.3108162Z   FETCH_ASSETS_ATTEMPTS: 5
+2026-10-20T19:15:30.3109128Z   FETCH_ASSETS_BACKOFF: 2
+2026-10-20T19:15:30.3110273Z   AGIALPHA_ADDRESS: 0xa61a3b3a130a9c20768eebf97e21515a6046a1fa
+2026-10-20T19:15:30.3111624Z   AGIALPHA_DECIMALS: 18
+2026-10-20T19:15:30.3118131Z   JOB_RESULTS: {
+  "owner-check": {
+    "result": "success",
+    "outputs": {
+      "repo_owner_lower": "montrealai"
+    }
+  },
+  "workflow-lint": {
+    "result": "success",
+    "outputs": {}
+  },
+  "lint-type": {
+    "result": "success",
+    "outputs": {}
+  },
+  "insight-eslint": {
+    "result": "success",
+    "outputs": {}
+  },
+  "tests": {
+    "result": "success",
+    "outputs": {}
+  },
+  "windows-smoke": {
+    "result": "success",
+    "outputs": {}
+  },
+  "macos-smoke": {
+    "result": "success",
+    "outputs": {}
+  },
+  "docs-check": {
+    "result": "success",
+    "outputs": {}
+  },
+  "docs-build": {
+    "result": "success",
+    "outputs": {}
+  },
+  "docker": {
+    "result": "success",
+    "outputs": {}
+  },
+  "branch-protection": {
+    "result": "success",
+    "outputs": {}
+  }
+}
+2026-10-20T19:15:30.3124876Z ##[endgroup]
+2026-10-20T19:15:30.3564888Z All 11 required validation jobs passed, including every matrix variant.
+2026-10-20T19:15:30.3770000Z Cleaning up orphan processes
