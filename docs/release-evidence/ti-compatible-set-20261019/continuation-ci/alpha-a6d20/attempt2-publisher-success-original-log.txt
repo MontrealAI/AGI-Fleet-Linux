@@ -1,0 +1,325 @@
+﻿2026-10-20T22:55:23.1579879Z Current runner version: '2.338.0'
+2026-10-20T22:55:23.1600358Z ##[group]Runner Image Provisioner
+2026-10-20T22:55:23.1601037Z Hosted Compute Agent
+2026-10-20T22:55:23.1601550Z Version: 20261015.610
+2026-10-20T22:55:23.1601994Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-20T22:55:23.1602983Z Build Date: 2026-10-14T17:06:54Z
+2026-10-20T22:55:23.1603493Z Worker ID: {a42db82c-65ff-493e-8b66-1dbdc71ca38a}
+2026-10-20T22:55:23.1603998Z Region: centralus
+2026-10-20T22:55:23.1604402Z Cloud: Azure
+2026-10-20T22:55:23.1604779Z ##[endgroup]
+2026-10-20T22:55:23.1606360Z ##[group]Operating System
+2026-10-20T22:55:23.1607028Z Ubuntu
+2026-10-20T22:55:23.1607495Z 24.04.5
+2026-10-20T22:55:23.1608395Z LTS
+2026-10-20T22:55:23.1608929Z ##[endgroup]
+2026-10-20T22:55:23.1609443Z ##[group]Runner Image
+2026-10-20T22:55:23.1610040Z Image: ubuntu-24.04
+2026-10-20T22:55:23.1610572Z Version: 20261018.339.1
+2026-10-20T22:55:23.1611866Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T22:55:23.1613471Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+2026-10-20T22:55:23.1614197Z ##[endgroup]
+2026-10-20T22:55:23.1615000Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T22:55:23.1617275Z Contents: write
+2026-10-20T22:55:23.1617720Z Metadata: read
+2026-10-20T22:55:23.1618129Z ##[endgroup]
+2026-10-20T22:55:23.1619846Z Secret source: Actions
+2026-10-20T22:55:23.1620493Z Cache mode: write
+2026-10-20T22:55:23.1621224Z Prepare workflow directory
+2026-10-20T22:55:23.1946830Z Prepare all required actions
+2026-10-20T22:55:23.1986182Z Getting action download info
+2026-10-20T22:55:23.4094697Z Download action repository 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-10-20T22:55:23.5391344Z Download action repository 'actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c' (SHA:3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c)
+2026-10-20T22:55:23.9959021Z Complete job name: publish
+2026-10-20T22:55:24.0488259Z ##[group]Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+2026-10-20T22:55:24.0489020Z with:
+2026-10-20T22:55:24.0489518Z   persist-credentials: false
+2026-10-20T22:55:24.0489997Z   repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:55:24.0494026Z   token: ***
+2026-10-20T22:55:24.0494427Z   ssh-strict: true
+2026-10-20T22:55:24.0494825Z   ssh-user: git
+2026-10-20T22:55:24.0495240Z   clean: true
+2026-10-20T22:55:24.0495637Z   sparse-checkout-cone-mode: true
+2026-10-20T22:55:24.0496089Z   fetch-depth: 1
+2026-10-20T22:55:24.0496484Z   fetch-tags: false
+2026-10-20T22:55:24.0496892Z   show-progress: true
+2026-10-20T22:55:24.0497327Z   lfs: false
+2026-10-20T22:55:24.0497693Z   submodules: false
+2026-10-20T22:55:24.0498088Z   set-safe-directory: true
+2026-10-20T22:55:24.0498725Z env:
+2026-10-20T22:55:24.0499125Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T22:55:24.0499609Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T22:55:24.0500062Z   NO_DISCLAIMER: 1
+2026-10-20T22:55:24.0500569Z ##[endgroup]
+2026-10-20T22:55:24.1269672Z Syncing repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:55:24.1271473Z ##[group]Getting Git version info
+2026-10-20T22:55:24.1272120Z Working directory is '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T22:55:24.1273379Z [command]/usr/bin/git version
+2026-10-20T22:55:24.1325325Z git version 2.55.0
+2026-10-20T22:55:24.1345951Z ##[endgroup]
+2026-10-20T22:55:24.1360006Z Temporarily overriding HOME='/home/runner/work/_temp/0b39cb9c-badc-4c7c-82f3-07b108824679' before making global git config changes
+2026-10-20T22:55:24.1361221Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:55:24.1365354Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T22:55:24.1409628Z Deleting the contents of '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T22:55:24.1413190Z ##[group]Initializing the repository
+2026-10-20T22:55:24.1416110Z [command]/usr/bin/git init /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T22:55:24.1509845Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T22:55:24.1510823Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T22:55:24.1511543Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T22:55:24.1512190Z hint: call:
+2026-10-20T22:55:24.1513053Z hint:
+2026-10-20T22:55:24.1513611Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T22:55:24.1514238Z hint:
+2026-10-20T22:55:24.1514736Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T22:55:24.1515458Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T22:55:24.1516100Z hint:
+2026-10-20T22:55:24.1516579Z hint: 	git branch -m <name>
+2026-10-20T22:55:24.1517119Z hint:
+2026-10-20T22:55:24.1517712Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T22:55:24.1518575Z Initialized empty Git repository in /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/
+2026-10-20T22:55:24.1520923Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:55:24.1562347Z ##[endgroup]
+2026-10-20T22:55:24.1563251Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:55:24.1564826Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T22:55:24.1590035Z ##[endgroup]
+2026-10-20T22:55:24.1590888Z ##[group]Setting up auth
+2026-10-20T22:55:24.1591453Z Removing SSH command configuration
+2026-10-20T22:55:24.1594960Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:55:24.1618048Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:55:24.1888970Z Removing HTTP extra header
+2026-10-20T22:55:24.1894854Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:55:24.1920763Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:55:24.2070204Z Removing includeIf entries pointing to credentials config files
+2026-10-20T22:55:24.2076314Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:55:24.2099693Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:55:24.2257511Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T22:55:24.2284432Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:24.2322288Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:24.2367447Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:24.2398933Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:24.2419980Z ##[endgroup]
+2026-10-20T22:55:24.2420686Z ##[group]Fetching the repository
+2026-10-20T22:55:24.2426316Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a6d20a93c7c5b7430bf42d2367701b350513e90d:refs/remotes/origin/main
+2026-10-20T22:55:28.0042764Z From https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:55:28.0044157Z  * [new ref]         a6d20a93c7c5b7430bf42d2367701b350513e90d -> origin/main
+2026-10-20T22:55:28.0060622Z [command]/usr/bin/git branch --list --remote origin/main
+2026-10-20T22:55:28.0074575Z   origin/main
+2026-10-20T22:55:28.0083060Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-10-20T22:55:28.0101150Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:55:28.0116115Z ##[endgroup]
+2026-10-20T22:55:28.0117341Z ##[group]Determining the checkout info
+2026-10-20T22:55:28.0118481Z ##[endgroup]
+2026-10-20T22:55:28.0120407Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T22:55:28.0152988Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:55:28.0174476Z ##[group]Checking out the ref
+2026-10-20T22:55:28.0177864Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-20T22:55:28.6249903Z Switched to a new branch 'main'
+2026-10-20T22:55:28.6253693Z branch 'main' set up to track 'origin/main'.
+2026-10-20T22:55:28.6281916Z ##[endgroup]
+2026-10-20T22:55:28.6319608Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T22:55:28.6339877Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T22:55:28.6346989Z ##[group]Removing auth
+2026-10-20T22:55:28.6347518Z Removing SSH command configuration
+2026-10-20T22:55:28.6351623Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:55:28.6374625Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:55:28.6534516Z Removing HTTP extra header
+2026-10-20T22:55:28.6537866Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:55:28.6558771Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:55:28.6708746Z Removing includeIf entries pointing to credentials config files
+2026-10-20T22:55:28.6709975Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:55:28.6733377Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T22:55:28.6734124Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T22:55:28.6734642Z includeif.gitdir:/github/workspace/.git.path
+2026-10-20T22:55:28.6735117Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T22:55:28.6742146Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T22:55:28.6758092Z /home/runner/work/_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:28.6765762Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:28.6791721Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T22:55:28.6807978Z /home/runner/work/_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:28.6814651Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:28.6845214Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-20T22:55:28.6860864Z /github/runner_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:28.6866066Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:28.6888655Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T22:55:28.6904037Z /github/runner_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:28.6909196Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config
+2026-10-20T22:55:28.6933892Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:55:28.7079777Z Removing credentials config '/home/runner/work/_temp/git-credentials-ac0101c5-f629-46f4-b22a-d3ddc62adc5d.config'
+2026-10-20T22:55:28.7088652Z ##[endgroup]
+2026-10-20T22:55:28.7275575Z ##[group]Run actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+2026-10-20T22:55:28.7276048Z with:
+2026-10-20T22:55:28.7276337Z   name: release-package-39484204330-2
+2026-10-20T22:55:28.7276635Z   path: release
+2026-10-20T22:55:28.7276910Z   digest-mismatch: error
+2026-10-20T22:55:28.7277204Z   merge-multiple: false
+2026-10-20T22:55:28.7277506Z   repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:55:28.7277837Z   run-id: 39484204330
+2026-10-20T22:55:28.7278093Z   skip-decompress: false
+2026-10-20T22:55:28.7278715Z env:
+2026-10-20T22:55:28.7279013Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T22:55:28.7279327Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T22:55:28.7279643Z   NO_DISCLAIMER: 1
+2026-10-20T22:55:28.7279890Z ##[endgroup]
+2026-10-20T22:55:28.8324297Z Downloading single artifact
+2026-10-20T22:55:29.0179418Z Preparing to download the following artifacts:
+2026-10-20T22:55:29.0180838Z - release-package-39484204330-2 (ID: 12305476129, Size: 1801198874, Expected Digest: sha256:a594b023340fbe3e434bbb6542c6df60f03210c53c4d8db38f9e1218a62d4810)
+2026-10-20T22:55:29.3578562Z Redirecting to blob download url: https://productionresultssa18.blob.core.windows.net/actions-results/aabf8b70-3d7f-8f8f-a41b-8354d3ac4a0b/workflow-job-run-ba77bb2e-6331-5e34-a7e5-56bd7e440316/artifacts/f646aed2de8456f903371d8e158204c00be503f34dcea7d299f3670d8cfc0c88.zip
+2026-10-20T22:55:29.3579643Z Starting download of artifact to: /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/release
+2026-10-20T22:55:29.5584679Z (node:2191) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-10-20T22:55:29.5585792Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T22:56:04.9962680Z SHA256 digest of downloaded artifact is a594b023340fbe3e434bbb6542c6df60f03210c53c4d8db38f9e1218a62d4810
+2026-10-20T22:56:04.9964326Z Artifact download completed successfully.
+2026-10-20T22:56:04.9964777Z Total of 1 artifact(s) downloaded
+2026-10-20T22:56:04.9966751Z Download artifact has finished successfully
+2026-10-20T22:56:05.0116977Z ##[group]Run actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+2026-10-20T22:56:05.0117392Z with:
+2026-10-20T22:56:05.0117615Z   name: public-pages-39484204330-2
+2026-10-20T22:56:05.0118345Z   path: public-evidence
+2026-10-20T22:56:05.0118612Z   digest-mismatch: error
+2026-10-20T22:56:05.0118945Z   merge-multiple: false
+2026-10-20T22:56:05.0119199Z   repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T22:56:05.0119462Z   run-id: 39484204330
+2026-10-20T22:56:05.0119715Z   skip-decompress: false
+2026-10-20T22:56:05.0119995Z env:
+2026-10-20T22:56:05.0120230Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T22:56:05.0120491Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T22:56:05.0120752Z   NO_DISCLAIMER: 1
+2026-10-20T22:56:05.0121034Z ##[endgroup]
+2026-10-20T22:56:05.1235615Z Downloading single artifact
+2026-10-20T22:56:05.3127909Z Preparing to download the following artifacts:
+2026-10-20T22:56:05.3128849Z - public-pages-39484204330-2 (ID: 12305377907, Size: 112328319, Expected Digest: sha256:fb0b38fbe1ecbf8f6d91b01b90c2f17cd4dbc0b6d572e9470392ec822f1c741a)
+2026-10-20T22:56:05.6561262Z Redirecting to blob download url: https://productionresultssa18.blob.core.windows.net/actions-results/aabf8b70-3d7f-8f8f-a41b-8354d3ac4a0b/workflow-job-run-951fbd84-0583-550d-8bf6-2d455436fb59/artifacts/01e621728cd5929411c295ea7f2f5a3e5db3b771011a66d1d735de19cecb3fc2.zip
+2026-10-20T22:56:05.6563759Z Starting download of artifact to: /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/public-evidence
+2026-10-20T22:56:05.8990087Z (node:2209) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-10-20T22:56:05.8991143Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T22:56:07.8671309Z SHA256 digest of downloaded artifact is fb0b38fbe1ecbf8f6d91b01b90c2f17cd4dbc0b6d572e9470392ec822f1c741a
+2026-10-20T22:56:07.8672309Z Artifact download completed successfully.
+2026-10-20T22:56:07.8672899Z Total of 1 artifact(s) downloaded
+2026-10-20T22:56:07.8675864Z Download artifact has finished successfully
+2026-10-20T22:56:07.8779651Z ##[group]Run python -m scripts.finalize_pages_release --evidence public-evidence
+2026-10-20T22:56:07.8780348Z [36;1mpython -m scripts.finalize_pages_release --evidence public-evidence[0m
+2026-10-20T22:56:07.8780757Z [36;1mcd release[0m
+2026-10-20T22:56:07.8781004Z [36;1msha256sum -c SHA256SUMS[0m
+2026-10-20T22:56:07.8905141Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T22:56:07.8905484Z env:
+2026-10-20T22:56:07.8905880Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T22:56:07.8906165Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T22:56:07.8906479Z   NO_DISCLAIMER: 1
+2026-10-20T22:56:07.8906756Z ##[endgroup]
+2026-10-20T22:56:15.8007093Z AGI_ALPHA_Unified_Publication_Final.md: OK
+2026-10-20T22:56:15.8044825Z AGI_ALPHA_Unified_Publication_Final.pdf: OK
+2026-10-20T22:56:15.8045341Z ASCENSION_CYCLE.md: OK
+2026-10-20T22:56:15.8045869Z ASCENSION_CYCLE_ENGINEERING.md: OK
+2026-10-20T22:56:15.8046306Z ASCENSION_CYCLE_HANDOFF.md: OK
+2026-10-20T22:56:15.8046958Z ASCENSION_PROTOCOL.md: OK
+2026-10-20T22:56:15.8047320Z ASCENSION_STACK_RELEASE.md: OK
+2026-10-20T22:56:15.8047758Z BUSINESS3.md: OK
+2026-10-20T22:56:15.8048088Z CAPABILITIES.md: OK
+2026-10-20T22:56:15.8048482Z COMPOUNDING_LAB.md: OK
+2026-10-20T22:56:15.8048823Z CURRENT_MAINNET_DEPLOYMENT.md: OK
+2026-10-20T22:56:15.8049178Z CURRICULUM_LAB.md: OK
+2026-10-20T22:56:15.8049610Z DECISION_STUDIO.md: OK
+2026-10-20T22:56:15.8049923Z DEMOS.md: OK
+2026-10-20T22:56:15.8050282Z DEMO_AUDIT_2026-10-01.md: OK
+2026-10-20T22:56:15.8050629Z DEMO_VALIDATION.md: OK
+2026-10-20T22:56:15.8050982Z DISCOVERY.md: OK
+2026-10-20T22:56:15.8051368Z ECOSYSTEM_ADAPTERS.md: OK
+2026-10-20T22:56:15.8051732Z EXPERIENCE.md: OK
+2026-10-20T22:56:15.8052078Z FACTORY_GUIDE.md: OK
+2026-10-20T22:56:15.8052426Z GOVERNANCE.md: OK
+2026-10-20T22:56:15.8052945Z INSIGHT_ATLAS.md: OK
+2026-10-20T22:56:15.8053328Z MAINNET_DEPLOYMENT.md: OK
+2026-10-20T22:56:15.8053694Z MAINNET_READINESS.md: OK
+2026-10-20T22:56:15.8054046Z MANUSCRIPT_ALIGNMENT.md: OK
+2026-10-20T22:56:15.8054472Z MARK_WALLET.md: OK
+2026-10-20T22:56:15.8054786Z MATS.md: OK
+2026-10-20T22:56:15.8055070Z MUZERO.md: OK
+2026-10-20T22:56:15.8055439Z NATIVE_BUDGET_RESERVATIONS.md: OK
+2026-10-20T22:56:15.8055795Z NOVA_SEED_STUDIO.md: OK
+2026-10-20T22:56:15.8056221Z NOVA_SEED_STUDIO_ENGINEERING.md: OK
+2026-10-20T22:56:15.8056590Z ONBOARDING.md: OK
+2026-10-20T22:56:15.8056872Z OPERATIONS.md: OK
+2026-10-20T22:56:15.8057263Z PAGES_GUIDE.md: OK
+2026-10-20T22:56:15.8057589Z PROOF_BLOOM.md: OK
+2026-10-20T22:56:15.8057924Z RELEASE_NOTES_1.36.0.md: OK
+2026-10-20T22:56:15.8058302Z RELEASE_READINESS.md: OK
+2026-10-20T22:56:15.8058663Z REPOSITORY_GUIDE.md: OK
+2026-10-20T22:56:15.8059389Z START_HERE.md: OK
+2026-10-20T22:56:15.8059710Z SUCCESSOR.md: OK
+2026-10-20T22:56:15.8060062Z SUCCESSOR_ACCEPTANCE.md: OK
+2026-10-20T22:56:15.8060443Z SUCCESSOR_ALPHA.md: OK
+2026-10-20T22:56:15.8060809Z SUCCESSOR_ALPHA_CONTINUITY.md: OK
+2026-10-20T22:56:15.8061251Z SUCCESSOR_ALPHA_DEPLOYMENT.md: OK
+2026-10-20T22:56:15.8061646Z SUCCESSOR_ARCHITECTURE.md: OK
+2026-10-20T22:56:15.8062017Z SUCCESSOR_ASCENSION.md: OK
+2026-10-20T22:56:15.8062382Z SUCCESSOR_COMPUTER_USE.md: OK
+2026-10-20T22:56:15.8063020Z SUCCESSOR_OPERATIONS.md: OK
+2026-10-20T22:56:15.8063457Z SUCCESSOR_PACKAGING.md: OK
+2026-10-20T22:56:15.8063821Z SUCCESSOR_SOURCES.json: OK
+2026-10-20T22:56:15.8064153Z SUPPLIER_BROWSER_ADAPTER.md: OK
+2026-10-20T22:56:15.8064569Z TRANSFORMATIONAL_DISCOVERY.md: OK
+2026-10-20T22:56:15.8064999Z TRANSFORMATIONAL_IMPLEMENTATION.md: OK
+2026-10-20T22:56:15.8065396Z TRANSFORMATIONAL_LOCAL_MODEL.md: OK
+2026-10-20T22:56:15.8065849Z TRANSFORMATIONAL_MATH.md: OK
+2026-10-20T22:56:15.8066239Z TRANSFORMATIONAL_POLICY_STUDY.md: OK
+2026-10-20T22:56:15.8066678Z TRANSFORMATIONAL_PUBLIC_PILOT.md: OK
+2026-10-20T22:56:15.8067082Z TRANSFORMATIONAL_SOURCE_AUDIT.md: OK
+2026-10-20T22:56:15.8067436Z VALIDATION.md: OK
+2026-10-20T22:56:15.8067845Z WHITEPAPER_IMPLEMENTATION.md: OK
+2026-10-20T22:56:15.8068246Z alpha-agent-v1.36.0-mainnet-record.zip: OK
+2026-10-20T22:56:15.8128941Z alpha-agent-v1.36.0-manuscript.zip: OK
+2026-10-20T22:56:15.8130617Z alpha-agent-v1.36.0-operator-guide.zip: OK
+2026-10-20T22:56:15.8230724Z alpha-agent-v1.36.0-public-validation-core-001.zip: OK
+2026-10-20T22:56:15.8918015Z alpha-agent-v1.36.0-public-validation-media-002.zip: OK
+2026-10-20T22:56:15.8918934Z alpha-agent-v1.36.0-public-validation-packs.json: OK
+2026-10-20T22:56:15.9790564Z alpha-agent-v1.36.0-source.zip: OK
+2026-10-20T22:56:16.2543926Z alpha-agent-v1.36.0-validation.zip: OK
+2026-10-20T22:56:16.2576045Z alpha_factory_v1-1.36.0-py3-none-any.whl: OK
+2026-10-20T22:56:16.2610040Z alpha_factory_v1-1.36.0.tar.gz: OK
+2026-10-20T22:56:16.2688327Z browser-core-001.zip: OK
+2026-10-20T22:56:16.2688825Z browser-media-002.zip: OK
+2026-10-20T22:56:16.5383546Z browser-models-003.zip: OK
+2026-10-20T22:56:16.7144623Z browser-models-004.zip: OK
+2026-10-20T22:56:16.7145475Z browser-packs.json: OK
+2026-10-20T22:56:16.7145860Z computer-use-study-report-pack.zip: OK
+2026-10-20T22:56:16.7146378Z ethereum-mainnet-2026-10-18.json: OK
+2026-10-20T22:56:16.7146818Z install_agent.py: OK
+2026-10-20T22:56:16.7147162Z release-manifest.json: OK
+2026-10-20T22:56:16.7147517Z release_packs.py: OK
+2026-10-20T22:56:16.7147906Z requirements-agent.lock: OK
+2026-10-20T22:56:16.7503049Z site-core-001.zip: OK
+2026-10-20T22:56:16.7522032Z site-media-002.zip: OK
+2026-10-20T22:56:17.0218049Z site-models-003.zip: OK
+2026-10-20T22:56:17.2059415Z site-models-004.zip: OK
+2026-10-20T22:56:17.2061352Z site-packs.json: OK
+2026-10-20T22:56:17.2483335Z site-research-005.zip: OK
+2026-10-20T22:56:17.2483854Z source-manifest.json: OK
+2026-10-20T22:56:17.2490506Z successor-alpha-workspace.html: OK
+2026-10-20T22:56:17.2497471Z successor-preservation.json: OK
+2026-10-20T22:56:17.2499540Z transformational-intelligence-workspace.html: OK
+2026-10-20T22:56:17.3400363Z ##[group]Run python -m scripts.publish_agent_release
+2026-10-20T22:56:17.3400907Z [36;1mpython -m scripts.publish_agent_release[0m
+2026-10-20T22:56:17.3435171Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T22:56:17.3435602Z env:
+2026-10-20T22:56:17.3435902Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T22:56:17.3436227Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T22:56:17.3436509Z   NO_DISCLAIMER: 1
+2026-10-20T22:56:17.3438881Z   GH_TOKEN: ***
+2026-10-20T22:56:17.3439152Z ##[endgroup]
+2026-10-20T22:59:46.4445581Z https://github.com/MontrealAI/AGI-Alpha-Agent-v0/releases/tag/v1.36.0
+2026-10-20T22:59:46.4676994Z Post job cleanup.
+2026-10-20T22:59:46.5347460Z [command]/usr/bin/git version
+2026-10-20T22:59:46.5376923Z git version 2.55.0
+2026-10-20T22:59:46.5403262Z Temporarily overriding HOME='/home/runner/work/_temp/64a86bd7-18ef-413b-afb8-62ac83ba5bd8' before making global git config changes
+2026-10-20T22:59:46.5404426Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:59:46.5407382Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T22:59:46.5435288Z Removing SSH command configuration
+2026-10-20T22:59:46.5440454Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:59:46.5468391Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:59:46.5630478Z Removing HTTP extra header
+2026-10-20T22:59:46.5635541Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:59:46.5660893Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:59:46.5815003Z Removing includeIf entries pointing to credentials config files
+2026-10-20T22:59:46.5820308Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:59:46.5846240Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:59:46.6129896Z Cleaning up orphan processes
