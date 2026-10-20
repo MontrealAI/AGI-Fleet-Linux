@@ -1,0 +1,186 @@
+{
+  "schema": "four-repository-assessment/live-metadata-static-source-peer/v1",
+  "createdAt": "2026-10-20T15:00:14.150Z",
+  "role": "ORDINARY_LIVE_METADATA_FINITE_STATIC_REVIEW_NOT_BLOCKED_FLEET_FUNCTIONAL_OWNER_REVIEW",
+  "result": "NO_CONCRETE_DEFECT_FOUND_IN_EXACT_FIVE_FILE_METADATA_PROPOSAL",
+  "runtimeValidation": "NOT_RUN",
+  "source": {
+    "proposalCommit": "b550df7ab779825c5b99d7eaa10a2be7983234af",
+    "proposalTree": "0de8286d1feded1607ff8ac1efda676a62406448",
+    "soleParent": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+    "baseTree": "71b9af9d3ebf0cba865df6639c08c8ddf11697f0",
+    "unreferencedProposal": true,
+    "apiAheadBy": 1,
+    "apiBehindBy": 0,
+    "nontruncatedTrees": true,
+    "baseLeafCount": 6913,
+    "newLeafCount": 6913,
+    "exactChangedRegularLeaves": 5,
+    "allOtherLeafPathBlobModeTypeSizeEntriesUnchanged": true,
+    "completeIndependentMerkleReconstructionClaimed": false
+  },
+  "files": [
+    {
+      "path": "engineering/integration/public-live-input.schema.json",
+      "bytes": 15572,
+      "sha256": "367a4ee4fe7f033d929b23c329e4e015758f8451e563b56d678cc5d7749d450a",
+      "gitBlob": "fb0a0ae1f43097b29d1fb517fdcf1b15da892de6",
+      "mode": "100644",
+      "base": {
+        "bytes": 14534,
+        "sha256": "abea801f5f66b36745f31fd9f15bd09fb730f3da7aeb45d49897a98325d58e69",
+        "gitBlob": "fc9264725cdcdb9c9f4c916c59dbe813b75efe9d"
+      }
+    },
+    {
+      "path": "engineering/integration/public_live_inputs.py",
+      "bytes": 11635,
+      "sha256": "7a770d3c36ccd6961dc7c70eb4e36a3576b0a0009f3a923fa7ad239a5a545e0a",
+      "gitBlob": "3519e3939ec2906dff1b88de7735c479a6b33517",
+      "mode": "100644",
+      "base": {
+        "bytes": 10709,
+        "sha256": "ca49924fdf3009b82ed3a25be4f28fca77553fa03edf8ac911bc1b41a50f215e",
+        "gitBlob": "4d1733ad4e3423f998d1023466d9690aa284269d"
+      }
+    },
+    {
+      "path": "engineering/integration/public-live-sites.mjs",
+      "bytes": 10434,
+      "sha256": "f6aed2d2791ce5205025fb8b5055e8a795be354095ff0bf8e1f807ed2aa8c9dc",
+      "gitBlob": "781cc61c26dbd41f433705801e750780ebb3ec5d",
+      "mode": "100644",
+      "base": {
+        "bytes": 8681,
+        "sha256": "2c4d5e9bacad68d23a2f2659d8ffce728d9afd4f5d4ff0a44fd22beba52d3c6e",
+        "gitBlob": "259265cbecdfdfff29cfbc949668b44502a0e716"
+      }
+    },
+    {
+      "path": "engineering/integration/PUBLIC_RELEASE_CONSUMER.md",
+      "bytes": 12898,
+      "sha256": "d96422ab8ad93db0cc16f45d131f94cd90c1f3d8f5b8f18b55cf034e8547c4eb",
+      "gitBlob": "651fb613ef0e43fa073182cbca2e23118477ed39",
+      "mode": "100644",
+      "base": {
+        "bytes": 12077,
+        "sha256": "803268d2c2d4dc55f076c1d12e03de19306398fa9b9a621d1a5ae6d364e1cc95",
+        "gitBlob": "99587211600566abc9e71464c0078e62aa7121b5"
+      }
+    },
+    {
+      "path": "engineering/integration/test_public_release_metadata.py",
+      "bytes": 6809,
+      "sha256": "8888c629f576c3822e39a608317933663691211db33db078ca7f14326f05f2a8",
+      "gitBlob": "5b5a57407b1da0f04feb21572e6b2a01287f8c05",
+      "mode": "100644",
+      "base": {
+        "bytes": 2593,
+        "sha256": "9632763d94302d02af52664bef8490a3246633178a9eee37c98ae6d6d5d43cef",
+        "gitBlob": "3d7da3bdb3a592fe2a9d06fb99761e40fb377b1a"
+      }
+    }
+  ],
+  "semanticFindings": [],
+  "reviewedFlow": {
+    "jobs": {
+      "closedInputShape": {
+        "path": "/catalog.json",
+        "commitPointer": "/revision",
+        "versionPointer": null
+      },
+      "nullVersionPointerScopedToJobsOnly": true,
+      "catalogRevisionComparisonPreserved": true,
+      "releaseVersionContextNotServedVersion": true,
+      "observedServedVersionRemainsNull": true,
+      "servedVersionVerifiedRemainsFalse": true
+    },
+    "fleet": {
+      "closedInputShape": {
+        "path": "/build-info.json",
+        "commitPointer": "/commit",
+        "versionPointer": "/version",
+        "versionPath": "/release.json"
+      },
+      "missingWrongVersionPathRefused": true,
+      "websiteTCommitComparisonUnconditionalAndBeforeVersionBranch": true,
+      "callerCannotSupplyDerivedReleasedSourceS2": true,
+      "derivedS2AddedOnlyAfterClosedReleaseInputAndReleaseAuthentication": true,
+      "connectedProducerAndPagesAuthenticationPreserved": true,
+      "releaseJsonFetchedAtFixedSameProjectPathWithoutRedirects": true,
+      "rawReleaseJsonHashComparedToTBuildInfoInventory": true,
+      "releaseMetadataWorkflowCommitComparedToAuthenticatedS2": true,
+      "servedVersionComparedToExpectedContext": true,
+      "versionEvidenceKeptSeparateFromTBuildInfo": true
+    },
+    "alphaAndManager": {
+      "sharedSchemaAndSiteDefinitionsUnchanged": true,
+      "servedVersionPointerStringAndRegexRequired": true,
+      "nonStringPointerControlledValueErrorBeforeRegex": true,
+      "actualServedVersionEqualityPreserved": true
+    },
+    "unchangedBoundaries": {
+      "existingProducerReleasePagesAndDeploymentAuthentication": true,
+      "readOnlyOriginsMethodsWebSocketPolicy": true,
+      "downloadHrefChecksWithoutPackageRedownload": true,
+      "normalEnFrUiStepsConsoleErrorsScreenshots": true,
+      "nativeJourneyNotRepeated": true,
+      "sourceRefsAndWorkflowFilesNotChanged": true,
+      "productionQualifiedRemainsFalse": true
+    },
+    "outputTruthfulness": {
+      "explicitReleaseVersionContext": true,
+      "observedServedVersionSeparate": true,
+      "servedVersionVerifiedExplicit": true,
+      "jobsVersionNotFabricated": true,
+      "allFieldsAreProposedObservationsNotExistingLiveResults": true
+    }
+  },
+  "testReview": {
+    "originalTwoUnitBodiesAndModulePrefixRetained": true,
+    "originalMainGuardRetained": true,
+    "addedBenignShapeUnitDefinitions": 5,
+    "totalDefinitions": 7,
+    "names": [
+      "def test_known_input_blob_and_raw_digests(self):",
+      "def test_complete_tiny_source_members_bytes_and_modes(self):",
+      "def test_jobs_context_and_separate_fleet_version_metadata_shape(self):",
+      "def test_jobs_refuses_served_version_or_wrong_catalog_metadata(self):",
+      "def test_alpha_and_manager_require_served_version_pointer(self):",
+      "def test_fleet_refuses_missing_or_wrong_separate_version_path(self):",
+      "def test_fleet_website_source_must_remain_t(self):"
+    ],
+    "syntheticInputsNotFinalReceipts": true,
+    "managerFixtureUsesSourceCommitAndSourceVersion": true,
+    "missingWrongFleetVersionPathAndWebsiteTRefusalCasesPresent": true,
+    "executedOrImportedByThisPeer": false
+  },
+  "sourceInterfaceEvidence": {
+    "existingPublishedFleetMetadataAtBase": {
+      "path": "engineering/published-release.json",
+      "schema": "agi-linux-published-release/v1",
+      "role": "HistoricalCommittedSchemaInterfaceOnlyNotCurrentReleaseQualification"
+    },
+    "workflowReadAtBase": ".github/workflows/public-live-sites.yml",
+    "workflowUploadDoesNotParseRemovedExpectedVersionField": true
+  },
+  "performed": {
+    "staticPinnedGithubSourceAndGitMetadataReads": true,
+    "inMemoryTextDiffJsonAndHashOperations": true,
+    "executorProbe": false,
+    "projectOrHelperImportExecution": false,
+    "testsSyntaxOrBrowser": false,
+    "liveSiteRequests": false,
+    "tokenOrServiceApi": false,
+    "workflowRunDispatchOrRefMutation": false,
+    "rejectedOwnerReviewRerouted": false
+  },
+  "limits": [
+    "Exact source reviewed is the unreferenced five-file proposal at b550df7; adoption into another head requires actual source continuity and normal checks.",
+    "No runtime/syntax/import/unit/browser/HTTP pass is claimed while execution services are unavailable.",
+    "Review covers ordinary metadata shape/source-version interpretation only; it does not provide the separately required eligible Fleet functional owner review or any full product/security qualification.",
+    "Root retains complete independent Git Merkle verification; this peer checked nontruncated Git objects, exact sole parent/API compare, raw blobs and all leaf metadata differences.",
+    "Jobs version remains caller-reviewed release context because catalog does not serve one; no served Jobs version is invented.",
+    "The eventual actual closed inputs, releases, connected producer, Pages deployment and live observations remain mandatory. No workflow admission, merge or publication is authorized by this receipt."
+  ]
+}

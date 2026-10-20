@@ -1,0 +1,159 @@
+{
+  "schema": "four-repository-assessment/live-metadata-proposal-local-validation/v1",
+  "observedAt": "2026-10-20T15:02:16.800Z",
+  "scope": "LOCAL_BENIGN_METADATA_UNITS_AND_SYNTAX_ONLY",
+  "proposal": {
+    "repository": "MontrealAI/AGI-Fleet-Linux",
+    "commit": "b550df7ab779825c5b99d7eaa10a2be7983234af",
+    "tree": "0de8286d1feded1607ff8ac1efda676a62406448",
+    "parent": "66940b6f9e9be467620f26fce033a3c88aed9ea5"
+  },
+  "sourceVerification": {
+    "sourceBytesVerified": true,
+    "pythonAstAndJsonParsed": true,
+    "files": [
+      {
+        "name": "public-live-input.schema.json",
+        "bytes": 15572,
+        "sha256": "367a4ee4fe7f033d929b23c329e4e015758f8451e563b56d678cc5d7749d450a",
+        "gitBlob": "fb0a0ae1f43097b29d1fb517fdcf1b15da892de6"
+      },
+      {
+        "name": "public_live_inputs.py",
+        "bytes": 11635,
+        "sha256": "7a770d3c36ccd6961dc7c70eb4e36a3576b0a0009f3a923fa7ad239a5a545e0a",
+        "gitBlob": "3519e3939ec2906dff1b88de7735c479a6b33517"
+      },
+      {
+        "name": "public-live-sites.mjs",
+        "bytes": 10434,
+        "sha256": "f6aed2d2791ce5205025fb8b5055e8a795be354095ff0bf8e1f807ed2aa8c9dc",
+        "gitBlob": "781cc61c26dbd41f433705801e750780ebb3ec5d"
+      },
+      {
+        "name": "PUBLIC_RELEASE_CONSUMER.md",
+        "bytes": 12898,
+        "sha256": "d96422ab8ad93db0cc16f45d131f94cd90c1f3d8f5b8f18b55cf034e8547c4eb",
+        "gitBlob": "651fb613ef0e43fa073182cbca2e23118477ed39"
+      },
+      {
+        "name": "test_public_release_metadata.py",
+        "bytes": 6809,
+        "sha256": "8888c629f576c3822e39a608317933663691211db33db078ca7f14326f05f2a8",
+        "gitBlob": "5b5a57407b1da0f04feb21572e6b2a01287f8c05"
+      },
+      {
+        "name": "public_release_common.py",
+        "bytes": 13700,
+        "sha256": "209c9e9a6a797743c1d6456eb1f473e8636192e5a5caccf68358f751fdf0b86b",
+        "gitBlob": "31f8ea6686a41b6bf0de629d7ad633b26c91d99e"
+      },
+      {
+        "name": "public_release_assets.py",
+        "bytes": 15614,
+        "sha256": "b850b15a718572acbf5a62c939e3bd4a838123dc69e510e37bfda9b8a27e069a",
+        "gitBlob": "d2643a0714c76e941774af4af37d22a35fdf9865"
+      }
+    ]
+  },
+  "fullGitTreeVerification": {
+    "commit": "b550df7ab779825c5b99d7eaa10a2be7983234af",
+    "tree": "0de8286d1feded1607ff8ac1efda676a62406448",
+    "parent": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+    "unchangedLeaves": 6908,
+    "changed": [
+      {
+        "path": "engineering/integration/PUBLIC_RELEASE_CONSUMER.md",
+        "from": "99587211600566abc9e71464c0078e62aa7121b5",
+        "to": "651fb613ef0e43fa073182cbca2e23118477ed39",
+        "bytes": 12898,
+        "mode": "100644"
+      },
+      {
+        "path": "engineering/integration/public-live-input.schema.json",
+        "from": "fc9264725cdcdb9c9f4c916c59dbe813b75efe9d",
+        "to": "fb0a0ae1f43097b29d1fb517fdcf1b15da892de6",
+        "bytes": 15572,
+        "mode": "100644"
+      },
+      {
+        "path": "engineering/integration/public-live-sites.mjs",
+        "from": "259265cbecdfdfff29cfbc949668b44502a0e716",
+        "to": "781cc61c26dbd41f433705801e750780ebb3ec5d",
+        "bytes": 10434,
+        "mode": "100644"
+      },
+      {
+        "path": "engineering/integration/public_live_inputs.py",
+        "from": "4d1733ad4e3423f998d1023466d9690aa284269d",
+        "to": "3519e3939ec2906dff1b88de7735c479a6b33517",
+        "bytes": 11635,
+        "mode": "100644"
+      },
+      {
+        "path": "engineering/integration/test_public_release_metadata.py",
+        "from": "3d7da3bdb3a592fe2a9d06fb99761e40fb377b1a",
+        "to": "5b5a57407b1da0f04feb21572e6b2a01287f8c05",
+        "bytes": 6809,
+        "mode": "100644"
+      }
+    ],
+    "added": 0,
+    "removed": 0,
+    "compareFiles": [
+      {
+        "path": "engineering/integration/PUBLIC_RELEASE_CONSUMER.md",
+        "status": "modified"
+      },
+      {
+        "path": "engineering/integration/public-live-input.schema.json",
+        "status": "modified"
+      },
+      {
+        "path": "engineering/integration/public-live-sites.mjs",
+        "status": "modified"
+      },
+      {
+        "path": "engineering/integration/public_live_inputs.py",
+        "status": "modified"
+      },
+      {
+        "path": "engineering/integration/test_public_release_metadata.py",
+        "status": "modified"
+      }
+    ],
+    "testsRun": false,
+    "refChanged": false,
+    "ownerReviewSupplied": false
+  },
+  "metadataUnits": {
+    "command": "python -B -m unittest discover -s /workspace/scratch/ededf14e8d03/assessment/fleet-live-metadata-proposal -p test_public_release_metadata.py -v",
+    "exitCode": 0,
+    "reportedCount": 7,
+    "reportedSeconds": 0.003,
+    "stdout": "test_alpha_and_manager_require_served_version_pointer (test_public_release_metadata.PublicLiveMetadataTests.test_alpha_and_manager_require_served_version_pointer) ... ok\ntest_fleet_refuses_missing_or_wrong_separate_version_path (test_public_release_metadata.PublicLiveMetadataTests.test_fleet_refuses_missing_or_wrong_separate_version_path) ... ok\ntest_fleet_website_source_must_remain_t (test_public_release_metadata.PublicLiveMetadataTests.test_fleet_website_source_must_remain_t) ... ok\ntest_jobs_context_and_separate_fleet_version_metadata_shape (test_public_release_metadata.PublicLiveMetadataTests.test_jobs_context_and_separate_fleet_version_metadata_shape) ... ok\ntest_jobs_refuses_served_version_or_wrong_catalog_metadata (test_public_release_metadata.PublicLiveMetadataTests.test_jobs_refuses_served_version_or_wrong_catalog_metadata) ... ok\ntest_complete_tiny_source_members_bytes_and_modes (test_public_release_metadata.PublicReleaseMetadataTests.test_complete_tiny_source_members_bytes_and_modes) ... ok\ntest_known_input_blob_and_raw_digests (test_public_release_metadata.PublicReleaseMetadataTests.test_known_input_blob_and_raw_digests) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.003s\n\nOK\n"
+  },
+  "javascriptSyntax": {
+    "command": "node --check /workspace/scratch/ededf14e8d03/assessment/fleet-live-metadata-proposal/public-live-sites.mjs",
+    "exitCode": 0,
+    "stdout": ""
+  },
+  "independentStaticPeer": {
+    "gitBlob": "2f553c53be645a137327237ac4cc5c85e4ba6942",
+    "bytes": 8276,
+    "sha256": "9f4953c4c7086b3185b05720399bed357ff335ca651be688aecf71dc7affc52e",
+    "scope": "Static source/data review before local recovery; did not execute these tests or supply owner clearance."
+  },
+  "nonClaims": {
+    "originalRequiredCiPassedOnProposal": false,
+    "hostedAuthenticationExecuted": false,
+    "browserExecuted": false,
+    "liveSitesRead": false,
+    "connectedJourneyRepeated": false,
+    "nativeExecuted": false,
+    "ownerFunctionalReviewSupplied": false,
+    "refChanged": false,
+    "releaseQualified": false
+  },
+  "next": "Primary integrates the finite source fix without overwriting active work, then obtains original required exact-source CI/reviews. Existing normal integration/service/public-package discovery includes all7 metadata units."
+}
