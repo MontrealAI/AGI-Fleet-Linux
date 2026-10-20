@@ -119,13 +119,26 @@ document containing actual four HTTPS roots, actual site source identities,
 build-info paths/fields, EN/FR normal public flow selectors and exact public asset
 link roles. Its referenced successful connected run must be the real S producer.
 
+Jobs uses /catalog.json with commitPointer /revision and versionPointer null.
+Its supplied version remains reviewed release context; the catalog does not serve
+a version, and the observation records servedVersionVerified:false. Alpha and
+Manager retain their actual served-version pointer comparisons.
+
+Fleet uses /build-info.json for website T, with commitPointer /commit, and a
+separate versionPath /release.json with versionPointer /version for software S.
+The authenticator derives releasedSourceS2 from the already-authenticated release
+input; the caller cannot supply it. The browser verifies release.json against
+the build-info file hash, its workflowCommit against actual S and its version
+against the expected release context. The two documents remain separate evidence.
+
 The owner may later admit the distinct normal branch at exact T:
 
 qualification/ti-public-live-<actual-live-input-blob-SHA1>-<actual-raw-SHA256>
 
 The workflow authenticates real T separately from release S, original Pages run
 attempts and successful exact-source github-pages deployment statuses. A fresh
-locked Playwright browser observes actual public build-info, versions, EN/FR
+locked Playwright browser observes actual public build-info, source identities,
+served versions where present, EN/FR
 flows, visible download hrefs, console/errors and screenshots. Package binaries
 are not downloaded again. Browser requests permit only GETs to the four public
 site roots and fixed static-resource origins; data/provider/RPC requests,

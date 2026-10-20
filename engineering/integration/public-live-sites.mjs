@@ -53,7 +53,8 @@ try{
     requests.push({url:url.href,method:'GET',resourceType:request.resourceType()});
     await interception.continue();
    });
-   const result={site:role,language,baseUrl:site.baseUrl,websiteSourceT:site.source,expectedVersion:site.version,
+   const result={site:role,language,baseUrl:site.baseUrl,websiteSourceT:site.source,
+    releaseVersionContext:site.version,observedServedVersion:null,servedVersionVerified:false,
     console:consoleMessages,pageErrors,requests,blocked,steps:[],downloads:[],screenshots:[],status:'FAIL'};
    try{
     const identityURL=within(site.baseUrl,site.buildInfo.path);
@@ -63,7 +64,30 @@ try{
     const identityRaw=await identityResponse.body();assert(identityRaw.length<=1_000_000);
     const identity=JSON.parse(identityRaw.toString('utf8'));
     assert.equal(pointer(identity,site.buildInfo.commitPointer),site.source.commit,'Observed Pages source differs');
-    assert.equal(String(pointer(identity,site.buildInfo.versionPointer)),site.version,'Observed public version differs');
+    if(role==='jobs'){
+     assert.deepEqual(site.buildInfo,{path:'/catalog.json',commitPointer:'/revision',versionPointer:null},
+      'Jobs catalog has no served version');
+    }else if(role==='fleet'){
+     assert.deepEqual(site.buildInfo,{path:'/build-info.json',commitPointer:'/commit',
+      versionPointer:'/version',versionPath:'/release.json'});
+     const versionURL=within(site.baseUrl,site.buildInfo.versionPath);
+     const versionResponse=await context.request.get(versionURL,{maxRedirects:0,timeout:30000});
+     assert.equal(versionResponse.status(),200,'Actual public release metadata response');
+     const versionRaw=await versionResponse.body();assert(versionRaw.length<=1_000_000);
+     assert.equal(sha(versionRaw),identity.files['release.json'],'Release metadata differs from website inventory');
+     const versionIdentity=JSON.parse(versionRaw.toString('utf8'));
+     assert.equal(versionIdentity.schema,'agi-linux-published-release/v1');
+     assert.equal(versionIdentity.workflowCommit,site.releasedSourceS2.commit,'Observed software S differs');
+     assert.equal(String(pointer(versionIdentity,site.buildInfo.versionPointer)),site.version,'Observed public version differs');
+     result.observedServedVersion=String(pointer(versionIdentity,site.buildInfo.versionPointer));
+     result.servedVersionVerified=true;
+     result.versionMetadata={url:versionURL,status:versionResponse.status(),bytes:versionRaw.length,
+      sha256:sha(versionRaw),releasedSourceS2:site.releasedSourceS2,observed:versionIdentity};
+    }else{
+     assert.equal(String(pointer(identity,site.buildInfo.versionPointer)),site.version,'Observed public version differs');
+     result.observedServedVersion=String(pointer(identity,site.buildInfo.versionPointer));
+     result.servedVersionVerified=true;
+    }
     result.buildInfo={url:identityURL,status:identityResponse.status(),bytes:identityRaw.length,
      sha256:sha(identityRaw),observed:identity};
     const address=within(site.baseUrl,route.path),response=await page.goto(address,{waitUntil:'networkidle',timeout:45000});

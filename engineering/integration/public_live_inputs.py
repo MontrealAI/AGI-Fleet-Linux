@@ -38,11 +38,24 @@ def validate_live(value):
         require(site["baseUrl"] == "https://montrealai.github.io/" + REPOSITORIES[role].split("/")[1] + "/",
                 "exact four public HTTPS site roots")
         identity(site["source"])
-        require(isinstance(site["version"], str) and re.fullmatch("[A-Za-z0-9._-]{1,80}", site["version"]), "observed expected version")
-        keys(site["buildInfo"], {"path", "commitPointer", "versionPointer"})
+        require(isinstance(site["version"], str) and re.fullmatch("[A-Za-z0-9._-]{1,80}", site["version"]), "reviewed release version context")
+        keys(site["buildInfo"], {"path", "commitPointer", "versionPointer"}
+             | ({"versionPath"} if role == "fleet" else set()))
         relative_url(site["buildInfo"]["path"])
-        for field in ("commitPointer", "versionPointer"):
-            require(re.fullmatch(r"(?:/[A-Za-z0-9_-]{1,64}){1,6}", site["buildInfo"][field]), "literal JSON identity pointer")
+        if role == "jobs":
+            require(site["buildInfo"] == {
+                "path": "/catalog.json", "commitPointer": "/revision", "versionPointer": None,
+            }, "Jobs catalog revision; release version is context only")
+        elif role == "fleet":
+            require(site["buildInfo"] == {
+                "path": "/build-info.json", "commitPointer": "/commit",
+                "versionPointer": "/version", "versionPath": "/release.json",
+            }, "Fleet website T and release S use separate metadata")
+        else:
+            for field in ("commitPointer", "versionPointer"):
+                require(isinstance(site["buildInfo"][field], str)
+                        and re.fullmatch(r"(?:/[A-Za-z0-9_-]{1,64}){1,6}", site["buildInfo"][field]),
+                        "literal JSON identity pointer")
         run = site["pagesRun"]
         keys(run, {"id", "attempt", "path", "event", "ref"})
         require(positive(run["id"]) and positive(run["attempt"])
@@ -132,6 +145,9 @@ def admit(output):
                     and ("/actions/runs/" + str(expected["id"])) in str(latest.get("log_url", ""))):
                 deployed.append({"deployment": deployment, "latestStatus": latest})
         require(deployed, "genuine successful Pages deployment for exact source/run/URL required")
+        if role == "fleet":
+            # Added only after the closed caller input and actual releases are authenticated.
+            site["releasedSourceS2"] = release_input["repositories"][role]["released"]
         site["downloads"] = {asset_role: asset["browser_download_url"] for asset_role, asset in releases[role]["assets"].items()}
         observed[role] = {"source": source, "pagesRun": run, "deployments": deployed, "releasedSourceS2": release_input["repositories"][role]["released"]}
     output.mkdir(mode=0o700)

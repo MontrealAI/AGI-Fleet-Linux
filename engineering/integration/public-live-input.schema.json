@@ -133,7 +133,7 @@
               "pattern": "^[A-Za-z0-9._-]{1,80}$"
             },
             "buildInfo": {
-              "$ref": "#/$defs/buildInfo"
+              "$ref": "#/$defs/fleetBuildInfo"
             },
             "pagesRun": {
               "$ref": "#/$defs/pagesRun"
@@ -176,10 +176,11 @@
             },
             "version": {
               "type": "string",
-              "pattern": "^[A-Za-z0-9._-]{1,80}$"
+              "pattern": "^[A-Za-z0-9._-]{1,80}$",
+              "description": "External release-version context; catalog.json does not serve a version."
             },
             "buildInfo": {
-              "$ref": "#/$defs/buildInfo"
+              "$ref": "#/$defs/jobsBuildInfo"
             },
             "pagesRun": {
               "$ref": "#/$defs/pagesRun"
@@ -591,6 +592,50 @@
               }
             }
           }
+        }
+      }
+    },
+    "jobsBuildInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "commitPointer",
+        "versionPointer"
+      ],
+      "properties": {
+        "path": {
+          "const": "/catalog.json"
+        },
+        "commitPointer": {
+          "const": "/revision"
+        },
+        "versionPointer": {
+          "const": null
+        }
+      }
+    },
+    "fleetBuildInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "commitPointer",
+        "versionPointer",
+        "versionPath"
+      ],
+      "properties": {
+        "path": {
+          "const": "/build-info.json"
+        },
+        "commitPointer": {
+          "const": "/commit"
+        },
+        "versionPointer": {
+          "const": "/version"
+        },
+        "versionPath": {
+          "const": "/release.json"
         }
       }
     }
