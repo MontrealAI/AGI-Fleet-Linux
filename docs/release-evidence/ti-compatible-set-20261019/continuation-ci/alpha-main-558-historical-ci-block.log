@@ -1,0 +1,327 @@
+﻿2026-10-20T17:02:23.7839846Z Current runner version: '2.337.0'
+2026-10-20T17:02:23.7865242Z ##[group]Runner Image Provisioner
+2026-10-20T17:02:23.7866252Z Hosted Compute Agent
+2026-10-20T17:02:23.7866861Z Version: 20261012.601
+2026-10-20T17:02:23.7867495Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-20T17:02:23.7868278Z Build Date: 2026-10-12T17:48:21Z
+2026-10-20T17:02:23.7868988Z Worker ID: {487b8a67-22e5-4967-aa16-0cb3bfacb8b3}
+2026-10-20T17:02:23.7869754Z Region: northcentralus
+2026-10-20T17:02:23.7870349Z Cloud: Azure
+2026-10-20T17:02:23.7870882Z ##[endgroup]
+2026-10-20T17:02:23.7872438Z ##[group]Operating System
+2026-10-20T17:02:23.7873072Z Ubuntu
+2026-10-20T17:02:23.7873574Z 24.04.5
+2026-10-20T17:02:23.7874381Z LTS
+2026-10-20T17:02:23.7874908Z ##[endgroup]
+2026-10-20T17:02:23.7875497Z ##[group]Runner Image
+2026-10-20T17:02:23.7876185Z Image: ubuntu-24.04
+2026-10-20T17:02:23.7876724Z Version: 20261012.334.1
+2026-10-20T17:02:23.7877993Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T17:02:23.7879589Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-20T17:02:23.7880634Z ##[endgroup]
+2026-10-20T17:02:23.7881800Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T17:02:23.7884209Z Actions: read
+2026-10-20T17:02:23.7884921Z Contents: read
+2026-10-20T17:02:23.7885734Z Metadata: read
+2026-10-20T17:02:23.7886289Z ##[endgroup]
+2026-10-20T17:02:23.7888454Z Secret source: Actions
+2026-10-20T17:02:23.7889430Z Cache mode: write
+2026-10-20T17:02:23.7890426Z Prepare workflow directory
+2026-10-20T17:02:23.8317388Z Prepare all required actions
+2026-10-20T17:02:23.8367680Z Getting action download info
+2026-10-20T17:02:24.1786543Z Download action repository 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-10-20T17:02:24.3109836Z Download action repository 'actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f' (SHA:bbbca2ddaa5d8feaa63e36b76fdaad77386f024f)
+2026-10-20T17:02:24.5280248Z Complete job name: historical-ci
+2026-10-20T17:02:24.6067026Z ##[group]Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+2026-10-20T17:02:24.6068270Z with:
+2026-10-20T17:02:24.6068784Z   persist-credentials: false
+2026-10-20T17:02:24.6069416Z   repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T17:02:24.6073538Z   token: ***
+2026-10-20T17:02:24.6074258Z   ssh-strict: true
+2026-10-20T17:02:24.6074765Z   ssh-user: git
+2026-10-20T17:02:24.6075236Z   clean: true
+2026-10-20T17:02:24.6075739Z   sparse-checkout-cone-mode: true
+2026-10-20T17:02:24.6076315Z   fetch-depth: 1
+2026-10-20T17:02:24.6076809Z   fetch-tags: false
+2026-10-20T17:02:24.6077301Z   show-progress: true
+2026-10-20T17:02:24.6077806Z   lfs: false
+2026-10-20T17:02:24.6078266Z   submodules: false
+2026-10-20T17:02:24.6078763Z   set-safe-directory: true
+2026-10-20T17:02:24.6079583Z env:
+2026-10-20T17:02:24.6080082Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T17:02:24.6080736Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T17:02:24.6081345Z   NO_DISCLAIMER: 1
+2026-10-20T17:02:24.6081924Z ##[endgroup]
+2026-10-20T17:02:24.7064885Z Syncing repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T17:02:24.7067091Z ##[group]Getting Git version info
+2026-10-20T17:02:24.7068120Z Working directory is '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T17:02:24.7069561Z [command]/usr/bin/git version
+2026-10-20T17:02:24.7134920Z git version 2.55.0
+2026-10-20T17:02:24.7157604Z ##[endgroup]
+2026-10-20T17:02:24.7171518Z Temporarily overriding HOME='/home/runner/work/_temp/0dd2a393-4075-4963-a4d1-af7a0705e349' before making global git config changes
+2026-10-20T17:02:24.7173909Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T17:02:24.7176455Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T17:02:24.7222067Z Deleting the contents of '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T17:02:24.7227016Z ##[group]Initializing the repository
+2026-10-20T17:02:24.7231072Z [command]/usr/bin/git init /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T17:02:24.7323088Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T17:02:24.7325511Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T17:02:24.7327710Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T17:02:24.7330021Z hint: call:
+2026-10-20T17:02:24.7331261Z hint:
+2026-10-20T17:02:24.7332551Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T17:02:24.7334335Z hint:
+2026-10-20T17:02:24.7335661Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T17:02:24.7337755Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T17:02:24.7339617Z hint:
+2026-10-20T17:02:24.7340634Z hint: 	git branch -m <name>
+2026-10-20T17:02:24.7341751Z hint:
+2026-10-20T17:02:24.7343057Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T17:02:24.7345738Z Initialized empty Git repository in /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/
+2026-10-20T17:02:24.7348478Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T17:02:24.7387741Z ##[endgroup]
+2026-10-20T17:02:24.7389308Z ##[group]Disabling automatic garbage collection
+2026-10-20T17:02:24.7391820Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T17:02:24.7422689Z ##[endgroup]
+2026-10-20T17:02:24.7425050Z ##[group]Setting up auth
+2026-10-20T17:02:24.7426601Z Removing SSH command configuration
+2026-10-20T17:02:24.7430301Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T17:02:24.7462419Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T17:02:24.7800032Z Removing HTTP extra header
+2026-10-20T17:02:24.7806351Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T17:02:24.7837477Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T17:02:24.8045448Z Removing includeIf entries pointing to credentials config files
+2026-10-20T17:02:24.8051163Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T17:02:24.8085001Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T17:02:24.8324460Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T17:02:24.8361276Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:24.8392660Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:24.8426736Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:24.8468103Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:24.8496146Z ##[endgroup]
+2026-10-20T17:02:24.8498088Z ##[group]Fetching the repository
+2026-10-20T17:02:24.8503348Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +558f798a9b9cc73c1db01905858aad8852e11092:refs/remotes/origin/main
+2026-10-20T17:02:29.5844500Z From https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T17:02:29.5847738Z  * [new ref]         558f798a9b9cc73c1db01905858aad8852e11092 -> origin/main
+2026-10-20T17:02:29.5856258Z [command]/usr/bin/git branch --list --remote origin/main
+2026-10-20T17:02:29.5880634Z   origin/main
+2026-10-20T17:02:29.5889737Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-10-20T17:02:29.5912937Z 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:02:29.5918008Z ##[endgroup]
+2026-10-20T17:02:29.5919258Z ##[group]Determining the checkout info
+2026-10-20T17:02:29.5920421Z ##[endgroup]
+2026-10-20T17:02:29.5923171Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T17:02:29.5971394Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T17:02:29.5998588Z ##[group]Checking out the ref
+2026-10-20T17:02:29.6001684Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-20T17:02:30.2237094Z Switched to a new branch 'main'
+2026-10-20T17:02:30.2255072Z branch 'main' set up to track 'origin/main'.
+2026-10-20T17:02:30.2281171Z ##[endgroup]
+2026-10-20T17:02:30.2324595Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T17:02:30.2350352Z 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:02:30.2360253Z ##[group]Removing auth
+2026-10-20T17:02:30.2360841Z Removing SSH command configuration
+2026-10-20T17:02:30.2365669Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T17:02:30.2409219Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T17:02:30.2647914Z Removing HTTP extra header
+2026-10-20T17:02:30.2651547Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T17:02:30.2684300Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T17:02:30.2900706Z Removing includeIf entries pointing to credentials config files
+2026-10-20T17:02:30.2904175Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T17:02:30.2929299Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T17:02:30.2930208Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T17:02:30.2930838Z includeif.gitdir:/github/workspace/.git.path
+2026-10-20T17:02:30.2931296Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T17:02:30.2939049Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T17:02:30.2960227Z /home/runner/work/_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:30.2969398Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:30.3001447Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T17:02:30.3025753Z /home/runner/work/_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:30.3036751Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:30.3070446Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-20T17:02:30.3093394Z /github/runner_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:30.3102270Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:30.3132419Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T17:02:30.3153020Z /github/runner_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:30.3160378Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config
+2026-10-20T17:02:30.3190567Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T17:02:30.3405632Z Removing credentials config '/home/runner/work/_temp/git-credentials-7a1ab373-8c6c-449d-9e96-0fa46fc197b3.config'
+2026-10-20T17:02:30.3414801Z ##[endgroup]
+2026-10-20T17:02:30.3708512Z ##[group]Run python -m scripts.wait_for_release_ci
+2026-10-20T17:02:30.3709061Z [36;1mpython -m scripts.wait_for_release_ci[0m
+2026-10-20T17:02:30.3952489Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T17:02:30.3953002Z env:
+2026-10-20T17:02:30.3953303Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T17:02:30.3953714Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T17:02:30.3954358Z   NO_DISCLAIMER: 1
+2026-10-20T17:02:30.3958173Z   GH_TOKEN: ***
+2026-10-20T17:02:30.3958434Z ##[endgroup]
+2026-10-20T17:02:31.9029530Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:03:03.1297941Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:03:34.6219978Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:04:05.9485230Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:04:37.3153785Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:05:08.8881576Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:05:40.1655582Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:06:11.4836027Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:06:42.7846437Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:07:14.0719216Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:07:45.5718564Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:08:17.1008580Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:08:48.4477982Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:09:19.9813352Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:09:51.4764948Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:10:22.5859933Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:10:53.6041989Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:11:25.0565022Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:11:56.4200776Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:12:27.6980967Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:12:58.9420722Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:13:30.3232169Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:14:01.6411839Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:14:32.9297036Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:15:04.3133076Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:15:35.8265820Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:16:07.0924736Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:16:38.4810938Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:17:09.8642701Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:17:41.2287169Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:18:12.4726597Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:18:43.7835569Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:19:15.3015166Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:19:46.5928198Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:20:17.8528166Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:20:49.0777430Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:21:20.3739359Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:21:51.7904199Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:22:23.1095628Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:22:54.3318400Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:23:25.6558905Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:23:57.1866635Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:24:28.5596120Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:24:59.8566372Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:25:31.5675123Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:26:02.9756155Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:26:34.4006786Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:27:05.6917002Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:27:37.0238680Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:28:08.3238596Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:28:39.5274713Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:29:10.8456514Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:29:42.4853139Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:30:13.8707406Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:30:45.1561578Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:31:16.6777608Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:31:47.9404844Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:32:19.2041020Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:32:50.4134207Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:33:21.7462596Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:33:53.0454951Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:34:24.3393012Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:34:55.7328450Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:35:26.9647764Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:35:58.3737663Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:36:29.5768072Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:37:00.8423441Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:37:32.1588965Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:38:03.4933490Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:38:34.8256843Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:39:06.0957045Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:39:37.4691873Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:40:08.9319022Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:40:40.2866271Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:41:11.6276251Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:41:42.9094656Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:42:14.1737152Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:42:45.6690963Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:43:17.0093504Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:43:48.2510297Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:44:19.6410160Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:44:50.9307435Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:45:22.2362484Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:45:53.7770412Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:46:25.2496136Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:46:56.5461885Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:47:27.8835709Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:47:59.3561498Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:48:30.5442239Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:49:01.9477486Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:49:33.3443552Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:50:04.7271976Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:50:36.0786358Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:51:07.4838795Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:51:38.6951601Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:52:09.9566041Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:52:41.4350186Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:53:12.9550229Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:53:44.4925038Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:54:15.8135924Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:54:47.1915472Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:55:18.4890114Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:55:49.8100185Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:56:21.1815392Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:56:52.5464288Z Waiting for historical CI on 558f798a9b9cc73c1db01905858aad8852e11092
+2026-10-20T17:57:23.9373241Z Traceback (most recent call last):
+2026-10-20T17:57:23.9374216Z   File "<frozen runpy>", line 198, in _run_module_as_main
+2026-10-20T17:57:23.9374895Z   File "<frozen runpy>", line 88, in _run_code
+2026-10-20T17:57:23.9376243Z   File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/scripts/wait_for_release_ci.py", line 147, in <module>
+2026-10-20T17:57:23.9377098Z     main()
+2026-10-20T17:57:23.9377797Z   File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/scripts/wait_for_release_ci.py", line 135, in main
+2026-10-20T17:57:23.9378930Z     results = [assess_runs(runs, sha) for runs in snapshots.values()]
+2026-10-20T17:57:23.9379569Z                ^^^^^^^^^^^^^^^^^^^^^^
+2026-10-20T17:57:23.9380459Z   File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/scripts/wait_for_release_ci.py", line 40, in assess_runs
+2026-10-20T17:57:23.9381420Z     raise RuntimeError(
+2026-10-20T17:57:23.9384382Z RuntimeError: Required historical CI did not pass: https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459545474 (cancelled)
+2026-10-20T17:57:23.9544223Z ##[error]Process completed with exit code 1.
+2026-10-20T17:57:23.9606813Z ##[group]Run echo "name=historical-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+2026-10-20T17:57:23.9607550Z [36;1mecho "name=historical-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"[0m
+2026-10-20T17:57:23.9667385Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T17:57:23.9667729Z env:
+2026-10-20T17:57:23.9667931Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T17:57:23.9668203Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T17:57:23.9668464Z   NO_DISCLAIMER: 1
+2026-10-20T17:57:23.9668669Z ##[endgroup]
+2026-10-20T17:57:23.9822731Z ##[group]Run actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+2026-10-20T17:57:23.9823161Z with:
+2026-10-20T17:57:23.9823382Z   name: historical-ci-39459544592-1
+2026-10-20T17:57:23.9823644Z   path: evidence/
+2026-10-20T17:57:23.9823864Z   if-no-files-found: warn
+2026-10-20T17:57:23.9824395Z   compression-level: 6
+2026-10-20T17:57:23.9824621Z   overwrite: false
+2026-10-20T17:57:23.9824847Z   include-hidden-files: false
+2026-10-20T17:57:23.9825088Z   archive: true
+2026-10-20T17:57:23.9825305Z env:
+2026-10-20T17:57:23.9825519Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T17:57:23.9825792Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T17:57:23.9826055Z   NO_DISCLAIMER: 1
+2026-10-20T17:57:23.9826266Z ##[endgroup]
+2026-10-20T17:57:24.1287236Z With the provided path, there will be 4 files uploaded
+2026-10-20T17:57:24.1292325Z Artifact name is valid!
+2026-10-20T17:57:24.1293030Z Root directory input is valid!
+2026-10-20T17:57:24.3820932Z Uploading artifact: historical-ci-39459544592-1.zip
+2026-10-20T17:57:24.3868178Z Beginning upload of artifact content to blob storage
+2026-10-20T17:57:24.5323095Z Uploaded bytes 10432
+2026-10-20T17:57:24.5704471Z Finished uploading artifact content to blob storage!
+2026-10-20T17:57:24.5705570Z SHA256 digest of uploaded artifact is 518b592eb3ca85536261e9cef5afd0501f81acc76f0fb74b9dc21adba349d920
+2026-10-20T17:57:24.5706485Z Finalizing artifact upload
+2026-10-20T17:57:24.8315085Z Artifact historical-ci-39459544592-1 successfully finalized. Artifact ID 12286847085
+2026-10-20T17:57:24.8316467Z Artifact historical-ci-39459544592-1 has been successfully uploaded! Final size is 10432 bytes. Artifact ID is 12286847085
+2026-10-20T17:57:24.8317961Z Artifact download URL: https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39459544592/artifacts/12286847085
+2026-10-20T17:57:24.8551274Z Post job cleanup.
+2026-10-20T17:57:24.9403200Z [command]/usr/bin/git version
+2026-10-20T17:57:24.9440318Z git version 2.55.0
+2026-10-20T17:57:24.9479642Z Temporarily overriding HOME='/home/runner/work/_temp/4825be18-1389-4d0f-9c77-5053877d78db' before making global git config changes
+2026-10-20T17:57:24.9481324Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T17:57:24.9484744Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T17:57:24.9515292Z Removing SSH command configuration
+2026-10-20T17:57:24.9522841Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T17:57:24.9556099Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T17:57:24.9778597Z Removing HTTP extra header
+2026-10-20T17:57:24.9785112Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T17:57:24.9818244Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T17:57:25.0038665Z Removing includeIf entries pointing to credentials config files
+2026-10-20T17:57:25.0046347Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T17:57:25.0077519Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T17:57:25.0443638Z Evaluate and set job outputs
+2026-10-20T17:57:25.0449136Z Set output 'artifact-name'
+2026-10-20T17:57:25.0451152Z Cleaning up orphan processes
