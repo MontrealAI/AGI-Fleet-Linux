@@ -1,0 +1,59 @@
+name: Final four public live sites
+on:
+  push:
+    branches: ['qualification/ti-public-live-*']
+permissions:
+  contents: read
+  actions: read
+  issues: read
+  pull-requests: read
+  deployments: read
+  pages: read
+concurrency:
+  group: final-public-live-sites
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  live-read-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Authenticate separate T, released S, successful ONE journey and actual Pages deployments
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          /usr/bin/python3 -I -S -B engineering/integration/public_live_inputs.py --output "$RUNNER_TEMP/public-live-inputs"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Protect official toolcache through the unchanged trusted bootstrap
+        run: |
+          /usr/bin/python3 -I -S -B engineering/integration/prepare-hosted-runtime.py --prepare-only
+      - name: Install the existing locked browser harness and Chromium
+        run: |
+          npm ci --prefix engineering/browser-tests --ignore-scripts --no-audit --no-fund
+          engineering/browser-tests/node_modules/.bin/playwright install --with-deps --only-shell chromium
+      - name: Observe all four actual EN and FR public flows without native or economic activity
+        run: |
+          node engineering/integration/public-live-sites.mjs "$RUNNER_TEMP/public-live-inputs/browser-input.json" "$RUNNER_TEMP/public-live-observations"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: final-four-public-live-observations
+          path: |
+            ${{ runner.temp }}/public-live-inputs/input.json
+            ${{ runner.temp }}/public-live-inputs/authentication.json
+            ${{ runner.temp }}/public-live-observations/live-sites.json
+            ${{ runner.temp }}/public-live-observations/*/observation.json
+            ${{ runner.temp }}/public-live-observations/*/observed.png
+          if-no-files-found: error
+          retention-days: 90
