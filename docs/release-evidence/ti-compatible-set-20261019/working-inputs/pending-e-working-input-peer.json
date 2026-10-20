@@ -1,0 +1,107 @@
+{
+  "schema": "four-repository-assessment/pending-e-reconstruction-data-peer/v1",
+  "createdAt": "2026-10-20T14:21:27.436Z",
+  "role": "DATA_BINDING_OF_PENDING_WORKING_INPUTS_ONLY_NOT_FINAL_E_REVIEW",
+  "result": "PASS_NO_CONCRETE_DEFECT_FOUND_IN_DATA_SCOPE",
+  "inputs": {
+    "pendingManifest": {
+      "bytes": 8772,
+      "sha256": "2991569788477b668cd537ef115af1d516b96796c34986e6deb608d498fef947",
+      "gitBlob": "eb50a9620ac65552bd8e94e054e742382e67f951"
+    },
+    "sourceMap": {
+      "bytes": 3855,
+      "sha256": "3f58308947c4396330b0719df75a662cba9c57230e631c20ef0610708694b8eb",
+      "gitBlob": "ecb18cf0ff58503c43a20f443463c5f96fd303ff"
+    },
+    "immutableManagerComponent": {
+      "commit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+      "bytes": 53373,
+      "sha256": "6f47b77645d65203f5da65d871ac296a0ae02683cc8dff0b07a0d6bb932e4eb6",
+      "gitBlob": "0a2d142ee93f8b014550a1b342975e526530ceb2"
+    },
+    "immutableCustodyIndex": {
+      "commit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+      "bytes": 5813,
+      "sha256": "6b9d226dc6ff893f8ae46b0aaa8696eeb426f6dd1733160289bfe162ff162f66",
+      "gitBlob": "d8333ebe7d627f57c617853aef7a7e39d95647db"
+    },
+    "contractCommentIds": [
+      6277337282,
+      6277463760,
+      6277567012,
+      6277599824
+    ]
+  },
+  "checked": {
+    "exactEightTopSections": [
+      "schema",
+      "createdAt",
+      "scope",
+      "repositories",
+      "sourceContinuity",
+      "jobsSourceTransition",
+      "connectedJourney",
+      "independentReview"
+    ],
+    "acceptedSingleBranchAndPath": true,
+    "reconstructionNotLostSkeletonRestoration": true,
+    "fourSourceReleaseDownloadInstallNativeRolesSeparate": true,
+    "missingFinalAlphaFleetJobsValuesNull": true,
+    "jobsTransitionAndConnectedJourneyAllNull": true,
+    "managerReviewedHAndActualMDistinctAndExact": true,
+    "managerReleaseIdTagPublisherAndParentsExact": true,
+    "managerCompleteNineAssetPointerExact": true,
+    "managerChecksumPhysicalCustodyManifestPointersResolve": true,
+    "physicalCustodyPointerIsExplicitExternalPrimaryCustodyDescriptionNotNewAcquisition": true,
+    "managerEightMainWorkflowRecordsAgree": true,
+    "manager67ArtifactPayloadsNot67IndependentLiveReads": true,
+    "managerTreeEqualityDoesNotAssertInstallOrExecution": true,
+    "finalDCompatibilityJourneyReviewTFMissingAndNull": true,
+    "noFixedHistoricalJobs24AssetRequirement": true,
+    "noFifthJobsConsumerRole": true,
+    "noNewExecutableValidatorOrRequiredGate": true,
+    "noQualifiedEOrFinalPublicationClaim": true
+  },
+  "managerComponent": {
+    "reviewedH": "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8",
+    "actualM": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+    "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+    "releaseId": 417952385,
+    "tag": "v1.19.5",
+    "assetCount": 9,
+    "publisherRunId": 39358807008,
+    "publisherAttempt": 1,
+    "publisherJobId": 118419845112,
+    "pagesRunId": 39361508964,
+    "pagesArtifactPayloadCount": 67,
+    "pagesRawMetadataSha256": "3fe5879a4ebb80dbffdf152a0653bfb28c603bb6cb19bd1e3c77b41cb9d2c2bf"
+  },
+  "performed": {
+    "publicGithubCommentsAndImmutableTextReads": true,
+    "inMemoryJsonAndByteHashComparison": true,
+    "executorProbe": false,
+    "projectHelperImportOrExecution": false,
+    "productTests": false,
+    "liveSiteOrTokenServiceApi": false,
+    "workflowOrRefMutation": false,
+    "rejectedFleetFunctionalReviewRetried": false
+  },
+  "nonClaims": {
+    "finalEApproved": false,
+    "finalCompatibilityQualified": false,
+    "finalInstallationVerified": false,
+    "finalConnectedJourneyExecuted": false,
+    "allFourLiveSitesVerified": false,
+    "eligibleOwnerReviewProvided": false,
+    "newReleaseAssetAdded": false
+  },
+  "limits": [
+    "This review binds pending reconstruction data and its immutable component references; it does not approve or publish finalE.",
+    "No exact identity with the lost28191-byte skeleton is asserted.",
+    "Manager physical candidate/release proof and HTTP metadata anchor are reused from the immutable component, not independently reacquired or replayed.",
+    "All final non-Manager source/release/install/native observations and final binding review remain absent/null; actual future release inventories must be authenticated without hardcoded historicalcounts.",
+    "No executable validator or new product/release/security gate is introduced by these two JSON inputs or this peer.",
+    "No local execution service probe, target/helper execution, test, live website request, token/serviceAPI call, workflow admission, ref move or blocked Fleet review was performed."
+  ]
+}

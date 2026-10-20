@@ -1,0 +1,212 @@
+{
+  "schema": "agi-fleet/public-release-equivalence/v1",
+  "createdAt": "2026-10-20T14:13:45.026Z",
+  "scope": {
+    "recordType": "PENDING_WORKING_INPUT_RECONSTRUCTION_NOT_FINAL_E",
+    "representation": "Reconstructed from accepted public meanings; not a restoration of the lost earlier skeleton and no byte/hash identity with it is claimed.",
+    "contractSources": [
+      "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6277337282",
+      "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6277463760",
+      "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6277567012",
+      "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6277599824"
+    ],
+    "reservedFinalLocation": {
+      "branch": "evidence/ti-compatible-set-20261019",
+      "path": "docs/release-evidence/ti-compatible-set-20261019/manifest.json"
+    },
+    "availableInputs": {
+      "managerComponent": {
+        "localPath": "assessment/manager-e-component.json",
+        "bytes": 53373,
+        "sha256": "6f47b77645d65203f5da65d871ac296a0ae02683cc8dff0b07a0d6bb932e4eb6",
+        "publicCommit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+        "publicPath": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/manager-1.19.5-component.json",
+        "gitBlob": "0a2d142ee93f8b014550a1b342975e526530ceb2",
+        "role": "AVAILABLE_PUBLISHED_COMPONENT_ONLY"
+      },
+      "componentCustodyIndex": {
+        "localPath": "assessment/component-custody-20261020-index.json",
+        "bytes": 5813,
+        "sha256": "6b9d226dc6ff893f8ae46b0aaa8696eeb426f6dd1733160289bfe162ff162f66",
+        "publicCommit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+        "publicPath": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/index.json",
+        "role": "HISTORICAL_CUSTODY_NOT_FINAL_SELECTION"
+      }
+    },
+    "roleBoundaries": [
+      "Reviewed H/source pins, actual main M, public release assets, normal installed D and native connected execution remain separate observations.",
+      "Manager is a completed component, not final combined qualification; historical roles in its component and the index are not transferred.",
+      "Complete actual final release asset inventories are required; consumer-selected asset roles are a subset. No future Jobs asset count is fixed here.",
+      "Source SDK, matching trees, file-only D, metadata and imported archives do not establish native execution; missing actual evidence remains null."
+    ],
+    "authorityAndPrivacy": {
+      "inputs": "Public non-personal only",
+      "ubuntuHardhat": "Local hidden ephemeral deployer-key entry; no key storage/printing/arguments/.env/history/logs",
+      "macStudioGovernance": "Ledger preserved",
+      "previousDeployments": "Read-only",
+      "ens": "Separate excluded work",
+      "realWalletSigningMainnetFundingActivationAuthorityChanges": "Require separate explicit authorization; outside this software-delivery authorization",
+      "softwarePublication": "Does not mean production activation"
+    },
+    "noNewValidatorOrGate": true,
+    "laterWebsiteT": null,
+    "laterFourSiteF": null
+  },
+  "repositories": {
+    "alpha": {
+      "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+      "reviewedH": null,
+      "actualMainM": null,
+      "release": null,
+      "exactMainQualification": null,
+      "downloadedPublicPayloads": null,
+      "normalInstalledD": null,
+      "nativeConnectedEvidence": null,
+      "finalCompatibilitySelection": null
+    },
+    "fleet": {
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "reviewedH": null,
+      "actualMainM": null,
+      "release": null,
+      "exactMainQualification": null,
+      "downloadedPublicPayloads": null,
+      "normalInstalledD": null,
+      "nativeConnectedEvidence": null,
+      "finalCompatibilitySelection": null
+    },
+    "jobs": {
+      "repository": "MontrealAI/AGIJobsv0",
+      "reviewedH": null,
+      "actualMainM": null,
+      "release": null,
+      "exactMainQualification": null,
+      "downloadedPublicPayloads": null,
+      "normalInstalledD": null,
+      "nativeConnectedEvidence": null,
+      "finalCompatibilitySelection": null
+    },
+    "manager": {
+      "repository": "MontrealAI/AGIJobManager",
+      "reviewedH": {
+        "commit": "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8",
+        "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+        "role": "REVIEWED_COMPONENT_SOURCE"
+      },
+      "actualMainM": {
+        "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+        "orderedParents": [
+          "d0c2cbaf58b594e20d888c3fc744bada06172306",
+          "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8"
+        ],
+        "role": "ACTUAL_MANAGER_MAIN_COMPONENT"
+      },
+      "release": {
+        "id": 417952385,
+        "tag": "v1.19.5",
+        "url": "https://github.com/MontrealAI/AGIJobManager/releases/tag/v1.19.5",
+        "publishedAt": "2026-10-20T02:55:05Z",
+        "immutable": true,
+        "annotatedTag": {
+          "ref": "refs/tags/v1.19.5",
+          "tagObject": "eea8726413ed5bafc71f65b4eccd6233e89f055c",
+          "peeledCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+          "peeledType": "commit"
+        },
+        "publisher": {
+          "runId": 39358807008,
+          "attempt": 1,
+          "jobId": 118419845112,
+          "path": ".github/workflows/publish-v114.yml",
+          "event": "workflow_dispatch",
+          "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+          "conclusion": "success"
+        },
+        "completeAssetInventory": {
+          "input": "managerComponent",
+          "jsonPointer": "/release/assets",
+          "actualCount": 9,
+          "scope": "ALL_ACTUAL_MANAGER_RELEASE_ASSETS_NOT_CONSUMER_SUBSET"
+        },
+        "manifestChecksumAndPhysicalCustody": {
+          "input": "managerComponent",
+          "jsonPointers": [
+            "/release/checksumBinding",
+            "/release/completePayloadCustody",
+            "/release/releaseManifest"
+          ]
+        },
+        "role": "PUBLISHED_MANAGER_COMPONENT_NOT_FINAL_COMPATIBILITY_APPROVAL"
+      },
+      "exactMainQualification": {
+        "input": "managerComponent",
+        "jsonPointer": "/actualMainQualification",
+        "actualWorkflowCount": 8,
+        "allSucceeded": true,
+        "role": "ACTUAL_MANAGER_COMPONENT_ONLY"
+      },
+      "downloadedPublicPayloads": null,
+      "normalInstalledD": null,
+      "nativeConnectedEvidence": null,
+      "finalCompatibilitySelection": null,
+      "availableComponentInput": {
+        "localPath": "assessment/manager-e-component.json",
+        "bytes": 53373,
+        "sha256": "6f47b77645d65203f5da65d871ac296a0ae02683cc8dff0b07a0d6bb932e4eb6",
+        "publicCommit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+        "publicPath": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/manager-1.19.5-component.json",
+        "gitBlob": "0a2d142ee93f8b014550a1b342975e526530ceb2",
+        "role": "AVAILABLE_PUBLISHED_COMPONENT_ONLY"
+      },
+      "componentPages": {
+        "input": "managerComponent",
+        "jsonPointer": "/actualPostpublicationPages",
+        "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "runId": 39361508964,
+        "rawMetadataSha256": "3fe5879a4ebb80dbffdf152a0653bfb28c603bb6cb19bd1e3c77b41cb9d2c2bf",
+        "artifactPayloadCount": 67,
+        "scope": "PAGES_ARTIFACT_PAYLOADS_PLUS_HTTP_METADATA_ANCHOR_NOT_ALL67_LIVE_READS",
+        "finalFourSiteF": null
+      }
+    }
+  },
+  "sourceContinuity": {
+    "alpha": null,
+    "fleet": null,
+    "jobs": null,
+    "manager": {
+      "role": "COMPONENT_GIT_TREE_CONTINUITY_ONLY",
+      "reviewedAndMainTreesEqual": true,
+      "evidence": {
+        "input": "managerComponent",
+        "jsonPointer": "/sourceRoles/treeRelation"
+      },
+      "finalSelectedPayloadBytesAndModes": null,
+      "normalInstallationEquivalence": null,
+      "finiteModeExceptions": null,
+      "finalCompatibilityApproval": null
+    }
+  },
+  "jobsSourceTransition": {
+    "reviewedS1": null,
+    "allowedReviewInstallation": null,
+    "actualMainS2": null,
+    "actualReleasedSourceProfile": null,
+    "genuineScannerAndSourceContinuity": null,
+    "independentBindingReview": null
+  },
+  "connectedJourney": {
+    "actualProducer": null,
+    "actualReleasedInputs": null,
+    "normalPublicPackageInstallations": null,
+    "nativeOutputsAndHistory": null,
+    "originalPublicArtifactCustody": null,
+    "independentSemanticReplay": null,
+    "actualResults": null,
+    "observedCosts": null,
+    "humanEffort": null,
+    "remainingLimitations": null
+  },
+  "independentReview": null
+}
