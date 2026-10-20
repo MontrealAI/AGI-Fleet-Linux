@@ -310,6 +310,9 @@ def main():
     output = Path(request["output"])
 
     def interrupted(signum, frame):
+        # Later cancellation must not interrupt Alpha's interrupted-state/receipt cleanup.
+        # The parent retains its existing bounded process-group SIGKILL escalation.
+        signal.signal(signal.SIGTERM, signal.SIG_IGN)
         raise KeyboardInterrupt("Fleet STOP or cancellation")
 
     signal.signal(signal.SIGTERM, interrupted)

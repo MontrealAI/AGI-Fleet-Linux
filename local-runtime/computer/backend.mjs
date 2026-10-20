@@ -52,12 +52,14 @@ export async function executeComputer({configFile,role,task,directory,signal,exp
   return await new Promise((resolve,reject)=>{
     const command=computerInvocation(installed.profile,'run');let child;
     try{child=spawn(command.executable,command.args,{stdio:['pipe','pipe','pipe'],env:computerEnvironment(),detached:true,shell:false});}catch(error){command.close();reject(error);return;}
-    let stdout=[],stderr=[],outputBytes=0,errorBytes=0,problem=null,exited=false,killTimer,knownGroupGone=false;
+    let stdout=[],stderr=[],outputBytes=0,errorBytes=0,problem=null,exited=false,killTimer,knownGroupGone=false,stopSent=false;
     const validPid=()=>Number.isSafeInteger(child.pid)&&child.pid>0;
     const groupGone=()=>{if(knownGroupGone)return true;if(!validPid())return false;try{process.kill(-child.pid,0);}catch(error){if(error.code==='ESRCH')knownGroupGone=true;}return knownGroupGone;};
     const killGroup=()=>{if(!validPid()||groupGone())return;try{process.kill(-child.pid,'SIGKILL');}catch(error){if(error.code==='ESRCH')knownGroupGone=true;}};
     const escalate=()=>{if(validPid()&&!groupGone())killTimer??=setTimeout(killGroup,20000);};
-    const interrupt=code=>{problem??=code;if(validPid()&&!exited&&!knownGroupGone)try{process.kill(child.pid,'SIGTERM');}catch{};escalate();};
+    // Deliver graceful cancellation once so Alpha can retain interruption and cleanup.
+    // Revalidation keeps failing closed; the existing bounded SIGKILL remains armed.
+    const interrupt=code=>{problem??=code;if(!stopSent&&validPid()&&!exited&&!knownGroupGone)try{process.kill(child.pid,'SIGTERM');stopSent=true;}catch{};escalate();};
     const abort=()=>interrupt('RUN_CANCELLED');signal?.addEventListener('abort',abort,{once:true});
     const timer=setTimeout(()=>interrupt('RUN_TIMEOUT'),Math.min(COMPUTER_LIMITS.wallMs,prepared.maxSeconds*1000+25000));
     let checking=false;
