@@ -1,0 +1,76 @@
+{
+  "schema": "four-repository-assessment/alpha-regression-budget-structural-validation/v1",
+  "observedAt": "2026-10-20T15:50:49.333Z",
+  "scope": "LOCAL_YAML_AND_STRUCTURAL_DATA_VALIDATION_NOT_WORKFLOW_EXECUTION",
+  "proposal": "a24dc60e8fff5aea53cdfb247be9fb5d8c7d55dc",
+  "initialInspection": {
+    "exitCode": 1,
+    "proof": {
+      "scope": "LOCAL_YAML_AND_STRUCTURAL_DATA_VALIDATION_NOT_WORKFLOW_EXECUTION",
+      "proposal": "a24dc60e8fff5aea53cdfb247be9fb5d8c7d55dc",
+      "checks": {
+        "whole_workflow_parses": true,
+        "global_fields_unchanged": true,
+        "unaffected19jobs_unchanged": true,
+        "only_static_checks_job_added": true,
+        "regression_metadata_unchanged": true,
+        "regression_timeout60_unchanged": true,
+        "regression_setup_pretests_fullsuite_unchanged": true,
+        "all17original_commands_exact_partition": true,
+        "twelve_mypy_plus_ruff_moved": false,
+        "post_suite_preservation_unchanged": true,
+        "existing_regression_upload_unchanged": true,
+        "new_job_setup_exact": true,
+        "new_job_metadata_matches_regression": true,
+        "package_fields_except_needs_unchanged": true,
+        "package_adds_only_required_static_job": true,
+        "no_extra_artifact_or_report": true
+      },
+      "allPass": false,
+      "files": {
+        "baseline.yml": {
+          "bytes": 64585,
+          "sha256": "a4d6598f26d7488a49182a045d743631705f0e3e64a92ba7d0b643e77c9d897f"
+        },
+        "proposal.yml": {
+          "bytes": 65987,
+          "sha256": "95f422125f8ad05273a954ee6330fc6661c364ee61fef0f57cd3beafc9d40527"
+        }
+      },
+      "runtimeExecuted": false,
+      "currentRetryAffected": false
+    }
+  },
+  "classificationCorrection": {
+    "exitCode": 0,
+    "proof": {
+      "scope": "CORRECTED_COMMAND_CLASSIFICATION_ONLY",
+      "proposalSha256": "95f422125f8ad05273a954ee6330fc6661c364ee61fef0f57cd3beafc9d40527",
+      "mypyInvocationCount": 12,
+      "allFirstTwelveAreMypy": true,
+      "lastIsUnchangedTrackedRuffWrapper": true,
+      "correction": "Initial inspection assumed direct mypy/ruff command names; actual unchanged baseline invokes python -m mypy and the tracked Ruff wrapper. No workflow command changed.",
+      "runtimeExecuted": false
+    }
+  },
+  "conclusion": {
+    "yamlParsed": true,
+    "all15OtherInitialStructuralChecksPassed": true,
+    "commandClassificationPassed": true,
+    "noSourceMutationBetweenChecks": true,
+    "runtimeExecuted": false,
+    "qualificationClaimed": false
+  },
+  "treeVerification": {
+    "commit": "a24dc60e8fff5aea53cdfb247be9fb5d8c7d55dc",
+    "tree": "b210911b9e13a2bab180cc0b79989c594b4cacdc",
+    "soleParent": "c92b91fc012f14041307d0ba4b59c4b7a98cc933",
+    "changedPath": ".github/workflows/agent-release.yml",
+    "otherLeavesPreserved": 3608,
+    "totalLeaves": 3609,
+    "baselineBlob": "c94bab495738795f8214d35d2e8b3d3244420b15",
+    "proposalBlob": "cba14176e4664e8a7afed642f5025b781b238414",
+    "noRefMoved": true,
+    "runtimeExecuted": false
+  }
+}

@@ -1,0 +1,763 @@
+{
+  "schema": "four-repository-assessment/alpha-static-workflow-split-peer/v1",
+  "observedAt": "2026-10-20T15:52:54.715Z",
+  "reviewerRole": "e_current_binding",
+  "result": "PASS_NO_CONCRETE_SCOPED_STATIC_FINDINGS",
+  "reviewClass": "FINITE_STATIC_WORKFLOW_SOURCE_AND_DEPENDENCY_REVIEW_ONLY",
+  "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+  "proposal": {
+    "commit": "a24dc60e8fff5aea53cdfb247be9fb5d8c7d55dc",
+    "tree": "b210911b9e13a2bab180cc0b79989c594b4cacdc",
+    "soleParent": "c92b91fc012f14041307d0ba4b59c4b7a98cc933",
+    "unreferencedAtHandoff": true,
+    "changedPath": ".github/workflows/agent-release.yml",
+    "baselineWorkflow": {
+      "bytes": 64585,
+      "sha256": "a4d6598f26d7488a49182a045d743631705f0e3e64a92ba7d0b643e77c9d897f",
+      "gitBlob": "c94bab495738795f8214d35d2e8b3d3244420b15"
+    },
+    "proposedWorkflow": {
+      "bytes": 65987,
+      "sha256": "95f422125f8ad05273a954ee6330fc6661c364ee61fef0f57cd3beafc9d40527",
+      "gitBlob": "cba14176e4664e8a7afed642f5025b781b238414"
+    },
+    "unchangedOtherLeaves": 3608,
+    "trackedLeavesBefore": 3609,
+    "trackedLeavesAfter": 3609,
+    "nontruncatedPublicTreesCompared": true,
+    "otherLeafPathTypeModeBlobAndByteSizesIdentical": true,
+    "noRemovedOrAddedLeaves": true
+  },
+  "fullWorkflowComparison": {
+    "globalNameTriggersPermissionsConcurrencyDefaultsAndEnvironmentByteIdentical": true,
+    "changedExistingJobs": [
+      "regression",
+      "package"
+    ],
+    "addedJob": "static-checks",
+    "otherJobsByteIdentical": [
+      "publication-preflight",
+      "successor-journey",
+      "mark-wallet",
+      "dependency-audit",
+      "runtime",
+      "browser-contracts",
+      "real-model",
+      "quality",
+      "gallery",
+      "native-demos",
+      "sovereign-lab",
+      "finance-lab",
+      "muzero-lab",
+      "demo-distribution",
+      "historical-ci",
+      "successor-workbench",
+      "transformational-intelligence",
+      "pages",
+      "publish"
+    ],
+    "regressionDifferenceExactlyCommentStepLabelAndThirteenCommandRemoval": true,
+    "packageDifferenceExactlyStaticChecksNeedsAddition": true,
+    "movedCommandOrderAndBytesPreserved": true,
+    "preservationCommandOrderAndBytesPreserved": true
+  },
+  "commandInventory": {
+    "moved": [
+      {
+        "command": "python -m mypy --config-file mypy-runtime.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --strict --follow-imports=skip scripts/release_packs.py scripts/check_successor_preservation.py scripts/successor_evidence.py",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy-business3.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy-governance.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy-discovery.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy-experience.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy-mats.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy-curriculum.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy-muzero.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy-finance.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy-sovereign.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python -m mypy --config-file mypy.ini",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      },
+      {
+        "command": "python scripts/ruff_targets.py --run",
+        "baseRegression": 1,
+        "proposalRegression": 0,
+        "proposalStatic": 1
+      }
+    ],
+    "retainedPostSuite": [
+      {
+        "command": "python -m scripts.check_agent_preservation > evidence/preservation.json",
+        "baseRegression": 1,
+        "proposalRegression": 1,
+        "proposalStatic": 0
+      },
+      {
+        "command": "python -m scripts.check_successor_preservation --output evidence/successor-preservation.json",
+        "baseRegression": 1,
+        "proposalRegression": 1,
+        "proposalStatic": 0
+      },
+      {
+        "command": "python -m scripts.check_manuscript > evidence/manuscript.json",
+        "baseRegression": 1,
+        "proposalRegression": 1,
+        "proposalStatic": 0
+      },
+      {
+        "command": "python -m scripts.check_factory_readiness > evidence/factory-preservation.json",
+        "baseRegression": 1,
+        "proposalRegression": 1,
+        "proposalStatic": 0
+      }
+    ],
+    "classification": {
+      "mypyCommands": 12,
+      "ruffViaTrackedWrapperCommands": 1,
+      "preservationCommandsRetained": 4
+    }
+  },
+  "environmentAndDependencies": {
+    "staticNeeds": "publication-preflight",
+    "staticRunner": "ubuntu-latest",
+    "staticTimeoutMinutes": 60,
+    "regressionTimeoutMinutesUnchanged": 60,
+    "copiedSetupByteIdentical": true,
+    "copiedSetupUtf8": {
+      "bytes": 1124,
+      "sha256": "a89f5785eba5bcf01f8f7a005b28f640a096c5bffa56b84aa2534c5f1bb5346a",
+      "gitBlob": "4d7a5ea6b18ab1c4e17b00a5662e808ddbe57392"
+    },
+    "checkoutFullHistory": true,
+    "checkoutPersistCredentials": false,
+    "pythonVersion": "3.12",
+    "nodeVersion": "22.17.1",
+    "setupCommandCount": 10,
+    "setupSummary": [
+      "pip<26",
+      "hash-locked requirements.lock and requirements-dev.lock",
+      "eth-account==0.13.7",
+      "check_python_deps.py",
+      "check_env.py --auto-install",
+      "pip check",
+      "browser npm ci --ignore-scripts",
+      "Insight browser npm ci",
+      "Insight browser build with FETCH_ASSETS_SKIP_LLM=1",
+      "Playwright Chromium installation"
+    ],
+    "inheritedGlobalEnvironmentAndContentsReadPermissionsUnchanged": true,
+    "staticJobHasNoIfContinueOnErrorEnvironmentOrPermissionsOverride": true,
+    "declaredMypyFilesAndStubRootsPresentInImmutableTree": true,
+    "declaredMypyConfigurationPathBindings": [
+      {
+        "config": "mypy-runtime.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/core/runtime",
+        "tracked": true,
+        "type": "tree",
+        "gitObject": "bd5dc4a6351b368b029274ab15f26d4f921647f7"
+      },
+      {
+        "config": "mypy-business3.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/alpha_agi_business_3_v1/enterprise.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "24cc9bd226c7908f27f5f40bd77a5decf75df2ce"
+      },
+      {
+        "config": "mypy-business3.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/alpha_agi_business_3_v1/cli.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "f36c480a23f2ca5c4c9a7dc5478bc106e7818c4b"
+      },
+      {
+        "config": "mypy-governance.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/solving_agi_governance/workbench.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "64588e08a0823b28a86fb599905e60ac93e949a0"
+      },
+      {
+        "config": "mypy-governance.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/solving_agi_governance/cli.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "26717f778980a22aca0b448503a16bff50e8fd71"
+      },
+      {
+        "config": "mypy-discovery.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/alpha_agi_insight_v0/discovery.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "79d0f5d0c591f8bc5e05225d7c70265d1b0701b0"
+      },
+      {
+        "config": "mypy-discovery.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/alpha_agi_insight_v0/discovery_cli.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "74e019bea8c388c806492cccc7cad6ac00770435"
+      },
+      {
+        "config": "mypy-experience.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/era_of_experience/lab.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "bfdd976ea5d4f3d5789ac01015fe32accd6a3d6d"
+      },
+      {
+        "config": "mypy-experience.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/era_of_experience/lab_cli.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "b19199403d88e3b3ef18609d34dca1d6c7fe2bb0"
+      },
+      {
+        "config": "mypy-experience.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/era_of_experience/lab_server.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "60e16b721b84de12058ebac56984939555f64d4d"
+      },
+      {
+        "config": "mypy-mats.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/meta_agentic_tree_search_v0/search_lab.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "37dc48a318eed004f61f089803f64a8acef86b39"
+      },
+      {
+        "config": "mypy-mats.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/meta_agentic_tree_search_v0/lab_cli.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "65625e4f94be5e6cf090ed6186df0b3f20d48143"
+      },
+      {
+        "config": "mypy-mats.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/meta_agentic_tree_search_v0/lab_server.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "0c92b40f95d0180c110da36d0677ce56dba2a1d5"
+      },
+      {
+        "config": "mypy-curriculum.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/meta_agentic_agi_v3/curriculum_lab.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "2df11ad29a359cdad670f73344a4f7b65429bf01"
+      },
+      {
+        "config": "mypy-curriculum.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/meta_agentic_agi_v3/lab_cli.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "c19b07a0573bb83c9810c17a50d703c06a21c02b"
+      },
+      {
+        "config": "mypy-curriculum.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/meta_agentic_agi_v3/lab_server.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "5b6c58fcd3696eb6caba78187bf1db9865c35bb4"
+      },
+      {
+        "config": "mypy-curriculum.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/meta_agentic_agi_v3/isolation.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "7445ac00d96bc3666dd5bbc44ec3ac78c5f518f5"
+      },
+      {
+        "config": "mypy-curriculum.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/meta_agentic_agi_v3/core/physics/gibbs.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "27b2d3d861668d0c05755883e89e1d6900b14168"
+      },
+      {
+        "config": "mypy-curriculum.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/meta_agentic_agi_v3/businesses/royalty_radar.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "c3a749a6af09e90c1f6ca31b627f945e9af585f3"
+      },
+      {
+        "config": "mypy-muzero.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/muzero_planning/minimuzero.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "2798539f082c5005cf1d8057571a3d1dbb0ae55a"
+      },
+      {
+        "config": "mypy-muzero.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/muzero_planning/training.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "d358820c5b48edb024c7df7c0d5f8ff7a1626a13"
+      },
+      {
+        "config": "mypy-muzero.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/muzero_planning/agent_muzero_entrypoint.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "5dd2300af201105e0892e0b1ff0bfb534b56bc11"
+      },
+      {
+        "config": "mypy-muzero.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/muzero_planning/__main__.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "5193b902a2b5d65eda62730e71a7559b1daba403"
+      },
+      {
+        "config": "mypy-muzero.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/muzeromctsllmagent_v0/__main__.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "4c8794b4ee12be272a2cd8e1891f864a39fdbd77"
+      },
+      {
+        "config": "mypy-muzero.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/muzeromctsllmagent_v0/lab.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "921170ebed9fa19ce42dd07fb3a7b6f8a69ec17d"
+      },
+      {
+        "config": "mypy-muzero.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/muzeromctsllmagent_v0/ui.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "1b74c1b9198cf1da8fadd110b1db99eb722a2bf8"
+      },
+      {
+        "config": "mypy-finance.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/finance_alpha/paper.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "df801615e7d286564fbe1cccc75fcc857262751f"
+      },
+      {
+        "config": "mypy-finance.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/finance_alpha/delivery.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "4458753853c3dad7f4ea24f82b4879cbd6982730"
+      },
+      {
+        "config": "mypy-finance.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/finance_alpha/server.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "e67f30db7049f08c22717e56b583f7eb1d0f5f4e"
+      },
+      {
+        "config": "mypy-finance.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/finance_alpha/__main__.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "e1c9f2c49f0494ab83c09b76566c2619233a938f"
+      },
+      {
+        "config": "mypy-finance.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/finance_alpha/agent_control.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "5f3d668165778a28a15397f87232e1ea9bbe15e4"
+      },
+      {
+        "config": "mypy-sovereign.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/sovereign_agentic_agialpha_agent_v0/models.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "a612a3af85f0a27e2e713446d09aeb1aacca83b3"
+      },
+      {
+        "config": "mypy-sovereign.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/sovereign_agentic_agialpha_agent_v0/workbench.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "effc37fdc47d2c5815ea4e59571c5b87f95e3c4f"
+      },
+      {
+        "config": "mypy-sovereign.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/sovereign_agentic_agialpha_agent_v0/service.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "e60dc8163596301475f75f4e2532ae4fccd9e4c6"
+      },
+      {
+        "config": "mypy-sovereign.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/sovereign_agentic_agialpha_agent_v0/__main__.py",
+        "tracked": true,
+        "type": "blob",
+        "gitObject": "1a78c7989586b2e1829c68848028dbed088c04b7"
+      },
+      {
+        "config": "mypy.ini",
+        "kind": "mypy_path",
+        "path": "stubs/openai_agents",
+        "tracked": true,
+        "type": "tree",
+        "gitObject": "6a9664edaf4ffac4e7508d44d5719b2d8ca63e30"
+      },
+      {
+        "config": "mypy.ini",
+        "kind": "mypy_path",
+        "path": "stubs/pydantic_settings",
+        "tracked": true,
+        "type": "tree",
+        "gitObject": "8a084742c230fe93170be31b521d92b005dfaf05"
+      },
+      {
+        "config": "mypy.ini",
+        "kind": "mypy_path",
+        "path": "stubs",
+        "tracked": true,
+        "type": "tree",
+        "gitObject": "7734ab29190b4a1f9310f3b2da2748582b02c53d"
+      },
+      {
+        "config": "mypy.ini",
+        "kind": "files",
+        "path": "alpha_factory_v1/demos/alpha_agi_insight_v1/src",
+        "tracked": true,
+        "type": "tree",
+        "gitObject": "36bdd02eed9fcb829246090a21b8e38b432edd24"
+      }
+    ],
+    "directMypyTargetBindings": [
+      {
+        "path": "scripts/release_packs.py",
+        "tracked": true,
+        "gitBlob": "d637649f6fb26eedd62d48fe9f8d908faaf50d92"
+      },
+      {
+        "path": "scripts/check_successor_preservation.py",
+        "tracked": true,
+        "gitBlob": "e6f344e913b604e9851b65693f7f21fabb74defd"
+      },
+      {
+        "path": "scripts/successor_evidence.py",
+        "tracked": true,
+        "gitBlob": "6befdb17b930d7d6e5df9b4515a592fe1521b0fd"
+      }
+    ],
+    "ruffInputRoute": "Unchanged tracked wrapper resolves git ls-files --cached Python-related targets from the full checkout and invokes Ruff; no generated report input is declared.",
+    "pytestEnvironmentRoute": "Unchanged run_local_tests constructs an environment passed to the pytest subprocess; its assignments do not export settings back to the calling workflow step.",
+    "inputsReviewed": [
+      {
+        "path": "mypy-runtime.ini",
+        "mode": "100644",
+        "bytes": 135,
+        "sha256": "12e4d0eafab196e0a2cf0321b02b2774e36dde1c22311795a9f78194782fa321",
+        "gitBlob": "9a568ce7ec7daee06a2bcf9ba999fe8546272f7d"
+      },
+      {
+        "path": "mypy-business3.ini",
+        "mode": "100644",
+        "bytes": 219,
+        "sha256": "1d36912c8c5d4b0afc385925e3133a9a87352a8471b82349130ff074710cb6e1",
+        "gitBlob": "42f278b3b5c4ddb712da895adbcc4fa9b8cad625"
+      },
+      {
+        "path": "mypy-governance.ini",
+        "mode": "100644",
+        "bytes": 216,
+        "sha256": "ce0f12576798aa3206d6605a7836ee33219ecc434d49aa1d1441ebe1986b8e17",
+        "gitBlob": "f475acc963342220f644dc3b489634104ec1e525"
+      },
+      {
+        "path": "mypy-discovery.ini",
+        "mode": "100644",
+        "bytes": 222,
+        "sha256": "c3c7aea4ca43fb6afe35ee0392b1577eeb0ab1f318107c8d9706561007f9c6a2",
+        "gitBlob": "e6a00a500ebd4cce2c88a16d9c95be0e190e0269"
+      },
+      {
+        "path": "mypy-experience.ini",
+        "mode": "100644",
+        "bytes": 260,
+        "sha256": "70ae1de06f42c8617420b5a27fad61c7739379af79f3edcfd9fa2bc3fc8a321e",
+        "gitBlob": "44fb973ddc37f9d847d2525b54910136bdec157c"
+      },
+      {
+        "path": "mypy-mats.ini",
+        "mode": "100644",
+        "bytes": 297,
+        "sha256": "ab6a9868cb30e8760310f99aab0290ef6bbbb7b7ed7076c46242b84e9dc64e7e",
+        "gitBlob": "a150314116cc6808c86a8adfadbfcd32fc8f2dd4"
+      },
+      {
+        "path": "mypy-curriculum.ini",
+        "mode": "100644",
+        "bytes": 472,
+        "sha256": "28d8ff28bf782e34866eb4db9e0e5ff542500c21fdf34464790167cc0a98af23",
+        "gitBlob": "4885fa7659e0f747e70155be7669bd9b591dbb12"
+      },
+      {
+        "path": "mypy-muzero.ini",
+        "mode": "100644",
+        "bytes": 490,
+        "sha256": "b6216355f578657fa7825117d16670eeec91ce0fb24fddaee6905dfe2336c83b",
+        "gitBlob": "8e049d0ba2f6dd71d142db304c7acb330915dda0"
+      },
+      {
+        "path": "mypy-finance.ini",
+        "mode": "100644",
+        "bytes": 352,
+        "sha256": "12882ec990dbbd763119f66c1a30f2abf982a3e6c3b601f16d5bf87b666ed52f",
+        "gitBlob": "f77f8c7424fb2bf6223f8ada380a83e564c376a0"
+      },
+      {
+        "path": "mypy-sovereign.ini",
+        "mode": "100644",
+        "bytes": 357,
+        "sha256": "bc78ffe15b7b5c5ec07ed8481770ec2c315aaf4443439915502126a60d82f0a7",
+        "gitBlob": "e37eb3ea4acbd5bb52c622f769951ac024beedf3"
+      },
+      {
+        "path": "mypy.ini",
+        "mode": "100644",
+        "bytes": 394,
+        "sha256": "5be0b6015b2f99e26d7d2a8432e5c7e7461f799a298cfaace6a0b52c0e24433a",
+        "gitBlob": "b3a03f5cb60989ef60f016478219d16f00497fc8"
+      },
+      {
+        "path": "scripts/ruff_targets.py",
+        "mode": "100644",
+        "bytes": 3762,
+        "sha256": "dcdbf215b6c862ffa5bae5cd538c05c2119b24b1e6a5d541384bbc15cc8273fe",
+        "gitBlob": "f123752d906f89eb708475bd08b88dd11c9573e9"
+      },
+      {
+        "path": "scripts/run_local_tests.py",
+        "mode": "100644",
+        "bytes": 1856,
+        "sha256": "e68c771ba2d8f2ffa9ec336c96a196b8f81c620a0a72a878e52b9495aa9b2d27",
+        "gitBlob": "6024c61303eb519acd6ebad02da6b06d43636f69"
+      }
+    ],
+    "noDeclaredGeneratedRegressionReportInputFoundForMovedCommands": true,
+    "exhaustiveDynamicDependencyOrMutationEquivalenceClaimed": false
+  },
+  "postSuiteAndEvidence": {
+    "fullRegressionCommandAndCoverage80ByteIdentical": true,
+    "restartAndCatalogStepsByteIdentical": true,
+    "preservationRemainsInOriginalRegressionJobAfterFullSuiteAndCoverageCopy": true,
+    "reportPaths": [
+      "evidence/preservation.json",
+      "evidence/successor-preservation.json",
+      "evidence/manuscript.json",
+      "evidence/factory-preservation.json"
+    ],
+    "regressionAlwaysUploadArtifactNamePathActionAndMissingFilePolicyByteIdentical": true,
+    "regressionArtifactName": "regression",
+    "regressionArtifactPath": "evidence/",
+    "addedArtifact": false,
+    "packageBulkDownloadAndRecursiveValidationArchiveUnchanged": true,
+    "staticCommandsWereLogOnlyAndNoReportPathWasMoved": true,
+    "preservationChecksObserveOriginalRegressionJobPostSuiteFilesystem": true
+  },
+  "gateConsumerReview": {
+    "newStaticJobMandatoryForPackage": true,
+    "packageHasNoNewConditionOrErrorBypass": true,
+    "existingPackageNeedsRetainedInOrder": true,
+    "existingPagesAndPublishDependenciesAndConditionsByteIdentical": true,
+    "examinedConsumers": [
+      {
+        "path": "scripts/check_ci_status.py",
+        "mode": "100644",
+        "bytes": 31619,
+        "sha256": "45e66dad30d5b5c4f6fdebd8ee9f50cab4f57d266495d1c6ff8a9134b09383a7",
+        "gitBlob": "7a98f8940c94af6250555247805d8d376b408df5"
+      },
+      {
+        "path": "scripts/wait_for_release_ci.py",
+        "mode": "100644",
+        "bytes": 6783,
+        "sha256": "6c4fc9dcc87cff63b0f06ddcf72772ee0f31ee780485aaa2230109cfd87178c5",
+        "gitBlob": "0a0229d0b10b610044e7c018591084777a08c23c"
+      },
+      {
+        "path": "scripts/required_checks.json",
+        "mode": "100644",
+        "bytes": 37,
+        "sha256": "8c34fb5bc11aa9a373d25d556f1f499c12bdfa0c01ea27770788e8cb4f964616",
+        "gitBlob": "f93dc902f0c135bee429bda9de46163033d0b0ac"
+      },
+      {
+        "path": "scripts/verify_branch_protection.py",
+        "mode": "100644",
+        "bytes": 10923,
+        "sha256": "4dd37e8bfa43ca8072c0d6cba43e7c40d8ee814c95b2011395dd42ff96a9eaeb",
+        "gitBlob": "2fc197913ece043c859643495b4cb20457b858c2"
+      },
+      {
+        "path": "scripts/publish_agent_release.py",
+        "mode": "100755",
+        "bytes": 7893,
+        "sha256": "5eb8446b271f055eaaa0d39f394aa509b3cf54e072983d2abc4d9613f3ec1bc5",
+        "gitBlob": "43098de085916fc57a2abdb89c37daee108101cd"
+      },
+      {
+        "path": "scripts/release_context.py",
+        "mode": "100644",
+        "bytes": 1293,
+        "sha256": "7d679ba993db530282445ef991d9e723660b59ecab51000e302bc892dbc23051",
+        "gitBlob": "fdd2684091936961253f64e7a3d8f471277ef0c7"
+      },
+      {
+        "path": "scripts/package_agent_release.py",
+        "mode": "100755",
+        "bytes": 25221,
+        "sha256": "bc9e55dc1745b37ea497325303c0cb9d6b2c03746659d4f451869f4a4c54ce7c",
+        "gitBlob": "55a6385b7cb2fb34ad000a0a8accc17d68637f95"
+      }
+    ],
+    "examinedTestSourcesWithoutExecuting": [
+      {
+        "path": "tests/test_release_ci_gate.py",
+        "mode": "100644",
+        "bytes": 10119,
+        "sha256": "384dea0557b9851a8c8d37d8e13b51d2bebe255a0d958a3edfc906b13411827e",
+        "gitBlob": "6b6c6d1de42b1c2a33d1e2be34248e265eb4e15c"
+      },
+      {
+        "path": "tests/test_release_artifact_handoffs.py",
+        "mode": "100644",
+        "bytes": 5043,
+        "sha256": "f4b9dd73e2f6722102bd0874c111894fd36b4bf2413dcefdc5696a8f423292b1",
+        "gitBlob": "ffec451a52ce3de78388ac60268a3f51ef26706e"
+      },
+      {
+        "path": "tests/test_agent_dependency_audit.py",
+        "mode": "100644",
+        "bytes": 1366,
+        "sha256": "c96fa7ecd9005cc0cc4cbd0340d9ee7d03b0273be89e4a5abb39d1d01eacd19e",
+        "gitBlob": "3645b16704bdd03dd958bc70fbc7cc11da5728f3"
+      }
+    ],
+    "findings": [
+      "check_ci_status verifies completed successful workflow runs rather than a fixed Agent job-name inventory.",
+      "wait_for_release_ci keeps its separate three historical workflow filenames; no Agent job-name inventory is changed.",
+      "required_checks.json and branch protection defaults retain Lint (ruff) and Smoke tests.",
+      "publish_agent_release and release_context retain exact main/repository/commit/version checks and do not enumerate regression or static-checks names.",
+      "Package validation evidence recursively includes the retained original regression reports; no static artifact was removed or renamed.",
+      "The inspected release-gate and artifact-handoff test sources contain no assertion requiring the thirteen commands to remain in regression."
+    ],
+    "noIncompatibleHardcodedAgentJobInventoryFoundInExaminedConsumers": true,
+    "globalRepositoryConsumerExhaustivenessClaimed": false
+  },
+  "limitations": {
+    "conditionalContingencyOnly": true,
+    "currentAttemptOutcomeEvaluated": false,
+    "currentRunOrRefStateQueried": false,
+    "yamlParsedOrImportedByThisPeer": false,
+    "projectCodeImportedOrExecuted": false,
+    "testsOrStaticToolsExecuted": false,
+    "runtimeDependencyCorrectnessVerified": false,
+    "timingCostOrPerformanceBenefitMeasured": false,
+    "canonicalSourceOrRefWritten": false,
+    "eligibleFleetOwnerOrFunctionalReviewPerformed": false,
+    "deploymentSigningFundingActivationOrAuthorityChanged": false,
+    "softwareOrNativeQualification": false,
+    "actualIntegratedCommitChecksStillRequired": true,
+    "workflowDispatchedRerunCancelledOrModifiedByThisPeer": false
+  },
+  "findings": [],
+  "disposition": "Scoped source structure is clear for the exact unreferenced proposal. Adoption, a fresh integrated commit, normal required checks and reviews remain separate; no passing runtime or current-attempt result is inferred."
+}
