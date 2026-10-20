@@ -51,13 +51,20 @@ PAPERS = tuple(f"{name}.{suffix}" for name in
     f"{name}_LaTeX.zip" for name in ("Transformational_Intelligence",
     "Beyond_the_Original_Problem", "Beyond_the_Production_Frontier")) + (
     "assets/whitepaper_v0.1.0-alphav15.pdf",
-    "manuscript/AGI_ALPHA_Unified_Publication_Final.pdf")
+    "manuscript/AGI_ALPHA_Unified_Publication_Final.pdf",
+    "Earn_the_Next_Experiment.pdf",
+    "Earn_the_Next_Experiment.tex",
+    "Earn_the_Next_Experiment_LaTeX.zip",
+    "Invent_the_Economy.pdf",
+    "Invent_the_Economy.tex",
+    "Invent_the_Economy_LaTeX.zip")
 ROUTES = {
     "alpha": (("", "en", None), ("successor/alpha/", "en", None),
               ("successor/alpha/", None, "fr"),
               ("transformational-intelligence/", None, None),
               ("agent/SUCCESSOR_COMPUTER_USE/", None, None),
-              ("manuscript/", None, None)),
+              ("manuscript/", None, None),
+              ("PILOT_PLAYBOOK/", None, None)),
     "jobs": (("", None, None), ("start/", "en", None),
              ("start/fr/", "fr", None), ("successor/computer/", "en", None),
              ("successor/computer/fr/", "fr", None),

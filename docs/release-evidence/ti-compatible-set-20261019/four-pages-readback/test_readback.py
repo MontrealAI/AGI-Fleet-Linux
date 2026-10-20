@@ -69,6 +69,36 @@ def unit_transport(expected):
 
 
 class ReadbackUnits(unittest.TestCase):
+    def test_finite_paper_inventory_preserves_original_paths_and_adds_public_source_names(self):
+        original = (
+            "Transformational_Intelligence.pdf", "Transformational_Intelligence.tex",
+            "Beyond_the_Original_Problem.pdf", "Beyond_the_Original_Problem.tex",
+            "Beyond_the_Production_Frontier.pdf", "Beyond_the_Production_Frontier.tex",
+            "Transformational_Intelligence_LaTeX.zip",
+            "Beyond_the_Original_Problem_LaTeX.zip",
+            "Beyond_the_Production_Frontier_LaTeX.zip",
+            "assets/whitepaper_v0.1.0-alphav15.pdf",
+            "manuscript/AGI_ALPHA_Unified_Publication_Final.pdf")
+        added = (
+            "Earn_the_Next_Experiment.pdf", "Earn_the_Next_Experiment.tex",
+            "Earn_the_Next_Experiment_LaTeX.zip", "Invent_the_Economy.pdf",
+            "Invent_the_Economy.tex", "Invent_the_Economy_LaTeX.zip")
+        self.assertEqual(R.PAPERS, original + added)
+        self.assertEqual(len(set(R.PAPERS)), 17)
+        self.assertEqual([row for row in R.ROUTES["alpha"] if row[0].startswith("PILOT_PLAYBOOK")],
+                         [("PILOT_PLAYBOOK/", None, None)])
+        expected = expectations()
+        expected["alpha"]["paperSha256"] = {added[0]: R.digest(b"%PDF-unit")}
+        files, transport = unit_transport(expected)
+        value = R.readback(expected, transport)
+        self.assertEqual([row["path"] for row in value["papers"]], list(original + added))
+        self.assertTrue(next(row for row in value["papers"] if row["path"] == added[0])[
+            "independentExpectedHashCompared"])
+        self.assertIn("PILOT_PLAYBOOK/", [row["path"] for row in value["routes"] if row["site"] == "alpha"])
+        files[("alpha", added[0], None)] = (b"%PDF-unit-changed", "application/octet-stream")
+        with self.assertRaisesRegex(ValueError, "independent paper hash differs"):
+            R.readback(expected, transport)
+
     def test_required_independent_inputs_refuse_before_transport(self):
         expected = expectations()
         _, transport = unit_transport(expected)

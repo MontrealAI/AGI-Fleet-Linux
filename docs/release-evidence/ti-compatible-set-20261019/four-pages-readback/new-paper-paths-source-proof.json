@@ -1,0 +1,182 @@
+{
+  "schema": "four-pages-paper-path-extension-static-proof/v1",
+  "scope": "LOCAL_READBACK_HELPER_AND_OFFLINE_GENERIC_UNITS_ONLY",
+  "upstream": {
+    "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+    "commit": "5518058431585b7d085b1e2f5db5faec175ea628",
+    "tree": "fde4a4eac62944c86bd17d41bef90f15da8d52ca",
+    "publicRecursiveTreeTruncated": false,
+    "selectedSourceRows": [
+      {
+        "path": "docs/Earn_the_Next_Experiment.pdf",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "47820f386fd29df590b428010a3fc392595a7845",
+        "bytes": 283924
+      },
+      {
+        "path": "docs/Earn_the_Next_Experiment.tex",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "699e4ae2d7b283bb9ba2e324e0ec189ed3c735f9",
+        "bytes": 78021
+      },
+      {
+        "path": "docs/Earn_the_Next_Experiment_LaTeX.zip",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "cfd0e1d9e841ddebadb58cb7496d4372d46ecc7f",
+        "bytes": 350750
+      },
+      {
+        "path": "docs/Invent_the_Economy.pdf",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "659395102963b2683f14f0d60bbf1e8aea2250d0",
+        "bytes": 285994
+      },
+      {
+        "path": "docs/Invent_the_Economy.tex",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "36d366b57c777fc85c5cd61e9c705b2a63e76e04",
+        "bytes": 82693
+      },
+      {
+        "path": "docs/Invent_the_Economy_LaTeX.zip",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "48d817d9ad7b8f97749218f888a8871098f05bd3",
+        "bytes": 365507
+      },
+      {
+        "path": "docs/PILOT_PLAYBOOK.md",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "58463ef4c21877c028ddd529de4d8bda3f168387",
+        "bytes": 6383
+      },
+      {
+        "path": "mkdocs.yml",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "7e53d58878db30bc9651a30744986673d780733f",
+        "bytes": 12352
+      },
+      {
+        "path": "requirements-docs.txt",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "66fd8373eb2a7364f2cff755067c065ca4bb2ce8",
+        "bytes": 130
+      },
+      {
+        "path": "scripts/build_gallery_site.sh",
+        "mode": "100755",
+        "type": "blob",
+        "gitBlob": "cea3e705bb17aec298952d100ce8e3515ac95748",
+        "bytes": 1551
+      },
+      {
+        "path": "scripts/mkdocs_assets.py",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "825a5c672ccfc1cf43348f320119ea57095329ae",
+        "bytes": 853
+      },
+      {
+        "path": "scripts/mkdocs_computer_use_study.py",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "9a5a6e2d2fe1d2368991f8ac25339c755b92c350",
+        "bytes": 928
+      },
+      {
+        "path": "scripts/mkdocs_release_links.py",
+        "mode": "100644",
+        "type": "blob",
+        "gitBlob": "7e52230aca4fbb55968157c08d1f2507e8129511",
+        "bytes": 1529
+      }
+    ]
+  },
+  "paperExtension": {
+    "originalPrefixPreserved": 11,
+    "addedPaths": [
+      "Earn_the_Next_Experiment.pdf",
+      "Earn_the_Next_Experiment.tex",
+      "Earn_the_Next_Experiment_LaTeX.zip",
+      "Invent_the_Economy.pdf",
+      "Invent_the_Economy.tex",
+      "Invent_the_Economy_LaTeX.zip"
+    ],
+    "total": 17,
+    "sourcePayloadBytes": 1446889,
+    "paperContentsOrArchivesRead": false
+  },
+  "pilotRoute": {
+    "source": "docs/PILOT_PLAYBOOK.md",
+    "route": "PILOT_PLAYBOOK/",
+    "generatedDestination": "PILOT_PLAYBOOK/index.html",
+    "classification": "SOURCE_GROUNDED_GENERATED_MAPPING_NOT_BUILT_OR_LIVE_OBSERVATION",
+    "reason": [
+      "Actual config docs_dir=docs; no use_directory_urls override, draft/exclude_docs declaration or matching mkdocs-exclude glob.",
+      "Pinned requirements-docs.txt selects MkDocs1.6.1. Its official defaults.py99 defaults use_directory_urls=True; structure/files.py376-398 maps Markdown basename to basename/index.html and basename/.",
+      "Official files.py546+ enumerates docs_dir independently of nav membership; actual three hooks do not remove or relocate this file.",
+      "Actual build_gallery_site.sh38 invokes mkdocs build --strict; subsequent browser copy is limited to site/alpha_agi_insight_v1/."
+    ]
+  },
+  "primaryReferences": [
+    "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/blob/5518058431585b7d085b1e2f5db5faec175ea628/mkdocs.yml",
+    "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/blob/5518058431585b7d085b1e2f5db5faec175ea628/requirements-docs.txt",
+    "https://github.com/MontrealAI/AGI-Alpha-Agent-v0/blob/5518058431585b7d085b1e2f5db5faec175ea628/scripts/build_gallery_site.sh",
+    "https://github.com/mkdocs/mkdocs/blob/1.6.1/mkdocs/config/defaults.py",
+    "https://github.com/mkdocs/mkdocs/blob/1.6.1/mkdocs/structure/files.py"
+  ],
+  "baseline": {
+    "readback": {
+      "bytes": 21993,
+      "sha256": "73c05e78df51d3fc510830e02d66a42f58a32bdb515afac99d05a2774d76b87c"
+    },
+    "tests": {
+      "bytes": 11234,
+      "sha256": "1ffcdb7ac74cefc255890236b4caed645f2ca59aea0049bb7402ef77b346f6ee"
+    }
+  },
+  "current": {
+    "readback": {
+      "bytes": 22250,
+      "gitBlob": "a1c811b4a07cc343dddbaf3e04e9845c88b191c2",
+      "sha256": "98bb912eba3aa1a45b1551c0190b3ba5f12a206bb2c912dd2835e3297e32ee13"
+    },
+    "tests": {
+      "bytes": 13164,
+      "gitBlob": "3ba74a4e8cef9a4f6c11fc9d6e5682f9db43859a",
+      "sha256": "368bc75fa30ffe0aabd388ea01428cd581d1b25e87369efa0078575c77b68ab6"
+    }
+  },
+  "validation": {
+    "offlineGenericUnits": {
+      "command": "python3 -I -B /workspace/scratch/ededf14e8d03/assessment/four-pages-readback/test_readback.py",
+      "passed": 11,
+      "failed": 0,
+      "elapsedSeconds": 0.01
+    },
+    "addedUnit": "Finite exact17paths/original11prefix/oneplaybookroute/newoptionalexpectedhashaccepted-and-mismatch-refused using generic unit transport only.",
+    "allHelperASTOutsidePAPERSAndROUTESUnchanged": true,
+    "allExistingTestsUnchanged": true,
+    "ASTParse": true
+  },
+  "preservedControls": [
+    "All four actual caller-supplied identities required before payload reads; no defaults/discovery.",
+    "Fixed host and paths, managed urllib transport, no redirects, origin Auth/Cookie, proxy inspection or override.",
+    "64MiB file /256MiB total /1024 requests /20s request /600s overall bounds unchanged.",
+    "Optional independent paper byte hashes and strict PDF/ZIP magic/UTF8 checks unchanged; no paper content/equivalence inferred from HTTP type.",
+    "All no-producer/no-release/no-render/no-native/no-install/no-wallet claims remain unchanged."
+  ],
+  "notPerformed": [
+    "No live Pages HTTP invocation or final expected input created.",
+    "No paper text read, PDF interpretation, archive extraction, build, browser or target/native/model execution.",
+    "No product source/ref/review-slot/release/E modification or publication."
+  ]
+}

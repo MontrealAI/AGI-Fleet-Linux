@@ -1,0 +1,89 @@
+{
+  "schema": "local/four-pages-readback-extension-source-peer/v1",
+  "scope": "SOURCE_REVIEW_ONLY_NOT_LIVE_PAGES_OR_RELEASE_QUALIFICATION",
+  "result": "CLEAR_NO_MATERIAL_FINDING",
+  "helper": {
+    "path": "assessment/four-pages-readback/readback.py",
+    "bytes": 22250,
+    "gitBlob": "a1c811b4a07cc343dddbaf3e04e9845c88b191c2",
+    "sha256": "98bb912eba3aa1a45b1551c0190b3ba5f12a206bb2c912dd2835e3297e32ee13"
+  },
+  "tests": {
+    "path": "assessment/four-pages-readback/test_readback.py",
+    "bytes": 13164,
+    "gitBlob": "3ba74a4e8cef9a4f6c11fc9d6e5682f9db43859a",
+    "sha256": "368bc75fa30ffe0aabd388ea01428cd581d1b25e87369efa0078575c77b68ab6"
+  },
+  "patch": {
+    "path": "assessment/four-pages-readback-551-extension/source.patch",
+    "bytes": 3406,
+    "sha256": "6dca772e211d1aaa92bc1417a4a06d52cc8efc540977df425bfee2c3fab38a88"
+  },
+  "independentChecks": {
+    "suppliedPatchInverseReconstructsCompleteReviewedBaseline": true,
+    "baselineHelper": {
+      "bytes": 21993,
+      "sha256": "73c05e78df51d3fc510830e02d66a42f58a32bdb515afac99d05a2774d76b87c"
+    },
+    "baselineTests": {
+      "bytes": 11234,
+      "sha256": "1ffcdb7ac74cefc255890236b4caed645f2ca59aea0049bb7402ef77b346f6ee"
+    },
+    "originalElevenPaperPathsRemainExactPrefix": true,
+    "totalUniquePaperPaths": 17,
+    "onlyHelperChanges": "Six fixed PAPERS paths appended and one fixed Alpha playbook route.",
+    "onlyTestChange": "One generic unit checks exact finite inventory/prefix/route, accepts independent hash for new PDF, and requires mismatched new PDF bytes to be refused.",
+    "transportIdentityBudgetAndOtherHelperSourceBytePreserved": true,
+    "existingTestsBytePreserved": true,
+    "sourceASTParsedWithoutExecution": true
+  },
+  "upstreamGrounding": {
+    "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+    "commit": "5518058431585b7d085b1e2f5db5faec175ea628",
+    "selectedPublicTreeLeavesIndependentlyRead": true,
+    "addedPaperPaths": [
+      "Earn_the_Next_Experiment.pdf",
+      "Earn_the_Next_Experiment.tex",
+      "Earn_the_Next_Experiment_LaTeX.zip",
+      "Invent_the_Economy.pdf",
+      "Invent_the_Economy.tex",
+      "Invent_the_Economy_LaTeX.zip"
+    ],
+    "sourceDocument": "docs/PILOT_PLAYBOOK.md",
+    "sourceBlob": "58463ef4c21877c028ddd529de4d8bda3f168387",
+    "generatedDestination": "PILOT_PLAYBOOK/index.html",
+    "publicRelativeRoute": "PILOT_PLAYBOOK/",
+    "classification": "SOURCE_GROUNDED_MAPPING_NOT_BUILT_OR_LIVE_OBSERVATION",
+    "config": {
+      "path": "mkdocs.yml",
+      "gitBlob": "7e53d58878db30bc9651a30744986673d780733f",
+      "docsDir": "docs",
+      "directoryUrlsOverride": false,
+      "matchingExclude": false
+    },
+    "pinnedMkDocs": "1.6.1",
+    "officialSource": {
+      "defaultsBlob": "68ebf3a8d89bdaf8dbeb4e57ac53f05bfe7951e8",
+      "filesBlob": "86f94bd63dd4ae9446145b7b10e25dc7024bffd6"
+    },
+    "rationale": "Pinned MkDocs defaults directory URLs and discovers docs files independently of nav. Three actual hooks do not remove/relocate this playbook; postbuild browser copy is confined to alpha_agi_insight_v1."
+  },
+  "limits": {
+    "publicGitHubSourceReadsPerformed": true,
+    "livePagesHTTP": false,
+    "repeatedOfflineUnits": false,
+    "targetImports": false,
+    "build": false,
+    "browser": false,
+    "nativeOrModelExecution": false,
+    "windowsACLExecution": false,
+    "paperPayloadContentsRead": false,
+    "productSourceEdits": false,
+    "productRefsChanged": false,
+    "evidenceBranchChanged": false,
+    "publicationPerformed": false,
+    "releaseOrProducerAuthenticated": false,
+    "remaining": "Actual independent final expectations and authenticated Pages artifact hashes are required before any live readback; HTTP bytes do not prove rendered controls or native acceptance."
+  }
+}
+
