@@ -1,0 +1,449 @@
+﻿2026-10-20T19:53:02.1201396Z Current runner version: '2.337.0'
+2026-10-20T19:53:02.1220446Z ##[group]Runner Image Provisioner
+2026-10-20T19:53:02.1221134Z Hosted Compute Agent
+2026-10-20T19:53:02.1221521Z Version: 20261015.610
+2026-10-20T19:53:02.1221940Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-20T19:53:02.1222443Z Build Date: 2026-10-14T17:06:54Z
+2026-10-20T19:53:02.1222868Z Worker ID: {3e744202-86ef-4646-8c5b-f57a34f1dd24}
+2026-10-20T19:53:02.1223362Z Region: centralus
+2026-10-20T19:53:02.1223730Z Cloud: Azure
+2026-10-20T19:53:02.1224077Z ##[endgroup]
+2026-10-20T19:53:02.1225160Z ##[group]Operating System
+2026-10-20T19:53:02.1225545Z Ubuntu
+2026-10-20T19:53:02.1225905Z 24.04.5
+2026-10-20T19:53:02.1226297Z LTS
+2026-10-20T19:53:02.1226631Z ##[endgroup]
+2026-10-20T19:53:02.1227377Z ##[group]Runner Image
+2026-10-20T19:53:02.1227809Z Image: ubuntu-24.04
+2026-10-20T19:53:02.1228160Z Version: 20261018.339.1
+2026-10-20T19:53:02.1229025Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T19:53:02.1229963Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+2026-10-20T19:53:02.1230626Z ##[endgroup]
+2026-10-20T19:53:02.1231369Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T19:53:02.1232671Z Actions: read
+2026-10-20T19:53:02.1233015Z Contents: read
+2026-10-20T19:53:02.1233426Z Metadata: read
+2026-10-20T19:53:02.1233819Z ##[endgroup]
+2026-10-20T19:53:02.1235498Z Secret source: Actions
+2026-10-20T19:53:02.1236100Z Cache mode: write
+2026-10-20T19:53:02.1236563Z Prepare workflow directory
+2026-10-20T19:53:02.1605079Z Prepare all required actions
+2026-10-20T19:53:02.1638965Z Getting action download info
+2026-10-20T19:53:02.4022192Z Download action repository 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-10-20T19:53:02.7558794Z Download action repository 'actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f' (SHA:bbbca2ddaa5d8feaa63e36b76fdaad77386f024f)
+2026-10-20T19:53:03.2109712Z Complete job name: historical-ci
+2026-10-20T19:53:03.2672516Z ##[group]Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+2026-10-20T19:53:03.2673132Z with:
+2026-10-20T19:53:03.2673418Z   persist-credentials: false
+2026-10-20T19:53:03.2673771Z   repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T19:53:03.2676591Z   token: ***
+2026-10-20T19:53:03.2676862Z   ssh-strict: true
+2026-10-20T19:53:03.2677137Z   ssh-user: git
+2026-10-20T19:53:03.2677410Z   clean: true
+2026-10-20T19:53:03.2677697Z   sparse-checkout-cone-mode: true
+2026-10-20T19:53:03.2678029Z   fetch-depth: 1
+2026-10-20T19:53:03.2678304Z   fetch-tags: false
+2026-10-20T19:53:03.2678606Z   show-progress: true
+2026-10-20T19:53:03.2678889Z   lfs: false
+2026-10-20T19:53:03.2679161Z   submodules: false
+2026-10-20T19:53:03.2679465Z   set-safe-directory: true
+2026-10-20T19:53:03.2679860Z env:
+2026-10-20T19:53:03.2680131Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T19:53:03.2680478Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T19:53:03.2680844Z   NO_DISCLAIMER: 1
+2026-10-20T19:53:03.2681160Z ##[endgroup]
+2026-10-20T19:53:03.3408684Z Syncing repository: MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T19:53:03.3409957Z ##[group]Getting Git version info
+2026-10-20T19:53:03.3410738Z Working directory is '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T19:53:03.3411507Z [command]/usr/bin/git version
+2026-10-20T19:53:03.3460385Z git version 2.55.0
+2026-10-20T19:53:03.3475644Z ##[endgroup]
+2026-10-20T19:53:03.3485885Z Temporarily overriding HOME='/home/runner/work/_temp/f8157490-256d-4be3-b458-5dd99ab8cbd6' before making global git config changes
+2026-10-20T19:53:03.3486723Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T19:53:03.3489662Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T19:53:03.4054060Z Deleting the contents of '/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0'
+2026-10-20T19:53:03.4058620Z ##[group]Initializing the repository
+2026-10-20T19:53:03.4062319Z [command]/usr/bin/git init /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T19:53:03.4625778Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T19:53:03.4627100Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T19:53:03.4627789Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T19:53:03.4628742Z hint: call:
+2026-10-20T19:53:03.4629191Z hint:
+2026-10-20T19:53:03.4629768Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T19:53:03.4630379Z hint:
+2026-10-20T19:53:03.4630945Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T19:53:03.4631853Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T19:53:03.4632604Z hint:
+2026-10-20T19:53:03.4633010Z hint: 	git branch -m <name>
+2026-10-20T19:53:03.4633564Z hint:
+2026-10-20T19:53:03.4634218Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T19:53:03.4635563Z Initialized empty Git repository in /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/
+2026-10-20T19:53:03.4637746Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T19:53:03.5204376Z ##[endgroup]
+2026-10-20T19:53:03.5205127Z ##[group]Disabling automatic garbage collection
+2026-10-20T19:53:03.5207065Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T19:53:03.5798970Z ##[endgroup]
+2026-10-20T19:53:03.5799560Z ##[group]Setting up auth
+2026-10-20T19:53:03.5799943Z Removing SSH command configuration
+2026-10-20T19:53:03.5804176Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T19:53:03.5836592Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T19:53:03.6132163Z Removing HTTP extra header
+2026-10-20T19:53:03.6138547Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T19:53:03.6167527Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T19:53:03.6377018Z Removing includeIf entries pointing to credentials config files
+2026-10-20T19:53:03.6381422Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T19:53:03.6410792Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T19:53:03.6625815Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T19:53:03.6892080Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:03.7502382Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:03.8702783Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:03.8798612Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:03.8896011Z ##[endgroup]
+2026-10-20T19:53:03.8897010Z ##[group]Fetching the repository
+2026-10-20T19:53:03.8902211Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a6d20a93c7c5b7430bf42d2367701b350513e90d:refs/remotes/origin/main
+2026-10-20T19:53:07.8370139Z From https://github.com/MontrealAI/AGI-Alpha-Agent-v0
+2026-10-20T19:53:07.8372497Z  * [new ref]         a6d20a93c7c5b7430bf42d2367701b350513e90d -> origin/main
+2026-10-20T19:53:07.8398958Z [command]/usr/bin/git branch --list --remote origin/main
+2026-10-20T19:53:07.8436848Z   origin/main
+2026-10-20T19:53:07.8443643Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-10-20T19:53:07.8479218Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:53:07.8483718Z ##[endgroup]
+2026-10-20T19:53:07.8484210Z ##[group]Determining the checkout info
+2026-10-20T19:53:07.8484665Z ##[endgroup]
+2026-10-20T19:53:07.8486624Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T19:53:07.8527819Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T19:53:07.8585364Z ##[group]Checking out the ref
+2026-10-20T19:53:07.8593966Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-20T19:53:08.3903852Z Switched to a new branch 'main'
+2026-10-20T19:53:08.3906089Z branch 'main' set up to track 'origin/main'.
+2026-10-20T19:53:08.3967937Z ##[endgroup]
+2026-10-20T19:53:08.4035289Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T19:53:08.4035624Z a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:53:08.4047371Z ##[group]Removing auth
+2026-10-20T19:53:08.4047657Z Removing SSH command configuration
+2026-10-20T19:53:08.4048010Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T19:53:08.4086858Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T19:53:08.4279491Z Removing HTTP extra header
+2026-10-20T19:53:08.4282988Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T19:53:08.4314265Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T19:53:08.4505027Z Removing includeIf entries pointing to credentials config files
+2026-10-20T19:53:08.4507754Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T19:53:08.4531500Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T19:53:08.4531978Z includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T19:53:08.4532319Z includeif.gitdir:/github/workspace/.git.path
+2026-10-20T19:53:08.4532580Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T19:53:08.4539526Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path
+2026-10-20T19:53:08.4559119Z /home/runner/work/_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:08.4566118Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git.path /home/runner/work/_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:08.4596098Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path
+2026-10-20T19:53:08.4617230Z /home/runner/work/_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:08.4623544Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:08.4651170Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-20T19:53:08.4706016Z /github/runner_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:08.4712776Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:08.4740931Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-20T19:53:08.4760475Z /github/runner_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:08.4765802Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config
+2026-10-20T19:53:08.4795010Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T19:53:08.4979853Z Removing credentials config '/home/runner/work/_temp/git-credentials-17284bae-224d-46cc-a460-7e9aa0f94065.config'
+2026-10-20T19:53:08.4988647Z ##[endgroup]
+2026-10-20T19:53:08.5172936Z ##[group]Run python -m scripts.wait_for_release_ci
+2026-10-20T19:53:08.5173257Z [36;1mpython -m scripts.wait_for_release_ci[0m
+2026-10-20T19:53:08.5304960Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T19:53:08.5305170Z env:
+2026-10-20T19:53:08.5305295Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T19:53:08.5305455Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T19:53:08.5305611Z   NO_DISCLAIMER: 1
+2026-10-20T19:53:08.5307251Z   GH_TOKEN: ***
+2026-10-20T19:53:08.5307377Z ##[endgroup]
+2026-10-20T19:53:10.3379920Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:53:41.6773640Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:54:13.0531816Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:54:44.3417953Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:55:15.6149272Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:55:46.9722494Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:56:18.3796970Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:56:49.6170616Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:57:20.9519407Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:57:52.7868774Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:58:24.1217366Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:58:55.5150681Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:59:26.7854855Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T19:59:58.4456268Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:00:29.9931485Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:01:01.3724733Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:01:32.8487786Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:02:04.4111867Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:02:35.9462000Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:03:07.2470714Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:03:38.5964939Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:04:09.9856669Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:04:41.3535689Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:05:12.8570361Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:05:44.3266083Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:06:15.7332955Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:06:47.1289314Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:07:18.5418991Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:07:50.0627512Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:08:21.4156358Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:08:52.8594331Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:09:24.4698369Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:09:56.0637419Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:10:27.5191320Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:10:59.2782370Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:11:31.2684124Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:12:02.6669037Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:12:34.2279817Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:13:05.5678960Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:13:36.9941169Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:14:08.2983856Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:14:39.5966061Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:15:11.0209608Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:15:42.2427162Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:16:13.5885966Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:16:45.0083603Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:17:16.3187072Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:17:47.6541395Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:18:19.1172854Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:18:50.4762216Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:19:21.7336253Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:19:53.2164727Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:20:24.6969492Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:20:56.0976210Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:21:27.3879285Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:21:58.9457794Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:22:30.3726659Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:23:01.7970929Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:23:32.9856999Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:24:04.3647617Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:24:35.6657079Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:25:07.3334678Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:25:38.6629032Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:26:09.9741162Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:26:41.2333781Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:27:12.5332097Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:27:43.9728485Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:28:15.3625047Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:28:46.7619055Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:29:18.0991160Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:29:49.3643696Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:30:20.7179982Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:30:52.0216075Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:31:23.3543113Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:31:54.6650953Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:32:26.0515587Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:32:57.3483921Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:33:28.6711138Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:33:59.9510216Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:34:31.2242470Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:35:02.7094679Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:35:34.0647660Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:36:05.4953292Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:36:36.6627143Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:37:08.0791210Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:37:39.5024317Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:38:10.6817412Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:38:41.9642070Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:39:13.5658303Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:39:44.9440434Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:40:16.1137567Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:40:47.4411921Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:41:18.6673991Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:41:49.9885702Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:42:21.3110874Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:42:52.6545248Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:43:24.0725002Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:43:55.4818954Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:44:26.8242562Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:44:58.1316809Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:45:29.4670299Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:46:00.7444874Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:46:32.2635228Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:47:03.5644418Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:47:34.8587791Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:48:06.0918684Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:48:37.3842723Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:49:08.7165119Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:49:40.0350303Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:50:11.1922608Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:50:42.4560462Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:51:13.8285959Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:51:45.2082907Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:52:16.4736753Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:52:47.7008457Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:53:18.9679425Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:53:50.3354998Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:54:21.6701837Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:54:53.0045482Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:55:24.5022585Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:55:55.7670756Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:56:27.0368792Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:56:58.5047774Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:57:29.7562240Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:58:01.0862463Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:58:32.5933801Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:59:04.2058580Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T20:59:35.4024695Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:00:06.7087056Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:00:38.0561693Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:01:09.4934442Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:01:40.8328086Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:02:12.2111639Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:02:43.6547371Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:03:15.1127106Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:03:46.3210348Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:04:17.5353632Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:04:48.9521112Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:05:20.1716938Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:05:51.6085791Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:06:22.8974402Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:06:54.0668643Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:07:25.3726320Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:07:56.7300411Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:08:28.1063517Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:08:59.5174767Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:09:30.9404639Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:10:02.3734432Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:10:33.7353346Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:11:05.0025854Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:11:36.4715207Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:12:07.8789288Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:12:39.1837217Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:13:10.3557045Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:13:41.9137132Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:14:13.3317664Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:14:44.7107456Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:15:16.1881567Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:15:47.8089664Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:16:19.2958254Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:16:50.6886408Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:17:22.1076992Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:17:53.4811301Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:18:24.7275595Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:18:56.2048309Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:19:27.5306077Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:19:58.8715679Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:20:30.3686509Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:21:01.8397766Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:21:33.2247610Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:22:04.4917349Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:22:35.8588961Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:23:07.2898211Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:23:38.4894694Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:24:09.8772932Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:24:41.2190540Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:25:12.6830642Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:25:43.9920328Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:26:15.3891796Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:26:46.7700725Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:27:18.0943759Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:27:49.4497634Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:28:20.8719083Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:28:52.2518776Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:29:23.4552013Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:29:54.7323570Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:30:26.0224227Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:30:57.3108147Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:31:28.5720266Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:32:00.2026753Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:32:31.5865477Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:33:02.9730006Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:33:34.2988762Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:34:05.6235325Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:34:37.0086586Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:35:08.3473564Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:35:39.7259978Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:36:11.1407252Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:36:42.3534915Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:37:13.6967510Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:37:45.2117759Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:38:16.5052125Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:38:47.8309605Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:39:19.1541877Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:39:50.3937545Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:40:21.7503926Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:40:53.0383852Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:41:24.2131936Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:41:55.3997983Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:42:26.6076252Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:42:57.9237207Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:43:29.2699590Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:44:00.5702108Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:44:31.7872628Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:45:02.9854209Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:45:34.2806730Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:46:05.7269165Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:46:36.9698516Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:47:08.2416116Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:47:39.7230297Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:48:11.0335121Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:48:42.2926565Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:49:13.5456673Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:49:45.1235343Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:50:16.5426782Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:50:47.9631603Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:51:19.2792325Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:51:50.5234758Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:52:21.7729390Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:52:53.0317611Z Waiting for historical CI on a6d20a93c7c5b7430bf42d2367701b350513e90d
+2026-10-20T21:53:24.4239152Z Traceback (most recent call last):
+2026-10-20T21:53:24.4239509Z   File "<frozen runpy>", line 198, in _run_module_as_main
+2026-10-20T21:53:24.4240159Z   File "<frozen runpy>", line 88, in _run_code
+2026-10-20T21:53:24.4240669Z   File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/scripts/wait_for_release_ci.py", line 147, in <module>
+2026-10-20T21:53:24.4241142Z     main()
+2026-10-20T21:53:24.4241525Z   File "/home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/scripts/wait_for_release_ci.py", line 141, in main
+2026-10-20T21:53:24.4242111Z     raise TimeoutError("Required historical CI did not complete before the release deadline")
+2026-10-20T21:53:24.4242637Z TimeoutError: Required historical CI did not complete before the release deadline
+2026-10-20T21:53:24.4426618Z ##[error]Process completed with exit code 1.
+2026-10-20T21:53:24.4470897Z ##[group]Run echo "name=historical-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+2026-10-20T21:53:24.4471290Z [36;1mecho "name=historical-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"[0m
+2026-10-20T21:53:24.4513127Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T21:53:24.4513338Z env:
+2026-10-20T21:53:24.4513459Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T21:53:24.4513615Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T21:53:24.4513760Z   NO_DISCLAIMER: 1
+2026-10-20T21:53:24.4513878Z ##[endgroup]
+2026-10-20T21:53:24.4631301Z ##[group]Run actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+2026-10-20T21:53:24.4631549Z with:
+2026-10-20T21:53:24.4631693Z   name: historical-ci-39484204330-1
+2026-10-20T21:53:24.4631844Z   path: evidence/
+2026-10-20T21:53:24.4631968Z   if-no-files-found: warn
+2026-10-20T21:53:24.4632101Z   compression-level: 6
+2026-10-20T21:53:24.4632227Z   overwrite: false
+2026-10-20T21:53:24.4632350Z   include-hidden-files: false
+2026-10-20T21:53:24.4632490Z   archive: true
+2026-10-20T21:53:24.4632602Z env:
+2026-10-20T21:53:24.4632719Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-20T21:53:24.4632871Z   OPENAI_AGENTS_DISABLE_TRACING: true
+2026-10-20T21:53:24.4633016Z   NO_DISCLAIMER: 1
+2026-10-20T21:53:24.4633152Z ##[endgroup]
+2026-10-20T21:53:24.5683912Z With the provided path, there will be 4 files uploaded
+2026-10-20T21:53:24.5687759Z Artifact name is valid!
+2026-10-20T21:53:24.5688020Z Root directory input is valid!
+2026-10-20T21:53:24.9156562Z Uploading artifact: historical-ci-39484204330-1.zip
+2026-10-20T21:53:24.9193601Z Beginning upload of artifact content to blob storage
+2026-10-20T21:53:25.1509208Z Uploaded bytes 10405
+2026-10-20T21:53:25.1952718Z Finished uploading artifact content to blob storage!
+2026-10-20T21:53:25.1953382Z SHA256 digest of uploaded artifact is 6a482685a267b86464a91e5384833562aaa6b2595d4aecb672e34e7a183d74ac
+2026-10-20T21:53:25.1953907Z Finalizing artifact upload
+2026-10-20T21:53:25.5337071Z Artifact historical-ci-39484204330-1 successfully finalized. Artifact ID 12301528709
+2026-10-20T21:53:25.5337625Z Artifact historical-ci-39484204330-1 has been successfully uploaded! Final size is 10405 bytes. Artifact ID is 12301528709
+2026-10-20T21:53:25.5340585Z Artifact download URL: https://github.com/MontrealAI/AGI-Alpha-Agent-v0/actions/runs/39484204330/artifacts/12301528709
+2026-10-20T21:53:25.5515619Z Post job cleanup.
+2026-10-20T21:53:25.6143639Z [command]/usr/bin/git version
+2026-10-20T21:53:25.6176867Z git version 2.55.0
+2026-10-20T21:53:25.6202797Z Temporarily overriding HOME='/home/runner/work/_temp/be54c0be-4697-4af4-b96e-341d5088ffbd' before making global git config changes
+2026-10-20T21:53:25.6203581Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T21:53:25.6207031Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0
+2026-10-20T21:53:25.6238751Z Removing SSH command configuration
+2026-10-20T21:53:25.6243947Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T21:53:25.6276788Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T21:53:25.6476905Z Removing HTTP extra header
+2026-10-20T21:53:25.6481216Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T21:53:25.6512811Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T21:53:25.6706919Z Removing includeIf entries pointing to credentials config files
+2026-10-20T21:53:25.6712764Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T21:53:25.6740669Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T21:53:25.7062836Z Evaluate and set job outputs
+2026-10-20T21:53:25.7068442Z Set output 'artifact-name'
+2026-10-20T21:53:25.7069812Z Cleaning up orphan processes
