@@ -1,0 +1,37 @@
+{
+  "schema": "alpha-main-optional-job-retry-result/v1",
+  "source": "558f798a9b9cc73c1db01905858aad8852e11092",
+  "admission": {
+    "schema": "alpha-cancelled-optional-job-retry/v1",
+    "source": "558f798a9b9cc73c1db01905858aad8852e11092",
+    "workflowRun": 39459545474,
+    "priorAttempt": 2,
+    "jobId": 118828297024,
+    "jobName": "Deploy",
+    "priorConclusion": "cancelled",
+    "sameSourceRequired": true,
+    "condition": "needs.owner-check.result == 'success' && startsWith(github.ref, 'refs/tags/')",
+    "ref": "refs/heads/main",
+    "conditionMustRemainFalse": true,
+    "reason": "All required validations and Integration matrix passed; the retained cancelled tag-only dependent keeps the aggregate workflow cancelled. One unchanged targeted job retry allows GitHub to reevaluate its original condition; no source, condition, timeout or gate changes are authorized.",
+    "noTagOrDeploymentDispatch": true
+  },
+  "originalRequiredValidation": "All required validation job variants and Integration matrix passed in attempt2; no waiver",
+  "retryResult": {
+    "runId": 39459545474,
+    "attempt": 3,
+    "status": "completed",
+    "conclusion": "cancelled",
+    "startedAt": "2026-10-20T19:19:24Z",
+    "updatedAt": "2026-10-20T19:31:37Z",
+    "jobs": []
+  },
+  "cause": "Not established by available completed-job logs or API metadata",
+  "remainingBlocker": {
+    "owner": "Alpha repository Actions operator",
+    "nextAction": "Inspect original Integration CI cancellation and use GitHub Re-run all jobs on the unchanged exact-main workflow if needed. Obtain genuine successful aggregate conclusion; then resume original Agent historical-ci/package/Pages/publish chain."
+  },
+  "noFurtherBlindRetry": true,
+  "noWorkflowOrGateChanges": true,
+  "publicationNotComplete": true
+}
