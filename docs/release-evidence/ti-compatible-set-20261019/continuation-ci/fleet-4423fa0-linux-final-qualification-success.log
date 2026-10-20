@@ -1,0 +1,91 @@
+﻿2026-10-20T19:41:33.2560500Z Current runner version: '2.337.0'
+2026-10-20T19:41:33.2584500Z ##[group]Runner Image Provisioner
+2026-10-20T19:41:33.2585348Z Hosted Compute Agent
+2026-10-20T19:41:33.2585939Z Version: 20261015.610
+2026-10-20T19:41:33.2586534Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-20T19:41:33.2587517Z Build Date: 2026-10-14T17:06:54Z
+2026-10-20T19:41:33.2588158Z Worker ID: {61575819-e01e-43f6-9610-4c6f96e00e70}
+2026-10-20T19:41:33.2588813Z Region: westus3
+2026-10-20T19:41:33.2589331Z Cloud: Azure
+2026-10-20T19:41:33.2589832Z ##[endgroup]
+2026-10-20T19:41:33.2591570Z ##[group]Operating System
+2026-10-20T19:41:33.2592153Z Ubuntu
+2026-10-20T19:41:33.2592626Z 24.04.5
+2026-10-20T19:41:33.2593151Z LTS
+2026-10-20T19:41:33.2593621Z ##[endgroup]
+2026-10-20T19:41:33.2594205Z ##[group]Runner Image
+2026-10-20T19:41:33.2594763Z Image: ubuntu-24.04
+2026-10-20T19:41:33.2595265Z Version: 20261018.339.1
+2026-10-20T19:41:33.2596452Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T19:41:33.2598074Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+2026-10-20T19:41:33.2598956Z ##[endgroup]
+2026-10-20T19:41:33.2599971Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T19:41:33.2602104Z Contents: read
+2026-10-20T19:41:33.2602663Z Metadata: read
+2026-10-20T19:41:33.2603230Z ##[endgroup]
+2026-10-20T19:41:33.2605300Z Secret source: Actions
+2026-10-20T19:41:33.2606240Z Cache mode: write
+2026-10-20T19:41:33.2607200Z Prepare workflow directory
+2026-10-20T19:41:33.2923220Z Prepare all required actions
+2026-10-20T19:41:33.3020574Z Complete job name: Required release qualification
+2026-10-20T19:41:33.3721442Z ##[group]Run set -euo pipefail
+2026-10-20T19:41:33.3722175Z [36;1mset -euo pipefail[0m
+2026-10-20T19:41:33.3722738Z [36;1mgit init .[0m
+2026-10-20T19:41:33.3723585Z [36;1mgit remote add origin "https://github.com/${REPOSITORY}.git"[0m
+2026-10-20T19:41:33.3724416Z [36;1mgit fetch --depth=1 origin "$COMMIT"[0m
+2026-10-20T19:41:33.3725155Z [36;1mgit checkout --detach FETCH_HEAD[0m
+2026-10-20T19:41:33.4446834Z shell: /usr/bin/bash -e {0}
+2026-10-20T19:41:33.4448442Z env:
+2026-10-20T19:41:33.4449508Z   COMMIT: ee06184ca9c86076971b369b1c20d1a148aff8a9
+2026-10-20T19:41:33.4450623Z   REPOSITORY: MontrealAI/AGI-Fleet-Linux
+2026-10-20T19:41:33.4451696Z ##[endgroup]
+2026-10-20T19:41:33.4857419Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T19:41:33.4859596Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/
+2026-10-20T19:41:33.4862748Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T19:41:33.4864904Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T19:41:33.4866498Z hint: call:
+2026-10-20T19:41:33.4867751Z hint:
+2026-10-20T19:41:33.4869276Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T19:41:33.4870608Z hint:
+2026-10-20T19:41:33.4871977Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T19:41:33.4873933Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T19:41:33.4875588Z hint:
+2026-10-20T19:41:33.4876587Z hint: 	git branch -m <name>
+2026-10-20T19:41:33.4877847Z hint:
+2026-10-20T19:41:33.4879185Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T19:41:35.0461537Z From https://github.com/MontrealAI/AGI-Fleet-Linux
+2026-10-20T19:41:35.0464433Z  * branch            ee06184ca9c86076971b369b1c20d1a148aff8a9 -> FETCH_HEAD
+2026-10-20T19:41:35.4794439Z HEAD is now at ee06184 Merge 4423fa0602229c6d9ce6e198dd68fca0bac37ba3 into 45759fb096faf8988f58ae5ea71248d0f35a97c7
+2026-10-20T19:41:35.4961482Z ##[group]Run python3 engineering/governance/check_children.py --needs "$CHILD_RESULTS"
+2026-10-20T19:41:35.4962272Z [36;1mpython3 engineering/governance/check_children.py --needs "$CHILD_RESULTS"[0m
+2026-10-20T19:41:35.4994324Z shell: /usr/bin/bash -e {0}
+2026-10-20T19:41:35.4994887Z env:
+2026-10-20T19:41:35.4996177Z   CHILD_RESULTS: {
+  "build": {
+    "result": "success",
+    "outputs": {}
+  },
+  "native": {
+    "result": "success",
+    "outputs": {}
+  },
+  "integration": {
+    "result": "success",
+    "outputs": {}
+  },
+  "profile-integration": {
+    "result": "success",
+    "outputs": {}
+  },
+  "successor": {
+    "result": "success",
+    "outputs": {}
+  },
+  "audit": {
+    "result": "success",
+    "outputs": {}
+  }
+}
+2026-10-20T19:41:35.4997761Z ##[endgroup]
+2026-10-20T19:41:35.5281477Z {"status": "PASS", "children": ["audit", "build", "integration", "native", "profile-integration", "successor"], "scope": "same-workflow exact-artifact qualification; not physical/live qualification"}
+2026-10-20T19:41:35.5406045Z Cleaning up orphan processes

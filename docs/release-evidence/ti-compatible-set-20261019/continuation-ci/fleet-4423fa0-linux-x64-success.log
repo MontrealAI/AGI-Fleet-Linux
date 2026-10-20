@@ -1,0 +1,234 @@
+﻿2026-10-20T18:43:07.1531669Z Current runner version: '2.337.0'
+2026-10-20T18:43:07.1546025Z ##[group]Runner Image Provisioner
+2026-10-20T18:43:07.1546621Z Hosted Compute Agent
+2026-10-20T18:43:07.1546966Z Version: 20261012.601
+2026-10-20T18:43:07.1547467Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-20T18:43:07.1547941Z Build Date: 2026-10-12T17:48:21Z
+2026-10-20T18:43:07.1548335Z Worker ID: {015addd6-f8e2-427e-8ba1-021cfdf402d5}
+2026-10-20T18:43:07.1548803Z Region: southcentralus
+2026-10-20T18:43:07.1549179Z Cloud: Azure
+2026-10-20T18:43:07.1549486Z ##[endgroup]
+2026-10-20T18:43:07.1550403Z ##[group]Operating System
+2026-10-20T18:43:07.1550758Z Ubuntu
+2026-10-20T18:43:07.1551119Z 24.04.5
+2026-10-20T18:43:07.1551430Z LTS
+2026-10-20T18:43:07.1551732Z ##[endgroup]
+2026-10-20T18:43:07.1552083Z ##[group]Runner Image
+2026-10-20T18:43:07.1552428Z Image: ubuntu-24.04
+2026-10-20T18:43:07.1552778Z Version: 20261012.334.1
+2026-10-20T18:43:07.1553537Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T18:43:07.1554430Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-20T18:43:07.1554987Z ##[endgroup]
+2026-10-20T18:43:07.1555679Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T18:43:07.1556878Z Contents: read
+2026-10-20T18:43:07.1557437Z Metadata: read
+2026-10-20T18:43:07.1557774Z ##[endgroup]
+2026-10-20T18:43:07.1558985Z Secret source: Actions
+2026-10-20T18:43:07.1559545Z Cache mode: write
+2026-10-20T18:43:07.1559940Z Prepare workflow directory
+2026-10-20T18:43:07.1869137Z Prepare all required actions
+2026-10-20T18:43:07.1898356Z Getting action download info
+2026-10-20T18:43:07.4674085Z Download action repository 'actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0' (SHA:634f93cb2916e3fdff6788551b99b062d0335ce0)
+2026-10-20T18:43:08.2063849Z Download action repository 'actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f' (SHA:b7c566a772e6b6bfb58ed0dc250532a479d7789f)
+2026-10-20T18:43:09.0136969Z Complete job name: native (ubuntu-24.04, x64)
+2026-10-20T18:43:09.0552809Z ##[group]Run set -euo pipefail
+2026-10-20T18:43:09.0553237Z [36;1mset -euo pipefail[0m
+2026-10-20T18:43:09.0553575Z [36;1mgit init .[0m
+2026-10-20T18:43:09.0553985Z [36;1mgit remote add origin "https://github.com/${REPOSITORY}.git"[0m
+2026-10-20T18:43:09.0554463Z [36;1mgit fetch --depth=1 origin "$COMMIT"[0m
+2026-10-20T18:43:09.0554860Z [36;1mgit checkout --detach FETCH_HEAD[0m
+2026-10-20T18:43:09.1019880Z shell: /usr/bin/bash -e {0}
+2026-10-20T18:43:09.1020345Z env:
+2026-10-20T18:43:09.1020670Z   COMMIT: ee06184ca9c86076971b369b1c20d1a148aff8a9
+2026-10-20T18:43:09.1021077Z   REPOSITORY: MontrealAI/AGI-Fleet-Linux
+2026-10-20T18:43:09.1021437Z ##[endgroup]
+2026-10-20T18:43:09.2148527Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T18:43:09.2149655Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/
+2026-10-20T18:43:09.2150790Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T18:43:09.2151727Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T18:43:09.2152464Z hint: call:
+2026-10-20T18:43:09.2152883Z hint:
+2026-10-20T18:43:09.2153405Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T18:43:09.2153945Z hint:
+2026-10-20T18:43:09.2154316Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T18:43:09.2154875Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T18:43:09.2155437Z hint:
+2026-10-20T18:43:09.2155867Z hint: 	git branch -m <name>
+2026-10-20T18:43:09.2156309Z hint:
+2026-10-20T18:43:09.2156704Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T18:43:10.3440733Z From https://github.com/MontrealAI/AGI-Fleet-Linux
+2026-10-20T18:43:10.3444125Z  * branch            ee06184ca9c86076971b369b1c20d1a148aff8a9 -> FETCH_HEAD
+2026-10-20T18:43:10.7375675Z HEAD is now at ee06184 Merge 4423fa0602229c6d9ce6e198dd68fca0bac37ba3 into 45759fb096faf8988f58ae5ea71248d0f35a97c7
+2026-10-20T18:43:10.7494896Z ##[group]Run actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+2026-10-20T18:43:10.7495187Z with:
+2026-10-20T18:43:10.7495337Z   name: linux-next-candidate
+2026-10-20T18:43:10.7495506Z   path: release
+2026-10-20T18:43:10.7495648Z   merge-multiple: false
+2026-10-20T18:43:10.7495816Z   repository: MontrealAI/AGI-Fleet-Linux
+2026-10-20T18:43:10.7495988Z   run-id: 39474244665
+2026-10-20T18:43:10.7496136Z ##[endgroup]
+2026-10-20T18:43:10.8412468Z Downloading single artifact
+2026-10-20T18:43:10.8483397Z (node:1982) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T18:43:10.8484003Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T18:43:11.0210666Z Preparing to download the following artifacts:
+2026-10-20T18:43:11.0211169Z - linux-next-candidate (ID: 12288834643, Size: 438308502, Expected Digest: sha256:8b99603d2c2a3f46b48c1df83e91c5bd749d2a1ef3b9a76d6144542c4b80c7de)
+2026-10-20T18:43:11.2274847Z Redirecting to blob download url: https://productionresultssa15.blob.core.windows.net/actions-results/701d9fb0-02a0-8ca0-b535-0e44182a20ee/workflow-job-run-03311dcb-2f96-5c7e-a665-a3c022cac188/artifacts/8699898d4cda38beaba5c2dc45f4fd395eb1276d87d9a5deb7b0c2244442d8c7.zip
+2026-10-20T18:43:11.2276061Z Starting download of artifact to: /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/release
+2026-10-20T18:43:11.3632387Z (node:1982) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-10-20T18:43:16.8838739Z SHA256 digest of downloaded artifact is 8b99603d2c2a3f46b48c1df83e91c5bd749d2a1ef3b9a76d6144542c4b80c7de
+2026-10-20T18:43:16.8839238Z Artifact download completed successfully.
+2026-10-20T18:43:16.8839484Z Total of 1 artifact(s) downloaded
+2026-10-20T18:43:16.8842670Z Download artifact has finished successfully
+2026-10-20T18:43:16.8963273Z ##[group]Run set -euo pipefail
+2026-10-20T18:43:16.8963454Z [36;1mset -euo pipefail[0m
+2026-10-20T18:43:16.8963789Z [36;1msudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT,GITHUB_REPOSITORY,GITHUB_RUN_ID,GITHUB_SHA python3 engineering/run-next-native.py \[0m
+2026-10-20T18:43:16.8964176Z [36;1m  --metadata "$GITHUB_WORKSPACE/release/release.json" \[0m
+2026-10-20T18:43:16.8964417Z [36;1m  --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.5.zip" \[0m
+2026-10-20T18:43:16.8964671Z [36;1m  --work "/root/agi-next-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \[0m
+2026-10-20T18:43:16.8964894Z [36;1m  --evidence "$GITHUB_WORKSPACE/native-evidence"[0m
+2026-10-20T18:43:16.9014577Z shell: /usr/bin/bash -e {0}
+2026-10-20T18:43:16.9014718Z ##[endgroup]
+2026-10-20T18:43:24.8012317Z VERIFIED AGI_Fleet_Linux_v1.1.5.zip c2c9f50e56d8cd478f7b3f57c6ad4be012517973f26bc5aeb1f96f4bf6148eb9
+2026-10-20T18:43:26.1408588Z VERIFIED AGI_Regression_Fixtures_v1.19.6.zip 4e95b35a90a2f212f2686f2c31bd4eb0d7de8131f1733d4d51e8647359b47014
+2026-10-20T18:43:26.5889461Z VERIFIED Linux-Validation-Evidence-v1.0.6.zip c85926b733b7f3277c09ada0b9ad7c9e4969ee0fdddac3b84830159fbab339cf
+2026-10-20T18:43:37.2596436Z {"nodeOwnershipChain": [{"path": "/root/agi-next-39474244665-1/node/node-v24.21.0-linux-x64/bin/node", "uid": 0, "gid": 0, "mode": "0o755"}, {"path": "/root/agi-next-39474244665-1/node/node-v24.21.0-linux-x64/bin", "uid": 0, "gid": 0, "mode": "0o755"}, {"path": "/root/agi-next-39474244665-1/node/node-v24.21.0-linux-x64", "uid": 0, "gid": 0, "mode": "0o755"}, {"path": "/root/agi-next-39474244665-1/node", "uid": 0, "gid": 0, "mode": "0o755"}, {"path": "/root/agi-next-39474244665-1", "uid": 0, "gid": 0, "mode": "0o700"}, {"path": "/root", "uid": 0, "gid": 0, "mode": "0o700"}, {"path": "/", "uid": 0, "gid": 0, "mode": "0o755"}, {"path": "/opt", "uid": 0, "gid": 0, "mode": "0o777"}]}
+2026-10-20T18:43:38.7144673Z RUN python3 /root/agi-next-39474244665-1/frozen/AGI_Fleet_Linux_v1.1.5/scripts/prepare-regression-fixtures.py --archives /root/agi-next-39474244665-1/fixture-archives/AGI_Regression_Fixtures_v1.19.6 --destination /root/agi-next-39474244665-1/dependencies --node /root/agi-next-39474244665-1/node/node-v24.21.0-linux-x64/bin/node --npm /root/agi-next-39474244665-1/node/node-v24.21.0-linux-x64/bin/npm
+2026-10-20T18:43:53.9113409Z EXIT 0 prepare-fixtures.log
+2026-10-20T18:43:54.0779235Z RUN python3 /root/agi-next-39474244665-1/frozen/AGI_Fleet_Linux_v1.1.5/scripts/run-regressions.py --node /root/agi-next-39474244665-1/node/node-v24.21.0-linux-x64/bin/node --openclaw /root/agi-next-39474244665-1/dependencies/runtime/node_modules/openclaw --historical /root/agi-next-39474244665-1/dependencies/historical --jobs 2 --out /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/native-evidence/targeted --file packages/AGI_Agent/tests/compute-repair.test.mjs --file packages/AGI_Agent/tests/compute-restart.test.mjs --file packages/AGI_Agent/tests/public-browser-integration.test.mjs --file packages/AGI_Agent/tests/public-browser-runtime.test.mjs --file packages/AGI_Agent/tests/public-web-qualification-import.test.mjs --file packages/AGI_Agent/tests/service-stop.test.mjs --file packages/AGI_Agent/tests/setup-runtime-socket.test.mjs --file packages/AGI_Node/tests/compute-repair.test.mjs --file packages/AGI_Node/tests/compute-restart.test.mjs --file packages/AGI_Node/tests/public-browser-integration.test.mjs --file packages/AGI_Node/tests/public-browser-runtime.test.mjs --file packages/AGI_Node/tests/public-web-qualification-import.test.mjs --file packages/AGI_Node/tests/service-stop.test.mjs --file packages/AGI_Node/tests/setup-runtime-socket.test.mjs --file packages/AGI_Agent/tests/setup-runtime-materialization.test.mjs --file packages/AGI_Node/tests/setup-runtime-materialization.test.mjs --file packages/AGI_Moderator/tests/setup-runtime-materialization.test.mjs --file packages/AGI_Employer/tests/setup-runtime-materialization.test.mjs --file packages/AGI_Evidence/tests/setup-runtime-materialization.test.mjs --file packages/AGI_Recovery/tests/setup-runtime-materialization.test.mjs --file packages/AGI_Agent/tests/setup-standard-readiness.test.mjs --file packages/AGI_Node/tests/setup-standard-readiness.test.mjs --file packages/AGI_Agent/tests/setup-plugin-catalog-policy.test.mjs --file packages/AGI_Agent/tests/setup-fresh-readiness-resume.test.mjs --file packages/AGI_Node/tests/setup-fresh-readiness-resume.test.mjs
+2026-10-20T18:44:24.0784695Z PROGRESS {"completedFiles": 7, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:45:24.0792677Z PROGRESS {"completedFiles": 8, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:45:54.0797331Z PROGRESS {"completedFiles": 10, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:46:54.0805467Z PROGRESS {"completedFiles": 11, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:48:24.0828359Z PROGRESS {"completedFiles": 12, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:48:54.0823060Z PROGRESS {"completedFiles": 19, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:49:24.0828092Z PROGRESS {"completedFiles": 20, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:50:24.0836968Z PROGRESS {"completedFiles": 22, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:50:54.0840497Z PROGRESS {"completedFiles": 23, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:52:24.0853623Z PROGRESS {"completedFiles": 24, "failedFiles": [], "totalFiles": 25}
+2026-10-20T18:52:49.6373607Z EXIT 1 targeted-run.log
+2026-10-20T18:52:49.6378858Z al": [{"label": "commissioning", "role": "agent", "relativeRoot": "commissioning/agent/AGI_Agent_Private_v1.24.9", "archiveName": "AGI_Agent_Private_v1.24.9.zip", "archiveSHA256": "21f35e78e593f2f9a9eceafc1c74ca78aad4ad10c96ba58dc210f57459b786de", "archiveBytes": 51822685, "manifestSHA256": "9c6d1c843f347717da95d3003e1b305c1195241b13c5869d112b263e10a92059", "verifiedFiles": 5332}, {"label": "commissioning", "role": "node", "relativeRoot": "commissioning/node/AGI_Node_Private_v2.25.9", "archiveName": "AGI_Node_Private_v2.25.9.zip", "archiveSHA256": "eb829fae193e05479965dd3bf182b50234c9d9e124c9c013ed1543c4f6d3d604", "archiveBytes": 54068602, "manifestSHA256": "f5540fb44d11f428b63934aae5dafebf8f060258ba166f572ec2ce5b0c4bd0a8", "verifiedFiles": 5365}, {"label": "authority", "role": "agent", "relativeRoot": "authority/agent/AGI_Agent_Private_v1.24.9", "archiveName": "AGI_Agent_Private_v1.24.9.zip", "archiveSHA256": "43d1c36e2da66e29b1762a6b6773f5b7d0208a1986b5d258a26818e0fb0c154a", "archiveBytes": 51910510, "manifestSHA256": "ec89195442b790a8eced827854b42d631e3a3647c79c8ab23e7d84f6c6beabd2", "verifiedFiles": 5359}, {"label": "authority", "role": "node", "relativeRoot": "authority/node/AGI_Node_Private_v2.25.9", "archiveName": "AGI_Node_Private_v2.25.9.zip", "archiveSHA256": "c242f0957e1919c2b1322725497cf32fa990d118e8be0011f20054a7253230c9", "archiveBytes": 54156828, "manifestSHA256": "074e56dab7e2d9c195b329312c6dbb23654b22811cddd398f905cfa93db6f708", "verifiedFiles": 5392}], "unixSocket": {"available": true}}}
+2026-10-20T18:52:49.6384899Z {"done": 1, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/compute-restart.test.mjs", "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24", "exitCode": 0, "timedOut": false, "durationSeconds": 0.936, "counts": {"tests": 14, "suites": 0, "pass": 14, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__compute-restart.test.mjs.tap", "logSHA256": "7595b0916b09dfa4dd50b3dcc001be7beff6962e9a0f4982a93579f74707e952", "logBytes": 3725, "environmentSignals": []}
+2026-10-20T18:52:49.6388330Z {"done": 2, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/public-browser-integration.test.mjs", "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98", "exitCode": 0, "timedOut": false, "durationSeconds": 0.349, "counts": {"tests": 14, "suites": 0, "pass": 14, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__public-browser-integration.test.mjs.tap", "logSHA256": "1caeaadb7eebc405bc099589072c4263d15f2b691a2ee43af8b893beb6f613a0", "logBytes": 3817, "environmentSignals": []}
+2026-10-20T18:52:49.6391276Z {"done": 3, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/public-browser-runtime.test.mjs", "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279", "exitCode": 0, "timedOut": false, "durationSeconds": 0.5, "counts": {"tests": 18, "suites": 0, "pass": 18, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__public-browser-runtime.test.mjs.tap", "logSHA256": "2f906ae004c8bdff95be0a03ea2e085648baf72cb55a49023c092a6bc9835b4a", "logBytes": 4309, "environmentSignals": []}
+2026-10-20T18:52:49.6394090Z {"done": 4, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/compute-repair.test.mjs", "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d", "exitCode": 0, "timedOut": false, "durationSeconds": 2.026, "counts": {"tests": 15, "suites": 0, "pass": 15, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__compute-repair.test.mjs.tap", "logSHA256": "87949d920b4d755305fa4108a54138b980ae420b8693e129582dc5fb09350082", "logBytes": 4114, "environmentSignals": []}
+2026-10-20T18:52:49.6396836Z {"done": 5, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/service-stop.test.mjs", "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff", "exitCode": 0, "timedOut": false, "durationSeconds": 0.178, "counts": {"tests": 26, "suites": 0, "pass": 26, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__service-stop.test.mjs.tap", "logSHA256": "cec1b5459addc742899a31d4edaf117185a4bdd496c81d55a645d11acbae77db", "logBytes": 6029, "environmentSignals": []}
+2026-10-20T18:52:49.6399819Z {"done": 6, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/public-web-qualification-import.test.mjs", "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378", "exitCode": 0, "timedOut": false, "durationSeconds": 1.368, "counts": {"tests": 15, "suites": 0, "pass": 15, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__public-web-qualification-import.test.mjs.tap", "logSHA256": "ec58795ddd41e79365f958fd5928a14a49029af729997c35c1e31ec5c1d7c31f", "logBytes": 23041, "environmentSignals": []}
+2026-10-20T18:52:49.6403026Z {"done": 7, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/setup-plugin-catalog-policy.test.mjs", "sourceSHA256": "f167705b81e9882d1bb94ba909537f400317e627098b946d7b0a5281b73990cd", "exitCode": 0, "timedOut": false, "durationSeconds": 0.517, "counts": {"tests": 21, "suites": 0, "pass": 21, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__setup-plugin-catalog-policy.test.mjs.tap", "logSHA256": "56549134b1dccd361dd7312c3e6033ab95c4b9c6b528fcc0d93c89d8f278a51b", "logBytes": 3240, "environmentSignals": []}
+2026-10-20T18:52:49.6405989Z {"done": 8, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/setup-fresh-readiness-resume.test.mjs", "sourceSHA256": "44a41728a0eb8a47e8714f51e622381b123b9889b631435dd28dd881bb2a3f20", "exitCode": 0, "timedOut": false, "durationSeconds": 80.644, "counts": {"tests": 3, "suites": 0, "pass": 3, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__setup-fresh-readiness-resume.test.mjs.tap", "logSHA256": "34eb82227ed3062746f6ff359a8365753815d02839c46d74fb700b6cb2ab55d6", "logBytes": 108029, "environmentSignals": []}
+2026-10-20T18:52:49.6409149Z {"done": 9, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/setup-runtime-socket.test.mjs", "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0", "exitCode": 0, "timedOut": false, "durationSeconds": 1.521, "counts": {"tests": 10, "suites": 0, "pass": 10, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__setup-runtime-socket.test.mjs.tap", "logSHA256": "ef69dc47b1bbdc72f67272cb9f96155377f8755561cc02e5e0f320778c8137be", "logBytes": 2616, "environmentSignals": []}
+2026-10-20T18:52:49.6412099Z {"done": 10, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/setup-runtime-materialization.test.mjs", "sourceSHA256": "67de9dbc5e8a27edb6bc7dfd0cffeb6fbe3a5b71fbc6a155fe0e17db6002923f", "exitCode": 0, "timedOut": false, "durationSeconds": 90.375, "counts": {"tests": 5, "suites": 0, "pass": 5, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__setup-runtime-materialization.test.mjs.tap", "logSHA256": "5461c31f7b336df5a6f34b15a58218d10bab3fe777fb70921462d8dceb21b1d0", "logBytes": 12362, "environmentSignals": []}
+2026-10-20T18:52:49.6415182Z {"done": 11, "total": 25, "suite": "AGI_Employer", "file": "packages/AGI_Employer/tests/setup-runtime-materialization.test.mjs", "sourceSHA256": "70cbed9cd83e61abdff71a721958db4aeab6e6f920041d2a23071c2e3708ab86", "exitCode": 0, "timedOut": false, "durationSeconds": 77.911, "counts": {"tests": 5, "suites": 0, "pass": 5, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "employer__setup-runtime-materialization.test.mjs.tap", "logSHA256": "5e74e57636412dddf118ed04062588d3be97ee0e588087f5413da9146f71deb7", "logBytes": 11990, "environmentSignals": []}
+2026-10-20T18:52:49.6418815Z {"done": 12, "total": 25, "suite": "AGI_Evidence", "file": "packages/AGI_Evidence/tests/setup-runtime-materialization.test.mjs", "sourceSHA256": "70cbed9cd83e61abdff71a721958db4aeab6e6f920041d2a23071c2e3708ab86", "exitCode": 0, "timedOut": false, "durationSeconds": 75.456, "counts": {"tests": 5, "suites": 0, "pass": 5, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "evidence__setup-runtime-materialization.test.mjs.tap", "logSHA256": "fe2bede564b5890d76b37fa944301b5ad74ac07311bb6165f10af72e8dd21f0e", "logBytes": 11759, "environmentSignals": []}
+2026-10-20T18:52:49.6421979Z {"done": 13, "total": 25, "suite": "AGI_Agent", "file": "packages/AGI_Agent/tests/setup-standard-readiness.test.mjs", "sourceSHA256": "e8161d97caec7c49fdf41082ae91d253de41313a35634e70facc2a1559749a49", "exitCode": 0, "timedOut": false, "durationSeconds": 195.13, "counts": {"tests": 5, "suites": 0, "pass": 5, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "agent__setup-standard-readiness.test.mjs.tap", "logSHA256": "59570d94bb53a7a4eeef5c06d888231c26c0ad278239dc0792e1d7d21ec4d9c1", "logBytes": 93754, "environmentSignals": []}
+2026-10-20T18:52:49.6424813Z {"done": 14, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/compute-repair.test.mjs", "sourceSHA256": "6518c9535abc4d888c714511a4d65a297dc5763b3a6b127c6d8665504509c14d", "exitCode": 0, "timedOut": false, "durationSeconds": 1.67, "counts": {"tests": 15, "suites": 0, "pass": 15, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__compute-repair.test.mjs.tap", "logSHA256": "1f012a23585af72e52ada8c58af66c0a395a4d6e135068403b0f7948aee3183e", "logBytes": 4114, "environmentSignals": []}
+2026-10-20T18:52:49.6427746Z {"done": 15, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/compute-restart.test.mjs", "sourceSHA256": "67b36abef6d8d4822b3e881c3e47fd5c42e2bd4c2c9a9ad9da6419c3e0035c24", "exitCode": 0, "timedOut": false, "durationSeconds": 0.718, "counts": {"tests": 14, "suites": 0, "pass": 14, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__compute-restart.test.mjs.tap", "logSHA256": "b9ffc6b4d605c25c35ffc6977064cc72d1a9ab54a914a2ec7c89090f67a83ef1", "logBytes": 3725, "environmentSignals": []}
+2026-10-20T18:52:49.6430782Z {"done": 16, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/public-browser-integration.test.mjs", "sourceSHA256": "c515cce3eb8aea6064ac3af7c794fcee36aa752eeb846d2d2b489b7f207a4c98", "exitCode": 0, "timedOut": false, "durationSeconds": 0.316, "counts": {"tests": 14, "suites": 0, "pass": 14, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__public-browser-integration.test.mjs.tap", "logSHA256": "d220a52e2399cb4a230621c70395569e1f128c76a876af26963cc1ed1c90e48a", "logBytes": 3815, "environmentSignals": []}
+2026-10-20T18:52:49.6433783Z {"done": 17, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/public-browser-runtime.test.mjs", "sourceSHA256": "ddbbbf280af949d3c9ce2f79b0b1ba879cea4b5b1e89e9d9e69e245b817fa279", "exitCode": 0, "timedOut": false, "durationSeconds": 0.522, "counts": {"tests": 18, "suites": 0, "pass": 18, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__public-browser-runtime.test.mjs.tap", "logSHA256": "2fbccba31df1c3c98b5977a5be443db14674e2ea8ce8e3b92c36afd81c612d71", "logBytes": 4309, "environmentSignals": []}
+2026-10-20T18:52:49.6436810Z {"done": 18, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/public-web-qualification-import.test.mjs", "sourceSHA256": "a1cf1a454073e638180128dcba120ce113f4058271fd5b9944bbb6d4fc6d4378", "exitCode": 0, "timedOut": false, "durationSeconds": 0.671, "counts": {"tests": 15, "suites": 0, "pass": 15, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__public-web-qualification-import.test.mjs.tap", "logSHA256": "8a94eaa172dfde5b06d5ed33876281dd783faacccfc26e599d54a1c5187a8b9d", "logBytes": 23039, "environmentSignals": []}
+2026-10-20T18:52:49.6439887Z {"done": 19, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/service-stop.test.mjs", "sourceSHA256": "b0d24df5d9cb5c835d5c1b78cca59374dfbd78ebb2b762ace8d044b65acadfff", "exitCode": 0, "timedOut": false, "durationSeconds": 0.171, "counts": {"tests": 26, "suites": 0, "pass": 26, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__service-stop.test.mjs.tap", "logSHA256": "2ee237891b3121430ab5574e51fc0d56ec3e2b62524bb222fb70ab9e316dc80c", "logBytes": 6029, "environmentSignals": []}
+2026-10-20T18:52:49.6443014Z {"done": 20, "total": 25, "suite": "AGI_Moderator", "file": "packages/AGI_Moderator/tests/setup-runtime-materialization.test.mjs", "sourceSHA256": "70cbed9cd83e61abdff71a721958db4aeab6e6f920041d2a23071c2e3708ab86", "exitCode": 0, "timedOut": false, "durationSeconds": 75.29, "counts": {"tests": 5, "suites": 0, "pass": 5, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "moderator__setup-runtime-materialization.test.mjs.tap", "logSHA256": "dac5be0976fe044a5cc641ee66e3ccf2d868d1fbc98a24b2aa4b77b7607f5220", "logBytes": 11773, "environmentSignals": []}
+2026-10-20T18:52:49.6446126Z {"done": 21, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/setup-fresh-readiness-resume.test.mjs", "sourceSHA256": "44a41728a0eb8a47e8714f51e622381b123b9889b631435dd28dd881bb2a3f20", "exitCode": 0, "timedOut": false, "durationSeconds": 78.28, "counts": {"tests": 3, "suites": 0, "pass": 3, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__setup-fresh-readiness-resume.test.mjs.tap", "logSHA256": "865122e47cb6efedba68cf754f9a3c81913fd8ca11811dcac1da26e34e21aa0d", "logBytes": 90107, "environmentSignals": []}
+2026-10-20T18:52:49.6449120Z {"done": 22, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/setup-runtime-socket.test.mjs", "sourceSHA256": "1e387d54306712b0f7f85f675e3aa56db09826ebcff53c0434e1355780d765a0", "exitCode": 0, "timedOut": false, "durationSeconds": 1.526, "counts": {"tests": 10, "suites": 0, "pass": 10, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__setup-runtime-socket.test.mjs.tap", "logSHA256": "0d479ba0592cb44def40ec6783e193df65841600d2c2efd74d99e1e23ea24b83", "logBytes": 2617, "environmentSignals": []}
+2026-10-20T18:52:49.6452150Z {"done": 23, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/setup-runtime-materialization.test.mjs", "sourceSHA256": "67de9dbc5e8a27edb6bc7dfd0cffeb6fbe3a5b71fbc6a155fe0e17db6002923f", "exitCode": 0, "timedOut": false, "durationSeconds": 84.711, "counts": {"tests": 5, "suites": 0, "pass": 5, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__setup-runtime-materialization.test.mjs.tap", "logSHA256": "26e79b258975bc2653f39daa5c33a2ce6e4e4cf95e16935e9ae489077bc39722", "logBytes": 12029, "environmentSignals": []}
+2026-10-20T18:52:49.6455222Z {"done": 24, "total": 25, "suite": "AGI_Recovery", "file": "packages/AGI_Recovery/tests/setup-runtime-materialization.test.mjs", "sourceSHA256": "70cbed9cd83e61abdff71a721958db4aeab6e6f920041d2a23071c2e3708ab86", "exitCode": 0, "timedOut": false, "durationSeconds": 73.146, "counts": {"tests": 5, "suites": 0, "pass": 5, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "recovery__setup-runtime-materialization.test.mjs.tap", "logSHA256": "f8cb6df720fc9bf749619b7f37851aafeab84c9d8d8e1241e242bd79603f27fb", "logBytes": 11533, "environmentSignals": []}
+2026-10-20T18:52:49.6458450Z {"done": 25, "total": 25, "suite": "AGI_Node", "file": "packages/AGI_Node/tests/setup-standard-readiness.test.mjs", "sourceSHA256": "e8161d97caec7c49fdf41082ae91d253de41313a35634e70facc2a1559749a49", "exitCode": 0, "timedOut": false, "durationSeconds": 164.529, "counts": {"tests": 5, "suites": 0, "pass": 5, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}, "completeSummary": true, "log": "node__setup-standard-readiness.test.mjs.tap", "logSHA256": "d08c5cb2099659f51d4b39a7240fb2ba2f99d7c85e64d226fd0899cacfadc10b", "logBytes": 76409, "environmentSignals": []}
+2026-10-20T18:52:49.6460646Z {"schema": "agi-full-regressions/v1", "status": "NOT_PASS", "scope": "PARTIAL", "complete": true, "sourceUnchanged": true, "retainedLogsUnchanged": true, "testFiles": 25, "counts": {"tests": 291, "suites": 0, "pass": 291, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}}
+2026-10-20T18:52:49.6461408Z 
+2026-10-20T18:52:49.6462563Z RUN python3 /root/agi-next-39474244665-1/frozen/AGI_Fleet_Linux_v1.1.5/scripts/run-regressions.py --node /root/agi-next-39474244665-1/node/node-v24.21.0-linux-x64/bin/node --openclaw /root/agi-next-39474244665-1/dependencies/runtime/node_modules/openclaw --historical /root/agi-next-39474244665-1/dependencies/historical --jobs 2 --out /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/native-evidence/complete
+2026-10-20T18:53:19.6384573Z PROGRESS {"completedFiles": 54, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:53:49.6395481Z PROGRESS {"completedFiles": 80, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:54:49.6405550Z PROGRESS {"completedFiles": 82, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:55:19.6412092Z PROGRESS {"completedFiles": 85, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:55:49.6421272Z PROGRESS {"completedFiles": 87, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:56:19.6427832Z PROGRESS {"completedFiles": 98, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:57:49.6466650Z PROGRESS {"completedFiles": 106, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:58:19.6472591Z PROGRESS {"completedFiles": 108, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:58:49.6482120Z PROGRESS {"completedFiles": 109, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:59:19.6508354Z PROGRESS {"completedFiles": 114, "failedFiles": [], "totalFiles": 344}
+2026-10-20T18:59:49.6519015Z PROGRESS {"completedFiles": 124, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:00:19.6508136Z PROGRESS {"completedFiles": 129, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:01:49.6536459Z PROGRESS {"completedFiles": 136, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:02:19.6603956Z PROGRESS {"completedFiles": 147, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:02:49.6568740Z PROGRESS {"completedFiles": 149, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:03:19.6619299Z PROGRESS {"completedFiles": 154, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:03:49.6629490Z PROGRESS {"completedFiles": 180, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:04:19.6642014Z PROGRESS {"completedFiles": 229, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:04:49.6652846Z PROGRESS {"completedFiles": 246, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:05:49.6694221Z PROGRESS {"completedFiles": 249, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:06:19.6704566Z PROGRESS {"completedFiles": 251, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:06:49.6718611Z PROGRESS {"completedFiles": 253, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:07:19.6739444Z PROGRESS {"completedFiles": 263, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:08:49.6785306Z PROGRESS {"completedFiles": 272, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:09:19.6801465Z PROGRESS {"completedFiles": 273, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:09:49.6812469Z PROGRESS {"completedFiles": 275, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:10:19.6830302Z PROGRESS {"completedFiles": 290, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:10:49.6878317Z PROGRESS {"completedFiles": 292, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:11:19.6866444Z PROGRESS {"completedFiles": 296, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:12:19.6972820Z PROGRESS {"completedFiles": 303, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:12:49.6986889Z PROGRESS {"completedFiles": 337, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:13:19.7006093Z PROGRESS {"completedFiles": 339, "failedFiles": [], "totalFiles": 344}
+2026-10-20T19:13:26.5276300Z EXIT 0 complete-run.log
+2026-10-20T19:13:26.5291286Z {
+2026-10-20T19:13:26.5291425Z   "schema": "agi-capable-native-validation/v1",
+2026-10-20T19:13:26.5291608Z   "architecture": "x64",
+2026-10-20T19:13:26.5291827Z   "releaseSHA256": "c2c9f50e56d8cd478f7b3f57c6ad4be012517973f26bc5aeb1f96f4bf6148eb9",
+2026-10-20T19:13:26.5292057Z   "targeted": {
+2026-10-20T19:13:26.5292192Z     "status": "PASS",
+2026-10-20T19:13:26.5292315Z     "runnerExitCode": 1,
+2026-10-20T19:13:26.5292436Z     "counts": {
+2026-10-20T19:13:26.5292546Z       "tests": 291,
+2026-10-20T19:13:26.5292963Z       "suites": 0,
+2026-10-20T19:13:26.5293083Z       "pass": 291,
+2026-10-20T19:13:26.5293190Z       "fail": 0,
+2026-10-20T19:13:26.5293298Z       "cancelled": 0,
+2026-10-20T19:13:26.5293416Z       "skipped": 0,
+2026-10-20T19:13:26.5293522Z       "todo": 0
+2026-10-20T19:13:26.5293624Z     },
+2026-10-20T19:13:26.5293725Z     "testFiles": 25,
+2026-10-20T19:13:26.5293998Z     "note": "The frozen runner intentionally returns 1 for every partial selection; each native case is independently checked here."
+2026-10-20T19:13:26.5294283Z   },
+2026-10-20T19:13:26.5294381Z   "complete": {
+2026-10-20T19:13:26.5294491Z     "status": "PASS",
+2026-10-20T19:13:26.5294609Z     "runnerExitCode": 0,
+2026-10-20T19:13:26.5294729Z     "counts": {
+2026-10-20T19:13:26.5294832Z       "tests": 3932,
+2026-10-20T19:13:26.5294944Z       "suites": 9,
+2026-10-20T19:13:26.5295049Z       "pass": 3932,
+2026-10-20T19:13:26.5295156Z       "fail": 0,
+2026-10-20T19:13:26.5295261Z       "cancelled": 0,
+2026-10-20T19:13:26.5295375Z       "skipped": 0,
+2026-10-20T19:13:26.5295480Z       "todo": 0
+2026-10-20T19:13:26.5295583Z     },
+2026-10-20T19:13:26.5295681Z     "testFiles": 344
+2026-10-20T19:13:26.5295814Z   },
+2026-10-20T19:13:26.5296041Z   "productionQualified": false,
+2026-10-20T19:13:26.5296191Z   "physicalQualification": "NOT_RUN",
+2026-10-20T19:13:26.5296359Z   "originalRestrictedEvidencePreserved": true
+2026-10-20T19:13:26.5296511Z }
+2026-10-20T19:13:26.5511329Z ##[group]Run if test -d native-evidence; then sudo chown -R "$(id -u):$(id -g)" native-evidence; fi
+2026-10-20T19:13:26.5511693Z [36;1mif test -d native-evidence; then sudo chown -R "$(id -u):$(id -g)" native-evidence; fi[0m
+2026-10-20T19:13:26.5560288Z shell: /usr/bin/bash -e {0}
+2026-10-20T19:13:26.5560422Z ##[endgroup]
+2026-10-20T19:13:26.5771072Z ##[group]Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+2026-10-20T19:13:26.5771287Z with:
+2026-10-20T19:13:26.5771404Z   name: next-native-x64
+2026-10-20T19:13:26.5771531Z   path: native-evidence/
+2026-10-20T19:13:26.5771669Z   if-no-files-found: error
+2026-10-20T19:13:26.5771794Z   retention-days: 90
+2026-10-20T19:13:26.5771921Z   compression-level: 6
+2026-10-20T19:13:26.5772035Z   overwrite: false
+2026-10-20T19:13:26.5772150Z   include-hidden-files: false
+2026-10-20T19:13:26.5772279Z ##[endgroup]
+2026-10-20T19:13:26.6954940Z With the provided path, there will be 391 files uploaded
+2026-10-20T19:13:26.6957940Z Artifact name is valid!
+2026-10-20T19:13:26.6958301Z Root directory input is valid!
+2026-10-20T19:13:26.9750591Z Beginning upload of artifact content to blob storage
+2026-10-20T19:13:27.5424313Z Uploaded bytes 1190090
+2026-10-20T19:13:27.5790171Z Finished uploading artifact content to blob storage!
+2026-10-20T19:13:27.5790847Z SHA256 digest of uploaded artifact zip is b3d6c21540fdc3b816d034803cb2c11cd7c916bae990d23b752ff2b8c7497256
+2026-10-20T19:13:27.5792044Z Finalizing artifact upload
+2026-10-20T19:13:27.9400257Z Artifact next-native-x64.zip successfully finalized. Artifact ID 12291494324
+2026-10-20T19:13:27.9400943Z Artifact next-native-x64 has been successfully uploaded! Final size is 1190090 bytes. Artifact ID is 12291494324
+2026-10-20T19:13:27.9403295Z Artifact download URL: https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39474244665/artifacts/12291494324
+2026-10-20T19:13:27.9556402Z Cleaning up orphan processes
+2026-10-20T19:13:27.9776082Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

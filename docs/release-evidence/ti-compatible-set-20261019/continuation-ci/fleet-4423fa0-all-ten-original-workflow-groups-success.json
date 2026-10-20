@@ -1,0 +1,795 @@
+{
+  "schema": "fleet-current-pr-all-original-workflows/v1",
+  "scope": "PR_SOURCE_QUALIFICATION_NOT_FINAL_RELEASE_SELECTION",
+  "source": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+  "tree": "ed382a6ac343bc6b1759af072bca4cb1aa031c92",
+  "workflowGroups": [
+    {
+      "id": 39474244639,
+      "name": "Mac source preview parity",
+      "path": ".github/workflows/macos-preview.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 39474244693,
+      "name": "Website / GitHub Pages",
+      "path": ".github/workflows/pages.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 39474244650,
+      "name": "Exact-source repository review",
+      "path": ".github/workflows/repository-review.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 39474244716,
+      "name": "Four-repository native Computer Use compatibility",
+      "path": ".github/workflows/four-repository-computer.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 39474244755,
+      "name": "Repository checks",
+      "path": ".github/workflows/repository-checks.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 39474244781,
+      "name": "Alpha candidate native IPC (inactive production trust)",
+      "path": ".github/workflows/alpha-native-ipc.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 39474244747,
+      "name": "Fleet and AGIJobManager integration",
+      "path": ".github/workflows/job-integration.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 39474244676,
+      "name": "Local Skills development qualification",
+      "path": ".github/workflows/local-skills.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 39474244672,
+      "name": "Native TI persistent project source-preview qualification",
+      "path": ".github/workflows/transformational-project.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 39474244665,
+      "name": "Linux 1.1.5 release qualification",
+      "path": ".github/workflows/next-release.yml",
+      "headSha": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    }
+  ],
+  "linux": {
+    "runId": 39474244665,
+    "conclusion": "success",
+    "jobs": {
+      "jobs": [
+        {
+          "id": 118805966806,
+          "name": "build",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Verify repository and engineering regressions",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install hash-pinned Node for package validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Build and validate the deterministic saved archive",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Retain exact candidate and packaging evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            }
+          ]
+        },
+        {
+          "id": 118816054402,
+          "name": "native (ubuntu-24.04-arm, arm64)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Exercise targeted cases and complete native suite",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Preserve evidence ownership",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Retain every native test log",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            }
+          ]
+        },
+        {
+          "id": 118816054408,
+          "name": "native (ubuntu-24.04, x64)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Exercise targeted cases and complete native suite",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Preserve evidence ownership",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Retain every native test log",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            }
+          ]
+        },
+        {
+          "id": 118816054515,
+          "name": "Saved-archive manager-1.17.0-b7218196 contract profile",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Prepare hash-pinned Node and exact Manager source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Build the locked Manager profile dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Exercise the complete saved archive with the selected profile",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Retain complete archive and profile observations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            }
+          ]
+        },
+        {
+          "id": 118816054532,
+          "name": "Saved-archive manager-1.17.0-b7218196 contract profile",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Prepare hash-pinned Node and exact Manager source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Build the locked Manager profile dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Exercise the complete saved archive with the selected profile",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Retain complete archive and profile observations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            }
+          ]
+        },
+        {
+          "id": 118816054573,
+          "name": "integration (ubuntu-24.04, x64)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Requalify the saved Fleet with AGIJobManager",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Retain all integration evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            }
+          ]
+        },
+        {
+          "id": 118816054592,
+          "name": "integration (ubuntu-24.04-arm, arm64)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Requalify the saved Fleet with AGIJobManager",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Retain all integration evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            }
+          ]
+        },
+        {
+          "id": 118816054642,
+          "name": "Saved-archive manager-1.19.3-d0c2cbaf contract profile",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Prepare hash-pinned Node and exact Manager source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Build the locked Manager profile dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Exercise the complete saved archive with the selected profile",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Retain complete archive and profile observations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            }
+          ]
+        },
+        {
+          "id": 118816054663,
+          "name": "Saved-archive manager-1.19.3-d0c2cbaf contract profile",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Prepare hash-pinned Node and exact Manager source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Build the locked Manager profile dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Exercise the complete saved archive with the selected profile",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Retain complete archive and profile observations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            }
+          ]
+        },
+        {
+          "id": 118816054746,
+          "name": "Saved-archive SUCCESSOR browser execution",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install hash-pinned Node for package validation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Install locked browser driver",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Verify archive and materialize its real Fleet source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Execute actual browser effects through the saved Controller and ComputeWorker",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Retain exact browser observations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            }
+          ]
+        },
+        {
+          "id": 118840665475,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Download this run's saved candidate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Download all retained validation logs",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Independently audit source-bound results",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Retain audited publication files",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            }
+          ]
+        },
+        {
+          "id": 118843609056,
+          "name": "Required release qualification",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Fetch the exact workflow commit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Reject missing, failed, cancelled or skipped qualification children",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            }
+          ]
+        },
+        {
+          "id": 118845124562,
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "skipped",
+          "run_id": 39474244665,
+          "logs_url": null,
+          "steps": null
+        }
+      ]
+    },
+    "artifacts": [
+      {
+        "id": 12293426359,
+        "name": "next-publication",
+        "bytes": 18406698,
+        "sha256": "b06d22cb3d5201ab40b1da986168519d33324f174f154d731de589c19f0c4c86"
+      },
+      {
+        "id": 12291719648,
+        "name": "next-native-arm64",
+        "bytes": 1193456,
+        "sha256": "a6648692b4d77b856c52b157ddce32811d0d54325d08331515b7b44ebcc36f60"
+      },
+      {
+        "id": 12291494324,
+        "name": "next-native-x64",
+        "bytes": 1190090,
+        "sha256": "b3d6c21540fdc3b816d034803cb2c11cd7c916bae990d23b752ff2b8c7497256"
+      },
+      {
+        "id": 12288834643,
+        "name": "linux-next-candidate",
+        "bytes": 438308502,
+        "sha256": "8b99603d2c2a3f46b48c1df83e91c5bd749d2a1ef3b9a76d6144542c4b80c7de"
+      }
+    ]
+  },
+  "currentNativeTIProof": "fe10d43ca90540ff52b66836e3fa9e5a2ddb76ac; actual x64 and ARM64 saved and normal-installed20/20 twice each, no final public ONE claim",
+  "remaining": [
+    {
+      "owner": "Eligible independent Fleet functional owner",
+      "action": "Provide genuine final exact-source owner review and explicitly dispose recovery/custody P1s; no bot/advisory substitution."
+    },
+    {
+      "owner": "Root release coordinator",
+      "action": "Select actual fresh Jobs/Alpha public release commits, refresh Fleet pins, run fresh checks/reviews, then normal merge and all three source publications."
+    }
+  ],
+  "releasePublished": false,
+  "finalONE": false,
+  "liveFinalVerification": false
+}
