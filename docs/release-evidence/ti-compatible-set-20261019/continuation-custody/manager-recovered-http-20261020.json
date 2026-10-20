@@ -1,0 +1,40 @@
+{
+  "schema": "four-repository-assessment/component-http-transport-readback/v1",
+  "scope": "ONE_RECOVERED_TRANSPORT_COMPONENT_METADATA_READ_NOT_FINAL_F",
+  "helper": {
+    "repository": "MontrealAI/AGI-Fleet-Linux",
+    "commit": "4340e4c01bb1867b90bfbcee4b52479b6a9a395d",
+    "path": "docs/release-evidence/ti-compatible-set-20261019/four-pages-readback/readback.py",
+    "sha256": "c30a0798f002780f92889d211642549cb3f3c7ae80a92b96068b9eb3d474302d"
+  },
+  "observed": {
+    "scope": "ONE_PUBLIC_METADATA_TRANSPORT_CHECK_NOT_FINAL_F",
+    "observedAt": "2026-10-20T15:21:22.342001+00:00",
+    "site": "manager",
+    "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+    "sourceVersion": "1.19.5",
+    "bytes": 18883,
+    "sha256": "3fe5879a4ebb80dbffdf152a0653bfb28c603bb6cb19bd1e3c77b41cb9d2c2bf",
+    "matchesRetainedArtifactAnchor": true,
+    "requestCount": 1,
+    "mediaType": "application/json; charset=utf-8"
+  },
+  "expectedComponent": {
+    "release": "v1.19.5",
+    "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+    "pagesRun": 39361508964,
+    "artifact": 12238091816,
+    "rawMetadataSha256": "3fe5879a4ebb80dbffdf152a0653bfb28c603bb6cb19bd1e3c77b41cb9d2c2bf",
+    "custodyCommit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+    "componentPath": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/manager-1.19.5-component.json"
+  },
+  "nonClaims": {
+    "allFourSitesRead": false,
+    "artifactPayloadsDownloadedAgain": false,
+    "browserUiExecuted": false,
+    "nativeOrModelExecuted": false,
+    "finalCompatibilityAccepted": false,
+    "keyOrAccountOrChainAction": false
+  },
+  "next": "Use actual authenticated final four-site expectations after component releases/E/T for the ONE final all-four R3 readback."
+}

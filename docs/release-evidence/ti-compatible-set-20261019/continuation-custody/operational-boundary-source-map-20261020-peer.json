@@ -1,0 +1,172 @@
+{
+  "schema": "four-repository-assessment/operational-boundary-preservation-data-peer/v1",
+  "observedAt": "2026-10-20T15:37:42.544Z",
+  "reviewerRole": "e_current_binding",
+  "reviewClass": "PUBLIC_GIT_METADATA_AND_JSON_DATA_BINDING_ONLY",
+  "result": "PASS_NO_UNRESOLVED_DATA_BINDING_FINDINGS",
+  "reviewedInput": {
+    "repository": "MontrealAI/AGI-Fleet-Linux",
+    "bytes": 42421,
+    "sha256": "0f05943aff2f141f9477a79ff06eac262fd82c1beda160922872c2dbe2de7142",
+    "gitBlob": "734759cbcf24e789534d40474689258200f19ad7"
+  },
+  "supersededInput": {
+    "bytes": 42082,
+    "sha256": "c26957094024fb1cf7f1b18af06fb2a841097b0d6ebd6a8c75081389c4702c39",
+    "gitBlob": "fa167c1c41d98f37b01db2f5de7c4f5c37969158"
+  },
+  "scope": {
+    "permitted": "JSON structure and labeling, immutable commit/tree/file identities, selected archive preservation, source versus operator/device/live qualification distinctions",
+    "excluded": "Product functionality, key-handler semantics, eligible Fleet owner review, source security audit, runtime behavior, current-main qualification and live deployment verification"
+  },
+  "amendmentVerification": {
+    "reverseNormalizedJsonDeepEqualToSupersededInput": true,
+    "dataIdentitiesAndFalseQualificationLimitsUnchanged": true,
+    "acceptedCorrections": [
+      "Archive counts explicitly describe only listed selected leaves; grouping prefixes do not claim exhaustive coverage.",
+      "Repository owner authorship is labeled account authorship; public metadata identifies a User account and does not establish a separate organization or person.",
+      "The historical deployment guide and draft head share the recorded 818b3a commit at this capture; identical source IDs do not transfer historical deployment, device custody or current-main qualification. Old 9a79 coordination remains separate."
+    ]
+  },
+  "immutableRepositoryBindings": {
+    "alpha": {
+      "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+      "commit": "c92b91fc012f14041307d0ba4b59c4b7a98cc933",
+      "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+      "baseCommit": "b7f017e91a18adb3a79b34e03dc0158896ef7570",
+      "baseTree": "77f1464bd3c37086c307d92506b6fdeb2d1d3a5d"
+    },
+    "jobs": {
+      "repository": "MontrealAI/AGIJobsv0",
+      "commit": "d9b3ac51d8497848108fb6e938298deef09856a9",
+      "tree": "bf6aea8ab2e8e6cccc55cb899b2352fe05b238c4",
+      "baseCommit": "b9ddbd9d7d0b5d5c3e472b978e0967036033ed10",
+      "baseTree": "3046998597d9e1d36245df893cd067917c5bb036"
+    },
+    "manager": {
+      "repository": "MontrealAI/AGIJobManager",
+      "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+      "reviewedCommit": "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8",
+      "reviewedTree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86"
+    },
+    "fleet": {
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "commit": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+      "tree": "71b9af9d3ebf0cba865df6639c08c8ddf11697f0",
+      "unreferencedMetadataProposal": {
+        "commit": "b550df7ab779825c5b99d7eaa10a2be7983234af",
+        "tree": "0de8286d1feded1607ff8ac1efda676a62406448",
+        "soleParent": "66940b6f9e9be467620f26fce033a3c88aed9ea5"
+      }
+    }
+  },
+  "selectedSourceIdentityBindings": {
+    "total": 21,
+    "authoritativeSourceOrDocumentEntries": 16,
+    "existingSourceCheckPathEntries": 5,
+    "pathGitBlobModeSizeAndPinnedCommitMatchPublicNontruncatedTrees": true,
+    "assertedSameBaseBlobAndModeFlagsMatchRelevantBaseTrees": true,
+    "rawSourceHandlerCheckerFixtureOrArchiveContentReadForThisReview": false,
+    "documentLineOrHandlerBehaviorSemanticsIndependentlyReviewed": false
+  },
+  "archiveBindings": {
+    "totalSelectedLeaves": 33,
+    "results": [
+      {
+        "repositoryRole": "alpha",
+        "selectedLeafCount": 27,
+        "selectedPrefixCounts": {
+          "deployments/ethereum-mainnet/": 24,
+          "docs/deployments/": 3
+        },
+        "allSelectedGitBlobModeAndSizeBindingsMatch": true,
+        "basePrefixTotal": 27,
+        "currentPrefixTotal": 27,
+        "removedPaths": [],
+        "scope": "SelectedNamedArchiveLeaves; prefix counts are selected-leaf counts, not necessarily a complete prefix inventory."
+      },
+      {
+        "repositoryRole": "jobs",
+        "selectedLeafCount": 6,
+        "selectedPrefixCounts": {
+          "docs/production/": 6
+        },
+        "allSelectedGitBlobModeAndSizeBindingsMatch": true,
+        "basePrefixTotal": 56,
+        "currentPrefixTotal": 56,
+        "removedPaths": [],
+        "scope": "SelectedNamedArchiveLeaves; prefix counts are selected-leaf counts, not necessarily a complete prefix inventory."
+      }
+    ],
+    "jobsProductionPrefixIsSelectedSubset": {
+      "selected": 6,
+      "trackedAtBothBoundTrees": 56
+    },
+    "preservationMeaning": "Exact listed public Git leaf custody and base/source path, blob, mode and byte-size agreement; no claim about chain state, archive contents or deployment correctness."
+  },
+  "managerPreservation": {
+    "completeSameTree": true,
+    "scope": "The two immutable commit objects expose the same complete Git tree identity; this does not establish device, wallet or chain state."
+  },
+  "fleetPreservation": {
+    "proposalCommit": "b550df7ab779825c5b99d7eaa10a2be7983234af",
+    "soleParent": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+    "changedRegularLeaves": 5,
+    "unchangedOtherLeaves": 6908,
+    "allOtherLeafPathTypeModeBlobAndSizeEntriesUnchanged": true,
+    "removedPaths": [],
+    "scope": "Only the five enumerated ordinary metadata/schema/browser/docs/test leaves differ; no eligible owner or functional clearance is provided."
+  },
+  "jobsCurrentAndDraft": {
+    "currentBoundCommit": "d9b3ac51d8497848108fb6e938298deef09856a9",
+    "routeClassification": "The map labels the inspected current named pair as the legacy configured signer route; this peer verifies identity and limits, not executable behavior or an exhaustive absence claim.",
+    "separateDraftPr": 3986,
+    "draftHead": "818b3a246871e4cd4dde86558dbb91ef82b15eef",
+    "draftHeadTree": "b1c3bb0f4b8d64e0d23376d6b6ef3722c4c67b0d",
+    "draftBase": "bd45f34de1c1e58986aafb4b0e5c48bc155839ca",
+    "draftBaseTree": "a49fa5d32272555e62431363f1ffd36b84ea87be",
+    "open": true,
+    "draft": true,
+    "merged": false,
+    "changedFileMetadataRowsMatchingIndependentTreeDelta": 43,
+    "assignees": 0,
+    "requestedTeams": 0,
+    "conventionalTtyAndExternalManualDocumentationBlobIdentitiesMatchDraftTree": true,
+    "oldCoordinationComment": 6223512277,
+    "oldCoordinationReferencesDifferent9a79Source": true,
+    "historicalGuideCommitEqualsCapturedDraftHead": true,
+    "currentMainHiddenTtyQualification": false,
+    "alternativeRouteEndorsedByThisPeer": false,
+    "distinctHumanTeamOrEconomicReviewerIdentityVerified": false
+  },
+  "qualifications": {
+    "mapLimitsAllFalse": true,
+    "ensWorkstreamSeparate": true,
+    "hiddenEphemeralEntryAndLedgerGovernanceRemainOperatorRequirements": true,
+    "finalMergedSourcePreservationRecheckStillRequired": true,
+    "softwarePublicationOrCurrentSourceIsProductionActivation": false,
+    "finalReleaseArtifactOrLiveWebsiteReadbackPerformed": false,
+    "completeIndependentGitMerkleReconstructionClaimed": false
+  },
+  "methods": {
+    "performed": [
+      "Public immutable Git commit/tree and PR metadata reads retained from this review",
+      "In-memory JSON structural comparison",
+      "In-memory UTF-8 byte length, SHA-256 and Git blob SHA-1 calculation"
+    ],
+    "notPerformed": [
+      "Executor probe",
+      "Project code import or execution",
+      "Tests or syntax execution",
+      "Runtime credential, Actions artifact-service, diagnostic service, or RPC API use",
+      "Raw key-handler, fixture, archive or checker content read",
+      "Browser or live-site request",
+      "Chain or hardware query",
+      "Wallet entry, signing, funding, deployment, activation or authority change",
+      "Workflow, run, status, review, comment, ref or commit mutation"
+    ]
+  },
+  "findings": [],
+  "finalSourceRequirement": "Recheck preservation against the actual final merged commits after merges; these exact captured identities and the unreferenced proposal do not establish final compatibility-set acceptance."
+}
