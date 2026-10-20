@@ -1,0 +1,82 @@
+{
+  "schema": "root-live-readback-paper-extension/1",
+  "asOf": "2026-10-20T20:36:08.167Z",
+  "status": "OFFLINE_VALIDATED_AND_INDEPENDENT_STATIC_REVIEW_CLEAR_NOT_LIVE_EVIDENCE",
+  "scope": "Append four fixed HTTPS paper paths added by normal Alpha owner commits; retain all 18 original paths and all transport, metadata, identity, bounds, hash and failure checks.",
+  "alpha": {
+    "main": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+    "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+    "addedRegularGitFiles": [
+      {
+        "path": "docs/Out_Evolve.pdf",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "a2a333187388e961a91c2fd67696adc09641c3ed",
+        "size": 399909,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/git/blobs/a2a333187388e961a91c2fd67696adc09641c3ed"
+      },
+      {
+        "path": "docs/Out_Evolve.tex",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "d2a1abdc373076d2f872ff824878988136d75c0b",
+        "size": 4246,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/git/blobs/d2a1abdc373076d2f872ff824878988136d75c0b"
+      },
+      {
+        "path": "docs/The_World_as_an_Output.pdf",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "b474ad005a7c6fd8339fcbed80c51c5c5fb85284",
+        "size": 313266,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/git/blobs/b474ad005a7c6fd8339fcbed80c51c5c5fb85284"
+      },
+      {
+        "path": "docs/The_World_as_an_Output.tex",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "c351982e1159c09f196868c4f76ee31faf392a65",
+        "size": 85948,
+        "url": "https://api.github.com/repos/MontrealAI/AGI-Alpha-Agent-v0/git/blobs/c351982e1159c09f196868c4f76ee31faf392a65"
+      }
+    ],
+    "previousSourceCustody": "cdb5672231a2ff8f508c78e5e9b082eeaadc0a37",
+    "mkdocsConfigBlob": "7e53d58878db30bc9651a30744986673d780733f",
+    "buildScriptBlob": "cea3e705bb17aec298952d100ce8e3515ac95748",
+    "publicationInference": "Original gallery builder runs mkdocs with docs_dir docs and no matching exclusions for these four new regular documents; actual final publisher inventories and HTTPS bytes still required.",
+    "extraIndependentBinaryHashes": "Unavailable through GitHub text-only blob capability (400); no retry or alternate binary retrieval attempted; actual source Git identities retained, future publication metadata remains authoritative."
+  },
+  "helperBefore": {
+    "bytes": 22311,
+    "gitBlob": "6685ae5d08d11d939185b2a0f490073cfcbcefb1",
+    "sha256": "c30a0798f002780f92889d211642549cb3f3c7ae80a92b96068b9eb3d474302d"
+  },
+  "helperAfter": {
+    "bytes": 22415,
+    "gitBlob": "e46db1d0b9136ed73ef3847b4e5591ff1df0c826",
+    "sha256": "d9399dc19af28f3c26f0adc5ac20cfe7241a9133bf8d020792f15ff9509a5289"
+  },
+  "testsAfter": {
+    "bytes": 13949,
+    "gitBlob": "5875e359c82587afe9d647a13c514dacdef4c456",
+    "sha256": "b0375f5844e9a4609f4c2a6818ddf957a90815d6e3840b87121bf7bb9512c2fc"
+  },
+  "change": "Only append Out_Evolve.pdf/.tex and The_World_as_an_Output.pdf/.tex to PAPERS. Existing paths retain exact relative order. Original finite-inventory unit extended; all other units unchanged.",
+  "offlineValidation": {
+    "command": "python3 -m unittest -v test_readback.py",
+    "tests": 11,
+    "passed": 11,
+    "failed": 0,
+    "networkRequests": 0,
+    "firstDraftFailure": "A temporary test update placed a TeX filename in the existing PDF sentinel position; corrected expected-inventory construction preserving the original sentinel and original assertions. No helper checks removed."
+  },
+  "limits": [
+    "Not final F, E, website T, public installed journey or release qualification.",
+    "No Ethereum/provider/wallet access, state changes or deployment actions."
+  ],
+  "independentReview": {
+    "bytes": 5048,
+    "gitBlob": "11807d3fd3eb1afe2a1a9ac571c5b192e86b9138",
+    "sha256": "33a0bd4b75ab2865b80493024b2f9a13d05c39cc5e008ce46b0f31f98def33f8"
+  }
+}
