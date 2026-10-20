@@ -1,0 +1,32 @@
+{
+  "request": {
+    "at": "2026-10-20T20:50:30.002Z",
+    "source": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+    "run": 39484204330,
+    "observedAttempt": 1,
+    "observedRunStatus": "in_progress",
+    "job": 118845385781,
+    "originalOutputEvidence": "573fa707660d07a57c21f2bb5a2a62f6aa53ff4a",
+    "reason": "One bounded retry of the original unchanged full regression after cancellation near configured60min limit; no test/deadline/source changes or pass inference."
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "GitHub API error 403: {\"message\":\"The workflow run containing this job is already running\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflow-runs#re-run-a-job-from-a-workflow-run\",\"status\":\"403\"}"
+      }
+    ],
+    "structuredContent": {
+      "error": "GitHub API error 403: {\"message\":\"The workflow run containing this job is already running\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflow-runs#re-run-a-job-from-a-workflow-run\",\"status\":\"403\"}",
+      "error_code": "FORBIDDEN",
+      "error_data": {
+        "message": "The workflow run containing this job is already running",
+        "documentation_url": "https://docs.github.com/rest/actions/workflow-runs#re-run-a-job-from-a-workflow-run",
+        "status": "403"
+      }
+    },
+    "isError": true
+  },
+  "retryAdmitted": false,
+  "nextEligibleCondition": "Original whole run must complete and exact source remain current; no alternative route or attempt while running."
+}
