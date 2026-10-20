@@ -77,6 +77,33 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
+      - name: Remove shared write permission from the disposable hosted interpreter
+        run: |
+          python - <<'PYTHON'
+          import json,os,stat,sys
+          from pathlib import Path
+          assert os.environ.get('GITHUB_ACTIONS')=='true' and os.environ.get('RUNNER_ENVIRONMENT')=='github-hosted'
+          assert os.environ.get('GITHUB_REPOSITORY')=='MontrealAI/AGI-Fleet-Linux'
+          prefix=Path(os.environ['pythonLocation']).resolve(strict=True)
+          executable=Path(sys.executable).resolve(strict=True)
+          assert executable.is_relative_to(prefix)
+          fd=os.open(executable,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+          try:
+              before=os.fstat(fd)
+              assert stat.S_ISREG(before.st_mode) and before.st_uid in (0,os.getuid())
+              assert 0<before.st_size<=128*1024*1024 and before.st_mode&0o111 and not before.st_mode&0o7000
+              if before.st_mode&0o022:
+                  assert before.st_uid==os.getuid()
+                  os.fchmod(fd,stat.S_IMODE(before.st_mode)&~0o022)
+              after=os.fstat(fd)
+              assert (before.st_dev,before.st_ino,before.st_uid,before.st_size)==(after.st_dev,after.st_ino,after.st_uid,after.st_size)
+              assert stat.S_IMODE(after.st_mode)==stat.S_IMODE(before.st_mode)&~0o022
+              print(json.dumps({'disposableInterpreterPermissionPreparation':True,'path':str(executable),
+                               'bytes':after.st_size,'beforeMode':oct(stat.S_IMODE(before.st_mode)),
+                               'afterMode':oct(stat.S_IMODE(after.st_mode)),'ownerUnchanged':True}))
+          finally:
+              os.close(fd)
+          PYTHON
       - name: Install the existing native Alpha session dependencies
         run: |
           python -B engineering/integration/source_guard.py --alpha-root "$PWD/.integration-alpha" --dependency-lock engineering/integration/requirements-native.lock
