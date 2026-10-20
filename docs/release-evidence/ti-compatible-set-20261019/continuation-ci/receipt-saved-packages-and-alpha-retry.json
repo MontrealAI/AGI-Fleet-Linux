@@ -1,0 +1,222 @@
+{
+  "schema": "release-continuation-observation/v1",
+  "observedAt": "2026-10-20T12:55:21.819Z",
+  "complete": false,
+  "finalEquivalenceManifest": false,
+  "logs": [
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/alpha-d262-successor-mission-attempt2-job-118634504802.log",
+      "repo": "MontrealAI/AGI-Alpha-Agent-v0",
+      "head": "d2626b932008f7f5edca9fdce6dd6197818e16af",
+      "run": 39421901572,
+      "attempt": 2,
+      "job": 118634504802,
+      "bytes": 162503,
+      "sha": "acb5b02519ca4873cc7a8640a09629d03d34862d",
+      "sha256": "ccdc4fb4fed65efd2f406c224b663b97a40feb4c31a23ed6bda702eb4b077ab7",
+      "conclusion": "success",
+      "method": "Original hosted-job log, decoded UTF-8; independently hashed; no ZIP artifact acquisition."
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-669-arm64-saved-job-118624727998.log",
+      "repo": "MontrealAI/AGI-Fleet-Linux",
+      "head": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+      "run": 39419453160,
+      "attempt": 1,
+      "job": 118624727998,
+      "bytes": 465689,
+      "sha": "30c771bb9fdece4b20ff8c0dee46e4f4773cd42a",
+      "sha256": "e1333ef76797ceafa36b7eb58902ec7560469eb82e6b650ee3edc33abde9418c",
+      "conclusion": "success",
+      "method": "Original hosted-job log, decoded UTF-8; independently hashed; no ZIP artifact acquisition."
+    },
+    {
+      "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-669-x64-saved-job-118624728163.log",
+      "repo": "MontrealAI/AGI-Fleet-Linux",
+      "head": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+      "run": 39419453160,
+      "attempt": 1,
+      "job": 118624728163,
+      "bytes": 752937,
+      "sha": "8a0bf66d6ff88e31a6bf98003b16abe3fc6598fd",
+      "sha256": "f8791217f7cd2f575b7dc4dfcd2b10cdff8de830aa0c2e73b973d037757919ff",
+      "conclusion": "success",
+      "method": "Original hosted-job log, decoded UTF-8; independently hashed; no ZIP artifact acquisition."
+    }
+  ],
+  "alpha": {
+    "originalAttempt1FailureRetainedAt": "fe77211a5ee8366cfda9a8932a853dfed7691006",
+    "retryCause": "Unknown. No source/test/timeout/assertion changes; original failure not erased.",
+    "currentAgentRun": 39424897418,
+    "currentAgentAttempt": 1,
+    "currentAgentStatus": "PENDING"
+  },
+  "fleet": {
+    "run": 39419453160,
+    "attempt": 1,
+    "head": "66940b6f9e9be467620f26fce033a3c88aed9ea5",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 118616470315,
+        "name": "browser",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-20T12:11:22Z",
+        "completed_at": "2026-10-20T12:12:13Z"
+      },
+      {
+        "id": 118616470531,
+        "name": "native (ubuntu-24.04, x64)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-20T12:18:02Z",
+        "completed_at": "2026-10-20T12:23:46Z"
+      },
+      {
+        "id": 118616470743,
+        "name": "native (ubuntu-24.04-arm, arm64)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-20T12:06:28Z",
+        "completed_at": "2026-10-20T12:13:15Z"
+      },
+      {
+        "id": 118616472309,
+        "name": "fleet",
+        "status": "completed",
+        "conclusion": "skipped",
+        "started_at": "2026-10-20T12:03:55Z",
+        "completed_at": "2026-10-20T12:03:54Z"
+      },
+      {
+        "id": 118624727998,
+        "name": "computer (ubuntu-24.04-arm, arm64) / Saved package service and two disposable payment routes (arm64)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-20T12:26:23Z",
+        "completed_at": "2026-10-20T12:39:18Z"
+      },
+      {
+        "id": 118624728163,
+        "name": "computer (ubuntu-24.04, x64) / Saved package service and two disposable payment routes (x64)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-20T12:34:45Z",
+        "completed_at": "2026-10-20T12:44:21Z"
+      },
+      {
+        "id": 118633874754,
+        "name": "audit",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-20T12:48:22Z",
+        "completed_at": "2026-10-20T12:49:15Z"
+      },
+      {
+        "id": 118636088756,
+        "name": "publish",
+        "status": "completed",
+        "conclusion": "skipped",
+        "started_at": "2026-10-20T12:49:16Z",
+        "completed_at": "2026-10-20T12:49:15Z"
+      }
+    ],
+    "artifactMetadataOnly": [
+      {
+        "id": 12265770776,
+        "name": "audited-local-preview",
+        "size_in_bytes": 41188832,
+        "digest": "sha256:fc4eb151943c94aaec7134500ddf68d97028fdb2ea898a8de6e725763c8440ea",
+        "created_at": "2026-10-20T12:49:11Z",
+        "expired": false,
+        "workflow_run": {
+          "id": 39419453160,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "66940b6f9e9be467620f26fce033a3c88aed9ea5"
+        }
+      },
+      {
+        "id": 12265331790,
+        "name": "local-skills-computer-x64",
+        "size_in_bytes": 14966300,
+        "digest": "sha256:716afdd3408d3a1ce349da974e94fa3737aa5651f7a64f9a0392d073acdc9324",
+        "created_at": "2026-10-20T12:44:13Z",
+        "expired": false,
+        "workflow_run": {
+          "id": 39419453160,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "66940b6f9e9be467620f26fce033a3c88aed9ea5"
+        }
+      },
+      {
+        "id": 12264752582,
+        "name": "local-skills-computer-arm64",
+        "size_in_bytes": 15000604,
+        "digest": "sha256:d1e31a7a6a8be6b58d3e165ea8f1916974075a6230aac0ef9a8210c9c7dc1dea",
+        "created_at": "2026-10-20T12:39:14Z",
+        "expired": false,
+        "workflow_run": {
+          "id": 39419453160,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "66940b6f9e9be467620f26fce033a3c88aed9ea5"
+        }
+      },
+      {
+        "id": 12263683924,
+        "name": "local-skills-preview-x64",
+        "size_in_bytes": 8440362,
+        "digest": "sha256:a1e1a76231e3b613bb89d1d3075f26a5f6b5485796dd47cad86ef4631775b3fb",
+        "created_at": "2026-10-20T12:23:43Z",
+        "expired": false,
+        "workflow_run": {
+          "id": 39419453160,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "66940b6f9e9be467620f26fce033a3c88aed9ea5"
+        }
+      },
+      {
+        "id": 12263223817,
+        "name": "local-skills-preview-arm64",
+        "size_in_bytes": 8440414,
+        "digest": "sha256:fcf30d13a59e6ad3d7c94912e931f565406b4887ab7f2742c62d36b0195443b7",
+        "created_at": "2026-10-20T12:13:10Z",
+        "expired": false,
+        "workflow_run": {
+          "id": 39419453160,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "66940b6f9e9be467620f26fce033a3c88aed9ea5"
+        }
+      },
+      {
+        "id": 12262308905,
+        "name": "local-dashboard-observations",
+        "size_in_bytes": 3035033,
+        "digest": "sha256:107213a0a0e5d83488e15c567d7d4b87227cdcfc825e85310f41a2af5073e6f6",
+        "created_at": "2026-10-20T12:12:12Z",
+        "expired": false,
+        "workflow_run": {
+          "id": 39419453160,
+          "repository_id": 1412491845,
+          "head_repository_id": 1412491845,
+          "head_branch": "integration/ti-custody-packaging-20261019",
+          "head_sha": "66940b6f9e9be467620f26fce033a3c88aed9ea5"
+        }
+      }
+    ],
+    "sourcePins": "Historical Alpha288/Jobsf2/Managera6; final released S2 pin refresh still required.",
+    "ownerReview": "Required, unavailable; automatic approval review rejected the owner-review action for possible cybersecurity risk. Not retried or substituted."
+  },
+  "finalInstalledPublicPackageJourney": "NOT_RUN",
+  "finalFourLiveSites": "NOT_RUN"
+}
