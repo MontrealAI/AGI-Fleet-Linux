@@ -1,0 +1,176 @@
+{
+  "schema": "four-repository-assessment/http-helper-source-byte-peer/v1",
+  "createdAt": "2026-10-20T14:12:51.308Z",
+  "role": "R3_EVIDENCE_HELPER_STATIC_SOURCE_AND_BYTE_BINDING_NOT_PRODUCT_QUALIFICATION",
+  "result": "PASS_NO_UNRESOLVED_FINDINGS_IN_SCOPE",
+  "base": {
+    "commit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+    "tree": "89cb60cb1243cb0cb814d450a07b438bae1433cd",
+    "originalHelper": {
+      "bytes": 22250,
+      "sha256": "98bb912eba3aa1a45b1551c0190b3ba5f12a206bb2c912dd2835e3297e32ee13",
+      "gitBlob": "a1c811b4a07cc343dddbaf3e04e9845c88b191c2"
+    },
+    "originalTest": {
+      "bytes": 13164,
+      "sha256": "368bc75fa30ffe0aabd388ea01428cd581d1b25e87369efa0078575c77b68ab6",
+      "gitBlob": "3ba74a4e8cef9a4f6c11fc9d6e5682f9db43859a"
+    }
+  },
+  "helper": {
+    "bytes": 22311,
+    "sha256": "c30a0798f002780f92889d211642549cb3f3c7ae80a92b96068b9eb3d474302d",
+    "gitBlob": "6685ae5d08d11d939185b2a0f490073cfcbcefb1",
+    "soleFiniteTextInverseRestoresWholeOriginal": true,
+    "preservesOriginalOrdered17Paths": true,
+    "appendedPath": "SUCCESSOR_Omega_Invent_the_Economy_Business_Brief.pdf",
+    "resultingPaperCount": 18,
+    "preservesPlaybookRoute": "PILOT_PLAYBOOK/",
+    "allUnrelatedTransportBoundsRoutesNonclaimsUnchanged": true
+  },
+  "test": {
+    "bytes": 13759,
+    "sha256": "34596a76400f53dd3d5c676619d99f73a2f4bfae33da8fee9b1425de7ed02e0f",
+    "gitBlob": "4a297f161e9b014c360588770cc6275dda703eb7",
+    "changedExistingGenericUnitOnly": true,
+    "other10UnitsAndFixturesExact": true,
+    "unitDefinitionCount": 11,
+    "firstAddedAndNewPdfIndependentHashSuccessAndMismatchAssertionsRetained": true,
+    "executedByThisPeer": false
+  },
+  "sourceProof": {
+    "bytes": 10539,
+    "sha256": "25fb841f65e0b82a5b73351b722cffbd6cb37382556ff35f79d2b26cffac218c",
+    "gitBlob": "82a08d53fc89ccb1365bbdace123b25c1ac59264",
+    "sourceCommits": [
+      {
+        "role": "other-team-main",
+        "commit": "b7f017e91a18adb3a79b34e03dc0158896ef7570",
+        "tree": "77f1464bd3c37086c307d92506b6fdeb2d1d3a5d",
+        "parents": [
+          "db1af170a133b809a6157d8c19e3a4343bf243bc"
+        ]
+      },
+      {
+        "role": "normal-integration-source",
+        "commit": "a0930886bda766ed88ce0af5579da0fb6e669f22",
+        "tree": "39b7edd473f36fd10e8c3702564cef642dc09e94",
+        "parents": [
+          "d2626b932008f7f5edca9fdce6dd6197818e16af",
+          "b7f017e91a18adb3a79b34e03dc0158896ef7570"
+        ]
+      }
+    ],
+    "pdf": {
+      "path": "docs/SUCCESSOR_Omega_Invent_the_Economy_Business_Brief.pdf",
+      "bytes": 90378,
+      "sha256": "ef9248320ea3a31b2975dd3658e42c5859d0b1a63fb4f05af2d15258146e4ff4",
+      "gitBlob": "ece391a594f4c921393cc689831f57b8261e706d",
+      "mode": "100644",
+      "independentlyBase64DecodedAndRehashed": true,
+      "pdfBytesPersisted": false,
+      "pdfExecuted": false,
+      "b7AndA093SameAuthenticatedGitBlob": true
+    },
+    "builderFiles": [
+      {
+        "path": "mkdocs.yml",
+        "bytes": 12352,
+        "sha256": "4863107b29d2cb84bf75943c5ce0acdac9f6e2c54f561f0556bcf80437bb04e2",
+        "gitBlob": "7e53d58878db30bc9651a30744986673d780733f",
+        "mode": "100644"
+      },
+      {
+        "path": "requirements-docs.txt",
+        "bytes": 130,
+        "sha256": "24ae34534d4700bad4e44d601bba9c8914cfe08a43bcf9c42c18bf7d7f268f10",
+        "gitBlob": "66fd8373eb2a7364f2cff755067c065ca4bb2ce8",
+        "mode": "100644"
+      },
+      {
+        "path": "scripts/build_gallery_site.sh",
+        "bytes": 1551,
+        "sha256": "c92ee82c4bb3d2290608862179203d2017ac1b3286365453557b7033caac9b43",
+        "gitBlob": "cea3e705bb17aec298952d100ce8e3515ac95748",
+        "mode": "100755"
+      },
+      {
+        "path": "scripts/package_pages_site.py",
+        "bytes": 3377,
+        "sha256": "2bb36a6e45aedaf08e1c918e3d006c28773f0e520778e5c553174d043e0b5ff9",
+        "gitBlob": "58ec94ca75df750966a1b28bbded811bae2e803f",
+        "mode": "100644"
+      },
+      {
+        "path": "scripts/mkdocs_assets.py",
+        "bytes": 853,
+        "sha256": "5433b3d05c0c79003cca7aa66c80f442276e09e7bb4e38806f7ac9c9384ee1f0",
+        "gitBlob": "825a5c672ccfc1cf43348f320119ea57095329ae",
+        "mode": "100644"
+      },
+      {
+        "path": "scripts/mkdocs_release_links.py",
+        "bytes": 1529,
+        "sha256": "0bf73608f6ea99ad04c92f229e404d6adda91c4fce55577d4036d9ed5655bf67",
+        "gitBlob": "7e52230aca4fbb55968157c08d1f2507e8129511",
+        "mode": "100644"
+      },
+      {
+        "path": "scripts/mkdocs_computer_use_study.py",
+        "bytes": 928,
+        "sha256": "a2d53530602b46f847852c85f3f3908887a2a992248433231f7cce52f8c1f648",
+        "gitBlob": "9a5a6e2d2fe1d2368991f8ac25339c755b92c350",
+        "mode": "100644"
+      },
+      {
+        "path": ".github/workflows/agent-release.yml",
+        "bytes": 64585,
+        "sha256": "a4d6598f26d7488a49182a045d743631705f0e3e64a92ba7d0b643e77c9d897f",
+        "gitBlob": "c94bab495738795f8214d35d2e8b3d3244420b15",
+        "mode": "100644"
+      }
+    ],
+    "finiteAnchorsRead": true,
+    "routeRole": "EXPECTED_COMMITTED_SOURCE_COPY_ROUTE_ONLY",
+    "finalArtifactObserved": false,
+    "liveHttpObserved": false,
+    "qualification": false
+  },
+  "rootValidation": {
+    "bytes": 1761,
+    "sha256": "43e1312020b13280858c411e729ec3a413a308ea1a0c63da9f5f58933517e18a",
+    "gitBlob": "b9096e5c4cffcafe60d514caf9ebb2d2c92ae23a",
+    "reportedGenericTests": 11,
+    "reportedExitCode": 0,
+    "reportedSeconds": 0.012,
+    "reportedResult": "PASS",
+    "independentlyReexecuted": false,
+    "finalArtifactObserved": false,
+    "liveReadbackPerformed": false,
+    "releaseQualified": false
+  },
+  "intendedEvidenceCommit": {
+    "soleNormalParentRequired": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+    "commitOrRefCreatedByThisPeer": false
+  },
+  "performed": {
+    "immutableGithubSourceAndMetadataReads": true,
+    "localTextAndHashReadsBeforeExecutorOutage": true,
+    "inMemoryDataDecodingAndHashing": true,
+    "helperOrProjectImportExecution": false,
+    "productOrGenericUnitsRunByPeer": false,
+    "liveSiteNetwork": false,
+    "nativeBrowserWalletSigningFundingActivation": false,
+    "workflowAdmissionOrDispatch": false,
+    "sourceRefOrStatusMutation": false,
+    "eligibleFleetOwnerReview": false
+  },
+  "limits": [
+    "PDF and builder bindings are to committed B7/A093 source only; later source changes require their own binding.",
+    "The committed docs_dir/build/package/restore route is an expected-source inference, not a final artifact or live HTTP observation.",
+    "Root's11 generic offline units are recorded as reported evidence, not independently rerun by this peer; no product qualification is transferred.",
+    "No full transitive product build/security review, original failure reproduction, owner approval or finalE/journey acceptance is claimed.",
+    "Executor became unavailable during the last data-hash invocation; remaining hashes were independently computed in memory, with SHA1/SHA256 primitives checked against standard empty/abc vectors and the already recorded original/current file hashes.",
+    "Root must still preserve all other7340 Git leaves and evidence ancestry when creating the intended sole-child R3; no future commit identity is invented."
+  ]
+}

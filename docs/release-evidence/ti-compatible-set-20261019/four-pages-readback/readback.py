@@ -57,7 +57,8 @@ PAPERS = tuple(f"{name}.{suffix}" for name in
     "Earn_the_Next_Experiment_LaTeX.zip",
     "Invent_the_Economy.pdf",
     "Invent_the_Economy.tex",
-    "Invent_the_Economy_LaTeX.zip")
+    "Invent_the_Economy_LaTeX.zip",
+    "SUCCESSOR_Omega_Invent_the_Economy_Business_Brief.pdf")
 ROUTES = {
     "alpha": (("", "en", None), ("successor/alpha/", "en", None),
               ("successor/alpha/", None, "fr"),

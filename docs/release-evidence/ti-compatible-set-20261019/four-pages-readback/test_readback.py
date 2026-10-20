@@ -82,20 +82,28 @@ class ReadbackUnits(unittest.TestCase):
         added = (
             "Earn_the_Next_Experiment.pdf", "Earn_the_Next_Experiment.tex",
             "Earn_the_Next_Experiment_LaTeX.zip", "Invent_the_Economy.pdf",
-            "Invent_the_Economy.tex", "Invent_the_Economy_LaTeX.zip")
+            "Invent_the_Economy.tex", "Invent_the_Economy_LaTeX.zip",
+            "SUCCESSOR_Omega_Invent_the_Economy_Business_Brief.pdf")
         self.assertEqual(R.PAPERS, original + added)
-        self.assertEqual(len(set(R.PAPERS)), 17)
+        self.assertEqual(len(set(R.PAPERS)), 18)
         self.assertEqual([row for row in R.ROUTES["alpha"] if row[0].startswith("PILOT_PLAYBOOK")],
                          [("PILOT_PLAYBOOK/", None, None)])
         expected = expectations()
-        expected["alpha"]["paperSha256"] = {added[0]: R.digest(b"%PDF-unit")}
+        expected["alpha"]["paperSha256"] = {added[0]: R.digest(b"%PDF-unit"),
+                                             added[-1]: R.digest(b"%PDF-unit")}
         files, transport = unit_transport(expected)
         value = R.readback(expected, transport)
         self.assertEqual([row["path"] for row in value["papers"]], list(original + added))
         self.assertTrue(next(row for row in value["papers"] if row["path"] == added[0])[
             "independentExpectedHashCompared"])
+        self.assertTrue(next(row for row in value["papers"] if row["path"] == added[-1])[
+            "independentExpectedHashCompared"])
         self.assertIn("PILOT_PLAYBOOK/", [row["path"] for row in value["routes"] if row["site"] == "alpha"])
         files[("alpha", added[0], None)] = (b"%PDF-unit-changed", "application/octet-stream")
+        with self.assertRaisesRegex(ValueError, "independent paper hash differs"):
+            R.readback(expected, transport)
+        files[("alpha", added[0], None)] = (b"%PDF-unit", "application/octet-stream")
+        files[("alpha", added[-1], None)] = (b"%PDF-unit-changed", "application/octet-stream")
         with self.assertRaisesRegex(ValueError, "independent paper hash differs"):
             R.readback(expected, transport)
 

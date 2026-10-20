@@ -1,0 +1,37 @@
+{
+  "schema": "four-repository-assessment/http-helper-extension-validation/v1",
+  "recordType": "local-offline-helper-validation",
+  "observedAt": "2026-10-20T14:06:50.732169+00:00",
+  "baseCommit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+  "baseTree": "89cb60cb1243cb0cb814d450a07b438bae1433cd",
+  "change": "Append the source-grounded new Alpha business-brief PDF after the original17; preserve all routes, transport, bounds and nonclaims. Extend the existing generic inventory test for the new path and its independent expected-hash mismatch.",
+  "changedFiles": {
+    "readback.py": {
+      "bytes": 22311,
+      "sha256": "c30a0798f002780f92889d211642549cb3f3c7ae80a92b96068b9eb3d474302d",
+      "gitBlob": "6685ae5d08d11d939185b2a0f490073cfcbcefb1"
+    },
+    "test_readback.py": {
+      "bytes": 13759,
+      "sha256": "34596a76400f53dd3d5c676619d99f73a2f4bfae33da8fee9b1425de7ed02e0f",
+      "gitBlob": "4a297f161e9b014c360588770cc6275dda703eb7"
+    }
+  },
+  "validation": {
+    "command": "python -m unittest discover -s assessment/four-pages-readback -p test_readback.py -v",
+    "exitCode": 0,
+    "tests": 11,
+    "reportedSeconds": 0.012,
+    "result": "PASS",
+    "scope": "Generic in-memory transport/shape fixtures only; no HTTP, project tests, browser, native, installation, workflow, wallet or chain action."
+  },
+  "finalArtifactObserved": false,
+  "liveReadbackPerformed": false,
+  "releaseQualified": false,
+  "refChanged": false,
+  "limits": [
+    "Source-grounded route inference must still match final released Pages artifact and live bytes.",
+    "No current or historical product qualification is transferred by this helper change.",
+    "Final authenticated expectations and final all-four HTTP/UI readback remain pending."
+  ]
+}
