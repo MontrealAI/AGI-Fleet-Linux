@@ -96,7 +96,9 @@ def controls(request,origin,output,restrict,external,errors,started):
             else:
                 result=page.locator('#runs .run').filter(has_text=request['run']);expect(result).to_have_count(1);expect(result).to_contain_text('uncertain')
                 response('reconciliation',lambda:click(result.get_by_role('button',name='Examiner la reprise' if language=='fr' else 'Inspect recovery',exact=True),'inspect-recovery'))
-                plan=json.loads(page.locator('#recoveryDetails').inner_text());expect(page.locator('#reconcile')).to_be_enabled()
+                expect(page.locator('#recovery')).to_be_visible()
+                expect(page.locator('#reconcile')).to_be_enabled()
+                plan=json.loads(page.locator('#recoveryDetails').inner_text())
                 selected={key:plan[key] for key in ['run','commitment','eligible','kind','replayAllowed','observationSha256']}
                 snapshot(page,'reconciliation');progress('reconciliation-ready',**selected);permission('reconcile',run=plan['run'],commitment=plan['commitment'])
                 reconciled=response('reconcile',lambda:click(page.locator('#reconcile'),'reconcile'))
