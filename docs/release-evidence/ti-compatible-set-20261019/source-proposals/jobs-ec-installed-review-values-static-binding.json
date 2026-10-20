@@ -1,0 +1,358 @@
+{
+  "schema": "four-repository-assessment/jobs-installed-child-static-data-binding/v1",
+  "observedAt": "2026-10-20T17:45:44.442Z",
+  "reviewerRole": "e_current_binding",
+  "reviewClass": "STATIC_PUBLIC_METADATA_REVIEW_RECEIPT_AND_INSTALL_HISTORY_BINDING_ONLY",
+  "disposition": "PASS_NO_CONCRETE_SCOPED_DATA_BINDING_DEFECT",
+  "identity": {
+    "repository": "MontrealAI/AGIJobsv0",
+    "installedCommit": "ec745a2045cdc3d5e48f6917a6ed8227c84d394d",
+    "installedTree": "2390e38d2c5ade29f11cf6656b8f0732cba2fe5a",
+    "soleParent": "689a34e3b70659984d537af5410977a4eaa77e77",
+    "installedCommitTime": "2026-10-20T17:35:48Z",
+    "reviewedSourceCommit": "689a34e3b70659984d537af5410977a4eaa77e77",
+    "reviewedSourceTree": "b404541f60ef7a927e085299c7159864a15ff53f",
+    "futureActualMergedMainAndReleasedS2": null,
+    "sourceRoleLimit": "689 is the fresh reviewed source baseline. ec is the metadata-installed child. This receipt does not assign ec or any future commit an actual main/released S2 role."
+  },
+  "exactInputs": {
+    "inheritedScannerSource": {
+      "path": "scripts/release/source-scanner-gates-rc16.cjs",
+      "mode": "100644",
+      "bytes": 43231,
+      "sha256": "2890b3ee716f9cb54e1d004819c9d9a0b379325861ec27ec86ba78a1afd21c3d",
+      "gitBlob": "6c72c824a971b3222f432a26be6efab2bbcdf5e8"
+    },
+    "sourceProfile": {
+      "path": "scripts/release/source-profile-rc16.json",
+      "before": {
+        "bytes": 25749,
+        "sha256": "f73ab57cf4822aa1cbb208305ad2e85d678361569041b461ca2970f0070bb7b9",
+        "gitBlob": "f79b73a82cc2783b184d4e0080889eba98aeb8d8"
+      },
+      "after": {
+        "bytes": 913250,
+        "sha256": "640d9b7daa7e34ab3f28318a7ce37adf8fd9aa5ad80ae1f3d2e5612bb11978c1",
+        "gitBlob": "7e4dc0a4f0cd5b2c3abc49a7457e5d7df6695c58"
+      }
+    },
+    "releaseNotes": {
+      "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+      "before": {
+        "bytes": 106592,
+        "sha256": "326ed0a6248022fc4ed562c39163339fc3560eace2e5ebee8131730678665351",
+        "gitBlob": "764ca8c93a4e9b5d11b9c4feefe29bdeed17d32a"
+      },
+      "after": {
+        "bytes": 186004,
+        "sha256": "29d33c84035ef5fc2e22893a772c571245a5cd9f3ccd2004bd80d8dea5f307b3",
+        "gitBlob": "8fba3a40791bb32b44f4bc4850dc3adfe379195a"
+      }
+    }
+  },
+  "fullTreeDelta": {
+    "bothPublicTreesNontruncated": true,
+    "entriesPerRecursiveTree": 6290,
+    "trackedLeavesBefore": 5185,
+    "trackedLeavesAfter": 5185,
+    "modifiedLeaves": [
+      {
+        "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+        "before": {
+          "gitBlob": "764ca8c93a4e9b5d11b9c4feefe29bdeed17d32a",
+          "bytes": 106592,
+          "mode": "100644",
+          "type": "blob"
+        },
+        "after": {
+          "gitBlob": "8fba3a40791bb32b44f4bc4850dc3adfe379195a",
+          "bytes": 186004,
+          "mode": "100644",
+          "type": "blob"
+        }
+      },
+      {
+        "path": "scripts/release/source-profile-rc16.json",
+        "before": {
+          "gitBlob": "f79b73a82cc2783b184d4e0080889eba98aeb8d8",
+          "bytes": 25749,
+          "mode": "100644",
+          "type": "blob"
+        },
+        "after": {
+          "gitBlob": "7e4dc0a4f0cd5b2c3abc49a7457e5d7df6695c58",
+          "bytes": 913250,
+          "mode": "100644",
+          "type": "blob"
+        }
+      }
+    ],
+    "unchangedOtherLeafPathTypeModeBlobAndSizeEntries": 5183,
+    "addedLeaves": 0,
+    "removedLeaves": 0,
+    "executableAndAllOtherOuterSourceLeavesUnchanged": true,
+    "completeIndependentGitMerkleReconstructionClaimed": false
+  },
+  "threeValueInverse": {
+    "allowedValues": [
+      {
+        "path": "scripts/release/source-profile-rc16.json",
+        "jsonPath": "$.scannerReview",
+        "before": null,
+        "after": "Fresh 689 JavaScript source/result review record"
+      },
+      {
+        "path": "scripts/release/source-profile-rc16.json",
+        "jsonPath": "$.pythonScannerReview",
+        "before": null,
+        "after": "Fresh 689 Python source/result review record"
+      },
+      {
+        "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+        "marker": "rc16-scanner-review",
+        "before": null,
+        "after": "Fresh 689 JavaScript notes record"
+      }
+    ],
+    "currentAndBaselineProfileUseExactTwoSpacePrettyJsonBytes": true,
+    "resettingOnlyTwoProfileValuesToNullReconstructsExact689ProfileBytes": true,
+    "resettingOnlyCurrentNotesMarkerPayloadToNullReconstructsExact689NotesBytes": true,
+    "historicalNotesBlocksAndAllOuterMarkdownBytesUnchanged": true,
+    "noteMarkerCount": 1,
+    "noOldApprovalValueTransferred": true
+  },
+  "currentAnchors": {
+    "scannerReview": {
+      "path": "scripts/release/source-profile-rc16.json",
+      "startLine": 278,
+      "endLine": 1075,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/scripts/release/source-profile-rc16.json#L278-L1075"
+    },
+    "scannerReviewSource": {
+      "path": "scripts/release/source-profile-rc16.json",
+      "startLine": 279,
+      "endLine": 279,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/scripts/release/source-profile-rc16.json#L279-L279"
+    },
+    "scannerReviewEvidence": {
+      "path": "scripts/release/source-profile-rc16.json",
+      "startLine": 1071,
+      "endLine": 1074,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/scripts/release/source-profile-rc16.json#L1071-L1074"
+    },
+    "pythonScannerReview": {
+      "path": "scripts/release/source-profile-rc16.json",
+      "startLine": 1630,
+      "endLine": 7665,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/scripts/release/source-profile-rc16.json#L1630-L7665"
+    },
+    "pythonScannerReviewSource": {
+      "path": "scripts/release/source-profile-rc16.json",
+      "startLine": 1632,
+      "endLine": 1633,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/scripts/release/source-profile-rc16.json#L1632-L1633"
+    },
+    "pythonReviewEvidence": {
+      "path": "scripts/release/source-profile-rc16.json",
+      "startLine": 7659,
+      "endLine": 7662,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/scripts/release/source-profile-rc16.json#L7659-L7662"
+    },
+    "notesMarker": {
+      "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+      "startLine": 1534,
+      "endLine": 2731,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/docs/production/RELEASE_NOTES_SOURCE_RC16.md#L1534-L2731"
+    },
+    "notesSource": {
+      "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+      "startLine": 1537,
+      "endLine": 1538,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/docs/production/RELEASE_NOTES_SOURCE_RC16.md#L1537-L1538"
+    },
+    "notesProducer": {
+      "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+      "startLine": 1539,
+      "endLine": 1548,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/docs/production/RELEASE_NOTES_SOURCE_RC16.md#L1539-L1548"
+    },
+    "notesCaseReviewMaterial": {
+      "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+      "startLine": 2436,
+      "endLine": 2707,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/docs/production/RELEASE_NOTES_SOURCE_RC16.md#L2436-L2707"
+    },
+    "notesHistoricalBindings": {
+      "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+      "startLine": 2720,
+      "endLine": 2724,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/docs/production/RELEASE_NOTES_SOURCE_RC16.md#L2720-L2724"
+    },
+    "notesReviewLinks": {
+      "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+      "startLine": 2725,
+      "endLine": 2729,
+      "url": "https://github.com/MontrealAI/AGIJobsv0/blob/ec745a2045cdc3d5e48f6917a6ed8227c84d394d/docs/production/RELEASE_NOTES_SOURCE_RC16.md#L2725-L2729"
+    }
+  },
+  "freshReviewMetadata": {
+    "comments": [
+      {
+        "id": 6296330899,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/pull/4004#issuecomment-6296330899",
+        "createdAt": "2026-10-20T16:54:32Z",
+        "updatedAt": "2026-10-20T16:54:32Z",
+        "afterReviewedSourceCommit": true,
+        "beforeInstalledChildCommit": true,
+        "sourceBinding": "Exact reviewed 689 commit prefix in configured receipt"
+      },
+      {
+        "id": 6296683983,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/pull/4004#issuecomment-6296683983",
+        "createdAt": "2026-10-20T17:12:55Z",
+        "updatedAt": "2026-10-20T17:12:55Z",
+        "afterReviewedSourceCommit": true,
+        "beforeInstalledChildCommit": true,
+        "sourceBinding": "Full 689 commit and tree in independent source/report receipt"
+      },
+      {
+        "id": 6297099570,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/pull/4004#issuecomment-6297099570",
+        "createdAt": "2026-10-20T17:34:00Z",
+        "updatedAt": "2026-10-20T17:34:00Z",
+        "afterReviewedSourceCommit": true,
+        "beforeInstalledChildCommit": true,
+        "sourceBinding": "Full 689 commit and tree in independent source/report receipt"
+      }
+    ],
+    "installationHandoffs": [
+      {
+        "id": 6297143795,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/pull/4004#issuecomment-6297143795",
+        "createdAt": "2026-10-20T17:36:14Z"
+      },
+      {
+        "id": 6297163694,
+        "url": "https://github.com/MontrealAI/AGIJobsv0/pull/4004#issuecomment-6297163694",
+        "createdAt": "2026-10-20T17:37:12Z"
+      }
+    ],
+    "javascript": {
+      "custodyCommit": "081cff8e1015430b92f575f2b79bcdfbd9dd8656",
+      "receiptPath": "docs/release-evidence/ti-compatible-set-20261020/jobs-689a34e/javascript/independent-review.json",
+      "receipt": {
+        "bytes": 8325,
+        "sha256": "eeb9facd2bc872804fb9caec9e31fe811bfecab126638ac0f99d1fde84aee58d",
+        "gitBlob": "0be741890e05ad02e91faaf9eda4304556066cc0"
+      },
+      "sourceCommit": "689a34e3b70659984d537af5410977a4eaa77e77",
+      "sourceTree": "b404541f60ef7a927e085299c7159864a15ff53f",
+      "producer": {
+        "runId": 39461253608,
+        "attempt": 2,
+        "event": "push",
+        "ref": "refs/heads/fix/processed-codeql-release-proof-20261020",
+        "codeqlJob": 118769808676,
+        "collectorJob": 118773076196,
+        "artifactId": 12283843672,
+        "archiveSha256": "ef26fbd30dd5595f2921da8adc35d063a05a1d7dcee80cdcbc591055a303846f"
+      },
+      "independentCaseMaterial": {
+        "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-689a34e/javascript/independent-case-material.json",
+        "bytes": 49085,
+        "sha256": "a990dd52c73b5689487a54c3b5b7cfeba69af6f468f41d3d09c51ff72eb79f5e",
+        "gitBlob": "dc82333aaf8fd5ec146210ec743dbb0ba0d04e07"
+      },
+      "independentlyRecomputedCanonicalMaterialSha256": "a990dd52c73b5689487a54c3b5b7cfeba69af6f468f41d3d09c51ff72eb79f5e",
+      "installedRecords": 45,
+      "installedMaterialEqualsIndependentMaterialExceptExactlyTenFreshQualityReviewEvidenceAdditions": true,
+      "addedEvidencePath": "qualityReview.independentReviewEvidence",
+      "addedEvidenceValue": [
+        "https://github.com/MontrealAI/AGIJobsv0/pull/4004#issuecomment-6297099570"
+      ],
+      "otherCaseFieldsAndArrayOrderUnchanged": true,
+      "currentQualitySourceBlobIdsMatch689Tree": true,
+      "independentCaseSemanticsReReviewedByThisPeer": false
+    },
+    "python": {
+      "custodyCommit": "9ead21fa1ade7c28f9b9295fe67156611cc9807c",
+      "receiptPath": "docs/release-evidence/ti-compatible-set-20261020/jobs-689a34e/python/independent-review.json",
+      "receipt": {
+        "bytes": 8136,
+        "sha256": "85c4cb0ed53fc87b9082a1defe47645ad5eaed5cffce97095e930ae8bf7d15ea",
+        "gitBlob": "eef72a12d75d72443ce4ae1dd50c28c2643f5fbf"
+      },
+      "sourceCommit": "689a34e3b70659984d537af5410977a4eaa77e77",
+      "sourceTree": "b404541f60ef7a927e085299c7159864a15ff53f",
+      "producer": {
+        "runId": 39461253659,
+        "attempt": 1,
+        "event": "push",
+        "ref": "refs/heads/fix/processed-codeql-release-proof-20261020",
+        "producerJob": 118760991449,
+        "collectorJob": 118762423228,
+        "artifactId": 12283091974,
+        "githubDigest": "sha256:ee77cd10997ca47f965928e28b98a99e16a25c56a7b1f21292a0d9a152d4e1e8"
+      },
+      "installedRecordCanonicalWithoutReviewEvidence": {
+        "bytes": 742014,
+        "sha256": "64567d685d92aa3e7a6d830d25c98f3e06db6dd7d81e40f824d0d759adefb813"
+      },
+      "exactCanonicalMaterialMatchesIndependentReceipt": true,
+      "freshEvidenceLinks": [
+        "https://github.com/MontrealAI/AGIJobsv0/pull/4004#issuecomment-6296683983",
+        "https://github.com/MontrealAI/AGIJobsv0/pull/4004#issuecomment-6296330899"
+      ]
+    },
+    "configuredReceiptLimit": "The public configured source-review receipt uses the 689 short commit prefix. It is recorded as a source selector, without an eligibility or overall qualification inference.",
+    "originalProducerStatusOrRawReportContentsIndependentlyReauthenticatedByThisPeer": false
+  },
+  "profileNotesLinkage": {
+    "sourceCommitAndSourceTreeMatch689": true,
+    "currentNotesProducerAndArchiveDigestMatchFreshJsReceipt": true,
+    "all45RawResultHashesMatchBetweenProfileNotesAndReceipt": true,
+    "all45RationalesMatchExactly": true,
+    "dispositionMappings": {
+      "Demonstrably false positive => reviewed-nonsecurity": 35,
+      "Acknowledged nonsecurity quality => quality-only": 10
+    },
+    "currentNotesRawToolAndQueryHashesMatchFreshReceipt": true,
+    "allFreshReviewLinksMatchActualPublicComments": true,
+    "installedPythonProducerAndArchiveMetadataMatchFreshReceipt": true
+  },
+  "history": {
+    "original532HoldPreserved": true,
+    "original532HoldUrl": "https://github.com/MontrealAI/AGIJobsv0/blob/79e62e6e35374f496e7edd84d94ac2ef65f3f5d7/docs/release-evidence/ti-compatible-set-20261020/jobs-53235ef/javascript/original-taxa-admission-hold.json",
+    "historicalF2CommentAndAllPriorOuterNotesBytePreserved": true,
+    "currentNotesHistoryObjectExactlyMatchesHistoricalF2History": true,
+    "currentHistory": {
+      "configSha256": "4b34450e1dcc0b489feea158d642a6b66261d9e935463928782219c8716c0892",
+      "findingsSha256": "3bb26ea360c74550cf8c3561085a742e55d058a03ca6658e74efb7e344bd7b0f",
+      "originalArchiveSha256": "c7dd344ab78de98d423d3294db17c1c7b810afa531df7416271f813096c25ba9"
+    },
+    "historicalConfigMatchesFrozenSourcePolicy": true,
+    "freshReceiptReference562Role": "The fresh JS receipt retains 562 as the historical coordinate/reference comparison source; this is not an approval transfer or replacement for fresh 689 source/review evidence.",
+    "historical532Or562ExecutionRelabelledAsEcOrFutureS2": false
+  },
+  "scopeLimits": {
+    "rawSarifReportsSecurityFixturesArtifactsAndLogsRead": false,
+    "producerArchiveDownloaded": false,
+    "projectCodeImportedExecutedOrReproduced": false,
+    "testsScriptsScansOrWorkflowActionsPerformed": false,
+    "reviewOrThreadStatusMutated": false,
+    "actualThreadResolutionIndependentlyQueriedByThisPeer": false,
+    "threadStatusBasis": "Parent separately reported genuine thread resolution from public review metadata; this receipt makes no new thread-status verification.",
+    "currentInstalledChildCiOrRuntimeQualified": false,
+    "finalMainServiceNativeApiArchivePublicationQualified": false,
+    "wholePrOrFourRepositorySetQualified": false,
+    "eligibleOwnerOrDistinctHumanReviewClaimed": false,
+    "signingFundingDeploymentActivationOrAuthorityChange": false,
+    "sourceCommitRefOrPublicCommentWritten": false
+  },
+  "findings": [],
+  "performed": [
+    "Reused public immutable commit/tree/file metadata and source-bound review receipts/comments",
+    "In-memory JSON, text inverse comparison and content hashes",
+    "Created this one unreferenced Fleet evidence blob only"
+  ]
+}
