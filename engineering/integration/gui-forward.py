@@ -17,6 +17,8 @@ def inventory(root):
     for file in sorted(root.rglob('*')):
         if file.is_symlink():raise ValueError('GUI_SITE_LINK')
         if file.is_file():rows.append({'name':file.relative_to(root).as_posix(),'bytes':file.stat().st_size,'sha256':sha(file.read_bytes())})
+    # Match the verifier's flattened relative-name UTF-16 code-unit ordering.
+    rows.sort(key=lambda row:row['name'].encode('utf-16-be'))
     return {'files':len(rows),'sha256':sha(json.dumps(rows,separators=(',',':'),ensure_ascii=False).encode())}
 
 def main():

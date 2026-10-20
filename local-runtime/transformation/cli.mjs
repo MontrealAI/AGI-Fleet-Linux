@@ -200,6 +200,7 @@ try {
       const session=runtime.store.meta('ti-browser-session');
       need(session?.projectId===id&&session.grant===v.grant&&session.commitment===v.commitment,'TI_EXACT_BROWSER_GRANT_REQUIRED');
       const principal=runtime.authenticate(decodeUTF8(readPrivate(runtime.store.meta('ti-browser-credential'))));
+      need(runtime.store.db.prepare('SELECT state FROM grants WHERE id=?').get(session.grant)?.state==='prepared','GRANT_UNAVAILABLE');
       runtime.authorize({grant:session.grant,commitment:session.commitment,confirm:true},principal);
       const completed=await runtime.run({actor:session.actor,grant:session.grant},principal);
       const returned=await runtime.dispatch('computer-export',{actor:session.actor,run:completed.run},principal);
