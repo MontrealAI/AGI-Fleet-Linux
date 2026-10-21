@@ -26,8 +26,11 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def audit_saved_profile(directory, archive, candidate, expected_commit, expected_run):
+def audit_saved_profile(directory, archive, candidate, expected_commit, expected_run, *, expected_profile=PROFILE):
     """Return one architecture's audit; caller must require x64 and arm64 together."""
+    require(expected_profile in CONTRACT_PROFILES and 'managerTests' in CONTRACT_PROFILES[expected_profile],
+            'Unsupported saved-archive profile')
+    profile_id = expected_profile
     directory, archive = Path(directory).absolute(), Path(archive).absolute()
     require(re.fullmatch(r'[a-f0-9]{40}', str(expected_commit))
             and re.fullmatch(r'[1-9][0-9]*', str(expected_run)), 'Expected workflow identity is missing')
@@ -47,13 +50,13 @@ def audit_saved_profile(directory, archive, candidate, expected_commit, expected
     binding = provenance(candidate)
     require(read(directory / 'candidate-binding.json') == binding, 'Profile candidate evidence binding differs')
     report = read(directory / 'summary.json')
-    definition = CONTRACT_PROFILES[PROFILE]
+    definition = CONTRACT_PROFILES[profile_id]
     require(report['schema'] == 'agi-fleet-saved-profile-integration/v1' and report['status'] == 'PASS'
             and report['classification'] == CLASSIFICATION and report['productionQualified'] is False
             and report['completeArchiveUnchanged'] is True, 'Saved profile integration did not pass')
     require(report['workflowCommit'] == expected_commit and str(report['workflowRun']) == str(expected_run)
             and re.fullmatch(r'[1-9][0-9]*', str(report['workflowRunAttempt'])), 'Profile workflow identity differs')
-    require(report['profile'] == PROFILE and report['profileManifestSHA256'] == definition['manifestSHA256']
+    require(report['profile'] == profile_id and report['profileManifestSHA256'] == definition['manifestSHA256']
             and report['manager']['commit'] == definition['commit'], 'Selected profile identity differs')
     require(report['candidateBinding'] == binding and report['archiveVerification'] == receipt,
             'Profile archive verification differs')
@@ -86,11 +89,11 @@ def audit_saved_profile(directory, archive, candidate, expected_commit, expected
         source = {'files': len(rows), 'revisionSHA256': revision}
         require(report['before'] == report['after'] == source, 'Profile before/after source identity differs')
         bundle = 'shared/runtime/contract-profiles/'
-        manifest_bytes = saved.read(prefix + bundle + PROFILE + '.json')
+        manifest_bytes = saved.read(prefix + bundle + profile_id + '.json')
         require(digest(manifest_bytes) == definition['manifestSHA256'], 'Reviewed profile manifest differs')
         manifest = json.loads(manifest_bytes)
-        require(manifest['profile'] == PROFILE and manifest['sourceCommit'] == definition['commit'], 'Profile source provenance differs')
-        base = prefix + bundle + PROFILE + '/'
+        require(manifest['profile'] == profile_id and manifest['sourceCommit'] == definition['commit'], 'Profile source provenance differs')
+        base = prefix + bundle + profile_id + '/'
         for name, checksum in manifest['files'].items():
             require(digest(saved.read(base + name)) == checksum, 'Reviewed profile member differs: ' + name)
         build_receipt = json.loads(saved.read(base + 'BUILD_RECEIPT.json'))
@@ -124,7 +127,7 @@ def audit_saved_profile(directory, archive, candidate, expected_commit, expected
             and child['status'] == 'PASS' and child['classification'] == CLASSIFICATION
             and child['productionQualified'] is False and child['savedArchiveBinding'] == binding,
             'Nested profile summary binding differs')
-    require(child['source'] == source and child['profile'] == PROFILE
+    require(child['source'] == source and child['profile'] == profile_id
             and child['profileManifestSHA256'] == definition['manifestSHA256']
             and child['managerCommit'] == manager['commit']
             and child['managerLockfileSHA256'] == manager['lockfileSHA256']
@@ -145,7 +148,7 @@ def audit_saved_profile(directory, archive, candidate, expected_commit, expected
         require(sha(file) == step['logSHA256'], 'Profile retained log hash differs')
         logs[step['name']] = file.read_text()
     for name, profile in [('legacy-artifact-reproduction', 'manager-legacy-db876a8'),
-                          ('profile-artifact-reproduction', PROFILE)]:
+                          ('profile-artifact-reproduction', profile_id)]:
         matches = re.findall(r'^MATCH (\w+)$', logs[name], re.MULTILINE)
         require(len(matches) == 11 and set(matches) == set(baseline.ARTIFACTS)
                 and 'All 11 artifacts reproduced exactly' in logs[name]
@@ -157,7 +160,7 @@ def audit_saved_profile(directory, archive, candidate, expected_commit, expected
             'Profile Manager regression counts differ')
     comparison = child['contractCompatibility']
     require(comparison['status'] == 'PASS' and comparison['bundledSourceCommit'] == definition['commit']
-            and comparison['contractProfile'] == PROFILE and comparison['contractProfileSHA256'] == definition['manifestSHA256']
+            and comparison['contractProfile'] == profile_id and comparison['contractProfileSHA256'] == definition['manifestSHA256']
             and comparison['productionSources'] == sources and comparison['artifacts'] == artifacts,
             'Profile exact source/artifact comparison differs')
     lifecycle_file = directory / 'profile-integration/profile-lifecycle.json'
@@ -165,7 +168,7 @@ def audit_saved_profile(directory, archive, candidate, expected_commit, expected
     require(sha(lifecycle_file) == report['lifecycleReportSHA256']
             and lifecycle == report['lifecycle'] == child['lifecycle']
             and lifecycle['schema'] == 'agi-fleet-job-lifecycle/v1' and lifecycle['status'] == 'PASS'
-            and lifecycle['chainId'] == 31337 and lifecycle['contractProfile'] == PROFILE
+            and lifecycle['chainId'] == 31337 and lifecycle['contractProfile'] == profile_id
             and lifecycle['contractProfileSHA256'] == definition['manifestSHA256'], 'Profile lifecycle binding differs')
     for key, value in {'linkedProductionContracts': 9, 'defaultVoteQuorum': 3, 'defaultReviewPeriodSeconds': 604800,
                        'agentGenerationCount': 1, 'publicationCount': 1, 'managerTokenBalanceAfter': '0',
@@ -179,7 +182,7 @@ def audit_saved_profile(directory, archive, candidate, expected_commit, expected
                 'independentRPCBackends', 'realTimeEndurance']:
         require(lifecycle['limitations'][key] is False, 'Profile lifecycle scope was broadened')
     return {'status': 'PASS', 'architecture': architecture, 'workflowCommit': expected_commit,
-            'workflowRun': str(expected_run), 'productionQualified': False, 'profile': PROFILE,
+            'workflowRun': str(expected_run), 'productionQualified': False, 'profile': profile_id,
             'profileManifestSHA256': definition['manifestSHA256'], 'managerCommit': definition['commit'],
             'managerTestsPassed': 792, 'standaloneIntegrationScripts': 8, 'contractArtifactsMatched': 11,
             'verifiedLogs': 12, 'archiveSHA256': candidate['sha256'], 'sourceRevisionSHA256': source['revisionSHA256'],

@@ -1,7 +1,7 @@
 name: Local Skills development qualification
 on:
   pull_request:
-    paths: ['fleet/**', 'local-runtime/**', 'local-dashboard/**', 'role-skills/**', 'docs/local-skills/**', 'LOCAL_SKILLS.md', '.github/workflows/local-skills.yml']
+    paths: ['fleet/**', 'local-runtime/**', 'local-dashboard/**', 'role-skills/**', 'docs/local-skills/**', 'engineering/integration/**', 'LOCAL_SKILLS.md', '.github/workflows/local-skills.yml', '.github/workflows/four-repository-service.yml']
   push:
     branches: [main]
     paths: ['local-runtime/preview-release.json']
@@ -85,7 +85,7 @@ jobs:
       - name: Build and verify a development archive, never an operator installer
         run: |
           python3 local-runtime/package.py --output "$RUNNER_TEMP/local-preview"
-          python3 local-runtime/package.py --verify "$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.5.zip"
+          python3 local-runtime/package.py --verify "$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.6.zip"
       - name: Exercise exact extracted bytes
         run: |
           set -euo pipefail
@@ -93,11 +93,11 @@ jobs:
           import os, stat, zipfile
           from pathlib import Path
           target=Path(os.environ['RUNNER_TEMP'])/'local-extracted'
-          with zipfile.ZipFile(Path(os.environ['RUNNER_TEMP'])/'local-preview/agi-fleet-local-0.1.0-alpha.5.zip') as z:
+          with zipfile.ZipFile(Path(os.environ['RUNNER_TEMP'])/'local-preview/agi-fleet-local-0.1.0-alpha.6.zip') as z:
             z.extractall(target)
             for i in z.infolist(): (target/i.filename).chmod(stat.S_IMODE(i.external_attr>>16))
           PY
-          cd "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.5"
+          cd "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.6"
           node local-runtime/validate.mjs
           node --test --test-reporter=tap local-runtime/tests/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/extracted.tap"
       - name: Require real native isolation and actual worker artifacts
@@ -108,10 +108,10 @@ jobs:
         if: ${{ !cancelled() }}
         run: |
           set -euo pipefail
-          node --test --test-reporter=tap "$RUNNER_TEMP"/local-extracted/agi-fleet-local-0.1.0-alpha.5/local-runtime/tests/native/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/native-archive.tap"
+          node --test --test-reporter=tap "$RUNNER_TEMP"/local-extracted/agi-fleet-local-0.1.0-alpha.6/local-runtime/tests/native/*.test.mjs 2>&1 | tee "$RUNNER_TEMP/local-host-evidence/native-archive.tap"
       - name: Install the saved package and run the actual local service and worker
         run: |
-          AGI_LOCAL_PACKAGE_ARCHIVE="$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.5.zip" \
+          AGI_LOCAL_PACKAGE_ARCHIVE="$RUNNER_TEMP/local-preview/agi-fleet-local-0.1.0-alpha.6.zip" \
           AGI_LOCAL_NODE_ARCHIVE="$RUNNER_TEMP/local-node.tar.xz" \
           AGI_LOCAL_INSTALL_EVIDENCE="$RUNNER_TEMP/local-host-evidence/installed-journey.json" \
             node local-runtime/qualification/installed-journey.mjs
@@ -125,7 +125,7 @@ jobs:
           for role in agent node moderator employer evidence recovery; do
             OPENCLAW_BIN="$RUNNER_TEMP/local-openclaw/node_modules/openclaw/openclaw.mjs" \
             AGI_LOCAL_OPENCLAW_EVIDENCE="$RUNNER_TEMP/local-host-evidence/openclaw-$role.json" \
-              node "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.5/local-runtime/qualification/openclaw-journey.mjs" "--role=$role"
+              node "$RUNNER_TEMP/local-extracted/agi-fleet-local-0.1.0-alpha.6/local-runtime/qualification/openclaw-journey.mjs" "--role=$role"
           done
           python3 - <<'PY'
           import json, os
@@ -143,9 +143,9 @@ jobs:
           import hashlib, json, os
           from pathlib import Path
           base=Path(os.environ['RUNNER_TEMP'])
-          archive=base/'local-preview/agi-fleet-local-0.1.0-alpha.5.zip'
+          archive=base/'local-preview/agi-fleet-local-0.1.0-alpha.6.zip'
           (base/'local-host-evidence/qualification.json').write_text(json.dumps({
-              'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],
+              'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],'workflowAttempt':os.environ['GITHUB_RUN_ATTEMPT'],
               'architecture':os.environ['ARCH'],'archiveSHA256':hashlib.sha256(archive.read_bytes()).hexdigest()})+'\n')
           PYCODE
       - name: Retain development artifact identity
@@ -195,7 +195,7 @@ jobs:
           import json, os
           from pathlib import Path
           (Path(os.environ['RUNNER_TEMP'])/'local-dashboard-evidence/qualification.json').write_text(json.dumps({
-              'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],
+              'commit':os.environ['GITHUB_SHA'],'workflowRun':os.environ['GITHUB_RUN_ID'],'workflowAttempt':os.environ['GITHUB_RUN_ATTEMPT'],
               'evidenceClass':'BROWSER_WITH_DECLARED_SYNTHETIC_WORKER'})+'\n')
           PYCODE
       - name: Retain non-secret dashboard observations
@@ -206,8 +206,24 @@ jobs:
           path: ${{ runner.temp }}/local-dashboard-evidence/
           if-no-files-found: warn
           retention-days: 30
+  computer:
+    needs: [native]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            arch: x64
+          - runner: ubuntu-24.04-arm
+            arch: arm64
+    uses: ./.github/workflows/four-repository-service.yml
+    with:
+      architecture: ${{ matrix.arch }}
+      runner: ${{ matrix.runner }}
+      package-artifact: local-skills-preview-${{ matrix.arch }}
+      archive-name: agi-fleet-local-0.1.0-alpha.6.zip
   audit:
-    needs: [native, browser]
+    needs: [native, browser, computer]
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -220,6 +236,43 @@ jobs:
         with:
           pattern: local-*
           path: evidence
+      - name: Read the exact native inspector source pins
+        id: computer-pins
+        run: |
+          python3 -B - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          pins=json.loads(Path('engineering/integration/compatibility-set.json').read_text())
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:
+              for name in ['alpha','jobs','manager']:
+                  assert re.fullmatch('[a-f0-9]{40}',pins[name])
+                  output.write(name+'='+pins[name]+'\n')
+          PY
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: MontrealAI/AGI-Alpha-Agent-v0
+          ref: ${{ steps.computer-pins.outputs.alpha }}
+          path: .computer-alpha
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: MontrealAI/AGIJobsv0
+          ref: ${{ steps.computer-pins.outputs.jobs }}
+          path: .computer-jobs
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: MontrealAI/AGIJobManager
+          ref: ${{ steps.computer-pins.outputs.manager }}
+          path: .computer-manager
+          persist-credentials: false
+      - name: Install the hash-pinned native inspector runtime
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz -o "$RUNNER_TEMP/computer-node.tar.xz"
+          printf '%s  %s\n' fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6 "$RUNNER_TEMP/computer-node.tar.xz" | sha256sum --check
+          tar -xJf "$RUNNER_TEMP/computer-node.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/node-v24.21.0-linux-x64/bin" >> "$GITHUB_PATH"
       - name: Independently audit both saved packages and all observations
         run: python3 local-runtime/release.py --evidence evidence --output "$RUNNER_TEMP/local-audited"
       - name: Retain the audited preview
@@ -240,7 +293,7 @@ jobs:
       validation_only: true
   publish:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish))
-    needs: [native, browser, audit, fleet]
+    needs: [native, browser, computer, audit, fleet]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
@@ -260,6 +313,43 @@ jobs:
         with:
           name: next-publication
           path: fleet-evidence
+      - name: Read the exact native inspector source pins
+        id: computer-pins
+        run: |
+          python3 -B - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          pins=json.loads(Path('engineering/integration/compatibility-set.json').read_text())
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:
+              for name in ['alpha','jobs','manager']:
+                  assert re.fullmatch('[a-f0-9]{40}',pins[name])
+                  output.write(name+'='+pins[name]+'\n')
+          PY
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: MontrealAI/AGI-Alpha-Agent-v0
+          ref: ${{ steps.computer-pins.outputs.alpha }}
+          path: .computer-alpha
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: MontrealAI/AGIJobsv0
+          ref: ${{ steps.computer-pins.outputs.jobs }}
+          path: .computer-jobs
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: MontrealAI/AGIJobManager
+          ref: ${{ steps.computer-pins.outputs.manager }}
+          path: .computer-manager
+          persist-credentials: false
+      - name: Install the hash-pinned native inspector runtime
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz -o "$RUNNER_TEMP/computer-node.tar.xz"
+          printf '%s  %s\n' fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6 "$RUNNER_TEMP/computer-node.tar.xz" | sha256sum --check
+          tar -xJf "$RUNNER_TEMP/computer-node.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/node-v24.21.0-linux-x64/bin" >> "$GITHUB_PATH"
       - name: Reaudit and publish the immutable labeled preview
         env:
           GH_TOKEN: ${{ github.token }}

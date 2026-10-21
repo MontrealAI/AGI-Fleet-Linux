@@ -1,0 +1,628 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agi-fleet:final-public-package-inputs:v1",
+  "description": "Runtime additionally authenticates actual API objects and cross-field identities. No release IDs are embedded here. Only identical Fleet architecture asset records may share identity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "consumerSource",
+    "repositories"
+  ],
+  "properties": {
+    "schema": {
+      "const": "agi-fleet/final-public-package-inputs/v1"
+    },
+    "consumerSource": {
+      "$ref": "#/$defs/identity"
+    },
+    "repositories": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alpha",
+        "fleet",
+        "jobs",
+        "manager"
+      ],
+      "properties": {
+        "alpha": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "releaseId",
+            "tag",
+            "reviewed",
+            "released",
+            "sourceContinuity",
+            "jobsSourceTransition",
+            "requiredRuns",
+            "assets"
+          ],
+          "properties": {
+            "repository": {
+              "const": "MontrealAI/AGI-Alpha-Agent-v0"
+            },
+            "releaseId": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "tag": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"
+            },
+            "reviewed": {
+              "$ref": "#/$defs/identity"
+            },
+            "released": {
+              "$ref": "#/$defs/identity"
+            },
+            "sourceContinuity": {
+              "$ref": "#/$defs/continuity"
+            },
+            "jobsSourceTransition": {
+              "type": "null"
+            },
+            "requiredRuns": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 100,
+              "items": {
+                "$ref": "#/$defs/run"
+              },
+              "contains": {
+                "type": "object",
+                "required": [
+                  "path",
+                  "sourceRole",
+                  "event",
+                  "ref"
+                ],
+                "properties": {
+                  "path": {
+                    "const": ".github/workflows/agent-release.yml"
+                  },
+                  "sourceRole": {
+                    "const": "released"
+                  },
+                  "event": {
+                    "enum": [
+                      "push",
+                      "workflow_dispatch"
+                    ]
+                  },
+                  "ref": {
+                    "const": "refs/heads/main"
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            "assets": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "wheel",
+                "manifest",
+                "checksums"
+              ],
+              "properties": {
+                "source": {
+                  "$ref": "#/$defs/asset"
+                },
+                "wheel": {
+                  "$ref": "#/$defs/asset"
+                },
+                "manifest": {
+                  "$ref": "#/$defs/asset"
+                },
+                "checksums": {
+                  "$ref": "#/$defs/asset"
+                }
+              }
+            }
+          }
+        },
+        "fleet": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "releaseId",
+            "tag",
+            "reviewed",
+            "released",
+            "sourceContinuity",
+            "jobsSourceTransition",
+            "requiredRuns",
+            "assets"
+          ],
+          "properties": {
+            "repository": {
+              "const": "MontrealAI/AGI-Fleet-Linux"
+            },
+            "releaseId": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "tag": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"
+            },
+            "reviewed": {
+              "$ref": "#/$defs/identity"
+            },
+            "released": {
+              "$ref": "#/$defs/identity"
+            },
+            "sourceContinuity": {
+              "$ref": "#/$defs/continuity"
+            },
+            "jobsSourceTransition": {
+              "type": "null"
+            },
+            "requiredRuns": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 100,
+              "items": {
+                "$ref": "#/$defs/run"
+              },
+              "contains": {
+                "type": "object",
+                "required": [
+                  "path",
+                  "sourceRole",
+                  "event",
+                  "ref"
+                ],
+                "properties": {
+                  "path": {
+                    "const": ".github/workflows/transformation-release.yml"
+                  },
+                  "sourceRole": {
+                    "const": "released"
+                  },
+                  "event": {
+                    "enum": [
+                      "workflow_dispatch"
+                    ]
+                  },
+                  "ref": {
+                    "const": "refs/heads/main"
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            "assets": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "packageX64",
+                "packageArm64",
+                "manifest",
+                "checksums"
+              ],
+              "properties": {
+                "packageX64": {
+                  "$ref": "#/$defs/asset"
+                },
+                "packageArm64": {
+                  "$ref": "#/$defs/asset"
+                },
+                "manifest": {
+                  "$ref": "#/$defs/asset"
+                },
+                "checksums": {
+                  "$ref": "#/$defs/asset"
+                }
+              }
+            }
+          }
+        },
+        "jobs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "releaseId",
+            "tag",
+            "reviewed",
+            "released",
+            "sourceContinuity",
+            "jobsSourceTransition",
+            "requiredRuns",
+            "assets"
+          ],
+          "properties": {
+            "repository": {
+              "const": "MontrealAI/AGIJobsv0"
+            },
+            "releaseId": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "tag": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"
+            },
+            "reviewed": {
+              "$ref": "#/$defs/identity"
+            },
+            "released": {
+              "$ref": "#/$defs/identity"
+            },
+            "sourceContinuity": {
+              "$ref": "#/$defs/jobsContinuity"
+            },
+            "jobsSourceTransition": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/transition"
+                }
+              ]
+            },
+            "requiredRuns": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 100,
+              "items": {
+                "$ref": "#/$defs/run"
+              },
+              "contains": {
+                "type": "object",
+                "required": [
+                  "path",
+                  "sourceRole",
+                  "event",
+                  "ref"
+                ],
+                "properties": {
+                  "path": {
+                    "const": ".github/workflows/source-release-rc16.yml"
+                  },
+                  "sourceRole": {
+                    "const": "released"
+                  },
+                  "event": {
+                    "enum": [
+                      "push"
+                    ]
+                  },
+                  "ref": {
+                    "const": "refs/heads/main"
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            "assets": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "provenance",
+                "sourceProfile",
+                "checksums"
+              ],
+              "properties": {
+                "source": {
+                  "$ref": "#/$defs/asset"
+                },
+                "provenance": {
+                  "$ref": "#/$defs/asset"
+                },
+                "sourceProfile": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/asset"
+                    },
+                    {
+                      "properties": {
+                        "name": {
+                          "const": "source-profile-rc16.json"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "checksums": {
+                  "$ref": "#/$defs/asset"
+                }
+              }
+            }
+          }
+        },
+        "manager": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "releaseId",
+            "tag",
+            "reviewed",
+            "released",
+            "sourceContinuity",
+            "jobsSourceTransition",
+            "requiredRuns",
+            "assets"
+          ],
+          "properties": {
+            "repository": {
+              "const": "MontrealAI/AGIJobManager"
+            },
+            "releaseId": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "tag": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"
+            },
+            "reviewed": {
+              "$ref": "#/$defs/identity"
+            },
+            "released": {
+              "$ref": "#/$defs/identity"
+            },
+            "sourceContinuity": {
+              "$ref": "#/$defs/continuity"
+            },
+            "jobsSourceTransition": {
+              "type": "null"
+            },
+            "requiredRuns": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 100,
+              "items": {
+                "$ref": "#/$defs/run"
+              },
+              "contains": {
+                "type": "object",
+                "required": [
+                  "path",
+                  "sourceRole",
+                  "event",
+                  "ref"
+                ],
+                "properties": {
+                  "path": {
+                    "const": ".github/workflows/current-state-release.yml"
+                  },
+                  "sourceRole": {
+                    "const": "released"
+                  },
+                  "event": {
+                    "enum": [
+                      "push",
+                      "workflow_dispatch"
+                    ]
+                  },
+                  "ref": {
+                    "const": "refs/heads/main"
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            "assets": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "package",
+                "manifest",
+                "qualification",
+                "checksums"
+              ],
+              "properties": {
+                "package": {
+                  "$ref": "#/$defs/asset"
+                },
+                "manifest": {
+                  "$ref": "#/$defs/asset"
+                },
+                "qualification": {
+                  "$ref": "#/$defs/asset"
+                },
+                "checksums": {
+                  "$ref": "#/$defs/asset"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commit",
+        "tree"
+      ],
+      "properties": {
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,179}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "exclusiveMaximum": 450000000
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "attempt",
+        "path",
+        "event",
+        "ref",
+        "sourceRole"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^\\.github/workflows/[a-z0-9-]+\\.yml$"
+        },
+        "event": {
+          "enum": [
+            "push",
+            "pull_request",
+            "workflow_dispatch",
+            "workflow_run"
+          ]
+        },
+        "ref": {
+          "type": "string",
+          "pattern": "^refs/heads/[A-Za-z0-9._/-]{1,180}$"
+        },
+        "sourceRole": {
+          "enum": [
+            "reviewed",
+            "released"
+          ]
+        }
+      }
+    },
+    "continuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "reviewIds"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "same-commit",
+            "same-tree"
+          ]
+        },
+        "reviewIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "description": "Selectors authenticated as source-bound issue comments; not approval or eligibility assertions."
+        }
+      }
+    },
+    "jobsContinuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "reviewIds"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "same-commit",
+            "same-tree",
+            "jobs-reviewed-transition"
+          ]
+        },
+        "reviewIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "description": "Selectors authenticated as source-bound issue comments; not approval or eligibility assertions."
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assetRole",
+        "sha256",
+        "reviewedCommit",
+        "releasedCommit"
+      ],
+      "properties": {
+        "assetRole": {
+          "const": "sourceProfile"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reviewedCommit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "releasedCommit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      }
+    }
+  }
+}

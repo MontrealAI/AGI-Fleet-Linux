@@ -7,6 +7,7 @@ import { getAddress, ZeroAddress } from 'ethers';
 
 export const LEGACY_CONTRACT_PROFILE = 'manager-legacy-db876a8';
 export const MANAGER_117_CONTRACT_PROFILE = 'manager-1.17.0-b7218196';
+export const MANAGER_1193_CONTRACT_PROFILE = 'manager-1.19.3-d0c2cbaf';
 export const RUNTIME_CONTRACTS = Object.freeze([
   'AGIJobManager', 'UriUtils', 'TransferUtils', 'BondMath', 'ReputationMath',
   'ENSOwnership', 'NftEligibility', 'JobSettlement', 'JobValidation',
@@ -20,6 +21,10 @@ const definitions = Object.freeze({
   [MANAGER_117_CONTRACT_PROFILE]: Object.freeze({
     sourceTag: 'v1.17.0', sourceCommit: 'b721819639668f0074c244d516bbbe0cf57329a7',
     manifestSHA256: 'a16ca49d23b91387c727277f0cabbcfec9860734cdba47f0ccecc93e5c443df7',
+  }),
+  [MANAGER_1193_CONTRACT_PROFILE]: Object.freeze({
+    sourceTag: 'v1.19.3', sourceCommit: 'd0c2cbaf58b594e20d888c3fc744bada06172306',
+    manifestSHA256: 'bf31418e6a26a24cd1af4c527e1a64c2566dba9078c4bfa09ba62a90f8cd6e93',
   }),
 });
 const root = fileURLToPath(new URL('../contract-profiles/', import.meta.url));

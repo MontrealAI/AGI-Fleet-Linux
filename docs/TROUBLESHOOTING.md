@@ -9,7 +9,7 @@ Use this guide with the [fresh installation procedure](FRESH_INSTALL.md). Run Li
 If installation completed, run the role's `Inspect.sh` from its compute desktop. For Agent in this release:
 
 ```bash
-/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/packages/AGI_Agent/Inspect.sh
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.5/packages/AGI_Agent/Inspect.sh
 ```
 
 Inspect reports filtered policy, host and authenticated health information. Its exit code alone is insufficient: inspect `policy`, `host`, `computeSTOP` and `health`. If no valid compute settings exist yet, Inspect may also fail. Retain the original installation's error and printed sanitized report path; do not create settings manually just to make Inspect work.
@@ -45,7 +45,7 @@ Preparation can make some changes before a later failure. A second invocation is
 In the installed role's compute desktop, for example Agent:
 
 ```bash
-/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.4/packages/AGI_Agent/Stop-Compute.sh
+/opt/agi-fleet-linux/AGI_Fleet_Linux_v1.1.5/packages/AGI_Agent/Stop-Compute.sh
 ```
 
 The command first writes `OPERATOR_REQUESTED_STOP` if no STOP already exists. It then checks service termination, closed role ports and recognized socket absence. Only a passed stop report confirms those postconditions. A failure means shutdown remains unconfirmed; retain its evidence and escalate diagnosis.

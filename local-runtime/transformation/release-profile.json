@@ -1,0 +1,19 @@
+{
+  "schema": "agi-fleet/ti-source-preview-release/v1",
+  "version": "0.1.0-alpha.7",
+  "tag": "v0.1.0-local-ti-preview.7",
+  "name": "AGI Fleet Local TI 0.1.0 alpha.7 — source preview",
+  "archive": "agi-fleet-local-0.1.0-alpha.7.zip",
+  "entrypoint": ["node", "local-runtime/transformation/cli.mjs"],
+  "sourceInventory": "local-runtime/transformation/source-inventory.json",
+  "legacyRuntimeVersion": "0.1.0-alpha.6",
+  "linuxDashboardVersion": "1.1.5",
+  "scope": "persistent-public-native-ti-project-free-inspection-source-preview",
+  "operatorInstaller": false,
+  "productionQualified": false,
+  "fullHandoffComplete": false,
+  "fundedTI": "REFUSED_NATIVE_ZERO_ALLOWANCE",
+  "importedAuthority": "none",
+  "nativeDockerSavedPackageQualification": "REQUIRED_SEPARATELY",
+  "headlessLaboratoryQualification": "TEST_ONLY_HOST_PLAYWRIGHT_NO_DOCKER"
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "agi-fleet/ti-installed-source-pins/v1",
+  "alpha": {
+    "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+    "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+    "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22"
+  },
+  "manager": {
+    "repository": "MontrealAI/AGIJobManager",
+    "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+    "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86"
+  },
+  "jobs": {
+    "repository": "MontrealAI/AGIJobsv0",
+    "commit": "83065adf18a6ee987f8fa479a496a052d35db682",
+    "tree": "77ded62b991e8cca28bfd849593153f61ac72d86"
+  },
+  "computer": {
+    "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+    "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+    "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22"
+  },
+  "computerScope": "current-Alpha-source; fresh-installed-native-browser-qualification-required",
+  "publicNonpersonalOnly": true,
+  "paidTI": false,
+  "liveProvider": false,
+  "importedAuthority": "none",
+  "productionQualified": false
+}

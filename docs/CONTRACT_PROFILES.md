@@ -2,6 +2,26 @@
 
 ## English
 
+### Current-source addition: Manager 1.19.3
+
+The new `manager-1.19.3-d0c2cbaf` profile pins published Manager source
+`d0c2cbaf58b594e20d888c3fc744bada06172306`. It adds the complete eleven-artifact
+bundle, compiler inputs, eleven production-source digests and locked-build
+receipt. Its source graph passed exact recompilation and 792 Manager
+regressions locally. The compiled settings retain Solidity 0.8.37, viaIR,
+40 optimizer runs, Shanghai and the reviewed Yul optimizer mitigation.
+
+This is an additive **Linux 1.1.5 / Local Skills alpha.6 source candidate**.
+It requires its own saved-archive native, browser, integration and audit gates
+before publication. The 1.1.5 release requires both this profile and the
+preserved 1.17.0 profile on x64 and ARM64; an older profile observation cannot
+substitute for the new graph. Omission still selects the unchanged legacy
+profile. Selecting any explicit profile requires a fresh reviewed enrollment
+and authorization binding; no deployment is automatically selected, migrated,
+activated or modified. Previous deployments remain read-only.
+
+The published 1.1.4 observations below are historical and remain unchanged.
+
 This additive profile support is included in the [published Linux 1.1.4 qualification installer](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.4-qualification). Its exact saved archive passed the separate 792-test Manager 1.17.0 profile integration on both architectures; [published evidence and remaining gates](../validation/LINUX_1_1_4_RELEASE_ADDENDUM.md) identify the accepted bytes. This does not deploy or migrate a contract, qualify physical operation or authorize funded work. Earlier saved releases and their historical integration harness remain unchanged.
 
 ### Choose a complete graph
@@ -57,6 +77,20 @@ The outer `summary.json`, `candidate-binding.json`, `archive-members.json` and n
 Maintain the canonical module and profile bundle under `fleet/shared/runtime/`. Run `fleet/scripts/sync-shared-runtime.py`, `fleet/scripts/sync-contract-profiles.py` and `fleet/scripts/sync-shared-operator.py` after source changes, then their `--check` modes. The profile adapter check covers all fourteen standalone/nested Agent and Node code roots; the shared checks cover all six editions and root operator code.
 
 ## Français
+
+Le nouveau profil `manager-1.19.3-d0c2cbaf` fixe la source Manager publiée
+`d0c2cbaf58b594e20d888c3fc744bada06172306`, ses onze artefacts, les entrées
+du compilateur, les empreintes des sources et le reçu de compilation verrouillée.
+Sa recompilation exacte et les 792 régressions Manager ont réussi localement.
+Solidity 0.8.37, viaIR, 40 passages, Shanghai et l’atténuation Yul sont conservés.
+
+Il reste un ajout source candidat Linux 1.1.5 / Local Skills alpha.6 jusqu’à
+ses propres essais d’archive, natifs, navigateur, intégration et audit. Les
+profils 1.17.0 et 1.19.3 doivent chacun réussir sur x64 et ARM64. Le profil
+historique par défaut et les observations publiées 1.1.4 ci-dessous sont
+préservés. Aucun déploiement n’est choisi, migré, activé ou modifié; les
+anciens déploiements restent en lecture seule et tout nouveau profil explicite
+exige de nouveaux liens d’inscription et d’autorisation examinés.
 
 Ces profils sont inclus dans l’[installateur de qualification Linux 1.1.4 publié](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v1.1.4-qualification). Son archive exacte a réussi l’intégration distincte de 792 tests Manager 1.17.0 sur les deux architectures; les [preuves publiées et exigences restantes](../validation/LINUX_1_1_4_RELEASE_ADDENDUM.md) identifient les fichiers acceptés. Cela ne déploie ni ne migre de contrat, ne qualifie aucune installation physique et n’autorise aucun travail financé. Les versions antérieures et leur banc d’intégration historique restent inchangés.
 

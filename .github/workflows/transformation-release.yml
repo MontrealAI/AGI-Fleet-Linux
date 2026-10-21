@@ -1,0 +1,139 @@
+name: Local TI alpha.7 retained-evidence publication
+on:
+  workflow_dispatch:
+    inputs:
+      expected-source:
+        description: Exact frozen current main commit S; never a branch or prospective source
+        required: true
+        type: string
+      selectors:
+        description: JSON with ti/local/linux/repository/sourceReview run:attempts and genuine review API IDs
+        required: true
+        type: string
+      publish:
+        description: Publish the fully audited alpha.7 prerelease after exact-source tag and asset verification
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  actions: read
+  checks: read
+  issues: read
+  pull-requests: read
+concurrency:
+  group: local-ti-alpha7-publication
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  audit:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - &source
+        name: Check out the exact dispatch source without retained credentials
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          persist-credentials: false
+      - &python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - &node
+        name: Install the existing hash-pinned read-only inspector runtime
+        run: |
+          python3 -B - <<'PY'
+          import hashlib,json,os,tarfile,urllib.request
+          from pathlib import Path
+          pin=next(row for row in json.loads(Path('fleet/shared/runtime/compute/runtime-artifacts.lock.json').read_bytes())['node']['archives'] if row['platform']=='linux-x64')
+          archive=Path(os.environ['RUNNER_TEMP'])/'ti-publisher-node.tar.xz'
+          urllib.request.urlretrieve(pin['url'],archive)
+          with archive.open('rb') as raw:assert hashlib.file_digest(raw,'sha256').hexdigest()==pin['sha256']
+          with tarfile.open(archive) as saved:saved.extractall(os.environ['RUNNER_TEMP'],filter='data')
+          with open(os.environ['GITHUB_PATH'],'a') as target:target.write(str(Path(os.environ['RUNNER_TEMP'])/'node-v24.21.0-linux-x64/bin')+'\n')
+          PY
+      - &pins
+        name: Read the unchanged legacy native inspector source pins
+        id: computer-pins
+        run: |
+          python3 -B - <<'PY'
+          import json,os,re
+          from pathlib import Path
+          pins=json.loads(Path('engineering/integration/compatibility-set.json').read_bytes())
+          with open(os.environ['GITHUB_OUTPUT'],'a') as target:
+              for name in ['alpha','jobs','manager']:
+                  assert re.fullmatch('[a-f0-9]{40}',pins[name]);target.write(name+'='+pins[name]+'\n')
+          PY
+      - &alpha
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGI-Alpha-Agent-v0
+          ref: ${{ steps.computer-pins.outputs.alpha }}
+          path: .computer-alpha
+          persist-credentials: false
+      - &jobs
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGIJobsv0
+          ref: ${{ steps.computer-pins.outputs.jobs }}
+          path: .computer-jobs
+          persist-credentials: false
+      - &manager
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          repository: MontrealAI/AGIJobManager
+          ref: ${{ steps.computer-pins.outputs.manager }}
+          path: .computer-manager
+          persist-credentials: false
+      - &tests
+        name: Check publication custody and refusal regressions without native work
+        run: python3 -B -m unittest discover -s engineering/transformation -p 'test_release*.py' -v
+      - name: Authenticate original successful evidence and prepare the reviewable publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SOURCE: ${{ inputs.expected-source }}
+          SELECTORS: ${{ inputs.selectors }}
+        run: python3 -B engineering/transformation/release.py --expected-source "$EXPECTED_SOURCE" --selectors "$SELECTORS" --output "$RUNNER_TEMP/ti-publication"
+      - name: Retain the exact audited public assets and source-bound publication plan
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: audited-ti-publication-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/ti-publication
+          if-no-files-found: error
+          retention-days: 90
+  publish:
+    if: github.ref == 'refs/heads/main' && inputs.publish
+    needs: [audit]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      actions: read
+      checks: read
+      issues: read
+      pull-requests: read
+    steps:
+      - *source
+      - *python
+      - *node
+      - *pins
+      - *alpha
+      - *jobs
+      - *manager
+      - *tests
+      - name: Reaudit original evidence and verify tag, draft, assets and main before publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SOURCE: ${{ inputs.expected-source }}
+          SELECTORS: ${{ inputs.selectors }}
+        run: python3 -B engineering/transformation/release.py --expected-source "$EXPECTED_SOURCE" --selectors "$SELECTORS" --output "$RUNNER_TEMP/ti-publication" --publish
+      - name: Retain the separate authenticated publication or read-only verification result
+        if: always()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+        with:
+          name: ti-publication-verification-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/ti-publication/verification-result.json
+          if-no-files-found: warn
+          retention-days: 90

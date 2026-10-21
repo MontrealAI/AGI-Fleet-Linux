@@ -1,0 +1,128 @@
+{
+  "sourceCommit": "d0c2cbaf58b594e20d888c3fc744bada06172306",
+  "sourceTree": "09de3f32ae89416f764b508e0147457ca8b54d9d",
+  "node": "24.19.0",
+  "solc": "0.8.37",
+  "hardhat": "3.17.0",
+  "commands": [
+    "npm ci --ignore-scripts --no-audit --no-fund",
+    "npm ci --prefix hardhat --ignore-scripts --no-audit --no-fund",
+    "node scripts/security/patch-openzeppelin-compiler.cjs",
+    "npm run build"
+  ],
+  "scope": "Exact local locked source build; source profile only, not deployed-contract or saved-archive qualification",
+  "compilerWarnings": 0,
+  "compilerErrors": 0,
+  "compilerSettings": {
+    "debug": {
+      "revertStrings": "strip"
+    },
+    "evmVersion": "shanghai",
+    "metadata": {
+      "bytecodeHash": "none"
+    },
+    "optimizer": {
+      "enabled": true,
+      "runs": 40,
+      "details": {
+        "yulDetails": {
+          "optimizerSteps": "dfDvulfnTUtnIfxa[r]scMVcul[j]Trpeulxa[r]cvifMCTUca[r]SsTFOtfDnca[r]IulcscCTUtvifMx[scCTUt]TOntnfDIulvifMjmul[jul]VcTOculjmul:fDnTOcmuO"
+        }
+      }
+    },
+    "outputSelection": {
+      "*": {
+        "": [
+          "ast"
+        ],
+        "*": [
+          "abi",
+          "evm.bytecode.linkReferences",
+          "evm.bytecode.object",
+          "evm.bytecode.opcodes",
+          "evm.bytecode.sourceMap",
+          "evm.deployedBytecode.immutableReferences",
+          "evm.deployedBytecode.linkReferences",
+          "evm.deployedBytecode.object",
+          "evm.deployedBytecode.opcodes",
+          "evm.deployedBytecode.sourceMap",
+          "evm.methodIdentifiers"
+        ]
+      }
+    },
+    "remappings": [
+      "project/:@openzeppelin/contracts/=npm/@openzeppelin/contracts@4.9.6/"
+    ],
+    "viaIR": true
+  },
+  "files": {
+    "package.json": {
+      "sha256": "b15aeb457fdcdf8a12721bfa0acfbfdb2c3f797cb0c0cee3f31769fa02ddb793",
+      "bytes": 4612
+    },
+    "package-lock.json": {
+      "sha256": "b3c344a4adf3b093f247bb377c029b2fffb03178ce18de418c453e5b96fe39e1",
+      "bytes": 109186
+    },
+    "hardhat/package.json": {
+      "sha256": "5257ddc5d10da9fbe3116785627d132af608e44bb7e02d91f66c2466325c298a",
+      "bytes": 3842
+    },
+    "hardhat/package-lock.json": {
+      "sha256": "824b85c81023a80a83ba7f5555406ca4f0d80be3bfc0a3fe74567809706c47b2",
+      "bytes": 76888
+    },
+    "scripts/security/patch-openzeppelin-compiler.cjs": {
+      "sha256": "4f673eb48f7ff62ed0b7305cbdb7e367a187b6468c9ef69698fe38468a395116",
+      "bytes": 2176
+    },
+    "scripts/security/openzeppelin-compiler-patches.json": {
+      "sha256": "d6b26417b011ef55012d092486ae4558235d3a45ad6b38028d2204289c1d7236",
+      "bytes": 1437
+    },
+    "build/contracts/AGIJobManager.json": {
+      "sha256": "131135ef1464d1d80eb5e9c18f09e6a311051f6de59c2c1c76bb8a11a3b5cdfe",
+      "bytes": 183526
+    },
+    "build/contracts/UriUtils.json": {
+      "sha256": "84ffc8a8babaa373c5eefa2e2c9fda63dc3aedab1471a0063737ccab9b9b352d",
+      "bytes": 9559
+    },
+    "build/contracts/TransferUtils.json": {
+      "sha256": "9066b87058bfd5aafa006a2fdf4163c3714c6965b0f9d9d03c7020971536e47e",
+      "bytes": 4150
+    },
+    "build/contracts/BondMath.json": {
+      "sha256": "661db19babee1ca7ba5a1ab6b4fd1f687cfece6876ae2eedf0a8253060cb644c",
+      "bytes": 4873
+    },
+    "build/contracts/ReputationMath.json": {
+      "sha256": "20210655124db86455747619eed37ceb91564d1f642367aab8ccdc379284fa19",
+      "bytes": 2999
+    },
+    "build/contracts/ENSOwnership.json": {
+      "sha256": "309efa9e2dd1ce58b40ac204536142cb4118fee147a440f6ee8df168037886de",
+      "bytes": 14588
+    },
+    "build/contracts/NftEligibility.json": {
+      "sha256": "b19917d2ff7493f25a10b38805f7940e37d33c9546e2cf2d7a3c6d47979d0fc2",
+      "bytes": 6291
+    },
+    "build/contracts/JobSettlement.json": {
+      "sha256": "358799fafac2828f11e1199136a5febb8a24e0ef87079082bce3e5164e71b9c1",
+      "bytes": 17066
+    },
+    "build/contracts/JobValidation.json": {
+      "sha256": "75362403791121dd152bf92cd3d4104183f5869ea82108fa83a8de1d7a206059",
+      "bytes": 10572
+    },
+    "build/contracts/MockERC20.json": {
+      "sha256": "d16f2209c432228a75c377894b83013673ecb0463c08053c58dc4a2fe9fa930d",
+      "bytes": 14876
+    },
+    "build/contracts/FailingERC20.json": {
+      "sha256": "a24a3c721b4fc595f23d4b53a867590adeb542e4184aae01e72334defd510f28",
+      "bytes": 17107
+    }
+  }
+}

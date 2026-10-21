@@ -17,6 +17,10 @@ ROOT = Path(__file__).resolve().parent.parent
 REPOSITORY = 'MontrealAI/AGI-Fleet-Linux'
 LIMIT = 450_000_000
 ROLES = ('agent', 'node', 'moderator', 'employer', 'evidence', 'recovery')
+COMPUTER_SCOPE = {'mode': 'scripted-zero-cost', 'default': 'DISABLED',
+                  'requiredArchitectures': ['x64', 'arm64'], 'providerRequests': 0,
+                  'providerCost': 'ZERO_SCRIPTED_REHEARSAL', 'liveProviders': 'DENIED_BEFORE_INVOCATION',
+                  'savedPackageServiceGate': 'REQUIRED'}
 
 
 def require(value, message):
@@ -73,12 +77,106 @@ def tap(file, expected):
     return result
 
 
+def package_inventory(archive):
+    """Reproduce the saved-package gate's complete extracted-file identity."""
+    with zipfile.ZipFile(archive) as source:
+        manifests = [entry for entry in source.infolist() if entry.filename.endswith('/local-preview-manifest.json')]
+        require(len(manifests) == 1, 'Saved package manifest differs')
+        prefix = manifests[0].filename.removesuffix('local-preview-manifest.json')
+        rows = []
+        for entry in source.infolist():
+            if entry.is_dir():
+                continue
+            require(entry.filename.startswith(prefix), 'Saved package member differs')
+            raw = source.read(entry)
+            rows.append({'name': entry.filename[len(prefix):], 'bytes': len(raw),
+                         'sha256': hashlib.sha256(raw).hexdigest(), 'mode': stat.S_IMODE(entry.external_attr >> 16)})
+        rows.sort(key=lambda row: row['name'].encode('utf-16-be'))
+        encoded = json.dumps(rows, ensure_ascii=False, separators=(',', ':')).encode()
+        return {'manifestSha256': hashlib.sha256(source.read(manifests[0])).hexdigest(),
+                'inventoryBeforeSha256': hashlib.sha256(encoded).hexdigest(),
+                'inventoryAfterSha256': hashlib.sha256(encoded).hexdigest(), 'unchanged': True}
+
+
+def replay_computer(folder, binding):
+    roots = [ROOT / ('.computer-' + name) for name in ('alpha', 'jobs', 'manager')]
+    require(all(directory.is_dir() and not directory.is_symlink() for directory in roots), 'Exact Computer Use inspector checkouts required')
+    node = shutil.which('node')
+    require(node is not None, 'Pinned Computer Use inspector runtime required')
+    environment = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'NODE_OPTIONS': ''}
+    version = subprocess.run([node, '--version'], capture_output=True, text=True, timeout=10, env=environment)
+    require(version.returncode == 0 and version.stdout.strip() == 'v24.21.0', 'Computer Use inspector Node pin differs')
+    result = subprocess.run([node, str(ROOT / 'engineering/integration/verify-evidence.mjs'), str(folder.resolve()),
+                             *(str(directory.resolve()) for directory in roots), '--read-only', '--expected-context',
+                             json.dumps(binding, separators=(',', ':'))], capture_output=True, text=True,
+                            timeout=180, env=environment)
+    require(result.returncode == 0 and len(result.stdout) < 20_000 and len(result.stderr) < 20_000,
+            'Saved-package native Computer Use semantic replay failed')
+
+
+def audit_computer(evidence, archive, commit, run, attempt, arch):
+    folder = evidence / ('local-skills-computer-' + arch)
+    require(folder.is_dir() and not folder.is_symlink(), 'Computer Use evidence directory required')
+    receipt = load(folder / 'local-host-evidence/computer-journey.json')
+    binding = {'repository': REPOSITORY, 'commit': commit, 'workflowRun': run, 'workflowAttempt': attempt,
+               'architecture': arch, 'archiveSHA256': sha(archive)}
+    require(receipt.get('schema') == 'agi-fleet/saved-package-computer-journey/v1'
+            and receipt.get('binding') == binding, 'Computer Use package/source/run/attempt binding differs')
+    require(receipt.get('package') == package_inventory(archive), 'Computer Use extracted package changed or differs')
+    service = receipt.get('service', {})
+    require(all(service.get(key) is True for key in ('actualIPC', 'prepare', 'exactGrant', 'oneUse', 'actualDocker', 'actualBrowser')),
+            'Actual saved-package Computer Use service journey required')
+    lock = load(ROOT / 'engineering/integration/compatibility-set.json')
+    require(receipt.get('sourceCommits') == {**{name: lock[name] for name in ('alpha', 'jobs', 'manager')}, 'fleet': commit},
+            'Computer Use exact compatibility source set differs')
+    proof = folder / 'computer-evidence'
+    require(proof.is_dir() and not proof.is_symlink(), 'Computer Use public evidence required')
+    records = receipt.get('artifacts')
+    require(isinstance(records, list) and 1 <= len(records) <= 512, 'Computer Use artifact inventory required')
+    observed = {}
+    for record in records:
+        require(isinstance(record, dict) and set(record) == {'name', 'bytes', 'sha256'}, 'Computer Use artifact record differs')
+        require(type(record['bytes']) is int and 0 < record['bytes'] < LIMIT
+                and isinstance(record['sha256'], str) and re.fullmatch('[0-9a-f]{64}', record['sha256']), 'Computer Use artifact identity differs')
+        name = record['name']
+        require(isinstance(name, str) and len(name) <= 300 and all(re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]*', part)
+                and part not in ('.', '..') for part in name.split('/')) and name not in observed, 'Computer Use artifact path differs')
+        file = proof / name
+        parts = name.split('/')
+        require(file.resolve().is_relative_to(proof.resolve())
+                and not any(proof.joinpath(*parts[:index]).is_symlink() for index in range(1, len(parts) + 1)),
+                'Computer Use artifact links forbidden')
+        require(identity(file) == {'name': file.name, 'bytes': record['bytes'], 'sha256': record['sha256']}, 'Computer Use artifact bytes differ')
+        observed[name] = record
+    actual = set()
+    for file in proof.rglob('*'):
+        require(not file.is_symlink() and (file.is_dir() or file.is_file()), 'Computer Use nonregular artifact forbidden')
+        if file.is_file():
+            actual.add(file.relative_to(proof).as_posix())
+    require(actual == set(observed), 'Computer Use artifact coverage differs')
+    aggregate = proof / 'compatibility-evidence.json'
+    require(receipt.get('compatibilityEvidenceSha256') == sha(aggregate), 'Computer Use compatibility evidence digest differs')
+    native_return = sha(proof / 'accepted/computer-return.json')
+    require(service.get('nativeAlphaReturnSha256') == service.get('returnExportSha256') == native_return,
+            'Computer Use native same-project return differs')
+    require(load(proof / 'execution-context.json') == binding, 'Computer Use retained execution provenance differs')
+    # Re-run native Alpha and both currency inspectors, independent constraint
+    # checking and actual browser/mock-chain artifact checks. Flags alone never pass.
+    replay_computer(proof, binding)
+    return {'binding': binding, 'package': receipt['package'], 'service': service,
+            'compatibilityEvidenceSha256': receipt['compatibilityEvidenceSha256'], 'artifacts': records}
+
+
 def audit(evidence, commit, run, specification=None):
     spec = specification or load(ROOT / 'local-runtime/preview-release.json')
-    require(spec.get('schema') == 'agi-fleet/local-preview-release/v1' and spec.get('qualificationScope') == 'bounded-offline-linux-development-preview'
+    attempt = os.environ.get('GITHUB_RUN_ATTEMPT', '')
+    require(re.fullmatch('[1-9][0-9]*', attempt), 'Exact workflow attempt required')
+    require(spec.get('schema') == 'agi-fleet/local-preview-release/v1'
+            and spec.get('qualificationScope') == 'bounded-offline-and-scripted-browser-linux-development-preview'
+            and spec.get('computerUse') == COMPUTER_SCOPE
             and all(spec.get(k) is False for k in ('operatorInstaller', 'fullHandoffComplete', 'productionQualified'))
             and spec.get('physicalQualification') == spec.get('liveProviderQualification') == 'NOT_RUN' and spec.get('fundedWork') == 'DISABLED', 'Preview specification scope differs')
-    require(all(type(spec['tests'].get(k)) is int and spec['tests'][k] >= n for k, n in {'module':55, 'native':4, 'installer':29, 'browser':2}.items()), 'Required preview gates reduced')
+    require(all(type(spec['tests'].get(k)) is int and spec['tests'][k] >= n for k, n in {'module':161, 'native':4, 'installer':29, 'browser':3}.items()), 'Required preview gates reduced')
     archive_identity, observations = None, {}
     pins = load(ROOT / 'fleet/shared/runtime/compute/runtime-artifacts.lock.json')['node']
     for arch in ('x64', 'arm64'):
@@ -92,7 +190,7 @@ def audit(evidence, commit, run, specification=None):
         archive_identity = observed
         logs = folder / 'local-host-evidence'
         binding = load(logs / 'qualification.json')
-        require(binding == {'commit': commit, 'workflowRun': run, 'architecture': arch, 'archiveSHA256': observed['sha256']}, 'Evidence source/run binding differs')
+        require(binding == {'commit': commit, 'workflowRun': run, 'workflowAttempt': attempt, 'architecture': arch, 'archiveSHA256': observed['sha256']}, 'Evidence source/run/attempt binding differs')
         counts = {name: tap(logs / (name + '.tap'), spec['tests'][scope]) for name, scope in
                   [('source', 'module'), ('extracted', 'module'), ('native-source', 'native'), ('native-archive', 'native')]}
         installer_file = logs / 'installer.log'
@@ -117,10 +215,12 @@ def audit(evidence, commit, run, specification=None):
             require(gateway.get('providerTransport') == 'local-synthetic-fixture' and gateway.get('evidenceClass') == 'NATIVE_LOCAL_RUNTIME'
                     and gateway.get('offeredTools') == ['fleet_local'] and gateway.get('productionQualified') is False
                     and gateway.get('liveProviderJudgment') is False and gateway.get('independentReview') is False, 'Gateway qualification scope differs')
-        observations[arch] = {'native': counts, 'installerTests': spec['tests']['installer'], 'installedJourney': 'PASS', 'gatewayRoles': list(ROLES)}
+        computer = audit_computer(evidence, archive, commit, run, attempt, arch)
+        observations[arch] = {'native': counts, 'installerTests': spec['tests']['installer'], 'installedJourney': 'PASS',
+                              'gatewayRoles': list(ROLES), 'computerJourney': computer}
     browser = evidence / 'local-dashboard-observations'
     binding = load(browser / 'qualification.json')
-    require(binding == {'commit': commit, 'workflowRun': run, 'evidenceClass': 'BROWSER_WITH_DECLARED_SYNTHETIC_WORKER'}, 'Browser source/run binding differs')
+    require(binding == {'commit': commit, 'workflowRun': run, 'workflowAttempt': attempt, 'evidenceClass': 'BROWSER_WITH_DECLARED_SYNTHETIC_WORKER'}, 'Browser source/run/attempt binding differs')
     browser_counts = tap(browser / 'browser.tap', spec['tests']['browser'])
     screenshots = {}
     for language in ('en', 'fr'):
@@ -129,7 +229,7 @@ def audit(evidence, commit, run, specification=None):
             require(file.is_file() and not file.is_symlink() and 8 < file.stat().st_size < 5_000_000
                     and file.read_bytes()[:8] == b'\x89PNG\r\n\x1a\n', 'Missing browser screenshot')
             screenshots[file.name] = sha(file)
-    return {**spec, 'schema': 'agi-fleet/local-preview-audit/v1', 'status': 'PASS', 'commit': commit, 'workflowRun': run,
+    return {**spec, 'schema': 'agi-fleet/local-preview-audit/v1', 'status': 'PASS', 'commit': commit, 'workflowRun': run, 'workflowAttempt': attempt,
             'archive': archive_identity, 'architectures': observations, 'browser': browser_counts, 'screenshots': screenshots,
             'providerTransport': 'local-synthetic-fixture', 'independentEconomicReview': 'DISABLED', 'humanAccessibility': 'NOT_RUN'}
 
@@ -169,17 +269,28 @@ def validate_fleet(fleet, commit, run):
 def notes(manifest, assets):
     commit, run = manifest['commit'], manifest['workflowRun']
     base = f'https://github.com/{REPOSITORY}/blob/{commit}/docs/local-skills/'
-    guide = {'0.1.0-alpha.4': 'DOWNLOAD.md', '0.1.0-alpha.5': 'DOWNLOAD_ALPHA_5.md'}.get(manifest.get('version'))
+    guide = {'0.1.0-alpha.4': 'DOWNLOAD.md', '0.1.0-alpha.5': 'DOWNLOAD_ALPHA_5.md', '0.1.0-alpha.6': 'DOWNLOAD_ALPHA_6.md'}.get(manifest.get('version'))
     require(guide is not None, 'Version-matched download guide required')
+    computer = manifest.get('version') == '0.1.0-alpha.6'
+    scope = ('The optional native Alpha browser route is a bounded scripted rehearsal with zero provider requests and zero provider cost. '
+             'It is disabled by default, requires a separately installed exact-source Docker/Python profile, and uses the normal exact one-use grant. '
+             'Live paid providers are denied before invocation. General browser/desktop automation, native Mac local execution, '
+             if computer else 'Local browser/desktop execution, native Mac local execution, ')
+    french_scope = ('Le parcours navigateur Alpha facultatif est une répétition scénarisée bornée, désactivée par défaut, sans requête ni coût fournisseur. '
+                    'Il exige un profil local installé séparément et une autorisation exacte à usage unique. Les fournisseurs payants sont refusés avant invocation. '
+                    'Le bureau/navigateur général, le mode local Mac, '
+                    if computer else 'Le bureau/navigateur local, le mode local Mac, ')
+    computer_evidence = ('the exact saved-package local service, one-use grant, real Docker browser and artifacts, same-project Alpha return, '
+                         'both disposable mock-token lifecycles, ' if computer else '')
     text = ('## Local Skills — Linux development preview / Aperçu de développement Linux\n\n'
             'One installation, multiple separate actors, six portable skills and a bilingual local dashboard. '
             'Try a zero-model-cost offline report, inspect its real files, authorize internal checking, and preserve a SUCCESSOR capsule.\n\n'
             '**Development preview, not the completed Local Skills product or a production-qualified operator installer.** '
-            'Linux x64 and ARM64 bounded offline paths are tested. Local browser/desktop execution, native Mac local execution, '
+            'Linux x64 and ARM64 bounded offline paths are tested. ' + scope +
             'live-provider qualification, independent economic review and funded work remain unavailable. '
             'The full 22-case product acceptance matrix remains open. Physical, human-accessibility and endurance commissioning remain NOT_RUN.\n\n'
             '**Aperçu de développement, pas un produit Local Skills terminé ni qualifié pour la production.** '
-            'Les parcours Linux x64/ARM64 hors ligne sont testés. Le bureau/navigateur local, le mode local Mac, '
+            'Les parcours Linux x64/ARM64 hors ligne sont testés. ' + french_scope +
             'les fournisseurs réels et le travail rémunéré ne sont pas qualifiés.\n\n'
             f'[Start here / Commencer ici]({base}{guide}) · [Install and recover]({base}INSTALL_AND_RECOVER.md) '
             f'· [Remaining requirements]({base}acceptance.json)\n\n'
@@ -188,9 +299,18 @@ def notes(manifest, assets):
             'No installation starts work, connects a provider, enrolls a startup service or activates a wallet.\n\n'
             f'Exact source: `{commit}`. [Coordinated qualification](https://github.com/{REPOSITORY}/actions/runs/{run}). '
             'The evidence includes source/extracted tests, saved install/recovery, six real Gateway paths with synthetic model transport, '
-            'EN/FR browser checks and the complete inherited Fleet regression audit. Existing Dedicated Fleet releases are unchanged.\n\n'
+            'EN/FR browser checks, ' + computer_evidence + 'and the complete inherited Fleet regression audit. Existing Dedicated Fleet releases are unchanged.\n\n'
             '| Asset | Bytes | SHA-256 |\n| --- | ---: | --- |\n')
     return text + ''.join(f'| {p.name} | {p.stat().st_size:,} | `{sha(p)}` |\n' for p in assets) + '\n'
+
+
+def require_current_main(api, commit):
+    ref = api('/git/ref/heads/main')
+    require(re.fullmatch(r'[0-9a-f]{40}', commit or '') is not None
+            and isinstance(ref, dict) and ref.get('ref') == 'refs/heads/main'
+            and isinstance(ref.get('object'), dict)
+            and ref['object'].get('type') == 'commit' and ref['object'].get('sha') == commit,
+            'Publication source is not the exact current main commit')
 
 
 def publish_assets(api, spec, commit, assets, body):
@@ -199,6 +319,7 @@ def publish_assets(api, spec, commit, assets, body):
     except urllib.error.HTTPError as error:
         if error.code != 404:
             raise
+        require_current_main(api, commit)
         tag = api('/git/refs', method='POST', data=json.dumps({'ref': 'refs/tags/' + spec['tag'], 'sha': commit}).encode())
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Tag identity differs')
     try:
@@ -225,6 +346,7 @@ def publish_assets(api, spec, commit, assets, body):
     tag = api('/git/ref/tags/' + spec['tag'])
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Tag changed before publication')
     if observed['draft']:
+        require_current_main(api, commit)
         observed = api(f'/releases/{release["id"]}', method='PATCH', data=json.dumps({'draft': False, 'prerelease': True, 'make_latest': 'false', 'body': body}).encode())
     require(observed['draft'] is False and observed['prerelease'] is True and observed.get('body') == body, 'Published classification or notes differ')
     tag = api('/git/ref/tags/' + spec['tag'])
