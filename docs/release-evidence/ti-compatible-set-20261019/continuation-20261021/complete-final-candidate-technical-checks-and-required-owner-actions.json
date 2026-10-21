@@ -1,0 +1,2320 @@
+{
+  "observedAt": "2026-10-21T00:11:43.754Z",
+  "state": {
+    "asOf": "2026-10-21T00:11:43.754Z",
+    "completion": false,
+    "userGoal": "Qualified normal merges, fresh releases, exact public installed-package ONE journey, all four live sites",
+    "jobs": {
+      "pr": 4006,
+      "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+      "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+      "main": "83065adf18a6ee987f8fa479a496a052d35db682",
+      "status": "PR4006 qualified normalmerge83065/tree77d; all21prereqgroups/all37contexts/166validation pluscomplete original scanner/native/archive/build checksPASS. Original publisherfailedatGitHubPOSTreleasesHTTP422; exacttag83065reserved, actualrelease404, qualified166906802Bproducerartifactretained. No unchangedretry.",
+      "fix": "Owned private external output; guide and publisher harnesses aligned",
+      "targetedBenignTests": {
+        "pass": 7,
+        "fail": 0
+      },
+      "evidence": {
+        "commit": "5c7e45ad8c4a0e338fbdd51ecdf97eab27aa6ac2",
+        "tree": "6b4901daa4c45298761d3bf064faf743186ee54d",
+        "branch": "evidence/rc16-codeql-c3e943-20261020"
+      },
+      "next": "Jobs release operator: authenticate HTTP422 cause and create exact ownedDRAFT with prepared bounded body, preserving existingtag/source/fullnotes/all25assets; require repositoryimmutable publicationenabled, then rerunORIGINAL failedpublisher onlyafterprerequisitechanged. Originalverificationandactualimmutablepublicreadbackremainrequired.",
+      "pythonReviewComment": 6302356351,
+      "javascript": {
+        "scope": "FRESH_S1_STATIC_REVIEW_AND_EXACT_S2_RECONCILIATION",
+        "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "run": 39500666780,
+        "producer": 118897034212,
+        "collector": 118899223817,
+        "results": 43,
+        "quality": 8,
+        "securityLike": 35,
+        "evidence": "2ced0e05db205b79a101a230c265b2ca3801502a",
+        "comment": 6302617066
+      },
+      "currentSourceGroups": {
+        "source": "83065adf18a6ee987f8fa479a496a052d35db682",
+        "counts": {
+          "success": 21,
+          "failure": 1
+        },
+        "requiredContextsAll37Success": true,
+        "validationAll166Success": true
+      },
+      "preparedInstall": {
+        "commit": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+        "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+        "parent": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "branchMoved": true,
+        "records": {
+          "scannerReview": {
+            "bytes": 47528,
+            "sha256": "edb4d5c7d2531f968b10dbfd9a37227f84ccc8762a63aa6d10d1ce9bc98c8717",
+            "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3"
+          },
+          "pythonScannerReview": {
+            "bytes": 742109,
+            "sha256": "e54b0f8afba18fe55e3edac35bf973afdc2319ce910bc6c1def11bec85b00ee6",
+            "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3"
+          },
+          "notesReview": {
+            "bytes": 70098,
+            "sha256": "694e98e07d6482f7d633aa3cfdac39f02706b749d7222b41a9ca81790c3abe12",
+            "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3"
+          }
+        },
+        "proof": {
+          "parent": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+          "parentTree": "5501717cfafc956be8432139766c63a34c69aa8f",
+          "commit": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+          "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+          "totalLeaves": 5185,
+          "unchangedLeaves": 5183,
+          "changed": [
+            {
+              "path": "docs/production/RELEASE_NOTES_SOURCE_RC16.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "46bc7625b8b56ff17b8d2bcdeaf435a9c362f8d1",
+              "size": 186240,
+              "url": "https://api.github.com/repos/MontrealAI/AGIJobsv0/git/blobs/46bc7625b8b56ff17b8d2bcdeaf435a9c362f8d1"
+            },
+            {
+              "path": "scripts/release/source-profile-rc16.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "fa13b44bbc29302db81ebe098f4d9906f60746fa",
+              "size": 909750,
+              "url": "https://api.github.com/repos/MontrealAI/AGIJobsv0/git/blobs/fa13b44bbc29302db81ebe098f4d9906f60746fa"
+            }
+          ],
+          "allModesAndOtherLeavesPreserved": true,
+          "onlyThreeSlotsChanged": true,
+          "exactOuterBytes": true
+        },
+        "status": "NORMAL_ADOPTED_TWO_INDEPENDENT_STATIC_INSTALLATION_PASSES_AND_HOSTED166_VALIDATION_PASS"
+      },
+      "reviewedS1": {
+        "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "tree": "5501717cfafc956be8432139766c63a34c69aa8f",
+        "pythonComment": 6302356351,
+        "javascriptComment": 6302617066,
+        "sourceChecks": {
+          "observedAt": "2026-10-20T21:50:34.443Z",
+          "source": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+          "tree": "5501717cfafc956be8432139766c63a34c69aa8f",
+          "workflowGroups": 23,
+          "allWorkflowGroupsSuccess": true,
+          "requiredContextNames": [
+            "Lint & static checks",
+            "ICS fixture validation",
+            "Tests",
+            "Python unit tests",
+            "Python integration tests",
+            "Load-simulation reports",
+            "Python coverage enforcement",
+            "HGM guardrails",
+            "Owner control assurance",
+            "Foundry",
+            "Coverage thresholds",
+            "Phase 6 readiness",
+            "Phase 8 readiness",
+            "Kardashev II readiness",
+            "ASI Take-Off Demonstration",
+            "Zenith Sapience Demonstration",
+            "AGI Labor Market Grand Demo",
+            "Sovereign Mesh Demo — build",
+            "Sovereign Constellation Demo — build",
+            "Celestial Archon Demonstration",
+            "Hypernova Governance Demonstration",
+            "Branch protection guard",
+            "CI summary",
+            "Invariant tests",
+            "Slither static analysis",
+            "forge-fuzz",
+            "webapp-ci",
+            "build (node-runner)",
+            "build (validator-runner)",
+            "build (gateway)",
+            "build (webapp)",
+            "build (owner-console)",
+            "orchestrator-e2e",
+            "CodeQL analysis",
+            "Inherited security boundaries and browser regressions",
+            "Pinned native transformation compatibility",
+            "Python integration CodeQL analysis"
+          ],
+          "required": [
+            {
+              "name": "Lint & static checks",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145614,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "ICS fixture validation",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145379,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Tests",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145069,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Python unit tests",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145310,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Python integration tests",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145464,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Load-simulation reports",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145313,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Python coverage enforcement",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118898737825,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "HGM guardrails",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587765,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Owner control assurance",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901464048,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Foundry",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587793,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Coverage thresholds",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587768,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Phase 6 readiness",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587714,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Phase 8 readiness",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587901,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Kardashev II readiness",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587943,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "ASI Take-Off Demonstration",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587848,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Zenith Sapience Demonstration",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901588108,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "AGI Labor Market Grand Demo",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587748,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Sovereign Mesh Demo — build",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901588020,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Sovereign Constellation Demo — build",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587960,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Celestial Archon Demonstration",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587804,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Hypernova Governance Demonstration",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901587979,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Branch protection guard",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897145390,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "CI summary",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905374319,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Invariant tests",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118901588026,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Slither static analysis",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897142821,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                },
+                {
+                  "id": 118897033726,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "forge-fuzz",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897144195,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "webapp-ci",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143595,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (node-runner)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884320,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (validator-runner)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884362,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (gateway)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884283,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (webapp)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884240,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "build (owner-console)",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118905884372,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "orchestrator-e2e",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897142914,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "CodeQL analysis",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143110,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                },
+                {
+                  "id": 118897034212,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Inherited security boundaries and browser regressions",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143515,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Pinned native transformation compatibility",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143666,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            },
+            {
+              "name": "Python integration CodeQL analysis",
+              "matchingOriginalChecks": [
+                {
+                  "id": 118897143002,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                },
+                {
+                  "id": 118897033924,
+                  "head": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+                  "app": 15368,
+                  "conclusion": "success"
+                }
+              ]
+            }
+          ],
+          "checkCount": 103,
+          "checkCounts": {
+            "success": 97,
+            "skipped": 6
+          },
+          "openThreads": 0,
+          "configuredReview": {
+            "url": "https://github.com/MontrealAI/AGIJobsv0/pull/4006#issuecomment-6301887032",
+            "body": "<!-- codex-pull-request-review-summary -->\n<!-- codex-review-state:v1 {\"code_review\":{\"commit_sha\":\"5d859a6965ed1d32727bf43ddfbe469e76accdb3\",\"has_any_findings\":false,\"has_unresolved_findings\":false,\"status\":\"completed\"},\"security_review\":{\"commit_sha\":null,\"has_any_findings\":null,\"has_unresolved_findings\":null,\"status\":null}} -->\n\n## Codex Review Summary\n\nThis comment shows the latest Codex review activity on this pull request.\n\n| Review | Status | Commit | Review trigger |\n| --- | --- | --- | --- |\n| 📝 **Code Review** | ✅ **Completed** <relative-time datetime=\"2026-10-20T21:30:34.955178Z\">2026-10-20T21:30:34.955178Z</relative-time> | `5d859a6` | PR opened |\n\n\n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\" or \"@codex security review\".\n\nCodex reacts with 👀 while any review is running, comments if it has suggestions, and reacts with 👍 once all reviews finish with no findings.\n\n</details>",
+            "user": {
+              "login": "chatgpt-codex-connector[bot]",
+              "name": "chatgpt-codex-connector[bot]",
+              "email": null,
+              "avatar_url": "https://avatars.githubusercontent.com/in/1144995?v=4",
+              "id": 199175422
+            },
+            "id": 6301887032,
+            "pull_request_review_id": null,
+            "in_reply_to_id": null,
+            "created_at": "2026-10-20T21:29:01Z",
+            "updated_at": "2026-10-20T21:30:35Z",
+            "review": null,
+            "side": null,
+            "line": null,
+            "start_line": null,
+            "path": null,
+            "body_html": "\n\n<h2 dir=\"auto\">Codex Review Summary</h2>\n<p dir=\"auto\">This comment shows the latest Codex review activity on this pull request.</p>\n<markdown-accessiblity-table><table role=\"table\">\n<thead>\n<tr>\n<th>Review</th>\n<th>Status</th>\n<th>Commit</th>\n<th>Review trigger</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>📝 <strong>Code Review</strong></td>\n<td>✅ <strong>Completed</strong> <relative-time datetime=\"2026-10-20T21:30:34.955178Z\">2026-10-20T21:30:34.955178Z</relative-time></td>\n<td><code class=\"notranslate\">5d859a6</code></td>\n<td>PR opened</td>\n</tr>\n</tbody>\n</table></markdown-accessiblity-table>\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br>\n<p dir=\"auto\"><a href=\"https://chatgpt.com/codex/cloud/settings/general\" rel=\"nofollow\">Your team has set up Codex to review pull requests in this repo</a>. Reviews are triggered when you</p>\n<ul dir=\"auto\">\n<li>Open a pull request for review</li>\n<li>Mark a draft as ready</li>\n<li>Comment \"<a class=\"user-mention notranslate\" data-hovercard-type=\"user\" data-hovercard-url=\"/users/codex/hovercard\" data-octo-click=\"hovercard-link-click\" data-octo-dimensions=\"link_type:self\" href=\"https://github.com/codex\">@codex</a> review\" or \"<a class=\"user-mention notranslate\" data-hovercard-type=\"user\" data-hovercard-url=\"/users/codex/hovercard\" data-octo-click=\"hovercard-link-click\" data-octo-dimensions=\"link_type:self\" href=\"https://github.com/codex\">@codex</a> security review\".</li>\n</ul>\n<p dir=\"auto\">Codex reacts with 👀 while any review is running, comments if it has suggestions, and reacts with 👍 once all reviews finish with no findings.</p>\n</details>"
+          },
+          "qualification": "SOURCE_CHECKS_SUCCESS_FRESH_FULL_REVIEW_AND_STRICT_INSTALL_STILL_REQUIRED"
+        },
+        "pythonReceipt": {
+          "commit": "5e379f5832c8bd29f65efb34f6932f9894ba17dc",
+          "sha256": "e15a5e6e246af2943ea5071f9cf8a7c4032a802c048c8816c1b1e415db113ca6"
+        },
+        "javascriptReceipt": {
+          "commit": "2ced0e05db205b79a101a230c265b2ca3801502a",
+          "sha256": "5851c51787c4546fc2dd68fa5ce233431a086a796dde300e98edc6587e372918"
+        }
+      },
+      "reconciliations": {
+        "python": {
+          "bytes": 13129,
+          "sha256": "9acf40806da82b3de0cc57cacce58e538587fbd508609bbac3b2fb17b3353dd5",
+          "status": "PASS_UNCHANGED_BOUNDED_POLICY",
+          "evidence": "233d089d8adfb4067cf96418b16303750dc20916"
+        },
+        "javascript": {
+          "bytes": 19326,
+          "sha256": "6ffd1a404ca2efb8fe421c83a6955ad234528dedf481759e8818b5ff19ec46a5",
+          "status": "PASS_STATIC_LOSSLESS_RECONCILIATION",
+          "evidence": "46159bbe427b4f3b3c7b295fe8e2e083faf4f6f2"
+        },
+        "genuineSourceComment": 6303396928
+      },
+      "normalMerge": {
+        "sha": "83065adf18a6ee987f8fa479a496a052d35db682",
+        "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+        "parents": [
+          "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+          "ff64fc432d641a04521fbe265c658d2dfbe35fd4"
+        ],
+        "reviewedCommit": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+        "evidence": "d683752aa9e9657d9926147ee3e085549dd24331"
+      },
+      "finalMainPrerequisites": null,
+      "failedPublisher": {
+        "run": 39494233776,
+        "attempt": 1,
+        "job": 118878025830,
+        "message": "Current/reviewed complete Python scanner semantics differ",
+        "evidence": "d9a4bf41e679a15aad60e7c0cddb80a7d2d4b81c",
+        "unchangedRetry": false
+      },
+      "proposedS1": {
+        "commit": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+        "tree": "5501717cfafc956be8432139766c63a34c69aa8f",
+        "parent": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+        "paths": 4,
+        "otherLeavesExact": 5181,
+        "allThreeSlotsNull": true,
+        "selectedBenignTests": {
+          "pass": 3,
+          "fail": 0
+        },
+        "syntaxChecks": 2,
+        "staticPeerReview": "PASS retained9e501f153b793cfbc345993eef76113549bbd128",
+        "branchMoved": true
+      },
+      "priorNormalMerge": {
+        "sha": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+        "tree": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+        "parents": [
+          "5cd671e6f3f3a29e12cede966842f4bc99ece59f",
+          "604d10094f3b7fede53406ae0e40f9f489155a3b"
+        ],
+        "reviewedCommit": "604d10094f3b7fede53406ae0e40f9f489155a3b",
+        "evidence": "829c1e582bd94ac247d9a12eb61d0ed9dd1fd07e"
+      },
+      "priorFinalMainPrerequisites": {
+        "source": "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+        "tree": "d12a01aeb823ba667ba5e6d15df2c9cfa633d674",
+        "workflows": 21,
+        "requiredContexts": 37,
+        "status": "ALL_SUCCESS",
+        "evidence": "218de8af8ec73b1e5c9fac00bbd292706d577fe1",
+        "publisherStillRequired": true
+      },
+      "historicalReconciliations604": {
+        "javascript": {
+          "bytes": 14484,
+          "sha256": "efc8b90ed922d73ec2bd1298f4e9c18b378f82b92f5fac0b963cffc95aeeaa13",
+          "status": "PASS_STATIC"
+        },
+        "python": {
+          "bytes": 8369,
+          "sha256": "d15451efc4b7ee8852625d16fd1b46303c1184e70ffb65f233982f43884fbb1a",
+          "status": "BOUNDED_POLICY_PASS",
+          "unexplainedParserCounterDelta": "8→6; retained separately, no whole-report equality claim"
+        }
+      },
+      "configuredS2Review": {
+        "id": 6303048939,
+        "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+        "status": "CLEAR",
+        "openThreads": 0
+      },
+      "s2Packets": {
+        "python": {
+          "commit": "093870a63b4a16b8430b295b77ff88239f904c45",
+          "tree": "caa4ca7fdac520d6a58c68c8cabaa7740344da4a",
+          "branch": "evidence/rc16-codeql-c3e943-20261020",
+          "files": [
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/collector-log-part-1.log",
+              "bytes": 900000,
+              "sha": "219ab7099e55a3f1e402d811ff082c6cdc94ef32",
+              "sha256": "0417ac612262413914eb589cdff223b7d3bd671a5a2048c6bea751bb8b3c300d"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/collector-log-part-2.log",
+              "bytes": 360768,
+              "sha": "c08f1b0643c77f8ca245e5e153d11587fcd25dbf",
+              "sha256": "f1767b4ec5838969c034fff1762e8f554da19e14274bc8811db97ac9472197ce"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/original.zip",
+              "bytes": 106962,
+              "sha": "714dc5937c7e20184b7208adfd035fe20d474899",
+              "sha256": "1bfb604a498d2f09730315e39f0b2e88ab07b9e8ae7c07e3cb3b6c327fbfedd7"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/python.sarif",
+              "bytes": 788624,
+              "sha": "730828c65de1a914b0683861fc67cb456bf6cfdf",
+              "sha256": "3ab5ec4d3d8d8e9ba8e4856d3f467e38d19b1bfc40ce20c977592d50bae9104d"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/source-extraction.json",
+              "bytes": 13261,
+              "sha": "ba05cf98b70e2954e3fd7fafd98aaa6785e93d3c",
+              "sha256": "a707dcb1854fe0a52e559f55336e7004e63b88525ee59ea04ca66c58601ea650"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/source-scope-after.json",
+              "bytes": 1541,
+              "sha": "7eaa4cb0e62b9eb3d7473877463e3cdf49bc5778",
+              "sha256": "0d422bc61a7393590643600c3f767746056d735d4d0f710728ef2f894714d1b1"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/source-scope-before.json",
+              "bytes": 1541,
+              "sha": "7eaa4cb0e62b9eb3d7473877463e3cdf49bc5778",
+              "sha256": "0d422bc61a7393590643600c3f767746056d735d4d0f710728ef2f894714d1b1"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/python/collector-capture.json",
+              "bytes": 28667,
+              "sha": "00ed43a0077c398ed8bb8943651d32179fdc6b5b",
+              "sha256": "07c3a9468fca81537e5826a9b8ef4c996ad7a983ef5227cc7ae6c748ac31703c"
+            }
+          ],
+          "manifest": {
+            "schema": "agijobsv0/codeql-review-byte-log/1",
+            "type": "manifest",
+            "repository": "MontrealAI/AGIJobsv0",
+            "language": "python",
+            "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+            "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+            "ref": "refs/heads/fix/processed-codeql-release-proof-20261020",
+            "workflow": ".github/workflows/static-analysis-python-integrations.yml",
+            "sourceFiles": {
+              "workflow": {
+                "path": ".github/workflows/static-analysis-python-integrations.yml",
+                "blob": "0d1220ce9b561ae8feeee9e47bb6a0ff4226c3c0",
+                "sha256": "5b08a73d05cea31c09e8bf23a34b742c2fd85a47b7fbea52a94f70fd9c3ce077"
+              },
+              "collector": {
+                "path": "scripts/release/emit-codeql-review-rc16.cjs",
+                "blob": "95c96fecba7e1bee728f190b4a0c1dc0da2fc979",
+                "sha256": "f72e89026b0c0b5d5638fef2cf9c7678f6fac5850afb5de439aa9d309411b6db"
+              }
+            },
+            "run": {
+              "id": 39506898518,
+              "attempt": 1,
+              "number": 75,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "branch": "fix/processed-codeql-release-proof-20261020",
+              "event": "push",
+              "workflow": ".github/workflows/static-analysis-python-integrations.yml",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            "producerJob": {
+              "id": 118917969470,
+              "runId": 39506898518,
+              "attempt": 1,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "key": "codeql-python",
+              "name": "Python integration CodeQL analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "uploadStepId": "codeql_raw"
+            },
+            "collectorJob": {
+              "id": 118918505639,
+              "runId": 39506898518,
+              "attempt": 1,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "key": "codeql-review-bytes",
+              "name": "Complete Python CodeQL review bytes",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            "artifact": {
+              "id": 12304171500,
+              "name": "python-codeql-security-report-ff64fc432d641a04521fbe265c658d2dfbe35fd4-39506898518-1",
+              "bytes": 106962,
+              "githubDigest": "sha256:1bfb604a498d2f09730315e39f0b2e88ab07b9e8ae7c07e3cb3b6c327fbfedd7",
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "runId": 39506898518,
+              "headBranch": "fix/processed-codeql-release-proof-20261020"
+            },
+            "acquisitionCount": 1,
+            "chunkBytes": 12288,
+            "reviewStatus": "UNAPPROVED_REQUIRES_FULL_REVIEW_AND_FINAL_PRODUCER_SUCCESS",
+            "streams": [
+              {
+                "name": "original.zip",
+                "bytes": 106962,
+                "sha256": "1bfb604a498d2f09730315e39f0b2e88ab07b9e8ae7c07e3cb3b6c327fbfedd7",
+                "chunks": 9
+              },
+              {
+                "name": "python.sarif",
+                "bytes": 788624,
+                "sha256": "3ab5ec4d3d8d8e9ba8e4856d3f467e38d19b1bfc40ce20c977592d50bae9104d",
+                "chunks": 65
+              },
+              {
+                "name": "source-extraction.json",
+                "bytes": 13261,
+                "sha256": "a707dcb1854fe0a52e559f55336e7004e63b88525ee59ea04ca66c58601ea650",
+                "chunks": 2
+              },
+              {
+                "name": "source-scope-after.json",
+                "bytes": 1541,
+                "sha256": "0d422bc61a7393590643600c3f767746056d735d4d0f710728ef2f894714d1b1",
+                "chunks": 1
+              },
+              {
+                "name": "source-scope-before.json",
+                "bytes": 1541,
+                "sha256": "0d422bc61a7393590643600c3f767746056d735d4d0f710728ef2f894714d1b1",
+                "chunks": 1
+              }
+            ]
+          },
+          "status": "COMPLETE_ORIGINAL_PACKET_RETAINED_INDEPENDENT_RECONCILIATION_IN_PROGRESS"
+        },
+        "javascript": {
+          "commit": "8a48658a0f38ed129b6b6e769103768c42d01960",
+          "tree": "b438d7e82612c3d9b327206eefe1f143ae958ffc",
+          "branch": "evidence/rc16-codeql-c3e943-20261020",
+          "files": [
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-1.log",
+              "bytes": 899999,
+              "sha": "030023b5dc4fe0b8bbbbb706252727a365f88eda",
+              "sha256": "ba388cff6e7a5a28c2e418053b2b51bc7a44bcbe7ad181bc46289d2d7a490045"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-2.log",
+              "bytes": 900000,
+              "sha": "a26e0eed5b2a405f3e93a841ac8463319ff28588",
+              "sha256": "9c5f206a21ec00716818fb1409f767769d3417f271abfe956050e41c7b22e248"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-3.log",
+              "bytes": 900000,
+              "sha": "cb6aa4738bd8848acfc86778796a941ffdb8407e",
+              "sha256": "da65de90c1660212ecb30cbf793d338f58b9fa42b7f05365faa4cb6b6f2cb041"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-log-part-4.log",
+              "bytes": 508559,
+              "sha": "ea0b37afff3362ea22e170ee43637ef536f59f64",
+              "sha256": "37662fc7f97a1d245b69ee2130a39a68a82fba0983ccb69ebb198210783879a2"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/original.zip",
+              "bytes": 200486,
+              "sha": "e9cb60169840db63edc67dd4d4024eeaaa921f10",
+              "sha256": "8f97ecca7453b48b449c65b2ab7f624a816dc0b86bdb0f21892457a403096fc4"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/javascript.sarif",
+              "bytes": 2091597,
+              "sha": "b8bb04c13cf2c2ed0cb19e056ebc953cec0bbe3c",
+              "sha256": "cacacde69731969f15575f35ef9dc414d41d3dbd15f92422fcd9402e7814e05c"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/source-extraction.json",
+              "bytes": 52235,
+              "sha": "48ae89621f86ef1ff018b3fccfc5032d42fcfb29",
+              "sha256": "e122a2870a27b95b1c9ed6c59ca610ce9b85117e6014c49a038caac75336f93f"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/source-scope-after.json",
+              "bytes": 5620,
+              "sha": "15c45d134f9112a97963948b8c408a0928353537",
+              "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/source-scope-before.json",
+              "bytes": 5620,
+              "sha": "15c45d134f9112a97963948b8c408a0928353537",
+              "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd"
+            },
+            {
+              "path": "docs/release-evidence/ti-compatible-set-20261020/jobs-ff64fc4/javascript/collector-capture.json",
+              "bytes": 34289,
+              "sha": "28a3411dd1c85e07fe0398afd8d2d582cde87cb4",
+              "sha256": "7075e1bed4284963a2b5ebcf040308ad6181c15ea4ed7221ce83dab4d7dd09be"
+            }
+          ],
+          "manifest": {
+            "schema": "agijobsv0/codeql-review-byte-log/1",
+            "type": "manifest",
+            "repository": "MontrealAI/AGIJobsv0",
+            "language": "javascript",
+            "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+            "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+            "ref": "refs/heads/fix/processed-codeql-release-proof-20261020",
+            "workflow": ".github/workflows/static-analysis.yml",
+            "sourceFiles": {
+              "workflow": {
+                "path": ".github/workflows/static-analysis.yml",
+                "blob": "da884644bf8b483c5ab6a643ce491c40b87898f6",
+                "sha256": "8b577905c4b4e2a173180a8883262869de7e5f9861a7dd6d1f36e316519e60ce"
+              },
+              "collector": {
+                "path": "scripts/release/emit-codeql-review-rc16.cjs",
+                "blob": "95c96fecba7e1bee728f190b4a0c1dc0da2fc979",
+                "sha256": "f72e89026b0c0b5d5638fef2cf9c7678f6fac5850afb5de439aa9d309411b6db"
+              }
+            },
+            "run": {
+              "id": 39506898382,
+              "attempt": 1,
+              "number": 4170,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "branch": "fix/processed-codeql-release-proof-20261020",
+              "event": "push",
+              "workflow": ".github/workflows/static-analysis.yml",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            "producerJob": {
+              "id": 118917969048,
+              "runId": 39506898382,
+              "attempt": 1,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "key": "codeql",
+              "name": "CodeQL analysis",
+              "status": "completed",
+              "conclusion": "success",
+              "uploadStepId": "codeql_raw"
+            },
+            "collectorJob": {
+              "id": 118919553008,
+              "runId": 39506898382,
+              "attempt": 1,
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "key": "codeql-review-bytes",
+              "name": "Complete JavaScript CodeQL review bytes",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            "artifact": {
+              "id": 12303942313,
+              "name": "codeql-security-report-ff64fc432d641a04521fbe265c658d2dfbe35fd4-39506898382-1",
+              "bytes": 200486,
+              "githubDigest": "sha256:8f97ecca7453b48b449c65b2ab7f624a816dc0b86bdb0f21892457a403096fc4",
+              "source": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+              "runId": 39506898382,
+              "headBranch": "fix/processed-codeql-release-proof-20261020"
+            },
+            "acquisitionCount": 1,
+            "chunkBytes": 12288,
+            "reviewStatus": "UNAPPROVED_REQUIRES_FULL_REVIEW_AND_FINAL_PRODUCER_SUCCESS",
+            "streams": [
+              {
+                "name": "original.zip",
+                "bytes": 200486,
+                "sha256": "8f97ecca7453b48b449c65b2ab7f624a816dc0b86bdb0f21892457a403096fc4",
+                "chunks": 17
+              },
+              {
+                "name": "javascript.sarif",
+                "bytes": 2091597,
+                "sha256": "cacacde69731969f15575f35ef9dc414d41d3dbd15f92422fcd9402e7814e05c",
+                "chunks": 171
+              },
+              {
+                "name": "source-extraction.json",
+                "bytes": 52235,
+                "sha256": "e122a2870a27b95b1c9ed6c59ca610ce9b85117e6014c49a038caac75336f93f",
+                "chunks": 5
+              },
+              {
+                "name": "source-scope-after.json",
+                "bytes": 5620,
+                "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd",
+                "chunks": 1
+              },
+              {
+                "name": "source-scope-before.json",
+                "bytes": 5620,
+                "sha256": "e0874673c379309130ed4e823ebd1917a13238664ef1336762238769c74529fd",
+                "chunks": 1
+              }
+            ]
+          },
+          "status": "COMPLETE_ORIGINAL_PACKET_RETAINED_INDEPENDENT_RECONCILIATION_IN_PROGRESS"
+        }
+      },
+      "s2CurrentGroups": {
+        "scope": "FINAL_PREMERGE_S2_OBSERVED_SUCCESS",
+        "groups": 23,
+        "requiredContexts": 37,
+        "checks": 103,
+        "success": 97,
+        "expectedSkipped": 6
+      },
+      "reconciliationS1": "5d859a6965ed1d32727bf43ddfbe469e76accdb3",
+      "reconciliationS2": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+      "currentS2Reconciliations": {
+        "python": "233d089d8adfb4067cf96418b16303750dc20916",
+        "javascript": "46159bbe427b4f3b3c7b295fe8e2e083faf4f6f2",
+        "comment": 6303396928,
+        "status": "BOTH_INDEPENDENT_STATIC_RECONCILIATIONS_PASS"
+      },
+      "currentBlocker": {
+        "owner": "Jobs release operator / root release coordinator",
+        "state": "Final GitHub POST releases HTTP422, no actualrelease, tagalready83065.",
+        "next": "Jobs release operator: authenticate HTTP422 cause and create exact ownedDRAFT with prepared bounded body, preserving existingtag/source/fullnotes/all25assets; require repositoryimmutable publicationenabled, then rerunORIGINAL failedpublisher onlyafterprerequisitechanged. Originalverificationandactualimmutablepublicreadbackremainrequired.",
+        "evidence": "acfcc857a6d79543e25b1a2d5dfe984776afafff"
+      },
+      "draftRecovery": {
+        "requestEvidence": "acfcc857a6d79543e25b1a2d5dfe984776afafff",
+        "independentReviewEvidence": "5c7e45ad8c4a0e338fbdd51ecdf97eab27aa6ac2",
+        "independentReceiptSha256": "ce4accd8ac0a7ad7fd94d550f9a2941f2d3f174b42aec575518918530fd2656a",
+        "status": "PASS_STATIC_PLAN_COMPATIBILITY_ONLY_NOT_SUBMITTED",
+        "fullNotesPreserved": true,
+        "all25OriginalAssetChecksRequired": true,
+        "immutableReadbackRequired": true,
+        "serverCauseConfirmed": false,
+        "unchangedRetry": false
+      },
+      "operatorActionComment": 6303804770,
+      "independentDraftRecoveryComment": 6303948714
+    },
+    "alpha": {
+      "main": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+      "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+      "oldReviewedMergedMain": "558f798a9b9cc73c1db01905858aad8852e11092",
+      "normalDescendant": true,
+      "unchangedPriorLeaves": 3609,
+      "addedPapers": [
+        "docs/Out_Evolve.pdf",
+        "docs/Out_Evolve.tex",
+        "docs/The_World_as_an_Output.pdf",
+        "docs/The_World_as_an_Output.tex"
+      ],
+      "agentRun": 39484204330,
+      "agentAttempt": 2,
+      "agentJobs": {
+        "total": 32,
+        "success": 32
+      },
+      "legacyRun": 39484204335,
+      "legacyAttempt": 1,
+      "legacyStatus": "Current exacta6 fullCI39484204335:1 completedSUCCESS; all12jobs includingboth3563passedcoveragecells,threshold80%passed83.80/84.09.",
+      "release": {
+        "id": 418962131,
+        "tag": "v1.36.0",
+        "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+        "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+        "publishedAt": "2026-10-20T22:59:45Z",
+        "immutable": false,
+        "assetCount": 92
+      },
+      "prior558OperatorBlocker": "SUPERSEDED_HISTORICAL_NOT_CURRENT_BLOCKER: newer owner paper commits changed main; follow new current source. Proposed558rootreplay aborted before mutation.",
+      "requiredNext": "Follow current exactmain fullCI/publisher, preserve all new papers, obtain current source continuity/review binding before final source selection and refresh Fleet Alpha/computer pins to actual published source.",
+      "evidence": {
+        "commit": "b5ebc77dcf10a5daae73fd7935e46f97d3e0efce",
+        "tree": "3d09985ea871529e179d937f1e7168321c0100a4",
+        "branch": "evidence/release-ci-custody-20261020",
+        "files": [
+          {
+            "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/alpha-a6d20/actual-v1.36.0-publication-and-required-immutability-blocker.json",
+            "bytes": 634401,
+            "sha": "24867ff96d8c607e7540e79ecc30b5e4c7456f1e",
+            "sha256": "a23633a8d56c00406978ff9eafdc3d7a74966e790905e4c06e2219b706e5bad9"
+          },
+          {
+            "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/alpha-a6d20/attempt2-publisher-success-original-log.txt",
+            "bytes": 26208,
+            "sha": "484caae1985d58f46865b868112003122078a98e",
+            "sha256": "74eb6dc23966a73300024154d5a0e30b73e62e286f5bf8ca07a54fcde7917d40"
+          }
+        ]
+      },
+      "currentSourceContinuityReview": {
+        "status": "PASS_STATIC_ONLY",
+        "source": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+        "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+        "evidence": "a5ae385888959b6a7fcbc982fcf5f8d321ec9a66",
+        "comment": 6301065552
+      },
+      "currentBlocker": {
+        "owner": "Alpha repository administrator / release operator",
+        "state": "Actual release418962131/v1.36.0 reports immutable:false. Original consumer public_release_assets.py:166 requires immutable:true; final public-package input remains unqualified.",
+        "next": "Enable GitHub release immutability, then publish/republish the authenticated release through an authorized operator while preserving exact tag/source/assets; require actual API immutable:true and reauthenticate all identities. No deletion or gate waiver.",
+        "evidencePending": false,
+        "evidence": "b5ebc77dcf10a5daae73fd7935e46f97d3e0efce"
+      },
+      "agentStatus": "Whole original Agent attempt2 and all32jobsSUCCESS; actual92-assetv1.36.0public,tagtargetauthenticated; immutablefalse blocks original public-packageconsumer.",
+      "operatorActionComment": 6303815973
+    },
+    "fleet": {
+      "pr": 61,
+      "source": "0674719f6749786c3591a15219364bfec94c336f",
+      "tree": "d78839054676930c377b9b1b8181513e8d9c8501",
+      "status": "Exact067 final candidate: all10 original workflow groupsSUCCESS, all38 original checks complete(34success/4source-verifiedmain-onlyskips), both Linux/nativeTI architectures and independent source auditPASS, genuine configured summary/receiptCLEAR. Required eligible independent owner PR review absent;2originalP1threads remainopen. PR not merged.",
+      "blockers": [
+        {
+          "owner": "Eligible independent Fleet functional owner",
+          "state": "No GitHub PR review exists on exact067; two original P1 threads remain open.",
+          "nextAction": "Conduct the genuine review and submit an actual GitHub PR REVIEW on this exact full head. Record reviewer role, owner authorization, findings/disposition and both P1 dispositions. A conversation comment alone is insufficient.",
+          "requiredAPIRecord": "/pulls/61/reviews/{ownerReview}",
+          "policy": {
+            "file": "CONTRIBUTING.md",
+            "gitBlob": "494607053fe0d8c6617bba4b38abb8288ee8c044",
+            "quote": "Changes to installers, authorization, signers, workflows, auditors and vendor boundaries require an eligible independent owner review."
+          },
+          "acceptedRecord": "Eligible separate-account APPROVED, or explicitly authorized independent reviewer using shared MontrealAI OWNER account COMMENTED; actual author association/identity/commit authenticated. Source-clear disposition only after actual review.",
+          "P1Comments": [
+            4322083594,
+            4323870690
+          ],
+          "reviewerLaneBoundary": "Previously rejected automated Fleet functional-owner lane will not be retried or substituted; configured review and CI do not replace this owner review."
+        },
+        {
+          "owner": "Jobs release operator / repository administrator",
+          "state": "83065 all21prerequisite groups/all37contexts/166validation and original scanner/native/archive checks passed. Original publication POST releases HTTP422; no release exists. Exactsource-v2.1.0-rc.16 tag already reserves83065.",
+          "nextAction": "Diagnose422; use the prepared exact owned-DRAFT recovery request if appropriate, preserving existingtag/source/all25assets. Then allow root to rerun ORIGINAL publisher only after this prerequisite changes. Original25-asset upload/readback/semantic/native/tag checks and actual immutable public readback remain mandatory.",
+          "requestCommit": "acfcc857a6d79543e25b1a2d5dfe984776afafff",
+          "requestPath": "docs/release-evidence/ti-compatible-set-20261020/jobs-83065ad/owned-draft-recovery-request-not-submitted.json",
+          "independentStaticReviewCommit": "5c7e45ad8c4a0e338fbdd51ecdf97eab27aa6ac2",
+          "originalPublisherRun": 39509956774,
+          "failedAttempt": 1,
+          "unchangedRetryRequested": false,
+          "serverValidationCauseConfirmed": false
+        },
+        {
+          "owner": "Alpha repository administrator / release operator",
+          "state": "Actual publicv1.36.0 release418962131 / sourcea6d20a93c7c5b7430bf42d2367701b350513e90d; whole original Agent attempt2/all32jobs and all3historical main workflows succeeded, all92assets authenticated, immutable:false.",
+          "nextAction": "Confirm/enable repository release immutability and publish/republish with exact tag/source/all92assets preserved. Require actual API immutable:true and reauthenticate complete inventory. Preserve prior releases if a new version is needed; fresh source/version qualification remains authorized. Ask before any irreversible deletion.",
+          "releaseId": 418962131,
+          "actionComment": 6303815973
+        },
+        {
+          "owner": "Fleet release operator",
+          "state": "Original TI workflow dispatch capability is not exposed by the current connector.",
+          "nextAction": "After genuine owner review, qualified normal merge to actual mainS, and original same-S main qualifications/Linux/LocalSkills publications: dispatch ORIGINAL transformation-release.yml with expected-source=S, selectors for five actual successful same-S main run:attempts plus genuine review API IDs, publish=true. All three Fleet releases must identify same actualS.",
+          "originalWorkflow": ".github/workflows/transformation-release.yml",
+          "inputTemplateEvidenceCommit": "ec3deaccec1774e024a755981121c9c4db9bfc5b",
+          "inputTemplatePath": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-0674719/genuine-configured-receipt-and-original-ti-dispatch-inputs.json",
+          "sourceS": null,
+          "selectorsOwnerReview": null,
+          "sourceOrTriggersChanged": false
+        }
+      ],
+      "evidence": {
+        "commit": "4e85b88611f921ed5ae4ded8dc2d4190f418bde4",
+        "tree": "ba2a7f06f289169305c2af4f55ba0f42b8d02561",
+        "branch": "evidence/release-ci-custody-20261020",
+        "files": [
+          {
+            "path": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-0674719/owner-actions-after-complete-technical-qualification.json",
+            "bytes": 6384,
+            "sha": "182c7dabf8a59340572bc4fa5989d34c99184fce",
+            "sha256": "b806cc728c9871db3d478ce3dd801459147549b1fdb7eaff23004b2f88eabab3"
+          }
+        ]
+      },
+      "pinPreparation": {
+        "commit": "0674719f6749786c3591a15219364bfec94c336f",
+        "tree": "d78839054676930c377b9b1b8181513e8d9c8501",
+        "parent": "4423fa0602229c6d9ce6e198dd68fca0bac37ba3",
+        "branch": "integration/ti-custody-packaging-20261019",
+        "changedFiles": 5,
+        "unchangedLeaves": 6908,
+        "modesPreserved": true,
+        "sourceNativeApproval": null,
+        "publicationsAuthenticated": false,
+        "qualified": false,
+        "checksWaived": false,
+        "adoptedAt": "2026-10-20T22:59:07.030Z"
+      },
+      "currentOriginalQualification": {
+        "role": "COMPLETE_PR_HEAD_TECHNICAL_QUALIFICATION_ONLY",
+        "source": "0674719f6749786c3591a15219364bfec94c336f",
+        "tree": "d78839054676930c377b9b1b8181513e8d9c8501",
+        "workflowGroups": 10,
+        "allSuccess": true,
+        "checks": 38,
+        "success": 34,
+        "expectedMainOnlySkips": 4,
+        "configuredSummary": 6275717324,
+        "configuredReceipt": 6304261878,
+        "eligibleOwnerPRReview": null,
+        "normalMergeQualified": false
+      },
+      "exactOwnerReviewRequest": {
+        "commentId": 6304071125,
+        "evidence": "573de3833252872e98867b7a7b5f6176327535c9",
+        "source": "0674719f6749786c3591a15219364bfec94c336f",
+        "CIQualified": false,
+        "apiRequired": "/pulls/61/reviews/{ownerReview}",
+        "completeActualReviewCollectionCount": 22,
+        "currentExactHeadReviews": 0,
+        "latestDecisiveReviewStates": [],
+        "topLevelCommentAloneNotSufficient": true
+      }
+    },
+    "manager": {
+      "source": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+      "release": "v1.19.5",
+      "releaseId": 417952385,
+      "status": "Released and frozen; final live verification still required"
+    },
+    "final": {
+      "publicInstalledONE": false,
+      "D": false,
+      "E": false,
+      "T": false,
+      "allFourFinalLive": false,
+      "rootReadbackExpansion": {
+        "status": "12offlineunitsPASS and independent static sourcebinding reviewPASS, notliveF",
+        "paths": 22,
+        "gitBlob": "96b7607765941a8171cf4255a261922bc75d3135",
+        "evidence": "4870f31c0e075a91a25c27e58d8aec9a17aa2622"
+      }
+    },
+    "storage": {
+      "free": "22GB available /28%used (fresh df -h /00:08UTC)",
+      "deleted": false,
+      "paidCommitment": false
+    },
+    "mainnet": {
+      "lookup": "Completed read-only block identity/timestamp matched retained ENS",
+      "stateChanges": 0
+    },
+    "capabilityDiscovery": {
+      "pluginSearch": "Only already-installed GitHub matched release/admin capability query; returned alternatives do not provide missing GitHub release/admin operations.",
+      "extraInstalled": false,
+      "permissionsChanged": false,
+      "githubReleaseEditOrSettingsOperationExposed": false,
+      "githubCLIAvailable": false,
+      "cloudAndExecutorGithubSkillFound": false
+    }
+  },
+  "workingE": {
+    "schema": "agi-fleet/public-release-equivalence/v1",
+    "createdAt": "2026-10-21T00:11:43.754Z",
+    "scope": {
+      "recordType": "PENDING_WORKING_INPUT_CONTINUATION_NOT_FINAL_E",
+      "representation": "Reconstructed from accepted public meanings; not a restoration of the lost earlier skeleton and no byte/hash identity with it is claimed.",
+      "contractSources": [
+        "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6277337282",
+        "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6277463760",
+        "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6277567012",
+        "https://github.com/MontrealAI/AGI-Fleet-Linux/issues/52#issuecomment-6277599824"
+      ],
+      "reservedFinalLocation": {
+        "branch": "evidence/ti-compatible-set-20261019",
+        "path": "docs/release-evidence/ti-compatible-set-20261019/manifest.json"
+      },
+      "availableInputs": {
+        "managerComponent": {
+          "localPath": "assessment/manager-e-component.json",
+          "bytes": 53373,
+          "sha256": "6f47b77645d65203f5da65d871ac296a0ae02683cc8dff0b07a0d6bb932e4eb6",
+          "publicCommit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+          "publicPath": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/manager-1.19.5-component.json",
+          "gitBlob": "0a2d142ee93f8b014550a1b342975e526530ceb2",
+          "role": "AVAILABLE_PUBLISHED_COMPONENT_ONLY"
+        },
+        "componentCustodyIndex": {
+          "localPath": "assessment/component-custody-20261020-index.json",
+          "bytes": 5813,
+          "sha256": "6b9d226dc6ff893f8ae46b0aaa8696eeb426f6dd1733160289bfe162ff162f66",
+          "publicCommit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+          "publicPath": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/index.json",
+          "role": "HISTORICAL_CUSTODY_NOT_FINAL_SELECTION"
+        },
+        "continuationEvidence": {
+          "fleetCI": "https://github.com/MontrealAI/AGI-Fleet-Linux/tree/4e85b88611f921ed5ae4ded8dc2d4190f418bde4/docs/release-evidence/ti-compatible-set-20261019/continuation-ci",
+          "jobs": "https://github.com/MontrealAI/AGIJobsv0/tree/5c7e45ad8c4a0e338fbdd51ecdf97eab27aa6ac2/docs/release-evidence/ti-compatible-set-20261020",
+          "role": "ACTUAL_COMPONENT_PROGRESS_NOT_FINAL_SELECTION"
+        }
+      },
+      "roleBoundaries": [
+        "Reviewed H/source pins, actual main M, public release assets, normal installed D and native connected execution remain separate observations.",
+        "Manager is a completed component, not final combined qualification; historical roles in its component and the index are not transferred.",
+        "Complete actual final release asset inventories are required; consumer-selected asset roles are a subset. No future Jobs asset count is fixed here.",
+        "Source SDK, matching trees, file-only D, metadata and imported archives do not establish native execution; missing actual evidence remains null."
+      ],
+      "authorityAndPrivacy": {
+        "inputs": "Public non-personal only",
+        "ubuntuHardhat": "Local hidden ephemeral deployer-key entry; no key storage/printing/arguments/.env/history/logs",
+        "macStudioGovernance": "Ledger preserved",
+        "previousDeployments": "Read-only",
+        "ens": "Separate excluded work",
+        "realWalletSigningMainnetFundingActivationAuthorityChanges": "Require separate explicit authorization; outside this software-delivery authorization",
+        "softwarePublication": "Does not mean production activation"
+      },
+      "noNewValidatorOrGate": true,
+      "laterWebsiteT": null,
+      "laterFourSiteF": null,
+      "candidateFleetSource": {
+        "commit": "0674719f6749786c3591a15219364bfec94c336f",
+        "tree": "d78839054676930c377b9b1b8181513e8d9c8501",
+        "merged": false,
+        "eligibleOwnerReview": null,
+        "qualified": false,
+        "technicalQualification": {
+          "all10OriginalGroupsSuccess": true,
+          "checks": 38,
+          "success": 34,
+          "expectedMainOnlySkipped": 4,
+          "configuredSummary": 6275717324,
+          "configuredReceipt": 6304261878,
+          "evidenceCommit": "61754f69c8320cc92e1ef52c35c3a2ec8a2aa847",
+          "role": "PREMERGE_TECHNICAL_QUALIFICATION_ONLY"
+        }
+      },
+      "readOnlyMainnetObservation": {
+        "block": 26227598,
+        "hash": "0x280b9d8f09ce5b7dc47783d00e8b036e2b4fbe94c241d589a48b8a25184a0cc7",
+        "timestamp": "2026-10-19T15:44:23.000000Z",
+        "matchedRetainedEnsHash": true,
+        "signing": false,
+        "transactions": false,
+        "observationTimeOfOriginalEnsSnapshot": null
+      }
+    },
+    "repositories": {
+      "alpha": {
+        "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+        "reviewedH": {
+          "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+          "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+          "sourceContinuityReview": 6301065552,
+          "role": "CURRENT_SOURCE_CONTINUITY_REVIEW_ONLY_NO_CURRENT_CONFIGURED_OR_FUNCTIONAL_APPROVAL"
+        },
+        "actualMainM": {
+          "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+          "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+          "orderedParents": [
+            "106fb6a0cd8508fb2ffd854dfc7690bb87d7d0fb"
+          ],
+          "role": "ACTUAL_CURRENT_ALPHA_MAIN_ORIGINAL_REQUIRED_CI_SUCCESS_PUBLICATION_PRESENT_IMMUTABLE_ADMISSION_BLOCKED"
+        },
+        "release": {
+          "id": 418962131,
+          "tag": "v1.36.0",
+          "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+          "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22",
+          "publishedAt": "2026-10-20T22:59:45Z",
+          "immutable": false,
+          "assetCount": 92,
+          "role": "ACTUAL_PUBLISHED_ALPHA_COMPONENT_MUTABLE_NOT_FINAL_SELECTION",
+          "tagObject": "81c25a9ef4281bb891c89b79d6eaf2ece09f2754",
+          "publisher": {
+            "runId": 39484204330,
+            "attempt": 2,
+            "jobId": 118933426791,
+            "path": ".github/workflows/agent-release.yml",
+            "event": "push",
+            "conclusion": "success"
+          },
+          "completeAssetInventory": {
+            "count": 92,
+            "apiCollectionReconciled": true
+          },
+          "normalInstalledPublicPayloads": null
+        },
+        "exactMainQualification": {
+          "requiredRuns": [
+            {
+              "id": 39484204330,
+              "attempt": 2,
+              "path": ".github/workflows/agent-release.yml",
+              "event": "push",
+              "ref": "refs/heads/main",
+              "sourceRole": "released"
+            },
+            {
+              "id": 39484204335,
+              "attempt": 1,
+              "path": ".github/workflows/ci.yml",
+              "event": "push",
+              "ref": "refs/heads/main",
+              "sourceRole": "released"
+            },
+            {
+              "id": 39484204031,
+              "attempt": 1,
+              "path": ".github/workflows/pr-ci.yml",
+              "event": "push",
+              "ref": "refs/heads/main",
+              "sourceRole": "released"
+            },
+            {
+              "id": 39484203943,
+              "attempt": 1,
+              "path": ".github/workflows/smoke.yml",
+              "event": "push",
+              "ref": "refs/heads/main",
+              "sourceRole": "released"
+            }
+          ],
+          "allSucceeded": true,
+          "originalAgentJobs": 32,
+          "allOriginalAgentJobsSucceeded": true,
+          "role": "ACTUAL_ALPHA_COMPONENT_NOT_FINAL_COMBINED_QUALIFICATION"
+        },
+        "downloadedPublicPayloads": null,
+        "normalInstalledD": null,
+        "nativeConnectedEvidence": null,
+        "finalCompatibilitySelection": null
+      },
+      "fleet": {
+        "repository": "MontrealAI/AGI-Fleet-Linux",
+        "reviewedH": null,
+        "actualMainM": null,
+        "release": null,
+        "exactMainQualification": null,
+        "downloadedPublicPayloads": null,
+        "normalInstalledD": null,
+        "nativeConnectedEvidence": null,
+        "finalCompatibilitySelection": null
+      },
+      "jobs": {
+        "repository": "MontrealAI/AGIJobsv0",
+        "reviewedH": {
+          "commit": "ff64fc432d641a04521fbe265c658d2dfbe35fd4",
+          "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+          "configuredReview": 6303048939,
+          "sourceReconciliationComment": 6303396928,
+          "role": "CURRENT_REVIEWED_METADATA_INSTALLED_SOURCE_PREMERGE_QUALIFIED"
+        },
+        "actualMainM": {
+          "commit": "83065adf18a6ee987f8fa479a496a052d35db682",
+          "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+          "orderedParents": [
+            "d023a717bd01cad92b51b86a69d64d1fef8e51a0",
+            "ff64fc432d641a04521fbe265c658d2dfbe35fd4"
+          ],
+          "role": "ACTUAL_NORMAL_MERGED_MAIN_PREREQUISITES_PASS_PUBLICATION_HTTP422_BLOCKED"
+        },
+        "release": null,
+        "exactMainQualification": {
+          "requiredContexts": {
+            "observedAt": "2026-10-20T23:04:28.413Z",
+            "source": "83065adf18a6ee987f8fa479a496a052d35db682",
+            "tree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+            "all37Success": true,
+            "required": [
+              {
+                "name": "Lint & static checks",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224835,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "ICS fixture validation",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224783,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Tests",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224739,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Python unit tests",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224788,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Python integration tests",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224541,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Load-simulation reports",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928225666,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Python coverage enforcement",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118930247450,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "HGM guardrails",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933217843,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Owner control assurance",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118931096763,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Foundry",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933217904,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Coverage thresholds",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933218099,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Phase 6 readiness",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933218042,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Phase 8 readiness",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933217996,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Kardashev II readiness",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933217897,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "ASI Take-Off Demonstration",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933218035,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Zenith Sapience Demonstration",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933218179,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "AGI Labor Market Grand Demo",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933218045,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Sovereign Mesh Demo — build",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933218271,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Sovereign Constellation Demo — build",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933218023,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Celestial Archon Demonstration",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933217995,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Hypernova Governance Demonstration",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933218233,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Branch protection guard",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224677,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "CI summary",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118936213717,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Invariant tests",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118933218231,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Slither static analysis",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928223872,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "forge-fuzz",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224748,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "webapp-ci",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224406,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "build (node-runner)",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118935105627,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "build (validator-runner)",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118935105620,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "build (gateway)",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118935105701,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "build (webapp)",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118935105675,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "build (owner-console)",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118935105647,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "orchestrator-e2e",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928223934,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "CodeQL analysis",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224837,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Inherited security boundaries and browser regressions",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224238,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Pinned native transformation compatibility",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224410,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              },
+              {
+                "name": "Python integration CodeQL analysis",
+                "matchingOriginalChecks": [
+                  {
+                    "id": 118928224712,
+                    "head": "83065adf18a6ee987f8fa479a496a052d35db682",
+                    "app": 15368,
+                    "conclusion": "success"
+                  }
+                ]
+              }
+            ],
+            "checkCount": 98,
+            "checkCounts": {
+              "success": 93,
+              "skipped": 4,
+              "failure": 1
+            },
+            "publisherPending": true
+          },
+          "all21PrerequisiteGroupsSuccess": true,
+          "all166OriginalValidationTestsPass": true,
+          "originalPublisher": {
+            "runId": 39509956774,
+            "attempt": 1,
+            "jobId": 118928443075,
+            "conclusion": "failure",
+            "failureStage": "GitHubPOSTreleasesHTTP422",
+            "completeScannerAndNativeArchiveVerification": "success",
+            "evidence": "acfcc857a6d79543e25b1a2d5dfe984776afafff"
+          },
+          "actualPublishedRelease": null,
+          "role": "ACTUAL_COMPONENT_PREREQUISITES_ONLY_NOT_FINAL_PUBLICATION_OR_COMBINED_QUALIFICATION"
+        },
+        "downloadedPublicPayloads": null,
+        "normalInstalledD": null,
+        "nativeConnectedEvidence": null,
+        "finalCompatibilitySelection": null
+      },
+      "manager": {
+        "repository": "MontrealAI/AGIJobManager",
+        "reviewedH": {
+          "commit": "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8",
+          "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+          "role": "REVIEWED_COMPONENT_SOURCE"
+        },
+        "actualMainM": {
+          "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+          "tree": "3676cb41be9c5c5110cc266e0ff6f7c20bfbec86",
+          "orderedParents": [
+            "d0c2cbaf58b594e20d888c3fc744bada06172306",
+            "a6ce48f3fc6884e1a5fd0963f3d27baa038052c8"
+          ],
+          "role": "ACTUAL_MANAGER_MAIN_COMPONENT"
+        },
+        "release": {
+          "id": 417952385,
+          "tag": "v1.19.5",
+          "url": "https://github.com/MontrealAI/AGIJobManager/releases/tag/v1.19.5",
+          "publishedAt": "2026-10-20T02:55:05Z",
+          "immutable": true,
+          "annotatedTag": {
+            "ref": "refs/tags/v1.19.5",
+            "tagObject": "eea8726413ed5bafc71f65b4eccd6233e89f055c",
+            "peeledCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+            "peeledType": "commit"
+          },
+          "publisher": {
+            "runId": 39358807008,
+            "attempt": 1,
+            "jobId": 118419845112,
+            "path": ".github/workflows/publish-v114.yml",
+            "event": "workflow_dispatch",
+            "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+            "conclusion": "success"
+          },
+          "completeAssetInventory": {
+            "input": "managerComponent",
+            "jsonPointer": "/release/assets",
+            "actualCount": 9,
+            "scope": "ALL_ACTUAL_MANAGER_RELEASE_ASSETS_NOT_CONSUMER_SUBSET"
+          },
+          "manifestChecksumAndPhysicalCustody": {
+            "input": "managerComponent",
+            "jsonPointers": [
+              "/release/checksumBinding",
+              "/release/completePayloadCustody",
+              "/release/releaseManifest"
+            ]
+          },
+          "role": "PUBLISHED_MANAGER_COMPONENT_NOT_FINAL_COMPATIBILITY_APPROVAL"
+        },
+        "exactMainQualification": {
+          "input": "managerComponent",
+          "jsonPointer": "/actualMainQualification",
+          "actualWorkflowCount": 8,
+          "allSucceeded": true,
+          "role": "ACTUAL_MANAGER_COMPONENT_ONLY"
+        },
+        "downloadedPublicPayloads": null,
+        "normalInstalledD": null,
+        "nativeConnectedEvidence": null,
+        "finalCompatibilitySelection": null,
+        "availableComponentInput": {
+          "localPath": "assessment/manager-e-component.json",
+          "bytes": 53373,
+          "sha256": "6f47b77645d65203f5da65d871ac296a0ae02683cc8dff0b07a0d6bb932e4eb6",
+          "publicCommit": "7340f0bb5ec5900a1936b68b70215b5776549b5e",
+          "publicPath": "docs/release-evidence/ti-compatible-set-20261019/component-custody-20261020/manager-1.19.5-component.json",
+          "gitBlob": "0a2d142ee93f8b014550a1b342975e526530ceb2",
+          "role": "AVAILABLE_PUBLISHED_COMPONENT_ONLY"
+        },
+        "componentPages": {
+          "input": "managerComponent",
+          "jsonPointer": "/actualPostpublicationPages",
+          "sourceCommit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+          "runId": 39361508964,
+          "rawMetadataSha256": "3fe5879a4ebb80dbffdf152a0653bfb28c603bb6cb19bd1e3c77b41cb9d2c2bf",
+          "artifactPayloadCount": 67,
+          "scope": "PAGES_ARTIFACT_PAYLOADS_PLUS_HTTP_METADATA_ANCHOR_NOT_ALL67_LIVE_READS",
+          "finalFourSiteF": null
+        }
+      }
+    },
+    "sourceContinuity": {
+      "alpha": {
+        "role": "CURRENT_SOURCE_CONTINUITY_REVIEW_ONLY",
+        "reviewedAndMainTreesEqual": true,
+        "priorConfiguredReviewedSource": {
+          "commit": "c92b91fc012f14041307d0ba4b59c4b7a98cc933",
+          "tree": "e92109d552a1c70a5ac82af4333fc9c2426f2d89",
+          "comment": 6292797378
+        },
+        "priorReviewedTreeEqualsCurrentTree": false,
+        "all3609PriorLeavesAndModesPreserved": true,
+        "onlyFourOwnerAddedRegularDocuments": true,
+        "currentIndependentReceipt": {
+          "commit": "a5ae385888959b6a7fcbc982fcf5f8d321ec9a66",
+          "gitBlob": "9a500ea29af51d060518dfbcbc115a81a1dae075",
+          "sha256": "9e69956d0a61754f4b7c4ae58f80a246105d1918e3e8b581485a464edb1f0d32"
+        },
+        "normalInstallationEquivalence": null,
+        "finalCompatibilityApproval": null
+      },
+      "fleet": null,
+      "jobs": {
+        "role": "NORMAL_MERGE_GIT_TREE_CONTINUITY_ONLY",
+        "reviewedAndMainTreesEqual": true,
+        "exactWholeTree": "77ded62b991e8cca28bfd849593153f61ac72d86",
+        "evidence": "d683752aa9e9657d9926147ee3e085549dd24331",
+        "normalInstallationEquivalence": null,
+        "finalCompatibilityApproval": null
+      },
+      "manager": {
+        "role": "COMPONENT_GIT_TREE_CONTINUITY_ONLY",
+        "reviewedAndMainTreesEqual": true,
+        "evidence": {
+          "input": "managerComponent",
+          "jsonPointer": "/sourceRoles/treeRelation"
+        },
+        "finalSelectedPayloadBytesAndModes": null,
+        "normalInstallationEquivalence": null,
+        "finiteModeExceptions": null,
+        "finalCompatibilityApproval": null
+      }
+    },
+    "jobsSourceTransition": null,
+    "connectedJourney": {
+      "actualProducer": null,
+      "actualReleasedInputs": null,
+      "normalPublicPackageInstallations": null,
+      "nativeOutputsAndHistory": null,
+      "originalPublicArtifactCustody": null,
+      "independentSemanticReplay": null,
+      "actualResults": null,
+      "observedCosts": null,
+      "humanEffort": null,
+      "remainingLimitations": null
+    },
+    "independentReview": null
+  },
+  "ownerActionCard": {
+    "recordType": "EXACT_SOURCE_OWNER_ACTIONS_AFTER_COMPLETE_TECHNICAL_QUALIFICATION",
+    "observedAt": "2026-10-21T00:10:03.112Z",
+    "repository": "MontrealAI/AGI-Fleet-Linux",
+    "pull": 61,
+    "source": {
+      "commit": "0674719f6749786c3591a15219364bfec94c336f",
+      "tree": "d78839054676930c377b9b1b8181513e8d9c8501"
+    },
+    "sourceChangeScope": "Exactly five pin/inventory/profile/README files from442; all6908other leaves and all modes preserved.",
+    "technicalQualification": {
+      "all10OriginalGroupsSuccess": true,
+      "checks": {
+        "total": 38,
+        "success": 34,
+        "expectedMainOnlySkipped": 4
+      },
+      "nativeArchitectures": [
+        "x64",
+        "arm64"
+      ],
+      "independentSourceAudit": "PASS",
+      "configuredSummary": 6275717324,
+      "genuineConfiguredReceipt": 6304261878,
+      "fullEvidenceCommit": "61754f69c8320cc92e1ef52c35c3a2ec8a2aa847",
+      "fullEvidencePath": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-0674719/complete-original-technical-qualification-owner-gates-outstanding.json"
+    },
+    "normalMergeQualified": false,
+    "requiredOwnerActions": [
+      {
+        "owner": "Eligible independent Fleet functional owner",
+        "state": "No GitHub PR review exists on exact067; two original P1 threads remain open.",
+        "nextAction": "Conduct the genuine review and submit an actual GitHub PR REVIEW on this exact full head. Record reviewer role, owner authorization, findings/disposition and both P1 dispositions. A conversation comment alone is insufficient.",
+        "requiredAPIRecord": "/pulls/61/reviews/{ownerReview}",
+        "policy": {
+          "file": "CONTRIBUTING.md",
+          "gitBlob": "494607053fe0d8c6617bba4b38abb8288ee8c044",
+          "quote": "Changes to installers, authorization, signers, workflows, auditors and vendor boundaries require an eligible independent owner review."
+        },
+        "acceptedRecord": "Eligible separate-account APPROVED, or explicitly authorized independent reviewer using shared MontrealAI OWNER account COMMENTED; actual author association/identity/commit authenticated. Source-clear disposition only after actual review.",
+        "P1Comments": [
+          4322083594,
+          4323870690
+        ],
+        "reviewerLaneBoundary": "Previously rejected automated Fleet functional-owner lane will not be retried or substituted; configured review and CI do not replace this owner review."
+      },
+      {
+        "owner": "Jobs release operator / repository administrator",
+        "state": "83065 all21prerequisite groups/all37contexts/166validation and original scanner/native/archive checks passed. Original publication POST releases HTTP422; no release exists. Exactsource-v2.1.0-rc.16 tag already reserves83065.",
+        "nextAction": "Diagnose422; use the prepared exact owned-DRAFT recovery request if appropriate, preserving existingtag/source/all25assets. Then allow root to rerun ORIGINAL publisher only after this prerequisite changes. Original25-asset upload/readback/semantic/native/tag checks and actual immutable public readback remain mandatory.",
+        "requestCommit": "acfcc857a6d79543e25b1a2d5dfe984776afafff",
+        "requestPath": "docs/release-evidence/ti-compatible-set-20261020/jobs-83065ad/owned-draft-recovery-request-not-submitted.json",
+        "independentStaticReviewCommit": "5c7e45ad8c4a0e338fbdd51ecdf97eab27aa6ac2",
+        "originalPublisherRun": 39509956774,
+        "failedAttempt": 1,
+        "unchangedRetryRequested": false,
+        "serverValidationCauseConfirmed": false
+      },
+      {
+        "owner": "Alpha repository administrator / release operator",
+        "state": "Actual publicv1.36.0 release418962131 / sourcea6d20a93c7c5b7430bf42d2367701b350513e90d; whole original Agent attempt2/all32jobs and all3historical main workflows succeeded, all92assets authenticated, immutable:false.",
+        "nextAction": "Confirm/enable repository release immutability and publish/republish with exact tag/source/all92assets preserved. Require actual API immutable:true and reauthenticate complete inventory. Preserve prior releases if a new version is needed; fresh source/version qualification remains authorized. Ask before any irreversible deletion.",
+        "releaseId": 418962131,
+        "actionComment": 6303815973
+      },
+      {
+        "owner": "Fleet release operator",
+        "state": "Original TI workflow dispatch capability is not exposed by the current connector.",
+        "nextAction": "After genuine owner review, qualified normal merge to actual mainS, and original same-S main qualifications/Linux/LocalSkills publications: dispatch ORIGINAL transformation-release.yml with expected-source=S, selectors for five actual successful same-S main run:attempts plus genuine review API IDs, publish=true. All three Fleet releases must identify same actualS.",
+        "originalWorkflow": ".github/workflows/transformation-release.yml",
+        "inputTemplateEvidenceCommit": "ec3deaccec1774e024a755981121c9c4db9bfc5b",
+        "inputTemplatePath": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-0674719/genuine-configured-receipt-and-original-ti-dispatch-inputs.json",
+        "sourceS": null,
+        "selectorsOwnerReview": null,
+        "sourceOrTriggersChanged": false
+      }
+    ],
+    "operationalImmutabilityNote": {
+      "settingReadback": "Current connector does not permit the repository-admin endpoint; no retry or alternative access was attempted.",
+      "preventiveStep": "Release operators should confirm release immutability enabled before publication.",
+      "separateNewAcceptanceGate": false,
+      "existingCanonicalGate": "Actual selected public release metadata must be immutable:true; a settings assertion never substitutes for this."
+    },
+    "remainingRootWorkAfterOwnerActions": [
+      "Authenticate actual immutable upstream releases and genuine owner review; normally merge qualified PR without any waiver.",
+      "Require actual final-main qualification and same-source Fleet/Linux/LocalSkills/TI publication identities.",
+      "Run ONE connected journey from actual normal public installed packages at exact final commits; collect completeD and independently reviewedE.",
+      "Make separate websiteT and perform final all-four-sitesF, including EN/FR, downloads/papers, metadata and console/screenshots. No second journey."
+    ],
+    "finalJourneyExecuted": false,
+    "finalE": null,
+    "websiteT": null,
+    "fourSiteF": null,
+    "completion": false
+  },
+  "strictAlphaComponentDraft": {
+    "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+    "releaseId": 418962131,
+    "tag": "v1.36.0",
+    "reviewed": {
+      "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+      "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22"
+    },
+    "released": {
+      "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+      "tree": "15d5101fee02fe2cc81d015b2af4a048ff9d9a22"
+    },
+    "sourceContinuity": {
+      "kind": "same-commit",
+      "reviewIds": [
+        6301065552
+      ]
+    },
+    "jobsSourceTransition": null,
+    "requiredRuns": [
+      {
+        "id": 39484204330,
+        "attempt": 2,
+        "path": ".github/workflows/agent-release.yml",
+        "event": "push",
+        "ref": "refs/heads/main",
+        "sourceRole": "released"
+      },
+      {
+        "id": 39484204335,
+        "attempt": 1,
+        "path": ".github/workflows/ci.yml",
+        "event": "push",
+        "ref": "refs/heads/main",
+        "sourceRole": "released"
+      },
+      {
+        "id": 39484204031,
+        "attempt": 1,
+        "path": ".github/workflows/pr-ci.yml",
+        "event": "push",
+        "ref": "refs/heads/main",
+        "sourceRole": "released"
+      },
+      {
+        "id": 39484203943,
+        "attempt": 1,
+        "path": ".github/workflows/smoke.yml",
+        "event": "push",
+        "ref": "refs/heads/main",
+        "sourceRole": "released"
+      }
+    ],
+    "assets": {
+      "source": {
+        "id": 660717873,
+        "name": "alpha-agent-v1.36.0-source.zip",
+        "bytes": 140127202,
+        "sha256": "ab04e50519f04a8500d5f3adf0f535a8decc5e50b76b60329be25c04ad8e42eb"
+      },
+      "wheel": {
+        "id": 660718574,
+        "name": "alpha_factory_v1-1.36.0-py3-none-any.whl",
+        "bytes": 5491759,
+        "sha256": "d9adbf79e191b21c8f6063d89e0e1b000a37518df4044eac4fadd210906123ea"
+      },
+      "manifest": {
+        "id": 660719377,
+        "name": "release-manifest.json",
+        "bytes": 202420,
+        "sha256": "6a4a9978ee3cbd41574482d4c2e0f2e1735cd1edc95fe66a51932b10ba27ff29"
+      },
+      "checksums": {
+        "id": 660716563,
+        "name": "SHA256SUMS",
+        "bytes": 8247,
+        "sha256": "20f36a3a021a48599be9c16ec82b65e299476bd3a0bbca93894cd0bf698c55c6"
+      }
+    }
+  },
+  "strictAlphaComponentDraftStatus": "UNQUALIFIED_MUTABLE_RELEASE_IMMUTABLE_TRUE_REQUIRED_BY_ORIGINAL_CONSUMER",
+  "finalFourSiteExpectedDraft": {
+    "status": "PENDING_FINAL_FLEET_S_T_AND_IMMUTABLE_RELEASES_NOT_RUN",
+    "helper": {
+      "gitBlob": "96b7607765941a8171cf4255a261922bc75d3135",
+      "bytes": 23365,
+      "sha256": "9ceed16e4b799f571c4a3ec4432947443790354dd7e3450c9a83f6701a2e59a7",
+      "independentReviewBlob": "90a7e50ddd7559c188aa970be4aa73f1af543884",
+      "independentReviewSha256": "5becc49c104ed15a855f9278d8c64787d1ed2dc619190b9d585c732ae47508a3",
+      "offlineUnitsPreviouslyPass": 12,
+      "offlineUnitsRerun": false,
+      "liveExecuted": false
+    },
+    "siteExpectationDraft": {
+      "alpha": {
+        "commit": "a6d20a93c7c5b7430bf42d2367701b350513e90d",
+        "version": "1.36.0",
+        "paperGitBlobs": {
+          "Out_Evolve.pdf": "a2a333187388e961a91c2fd67696adc09641c3ed",
+          "Out_Evolve.tex": "d2a1abdc373076d2f872ff824878988136d75c0b",
+          "The_World_as_an_Output.pdf": "b474ad005a7c6fd8339fcbed80c51c5c5fb85284",
+          "The_World_as_an_Output.tex": "c351982e1159c09f196868c4f76ee31faf392a65"
+        },
+        "paperSha256": {
+          "Out_Evolve.tex": "9860db55e36d18a8bab17b1dadfede7d5938449b10bb4dd48bf3be7f996e5e40",
+          "The_World_as_an_Output.tex": "21bd28bd6adc322c8d5a0c02183065b03971eddd89676df6310f6c3ba74b008b"
+        }
+      },
+      "jobs": {
+        "commit": "83065adf18a6ee987f8fa479a496a052d35db682",
+        "version": null
+      },
+      "manager": {
+        "commit": "4d4c32685eebf23b0aa35dbb45abe23ac8a261cb",
+        "version": "1.19.5"
+      },
+      "fleet": {
+        "websiteCommit": null,
+        "releaseCommit": null,
+        "version": "1.1.5",
+        "releaseTag": "v1.1.5",
+        "releaseWorkflowRun": null,
+        "releaseArchive": null
+      }
+    },
+    "currentActualAlphaPaperSources": [
+      {
+        "path": "docs/Out_Evolve.pdf",
+        "gitBlob": "a2a333187388e961a91c2fd67696adc09641c3ed",
+        "bytes": 399909,
+        "mode": "100644",
+        "sha256": null
+      },
+      {
+        "path": "docs/Out_Evolve.tex",
+        "gitBlob": "d2a1abdc373076d2f872ff824878988136d75c0b",
+        "bytes": 4246,
+        "mode": "100644",
+        "sha256": "9860db55e36d18a8bab17b1dadfede7d5938449b10bb4dd48bf3be7f996e5e40"
+      },
+      {
+        "path": "docs/The_World_as_an_Output.pdf",
+        "gitBlob": "b474ad005a7c6fd8339fcbed80c51c5c5fb85284",
+        "bytes": 313266,
+        "mode": "100644",
+        "sha256": null
+      },
+      {
+        "path": "docs/The_World_as_an_Output.tex",
+        "gitBlob": "c351982e1159c09f196868c4f76ee31faf392a65",
+        "bytes": 85948,
+        "mode": "100644",
+        "sha256": "21bd28bd6adc322c8d5a0c02183065b03971eddd89676df6310f6c3ba74b008b"
+      }
+    ],
+    "requiredBeforeExecution": [
+      "Actual immutable releases with authenticated exact source/tag/assets, not merely existing mutable Alpha publication or reserved Jobs tag.",
+      "All three Fleet publications from same actual qualified merged mainS after required eligible owner review.",
+      "ONE actual public normal-installed-package connected journey with original completeD and independently reviewed E.",
+      "Separate website-only commitT from exactS and original hosted all-four-site live verification."
+    ],
+    "noFinalFClaim": true,
+    "mainnetSigningOrTransactions": false,
+    "createdAt": "2026-10-20T23:23:43.019Z"
+  },
+  "technicalQualificationEvidence": "61754f69c8320cc92e1ef52c35c3a2ec8a2aa847",
+  "ownerActionCardEvidence": "4e85b88611f921ed5ae4ded8dc2d4190f418bde4",
+  "publicationOrCompletionApproval": false
+}
