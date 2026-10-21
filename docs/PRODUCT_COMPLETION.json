@@ -650,7 +650,7 @@
   "resources": [
     {
       "owner": "repository-administrator",
-      "needs": "Administration(write), named eligible independent reviewers, branch/tag rules, immutable releases, private reporting and provenance attestations",
+      "needs": "Administration(write), named eligible independent reviewers, branch/tag rules, private reporting and provenance attestations; release immutability is optional for the independently approved content-pinned public-package consumer",
       "status": "NOT_CONFIGURED"
     },
     {

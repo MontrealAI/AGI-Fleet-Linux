@@ -12,13 +12,17 @@ Land and review these helpers before freezing final Fleet source S. First publis
 and authenticate the actual Alpha, Jobs and Manager releases. Refresh Fleet's
 coherent runtime, inspector, captured SDK and source pins to those actual released
 S2 commits, keeping their reviewed S1 identities separately. Re-run the unchanged
-required gates and publish the immutable Fleet alpha.7 release at S.
+required gates and publish the content-pinned Fleet alpha.7 release at S.
 
 Only after all four releases exist, prepare a real input document matching
 public-release-input.schema.json. The repository-specific validator also checks
 cross-field identities and authenticates GitHub objects. Review the complete
-document, retain its raw UTF-8 SHA256, and store those exact bytes as a Git blob
-in the Fleet repository. The blob is data, not executable source.
+document against the retained original producer/package qualification evidence,
+retain its raw UTF-8 SHA256, and store those exact bytes as a Git blob in the Fleet
+repository. The owner must independently approve this exact input and its
+Git-blob SHA1/raw-SHA256 pair before admission. The blob is data, not executable
+source; storing it or supplying hashes does not establish that its bytes were
+qualified. This draft does not establish a final approved-input baseline.
 
 Root is the sole admission owner. After reviews and a fresh all-events query
 showing no previous public-release-journey workflow run for S, the owner may
@@ -43,13 +47,31 @@ workspaces are never used or removed.
 
 ## Public-byte installation
 
-The acquisition job authenticates each repository, immutable published release
+The acquisition job authenticates each repository, published release
 ID, tag, peeled commit/tree, exact asset ID/name/size/digest and actual downloaded
 bytes. Required run selectors must match genuine latest successful attempts and
 their explicit reviewed/released source role. Review comment IDs are authenticated
 source-bound selectors only: this consumer does not infer reviewer eligibility
 or approval from a comment ID. The original authenticated publisher/review gates
 remain prerequisites and cannot be replaced by these selectors.
+
+GitHub release immutability is optional for this consumer, not an administrative
+prerequisite. Both immutable and mutable published releases are accepted only
+when every selected identity, provenance binding and downloaded byte matches the
+independently approved input. The complete release API observation retains the
+reported immutable flag; CLI output records contentPinnedReleasesAuthenticated
+and releaseImmutabilityObserved (null if the API did not report the flag), not a
+claim that GitHub prevents changes.
+
+The input is the existing trust anchor, not today's release metadata or a
+checksum file downloaded alongside the package. A changed selected asset ID,
+name, size or SHA256 requires a new explicitly qualified and owner-approved input;
+the consumer never adopts replacement hashes from the current release. Extra
+unselected assets are not acquired or admitted to the installed asset inventory.
+Pinning detects mismatches but cannot prevent mutation or deletion of a mutable
+release: changed metadata or bytes cause verification failure, and deleted assets
+or unavailable APIs can make verification unavailable. The verify mode still
+authenticates live GitHub metadata; it is not an offline verifier.
 
 All selected public checksums must agree. Source materialization clones genuine,
 complete standalone Git metadata and retains authentic objects/index at S2. It
@@ -148,10 +170,21 @@ page/console error fails the observation rather than becoming a live pass.
 
 ## Validation and remaining decisions
 
-This source draft has NOT_RUN local syntax/import checks, regressions, package
-acquisition, installation, native/GUI execution, independent artifact collection
-and live browser observation. The workspace execution/browser services are
-unavailable. In-memory source comparison and Git objects are not runtime QA.
+The original source draft recorded NOT_RUN local syntax/import checks,
+regressions, package acquisition, installation, native/GUI execution, independent
+artifact collection and live browser observation while its workspace
+execution/browser services were unavailable. In-memory source comparison and
+Git objects are not runtime QA.
+
+The content-pinned admission change has a bounded local stdlib regression suite,
+test_public_release_assets.py, alongside the unchanged metadata tests. Run it with
+python3 -B -m unittest discover -s engineering/integration -p 'test_public_release_*.py' -v.
+Its synthetic API/byte doubles cover mutable/immutable/missing-flag observations,
+unchanged published-prerelease acceptance, input/provenance/asset mismatch
+rejection and downloaded-byte verification. They never execute packages or
+establish a real approved-input baseline, hosted admission or release qualification.
+All actual public acquisition, installed/native, browser, owner-review and final
+exact-byte gates remain separate requirements.
 
 Before merge or publication, review archive completeness/mode handling, actual publisher
 manifest interfaces, existing source-pin compatibility, required gate selectors,
@@ -166,9 +199,25 @@ authorized by this draft.
 ## Français
 
 Ce chemin reste un brouillon de qualification technique, sans résultat observé.
-Les publications immuables, les paquets téléchargés et les révisions finales
-réelles sont obligatoires. Les sources examinées S1 et publiées S2 restent
+Les publications réelles, les paquets téléchargés et les révisions finales
+réelles sont obligatoires. L'immuabilité GitHub est facultative pour ce
+consommateur : une publication modifiable est admise uniquement si ses identités,
+sa provenance et ses octets correspondent à l'entrée exacte approuvée par le
+propriétaire. L'état d'immuabilité observé est conservé, sans promesse de verrouillage.
+Les sources examinées S1 et publiées S2 restent
 distinctes; aucune ancienne preuve n'est renommée.
+
+L'entrée doit être examinée au regard des preuves originales conservées du
+producteur et de qualification des paquets, puis approuvée indépendamment avec
+son SHA1 de blob Git et son SHA256 UTF-8 brut. Stocker un blob ou fournir des
+empreintes ne prouve pas la qualification; aucune entrée finale approuvée n'est
+établie ici. Les métadonnées et sommes de contrôle actuelles ne peuvent pas
+autoriser de nouveaux octets. Tout changement d'identifiant, nom, taille ou SHA256
+d'un actif sélectionné exige une nouvelle entrée explicitement qualifiée et
+approuvée. Les actifs non sélectionnés ne sont pas acquis. L'épinglage détecte
+les divergences sans empêcher une modification ou une suppression : il peut en
+résulter un échec ou une indisponibilité. Le mode verify consulte toujours GitHub;
+il n'est pas hors ligne.
 
 Le paquet source publié fournit tous les fichiers exécutés dans un contexte Git
 authentique. Aucun fichier manquant n'est ajouté depuis un checkout. Le wheel
@@ -186,6 +235,10 @@ déclaré ici; les validations et l'examen indépendant admissible restent à fa
 
 The separate installed-wheel phase also installs the actual released Alpha source package's `requirements-agent.lock` with hashes and binary-only dependencies before normal wheel installation and `pip check`. The original native lock guard and install remain unchanged. Trusted system-Python preparation runs again after dependency installation and before any candidate site-package code is invoked. Availability of every locked wheel on both target architectures is a required hosted check, presently NOT_RUN; missing binary availability fails closed.
 
-A small stdlib `test_public_release_metadata.py` module covers only known input digests and a complete benign two-file source ZIP's byte/blob and unspecified0644/declared0755 metadata. The unchanged original unittest discovery will pick it up. It has NOT_RUN here and makes no source-release, installed-product, browser or journey qualification claim.
+A small stdlib `test_public_release_metadata.py` module covers known input digests, a complete benign two-file source ZIP's byte/blob and unspecified0644/declared0755 metadata, and live-site metadata shape. The unchanged original unittest discovery picks it up alongside the bounded admission tests. These local tests make no source-release, installed-product, browser or journey qualification claim.
 
-Canonical final-source selectors must include the actual released S2 main producer: Alpha Agent release (push/dispatch), Fleet TI publication (dispatch), Jobs rc.16 publication (push), and Manager's actual source qualification (push/dispatch). Manager has no publish job in current-state-release.yml; its immutable release/API custody is authenticated separately. Reviewed S1 runs remain additional evidence. Duplicate public asset IDs are validated as complete identity groups independent of JSON ordering: only the two identical Fleet architecture package roles can share one asset; manifest and checksum roles cannot join that group.
+Canonical final-source selectors must include the actual released S2 main producer: Alpha Agent release (push/dispatch), Fleet TI publication (dispatch), Jobs rc.16 publication (push), and Manager's actual source qualification (push/dispatch). Manager has no publish job in current-state-release.yml; its content-pinned release/API custody is authenticated separately. Reviewed S1 runs remain additional evidence. Duplicate public asset IDs are validated as complete identity groups independent of JSON ordering: only the two identical Fleet architecture package roles can share one asset; manifest and checksum roles cannot join that group.
+
+Manager n'a pas de tâche de publication dans current-state-release.yml : sa
+qualification source reste obligatoire et les identités et octets des actifs publics
+épinglés sont authentifiés séparément, sans imposer le verrouillage GitHub.

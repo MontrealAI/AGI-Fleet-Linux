@@ -1,4 +1,4 @@
-"""Authenticate one reviewed input blob and immutable public release assets.
+"""Authenticate one reviewed input blob and content-pinned public release assets.
 
 Run only on the explicit qualification push. This adds installed-package custody;
 it never substitutes for the original release publishers or source qualification.
@@ -163,8 +163,11 @@ def authenticate(value):
         prefix = "/repos/" + selected["repository"]
         release = api(prefix + "/releases/" + str(selected["releaseId"]))
         require(release["id"] == selected["releaseId"] and release["tag_name"] == selected["tag"]
-                and release["draft"] is False and release["immutable"] is True
-                and release["published_at"] is not None, "immutable published release identity")
+                and release["draft"] is False
+                and release["published_at"] is not None, "published release identity")
+        # Platform immutability is an observation, not the trust anchor. The
+        # independently approved input pins every selected identity and digest;
+        # current release metadata must never supply replacement expectations.
         tag = api(prefix + "/git/ref/tags/" + urllib.parse.quote(selected["tag"], safe=""))
         obj = tag["object"]
         for _ in range(4):
@@ -245,4 +248,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     value, producer, observations = run(args.mode, args.bundle)
     print(json.dumps({"input": producer["inputSha256"], "consumer": value["consumerSource"],
-                      "immutableReleasesAuthenticated": True, "journeyExecuted": False}))
+                      "contentPinnedReleasesAuthenticated": True,
+                      "releaseImmutabilityObserved": {
+                          role: observed["release"].get("immutable")
+                          for role, observed in observations.items()},
+                      "journeyExecuted": False}))
