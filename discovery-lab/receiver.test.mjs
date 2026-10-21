@@ -141,6 +141,28 @@ test('checker receives remaining budget and returned reasons cannot alias later 
   assert.equal(remaining.storageBytes,f.request.resourceLimits.storageBytes-8192);
   reasons.push('MUTATED_AFTER_RETURN');assert.deepEqual(result.reasons,['COMPLETE_FINITE_CHECK']);
 });
+test('checker report semantics use one captured data frame without reading property behavior',async()=>{
+  const f=fixture();let reportReads=0,reportFrames=0;
+  const report=new Proxy({accepted:false,resourceUsed:vector(0),reasons:[]},{
+    ownKeys(target){reportFrames++;return Reflect.ownKeys(target);},
+    get(target,key,receiver){
+      if(key==='then')return undefined; // Promise assimilation is separate from report data.
+      reportReads++;return key==='accepted'?true:Reflect.get(target,key,receiver);
+    }
+  });
+  f.installed.inspectCampaign=()=>report;
+  const rejected=await reviewDiscoveryRequest(f.raw(),f.installed);
+  assert.equal(rejected.state,'rejected-local-review');assert.equal(reportReads,0);assert.equal(reportFrames,1);
+  const g=fixture();let resourceReads=0,resourceFrames=0;
+  const resourceUsed=new Proxy({...vector(0),checking:-5000},{
+    ownKeys(target){resourceFrames++;return Reflect.ownKeys(target);},
+    get(target,key,receiver){resourceReads++;return key==='checking'?0:Reflect.get(target,key,receiver);}
+  });
+  g.installed.inspectCampaign=()=>({accepted:true,resourceUsed,reasons:[]});
+  const malformed=await reviewDiscoveryRequest(g.raw(),g.installed);
+  assert.equal(malformed.state,'inconclusive');assert.equal(malformed.resourceUsed.checking,1);
+  assert.equal(resourceReads,0);assert.equal(resourceFrames,1);
+});
 test('unprovisioned admission attempts retain known input, checking, receipt and elapsed costs',async()=>{
   const f=fixture(),result=await reviewDiscoveryRequest(f.raw());
   assert.equal(result.state,'unprovisioned');assert.equal(result.resourceUsed.checking,1);

@@ -1,0 +1,381 @@
+{
+  "schema": "agi-fleet/browser-draft-local-review-evidence/v1",
+  "source": {
+    "commit": "0385df4c9728db19c396e039cd04678eebfddb9e",
+    "tree": "8340ffc1b0dc61ff02f55118c36cf412d68820b6",
+    "generatedSourcesHash": "46858f3b1e5e2b5cc00f0118b0ec3660d8d701cfa726e097475757efd141442a",
+    "generatedPageSha256": "77c20a44751b937180c271d8c4aa4f782d4afe6d865c935f9461f10034a3f196",
+    "generatedFiles": 26,
+    "nativeClosureFiles": 6,
+    "allPinnedFiles": 29
+  },
+  "profile": "alpha-compatible-linux-x64",
+  "runtime": "v22.17.1",
+  "runtimeDigest": "1ea51aedf6e7669e9c845484ac2a5f22df7044b5a44147dd24d16b75baff226f",
+  "receiverSources": {
+    "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd",
+    "contract.mjs": "98c8de8ce2774b7650bf4ee11eeedfb0a69b75fa6d1b080ef823637d77d0ab47",
+    "qualify.mjs": "e22b3d487aeac30f09c837e9aa458a77e920cf2e86bde5b3a4fc714e17b01f90",
+    "alpha-source-pin.json": "85cee8d60ddf5bc3c5ac90804c150585e53da87eb2631e11d73b683975ab0f66"
+  },
+  "workspaceSha256": "fb255c1bf33db82b240c452bcdd1334260d7934d5d2eed984f261109f34bd340",
+  "missionId": "capability-14e2314c-f9c3-4e54-a1fc-4e1d8cc28540",
+  "workspaceRevision": 8,
+  "trustedCapacity": {
+    "acquisitions": 4000,
+    "checking": 2020000,
+    "elapsedMs": 120000,
+    "installations": 40,
+    "memoryBytes": 10000000,
+    "search": 2000000,
+    "storageBytes": 4000000,
+    "workerCapacity": 4
+  },
+  "capacityDerivation": {
+    "routeAdmissionAllowance": 10000,
+    "declaredInspectionChecks": 10000,
+    "replayCharters": [
+      {
+        "accuracy": 1,
+        "actualDrift": "linear",
+        "budget": {
+          "acquisitions": 2000,
+          "checking": 1000000,
+          "installations": 20,
+          "search": 1000000,
+          "storageBytes": 500000
+        },
+        "checkpoints": [
+          "safety"
+        ],
+        "controls": 4,
+        "driftScope": "linear",
+        "faultHypotheses": [
+          "clear",
+          "left",
+          "right",
+          "both"
+        ],
+        "hiddenCoupling": false,
+        "intendedUses": 12,
+        "memory": 16,
+        "noise": 0,
+        "observations": [
+          "contrast",
+          "reference",
+          "coarse",
+          "full"
+        ],
+        "operations": [
+          "flip-z",
+          "flip-w"
+        ],
+        "purpose": "qualified-finite-discovery-platform",
+        "schema": "discovery-lab-charter/v1",
+        "topology": "right",
+        "workerCapacity": 3
+      },
+      {
+        "accuracy": 1,
+        "actualDrift": "linear",
+        "budget": {
+          "acquisitions": 2000,
+          "checking": 1000000,
+          "installations": 20,
+          "search": 1000000,
+          "storageBytes": 500000
+        },
+        "checkpoints": [
+          "safety"
+        ],
+        "controls": 3,
+        "driftScope": "linear",
+        "faultHypotheses": [
+          "clear",
+          "left",
+          "right",
+          "both"
+        ],
+        "hiddenCoupling": false,
+        "intendedUses": 12,
+        "memory": 8,
+        "noise": 0,
+        "observations": [
+          "contrast",
+          "reference",
+          "coarse",
+          "full"
+        ],
+        "operations": [
+          "flip-z"
+        ],
+        "purpose": "qualified-finite-discovery-platform",
+        "schema": "discovery-lab-charter/v1",
+        "topology": "right",
+        "workerCapacity": 3
+      }
+    ],
+    "source": "Verified pinned UI bridge and contract; freshly reconstructed current/ancestor history."
+  },
+  "retainedOutcomes": [
+    {
+      "state": "inconclusive",
+      "controls": 3,
+      "campaignDigest": "1918f69af101f5c59540d4fff4267f9578c4b0fcf794b40e5e8f4448469cb612"
+    },
+    {
+      "state": "accepted",
+      "controls": 3,
+      "campaignDigest": "6a5a522e4cf4cd0152c3c8580c42c6a0fc8ceead1ae093d5de17819e34f3ca9f"
+    },
+    {
+      "state": "rejected",
+      "controls": 3,
+      "campaignDigest": "1f9dea5c4cd43076b4fd69754dd0b1b08a5e89ffc2001b3ccc1f5e0c9d427f0a"
+    },
+    {
+      "state": "accepted",
+      "controls": 4,
+      "campaignDigest": "4be51597afbe948cd935415866ca9e4f25dafe30b1985ffda0b0b41ef3e127cc"
+    }
+  ],
+  "selectedCampaignDigest": "4be51597afbe948cd935415866ca9e4f25dafe30b1985ffda0b0b41ef3e127cc",
+  "selectedAttempt": "lab-92409bf5-b9fd-430c-9189-5a5ddfeb39d7",
+  "selectedBindings": {
+    "charterDigest": "0a430aeee4506a2d8719cdb222f9bef4832908e45436a54a4738fbacbcce1ef9",
+    "evaluatorDigest": "ba46c89d42defc9d78ac61090f5ccc793549c4c072a5afe825bc7b434b3f7099",
+    "missionId": "capability-14e2314c-f9c3-4e54-a1fc-4e1d8cc28540",
+    "modelDigest": "0929e305a6d235774a6464662220e0ae454ec738fc42ffde6ba6f141d3217851",
+    "purposeDigest": "eff029abd79af61fd21de23b48a10962271e8e7aa8c24f45d3d6a791590af3a5",
+    "revision": 7,
+    "sourceDigest": "46858f3b1e5e2b5cc00f0118b0ec3660d8d701cfa726e097475757efd141442a"
+  },
+  "checkedWorkspaceAndInspectorClosure": {
+    "examples/successor-capability/workspace.mjs": {
+      "sha256": "a5b9165d14094046f9068cfed1d3300031fa1757269dc422c15df0f933411016",
+      "gitBlob": "26ff4dcbda354fc1aff97c35b1eb5130e2fd6986"
+    },
+    "docs/assets/successor/engine.mjs": {
+      "sha256": "38c4f38978bf9fc29f207bae3adee0755bc6530d04502a36c491cc430787e488",
+      "gitBlob": "4a22d7a7be2d8faecec411a5ca9088e942a38418"
+    },
+    "examples/successor-capability/witness.mjs": {
+      "sha256": "424d90415fcfb2d6d374e44e687e814f7b53fd6cf20f97f65c4c366981f5c215",
+      "gitBlob": "6ed2af7b5a08c6c79538b9d91e46c21d1d09f84e"
+    },
+    "examples/successor-capability/discovery-lab-history.mjs": {
+      "sha256": "0b8972dc53e5014686b50e5f0a88a1d0248de3556becc94e3e0cf3737151cc17",
+      "gitBlob": "ea426e027a109b964113f824a590cb200e7c7556"
+    },
+    "examples/successor-capability/discovery-lab.mjs": {
+      "sha256": "0929e305a6d235774a6464662220e0ae454ec738fc42ffde6ba6f141d3217851",
+      "gitBlob": "ba410c053c453941faad6fd2899f4053f648e916"
+    },
+    "examples/successor-capability/discovery-lab-checker.mjs": {
+      "sha256": "ba46c89d42defc9d78ac61090f5ccc793549c4c072a5afe825bc7b434b3f7099",
+      "gitBlob": "3628efdb8465bb5c4f601c3f18165c631d715804"
+    },
+    "examples/successor-capability/discovery-lab-baselines.mjs": {
+      "sha256": "91123c8c471224910ae420f3ec140a31fb0e1ad09862cbf85132ebc7993232ce",
+      "gitBlob": "ba166f4a8d6b1a4fe849d769e72ef2e31f915093"
+    },
+    "examples/successor-capability/discovery-lab-contract.mjs": {
+      "sha256": "98c8de8ce2774b7650bf4ee11eeedfb0a69b75fa6d1b080ef823637d77d0ab47",
+      "gitBlob": "54de767a76f82050d0f9e32c3be84aec43acb896"
+    },
+    "examples/successor-capability/discovery-lab-artifacts.mjs": {
+      "sha256": "7a122e1b9067678b6aebd81d25996d53f4746d1d56fa396132f2b8e4c8900503",
+      "gitBlob": "cb076927f86473d55bf042ff1169967f3cd1c9ab"
+    },
+    "examples/successor-capability/discovery-lab-inspector.mjs": {
+      "sha256": "c3dded6b04decf410c9770d3fa4ab7e9bbc60822f06d4aa8e54a658d607566af",
+      "gitBlob": "2fa30d2760c6151d7cf57ecd2aa1d9ac9fe9ceab"
+    }
+  },
+  "passed": 2,
+  "total": 2,
+  "cases": [
+    {
+      "name": "manager-review-draft.json",
+      "rawBytes": 252490,
+      "rawSha256": "a054a86a58a9aa38eee25c831cc7e5948847504d6e0da4d03fcadf2d499661e4",
+      "canonicalRequestDigest": "3696bf880fba8345ceed3ba3c494c6ac7e6407921d4d41b5aec0308ba882377b",
+      "receipt": {
+        "schema": "agi-fleet/discovery-review/v1",
+        "state": "accepted-local-review",
+        "reasons": [],
+        "missionId": "capability-14e2314c-f9c3-4e54-a1fc-4e1d8cc28540",
+        "revision": 7,
+        "stage": "evolve",
+        "requestDigest": "a054a86a58a9aa38eee25c831cc7e5948847504d6e0da4d03fcadf2d499661e4",
+        "payloadDigest": "2264d4b74cf329b65cfc7f981072dc837bd36be69ef159e5f2e66eeab8bf3bf3",
+        "sourceDigest": "46858f3b1e5e2b5cc00f0118b0ec3660d8d701cfa726e097475757efd141442a",
+        "evaluatorDigest": "ba46c89d42defc9d78ac61090f5ccc793549c4c072a5afe825bc7b434b3f7099",
+        "commission": {
+          "branch": "lab-92409bf5-b9fd-430c-9189-5a5ddfeb39d7-usdc",
+          "capBaseUnits": "0",
+          "currency": "USDC6",
+          "id": "lab-92409bf5-b9fd-430c-9189-5a5ddfeb39d7",
+          "route": "manager-usdc",
+          "status": "DRAFT_NOT_SUBMITTED"
+        },
+        "executorId": "verified-browser-draft-local-review",
+        "runtimeDigest": "1ea51aedf6e7669e9c845484ac2a5f22df7044b5a44147dd24d16b75baff226f",
+        "executionMode": "synthetic-local",
+        "scope": "bounded-synthetic-semantic-review",
+        "resourceUsed": {
+          "acquisitions": 2556,
+          "search": 36625,
+          "checking": 301874,
+          "memoryBytes": 923566,
+          "storageBytes": 65654,
+          "workerCapacity": 3,
+          "installations": 8,
+          "elapsedMs": 288
+        },
+        "resourceAccounting": "reported-model-work-plus-input-and-receipt-bytes",
+        "authority": "none",
+        "remoteExecution": "unprovisioned",
+        "settlement": "not-connected",
+        "organizationalIndependence": false,
+        "protectedHoldout": false
+      },
+      "unprovisioned": {
+        "schema": "agi-fleet/discovery-review/v1",
+        "state": "unprovisioned",
+        "reasons": [
+          "DISCOVERY_EXECUTOR_UNPROVISIONED"
+        ],
+        "missionId": "capability-14e2314c-f9c3-4e54-a1fc-4e1d8cc28540",
+        "revision": 7,
+        "stage": "evolve",
+        "requestDigest": "a054a86a58a9aa38eee25c831cc7e5948847504d6e0da4d03fcadf2d499661e4",
+        "payloadDigest": "2264d4b74cf329b65cfc7f981072dc837bd36be69ef159e5f2e66eeab8bf3bf3",
+        "sourceDigest": "46858f3b1e5e2b5cc00f0118b0ec3660d8d701cfa726e097475757efd141442a",
+        "evaluatorDigest": "ba46c89d42defc9d78ac61090f5ccc793549c4c072a5afe825bc7b434b3f7099",
+        "commission": {
+          "branch": "lab-92409bf5-b9fd-430c-9189-5a5ddfeb39d7-usdc",
+          "capBaseUnits": "0",
+          "currency": "USDC6",
+          "id": "lab-92409bf5-b9fd-430c-9189-5a5ddfeb39d7",
+          "route": "manager-usdc",
+          "status": "DRAFT_NOT_SUBMITTED"
+        },
+        "executorId": null,
+        "runtimeDigest": null,
+        "executionMode": "synthetic-local",
+        "scope": "bounded-synthetic-semantic-review",
+        "resourceUsed": {
+          "acquisitions": 0,
+          "search": 0,
+          "checking": 1,
+          "memoryBytes": 252490,
+          "storageBytes": 1228,
+          "workerCapacity": 0,
+          "installations": 0,
+          "elapsedMs": 30
+        },
+        "resourceAccounting": "admission-only-known-input-and-receipt-bytes",
+        "authority": "none",
+        "remoteExecution": "unprovisioned",
+        "settlement": "not-connected",
+        "organizationalIndependence": false,
+        "protectedHoldout": false
+      }
+    },
+    {
+      "name": "jobs-review-draft.json",
+      "rawBytes": 252500,
+      "rawSha256": "6911d09b818643feae3a6edd0c150a3124ccd5bae933b9c8282254ee00c5fb16",
+      "canonicalRequestDigest": "b3d43af1d26db6fa7df42f569ee0423dd62536841896ddfed4913475ea8186f7",
+      "receipt": {
+        "schema": "agi-fleet/discovery-review/v1",
+        "state": "accepted-local-review",
+        "reasons": [],
+        "missionId": "capability-14e2314c-f9c3-4e54-a1fc-4e1d8cc28540",
+        "revision": 7,
+        "stage": "evolve",
+        "requestDigest": "6911d09b818643feae3a6edd0c150a3124ccd5bae933b9c8282254ee00c5fb16",
+        "payloadDigest": "2264d4b74cf329b65cfc7f981072dc837bd36be69ef159e5f2e66eeab8bf3bf3",
+        "sourceDigest": "46858f3b1e5e2b5cc00f0118b0ec3660d8d701cfa726e097475757efd141442a",
+        "evaluatorDigest": "ba46c89d42defc9d78ac61090f5ccc793549c4c072a5afe825bc7b434b3f7099",
+        "commission": {
+          "branch": "lab-92409bf5-b9fd-430c-9189-5a5ddfeb39d7-agialpha",
+          "capBaseUnits": "0",
+          "currency": "AGIALPHA18",
+          "id": "lab-92409bf5-b9fd-430c-9189-5a5ddfeb39d7",
+          "route": "jobs-agialpha",
+          "status": "DRAFT_NOT_SUBMITTED"
+        },
+        "executorId": "verified-browser-draft-local-review",
+        "runtimeDigest": "1ea51aedf6e7669e9c845484ac2a5f22df7044b5a44147dd24d16b75baff226f",
+        "executionMode": "synthetic-local",
+        "scope": "bounded-synthetic-semantic-review",
+        "resourceUsed": {
+          "acquisitions": 2556,
+          "search": 36625,
+          "checking": 301874,
+          "memoryBytes": 923616,
+          "storageBytes": 65664,
+          "workerCapacity": 3,
+          "installations": 8,
+          "elapsedMs": 267
+        },
+        "resourceAccounting": "reported-model-work-plus-input-and-receipt-bytes",
+        "authority": "none",
+        "remoteExecution": "unprovisioned",
+        "settlement": "not-connected",
+        "organizationalIndependence": false,
+        "protectedHoldout": false
+      },
+      "unprovisioned": {
+        "schema": "agi-fleet/discovery-review/v1",
+        "state": "unprovisioned",
+        "reasons": [
+          "DISCOVERY_EXECUTOR_UNPROVISIONED"
+        ],
+        "missionId": "capability-14e2314c-f9c3-4e54-a1fc-4e1d8cc28540",
+        "revision": 7,
+        "stage": "evolve",
+        "requestDigest": "6911d09b818643feae3a6edd0c150a3124ccd5bae933b9c8282254ee00c5fb16",
+        "payloadDigest": "2264d4b74cf329b65cfc7f981072dc837bd36be69ef159e5f2e66eeab8bf3bf3",
+        "sourceDigest": "46858f3b1e5e2b5cc00f0118b0ec3660d8d701cfa726e097475757efd141442a",
+        "evaluatorDigest": "ba46c89d42defc9d78ac61090f5ccc793549c4c072a5afe825bc7b434b3f7099",
+        "commission": {
+          "branch": "lab-92409bf5-b9fd-430c-9189-5a5ddfeb39d7-agialpha",
+          "capBaseUnits": "0",
+          "currency": "AGIALPHA18",
+          "id": "lab-92409bf5-b9fd-430c-9189-5a5ddfeb39d7",
+          "route": "jobs-agialpha",
+          "status": "DRAFT_NOT_SUBMITTED"
+        },
+        "executorId": null,
+        "runtimeDigest": null,
+        "executionMode": "synthetic-local",
+        "scope": "bounded-synthetic-semantic-review",
+        "resourceUsed": {
+          "acquisitions": 0,
+          "search": 0,
+          "checking": 1,
+          "memoryBytes": 252500,
+          "storageBytes": 1238,
+          "workerCapacity": 0,
+          "installations": 0,
+          "elapsedMs": 20
+        },
+        "resourceAccounting": "admission-only-known-input-and-receipt-bytes",
+        "authority": "none",
+        "remoteExecution": "unprovisioned",
+        "settlement": "not-connected",
+        "organizationalIndependence": false,
+        "protectedHoldout": false
+      }
+    }
+  ],
+  "scope": "Direct local finite review of exact browser-downloaded bytes after fresh source/history validation. Local context is explicitly installed by this harness. Imported history does not grant authority.",
+  "remoteExecution": "unprovisioned",
+  "installedFleetService": false,
+  "operatorPackage": false,
+  "qualifiedRelease": false,
+  "organizationalIndependence": false
+}

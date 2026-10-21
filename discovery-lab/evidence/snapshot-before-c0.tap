@@ -1,0 +1,476 @@
+TAP version 13
+# Subtest: obviously oversized imported text is rejected before encoder allocation
+ok 1 - obviously oversized imported text is rejected before encoder allocation
+  ---
+  duration_ms: 1.606634
+  type: 'test'
+  ...
+# Subtest: direct oversized scalar is rejected before stringify or encoder allocation
+ok 2 - direct oversized scalar is rejected before stringify or encoder allocation
+  ---
+  duration_ms: 0.559594
+  type: 'test'
+  ...
+# Subtest: escaped and cumulative canonical output is bounded before encoder allocation
+ok 3 - escaped and cumulative canonical output is bounded before encoder allocation
+  ---
+  duration_ms: 36.88145
+  type: 'test'
+  ...
+# Subtest: ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+ok 4 - ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+  ---
+  duration_ms: 98.170311
+  type: 'test'
+  ...
+# Subtest: UTF-8 multibyte boundaries are measured even when code units fit
+ok 5 - UTF-8 multibyte boundaries are measured even when code units fit
+  ---
+  duration_ms: 115.074181
+  type: 'test'
+  ...
+# Subtest: canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+ok 6 - canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+  ---
+  duration_ms: 0.630932
+  type: 'test'
+  ...
+# Subtest: array node ceiling is checked before descriptor materialization without shrinking its boundary
+ok 7 - array node ceiling is checked before descriptor materialization without shrinking its boundary
+  ---
+  duration_ms: 64.704844
+  type: 'test'
+  ...
+# Subtest: wide object node ceiling precedes descriptors and preserves the admitted boundary
+ok 8 - wide object node ceiling precedes descriptors and preserves the admitted boundary
+  ---
+  duration_ms: 265.152758
+  type: 'test'
+  ...
+# Subtest: wide non-enumerable object and array keys are bounded before descriptor inspection
+ok 9 - wide non-enumerable object and array keys are bounded before descriptor inspection
+  ---
+  duration_ms: 233.024019
+  type: 'test'
+  ...
+# Subtest: object key output lower bound precedes descriptors and observes the remaining output budget
+ok 10 - object key output lower bound precedes descriptors and observes the remaining output budget
+  ---
+  duration_ms: 49.082545
+  type: 'test'
+  ...
+# Subtest: remaining node budget bounds nested object width before descriptor inspection
+ok 11 - remaining node budget bounds nested object width before descriptor inspection
+  ---
+  duration_ms: 88.886546
+  type: 'test'
+  ...
+# Subtest: shared declared inspection charge composes with a distinct receiver allowance in the exact vector
+ok 12 - shared declared inspection charge composes with a distinct receiver allowance in the exact vector
+  ---
+  duration_ms: 0.533945
+  type: 'test'
+  ...
+# Subtest: canonical data comes from captured descriptors without property or array-method reads
+not ok 13 - canonical data comes from captured descriptors without property or array-method reads
+  ---
+  duration_ms: 0.236096
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:132:1'
+  failureType: 'testCodeFailure'
+  error: 'Caller property was read'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    Object.get (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:135:63)
+    file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.mjs:66:70
+    Array.map (<anonymous>)
+    encode (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.mjs:63:31)
+    canonical (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.mjs:71:20)
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:136:22)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+  ...
+# Subtest: captured array length must itself be a bounded nonnegative integer
+not ok 14 - captured array length must itself be a bounded nonnegative integer
+  ---
+  duration_ms: 0.56341
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:140:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:149:16)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: resource and binding validation returns the same inert snapshot it checked
+not ok 15 - resource and binding validation returns the same inert snapshot it checked
+  ---
+  duration_ms: 0.975171
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:152:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    -1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: -1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:167:16)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: complete request validation keeps extra keys from its first captured frame
+not ok 16 - complete request validation keeps extra keys from its first captured frame
+  ---
+  duration_ms: 12.798753
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:171:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:179:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: complete request validation uses captured mode data rather than a later property value
+not ok 17 - complete request validation uses captured mode data rather than a later property value
+  ---
+  duration_ms: 1.419221
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:181:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:186:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: complete request validation owns all data before awaiting its payload hash
+not ok 18 - complete request validation owns all data before awaiting its payload hash
+  ---
+  duration_ms: 2.528905
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:188:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      {
+        charterDigest: '2222222222222222222222222222222222222222222222222222222222222222',
+        commission: {
+          branch: 'usdc-example',
+    +     capBaseUnits: '1',
+    -     capBaseUnits: '0',
+          currency: 'USDC6',
+          id: 'lab-example',
+          route: 'manager-usdc',
+    +     status: 'SUBMITTED'
+    -     status: 'DRAFT_NOT_SUBMITTED'
+        },
+        evaluatorDigest: '5555555555555555555555555555555555555555555555555555555555555555',
+    +   executionMode: 'external',
+    -   executionMode: 'synthetic-local',
+        inputArtifacts: [],
+        missionId: 'capability-00000000-0000-4000-8000-000000000000',
+        modelDigest: '3333333333333333333333333333333333333333333333333333333333333333',
+        payload: {
+    +     notice: 'Changed after validation started',
+    -     notice: 'Transport fixture only. No semantic acceptance or executor competence established.',
+          schema: 'discovery-lab-transport-fixture/v1'
+        },
+        payloadDigest: 'd64ebd875c1d527d4cb715befc04e0c73fd68fb9eabdfaa124db1e3ab5ce167f',
+        purposeDigest: '1111111111111111111111111111111111111111111111111111111111111111',
+        resourceLimits: {
+          acquisitions: 200,
+    +     checking: -1,
+    -     checking: 1000000,
+          elapsedMs: 10000,
+          installations: 20,
+          memoryBytes: 500000,
+          search: 1000000,
+          storageBytes: 500000,
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    charterDigest: '2222222222222222222222222222222222222222222222222222222222222222'
+    commission:
+      branch: 'usdc-example'
+      capBaseUnits: '0'
+      currency: 'USDC6'
+      id: 'lab-example'
+      route: 'manager-usdc'
+      status: 'DRAFT_NOT_SUBMITTED'
+    evaluatorDigest: '5555555555555555555555555555555555555555555555555555555555555555'
+    executionMode: 'synthetic-local'
+    inputArtifacts:
+    missionId: 'capability-00000000-0000-4000-8000-000000000000'
+    modelDigest: '3333333333333333333333333333333333333333333333333333333333333333'
+    payload:
+      notice: 'Transport fixture only. No semantic acceptance or executor competence established.'
+      schema: 'discovery-lab-transport-fixture/v1'
+    payloadDigest: 'd64ebd875c1d527d4cb715befc04e0c73fd68fb9eabdfaa124db1e3ab5ce167f'
+    purposeDigest: '1111111111111111111111111111111111111111111111111111111111111111'
+    resourceLimits:
+      acquisitions: 200
+      checking: 1000000
+      elapsedMs: 10000
+      installations: 20
+      memoryBytes: 500000
+      search: 1000000
+      storageBytes: 500000
+      workerCapacity: 3
+    revision: 0
+    schema: 'successor-discovery-work-request/v1'
+    sourceDigest: '4444444444444444444444444444444444444444444444444444444444444444'
+    stage: 'learn'
+  actual:
+    charterDigest: '2222222222222222222222222222222222222222222222222222222222222222'
+    commission:
+      branch: 'usdc-example'
+      capBaseUnits: '1'
+      currency: 'USDC6'
+      id: 'lab-example'
+      route: 'manager-usdc'
+      status: 'SUBMITTED'
+    evaluatorDigest: '5555555555555555555555555555555555555555555555555555555555555555'
+    executionMode: 'external'
+    inputArtifacts:
+    missionId: 'capability-00000000-0000-4000-8000-000000000000'
+    modelDigest: '3333333333333333333333333333333333333333333333333333333333333333'
+    payload:
+      notice: 'Changed after validation started'
+      schema: 'discovery-lab-transport-fixture/v1'
+    payloadDigest: 'd64ebd875c1d527d4cb715befc04e0c73fd68fb9eabdfaa124db1e3ab5ce167f'
+    purposeDigest: '1111111111111111111111111111111111111111111111111111111111111111'
+    resourceLimits:
+      acquisitions: 200
+      checking: -1
+      elapsedMs: 10000
+      installations: 20
+      memoryBytes: 500000
+      search: 1000000
+      storageBytes: 500000
+      workerCapacity: 3
+    revision: 0
+    schema: 'successor-discovery-work-request/v1'
+    sourceDigest: '4444444444444444444444444444444444444444444444444444444444444444'
+    stage: 'learn'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/contract.test.mjs:194:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: evidence refuses a path inside either checkout including trailing-separator roots
+ok 19 - evidence refuses a path inside either checkout including trailing-separator roots
+  ---
+  duration_ms: 4.476934
+  type: 'test'
+  ...
+# Subtest: evidence resolves an existing parent alias before checking containment
+ok 20 - evidence resolves an existing parent alias before checking containment
+  ---
+  duration_ms: 1.169164
+  type: 'test'
+  ...
+# Subtest: retained evidence is never overwritten
+ok 21 - retained evidence is never overwritten
+  ---
+  duration_ms: 1.826034
+  type: 'test'
+  ...
+# Subtest: an absent directory outside both repositories remains available for concrete output
+ok 22 - an absent directory outside both repositories remains available for concrete output
+  ---
+  duration_ms: 0.863973
+  type: 'test'
+  ...
+# Subtest: Alpha source must be the physical Git worktree root before output validation
+ok 23 - Alpha source must be the physical Git worktree root before output validation
+  ---
+  duration_ms: 26.473779
+  type: 'test'
+  ...
+# Subtest: all six discriminants and both inert currency routes are transport-compatible
+ok 24 - all six discriminants and both inert currency routes are transport-compatible
+  ---
+  duration_ms: 54.909231
+  type: 'test'
+  ...
+# Subtest: unprovisioned is the default and imported fields cannot install a checker
+ok 25 - unprovisioned is the default and imported fields cannot install a checker
+  ---
+  duration_ms: 2.518139
+  type: 'test'
+  ...
+# Subtest: transport inspection does not manufacture semantic acceptance
+ok 26 - transport inspection does not manufacture semantic acceptance
+  ---
+  duration_ms: 3.271044
+  type: 'test'
+  ...
+# Subtest: each immutable binding and the current runtime identity must match
+ok 27 - each immutable binding and the current runtime identity must match
+  ---
+  duration_ms: 7.281064
+  type: 'test'
+  ...
+# Subtest: logical commission identity, branch and route are frozen independently
+ok 28 - logical commission identity, branch and route are frozen independently
+  ---
+  duration_ms: 3.162501
+  type: 'test'
+  ...
+# Subtest: unsupported stages and modes never invoke the registered checker
+ok 29 - unsupported stages and modes never invoke the registered checker
+  ---
+  duration_ms: 1.626043
+  type: 'test'
+  ...
+# Subtest: receiver refuses positive caps, currency mixing and submitted imports
+ok 30 - receiver refuses positive caps, currency mixing and submitted imports
+  ---
+  duration_ms: 1.397909
+  type: 'test'
+  ...
+# Subtest: changed executable data, duplicate keys and non-finite resources refuse
+ok 31 - changed executable data, duplicate keys and non-finite resources refuse
+  ---
+  duration_ms: 2.089663
+  type: 'test'
+  ...
+# Subtest: capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
+ok 32 - capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
+  ---
+  duration_ms: 1.987208
+  type: 'test'
+  ...
+# Subtest: failed and over-budget checks retain cost lower bounds and never become rejection proofs
+ok 33 - failed and over-budget checks retain cost lower bounds and never become rejection proofs
+  ---
+  duration_ms: 3.853263
+  type: 'test'
+  ...
+# Subtest: previous acceptance is rechecked on every retry, with no hidden receipt store
+ok 34 - previous acceptance is rechecked on every retry, with no hidden receipt store
+  ---
+  duration_ms: 2.918022
+  type: 'test'
+  ...
+# Subtest: malformed checker output is inconclusive and never publishes an accepted receipt
+ok 35 - malformed checker output is inconclusive and never publishes an accepted receipt
+  ---
+  duration_ms: 1.659353
+  type: 'test'
+  ...
+# Subtest: storage is reserved before semantic work and current request cannot be rewritten by its checker
+ok 36 - storage is reserved before semantic work and current request cannot be rewritten by its checker
+  ---
+  duration_ms: 1.702729
+  type: 'test'
+  ...
+# Subtest: exhaustion at the exact budget is inconclusive and installed identity stays source-bound
+ok 37 - exhaustion at the exact budget is inconclusive and installed identity stays source-bound
+  ---
+  duration_ms: 3.138085
+  type: 'test'
+  ...
+# Subtest: unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
+ok 38 - unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
+  ---
+  duration_ms: 1.90218
+  type: 'test'
+  ...
+# Subtest: direct object APIs reject hidden data and getters without invoking them
+ok 39 - direct object APIs reject hidden data and getters without invoking them
+  ---
+  duration_ms: 0.641287
+  type: 'test'
+  ...
+# Subtest: checker receives remaining budget and returned reasons cannot alias later changes
+ok 40 - checker receives remaining budget and returned reasons cannot alias later changes
+  ---
+  duration_ms: 2.014739
+  type: 'test'
+  ...
+# Subtest: checker report semantics use one captured data frame without reading property behavior
+not ok 41 - checker report semantics use one captured data frame without reading property behavior
+  ---
+  duration_ms: 2.752192
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/receiver.test.mjs:144:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'accepted-local-review'
+    - 'rejected-local-review'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'rejected-local-review'
+  actual: 'accepted-local-review'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/fleet-lab/discovery-lab/receiver.test.mjs:155:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
+ok 42 - unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
+  ---
+  duration_ms: 1.714818
+  type: 'test'
+  ...
+# Subtest: exhausted receiver overhead precedes every stale binding decision
+ok 43 - exhausted receiver overhead precedes every stale binding decision
+  ---
+  duration_ms: 37.429807
+  type: 'test'
+  ...
+# Subtest: zero checking allowance cannot inspect installed context before overhead admission
+ok 44 - zero checking allowance cannot inspect installed context before overhead admission
+  ---
+  duration_ms: 2.428073
+  type: 'test'
+  ...
+1..44
+# tests 44
+# suites 0
+# pass 37
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1049.83697
