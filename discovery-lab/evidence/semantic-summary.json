@@ -8,18 +8,18 @@
   "nativeClosureFiles": 6,
   "semanticCases": {
     "fleetNode24.21.0": {
-      "pass": 29,
+      "pass": 45,
       "fail": 0,
       "evidence": "semantic-fleet24.json"
     },
     "alphaNode22.17.1": {
-      "pass": 29,
+      "pass": 45,
       "fail": 0,
       "evidence": "semantic-alpha22.json"
     }
   },
   "boundaryAndOutputTests": {
-    "pass": 22,
+    "pass": 24,
     "fail": 0,
     "evidence": "boundary-final.tap"
   },
@@ -32,11 +32,11 @@
     "node": "v24.21.0"
   },
   "sourceSha256": {
-    "receiver.mjs": "d54f2b24b6b14b8fb4ea5b16a031ff0e6dc58560e308eda1f45bb1ac33413036",
+    "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd",
     "contract.mjs": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
-    "qualify.mjs": "e1e8de973601f73df304dc5fb6a67817fca852a241a7c5667d7a20e10a383f6f",
+    "qualify.mjs": "19362982ffeedfbd8bb812405b96534e024e0ca9c872c053a21e2429ae324e53",
     "qualify.test.mjs": "9762c47c72225d191bb86ee2b9eda08f1cdf32c1d41cf765b5eedfd2403c9c3e",
-    "receiver.test.mjs": "12ab4ef2bc8d868584bfae5f4c584c09c459253c16492841954f23440db8a82a",
+    "receiver.test.mjs": "72688a912add28e898353bd7bfbd18454c195f7c204359668511893191df1052",
     "alpha-source-pin.json": "3627ab6a60bb99c659942074cef1903ad6f1ca1f58ebd327d84ce21a5d2e4a3e"
   },
   "scope": "Actual direct finite semantic review with zero-cap draft alternative routes. Not an installed Fleet service, saved operator package, remote execution or protected holdout.",
@@ -50,5 +50,14 @@
   "remoteExecution": "unprovisioned",
   "installedFleetExecution": false,
   "qualifiedPublication": false,
-  "eligibleOwnerApproval": false
+  "eligibleOwnerApproval": false,
+  "configuredReviewCorrection": {
+    "comment": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/64#discussion_r4341609489",
+    "originalHead": "26929d0f2240378a85cba511020e746c8de1e195",
+    "originalReproduction": "budget-reproduction-before.json",
+    "originalFailingTests": "budget-binding-before.tap",
+    "fix": "Check receiver overhead immediately after parsed request, before installed-context decisions; finalize every parsed admission against the original limits.",
+    "regressionCoverage": "44 exhausted-resource/binding combinations plus zero installed-context reads;16 corresponding actual pinned semantic requests retain inconclusive outcomes.",
+    "independentAdvisoryReview": "budget-binding-advisory.json"
+  }
 }

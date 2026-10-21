@@ -2,141 +2,153 @@ TAP version 13
 # Subtest: evidence refuses a path inside either checkout including trailing-separator roots
 ok 1 - evidence refuses a path inside either checkout including trailing-separator roots
   ---
-  duration_ms: 4.071084
+  duration_ms: 16.383082
   type: 'test'
   ...
 # Subtest: evidence resolves an existing parent alias before checking containment
 ok 2 - evidence resolves an existing parent alias before checking containment
   ---
-  duration_ms: 1.115333
+  duration_ms: 3.301801
   type: 'test'
   ...
 # Subtest: retained evidence is never overwritten
 ok 3 - retained evidence is never overwritten
   ---
-  duration_ms: 1.455616
+  duration_ms: 3.215751
   type: 'test'
   ...
 # Subtest: an absent directory outside both repositories remains available for concrete output
 ok 4 - an absent directory outside both repositories remains available for concrete output
   ---
-  duration_ms: 1.005828
+  duration_ms: 3.061188
   type: 'test'
   ...
 # Subtest: all six discriminants and both inert currency routes are transport-compatible
 ok 5 - all six discriminants and both inert currency routes are transport-compatible
   ---
-  duration_ms: 48.328135
+  duration_ms: 139.394554
   type: 'test'
   ...
 # Subtest: unprovisioned is the default and imported fields cannot install a checker
 ok 6 - unprovisioned is the default and imported fields cannot install a checker
   ---
-  duration_ms: 1.83551
+  duration_ms: 4.203621
   type: 'test'
   ...
 # Subtest: transport inspection does not manufacture semantic acceptance
 ok 7 - transport inspection does not manufacture semantic acceptance
   ---
-  duration_ms: 4.217595
+  duration_ms: 7.563959
   type: 'test'
   ...
 # Subtest: each immutable binding and the current runtime identity must match
 ok 8 - each immutable binding and the current runtime identity must match
   ---
-  duration_ms: 7.387077
+  duration_ms: 13.02649
   type: 'test'
   ...
 # Subtest: logical commission identity, branch and route are frozen independently
 ok 9 - logical commission identity, branch and route are frozen independently
   ---
-  duration_ms: 3.629347
+  duration_ms: 9.711929
   type: 'test'
   ...
 # Subtest: unsupported stages and modes never invoke the registered checker
 ok 10 - unsupported stages and modes never invoke the registered checker
   ---
-  duration_ms: 1.794118
+  duration_ms: 1.956481
   type: 'test'
   ...
 # Subtest: receiver refuses positive caps, currency mixing and submitted imports
 ok 11 - receiver refuses positive caps, currency mixing and submitted imports
   ---
-  duration_ms: 1.991175
+  duration_ms: 5.546156
   type: 'test'
   ...
 # Subtest: changed executable data, duplicate keys and non-finite resources refuse
 ok 12 - changed executable data, duplicate keys and non-finite resources refuse
   ---
-  duration_ms: 1.966367
+  duration_ms: 14.18043
   type: 'test'
   ...
 # Subtest: capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
 ok 13 - capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
   ---
-  duration_ms: 2.029442
+  duration_ms: 3.759881
   type: 'test'
   ...
 # Subtest: failed and over-budget checks retain cost lower bounds and never become rejection proofs
 ok 14 - failed and over-budget checks retain cost lower bounds and never become rejection proofs
   ---
-  duration_ms: 4.036611
+  duration_ms: 10.925871
   type: 'test'
   ...
 # Subtest: previous acceptance is rechecked on every retry, with no hidden receipt store
 ok 15 - previous acceptance is rechecked on every retry, with no hidden receipt store
   ---
-  duration_ms: 3.406932
+  duration_ms: 17.141495
   type: 'test'
   ...
 # Subtest: malformed checker output is inconclusive and never publishes an accepted receipt
 ok 16 - malformed checker output is inconclusive and never publishes an accepted receipt
   ---
-  duration_ms: 7.071592
+  duration_ms: 2.715716
   type: 'test'
   ...
 # Subtest: storage is reserved before semantic work and current request cannot be rewritten by its checker
 ok 17 - storage is reserved before semantic work and current request cannot be rewritten by its checker
   ---
-  duration_ms: 7.525877
+  duration_ms: 20.389065
   type: 'test'
   ...
 # Subtest: exhaustion at the exact budget is inconclusive and installed identity stays source-bound
 ok 18 - exhaustion at the exact budget is inconclusive and installed identity stays source-bound
   ---
-  duration_ms: 3.62461
+  duration_ms: 6.311891
   type: 'test'
   ...
 # Subtest: unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
 ok 19 - unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
   ---
-  duration_ms: 2.069564
+  duration_ms: 7.406902
   type: 'test'
   ...
 # Subtest: direct object APIs reject hidden data and getters without invoking them
 ok 20 - direct object APIs reject hidden data and getters without invoking them
   ---
-  duration_ms: 0.983595
+  duration_ms: 1.782278
   type: 'test'
   ...
 # Subtest: checker receives remaining budget and returned reasons cannot alias later changes
 ok 21 - checker receives remaining budget and returned reasons cannot alias later changes
   ---
-  duration_ms: 3.120289
+  duration_ms: 22.961305
   type: 'test'
   ...
 # Subtest: unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
 ok 22 - unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
   ---
-  duration_ms: 1.37821
+  duration_ms: 5.895653
   type: 'test'
   ...
-1..22
-# tests 22
+# Subtest: exhausted receiver overhead precedes every stale binding decision
+ok 23 - exhausted receiver overhead precedes every stale binding decision
+  ---
+  duration_ms: 136.011391
+  type: 'test'
+  ...
+# Subtest: zero checking allowance cannot inspect installed context before overhead admission
+ok 24 - zero checking allowance cannot inspect installed context before overhead admission
+  ---
+  duration_ms: 2.206408
+  type: 'test'
+  ...
+1..24
+# tests 24
 # suites 0
-# pass 22
+# pass 24
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 202.640459
+# duration_ms 727.025861

@@ -100,13 +100,13 @@ export async function qualify(alphaRoot,{profile='fleet-linux-x64',output=null}=
       expectedCommission:Object.fromEntries(['id','branch','route'].map(key=>[key,request.commission[key]])),
       stages:STAGES,resourceCapacity:{...request.resourceLimits},inspectCampaign:inspector};
   }
-  async function run(id,report,stage,expected,{route='manager-usdc',edit=null,contextEdit=null,unprovisioned=false}={}) {
+  async function run(id,report,stage,expected,{route='manager-usdc',edit=null,contextEdit=null,unprovisioned=false,requiredReasons=[]}={}) {
     let request=await requestFor(report,stage,route),context=installed(request);
     if(edit) { request=structuredClone(request);await edit(request);request.payloadDigest=await payloadDigest(request.payload); }
     if(contextEdit)contextEdit(context);
     const start=performance.now(),raw=canonical(request);
     const receipt=await reviewDiscoveryRequest(raw,unprovisioned?null:context);
-    const observations={id,expected,actual:receipt.state,passed:receipt.state===expected,
+    const observations={id,expected,actual:receipt.state,passed:receipt.state===expected&&requiredReasons.every(reason=>receipt.reasons.includes(reason)),
       elapsedMs:Math.ceil(performance.now()-start),requestDigest:sha(raw),payloadDigest:request.payloadDigest,
       route:request.commission.route,currency:request.commission.currency,capBaseUnits:request.commission.capBaseUnits,
       request,receipt};
@@ -136,6 +136,14 @@ export async function qualify(alphaRoot,{profile='fleet-linux-x64',output=null}=
   await run('omitted-checkpoint',checkpoint,'strategise','rejected-local-review',{edit:request=>{
     request.payload.result.stages[3].program.leaves[0].visits=request.payload.result.stages[3].program.leaves[0].visits.filter(value=>value!=='sterile');
   }});
+  for(const resource of ['checking','memoryBytes','storageBytes','elapsedMs']) {
+    const mismatches={runtime:context=>{context.currentRuntimeDigest='0'.repeat(64);},
+      source:context=>{context.expected.sourceDigest='0'.repeat(64);},revision:context=>{context.expected.revision++;},
+      commission:context=>{context.expectedCommission.branch='stale-branch';}};
+    for(const [binding,contextEdit] of Object.entries(mismatches))
+      await run('exhausted-'+resource+'-stale-'+binding,base,'evolve','inconclusive',{
+        edit:request=>{request.resourceLimits[resource]=0;},contextEdit,requiredReasons:['DISCOVERY_REVIEW_BUDGET_EXHAUSTED']});
+  }
   verifyAlphaSource(alphaRoot);
   const evidence={schema:'agi-fleet/discovery-semantic-seam-evidence/v1',profile,runtime:process.version,
     sourceObservation,runtimeDigest,receiverSources:Object.fromEntries(['receiver.mjs','contract.mjs','qualify.mjs','alpha-source-pin.json'].map(name=>[name,sha(bytes(path.join(here,name)))])),

@@ -148,3 +148,27 @@ test('unprovisioned admission attempts retain known input, checking, receipt and
   assert.equal(result.resourceUsed.storageBytes,Buffer.byteLength(canonical(result)));
   assert.ok(result.resourceUsed.elapsedMs>=0);
 });
+test('exhausted receiver overhead precedes every stale binding decision',async()=>{
+  const mismatches=[
+    context=>{context.currentRuntimeDigest='a'.repeat(64);},
+    ...Object.keys(fixture().installed.expected).map(key=>context=>{
+      context.expected[key]=key==='revision'?1:key==='missionId'?'capability-00000000-0000-4000-8000-000000000002':'a'.repeat(64);
+    }),
+    ...['id','branch','route'].map(key=>context=>{context.expectedCommission[key]=key==='route'?'jobs-agialpha':'different';}),
+  ];
+  for(const resource of ['checking','memoryBytes','storageBytes','elapsedMs'])for(const mismatch of mismatches) {
+    const f=fixture();f.request.resourceLimits[resource]=0;mismatch(f.installed);let calls=0;
+    f.installed.inspectCampaign=async()=>{calls++;throw Error('must not execute');};
+    const receipt=await reviewDiscoveryRequest(f.raw(),f.installed);
+    assert.equal(receipt.state,'inconclusive',resource);
+    assert.ok(receipt.reasons.includes('DISCOVERY_REVIEW_BUDGET_EXHAUSTED'));
+    assert.equal(receipt.resourceUsed.checking,1);assert.equal(calls,0);
+    assert.equal(receipt.resourceUsed.storageBytes,Buffer.byteLength(canonical(receipt)));
+  }
+});
+test('zero checking allowance cannot inspect installed context before overhead admission',async()=>{
+  const f=fixture();f.request.resourceLimits.checking=0;let reads=0;
+  Object.defineProperty(f.installed,'runtimeDigest',{get(){reads++;return '6'.repeat(64);}});
+  const receipt=await reviewDiscoveryRequest(f.raw(),f.installed);
+  assert.equal(receipt.state,'inconclusive');assert.equal(reads,0);
+});

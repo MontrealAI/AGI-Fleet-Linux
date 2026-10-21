@@ -1,0 +1,23 @@
+{
+  "schema": "agi-fleet/budget-binding-advisory-review/v1",
+  "scope": "Independent narrow technical review of receiver budget ordering; not owner approval or native/public acceptance.",
+  "configuredFinding": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/64#discussion_r4341609489",
+  "reviewedSha256": {
+    "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd",
+    "receiver.test.mjs": "72688a912add28e898353bd7bfbd18454c195f7c204359668511893191df1052"
+  },
+  "reviewerRole": "separate history/budget review agent; no source edits",
+  "result": "clear",
+  "observations": {
+    "pinnedNode": "v24.21.0",
+    "combinedTestsPassed": 24,
+    "extraAdmissionProbeCasesPassed": 32,
+    "extraProbeScope": "Both admit/review APIs with missing or invalid context, unsupported stage and capacity mismatch, across four zero overhead limits; all inconclusive with exact receipt bytes.",
+    "lateElapsedObservation": "A context access taking47ms exceeded a15ms allowance after preflight; finalization retained the stale runtime reason and converted the decision to inconclusive with the budget code."
+  },
+  "eligibleOwnerApproval": false,
+  "organizationalIndependence": false,
+  "installedFleetAcceptance": false,
+  "retainedProbeArtifacts": "independent-budget-probes/README.md",
+  "retentionMode": "Exact executed stdin scripts retained after execution; stdout files explicitly transcribe actual captured output, not raw generated logs."
+}

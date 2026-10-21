@@ -79,13 +79,17 @@ export async function admitDiscoveryReview(raw,installed=null) {
     const result=receipt(request,text,state,reasons,used,context);
     used.elapsedMs=Math.ceil(performance.now()-started);
     if(text.length>2_000_000)result.resourceAccounting='lower-bound-oversized-input';
-    return {request,receipt:finalize(result,null),installedSnapshot:context?snapshotInstalled(context):null};
+    return {request,receipt:finalize(result,request),installedSnapshot:context?snapshotInstalled(context):null};
   };
   try { request=await inspectDiscoveryRequest(raw); }
   catch(error) {
     const unsupported=/Unsupported Discovery Lab|mode is not provisioned/.test(error.message??'');
     return respond(unsupported?'unsupported':'rejected',[reason(error,'DISCOVERY_MALFORMED')]);
   }
+  if(request.resourceLimits.checking<used.checking||request.resourceLimits.memoryBytes<used.memoryBytes
+    ||request.resourceLimits.elapsedMs<Math.max(1,Math.ceil(performance.now()-started))
+    ||request.resourceLimits.storageBytes<RECEIPT_RESERVATION_BYTES)
+    return respond('inconclusive',['DISCOVERY_REVIEW_BUDGET_EXHAUSTED']);
   if(installed===null) return respond('unprovisioned',['DISCOVERY_EXECUTOR_UNPROVISIONED']);
   try { installedContext(installed); }
   catch(error) { return respond('unprovisioned',[reason(error,'DISCOVERY_INSTALLED_CONTEXT_INVALID')]); }
@@ -99,10 +103,6 @@ export async function admitDiscoveryReview(raw,installed=null) {
     return respond('unsupported',['DISCOVERY_STAGE_NOT_ADMITTED'],installed);
   if(RESOURCES.some(key=>request.resourceLimits[key]>installed.resourceCapacity[key]))
     return respond('unprovisioned',['DISCOVERY_EXECUTOR_CAPACITY'],installed);
-  const bytes=Buffer.byteLength(raw);
-  if(request.resourceLimits.checking<1||request.resourceLimits.memoryBytes<bytes||request.resourceLimits.elapsedMs<1
-    ||request.resourceLimits.storageBytes<RECEIPT_RESERVATION_BYTES)
-    return respond('inconclusive',['DISCOVERY_REVIEW_BUDGET_EXHAUSTED'],installed);
   return respond('admitted-local-review',[],installed);
 }
 
