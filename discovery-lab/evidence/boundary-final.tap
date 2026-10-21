@@ -2,145 +2,145 @@ TAP version 13
 # Subtest: evidence refuses a path inside either checkout including trailing-separator roots
 ok 1 - evidence refuses a path inside either checkout including trailing-separator roots
   ---
-  duration_ms: 16.383082
+  duration_ms: 2.336008
   type: 'test'
   ...
 # Subtest: evidence resolves an existing parent alias before checking containment
 ok 2 - evidence resolves an existing parent alias before checking containment
   ---
-  duration_ms: 3.301801
+  duration_ms: 0.678555
   type: 'test'
   ...
 # Subtest: retained evidence is never overwritten
 ok 3 - retained evidence is never overwritten
   ---
-  duration_ms: 3.215751
+  duration_ms: 0.883425
   type: 'test'
   ...
 # Subtest: an absent directory outside both repositories remains available for concrete output
 ok 4 - an absent directory outside both repositories remains available for concrete output
   ---
-  duration_ms: 3.061188
+  duration_ms: 0.753047
   type: 'test'
   ...
 # Subtest: all six discriminants and both inert currency routes are transport-compatible
 ok 5 - all six discriminants and both inert currency routes are transport-compatible
   ---
-  duration_ms: 139.394554
+  duration_ms: 34.728801
   type: 'test'
   ...
 # Subtest: unprovisioned is the default and imported fields cannot install a checker
 ok 6 - unprovisioned is the default and imported fields cannot install a checker
   ---
-  duration_ms: 4.203621
+  duration_ms: 1.289978
   type: 'test'
   ...
 # Subtest: transport inspection does not manufacture semantic acceptance
 ok 7 - transport inspection does not manufacture semantic acceptance
   ---
-  duration_ms: 7.563959
+  duration_ms: 2.758086
   type: 'test'
   ...
 # Subtest: each immutable binding and the current runtime identity must match
 ok 8 - each immutable binding and the current runtime identity must match
   ---
-  duration_ms: 13.02649
+  duration_ms: 4.654581
   type: 'test'
   ...
 # Subtest: logical commission identity, branch and route are frozen independently
 ok 9 - logical commission identity, branch and route are frozen independently
   ---
-  duration_ms: 9.711929
+  duration_ms: 2.381136
   type: 'test'
   ...
 # Subtest: unsupported stages and modes never invoke the registered checker
 ok 10 - unsupported stages and modes never invoke the registered checker
   ---
-  duration_ms: 1.956481
+  duration_ms: 1.336699
   type: 'test'
   ...
 # Subtest: receiver refuses positive caps, currency mixing and submitted imports
 ok 11 - receiver refuses positive caps, currency mixing and submitted imports
   ---
-  duration_ms: 5.546156
+  duration_ms: 1.349949
   type: 'test'
   ...
 # Subtest: changed executable data, duplicate keys and non-finite resources refuse
 ok 12 - changed executable data, duplicate keys and non-finite resources refuse
   ---
-  duration_ms: 14.18043
+  duration_ms: 1.505184
   type: 'test'
   ...
 # Subtest: capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
 ok 13 - capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
   ---
-  duration_ms: 3.759881
+  duration_ms: 1.563101
   type: 'test'
   ...
 # Subtest: failed and over-budget checks retain cost lower bounds and never become rejection proofs
 ok 14 - failed and over-budget checks retain cost lower bounds and never become rejection proofs
   ---
-  duration_ms: 10.925871
+  duration_ms: 2.694971
   type: 'test'
   ...
 # Subtest: previous acceptance is rechecked on every retry, with no hidden receipt store
 ok 15 - previous acceptance is rechecked on every retry, with no hidden receipt store
   ---
-  duration_ms: 17.141495
+  duration_ms: 2.373585
   type: 'test'
   ...
 # Subtest: malformed checker output is inconclusive and never publishes an accepted receipt
 ok 16 - malformed checker output is inconclusive and never publishes an accepted receipt
   ---
-  duration_ms: 2.715716
+  duration_ms: 1.465724
   type: 'test'
   ...
 # Subtest: storage is reserved before semantic work and current request cannot be rewritten by its checker
 ok 17 - storage is reserved before semantic work and current request cannot be rewritten by its checker
   ---
-  duration_ms: 20.389065
+  duration_ms: 2.578194
   type: 'test'
   ...
 # Subtest: exhaustion at the exact budget is inconclusive and installed identity stays source-bound
 ok 18 - exhaustion at the exact budget is inconclusive and installed identity stays source-bound
   ---
-  duration_ms: 6.311891
+  duration_ms: 4.919982
   type: 'test'
   ...
 # Subtest: unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
 ok 19 - unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
   ---
-  duration_ms: 7.406902
+  duration_ms: 1.472224
   type: 'test'
   ...
 # Subtest: direct object APIs reject hidden data and getters without invoking them
 ok 20 - direct object APIs reject hidden data and getters without invoking them
   ---
-  duration_ms: 1.782278
+  duration_ms: 1.087993
   type: 'test'
   ...
 # Subtest: checker receives remaining budget and returned reasons cannot alias later changes
 ok 21 - checker receives remaining budget and returned reasons cannot alias later changes
   ---
-  duration_ms: 22.961305
+  duration_ms: 2.020031
   type: 'test'
   ...
 # Subtest: unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
 ok 22 - unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
   ---
-  duration_ms: 5.895653
+  duration_ms: 0.855052
   type: 'test'
   ...
 # Subtest: exhausted receiver overhead precedes every stale binding decision
 ok 23 - exhausted receiver overhead precedes every stale binding decision
   ---
-  duration_ms: 136.011391
+  duration_ms: 23.994926
   type: 'test'
   ...
 # Subtest: zero checking allowance cannot inspect installed context before overhead admission
 ok 24 - zero checking allowance cannot inspect installed context before overhead admission
   ---
-  duration_ms: 2.206408
+  duration_ms: 0.948673
   type: 'test'
   ...
 1..24
@@ -151,4 +151,4 @@ ok 24 - zero checking allowance cannot inspect installed context before overhead
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 727.025861
+# duration_ms 172.723458

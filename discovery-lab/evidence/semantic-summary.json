@@ -1,10 +1,10 @@
 {
   "schema": "agi-fleet/discovery-semantic-qualification-summary/v1",
-  "sourceScope": "Alpha91ee evidence-scoped draft; not final compatibility source",
-  "alphaCommit": "91ee90a2d093043b9dff7d115320b181e89cdd46",
-  "alphaTree": "db890530bd8c12cf18f642c9bcae0adda38a20c8",
-  "generatedSourceHash": "ca447b4ee3a9d2eb0dd764c1d9e478f2d2610c9e694dffe105b3c70e3fd26142",
-  "publicGitTreeVerifiedFiles": 28,
+  "sourceScope": "Current frozen Alpha7d2 direct-local source seam; not a qualified compatibility release",
+  "alphaCommit": "7d2cd4c9e1e43032902d09ee3b84ffb8f2956824",
+  "alphaTree": "f3d68d99ec7f38dc57a53b65faf8b6c7e7a38a55",
+  "generatedSourceHash": "c1d099d379becf19d60b55e269bed3862dfb4091e805a5436270ecdc6a0a027d",
+  "publicGitTreeVerifiedFiles": 29,
   "nativeClosureFiles": 6,
   "semanticCases": {
     "fleetNode24.21.0": {
@@ -34,18 +34,17 @@
   "sourceSha256": {
     "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd",
     "contract.mjs": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
-    "qualify.mjs": "19362982ffeedfbd8bb812405b96534e024e0ca9c872c053a21e2429ae324e53",
+    "qualify.mjs": "688c421e93f4a64730dc97ade3f1f70eb0e84f49c3030a721521e9a7da85a37c",
     "qualify.test.mjs": "9762c47c72225d191bb86ee2b9eda08f1cdf32c1d41cf765b5eedfd2403c9c3e",
     "receiver.test.mjs": "72688a912add28e898353bd7bfbd18454c195f7c204359668511893191df1052",
-    "alpha-source-pin.json": "3627ab6a60bb99c659942074cef1903ad6f1ca1f58ebd327d84ce21a5d2e4a3e"
+    "alpha-source-pin.json": "76dbd57ae3320a172ff7f7c52dd46e4191ea9e150ff3712e470d13a8451dd3ac"
   },
   "scope": "Actual direct finite semantic review with zero-cap draft alternative routes. Not an installed Fleet service, saved operator package, remote execution or protected holdout.",
   "runtimeRecovery": "runtime-extraction-recovery.json",
   "pending": [
-    "later Alpha source pin refresh after owner-held history/workflow corrections",
-    "fresh exact-head hosted CI and configured source review",
+    "fresh exact-head hosted CI and separate configured code/security reviews",
     "required eligible owner review under CONTRIBUTING for audit/source boundaries",
-    "qualified merge and existing supported publication/installed-package gates"
+    "qualified baseline reconciliation, merge and existing supported publication/installed-package gates"
   ],
   "remoteExecution": "unprovisioned",
   "installedFleetExecution": false,
@@ -59,5 +58,6 @@
     "fix": "Check receiver overhead immediately after parsed request, before installed-context decisions; finalize every parsed admission against the original limits.",
     "regressionCoverage": "44 exhausted-resource/binding combinations plus zero installed-context reads;16 corresponding actual pinned semantic requests retain inconclusive outcomes.",
     "independentAdvisoryReview": "budget-binding-advisory.json"
-  }
+  },
+  "generatedPageSha256": "dec424d031e9506149be2485d7b2ca540c268c37a263f66666983110bdc385c1"
 }

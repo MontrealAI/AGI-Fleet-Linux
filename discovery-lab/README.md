@@ -51,9 +51,9 @@ The engineering test shim also runs `qualify.test.mjs`, covering output containm
 
 ## Pinned direct local semantic seam
 
-`qualify.mjs` performs the actual finite local review through this receiver against public Alpha commit `91ee90a2d093043b9dff7d115320b181e89cdd46`, tree `db890530bd8c12cf18f642c9bcae0adda38a20c8`. This is an evidence-scoped development pin, not a final compatibility-set or released-installer claim. Later Alpha changes require a reviewed pin refresh and fresh execution.
+`qualify.mjs` performs the actual finite local review through this receiver against public Alpha commit `7d2cd4c9e1e43032902d09ee3b84ffb8f2956824`, tree `f3d68d99ec7f38dc57a53b65faf8b6c7e7a38a55`. This is an evidence-scoped development pin, not a final compatibility-set or released-installer claim. Later Alpha changes require a reviewed pin refresh and fresh execution.
 
-`alpha-source-pin.json` independently commits all 26 files in Alpha’s generated browser catalog (`ca447b4ee3a9d2eb0dd764c1d9e478f2d2610c9e694dffe105b3c70e3fd26142`) and the six-file native inspector import closure. The union contains 28 regular files including the catalog itself. Each SHA-256 and Git blob was compared with the exact public Git tree. The harness requires a clean tracked checkout at that exact commit, verifies the full maps before importing its fixed modules, and verifies them again afterward. Imported requests cannot choose source paths, inspectors, profiles, grants or code. This is a read-only development check, not a private source capture or a concurrent adversarial filesystem custody guarantee; it does not modify the separate native TI project or its review requirements.
+`alpha-source-pin.json` independently commits all 26 files in Alpha’s generated browser catalog (`c1d099d379becf19d60b55e269bed3862dfb4091e805a5436270ecdc6a0a027d`) and the six-file native inspector import closure. The union contains 29 regular files including the catalog and generated HTML page; the page SHA-256 is `dec424d031e9506149be2485d7b2ca540c268c37a263f66666983110bdc385c1`. Each SHA-256 and Git blob was compared with the exact public Git tree. The harness requires a clean tracked checkout at that exact commit, verifies the full maps before importing its fixed modules, and verifies them again afterward. Imported requests cannot choose source paths, inspectors, profiles, grants or code. This is a read-only development check, not a private source capture or a concurrent adversarial filesystem custody guarantee; it does not modify the separate native TI project or its review requirements.
 
 The actual case bank checks all six stages on separate USDC and AGIALPHA branches of one frozen mission. It also retains invalid calibration, non-updatable memory, wrong-location capacity, hidden coupling, stale source context, forged response data, forged artifact inputs, omitted checkpoints, exhausted search/checking/storage, a cloned commission branch, unsupported/unprovisioned modes and accepted stronger control/checkpoint successors. The inspector reconstructs the current campaign and ancestry; a prior checker flag cannot stand in for current acceptance. Every request remains `DRAFT_NOT_SUBMITTED` with zero currency caps.
 
@@ -63,7 +63,7 @@ Reproduce from a separate clean Alpha checkout; choose an absent evidence direct
 
 ```sh
 git clone https://github.com/MontrealAI/AGI-Alpha-Agent-v0.git /absolute/alpha-review
-git -C /absolute/alpha-review checkout --detach 91ee90a2d093043b9dff7d115320b181e89cdd46
+git -C /absolute/alpha-review checkout --detach 7d2cd4c9e1e43032902d09ee3b84ffb8f2956824
 /absolute/node-v24.21.0-linux-x64/bin/node discovery-lab/qualify.mjs --alpha-root /absolute/alpha-review --output /absolute/new-fleet-evidence
 ```
 
@@ -73,4 +73,4 @@ The 24 receiver/output regressions and all 179 engineering tests pass under Node
 
 ## Shared contract source
 
-`contract.mjs` is an identical Apache-2.0 copy of [Alpha’s additive contract at `91ee90a`](https://github.com/MontrealAI/AGI-Alpha-Agent-v0/blob/91ee90a2d093043b9dff7d115320b181e89cdd46/examples/successor-capability/discovery-lab-contract.mjs), developed in [Alpha #4851](https://github.com/MontrealAI/AGI-Alpha-Agent-v0/pull/4851). SHA-256: `bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3`. The common transport fixture is copied unchanged from Alpha’s `fixtures/discovery-lab-request.json`. This draft makes no released-source or installed-package claim.
+`contract.mjs` is an identical Apache-2.0 copy of [Alpha’s additive contract at `7d2cd4c`](https://github.com/MontrealAI/AGI-Alpha-Agent-v0/blob/7d2cd4c9e1e43032902d09ee3b84ffb8f2956824/examples/successor-capability/discovery-lab-contract.mjs), developed in [Alpha #4851](https://github.com/MontrealAI/AGI-Alpha-Agent-v0/pull/4851). SHA-256: `bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3`. The common transport fixture is copied unchanged from Alpha’s `fixtures/discovery-lab-request.json`. This draft makes no released-source or installed-package claim.

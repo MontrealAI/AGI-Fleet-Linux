@@ -1,9 +1,9 @@
 {
   "schema": "agi-fleet/discovery-native-seam-pin/v1",
   "repository": "MontrealAI/AGI-Alpha-Agent-v0",
-  "commit": "91ee90a2d093043b9dff7d115320b181e89cdd46",
-  "tree": "db890530bd8c12cf18f642c9bcae0adda38a20c8",
-  "generatedSourcesHash": "ca447b4ee3a9d2eb0dd764c1d9e478f2d2610c9e694dffe105b3c70e3fd26142",
+  "commit": "7d2cd4c9e1e43032902d09ee3b84ffb8f2956824",
+  "tree": "f3d68d99ec7f38dc57a53b65faf8b6c7e7a38a55",
+  "generatedSourcesHash": "c1d099d379becf19d60b55e269bed3862dfb4091e805a5436270ecdc6a0a027d",
   "generatedSources": {
     "docs/assets/successor/engine.mjs": "38c4f38978bf9fc29f207bae3adee0755bc6530d04502a36c491cc430787e488",
     "examples/successor-capability/apparatus.mjs": "3624abc15b1457bbfc2a7dc5c0693df66f29d13d7ef9fc43c77adf6d1758096d",
@@ -13,7 +13,7 @@
     "examples/successor-capability/discovery-lab-baselines.mjs": "91123c8c471224910ae420f3ec140a31fb0e1ad09862cbf85132ebc7993232ce",
     "examples/successor-capability/discovery-lab-checker.mjs": "ba46c89d42defc9d78ac61090f5ccc793549c4c072a5afe825bc7b434b3f7099",
     "examples/successor-capability/discovery-lab-contract.mjs": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
-    "examples/successor-capability/discovery-lab-history.mjs": "db0a9852199201bff45ba11752c3e07e0c67d34ab8901f2e8d933c09aa11ad01",
+    "examples/successor-capability/discovery-lab-history.mjs": "0b8972dc53e5014686b50e5f0a88a1d0248de3556becc94e3e0cf3737151cc17",
     "examples/successor-capability/discovery-lab.mjs": "0929e305a6d235774a6464662220e0ae454ec738fc42ffde6ba6f141d3217851",
     "examples/successor-capability/evaluation.mjs": "4fcbdce45c41b89cd797fe7272af7c1b1e59931984df9e0028903081002cc0ff",
     "examples/successor-capability/independent-checker.mjs": "b59034eeb73594178170d81d7b4f96625a52230e85bda94038bf7ccd4ad0d286",
@@ -24,8 +24,8 @@
     "examples/successor-workbench/mission-store.mjs": "ccdae4fa9b546e1f0e31e289ff8d3c325fcb6c5cddf5a065de67ed991f1a7cb0",
     "scripts/generate_successor_capability.py": "5a47493ff37b304ce37e3ccb2e540581ac80055ecad3b087874d7579f65cdc0b",
     "scripts/templates/successor-capability/app.js": "65d30e012718d4c9e7382f820d36754509308883e58bcffa00d25499d422c114",
-    "scripts/templates/successor-capability/discovery-lab-app.js": "16d0bdc8ca7502102d24ce0dfd46d2da46549918a51511ec219075e2c7260ff6",
-    "scripts/templates/successor-capability/discovery-lab-bridge.js": "9be346c5ce867f7d6f149c23961367e542a362dc6ed79ff169692d53885efa35",
+    "scripts/templates/successor-capability/discovery-lab-app.js": "b1a02485417b5edca9a996f3934d91c255017a56ec2455311c43da837adb04f5",
+    "scripts/templates/successor-capability/discovery-lab-bridge.js": "08982095de2da7c8a42d561f9da76fa3231645b24d185666a5c0ca4de9ea0a87",
     "scripts/templates/successor-capability/discovery-lab.css": "a35eb0dcab91808208d8657ca533935793735444d59f8ddda3776eff0e413e0e",
     "scripts/templates/successor-capability/discovery-lab.html": "77a60326755dcf3af5bb15472e4dc411d5d25dfc931a453ab44e685bf8db82f8",
     "scripts/templates/successor-capability/index.html": "839cf0f5ef659c18918886aeca14a2a79932cb6165e680e493a46d254b090aea",
@@ -75,8 +75,8 @@
       "gitBlob": "bb8fdfaeb2ee0b4a2f812d105c3d2e15358aa33c"
     },
     "examples/successor-capability/discovery-lab-history.mjs": {
-      "sha256": "db0a9852199201bff45ba11752c3e07e0c67d34ab8901f2e8d933c09aa11ad01",
-      "gitBlob": "0aa1d40c3a9bf82579fa8a163dfee534eaebb651"
+      "sha256": "0b8972dc53e5014686b50e5f0a88a1d0248de3556becc94e3e0cf3737151cc17",
+      "gitBlob": "ea426e027a109b964113f824a590cb200e7c7556"
     },
     "examples/successor-capability/discovery-lab.mjs": {
       "sha256": "0929e305a6d235774a6464662220e0ae454ec738fc42ffde6ba6f141d3217851",
@@ -119,12 +119,12 @@
       "gitBlob": "aee66c3ca1d8f379c79887a6942b555496f01c28"
     },
     "scripts/templates/successor-capability/discovery-lab-app.js": {
-      "sha256": "16d0bdc8ca7502102d24ce0dfd46d2da46549918a51511ec219075e2c7260ff6",
-      "gitBlob": "871520d0f071911caa3c5f7926040279ae14f967"
+      "sha256": "b1a02485417b5edca9a996f3934d91c255017a56ec2455311c43da837adb04f5",
+      "gitBlob": "0d3eb8e00ac9be0d43b130b7bc91d6c3bb2d0861"
     },
     "scripts/templates/successor-capability/discovery-lab-bridge.js": {
-      "sha256": "9be346c5ce867f7d6f149c23961367e542a362dc6ed79ff169692d53885efa35",
-      "gitBlob": "d8cd808ceaaa11338af836910059c616ac7bf890"
+      "sha256": "08982095de2da7c8a42d561f9da76fa3231645b24d185666a5c0ca4de9ea0a87",
+      "gitBlob": "145242a89ddfd32b526a0c94b1c47982ef972cc7"
     },
     "scripts/templates/successor-capability/discovery-lab.css": {
       "sha256": "a35eb0dcab91808208d8657ca533935793735444d59f8ddda3776eff0e413e0e",
@@ -151,8 +151,12 @@
       "gitBlob": "bbb5bcbf3f1a6d5f0f8bf5a0f17ac3af834d8cd3"
     },
     "docs/successor/capabilities/sources.json": {
-      "sha256": "6902b896af7e84544c112779dada09a33eddb327e053540c431eb2f78edd3a38",
-      "gitBlob": "d34caa60fc33234ed9f855ff420971c1e1e8ded4"
+      "sha256": "68caf4de5588c2cfb7acf5912b5a5342526f63bc79b000fb5e1b1947e71748b6",
+      "gitBlob": "458966d3bc2e603883c6ff5a00a53322b61cb73d"
+    },
+    "docs/successor/capabilities/index.html": {
+      "sha256": "dec424d031e9506149be2485d7b2ca540c268c37a263f66666983110bdc385c1",
+      "gitBlob": "995cb34aec26db914904b2910585ead46bddd4a1"
     }
   },
   "runtimeProfiles": {
@@ -173,5 +177,7 @@
     "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz",
     "sha256": "fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6"
   },
-  "scope": "read-only finite local source-seam qualification; no installed Fleet execution, private capture, authority or custody guarantee"
+  "scope": "read-only finite local source-seam qualification; no installed Fleet execution, private capture, authority or custody guarantee",
+  "browserPagePath": "docs/successor/capabilities/index.html",
+  "generatedPageSha256": "dec424d031e9506149be2485d7b2ca540c268c37a263f66666983110bdc385c1"
 }

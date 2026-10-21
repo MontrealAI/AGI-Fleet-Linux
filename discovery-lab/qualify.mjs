@@ -40,6 +40,7 @@ export function verifyAlphaSource(root) {
   assert.equal(canonical(generated.sources),canonical(pin.generatedSources));
   assert.equal(sha(canonical(generated.sources)),pin.generatedSourcesHash);
   assert.equal(generated.sourceHash,pin.generatedSourcesHash);
+  assert.equal(pin.files[pin.browserPagePath].sha256,pin.generatedPageSha256);
   const visited=new Map();
   function visit(relative) {
     if(visited.has(relative))return;
@@ -52,6 +53,7 @@ export function verifyAlphaSource(root) {
   }
   visit(pin.nativeEntry);assert.equal(canonical(Object.fromEntries(visited)),canonical(pin.nativeClosure));
   return {commit:pin.commit,tree:pin.tree,generatedSourcesHash:pin.generatedSourcesHash,
+    generatedPageSha256:pin.generatedPageSha256,
     generatedFiles:Object.keys(pin.generatedSources).length,nativeClosureFiles:visited.size,allPinnedFiles:Object.keys(pin.files).length};
 }
 
