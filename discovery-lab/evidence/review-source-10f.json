@@ -1,0 +1,125 @@
+{
+  "schema": "agi-fleet/discovery-review-source-qualification/v1",
+  "scope": "Historical exact10f review source downloaded from the actual hosted artifact. Direct local finite inspection only. No operator installation, qualified release or remote execution.",
+  "prHead": "10f540f8e247ce22ca7d31860ad0933871465efc",
+  "testedSourceCommit": "2c853d6e256a437cc3194e9b55d0d135dfb359f0",
+  "sourceTree": "3bdbe9fa02dfebfa73a7987b889e5f4091fd18fa",
+  "workflowRun": 39672984290,
+  "workflowURL": "https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39672984290",
+  "artifactId": 12380524722,
+  "artifactName": "exact-review-source",
+  "artifactOuterBytes": 30729212,
+  "artifactOuterSha256": "872233ea1266f27f259970af3abe1ae07c56ee74a1625ee78ab131029d212ea2",
+  "actualHostedReceipt": {
+    "schema": "agi-fleet-review-source/v1",
+    "repository": "MontrealAI/AGI-Fleet-Linux",
+    "commit": "2c853d6e256a437cc3194e9b55d0d135dfb359f0",
+    "workflowRun": "39672984290",
+    "event": "pull_request",
+    "name": "AGI-Fleet-Linux-review-source.zip",
+    "bytes": 30728193,
+    "sha256": "41403d7e266d58c0a9ee533bbc82481e125e133b1908ed14fbc789e803ff8c8e",
+    "purpose": "Exact review source; not an installer or qualified release",
+    "productionQualified": false,
+    "releaseEligible": false
+  },
+  "zipCommentCommitVerified": true,
+  "exactGitTreeCoverage": true,
+  "verifiedFiles": 6731,
+  "verifiedDirectories": 1042,
+  "allGitBlobsAndModesVerified": true,
+  "allExtractedSha256Verified": true,
+  "utcLocalWorkflowReproductionSha256": "41403d7e266d58c0a9ee533bbc82481e125e133b1908ed14fbc789e803ff8c8e",
+  "initialNonUtcReproduction": {
+    "sha256": "6821bd7d0efaecd8c32d4af321cc97699710d53ba8a28f5c03902759d880e17a",
+    "difference": "All7773 ZIP DOS timestamps were7hours earlier. Member CRC,size,compression size,attributes,extra fields and content matched; TZ=UTC reproduction matches hosted ZIP byte-for-byte."
+  },
+  "alphaSource": {
+    "commit": "7d2cd4c9e1e43032902d09ee3b84ffb8f2956824",
+    "tree": "f3d68d99ec7f38dc57a53b65faf8b6c7e7a38a55",
+    "generatedSourcesHash": "c1d099d379becf19d60b55e269bed3862dfb4091e805a5436270ecdc6a0a027d",
+    "generatedPageSha256": "dec424d031e9506149be2485d7b2ca540c268c37a263f66666983110bdc385c1",
+    "generatedFiles": 26,
+    "nativeClosureFiles": 6,
+    "allPinnedFiles": 29
+  },
+  "nativeCases": {
+    "24": {
+      "runtime": "v24.21.0",
+      "profile": "fleet-linux-x64",
+      "passed": 45,
+      "total": 45,
+      "receiverSources": {
+        "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd",
+        "contract.mjs": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
+        "qualify.mjs": "688c421e93f4a64730dc97ade3f1f70eb0e84f49c3030a721521e9a7da85a37c",
+        "alpha-source-pin.json": "76dbd57ae3320a172ff7f7c52dd46e4191ea9e150ff3712e470d13a8451dd3ac"
+      },
+      "evidenceSha256": "0797d788e26bc4f41863a9fffdab8f3bfae7c5d90e78d8cc76fd73e205acb49d",
+      "retainedEvidence": "review-source-10f-native24.json",
+      "retainedEvidenceSha256": "05a853f7bab6d585719bbe8fe0394f63bec14d323b0ef9d08b0a613ebe7e1eca"
+    },
+    "22": {
+      "runtime": "v22.17.1",
+      "profile": "alpha-compatible-linux-x64",
+      "passed": 45,
+      "total": 45,
+      "receiverSources": {
+        "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd",
+        "contract.mjs": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
+        "qualify.mjs": "688c421e93f4a64730dc97ade3f1f70eb0e84f49c3030a721521e9a7da85a37c",
+        "alpha-source-pin.json": "76dbd57ae3320a172ff7f7c52dd46e4191ea9e150ff3712e470d13a8451dd3ac"
+      },
+      "evidenceSha256": "2630284379e0464ad63a090ae0adf9b1ddb6e0b24a06e2920f91d32443c54e9b",
+      "retainedEvidence": "review-source-10f-native22.json",
+      "retainedEvidenceSha256": "37cdf219bf83853fc87f18dfad637c73d2c8d6a5c249f7597931968330aaa0bc"
+    }
+  },
+  "archivedBoundaryTests": {
+    "node": "v24.21.0",
+    "passed": 24,
+    "failed": 0
+  },
+  "rawBrowserDrafts": {
+    "24": {
+      "total": 2,
+      "passed": 2,
+      "evidence": "browser-native-7d2-node24.json",
+      "workspaceSha256": "2237fd5fbcbbca7b4382be31afbf99997d1836b122fad6e78fa761eb5603bc2b",
+      "drafts": [
+        {
+          "name": "manager-review-draft.json",
+          "rawSha256": "6a4a6005b752e06883502a08b29f80d7ed2a3f06be487cc9be3b262b44dc9ed6",
+          "rawBytes": 252490
+        },
+        {
+          "name": "jobs-review-draft.json",
+          "rawSha256": "62a2db272c98a4413b88c3edffd761facbdad900a1694a93607c0dcd257d4969",
+          "rawBytes": 252500
+        }
+      ]
+    },
+    "22": {
+      "total": 2,
+      "passed": 2,
+      "evidence": "browser-native-7d2-node22.json",
+      "workspaceSha256": "2237fd5fbcbbca7b4382be31afbf99997d1836b122fad6e78fa761eb5603bc2b",
+      "drafts": [
+        {
+          "name": "manager-review-draft.json",
+          "rawSha256": "6a4a6005b752e06883502a08b29f80d7ed2a3f06be487cc9be3b262b44dc9ed6",
+          "rawBytes": 252490
+        },
+        {
+          "name": "jobs-review-draft.json",
+          "rawSha256": "62a2db272c98a4413b88c3edffd761facbdad900a1694a93607c0dcd257d4969",
+          "rawBytes": 252500
+        }
+      ]
+    }
+  },
+  "operatorInstallerIncludesModule": false,
+  "remoteExecution": "unprovisioned",
+  "qualifiedPublication": false,
+  "currentCandidateRule": "Later fixes/source pins require fresh exact candidate CI and archive qualification; this report is not relabelled current."
+}

@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {evidenceDestination} from './qualify.mjs';
+import {execFileSync} from 'node:child_process';
+import {evidenceDestination,verifiedAlphaRoot,qualify} from './qualify.mjs';
 
 function fixture(t) {
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'discovery-evidence-'));
@@ -26,4 +27,16 @@ test('retained evidence is never overwritten',t=>{
 test('an absent directory outside both repositories remains available for concrete output',t=>{
   const {root,fleet,alpha}=fixture(t),output=path.join(root,'new-evidence');
   assert.equal(evidenceDestination(output,[fleet,alpha]),output);assert.equal(fs.existsSync(output),false);
+});
+test('Alpha source must be the physical Git worktree root before output validation',async t=>{
+  const {root,alpha}=fixture(t);
+  execFileSync('git',['init','--quiet',alpha]);
+  const nested=path.join(alpha,'copied-source');fs.mkdirSync(nested);
+  const alias=path.join(root,'alpha-alias');fs.symlinkSync(alpha,alias,'dir');
+  assert.equal(verifiedAlphaRoot(alpha),fs.realpathSync(alpha));
+  assert.equal(verifiedAlphaRoot(alias),fs.realpathSync(alpha));
+  assert.throws(()=>verifiedAlphaRoot(nested),/Git worktree root/);
+  const output=path.join(alpha,'must-not-write');
+  await assert.rejects(qualify(nested,{output}),/Git worktree root/);
+  assert.equal(fs.existsSync(output),false);
 });

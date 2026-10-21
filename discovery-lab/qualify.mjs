@@ -26,7 +26,15 @@ export function evidenceDestination(output,roots) {
   return output;
 }
 
+export function verifiedAlphaRoot(root) {
+  assert.ok(path.isAbsolute(root),'An explicit absolute Alpha checkout is required.');
+  root=fs.realpathSync(root);
+  assert.equal(root,fs.realpathSync(git(root,'rev-parse','--show-toplevel')),'Alpha path must be the Git worktree root.');
+  return root;
+}
+
 export function verifyAlphaSource(root) {
+  root=verifiedAlphaRoot(root);
   assert.equal(git(root,'rev-parse','HEAD'),pin.commit,'Use the exact public Alpha commit.');
   assert.equal(git(root,'rev-parse','HEAD^{tree}'),pin.tree,'Alpha tree changed.');
   assert.equal(git(root,'status','--porcelain','--untracked-files=no'),'','Alpha tracked checkout must be unchanged.');
@@ -59,8 +67,7 @@ export function verifyAlphaSource(root) {
 
 /** Development-only public finite seam; no Fleet service, private capture or authority. */
 export async function qualify(alphaRoot,{profile='fleet-linux-x64',output=null}={}) {
-  assert.ok(path.isAbsolute(alphaRoot),'An explicit absolute Alpha checkout is required.');
-  alphaRoot=fs.realpathSync(alphaRoot);
+  alphaRoot=verifiedAlphaRoot(alphaRoot);
   const runtime=pin.runtimeProfiles[profile];assert.ok(runtime,'Unknown runtime profile.');
   assert.equal(process.version,runtime.version);assert.equal(process.platform,runtime.platform);assert.equal(process.arch,runtime.arch);
   assert.equal(sha(bytes(process.execPath)),runtime.binarySha256,'Use the pinned Node bytes for this source-seam profile.');

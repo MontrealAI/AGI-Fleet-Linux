@@ -1,0 +1,52 @@
+TAP version 13
+# Subtest: obviously oversized imported text is rejected before encoder allocation
+ok 1 - obviously oversized imported text is rejected before encoder allocation
+  ---
+  duration_ms: 1.73885
+  type: 'test'
+  ...
+# Subtest: direct oversized scalar is rejected before stringify or encoder allocation
+ok 2 - direct oversized scalar is rejected before stringify or encoder allocation
+  ---
+  duration_ms: 0.382226
+  type: 'test'
+  ...
+# Subtest: escaped and cumulative canonical output is bounded before encoder allocation
+ok 3 - escaped and cumulative canonical output is bounded before encoder allocation
+  ---
+  duration_ms: 27.749003
+  type: 'test'
+  ...
+# Subtest: ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+ok 4 - ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+  ---
+  duration_ms: 101.506647
+  type: 'test'
+  ...
+# Subtest: UTF-8 multibyte boundaries are measured even when code units fit
+ok 5 - UTF-8 multibyte boundaries are measured even when code units fit
+  ---
+  duration_ms: 100.375478
+  type: 'test'
+  ...
+# Subtest: canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+ok 6 - canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+  ---
+  duration_ms: 0.588466
+  type: 'test'
+  ...
+# Subtest: array node ceiling is checked before descriptor materialization without shrinking its boundary
+ok 7 - array node ceiling is checked before descriptor materialization without shrinking its boundary
+  ---
+  duration_ms: 105.544155
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 412.164428

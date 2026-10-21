@@ -1,0 +1,202 @@
+TAP version 13
+# Subtest: obviously oversized imported text is rejected before encoder allocation
+ok 1 - obviously oversized imported text is rejected before encoder allocation
+  ---
+  duration_ms: 1.049883
+  type: 'test'
+  ...
+# Subtest: direct oversized scalar is rejected before stringify or encoder allocation
+ok 2 - direct oversized scalar is rejected before stringify or encoder allocation
+  ---
+  duration_ms: 0.317149
+  type: 'test'
+  ...
+# Subtest: escaped and cumulative canonical output is bounded before encoder allocation
+ok 3 - escaped and cumulative canonical output is bounded before encoder allocation
+  ---
+  duration_ms: 27.909208
+  type: 'test'
+  ...
+# Subtest: ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+ok 4 - ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+  ---
+  duration_ms: 60.574891
+  type: 'test'
+  ...
+# Subtest: UTF-8 multibyte boundaries are measured even when code units fit
+ok 5 - UTF-8 multibyte boundaries are measured even when code units fit
+  ---
+  duration_ms: 83.712199
+  type: 'test'
+  ...
+# Subtest: canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+ok 6 - canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+  ---
+  duration_ms: 0.560005
+  type: 'test'
+  ...
+# Subtest: array node ceiling is checked before descriptor materialization without shrinking its boundary
+ok 7 - array node ceiling is checked before descriptor materialization without shrinking its boundary
+  ---
+  duration_ms: 81.322995
+  type: 'test'
+  ...
+# Subtest: evidence refuses a path inside either checkout including trailing-separator roots
+ok 8 - evidence refuses a path inside either checkout including trailing-separator roots
+  ---
+  duration_ms: 3.544748
+  type: 'test'
+  ...
+# Subtest: evidence resolves an existing parent alias before checking containment
+ok 9 - evidence resolves an existing parent alias before checking containment
+  ---
+  duration_ms: 0.951135
+  type: 'test'
+  ...
+# Subtest: retained evidence is never overwritten
+ok 10 - retained evidence is never overwritten
+  ---
+  duration_ms: 1.125899
+  type: 'test'
+  ...
+# Subtest: an absent directory outside both repositories remains available for concrete output
+ok 11 - an absent directory outside both repositories remains available for concrete output
+  ---
+  duration_ms: 0.774518
+  type: 'test'
+  ...
+# Subtest: Alpha source must be the physical Git worktree root before output validation
+ok 12 - Alpha source must be the physical Git worktree root before output validation
+  ---
+  duration_ms: 25.70421
+  type: 'test'
+  ...
+# Subtest: all six discriminants and both inert currency routes are transport-compatible
+ok 13 - all six discriminants and both inert currency routes are transport-compatible
+  ---
+  duration_ms: 39.52932
+  type: 'test'
+  ...
+# Subtest: unprovisioned is the default and imported fields cannot install a checker
+ok 14 - unprovisioned is the default and imported fields cannot install a checker
+  ---
+  duration_ms: 1.898725
+  type: 'test'
+  ...
+# Subtest: transport inspection does not manufacture semantic acceptance
+ok 15 - transport inspection does not manufacture semantic acceptance
+  ---
+  duration_ms: 3.275843
+  type: 'test'
+  ...
+# Subtest: each immutable binding and the current runtime identity must match
+ok 16 - each immutable binding and the current runtime identity must match
+  ---
+  duration_ms: 5.651076
+  type: 'test'
+  ...
+# Subtest: logical commission identity, branch and route are frozen independently
+ok 17 - logical commission identity, branch and route are frozen independently
+  ---
+  duration_ms: 2.38644
+  type: 'test'
+  ...
+# Subtest: unsupported stages and modes never invoke the registered checker
+ok 18 - unsupported stages and modes never invoke the registered checker
+  ---
+  duration_ms: 1.235073
+  type: 'test'
+  ...
+# Subtest: receiver refuses positive caps, currency mixing and submitted imports
+ok 19 - receiver refuses positive caps, currency mixing and submitted imports
+  ---
+  duration_ms: 1.666695
+  type: 'test'
+  ...
+# Subtest: changed executable data, duplicate keys and non-finite resources refuse
+ok 20 - changed executable data, duplicate keys and non-finite resources refuse
+  ---
+  duration_ms: 1.417279
+  type: 'test'
+  ...
+# Subtest: capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
+ok 21 - capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
+  ---
+  duration_ms: 1.405541
+  type: 'test'
+  ...
+# Subtest: failed and over-budget checks retain cost lower bounds and never become rejection proofs
+ok 22 - failed and over-budget checks retain cost lower bounds and never become rejection proofs
+  ---
+  duration_ms: 7.076596
+  type: 'test'
+  ...
+# Subtest: previous acceptance is rechecked on every retry, with no hidden receipt store
+ok 23 - previous acceptance is rechecked on every retry, with no hidden receipt store
+  ---
+  duration_ms: 3.568264
+  type: 'test'
+  ...
+# Subtest: malformed checker output is inconclusive and never publishes an accepted receipt
+ok 24 - malformed checker output is inconclusive and never publishes an accepted receipt
+  ---
+  duration_ms: 1.544059
+  type: 'test'
+  ...
+# Subtest: storage is reserved before semantic work and current request cannot be rewritten by its checker
+ok 25 - storage is reserved before semantic work and current request cannot be rewritten by its checker
+  ---
+  duration_ms: 2.28644
+  type: 'test'
+  ...
+# Subtest: exhaustion at the exact budget is inconclusive and installed identity stays source-bound
+ok 26 - exhaustion at the exact budget is inconclusive and installed identity stays source-bound
+  ---
+  duration_ms: 3.164044
+  type: 'test'
+  ...
+# Subtest: unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
+ok 27 - unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
+  ---
+  duration_ms: 1.161663
+  type: 'test'
+  ...
+# Subtest: direct object APIs reject hidden data and getters without invoking them
+ok 28 - direct object APIs reject hidden data and getters without invoking them
+  ---
+  duration_ms: 0.670842
+  type: 'test'
+  ...
+# Subtest: checker receives remaining budget and returned reasons cannot alias later changes
+ok 29 - checker receives remaining budget and returned reasons cannot alias later changes
+  ---
+  duration_ms: 1.594205
+  type: 'test'
+  ...
+# Subtest: unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
+ok 30 - unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
+  ---
+  duration_ms: 1.097556
+  type: 'test'
+  ...
+# Subtest: exhausted receiver overhead precedes every stale binding decision
+ok 31 - exhausted receiver overhead precedes every stale binding decision
+  ---
+  duration_ms: 30.012521
+  type: 'test'
+  ...
+# Subtest: zero checking allowance cannot inspect installed context before overhead admission
+ok 32 - zero checking allowance cannot inspect installed context before overhead admission
+  ---
+  duration_ms: 2.170595
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 371.248563

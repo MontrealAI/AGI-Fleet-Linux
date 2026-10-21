@@ -1,6 +1,6 @@
 {
   "schema": "agi-fleet/discovery-semantic-qualification-summary/v1",
-  "sourceScope": "Current frozen Alpha7d2 direct-local source seam; not a qualified compatibility release",
+  "sourceScope": "Public Alpha7d2 native source with reviewed oversized-input Fleet transport guard; not a final compatibility release",
   "alphaCommit": "7d2cd4c9e1e43032902d09ee3b84ffb8f2956824",
   "alphaTree": "f3d68d99ec7f38dc57a53b65faf8b6c7e7a38a55",
   "generatedSourceHash": "c1d099d379becf19d60b55e269bed3862dfb4091e805a5436270ecdc6a0a027d",
@@ -19,32 +19,35 @@
     }
   },
   "boundaryAndOutputTests": {
-    "pass": 24,
+    "pass": 32,
     "fail": 0,
-    "evidence": "boundary-final.tap"
+    "evidence": "boundary-final.tap",
+    "alphaCompatibleEvidence": "boundary-alpha22.tap"
   },
   "engineering": {
     "run": 179,
+    "exit": 0,
+    "passed": true,
+    "node": "v24.21.0",
+    "rawLog": "engineering-final.log",
     "failures": 0,
     "errors": 0,
-    "skipped": 0,
-    "passed": true,
-    "node": "v24.21.0"
+    "skipped": 0
   },
   "sourceSha256": {
     "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd",
-    "contract.mjs": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
-    "qualify.mjs": "688c421e93f4a64730dc97ade3f1f70eb0e84f49c3030a721521e9a7da85a37c",
-    "qualify.test.mjs": "9762c47c72225d191bb86ee2b9eda08f1cdf32c1d41cf765b5eedfd2403c9c3e",
+    "contract.mjs": "44231eae9f3ea5b3c56aa25417978f867d4f21b6309eab0501190b9e20959c6d",
+    "qualify.mjs": "20f27f3ceae3c14a85868736455172b5147a49a8ddeac9a19fede5cecb6cfbdf",
+    "qualify.test.mjs": "acb82ee73726614c018c7d37dbdc1ff29a66994415ef8f17113e99bb713c7d9d",
     "receiver.test.mjs": "72688a912add28e898353bd7bfbd18454c195f7c204359668511893191df1052",
+    "contract.test.mjs": "0b637c67d48c93deded669b1ad601739779307b88210d768fdfb71d5499422d7",
     "alpha-source-pin.json": "76dbd57ae3320a172ff7f7c52dd46e4191ea9e150ff3712e470d13a8451dd3ac"
   },
   "scope": "Actual direct finite semantic review with zero-cap draft alternative routes. Not an installed Fleet service, saved operator package, remote execution or protected holdout.",
   "runtimeRecovery": "runtime-extraction-recovery.json",
   "pending": [
-    "fresh exact-head hosted CI and separate configured code/security reviews",
-    "required eligible owner review under CONTRIBUTING for audit/source boundaries",
-    "qualified baseline reconciliation, merge and existing supported publication/installed-package gates"
+    "fresh exact-head hosted repository/release/Pages/exact-source CI and separate configured code/security reviews",
+    "qualified baseline reconciliation and scoped merge decision"
   ],
   "remoteExecution": "unprovisioned",
   "installedFleetExecution": false,
@@ -59,5 +62,18 @@
     "regressionCoverage": "44 exhausted-resource/binding combinations plus zero installed-context reads;16 corresponding actual pinned semantic requests retain inconclusive outcomes.",
     "independentAdvisoryReview": "budget-binding-advisory.json"
   },
-  "generatedPageSha256": "dec424d031e9506149be2485d7b2ca540c268c37a263f66666983110bdc385c1"
+  "generatedPageSha256": "dec424d031e9506149be2485d7b2ca540c268c37a263f66666983110bdc385c1",
+  "distributionScope": {
+    "exactReviewSource": "The existing exact-review-source workflow includes this module as review source; historical actual downloaded artifact qualification is review-source-10f.json.",
+    "operatorInstallerIncludesModule": false,
+    "localRuntimePackageIncludesModule": false,
+    "ownerReviewRule": "CONTRIBUTING requires eligible independent owner review for changes to installers, authorization, signers, workflows, auditors and vendor boundaries. This additive source/test PR does not modify those existing boundaries; no PR61 owner gate is inferred.",
+    "futurePackageIntegration": "Requires a separately declared version/profile/inventory and its actual package/release and owner-review contract."
+  },
+  "additionalConfiguredReviewCorrections": "size-and-root-corrections.json",
+  "transportSourceDistinction": {
+    "fleetSharedGuardSha256": "44231eae9f3ea5b3c56aa25417978f867d4f21b6309eab0501190b9e20959c6d",
+    "pinnedAlphaNativeContractSha256": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
+    "scope": "Shared guard is synchronized across in-development transport copies; actual native inspector still pins public Alpha7d2. Admitted canonical byte equivalence is retained; later public Alpha freeze requires fresh source/native qualification."
+  }
 }
