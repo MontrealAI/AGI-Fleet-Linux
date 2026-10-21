@@ -1,9 +1,9 @@
 {
   "schema": "agi-fleet/discovery-semantic-qualification-summary/v1",
-  "sourceScope": "Public Alpha7d2 native source with reviewed oversized-input Fleet transport guard; not a final compatibility release",
-  "alphaCommit": "7d2cd4c9e1e43032902d09ee3b84ffb8f2956824",
-  "alphaTree": "f3d68d99ec7f38dc57a53b65faf8b6c7e7a38a55",
-  "generatedSourceHash": "c1d099d379becf19d60b55e269bed3862dfb4091e805a5436270ecdc6a0a027d",
+  "sourceScope": "Current frozen public Alpha1665 direct-local source seam; not a qualified compatibility release",
+  "alphaCommit": "1665cb83f09bde3962f80942e2f1e54b789d9708",
+  "alphaTree": "d89e40f15fb47d8dd848e998d1fd26e6712e90be",
+  "generatedSourceHash": "3775fb20316bdacf81808ee31b47359e364eab16905ea2972de4b179e64ebb49",
   "publicGitTreeVerifiedFiles": 29,
   "nativeClosureFiles": 6,
   "semanticCases": {
@@ -30,6 +30,7 @@
     "passed": true,
     "node": "v24.21.0",
     "rawLog": "engineering-final.log",
+    "sourcePinSha256": "b637304279eb3692027eac33f15bd4de0a0a185f73d6a84e6e74ffdd4d2e9dc6",
     "failures": 0,
     "errors": 0,
     "skipped": 0
@@ -41,7 +42,7 @@
     "qualify.test.mjs": "acb82ee73726614c018c7d37dbdc1ff29a66994415ef8f17113e99bb713c7d9d",
     "receiver.test.mjs": "72688a912add28e898353bd7bfbd18454c195f7c204359668511893191df1052",
     "contract.test.mjs": "0b637c67d48c93deded669b1ad601739779307b88210d768fdfb71d5499422d7",
-    "alpha-source-pin.json": "76dbd57ae3320a172ff7f7c52dd46e4191ea9e150ff3712e470d13a8451dd3ac"
+    "alpha-source-pin.json": "b637304279eb3692027eac33f15bd4de0a0a185f73d6a84e6e74ffdd4d2e9dc6"
   },
   "scope": "Actual direct finite semantic review with zero-cap draft alternative routes. Not an installed Fleet service, saved operator package, remote execution or protected holdout.",
   "runtimeRecovery": "runtime-extraction-recovery.json",
@@ -62,7 +63,7 @@
     "regressionCoverage": "44 exhausted-resource/binding combinations plus zero installed-context reads;16 corresponding actual pinned semantic requests retain inconclusive outcomes.",
     "independentAdvisoryReview": "budget-binding-advisory.json"
   },
-  "generatedPageSha256": "dec424d031e9506149be2485d7b2ca540c268c37a263f66666983110bdc385c1",
+  "generatedPageSha256": "c95ca4565623e1b42fb3f3b44756a91d2c5354312680135924ee24d90099e8f4",
   "distributionScope": {
     "exactReviewSource": "The existing exact-review-source workflow includes this module as review source; historical actual downloaded artifact qualification is review-source-10f.json.",
     "operatorInstallerIncludesModule": false,
@@ -71,9 +72,20 @@
     "futurePackageIntegration": "Requires a separately declared version/profile/inventory and its actual package/release and owner-review contract."
   },
   "additionalConfiguredReviewCorrections": "size-and-root-corrections.json",
-  "transportSourceDistinction": {
-    "fleetSharedGuardSha256": "44231eae9f3ea5b3c56aa25417978f867d4f21b6309eab0501190b9e20959c6d",
-    "pinnedAlphaNativeContractSha256": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
-    "scope": "Shared guard is synchronized across in-development transport copies; actual native inspector still pins public Alpha7d2. Admitted canonical byte equivalence is retained; later public Alpha freeze requires fresh source/native qualification."
+  "sharedTransportAndNativeContractSha256": "44231eae9f3ea5b3c56aa25417978f867d4f21b6309eab0501190b9e20959c6d",
+  "currentBrowserRawDraftProof": {
+    "workspaceSha256": "cf79913210fc2bdfbdf216e119f577c20ae427cb32764e981c60c7c81fcd40d8",
+    "missionId": "capability-5dd87a6d-135b-49e3-8108-54e4f986b770",
+    "node24.21.0": {
+      "passed": 2,
+      "total": 2,
+      "evidence": "browser-native-1665-node24.json"
+    },
+    "node22.17.1": {
+      "passed": 2,
+      "total": 2,
+      "evidence": "browser-native-1665-node22.json"
+    },
+    "method": "Exact independently captured raw draft bytes through actual receiver after fresh pinned-source/history validation; local expected mission/campaign/commission reconstructed from selected accepted4-control workspace history. No imported selfclaim installs authority. Null contexts remain unprovisioned."
   }
 }
