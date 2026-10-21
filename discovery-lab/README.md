@@ -47,8 +47,30 @@ python3 engineering/check-repository.py --require-source
 python3 engineering/check-successor-preservation.py
 ```
 
-The engineering test shim lets the existing exact-source repository-review workflow run these tests without a workflow change. Source tests do not establish publication, native installer acceptance, or the pending actual-campaign cross-repository integration. Existing review and release gates remain unchanged. No credentials, provider calls, payments, wallets, security changes, or paid runners are included.
+The engineering test shim also runs `qualify.test.mjs`, covering output containment and preservation, through the existing exact-source repository-review workflow without a workflow change. Existing review and release gates remain unchanged. No credentials, provider calls, payments, wallets, security changes, or paid runners are included.
+
+## Pinned direct local semantic seam
+
+`qualify.mjs` performs the actual finite local review through this receiver against public Alpha commit `91ee90a2d093043b9dff7d115320b181e89cdd46`, tree `db890530bd8c12cf18f642c9bcae0adda38a20c8`. This is an evidence-scoped development pin, not a final compatibility-set or released-installer claim. Later Alpha changes require a reviewed pin refresh and fresh execution.
+
+`alpha-source-pin.json` independently commits all 26 files in Alpha’s generated browser catalog (`ca447b4ee3a9d2eb0dd764c1d9e478f2d2610c9e694dffe105b3c70e3fd26142`) and the six-file native inspector import closure. The union contains 28 regular files including the catalog itself. Each SHA-256 and Git blob was compared with the exact public Git tree. The harness requires a clean tracked checkout at that exact commit, verifies the full maps before importing its fixed modules, and verifies them again afterward. Imported requests cannot choose source paths, inspectors, profiles, grants or code. This is a read-only development check, not a private source capture or a concurrent adversarial filesystem custody guarantee; it does not modify the separate native TI project or its review requirements.
+
+The actual case bank checks all six stages on separate USDC and AGIALPHA branches of one frozen mission. It also retains invalid calibration, non-updatable memory, wrong-location capacity, hidden coupling, stale source context, forged response data, forged artifact inputs, omitted checkpoints, exhausted search/checking/storage, a cloned commission branch, unsupported/unprovisioned modes and accepted stronger control/checkpoint successors. The inspector reconstructs the current campaign and ancestry; a prior checker flag cannot stand in for current acceptance. Every request remains `DRAFT_NOT_SUBMITTED` with zero currency caps.
+
+At this source, 29/29 semantic cases pass on the hash-pinned Fleet Node 24.21.0 Linux x64 runtime and separately on Alpha-compatible Node 22.17.1 Linux x64. These are direct local source-seam observations. No installed Fleet service, operator package, remote execution, protected holdout or eligible owner approval is established. The retained receipts keep those distinctions explicit. The earlier extraction failure is preserved in `evidence/runtime-extraction-recovery.json`: a truncated local binary was replaced only after the complete bytes matched the member streamed independently from the unchanged hash-pinned official archive.
+
+Reproduce from a separate clean Alpha checkout; choose an absent evidence directory outside both repositories:
+
+```sh
+git clone https://github.com/MontrealAI/AGI-Alpha-Agent-v0.git /absolute/alpha-review
+git -C /absolute/alpha-review checkout --detach 91ee90a2d093043b9dff7d115320b181e89cdd46
+/absolute/node-v24.21.0-linux-x64/bin/node discovery-lab/qualify.mjs --alpha-root /absolute/alpha-review --output /absolute/new-fleet-evidence
+```
+
+The runtime archive URL, SHA-256 and exact executable hash are in the pin. For the separately retained compatibility observation, invoke the pinned Node 22.17.1 executable with `--profile alpha-compatible-linux-x64`. The harness preserves actual receipts and reports failure if any expected outcome changes. `evidence/semantic-fleet24.json` retains all request digests/current receipts and seven full representative synthetic requests; `evidence/semantic-alpha22.json` retains the separate compatibility observations. Both are reproducible public authored cases, not independently protected evaluations.
+
+The 22 receiver/output regressions and all 179 existing engineering tests pass under Node 24.21.0; source inventory and successor preservation pass. Exact hosted CI, current-source review, predecessor reconciliation, any required eligible owner review, publication and installed-package qualification remain separate gates. These source files are not included in a currently published Fleet installer.
 
 ## Shared contract source
 
-`contract.mjs` is an identical Apache-2.0 copy of Alpha’s additive `examples/successor-capability/discovery-lab-contract.mjs`, being developed in [Alpha #4851](https://github.com/MontrealAI/AGI-Alpha-Agent-v0/pull/4851). SHA-256: `bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3`. The common transport fixture is copied unchanged from Alpha’s `fixtures/discovery-lab-request.json`. Exact public source-commit pin and actual semantic integration remain pending; this draft makes no released-source or installed-package claim.
+`contract.mjs` is an identical Apache-2.0 copy of [Alpha’s additive contract at `91ee90a`](https://github.com/MontrealAI/AGI-Alpha-Agent-v0/blob/91ee90a2d093043b9dff7d115320b181e89cdd46/examples/successor-capability/discovery-lab-contract.mjs), developed in [Alpha #4851](https://github.com/MontrealAI/AGI-Alpha-Agent-v0/pull/4851). SHA-256: `bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3`. The common transport fixture is copied unchanged from Alpha’s `fixtures/discovery-lab-request.json`. This draft makes no released-source or installed-package claim.

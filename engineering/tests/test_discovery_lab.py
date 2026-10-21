@@ -6,6 +6,6 @@ class DiscoveryLabReceiver(unittest.TestCase):
         node=shutil.which('node')
         self.assertIsNotNone(node, 'Node is required for the Discovery Lab receiver tests')
         root=Path(__file__).resolve().parents[2]
-        result=subprocess.run([node,'--test','--test-reporter=tap','discovery-lab/receiver.test.mjs'],cwd=root,capture_output=True,text=True,timeout=60)
+        result=subprocess.run([node,'--test','--test-reporter=tap','discovery-lab/receiver.test.mjs','discovery-lab/qualify.test.mjs'],cwd=root,capture_output=True,text=True,timeout=60)
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
         self.assertIn('# fail 0',result.stdout)

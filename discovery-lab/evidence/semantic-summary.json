@@ -1,0 +1,54 @@
+{
+  "schema": "agi-fleet/discovery-semantic-qualification-summary/v1",
+  "sourceScope": "Alpha91ee evidence-scoped draft; not final compatibility source",
+  "alphaCommit": "91ee90a2d093043b9dff7d115320b181e89cdd46",
+  "alphaTree": "db890530bd8c12cf18f642c9bcae0adda38a20c8",
+  "generatedSourceHash": "ca447b4ee3a9d2eb0dd764c1d9e478f2d2610c9e694dffe105b3c70e3fd26142",
+  "publicGitTreeVerifiedFiles": 28,
+  "nativeClosureFiles": 6,
+  "semanticCases": {
+    "fleetNode24.21.0": {
+      "pass": 29,
+      "fail": 0,
+      "evidence": "semantic-fleet24.json"
+    },
+    "alphaNode22.17.1": {
+      "pass": 29,
+      "fail": 0,
+      "evidence": "semantic-alpha22.json"
+    }
+  },
+  "boundaryAndOutputTests": {
+    "pass": 22,
+    "fail": 0,
+    "evidence": "boundary-final.tap"
+  },
+  "engineering": {
+    "run": 179,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true,
+    "node": "v24.21.0"
+  },
+  "sourceSha256": {
+    "receiver.mjs": "d54f2b24b6b14b8fb4ea5b16a031ff0e6dc58560e308eda1f45bb1ac33413036",
+    "contract.mjs": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
+    "qualify.mjs": "e1e8de973601f73df304dc5fb6a67817fca852a241a7c5667d7a20e10a383f6f",
+    "qualify.test.mjs": "9762c47c72225d191bb86ee2b9eda08f1cdf32c1d41cf765b5eedfd2403c9c3e",
+    "receiver.test.mjs": "12ab4ef2bc8d868584bfae5f4c584c09c459253c16492841954f23440db8a82a",
+    "alpha-source-pin.json": "3627ab6a60bb99c659942074cef1903ad6f1ca1f58ebd327d84ce21a5d2e4a3e"
+  },
+  "scope": "Actual direct finite semantic review with zero-cap draft alternative routes. Not an installed Fleet service, saved operator package, remote execution or protected holdout.",
+  "runtimeRecovery": "runtime-extraction-recovery.json",
+  "pending": [
+    "later Alpha source pin refresh after owner-held history/workflow corrections",
+    "fresh exact-head hosted CI and configured source review",
+    "required eligible owner review under CONTRIBUTING for audit/source boundaries",
+    "qualified merge and existing supported publication/installed-package gates"
+  ],
+  "remoteExecution": "unprovisioned",
+  "installedFleetExecution": false,
+  "qualifiedPublication": false,
+  "eligibleOwnerApproval": false
+}

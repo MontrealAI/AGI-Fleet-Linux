@@ -1,7 +1,5 @@
 import {createHash} from 'node:crypto';
 import {performance} from 'node:perf_hooks';
-import {need, keys} from '../local-runtime/primitives.mjs';
-
 import {REQUEST_SCHEMA, STAGES, RESOURCE_KEYS, BINDING_KEYS, canonical, parseWorkRequest, validateResources, validateBindings} from './contract.mjs';
 export {REQUEST_SCHEMA, STAGES};
 export const RECEIPT_SCHEMA = 'agi-fleet/discovery-review/v1';
@@ -13,6 +11,9 @@ const identity = value => typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9._
 const zero = () => Object.fromEntries(RESOURCES.map(key=>[key,0]));
 const resources = validateResources;
 const reason = (error,fallback) => typeof error?.code==='string'&&/^[A-Z0-9_:-]{1,120}$/.test(error.code)?error.code:fallback;
+const need=(condition,code)=>{if(!condition)throw Object.assign(new Error(code),{code});};
+const keys=(value,expected)=>need(value&&typeof value==='object'&&!Array.isArray(value)
+  &&Object.keys(value).length===expected.length&&expected.every(key=>Object.hasOwn(value,key)),'FIELDS_INVALID');
 const freeze = value => {
   if(value&&typeof value==='object') { for(const child of Object.values(value))freeze(child);Object.freeze(value); }
   return value;
