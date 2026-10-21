@@ -1,0 +1,95 @@
+{
+  "recordType": "EXACT_SOURCE_OWNER_ACTIONS_AFTER_COMPLETE_TECHNICAL_QUALIFICATION",
+  "observedAt": "2026-10-21T00:10:03.112Z",
+  "repository": "MontrealAI/AGI-Fleet-Linux",
+  "pull": 61,
+  "source": {
+    "commit": "0674719f6749786c3591a15219364bfec94c336f",
+    "tree": "d78839054676930c377b9b1b8181513e8d9c8501"
+  },
+  "sourceChangeScope": "Exactly five pin/inventory/profile/README files from442; all6908other leaves and all modes preserved.",
+  "technicalQualification": {
+    "all10OriginalGroupsSuccess": true,
+    "checks": {
+      "total": 38,
+      "success": 34,
+      "expectedMainOnlySkipped": 4
+    },
+    "nativeArchitectures": [
+      "x64",
+      "arm64"
+    ],
+    "independentSourceAudit": "PASS",
+    "configuredSummary": 6275717324,
+    "genuineConfiguredReceipt": 6304261878,
+    "fullEvidenceCommit": "61754f69c8320cc92e1ef52c35c3a2ec8a2aa847",
+    "fullEvidencePath": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-0674719/complete-original-technical-qualification-owner-gates-outstanding.json"
+  },
+  "normalMergeQualified": false,
+  "requiredOwnerActions": [
+    {
+      "owner": "Eligible independent Fleet functional owner",
+      "state": "No GitHub PR review exists on exact067; two original P1 threads remain open.",
+      "nextAction": "Conduct the genuine review and submit an actual GitHub PR REVIEW on this exact full head. Record reviewer role, owner authorization, findings/disposition and both P1 dispositions. A conversation comment alone is insufficient.",
+      "requiredAPIRecord": "/pulls/61/reviews/{ownerReview}",
+      "policy": {
+        "file": "CONTRIBUTING.md",
+        "gitBlob": "494607053fe0d8c6617bba4b38abb8288ee8c044",
+        "quote": "Changes to installers, authorization, signers, workflows, auditors and vendor boundaries require an eligible independent owner review."
+      },
+      "acceptedRecord": "Eligible separate-account APPROVED, or explicitly authorized independent reviewer using shared MontrealAI OWNER account COMMENTED; actual author association/identity/commit authenticated. Source-clear disposition only after actual review.",
+      "P1Comments": [
+        4322083594,
+        4323870690
+      ],
+      "reviewerLaneBoundary": "Previously rejected automated Fleet functional-owner lane will not be retried or substituted; configured review and CI do not replace this owner review."
+    },
+    {
+      "owner": "Jobs release operator / repository administrator",
+      "state": "83065 all21prerequisite groups/all37contexts/166validation and original scanner/native/archive checks passed. Original publication POST releases HTTP422; no release exists. Exactsource-v2.1.0-rc.16 tag already reserves83065.",
+      "nextAction": "Diagnose422; use the prepared exact owned-DRAFT recovery request if appropriate, preserving existingtag/source/all25assets. Then allow root to rerun ORIGINAL publisher only after this prerequisite changes. Original25-asset upload/readback/semantic/native/tag checks and actual immutable public readback remain mandatory.",
+      "requestCommit": "acfcc857a6d79543e25b1a2d5dfe984776afafff",
+      "requestPath": "docs/release-evidence/ti-compatible-set-20261020/jobs-83065ad/owned-draft-recovery-request-not-submitted.json",
+      "independentStaticReviewCommit": "5c7e45ad8c4a0e338fbdd51ecdf97eab27aa6ac2",
+      "originalPublisherRun": 39509956774,
+      "failedAttempt": 1,
+      "unchangedRetryRequested": false,
+      "serverValidationCauseConfirmed": false
+    },
+    {
+      "owner": "Alpha repository administrator / release operator",
+      "state": "Actual publicv1.36.0 release418962131 / sourcea6d20a93c7c5b7430bf42d2367701b350513e90d; whole original Agent attempt2/all32jobs and all3historical main workflows succeeded, all92assets authenticated, immutable:false.",
+      "nextAction": "Confirm/enable repository release immutability and publish/republish with exact tag/source/all92assets preserved. Require actual API immutable:true and reauthenticate complete inventory. Preserve prior releases if a new version is needed; fresh source/version qualification remains authorized. Ask before any irreversible deletion.",
+      "releaseId": 418962131,
+      "actionComment": 6303815973
+    },
+    {
+      "owner": "Fleet release operator",
+      "state": "Original TI workflow dispatch capability is not exposed by the current connector.",
+      "nextAction": "After genuine owner review, qualified normal merge to actual mainS, and original same-S main qualifications/Linux/LocalSkills publications: dispatch ORIGINAL transformation-release.yml with expected-source=S, selectors for five actual successful same-S main run:attempts plus genuine review API IDs, publish=true. All three Fleet releases must identify same actualS.",
+      "originalWorkflow": ".github/workflows/transformation-release.yml",
+      "inputTemplateEvidenceCommit": "ec3deaccec1774e024a755981121c9c4db9bfc5b",
+      "inputTemplatePath": "docs/release-evidence/ti-compatible-set-20261019/continuation-ci/fleet-0674719/genuine-configured-receipt-and-original-ti-dispatch-inputs.json",
+      "sourceS": null,
+      "selectorsOwnerReview": null,
+      "sourceOrTriggersChanged": false
+    }
+  ],
+  "operationalImmutabilityNote": {
+    "settingReadback": "Current connector does not permit the repository-admin endpoint; no retry or alternative access was attempted.",
+    "preventiveStep": "Release operators should confirm release immutability enabled before publication.",
+    "separateNewAcceptanceGate": false,
+    "existingCanonicalGate": "Actual selected public release metadata must be immutable:true; a settings assertion never substitutes for this."
+  },
+  "remainingRootWorkAfterOwnerActions": [
+    "Authenticate actual immutable upstream releases and genuine owner review; normally merge qualified PR without any waiver.",
+    "Require actual final-main qualification and same-source Fleet/Linux/LocalSkills/TI publication identities.",
+    "Run ONE connected journey from actual normal public installed packages at exact final commits; collect completeD and independently reviewedE.",
+    "Make separate websiteT and perform final all-four-sitesF, including EN/FR, downloads/papers, metadata and console/screenshots. No second journey."
+  ],
+  "finalJourneyExecuted": false,
+  "finalE": null,
+  "websiteT": null,
+  "fourSiteF": null,
+  "completion": false
+}
