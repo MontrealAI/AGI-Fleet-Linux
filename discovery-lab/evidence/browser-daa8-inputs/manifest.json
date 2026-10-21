@@ -1,0 +1,35 @@
+{
+  "schema": "agi-fleet/exact-browser-input-provenance/v1",
+  "sourceCommit": "daa8e3d8f0fbad4a5bc9b25393f566601b0baf31",
+  "sourceTree": "77fbbe881c544749e7a3c8ff19288610451f0697",
+  "browserSourcesHash": "42b928d091dc60a6265836b1bbb641cb66dccea709583777cba0668685c83ebb",
+  "browserPageSha256": "2e9568507c04fe0cdc8b0870580848899f3fb94af181ac8d88e2141482244dc0",
+  "missionId": "capability-07c1c997-6993-4457-8569-dbba136371d9",
+  "capture": "Actual packaged-local browser wrapper on the exact published Alpha source; 12 checks, four retained campaigns and eight downloads. These are three unchanged raw downloads, not canonical reconstructions.",
+  "files": {
+    "browser-workspace.json": {
+      "bytes": 91157,
+      "sha256": "42f62ebae2519e2d074b30688841da8874fad14401f76c4d17e41c1ede29d57d",
+      "gitBlob": "0186d403bc03772c5c194c019daa95d61f417524",
+      "mode": "100644"
+    },
+    "manager-review-draft.json": {
+      "bytes": 252490,
+      "sha256": "6ca09c46fc4dc58dc77e4eb53e5691e3219eef6d4d68ef628ab80a1a62fa2671",
+      "gitBlob": "4b4c2e9822057e7215298b65720e493e31241e74",
+      "mode": "100644"
+    },
+    "jobs-review-draft.json": {
+      "bytes": 252500,
+      "sha256": "5ad060350e89b8a7931d0272557192a95c75d1e83fd331babab696572782eb99",
+      "gitBlob": "d9a0601825e8d10e02d8d7637ac85023208087f1",
+      "mode": "100644"
+    }
+  },
+  "localProof": "../browser-native-proof-daa8.mjs",
+  "receiptFiles": [
+    "../browser-native-daa8-node24.json",
+    "../browser-native-daa8-node22.json"
+  ],
+  "scope": "Synthetic public local mission. Import installs no checker, capacity, execution or payment authority. Retained input bytes are distinct from canonical request digests."
+}

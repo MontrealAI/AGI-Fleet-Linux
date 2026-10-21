@@ -1,0 +1,232 @@
+TAP version 13
+# Subtest: obviously oversized imported text is rejected before encoder allocation
+ok 1 - obviously oversized imported text is rejected before encoder allocation
+  ---
+  duration_ms: 1.862028
+  type: 'test'
+  ...
+# Subtest: direct oversized scalar is rejected before stringify or encoder allocation
+ok 2 - direct oversized scalar is rejected before stringify or encoder allocation
+  ---
+  duration_ms: 0.635399
+  type: 'test'
+  ...
+# Subtest: escaped and cumulative canonical output is bounded before encoder allocation
+ok 3 - escaped and cumulative canonical output is bounded before encoder allocation
+  ---
+  duration_ms: 41.995003
+  type: 'test'
+  ...
+# Subtest: ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+ok 4 - ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+  ---
+  duration_ms: 123.703992
+  type: 'test'
+  ...
+# Subtest: UTF-8 multibyte boundaries are measured even when code units fit
+ok 5 - UTF-8 multibyte boundaries are measured even when code units fit
+  ---
+  duration_ms: 124.902769
+  type: 'test'
+  ...
+# Subtest: canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+ok 6 - canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+  ---
+  duration_ms: 0.587736
+  type: 'test'
+  ...
+# Subtest: array node ceiling is checked before descriptor materialization without shrinking its boundary
+ok 7 - array node ceiling is checked before descriptor materialization without shrinking its boundary
+  ---
+  duration_ms: 97.57771
+  type: 'test'
+  ...
+# Subtest: wide object node ceiling precedes descriptors and preserves the admitted boundary
+ok 8 - wide object node ceiling precedes descriptors and preserves the admitted boundary
+  ---
+  duration_ms: 332.747697
+  type: 'test'
+  ...
+# Subtest: wide non-enumerable object and array keys are bounded before descriptor inspection
+ok 9 - wide non-enumerable object and array keys are bounded before descriptor inspection
+  ---
+  duration_ms: 255.367148
+  type: 'test'
+  ...
+# Subtest: object key output lower bound precedes descriptors and observes the remaining output budget
+ok 10 - object key output lower bound precedes descriptors and observes the remaining output budget
+  ---
+  duration_ms: 82.763373
+  type: 'test'
+  ...
+# Subtest: remaining node budget bounds nested object width before descriptor inspection
+ok 11 - remaining node budget bounds nested object width before descriptor inspection
+  ---
+  duration_ms: 189.522604
+  type: 'test'
+  ...
+# Subtest: shared declared inspection charge composes with a distinct receiver allowance in the exact vector
+ok 12 - shared declared inspection charge composes with a distinct receiver allowance in the exact vector
+  ---
+  duration_ms: 0.624071
+  type: 'test'
+  ...
+# Subtest: evidence refuses a path inside either checkout including trailing-separator roots
+ok 13 - evidence refuses a path inside either checkout including trailing-separator roots
+  ---
+  duration_ms: 4.362058
+  type: 'test'
+  ...
+# Subtest: evidence resolves an existing parent alias before checking containment
+ok 14 - evidence resolves an existing parent alias before checking containment
+  ---
+  duration_ms: 1.256555
+  type: 'test'
+  ...
+# Subtest: retained evidence is never overwritten
+ok 15 - retained evidence is never overwritten
+  ---
+  duration_ms: 1.561846
+  type: 'test'
+  ...
+# Subtest: an absent directory outside both repositories remains available for concrete output
+ok 16 - an absent directory outside both repositories remains available for concrete output
+  ---
+  duration_ms: 0.714959
+  type: 'test'
+  ...
+# Subtest: Alpha source must be the physical Git worktree root before output validation
+ok 17 - Alpha source must be the physical Git worktree root before output validation
+  ---
+  duration_ms: 29.243283
+  type: 'test'
+  ...
+# Subtest: all six discriminants and both inert currency routes are transport-compatible
+ok 18 - all six discriminants and both inert currency routes are transport-compatible
+  ---
+  duration_ms: 56.286443
+  type: 'test'
+  ...
+# Subtest: unprovisioned is the default and imported fields cannot install a checker
+ok 19 - unprovisioned is the default and imported fields cannot install a checker
+  ---
+  duration_ms: 1.859925
+  type: 'test'
+  ...
+# Subtest: transport inspection does not manufacture semantic acceptance
+ok 20 - transport inspection does not manufacture semantic acceptance
+  ---
+  duration_ms: 3.072784
+  type: 'test'
+  ...
+# Subtest: each immutable binding and the current runtime identity must match
+ok 21 - each immutable binding and the current runtime identity must match
+  ---
+  duration_ms: 5.790904
+  type: 'test'
+  ...
+# Subtest: logical commission identity, branch and route are frozen independently
+ok 22 - logical commission identity, branch and route are frozen independently
+  ---
+  duration_ms: 8.22936
+  type: 'test'
+  ...
+# Subtest: unsupported stages and modes never invoke the registered checker
+ok 23 - unsupported stages and modes never invoke the registered checker
+  ---
+  duration_ms: 1.353081
+  type: 'test'
+  ...
+# Subtest: receiver refuses positive caps, currency mixing and submitted imports
+ok 24 - receiver refuses positive caps, currency mixing and submitted imports
+  ---
+  duration_ms: 1.303555
+  type: 'test'
+  ...
+# Subtest: changed executable data, duplicate keys and non-finite resources refuse
+ok 25 - changed executable data, duplicate keys and non-finite resources refuse
+  ---
+  duration_ms: 2.090192
+  type: 'test'
+  ...
+# Subtest: capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
+ok 26 - capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
+  ---
+  duration_ms: 1.384147
+  type: 'test'
+  ...
+# Subtest: failed and over-budget checks retain cost lower bounds and never become rejection proofs
+ok 27 - failed and over-budget checks retain cost lower bounds and never become rejection proofs
+  ---
+  duration_ms: 2.181991
+  type: 'test'
+  ...
+# Subtest: previous acceptance is rechecked on every retry, with no hidden receipt store
+ok 28 - previous acceptance is rechecked on every retry, with no hidden receipt store
+  ---
+  duration_ms: 1.931483
+  type: 'test'
+  ...
+# Subtest: malformed checker output is inconclusive and never publishes an accepted receipt
+ok 29 - malformed checker output is inconclusive and never publishes an accepted receipt
+  ---
+  duration_ms: 1.116774
+  type: 'test'
+  ...
+# Subtest: storage is reserved before semantic work and current request cannot be rewritten by its checker
+ok 30 - storage is reserved before semantic work and current request cannot be rewritten by its checker
+  ---
+  duration_ms: 7.592536
+  type: 'test'
+  ...
+# Subtest: exhaustion at the exact budget is inconclusive and installed identity stays source-bound
+ok 31 - exhaustion at the exact budget is inconclusive and installed identity stays source-bound
+  ---
+  duration_ms: 2.232157
+  type: 'test'
+  ...
+# Subtest: unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
+ok 32 - unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
+  ---
+  duration_ms: 1.930772
+  type: 'test'
+  ...
+# Subtest: direct object APIs reject hidden data and getters without invoking them
+ok 33 - direct object APIs reject hidden data and getters without invoking them
+  ---
+  duration_ms: 0.794368
+  type: 'test'
+  ...
+# Subtest: checker receives remaining budget and returned reasons cannot alias later changes
+ok 34 - checker receives remaining budget and returned reasons cannot alias later changes
+  ---
+  duration_ms: 3.22238
+  type: 'test'
+  ...
+# Subtest: unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
+ok 35 - unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
+  ---
+  duration_ms: 3.272655
+  type: 'test'
+  ...
+# Subtest: exhausted receiver overhead precedes every stale binding decision
+ok 36 - exhausted receiver overhead precedes every stale binding decision
+  ---
+  duration_ms: 45.924201
+  type: 'test'
+  ...
+# Subtest: zero checking allowance cannot inspect installed context before overhead admission
+ok 37 - zero checking allowance cannot inspect installed context before overhead admission
+  ---
+  duration_ms: 1.968279
+  type: 'test'
+  ...
+1..37
+# tests 37
+# suites 0
+# pass 37
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1349.747086

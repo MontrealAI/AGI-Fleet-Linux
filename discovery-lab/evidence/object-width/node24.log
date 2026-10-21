@@ -1,0 +1,20 @@
+✔ obviously oversized imported text is rejected before encoder allocation (1.46528ms)
+✔ direct oversized scalar is rejected before stringify or encoder allocation (0.488216ms)
+✔ escaped and cumulative canonical output is bounded before encoder allocation (34.258486ms)
+✔ ASCII and escaped scalar JSON remain accepted at exactly two million bytes (108.259579ms)
+✔ UTF-8 multibyte boundaries are measured even when code units fit (103.814163ms)
+✔ canonical bytes for admitted compound data retain sorted keys and Unicode scalars (0.511822ms)
+✔ array node ceiling is checked before descriptor materialization without shrinking its boundary (73.086869ms)
+✔ wide object node ceiling precedes descriptors and preserves the admitted boundary (319.628679ms)
+✔ wide non-enumerable object and array keys are bounded before descriptor inspection (218.534282ms)
+✔ object key output lower bound precedes descriptors and observes the remaining output budget (27.306429ms)
+✔ remaining node budget bounds nested object width before descriptor inspection (105.792673ms)
+✔ shared declared inspection charge composes with a distinct receiver allowance in the exact vector (3.252056ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1102.839766

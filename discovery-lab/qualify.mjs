@@ -76,6 +76,8 @@ export async function qualify(alphaRoot,{profile='fleet-linux-x64',output=null}=
   const load=name=>import(pathToFileURL(path.join(alphaRoot,'examples/successor-capability',name)).href);
   const model=await load('discovery-lab.mjs'),{createInspector}=await load('discovery-lab-inspector.mjs');
   const {makeArtifacts}=await load('discovery-lab-artifacts.mjs');
+  const {DISCOVERY_LAB_INSPECTION_CHECKS}=await load('discovery-lab-contract.mjs');
+  assert.equal(DISCOVERY_LAB_INSPECTION_CHECKS,10000,'Use the reviewed declared inspection charge.');
   const sources={modelDigest:pin.nativeClosure['examples/successor-capability/discovery-lab.mjs'],
     sourceDigest:pin.generatedSourcesHash,evaluatorDigest:pin.nativeClosure['examples/successor-capability/discovery-lab-checker.mjs']};
   const runtimeDigest=await payloadDigest({profile,...runtime,nativeClosure:pin.nativeClosure});
@@ -93,15 +95,41 @@ export async function qualify(alphaRoot,{profile='fleet-linux-x64',output=null}=
       purposeDigest:await payloadDigest({purpose:report.charter.purpose}),charterDigest:await payloadDigest(report.charter),...sources};
     const artifacts=await makeArtifacts(bindings,report.result);
     const chain=[...report.ancestors,{charter:report.charter,result:report.result}];
-    const limits={acquisitions:4096,search:4096,checking:4096,memoryBytes:1_000_000,storageBytes:1_000_000,
+    // Local construction policy: the existing admission allowance, trusted inspector charge,
+    // and the current/ancestor charters. Imported request claims never select this allowance.
+    const limits={acquisitions:4096,search:4096,checking:4096+DISCOVERY_LAB_INSPECTION_CHECKS,memoryBytes:1_000_000,storageBytes:1_000_000,
       workerCapacity:4,installations:4096,elapsedMs:120_000};
     for(const item of chain)for(const key of ['acquisitions','search','checking','installations'])limits[key]+=item.charter.budget[key];
     const payload={schema:'discovery-lab-review-payload/v1',charter:report.charter,result:report.result,ancestors:report.ancestors};
-    return {schema:'successor-discovery-work-request/v1',...bindings,stage,
+    const request={schema:'successor-discovery-work-request/v1',...bindings,stage,
       inputArtifacts:artifacts.slice(0,STAGES.indexOf(stage)).map(artifact=>artifact.digest),resourceLimits:limits,
       executionMode:'synthetic-local',commission:{id:'native-finite-mission',branch:route==='manager-usdc'?'usdc-local-branch':'agialpha-local-branch',
         route,currency:route==='manager-usdc'?'USDC6':'AGIALPHA18',capBaseUnits:'0',status:'DRAFT_NOT_SUBMITTED'},
       payloadDigest:await payloadDigest(payload),payload};
+    // Pinned inspector policy owns four UTF-8 footprints per snapshot and reserves
+    // 500,000 finite working bytes. The committed safe-integer vector bounds the
+    // encoded width of every smaller remaining vector supplied by the receiver.
+    const encoded=value=>Buffer.byteLength(canonical(value));
+    let memoryReservation=null;
+    for(let iteration=1;iteration<=16;iteration++) {
+      const terms={rawAdmissionBytes:encoded(request),committedLimitsCanonicalBytes:encoded(limits),
+        fullRequestCanonicalBytes:encoded(request),separatePayloadCanonicalBytes:encoded(payload),
+        currentArtifactsCanonicalBytes:encoded(artifacts),snapshotFootprints:4,workingReserveBytes:500_000,
+        existingFloorBytes:1_000_000};
+      const derived=terms.rawAdmissionBytes+terms.snapshotFootprints*(terms.committedLimitsCanonicalBytes
+        +terms.fullRequestCanonicalBytes+terms.separatePayloadCanonicalBytes+terms.currentArtifactsCanonicalBytes)
+        +terms.workingReserveBytes;
+      assert.ok(Number.isSafeInteger(derived),'Native memory reservation must be representable.');
+      const reserved=Math.max(terms.existingFloorBytes,derived);
+      if(reserved===limits.memoryBytes) {
+        memoryReservation={...terms,derivedBytes:derived,reservedBytes:reserved,iterations:iteration,
+          source:'Verified pinned inspector snapshot and working-reserve policy; trusted locally constructed campaign data.'};
+        break;
+      }
+      limits.memoryBytes=reserved;
+    }
+    assert.ok(memoryReservation,'Native memory reservation did not converge before inspection.');
+    return {request,memoryReservation};
   }
   function installed(request) {
     return {executorId:'pinned-public-finite-review',runtimeDigest,currentRuntimeDigest:runtimeDigest,
@@ -110,7 +138,7 @@ export async function qualify(alphaRoot,{profile='fleet-linux-x64',output=null}=
       stages:STAGES,resourceCapacity:{...request.resourceLimits},inspectCampaign:inspector};
   }
   async function run(id,report,stage,expected,{route='manager-usdc',edit=null,contextEdit=null,unprovisioned=false,requiredReasons=[]}={}) {
-    let request=await requestFor(report,stage,route),context=installed(request);
+    let {request,memoryReservation}=await requestFor(report,stage,route),context=installed(request);
     if(edit) { request=structuredClone(request);await edit(request);request.payloadDigest=await payloadDigest(request.payload); }
     if(contextEdit)contextEdit(context);
     const start=performance.now(),raw=canonical(request);
@@ -118,7 +146,7 @@ export async function qualify(alphaRoot,{profile='fleet-linux-x64',output=null}=
     const observations={id,expected,actual:receipt.state,passed:receipt.state===expected&&requiredReasons.every(reason=>receipt.reasons.includes(reason)),
       elapsedMs:Math.ceil(performance.now()-start),requestDigest:sha(raw),payloadDigest:request.payloadDigest,
       route:request.commission.route,currency:request.commission.currency,capBaseUnits:request.commission.capBaseUnits,
-      request,receipt};
+      memoryReservation,request,receipt};
     assert.equal(receipt.remoteExecution,'unprovisioned');assert.equal(receipt.authority,'none');
     cases.push(observations);
   }
@@ -158,6 +186,8 @@ export async function qualify(alphaRoot,{profile='fleet-linux-x64',output=null}=
     sourceObservation,runtimeDigest,receiverSources:Object.fromEntries(['receiver.mjs','contract.mjs','qualify.mjs','alpha-source-pin.json'].map(name=>[name,sha(bytes(path.join(here,name)))])),
     scope:'Actual direct local finite review against pinned public Alpha source. No Fleet service, operator installation, remote execution or organizational independence.',
     total:cases.length,passed:cases.filter(row=>row.passed).length,failed:cases.filter(row=>!row.passed).length,
+    checkingReservation:{nativeAdmissionAllowance:4096,declaredInspectionChecks:DISCOVERY_LAB_INSPECTION_CHECKS,
+      replayAllowance:'Sum of the trusted current and ancestor charter checking caps; declared checks are not VM instruction counts.'},
     construction,cases,remoteExecution:'unprovisioned',installedFleetExecution:false,eligibleOwnerApproval:false};
   if(output) {
     fs.mkdirSync(output);fs.writeFileSync(path.join(output,'semantic-seam.json'),JSON.stringify(evidence,null,2)+'\n');
