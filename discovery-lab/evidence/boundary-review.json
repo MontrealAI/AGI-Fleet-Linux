@@ -1,0 +1,48 @@
+{
+  "schema": "agi-fleet/discovery-boundary-evidence/v1",
+  "baselineCommit": "45759fb096faf8988f58ae5ea71248d0f35a97c7",
+  "tests": {
+    "total": 18,
+    "pass": 18,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "scope": "transport/admission and fake installed-checker boundary; not actual campaign semantics"
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "Linux x64 source checkout; not saved installer"
+  },
+  "files": {
+    "discovery-lab/contract.mjs": "bfa38a9312a90730f7f35eaed3d5d5dcca2b1c0cc7e51657413670145d2da2e3",
+    "discovery-lab/receiver.mjs": "1b3b26569a3f32477d6bec5852f8483cccd095b4ddb982d4ec18b081e60d3fcb",
+    "discovery-lab/receiver.test.mjs": "12ab4ef2bc8d868584bfae5f4c584c09c459253c16492841954f23440db8a82a",
+    "discovery-lab/fixtures/transport-request.json": "891e11f3fed142db55e36934b4f1b5869200973216bfdd9257789fd66fb0a82f",
+    "engineering/tests/test_discovery_lab.py": "cc9a44285125fa17d4e5e1b354a9010230a5e5b0328e68ab3241a2341b0c7907",
+    "discovery-lab/evidence/boundary.tap": "68f7a7b1eea65398bf4d2b600aa69034e95e1314055e97484a531c7ec3da2d52"
+  },
+  "advisoryReview": {
+    "scope": "separate review agent examined new bounded receiver and benign boundary regressions",
+    "priorFindingsResolved": [
+      "immutable request and installed context snapshot",
+      "exhaustion distinct from completed negative result",
+      "receipt overflow retained inconclusive",
+      "remaining checker budget after receiver reservation",
+      "known costs for nonadmitted and failed attempts",
+      "checker result arrays copied before retention"
+    ],
+    "remainingBlockingFindings": [],
+    "eligibleOwnerApproval": false,
+    "organizationalIndependence": false
+  },
+  "pending": [
+    "actual campaign semantic inspector and cross-repository fixture",
+    "actual installed runtime-to-function source binding",
+    "exact public Alpha contract source pin",
+    "applicable exact-source CI and configured review",
+    "predecessor reconciliation and qualified merge/publication"
+  ],
+  "remoteExecution": "unprovisioned",
+  "publicationQualified": false,
+  "nativeInstallerQualified": false
+}
