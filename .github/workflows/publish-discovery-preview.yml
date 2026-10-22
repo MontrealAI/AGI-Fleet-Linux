@@ -1,0 +1,110 @@
+name: Publish reviewed Discovery preview
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Enter PUBLISH_0.1.0-discovery-preview.1 to publish the qualified preview
+        type: string
+        required: true
+      source:
+        description: Exact reviewed current-main commit SHA
+        type: string
+        required: true
+      review_pr:
+        description: Pull request number retaining the source-specific review and authorization
+        type: number
+        required: true
+      review_comment:
+        description: Issue comment ID retaining that exact review record
+        type: number
+        required: true
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+concurrency:
+  group: discovery-preview-publication-${{ github.ref }}-${{ inputs.source }}
+  cancel-in-progress: false
+jobs:
+  authorize:
+    name: Authorize reviewed Discovery source
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out the exact workflow source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Authenticate source and source-specific review before qualification
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SOURCE: ${{ inputs.source }}
+          REVIEW_PR: ${{ inputs.review_pr }}
+          REVIEW_COMMENT: ${{ inputs.review_comment }}
+          CONFIRM: ${{ inputs.confirm }}
+        run: |
+          set -euo pipefail
+          python3 engineering/discovery_preview_publication.py authorize --source "$EXPECTED_SOURCE" --review-pr "$REVIEW_PR" --review-comment "$REVIEW_COMMENT" --confirm "$CONFIRM" --output "$RUNNER_TEMP/discovery-source"
+      - name: Retain authenticated source and authorization record
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: discovery-publication-source
+          path: ${{ runner.temp }}/discovery-source/
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 0
+  discovery:
+    name: Discovery installed review
+    needs: authorize
+    permissions:
+      contents: read
+    uses: ./.github/workflows/discovery-installed.yml
+  fleet:
+    name: Inherited full Fleet
+    needs: authorize
+    # The legacy reusable workflow declares a write-scoped publisher. Its
+    # validation_only input keeps that publisher disabled and all gates intact.
+    permissions:
+      contents: write
+    uses: ./.github/workflows/next-release.yml
+    with:
+      validation_only: true
+  publish:
+    name: Publish reviewed Discovery preview
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.confirm == 'PUBLISH_0.1.0-discovery-preview.1'
+    needs: [authorize, discovery, fleet]
+    permissions:
+      contents: write
+      actions: read
+      issues: read
+      pull-requests: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out the exact reviewed workflow source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Revalidate live qualification, raw custody and immutable release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SOURCE: ${{ inputs.source }}
+          REVIEW_PR: ${{ inputs.review_pr }}
+          REVIEW_COMMENT: ${{ inputs.review_comment }}
+          CONFIRM: ${{ inputs.confirm }}
+        run: |
+          set -euo pipefail
+          python3 engineering/discovery_preview_publication.py publish --source "$EXPECTED_SOURCE" --review-pr "$REVIEW_PR" --review-comment "$REVIEW_COMMENT" --confirm "$CONFIRM" --output "$RUNNER_TEMP/discovery-publication"
+      - name: Retain publication assets, downloaded-byte observations and failures
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: discovery-preview-publication-evidence
+          path: ${{ runner.temp }}/discovery-publication/
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 0

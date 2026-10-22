@@ -1,0 +1,149 @@
+name: Discovery installed finite review qualification
+on:
+  pull_request:
+    paths: ['discovery-lab/**', 'engineering/discovery_release.py', 'engineering/discovery_alpha_input.py', 'engineering/discovery_installed_qualification.py', 'engineering/discovery_preview_publication.py', 'engineering/tests/test_discovery*.py', 'engineering/tests/discovery_input_fixture.py', '.github/workflows/discovery-installed.yml', '.github/workflows/publish-discovery-preview.yml']
+  workflow_call:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: discovery-installed-${{ github.ref }}-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  build:
+    name: Discovery saved candidate
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version: '24.21.0'
+      - name: Require the frozen reviewed source profile
+        id: profile
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          profile=json.loads(Path('discovery-lab/release/profile.json').read_bytes())
+          assert profile['qualification']=='FROZEN_SOURCE_PROFILE' and isinstance(profile['alpha'],dict), 'Final Alpha pin is not frozen'
+          commit=profile['alpha']['commit']
+          assert re.fullmatch('[0-9a-f]{40}',commit)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output: output.write('alpha_commit='+commit+'\n')
+          PY
+      - name: Fetch only the declared Alpha source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: MontrealAI/AGI-Alpha-Agent-v0
+          ref: ${{ steps.profile.outputs.alpha_commit }}
+          path: .ci-alpha-discovery
+          persist-credentials: false
+      - name: Preserve ordinary repository and engineering gates
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/discovery-build"
+          python3 engineering/check-repository.py --require-source 2>&1 | tee "$RUNNER_TEMP/discovery-build/repository.log"
+          python3 engineering/check-successor-preservation.py 2>&1 | tee "$RUNNER_TEMP/discovery-build/preservation.log"
+          python3 -m unittest discover -s engineering/tests -v 2>&1 | tee "$RUNNER_TEMP/discovery-build/engineering.log"
+          python3 -m unittest discover -s macos/tests -v 2>&1 | tee "$RUNNER_TEMP/discovery-build/macos.log"
+      - name: Build one saved inactive candidate
+        run: |
+          set -euo pipefail
+          python3 engineering/discovery_alpha_input.py --output "$RUNNER_TEMP/discovery-build/alpha-input" 2>&1 | tee "$RUNNER_TEMP/discovery-build/alpha-input.log"
+          python3 engineering/discovery_release.py build --alpha-root "$GITHUB_WORKSPACE/.ci-alpha-discovery" --mission-input "$RUNNER_TEMP/discovery-build/alpha-input" --output "$RUNNER_TEMP/discovery-build/candidate" 2>&1 | tee "$RUNNER_TEMP/discovery-build/build.log"
+          python3 engineering/discovery_installed_qualification.py provenance --candidate "$RUNNER_TEMP/discovery-build/candidate" --output "$RUNNER_TEMP/discovery-build/provenance.json"
+      - name: Retain original candidate and logs
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: discovery-installed-candidate
+          path: ${{ runner.temp }}/discovery-build/
+          if-no-files-found: error
+          retention-days: 30
+  native:
+    name: Discovery installed native (${{ matrix.profile }})
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - profile: fleet-linux-x64
+            version: '24.21.0'
+          - profile: alpha-compatible-linux-x64
+            version: '22.17.1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        with:
+          node-version: ${{ matrix.version }}
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: discovery-installed-candidate
+          path: ${{ runner.temp }}/discovery-build
+      - name: Verify and install the same saved archive without starting services
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/discovery-native"
+          CANDIDATE_SHA=$(python3 -c 'import json,os; from pathlib import Path; print(json.loads((Path(os.environ["RUNNER_TEMP"])/"discovery-build/candidate/package-receipt.json").read_bytes())["sha256"])')
+          python3 engineering/discovery_release.py install --archive "$RUNNER_TEMP/discovery-build/candidate/agi-fleet-discovery-0.1.0-discovery-preview.1.zip" --sha256 "$CANDIDATE_SHA" --destination "$RUNNER_TEMP/discovery-installed" 2>&1 | tee "$RUNNER_TEMP/discovery-native/install.log"
+          python3 engineering/discovery_installed_qualification.py provenance --candidate "$RUNNER_TEMP/discovery-build/candidate" --output "$RUNNER_TEMP/discovery-native/provenance.json"
+      - name: Run the actual extracted reviewer and return both alternatives to one mission
+        env:
+          RUNTIME_PROFILE: ${{ matrix.profile }}
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/discovery-installed/discovery-lab/release/qualify-installed.mjs" "$RUNNER_TEMP/discovery-installed" "$RUNNER_TEMP/discovery-native/installed-native" "$RUNTIME_PROFILE" 2>&1 | tee "$RUNNER_TEMP/discovery-native/native.log"
+      - name: Preserve the separate constructed native regression history
+        env:
+          RUNTIME_PROFILE: ${{ matrix.profile }}
+        run: |
+          set -euo pipefail
+          node discovery-lab/release/qualify-constructed-fixture.mjs "$RUNNER_TEMP/discovery-installed" "$RUNNER_TEMP/discovery-native/constructed-fixture" "$RUNTIME_PROFILE" 2>&1 | tee "$RUNNER_TEMP/discovery-native/constructed-fixture.log"
+      - name: Retain native raw bytes and all observed failures
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: discovery-installed-native-${{ matrix.profile }}
+          path: ${{ runner.temp }}/discovery-native/
+          if-no-files-found: error
+          retention-days: 30
+  audit:
+    name: Discovery raw custody audit
+    needs: [build, native]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: discovery-installed-candidate
+          path: ${{ runner.temp }}/discovery-build
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: discovery-installed-native-fleet-linux-x64
+          path: ${{ runner.temp }}/discovery-native-fleet
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: discovery-installed-native-alpha-compatible-linux-x64
+          path: ${{ runner.temp }}/discovery-native-alpha
+      - name: Bind exact source, saved bytes, runtime observations and workflow identity
+        run: |
+          set -euo pipefail
+          python3 engineering/discovery_installed_qualification.py audit --candidate "$RUNNER_TEMP/discovery-build/candidate" --reports "$RUNNER_TEMP/discovery-native-fleet" "$RUNNER_TEMP/discovery-native-alpha" --output "$RUNNER_TEMP/discovery-installed-audit.json"
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: discovery-installed-audit
+          path: ${{ runner.temp }}/discovery-installed-audit.json
+          if-no-files-found: error
+          retention-days: 30
