@@ -1,0 +1,27 @@
+{
+  "schema": "agi-fleet/discovery-installed-profile/v1",
+  "version": "0.1.0-discovery-preview.1",
+  "qualification": "PENDING_FINAL_ALPHA_PIN",
+  "alpha": null,
+  "runtimeProfiles": {
+    "fleet-linux-x64": {
+      "version": "v24.21.0",
+      "platform": "linux",
+      "arch": "x64",
+      "binarySha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c"
+    },
+    "alpha-compatible-linux-x64": {
+      "version": "v22.17.1",
+      "platform": "linux",
+      "arch": "x64",
+      "binarySha256": "e5207b0c9f178fe6b5caf8f5bab550b9f589a3f8e0e802165340e8bbf7f90927"
+    }
+  },
+  "scope": "installed-local-finite-review-only",
+  "remoteExecution": "unprovisioned",
+  "productionQualified": false,
+  "organizationalIndependence": false,
+  "authority": "none",
+  "legacyQualification": "separate-unchanged-required-gates",
+  "publication": "HELD"
+}
