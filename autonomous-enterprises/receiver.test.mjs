@@ -32,6 +32,57 @@ test('Fleet advertises inspection-only zero-cap source development without an in
     assert.equal(value.settlement, 'NOT_RUN');
 });
 
+const source={repository:'MontrealAI/AGI-Alpha-Agent-v0',commit:'4'.repeat(40),constructor:'1'.repeat(64),
+  checker:'2'.repeat(64),closure:'3'.repeat(64)};
+const binding={missionId:'capability-'+ 'a'.repeat(8)+'-'+ 'a'.repeat(4)+'-'+ 'a'.repeat(4)+'-'+ 'a'.repeat(4)+'-'+ 'a'.repeat(12),
+  revision:4,eventHead:'5'.repeat(64),eventPrefixDigest:'6'.repeat(64),attempt:'enterprise-'+ 'b'.repeat(8)+'-'+ 'b'.repeat(4)
+    +'-'+ 'b'.repeat(4)+'-'+ 'b'.repeat(4)+'-'+ 'b'.repeat(12),state:'FROZEN',freezeDigest:'7'.repeat(64),
+  artifactDigests:['8'.repeat(64),'9'.repeat(64),'a'.repeat(64),'b'.repeat(64)],invocationId:null};
+const limits={checkingUnits:5_000_000,elapsedMs:60_000,memoryBytes:32_000_000};
+const literalContext=()=>({schema:'autonomous-enterprise-native-context/v1',source,binding,inspectionId:'literal-inspection',
+  logicalCommissionId:'one-logical-commission',route,limits});
+function literalTransport(context=literalContext()) {
+  return {request:{schema:'autonomous-enterprise-native-request/v1',inspectionId:context.inspectionId,
+    logicalCommissionId:context.logicalCommissionId,route:context.route,source:context.source,binding:context.binding,
+    payloadDigest:'c'.repeat(64),docketDigest:'d'.repeat(64),payload:{workspace:{}},limits:context.limits,
+    authority:[],externalSubmission:'NOT_SUBMITTED',settlement:'NOT_RUN'},docket:'{}'};
+}
+const causeCode=expected=>error=>error.cause?.code===expected && error.authority.length===0;
+
+// Literal report-state checks only. This callback does not certify a real workspace or installed source.
+test('literal negative receipts keep every unknown replay or historical reservation inconclusive',async()=>{
+  const digest=value=>createHash('sha256').update(canonical(value)).digest('hex');
+  const cases=[null,'partial','construction','reservation','future','successor'];
+  for(const uncertainty of cases) {
+    const context=literalContext(),transport=literalTransport(context);let calls=0;
+    const report={schema:'autonomous-enterprise-native-inspection/v1',state:'REJECTED',accepted:false,
+      requestDigest:digest(transport.request),reconciliationKey:digest({schema:'autonomous-enterprise-native-reconciliation-key/v1',
+        source:context.source,binding:context.binding,inspectionId:context.inspectionId,
+        logicalCommissionId:context.logicalCommissionId,route:context.route}),binding:context.binding,route:context.route,
+      source:context.source,payloadDigest:transport.request.payloadDigest,docketDigest:transport.request.docketDigest,
+      resourceUsed:{checkingUnits:10_017,elapsedMs:1,memoryBytes:100},
+      work:{admissionUnits:10_000,knownReplayWork:17,unknownPartialReplay:uncertainty==='partial',
+        measurement:'Declared current shared-session replay delta; native inspections are serialized; unrelated host work is not excluded. '
+          +'Memory bytes reserve four canonical UTF-8 input/context/options footprints, not measured peak VM heap; output, control and framing overhead remain unmeasured. '
+          +'Checking and elapsed limits are soft checks before and after complete bounded replays; JavaScript execution is not preempted.'},
+      reasons:['LITERAL_REPLAY_REJECTED'],historicalState:{state:'FROZEN',unknownConstructionSpent:uncertainty==='construction',
+        unresolvedReservation:uncertainty==='reservation',futureSpent:uncertainty==='future'?'unknown-reservation-retained':null,
+        successorSpent:uncertainty==='successor'?'unknown-reservation-retained':null},authority:[],externalSubmission:'NOT_SUBMITTED',
+      settlement:'NOT_RUN',reconciliation:'RECEIVER_HISTORY_COMMIT_REQUIRED',scope:'LOCAL_FIXED_SOURCE_INSPECTION_ONLY'};
+    const inspector=async()=>{calls++;return report;};
+    const receiver=createEnterpriseReceiver({installedContext:context,inspectNativeRequest:inspector});
+    const raw=canonical(transport),result=await receiver.receive(raw),row=receiver.exportJournal().records[0];
+    assert.equal(result.state,uncertainty?'INCONCLUSIVE':'LOCAL_REJECTED',String(uncertainty));
+    assert.equal(row.state,uncertainty?'INCONCLUSIVE':'INSPECTED',String(uncertainty));
+    assert.equal(row.nativeReservationUnresolved,Boolean(uncertainty),String(uncertainty));
+    assert.equal(row.nativeReceiptDigest,digest(report));assert.deepEqual(result.nativeReceipt,report);
+    assert.equal(result.resourceUsed.checkingUnits,20_017);assert.deepEqual(result.authority,[]);
+    const restored=createEnterpriseReceiver({installedContext:context,inspectNativeRequest:inspector,priorJournal:receiver.exportJournal()});
+    await assert.rejects(restored.receive(raw),causeCode('ENTERPRISE_DUPLICATE_OR_UNCERTAIN_INSPECTION'));
+    assert.equal(calls,1);
+  }
+});
+
 if (!configured) {
     test('actual independently provisioned Alpha checkout is required for native integration',
         {skip: 'Set ALPHA_ENTERPRISE_ROOT to the explicit reviewed source checkout; no fixture is substituted.'}, () => {});
