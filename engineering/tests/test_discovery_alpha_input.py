@@ -26,7 +26,7 @@ class AlphaOriginalInput(unittest.TestCase):
         self.raw_profile = (self.fleet / "discovery-lab/release/mission-input.json").read_bytes()
         self.custody = json.loads((self.base / "input/CUSTODY.json").read_bytes())
         self.binding = original.binding(self.custody, self.alpha)
-        snapshots = {name: json.loads((self.base / 'input/supplementarymetadata' / (name + '.json')).read_bytes())
+        snapshots = {name: json.loads((self.base / 'input/metadata' / (name + '.json')).read_bytes())
             for name in ('run', 'jobs', 'artifacts', 'checkout-commit', 'public-commit')}
         self.metadata = {'run': snapshots['run'], 'job': snapshots['jobs']['jobs'][0],
             'artifact': snapshots['artifacts']['artifacts'][0], 'checkoutCommit': snapshots['checkout-commit'],
@@ -158,7 +158,11 @@ class AlphaOriginalInput(unittest.TestCase):
         return api, read_body, configured, objects, calls
 
     def test_public_git_packet_captures_exact_original17_without_actions_zip(self):
-        api, read_body, configured, _, calls = self.public_api()
+        api, read_body, configured, objects, calls = self.public_api()
+        self.assertEqual(set(original.METADATA), {'metadata/' + name + '.json' for name in
+            ('run', 'jobs', 'artifacts', 'checkout-commit', 'public-commit')})
+        self.assertIn('discovery-continuation/fleet-native/native-proof.json', original.MEMBERS)
+        self.assertEqual(len(original.MEMBERS), 11)
         output = self.base / 'public-read-capture'
         binding, _ = original.fetch_capture(api, read_body, json.dumps(configured), self.alpha, output)
         self.assertEqual(binding, self.binding)
@@ -167,6 +171,13 @@ class AlphaOriginalInput(unittest.TestCase):
         self.assertEqual(len(original.captured_entries(output, json.dumps(configured), self.alpha)), 17)
         self.assertTrue(calls)
         self.assertLessEqual(len(calls), 12)
+        tree = objects['/git/trees/' + configured['transport']['tree'] + '?recursive=1']
+        row = next(row for row in tree['tree'] if row['path'] == 'discovery-input/metadata/run.json')
+        row['path'] = 'discovery-input/supplementarymetadata/run.json'
+        refused = self.base / 'refused-old-metadata-alias'
+        with self.assertRaisesRegex(ValueError, 'exactly the common 17'):
+            original.fetch_capture(api, read_body, json.dumps(configured), self.alpha, refused)
+        self.assertFalse(refused.exists())
 
     def test_public_git_blob_tamper_or_incomplete_metadata_refuses(self):
         api, read_body, configured, objects, _ = self.public_api()
@@ -176,9 +187,9 @@ class AlphaOriginalInput(unittest.TestCase):
             original.fetch_capture(api, read_body, json.dumps(configured), self.alpha, self.base / 'refused-public-capture')
         self.assertFalse((self.base / 'refused-public-capture').exists())
         metadata = {name: (self.base / 'input' / name).read_bytes() for name in original.METADATA}
-        jobs = json.loads(metadata['supplementarymetadata/jobs.json'])
+        jobs = json.loads(metadata['metadata/jobs.json'])
         jobs['total_count'] += 1
-        metadata['supplementarymetadata/jobs.json'] = json.dumps(jobs).encode()
+        metadata['metadata/jobs.json'] = json.dumps(jobs).encode()
         with self.assertRaisesRegex(ValueError, 'Incomplete'):
             original.retained_metadata(metadata, self.binding)
 

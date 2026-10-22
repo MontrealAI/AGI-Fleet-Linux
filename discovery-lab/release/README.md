@@ -66,7 +66,7 @@ replacement mission or reanchors an older artifact to a newer source.
 exact public evidence Git commit/tree/path and custody Git blob/SHA-256/size.
 The shared `successor/discovery-browser-artifact-custody/v1` packet contains
 `CUSTODY.json`, eleven unchanged original Alpha artifact members and five raw
-public API metadata files. The producer verifies the exact seventeen Git blobs,
+`metadata/{run,jobs,artifacts,checkout-commit,public-commit}.json` files. The producer verifies the exact seventeen Git blobs,
 their tree membership, complete original ZIP inventory, outer artifact identity,
 source/page/catalog, successful final-main run/attempt, capability job and required
 steps. It repeats public metadata reads and retains the original raw files inside
@@ -89,6 +89,7 @@ d'une seule mission Alpha authentifiée. L'historique original reste intact; les
 deux reçus natifs sont ajoutés avant la vérification des treize fichiers du dossier.
 Le transport public et le gel final restent en attente. Les missions construites
 restent des tests séparés et ne remplacent jamais une entrée originale manquante.
+Les cinq fichiers de métadonnées utilisent les chemins exacts sous `metadata/`.
 
 Repeat with `alpha-compatible-linux-x64` and its separately pinned executable and
 absent output. This gate uses the captured-byte boundary too; it does not qualify

@@ -71,8 +71,8 @@ def prepare(module, base: Path, alpha):
     snapshots = {'run': metadata['run'], 'jobs': {'total_count': 1, 'jobs': [metadata['job']]},
                  'artifacts': {'total_count': 1, 'artifacts': [metadata['artifact']]},
                  'checkout-commit': metadata['checkoutCommit'], 'public-commit': metadata['acceptedCommit']}
-    supplementary = {'supplementarymetadata/' + name + '.json': raw(value) for name, value in snapshots.items()}
-    for name, value in {**files, **supplementary, "CUSTODY.json": custody_raw}.items():
+    metadata_files = {'metadata/' + name + '.json': raw(value) for name, value in snapshots.items()}
+    for name, value in {**files, **metadata_files, "CUSTODY.json": custody_raw}.items():
         target = base / "input" / name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(value)

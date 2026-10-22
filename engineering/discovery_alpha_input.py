@@ -20,7 +20,7 @@ MEMBERS = ("source.json", "exact-checkout.json", PREFIX + "served/index.html", P
            PREFIX + "fleet-native/native-proof.json", PREFIX + "journey.json",
            *(PREFIX + name for name in ("fleet-browser-workspace.json", "jobs-browser-workspace.json",
              "fleet-browser-request.json", "jobs-browser-request.json", "browser-native-requests.json")))
-METADATA = tuple('supplementarymetadata/' + name + '.json' for name in
+METADATA = tuple('metadata/' + name + '.json' for name in
                  ('run', 'jobs', 'artifacts', 'checkout-commit', 'public-commit'))
 LIMIT = 120_000_000
 
@@ -190,7 +190,7 @@ def authenticated_metadata(api, binding):
 
 
 def retained_metadata(files, expected):
-    snapshots = {name: document(files['supplementarymetadata/' + name + '.json']) for name in
+    snapshots = {name: document(files['metadata/' + name + '.json']) for name in
                  ('run', 'jobs', 'artifacts', 'checkout-commit', 'public-commit')}
     for name in ('jobs', 'artifacts'):
         rows = snapshots[name].get(name)
