@@ -547,7 +547,7 @@ def publish(transport, source, number, comment_id, confirmation, output):
     def publication_lease():
         require(authorize(transport.api, source, number, comment_id, confirmation) == authorization,
                 "Review/source authorization changed before draft publication")
-        require(original_input.authenticated_metadata(alpha_transport.api, binding) == metadata,
+        require(original_input.same_json(original_input.authenticated_metadata(alpha_transport.api, binding), metadata),
                 "Alpha input custody changed before draft publication")
         workflow_jobs(transport.api, authorization)
     result = publish_assets(transport, source, files, body, before_publish=publication_lease)

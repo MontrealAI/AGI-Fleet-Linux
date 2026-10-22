@@ -150,11 +150,16 @@ def validate_members(files, binding, alpha):
             and requests[0]["commission"]["branch"] != requests[1]["commission"]["branch"], "Alpha alternative drafts differ")
 
 
+def same_json(left, right):
+    """Ignore object key order/formatting, preserving JSON types and list order."""
+    return json.dumps(left, sort_keys=True, separators=(',', ':')) == json.dumps(right, sort_keys=True, separators=(',', ':'))
+
+
 def authenticated_metadata(api, binding):
     workflow = api(f'/actions/workflows/{binding["workflowId"]}')
     require(workflow.get('id') == binding['workflowId'] and workflow.get('path') == WORKFLOW,
             'Alpha producer workflow identity differs')
-    run = api(f'/actions/runs/{binding["runId"]}/attempts/{binding["runAttempt"]}')
+    run = api(f'/actions/runs/{binding["runId"]}')
     require(run["id"] == binding["runId"] and run["run_attempt"] == binding["runAttempt"] and run["head_branch"] == "main"
             and run["head_sha"] == binding["headSha"] and run["event"] == binding["event"]
             and run["workflow_id"] == binding["workflowId"] and run["path"].split("@")[0] == WORKFLOW
@@ -166,7 +171,7 @@ def authenticated_metadata(api, binding):
             and (binding["acceptedCommit"] == binding["headSha"] or binding["headSha"] in [row["sha"] for row in accepted["parents"]])
             and checkout["sha"] == binding["checkoutCommit"] and checkout["tree"]["sha"] == binding["checkoutTree"]
             and [row["sha"] for row in checkout["parents"]] == binding["checkoutParents"], "Alpha accepted/synthetic Git source differs")
-    jobs = api(f'/actions/runs/{binding["runId"]}/attempts/{binding["runAttempt"]}/jobs?per_page=100')
+    jobs = api(f'/actions/runs/{binding["runId"]}/attempts/{binding["runAttempt"]}/jobs?per_page=100&page=1')
     require(type(jobs.get('total_count')) is int and jobs['total_count'] == len(jobs['jobs'])
             and 0 < len(jobs['jobs']) <= 100 and len({row.get('id') for row in jobs['jobs']}) == len(jobs['jobs']),
             "Alpha job collection incomplete/duplicate")
@@ -178,7 +183,14 @@ def authenticated_metadata(api, binding):
                  "Retain exact-source screenshots and journey evidence"):
         steps = [row for row in job["steps"] if row["name"] == name]
         require(len(steps) == 1 and steps[0].get('status') == 'completed' and steps[0]["conclusion"] == "success", "Alpha producer step failed/missing")
-    artifact = api(f'/actions/artifacts/{binding["artifactId"]}')
+    artifacts = api(f'/actions/runs/{binding["runId"]}/artifacts?per_page=100&page=1')
+    require(type(artifacts.get('total_count')) is int and artifacts['total_count'] == len(artifacts['artifacts'])
+            and 0 < len(artifacts['artifacts']) <= 100
+            and len({row.get('id') for row in artifacts['artifacts']}) == len(artifacts['artifacts']),
+            "Alpha artifact collection incomplete/duplicate")
+    selected = [row for row in artifacts['artifacts'] if row.get('id') == binding['artifactId']]
+    require(len(selected) == 1, 'Alpha original artifact missing/duplicate')
+    artifact = selected[0]
     require(artifact["id"] == binding["artifactId"] and artifact["name"] == binding["artifactName"]
             and artifact["expired"] is False and artifact["size_in_bytes"] == binding["artifactBytes"]
             and artifact["digest"] == "sha256:" + binding["artifactSha256"]
@@ -186,7 +198,8 @@ def authenticated_metadata(api, binding):
             and datetime.fromisoformat(job["started_at"].replace("Z", "+00:00"))
                 <= datetime.fromisoformat(artifact["created_at"].replace("Z", "+00:00"))
                 <= datetime.fromisoformat(job["completed_at"].replace("Z", "+00:00")), "Alpha original artifact custody differs")
-    return {"run": run, "job": job, "artifact": artifact, "acceptedCommit": accepted, "checkoutCommit": checkout}
+    return {"run": run, "job": job, "artifact": artifact, "jobs": jobs, "artifacts": artifacts,
+            "acceptedCommit": accepted, "checkoutCommit": checkout}
 
 
 def retained_metadata(files, expected):
@@ -200,18 +213,17 @@ def retained_metadata(files, expected):
     selected = [row for row in snapshots['artifacts']['artifacts'] if row.get('id') == expected['artifactId']]
     require(len(selected) == 1, 'Original public artifact metadata missing/duplicate')
     def git_record(value):
-        result = dict(value)
-        result['tree'] = value.get('tree', value.get('commit', {}).get('tree', {}))
-        require(result.get('sha') == expected['acceptedCommit'] and result['tree'].get('sha') == expected['acceptedTree']
-                and [row.get('sha') for row in result.get('parents', [])] == expected['checkoutParents'],
+        require(value.get('sha') == expected['acceptedCommit'] and value.get('tree', {}).get('sha') == expected['acceptedTree']
+                and [row.get('sha') for row in value.get('parents', [])] == expected['checkoutParents'],
                 'Original public source metadata differs')
-        return result
+        return value
     accepted, checkout = (git_record(snapshots[name]) for name in ('public-commit', 'checkout-commit'))
+    require(same_json(accepted, checkout), 'Original public/checkout Git metadata differs')
     lookup = {f'/actions/workflows/{expected["workflowId"]}': {'id': expected['workflowId'], 'path': WORKFLOW},
-              f'/actions/runs/{expected["runId"]}/attempts/{expected["runAttempt"]}': snapshots['run'],
+              f'/actions/runs/{expected["runId"]}': snapshots['run'],
               '/git/commits/' + expected['acceptedCommit']: checkout,
-              f'/actions/runs/{expected["runId"]}/attempts/{expected["runAttempt"]}/jobs?per_page=100': snapshots['jobs'],
-              f'/actions/artifacts/{expected["artifactId"]}': selected[0]}
+              f'/actions/runs/{expected["runId"]}/attempts/{expected["runAttempt"]}/jobs?per_page=100&page=1': snapshots['jobs'],
+              f'/actions/runs/{expected["runId"]}/artifacts?per_page=100&page=1': snapshots['artifacts']}
     authenticated_metadata(lookup.__getitem__, expected)
     return snapshots
 
@@ -319,7 +331,10 @@ def fetch_capture(api, read_body, config, alpha, output):
     expected = binding(document(custody_raw), alpha)
     metadata = authenticated_metadata(api, expected)
     files = public_files(api, read_body, transport, (*MEMBERS, *METADATA), exact=True)
-    retained_metadata({name: files[name] for name in METADATA}, expected)
+    snapshots = retained_metadata({name: files[name] for name in METADATA}, expected)
+    require(same_json(snapshots, {'run': metadata['run'], 'jobs': metadata['jobs'], 'artifacts': metadata['artifacts'],
+            'checkout-commit': metadata['checkoutCommit'], 'public-commit': metadata['acceptedCommit']}),
+            'Committed Alpha metadata sidecars differ from complete live responses')
     validate_members({name: files[name] for name in MEMBERS}, expected, alpha)
     source = public_files(api, read_body, {'commit': alpha['commit'], 'tree': alpha['tree'], 'path': ''},
                           alpha['files'], bindings=alpha['files'])
@@ -327,7 +342,7 @@ def fetch_capture(api, read_body, config, alpha, output):
         require(release.sha(raw) == alpha['files'][name]['sha256']
                 and hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest() == alpha['files'][name]['gitBlob'],
                 'Original accepted Alpha source bytes differ from the reviewed profile')
-    require(authenticated_metadata(api, expected) == metadata, "Original Alpha public metadata changed during capture")
+    require(same_json(authenticated_metadata(api, expected), metadata), "Original Alpha public metadata changed during capture")
     output.mkdir(mode=0o700)
     for name, raw in {**files, "CUSTODY.json": custody_raw}.items():
         target = output / name

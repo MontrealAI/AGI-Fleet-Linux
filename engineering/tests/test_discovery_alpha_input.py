@@ -28,18 +28,19 @@ class AlphaOriginalInput(unittest.TestCase):
         self.binding = original.binding(self.custody, self.alpha)
         snapshots = {name: json.loads((self.base / 'input/metadata' / (name + '.json')).read_bytes())
             for name in ('run', 'jobs', 'artifacts', 'checkout-commit', 'public-commit')}
+        self.snapshots = snapshots
         self.metadata = {'run': snapshots['run'], 'job': snapshots['jobs']['jobs'][0],
             'artifact': snapshots['artifacts']['artifacts'][0], 'checkoutCommit': snapshots['checkout-commit'],
-            'acceptedCommit': snapshots['public-commit']}
+            'acceptedCommit': snapshots['public-commit'], 'jobs': snapshots['jobs'], 'artifacts': snapshots['artifacts']}
 
     def api(self, binding=None, metadata=None):
         binding, metadata = binding or self.binding, metadata or self.metadata
         return {f'/actions/workflows/{binding["workflowId"]}': {'id': binding['workflowId'], 'path': original.WORKFLOW},
-            f'/actions/runs/{binding["runId"]}/attempts/{binding["runAttempt"]}': metadata["run"],
+            f'/actions/runs/{binding["runId"]}': metadata["run"],
             '/git/commits/' + binding["acceptedCommit"]: metadata["acceptedCommit"],
             '/git/commits/' + binding["checkoutCommit"]: metadata["checkoutCommit"],
-            f'/actions/runs/{binding["runId"]}/attempts/{binding["runAttempt"]}/jobs?per_page=100': {"total_count": 1, "jobs": [metadata["job"]]},
-            f'/actions/artifacts/{binding["artifactId"]}': metadata["artifact"]}.__getitem__
+            f'/actions/runs/{binding["runId"]}/attempts/{binding["runAttempt"]}/jobs?per_page=100&page=1': metadata['jobs'],
+            f'/actions/runs/{binding["runId"]}/artifacts?per_page=100&page=1': metadata['artifacts']}.__getitem__
 
     def test_original_raw_inputs_survive_capture_and_package_inventory(self):
         original.profile(self.raw_profile)
@@ -192,6 +193,88 @@ class AlphaOriginalInput(unittest.TestCase):
         metadata['metadata/jobs.json'] = json.dumps(jobs).encode()
         with self.assertRaisesRegex(ValueError, 'Incomplete'):
             original.retained_metadata(metadata, self.binding)
+
+    def replace_public_snapshot(self, objects, configured, name, value):
+        """Commit honest inert Git identities for deliberately changed API JSON."""
+        path = 'discovery-input/metadata/' + name + '.json'
+        raw = json.dumps(value, indent=1).encode()
+        objects['raw:' + configured['transport']['commit'] + ':' + path] = raw
+        tree = objects['/git/trees/' + configured['transport']['tree'] + '?recursive=1']
+        row = next(row for row in tree['tree'] if row['path'] == path)
+        row.update(size=len(raw), sha=hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest())
+
+    def test_full_committed_sidecars_match_live_metadata_before_capture_write(self):
+        # Ancillary collection members and envelope fields are original API evidence too.
+        self.snapshots['jobs']['jobs'].append({'id': 51, 'name': 'ancillary', 'runner_name': 'original runner'})
+        self.snapshots['artifacts']['artifacts'].append({'id': 41, 'name': 'ancillary', 'digest': 'original digest'})
+        for name in ('jobs', 'artifacts'):
+            self.snapshots[name]['total_count'] = 2
+            self.snapshots[name]['inventory_note'] = 'original envelope'
+            (self.base / 'input/metadata' / (name + '.json')).write_text(json.dumps(self.snapshots[name]))
+        api, read_body, configured, objects, _ = self.public_api()
+        changes = []
+        for name, change in (
+            ('run', lambda x: x.update(display_title='modified ancillary run')),
+            ('run', lambda x: x.pop('display_title')),
+            ('run', lambda x: x['ancillary'].update(enabled=1)),
+            ('run', lambda x: x['ancillary']['labels'].reverse()),
+            ('jobs', lambda x: x['jobs'][1].update(runner_name='modified ancillary runner')),
+            ('jobs', lambda x: x.update(inventory_note='modified envelope')),
+            ('jobs', lambda x: x['jobs'].reverse()),
+            ('artifacts', lambda x: x['artifacts'][1].update(digest='modified ancillary digest')),
+            ('artifacts', lambda x: x.update(inventory_note='modified envelope')),
+            ('artifacts', lambda x: x['artifacts'].reverse()),
+        ):
+            value = copy.deepcopy(self.snapshots[name])
+            change(value)
+            changes.append({name: value})
+        for field, value in (('message', 'modified Git message'), ('verification', {'verified': True, 'reason': 'changed'})):
+            # Both same-main commit sidecars can agree with each other yet differ from GitHub.
+            changes.append({name: {**copy.deepcopy(self.snapshots[name]), field: value}
+                            for name in ('checkout-commit', 'public-commit')})
+        for index, changed in enumerate(changes):
+            for name, value in self.snapshots.items():
+                self.replace_public_snapshot(objects, configured, name, value)
+            for name, value in changed.items():
+                self.replace_public_snapshot(objects, configured, name, value)
+            output = self.base / ('refused-sidecar-' + str(index))
+            with self.subTest(changed=changed), self.assertRaisesRegex(ValueError, 'complete live responses'):
+                original.fetch_capture(api, read_body, json.dumps(configured), self.alpha, output)
+            self.assertFalse(output.exists())
+
+    def test_sidecar_json_formatting_preserved_and_exact_live_routes_bounded(self):
+        api, read_body, configured, objects, calls = self.public_api()
+        for name, value in self.snapshots.items():
+            self.replace_public_snapshot(objects, configured, name, dict(reversed(list(value.items()))))
+        output = self.base / 'formatting-capture'
+        original.fetch_capture(api, read_body, json.dumps(configured), self.alpha, output)
+        for name in original.METADATA:
+            self.assertEqual((output / name).read_bytes(),
+                objects['raw:' + configured['transport']['commit'] + ':discovery-input/' + name])
+        for route in ('/actions/runs/10', '/actions/runs/10/attempts/2/jobs?per_page=100&page=1',
+                      '/actions/runs/10/artifacts?per_page=100&page=1'):
+            self.assertEqual(calls.count(route), 2)
+        self.assertEqual(calls.count('/git/commits/' + self.alpha['commit']), 1)
+        self.assertFalse(any(route.startswith('/actions/artifacts/') for route in calls))
+        self.assertLessEqual(len(calls), 12)
+
+    def test_full_mutable_metadata_is_freshly_rechecked_before_capture_write(self):
+        api, read_body, configured, _, _ = self.public_api()
+        for index, route in enumerate(('/actions/runs/10', '/actions/runs/10/attempts/2/jobs?per_page=100&page=1',
+                                       '/actions/runs/10/artifacts?per_page=100&page=1')):
+            count = 0
+            def changing_api(actual):
+                nonlocal count
+                value = copy.deepcopy(api(actual))
+                if actual == route:
+                    count += 1
+                    if count == 2:
+                        value['ancillary_change'] = 'changed after initial observation'
+                return value
+            output = self.base / ('refused-live-change-' + str(index))
+            with self.subTest(route=route), self.assertRaisesRegex(ValueError, 'changed during capture'):
+                original.fetch_capture(changing_api, read_body, json.dumps(configured), self.alpha, output)
+            self.assertFalse(output.exists())
 
     def test_raw_transport_is_immutable_bounded_get_without_credentials(self):
         opener = mock.Mock()

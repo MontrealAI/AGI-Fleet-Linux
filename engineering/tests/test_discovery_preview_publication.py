@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Ordinary inert API/ZIP/publication fixtures; no network or release is created."""
 import copy
+import hashlib
 import importlib.util
 import io
 import json
@@ -25,6 +26,27 @@ try:
     spec.loader.exec_module(publication)
 finally:
     sys.path.pop(0)
+
+
+# Exact immutable bytes at 0dd352fdd2b1af00bc8358e0ac7f96682fd6f796.
+# Keep these explicit: a saved source ZIP has no historical Git object database.
+HISTORICAL_BYTES = {
+    '.github/workflows/next-release.yml': (12612, 'c46984b99d43d8f8c91d74bc35f14c0a7b6d1f217178087c06d04709aab9c125'),
+    '.github/workflows/local-skills.yml': (13301, '93ab984151e461ba6e24a42121cca14e63daa26ea9a4501e9f0cf7fd18a7e3b0'),
+    'engineering/publish-next-release.py': (15071, '96860a0774ed9740a24bccb498561d2e0795f477fc957ecaa541724c94fc51ee'),
+    'engineering/publish-qualified-release.py': (5103, '159d4841f6b8a88a8717f30460124075ec17088702e47196bf077a96957937b7'),
+    'engineering/next-release.json': (739, '0012e5d324d894019ea45d7b31627f47def2c14d06a21127637edc43feffe73b'),
+    'local-runtime/release.py': (18992, '46e6458221045ffec6fa61a15bab9ff0783b6fe19c8e9c8f2f5d4a628f6d620b'),
+    'local-runtime/preview-release.json': (613, 'de001dbd3cd5afadeb642aa59b0b2377ba48fee02367503e9a3afcf283103f18'),
+    'LICENSE': (1068, '4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25'),
+}
+
+
+def historical_bytes(root):
+    for name, expected in HISTORICAL_BYTES.items():
+        raw = (root / name).read_bytes()
+        if (len(raw), hashlib.sha256(raw).hexdigest()) != expected:
+            raise AssertionError('Historical baseline bytes differ: ' + name)
 
 
 def missing(path):
@@ -107,14 +129,29 @@ class Publication(unittest.TestCase):
         self.assertFalse(result["record"]["organizationalIndependence"])
 
     def test_historical_publishers_profiles_and_root_license_are_byte_exact(self):
-        baseline = "0dd352fdd2b1af00bc8358e0ac7f96682fd6f796"
-        for name in (".github/workflows/next-release.yml", ".github/workflows/local-skills.yml",
-                     "engineering/publish-next-release.py", "engineering/publish-qualified-release.py",
-                     "engineering/next-release.json", "local-runtime/release.py", "local-runtime/preview-release.json", "LICENSE"):
-            with self.subTest(name=name):
-                expected = subprocess.check_output(["git", "show", baseline + ":" + name], cwd=publication.ROOT,
-                                                   env=packaging.release.git_environment())
-                self.assertEqual((publication.ROOT / name).read_bytes(), expected)
+        historical_bytes(publication.ROOT)
+
+    def test_historical_byte_pins_work_without_git_and_refuse_each_changed_or_missing_file(self):
+        root = self.base / 'saved-review-source'
+        for name in HISTORICAL_BYTES:
+            target = root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((publication.ROOT / name).read_bytes())
+        self.assertFalse((root / '.git').exists())
+        with mock.patch.object(subprocess, 'check_output', side_effect=AssertionError('Git must not be consulted')):
+            historical_bytes(root)
+            for name in HISTORICAL_BYTES:
+                target = root / name
+                raw = target.read_bytes()
+                target.write_bytes(bytes([raw[0] ^ 1]) + raw[1:])
+                with self.subTest(name=name, case='same-length changed bytes'), self.assertRaises(AssertionError) as caught:
+                    historical_bytes(root)
+                self.assertIn(name, str(caught.exception))
+                target.unlink()
+                with self.subTest(name=name, case='missing bytes'), self.assertRaises(FileNotFoundError):
+                    historical_bytes(root)
+                target.write_bytes(raw)
+            historical_bytes(root)
 
     def test_generic_stale_unresolved_or_unmerged_review_refuses(self):
         record, comment, pull = self.review()

@@ -69,7 +69,13 @@ The shared `successor/discovery-browser-artifact-custody/v1` packet contains
 `metadata/{run,jobs,artifacts,checkout-commit,public-commit}.json` files. The producer verifies the exact seventeen Git blobs,
 their tree membership, complete original ZIP inventory, outer artifact identity,
 source/page/catalog, successful final-main run/attempt, capability job and required
-steps. It repeats public metadata reads and retains the original raw files inside
+steps. Each of the five complete JSON sidecars must equal its live response,
+including ancillary run fields and all jobs/artifacts and their list envelopes;
+only JSON formatting and object-key order may differ. Run metadata uses
+`/actions/runs/{id}`, jobs use the exact attempt with `per_page=100&page=1`,
+and artifacts use the run collection with the same bounds. Both commit sidecars
+use flat `/git/commits/{sha}` records, without normalizing another API shape.
+It repeats mutable public metadata reads and retains the original raw files inside
 the one saved candidate. Public Git transport needs no new credential or
 cross-repository Actions ZIP token. File bodies use bounded immutable public raw
 URLs, checked against complete recursive Git tree records, Git blob identities,
@@ -90,6 +96,10 @@ deux reçus natifs sont ajoutés avant la vérification des treize fichiers du d
 Le transport public et le gel final restent en attente. Les missions construites
 restent des tests séparés et ne remplacent jamais une entrée originale manquante.
 Les cinq fichiers de métadonnées utilisent les chemins exacts sous `metadata/`.
+Leur contenu JSON complet doit correspondre aux réponses publiques courantes,
+y compris tous les travaux, artefacts et champs accessoires; seuls le formatage
+et l'ordre des clés d'objet peuvent varier. Les types JSON et l'ordre des listes
+restent stricts. Les observations publiques modifiables sont relues avant l'écriture.
 
 Repeat with `alpha-compatible-linux-x64` and its separately pinned executable and
 absent output. This gate uses the captured-byte boundary too; it does not qualify

@@ -49,7 +49,8 @@ def prepare(module, base: Path, alpha):
         "members": {name: {"bytes": len(value), "sha256": module.release.sha(value)} for name, value in files.items()}}
     metadata = {"run": {"id": 10, "run_attempt": 2, "head_sha": alpha["commit"], "event": "push", "head_branch": "main", "workflow_id": 30,
         "path": module.WORKFLOW, "repository": {"full_name": module.REPOSITORY},
-        "head_repository": {"full_name": module.REPOSITORY}, "status": "completed", "conclusion": "success"},
+        "head_repository": {"full_name": module.REPOSITORY}, "status": "completed", "conclusion": "success",
+        "display_title": "Original inert run", "ancillary": {"enabled": True, "labels": ["one", "two"]}},
         "job": {"id": 50, "name": "capability", "run_id": 10, "head_sha": alpha["commit"], "status": "completed", "conclusion": "success", "started_at": "2026-10-22T00:00:00Z",
             "completed_at": "2026-10-22T00:02:00Z", "steps": [{"name": name, "status": "completed", "conclusion": "success"} for name in
                 ("Bind retained evidence to exact source", "Saved future-task protocol, docket and real-task boundary acceptance",
@@ -57,8 +58,10 @@ def prepare(module, base: Path, alpha):
         "artifact": {"id": 40, "name": binding["artifactName"], "expired": False, "size_in_bytes": binding["artifactBytes"],
             "digest": "sha256:" + binding["artifactSha256"], "workflow_run": {"id": 10, "head_sha": alpha["commit"]},
             "created_at": "2026-10-22T00:01:00Z"},
-        "acceptedCommit": {"sha": alpha["commit"], "tree": {"sha": alpha["tree"]}, "parents": []},
-        "checkoutCommit": {"sha": alpha["commit"], "tree": {"sha": alpha["tree"]}, "parents": []}}
+        "acceptedCommit": {"sha": alpha["commit"], "tree": {"sha": alpha["tree"]}, "parents": [],
+            "message": "Original inert Git commit", "verification": {"verified": False, "reason": "unsigned"}},
+        "checkoutCommit": {"sha": alpha["commit"], "tree": {"sha": alpha["tree"]}, "parents": [],
+            "message": "Original inert Git commit", "verification": {"verified": False, "reason": "unsigned"}}}
     custody = {"schema": "successor/discovery-browser-artifact-custody/v1", "repository": module.REPOSITORY,
         "workflowPath": module.WORKFLOW, "producer": {"runId": 10, "runAttempt": 2, "workflowId": 30,
             "event": "push", "headBranch": "main", "headCommit": alpha["commit"], "checkoutCommit": alpha["commit"],
