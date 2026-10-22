@@ -1,0 +1,33 @@
+{
+  "schema": "independent-technical-advisory-probe/v1",
+  "runtime": "v24.21.0",
+  "binarySha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c",
+  "sourceSha256": {
+    "qualify.mjs": "20f27f3ceae3c14a85868736455172b5147a49a8ddeac9a19fede5cecb6cfbdf",
+    "qualify.test.mjs": "acb82ee73726614c018c7d37dbdc1ff29a66994415ef8f17113e99bb713c7d9d",
+    "contract.mjs": "44231eae9f3ea5b3c56aa25417978f867d4f21b6309eab0501190b9e20959c6d",
+    "contract.test.mjs": "0b637c67d48c93deded669b1ad601739779307b88210d768fdfb71d5499422d7"
+  },
+  "checksPassed": 17,
+  "checks": [
+    "valid-root:/tmp/fleet-root-review-IWw1P7/alpha",
+    "valid-root:/tmp/fleet-root-review-IWw1P7/alpha/",
+    "valid-root:/tmp/fleet-root-review-IWw1P7/alpha-alias",
+    "valid-root:/tmp/fleet-root-review-IWw1P7/alpha-alias/",
+    "nested-refused-before-write:/tmp/fleet-root-review-IWw1P7/alpha/copies",
+    "nested-refused-before-write:/tmp/fleet-root-review-IWw1P7/nested-alias",
+    "inside-refused:/tmp/fleet-root-review-IWw1P7/alpha",
+    "inside-refused:/tmp/fleet-root-review-IWw1P7/alpha/receipt",
+    "inside-refused:/tmp/fleet-root-review-IWw1P7/fleet",
+    "inside-refused:/tmp/fleet-root-review-IWw1P7/fleet/receipt",
+    "aliased-parent-refused",
+    "outside-preserved:/tmp/fleet-root-review-IWw1P7/alpha-sibling",
+    "outside-preserved:/tmp/fleet-root-review-IWw1P7/evidence",
+    "oversize-parser-scalar-aggregate-no-encoder",
+    "exact-utf8-byte-boundary:97",
+    "exact-utf8-byte-boundary:233",
+    "exact-utf8-byte-boundary:55357"
+  ],
+  "findings": [],
+  "scope": "Narrow local source review. No eligible-owner, organizational independence, release, installed Fleet or external-execution claim."
+}

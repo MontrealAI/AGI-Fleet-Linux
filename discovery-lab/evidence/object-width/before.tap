@@ -1,0 +1,180 @@
+TAP version 13
+# Subtest: obviously oversized imported text is rejected before encoder allocation
+ok 1 - obviously oversized imported text is rejected before encoder allocation
+  ---
+  duration_ms: 1.26592
+  type: 'test'
+  ...
+# Subtest: direct oversized scalar is rejected before stringify or encoder allocation
+ok 2 - direct oversized scalar is rejected before stringify or encoder allocation
+  ---
+  duration_ms: 0.505052
+  type: 'test'
+  ...
+# Subtest: escaped and cumulative canonical output is bounded before encoder allocation
+ok 3 - escaped and cumulative canonical output is bounded before encoder allocation
+  ---
+  duration_ms: 25.214227
+  type: 'test'
+  ...
+# Subtest: ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+ok 4 - ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+  ---
+  duration_ms: 70.432059
+  type: 'test'
+  ...
+# Subtest: UTF-8 multibyte boundaries are measured even when code units fit
+ok 5 - UTF-8 multibyte boundaries are measured even when code units fit
+  ---
+  duration_ms: 101.154827
+  type: 'test'
+  ...
+# Subtest: canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+ok 6 - canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+  ---
+  duration_ms: 0.986307
+  type: 'test'
+  ...
+# Subtest: array node ceiling is checked before descriptor materialization without shrinking its boundary
+ok 7 - array node ceiling is checked before descriptor materialization without shrinking its boundary
+  ---
+  duration_ms: 96.333544
+  type: 'test'
+  ...
+# Subtest: wide object node ceiling precedes descriptors and preserves the admitted boundary
+not ok 8 - wide object node ceiling precedes descriptors and preserves the admitted boundary
+  ---
+  duration_ms: 338.056878
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:88:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Over-limit value reached descriptor inspection
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    withoutDescriptors (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:81:31)
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:90:5)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: wide non-enumerable object and array keys are bounded before descriptor inspection
+not ok 9 - wide non-enumerable object and array keys are bounded before descriptor inspection
+  ---
+  duration_ms: 295.983204
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:96:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /JSON complexity exceeds limit/. Input:
+    
+    'Error: Non-enumerable data is unsupported'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: 'Non-enumerable data is unsupported'
+  stack: |-
+    encode (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.mjs:37:51)
+    canonical (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.mjs:60:20)
+    file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:100:33
+    getActual (node:assert:530:5)
+    Function.throws (node:assert:676:24)
+    file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:100:20
+    withoutEncoder (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:12:11)
+    file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:99:41
+    withoutDescriptors (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:81:11)
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:99:9)
+  operator: 'throws'
+  stack: |-
+    file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:100:20
+    withoutEncoder (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:12:11)
+    file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:99:41
+    withoutDescriptors (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:81:11)
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:99:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+  ...
+# Subtest: object key output lower bound precedes descriptors and observes the remaining output budget
+not ok 10 - object key output lower bound precedes descriptors and observes the remaining output budget
+  ---
+  duration_ms: 31.544056
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:104:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Over-limit value reached descriptor inspection
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    withoutDescriptors (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:81:31)
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:106:5)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: remaining node budget bounds nested object width before descriptor inspection
+not ok 11 - remaining node budget bounds nested object width before descriptor inspection
+  ---
+  duration_ms: 303.187352
+  type: 'test'
+  location: '/workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:113:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Over-limit value reached descriptor inspection
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    withoutDescriptors (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:81:31)
+    TestContext.<anonymous> (file:///workspace/scratch/ce7e013c0938/alpha-discovery/examples/successor-capability/discovery-lab-contract.test.mjs:115:5)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: shared declared inspection charge composes with a distinct receiver allowance in the exact vector
+ok 12 - shared declared inspection charge composes with a distinct receiver allowance in the exact vector
+  ---
+  duration_ms: 0.582568
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 8
+# fail 4
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1348.261527

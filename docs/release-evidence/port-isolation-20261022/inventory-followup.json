@@ -1,0 +1,55 @@
+{
+  "schema": "agi-fleet/port-isolation-derived-inventory-followup/v1",
+  "parent": "9d63d3830d259656e4e8eedcdeb54ac6cabd5ebe",
+  "parentTree": "6cfaeecafaf02e131a3a84f9c5bc6054f4c57bca",
+  "retainedFailedRuns": [
+    {
+      "run": 39826754986,
+      "job": 119991956620,
+      "result": "179of180 engineering tests pass; Mac preview inventory differs"
+    },
+    {
+      "run": 39826754976,
+      "result": "build fails same engineering test; no candidate"
+    },
+    {
+      "run": 39826755005,
+      "result": "source review archive prerequisite fails same engineering test"
+    },
+    {
+      "run": 39826755027,
+      "jobs": [
+        119991956395,
+        119991957042
+      ],
+      "result": "Mac preview materialization stops at unchanged inventory check"
+    }
+  ],
+  "cause": "Initial correction refreshed candidate source inventory but omitted the derived Mac preview input row for engineering/next-release.json. New failure preserved and fixed without rerunning unchanged source.",
+  "correction": {
+    "path": "macos/preview/source-inventory.json",
+    "changedRows": [
+      "engineering/next-release.json"
+    ],
+    "otherRowsPreserved": 54,
+    "sourceBytes": 739,
+    "beforeInputSha256": "0012e5d324d894019ea45d7b31627f47def2c14d06a21127637edc43feffe73b",
+    "afterInputSha256": "20d3adbdd7bffc1c3e86b2d0a336d2cd624857dcde464849c72a4498a0ec5027",
+    "beforeInventory": "c79b0e3a902baa2b38171f1bce78ced99aa412e008f232e4214ef006ff413215",
+    "afterInventory": "7bb4af030a2f0bcf47117ef0196a757869ba14f508af89a5d5a936cec72e9c7c"
+  },
+  "localChecks": {
+    "pythonVersion": "3.12.14",
+    "engineeringTests": {
+      "tests": 180,
+      "failures": 0,
+      "result": "PASS",
+      "log": "engineering-after-mac-inventory.log",
+      "logSha256": "49b0656bca21378df0e82a42f6c4b189e04cfd35125c4a6ac84289a86ebd05d3"
+    },
+    "macPreviewSourceCheck": "PASS",
+    "sourceCheck": "PASS",
+    "preservationCheck": "PASS"
+  },
+  "limitations": "Fresh current-source hosted and full pinned native qualification remain required. Eligible auditor/held61 source-custody review remains unsatisfied; no merge/publication/installed acceptance. Historical1.1.4 release is unchanged; changed source must reconcile1.1.5 before publication."
+}

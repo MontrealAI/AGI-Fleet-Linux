@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: obviously oversized imported text is rejected before encoder allocation
+ok 1 - obviously oversized imported text is rejected before encoder allocation
+  ---
+  duration_ms: 1.275164
+  type: 'test'
+  ...
+# Subtest: direct oversized scalar is rejected before stringify or encoder allocation
+ok 2 - direct oversized scalar is rejected before stringify or encoder allocation
+  ---
+  duration_ms: 0.452863
+  type: 'test'
+  ...
+# Subtest: escaped and cumulative canonical output is bounded before encoder allocation
+ok 3 - escaped and cumulative canonical output is bounded before encoder allocation
+  ---
+  duration_ms: 32.698748
+  type: 'test'
+  ...
+# Subtest: ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+ok 4 - ASCII and escaped scalar JSON remain accepted at exactly two million bytes
+  ---
+  duration_ms: 113.857853
+  type: 'test'
+  ...
+# Subtest: UTF-8 multibyte boundaries are measured even when code units fit
+ok 5 - UTF-8 multibyte boundaries are measured even when code units fit
+  ---
+  duration_ms: 126.594946
+  type: 'test'
+  ...
+# Subtest: canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+ok 6 - canonical bytes for admitted compound data retain sorted keys and Unicode scalars
+  ---
+  duration_ms: 0.775781
+  type: 'test'
+  ...
+# Subtest: array node ceiling is checked before descriptor materialization without shrinking its boundary
+ok 7 - array node ceiling is checked before descriptor materialization without shrinking its boundary
+  ---
+  duration_ms: 75.784143
+  type: 'test'
+  ...
+# Subtest: wide object node ceiling precedes descriptors and preserves the admitted boundary
+ok 8 - wide object node ceiling precedes descriptors and preserves the admitted boundary
+  ---
+  duration_ms: 308.814923
+  type: 'test'
+  ...
+# Subtest: wide non-enumerable object and array keys are bounded before descriptor inspection
+ok 9 - wide non-enumerable object and array keys are bounded before descriptor inspection
+  ---
+  duration_ms: 238.090541
+  type: 'test'
+  ...
+# Subtest: object key output lower bound precedes descriptors and observes the remaining output budget
+ok 10 - object key output lower bound precedes descriptors and observes the remaining output budget
+  ---
+  duration_ms: 62.214605
+  type: 'test'
+  ...
+# Subtest: remaining node budget bounds nested object width before descriptor inspection
+ok 11 - remaining node budget bounds nested object width before descriptor inspection
+  ---
+  duration_ms: 105.204089
+  type: 'test'
+  ...
+# Subtest: shared declared inspection charge composes with a distinct receiver allowance in the exact vector
+ok 12 - shared declared inspection charge composes with a distinct receiver allowance in the exact vector
+  ---
+  duration_ms: 0.443699
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1163.3933

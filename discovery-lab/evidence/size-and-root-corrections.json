@@ -1,0 +1,33 @@
+{
+  "schema": "agi-fleet/size-and-root-corrections/v1",
+  "originalHead": "10f540f8e247ce22ca7d31860ad0933871465efc",
+  "findings": [
+    "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/64#discussion_r4341764278",
+    "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/64#discussion_r4341801334"
+  ],
+  "originalEvidence": [
+    "contract-size-before.tap",
+    "nested-root-before.json"
+  ],
+  "regressions": {
+    "node24.21.0": 32,
+    "node22.17.1": 32,
+    "fail": 0
+  },
+  "canonicalByteEquivalence": "contract-size-equivalence.json",
+  "independentAdvisoryReview": {
+    "tests": 32,
+    "additionalChecks": 17,
+    "evidenceDirectory": "independent-root-guard-probes",
+    "eligibleOwnerApproval": false,
+    "organizationalIndependence": false
+  },
+  "sourceSha256": {
+    "contract.mjs": "44231eae9f3ea5b3c56aa25417978f867d4f21b6309eab0501190b9e20959c6d",
+    "contract.test.mjs": "0b637c67d48c93deded669b1ad601739779307b88210d768fdfb71d5499422d7",
+    "qualify.mjs": "20f27f3ceae3c14a85868736455172b5147a49a8ddeac9a19fede5cecb6cfbdf",
+    "qualify.test.mjs": "acb82ee73726614c018c7d37dbdc1ff29a66994415ef8f17113e99bb713c7d9d",
+    "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd"
+  },
+  "scope": "Local imported-data/source-harness correctness. Fresh source pins/native evidence and exact candidate hosted checks remain separately required."
+}

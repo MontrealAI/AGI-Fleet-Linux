@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "acceptanceRelease": "1.0.9",
+  "nativeAcceptance": "PASS",
+  "candidateAcceptance": "SEE_NEW_RELEASE_AUDIT",
+  "jobIntegration": "PASS",
+  "mainnetDeploymentObservation": {
+    "status": "PASS",
+    "rpcHosts": [
+      "rpc.mevblocker.io",
+      "ethereum-rpc.publicnode.com"
+    ],
+    "runtimeContracts": 9,
+    "managerGettersPerHost": 42,
+    "observationBlock": 26162266,
+    "intakeOpenAtObservedBlock": false,
+    "productionQualified": false
+  },
+  "recordedMainnetObservation": {
+    "status": "PASS",
+    "rpcHosts": [
+      "rpc.mevblocker.io",
+      "ethereum-rpc.publicnode.com"
+    ],
+    "runtimeContracts": 9,
+    "managerGettersPerHost": 42,
+    "observationBlock": 26170203,
+    "intakeOpenAtObservedBlock": false,
+    "productionQualified": false
+  },
+  "operatorGate": "OPEN_FOR_CONTROLLED_FRESH_INSTALL",
+  "sourceMirror": {
+    "status": "PASS",
+    "version": "1.1.4",
+    "files": 6153,
+    "revisionSHA256": "ccb404ab6bf79616e54aba2c33d71686447cb215128b04ba6a7dbce2e53d5383"
+  },
+  "productionQualified": false
+}

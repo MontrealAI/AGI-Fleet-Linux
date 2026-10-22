@@ -1,0 +1,52 @@
+{
+  "schema": "agi-fleet/budget-binding-reproduction/v1",
+  "sourceCommit": "26929d0f2240378a85cba511020e746c8de1e195",
+  "receiverSha256": "d54f2b24b6b14b8fb4ea5b16a031ff0e6dc58560e308eda1f45bb1ac33413036",
+  "reviewComment": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/64#discussion_r4341609489",
+  "expected": "inconclusive",
+  "actual": "rejected",
+  "checkingLimit": 0,
+  "receipt": {
+    "schema": "agi-fleet/discovery-review/v1",
+    "state": "rejected",
+    "reasons": [
+      "DISCOVERY_STALE_BINDING"
+    ],
+    "missionId": "capability-00000000-0000-4000-8000-000000000000",
+    "revision": 0,
+    "stage": "learn",
+    "requestDigest": "c946fb765e7c73fe261e0867660ff73f06c78bf9614f252a4ccca134d8cbe9c1",
+    "payloadDigest": "d64ebd875c1d527d4cb715befc04e0c73fd68fb9eabdfaa124db1e3ab5ce167f",
+    "sourceDigest": "4444444444444444444444444444444444444444444444444444444444444444",
+    "evaluatorDigest": "5555555555555555555555555555555555555555555555555555555555555555",
+    "commission": {
+      "branch": "usdc-example",
+      "capBaseUnits": "0",
+      "currency": "USDC6",
+      "id": "lab-example",
+      "route": "manager-usdc",
+      "status": "DRAFT_NOT_SUBMITTED"
+    },
+    "executorId": "budget-regression-fixture",
+    "runtimeDigest": "6666666666666666666666666666666666666666666666666666666666666666",
+    "executionMode": "synthetic-local",
+    "scope": "bounded-synthetic-semantic-review",
+    "resourceUsed": {
+      "acquisitions": 0,
+      "search": 0,
+      "checking": 1,
+      "memoryBytes": 1159,
+      "storageBytes": 1233,
+      "workerCapacity": 0,
+      "installations": 0,
+      "elapsedMs": 5
+    },
+    "resourceAccounting": "admission-only-known-input-and-receipt-bytes",
+    "authority": "none",
+    "remoteExecution": "unprovisioned",
+    "settlement": "not-connected",
+    "organizationalIndependence": false,
+    "protectedHoldout": false
+  },
+  "scope": "Public transport-only fixture; no semantic execution or authority."
+}

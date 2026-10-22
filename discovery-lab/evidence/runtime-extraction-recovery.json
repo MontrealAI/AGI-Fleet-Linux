@@ -1,0 +1,13 @@
+{
+  "schema": "agi-fleet/runtime-extraction-recovery/v1",
+  "archiveSha256": "fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6",
+  "archiveDeclaredNodeBytes": 126595440,
+  "initialExtractedNodeBytes": 55755264,
+  "initialExtractedNodeSha256": "26678611e286f73b74f650fd15fdf3282e838a889e8c9d29e7de6eafbe697e93",
+  "initialPlainScriptExit": 139,
+  "initialJitlessScriptExit": 139,
+  "diagnosis": "Extracted binary was truncated; --version alone was insufficient.",
+  "archiveStreamNodeSha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c",
+  "completeStandardNpmNodeSha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c",
+  "recovery": "Use complete standard npm binary only after independently matching its bytes to the exact verified official tar archive member; no runtime pin or acceptance gate changed."
+}

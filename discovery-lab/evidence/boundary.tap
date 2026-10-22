@@ -1,0 +1,118 @@
+TAP version 13
+# Subtest: all six discriminants and both inert currency routes are transport-compatible
+ok 1 - all six discriminants and both inert currency routes are transport-compatible
+  ---
+  duration_ms: 52.505494
+  type: 'test'
+  ...
+# Subtest: unprovisioned is the default and imported fields cannot install a checker
+ok 2 - unprovisioned is the default and imported fields cannot install a checker
+  ---
+  duration_ms: 1.461796
+  type: 'test'
+  ...
+# Subtest: transport inspection does not manufacture semantic acceptance
+ok 3 - transport inspection does not manufacture semantic acceptance
+  ---
+  duration_ms: 8.249218
+  type: 'test'
+  ...
+# Subtest: each immutable binding and the current runtime identity must match
+ok 4 - each immutable binding and the current runtime identity must match
+  ---
+  duration_ms: 7.365764
+  type: 'test'
+  ...
+# Subtest: logical commission identity, branch and route are frozen independently
+ok 5 - logical commission identity, branch and route are frozen independently
+  ---
+  duration_ms: 3.760654
+  type: 'test'
+  ...
+# Subtest: unsupported stages and modes never invoke the registered checker
+ok 6 - unsupported stages and modes never invoke the registered checker
+  ---
+  duration_ms: 1.983153
+  type: 'test'
+  ...
+# Subtest: receiver refuses positive caps, currency mixing and submitted imports
+ok 7 - receiver refuses positive caps, currency mixing and submitted imports
+  ---
+  duration_ms: 2.186309
+  type: 'test'
+  ...
+# Subtest: changed executable data, duplicate keys and non-finite resources refuse
+ok 8 - changed executable data, duplicate keys and non-finite resources refuse
+  ---
+  duration_ms: 2.399211
+  type: 'test'
+  ...
+# Subtest: capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
+ok 9 - capacity mismatch remains unprovisioned; insufficient review budget is inconclusive
+  ---
+  duration_ms: 2.089793
+  type: 'test'
+  ...
+# Subtest: failed and over-budget checks retain cost lower bounds and never become rejection proofs
+ok 10 - failed and over-budget checks retain cost lower bounds and never become rejection proofs
+  ---
+  duration_ms: 4.343194
+  type: 'test'
+  ...
+# Subtest: previous acceptance is rechecked on every retry, with no hidden receipt store
+ok 11 - previous acceptance is rechecked on every retry, with no hidden receipt store
+  ---
+  duration_ms: 3.811331
+  type: 'test'
+  ...
+# Subtest: malformed checker output is inconclusive and never publishes an accepted receipt
+ok 12 - malformed checker output is inconclusive and never publishes an accepted receipt
+  ---
+  duration_ms: 2.369225
+  type: 'test'
+  ...
+# Subtest: storage is reserved before semantic work and current request cannot be rewritten by its checker
+ok 13 - storage is reserved before semantic work and current request cannot be rewritten by its checker
+  ---
+  duration_ms: 8.030648
+  type: 'test'
+  ...
+# Subtest: exhaustion at the exact budget is inconclusive and installed identity stays source-bound
+ok 14 - exhaustion at the exact budget is inconclusive and installed identity stays source-bound
+  ---
+  duration_ms: 9.193462
+  type: 'test'
+  ...
+# Subtest: unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
+ok 15 - unrepresentable receipt totals are retained as explicit lower-bound inconclusive outcomes
+  ---
+  duration_ms: 2.427282
+  type: 'test'
+  ...
+# Subtest: direct object APIs reject hidden data and getters without invoking them
+ok 16 - direct object APIs reject hidden data and getters without invoking them
+  ---
+  duration_ms: 1.448956
+  type: 'test'
+  ...
+# Subtest: checker receives remaining budget and returned reasons cannot alias later changes
+ok 17 - checker receives remaining budget and returned reasons cannot alias later changes
+  ---
+  duration_ms: 3.320239
+  type: 'test'
+  ...
+# Subtest: unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
+ok 18 - unprovisioned admission attempts retain known input, checking, receipt and elapsed costs
+  ---
+  duration_ms: 1.61698
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 256.285406

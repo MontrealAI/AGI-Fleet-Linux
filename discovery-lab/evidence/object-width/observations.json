@@ -1,0 +1,47 @@
+{
+  "schema": "agi-fleet/common-object-width-repair-evidence/v1",
+  "finding": "https://github.com/MontrealAI/AGI-Fleet-Linux/pull/64#discussion_r4342007670",
+  "scope": "Alpha in-development common-contract patch prior to immutable publication; no native source acceptance transfer. Same pre-fix canonical implementation as public Fleet c310.",
+  "publicFleetHead": "c3105c5652f2aa2174bb2fd09563bfc30d3c1089",
+  "publicFleetContractSha256": "44231eae9f3ea5b3c56aa25417978f867d4f21b6309eab0501190b9e20959c6d",
+  "preWidthSnapshotSha256": "2f0ece43ffd105c2ab3eb0dc135a12a4c0ba8935b6639f46ec426d93c2d1a5be",
+  "samePreFixCanonicalPrefix": true,
+  "canonicalPrefixSha256": "3e4cdf847026894c2790ec8790a5d651dadb9ed0ae05b50e1f2df5d9d00b4351",
+  "proposedContractSha256": "9d2c99031d0b5c7ecd98ab3495c25ff48671eac3e94397b730ff93158bc21b71",
+  "proposedTestSha256": "3b2d5f9459f145b82fb59c77287453918f70de9c0d8b50f51b48e11a4a6e9169",
+  "logs": [
+    {
+      "file": "fleet-object-width-before.tap",
+      "sha256": "392ad2d834e913e84ea354bb83ab037a57bff8a4ead9a9b8421807aecf75ee37",
+      "format": "TAP",
+      "tests": 12,
+      "passed": 8,
+      "failed": 4
+    },
+    {
+      "file": "fleet-object-width-node22.tap",
+      "sha256": "45bfa066ba6f5c9c344cbeacb0f4c09b6ec0981848da2d6aee44a404ef697410",
+      "format": "TAP",
+      "tests": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "file": "fleet-object-width-node24.tap",
+      "sha256": "3ad32d206e9fb65b1dd6ee00c3d23ed041f615f8ce83346fad05d14b137420ab",
+      "format": "Node default spec reporter",
+      "tests": 12,
+      "passed": 12,
+      "failed": 0
+    }
+  ],
+  "canonicalEquivalence": {
+    "runtime": "v22.17.1",
+    "baselineContractSha256": "2f0ece43ffd105c2ab3eb0dc135a12a4c0ba8935b6639f46ec426d93c2d1a5be",
+    "newContractSha256": "9d2c99031d0b5c7ecd98ab3495c25ff48671eac3e94397b730ff93158bc21b71",
+    "cases": 1055,
+    "allAdmittedCanonicalBytesIdentical": true,
+    "aggregateSha256": "60cc9e2ddf3ce5cbfaab72a9e0ee64b3d521c52d62f5621369bc8ab31e1b897c"
+  },
+  "rootIndependentDisposition": "Root reported 35/35 pinned22 contract/history/lineage tests pass and no narrow blocker; advisory review, no external eligible-owner or configured security acceptance."
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "agi-fleet/hosted-exact-review-source-results/v1",
+  "head": "c3105c5652f2aa2174bb2fd09563bfc30d3c1089",
+  "testedSourceCommit": "e7e04e033d57fc23c90fa424a62a0029cc082039",
+  "sourceTree": "96545a8ad747fdb853fe566c32a68dc43833cd51",
+  "origin": "actual-downloaded-hosted-artifact12383956986-run39676928280-historical-Alpha1665-inspector-scope",
+  "artifact": 12383956986,
+  "workflowRun": 39676928280,
+  "outerSha256": "584f4a3c1c353da5e80c17d8de70d1e6d47e040c94748dee1b4d6ee934c20aee",
+  "outerBytes": 30790570,
+  "archiveSha256": "13ce27a56971c58aabd9d5af1a12e707e5c3eab1d4a13a0b019dc4048002c6a6",
+  "archiveBytes": 30789551,
+  "verifiedFiles": 6754,
+  "verifiedDirectories": 1043,
+  "actualHostedReceipt": {
+    "schema": "agi-fleet-review-source/v1",
+    "repository": "MontrealAI/AGI-Fleet-Linux",
+    "commit": "e7e04e033d57fc23c90fa424a62a0029cc082039",
+    "workflowRun": "39676928280",
+    "event": "pull_request",
+    "name": "AGI-Fleet-Linux-review-source.zip",
+    "bytes": 30789551,
+    "sha256": "13ce27a56971c58aabd9d5af1a12e707e5c3eab1d4a13a0b019dc4048002c6a6",
+    "purpose": "Exact review source; not an installer or qualified release",
+    "productionQualified": false,
+    "releaseEligible": false
+  },
+  "localUtcArchiveByteIdentical": true,
+  "alphaCommit": "1665cb83f09bde3962f80942e2f1e54b789d9708",
+  "runtimes": {
+    "24": {
+      "runtime": "v24.21.0",
+      "profile": "fleet-linux-x64",
+      "nativePassed": 45,
+      "nativeTotal": 45,
+      "boundaryPassed": 32,
+      "boundaryFailed": 0,
+      "browserDraftsPassed": 2,
+      "browserDraftsTotal": 2,
+      "receiverSources": {
+        "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd",
+        "contract.mjs": "44231eae9f3ea5b3c56aa25417978f867d4f21b6309eab0501190b9e20959c6d",
+        "qualify.mjs": "20f27f3ceae3c14a85868736455172b5147a49a8ddeac9a19fede5cecb6cfbdf",
+        "alpha-source-pin.json": "b637304279eb3692027eac33f15bd4de0a0a185f73d6a84e6e74ffdd4d2e9dc6"
+      },
+      "nativeEvidenceSha256": "05d4477dfbeb05113ace69adae6363190f73b15c239c2b74cf454e2f2a7eb31b",
+      "browserEvidenceSha256": "474fd32d63e76a53544a91efe1fdec1e186c37268ad9471847a75712f3156969",
+      "workspaceSha256": "cf79913210fc2bdfbdf216e119f577c20ae427cb32764e981c60c7c81fcd40d8"
+    },
+    "22": {
+      "runtime": "v22.17.1",
+      "profile": "alpha-compatible-linux-x64",
+      "nativePassed": 45,
+      "nativeTotal": 45,
+      "boundaryPassed": 32,
+      "boundaryFailed": 0,
+      "browserDraftsPassed": 2,
+      "browserDraftsTotal": 2,
+      "receiverSources": {
+        "receiver.mjs": "55000194e7743dc9725d32a516287fec6bd7e0fc42bd36bf26c1665975f734cd",
+        "contract.mjs": "44231eae9f3ea5b3c56aa25417978f867d4f21b6309eab0501190b9e20959c6d",
+        "qualify.mjs": "20f27f3ceae3c14a85868736455172b5147a49a8ddeac9a19fede5cecb6cfbdf",
+        "alpha-source-pin.json": "b637304279eb3692027eac33f15bd4de0a0a185f73d6a84e6e74ffdd4d2e9dc6"
+      },
+      "nativeEvidenceSha256": "fc78f3c04fb391730da3a5c07ca6400fbd48b8c08a9f9080af25b0a80d637d26",
+      "browserEvidenceSha256": "50546890ce690c31f2e3d1f66e6f5c9c36aea51eda8eef5437b320f2de728598",
+      "workspaceSha256": "cf79913210fc2bdfbdf216e119f577c20ae427cb32764e981c60c7c81fcd40d8"
+    }
+  },
+  "scope": "Actual downloaded hosted c310 source archive physically extracted, verified and executed against historical Alpha1665 inspector only. Forthcoming standalone-inspector corrections are not qualified. Review-source distribution only; operator installer omits module and remote execution is unprovisioned."
+}
