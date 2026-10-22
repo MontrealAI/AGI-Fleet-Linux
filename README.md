@@ -4,6 +4,14 @@
 
 **[Build my SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor.html)** · **[Créer mon SUCCESSOR Ω](https://montrealai.github.io/AGI-Fleet-Linux/successor-fr.html)** — Create useful local work, connect a qualified Fleet computer, check improvements and keep your system. [Builder guide](successor/docs/GUIDE.md).
 
+**Autonomous Enterprises · source preview.** Build checked computational capabilities with Alpha, freeze
+and invoke their bytes on later tasks, and inspect one shared thirteen-section Evidence Docket. Fleet supplies its
+separate replay review route with no currency or transaction.
+[Foundry source candidate](https://github.com/MontrealAI/AGI-Alpha-Agent-v0/pull/4855) ·
+[Fleet receiver contract and remaining acceptance](docs/AUTONOMOUS_ENTERPRISES.md).
+Installed custody, operator-package qualification and the operational pilot remain **NOT_RUN**.
+**Français :** aperçu source de capacités vérifiées et réutilisables ; installation et pilote opérationnel **NOT_RUN**.
+
 **Published qualification releases: Linux 1.1.4 and Local Skills alpha.4.** Both were published on 15 October 2026 after their exact saved-archive gates passed on x86-64 and ARM64. They add stronger artifact checks, readable reports, explicit reuse/mapping, bounded history continuation, task admission and lifecycle corrections. [Linux release notes](docs/RELEASE_NOTES_1_1_4.md) · [Local Skills release](https://github.com/MontrealAI/AGI-Fleet-Linux/releases/tag/v0.1.0-local-skills-preview.4) · [Completion backlog and open gates](docs/PRODUCT_COMPLETION.json). Both remain prereleases with production qualification false; physical and live-provider commissioning remain open.
 
 **New source candidate: Local Skills alpha.5.** The [Alpha project journey](docs/local-skills/PROJECT_JOURNEY.md) preserves one project through bounded Fleet execution and a separately authorized internal check, with USDC and $AGIALPHA kept explicit. This is a source candidate pending its own saved-package qualification; the published downloads above are unchanged.
