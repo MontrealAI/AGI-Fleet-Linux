@@ -1,0 +1,73 @@
+TAP version 13
+# Subtest: verified evidence actual pinned Gateway/catalogue/compute health completes the fresh transaction
+ok 1 - verified evidence actual pinned Gateway/catalogue/compute health completes the fresh transaction
+  ---
+  duration_ms: 24397.255897
+  type: 'test'
+  ...
+# gateway port 42269
+# Real pinned Gateway persisted the hosted discovery cache; versioned identity validates it.
+# 2026-10-22T00:43:17.600+00:00 [gateway] loading configuration…\\n2026-10-22T00:43:17.619+00:00 [gateway] resolving authentication…\\n2026-10-22T00:43:17.622+00:00 [gateway] starting...\\n2026-10-22T00:43:17.878+00:00 [gateway] shutdown budget at startup: drain=75000ms shutdown=85000ms reserve=10000ms exitMargin=5000ms; source=systemd system hosted-compute-agent.service TimeoutStopUSec=90000ms\\n2026-10-22T00:43:17.976+00:00 [gateway] spawn broker ready pid=6285\\n2026-10-22T00:43:18.329+00:00 [gateway] auto-enabled plugins for this runtime without writing config:\\n- openai/gpt-5.2 model configured, enabled automatically.\\n2026-10-22T00:43:18.845+00:00 [gateway] starting HTTP server...\\n2026-10-22T00:43:19.039+00:00 [health-monitor] started (interval: 300s, startup-grace: 60s, channel-connect-grace: 120s)\\n2026-10-22T00:43:19.606+00:00 [gateway] starting channels and sidecars...\\n2026-10-22T00:43:19.614+00:00 [gateway] agent model: openai/gpt-5.2 (thinking=high, fast=off)\\n2026-10-22T00:43:19.615+00:00 [gateway] http server listening (1 plugin: openai; 1.7s)\\n2026-10-22T00:43:19.615+00:00 [gateway] log file: /tmp/openclaw/openclaw-agi--evidence--compute-2026-10-22.log\\n2026-10-22T00:43:19.853+00:00 [gateway] startup outcomes: internal-hooks=skipped (not-configured); internal-startup-hook=skipped (no-handlers-loaded); gateway-start-hooks=skipped (no-handlers-loaded); gmail-watcher=skipped (hooks-disabled); gmail-model=skipped (not-configured)\\n2026-10-22T00:43:19.860+00:00 [gateway] ready\\n2026-10-22T00:43:19.907+00:00 [skill-workshop] scheduled skill collection reviews are disabled because the cron scheduler is disabled; enable cron and restart the gateway\\n2026-10-22T00:43:19.910+00:00 [heartbeat] disabled\\n2026-10-22T00:43:20.659+00:00 [gateway] remote model catalog downloaded; restart the Gateway to apply it\\n2026-10-22T00:43:23.502+00:00 [admission] closed: stop (SIGTERM)\\n2026-10-22T00:43:23.503+00:00 [gateway] received SIGTERM; shutting down\\n2026-10-22T00:43:23.505+00:00 [gateway] shutdown budget at shutdown: drain=75000ms shutdown=85000ms reserve=10000ms exitMargin=5000ms; source=systemd system hosted-compute-agent.service TimeoutStopUSec=90000ms\\n2026-10-22T00:43:23.508+00:00 [gateway] active-work drain settled; beginning server close\\n2026-10-22T00:43:23.521+00:00 [gmail-watcher] gmail watcher stopped\\n2026-10-22T00:43:23.564+00:00 [shutdown] completed cleanly in 52ms\\n
+# Subtest: verified evidence actual pinned Gateway/catalogue/compute health retains failed fresh runtime safely
+ok 2 - verified evidence actual pinned Gateway/catalogue/compute health retains failed fresh runtime safely
+  ---
+  duration_ms: 23230.537586
+  type: 'test'
+  ...
+# gateway port 35625
+# Real pinned Gateway persisted the hosted discovery cache; versioned identity validates it.
+# 2026-10-22T00:43:41.825+00:00 [gateway] loading configuration…\\n2026-10-22T00:43:41.843+00:00 [gateway] resolving authentication…\\n2026-10-22T00:43:41.846+00:00 [gateway] starting...\\n2026-10-22T00:43:42.088+00:00 [gateway] shutdown budget at startup: drain=75000ms shutdown=85000ms reserve=10000ms exitMargin=5000ms; source=systemd system hosted-compute-agent.service TimeoutStopUSec=90000ms\\n2026-10-22T00:43:42.177+00:00 [gateway] spawn broker ready pid=6603\\n2026-10-22T00:43:42.532+00:00 [gateway] auto-enabled plugins for this runtime without writing config:\\n- openai/gpt-5.2 model configured, enabled automatically.\\n2026-10-22T00:43:43.049+00:00 [gateway] starting HTTP server...\\n2026-10-22T00:43:43.263+00:00 [health-monitor] started (interval: 300s, startup-grace: 60s, channel-connect-grace: 120s)\\n2026-10-22T00:43:43.893+00:00 [gateway] starting channels and sidecars...\\n2026-10-22T00:43:43.903+00:00 [gateway] agent model: openai/gpt-5.2 (thinking=high, fast=off)\\n2026-10-22T00:43:43.904+00:00 [gateway] http server listening (1 plugin: openai; 1.8s)\\n2026-10-22T00:43:43.905+00:00 [gateway] log file: /tmp/openclaw/openclaw-agi--evidence--compute-2026-10-22.log\\n2026-10-22T00:43:44.149+00:00 [gateway] startup outcomes: internal-hooks=skipped (not-configured); internal-startup-hook=skipped (no-handlers-loaded); gateway-start-hooks=skipped (no-handlers-loaded); gmail-watcher=skipped (hooks-disabled); gmail-model=skipped (not-configured)\\n2026-10-22T00:43:44.156+00:00 [gateway] ready\\n2026-10-22T00:43:44.216+00:00 [skill-workshop] scheduled skill collection reviews are disabled because the cron scheduler is disabled; enable cron and restart the gateway\\n2026-10-22T00:43:44.218+00:00 [heartbeat] disabled\\n2026-10-22T00:43:44.907+00:00 [gateway] remote model catalog downloaded; restart the Gateway to apply it\\n2026-10-22T00:43:47.606+00:00 [admission] closed: stop (SIGTERM)\\n2026-10-22T00:43:47.607+00:00 [gateway] received SIGTERM; shutting down\\n2026-10-22T00:43:47.609+00:00 [gateway] shutdown budget at shutdown: drain=75000ms shutdown=85000ms reserve=10000ms exitMargin=5000ms; source=systemd system hosted-compute-agent.service TimeoutStopUSec=90000ms\\n2026-10-22T00:43:47.612+00:00 [gateway] active-work drain settled; beginning server close\\n2026-10-22T00:43:47.630+00:00 [gmail-watcher] gmail watcher stopped\\n2026-10-22T00:43:47.670+00:00 [shutdown] completed cleanly in 55ms\\n
+# Subtest: standard evidence actual pinned Gateway/catalogue/compute health completes the fresh transaction
+ok 3 - standard evidence actual pinned Gateway/catalogue/compute health completes the fresh transaction
+  ---
+  duration_ms: 25272.446535
+  type: 'test'
+  ...
+# gateway port 34613
+# 2026-10-22T00:43:57.509+00:00 [gateway] loading configuration…\\n2026-10-22T00:43:57.526+00:00 [gateway] resolving authentication…\\n2026-10-22T00:43:57.529+00:00 [gateway] starting...\\n2026-10-22T00:43:57.786+00:00 [gateway] shutdown budget at startup: drain=75000ms shutdown=85000ms reserve=10000ms exitMargin=5000ms; source=systemd system hosted-compute-agent.service TimeoutStopUSec=90000ms\\n2026-10-22T00:43:57.884+00:00 [gateway] spawn broker ready pid=6991\\n2026-10-22T00:43:58.216+00:00 [gateway] auto-enabled plugins for this runtime without writing config:\\n- openai/gpt-5.2 model configured, enabled automatically.\\n2026-10-22T00:43:58.724+00:00 [gateway] starting HTTP server...\\n2026-10-22T00:43:58.933+00:00 [health-monitor] started (interval: 300s, startup-grace: 60s, channel-connect-grace: 120s)\\n2026-10-22T00:43:59.517+00:00 [gateway] starting channels and sidecars...\\n2026-10-22T00:43:59.525+00:00 [gateway] agent model: openai/gpt-5.2 (thinking=high, fast=off)\\n2026-10-22T00:43:59.526+00:00 [gateway] http server listening (1 plugin: openai; 1.7s)\\n2026-10-22T00:43:59.526+00:00 [gateway] log file: /tmp/openclaw/openclaw-agi--evidence--compute-2026-10-22.log\\n2026-10-22T00:43:59.734+00:00 [gateway] startup outcomes: internal-hooks=skipped (not-configured); internal-startup-hook=skipped (no-handlers-loaded); gateway-start-hooks=skipped (no-handlers-loaded); gmail-watcher=skipped (hooks-disabled); gmail-model=skipped (not-configured)\\n2026-10-22T00:43:59.741+00:00 [gateway] ready\\n2026-10-22T00:43:59.795+00:00 [skill-workshop] scheduled skill collection reviews are disabled because the cron scheduler is disabled; enable cron and restart the gateway\\n2026-10-22T00:43:59.796+00:00 [heartbeat] disabled\\n2026-10-22T00:44:00.495+00:00 [gateway] remote model catalog downloaded; restart the Gateway to apply it\\n2026-10-22T00:44:04.229+00:00 [admission] closed: stop (SIGTERM)\\n2026-10-22T00:44:04.230+00:00 [gateway] received SIGTERM; shutting down\\n2026-10-22T00:44:04.231+00:00 [gateway] shutdown budget at shutdown: drain=75000ms shutdown=85000ms reserve=10000ms exitMargin=5000ms; source=systemd system hosted-compute-agent.service TimeoutStopUSec=90000ms\\n2026-10-22T00:44:04.234+00:00 [gateway] active-work drain settled; beginning server close\\n2026-10-22T00:44:04.248+00:00 [gmail-watcher] gmail watcher stopped\\n2026-10-22T00:44:04.289+00:00 [shutdown] completed cleanly in 50ms\\n
+# Subtest: standard evidence actual pinned Gateway/catalogue/compute health retains failed fresh runtime safely
+not ok 4 - standard evidence actual pinned Gateway/catalogue/compute health retains failed fresh runtime safely
+  ---
+  duration_ms: 15136.842476
+  type: 'test'
+  location: '/root/agi-next-39690796342-1/frozen/AGI_Fleet_Linux_v1.1.4/packages/AGI_Evidence/tests/setup-runtime-materialization.test.mjs:22:74'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /COMPUTE_SERVICE_HEALTH_FAILED/. Input:
+    
+    'Error: listen EADDRINUSE: address already in use 127.0.0.1:40329'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: 'listen EADDRINUSE: address already in use 127.0.0.1:40329'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:2328:16)
+    listenInCluster (node:net:2437:12)
+    node:net:2666:7
+    process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+  operator: 'rejects'
+  stack: |-
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async TestContext.<anonymous> (file:///root/agi-next-39690796342-1/frozen/AGI_Fleet_Linux_v1.1.4/packages/AGI_Evidence/tests/setup-runtime-materialization.test.mjs:58:11)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# gateway port 40329
+# 2026-10-22T00:44:22.764+00:00 [gateway] loading configuration…\\n2026-10-22T00:44:22.782+00:00 [gateway] resolving authentication…\\n2026-10-22T00:44:22.785+00:00 [gateway] starting...\\n2026-10-22T00:44:23.003+00:00 [gateway] shutdown budget at startup: drain=75000ms shutdown=85000ms reserve=10000ms exitMargin=5000ms; source=systemd system hosted-compute-agent.service TimeoutStopUSec=90000ms\\n2026-10-22T00:44:23.132+00:00 [gateway] spawn broker ready pid=7380\\n2026-10-22T00:44:23.452+00:00 [gateway] auto-enabled plugins for this runtime without writing config:\\n- openai/gpt-5.2 model configured, enabled automatically.\\n2026-10-22T00:44:23.981+00:00 [gateway] starting HTTP server...\\n2026-10-22T00:44:24.181+00:00 [health-monitor] started (interval: 300s, startup-grace: 60s, channel-connect-grace: 120s)\\n2026-10-22T00:44:24.799+00:00 [gateway] starting channels and sidecars...\\n2026-10-22T00:44:24.807+00:00 [gateway] agent model: openai/gpt-5.2 (thinking=high, fast=off)\\n2026-10-22T00:44:24.808+00:00 [gateway] http server listening (1 plugin: openai; 1.8s)\\n2026-10-22T00:44:24.809+00:00 [gateway] log file: /tmp/openclaw/openclaw-agi--evidence--compute-2026-10-22.log\\n2026-10-22T00:44:25.051+00:00 [gateway] startup outcomes: internal-hooks=skipped (not-configured); internal-startup-hook=skipped (no-handlers-loaded); gateway-start-hooks=skipped (no-handlers-loaded); gmail-watcher=skipped (hooks-disabled); gmail-model=skipped (not-configured)\\n2026-10-22T00:44:25.056+00:00 [gateway] ready\\n2026-10-22T00:44:25.100+00:00 [skill-workshop] scheduled skill collection reviews are disabled because the cron scheduler is disabled; enable cron and restart the gateway\\n2026-10-22T00:44:25.103+00:00 [heartbeat] disabled\\n2026-10-22T00:44:25.807+00:00 [gateway] remote model catalog downloaded; restart the Gateway to apply it\\n2026-10-22T00:44:28.460+00:00 [admission] closed: stop (SIGTERM)\\n2026-10-22T00:44:28.461+00:00 [gateway] received SIGTERM; shutting down\\n2026-10-22T00:44:28.462+00:00 [gateway] shutdown budget at shutdown: drain=75000ms shutdown=85000ms reserve=10000ms exitMargin=5000ms; source=systemd system hosted-compute-agent.service TimeoutStopUSec=90000ms\\n2026-10-22T00:44:28.468+00:00 [gateway] active-work drain settled; beginning server close\\n2026-10-22T00:44:28.481+00:00 [gmail-watcher] gmail watcher stopped\\n2026-10-22T00:44:28.516+00:00 [shutdown] completed cleanly in 44ms\\n
+# Subtest: evidence remote cache cannot grant transport, provider APIs or arbitrary machine-state authority
+ok 5 - evidence remote cache cannot grant transport, provider APIs or arbitrary machine-state authority
+  ---
+  duration_ms: 644.118231
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 4
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 88948.93052
