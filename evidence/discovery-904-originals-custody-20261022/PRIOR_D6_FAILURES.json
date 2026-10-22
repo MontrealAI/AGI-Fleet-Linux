@@ -1,0 +1,117 @@
+{
+  "schema": "fleet/prior-d6-original-failure-links/v1",
+  "head": "d6daf2785f762e18f770f0c2c45b4fd687061f25",
+  "originalsRemainFailures": true,
+  "historyContext": {
+    "exactSource": {
+      "run": 39722686926,
+      "tests": 242,
+      "errors": 8,
+      "reason": "Eight historical git show assertions failed in historyless/shallow archive review context."
+    },
+    "repository": 39722686904,
+    "legacyQualification": 39722686899,
+    "missingFrozenAlphaInstalled": 39722687040
+  },
+  "originalFailureLogs": [
+    {
+      "kind": "PRIOR_D6_FULL_ORIGINAL_JOB_LOG_NOT_INCLUDED",
+      "localRetainedPath": "/workspace/scratch/32717074a7f1/fleet-profile-preparation/archive-history-compatibility/ORIGINAL_FAILED_JOB.log",
+      "bytes": 74849,
+      "sha256": "2461b5f41d55153c51fac8aa4c585b3bb1318047fbc0a7e0242c03688bbb7cea",
+      "gitBlob": "bd25ac078430e8a6f61df9be957f666eb94f2852",
+      "mode": "100644",
+      "runId": 39722686926,
+      "jobId": 119639538360,
+      "attempt": 1,
+      "head": "d6daf2785f762e18f770f0c2c45b4fd687061f25",
+      "conclusion": "failure",
+      "apiReference": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/jobs/119639538360/logs",
+      "browserReference": "https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39722686926/job/119639538360",
+      "referenceSemantics": "External original job identity plus captured exact body digest; API availability can change; not represented as packet body."
+    },
+    {
+      "kind": "PRIOR_D6_FULL_ORIGINAL_JOB_LOG_NOT_INCLUDED",
+      "localRetainedPath": "/workspace/scratch/32717074a7f1/fleet-profile-preparation/public-corrections-5b88720/ORIGINAL_D6_REPOSITORY_JOB.log",
+      "bytes": 71235,
+      "sha256": "aaebb7097de076535ded2647569843e4cc2893218c6aea76cef25c658ec238fc",
+      "gitBlob": "5d173c47991ee755bb95136814f64854b3654459",
+      "mode": "100644",
+      "runId": 39722686904,
+      "jobId": 119639537856,
+      "attempt": 1,
+      "head": "d6daf2785f762e18f770f0c2c45b4fd687061f25",
+      "conclusion": "failure",
+      "apiReference": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/jobs/119639537856/logs",
+      "browserReference": "https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39722686904/job/119639537856",
+      "referenceSemantics": "External original job identity plus captured exact body digest; API availability can change; not represented as packet body."
+    },
+    {
+      "kind": "PRIOR_D6_FULL_ORIGINAL_JOB_LOG_NOT_INCLUDED",
+      "localRetainedPath": "/workspace/scratch/32717074a7f1/fleet-profile-preparation/public-corrections-5b88720/ORIGINAL_D6_LEGACY_JOB.log",
+      "bytes": 71433,
+      "sha256": "c4cf25802a2a151afb884382c429a540efb8af81a1715c283b76a7f7ca4ca9ee",
+      "gitBlob": "d71161f1137239af971fa93a3873832d83f25550",
+      "mode": "100644",
+      "runId": 39722686899,
+      "jobId": 119639538216,
+      "attempt": 1,
+      "head": "d6daf2785f762e18f770f0c2c45b4fd687061f25",
+      "conclusion": "failure",
+      "apiReference": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/jobs/119639538216/logs",
+      "browserReference": "https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39722686899/job/119639538216",
+      "referenceSemantics": "External original job identity plus captured exact body digest; API availability can change; not represented as packet body."
+    },
+    {
+      "kind": "PRIOR_D6_FULL_ORIGINAL_JOB_LOG_NOT_INCLUDED",
+      "localRetainedPath": "/workspace/scratch/32717074a7f1/fleet-profile-preparation/public-corrections-5b88720/ORIGINAL_D6_INSTALLED_JOB.log",
+      "bytes": 19310,
+      "sha256": "58e5e510affc7884655172be03c50cb5c95ada12a51c45031d278bdfc6f3b6ee",
+      "gitBlob": "97dfddc901aaa5f882c5ca35f4c5cdaac54a93d6",
+      "mode": "100644",
+      "runId": 39722687040,
+      "jobId": 119639538636,
+      "attempt": 1,
+      "head": "d6daf2785f762e18f770f0c2c45b4fd687061f25",
+      "conclusion": "failure",
+      "apiReference": "https://api.github.com/repos/MontrealAI/AGI-Fleet-Linux/actions/jobs/119639538636/logs",
+      "browserReference": "https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39722687040/job/119639538636",
+      "referenceSemantics": "External original job identity plus captured exact body digest; API availability can change; not represented as packet body."
+    }
+  ],
+  "smallOriginalApiArtifactAndCommitRecordsIncluded": [
+    {
+      "packetPath": "prior-d6/ORIGINAL_FAILED_API_METADATA.json",
+      "proposedPublicPath": "evidence/discovery-904-originals-custody-20261022/prior-d6/ORIGINAL_FAILED_API_METADATA.json",
+      "bytes": 18138,
+      "sha256": "1edd1c5797edfc291970b1e0f5860ec7cf2bae349711283eb621d101d7e94651",
+      "gitBlob": "5baefabf48cb00f74ed24c85f2dd24c242c2d69a",
+      "mode": "100644"
+    },
+    {
+      "packetPath": "prior-d6/ORIGINAL_FAILED_ARTIFACT_CUSTODY.json",
+      "proposedPublicPath": "evidence/discovery-904-originals-custody-20261022/prior-d6/ORIGINAL_FAILED_ARTIFACT_CUSTODY.json",
+      "bytes": 1765,
+      "sha256": "30379fc9b2c2a6be05baecd1222df99dc252291aecd3f52bdaf0703fb9fbc5d1",
+      "gitBlob": "3a6cffe34c54680bd4348c0ead7fd9f7a7f04296",
+      "mode": "100644"
+    },
+    {
+      "packetPath": "prior-d6/ORIGINAL_FAILED_SYNTHETIC_COMMIT.json",
+      "proposedPublicPath": "evidence/discovery-904-originals-custody-20261022/prior-d6/ORIGINAL_FAILED_SYNTHETIC_COMMIT.json",
+      "bytes": 2862,
+      "sha256": "f0670b792a68e78cf221b66b68476c1fc8dd1e8f0c66dddeca24bba66c74df2f",
+      "gitBlob": "86d11cfe28a0d5cf2b6ce5e2280370b164ed85a8",
+      "mode": "100644"
+    }
+  ],
+  "retainedPublicationContextNotIncluded": {
+    "path": "/workspace/scratch/32717074a7f1/fleet-profile-preparation/public-corrections-5b88720/ROOT_PUBLICATION_REPORT_904fce44.json",
+    "bytes": 6790,
+    "sha256": "3aba1c46b7dfe203cb03b699b80d9c0886cef79fc8ad391ea728a6a7259c8bac",
+    "gitBlob": "a1742a0d04e53a3af89464d8da3b2582919201ac",
+    "mode": "100644"
+  },
+  "immutablePublicSourceComparison": "https://github.com/MontrealAI/AGI-Fleet-Linux/compare/d6daf2785f762e18f770f0c2c45b4fd687061f25...904fce44eac8bc5c51215e02102e13245b3f20fa",
+  "preservation": "No original d6 file, log, conclusion or artifact was rewritten or promoted to current-source qualification."
+}

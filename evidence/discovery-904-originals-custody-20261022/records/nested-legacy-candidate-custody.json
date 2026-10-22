@@ -1,0 +1,59 @@
+{
+  "schema": "fleet/legacy-candidate-all-bytes-parse-only-custody/v1",
+  "scope": "Original904 legacy1.1.4 PR qualification only; no Discovery installed/main/release acceptance",
+  "artifactId": 12403888131,
+  "runId": 39727291254,
+  "attempt": 1,
+  "head": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+  "checkout": "392fa551c0cef00aac511c812c029fb053729a4e",
+  "outerBytes": 435327529,
+  "outerSha256": "51a04d65d68b8b036eb0fc50229b1abc4845661056c5c58b264a00221d2e8ea4",
+  "candidateBytes": 431360777,
+  "candidateSha256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+  "completeArchiveFiles": 34861,
+  "expandedBytes": 904543647,
+  "allMembersSafeRegularUniqueAndCRCAndSHA256": true,
+  "manifestEntriesVerified": 61583,
+  "editions": 7,
+  "sourceInventories": [
+    {
+      "base": "",
+      "sourceFiles": 6153,
+      "revisionSHA256": "ccb404ab6bf79616e54aba2c33d71686447cb215128b04ba6a7dbce2e53d5383"
+    },
+    {
+      "base": "packages/AGI_Agent/",
+      "sourceFiles": 772,
+      "revisionSHA256": "3d2d965a3e2019010ec540820e479d3d0ebd2e5dac050dc7d78b7c10191c0918"
+    },
+    {
+      "base": "packages/AGI_Node/",
+      "sourceFiles": 796,
+      "revisionSHA256": "831b9b55a4d41c0c111caf33ed936efd624b94bb176dae2841fae1dfaab46374"
+    },
+    {
+      "base": "packages/AGI_Moderator/",
+      "sourceFiles": 1002,
+      "revisionSHA256": "c5940e5376a4b874ed810b5551e060d42a8443de556a460b5b8cd251db054b9f"
+    },
+    {
+      "base": "packages/AGI_Employer/",
+      "sourceFiles": 1002,
+      "revisionSHA256": "203d3443a2237ff1bf45abb117aedd871f7ca46dcdfc294d851ad64d6c72b321"
+    },
+    {
+      "base": "packages/AGI_Evidence/",
+      "sourceFiles": 1001,
+      "revisionSHA256": "3f6ec458b4c239dc3218a4516f665660a6c254b127d3849991d27c98bd4800f6"
+    },
+    {
+      "base": "packages/AGI_Recovery/",
+      "sourceFiles": 1002,
+      "revisionSHA256": "d32c86443cb7a6200e1dde1afae784715f6312580d3f0ddb6802b068cfbff2e9"
+    }
+  ],
+  "completeArchiveMembersCanonicalSha256": "69160d20122ead52e0b768eff67697a40cb76127c6e9443202e55060d2feb25c",
+  "archiveMembersRawJsonSha256": "a340983ca7b7b9cd71488906862bb5ac2e790e45b66199587217825b148cebcc",
+  "bothProfileInventoriesAndBeforeAfterBindingsEqualActualDownloadedArchive": true,
+  "execution": "NONE; original archive bytes parsed and hashed in RAM only"
+}

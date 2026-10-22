@@ -1,0 +1,54 @@
+{
+  "schema": "fleet/original-pr-artifact-ram-custody/v1",
+  "scope": "Exact 904 PR-only original attempt1; no new installed/main/release qualification",
+  "runId": 39727291251,
+  "runAttempt": 1,
+  "headCommit": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+  "expectedSyntheticCheckout": "392fa551c0cef00aac511c812c029fb053729a4e",
+  "artifactId": 12403843741,
+  "artifactName": "exact-review-source",
+  "outerBytes": 31384832,
+  "outerSha256": "b23d61bb04da6bfc6f913e061188c97d96c71f36ada6d51c5fa9576171b7c0fd",
+  "outerByteIdentityVerified": true,
+  "allMembersCRCAndSha256Verified": true,
+  "allMembersUniqueSafePaths": true,
+  "members": [
+    {
+      "path": "SHA256SUMS.txt",
+      "bytes": 100,
+      "sha256": "c28ff258d6998240b965794434f8dfcd742f5abaa4e3502167259d8c5793a86e",
+      "crc32": "6d9fb80b",
+      "directory": false
+    },
+    {
+      "path": "AGI-Fleet-Linux-review-source.zip",
+      "bytes": 31383813,
+      "sha256": "1f50c513efdbedfabeef77468f1d909f9a547f5e9ba35d701f3bbdba008b9f01",
+      "crc32": "00cac699",
+      "directory": false
+    },
+    {
+      "path": "source-receipt.json",
+      "bytes": 489,
+      "sha256": "00ebb410eb9fa72cf70d380c0630aba789618b22ee5c1b633b4348fd0e2d3295",
+      "crc32": "63c6fe56",
+      "directory": false
+    }
+  ],
+  "smallJsonParseOnly": {
+    "source-receipt.json": {
+      "schema": "agi-fleet-review-source/v1",
+      "repository": "MontrealAI/AGI-Fleet-Linux",
+      "commit": "392fa551c0cef00aac511c812c029fb053729a4e",
+      "workflowRun": "39727291251",
+      "event": "pull_request",
+      "name": "AGI-Fleet-Linux-review-source.zip",
+      "bytes": 31383813,
+      "sha256": "1f50c513efdbedfabeef77468f1d909f9a547f5e9ba35d701f3bbdba008b9f01",
+      "purpose": "Exact review source; not an installer or qualified release",
+      "productionQualified": false,
+      "releaseEligible": false
+    }
+  },
+  "downloadMode": "RAM-only ZIP; no archive/extraction saved and no artifact code executed"
+}

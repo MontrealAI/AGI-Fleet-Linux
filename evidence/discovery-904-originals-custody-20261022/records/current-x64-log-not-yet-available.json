@@ -1,0 +1,15 @@
+{
+  "observedAt": "2026-10-22T06:25:45.340Z",
+  "run": 39727291254,
+  "attempt": 1,
+  "job": 119657537949,
+  "state": "IN_PROGRESS_AT_READ",
+  "result": {
+    "error": "GitHub API error 404: ﻿<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.\nRequestId:117ba0fc-b01e-00e5-15ee-614749000000\nTime:2026-10-22T06:25:32.5006779Z</Message></Error>",
+    "error_code": "NOT_FOUND",
+    "error_data": {
+      "error_str": "GitHub API error 404: ﻿<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.\nRequestId:117ba0fc-b01e-00e5-15ee-614749000000\nTime:2026-10-22T06:25:32.5006779Z</Message></Error>"
+    }
+  },
+  "policy": "One ordinary connector read; no partial log available, no alternate access path or retry while state unchanged."
+}

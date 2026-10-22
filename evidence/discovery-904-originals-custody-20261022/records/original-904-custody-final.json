@@ -1,0 +1,576 @@
+{
+  "schema": "fleet/original-904-pr-custody-final/v1",
+  "observedAt": "2026-10-22T06:39:22.614436+00:00",
+  "head": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+  "tree": "99346e2473e5bead7da46d94511a2262b1b7f060",
+  "actualSynthetic": "392fa551c0cef00aac511c812c029fb053729a4e",
+  "syntheticParents": [
+    "0dd352fdd2b1af00bc8358e0ac7f96682fd6f796",
+    "904fce44eac8bc5c51215e02102e13245b3f20fa"
+  ],
+  "scope": "Original attempt1 PR evidence only; not new Discovery installed/main/release qualification",
+  "state": "ORIGINAL_904_INHERITED_QUALIFICATION_SUCCESS_INSTALLED_PROFILE_HELD",
+  "runSnapshots": [
+    {
+      "id": 39727291191,
+      "path": ".github/workflows/repository-checks.yml",
+      "head": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 39727291289,
+      "path": ".github/workflows/pages.yml",
+      "head": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 39727291251,
+      "path": ".github/workflows/repository-review.yml",
+      "head": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 39727291254,
+      "path": ".github/workflows/next-release.yml",
+      "head": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 39727291180,
+      "path": ".github/workflows/discovery-installed.yml",
+      "head": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure"
+    }
+  ],
+  "latestQualificationJobs": [
+    {
+      "id": 119654025736,
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119657537858,
+      "name": "Saved-archive SUCCESSOR browser execution",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119657537861,
+      "name": "integration (ubuntu-24.04-arm, arm64)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119657537893,
+      "name": "Saved-archive Manager 1.17 contract profile (ubuntu-24.04-arm, arm64)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119657537901,
+      "name": "integration (ubuntu-24.04, x64)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119657537926,
+      "name": "Saved-archive Manager 1.17 contract profile (ubuntu-24.04, x64)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119657537949,
+      "name": "native (ubuntu-24.04, x64)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119657537956,
+      "name": "native (ubuntu-24.04-arm, arm64)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119675989718,
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119676505623,
+      "name": "Required release qualification",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 119677527455,
+      "name": "publish",
+      "status": "completed",
+      "conclusion": "skipped"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12403839960,
+      "run": 39727291254,
+      "name": "next-integration-arm64",
+      "outerBytes": 33825,
+      "outerSha256": "41134994e37c17f038e76b1847b1ea35c618eb6e289e71240371142bd7476e8b",
+      "members": 22,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12403839960-custody.json",
+        "bytes": 22359,
+        "sha256": "4ade3f22fd43bf5c6624db9ec7497fd2d9fd80a7209cd0e38009a873def770aa"
+      }
+    },
+    {
+      "id": 12403843741,
+      "run": 39727291251,
+      "name": "exact-review-source",
+      "outerBytes": 31384832,
+      "outerSha256": "b23d61bb04da6bfc6f913e061188c97d96c71f36ada6d51c5fa9576171b7c0fd",
+      "members": 3,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12403843741-custody.json",
+        "bytes": 1969,
+        "sha256": "6be6ee669a7ffb0cddf980800f22f0e8d808aa3ed18bb783c9b6178f7caa9f8c"
+      }
+    },
+    {
+      "id": 12403888131,
+      "run": 39727291254,
+      "name": "linux-next-candidate",
+      "outerBytes": 435327529,
+      "outerSha256": "51a04d65d68b8b036eb0fc50229b1abc4845661056c5c58b264a00221d2e8ea4",
+      "members": 268,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12403888131-custody.json",
+        "bytes": 123719,
+        "sha256": "52db1b4d74c7cc337b4a960fb50536892c27b30714c3e2cc4ba33c92465774d6"
+      }
+    },
+    {
+      "id": 12403993018,
+      "run": 39727291289,
+      "name": "website-browser-evidence",
+      "outerBytes": 89939817,
+      "outerSha256": "6b30626c6226c1d4871b6ada1f24ce3b2a04947160a10c4bbf31c000ad4973b5",
+      "members": 88,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12403993018-custody.json",
+        "bytes": 26191,
+        "sha256": "6366d09709afe0f203c4bb94e6b277c80dbdf32e4546cf22f1f04ac8a4321fcf"
+      }
+    },
+    {
+      "id": 12404118172,
+      "run": 39727291254,
+      "name": "next-integration-x64",
+      "outerBytes": 33886,
+      "outerSha256": "b29d971181cc640675ee32d175b2fa87f963b3102dca48f1545cb4e5dfed784a",
+      "members": 22,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12404118172-custody.json",
+        "bytes": 22354,
+        "sha256": "ef4aad122f15afaf2e7ee7ea52ab943846bb556131b8c3fe9e1e05e5df290ebd"
+      }
+    },
+    {
+      "id": 12404138683,
+      "run": 39727291254,
+      "name": "next-profile-arm64",
+      "outerBytes": 1699813,
+      "outerSha256": "102338f704f2e61dbad9da8d368c62f64ad71c192d4d6d553207bf3f6bdf290f",
+      "members": 17,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12404138683-custody.json",
+        "bytes": 30057,
+        "sha256": "d3aba8b58f273aa62bfdb8538c4b75a30f244549dfc02651293c58fe71b69313"
+      }
+    },
+    {
+      "id": 12404222919,
+      "run": 39727291254,
+      "name": "next-profile-x64",
+      "outerBytes": 1699800,
+      "outerSha256": "9dd7660d78ed64720a1e15b85e079b2842c2f5ebbd403187b341c4dc3e068251",
+      "members": 17,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12404222919-custody.json",
+        "bytes": 30053,
+        "sha256": "43d97a5b784dd10af78d3fe217150d42ce44a7143fee12a214a5ddd7025d77bb"
+      }
+    },
+    {
+      "id": 12404267102,
+      "run": 39727291254,
+      "name": "next-successor-browser",
+      "outerBytes": 8674208,
+      "outerSha256": "9b69b66b52e27160e3770a21fcf79c2822f64100b02ce0934013845415ef50dd",
+      "members": 23,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12404267102-custody.json",
+        "bytes": 13908,
+        "sha256": "164e8d455d0d74c425c9cef94fa0330429f83972d8f8962da45ea706f0555bf3"
+      }
+    },
+    {
+      "id": 12405384290,
+      "run": 39727291254,
+      "name": "next-native-arm64",
+      "outerBytes": 1178064,
+      "outerSha256": "2cad602f34b8d6e1f1748db44fc1285d195d3b8f551ba08db38a21a7f86dd612",
+      "members": 391,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12405384290-custody.json",
+        "bytes": 146632,
+        "sha256": "ee9631fdafcee451c200b67dc3262d4b9b262a295d20df4a5717ce79d51d9a54"
+      }
+    },
+    {
+      "id": 12406163874,
+      "run": 39727291254,
+      "name": "next-native-x64",
+      "outerBytes": 1182686,
+      "outerSha256": "b48c6c6192207467fef3fcab850d692e7a8eadaa8ede3517f661412620d1c7cf",
+      "members": 391,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12406163874-custody.json",
+        "bytes": 146632,
+        "sha256": "2ab40b9c41a0c7ef4070abd4c3604b8248604d64f225a1f0e8dc0f420309ead0"
+      }
+    },
+    {
+      "id": 12406179061,
+      "run": 39727291254,
+      "name": "next-publication",
+      "outerBytes": 14849068,
+      "outerSha256": "9f049bd7f70525ee829ebd2edbaa5c4adb1555540250de22a67286ab61758a74",
+      "members": 4,
+      "proof": {
+        "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/12406179061-custody.json",
+        "bytes": 122911,
+        "sha256": "4bcd3d89d871cf66f51fdc1ac385436da034d31076bb8badb7a654221a9879f5"
+      }
+    }
+  ],
+  "artifactCount": 11,
+  "outerBytes": 586003528,
+  "outerMembers": 1246,
+  "allActualCurrentArtifactApiIdentitiesAndFullZipMemberCrcShaPathsVerified": true,
+  "artifactProducerLogBindings": [
+    {
+      "artifactId": 12403993018,
+      "jobId": 119654026047,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12403843741,
+      "jobId": 119654025791,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12403888131,
+      "jobId": 119654025736,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12404267102,
+      "jobId": 119657537858,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12403839960,
+      "jobId": 119657537861,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12404138683,
+      "jobId": 119657537893,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12404118172,
+      "jobId": 119657537901,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12404222919,
+      "jobId": 119657537926,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12406163874,
+      "jobId": 119657537949,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12405384290,
+      "jobId": 119657537956,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    },
+    {
+      "artifactId": 12406179061,
+      "jobId": 119675989718,
+      "uploadIdSizeAndDigestMatchFullOriginalJobLog": true
+    }
+  ],
+  "nestedReviewSource": {
+    "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/nested-review-source-git-custody.json",
+    "bytes": 2140388,
+    "sha256": "9722914ac454dff88724febd1db65d5b70ba101f6710c789a50327f809d81496"
+  },
+  "nestedLegacyCandidate": {
+    "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/nested-legacy-candidate-custody.json",
+    "bytes": 2333,
+    "sha256": "436450f05da2f3d86e2e0a94f569bceb1b076025a22c741fb5fdd0afa9ba1c8b"
+  },
+  "semanticBindings": {
+    "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/artifact-semantic-bindings.json",
+    "bytes": 357,
+    "sha256": "4db32237216049f43e99fbbc89ad74e67b799e4b59f51776ad2df34afe355c40"
+  },
+  "supplementaryNativeCaseReview": {
+    "state": "NOT_COMPLETED_NOT_ACCEPTED",
+    "record": {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/supplementary-native-case-limitations.json",
+      "bytes": 1777,
+      "sha256": "5be0561c39d25d8ea91484b21de6bc69f9051b3eeb932de6782e23e76389416d"
+    },
+    "reason": "Later cached signed URL reads returned403; no refresh/retry/alternate route. Full original native summaries and every downloaded ZIP member are separately authenticated."
+  },
+  "originalNativeSummaries": [
+    {
+      "artifactId": 12406163874,
+      "summary": {
+        "schema": "agi-capable-native-validation/v1",
+        "architecture": "x64",
+        "releaseSHA256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+        "targeted": {
+          "status": "PASS",
+          "runnerExitCode": 1,
+          "counts": {
+            "tests": 291,
+            "suites": 0,
+            "pass": 291,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "testFiles": 25,
+          "note": "The frozen runner intentionally returns 1 for every partial selection; each native case is independently checked here."
+        },
+        "complete": {
+          "status": "PASS",
+          "runnerExitCode": 0,
+          "counts": {
+            "tests": 3931,
+            "suites": 9,
+            "pass": 3931,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "testFiles": 344
+        },
+        "productionQualified": false,
+        "physicalQualification": "NOT_RUN",
+        "originalRestrictedEvidencePreserved": true
+      }
+    },
+    {
+      "artifactId": 12405384290,
+      "summary": {
+        "schema": "agi-capable-native-validation/v1",
+        "architecture": "arm64",
+        "releaseSHA256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+        "targeted": {
+          "status": "PASS",
+          "runnerExitCode": 1,
+          "counts": {
+            "tests": 291,
+            "suites": 0,
+            "pass": 291,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "testFiles": 25,
+          "note": "The frozen runner intentionally returns 1 for every partial selection; each native case is independently checked here."
+        },
+        "complete": {
+          "status": "PASS",
+          "runnerExitCode": 0,
+          "counts": {
+            "tests": 3931,
+            "suites": 9,
+            "pass": 3931,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "testFiles": 344
+        },
+        "productionQualified": false,
+        "physicalQualification": "NOT_RUN",
+        "originalRestrictedEvidencePreserved": true
+      }
+    }
+  ],
+  "fullOriginalJobLogs": [
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119654025260.log",
+      "bytes": 79717,
+      "sha256": "635187e44844c9bd3657f4691d75c6c192a78a956eb17ba3e5fef1ac14632379",
+      "actualCheckoutPresent": true,
+      "testSummaries": [
+        "Ran 246 tests in 13.414s",
+        "Ran 92 tests in 1.364s",
+        "# tests 9",
+        "# pass 9",
+        "# fail 0"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119654025695.log",
+      "bytes": 18841,
+      "sha256": "3931dcb4ad516cb4ddba66c819308eb2c318445650b5b689c6e77c054a333154",
+      "actualCheckoutPresent": true,
+      "testSummaries": []
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119654025736.log",
+      "bytes": 67668,
+      "sha256": "92dc2c7318fe0339178f30b5b2a160ba45aee25470b6f400a0476cecb1e816ad",
+      "actualCheckoutPresent": true,
+      "testSummaries": [
+        "Ran 246 tests in 14.494s"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119654025791.log",
+      "bytes": 58791,
+      "sha256": "2e1af7b5a7dcb3c340e3ffabc920db9b0e397bc8b04fc2d7ceb6de1c19e74290",
+      "actualCheckoutPresent": true,
+      "testSummaries": [
+        "Ran 246 tests in 9.423s"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119654026047.log",
+      "bytes": 87527,
+      "sha256": "82b028973d1e4241b669341e9814cbbd37e5123a41b6d485f7a84be39f9cb48d",
+      "actualCheckoutPresent": true,
+      "testSummaries": [
+        "Ran 5 tests in 0.123s",
+        "76 passed (57.5s)"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119657537858.log",
+      "bytes": 37059,
+      "sha256": "02adb1cccd08e10db66facb25b21a09208e72616cfc2dfd59b2e97515fe76c97",
+      "actualCheckoutPresent": true,
+      "testSummaries": [
+        "14 passed (43.1s)"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119657537861.log",
+      "bytes": 10264,
+      "sha256": "b360feaaf9d78be463080ddbb3b5b2a55ac7ae77aeb9957597ad88327a7668d6",
+      "actualCheckoutPresent": true,
+      "testSummaries": []
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119657537893.log",
+      "bytes": 16266,
+      "sha256": "92ad6bf477656dbb7ab2408b6fdf48f66cd5c992bdb3c9887ef06150c822fd12",
+      "actualCheckoutPresent": true,
+      "testSummaries": []
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119657537901.log",
+      "bytes": 10223,
+      "sha256": "5ed0f43a75e8388fdd562add4f4663dc7496aaf6bc792bd3dd50f837e3078522",
+      "actualCheckoutPresent": true,
+      "testSummaries": []
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119657537926.log",
+      "bytes": 16219,
+      "sha256": "157582dc8983d54d4ddebb3c5a0b82f5750319b0075751907adcaa0953f88390",
+      "actualCheckoutPresent": true,
+      "testSummaries": []
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119657537949.log",
+      "bytes": 38054,
+      "sha256": "e5d8ee98076479cc83acf1c1aeb14127f1834a190fa373304eaf0477c4e6696d",
+      "actualCheckoutPresent": true,
+      "testSummaries": []
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119657537956.log",
+      "bytes": 37513,
+      "sha256": "d727797927d22171ae2e4ae84604c5b4ca2dd2115150dff1f3cccc6b07bbbb7c",
+      "actualCheckoutPresent": true,
+      "testSummaries": []
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119675989718.log",
+      "bytes": 17175,
+      "sha256": "ed56de5c36ba216145978b48a64573258e4f26540d06fc30f42c4bf0a7d8a832",
+      "actualCheckoutPresent": true,
+      "testSummaries": []
+    },
+    {
+      "path": "/workspace/scratch/32717074a7f1/fleet904-original-custody/job-119676505623.log",
+      "bytes": 4941,
+      "sha256": "ab45cbab2d323e012cac7fa59fb4e2dd908064489cbf362a32e7d232b22737b4",
+      "actualCheckoutPresent": true,
+      "testSummaries": []
+    }
+  ],
+  "installedFailure": {
+    "run": 39727291180,
+    "job": 119654025695,
+    "cause": "Final Alpha pin is not frozen",
+    "candidateArtifact": "NONE",
+    "nativeConsumerAndAudit": "SKIPPED"
+  },
+  "retainedAttemptObservations": [
+    "A separate small local verifier could not start during a transient exec-server transport disconnection; one ordinary pwd succeeded; the existing parse-only large audit session completed normally and was not repeated.",
+    "First local step-log JSON comparison assumed root-relative log paths and raised KeyError; corrected parse-only checker resolves paths relative to the containing summary JSON, then all62 artifact-qualified unique log references and86 total comparisons including duplicate nested summaries matched authenticated member hashes.",
+    "Supplementary native per-case verifier had incorrect schema/path assumptions before correction and later stopped on403; it has no completed all-case acceptance. Exact observations are retained separately."
+  ],
+  "notRunOrHeld": [
+    "New Discovery candidate and native qualification: NULL Alpha pin",
+    "New Discovery main merge/tag/release/Pages deployment",
+    "Physical Linux/Mac installation, production authority, live inference, live USDC and independently operated backends"
+  ],
+  "mutations": {
+    "source": 0,
+    "publicRefs": 0,
+    "workflowRerun": 0,
+    "workflowCancel": 0,
+    "dispatch": 0,
+    "settingsOrCredentials": 0
+  },
+  "byteHandling": "All ZIP bytes and nested contents were parsed in RAM and discarded; reports/logs only retained; no artifact code executed"
+}

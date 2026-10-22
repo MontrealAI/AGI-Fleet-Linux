@@ -1,0 +1,15 @@
+# Fleet904 original PR custody
+
+This packet records inherited Fleet qualification for PR #65 head `904fce44eac8bc5c51215e02102e13245b3f20fa`, tree `99346e2473e5bead7da46d94511a2262b1b7f060`. Actual PR checkout was `392fa551c0cef00aac511c812c029fb053729a4e`, with ordered parents `0dd352fdd2b1af00bc8358e0ac7f96682fd6f796` and `904fce44eac8bc5c51215e02102e13245b3f20fa`.
+
+Four original attempt 1 workflows succeeded: Repository 39727291191, Website 39727291289, Exact source 39727291251 and inherited Linux 1.1.4 qualification 39727291254. Both native architectures, downstream audit and Required release qualification passed; PR publication was skipped. The new Discovery installed workflow 39727291180 genuinely failed at `Final Alpha pin is not frozen`; its consumers and raw audit were skipped. This is no Discovery installed, accepted-main, release, deployed-Pages, physical or live qualification.
+
+The final custody report binds 11 actual artifact ZIPs, 586,003,528 outer bytes and 1,246 outer members by API size/digest, safe unique paths, CRC and SHA256. Original producer logs bind each upload ID, size and digest. The included source report binds all 6,811 raw Git files and 99,778,069 bytes and reconstructs the exact tree. The separately parsed legacy candidate has 34,861 files, 61,583 manifest references across 7 editions and the exact original package identity. All archive work was parse-only in RAM; no archive code ran.
+
+The supplementary deeper native TAP/source-row checker did not complete. Incorrect local schema/path assumptions were recorded; the legacy generated current-guides test is intentionally outside the revision snapshot and is covered by complete-archive checks. Later cached signed arm64/profile URLs returned HTTP 403. Those reads stopped, with no refresh, retry, alternate access route or delegated bypass. No successful supplementary all-case acceptance is claimed. Full original native summaries and authenticated member hashes remain distinct from that unfinished check.
+
+Original d6 failures remain failures, hash-linked in PRIOR_D6_FAILURES.json. Main 45759fb096faf8988f58ae5ea71248d0f35a97c7, original #64 head 0dd352fdd2b1af00bc8358e0ac7f96682fd6f796 and separately held #61 head 2ceefbf14a8f384c9803f67115609bf2632384b7 were unchanged at the final readback. No source/ref write, rerun, cancellation, dispatch, settings, access or credential change occurred in this custody task.
+
+Read records/original-904-custody-final.json first. Original captured JSON/log identities are preserved verbatim. LOCAL_TO_PUBLIC_PATHS.json resolves included local references. EXTERNAL_REFERENCES.json marks omitted ZIP/member bodies, full tree response and historical full logs; they are not claimed included. The source inventory is metadata rather than bundled source code. No signed download URL is included.
+
+MANIFEST.json binds payload UTF-8 bytes, SHA256, Git blobs and modes; SHA256SUMS.txt also binds that manifest. The separate local PUBLICATION_MANIFEST.json binds every proposed new public file, including both integrity files. This preparation has not created a branch or commit and is not publication approval.

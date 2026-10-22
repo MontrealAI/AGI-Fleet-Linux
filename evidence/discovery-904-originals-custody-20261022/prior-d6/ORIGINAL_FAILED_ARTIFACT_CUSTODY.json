@@ -1,0 +1,45 @@
+{
+  "schema": "fleet-original-failed-hosted-review-custody/v1",
+  "repository": "MontrealAI/AGI-Fleet-Linux",
+  "runId": 39722686926,
+  "jobId": 119639538360,
+  "headCommit": "d6daf2785f762e18f770f0c2c45b4fd687061f25",
+  "artifactId": 12402122582,
+  "archiveBytes": 31382141,
+  "archiveSha256": "e7a51548d32e0e36fb260449289cc6c5449eb39d06a964cf078b66b44c818763",
+  "members": [
+    {
+      "path": "AGI-Fleet-Linux-review-source.zip",
+      "bytes": 31381122,
+      "sha256": "e043587b9852e0cbb0023e5295d7cac4e47abfafef6b0039768c59b7b84fad71",
+      "crc32": "0xce227acf"
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "bytes": 100,
+      "sha256": "66fe357a01a227c4ed013f9216d9a80d14fce1a3fcae064d565c09a8e25a87ff",
+      "crc32": "0x32a9c42d",
+      "text": "e043587b9852e0cbb0023e5295d7cac4e47abfafef6b0039768c59b7b84fad71  AGI-Fleet-Linux-review-source.zip\n"
+    },
+    {
+      "path": "source-receipt.json",
+      "bytes": 489,
+      "sha256": "823c9882eee71f92c9102d3c92e0a24f27f3f11ba11418fac0a41e89d819d674",
+      "crc32": "0x402ce5cc",
+      "json": {
+        "schema": "agi-fleet-review-source/v1",
+        "repository": "MontrealAI/AGI-Fleet-Linux",
+        "commit": "fc76b25026ae732e3e3c920c4a59d4d2b0ae015c",
+        "workflowRun": "39722686926",
+        "event": "pull_request",
+        "name": "AGI-Fleet-Linux-review-source.zip",
+        "bytes": 31381122,
+        "sha256": "e043587b9852e0cbb0023e5295d7cac4e47abfafef6b0039768c59b7b84fad71",
+        "purpose": "Exact review source; not an installer or qualified release",
+        "productionQualified": false,
+        "releaseEligible": false
+      }
+    }
+  ],
+  "scope": "RAM-only static ZIP read and SHA/CRC inventory; no extracted code executed; failed historical run remains failed"
+}

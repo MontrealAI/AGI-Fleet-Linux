@@ -1,0 +1,207 @@
+﻿2026-10-22T05:35:28.2913323Z Current runner version: '2.338.0'
+2026-10-22T05:35:28.2939270Z ##[group]Runner Image Provisioner
+2026-10-22T05:35:28.2940304Z Hosted Compute Agent
+2026-10-22T05:35:28.2940919Z Version: 20261012.601
+2026-10-22T05:35:28.2941564Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-22T05:35:28.2942420Z Build Date: 2026-10-12T17:48:21Z
+2026-10-22T05:35:28.2943110Z Worker ID: {f2699185-22bc-4d32-a31b-1a36e31c0cac}
+2026-10-22T05:35:28.2943868Z Region: eastus
+2026-10-22T05:35:28.2944478Z Cloud: Azure
+2026-10-22T05:35:28.2945019Z ##[endgroup]
+2026-10-22T05:35:28.2947071Z ##[group]Operating System
+2026-10-22T05:35:28.2948019Z Ubuntu
+2026-10-22T05:35:28.2948638Z 24.04.5
+2026-10-22T05:35:28.2949182Z LTS
+2026-10-22T05:35:28.2949696Z ##[endgroup]
+2026-10-22T05:35:28.2950357Z ##[group]Runner Image
+2026-10-22T05:35:28.2951091Z Image: ubuntu-24.04
+2026-10-22T05:35:28.2951705Z Version: 20261012.334.1
+2026-10-22T05:35:28.2953066Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-22T05:35:28.2954791Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-22T05:35:28.2955786Z ##[endgroup]
+2026-10-22T05:35:28.2956967Z ##[group]GITHUB_TOKEN Permissions
+2026-10-22T05:35:28.2959299Z Contents: read
+2026-10-22T05:35:28.2959950Z Metadata: read
+2026-10-22T05:35:28.2960660Z ##[endgroup]
+2026-10-22T05:35:28.2963946Z Secret source: Actions
+2026-10-22T05:35:28.2965044Z Cache mode: write
+2026-10-22T05:35:28.2966080Z Prepare workflow directory
+2026-10-22T05:35:28.3307327Z Prepare all required actions
+2026-10-22T05:35:28.3356572Z Getting action download info
+2026-10-22T05:35:28.5549315Z Download action repository 'actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0' (SHA:634f93cb2916e3fdff6788551b99b062d0335ce0)
+2026-10-22T05:35:28.7976045Z Download action repository 'actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f' (SHA:b7c566a772e6b6bfb58ed0dc250532a479d7789f)
+2026-10-22T05:35:29.0364372Z Complete job name: Saved-archive Manager 1.17 contract profile (ubuntu-24.04, x64)
+2026-10-22T05:35:29.1127369Z ##[group]Run set -euo pipefail
+2026-10-22T05:35:29.1128328Z [36;1mset -euo pipefail[0m
+2026-10-22T05:35:29.1128867Z [36;1mgit init .[0m
+2026-10-22T05:35:29.1129532Z [36;1mgit remote add origin "https://github.com/${REPOSITORY}.git"[0m
+2026-10-22T05:35:29.1130439Z [36;1mgit fetch --depth=1 origin "$COMMIT"[0m
+2026-10-22T05:35:29.1131145Z [36;1mgit checkout --detach FETCH_HEAD[0m
+2026-10-22T05:35:29.1422868Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:35:29.1423814Z env:
+2026-10-22T05:35:29.1424415Z   COMMIT: 392fa551c0cef00aac511c812c029fb053729a4e
+2026-10-22T05:35:29.1425219Z   REPOSITORY: MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:35:29.1425911Z ##[endgroup]
+2026-10-22T05:35:29.1806027Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-22T05:35:29.1807959Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-22T05:35:29.1809412Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-22T05:35:29.1810334Z hint: call:
+2026-10-22T05:35:29.1810780Z hint:
+2026-10-22T05:35:29.1811356Z hint: 	git config --global init.defaultBranch <name>
+2026-10-22T05:35:29.1812043Z hint:
+2026-10-22T05:35:29.1812675Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-22T05:35:29.1813665Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-22T05:35:29.1814478Z hint:
+2026-10-22T05:35:29.1815099Z hint: 	git branch -m <name>
+2026-10-22T05:35:29.1815651Z hint:
+2026-10-22T05:35:29.1816331Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-22T05:35:29.1817639Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/
+2026-10-22T05:35:29.8560366Z From https://github.com/MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:35:29.8563041Z  * branch            392fa551c0cef00aac511c812c029fb053729a4e -> FETCH_HEAD
+2026-10-22T05:35:30.4323434Z HEAD is now at 392fa55 Merge 904fce44eac8bc5c51215e02102e13245b3f20fa into 0dd352fdd2b1af00bc8358e0ac7f96682fd6f796
+2026-10-22T05:35:30.4512861Z ##[group]Run actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+2026-10-22T05:35:30.4513569Z with:
+2026-10-22T05:35:30.4513965Z   name: linux-next-candidate
+2026-10-22T05:35:30.4514406Z   path: release
+2026-10-22T05:35:30.4514804Z   merge-multiple: false
+2026-10-22T05:35:30.4515255Z   repository: MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:35:30.4515805Z   run-id: 39727291254
+2026-10-22T05:35:30.4516207Z ##[endgroup]
+2026-10-22T05:35:30.6114567Z Downloading single artifact
+2026-10-22T05:35:30.6260419Z (node:2249) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-22T05:35:30.6262201Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-22T05:35:30.7102583Z Preparing to download the following artifacts:
+2026-10-22T05:35:30.7104116Z - linux-next-candidate (ID: 12403888131, Size: 435327529, Expected Digest: sha256:51a04d65d68b8b036eb0fc50229b1abc4845661056c5c58b264a00221d2e8ea4)
+2026-10-22T05:35:30.8290625Z Redirecting to blob download url: https://productionresultssa7.blob.core.windows.net/actions-results/75e9bea1-0df1-8e3a-8795-6880b469fc0a/workflow-job-run-f3f9e28d-0d7f-5870-ac47-ffcb54a7fefc/artifacts/8699898d4cda38beaba5c2dc45f4fd395eb1276d87d9a5deb7b0c2244442d8c7.zip
+2026-10-22T05:35:30.8292953Z Starting download of artifact to: /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/release
+2026-10-22T05:35:30.8918528Z (node:2249) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-10-22T05:35:34.9557838Z SHA256 digest of downloaded artifact is 51a04d65d68b8b036eb0fc50229b1abc4845661056c5c58b264a00221d2e8ea4
+2026-10-22T05:35:34.9559333Z Artifact download completed successfully.
+2026-10-22T05:35:34.9560327Z Total of 1 artifact(s) downloaded
+2026-10-22T05:35:34.9608473Z Download artifact has finished successfully
+2026-10-22T05:35:34.9818459Z ##[group]Run set -euo pipefail
+2026-10-22T05:35:34.9819120Z [36;1mset -euo pipefail[0m
+2026-10-22T05:35:34.9819654Z [36;1mpython3 - <<'PYCODE'[0m
+2026-10-22T05:35:34.9820160Z [36;1mimport os, sys[0m
+2026-10-22T05:35:34.9820658Z [36;1mfrom pathlib import Path[0m
+2026-10-22T05:35:34.9821242Z [36;1msys.path.insert(0, 'engineering')[0m
+2026-10-22T05:35:34.9822007Z [36;1mfrom contract_profiles import CONTRACT_PROFILES, baseline[0m
+2026-10-22T05:35:34.9822896Z [36;1mroot = Path(os.environ['RUNNER_TEMP']) / 'profile-tools'[0m
+2026-10-22T05:35:34.9823587Z [36;1mroot.mkdir()[0m
+2026-10-22T05:35:34.9824119Z [36;1mnode, arch = baseline.install_node(root)[0m
+2026-10-22T05:35:34.9824876Z [36;1mprofile = CONTRACT_PROFILES['manager-1.17.0-b7218196'][0m
+2026-10-22T05:35:34.9825720Z [36;1mwith open(os.environ['GITHUB_ENV'], 'a') as output:[0m
+2026-10-22T05:35:34.9826965Z [36;1m    output.write(f'PROFILE_NODE={node}/node\nPROFILE_NPM={node}/npm\nPROFILE_MANAGER_COMMIT={profile["commit"]}\n')[0m
+2026-10-22T05:35:34.9828334Z [36;1mwith open(os.environ['GITHUB_PATH'], 'a') as output:[0m
+2026-10-22T05:35:34.9829047Z [36;1m    output.write(str(node) + '\n')[0m
+2026-10-22T05:35:34.9829617Z [36;1mPYCODE[0m
+2026-10-22T05:35:34.9830111Z [36;1mmkdir "$RUNNER_TEMP/profile-manager"[0m
+2026-10-22T05:35:34.9830792Z [36;1mgit -C "$RUNNER_TEMP/profile-manager" init[0m
+2026-10-22T05:35:34.9831900Z [36;1mgit -C "$RUNNER_TEMP/profile-manager" remote add origin https://github.com/MontrealAI/AGIJobManager.git[0m
+2026-10-22T05:35:34.9912933Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:35:34.9913268Z ##[endgroup]
+2026-10-22T05:35:38.7758103Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-22T05:35:38.7759222Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-22T05:35:38.7760159Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-22T05:35:38.7761450Z hint: call:
+2026-10-22T05:35:38.7761818Z hint:
+2026-10-22T05:35:38.7762192Z hint: 	git config --global init.defaultBranch <name>
+2026-10-22T05:35:38.7762521Z hint:
+2026-10-22T05:35:38.7762835Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-22T05:35:38.7763354Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-22T05:35:38.7763759Z hint:
+2026-10-22T05:35:38.7764002Z hint: 	git branch -m <name>
+2026-10-22T05:35:38.7764243Z hint:
+2026-10-22T05:35:38.7834176Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-22T05:35:38.7835474Z Initialized empty Git repository in /home/runner/work/_temp/profile-manager/.git/
+2026-10-22T05:35:38.7885085Z ##[group]Run set -euo pipefail
+2026-10-22T05:35:38.7885406Z [36;1mset -euo pipefail[0m
+2026-10-22T05:35:38.7885695Z [36;1mmanager="$RUNNER_TEMP/profile-manager"[0m
+2026-10-22T05:35:38.7886131Z [36;1mgit -C "$manager" fetch --depth=1 origin "$PROFILE_MANAGER_COMMIT"[0m
+2026-10-22T05:35:38.7886566Z [36;1mgit -C "$manager" checkout --detach FETCH_HEAD[0m
+2026-10-22T05:35:38.7886998Z [36;1mtest "$(git -C "$manager" rev-parse HEAD)" = "$PROFILE_MANAGER_COMMIT"[0m
+2026-10-22T05:35:38.7887706Z [36;1mcd "$manager"[0m
+2026-10-22T05:35:38.7888053Z [36;1m"$PROFILE_NPM" ci --ignore-scripts --no-audit --no-fund[0m
+2026-10-22T05:35:38.7888542Z [36;1m"$PROFILE_NPM" --prefix hardhat ci --ignore-scripts --no-audit --no-fund[0m
+2026-10-22T05:35:38.7889066Z [36;1m"$PROFILE_NODE" scripts/security/patch-openzeppelin-compiler.cjs[0m
+2026-10-22T05:35:38.7889469Z [36;1m"$PROFILE_NPM" run build[0m
+2026-10-22T05:35:38.7955441Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:35:38.7955754Z env:
+2026-10-22T05:35:38.7956120Z   PROFILE_NODE: /home/runner/work/_temp/profile-tools/node-v24.21.0-linux-x64/bin/node
+2026-10-22T05:35:38.7956701Z   PROFILE_NPM: /home/runner/work/_temp/profile-tools/node-v24.21.0-linux-x64/bin/npm
+2026-10-22T05:35:38.7957225Z   PROFILE_MANAGER_COMMIT: b721819639668f0074c244d516bbbe0cf57329a7
+2026-10-22T05:35:38.7957922Z ##[endgroup]
+2026-10-22T05:35:39.4080298Z From https://github.com/MontrealAI/AGIJobManager
+2026-10-22T05:35:39.4081272Z  * branch            b721819639668f0074c244d516bbbe0cf57329a7 -> FETCH_HEAD
+2026-10-22T05:35:39.5376095Z HEAD is now at b721819 Merge pull request #1574 from MontrealAI/feat/ecosystem-homepage-polish
+2026-10-22T05:35:45.1534948Z 
+2026-10-22T05:35:45.1535479Z added 201 packages in 6s
+2026-10-22T05:35:49.0684975Z 
+2026-10-22T05:35:49.0685265Z added 128 packages in 4s
+2026-10-22T05:35:49.1352168Z Verified OpenZeppelin 4.9.6 compiler compatibility (2 installed copies).
+2026-10-22T05:35:49.2367804Z 
+2026-10-22T05:35:49.2368440Z > agijobmanager@1.17.0 build
+2026-10-22T05:35:49.2369430Z > npm --prefix hardhat run compile && node scripts/export-contract-artifacts.js
+2026-10-22T05:35:49.2370202Z 
+2026-10-22T05:35:49.3343321Z 
+2026-10-22T05:35:49.3343805Z > agijobmanager-hardhat@1.17.0 compile
+2026-10-22T05:35:49.3344681Z > node ../node_modules/hardhat/dist/src/cli.js --config ../hardhat.config.mjs compile
+2026-10-22T05:35:49.3345164Z 
+2026-10-22T05:36:45.5270616Z 
+2026-10-22T05:36:45.5277174Z Compiled 62 Solidity files with solc 0.8.37 (evm target: shanghai)
+2026-10-22T05:36:45.6438653Z Exported 91 Hardhat artifacts from 1 builds: zero compiler warnings or errors.
+2026-10-22T05:36:45.6636382Z ##[group]Run python3 engineering/run-next-profile-integration.py \
+2026-10-22T05:36:45.6636947Z [36;1mpython3 engineering/run-next-profile-integration.py \[0m
+2026-10-22T05:36:45.6637691Z [36;1m  --metadata "$GITHUB_WORKSPACE/release/release.json" \[0m
+2026-10-22T05:36:45.6638268Z [36;1m  --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.4.zip" \[0m
+2026-10-22T05:36:45.6638736Z [36;1m  --work "$RUNNER_TEMP/profile-saved-work" \[0m
+2026-10-22T05:36:45.6639114Z [36;1m  --evidence "$RUNNER_TEMP/profile-evidence" \[0m
+2026-10-22T05:36:45.6639550Z [36;1m  --manager "$RUNNER_TEMP/profile-manager" --node "$PROFILE_NODE" \[0m
+2026-10-22T05:36:45.6640194Z [36;1m  --contract-profile manager-1.17.0-b7218196[0m
+2026-10-22T05:36:45.6702522Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:36:45.6702810Z env:
+2026-10-22T05:36:45.6703215Z   PROFILE_NODE: /home/runner/work/_temp/profile-tools/node-v24.21.0-linux-x64/bin/node
+2026-10-22T05:36:45.6703916Z   PROFILE_NPM: /home/runner/work/_temp/profile-tools/node-v24.21.0-linux-x64/bin/npm
+2026-10-22T05:36:45.6704493Z   PROFILE_MANAGER_COMMIT: b721819639668f0074c244d516bbbe0cf57329a7
+2026-10-22T05:36:45.6704892Z ##[endgroup]
+2026-10-22T05:37:21.9293484Z RUN legacy-artifact-reproduction
+2026-10-22T05:38:28.4628251Z RUN profile-artifact-reproduction
+2026-10-22T05:39:23.1274690Z RUN AGI_Agent-integration
+2026-10-22T05:39:42.7905998Z RUN AGI_Agent-integration-identity
+2026-10-22T05:39:44.7598256Z RUN AGI_Agent-integration-finalization
+2026-10-22T05:39:49.3849101Z RUN AGI_Agent-integration-budget-recovery
+2026-10-22T05:40:12.2045905Z RUN AGI_Agent-integration-images
+2026-10-22T05:40:32.2151116Z RUN AGI_Agent-integration-computer
+2026-10-22T05:40:52.7795018Z RUN AGI_Node-integration
+2026-10-22T05:41:05.0221427Z RUN AGI_Node-integration-finalization
+2026-10-22T05:41:09.6468590Z RUN profile-lifecycle
+2026-10-22T05:41:31.3611018Z RUN manager-regression
+2026-10-22T05:42:03.9336236Z {"status": "PASS", "evidence": "/home/runner/work/_temp/profile-evidence/profile-integration"}
+2026-10-22T05:42:09.9877132Z {"status": "PASS", "evidence": "/home/runner/work/_temp/profile-evidence"}
+2026-10-22T05:42:10.0115313Z ##[group]Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+2026-10-22T05:42:10.0116120Z with:
+2026-10-22T05:42:10.0116486Z   name: next-profile-x64
+2026-10-22T05:42:10.0116993Z   path: /home/runner/work/_temp/profile-evidence/
+2026-10-22T05:42:10.0117326Z   if-no-files-found: error
+2026-10-22T05:42:10.0117924Z   retention-days: 90
+2026-10-22T05:42:10.0118154Z   compression-level: 6
+2026-10-22T05:42:10.0118371Z   overwrite: false
+2026-10-22T05:42:10.0118607Z   include-hidden-files: false
+2026-10-22T05:42:10.0118958Z env:
+2026-10-22T05:42:10.0119363Z   PROFILE_NODE: /home/runner/work/_temp/profile-tools/node-v24.21.0-linux-x64/bin/node
+2026-10-22T05:42:10.0119938Z   PROFILE_NPM: /home/runner/work/_temp/profile-tools/node-v24.21.0-linux-x64/bin/npm
+2026-10-22T05:42:10.0120610Z   PROFILE_MANAGER_COMMIT: b721819639668f0074c244d516bbbe0cf57329a7
+2026-10-22T05:42:10.0120954Z ##[endgroup]
+2026-10-22T05:42:10.1855307Z With the provided path, there will be 17 files uploaded
+2026-10-22T05:42:10.1860735Z Artifact name is valid!
+2026-10-22T05:42:10.1861339Z Root directory input is valid!
+2026-10-22T05:42:10.4166859Z Beginning upload of artifact content to blob storage
+2026-10-22T05:42:10.7181891Z Uploaded bytes 1699800
+2026-10-22T05:42:10.7342369Z Finished uploading artifact content to blob storage!
+2026-10-22T05:42:10.7343986Z SHA256 digest of uploaded artifact zip is 9dd7660d78ed64720a1e15b85e079b2842c2f5ebbd403187b341c4dc3e068251
+2026-10-22T05:42:10.7345630Z Finalizing artifact upload
+2026-10-22T05:42:11.1793740Z Artifact next-profile-x64.zip successfully finalized. Artifact ID 12404222919
+2026-10-22T05:42:11.1795332Z Artifact next-profile-x64 has been successfully uploaded! Final size is 1699800 bytes. Artifact ID is 12404222919
+2026-10-22T05:42:11.1800277Z Artifact download URL: https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39727291254/artifacts/12404222919
+2026-10-22T05:42:11.1981438Z Cleaning up orphan processes
+2026-10-22T05:42:11.2323706Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,135 @@
+﻿2026-10-22T05:34:10.1342922Z Current runner version: '2.338.0'
+2026-10-22T05:34:10.1368314Z ##[group]Runner Image Provisioner
+2026-10-22T05:34:10.1369432Z Hosted Compute Agent
+2026-10-22T05:34:10.1370347Z Version: 20261015.610
+2026-10-22T05:34:10.1371153Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-22T05:34:10.1371914Z Build Date: 2026-10-14T17:06:54Z
+2026-10-22T05:34:10.1372632Z Worker ID: {8be0a051-a5fc-4cbc-bc33-774304cd37f5}
+2026-10-22T05:34:10.1373523Z Region: northcentralus
+2026-10-22T05:34:10.1374130Z Cloud: Azure
+2026-10-22T05:34:10.1374721Z ##[endgroup]
+2026-10-22T05:34:10.1376477Z ##[group]Operating System
+2026-10-22T05:34:10.1377146Z Ubuntu
+2026-10-22T05:34:10.1377856Z 24.04.5
+2026-10-22T05:34:10.1378374Z LTS
+2026-10-22T05:34:10.1378874Z ##[endgroup]
+2026-10-22T05:34:10.1379508Z ##[group]Runner Image
+2026-10-22T05:34:10.1380379Z Image: ubuntu-24.04-arm
+2026-10-22T05:34:10.1381141Z Version: 20261018.154.1
+2026-10-22T05:34:10.1382427Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24-arm64/20261018.154/images/ubuntu/Ubuntu2404-Arm64-Readme.md
+2026-10-22T05:34:10.1384048Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24-arm64%2F20261018.154
+2026-10-22T05:34:10.1385122Z ##[endgroup]
+2026-10-22T05:34:10.1386380Z ##[group]GITHUB_TOKEN Permissions
+2026-10-22T05:34:10.1388972Z Contents: read
+2026-10-22T05:34:10.1389715Z Metadata: read
+2026-10-22T05:34:10.1390616Z ##[endgroup]
+2026-10-22T05:34:10.1393023Z Secret source: Actions
+2026-10-22T05:34:10.1394169Z Cache mode: write
+2026-10-22T05:34:10.1394909Z Prepare workflow directory
+2026-10-22T05:34:10.1741670Z Prepare all required actions
+2026-10-22T05:34:10.1789608Z Getting action download info
+2026-10-22T05:34:10.4024287Z Download action repository 'actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0' (SHA:634f93cb2916e3fdff6788551b99b062d0335ce0)
+2026-10-22T05:34:10.7279315Z Download action repository 'actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f' (SHA:b7c566a772e6b6bfb58ed0dc250532a479d7789f)
+2026-10-22T05:34:10.9715762Z Complete job name: integration (ubuntu-24.04-arm, arm64)
+2026-10-22T05:34:11.0519428Z ##[group]Run set -euo pipefail
+2026-10-22T05:34:11.0520635Z [36;1mset -euo pipefail[0m
+2026-10-22T05:34:11.0521284Z [36;1mgit init .[0m
+2026-10-22T05:34:11.0522008Z [36;1mgit remote add origin "https://github.com/${REPOSITORY}.git"[0m
+2026-10-22T05:34:11.0523046Z [36;1mgit fetch --depth=1 origin "$COMMIT"[0m
+2026-10-22T05:34:11.0523796Z [36;1mgit checkout --detach FETCH_HEAD[0m
+2026-10-22T05:34:11.0662280Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:34:11.0663489Z env:
+2026-10-22T05:34:11.0664269Z   COMMIT: 392fa551c0cef00aac511c812c029fb053729a4e
+2026-10-22T05:34:11.0665082Z   REPOSITORY: MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:34:11.0665753Z ##[endgroup]
+2026-10-22T05:34:11.0943835Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-22T05:34:11.0945246Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-22T05:34:11.0946609Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/
+2026-10-22T05:34:11.0948005Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-22T05:34:11.0948881Z hint: call:
+2026-10-22T05:34:11.0949768Z hint:
+2026-10-22T05:34:11.0950797Z hint: 	git config --global init.defaultBranch <name>
+2026-10-22T05:34:11.0951636Z hint:
+2026-10-22T05:34:11.0952437Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-22T05:34:11.0953501Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-22T05:34:11.0954347Z hint:
+2026-10-22T05:34:11.0955235Z hint: 	git branch -m <name>
+2026-10-22T05:34:11.0955851Z hint:
+2026-10-22T05:34:11.0956698Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-22T05:34:11.8584415Z From https://github.com/MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:34:11.8585941Z  * branch            392fa551c0cef00aac511c812c029fb053729a4e -> FETCH_HEAD
+2026-10-22T05:34:12.2123963Z HEAD is now at 392fa55 Merge 904fce44eac8bc5c51215e02102e13245b3f20fa into 0dd352fdd2b1af00bc8358e0ac7f96682fd6f796
+2026-10-22T05:34:12.2377635Z ##[group]Run actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+2026-10-22T05:34:12.2379384Z with:
+2026-10-22T05:34:12.2380357Z   name: linux-next-candidate
+2026-10-22T05:34:12.2381380Z   path: release
+2026-10-22T05:34:12.2382198Z   merge-multiple: false
+2026-10-22T05:34:12.2383130Z   repository: MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:34:12.2384335Z   run-id: 39727291254
+2026-10-22T05:34:12.2385185Z ##[endgroup]
+2026-10-22T05:34:12.3684971Z Downloading single artifact
+2026-10-22T05:34:12.3808572Z (node:2212) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-22T05:34:12.3811333Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-22T05:34:12.5009228Z Preparing to download the following artifacts:
+2026-10-22T05:34:12.5011840Z - linux-next-candidate (ID: 12403888131, Size: 435327529, Expected Digest: sha256:51a04d65d68b8b036eb0fc50229b1abc4845661056c5c58b264a00221d2e8ea4)
+2026-10-22T05:34:12.6517829Z Redirecting to blob download url: https://productionresultssa7.blob.core.windows.net/actions-results/75e9bea1-0df1-8e3a-8795-6880b469fc0a/workflow-job-run-f3f9e28d-0d7f-5870-ac47-ffcb54a7fefc/artifacts/8699898d4cda38beaba5c2dc45f4fd395eb1276d87d9a5deb7b0c2244442d8c7.zip
+2026-10-22T05:34:12.6522390Z Starting download of artifact to: /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/release
+2026-10-22T05:34:12.8042918Z (node:2212) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-10-22T05:34:22.5730574Z SHA256 digest of downloaded artifact is 51a04d65d68b8b036eb0fc50229b1abc4845661056c5c58b264a00221d2e8ea4
+2026-10-22T05:34:22.5731450Z Artifact download completed successfully.
+2026-10-22T05:34:22.5732241Z Total of 1 artifact(s) downloaded
+2026-10-22T05:34:22.5740660Z Download artifact has finished successfully
+2026-10-22T05:34:22.5925108Z ##[group]Run python3 engineering/run-next-integration.py \
+2026-10-22T05:34:22.5925845Z [36;1mpython3 engineering/run-next-integration.py \[0m
+2026-10-22T05:34:22.5926498Z [36;1m  --metadata "$GITHUB_WORKSPACE/release/release.json" \[0m
+2026-10-22T05:34:22.5927069Z [36;1m  --archive "$GITHUB_WORKSPACE/release/AGI_Fleet_Linux_v1.1.4.zip" \[0m
+2026-10-22T05:34:22.5927766Z [36;1m  --work "$RUNNER_TEMP/agi-integration-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \[0m
+2026-10-22T05:34:22.5928552Z [36;1m  --evidence "$GITHUB_WORKSPACE/integration-evidence"[0m
+2026-10-22T05:34:22.5971512Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:34:22.5972128Z ##[endgroup]
+2026-10-22T05:34:48.8509162Z RUN manager-init
+2026-10-22T05:34:48.8544990Z RUN manager-remote
+2026-10-22T05:34:48.8581774Z RUN manager-fetch
+2026-10-22T05:34:49.7236745Z RUN manager-checkout
+2026-10-22T05:34:49.8394902Z RUN manager-dependencies
+2026-10-22T05:34:54.3614818Z RUN hardhat-dependencies
+2026-10-22T05:34:57.2337146Z RUN compiler-compatibility
+2026-10-22T05:34:57.2984697Z RUN manager-build
+2026-10-22T05:35:51.4519536Z RUN fleet-artifact-reproduction
+2026-10-22T05:36:56.6452240Z RUN AGI_Agent-integration
+2026-10-22T05:37:15.9462252Z RUN AGI_Agent-integration-identity
+2026-10-22T05:37:17.7673984Z RUN AGI_Agent-integration-finalization
+2026-10-22T05:37:22.1927019Z RUN AGI_Agent-integration-budget-recovery
+2026-10-22T05:37:44.2046595Z RUN AGI_Agent-integration-images
+2026-10-22T05:38:03.8036180Z RUN AGI_Agent-integration-computer
+2026-10-22T05:38:23.7531015Z RUN AGI_Node-integration
+2026-10-22T05:38:35.6877880Z RUN AGI_Node-integration-finalization
+2026-10-22T05:38:40.1087490Z RUN current-manager-lifecycle
+2026-10-22T05:39:01.5215048Z RUN manager-regression
+2026-10-22T05:39:25.9480098Z {
+2026-10-22T05:39:25.9480905Z   "status": "PASS",
+2026-10-22T05:39:25.9481568Z   "evidence": "/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/integration-evidence"
+2026-10-22T05:39:25.9482945Z }
+2026-10-22T05:39:25.9736033Z ##[group]Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+2026-10-22T05:39:25.9736606Z with:
+2026-10-22T05:39:25.9737046Z   name: next-integration-arm64
+2026-10-22T05:39:25.9737377Z   path: integration-evidence/
+2026-10-22T05:39:25.9737773Z   if-no-files-found: error
+2026-10-22T05:39:25.9738066Z   retention-days: 90
+2026-10-22T05:39:25.9738366Z   compression-level: 6
+2026-10-22T05:39:25.9738761Z   overwrite: false
+2026-10-22T05:39:25.9739043Z   include-hidden-files: false
+2026-10-22T05:39:25.9739364Z ##[endgroup]
+2026-10-22T05:39:26.1100733Z With the provided path, there will be 22 files uploaded
+2026-10-22T05:39:26.1105096Z Artifact name is valid!
+2026-10-22T05:39:26.1105896Z Root directory input is valid!
+2026-10-22T05:39:26.3494931Z Beginning upload of artifact content to blob storage
+2026-10-22T05:39:26.5189217Z Uploaded bytes 33825
+2026-10-22T05:39:26.5478836Z Finished uploading artifact content to blob storage!
+2026-10-22T05:39:26.5480032Z SHA256 digest of uploaded artifact zip is 41134994e37c17f038e76b1847b1ea35c618eb6e289e71240371142bd7476e8b
+2026-10-22T05:39:26.5481375Z Finalizing artifact upload
+2026-10-22T05:39:27.0054145Z Artifact next-integration-arm64.zip successfully finalized. Artifact ID 12403839960
+2026-10-22T05:39:27.0055074Z Artifact next-integration-arm64 has been successfully uploaded! Final size is 33825 bytes. Artifact ID is 12403839960
+2026-10-22T05:39:27.0058869Z Artifact download URL: https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39727291254/artifacts/12403839960
+2026-10-22T05:39:27.0234527Z Cleaning up orphan processes
+2026-10-22T05:39:27.0657567Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

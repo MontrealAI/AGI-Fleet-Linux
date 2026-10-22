@@ -1,0 +1,847 @@
+﻿2026-10-22T05:29:38.9831372Z Current runner version: '2.338.0'
+2026-10-22T05:29:38.9848389Z ##[group]Runner Image Provisioner
+2026-10-22T05:29:38.9848912Z Hosted Compute Agent
+2026-10-22T05:29:38.9849311Z Version: 20261015.610
+2026-10-22T05:29:38.9849682Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-22T05:29:38.9850124Z Build Date: 2026-10-14T17:06:54Z
+2026-10-22T05:29:38.9850571Z Worker ID: {d74b3121-2043-4ad3-acda-dc6822999dcc}
+2026-10-22T05:29:38.9851014Z Region: centralus
+2026-10-22T05:29:38.9851373Z Cloud: Azure
+2026-10-22T05:29:38.9851695Z ##[endgroup]
+2026-10-22T05:29:38.9852448Z ##[group]Operating System
+2026-10-22T05:29:38.9852849Z Ubuntu
+2026-10-22T05:29:38.9853159Z 24.04.5
+2026-10-22T05:29:38.9853612Z LTS
+2026-10-22T05:29:38.9853932Z ##[endgroup]
+2026-10-22T05:29:38.9854285Z ##[group]Runner Image
+2026-10-22T05:29:38.9854687Z Image: ubuntu-24.04
+2026-10-22T05:29:38.9855026Z Version: 20261018.339.1
+2026-10-22T05:29:38.9855757Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-22T05:29:38.9856643Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+2026-10-22T05:29:38.9857257Z ##[endgroup]
+2026-10-22T05:29:38.9857876Z ##[group]GITHUB_TOKEN Permissions
+2026-10-22T05:29:38.9859021Z Contents: read
+2026-10-22T05:29:38.9859393Z Metadata: read
+2026-10-22T05:29:38.9859762Z ##[endgroup]
+2026-10-22T05:29:38.9861025Z Secret source: Actions
+2026-10-22T05:29:38.9861667Z Cache mode: write
+2026-10-22T05:29:38.9862090Z Prepare workflow directory
+2026-10-22T05:29:39.0057703Z Prepare all required actions
+2026-10-22T05:29:39.0087314Z Getting action download info
+2026-10-22T05:29:39.2331303Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-22T05:29:39.3495499Z Download action repository 'actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f' (SHA:b7c566a772e6b6bfb58ed0dc250532a479d7789f)
+2026-10-22T05:29:39.5069108Z Download action repository 'actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9' (SHA:fc324d3547104276b827a68afc52ff2a11cc49c9)
+2026-10-22T05:29:39.7074336Z Getting action download info
+2026-10-22T05:29:39.7898915Z Download action repository 'actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f' (SHA:bbbca2ddaa5d8feaa63e36b76fdaad77386f024f)
+2026-10-22T05:29:39.9446080Z Complete job name: Build and check website
+2026-10-22T05:29:40.0046976Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-10-22T05:29:40.0047969Z with:
+2026-10-22T05:29:40.0048487Z   persist-credentials: false
+2026-10-22T05:29:40.0049130Z   repository: MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:29:40.0054021Z   token: ***
+2026-10-22T05:29:40.0054522Z   ssh-strict: true
+2026-10-22T05:29:40.0055036Z   ssh-user: git
+2026-10-22T05:29:40.0055534Z   clean: true
+2026-10-22T05:29:40.0056071Z   sparse-checkout-cone-mode: true
+2026-10-22T05:29:40.0056700Z   fetch-depth: 1
+2026-10-22T05:29:40.0057205Z   fetch-tags: false
+2026-10-22T05:29:40.0057752Z   show-progress: true
+2026-10-22T05:29:40.0058279Z   lfs: false
+2026-10-22T05:29:40.0058778Z   submodules: false
+2026-10-22T05:29:40.0059319Z   set-safe-directory: true
+2026-10-22T05:29:40.0059931Z   allow-unsafe-pr-checkout: false
+2026-10-22T05:29:40.0060618Z ##[endgroup]
+2026-10-22T05:29:40.0725803Z Syncing repository: MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:29:40.0727669Z ##[group]Getting Git version info
+2026-10-22T05:29:40.0728566Z Working directory is '/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux'
+2026-10-22T05:29:40.0729843Z [command]/usr/bin/git version
+2026-10-22T05:29:40.0789369Z git version 2.55.0
+2026-10-22T05:29:40.0800735Z ##[endgroup]
+2026-10-22T05:29:40.0807829Z Temporarily overriding HOME='/home/runner/work/_temp/b2f709ec-02d0-4cba-b096-fdc40c8e2c85' before making global git config changes
+2026-10-22T05:29:40.0809904Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-22T05:29:40.0811777Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux
+2026-10-22T05:29:40.0852314Z Deleting the contents of '/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux'
+2026-10-22T05:29:40.0854271Z ##[group]Determining repository object format
+2026-10-22T05:29:40.0855393Z ##[endgroup]
+2026-10-22T05:29:40.0856279Z ##[group]Initializing the repository
+2026-10-22T05:29:40.0858073Z [command]/usr/bin/git init /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux
+2026-10-22T05:29:40.0955241Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-22T05:29:40.0956412Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-22T05:29:40.0957649Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-22T05:29:40.0958924Z hint: call:
+2026-10-22T05:29:40.0959472Z hint:
+2026-10-22T05:29:40.0960091Z hint: 	git config --global init.defaultBranch <name>
+2026-10-22T05:29:40.0961135Z hint:
+2026-10-22T05:29:40.0962035Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-22T05:29:40.0963136Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-22T05:29:40.1026068Z hint:
+2026-10-22T05:29:40.1027124Z hint: 	git branch -m <name>
+2026-10-22T05:29:40.1028139Z hint:
+2026-10-22T05:29:40.1029336Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-22T05:29:40.1031025Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/
+2026-10-22T05:29:40.1033304Z [command]/usr/bin/git remote add origin https://github.com/MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:29:40.1035664Z ##[endgroup]
+2026-10-22T05:29:40.1036655Z ##[group]Disabling automatic garbage collection
+2026-10-22T05:29:40.1037786Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-22T05:29:40.1040527Z ##[endgroup]
+2026-10-22T05:29:40.1041711Z ##[group]Setting up auth
+2026-10-22T05:29:40.1042362Z Removing SSH command configuration
+2026-10-22T05:29:40.1044749Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-22T05:29:40.1071613Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-22T05:29:40.1356815Z Removing HTTP extra header
+2026-10-22T05:29:40.1361672Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-22T05:29:40.1388852Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-22T05:29:40.1555253Z Removing includeIf entries pointing to credentials config files
+2026-10-22T05:29:40.1558898Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-22T05:29:40.1584546Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-22T05:29:40.1755152Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-22T05:29:40.1788415Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git.path /home/runner/work/_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config
+2026-10-22T05:29:40.1813105Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config
+2026-10-22T05:29:40.1841446Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config
+2026-10-22T05:29:40.1866314Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config
+2026-10-22T05:29:40.1890485Z ##[endgroup]
+2026-10-22T05:29:40.1891787Z ##[group]Fetching the repository
+2026-10-22T05:29:40.1895905Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +392fa551c0cef00aac511c812c029fb053729a4e:refs/remotes/pull/65/merge
+2026-10-22T05:29:40.9970192Z From https://github.com/MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:29:40.9970595Z  * [new ref]         392fa551c0cef00aac511c812c029fb053729a4e -> pull/65/merge
+2026-10-22T05:29:40.9979623Z ##[endgroup]
+2026-10-22T05:29:40.9979903Z ##[group]Determining the checkout info
+2026-10-22T05:29:40.9980175Z ##[endgroup]
+2026-10-22T05:29:40.9981365Z [command]/usr/bin/git sparse-checkout disable
+2026-10-22T05:29:41.0024193Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-22T05:29:41.0049350Z ##[group]Checking out the ref
+2026-10-22T05:29:41.0052349Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/65/merge
+2026-10-22T05:29:41.3872610Z Note: switching to 'refs/remotes/pull/65/merge'.
+2026-10-22T05:29:41.3872860Z 
+2026-10-22T05:29:41.3873006Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-22T05:29:41.3873353Z changes and commit them, and you can discard any commits you make in this
+2026-10-22T05:29:41.3873916Z state without impacting any branches by switching back to a branch.
+2026-10-22T05:29:41.3874108Z 
+2026-10-22T05:29:41.3874263Z If you want to create a new branch to retain commits you create, you may
+2026-10-22T05:29:41.3874563Z do so (now or later) by using -c with the switch command. Example:
+2026-10-22T05:29:41.3874713Z 
+2026-10-22T05:29:41.3874800Z   git switch -c <new-branch-name>
+2026-10-22T05:29:41.3874907Z 
+2026-10-22T05:29:41.3875026Z Or undo this operation with:
+2026-10-22T05:29:41.3875146Z 
+2026-10-22T05:29:41.3875209Z   git switch -
+2026-10-22T05:29:41.3875334Z 
+2026-10-22T05:29:41.3875476Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-22T05:29:41.3875653Z 
+2026-10-22T05:29:41.3875871Z HEAD is now at 392fa55 Merge 904fce44eac8bc5c51215e02102e13245b3f20fa into 0dd352fdd2b1af00bc8358e0ac7f96682fd6f796
+2026-10-22T05:29:41.3888946Z ##[endgroup]
+2026-10-22T05:29:41.3929240Z [command]/usr/bin/git log -1 --format=%H
+2026-10-22T05:29:41.3951268Z 392fa551c0cef00aac511c812c029fb053729a4e
+2026-10-22T05:29:41.3958519Z ##[group]Removing auth
+2026-10-22T05:29:41.3958843Z Removing SSH command configuration
+2026-10-22T05:29:41.3961419Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-22T05:29:41.3986149Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-22T05:29:41.4166031Z Removing HTTP extra header
+2026-10-22T05:29:41.4168325Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-22T05:29:41.4194327Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-22T05:29:41.4371812Z Removing includeIf entries pointing to credentials config files
+2026-10-22T05:29:41.4373749Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-22T05:29:41.4396838Z includeif.gitdir:/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git.path
+2026-10-22T05:29:41.4397568Z includeif.gitdir:/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/worktrees/*.path
+2026-10-22T05:29:41.4398269Z includeif.gitdir:/github/workspace/.git.path
+2026-10-22T05:29:41.4398688Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-22T05:29:41.4403260Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git.path
+2026-10-22T05:29:41.4422132Z /home/runner/work/_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config
+2026-10-22T05:29:41.4430014Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-4dfaa443\-cc32\-450f\-9ed2\-6f9d150cafc7\.config
+2026-10-22T05:29:41.4462603Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/worktrees/*.path
+2026-10-22T05:29:41.4480500Z /home/runner/work/_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config
+2026-10-22T05:29:41.4486269Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-4dfaa443\-cc32\-450f\-9ed2\-6f9d150cafc7\.config
+2026-10-22T05:29:41.4512564Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-22T05:29:41.4530521Z /github/runner_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config
+2026-10-22T05:29:41.4535470Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-4dfaa443\-cc32\-450f\-9ed2\-6f9d150cafc7\.config
+2026-10-22T05:29:41.4563253Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-22T05:29:41.4582076Z /github/runner_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config
+2026-10-22T05:29:41.4587796Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-4dfaa443\-cc32\-450f\-9ed2\-6f9d150cafc7\.config
+2026-10-22T05:29:41.4613817Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-22T05:29:41.4788783Z Removing credentials config '/home/runner/work/_temp/git-credentials-4dfaa443-cc32-450f-9ed2-6f9d150cafc7.config'
+2026-10-22T05:29:41.4796679Z ##[endgroup]
+2026-10-22T05:29:41.4947397Z ##[group]Run python3 engineering/test-demo-directory.py
+2026-10-22T05:29:41.4947748Z [36;1mpython3 engineering/test-demo-directory.py[0m
+2026-10-22T05:29:41.4947980Z [36;1mpython3 engineering/build-website.py[0m
+2026-10-22T05:29:41.5093248Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:29:41.5093587Z ##[endgroup]
+2026-10-22T05:29:41.7013665Z .....
+2026-10-22T05:29:41.7014121Z ----------------------------------------------------------------------
+2026-10-22T05:29:41.7014546Z Ran 5 tests in 0.123s
+2026-10-22T05:29:41.7014699Z 
+2026-10-22T05:29:41.7014791Z OK
+2026-10-22T05:29:41.7015084Z Demo directory: 6 families, 194 named paths, 200 source links
+2026-10-22T05:29:41.8242280Z Demo directory: 6 families, 194 named paths, 200 source links
+2026-10-22T05:29:42.1257033Z Built EN/FR GitHub Pages site for Mac and Linux 1.1.4 in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/_site
+2026-10-22T05:29:42.3382254Z ##[group]Run python3 engineering/check-website.py
+2026-10-22T05:29:42.3382491Z [36;1mpython3 engineering/check-website.py[0m
+2026-10-22T05:29:42.3382659Z [36;1mnode --check website/app.js[0m
+2026-10-22T05:29:42.3382812Z [36;1mnode --check website/onboarding.js[0m
+2026-10-22T05:29:42.3382972Z [36;1mnode --check website/mac-setup.js[0m
+2026-10-22T05:29:42.3422189Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:29:42.3422322Z ##[endgroup]
+2026-10-22T05:29:42.5346680Z {
+2026-10-22T05:29:42.5347291Z   "status": "PASS",
+2026-10-22T05:29:42.5347480Z   "files": 24,
+2026-10-22T05:29:42.5347639Z   "links": 882,
+2026-10-22T05:29:42.5347806Z   "htmlPages": 12,
+2026-10-22T05:29:42.5348105Z   "publicDirectory": "/home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/_site"
+2026-10-22T05:29:42.5348423Z }
+2026-10-22T05:29:42.5997031Z ##[group]Run npm ci --prefix engineering/browser-tests --ignore-scripts --no-audit --no-fund
+2026-10-22T05:29:42.5997409Z [36;1mnpm ci --prefix engineering/browser-tests --ignore-scripts --no-audit --no-fund[0m
+2026-10-22T05:29:42.6037520Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:29:42.6037653Z ##[endgroup]
+2026-10-22T05:29:43.3157305Z 
+2026-10-22T05:29:43.3157761Z added 5 packages in 632ms
+2026-10-22T05:29:43.3505991Z ##[group]Run engineering/browser-tests/node_modules/.bin/playwright install --with-deps --only-shell chromium
+2026-10-22T05:29:43.3506410Z [36;1mengineering/browser-tests/node_modules/.bin/playwright install --with-deps --only-shell chromium[0m
+2026-10-22T05:29:43.3547137Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:29:43.3547280Z ##[endgroup]
+2026-10-22T05:29:43.7069434Z Installing dependencies...
+2026-10-22T05:29:43.7127643Z Switching to root user to install dependencies...
+2026-10-22T05:29:43.7697953Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-22T05:29:43.8125825Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-10-22T05:29:43.8134581Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-10-22T05:29:43.8135228Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-10-22T05:29:43.8158718Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-10-22T05:29:43.8176367Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-10-22T05:29:43.9054329Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [630 kB]
+2026-10-22T05:29:43.9174671Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [567 kB]
+2026-10-22T05:29:43.9488821Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1400 kB]
+2026-10-22T05:29:43.9559537Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [310 kB]
+2026-10-22T05:29:43.9594750Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1706 kB]
+2026-10-22T05:29:43.9644219Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [342 kB]
+2026-10-22T05:29:44.0320802Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1146 kB]
+2026-10-22T05:29:44.0365330Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [231 kB]
+2026-10-22T05:29:44.0394354Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1222 kB]
+2026-10-22T05:29:46.5854682Z Fetched 7936 kB in 1s (12.4 MB/s)
+2026-10-22T05:29:47.2350185Z Reading package lists...
+2026-10-22T05:29:47.2597759Z Reading package lists...
+2026-10-22T05:29:47.4444692Z Building dependency tree...
+2026-10-22T05:29:47.4450188Z Reading state information...
+2026-10-22T05:29:47.5671096Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+2026-10-22T05:29:47.5671622Z libasound2t64 set to manually installed.
+2026-10-22T05:29:47.5672077Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-22T05:29:47.5672574Z libatk-bridge2.0-0t64 set to manually installed.
+2026-10-22T05:29:47.5673052Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-22T05:29:47.5673622Z libatk1.0-0t64 set to manually installed.
+2026-10-22T05:29:47.5674050Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-22T05:29:47.5674483Z libatspi2.0-0t64 set to manually installed.
+2026-10-22T05:29:47.5674882Z libcairo2 is already the newest version (1.18.0-3build1).
+2026-10-22T05:29:47.5675288Z libcairo2 set to manually installed.
+2026-10-22T05:29:47.5675704Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+2026-10-22T05:29:47.5676145Z libcups2t64 set to manually installed.
+2026-10-22T05:29:47.5676545Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+2026-10-22T05:29:47.5676989Z libdbus-1-3 set to manually installed.
+2026-10-22T05:29:47.5677417Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+2026-10-22T05:29:47.5677874Z libdrm2 set to manually installed.
+2026-10-22T05:29:47.5678285Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+2026-10-22T05:29:47.5679206Z libgbm1 set to manually installed.
+2026-10-22T05:29:47.5679574Z libnspr4 is already the newest version (2:4.35-1.1build1).
+2026-10-22T05:29:47.5680309Z libnspr4 set to manually installed.
+2026-10-22T05:29:47.5680629Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+2026-10-22T05:29:47.5681022Z libpango-1.0-0 set to manually installed.
+2026-10-22T05:29:47.5681393Z libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+2026-10-22T05:29:47.5681761Z libx11-6 set to manually installed.
+2026-10-22T05:29:47.5682118Z libxcb1 is already the newest version (1.15-1ubuntu2).
+2026-10-22T05:29:47.5682452Z libxcb1 set to manually installed.
+2026-10-22T05:29:47.5682813Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+2026-10-22T05:29:47.5683210Z libxcomposite1 set to manually installed.
+2026-10-22T05:29:47.5683683Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+2026-10-22T05:29:47.5684062Z libxdamage1 set to manually installed.
+2026-10-22T05:29:47.5684407Z libxext6 is already the newest version (2:1.3.4-1build2).
+2026-10-22T05:29:47.5684766Z libxext6 set to manually installed.
+2026-10-22T05:29:47.5685113Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+2026-10-22T05:29:47.5685494Z libxfixes3 set to manually installed.
+2026-10-22T05:29:47.5685857Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2026-10-22T05:29:47.5686250Z libxkbcommon0 set to manually installed.
+2026-10-22T05:29:47.5686618Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+2026-10-22T05:29:47.5686995Z libxrandr2 set to manually installed.
+2026-10-22T05:29:47.5687426Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+2026-10-22T05:29:47.5687903Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+2026-10-22T05:29:47.5688185Z libfontconfig1 set to manually installed.
+2026-10-22T05:29:47.5688466Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+2026-10-22T05:29:47.5688754Z libfreetype6 set to manually installed.
+2026-10-22T05:29:47.5689003Z fonts-liberation is already the newest version (1:2.1.5-3).
+2026-10-22T05:29:47.5689235Z fonts-liberation set to manually installed.
+2026-10-22T05:29:47.5689416Z The following additional packages will be installed:
+2026-10-22T05:29:47.5689621Z   gir1.2-glib-2.0 libglib2.0-bin libglib2.0-data libnss3-tools
+2026-10-22T05:29:47.5689816Z   xfonts-encodings xfonts-utils xserver-common
+2026-10-22T05:29:47.5689975Z Suggested packages:
+2026-10-22T05:29:47.5690089Z   low-memory-monitor
+2026-10-22T05:29:47.5690206Z Recommended packages:
+2026-10-22T05:29:47.5690346Z   fonts-ipafont-mincho fonts-tlwg-loma xfonts-base
+2026-10-22T05:29:47.5891094Z The following NEW packages will be installed:
+2026-10-22T05:29:47.5891673Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+2026-10-22T05:29:47.5897068Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+2026-10-22T05:29:47.5897548Z   xfonts-utils
+2026-10-22T05:29:47.5899550Z The following packages will be upgraded:
+2026-10-22T05:29:47.5900674Z   gir1.2-glib-2.0 libglib2.0-0t64 libglib2.0-bin libglib2.0-data libnss3
+2026-10-22T05:29:47.5902839Z   libnss3-tools xserver-common xvfb
+2026-10-22T05:29:47.6065832Z 8 upgraded, 9 newly installed, 0 to remove and 47 not upgraded.
+2026-10-22T05:29:47.6066198Z Need to get 25.9 MB of archives.
+2026-10-22T05:29:47.6066495Z After this operation, 79.5 MB of additional disk space will be used.
+2026-10-22T05:29:47.6066860Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-22T05:29:47.6589239Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+2026-10-22T05:29:47.7157304Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-data all 2.80.0-6ubuntu3.10 [50.2 kB]
+2026-10-22T05:29:47.7438969Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-bin amd64 2.80.0-6ubuntu3.10 [97.9 kB]
+2026-10-22T05:29:47.7720868Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gir1.2-glib-2.0 amd64 2.80.0-6ubuntu3.10 [183 kB]
+2026-10-22T05:29:47.8010453Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-0t64 amd64 2.80.0-6ubuntu3.10 [1548 kB]
+2026-10-22T05:29:47.8415787Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+2026-10-22T05:29:47.9240744Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+2026-10-22T05:29:47.9552310Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+2026-10-22T05:29:47.9969582Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+2026-10-22T05:29:48.0925158Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3 amd64 2:3.98-1ubuntu0.3 [1445 kB]
+2026-10-22T05:29:48.1310399Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3-tools amd64 2:3.98-1ubuntu0.3 [615 kB]
+2026-10-22T05:29:48.1638727Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-10-22T05:29:48.1966428Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-10-22T05:29:48.2275156Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+2026-10-22T05:29:48.2596305Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+2026-10-22T05:29:48.2915026Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.9 [35.0 kB]
+2026-10-22T05:29:48.3222185Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.9 [877 kB]
+2026-10-22T05:29:48.5287985Z Fetched 25.9 MB in 1s (35.6 MB/s)
+2026-10-22T05:29:48.5469942Z Selecting previously unselected package fonts-ipafont-gothic.
+2026-10-22T05:29:48.5706522Z (Reading database ... 
+2026-10-22T05:29:48.5706937Z (Reading database ... 5%
+2026-10-22T05:29:48.5707281Z (Reading database ... 10%
+2026-10-22T05:29:48.5707514Z (Reading database ... 15%
+2026-10-22T05:29:48.5707744Z (Reading database ... 20%
+2026-10-22T05:29:48.5708061Z (Reading database ... 25%
+2026-10-22T05:29:48.5708339Z (Reading database ... 30%
+2026-10-22T05:29:48.5708563Z (Reading database ... 35%
+2026-10-22T05:29:48.5708850Z (Reading database ... 40%
+2026-10-22T05:29:48.5709167Z (Reading database ... 45%
+2026-10-22T05:29:48.5709491Z (Reading database ... 50%
+2026-10-22T05:29:48.5748724Z (Reading database ... 55%
+2026-10-22T05:29:48.6918886Z (Reading database ... 60%
+2026-10-22T05:29:48.8963496Z (Reading database ... 65%
+2026-10-22T05:29:48.9602509Z (Reading database ... 70%
+2026-10-22T05:29:49.1024234Z (Reading database ... 75%
+2026-10-22T05:29:49.2461511Z (Reading database ... 80%
+2026-10-22T05:29:49.4011453Z (Reading database ... 85%
+2026-10-22T05:29:49.5067286Z (Reading database ... 90%
+2026-10-22T05:29:49.6552656Z (Reading database ... 95%
+2026-10-22T05:29:49.6552954Z (Reading database ... 100%
+2026-10-22T05:29:49.6553278Z (Reading database ... 214410 files and directories currently installed.)
+2026-10-22T05:29:49.6594068Z Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+2026-10-22T05:29:49.6679386Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-22T05:29:49.9225367Z Preparing to unpack .../01-libglib2.0-data_2.80.0-6ubuntu3.10_all.deb ...
+2026-10-22T05:29:49.9244805Z Unpacking libglib2.0-data (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+2026-10-22T05:29:49.9572963Z Preparing to unpack .../02-libglib2.0-bin_2.80.0-6ubuntu3.10_amd64.deb ...
+2026-10-22T05:29:49.9593319Z Unpacking libglib2.0-bin (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+2026-10-22T05:29:50.0045949Z Preparing to unpack .../03-gir1.2-glib-2.0_2.80.0-6ubuntu3.10_amd64.deb ...
+2026-10-22T05:29:50.0063827Z Unpacking gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+2026-10-22T05:29:50.0436627Z Preparing to unpack .../04-libglib2.0-0t64_2.80.0-6ubuntu3.10_amd64.deb ...
+2026-10-22T05:29:50.0506492Z Unpacking libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+2026-10-22T05:29:50.1212205Z Selecting previously unselected package fonts-freefont-ttf.
+2026-10-22T05:29:50.1322807Z Preparing to unpack .../05-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+2026-10-22T05:29:50.1330604Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-22T05:29:50.2241814Z Selecting previously unselected package fonts-tlwg-loma-otf.
+2026-10-22T05:29:50.2355286Z Preparing to unpack .../06-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+2026-10-22T05:29:50.2363526Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-22T05:29:50.2577171Z Selecting previously unselected package fonts-unifont.
+2026-10-22T05:29:50.2686818Z Preparing to unpack .../07-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+2026-10-22T05:29:50.2694148Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+2026-10-22T05:29:50.4741161Z Selecting previously unselected package fonts-wqy-zenhei.
+2026-10-22T05:29:50.4847409Z Preparing to unpack .../08-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+2026-10-22T05:29:50.4938590Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-22T05:29:50.9526106Z Preparing to unpack .../09-libnss3_2%3a3.98-1ubuntu0.3_amd64.deb ...
+2026-10-22T05:29:50.9546370Z Unpacking libnss3:amd64 (2:3.98-1ubuntu0.3) over (2:3.98-1ubuntu0.2) ...
+2026-10-22T05:29:51.0066891Z Preparing to unpack .../10-libnss3-tools_2%3a3.98-1ubuntu0.3_amd64.deb ...
+2026-10-22T05:29:51.0086436Z Unpacking libnss3-tools (2:3.98-1ubuntu0.3) over (2:3.98-1ubuntu0.2) ...
+2026-10-22T05:29:51.0467679Z Selecting previously unselected package xfonts-encodings.
+2026-10-22T05:29:51.0575763Z Preparing to unpack .../11-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-10-22T05:29:51.0580959Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-22T05:29:51.0831411Z Selecting previously unselected package xfonts-utils.
+2026-10-22T05:29:51.0939571Z Preparing to unpack .../12-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-10-22T05:29:51.0946233Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-10-22T05:29:51.1406699Z Selecting previously unselected package xfonts-cyrillic.
+2026-10-22T05:29:51.1514997Z Preparing to unpack .../13-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+2026-10-22T05:29:51.1521566Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-22T05:29:51.1833705Z Selecting previously unselected package xfonts-scalable.
+2026-10-22T05:29:51.1940828Z Preparing to unpack .../14-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+2026-10-22T05:29:51.1947441Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-22T05:29:51.2275884Z Preparing to unpack .../15-xserver-common_2%3a21.1.12-1ubuntu1.9_all.deb ...
+2026-10-22T05:29:51.2289522Z Unpacking xserver-common (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+2026-10-22T05:29:51.2617047Z Preparing to unpack .../16-xvfb_2%3a21.1.12-1ubuntu1.9_amd64.deb ...
+2026-10-22T05:29:51.2631164Z Unpacking xvfb (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+2026-10-22T05:29:51.3145104Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-22T05:29:51.3369403Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-22T05:29:51.3383342Z Setting up libnss3:amd64 (2:3.98-1ubuntu0.3) ...
+2026-10-22T05:29:51.3397102Z Setting up libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.10) ...
+2026-10-22T05:29:51.3483562Z Setting up libglib2.0-data (2.80.0-6ubuntu3.10) ...
+2026-10-22T05:29:51.3496547Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-22T05:29:51.3509437Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-22T05:29:51.3522760Z Setting up gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.10) ...
+2026-10-22T05:29:51.3536168Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-22T05:29:51.3581930Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+2026-10-22T05:29:51.3594337Z Setting up xserver-common (2:21.1.12-1ubuntu1.9) ...
+2026-10-22T05:29:51.3607362Z Setting up libnss3-tools (2:3.98-1ubuntu0.3) ...
+2026-10-22T05:29:51.3620635Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+2026-10-22T05:29:51.3633218Z Setting up xvfb (2:21.1.12-1ubuntu1.9) ...
+2026-10-22T05:29:51.3645809Z Setting up libglib2.0-bin (2.80.0-6ubuntu3.10) ...
+2026-10-22T05:29:51.3658317Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-10-22T05:29:51.3690284Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-22T05:29:51.3917536Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-22T05:29:51.4126751Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+2026-10-22T05:29:51.5904805Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-10-22T05:29:51.5926556Z Not building database; man-db/auto-update is not 'true'.
+2026-10-22T05:29:51.5937397Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-10-22T05:29:52.0745916Z 
+2026-10-22T05:29:52.0746659Z Running kernel seems to be up-to-date.
+2026-10-22T05:29:52.0746825Z 
+2026-10-22T05:29:52.0746884Z Restarting services...
+2026-10-22T05:29:52.1091596Z  systemctl restart packagekit.service php8.3-fpm.service polkit.service udisks2.service
+2026-10-22T05:29:52.2088591Z 
+2026-10-22T05:29:52.2089290Z Service restarts being deferred:
+2026-10-22T05:29:52.2089611Z  systemctl restart ModemManager.service
+2026-10-22T05:29:52.2103862Z  systemctl restart networkd-dispatcher.service
+2026-10-22T05:29:52.2104101Z 
+2026-10-22T05:29:52.2104212Z No containers need to be restarted.
+2026-10-22T05:29:52.2104359Z 
+2026-10-22T05:29:52.2104468Z No user sessions are running outdated binaries.
+2026-10-22T05:29:52.2104640Z 
+2026-10-22T05:29:52.2104803Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-10-22T05:29:53.0622227Z Downloading Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-headless-shell-linux64.zip
+2026-10-22T05:29:53.3664366Z |                                                                                |   0% of 120 MiB
+2026-10-22T05:29:53.5191671Z |■■■■■■■■                                                                        |  10% of 120 MiB
+2026-10-22T05:29:53.5737057Z |■■■■■■■■■■■■■■■■                                                                |  20% of 120 MiB
+2026-10-22T05:29:53.6292551Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 120 MiB
+2026-10-22T05:29:53.6755056Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 120 MiB
+2026-10-22T05:29:53.7229941Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 120 MiB
+2026-10-22T05:29:53.7696050Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 120 MiB
+2026-10-22T05:29:53.8186548Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 120 MiB
+2026-10-22T05:29:53.8631476Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 120 MiB
+2026-10-22T05:29:53.9188837Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 120 MiB
+2026-10-22T05:29:53.9727043Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 120 MiB
+2026-10-22T05:29:55.1263670Z Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1248
+2026-10-22T05:29:55.1265110Z Downloading FFmpeg (playwright ffmpeg v1013) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1013/ffmpeg-linux.zip
+2026-10-22T05:29:55.3815632Z |                                                                                |   0% of 2.2 MiB
+2026-10-22T05:29:55.4083965Z |■■■■■■■■                                                                        |  10% of 2.2 MiB
+2026-10-22T05:29:55.4186888Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.2 MiB
+2026-10-22T05:29:55.4266485Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.2 MiB
+2026-10-22T05:29:55.4299862Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.2 MiB
+2026-10-22T05:29:55.4325258Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.2 MiB
+2026-10-22T05:29:55.4380655Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.2 MiB
+2026-10-22T05:29:55.4402818Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.2 MiB
+2026-10-22T05:29:55.4416183Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.2 MiB
+2026-10-22T05:29:55.4429830Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.2 MiB
+2026-10-22T05:29:55.4440494Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.2 MiB
+2026-10-22T05:29:55.4815223Z FFmpeg (playwright ffmpeg v1013) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1013
+2026-10-22T05:29:55.4972000Z ##[group]Run npm test --prefix engineering/browser-tests
+2026-10-22T05:29:55.4972260Z [36;1mnpm test --prefix engineering/browser-tests[0m
+2026-10-22T05:29:55.5013082Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:29:55.5013226Z ##[endgroup]
+2026-10-22T05:29:55.5802803Z 
+2026-10-22T05:29:55.5803482Z > agi-fleet-onboarding-browser-tests@1.0.0 test
+2026-10-22T05:29:55.5803734Z > playwright test
+2026-10-22T05:29:55.5803808Z 
+2026-10-22T05:29:56.2554118Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:56] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:29:56.4566161Z 
+2026-10-22T05:29:56.4566696Z Running 76 tests using 2 workers
+2026-10-22T05:29:56.4566902Z 
+2026-10-22T05:29:57.0992927Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:57] "GET /demos.html HTTP/1.1" 200 -
+2026-10-22T05:29:57.1036830Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:57] "GET /demos.html HTTP/1.1" 200 -
+2026-10-22T05:29:57.1185223Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:57] "GET /demo-directory.css HTTP/1.1" 200 -
+2026-10-22T05:29:57.1203100Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:57] "GET /demo-directory.css HTTP/1.1" 200 -
+2026-10-22T05:29:57.3769767Z   ✓   2 tests/demo-directory.spec.js:15:3 › en directory remains useful without JavaScript (342ms)
+2026-10-22T05:29:57.4334894Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:57] "GET /demos-fr.html HTTP/1.1" 200 -
+2026-10-22T05:29:57.4505358Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:57] "GET /demo-directory.css HTTP/1.1" 200 -
+2026-10-22T05:29:58.0295145Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /index.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.0317600Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /demos-fr.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.0346043Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.0395804Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.2654803Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /fr.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.2702126Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /demos.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.2727588Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /successor-fr.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.2760687Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.6112249Z   ✓   1 tests/demo-directory.spec.js:4:3 › en original demo directory preserves scope, local routes and responsive access (1.6s)
+2026-10-22T05:29:58.6550972Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /demos-fr.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.6653274Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /demo-directory.css HTTP/1.1" 200 -
+2026-10-22T05:29:58.8575309Z   ✓   3 tests/demo-directory.spec.js:4:3 › fr original demo directory preserves scope, local routes and responsive access (1.5s)
+2026-10-22T05:29:58.8797099Z   ✓   4 tests/demo-directory.spec.js:15:3 › fr directory remains useful without JavaScript (256ms)
+2026-10-22T05:29:58.9145148Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /index.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.9264426Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:29:58.9284466Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /fr.html HTTP/1.1" 200 -
+2026-10-22T05:29:58.9388289Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:29:58] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:01.0134497Z   ✓   5 tests/ecosystem.spec.js:4:3 › en: ecosystem wayfinding works without scripts and keeps protocol boundaries visible (2.1s)
+2026-10-22T05:30:01.0585772Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:01] "GET /index.html HTTP/1.1" 200 -
+2026-10-22T05:30:01.0721374Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:01] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:01.0735690Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:01] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:01.6467285Z   ✓   6 tests/ecosystem.spec.js:4:3 › fr: ecosystem wayfinding works without scripts and keeps protocol boundaries visible (2.7s)
+2026-10-22T05:30:01.6892225Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:01] "GET /index.html HTTP/1.1" 200 -
+2026-10-22T05:30:01.7019844Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:01] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:01.7039798Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:01] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:03.6434685Z   ✓   8 tests/landing.spec.js:56:3 › en: landing page meets automated WCAG A/AA checks at desktop and mobile sizes (2.0s)
+2026-10-22T05:30:03.7034687Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:03] "GET /index.html HTTP/1.1" 200 -
+2026-10-22T05:30:03.7266891Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:03] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:03.7303686Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:03] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:03.8050109Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:03] "GET /release.json HTTP/1.1" 200 -
+2026-10-22T05:30:04.1936936Z   ✓   7 tests/landing.spec.js:15:3 › en: landing page reflows without clipped content or overlapping navigation (3.2s)
+2026-10-22T05:30:04.2532717Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:04] "GET /index.html HTTP/1.1" 200 -
+2026-10-22T05:30:04.2752005Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:04] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:04.2767789Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:04] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:06.2260355Z   ✓  10 tests/landing.spec.js:87:3 › en: guide search, clipboard fallback and planning checks remain useful (2.0s)
+2026-10-22T05:30:06.2725722Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:06] "GET /fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:06.2849478Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:06] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:06.2852263Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:06] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:07.0228847Z   ✓   9 tests/landing.spec.js:66:3 › en: all role commands copy the displayed path and retain role-specific guidance (3.4s)
+2026-10-22T05:30:07.0784433Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:07] "GET /fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:07.0882905Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:07] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:07.0883594Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:07] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:09.1445119Z   ✓  12 tests/landing.spec.js:56:3 › fr: landing page meets automated WCAG A/AA checks at desktop and mobile sizes (2.1s)
+2026-10-22T05:30:09.2036484Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:09] "GET /fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:09.2394805Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:09] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:09.2414310Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:09] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:09.3048628Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:09] "GET /release.json HTTP/1.1" 200 -
+2026-10-22T05:30:09.6453627Z   ✓  11 tests/landing.spec.js:15:3 › fr: landing page reflows without clipped content or overlapping navigation (3.4s)
+2026-10-22T05:30:09.7078734Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:09] "GET /fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:09.7258948Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:09] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:09.7277927Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:09] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:12.1278920Z   ✓  14 tests/landing.spec.js:87:3 › fr: guide search, clipboard fallback and planning checks remain useful (2.5s)
+2026-10-22T05:30:12.2146185Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:12] "GET /install-mac.html?role=node HTTP/1.1" 200 -
+2026-10-22T05:30:12.2285761Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:12] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:12.2295349Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:12] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:12.2324940Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:12] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:12.5942940Z   ✓  13 tests/landing.spec.js:66:3 › fr: all role commands copy the displayed path and retain role-specific guidance (3.4s)
+2026-10-22T05:30:12.6595166Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:12] "GET /install-mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:12.6712863Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:12] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:12.6741650Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:12] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:12.6749930Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:12] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:13.2603951Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /install-mac.html?role=node HTTP/1.1" 200 -
+2026-10-22T05:30:13.2765987Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:13.2779894Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:13.2786646Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:13.6117103Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /install-mac.html?role=agent HTTP/1.1" 200 -
+2026-10-22T05:30:13.6243033Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:13.6258022Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:13.6263342Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:13.9229481Z   ✓  15 tests/mac-setup.spec.js:10:3 › en: companion preserves role and progress, marks only explicit observations and prints all steps (1.8s)
+2026-10-22T05:30:13.9781064Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /install-mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:13.9964802Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:13.9993972Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:13.9995252Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:13] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:14.1662446Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:14] "GET /install-mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:14.1790198Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:14] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:14.1793599Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:14] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:14.3843919Z   ✓  17 tests/mac-setup.spec.js:61:3 › en: unavailable storage and JavaScript-disabled reading remain useful (450ms)
+2026-10-22T05:30:14.4246046Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:14] "GET /install-mac-fr.html?role=node HTTP/1.1" 200 -
+2026-10-22T05:30:14.4361468Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:14] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:14.4391816Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:14] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:14.4408885Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:14] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:15.4711026Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:15] "GET /install-mac-fr.html?role=node HTTP/1.1" 200 -
+2026-10-22T05:30:15.4879483Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:15] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:15.4882196Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:15] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:15.4885839Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:15] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:15.8376670Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:15] "GET /install-mac-fr.html?role=agent HTTP/1.1" 200 -
+2026-10-22T05:30:15.8539658Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:15] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:15.8549787Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:15] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:15.8570362Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:15] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:16.2195958Z   ✓  18 tests/mac-setup.spec.js:10:3 › fr: companion preserves role and progress, marks only explicit observations and prints all steps (1.8s)
+2026-10-22T05:30:16.2676650Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /install-mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:16.2769983Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:16.2789856Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:16.2798145Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:16.5701836Z   ✓  16 tests/mac-setup.spec.js:44:3 › en: mobile, large text, keyboard and WCAG checks on every step (4.0s)
+2026-10-22T05:30:16.6288129Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /install-mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:16.6432427Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:16.6459711Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:16.6465413Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /mac-setup.js HTTP/1.1" 200 -
+2026-10-22T05:30:16.8514464Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /install-mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:16.8632060Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /mac-setup.css HTTP/1.1" 200 -
+2026-10-22T05:30:16.8647218Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:16] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:17.0810118Z   ✓  20 tests/mac-setup.spec.js:61:3 › fr: unavailable storage and JavaScript-disabled reading remain useful (497ms)
+2026-10-22T05:30:17.1275290Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:17] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:17.1440630Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:17] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:17.1441488Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:17] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:18.1575405Z   ✓  21 tests/onboarding.spec.js:57:3 › Linux EN: all goals lead to a useful next step and both roles make accurate plans (1.1s)
+2026-10-22T05:30:18.1966306Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:18] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:18.2112261Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:18] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:18.2196333Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:18] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:18.6599127Z   ✓  22 tests/onboarding.spec.js:101:3 › Linux EN: unsupported or unknown computers stay on the help route (494ms)
+2026-10-22T05:30:18.7093913Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:18] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:18.7225859Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:18] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:19.0441417Z   ✓  23 tests/onboarding.spec.js:115:3 › Linux EN: the complete guide stays useful with JavaScript disabled (373ms)
+2026-10-22T05:30:19.0784872Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:19] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:19.0939889Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:19] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:19.0948610Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:19] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:20.1695131Z   ✓  19 tests/mac-setup.spec.js:44:3 › fr: mobile, large text, keyboard and WCAG checks on every step (3.9s)
+2026-10-22T05:30:20.2182410Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:20] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:20.2309293Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:20] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:20.2310985Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:20] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:20.4010190Z   ✓  24 tests/onboarding.spec.js:143:3 › Linux EN: welcome and chosen plan have no automated WCAG A or AA violations (1.3s)
+2026-10-22T05:30:20.4558799Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:20] "GET /start-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:20.4658689Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:20] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:20.4667678Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:20] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:21.6328051Z   ✓  26 tests/onboarding.spec.js:57:3 › Linux FR: all goals lead to a useful next step and both roles make accurate plans (1.2s)
+2026-10-22T05:30:21.6745472Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:21] "GET /start-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:21.6844514Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:21] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:21.6852392Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:21] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:21.7271813Z   ✓  25 tests/onboarding.spec.js:154:3 › Linux EN: welcome and plan reflow on small screens and with larger text (1.5s)
+2026-10-22T05:30:21.7922706Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:21] "GET /start-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:21.8062729Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:21] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:22.1575887Z   ✓  28 tests/onboarding.spec.js:115:3 › Linux FR: the complete guide stays useful with JavaScript disabled (419ms)
+2026-10-22T05:30:22.1628668Z   ✓  27 tests/onboarding.spec.js:101:3 › Linux FR: unsupported or unknown computers stay on the help route (523ms)
+2026-10-22T05:30:22.2039246Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:22] "GET /start-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:22.2106585Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:22] "GET /start-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:22.2183819Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:22] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:22.2252258Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:22] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:22.2260365Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:22] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:22.2261057Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:22] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:23.7802481Z   ✓  29 tests/onboarding.spec.js:143:3 › Linux FR: welcome and chosen plan have no automated WCAG A or AA violations (1.6s)
+2026-10-22T05:30:23.7836483Z   ✓  30 tests/onboarding.spec.js:154:3 › Linux FR: welcome and plan reflow on small screens and with larger text (1.6s)
+2026-10-22T05:30:23.8297333Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:23] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:23.8374455Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:23] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:23.8449627Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:23] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:23.8480727Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:23] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:23.8554433Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:23] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:23.8575222Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:23] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:24.2768639Z   ✓  32 tests/onboarding.spec.js:101:3 › Mac EN: unsupported or unknown computers stay on the help route (482ms)
+2026-10-22T05:30:24.3364688Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:24] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:24.3480968Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:24] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:24.4752854Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:24] "GET /mac-release.json HTTP/1.1" 200 -
+2026-10-22T05:30:24.6629200Z   ✓  33 tests/onboarding.spec.js:115:3 › Mac EN: the complete guide stays useful with JavaScript disabled (375ms)
+2026-10-22T05:30:24.7081875Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:24] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:24.7282326Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:24] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:24.7300843Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:24] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:25.1355666Z   ✓  31 tests/onboarding.spec.js:57:3 › Mac EN: all goals lead to a useful next step and both roles make accurate plans (1.3s)
+2026-10-22T05:30:25.1824648Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:25] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:25.1997664Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:25] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:25.1998537Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:25] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:26.2377338Z   ✓  34 tests/onboarding.spec.js:143:3 › Mac EN: welcome and chosen plan have no automated WCAG A or AA violations (1.6s)
+2026-10-22T05:30:26.3526994Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:26] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:26.3637171Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:26] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:26.3647803Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:26] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:26.6971371Z   ✓  35 tests/onboarding.spec.js:154:3 › Mac EN: welcome and plan reflow on small screens and with larger text (1.6s)
+2026-10-22T05:30:26.7503302Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:26] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:26.7761432Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:26] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:26.7778097Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:26] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:26.9402538Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:26] "GET /mac-release.json HTTP/1.1" 200 -
+2026-10-22T05:30:27.2055598Z   ✓  37 tests/onboarding.spec.js:101:3 › Mac FR: unsupported or unknown computers stay on the help route (497ms)
+2026-10-22T05:30:27.2574235Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:27] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:27.2655891Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:27] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:27.5527180Z   ✓  36 tests/onboarding.spec.js:57:3 › Mac FR: all goals lead to a useful next step and both roles make accurate plans (1.3s)
+2026-10-22T05:30:27.5814792Z   ✓  38 tests/onboarding.spec.js:115:3 › Mac FR: the complete guide stays useful with JavaScript disabled (368ms)
+2026-10-22T05:30:27.6030572Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:27] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:27.6173947Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:27] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:27.6195010Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:27] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:27.6241403Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:27] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:27.6347135Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:27] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:27.6359802Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:27] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:29.0737708Z   ✓  39 tests/onboarding.spec.js:143:3 › Mac FR: welcome and chosen plan have no automated WCAG A or AA violations (1.5s)
+2026-10-22T05:30:29.0978211Z   ✓  40 tests/onboarding.spec.js:154:3 › Mac FR: welcome and plan reflow on small screens and with larger text (1.5s)
+2026-10-22T05:30:29.1257767Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:29.1386721Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:29.1408122Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:29.1443852Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:29.1584639Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:29.1604519Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:29.5539661Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:29.5755312Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:29.5788087Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:29.7492222Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /start-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:29.7677906Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:29.7685444Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:29.8413203Z   ✓  41 tests/onboarding.spec.js:170:1 › the browser Back and Forward buttons follow the choices and preserve their meaning (757ms)
+2026-10-22T05:30:29.8816427Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:29.8969555Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:29.8987692Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:29.9013755Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:29.9234401Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:29.9294317Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:29] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:30.0867445Z   ✓  42 tests/onboarding.spec.js:184:1 › reloading and switching language preserve the selected role, step and larger text (979ms)
+2026-10-22T05:30:30.1807784Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:30.1956973Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:30.1960854Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:30.4604677Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:30.4832738Z   ✓  44 tests/onboarding.spec.js:219:1 › a direct plan link cannot skip the computer and role choices (372ms)
+2026-10-22T05:30:30.4864724Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:30.4869442Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:30.5364732Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:30.5625900Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:30.5646877Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:30.7282202Z   ✓  43 tests/onboarding.spec.js:201:1 › starting again clears the journey while keeping the larger-text preference (868ms)
+2026-10-22T05:30:30.7895391Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:30.8031336Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:30.8085593Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:30] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:31.0927268Z   ✓  45 tests/onboarding.spec.js:228:1 › blocked browser storage leaves every route and larger text usable (598ms)
+2026-10-22T05:30:31.1366497Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:31.1511514Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:31.1517045Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:31.4030728Z   ✓  46 tests/onboarding.spec.js:245:1 › printing includes the selected plan and closed details, then restores the screen (665ms)
+2026-10-22T05:30:31.4453085Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:31.4639328Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:31.4642476Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:31.6977049Z   ✓  47 tests/onboarding.spec.js:265:1 › a denied clipboard offers a labelled, read-only, selectable helper plan (594ms)
+2026-10-22T05:30:31.7495078Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /index.html HTTP/1.1" 200 -
+2026-10-22T05:30:31.7638342Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:31.7650408Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:31.8237584Z   ✓  48 tests/onboarding.spec.js:297:1 › a keyboard user can enter the guide, choose a path and return with visible focus (410ms)
+2026-10-22T05:30:31.8745809Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:31.8872164Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:31.8884358Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:31] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:32.1787924Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:32.1960096Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:32.1962278Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:32.6395580Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:32.6515102Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:32.6538596Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:32.7325537Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:32.7431609Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:32.7432086Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:32.8035102Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /start-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:32.8176598Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:32.8184049Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:32.9398238Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:32.9555194Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:32.9576067Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:32] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:33.1299981Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:33] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:33.1433522Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:33] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:33.1445189Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:33] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:33.2940038Z   ✓  50 tests/onboarding.spec.js:362:1 › Mac and Linux choices stay separate across language changes, reloads and browser history (1.5s)
+2026-10-22T05:30:33.3452526Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:33] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:33.3574147Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:33] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:33.3576210Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:33] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:33.5546436Z   ✓  51 tests/onboarding.spec.js:392:1 › Mac guide refuses a Linux or Intel choice injected into its saved plan (247ms)
+2026-10-22T05:30:33.5902789Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:33] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:33.5998071Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:33] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:33.6020943Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:33] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:34.1605537Z   ✓  52 tests/onboarding.spec.js:404:1 › Mac plan can be copied manually and printed with its native setup and honest readiness (597ms)
+2026-10-22T05:30:34.2054351Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:34.2203058Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:34.2215929Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:34.2578380Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /start.html HTTP/1.1" 200 -
+2026-10-22T05:30:34.3008501Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:34.3044569Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:34.3701295Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:34.3929018Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:34.3944392Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:34.3962889Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:34.4060417Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:34.4079692Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:34.4877664Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /start-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:34.4996100Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:34.5030948Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:34.6453790Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:34.6796720Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:34.6819073Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:34.8399743Z   ✓  53 tests/onboarding.spec.js:434:1 › Linux computer choices link directly to the matching Mac setup guide (670ms)
+2026-10-22T05:30:34.8964681Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:34] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:30:36.8132410Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:36] "GET /start-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:36.8433833Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:36] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:36.8455395Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:36] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:36.9133772Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:36] "GET /index.html HTTP/1.1" 200 -
+2026-10-22T05:30:36.9298056Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:36] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:36.9334056Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:36] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:37.0545721Z   ✓  54 tests/successor.spec.js:4:69 › SUCCESSOR en 320: useful work, Fleet export, offline restore (2.2s)
+2026-10-22T05:30:37.1032099Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:37] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:30:37.8714773Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:37] "GET /mac.html HTTP/1.1" 200 -
+2026-10-22T05:30:37.8888873Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:37] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:37.8924385Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:37] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:37.9647883Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:37] "GET /fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:37.9775833Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:37] "GET /styles.css HTTP/1.1" 200 -
+2026-10-22T05:30:37.9795101Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:37] "GET /app.js HTTP/1.1" 200 -
+2026-10-22T05:30:39.1424956Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:39] "GET /mac-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:39.1623489Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:39] "GET /onboarding.css HTTP/1.1" 200 -
+2026-10-22T05:30:39.1646692Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:39] "GET /onboarding.js HTTP/1.1" 200 -
+2026-10-22T05:30:39.2675753Z   ✓  49 tests/onboarding.spec.js:320:1 › homepages feature both platforms and their source previews on mobile and desktop (7.6s)
+2026-10-22T05:30:39.3257953Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:39] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:30:39.3602842Z   ✓  55 tests/successor.spec.js:4:69 › SUCCESSOR en 390: useful work, Fleet export, offline restore (2.3s)
+2026-10-22T05:30:39.4120093Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:39] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:30:41.7170589Z   ✓  56 tests/successor.spec.js:4:69 › SUCCESSOR en 768: useful work, Fleet export, offline restore (2.4s)
+2026-10-22T05:30:41.7724734Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:41] "GET /successor-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:41.8935167Z   ✓  57 tests/successor.spec.js:4:69 › SUCCESSOR en 1440: useful work, Fleet export, offline restore (2.5s)
+2026-10-22T05:30:41.9365532Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:41] "GET /successor-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:43.9931396Z   ✓  58 tests/successor.spec.js:4:69 › SUCCESSOR fr 320: useful work, Fleet export, offline restore (2.3s)
+2026-10-22T05:30:44.0292777Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:44] "GET /successor-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:44.2089073Z   ✓  59 tests/successor.spec.js:4:69 › SUCCESSOR fr 390: useful work, Fleet export, offline restore (2.3s)
+2026-10-22T05:30:44.2653036Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:44] "GET /successor-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:46.3677357Z   ✓  60 tests/successor.spec.js:4:69 › SUCCESSOR fr 768: useful work, Fleet export, offline restore (2.4s)
+2026-10-22T05:30:46.6798509Z   ✓  61 tests/successor.spec.js:4:69 › SUCCESSOR fr 1440: useful work, Fleet export, offline restore (2.5s)
+2026-10-22T05:30:46.7150333Z   ✓  62 tests/successor.spec.js:32:116 › Installed SUCCESSOR en: stop interrupts pending inspection (337ms)
+2026-10-22T05:30:47.0241249Z   ✓  64 tests/successor.spec.js:32:116 › Installed SUCCESSOR en: revoke interrupts pending inspection (299ms)
+2026-10-22T05:30:47.0604114Z   ✓  63 tests/successor.spec.js:32:116 › Installed SUCCESSOR en: stop interrupts pending context (372ms)
+2026-10-22T05:30:47.4225304Z   ✓  66 tests/successor.spec.js:32:116 › Installed SUCCESSOR fr: stop interrupts pending inspection (352ms)
+2026-10-22T05:30:47.4644812Z   ✓  65 tests/successor.spec.js:32:116 › Installed SUCCESSOR en: revoke interrupts pending context (432ms)
+2026-10-22T05:30:47.8072643Z   ✓  67 tests/successor.spec.js:32:116 › Installed SUCCESSOR fr: stop interrupts pending context (374ms)
+2026-10-22T05:30:47.8395276Z   ✓  68 tests/successor.spec.js:32:116 › Installed SUCCESSOR fr: revoke interrupts pending inspection (365ms)
+2026-10-22T05:30:47.8847219Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:47] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:30:48.1986301Z   ✓  69 tests/successor.spec.js:32:116 › Installed SUCCESSOR fr: revoke interrupts pending context (383ms)
+2026-10-22T05:30:48.2417245Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:48] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:30:48.4212712Z   ✓  70 tests/successor.spec.js:75:1 › SUCCESSOR preserves text on errors and unavailable storage; keyboard focus and isolated preview (574ms)
+2026-10-22T05:30:48.4636837Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:48] "GET /successor-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:49.1685104Z   ✓  71 tests/successor.spec.js:83:31 › SUCCESSOR en: stale restore consent and stopped work preserve the selected version (961ms)
+2026-10-22T05:30:49.2176468Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:49] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:30:49.3940471Z   ✓  72 tests/successor.spec.js:83:31 › SUCCESSOR fr: stale restore consent and stopped work preserve the selected version (965ms)
+2026-10-22T05:30:49.4430767Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:49] "GET /successor-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:49.9194617Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:49] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:30:50.1554532Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:50] "GET /successor-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:51.5684824Z   ✓  73 tests/successor.spec.js:106:31 › SUCCESSOR en: restored method survives changed data, mapping consent and readable numeric report (2.4s)
+2026-10-22T05:30:51.7251785Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:51] "GET /successor.html HTTP/1.1" 200 -
+2026-10-22T05:30:51.8716452Z   ✓  74 tests/successor.spec.js:106:31 › SUCCESSOR fr: restored method survives changed data, mapping consent and readable numeric report (2.5s)
+2026-10-22T05:30:52.0532088Z [WebServer] 127.0.0.1 - - [22/Oct/2026 05:30:52] "GET /successor-fr.html HTTP/1.1" 200 -
+2026-10-22T05:30:53.0915460Z   ✓  75 tests/successor.spec.js:125:31 › SUCCESSOR en: replacement planning revokes stale handoff and Fleet export (1.5s)
+2026-10-22T05:30:53.3403494Z   ✓  76 tests/successor.spec.js:125:31 › SUCCESSOR fr: replacement planning revokes stale handoff and Fleet export (1.5s)
+2026-10-22T05:30:53.4201986Z 
+2026-10-22T05:30:53.4205570Z   76 passed (57.5s)
+2026-10-22T05:30:53.5616556Z ##[group]Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+2026-10-22T05:30:53.5616776Z with:
+2026-10-22T05:30:53.5616895Z   name: website-browser-evidence
+2026-10-22T05:30:53.5617062Z   path: engineering/browser-tests/test-results/
+2026-10-22T05:30:53.5617219Z   if-no-files-found: warn
+2026-10-22T05:30:53.5617345Z   retention-days: 14
+2026-10-22T05:30:53.5617481Z   compression-level: 6
+2026-10-22T05:30:53.5617601Z   overwrite: false
+2026-10-22T05:30:53.5617717Z   include-hidden-files: false
+2026-10-22T05:30:53.5617847Z ##[endgroup]
+2026-10-22T05:30:53.6727203Z With the provided path, there will be 88 files uploaded
+2026-10-22T05:30:53.6729866Z Artifact name is valid!
+2026-10-22T05:30:53.6730102Z Root directory input is valid!
+2026-10-22T05:30:53.9138683Z Beginning upload of artifact content to blob storage
+2026-10-22T05:30:54.6268736Z Uploaded bytes 8388608
+2026-10-22T05:30:54.7516006Z Uploaded bytes 16777216
+2026-10-22T05:30:54.8475205Z Uploaded bytes 25165824
+2026-10-22T05:30:54.9780085Z Uploaded bytes 33554432
+2026-10-22T05:30:55.0322194Z Uploaded bytes 41943040
+2026-10-22T05:30:55.2034941Z Uploaded bytes 50331648
+2026-10-22T05:30:55.4009983Z Uploaded bytes 58720256
+2026-10-22T05:30:55.5399791Z Uploaded bytes 67108864
+2026-10-22T05:30:55.7554460Z Uploaded bytes 75497472
+2026-10-22T05:30:55.9658083Z Uploaded bytes 83886080
+2026-10-22T05:30:56.1258782Z Uploaded bytes 89939817
+2026-10-22T05:30:56.1643850Z Finished uploading artifact content to blob storage!
+2026-10-22T05:30:56.1645346Z SHA256 digest of uploaded artifact zip is 6b30626c6226c1d4871b6ada1f24ce3b2a04947160a10c4bbf31c000ad4973b5
+2026-10-22T05:30:56.1646863Z Finalizing artifact upload
+2026-10-22T05:30:56.6631048Z Artifact website-browser-evidence.zip successfully finalized. Artifact ID 12403993018
+2026-10-22T05:30:56.6631719Z Artifact website-browser-evidence has been successfully uploaded! Final size is 89939817 bytes. Artifact ID is 12403993018
+2026-10-22T05:30:56.6635528Z Artifact download URL: https://github.com/MontrealAI/AGI-Fleet-Linux/actions/runs/39727291289/artifacts/12403993018
+2026-10-22T05:30:56.6824750Z ##[group]Run python3 - <<'PY'
+2026-10-22T05:30:56.6824928Z [36;1mpython3 - <<'PY'[0m
+2026-10-22T05:30:56.6825065Z [36;1mimport hashlib, json, os[0m
+2026-10-22T05:30:56.6825209Z [36;1mfrom pathlib import Path[0m
+2026-10-22T05:30:56.6825341Z [36;1m[0m
+2026-10-22T05:30:56.6825507Z [36;1mhashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()[0m
+2026-10-22T05:30:56.6825789Z [36;1m          for path in sorted(Path('_site').iterdir()) if path.name != '.nojekyll'}[0m
+2026-10-22T05:30:56.6826039Z [36;1mwith open(os.environ['GITHUB_OUTPUT'], 'a') as output:[0m
+2026-10-22T05:30:56.6826298Z [36;1m    print('public_hashes=' + json.dumps(hashes, separators=(',', ':')), file=output)[0m
+2026-10-22T05:30:56.6826517Z [36;1mPY[0m
+2026-10-22T05:30:56.6866194Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:30:56.6866333Z ##[endgroup]
+2026-10-22T05:30:56.7228511Z Post job cleanup.
+2026-10-22T05:30:56.7802558Z [command]/usr/bin/git version
+2026-10-22T05:30:56.7832058Z git version 2.55.0
+2026-10-22T05:30:56.7852036Z Temporarily overriding HOME='/home/runner/work/_temp/2bb4785b-36a3-4c2d-bbad-162cd08269b3' before making global git config changes
+2026-10-22T05:30:56.7852939Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-22T05:30:56.7855572Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux
+2026-10-22T05:30:56.7879426Z Removing SSH command configuration
+2026-10-22T05:30:56.7883022Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-22T05:30:56.7909214Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-22T05:30:56.8085571Z Removing HTTP extra header
+2026-10-22T05:30:56.8088754Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-22T05:30:56.8114392Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-22T05:30:56.8283540Z Removing includeIf entries pointing to credentials config files
+2026-10-22T05:30:56.8287520Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-22T05:30:56.8311419Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-22T05:30:56.8606587Z Evaluate and set job outputs
+2026-10-22T05:30:56.8615937Z Set output 'public_hashes'
+2026-10-22T05:30:56.8617058Z Cleaning up orphan processes

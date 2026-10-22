@@ -1,0 +1,581 @@
+﻿2026-10-22T05:22:00.6453879Z Current runner version: '2.338.0'
+2026-10-22T05:22:00.6480905Z ##[group]Runner Image Provisioner
+2026-10-22T05:22:00.6481824Z Hosted Compute Agent
+2026-10-22T05:22:00.6482581Z Version: 20261015.610
+2026-10-22T05:22:00.6483694Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-22T05:22:00.6484456Z Build Date: 2026-10-14T17:06:54Z
+2026-10-22T05:22:00.6485692Z Worker ID: {b733f798-0c5f-4057-8f3b-2d000d8169dd}
+2026-10-22T05:22:00.6486860Z Region: eastus2
+2026-10-22T05:22:00.6487697Z Cloud: Azure
+2026-10-22T05:22:00.6488643Z ##[endgroup]
+2026-10-22T05:22:00.6490490Z ##[group]Operating System
+2026-10-22T05:22:00.6491250Z Ubuntu
+2026-10-22T05:22:00.6491887Z 24.04.5
+2026-10-22T05:22:00.6492494Z LTS
+2026-10-22T05:22:00.6493514Z ##[endgroup]
+2026-10-22T05:22:00.6494130Z ##[group]Runner Image
+2026-10-22T05:22:00.6494808Z Image: ubuntu-24.04
+2026-10-22T05:22:00.6495428Z Version: 20261018.339.1
+2026-10-22T05:22:00.6496838Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-22T05:22:00.6498484Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+2026-10-22T05:22:00.6499551Z ##[endgroup]
+2026-10-22T05:22:00.6500728Z ##[group]GITHUB_TOKEN Permissions
+2026-10-22T05:22:00.6503262Z Contents: read
+2026-10-22T05:22:00.6504006Z Metadata: read
+2026-10-22T05:22:00.6505047Z ##[endgroup]
+2026-10-22T05:22:00.6507283Z Secret source: Actions
+2026-10-22T05:22:00.6508308Z Cache mode: write
+2026-10-22T05:22:00.6509389Z Prepare workflow directory
+2026-10-22T05:22:00.6842398Z Prepare all required actions
+2026-10-22T05:22:00.6964816Z Complete job name: repository
+2026-10-22T05:22:00.7935643Z ##[group]Run set -euo pipefail
+2026-10-22T05:22:00.7936330Z [36;1mset -euo pipefail[0m
+2026-10-22T05:22:00.7936877Z [36;1mgit init .[0m
+2026-10-22T05:22:00.7937654Z [36;1mgit remote add origin "https://github.com/${REPOSITORY}.git"[0m
+2026-10-22T05:22:00.7938471Z [36;1mgit fetch --depth=1 origin "$COMMIT"[0m
+2026-10-22T05:22:00.7939136Z [36;1mgit checkout --detach FETCH_HEAD[0m
+2026-10-22T05:22:00.8433351Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:22:00.8434293Z env:
+2026-10-22T05:22:00.8434836Z   COMMIT: 392fa551c0cef00aac511c812c029fb053729a4e
+2026-10-22T05:22:00.8435512Z   REPOSITORY: MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:22:00.8436106Z ##[endgroup]
+2026-10-22T05:22:00.8880475Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-22T05:22:00.8881554Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-22T05:22:00.8882636Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-22T05:22:00.8883753Z hint: call:
+2026-10-22T05:22:00.8884174Z hint:
+2026-10-22T05:22:00.8884707Z hint: 	git config --global init.defaultBranch <name>
+2026-10-22T05:22:00.8885332Z hint:
+2026-10-22T05:22:00.8885919Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-22T05:22:00.8886855Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-22T05:22:00.8887603Z hint:
+2026-10-22T05:22:00.8888026Z hint: 	git branch -m <name>
+2026-10-22T05:22:00.8888535Z hint:
+2026-10-22T05:22:00.8889164Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-22T05:22:01.6363933Z From https://github.com/MontrealAI/AGI-Fleet-Linux
+2026-10-22T05:22:01.6366134Z  * branch            392fa551c0cef00aac511c812c029fb053729a4e -> FETCH_HEAD
+2026-10-22T05:22:01.6368958Z Initialized empty Git repository in /home/runner/work/AGI-Fleet-Linux/AGI-Fleet-Linux/.git/
+2026-10-22T05:22:02.2106174Z HEAD is now at 392fa55 Merge 904fce44eac8bc5c51215e02102e13245b3f20fa into 0dd352fdd2b1af00bc8358e0ac7f96682fd6f796
+2026-10-22T05:22:02.2241680Z ##[group]Run set -euo pipefail
+2026-10-22T05:22:02.2242099Z [36;1mset -euo pipefail[0m
+2026-10-22T05:22:02.2242446Z [36;1mmkdir -p "$RUNNER_TEMP/actionlint"[0m
+2026-10-22T05:22:02.2243825Z [36;1mcurl --fail --location --silent --show-error https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz -o "$RUNNER_TEMP/actionlint/tool.tar.gz"[0m
+2026-10-22T05:22:02.2245377Z [36;1mprintf '%s  %s\n' 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8 "$RUNNER_TEMP/actionlint/tool.tar.gz" | sha256sum --check[0m
+2026-10-22T05:22:02.2246274Z [36;1mtar -xzf "$RUNNER_TEMP/actionlint/tool.tar.gz" -C "$RUNNER_TEMP/actionlint" actionlint[0m
+2026-10-22T05:22:02.2246883Z [36;1m"$RUNNER_TEMP/actionlint/actionlint" -shellcheck= -pyflakes=[0m
+2026-10-22T05:22:02.2297849Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:22:02.2298193Z ##[endgroup]
+2026-10-22T05:22:02.3537844Z /home/runner/work/_temp/actionlint/tool.tar.gz: OK
+2026-10-22T05:22:02.4172778Z ##[group]Run python3 engineering/check-repository.py
+2026-10-22T05:22:02.4173505Z [36;1mpython3 engineering/check-repository.py[0m
+2026-10-22T05:22:02.4223131Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:22:02.4223544Z ##[endgroup]
+2026-10-22T05:22:04.1183301Z {
+2026-10-22T05:22:04.1184115Z   "status": "PASS",
+2026-10-22T05:22:04.1184499Z   "acceptanceRelease": "1.0.9",
+2026-10-22T05:22:04.1184914Z   "nativeAcceptance": "PASS",
+2026-10-22T05:22:04.1185349Z   "candidateAcceptance": "SEE_NEW_RELEASE_AUDIT",
+2026-10-22T05:22:04.1185840Z   "jobIntegration": "PASS",
+2026-10-22T05:22:04.1186244Z   "mainnetDeploymentObservation": {
+2026-10-22T05:22:04.1186652Z     "status": "PASS",
+2026-10-22T05:22:04.1187011Z     "rpcHosts": [
+2026-10-22T05:22:04.1187353Z       "rpc.mevblocker.io",
+2026-10-22T05:22:04.1187758Z       "ethereum-rpc.publicnode.com"
+2026-10-22T05:22:04.1188202Z     ],
+2026-10-22T05:22:04.1188545Z     "runtimeContracts": 9,
+2026-10-22T05:22:04.1188984Z     "managerGettersPerHost": 42,
+2026-10-22T05:22:04.1189382Z     "observationBlock": 26162266,
+2026-10-22T05:22:04.1189793Z     "intakeOpenAtObservedBlock": false,
+2026-10-22T05:22:04.1190224Z     "productionQualified": false
+2026-10-22T05:22:04.1190508Z   },
+2026-10-22T05:22:04.1190754Z   "recordedMainnetObservation": {
+2026-10-22T05:22:04.1191062Z     "status": "PASS",
+2026-10-22T05:22:04.1191317Z     "rpcHosts": [
+2026-10-22T05:22:04.1191599Z       "rpc.mevblocker.io",
+2026-10-22T05:22:04.1191894Z       "ethereum-rpc.publicnode.com"
+2026-10-22T05:22:04.1192192Z     ],
+2026-10-22T05:22:04.1192448Z     "runtimeContracts": 9,
+2026-10-22T05:22:04.1192739Z     "managerGettersPerHost": 42,
+2026-10-22T05:22:04.1193382Z     "observationBlock": 26170203,
+2026-10-22T05:22:04.1193709Z     "intakeOpenAtObservedBlock": false,
+2026-10-22T05:22:04.1194039Z     "productionQualified": false
+2026-10-22T05:22:04.1194325Z   },
+2026-10-22T05:22:04.1194609Z   "operatorGate": "OPEN_FOR_CONTROLLED_FRESH_INSTALL",
+2026-10-22T05:22:04.1194974Z   "sourceMirror": {
+2026-10-22T05:22:04.1195226Z     "status": "PASS",
+2026-10-22T05:22:04.1195480Z     "version": "1.1.4",
+2026-10-22T05:22:04.1195743Z     "files": 6153,
+2026-10-22T05:22:04.1196160Z     "revisionSHA256": "ccb404ab6bf79616e54aba2c33d71686447cb215128b04ba6a7dbce2e53d5383"
+2026-10-22T05:22:04.1196622Z   },
+2026-10-22T05:22:04.1196869Z   "productionQualified": false
+2026-10-22T05:22:04.1197147Z }
+2026-10-22T05:22:04.1328853Z ##[group]Run python3 -m unittest discover -s engineering/tests -v
+2026-10-22T05:22:04.1329426Z [36;1mpython3 -m unittest discover -s engineering/tests -v[0m
+2026-10-22T05:22:04.1380791Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:22:04.1381110Z ##[endgroup]
+2026-10-22T05:22:04.5248076Z test_full_committed_sidecars_match_live_metadata_before_capture_write (test_discovery_alpha_input.AlphaOriginalInput.test_full_committed_sidecars_match_live_metadata_before_capture_write) ... ok
+2026-10-22T05:22:04.6461104Z test_full_mutable_metadata_is_freshly_rechecked_before_capture_write (test_discovery_alpha_input.AlphaOriginalInput.test_full_mutable_metadata_is_freshly_rechecked_before_capture_write) ... ok
+2026-10-22T05:22:04.7050694Z test_original_raw_inputs_survive_capture_and_package_inventory (test_discovery_alpha_input.AlphaOriginalInput.test_original_raw_inputs_survive_capture_and_package_inventory) ... ok
+2026-10-22T05:22:04.7633584Z test_outer_sha_member_change_and_different_workspace_refuse (test_discovery_alpha_input.AlphaOriginalInput.test_outer_sha_member_change_and_different_workspace_refuse) ... ok
+2026-10-22T05:22:04.8190732Z test_pr_synthetic_checkout_is_not_a_final_main_artifact (test_discovery_alpha_input.AlphaOriginalInput.test_pr_synthetic_checkout_is_not_a_final_main_artifact) ... ok
+2026-10-22T05:22:04.9357141Z test_public_git_blob_tamper_or_incomplete_metadata_refuses (test_discovery_alpha_input.AlphaOriginalInput.test_public_git_blob_tamper_or_incomplete_metadata_refuses) ... ok
+2026-10-22T05:22:05.0576739Z test_public_git_packet_captures_exact_original17_without_actions_zip (test_discovery_alpha_input.AlphaOriginalInput.test_public_git_packet_captures_exact_original17_without_actions_zip) ... ok
+2026-10-22T05:22:05.1177470Z test_raw_transport_is_immutable_bounded_get_without_credentials (test_discovery_alpha_input.AlphaOriginalInput.test_raw_transport_is_immutable_bounded_get_without_credentials) ... ok
+2026-10-22T05:22:05.1739125Z test_saved_member_journal_cannot_claim_another_mission (test_discovery_alpha_input.AlphaOriginalInput.test_saved_member_journal_cannot_claim_another_mission) ... ok
+2026-10-22T05:22:05.2297635Z test_semantically_equal_served_catalog_with_different_raw_bytes_refuses (test_discovery_alpha_input.AlphaOriginalInput.test_semantically_equal_served_catalog_with_different_raw_bytes_refuses) ... ok
+2026-10-22T05:22:05.3515088Z test_sidecar_json_formatting_preserved_and_exact_live_routes_bounded (test_discovery_alpha_input.AlphaOriginalInput.test_sidecar_json_formatting_preserved_and_exact_live_routes_bounded) ... ok
+2026-10-22T05:22:05.4079771Z test_unset_and_source_or_page_reanchoring_refuse (test_discovery_alpha_input.AlphaOriginalInput.test_unset_and_source_or_page_reanchoring_refuse) ... ok
+2026-10-22T05:22:05.4639625Z test_wrong_attempt_missing_step_and_stale_artifact_refuse (test_discovery_alpha_input.AlphaOriginalInput.test_wrong_attempt_missing_step_and_stale_artifact_refuse) ... ok
+2026-10-22T05:22:05.4783897Z test_actual_nested_copy_is_not_a_git_root (test_discovery_installed_profile.InstalledProfile.test_actual_nested_copy_is_not_a_git_root) ... ok
+2026-10-22T05:22:05.8169013Z test_archive_root_dot_refuses_before_destination_creation (test_discovery_installed_profile.InstalledProfile.test_archive_root_dot_refuses_before_destination_creation) ... ok
+2026-10-22T05:22:05.9569280Z test_assume_unchanged_and_inconsistent_sha_map_cannot_relabel_raw_bytes (test_discovery_installed_profile.InstalledProfile.test_assume_unchanged_and_inconsistent_sha_map_cannot_relabel_raw_bytes) ... ok
+2026-10-22T05:22:06.1644997Z test_build_does_not_invoke_a_configured_remote (test_discovery_installed_profile.InstalledProfile.test_build_does_not_invoke_a_configured_remote) ... ok
+2026-10-22T05:22:06.1653532Z test_changed_inert_metadata_refuses_owned_descriptor_capture (test_discovery_installed_profile.InstalledProfile.test_changed_inert_metadata_refuses_owned_descriptor_capture) ... ok
+2026-10-22T05:22:06.2368917Z test_checkout_gc_auto_zero_is_inert_and_other_gc_configuration_refuses (test_discovery_installed_profile.InstalledProfile.test_checkout_gc_auto_zero_is_inert_and_other_gc_configuration_refuses) ... ok
+2026-10-22T05:22:06.4505435Z test_conflicting_file_paths_refuse_before_destination_creation (test_discovery_installed_profile.InstalledProfile.test_conflicting_file_paths_refuse_before_destination_creation) ... ok
+2026-10-22T05:22:06.6677394Z test_disabled_ignored_regular_worktree_metadata_preserves_clean_checkout (test_discovery_installed_profile.InstalledProfile.test_disabled_ignored_regular_worktree_metadata_preserves_clean_checkout) ... ok
+2026-10-22T05:22:06.8728938Z test_duplicate_archive_entry_is_refused (test_discovery_installed_profile.InstalledProfile.test_duplicate_archive_entry_is_refused) ... /usr/lib/python3.12/zipfile/__init__.py:1620: UserWarning: Duplicate name: 'agi-fleet-discovery-0.1.0-discovery-preview.1/discovery-lab/receiver.mjs'
+2026-10-22T05:22:06.8731010Z   return self._open_to_write(zinfo, force_zip64=force_zip64)
+2026-10-22T05:22:06.8838152Z ok
+2026-10-22T05:22:06.9613686Z test_freeze_cannot_overwrite_an_existing_frozen_profile (test_discovery_installed_profile.InstalledProfile.test_freeze_cannot_overwrite_an_existing_frozen_profile) ... ok
+2026-10-22T05:22:07.1390909Z test_freeze_records_source_identity_without_claiming_installed_qualification (test_discovery_installed_profile.InstalledProfile.test_freeze_records_source_identity_without_claiming_installed_qualification) ... ok
+2026-10-22T05:22:07.2235673Z test_freeze_wrong_reviewed_commit_preserves_pending_profile (test_discovery_installed_profile.InstalledProfile.test_freeze_wrong_reviewed_commit_preserves_pending_profile) ... ok
+2026-10-22T05:22:07.2891793Z test_git_environment_cannot_redirect_the_selected_root (test_discovery_installed_profile.InstalledProfile.test_git_environment_cannot_redirect_the_selected_root) ... ok
+2026-10-22T05:22:07.2896126Z test_git_object_lookups_cannot_lazily_fetch_or_use_external_protocols (test_discovery_installed_profile.InstalledProfile.test_git_object_lookups_cannot_lazily_fetch_or_use_external_protocols) ... ok
+2026-10-22T05:22:07.3443862Z test_ignored_worktree_metadata_must_be_regular_and_bounded (test_discovery_installed_profile.InstalledProfile.test_ignored_worktree_metadata_must_be_regular_and_bounded) ... ok
+2026-10-22T05:22:07.4101150Z test_included_filter_is_refused_before_actual_build_status (test_discovery_installed_profile.InstalledProfile.test_included_filter_is_refused_before_actual_build_status) ... ok
+2026-10-22T05:22:07.4104886Z test_inert_unsafe_member_names_refuse_before_filesystem_use (test_discovery_installed_profile.InstalledProfile.test_inert_unsafe_member_names_refuse_before_filesystem_use) ... ok
+2026-10-22T05:22:08.0684781Z test_installed_capture_regressions (test_discovery_installed_profile.InstalledProfile.test_installed_capture_regressions) ... ok
+2026-10-22T05:22:08.1374306Z test_local_clean_filter_is_refused_before_status_can_execute_it (test_discovery_installed_profile.InstalledProfile.test_local_clean_filter_is_refused_before_status_can_execute_it) ... ok
+2026-10-22T05:22:08.2887097Z test_local_replacement_objects_cannot_change_original_commit_tree (test_discovery_installed_profile.InstalledProfile.test_local_replacement_objects_cannot_change_original_commit_tree) ... ok
+2026-10-22T05:22:08.5017025Z test_missing_source_member_is_refused_before_destination_creation (test_discovery_installed_profile.InstalledProfile.test_missing_source_member_is_refused_before_destination_creation) ... ok
+2026-10-22T05:22:08.5038703Z test_oversized_inert_source_refuses_before_descriptor_read (test_discovery_installed_profile.InstalledProfile.test_oversized_inert_source_refuses_before_descriptor_read) ... ok
+2026-10-22T05:22:08.7200596Z test_saved_archive_all_bytes_modes_and_inactive_install (test_discovery_installed_profile.InstalledProfile.test_saved_archive_all_bytes_modes_and_inactive_install) ... ok
+2026-10-22T05:22:08.8359705Z test_source_change_refuses_saved_build (test_discovery_installed_profile.InstalledProfile.test_source_change_refuses_saved_build) ... ok
+2026-10-22T05:22:08.8922633Z test_unfrozen_profile_refuses_before_output_creation (test_discovery_installed_profile.InstalledProfile.test_unfrozen_profile_refuses_before_output_creation) ... ok
+2026-10-22T05:22:08.9759363Z test_untracked_packaged_runtime_cannot_claim_head_source (test_discovery_installed_profile.InstalledProfile.test_untracked_packaged_runtime_cannot_claim_head_source) ... ok
+2026-10-22T05:22:09.0346401Z test_worktree_activation_is_rejected_before_any_git_call (test_discovery_installed_profile.InstalledProfile.test_worktree_activation_is_rejected_before_any_git_call) ... ok
+2026-10-22T05:22:09.1017316Z test_worktree_specific_filter_is_refused_before_status (test_discovery_installed_profile.InstalledProfile.test_worktree_specific_filter_is_refused_before_status) ... ok
+2026-10-22T05:22:09.3073556Z test_wrong_archive_checksum_is_refused (test_discovery_installed_profile.InstalledProfile.test_wrong_archive_checksum_is_refused) ... ok
+2026-10-22T05:22:09.6337579Z test_changed_archive_and_docket_cannot_reuse_report (test_discovery_installed_qualification.InstalledAudit.test_changed_archive_and_docket_cannot_reuse_report) ... ok
+2026-10-22T05:22:09.9313787Z test_constructed_history_and_changed_original_prefix_cannot_replace_ui_input (test_discovery_installed_qualification.InstalledAudit.test_constructed_history_and_changed_original_prefix_cannot_replace_ui_input) ... ok
+2026-10-22T05:22:10.1475326Z test_constructed_history_cannot_attach_the_original_ui_lane_return (test_discovery_installed_qualification.InstalledAudit.test_constructed_history_cannot_attach_the_original_ui_lane_return) ... ok
+2026-10-22T05:22:10.3661174Z test_constructed_history_prefix_and_docket_are_independently_checked (test_discovery_installed_qualification.InstalledAudit.test_constructed_history_prefix_and_docket_are_independently_checked) ... ok
+2026-10-22T05:22:10.5986093Z test_constructed_lane_requires_every_raw_request_return_and_observation (test_discovery_installed_qualification.InstalledAudit.test_constructed_lane_requires_every_raw_request_return_and_observation) ... ok
+2026-10-22T05:22:10.8350634Z test_constructed_raw_bytes_and_runtime_cannot_reuse_summary (test_discovery_installed_qualification.InstalledAudit.test_constructed_raw_bytes_and_runtime_cannot_reuse_summary) ... ok
+2026-10-22T05:22:11.0524966Z test_inert_complete_metadata_keeps_all_publication_and_legacy_gates_held (test_discovery_installed_qualification.InstalledAudit.test_inert_complete_metadata_keeps_all_publication_and_legacy_gates_held) ... ok
+2026-10-22T05:22:11.2711621Z test_missing_duplicate_or_mixed_workflow_reports_refuse (test_discovery_installed_qualification.InstalledAudit.test_missing_duplicate_or_mixed_workflow_reports_refuse) ... ok
+2026-10-22T05:22:11.4911516Z test_wrong_runtime_and_changed_raw_return_refuse (test_discovery_installed_qualification.InstalledAudit.test_wrong_runtime_and_changed_raw_return_refuse) ... ok
+2026-10-22T05:22:12.6230196Z test_explicit_receiver_contract (test_discovery_lab.DiscoveryLabReceiver.test_explicit_receiver_contract) ... ok
+2026-10-22T05:22:12.6235743Z test_advanced_main_stops_before_any_mutation (test_discovery_preview_publication.Publication.test_advanced_main_stops_before_any_mutation) ... ok
+2026-10-22T05:22:12.6240558Z test_all_original_inherited_groups_and_unskipped_native_steps_are_required (test_discovery_preview_publication.Publication.test_all_original_inherited_groups_and_unskipped_native_steps_are_required) ... ok
+2026-10-22T05:22:12.6247454Z test_artifact_expansion_collision_refuses_before_output (test_discovery_preview_publication.Publication.test_artifact_expansion_collision_refuses_before_output) ... ok
+2026-10-22T05:22:12.7048354Z test_authorization_requires_exact_current_main_and_frozen_profile (test_discovery_preview_publication.Publication.test_authorization_requires_exact_current_main_and_frozen_profile) ... ok
+2026-10-22T05:22:12.7059391Z test_changed_downloaded_bytes_block_publication (test_discovery_preview_publication.Publication.test_changed_downloaded_bytes_block_publication) ... ok
+2026-10-22T05:22:12.7072453Z test_changed_review_lease_stops_before_publishing_verified_draft (test_discovery_preview_publication.Publication.test_changed_review_lease_stops_before_publishing_verified_draft) ... ok
+2026-10-22T05:22:12.7079387Z test_differing_draft_asset_and_missing_published_asset_refuse (test_discovery_preview_publication.Publication.test_differing_draft_asset_and_missing_published_asset_refuse) ... ok
+2026-10-22T05:22:12.7084441Z test_generic_stale_unresolved_or_unmerged_review_refuses (test_discovery_preview_publication.Publication.test_generic_stale_unresolved_or_unmerged_review_refuses) ... ok
+2026-10-22T05:22:12.7139405Z test_historical_byte_pins_work_without_git_and_refuse_each_changed_or_missing_file (test_discovery_preview_publication.Publication.test_historical_byte_pins_work_without_git_and_refuse_each_changed_or_missing_file) ... ok
+2026-10-22T05:22:12.7144159Z test_historical_publishers_profiles_and_root_license_are_byte_exact (test_discovery_preview_publication.Publication.test_historical_publishers_profiles_and_root_license_are_byte_exact) ... ok
+2026-10-22T05:22:12.7159648Z test_immutable_release_downloads_every_asset_before_and_after_publish (test_discovery_preview_publication.Publication.test_immutable_release_downloads_every_asset_before_and_after_publish) ... ok
+2026-10-22T05:22:12.7184660Z test_original_artifact_source_job_time_and_downloaded_zip_custody (test_discovery_preview_publication.Publication.test_original_artifact_source_job_time_and_downloaded_zip_custody) ... ok
+2026-10-22T05:22:12.7900530Z test_review_source_zip_streams_git_blob_and_crc_checks (test_discovery_preview_publication.Publication.test_review_source_zip_streams_git_blob_and_crc_checks) ... ok
+2026-10-22T05:22:12.7908078Z test_signed_storage_redirect_does_not_receive_authorization (test_discovery_preview_publication.Publication.test_signed_storage_redirect_does_not_receive_authorization) ... ok
+2026-10-22T05:22:12.7910907Z test_source_specific_shared_account_comment_is_not_fabricated_approval (test_discovery_preview_publication.Publication.test_source_specific_shared_account_comment_is_not_fabricated_approval) ... ok
+2026-10-22T05:22:12.7914027Z test_wrong_tag_or_differing_existing_asset_never_overwrites (test_discovery_preview_publication.Publication.test_wrong_tag_or_differing_existing_asset_never_overwrites) ... ok
+2026-10-22T05:22:12.7916670Z test_aggregate_is_a_job_and_dispatch_keeps_its_boolean_input (test_governance_gate.GovernanceGate.test_aggregate_is_a_job_and_dispatch_keeps_its_boolean_input) ... ok
+2026-10-22T05:22:12.7918558Z test_all_required_children_succeed (test_governance_gate.GovernanceGate.test_all_required_children_succeed) ... ok
+2026-10-22T05:22:12.7920350Z test_local_skills_requalifies_packaged_fleet_changes (test_governance_gate.GovernanceGate.test_local_skills_requalifies_packaged_fleet_changes) ... ok
+2026-10-22T05:22:12.7927107Z test_missing_failed_cancelled_skipped_and_extra_children_fail (test_governance_gate.GovernanceGate.test_missing_failed_cancelled_skipped_and_extra_children_fail) ... ok
+2026-10-22T05:22:12.7929432Z test_policy_requires_reviews_and_protects_admin_force_push_deletion (test_governance_gate.GovernanceGate.test_policy_requires_reviews_and_protects_admin_force_push_deletion) ... ok
+2026-10-22T05:22:12.7931810Z test_profile_gate_keeps_two_architectures_same_archive_and_no_root (test_governance_gate.GovernanceGate.test_profile_gate_keeps_two_architectures_same_archive_and_no_root) ... ok
+2026-10-22T05:22:12.8011075Z test_changed_contract_hash_cannot_be_pass (test_job_evidence.RetainedEvidence.test_changed_contract_hash_cannot_be_pass) ... ok
+2026-10-22T05:22:12.8048822Z test_changed_log_cannot_be_pass (test_job_evidence.RetainedEvidence.test_changed_log_cannot_be_pass) ... ok
+2026-10-22T05:22:12.8088886Z test_failed_step_cannot_be_pass (test_job_evidence.RetainedEvidence.test_failed_step_cannot_be_pass) ... ok
+2026-10-22T05:22:12.8120502Z test_missing_log_cannot_be_pass (test_job_evidence.RetainedEvidence.test_missing_log_cannot_be_pass) ... ok
+2026-10-22T05:22:12.8193378Z test_simulation_cannot_be_reclassified_as_live_evidence (test_job_evidence.RetainedEvidence.test_simulation_cannot_be_reclassified_as_live_evidence) ... ok
+2026-10-22T05:22:12.8235206Z test_skipped_manager_test_cannot_be_pass (test_job_evidence.RetainedEvidence.test_skipped_manager_test_cannot_be_pass) ... ok
+2026-10-22T05:22:12.8304053Z test_valid_fixture_has_complete_log_coverage (test_job_evidence.RetainedEvidence.test_valid_fixture_has_complete_log_coverage) ... ok
+2026-10-22T05:22:12.8375672Z test_abi_and_both_bytecodes_must_match (test_job_integration.ContractCompatibility.test_abi_and_both_bytecodes_must_match) ... ok
+2026-10-22T05:22:12.8432842Z test_ast_id_renumbering_preserves_exact_immutable_locations (test_job_integration.ContractCompatibility.test_ast_id_renumbering_preserves_exact_immutable_locations) ... ok
+2026-10-22T05:22:12.8479440Z test_changed_immutable_offset_fails_closed (test_job_integration.ContractCompatibility.test_changed_immutable_offset_fails_closed) ... ok
+2026-10-22T05:22:12.8526038Z test_changed_library_link_fails_closed (test_job_integration.ContractCompatibility.test_changed_library_link_fails_closed) ... ok
+2026-10-22T05:22:12.8567989Z test_changed_production_source_fails_closed (test_job_integration.ContractCompatibility.test_changed_production_source_fails_closed) ... ok
+2026-10-22T05:22:12.8610362Z test_missing_source_coverage_fails_closed (test_job_integration.ContractCompatibility.test_missing_source_coverage_fails_closed) ... ok
+2026-10-22T05:22:13.3434391Z test_every_artifact_field_remains_exact (test_job_integration.ExplicitContractProfiles.test_every_artifact_field_remains_exact) ... ok
+2026-10-22T05:22:13.3999783Z test_every_production_source_is_exact (test_job_integration.ExplicitContractProfiles.test_every_production_source_is_exact) ... ok
+2026-10-22T05:22:13.4202470Z test_exact_new_profile_is_complete_and_default_still_rejects_it (test_job_integration.ExplicitContractProfiles.test_exact_new_profile_is_complete_and_default_still_rejects_it) ... ok
+2026-10-22T05:22:13.4347265Z test_manifest_and_bundle_tampering_are_rejected (test_job_integration.ExplicitContractProfiles.test_manifest_and_bundle_tampering_are_rejected) ... ok
+2026-10-22T05:22:13.4535720Z test_mixed_legacy_library_with_new_manager_is_rejected (test_job_integration.ExplicitContractProfiles.test_mixed_legacy_library_with_new_manager_is_rejected) ... ok
+2026-10-22T05:22:13.4656435Z test_profile_registry_matches_runtime_manifest_pins (test_job_integration.ExplicitContractProfiles.test_profile_registry_matches_runtime_manifest_pins) ... ok
+2026-10-22T05:22:13.4778064Z test_unknown_selectors_never_become_paths_or_hash_overrides (test_job_integration.ExplicitContractProfiles.test_unknown_selectors_never_become_paths_or_hash_overrides) ... ok
+2026-10-22T05:22:13.4788324Z test_oversized_dependency_stops_before_archive_or_git (test_local_package_limits.LocalPackageLimits.test_oversized_dependency_stops_before_archive_or_git) ... ok
+2026-10-22T05:22:13.4860138Z test_runtime_source_limit_matches_and_accepts_exact_boundary (test_local_package_limits.LocalPackageLimits.test_runtime_source_limit_matches_and_accepts_exact_boundary) ... ok
+2026-10-22T05:22:13.4902580Z test_current_manifest_and_exact_evidence_are_required (test_local_preview_fleet_binding.LocalPreviewFleetBinding.test_current_manifest_and_exact_evidence_are_required) ... ok
+2026-10-22T05:22:13.4978549Z test_all_current_inputs_match_reviewed_preview_inventory (test_mac_preview_inventory.MacPreviewInventory.test_all_current_inputs_match_reviewed_preview_inventory) ... ok
+2026-10-22T05:22:13.4989372Z test_changed_pause_summary_cannot_pass (test_mainnet_evidence.PublicDeploymentEvidence.test_changed_pause_summary_cannot_pass) ... ok
+2026-10-22T05:22:13.5028390Z test_complete_record_replays_without_network (test_mainnet_evidence.PublicDeploymentEvidence.test_complete_record_replays_without_network) ... ok
+2026-10-22T05:22:13.5055071Z test_missing_secondary_library_cannot_pass (test_mainnet_evidence.PublicDeploymentEvidence.test_missing_secondary_library_cannot_pass) ... ok
+2026-10-22T05:22:13.5093345Z test_observation_cannot_be_promoted_to_production (test_mainnet_evidence.PublicDeploymentEvidence.test_observation_cannot_be_promoted_to_production) ... ok
+2026-10-22T05:22:13.5103983Z test_rpc_disagreement_cannot_pass (test_mainnet_evidence.PublicDeploymentEvidence.test_rpc_disagreement_cannot_pass) ... ok
+2026-10-22T05:22:13.5124655Z test_substituted_runtime_cannot_pass (test_mainnet_evidence.PublicDeploymentEvidence.test_substituted_runtime_cannot_pass) ... ok
+2026-10-22T05:22:13.5145846Z test_wrong_chain_and_transaction_method_cannot_pass (test_mainnet_evidence.PublicDeploymentEvidence.test_wrong_chain_and_transaction_method_cannot_pass) ... ok
+2026-10-22T05:22:13.5154650Z test_changed_materialization_cannot_pass (test_mainnet_evidence.RefreshedDeploymentEvidence.test_changed_materialization_cannot_pass) ... ok
+2026-10-22T05:22:13.5163209Z test_changed_pause_summary_cannot_pass (test_mainnet_evidence.RefreshedDeploymentEvidence.test_changed_pause_summary_cannot_pass) ... ok
+2026-10-22T05:22:13.5201166Z test_complete_record_replays_without_network (test_mainnet_evidence.RefreshedDeploymentEvidence.test_complete_record_replays_without_network) ... ok
+2026-10-22T05:22:13.5239286Z test_connected_helper_and_materialization_are_recorded (test_mainnet_evidence.RefreshedDeploymentEvidence.test_connected_helper_and_materialization_are_recorded) ... ok
+2026-10-22T05:22:13.5265282Z test_missing_secondary_library_cannot_pass (test_mainnet_evidence.RefreshedDeploymentEvidence.test_missing_secondary_library_cannot_pass) ... ok
+2026-10-22T05:22:13.5303139Z test_observation_cannot_be_promoted_to_production (test_mainnet_evidence.RefreshedDeploymentEvidence.test_observation_cannot_be_promoted_to_production) ... ok
+2026-10-22T05:22:13.5311173Z test_rpc_disagreement_cannot_pass (test_mainnet_evidence.RefreshedDeploymentEvidence.test_rpc_disagreement_cannot_pass) ... ok
+2026-10-22T05:22:13.5344024Z test_substituted_runtime_cannot_pass (test_mainnet_evidence.RefreshedDeploymentEvidence.test_substituted_runtime_cannot_pass) ... ok
+2026-10-22T05:22:13.5364370Z test_wrong_chain_and_transaction_method_cannot_pass (test_mainnet_evidence.RefreshedDeploymentEvidence.test_wrong_chain_and_transaction_method_cannot_pass) ... ok
+2026-10-22T05:22:13.5473505Z test_changed_source_is_complete_and_bound_to_the_previous_inventory (test_maintenance_release.MaintenanceReleaseTests.test_changed_source_is_complete_and_bound_to_the_previous_inventory) ... ok
+2026-10-22T05:22:13.5737720Z test_every_source_change_is_only_coordinated_version_or_generated_guidance (test_maintenance_release.MaintenanceReleaseTests.test_every_source_change_is_only_coordinated_version_or_generated_guidance) ... ok
+2026-10-22T05:22:13.5811483Z test_every_static_edition_label_matches_the_candidate (test_maintenance_release.MaintenanceReleaseTests.test_every_static_edition_label_matches_the_candidate) ... ok
+2026-10-22T05:22:13.5851606Z test_french_offline_guide_declares_language_and_navigation (test_maintenance_release.MaintenanceReleaseTests.test_french_offline_guide_declares_language_and_navigation) ... ok
+2026-10-22T05:22:13.5916263Z test_generated_role_guides_match_current_markdown (test_maintenance_release.MaintenanceReleaseTests.test_generated_role_guides_match_current_markdown) ... ok
+2026-10-22T05:22:13.5955501Z test_historical_notes_remain_available (test_maintenance_release.MaintenanceReleaseTests.test_historical_notes_remain_available) ... ok
+2026-10-22T05:22:13.6217429Z test_qualification_and_unfinished_work_are_not_promoted (test_maintenance_release.MaintenanceReleaseTests.test_qualification_and_unfinished_work_are_not_promoted) ... ok
+2026-10-22T05:22:13.6259527Z test_saved_maintenance_guidance_can_explain_the_separate_development_mode (test_maintenance_release.MaintenanceReleaseTests.test_saved_maintenance_guidance_can_explain_the_separate_development_mode) ... ok
+2026-10-22T05:22:13.6312655Z test_saved_maintenance_installer_rejects_development_code_at_any_depth (test_maintenance_release.MaintenanceReleaseTests.test_saved_maintenance_installer_rejects_development_code_at_any_depth) ... ok
+2026-10-22T05:22:13.6408317Z test_workflow_and_publication_use_only_the_new_release_identity (test_maintenance_release.MaintenanceReleaseTests.test_workflow_and_publication_use_only_the_new_release_identity) ... ok
+2026-10-22T05:22:13.6410722Z test_candidate_provenance_cannot_be_relabelled (test_next_publication.PublicationAcceptance.test_candidate_provenance_cannot_be_relabelled) ... ok
+2026-10-22T05:22:13.6459214Z test_changed_notes_stop_before_any_remote_publication (test_next_publication.PublicationAcceptance.test_changed_notes_stop_before_any_remote_publication) ... ok
+2026-10-22T05:22:13.6461453Z test_complete_candidate_can_be_prepared (test_next_publication.PublicationAcceptance.test_complete_candidate_can_be_prepared) ... ok
+2026-10-22T05:22:13.6490853Z test_incomplete_or_unrelated_acceptance_is_rejected (test_next_publication.PublicationAcceptance.test_incomplete_or_unrelated_acceptance_is_rejected) ... ok
+2026-10-22T05:22:13.6492694Z test_invalid_note_workflow_is_rejected (test_next_publication.PublicationAcceptance.test_invalid_note_workflow_is_rejected) ... ok
+2026-10-22T05:22:13.6526891Z test_note_artifact_table_tracks_exact_bytes (test_next_publication.PublicationAcceptance.test_note_artifact_table_tracks_exact_bytes) ... ok
+2026-10-22T05:22:13.6552557Z test_profile_proof_missing_or_mixed_is_rejected (test_next_publication.PublicationAcceptance.test_profile_proof_missing_or_mixed_is_rejected) ... ok
+2026-10-22T05:22:13.6568241Z test_published_guides_are_bound_to_the_validated_commit (test_next_publication.PublicationAcceptance.test_published_guides_are_bound_to_the_validated_commit) ... ok
+2026-10-22T05:22:13.6570740Z test_reserved_parallel_release_identity_cannot_publish (test_next_publication.PublicationAcceptance.test_reserved_parallel_release_identity_cannot_publish) ... ok
+2026-10-22T05:22:13.6578707Z test_mirror_symlinks_cannot_supply_reviewed_source (test_next_release_build.CandidateBuilder.test_mirror_symlinks_cannot_supply_reviewed_source) ... ok
+2026-10-22T05:22:13.6634698Z test_mismatched_role_version_cannot_be_built (test_next_release_build.CandidateBuilder.test_mismatched_role_version_cannot_be_built) ... ok
+2026-10-22T05:22:13.6737307Z test_new_manifests_do_not_reuse_previous_acceptance (test_next_release_build.CandidateBuilder.test_new_manifests_do_not_reuse_previous_acceptance) ... ok
+2026-10-22T05:22:13.6740574Z test_offline_renderer_escapes_active_content_and_keeps_commands_readable (test_next_release_build.CandidateBuilder.test_offline_renderer_escapes_active_content_and_keeps_commands_readable) ... ok
+2026-10-22T05:22:13.7027526Z test_operator_guides_replace_stale_plain_text_in_all_seven_editions (test_next_release_build.CandidateBuilder.test_operator_guides_replace_stale_plain_text_in_all_seven_editions) ... ok
+2026-10-22T05:22:13.7045631Z test_overlay_removes_deleted_source_and_preserves_frozen_dependencies (test_next_release_build.CandidateBuilder.test_overlay_removes_deleted_source_and_preserves_frozen_dependencies) ... ok
+2026-10-22T05:22:13.7063625Z test_reviewed_inventory_requires_exact_content_modes_and_coverage (test_next_release_build.CandidateBuilder.test_reviewed_inventory_requires_exact_content_modes_and_coverage) ... ok
+2026-10-22T05:22:13.7072032Z test_unsafe_inventory_path_rejected_even_when_digest_matches (test_next_release_build.CandidateBuilder.test_unsafe_inventory_path_rejected_even_when_digest_matches) ... ok
+2026-10-22T05:22:13.7083512Z test_candidate_metadata_and_saved_archive_must_match (test_next_validation.CandidateAdapters.test_candidate_metadata_and_saved_archive_must_match) ... ok
+2026-10-22T05:22:13.7087957Z test_changed_historical_harness_cannot_be_adapted (test_next_validation.CandidateAdapters.test_changed_historical_harness_cannot_be_adapted) ... ok
+2026-10-22T05:22:13.7198981Z test_frozen_native_source_stays_intact_and_candidate_is_bound (test_next_validation.CandidateAdapters.test_frozen_native_source_stays_intact_and_candidate_is_bound) ... ok
+2026-10-22T05:22:13.7288341Z test_integration_binds_candidate_and_exact_manager_target (test_next_validation.CandidateAdapters.test_integration_binds_candidate_and_exact_manager_target) ... ok
+2026-10-22T05:22:13.7294818Z test_native_refuses_operator_environment_before_provisioning (test_next_validation.CandidateAdapters.test_native_refuses_operator_environment_before_provisioning) ... ok
+2026-10-22T05:22:13.7699846Z test_native_requires_reviewed_profile_test_counts (test_next_validation.CandidateAdapters.test_native_requires_reviewed_profile_test_counts) ... ok
+2026-10-22T05:22:13.7705647Z test_previous_release_metadata_cannot_be_relabelled (test_next_validation.CandidateAdapters.test_previous_release_metadata_cannot_be_relabelled) ... ok
+2026-10-22T05:22:13.7941705Z test_claiming_live_usdc_is_rejected (test_next_validation.CandidateIntegrationAudit.test_claiming_live_usdc_is_rejected) ... ok
+2026-10-22T05:22:13.8140912Z test_corrupted_log_is_rejected (test_next_validation.CandidateIntegrationAudit.test_corrupted_log_is_rejected) ... ok
+2026-10-22T05:22:13.8374142Z test_fresh_candidate_retains_all_integration_audit_gates (test_next_validation.CandidateIntegrationAudit.test_fresh_candidate_retains_all_integration_audit_gates) ... ok
+2026-10-22T05:22:13.8486752Z test_missing_candidate_binding_is_rejected (test_next_validation.CandidateIntegrationAudit.test_missing_candidate_binding_is_rejected) ... ok
+2026-10-22T05:22:13.8726018Z test_previous_version_summary_is_rejected (test_next_validation.CandidateIntegrationAudit.test_previous_version_summary_is_rejected) ... ok
+2026-10-22T05:22:13.8914644Z test_wrong_manager_revision_is_rejected (test_next_validation.CandidateIntegrationAudit.test_wrong_manager_revision_is_rejected) ... ok
+2026-10-22T05:22:13.9085641Z test_edited_log_cannot_pass (test_next_validation.CandidateNativeAudit.test_edited_log_cannot_pass) ... ok
+2026-10-22T05:22:13.9218440Z test_empty_source_inventory_cannot_pass (test_next_validation.CandidateNativeAudit.test_empty_source_inventory_cannot_pass) ... ok
+2026-10-22T05:22:13.9375458Z test_every_tap_and_source_are_bound (test_next_validation.CandidateNativeAudit.test_every_tap_and_source_are_bound) ... ok
+2026-10-22T05:22:13.9475678Z test_incorrect_native_architecture_cannot_pass (test_next_validation.CandidateNativeAudit.test_incorrect_native_architecture_cannot_pass) ... ok
+2026-10-22T05:22:13.9579324Z test_previous_release_digest_cannot_pass (test_next_validation.CandidateNativeAudit.test_previous_release_digest_cannot_pass) ... ok
+2026-10-22T05:22:13.9590810Z test_changed_journey_bytes_cannot_qualify (test_next_validation.SuccessorBrowserAudit.test_changed_journey_bytes_cannot_qualify) ... ok
+2026-10-22T05:22:13.9600806Z test_exact_archive_browser_evidence_is_accepted (test_next_validation.SuccessorBrowserAudit.test_exact_archive_browser_evidence_is_accepted) ... ok
+2026-10-22T05:22:13.9657134Z test_incomplete_journey_cannot_qualify (test_next_validation.SuccessorBrowserAudit.test_incomplete_journey_cannot_qualify) ... ok
+2026-10-22T05:22:13.9698442Z test_relabelled_or_corrupted_browser_evidence_is_rejected (test_next_validation.SuccessorBrowserAudit.test_relabelled_or_corrupted_browser_evidence_is_rejected) ... ok
+2026-10-22T05:22:13.9699593Z test_complete_tap_summary (test_next_validation.TapParsing.test_complete_tap_summary) ... ok
+2026-10-22T05:22:13.9701690Z test_pass_label_does_not_hide_failed_skipped_or_truncated_tap (test_next_validation.TapParsing.test_pass_label_does_not_hide_failed_skipped_or_truncated_tap) ... ok
+2026-10-22T05:22:14.2236153Z test_all_original_paths_modes_anchors_and_diagrams_survive (test_profile_preservation.ProfilePreservation.test_all_original_paths_modes_anchors_and_diagrams_survive) ... ok
+2026-10-22T05:22:14.2243586Z test_changed_unknown_original_file_still_fails (test_profile_preservation.ProfilePreservation.test_changed_unknown_original_file_still_fails) ... ok
+2026-10-22T05:22:14.2245676Z test_only_exact_reviewed_profile_paths_are_classified (test_profile_preservation.ProfilePreservation.test_only_exact_reviewed_profile_paths_are_classified) ... ok
+2026-10-22T05:22:16.0297961Z test_optimized_python_cannot_skip_missing_original_file (test_profile_preservation.ProfilePreservation.test_optimized_python_cannot_skip_missing_original_file) ... ok
+2026-10-22T05:22:16.0369776Z test_concurrent_draft_edit_cannot_replace_canonical_publication (test_publication_note_race.PublicationNoteRaceTests.test_concurrent_draft_edit_cannot_replace_canonical_publication) ... ok
+2026-10-22T05:22:16.0436565Z test_matching_already_published_release_is_not_mutated (test_publication_note_race.PublicationNoteRaceTests.test_matching_already_published_release_is_not_mutated) ... ok
+2026-10-22T05:22:16.0501197Z test_prior_unreviewed_draft_edit_is_rejected_before_publication (test_publication_note_race.PublicationNoteRaceTests.test_prior_unreviewed_draft_edit_is_rejected_before_publication) ... ok
+2026-10-22T05:22:16.0566925Z test_publication_response_body_mismatch_is_not_reported_successful (test_publication_note_race.PublicationNoteRaceTests.test_publication_response_body_mismatch_is_not_reported_successful) ... ok
+2026-10-22T05:22:16.0569386Z test_duplicate_request_ids_are_rejected (test_read_only_rpc.ReadOnlyTransport.test_duplicate_request_ids_are_rejected) ... ok
+2026-10-22T05:22:16.0579786Z test_missing_or_duplicate_responses_fail_closed (test_read_only_rpc.ReadOnlyTransport.test_missing_or_duplicate_responses_fail_closed) ... ok
+2026-10-22T05:22:16.0581626Z test_non_https_and_fragment_urls_are_rejected (test_read_only_rpc.ReadOnlyTransport.test_non_https_and_fragment_urls_are_rejected) ... ok
+2026-10-22T05:22:16.0587092Z test_oversized_response_fails_closed (test_read_only_rpc.ReadOnlyTransport.test_oversized_response_fails_closed) ... ok
+2026-10-22T05:22:16.0593366Z test_provider_errors_do_not_expose_credentials (test_read_only_rpc.ReadOnlyTransport.test_provider_errors_do_not_expose_credentials) ... ok
+2026-10-22T05:22:16.0594942Z test_redirect_is_rejected (test_read_only_rpc.ReadOnlyTransport.test_redirect_is_rejected) ... ok
+2026-10-22T05:22:16.0599513Z test_reordered_complete_batch_is_accepted (test_read_only_rpc.ReadOnlyTransport.test_reordered_complete_batch_is_accepted) ... ok
+2026-10-22T05:22:16.0602011Z test_transactions_are_rejected_before_network_access (test_read_only_rpc.ReadOnlyTransport.test_transactions_are_rejected_before_network_access) ... ok
+2026-10-22T05:22:16.0618290Z test_absolute_and_encoded_backslash_paths_are_rejected (test_release_note_links.ReleaseNoteLinksTests.test_absolute_and_encoded_backslash_paths_are_rejected) ... ok
+2026-10-22T05:22:16.0632263Z test_angle_destinations_and_encoded_names (test_release_note_links.ReleaseNoteLinksTests.test_angle_destinations_and_encoded_names) ... ok
+2026-10-22T05:22:16.0647718Z test_code_examples_remain_unchanged (test_release_note_links.ReleaseNoteLinksTests.test_code_examples_remain_unchanged) ... ok
+2026-10-22T05:22:16.0660642Z test_current_guide_paths_are_commit_pinned (test_release_note_links.ReleaseNoteLinksTests.test_current_guide_paths_are_commit_pinned) ... ok
+2026-10-22T05:22:16.0671683Z test_external_urls_and_same_document_anchors_are_unchanged (test_release_note_links.ReleaseNoteLinksTests.test_external_urls_and_same_document_anchors_are_unchanged) ... ok
+2026-10-22T05:22:16.0683469Z test_fragments_queries_and_titles_are_retained (test_release_note_links.ReleaseNoteLinksTests.test_fragments_queries_and_titles_are_retained) ... ok
+2026-10-22T05:22:16.0695033Z test_image_uses_raw_source_bytes (test_release_note_links.ReleaseNoteLinksTests.test_image_uses_raw_source_bytes) ... ok
+2026-10-22T05:22:16.0705434Z test_invalid_source_and_mutable_ref_are_rejected (test_release_note_links.ReleaseNoteLinksTests.test_invalid_source_and_mutable_ref_are_rejected) ... ok
+2026-10-22T05:22:16.0716358Z test_missing_destination_stops_preparation (test_release_note_links.ReleaseNoteLinksTests.test_missing_destination_stops_preparation) ... ok
+2026-10-22T05:22:16.0728371Z test_offline_source_bytes_are_unchanged (test_release_note_links.ReleaseNoteLinksTests.test_offline_source_bytes_are_unchanged) ... ok
+2026-10-22T05:22:16.0740089Z test_reference_definition_uses_source_commit (test_release_note_links.ReleaseNoteLinksTests.test_reference_definition_uses_source_commit) ... ok
+2026-10-22T05:22:16.0751538Z test_relative_link_outside_code_is_still_relocated (test_release_note_links.ReleaseNoteLinksTests.test_relative_link_outside_code_is_still_relocated) ... ok
+2026-10-22T05:22:16.0763982Z test_rendering_is_idempotent (test_release_note_links.ReleaseNoteLinksTests.test_rendering_is_idempotent) ... ok
+2026-10-22T05:22:16.0779854Z test_traversal_and_symlink_escape_are_rejected (test_release_note_links.ReleaseNoteLinksTests.test_traversal_and_symlink_escape_are_rejected) ... ok
+2026-10-22T05:22:16.0787124Z test_case_collisions_are_rejected (test_release_tools.ArchiveSafety.test_case_collisions_are_rejected) ... ok
+2026-10-22T05:22:16.0793365Z test_existing_destination_is_preserved (test_release_tools.ArchiveSafety.test_existing_destination_is_preserved) ... ok
+2026-10-22T05:22:16.0798197Z test_mirror_cannot_replace_its_own_trust_anchor (test_release_tools.ArchiveSafety.test_mirror_cannot_replace_its_own_trust_anchor) ... ok
+2026-10-22T05:22:16.0805048Z test_missing_selected_member_fails_without_output (test_release_tools.ArchiveSafety.test_missing_selected_member_fails_without_output) ... ok
+2026-10-22T05:22:16.0814031Z test_source_selection_and_executable_mode (test_release_tools.ArchiveSafety.test_source_selection_and_executable_mode) ... ok
+2026-10-22T05:22:16.0818851Z test_symlink_destination_is_preserved (test_release_tools.ArchiveSafety.test_symlink_destination_is_preserved) ... ok
+2026-10-22T05:22:16.0851614Z test_unsafe_paths_and_links_do_not_escape (test_release_tools.ArchiveSafety.test_unsafe_paths_and_links_do_not_escape) ... ok
+2026-10-22T05:22:16.0856236Z test_wrong_release_is_rejected_before_extraction (test_release_tools.ArchiveSafety.test_wrong_release_is_rejected_before_extraction) ... ok
+2026-10-22T05:22:16.1311969Z test_changed_and_rehashed_incomplete_artifact_log_fail (test_saved_profile_audit.SavedProfileAudit.test_changed_and_rehashed_incomplete_artifact_log_fail) ... ok
+2026-10-22T05:22:16.1788322Z test_complete_synthetic_proof_audits_both_native_architectures (test_saved_profile_audit.SavedProfileAudit.test_complete_synthetic_proof_audits_both_native_architectures) ... ok
+2026-10-22T05:22:16.2371824Z test_failed_missing_and_duplicate_step_claims_fail (test_saved_profile_audit.SavedProfileAudit.test_failed_missing_and_duplicate_step_claims_fail) ... ok
+2026-10-22T05:22:16.2677694Z test_full_archive_after_digest_cannot_be_replaced_by_source_identity (test_saved_profile_audit.SavedProfileAudit.test_full_archive_after_digest_cannot_be_replaced_by_source_identity) ... ok
+2026-10-22T05:22:16.2877748Z test_missing_added_and_linked_logs_fail (test_saved_profile_audit.SavedProfileAudit.test_missing_added_and_linked_logs_fail) ... ok
+2026-10-22T05:22:16.3181160Z test_nested_summary_must_have_its_exact_recorded_hash (test_saved_profile_audit.SavedProfileAudit.test_nested_summary_must_have_its_exact_recorded_hash) ... ok
+2026-10-22T05:22:16.3521999Z test_rehashed_before_after_and_candidate_binding_fail (test_saved_profile_audit.SavedProfileAudit.test_rehashed_before_after_and_candidate_binding_fail) ... ok
+2026-10-22T05:22:16.3841157Z test_rehashed_lifecycle_scope_or_accounting_change_fails (test_saved_profile_audit.SavedProfileAudit.test_rehashed_lifecycle_scope_or_accounting_change_fails) ... ok
+2026-10-22T05:22:16.4147628Z test_rehashed_member_map_cannot_omit_non_source_members (test_saved_profile_audit.SavedProfileAudit.test_rehashed_member_map_cannot_omit_non_source_members) ... ok
+2026-10-22T05:22:16.4681085Z test_rehashed_source_profile_and_library_substitution_fail (test_saved_profile_audit.SavedProfileAudit.test_rehashed_source_profile_and_library_substitution_fail) ... ok
+2026-10-22T05:22:16.5148002Z test_rehashed_wrong_or_ambiguous_manager_count_fails (test_saved_profile_audit.SavedProfileAudit.test_rehashed_wrong_or_ambiguous_manager_count_fails) ... ok
+2026-10-22T05:22:16.5531553Z test_runtime_architecture_and_profile_lock_identity_fail (test_saved_profile_audit.SavedProfileAudit.test_runtime_architecture_and_profile_lock_identity_fail) ... ok
+2026-10-22T05:22:16.5856204Z test_wrong_archive_and_workflow_binding_fail (test_saved_profile_audit.SavedProfileAudit.test_wrong_archive_and_workflow_binding_fail) ... ok
+2026-10-22T05:22:16.5971011Z {"status": "PASS", "evidence": "/tmp/tmpeteg50v8/synthetic-evidence"}
+2026-10-22T05:22:16.5986456Z test_adapter_executes_complete_extraction_and_binds_results (test_saved_profile_integration.SavedProfileIntegrity.test_adapter_executes_complete_extraction_and_binds_results) ... ok
+2026-10-22T05:22:16.6032727Z test_added_files_and_empty_directories_are_rejected (test_saved_profile_integration.SavedProfileIntegrity.test_added_files_and_empty_directories_are_rejected) ... ok
+2026-10-22T05:22:16.6058284Z test_archive_file_changed_after_extraction_is_rejected (test_saved_profile_integration.SavedProfileIntegrity.test_archive_file_changed_after_extraction_is_rejected) ... ok
+2026-10-22T05:22:16.6138513Z test_changed_non_source_members_are_rejected (test_saved_profile_integration.SavedProfileIntegrity.test_changed_non_source_members_are_rejected) ... ok
+2026-10-22T05:22:16.6174323Z test_complete_archive_keeps_docs_dependencies_and_manifest (test_saved_profile_integration.SavedProfileIntegrity.test_complete_archive_keeps_docs_dependencies_and_manifest) ... ok
+2026-10-22T05:22:16.6264875Z {"status": "FAIL", "evidence": "/tmp/tmphtl9z_gn/synthetic-evidence"}
+2026-10-22T05:22:16.6279215Z test_integrity_is_checked_and_logs_retained_after_test_failure (test_saved_profile_integration.SavedProfileIntegrity.test_integrity_is_checked_and_logs_retained_after_test_failure) ... ok
+2026-10-22T05:22:16.6320032Z test_missing_members_and_changed_executable_mode_are_rejected (test_saved_profile_integration.SavedProfileIntegrity.test_missing_members_and_changed_executable_mode_are_rejected) ... ok
+2026-10-22T05:22:16.6426298Z {"status": "FAIL", "evidence": "/tmp/tmpm7n4rsn8/synthetic-evidence"}
+2026-10-22T05:22:16.6441409Z test_selected_profile_mismatch_cannot_be_relabelled_pass (test_saved_profile_integration.SavedProfileIntegrity.test_selected_profile_mismatch_cannot_be_relabelled_pass) ... ok
+2026-10-22T05:22:16.6490572Z test_source_only_runner_still_rejects_non_source_coverage (test_saved_profile_integration.SavedProfileIntegrity.test_source_only_runner_still_rejects_non_source_coverage) ... ok
+2026-10-22T05:22:16.6602583Z {"status": "FAIL", "evidence": "/tmp/tmp7w9dyb0d/synthetic-evidence"}
+2026-10-22T05:22:16.6619199Z test_successful_child_cannot_hide_archive_mutation (test_saved_profile_integration.SavedProfileIntegrity.test_successful_child_cannot_hide_archive_mutation) ... ok
+2026-10-22T05:22:16.6655008Z test_symlinked_members_and_parent_directories_are_rejected (test_saved_profile_integration.SavedProfileIntegrity.test_symlinked_members_and_parent_directories_are_rejected) ... ok
+2026-10-22T05:22:16.6689520Z test_wrong_archive_binding_and_source_only_subset_are_rejected (test_saved_profile_integration.SavedProfileIntegrity.test_wrong_archive_binding_and_source_only_subset_are_rejected) ... ok
+2026-10-22T05:22:16.6718408Z {"status": "FAIL", "evidence": "/tmp/tmpu2vqkemn/failed-evidence"}
+2026-10-22T05:22:16.6726146Z test_wrong_candidate_metadata_retains_failure_summary (test_saved_profile_integration.SavedProfileIntegrity.test_wrong_candidate_metadata_retains_failure_summary) ... ok
+2026-10-22T05:22:16.6753728Z test_wrong_selected_profile_manager_commit_is_rejected (test_saved_profile_integration.SavedProfileIntegrity.test_wrong_selected_profile_manager_commit_is_rejected) ... ok
+2026-10-22T05:22:16.6797179Z test_all_local_guide_destinations_exist (test_start_guides.StartingGuidesTests.test_all_local_guide_destinations_exist) ... ok
+2026-10-22T05:22:16.6799004Z test_both_guides_are_discoverable_from_readme (test_start_guides.StartingGuidesTests.test_both_guides_are_discoverable_from_readme) ... ok
+2026-10-22T05:22:16.6801270Z test_developer_guide_names_the_current_publication_notes (test_start_guides.StartingGuidesTests.test_developer_guide_names_the_current_publication_notes) ... ok
+2026-10-22T05:22:16.6810063Z test_guides_match_the_published_platform_versions (test_start_guides.StartingGuidesTests.test_guides_match_the_published_platform_versions) ... ok
+2026-10-22T05:22:16.6818891Z test_integration_publication_claim_matches_the_published_manifest (test_start_guides.StartingGuidesTests.test_integration_publication_claim_matches_the_published_manifest) ... ok
+2026-10-22T05:22:16.6820889Z test_languages_link_to_each_other (test_start_guides.StartingGuidesTests.test_languages_link_to_each_other) ... ok
+2026-10-22T05:22:16.6822705Z test_exact_reviewed_portable_suite (test_successor_archive_counts.SuccessorArchiveCounts.test_exact_reviewed_portable_suite) ... ok
+2026-10-22T05:22:16.6829896Z test_missing_or_duplicate_totals_fail_closed (test_successor_archive_counts.SuccessorArchiveCounts.test_missing_or_duplicate_totals_fail_closed) ... ok
+2026-10-22T05:22:17.7821461Z test_optimized_python_preserves_validation (test_successor_archive_counts.SuccessorArchiveCounts.test_optimized_python_preserves_validation) ... ok
+2026-10-22T05:22:17.7823668Z test_stale_or_changed_counts_fail_closed (test_successor_archive_counts.SuccessorArchiveCounts.test_stale_or_changed_counts_fail_closed) ... ok
+2026-10-22T05:22:17.7827839Z test_blank_ledger_identity_does_not_import_observations (test_successor_release_identity.SuccessorReleaseIdentity.test_blank_ledger_identity_does_not_import_observations) ... ok
+2026-10-22T05:22:17.7830142Z test_builder_and_integration_qualify_the_same_manager_release (test_successor_release_identity.SuccessorReleaseIdentity.test_builder_and_integration_qualify_the_same_manager_release) ... ok
+2026-10-22T05:22:17.7947642Z test_changed_metadata_preserves_mac_and_historical_release_records (test_successor_release_identity.SuccessorReleaseIdentity.test_changed_metadata_preserves_mac_and_historical_release_records) ... ok
+2026-10-22T05:22:17.7951460Z test_combined_release_uses_distinct_reserved_identities (test_successor_release_identity.SuccessorReleaseIdentity.test_combined_release_uses_distinct_reserved_identities) ... ok
+2026-10-22T05:22:17.7954487Z test_fresh_install_paths_and_asset_identity_agree (test_successor_release_identity.SuccessorReleaseIdentity.test_fresh_install_paths_and_asset_identity_agree) ... ok
+2026-10-22T05:22:17.7957637Z test_troubleshooting_commands_use_current_candidate (test_successor_release_identity.SuccessorReleaseIdentity.test_troubleshooting_commands_use_current_candidate) ... ok
+2026-10-22T05:22:17.7958875Z 
+2026-10-22T05:22:17.7959126Z ----------------------------------------------------------------------
+2026-10-22T05:22:17.7959758Z Ran 246 tests in 13.414s
+2026-10-22T05:22:17.7960013Z 
+2026-10-22T05:22:17.7960138Z OK
+2026-10-22T05:22:17.8179991Z ##[group]Run python3 -m unittest discover -s macos/tests -v
+2026-10-22T05:22:17.8180451Z [36;1mpython3 -m unittest discover -s macos/tests -v[0m
+2026-10-22T05:22:17.8230596Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:22:17.8230946Z ##[endgroup]
+2026-10-22T05:22:17.9848632Z test_every_archive_test_is_required_even_outside_revision_inventory (test_audit.ArchiveSelectionTests.test_every_archive_test_is_required_even_outside_revision_inventory) ... ok
+2026-10-22T05:22:18.0176484Z test_missing_tests_or_mismatched_source_bytes_are_rejected (test_audit.ArchiveSelectionTests.test_missing_tests_or_mismatched_source_bytes_are_rejected) ... ok
+2026-10-22T05:22:18.0333565Z test_complete_bound_logs_pass (test_audit.CompleteEvidenceTests.test_complete_bound_logs_pass) ... ok
+2026-10-22T05:22:18.0417916Z test_duplicate_or_omitted_execution_is_rejected (test_audit.CompleteEvidenceTests.test_duplicate_or_omitted_execution_is_rejected) ... ok
+2026-10-22T05:22:18.0572647Z test_missing_and_extra_tap_are_rejected (test_audit.CompleteEvidenceTests.test_missing_and_extra_tap_are_rejected) ... ok
+2026-10-22T05:22:18.0657555Z test_modified_retained_tap_is_rejected (test_audit.CompleteEvidenceTests.test_modified_retained_tap_is_rejected) ... ok
+2026-10-22T05:22:18.0749180Z test_source_snapshot_and_executed_source_are_bound (test_audit.CompleteEvidenceTests.test_source_snapshot_and_executed_source_are_bound) ... ok
+2026-10-22T05:22:18.0829994Z test_symlink_evidence_is_rejected (test_audit.CompleteEvidenceTests.test_symlink_evidence_is_rejected) ... ok
+2026-10-22T05:22:18.1003284Z test_test_outside_revision_inventory_remains_mandatory_and_hash_bound (test_audit.CompleteEvidenceTests.test_test_outside_revision_inventory_remains_mandatory_and_hash_bound) ... ok
+2026-10-22T05:22:18.1308024Z test_timeout_partial_failed_exit_and_source_mutation_are_rejected (test_audit.CompleteEvidenceTests.test_timeout_partial_failed_exit_and_source_mutation_are_rejected) ... ok
+2026-10-22T05:22:18.1398785Z test_unsafe_log_path_and_incomplete_fixture_are_rejected (test_audit.CompleteEvidenceTests.test_unsafe_log_path_and_incomplete_fixture_are_rejected) ... ok
+2026-10-22T05:22:18.1403171Z test_exact_successful_probe_is_required_and_hash_bound (test_audit.IntegrationFilesystemTests.test_exact_successful_probe_is_required_and_hash_bound) ... ok
+2026-10-22T05:22:18.1424728Z test_failed_ambiguous_or_broadened_probe_is_rejected (test_audit.IntegrationFilesystemTests.test_failed_ambiguous_or_broadened_probe_is_rejected) ... ok
+2026-10-22T05:22:18.1429738Z test_missing_linked_or_duplicate_probe_is_rejected (test_audit.IntegrationFilesystemTests.test_missing_linked_or_duplicate_probe_is_rejected) ... ok
+2026-10-22T05:22:18.1436846Z test_duplicate_and_unsafe_checksum_names_are_rejected (test_audit.PublicationTests.test_duplicate_and_unsafe_checksum_names_are_rejected) ... ok
+2026-10-22T05:22:18.1454310Z test_moved_tag_and_existing_different_asset_are_never_mutated (test_audit.PublicationTests.test_moved_tag_and_existing_different_asset_are_never_mutated) ... ok
+2026-10-22T05:22:18.1456306Z test_provenance_rejects_unknown_repo_run_or_commit (test_audit.PublicationTests.test_provenance_rejects_unknown_repo_run_or_commit) ... ok
+2026-10-22T05:22:18.1477511Z test_publish_denies_local_and_pull_request_runs (test_audit.PublicationTests.test_publish_denies_local_and_pull_request_runs) ... ok
+2026-10-22T05:22:18.1488802Z test_exact_ci_runtime_with_restored_original_passes (test_audit.SystemNodeProvisioningTests.test_exact_ci_runtime_with_restored_original_passes) ... ok
+2026-10-22T05:22:18.1502605Z test_malformed_original_and_changed_retained_probe_are_rejected (test_audit.SystemNodeProvisioningTests.test_malformed_original_and_changed_retained_probe_are_rejected) ... ok
+2026-10-22T05:22:18.1518314Z test_original_absence_and_literal_symlink_identity_are_supported (test_audit.SystemNodeProvisioningTests.test_original_absence_and_literal_symlink_identity_are_supported) ... ok
+2026-10-22T05:22:18.1530471Z test_parent_permission_changes_or_incomplete_coverage_are_rejected (test_audit.SystemNodeProvisioningTests.test_parent_permission_changes_or_incomplete_coverage_are_rejected) ... ok
+2026-10-22T05:22:18.1548626Z test_parent_world_write_or_foreign_ownership_is_rejected_even_when_unchanged (test_audit.SystemNodeProvisioningTests.test_parent_world_write_or_foreign_ownership_is_rejected_even_when_unchanged) ... ok
+2026-10-22T05:22:18.1572381Z test_provisioned_file_cannot_be_writable_or_changed (test_audit.SystemNodeProvisioningTests.test_provisioned_file_cannot_be_writable_or_changed) ... ok
+2026-10-22T05:22:18.1625334Z test_runtime_probe_and_module_must_match_verified_pins (test_audit.SystemNodeProvisioningTests.test_runtime_probe_and_module_must_match_verified_pins) ... ok
+2026-10-22T05:22:18.1690241Z test_unrestored_changed_and_broadened_provisioning_is_rejected (test_audit.SystemNodeProvisioningTests.test_unrestored_changed_and_broadened_provisioning_is_rejected) ... ok
+2026-10-22T05:22:18.1692153Z test_complete_case_inventory (test_audit.TapAuditTests.test_complete_case_inventory) ... ok
+2026-10-22T05:22:18.1693554Z test_duplicate_json_keys_fail (test_audit.TapAuditTests.test_duplicate_json_keys_fail) ... ok
+2026-10-22T05:22:18.1695287Z test_failed_skipped_todo_aborted_and_fabricated_counts_fail (test_audit.TapAuditTests.test_failed_skipped_todo_aborted_and_fabricated_counts_fail) ... ok
+2026-10-22T05:22:18.1696765Z test_nested_suites_are_counted_without_becoming_tests (test_audit.TapAuditTests.test_nested_suites_are_counted_without_becoming_tests) ... ok
+2026-10-22T05:22:18.1697645Z test_truncation_and_ambiguous_summary_fail (test_audit.TapAuditTests.test_truncation_and_ambiguous_summary_fail) ... ok
+2026-10-22T05:22:18.1713695Z test_baseline_archive_integrity_and_source_identity_are_both_required (test_build.MacDistribution.test_baseline_archive_integrity_and_source_identity_are_both_required) ... ok
+2026-10-22T05:22:18.2793187Z test_build_is_byte_reproducible_and_preserves_executable_modes (test_build.MacDistribution.test_build_is_byte_reproducible_and_preserves_executable_modes) ... ok
+2026-10-22T05:22:18.3524425Z test_current_source_omitted_from_inventory_fails_even_with_correct_manifests (test_build.MacDistribution.test_current_source_omitted_from_inventory_fails_even_with_correct_manifests) ... ok
+2026-10-22T05:22:18.4113923Z test_mac_guides_replace_all_entrypoints_and_work_offline (test_build.MacDistribution.test_mac_guides_replace_all_entrypoints_and_work_offline) ... ok
+2026-10-22T05:22:18.4123125Z test_new_linux_release_pointer_and_source_do_not_retarget_mac_baseline (test_build.MacDistribution.test_new_linux_release_pointer_and_source_do_not_retarget_mac_baseline) ... ok
+2026-10-22T05:22:18.5006020Z test_nonexecutable_mac_launcher_fails_with_otherwise_valid_manifest (test_build.MacDistribution.test_nonexecutable_mac_launcher_fails_with_otherwise_valid_manifest) ... ok
+2026-10-22T05:22:18.5382493Z test_prior_manifest_bytes_are_saved_without_qualifying_candidate (test_build.MacDistribution.test_prior_manifest_bytes_are_saved_without_qualifying_candidate) ... ok
+2026-10-22T05:22:18.6327915Z test_role_identity_and_coordinated_versions_are_enforced (test_build.MacDistribution.test_role_identity_and_coordinated_versions_are_enforced) ... ok
+2026-10-22T05:22:18.6989439Z test_saved_archive_hash_and_size_are_required (test_build.MacDistribution.test_saved_archive_hash_and_size_are_required) ... ok
+2026-10-22T05:22:18.7997361Z test_seven_editions_verify_after_saved_archive_and_fresh_extraction (test_build.MacDistribution.test_seven_editions_verify_after_saved_archive_and_fresh_extraction) ... ok
+2026-10-22T05:22:18.8034971Z test_specification_pins_original_public_source_and_stays_unqualified (test_build.MacDistribution.test_specification_pins_original_public_source_and_stays_unqualified) ... ok
+2026-10-22T05:22:18.8334215Z test_symlinks_and_unsafe_role_package_paths_are_refused (test_build.MacDistribution.test_symlinks_and_unsafe_role_package_paths_are_refused) ... ok
+2026-10-22T05:22:18.8424597Z test_archive_verification_uses_exact_candidate_and_preserves_seven_edition_coverage (test_integration.IntegrationBindingTests.test_archive_verification_uses_exact_candidate_and_preserves_seven_edition_coverage) ... ok
+2026-10-22T05:22:18.8682085Z test_case_collision_or_any_dirty_checkout_is_rejected_before_validation (test_integration.IntegrationBindingTests.test_case_collision_or_any_dirty_checkout_is_rejected_before_validation) ... ok
+2026-10-22T05:22:18.8769307Z test_clean_checkout_is_checked_immediately_after_head_without_mutating_global_subprocess (test_integration.IntegrationBindingTests.test_clean_checkout_is_checked_immediately_after_head_without_mutating_global_subprocess) ... ok
+2026-10-22T05:22:18.8855624Z test_failed_archive_verification_cannot_be_promoted (test_integration.IntegrationBindingTests.test_failed_archive_verification_cannot_be_promoted) ... ok
+2026-10-22T05:22:18.8887724Z test_failure_summary_retains_exact_provenance_even_if_diagnostic_file_cannot_be_written (test_integration.IntegrationBindingTests.test_failure_summary_retains_exact_provenance_even_if_diagnostic_file_cannot_be_written) ... ok
+2026-10-22T05:22:18.8905557Z test_main_refuses_candidate_from_a_different_workflow_before_running_harness (test_integration.IntegrationBindingTests.test_main_refuses_candidate_from_a_different_workflow_before_running_harness) ... ok
+2026-10-22T05:22:18.8990879Z test_runner_reuses_hash_checked_manager_harness_with_exact_mac_identity (test_integration.IntegrationBindingTests.test_runner_reuses_hash_checked_manager_harness_with_exact_mac_identity) ... ok
+2026-10-22T05:22:18.9161538Z test_unavailable_cleanliness_check_is_not_treated_as_clean_and_final_guard_is_unchanged (test_integration.IntegrationBindingTests.test_unavailable_cleanliness_check_is_not_treated_as_clean_and_final_guard_is_unchanged) ... ok
+2026-10-22T05:22:18.9166944Z test_case_insensitive_exclusive_create_fails_closed_and_cleans_probe (test_integration.IntegrationFilesystemTests.test_case_insensitive_exclusive_create_fails_closed_and_cleans_probe) ... ok
+2026-10-22T05:22:18.9176436Z test_checkout_failure_retains_only_bounded_read_only_git_diagnostics (test_integration.IntegrationFilesystemTests.test_checkout_failure_retains_only_bounded_read_only_git_diagnostics) ... ok
+2026-10-22T05:22:18.9185484Z test_diagnostic_command_timeout_and_spawn_failure_cannot_mask_primary_error (test_integration.IntegrationFilesystemTests.test_diagnostic_command_timeout_and_spawn_failure_cannot_mask_primary_error) ... ok
+2026-10-22T05:22:18.9189216Z test_no_manager_repository_produces_no_diagnostic_commands (test_integration.IntegrationFilesystemTests.test_no_manager_repository_produces_no_diagnostic_commands) ... ok
+2026-10-22T05:22:18.9195556Z test_real_case_sensitive_workspace_is_observed_and_probe_is_removed (test_integration.IntegrationFilesystemTests.test_real_case_sensitive_workspace_is_observed_and_probe_is_removed) ... ok
+2026-10-22T05:22:18.9207642Z test_same_inode_or_changed_contents_cannot_claim_case_sensitivity (test_integration.IntegrationFilesystemTests.test_same_inode_or_changed_contents_cannot_claim_case_sensitivity) ... ok
+2026-10-22T05:22:18.9209882Z test_exact_native_hosted_context_is_accepted (test_integration.IntegrationGuardTests.test_exact_native_hosted_context_is_accepted) ... ok
+2026-10-22T05:22:18.9211923Z test_linux_intel_and_unbound_hosted_context_are_rejected (test_integration.IntegrationGuardTests.test_linux_intel_and_unbound_hosted_context_are_rejected) ... ok
+2026-10-22T05:22:18.9323205Z test_node_download_pairs_darwin_xz_url_with_exact_xz_digest (test_integration.IntegrationGuardTests.test_node_download_pairs_darwin_xz_url_with_exact_xz_digest) ... ok
+2026-10-22T05:22:18.9325326Z test_parent_policy_never_admits_world_write_or_foreign_owner (test_native.DisposableSystemNodeTests.test_parent_policy_never_admits_world_write_or_foreign_owner) ... ok
+2026-10-22T05:22:18.9340183Z test_restoration_retains_original_entry_and_refuses_changed_provisioned_bytes (test_native.DisposableSystemNodeTests.test_restoration_retains_original_entry_and_refuses_changed_provisioned_bytes) ... ok
+2026-10-22T05:22:18.9343579Z test_symlink_receipt_binds_link_itself_and_preserves_broken_links (test_native.DisposableSystemNodeTests.test_symlink_receipt_binds_link_itself_and_preserves_broken_links) ... ok
+2026-10-22T05:22:18.9954349Z test_complete_dynamic_count_is_accepted (test_native.NativeAcceptanceTests.test_complete_dynamic_count_is_accepted) ... ok
+2026-10-22T05:22:19.0224022Z test_every_incomplete_or_untrusted_top_level_flag_is_refused (test_native.NativeAcceptanceTests.test_every_incomplete_or_untrusted_top_level_flag_is_refused) ... ok
+2026-10-22T05:22:19.0724999Z test_failed_skipped_cancelled_todo_timeout_and_incomplete_tests_are_refused (test_native.NativeAcceptanceTests.test_failed_skipped_cancelled_todo_timeout_and_incomplete_tests_are_refused) ... ok
+2026-10-22T05:22:19.0994594Z test_log_traversal_and_duplicate_log_are_refused (test_native.NativeAcceptanceTests.test_log_traversal_and_duplicate_log_are_refused) ... ok
+2026-10-22T05:22:19.1267454Z test_rehashed_log_still_requires_actual_tap_counts (test_native.NativeAcceptanceTests.test_rehashed_log_still_requires_actual_tap_counts) ... ok
+2026-10-22T05:22:19.1624931Z test_removed_replaced_and_duplicate_tests_are_refused (test_native.NativeAcceptanceTests.test_removed_replaced_and_duplicate_tests_are_refused) ... ok
+2026-10-22T05:22:19.1894164Z test_socket_capability_is_required (test_native.NativeAcceptanceTests.test_socket_capability_is_required) ... ok
+2026-10-22T05:22:19.2164988Z test_symlinked_log_is_refused (test_native.NativeAcceptanceTests.test_symlinked_log_is_refused) ... ok
+2026-10-22T05:22:19.2439438Z test_tampered_and_missing_logs_are_refused (test_native.NativeAcceptanceTests.test_tampered_and_missing_logs_are_refused) ... ok
+2026-10-22T05:22:19.3130423Z test_totals_are_reconciled_and_minimum_coverage_is_required (test_native.NativeAcceptanceTests.test_totals_are_reconciled_and_minimum_coverage_is_required) ... ok
+2026-10-22T05:22:19.3139905Z test_regular_fixture_content_and_executable_bit_are_preserved (test_native.NativeFixtureExtractionTests.test_regular_fixture_content_and_executable_bit_are_preserved) ... ok
+2026-10-22T05:22:19.3156140Z test_traversal_duplicate_and_symlink_members_are_refused (test_native.NativeFixtureExtractionTests.test_traversal_duplicate_and_symlink_members_are_refused) ... ok
+2026-10-22T05:22:19.3158568Z test_exact_hosted_darwin_root_context (test_native.NativeRunnerGuardTests.test_exact_hosted_darwin_root_context) ... ok
+2026-10-22T05:22:19.3160697Z test_linux_rosetta_standard_user_and_operator_home_are_refused (test_native.NativeRunnerGuardTests.test_linux_rosetta_standard_user_and_operator_home_are_refused) ... ok
+2026-10-22T05:22:19.3163202Z test_original_archive_metadata_is_bound_to_workflow (test_native.NativeRunnerGuardTests.test_original_archive_metadata_is_bound_to_workflow) ... ok
+2026-10-22T05:22:19.3169106Z test_unbound_or_self_hosted_runner_is_refused (test_native.NativeRunnerGuardTests.test_unbound_or_self_hosted_runner_is_refused) ... ok
+2026-10-22T05:22:19.3187658Z test_audit_cannot_describe_another_release_or_workflow (test_website.MacWebsiteMetadataTests.test_audit_cannot_describe_another_release_or_workflow) ... ok
+2026-10-22T05:22:19.3201964Z test_both_native_versions_need_matching_complete_passing_suites (test_website.MacWebsiteMetadataTests.test_both_native_versions_need_matching_complete_passing_suites) ... ok
+2026-10-22T05:22:19.3206738Z test_candidate_or_spec_cannot_be_promoted_by_setting_pass_fields (test_website.MacWebsiteMetadataTests.test_candidate_or_spec_cannot_be_promoted_by_setting_pass_fields) ... ok
+2026-10-22T05:22:19.3226549Z test_metadata_paths_require_their_exact_schema (test_website.MacWebsiteMetadataTests.test_metadata_paths_require_their_exact_schema) ... ok
+2026-10-22T05:22:19.3235217Z test_missing_acceptance_identity_or_workflow_provenance_blocks_publication (test_website.MacWebsiteMetadataTests.test_missing_acceptance_identity_or_workflow_provenance_blocks_publication) ... ok
+2026-10-22T05:22:19.3253961Z test_native_pass_without_complete_integration_and_lifecycle_is_rejected (test_website.MacWebsiteMetadataTests.test_native_pass_without_complete_integration_and_lifecycle_is_rejected) ... ok
+2026-10-22T05:22:19.3264236Z test_only_explicit_published_pointer_enables_published_classification (test_website.MacWebsiteMetadataTests.test_only_explicit_published_pointer_enables_published_classification) ... ok
+2026-10-22T05:22:19.3266465Z test_opening_unpublished_gate_is_rejected (test_website.MacWebsiteMetadataTests.test_opening_unpublished_gate_is_rejected) ... ok
+2026-10-22T05:22:19.3274019Z test_platform_and_production_claims_cannot_change_without_explicit_review (test_website.MacWebsiteMetadataTests.test_platform_and_production_claims_cannot_change_without_explicit_review) ... ok
+2026-10-22T05:22:19.3285574Z test_publication_requires_the_evidence_archive_and_independent_audit (test_website.MacWebsiteMetadataTests.test_publication_requires_the_evidence_archive_and_independent_audit) ... ok
+2026-10-22T05:22:19.3289067Z test_published_accepted_archive_uses_mac_asset_and_stays_unqualified (test_website.MacWebsiteMetadataTests.test_published_accepted_archive_uses_mac_asset_and_stays_unqualified) ... ok
+2026-10-22T05:22:19.3311007Z test_stale_audit_cannot_accept_changed_candidate_metadata (test_website.MacWebsiteMetadataTests.test_stale_audit_cannot_accept_changed_candidate_metadata) ... ok
+2026-10-22T05:22:19.3313427Z test_unpublished_candidate_has_preparation_links_and_closed_gate (test_website.MacWebsiteMetadataTests.test_unpublished_candidate_has_preparation_links_and_closed_gate) ... ok
+2026-10-22T05:22:19.3314542Z 
+2026-10-22T05:22:19.3314784Z ----------------------------------------------------------------------
+2026-10-22T05:22:19.3315317Z Ran 92 tests in 1.364s
+2026-10-22T05:22:19.3315530Z 
+2026-10-22T05:22:19.3315642Z OK
+2026-10-22T05:22:19.3527357Z ##[group]Run node --test engineering/tests/*.test.mjs
+2026-10-22T05:22:19.3527771Z [36;1mnode --test engineering/tests/*.test.mjs[0m
+2026-10-22T05:22:19.3575209Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:22:19.3575471Z ##[endgroup]
+2026-10-22T05:22:19.4043533Z TAP version 13
+2026-10-22T05:22:19.4699937Z # Subtest: verification follows the selected materialization, independent of the current source mirror
+2026-10-22T05:22:19.4705445Z ok 1 - verification follows the selected materialization, independent of the current source mirror
+2026-10-22T05:22:19.4706717Z   ---
+2026-10-22T05:22:19.4713718Z   duration_ms: 6.488684
+2026-10-22T05:22:19.4714458Z   type: 'test'
+2026-10-22T05:22:19.4714835Z   ...
+2026-10-22T05:22:19.4715351Z # Subtest: changed bytes are rejected before imports: src/main.mjs
+2026-10-22T05:22:19.4716165Z ok 2 - changed bytes are rejected before imports: src/main.mjs
+2026-10-22T05:22:19.4716789Z   ---
+2026-10-22T05:22:19.4717130Z   duration_ms: 2.974065
+2026-10-22T05:22:19.4717629Z   type: 'test'
+2026-10-22T05:22:19.4717981Z   ...
+2026-10-22T05:22:19.4718578Z # Subtest: changed bytes are rejected before imports: node_modules/ethers/index.js
+2026-10-22T05:22:19.4719781Z ok 3 - changed bytes are rejected before imports: node_modules/ethers/index.js
+2026-10-22T05:22:19.4720627Z   ---
+2026-10-22T05:22:19.4721001Z   duration_ms: 1.933532
+2026-10-22T05:22:19.4721406Z   type: 'test'
+2026-10-22T05:22:19.4721764Z   ...
+2026-10-22T05:22:19.4722511Z # Subtest: changed bytes are rejected before imports: source-inventory.json
+2026-10-22T05:22:19.4723816Z ok 4 - changed bytes are rejected before imports: source-inventory.json
+2026-10-22T05:22:19.4724520Z   ---
+2026-10-22T05:22:19.4724848Z   duration_ms: 1.76608
+2026-10-22T05:22:19.4725276Z   type: 'test'
+2026-10-22T05:22:19.4725607Z   ...
+2026-10-22T05:22:19.4726155Z # Subtest: a replaced manifest cannot authorize changed dependencies
+2026-10-22T05:22:19.4727007Z ok 5 - a replaced manifest cannot authorize changed dependencies
+2026-10-22T05:22:19.4727679Z   ---
+2026-10-22T05:22:19.4728031Z   duration_ms: 2.012428
+2026-10-22T05:22:19.4728603Z   type: 'test'
+2026-10-22T05:22:19.4729087Z   ...
+2026-10-22T05:22:19.4729657Z # Subtest: executable mode changes and missing dependencies are rejected
+2026-10-22T05:22:19.4730588Z ok 6 - executable mode changes and missing dependencies are rejected
+2026-10-22T05:22:19.4731417Z   ---
+2026-10-22T05:22:19.4731876Z   duration_ms: 2.504262
+2026-10-22T05:22:19.4732315Z   type: 'test'
+2026-10-22T05:22:19.4733053Z   ...
+2026-10-22T05:22:19.4736503Z # Subtest: unlisted files that could change module resolution are rejected
+2026-10-22T05:22:19.4737558Z ok 7 - unlisted files that could change module resolution are rejected
+2026-10-22T05:22:19.4756331Z   ---
+2026-10-22T05:22:19.4756708Z   duration_ms: 1.705007
+2026-10-22T05:22:19.4757096Z   type: 'test'
+2026-10-22T05:22:19.4757335Z   ...
+2026-10-22T05:22:19.4757764Z # Subtest: symlinked files, parent directories and roots are rejected even with identical bytes
+2026-10-22T05:22:19.4758481Z ok 8 - symlinked files, parent directories and roots are rejected even with identical bytes
+2026-10-22T05:22:19.4758965Z   ---
+2026-10-22T05:22:19.4759158Z   duration_ms: 2.162507
+2026-10-22T05:22:19.4759401Z   type: 'test'
+2026-10-22T05:22:19.4759614Z   ...
+2026-10-22T05:22:19.4759872Z # Subtest: manifest traversal cannot read outside the release
+2026-10-22T05:22:19.4760288Z ok 9 - manifest traversal cannot read outside the release
+2026-10-22T05:22:19.4760614Z   ---
+2026-10-22T05:22:19.4760836Z   duration_ms: 2.560116
+2026-10-22T05:22:19.4761066Z   type: 'test'
+2026-10-22T05:22:19.4761273Z   ...
+2026-10-22T05:22:19.4822725Z 1..9
+2026-10-22T05:22:19.4823472Z # tests 9
+2026-10-22T05:22:19.4824184Z # suites 0
+2026-10-22T05:22:19.4824674Z # pass 9
+2026-10-22T05:22:19.4825246Z # fail 0
+2026-10-22T05:22:19.4825772Z # cancelled 0
+2026-10-22T05:22:19.4826388Z # skipped 0
+2026-10-22T05:22:19.4826847Z # todo 0
+2026-10-22T05:22:19.4827430Z # duration_ms 89.93379
+2026-10-22T05:22:19.4908277Z ##[group]Run python3 validation/audit-manager-1.14.0.py
+2026-10-22T05:22:19.4908708Z [36;1mpython3 validation/audit-manager-1.14.0.py[0m
+2026-10-22T05:22:19.4956864Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:22:19.4957123Z ##[endgroup]
+2026-10-22T05:22:19.5380251Z {
+2026-10-22T05:22:19.5380685Z   "status": "PASS",
+2026-10-22T05:22:19.5381508Z   "recordSHA256": "4dd604f2fc1fc7c386bbf2ca731d9a6e9c7bcc7806a4d48fd4d3f2b652df3560",
+2026-10-22T05:22:19.5382115Z   "verifiedLogs": 38,
+2026-10-22T05:22:19.5382676Z   "architectures": [
+2026-10-22T05:22:19.5383299Z     "x64",
+2026-10-22T05:22:19.5383522Z     "arm64"
+2026-10-22T05:22:19.5383731Z   ],
+2026-10-22T05:22:19.5383986Z   "managerTestsPerArchitecture": 779,
+2026-10-22T05:22:19.5384347Z   "productionQualified": false,
+2026-10-22T05:22:19.5384836Z   "scope": "Retained log integrity and consistency only; no fresh execution or RPC."
+2026-10-22T05:22:19.5385327Z }
+2026-10-22T05:22:19.5457935Z ##[group]Run python3 validation/audit-manager-1.15.0.py
+2026-10-22T05:22:19.5458361Z [36;1mpython3 validation/audit-manager-1.15.0.py[0m
+2026-10-22T05:22:19.5503120Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:22:19.5503386Z ##[endgroup]
+2026-10-22T05:22:19.5929195Z {
+2026-10-22T05:22:19.5929830Z   "status": "PASS",
+2026-10-22T05:22:19.5930515Z   "recordSHA256": "f6d514d9db028ad20bf1814248c541613f67ec941ca1ee9f820f3a1e29bf047e",
+2026-10-22T05:22:19.5931280Z   "verifiedLogs": 38,
+2026-10-22T05:22:19.5931665Z   "architectures": [
+2026-10-22T05:22:19.5932033Z     "x64",
+2026-10-22T05:22:19.5932361Z     "arm64"
+2026-10-22T05:22:19.5932654Z   ],
+2026-10-22T05:22:19.5933253Z   "managerTestsPerArchitecture": 780,
+2026-10-22T05:22:19.5956766Z   "productionQualified": false,
+2026-10-22T05:22:19.5957491Z   "scope": "Retained log integrity and consistency only; no fresh execution or RPC."
+2026-10-22T05:22:19.5958209Z }
+2026-10-22T05:22:19.6017437Z ##[group]Run python3 -m compileall -q engineering
+2026-10-22T05:22:19.6017859Z [36;1mpython3 -m compileall -q engineering[0m
+2026-10-22T05:22:19.6018246Z [36;1mnode --check engineering/verify-mainnet-deployment.mjs[0m
+2026-10-22T05:22:19.6018683Z [36;1mnode --check engineering/verify-mainnet-source.mjs[0m
+2026-10-22T05:22:19.6066273Z shell: /usr/bin/bash -e {0}
+2026-10-22T05:22:19.6066531Z ##[endgroup]
+2026-10-22T05:22:19.7479220Z Cleaning up orphan processes

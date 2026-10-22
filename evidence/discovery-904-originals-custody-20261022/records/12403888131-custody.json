@@ -1,0 +1,3740 @@
+{
+  "schema": "fleet/original-pr-artifact-ram-custody/v1",
+  "scope": "Exact 904 PR-only original attempt1; no new installed/main/release qualification",
+  "runId": 39727291254,
+  "runAttempt": 1,
+  "headCommit": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+  "expectedSyntheticCheckout": "392fa551c0cef00aac511c812c029fb053729a4e",
+  "artifactId": 12403888131,
+  "artifactName": "linux-next-candidate",
+  "outerBytes": 435327529,
+  "outerSha256": "51a04d65d68b8b036eb0fc50229b1abc4845661056c5c58b264a00221d2e8ea4",
+  "outerByteIdentityVerified": true,
+  "allMembersCRCAndSha256Verified": true,
+  "allMembersUniqueSafePaths": true,
+  "members": [
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/executables.json",
+      "bytes": 3568762,
+      "sha256": "95015dcbf9396b05f5b4d5735752c2725171e7ad1c59ca4b5be395fdcc74d3f6",
+      "crc32": "f3bc126b",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/final-gate.json",
+      "bytes": 1841,
+      "sha256": "32cdd0ea6cb39d05b32357a662b1bf6e63d1ea1b711d583b5d6932a665a5dbfa",
+      "crc32": "67a410b2",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/executables.log",
+      "bytes": 309,
+      "sha256": "b47bfb0eba41225bf0aca0253fc91947e2bc6c0e1cb621c715179db839a4755c",
+      "crc32": "345a821e",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/001-Clean-Install-Compute-command-agent.log",
+      "bytes": 560,
+      "sha256": "520358f2952a608848d8896b5970aef0fb6b0052c9384ac21c1038645e4c9534",
+      "crc32": "0a054d73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/002-Continue-Fresh-Readiness-command-agent.log",
+      "bytes": 636,
+      "sha256": "fffeec6b67ff9350ffdf14d338a2079ad6aa8314809584fd42bb089610c45d89",
+      "crc32": "67ad23d9",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/003-Continue-Standard-Install-command-agent.log",
+      "bytes": 690,
+      "sha256": "ec7a83ce70e11b25bc233a73e34cd5944119d735ad2e93e5b0e2a5bf4f3243d7",
+      "crc32": "6cadfe6f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/004-Continue-Standard-Readiness-command-agent.log",
+      "bytes": 675,
+      "sha256": "4a088da515234ef90b6cb745d35e970c07495a2f905812ce3abd78b712e3e0d3",
+      "crc32": "25cd2d7f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/005-Experimental-Migration-command-agent.log",
+      "bytes": 476,
+      "sha256": "874f6148204de3017df28a797e8f34b241f57f55e1d0fbb0223db76f94c1e1bc",
+      "crc32": "83388471",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/006-Install-command-agent.log",
+      "bytes": 560,
+      "sha256": "520358f2952a608848d8896b5970aef0fb6b0052c9384ac21c1038645e4c9534",
+      "crc32": "0a054d73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/007-Install-command-node.log",
+      "bytes": 474,
+      "sha256": "a74a90cf6dfc0595e0fafcdbcafb76adfdf73640b2812c81abaf7aa9da7e175f",
+      "crc32": "4e55d724",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/008-Install-command-moderator.log",
+      "bytes": 457,
+      "sha256": "15f37f30af28509723379a78a6a1d63f0df66d61ac4dd9614a47d42df231af8c",
+      "crc32": "4582ef9f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/009-Install-command-employer.log",
+      "bytes": 456,
+      "sha256": "f64bb963f6e293fdde34afad131e2a027c664a103f3d75be0f67da2a7e885646",
+      "crc32": "02634b77",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/010-Install-command-evidence.log",
+      "bytes": 456,
+      "sha256": "cc2980c71f65fa0021b640509c7adcfa92269b773301219f4a9c90f7b4ffc69c",
+      "crc32": "cd1485d9",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/011-Install-command-recovery.log",
+      "bytes": 456,
+      "sha256": "2a688b12b3ecfb4e2f966d2a56f0ea20e9cf7103af8e4426566f809bebcb7f20",
+      "crc32": "ae31c8c2",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/012-Launch-AGI-Agent-Seed-Wallet-command-agent.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/013-Launch-AGI-Agent-command-agent.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/014-Launch-AGI-Node-Seed-Wallet-command-node.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/015-Launch-AGI-Node-command-node.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/016-Launch-Employer-Seed-Wallet-command-employer.log",
+      "bytes": 195,
+      "sha256": "badd40491f02b21a69e12945d83892abaa40c79157407e38a22090c7b0e09364",
+      "crc32": "8ff18957",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/017-Launch-Employer-command-employer.log",
+      "bytes": 179,
+      "sha256": "163733f9108aaa2e423f2015167af6450236f8317bec522abce7cca56cb6ffa1",
+      "crc32": "4157e2ab",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/018-Launch-Employer-sh-employer.log",
+      "bytes": 179,
+      "sha256": "163733f9108aaa2e423f2015167af6450236f8317bec522abce7cca56cb6ffa1",
+      "crc32": "4157e2ab",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/019-Launch-Evidence-command-evidence.log",
+      "bytes": 179,
+      "sha256": "4747222498e7764903ec76768f5542ee492ca3e1e4de2c7385a8d0982d9628d5",
+      "crc32": "f39eb2c6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/020-Launch-Evidence-sh-evidence.log",
+      "bytes": 179,
+      "sha256": "4747222498e7764903ec76768f5542ee492ca3e1e4de2c7385a8d0982d9628d5",
+      "crc32": "f39eb2c6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/021-Launch-Moderator-Seed-Wallet-command-moderator.log",
+      "bytes": 197,
+      "sha256": "e2e0fa1e7a536f9a6d6248b575a19959f8caf2306fa15f7011ad6c52ddf02d8b",
+      "crc32": "bf49a964",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/022-Launch-Moderator-command-moderator.log",
+      "bytes": 181,
+      "sha256": "0c6fb3c3adfc1c9834a603380bfad3037b2315c9084c72963999d14e9c40195a",
+      "crc32": "ea48fb71",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/023-Launch-Moderator-sh-moderator.log",
+      "bytes": 181,
+      "sha256": "0c6fb3c3adfc1c9834a603380bfad3037b2315c9084c72963999d14e9c40195a",
+      "crc32": "ea48fb71",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/024-Launch-Native-Workforce-command-agent.log",
+      "bytes": 232,
+      "sha256": "1d7524187c875af46872e7bad401b44506114ae6cabcf20a91bfe5af9819dba5",
+      "crc32": "1ecf9f9b",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/025-Launch-Native-Workforce-sh-agent.log",
+      "bytes": 232,
+      "sha256": "1d7524187c875af46872e7bad401b44506114ae6cabcf20a91bfe5af9819dba5",
+      "crc32": "1ecf9f9b",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/026-Launch-Recovery-Seed-Wallet-command-recovery.log",
+      "bytes": 195,
+      "sha256": "168421648a28ab03910868680b18536b95b411a3a7250f0e9a6cff66c87e3259",
+      "crc32": "a28c362a",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/027-Launch-Recovery-command-recovery.log",
+      "bytes": 179,
+      "sha256": "1bd3509ade3477560b5ffa80c0387e0a7105fdc10cb2a22e658939b3b3569dcc",
+      "crc32": "6ff34698",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/028-Launch-Recovery-sh-recovery.log",
+      "bytes": 179,
+      "sha256": "1bd3509ade3477560b5ffa80c0387e0a7105fdc10cb2a22e658939b3b3569dcc",
+      "crc32": "6ff34698",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/029-Launch-sh-agent.log",
+      "bytes": 89,
+      "sha256": "3f5cdde2f161fc6e9cd7889758d295105deb072517383d612f2c19d65c020bc8",
+      "crc32": "9349b5d8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/030-Practice-Offline-command-agent.log",
+      "bytes": 271,
+      "sha256": "f3d1c3e9e73d8e9672e382e3ebafd52d1be3708233a67a0968f22e0ca388b9a6",
+      "crc32": "a4fcf875",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/031-Prepare-Compute-Runtime-command-agent.log",
+      "bytes": 249,
+      "sha256": "58f21ebadc9c000d5b04c794a8d6162c24b38b993a49ef89233ff9a460994d3e",
+      "crc32": "a55308a4",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/032-Prepare-Compute-sh-agent.log",
+      "bytes": 94,
+      "sha256": "085c40c5caf1dd90b3ec99ce68bfd6580cab5dadf50dc144d7ba1b2e7790364d",
+      "crc32": "ab78413e",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/033-Prepare-Ubuntu-sh-agent.log",
+      "bytes": 151,
+      "sha256": "19a2146ad255df0601ec10a4cf32b60092e9f43981c188470a0c50f7a2827185",
+      "crc32": "fa9ecfff",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/034-Qualify-Mac-command-agent.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/035-Qualify-Mac-command-node.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/036-Qualify-Mac-command-moderator.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/037-Qualify-Mac-command-employer.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/038-Qualify-Mac-command-evidence.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/039-Qualify-Mac-command-recovery.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/040-Repair-Compute-command-agent.log",
+      "bytes": 288,
+      "sha256": "9886df9505f224f1c27b037be25e01c319c681fa475dde0cd2041934fe9d2dcb",
+      "crc32": "205d9f96",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/041-Restart-Compute-command-agent.log",
+      "bytes": 311,
+      "sha256": "600a13f6a173a4995227ad274e16e0c6e924aafdd8bc574360935f3e02addb2b",
+      "crc32": "8dcd2c1b",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/042-Resume-Fresh-OAuth-command-agent.log",
+      "bytes": 655,
+      "sha256": "690ff6f85dd4e16c42bcd23e6750728b390a827387f6626a9cb88efe96891936",
+      "crc32": "98487400",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/043-Retry-Clean-Install-command-agent.log",
+      "bytes": 578,
+      "sha256": "ae9a4667b7eac28510ff6368515ca6aea85a8167cf02b7d06c406855c4c69f41",
+      "crc32": "b4a44605",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/044-Retry-Standard-Install-command-agent.log",
+      "bytes": 560,
+      "sha256": "520358f2952a608848d8896b5970aef0fb6b0052c9384ac21c1038645e4c9534",
+      "crc32": "0a054d73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/045-Retry-Verified-Install-command-agent.log",
+      "bytes": 570,
+      "sha256": "7c655413d4eb1e4dc3ccbdc346b31dc793ba1b4013f2823ba17c4b26bad689e0",
+      "crc32": "a167482e",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/046-Setup-OpenClaw-command-agent.log",
+      "bytes": 560,
+      "sha256": "520358f2952a608848d8896b5970aef0fb6b0052c9384ac21c1038645e4c9534",
+      "crc32": "0a054d73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/047-Transfer-Setup-sh-agent.log",
+      "bytes": 152,
+      "sha256": "0a6e29422c7c1b3846db4724241782a4e1d204b81146a0dabe824d419a9498d6",
+      "crc32": "c0872368",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/048-Update-Signer-command-agent.log",
+      "bytes": 313,
+      "sha256": "5820cfa30aa98da41127af01d0e453a3e1b22228a74829344ace21b4294afc1a",
+      "crc32": "9e2dfd75",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/049-Verified-Install-command-agent.log",
+      "bytes": 570,
+      "sha256": "7c655413d4eb1e4dc3ccbdc346b31dc793ba1b4013f2823ba17c4b26bad689e0",
+      "crc32": "a167482e",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/050-Verify-Linux-sh-agent.log",
+      "bytes": 200,
+      "sha256": "0c14671dcb9f6c44ddef38403d526bdb75065a706e46d1949bb4ae0274e02886",
+      "crc32": "8e34824f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/051-Verify-Package-command-agent.log",
+      "bytes": 154,
+      "sha256": "f42dc645d278efd1ae951c426a4ab24eda74fdde2ff10f873812876ca96b0c40",
+      "crc32": "974ec0f8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/052-packages-AGI_Agent-AGI-Agent-app-Contents-MacOS-start-agent.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/053-packages-AGI_Agent-Administrator-DNS-command-agent.log",
+      "bytes": 223,
+      "sha256": "6c4f343b6975eed10ac877d9a2cd00f933858c76ab9a127310de065b260f795f",
+      "crc32": "c1dd5422",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/054-packages-AGI_Agent-Clean-Install-Compute-command-agent.log",
+      "bytes": 424,
+      "sha256": "5026c26a6d1ae3e5af7b4066bba9b8b9778866f43a94cbd2602edc52c64f19c5",
+      "crc32": "bc6105ae",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/055-packages-AGI_Agent-Cleanup-Evidence-command-agent.log",
+      "bytes": 789,
+      "sha256": "99fc60ffffa0d1280389f5741e3f370076e6be01942f9ab4f6f9f9f34afdf4a3",
+      "crc32": "f11a7826",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/056-packages-AGI_Agent-Configure-Public-Browser-command-agent.log",
+      "bytes": 606,
+      "sha256": "696fb1469d128fd846577b370b95b50dd099a6c8467a60511c1f3eb316b44106",
+      "crc32": "62bc879c",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/057-packages-AGI_Agent-Configure-Public-Browser-sh-agent.log",
+      "bytes": 72,
+      "sha256": "6efaf2213cb80960a9a758518977c8d6e3591106c6e44651b42a4c05d044b811",
+      "crc32": "078d689f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/058-packages-AGI_Agent-Continue-Fresh-Readiness-command-agent.log",
+      "bytes": 483,
+      "sha256": "781f2aa1f3e0a32defd3b23f0b31584e54f3cf13cb8193c19c01c67d043316f6",
+      "crc32": "a952a038",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/059-packages-AGI_Agent-Continue-Standard-Install-command-agent.log",
+      "bytes": 477,
+      "sha256": "04cec68114451b23bf4396da424c16db37c7468e1fe2c33cb381ac70635ab5b2",
+      "crc32": "bedf73b1",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/060-packages-AGI_Agent-Continue-Standard-Readiness-command-agent.log",
+      "bytes": 480,
+      "sha256": "5b23977bab92a75c5d26e304ee9219b72c37ffa523b53c31805eb9e9027a2b80",
+      "crc32": "3e3780a6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/061-packages-AGI_Agent-Experimental-Migration-command-agent.log",
+      "bytes": 772,
+      "sha256": "fad10b171bec69ff4279fb3c88821c696d13476ad4db69bec8980a9dd0216757",
+      "crc32": "4d4d2612",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/062-packages-AGI_Agent-Import-Public-Browser-Qualification-command-agent.log",
+      "bytes": 385,
+      "sha256": "2fa943722404b1a3f7674876336d87a66448a9672dff9ca6290a5e5e90026721",
+      "crc32": "43fee97d",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/063-packages-AGI_Agent-Import-Public-Browser-Qualification-sh-agent.log",
+      "bytes": 72,
+      "sha256": "6efaf2213cb80960a9a758518977c8d6e3591106c6e44651b42a4c05d044b811",
+      "crc32": "078d689f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/064-packages-AGI_Agent-Inspect-sh-agent.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/065-packages-AGI_Agent-Install-command-agent.log",
+      "bytes": 424,
+      "sha256": "5026c26a6d1ae3e5af7b4066bba9b8b9778866f43a94cbd2602edc52c64f19c5",
+      "crc32": "bc6105ae",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/066-packages-AGI_Agent-Install-sh-agent.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/067-packages-AGI_Agent-Launch-AGI-Agent-command-agent.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/068-packages-AGI_Agent-Launch-AGI-Agent-sh-agent.log",
+      "bytes": 148,
+      "sha256": "db3791ec389deae88cf00486a3b9a615351088a2d686f001fb3c07f54a44a40c",
+      "crc32": "6ee47045",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/069-packages-AGI_Agent-Launch-Native-Workforce-command-agent.log",
+      "bytes": 251,
+      "sha256": "fb5402fa06bfbae159f5d5cb59db4a70dd692d60f01d2ef644defe230d752566",
+      "crc32": "df6edefe",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/070-packages-AGI_Agent-Launch-Native-Workforce-sh-agent.log",
+      "bytes": 251,
+      "sha256": "fb5402fa06bfbae159f5d5cb59db4a70dd692d60f01d2ef644defe230d752566",
+      "crc32": "df6edefe",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/071-packages-AGI_Agent-Launch-Seed-Wallet-command-agent.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/072-packages-AGI_Agent-Launch-sh-agent.log",
+      "bytes": 89,
+      "sha256": "3f5cdde2f161fc6e9cd7889758d295105deb072517383d612f2c19d65c020bc8",
+      "crc32": "9349b5d8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/073-packages-AGI_Agent-Prepare-Compute-Runtime-command-agent.log",
+      "bytes": 249,
+      "sha256": "58f21ebadc9c000d5b04c794a8d6162c24b38b993a49ef89233ff9a460994d3e",
+      "crc32": "a55308a4",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/074-packages-AGI_Agent-Qualify-Linux-sh-agent.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/075-packages-AGI_Agent-Qualify-Mac-command-agent.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/076-packages-AGI_Agent-Repair-Compute-command-agent.log",
+      "bytes": 584,
+      "sha256": "3234deeb62a3ba71e1e22e1355d252275d2498bdb0df97a6873d89e023d6e700",
+      "crc32": "4b61536e",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/077-packages-AGI_Agent-Restart-Compute-command-agent.log",
+      "bytes": 322,
+      "sha256": "a3fadf526b6b82643fa5b9e2c33360245a5ce73a2cd36aef431e3d5ed42bda9b",
+      "crc32": "6029ae5f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/079-packages-AGI_Agent-Retry-Clean-Install-command-agent.log",
+      "bytes": 443,
+      "sha256": "eb9114e688165ab74ec5de3df7c0a98f79bf2ab2f5389c3d3e9fd99071a487bd",
+      "crc32": "90b96f48",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/078-packages-AGI_Agent-Resume-Fresh-OAuth-command-agent.log",
+      "bytes": 502,
+      "sha256": "4b3bddf1d1c30a4b53d14cf1656fa783fb31236a40763465b18063c616cf402d",
+      "crc32": "645e3818",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/080-packages-AGI_Agent-Retry-Standard-Install-command-agent.log",
+      "bytes": 424,
+      "sha256": "5026c26a6d1ae3e5af7b4066bba9b8b9778866f43a94cbd2602edc52c64f19c5",
+      "crc32": "bc6105ae",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/081-packages-AGI_Agent-Retry-Verified-Install-command-agent.log",
+      "bytes": 439,
+      "sha256": "b3d71b2a49c735f082a2d41fbae105a7d2661c1f227099bb904eb6aa2342b971",
+      "crc32": "afd38ee3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/082-packages-AGI_Agent-Setup-OpenClaw-command-agent.log",
+      "bytes": 424,
+      "sha256": "5026c26a6d1ae3e5af7b4066bba9b8b9778866f43a94cbd2602edc52c64f19c5",
+      "crc32": "bc6105ae",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/083-packages-AGI_Agent-Setup-OpenClaw-sh-agent.log",
+      "bytes": 424,
+      "sha256": "5026c26a6d1ae3e5af7b4066bba9b8b9778866f43a94cbd2602edc52c64f19c5",
+      "crc32": "bc6105ae",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/084-packages-AGI_Agent-Start-Approved-sh-agent.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/085-packages-AGI_Agent-Stop-Compute-sh-agent.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/086-packages-AGI_Agent-Update-Signer-command-agent.log",
+      "bytes": 313,
+      "sha256": "5820cfa30aa98da41127af01d0e453a3e1b22228a74829344ace21b4294afc1a",
+      "crc32": "9e2dfd75",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/087-packages-AGI_Agent-Verified-Install-command-agent.log",
+      "bytes": 439,
+      "sha256": "b3d71b2a49c735f082a2d41fbae105a7d2661c1f227099bb904eb6aa2342b971",
+      "crc32": "afd38ee3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/088-packages-AGI_Agent-Verify-Package-command-agent.log",
+      "bytes": 191,
+      "sha256": "92a4ba57183b3583427160b2cf1dc927cd48c0df431d2754cef56cf941e8a926",
+      "crc32": "e060d477",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/089-packages-AGI_Agent-fleet-Connect-Agent-command-agent.log",
+      "bytes": 99,
+      "sha256": "ed73a0ef0c19705af05eb069de70df2e61cbd07bb9a7f3319d84d2000aa3df53",
+      "crc32": "c3fbe16e",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/090-packages-AGI_Agent-fleet-Connect-Node-command-agent.log",
+      "bytes": 98,
+      "sha256": "c4f3191119dbd3049fda1f20954ab0e4785bcd47784a11ee09c116eeef7ddc9f",
+      "crc32": "ca185e31",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/091-packages-AGI_Agent-fleet-Launch-Fleet-Monitor-command-agent.log",
+      "bytes": 101,
+      "sha256": "219bcb5cbd8c31922cca54781c3f20b708e20667130bfeff93106d685ced1712",
+      "crc32": "c061fb76",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/092-packages-AGI_Agent-fleet-Open-Fleet-Monitor-command-agent.log",
+      "bytes": 180,
+      "sha256": "af2c78766ccac93a9b78fb1d474f3f157908124efcdbc2084cf43b6e3d76efa9",
+      "crc32": "54771275",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/093-packages-AGI_Agent-fleet-Remove-Supervised-Monitor-command-agent.log",
+      "bytes": 68,
+      "sha256": "46c07f3e62338ac06067e105a126a31e062025e597685c4946ff4e9c3796a62a",
+      "crc32": "ccfaab8b",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/094-packages-AGI_Agent-fleet-Setup-Supervised-Monitor-command-agent.log",
+      "bytes": 68,
+      "sha256": "46c07f3e62338ac06067e105a126a31e062025e597685c4946ff4e9c3796a62a",
+      "crc32": "ccfaab8b",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/095-packages-AGI_Employer-AGI-Employer-app-Contents-MacOS-launch-employer.log",
+      "bytes": 74,
+      "sha256": "b7c166083e4fc760ee7d747d9c9ded31e3d290b411e534e3c98fa9cecee8cfc0",
+      "crc32": "6d98e726",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/096-packages-AGI_Employer-Administrator-DNS-command-employer.log",
+      "bytes": 223,
+      "sha256": "6c4f343b6975eed10ac877d9a2cd00f933858c76ab9a127310de065b260f795f",
+      "crc32": "c1dd5422",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/097-packages-AGI_Employer-Cleanup-Evidence-command-employer.log",
+      "bytes": 789,
+      "sha256": "99fc60ffffa0d1280389f5741e3f370076e6be01942f9ab4f6f9f9f34afdf4a3",
+      "crc32": "f11a7826",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/098-packages-AGI_Employer-Continue-Standard-Install-command-employer.log",
+      "bytes": 320,
+      "sha256": "f83c703fd687efbed7a19c4689e8570a6e9df83433223e4f15e72260cef82ddc",
+      "crc32": "e3e2d8c6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/099-packages-AGI_Employer-Continue-Standard-Readiness-command-employer.log",
+      "bytes": 320,
+      "sha256": "f83c703fd687efbed7a19c4689e8570a6e9df83433223e4f15e72260cef82ddc",
+      "crc32": "e3e2d8c6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/100-packages-AGI_Employer-Experimental-Migration-command-employer.log",
+      "bytes": 653,
+      "sha256": "24c6760dbf6d4b9af980fc97e41c206a089b7508f93acb7446027662f1730172",
+      "crc32": "68a04430",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/101-packages-AGI_Employer-Inspect-sh-employer.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/102-packages-AGI_Employer-Install-command-employer.log",
+      "bytes": 320,
+      "sha256": "f83c703fd687efbed7a19c4689e8570a6e9df83433223e4f15e72260cef82ddc",
+      "crc32": "e3e2d8c6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/103-packages-AGI_Employer-Install-sh-employer.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/104-packages-AGI_Employer-Launch-AGI-Employer-command-employer.log",
+      "bytes": 74,
+      "sha256": "b7c166083e4fc760ee7d747d9c9ded31e3d290b411e534e3c98fa9cecee8cfc0",
+      "crc32": "6d98e726",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/105-packages-AGI_Employer-Launch-AGI-Employer-sh-employer.log",
+      "bytes": 74,
+      "sha256": "b7c166083e4fc760ee7d747d9c9ded31e3d290b411e534e3c98fa9cecee8cfc0",
+      "crc32": "6d98e726",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/106-packages-AGI_Employer-Launch-Seed-Wallet-command-employer.log",
+      "bytes": 74,
+      "sha256": "b7c166083e4fc760ee7d747d9c9ded31e3d290b411e534e3c98fa9cecee8cfc0",
+      "crc32": "6d98e726",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/107-packages-AGI_Employer-Launch-sh-employer.log",
+      "bytes": 89,
+      "sha256": "3f5cdde2f161fc6e9cd7889758d295105deb072517383d612f2c19d65c020bc8",
+      "crc32": "9349b5d8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/108-packages-AGI_Employer-Prepare-Compute-Runtime-command-employer.log",
+      "bytes": 249,
+      "sha256": "58f21ebadc9c000d5b04c794a8d6162c24b38b993a49ef89233ff9a460994d3e",
+      "crc32": "a55308a4",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/109-packages-AGI_Employer-Qualify-Mac-command-employer.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/110-packages-AGI_Employer-Repair-Compute-command-employer.log",
+      "bytes": 465,
+      "sha256": "06f6eae586285d51f8627be3d7a12e86c1beba5d43b7ac853fb29a28cbeb4784",
+      "crc32": "ef4c6f39",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/111-packages-AGI_Employer-Restart-Compute-command-employer.log",
+      "bytes": 322,
+      "sha256": "a3fadf526b6b82643fa5b9e2c33360245a5ce73a2cd36aef431e3d5ed42bda9b",
+      "crc32": "6029ae5f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/112-packages-AGI_Employer-Retry-Clean-Install-command-employer.log",
+      "bytes": 310,
+      "sha256": "95c3cc4a3fe6c55e291e3e01b2583affeed11d4487f97048f71da877ed4506c7",
+      "crc32": "3bd398d6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/113-packages-AGI_Employer-Retry-Standard-Install-command-employer.log",
+      "bytes": 320,
+      "sha256": "f83c703fd687efbed7a19c4689e8570a6e9df83433223e4f15e72260cef82ddc",
+      "crc32": "e3e2d8c6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/114-packages-AGI_Employer-Retry-Verified-Install-command-employer.log",
+      "bytes": 310,
+      "sha256": "95c3cc4a3fe6c55e291e3e01b2583affeed11d4487f97048f71da877ed4506c7",
+      "crc32": "3bd398d6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/115-packages-AGI_Employer-Setup-OpenClaw-command-employer.log",
+      "bytes": 320,
+      "sha256": "f83c703fd687efbed7a19c4689e8570a6e9df83433223e4f15e72260cef82ddc",
+      "crc32": "e3e2d8c6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/116-packages-AGI_Employer-Start-Approved-sh-employer.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/117-packages-AGI_Employer-Stop-Compute-sh-employer.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/118-packages-AGI_Employer-Update-Signer-command-employer.log",
+      "bytes": 313,
+      "sha256": "5820cfa30aa98da41127af01d0e453a3e1b22228a74829344ace21b4294afc1a",
+      "crc32": "9e2dfd75",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/119-packages-AGI_Employer-Verified-Install-command-employer.log",
+      "bytes": 310,
+      "sha256": "95c3cc4a3fe6c55e291e3e01b2583affeed11d4487f97048f71da877ed4506c7",
+      "crc32": "3bd398d6",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/120-packages-AGI_Employer-Verify-Package-command-employer.log",
+      "bytes": 191,
+      "sha256": "6121c6b4a6e49b3e4846da7b84ff87787b5cea26179cc211344271c87618fc11",
+      "crc32": "d4c4dbdd",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/121-packages-AGI_Evidence-AGI-Evidence-app-Contents-MacOS-launch-evidence.log",
+      "bytes": 74,
+      "sha256": "7e3363e1b02f4d6aa916c28288c6e84ffcbcd6982a380974495253217d803f06",
+      "crc32": "55875929",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/122-packages-AGI_Evidence-Administrator-DNS-command-evidence.log",
+      "bytes": 223,
+      "sha256": "6c4f343b6975eed10ac877d9a2cd00f933858c76ab9a127310de065b260f795f",
+      "crc32": "c1dd5422",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/123-packages-AGI_Evidence-Cleanup-Evidence-command-evidence.log",
+      "bytes": 789,
+      "sha256": "99fc60ffffa0d1280389f5741e3f370076e6be01942f9ab4f6f9f9f34afdf4a3",
+      "crc32": "f11a7826",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/124-packages-AGI_Evidence-Continue-Standard-Install-command-evidence.log",
+      "bytes": 320,
+      "sha256": "7160af945d298bf9c6247b8569ec169b62715e052a26fffe9549cc8ff32e7578",
+      "crc32": "2c951668",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/125-packages-AGI_Evidence-Continue-Standard-Readiness-command-evidence.log",
+      "bytes": 320,
+      "sha256": "7160af945d298bf9c6247b8569ec169b62715e052a26fffe9549cc8ff32e7578",
+      "crc32": "2c951668",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/126-packages-AGI_Evidence-Experimental-Migration-command-evidence.log",
+      "bytes": 653,
+      "sha256": "24c6760dbf6d4b9af980fc97e41c206a089b7508f93acb7446027662f1730172",
+      "crc32": "68a04430",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/127-packages-AGI_Evidence-Inspect-sh-evidence.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/128-packages-AGI_Evidence-Install-command-evidence.log",
+      "bytes": 320,
+      "sha256": "7160af945d298bf9c6247b8569ec169b62715e052a26fffe9549cc8ff32e7578",
+      "crc32": "2c951668",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/129-packages-AGI_Evidence-Install-sh-evidence.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/130-packages-AGI_Evidence-Launch-AGI-Evidence-command-evidence.log",
+      "bytes": 74,
+      "sha256": "7e3363e1b02f4d6aa916c28288c6e84ffcbcd6982a380974495253217d803f06",
+      "crc32": "55875929",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/131-packages-AGI_Evidence-Launch-AGI-Evidence-sh-evidence.log",
+      "bytes": 74,
+      "sha256": "7e3363e1b02f4d6aa916c28288c6e84ffcbcd6982a380974495253217d803f06",
+      "crc32": "55875929",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/132-packages-AGI_Evidence-Launch-sh-evidence.log",
+      "bytes": 89,
+      "sha256": "3f5cdde2f161fc6e9cd7889758d295105deb072517383d612f2c19d65c020bc8",
+      "crc32": "9349b5d8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/133-packages-AGI_Evidence-Prepare-Compute-Runtime-command-evidence.log",
+      "bytes": 249,
+      "sha256": "58f21ebadc9c000d5b04c794a8d6162c24b38b993a49ef89233ff9a460994d3e",
+      "crc32": "a55308a4",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/134-packages-AGI_Evidence-Qualify-Mac-command-evidence.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/135-packages-AGI_Evidence-Repair-Compute-command-evidence.log",
+      "bytes": 465,
+      "sha256": "06f6eae586285d51f8627be3d7a12e86c1beba5d43b7ac853fb29a28cbeb4784",
+      "crc32": "ef4c6f39",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/136-packages-AGI_Evidence-Restart-Compute-command-evidence.log",
+      "bytes": 322,
+      "sha256": "a3fadf526b6b82643fa5b9e2c33360245a5ce73a2cd36aef431e3d5ed42bda9b",
+      "crc32": "6029ae5f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/137-packages-AGI_Evidence-Retry-Clean-Install-command-evidence.log",
+      "bytes": 310,
+      "sha256": "38e22ad6f93d3caa4259a7e5632a5ea0821ce6248f309e711326e48a34f0014b",
+      "crc32": "3bf0873f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/138-packages-AGI_Evidence-Retry-Standard-Install-command-evidence.log",
+      "bytes": 320,
+      "sha256": "7160af945d298bf9c6247b8569ec169b62715e052a26fffe9549cc8ff32e7578",
+      "crc32": "2c951668",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/139-packages-AGI_Evidence-Retry-Verified-Install-command-evidence.log",
+      "bytes": 310,
+      "sha256": "38e22ad6f93d3caa4259a7e5632a5ea0821ce6248f309e711326e48a34f0014b",
+      "crc32": "3bf0873f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/140-packages-AGI_Evidence-Setup-OpenClaw-command-evidence.log",
+      "bytes": 320,
+      "sha256": "7160af945d298bf9c6247b8569ec169b62715e052a26fffe9549cc8ff32e7578",
+      "crc32": "2c951668",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/141-packages-AGI_Evidence-Start-Approved-sh-evidence.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/142-packages-AGI_Evidence-Stop-Compute-sh-evidence.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/143-packages-AGI_Evidence-Update-Signer-command-evidence.log",
+      "bytes": 313,
+      "sha256": "5820cfa30aa98da41127af01d0e453a3e1b22228a74829344ace21b4294afc1a",
+      "crc32": "9e2dfd75",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/144-packages-AGI_Evidence-Verified-Install-command-evidence.log",
+      "bytes": 310,
+      "sha256": "38e22ad6f93d3caa4259a7e5632a5ea0821ce6248f309e711326e48a34f0014b",
+      "crc32": "3bf0873f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/145-packages-AGI_Evidence-Verify-Package-command-evidence.log",
+      "bytes": 191,
+      "sha256": "c2aa99846c9db8b57c51bf2d1dd25d69a0648eec5ee5ce9d051de42952520028",
+      "crc32": "40036026",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/146-packages-AGI_Moderator-AGI-Moderator-app-Contents-MacOS-launch-moderator.log",
+      "bytes": 75,
+      "sha256": "db9b8c58239beb82ed3e4fb8a5aac566a8448c93b6345aa7abd5f928fc0dafbd",
+      "crc32": "700b2150",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/147-packages-AGI_Moderator-Administrator-DNS-command-moderator.log",
+      "bytes": 223,
+      "sha256": "6c4f343b6975eed10ac877d9a2cd00f933858c76ab9a127310de065b260f795f",
+      "crc32": "c1dd5422",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/148-packages-AGI_Moderator-Cleanup-Evidence-command-moderator.log",
+      "bytes": 789,
+      "sha256": "99fc60ffffa0d1280389f5741e3f370076e6be01942f9ab4f6f9f9f34afdf4a3",
+      "crc32": "f11a7826",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/149-packages-AGI_Moderator-Continue-Standard-Install-command-moderator.log",
+      "bytes": 321,
+      "sha256": "235f121d35c48262729e1845cb8ca41eb307f977270af605262cd38c7e5c3939",
+      "crc32": "f905ed16",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/150-packages-AGI_Moderator-Continue-Standard-Readiness-command-moderator.log",
+      "bytes": 321,
+      "sha256": "235f121d35c48262729e1845cb8ca41eb307f977270af605262cd38c7e5c3939",
+      "crc32": "f905ed16",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/151-packages-AGI_Moderator-Experimental-Migration-command-moderator.log",
+      "bytes": 653,
+      "sha256": "24c6760dbf6d4b9af980fc97e41c206a089b7508f93acb7446027662f1730172",
+      "crc32": "68a04430",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/152-packages-AGI_Moderator-Inspect-sh-moderator.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/153-packages-AGI_Moderator-Install-command-moderator.log",
+      "bytes": 321,
+      "sha256": "235f121d35c48262729e1845cb8ca41eb307f977270af605262cd38c7e5c3939",
+      "crc32": "f905ed16",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/154-packages-AGI_Moderator-Install-sh-moderator.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/155-packages-AGI_Moderator-Launch-AGI-Moderator-command-moderator.log",
+      "bytes": 75,
+      "sha256": "db9b8c58239beb82ed3e4fb8a5aac566a8448c93b6345aa7abd5f928fc0dafbd",
+      "crc32": "700b2150",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/156-packages-AGI_Moderator-Launch-AGI-Moderator-sh-moderator.log",
+      "bytes": 75,
+      "sha256": "db9b8c58239beb82ed3e4fb8a5aac566a8448c93b6345aa7abd5f928fc0dafbd",
+      "crc32": "700b2150",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/157-packages-AGI_Moderator-Launch-Seed-Wallet-command-moderator.log",
+      "bytes": 75,
+      "sha256": "db9b8c58239beb82ed3e4fb8a5aac566a8448c93b6345aa7abd5f928fc0dafbd",
+      "crc32": "700b2150",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/158-packages-AGI_Moderator-Launch-sh-moderator.log",
+      "bytes": 89,
+      "sha256": "3f5cdde2f161fc6e9cd7889758d295105deb072517383d612f2c19d65c020bc8",
+      "crc32": "9349b5d8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/159-packages-AGI_Moderator-Prepare-Compute-Runtime-command-moderator.log",
+      "bytes": 249,
+      "sha256": "58f21ebadc9c000d5b04c794a8d6162c24b38b993a49ef89233ff9a460994d3e",
+      "crc32": "a55308a4",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/160-packages-AGI_Moderator-Qualify-Mac-command-moderator.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/161-packages-AGI_Moderator-Repair-Compute-command-moderator.log",
+      "bytes": 465,
+      "sha256": "06f6eae586285d51f8627be3d7a12e86c1beba5d43b7ac853fb29a28cbeb4784",
+      "crc32": "ef4c6f39",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/162-packages-AGI_Moderator-Restart-Compute-command-moderator.log",
+      "bytes": 322,
+      "sha256": "a3fadf526b6b82643fa5b9e2c33360245a5ce73a2cd36aef431e3d5ed42bda9b",
+      "crc32": "6029ae5f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/163-packages-AGI_Moderator-Retry-Clean-Install-command-moderator.log",
+      "bytes": 311,
+      "sha256": "4cd1000e50cf0890819c5277ffcddde1524f0eb4c5196f418a0afd6fe1b7e35d",
+      "crc32": "6fe96768",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/164-packages-AGI_Moderator-Retry-Standard-Install-command-moderator.log",
+      "bytes": 321,
+      "sha256": "235f121d35c48262729e1845cb8ca41eb307f977270af605262cd38c7e5c3939",
+      "crc32": "f905ed16",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/165-packages-AGI_Moderator-Retry-Verified-Install-command-moderator.log",
+      "bytes": 311,
+      "sha256": "4cd1000e50cf0890819c5277ffcddde1524f0eb4c5196f418a0afd6fe1b7e35d",
+      "crc32": "6fe96768",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/166-packages-AGI_Moderator-Setup-OpenClaw-command-moderator.log",
+      "bytes": 321,
+      "sha256": "235f121d35c48262729e1845cb8ca41eb307f977270af605262cd38c7e5c3939",
+      "crc32": "f905ed16",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/167-packages-AGI_Moderator-Start-Approved-sh-moderator.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/168-packages-AGI_Moderator-Stop-Compute-sh-moderator.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/169-packages-AGI_Moderator-Update-Signer-command-moderator.log",
+      "bytes": 313,
+      "sha256": "5820cfa30aa98da41127af01d0e453a3e1b22228a74829344ace21b4294afc1a",
+      "crc32": "9e2dfd75",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/170-packages-AGI_Moderator-Verified-Install-command-moderator.log",
+      "bytes": 311,
+      "sha256": "4cd1000e50cf0890819c5277ffcddde1524f0eb4c5196f418a0afd6fe1b7e35d",
+      "crc32": "6fe96768",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/171-packages-AGI_Moderator-Verify-Package-command-moderator.log",
+      "bytes": 191,
+      "sha256": "6121c6b4a6e49b3e4846da7b84ff87787b5cea26179cc211344271c87618fc11",
+      "crc32": "d4c4dbdd",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/172-packages-AGI_Node-AGI-Node-app-Contents-MacOS-start-node.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/173-packages-AGI_Node-Administrator-DNS-command-node.log",
+      "bytes": 223,
+      "sha256": "6c4f343b6975eed10ac877d9a2cd00f933858c76ab9a127310de065b260f795f",
+      "crc32": "c1dd5422",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/174-packages-AGI_Node-Clean-Install-Compute-command-node.log",
+      "bytes": 338,
+      "sha256": "9e51ac64c2516bfa80f5c254272d3c89469c8a6c51bf92c14cbfda4a01112758",
+      "crc32": "c51978a8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/175-packages-AGI_Node-Cleanup-Evidence-command-node.log",
+      "bytes": 789,
+      "sha256": "99fc60ffffa0d1280389f5741e3f370076e6be01942f9ab4f6f9f9f34afdf4a3",
+      "crc32": "f11a7826",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/176-packages-AGI_Node-Configure-Public-Browser-command-node.log",
+      "bytes": 606,
+      "sha256": "696fb1469d128fd846577b370b95b50dd099a6c8467a60511c1f3eb316b44106",
+      "crc32": "62bc879c",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/177-packages-AGI_Node-Configure-Public-Browser-sh-node.log",
+      "bytes": 72,
+      "sha256": "6efaf2213cb80960a9a758518977c8d6e3591106c6e44651b42a4c05d044b811",
+      "crc32": "078d689f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/178-packages-AGI_Node-Continue-Fresh-Readiness-command-node.log",
+      "bytes": 397,
+      "sha256": "b2f04b9a52b41a6807ca3bb304a71a2aec79f5da5722ee97de9e12b87e71c3e4",
+      "crc32": "0cfea2e0",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/179-packages-AGI_Node-Continue-Standard-Install-command-node.log",
+      "bytes": 391,
+      "sha256": "4248673e289090702d17111e6294d3b4e839b10e5d7d615d77b8a69df477486b",
+      "crc32": "d85b80f3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/180-packages-AGI_Node-Continue-Standard-Readiness-command-node.log",
+      "bytes": 394,
+      "sha256": "4096b857424d7f1d47e49bde18e169e4807180348e43e3e50f72bdb1a5b743c2",
+      "crc32": "e7417d27",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/181-packages-AGI_Node-Experimental-Migration-command-node.log",
+      "bytes": 772,
+      "sha256": "fad10b171bec69ff4279fb3c88821c696d13476ad4db69bec8980a9dd0216757",
+      "crc32": "4d4d2612",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/182-packages-AGI_Node-Import-Public-Browser-Qualification-command-node.log",
+      "bytes": 385,
+      "sha256": "2fa943722404b1a3f7674876336d87a66448a9672dff9ca6290a5e5e90026721",
+      "crc32": "43fee97d",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/183-packages-AGI_Node-Import-Public-Browser-Qualification-sh-node.log",
+      "bytes": 72,
+      "sha256": "6efaf2213cb80960a9a758518977c8d6e3591106c6e44651b42a4c05d044b811",
+      "crc32": "078d689f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/184-packages-AGI_Node-Inspect-sh-node.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/185-packages-AGI_Node-Install-command-node.log",
+      "bytes": 338,
+      "sha256": "9e51ac64c2516bfa80f5c254272d3c89469c8a6c51bf92c14cbfda4a01112758",
+      "crc32": "c51978a8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/186-packages-AGI_Node-Install-sh-node.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/187-packages-AGI_Node-Launch-AGI-Node-command-node.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/188-packages-AGI_Node-Launch-AGI-Node-sh-node.log",
+      "bytes": 147,
+      "sha256": "921c2c6c3e053fb24b642ed85e86ff0dddc3e98a964e66026461088abb9ba20c",
+      "crc32": "d71fea4d",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/189-packages-AGI_Node-Launch-Demo-command-node.log",
+      "bytes": 159,
+      "sha256": "c5e3b22d0fcaf3d381b92219895c215a9dda052dc1560d072fbd14077165d8e5",
+      "crc32": "2f20fec3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/190-packages-AGI_Node-Launch-Demo-sh-node.log",
+      "bytes": 159,
+      "sha256": "c5e3b22d0fcaf3d381b92219895c215a9dda052dc1560d072fbd14077165d8e5",
+      "crc32": "2f20fec3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/191-packages-AGI_Node-Launch-Native-Workforce-command-node.log",
+      "bytes": 250,
+      "sha256": "e7e865cdc5bbbe4b796a8c57f72eb0f38efad1464ab9b0e5b9ac9195ec91e0e3",
+      "crc32": "834489da",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/192-packages-AGI_Node-Launch-Native-Workforce-sh-node.log",
+      "bytes": 250,
+      "sha256": "e7e865cdc5bbbe4b796a8c57f72eb0f38efad1464ab9b0e5b9ac9195ec91e0e3",
+      "crc32": "834489da",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/193-packages-AGI_Node-Launch-Seed-Wallet-command-node.log",
+      "bytes": 26,
+      "sha256": "cf2f69c2ef755f5e4565e9cdca9c4f2ebebbdfd6200e4f7ca828f1ef8f4849c7",
+      "crc32": "c60bba66",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/194-packages-AGI_Node-Launch-sh-node.log",
+      "bytes": 89,
+      "sha256": "3f5cdde2f161fc6e9cd7889758d295105deb072517383d612f2c19d65c020bc8",
+      "crc32": "9349b5d8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/195-packages-AGI_Node-Prepare-Compute-Runtime-command-node.log",
+      "bytes": 249,
+      "sha256": "58f21ebadc9c000d5b04c794a8d6162c24b38b993a49ef89233ff9a460994d3e",
+      "crc32": "a55308a4",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/196-packages-AGI_Node-Qualify-Linux-sh-node.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/197-packages-AGI_Node-Qualify-Mac-command-node.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/198-packages-AGI_Node-Repair-Compute-command-node.log",
+      "bytes": 584,
+      "sha256": "3234deeb62a3ba71e1e22e1355d252275d2498bdb0df97a6873d89e023d6e700",
+      "crc32": "4b61536e",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/199-packages-AGI_Node-Restart-Compute-command-node.log",
+      "bytes": 322,
+      "sha256": "a3fadf526b6b82643fa5b9e2c33360245a5ce73a2cd36aef431e3d5ed42bda9b",
+      "crc32": "6029ae5f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/200-packages-AGI_Node-Resume-Fresh-OAuth-command-node.log",
+      "bytes": 416,
+      "sha256": "8d7ef96253e4b3ab8afa852e07ea3a5b89ac32d2a0762115e4d555cb4e5a3bf4",
+      "crc32": "e53fc51a",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/201-packages-AGI_Node-Retry-Clean-Install-command-node.log",
+      "bytes": 357,
+      "sha256": "1f03d0b84f74154e066143c7ce7b1c2aabc468464b0d314d2b8d9f59a3e360f1",
+      "crc32": "b99e824c",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/202-packages-AGI_Node-Retry-Standard-Install-command-node.log",
+      "bytes": 338,
+      "sha256": "9e51ac64c2516bfa80f5c254272d3c89469c8a6c51bf92c14cbfda4a01112758",
+      "crc32": "c51978a8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/203-packages-AGI_Node-Retry-Verified-Install-command-node.log",
+      "bytes": 353,
+      "sha256": "6de828328c7bd87ca3fafb9575fa8ef7d8177f4473c50b82f6bb9b6ed9164419",
+      "crc32": "48a8359c",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/204-packages-AGI_Node-Setup-OpenClaw-command-node.log",
+      "bytes": 338,
+      "sha256": "9e51ac64c2516bfa80f5c254272d3c89469c8a6c51bf92c14cbfda4a01112758",
+      "crc32": "c51978a8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/205-packages-AGI_Node-Setup-OpenClaw-sh-node.log",
+      "bytes": 338,
+      "sha256": "9e51ac64c2516bfa80f5c254272d3c89469c8a6c51bf92c14cbfda4a01112758",
+      "crc32": "c51978a8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/206-packages-AGI_Node-Start-Approved-sh-node.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/207-packages-AGI_Node-Stop-Compute-sh-node.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/208-packages-AGI_Node-Update-Signer-command-node.log",
+      "bytes": 313,
+      "sha256": "5820cfa30aa98da41127af01d0e453a3e1b22228a74829344ace21b4294afc1a",
+      "crc32": "9e2dfd75",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/209-packages-AGI_Node-Verified-Install-command-node.log",
+      "bytes": 353,
+      "sha256": "6de828328c7bd87ca3fafb9575fa8ef7d8177f4473c50b82f6bb9b6ed9164419",
+      "crc32": "48a8359c",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/210-packages-AGI_Node-Verify-Package-command-node.log",
+      "bytes": 191,
+      "sha256": "9aae4ccbb10a70ba19ce6e94a018010102bc393f8c5a38e3d454d16e11b0f465",
+      "crc32": "860277b1",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/211-packages-AGI_Node-fleet-Connect-Agent-command-node.log",
+      "bytes": 99,
+      "sha256": "ed73a0ef0c19705af05eb069de70df2e61cbd07bb9a7f3319d84d2000aa3df53",
+      "crc32": "c3fbe16e",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/212-packages-AGI_Node-fleet-Connect-Node-command-node.log",
+      "bytes": 98,
+      "sha256": "c4f3191119dbd3049fda1f20954ab0e4785bcd47784a11ee09c116eeef7ddc9f",
+      "crc32": "ca185e31",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/213-packages-AGI_Node-fleet-Launch-Fleet-Monitor-command-node.log",
+      "bytes": 101,
+      "sha256": "219bcb5cbd8c31922cca54781c3f20b708e20667130bfeff93106d685ced1712",
+      "crc32": "c061fb76",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/214-packages-AGI_Node-fleet-Open-Fleet-Monitor-command-node.log",
+      "bytes": 180,
+      "sha256": "af2c78766ccac93a9b78fb1d474f3f157908124efcdbc2084cf43b6e3d76efa9",
+      "crc32": "54771275",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/215-packages-AGI_Node-fleet-Remove-Supervised-Monitor-command-node.log",
+      "bytes": 68,
+      "sha256": "46c07f3e62338ac06067e105a126a31e062025e597685c4946ff4e9c3796a62a",
+      "crc32": "ccfaab8b",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/216-packages-AGI_Node-fleet-Setup-Supervised-Monitor-command-node.log",
+      "bytes": 68,
+      "sha256": "46c07f3e62338ac06067e105a126a31e062025e597685c4946ff4e9c3796a62a",
+      "crc32": "ccfaab8b",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/217-packages-AGI_Recovery-AGI-Recovery-app-Contents-MacOS-launch-recovery.log",
+      "bytes": 74,
+      "sha256": "871f9d4a422de69f37178c3c51739563058d5cd7d7d5240f12f04f879e241bef",
+      "crc32": "d56e2eaf",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/218-packages-AGI_Recovery-Administrator-DNS-command-recovery.log",
+      "bytes": 223,
+      "sha256": "6c4f343b6975eed10ac877d9a2cd00f933858c76ab9a127310de065b260f795f",
+      "crc32": "c1dd5422",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/219-packages-AGI_Recovery-Cleanup-Evidence-command-recovery.log",
+      "bytes": 789,
+      "sha256": "99fc60ffffa0d1280389f5741e3f370076e6be01942f9ab4f6f9f9f34afdf4a3",
+      "crc32": "f11a7826",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/220-packages-AGI_Recovery-Continue-Standard-Install-command-recovery.log",
+      "bytes": 320,
+      "sha256": "93e18dd4ae6e1531c7644280e4272c71029687211c9f9e173aaedd8306c28d08",
+      "crc32": "4fb05b73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/221-packages-AGI_Recovery-Continue-Standard-Readiness-command-recovery.log",
+      "bytes": 320,
+      "sha256": "93e18dd4ae6e1531c7644280e4272c71029687211c9f9e173aaedd8306c28d08",
+      "crc32": "4fb05b73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/222-packages-AGI_Recovery-Experimental-Migration-command-recovery.log",
+      "bytes": 653,
+      "sha256": "24c6760dbf6d4b9af980fc97e41c206a089b7508f93acb7446027662f1730172",
+      "crc32": "68a04430",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/223-packages-AGI_Recovery-Inspect-sh-recovery.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/224-packages-AGI_Recovery-Install-command-recovery.log",
+      "bytes": 320,
+      "sha256": "93e18dd4ae6e1531c7644280e4272c71029687211c9f9e173aaedd8306c28d08",
+      "crc32": "4fb05b73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/225-packages-AGI_Recovery-Install-sh-recovery.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/226-packages-AGI_Recovery-Launch-AGI-Recovery-command-recovery.log",
+      "bytes": 74,
+      "sha256": "871f9d4a422de69f37178c3c51739563058d5cd7d7d5240f12f04f879e241bef",
+      "crc32": "d56e2eaf",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/227-packages-AGI_Recovery-Launch-AGI-Recovery-sh-recovery.log",
+      "bytes": 74,
+      "sha256": "871f9d4a422de69f37178c3c51739563058d5cd7d7d5240f12f04f879e241bef",
+      "crc32": "d56e2eaf",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/229-packages-AGI_Recovery-Launch-sh-recovery.log",
+      "bytes": 89,
+      "sha256": "3f5cdde2f161fc6e9cd7889758d295105deb072517383d612f2c19d65c020bc8",
+      "crc32": "9349b5d8",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/228-packages-AGI_Recovery-Launch-Seed-Wallet-command-recovery.log",
+      "bytes": 74,
+      "sha256": "871f9d4a422de69f37178c3c51739563058d5cd7d7d5240f12f04f879e241bef",
+      "crc32": "d56e2eaf",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/230-packages-AGI_Recovery-Prepare-Compute-Runtime-command-recovery.log",
+      "bytes": 249,
+      "sha256": "58f21ebadc9c000d5b04c794a8d6162c24b38b993a49ef89233ff9a460994d3e",
+      "crc32": "a55308a4",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/231-packages-AGI_Recovery-Qualify-Mac-command-recovery.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/232-packages-AGI_Recovery-Repair-Compute-command-recovery.log",
+      "bytes": 465,
+      "sha256": "06f6eae586285d51f8627be3d7a12e86c1beba5d43b7ac853fb29a28cbeb4784",
+      "crc32": "ef4c6f39",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/233-packages-AGI_Recovery-Restart-Compute-command-recovery.log",
+      "bytes": 322,
+      "sha256": "a3fadf526b6b82643fa5b9e2c33360245a5ce73a2cd36aef431e3d5ed42bda9b",
+      "crc32": "6029ae5f",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/234-packages-AGI_Recovery-Retry-Clean-Install-command-recovery.log",
+      "bytes": 310,
+      "sha256": "71e149be2530c8447f445e535e9cff43c901822696eebe9d3ee3408a200f147c",
+      "crc32": "25754c7c",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/235-packages-AGI_Recovery-Retry-Standard-Install-command-recovery.log",
+      "bytes": 320,
+      "sha256": "93e18dd4ae6e1531c7644280e4272c71029687211c9f9e173aaedd8306c28d08",
+      "crc32": "4fb05b73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/236-packages-AGI_Recovery-Retry-Verified-Install-command-recovery.log",
+      "bytes": 310,
+      "sha256": "71e149be2530c8447f445e535e9cff43c901822696eebe9d3ee3408a200f147c",
+      "crc32": "25754c7c",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/238-packages-AGI_Recovery-Start-Approved-sh-recovery.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/237-packages-AGI_Recovery-Setup-OpenClaw-command-recovery.log",
+      "bytes": 320,
+      "sha256": "93e18dd4ae6e1531c7644280e4272c71029687211c9f9e173aaedd8306c28d08",
+      "crc32": "4fb05b73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/239-packages-AGI_Recovery-Stop-Compute-sh-recovery.log",
+      "bytes": 82,
+      "sha256": "5f8f1b638630559b423df813e16ca73f26c3a77d56207f3c0b3897b81d0d9dd7",
+      "crc32": "a229c187",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/240-packages-AGI_Recovery-Update-Signer-command-recovery.log",
+      "bytes": 313,
+      "sha256": "5820cfa30aa98da41127af01d0e453a3e1b22228a74829344ace21b4294afc1a",
+      "crc32": "9e2dfd75",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/241-packages-AGI_Recovery-Verified-Install-command-recovery.log",
+      "bytes": 310,
+      "sha256": "71e149be2530c8447f445e535e9cff43c901822696eebe9d3ee3408a200f147c",
+      "crc32": "25754c7c",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/242-packages-AGI_Recovery-Verify-Package-command-recovery.log",
+      "bytes": 191,
+      "sha256": "6121c6b4a6e49b3e4846da7b84ff87787b5cea26179cc211344271c87618fc11",
+      "crc32": "d4c4dbdd",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/243-packages-AGI_Agent-scripts-qualify-mac-mjs-agent.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/244-packages-AGI_Node-scripts-qualify-mac-mjs-node.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/245-packages-AGI_Moderator-scripts-qualify-mac-mjs-moderator.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/246-packages-AGI_Employer-scripts-qualify-mac-mjs-employer.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/247-packages-AGI_Evidence-scripts-qualify-mac-mjs-evidence.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/248-packages-AGI_Recovery-scripts-qualify-mac-mjs-recovery.log",
+      "bytes": 292,
+      "sha256": "a1eaa5be9ee2ffdc6df53b51963ca3ee8b68d5b558ee834a01d18912dedad3ea",
+      "crc32": "7e2b22d3",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers/launcher-smoke.json",
+      "bytes": 188940,
+      "sha256": "ba1bfb3aa1015b5ea5b4f100f204a877d92b19e730aa23038e16bec7565d179b",
+      "crc32": "6fdc4a45",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/launchers.log",
+      "bytes": 17167,
+      "sha256": "c4721e20c18ffd86089a6f6d3df4a128ad961bf76614ce715af1ad31d92373ad",
+      "crc32": "590a47de",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/shell-syntax.json",
+      "bytes": 34834,
+      "sha256": "4ea0f0e85e83149c83cda6fc6feb5a474d87254637bb1d9f36439bd4bbbb46d8",
+      "crc32": "1df5122b",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4-checks/successor-archive.json",
+      "bytes": 321,
+      "sha256": "7911ab2f1d8cecd74f0937ccfc50d7d4ea5ab78f30b637c3184ed1f12cbd8654",
+      "crc32": "4588eeb1",
+      "directory": false
+    },
+    {
+      "path": "AGI_Fleet_Linux_v1.1.4.zip",
+      "bytes": 431360777,
+      "sha256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+      "crc32": "6f6f3b43",
+      "directory": false
+    },
+    {
+      "path": "SHA256SUMS-v1.1.4.txt",
+      "bytes": 93,
+      "sha256": "2d46d015fd6253d97c247e3104563da365814d69c2676a6ddd64801680aaea9a",
+      "crc32": "653d07fc",
+      "directory": false
+    },
+    {
+      "path": "agent-commands.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000",
+      "directory": false
+    },
+    {
+      "path": "employer-commands.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000",
+      "directory": false
+    },
+    {
+      "path": "evidence-commands.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000",
+      "directory": false
+    },
+    {
+      "path": "fleet-commands.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000",
+      "directory": false
+    },
+    {
+      "path": "metadata.log",
+      "bytes": 4087,
+      "sha256": "3ff23c6d842bc3b436c4d8d593f8a20812d278af7ee04eee7655a5ba53a183b6",
+      "crc32": "7ed0ca92",
+      "directory": false
+    },
+    {
+      "path": "moderator-commands.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000",
+      "directory": false
+    },
+    {
+      "path": "node-commands.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000",
+      "directory": false
+    },
+    {
+      "path": "package.log",
+      "bytes": 4596,
+      "sha256": "a3f31d9094f6395744542f27b6d608372cab1a1dba70211c0e49e0e8b1d6454a",
+      "crc32": "76f095d3",
+      "directory": false
+    },
+    {
+      "path": "recovery-commands.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000",
+      "directory": false
+    },
+    {
+      "path": "release.json",
+      "bytes": 3984,
+      "sha256": "efb151e502c82c1d6274c36af5998a5731dc5f0cdd9f61e40d65c3d8f3065b9c",
+      "crc32": "ec592440",
+      "directory": false
+    },
+    {
+      "path": "successor-saved-archive.log",
+      "bytes": 291,
+      "sha256": "bbea07886388aff6e312068a44725cc07f45a66f43009a90a154fa8a4a1a41ad",
+      "crc32": "12b56de6",
+      "directory": false
+    }
+  ],
+  "smallJsonParseOnly": {
+    "AGI_Fleet_Linux_v1.1.4-checks/final-gate.json": {
+      "schema": "agi-final-archive-gate/v1",
+      "archive": "AGI_Fleet_Linux_v1.1.4.zip",
+      "sha256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+      "bytes": 431360777,
+      "maximumFileBytes": 450000000,
+      "status": "PASS_PACKAGED_EXECUTABLES_AND_LINUX_LAUNCHER_SMOKE",
+      "physicalMacQualification": "NOT_RUN",
+      "platform": "linux",
+      "extractedFiles": 34861,
+      "freshExtraction": true,
+      "allArchiveCRCsVerified": true,
+      "shellSyntax": {
+        "files": 275,
+        "fail": 0
+      },
+      "executables": {
+        "schema": "agi-final-executable-validation/v1",
+        "generatedAt": "2026-10-22T05:28:15.153981Z",
+        "root": "/tmp/agi-final-extracted-6nughjs5/AGI_Fleet_Linux_v1.1.4",
+        "runtime": {
+          "path": "/home/runner/work/_temp/node-v24.21.0-linux-x64/bin/node",
+          "version": "v24.21.0",
+          "sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c"
+        },
+        "scope": "Every shipped .js, .mjs and .cjs file, including tests, dependencies and historical evidence; no exclusions.",
+        "hashbangPolicy": "The literal byte pair 0x23 0x21 is permitted only at byte offset 0; even comments and string literals are rejected elsewhere.",
+        "parseCommand": [
+          "<runtime.path>",
+          "--check",
+          "<absolute-file-path>"
+        ],
+        "nodeOptionsCleared": true,
+        "jobs": 4,
+        "status": "PASS",
+        "summary": {
+          "files": 8803,
+          "pass": 8803,
+          "fail": 0,
+          "nodeChecksPassed": 8803,
+          "misplacedHashbangFiles": 0
+        }
+      },
+      "executableEvidence": "executables.json",
+      "launcherEvidence": "launchers/launcher-smoke.json",
+      "launchers": {
+        "platform": "Linux",
+        "physicalMacQualification": "NOT_RUN",
+        "summary": {
+          "cases": 248,
+          "passed": 248,
+          "failed": 0
+        },
+        "status": "PASS"
+      },
+      "extractedBytesAndModesUnchangedAfterTests": true
+    },
+    "AGI_Fleet_Linux_v1.1.4-checks/shell-syntax.json": [
+      {
+        "path": "Clean-Install-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Continue-Fresh-Readiness.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Continue-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Continue-Standard-Readiness.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Experimental-Migration.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-AGI-Agent-Seed-Wallet.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-AGI-Agent.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-AGI-Node-Seed-Wallet.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-AGI-Node.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Employer-Seed-Wallet.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Employer.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Employer.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Evidence.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Evidence.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Moderator-Seed-Wallet.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Moderator.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Moderator.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Native-Workforce.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Native-Workforce.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Recovery-Seed-Wallet.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Recovery.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch-Recovery.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Launch.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Practice-Offline.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Prepare-Compute-Runtime.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Prepare-Compute.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Prepare-Ubuntu.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Qualify-Mac.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Repair-Compute.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Restart-Compute.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Resume-Fresh-OAuth.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Retry-Clean-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Retry-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Retry-Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Setup-OpenClaw.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Transfer-Setup.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Update-Signer.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Verify-Linux.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "Verify-Package.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "evidence/upstream/openclaw-2026.9.5/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/AGI Agent.app/Contents/MacOS/start",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Administrator-DNS.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Clean-Install-Compute.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Cleanup-Evidence.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Configure-Public-Browser.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Configure-Public-Browser.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Continue-Fresh-Readiness.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Continue-Standard-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Continue-Standard-Readiness.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Experimental-Migration.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Import-Public-Browser-Qualification.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Import-Public-Browser-Qualification.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Inspect.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Install.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Launch-AGI-Agent.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Launch-AGI-Agent.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Launch-Native-Workforce.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Launch-Native-Workforce.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Launch-Seed-Wallet.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Launch.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Prepare-Compute-Runtime.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Qualify-Linux.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Qualify-Mac.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Repair-Compute.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Restart-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Resume-Fresh-OAuth.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Retry-Clean-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Retry-Standard-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Retry-Verified-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Setup-OpenClaw.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Setup-OpenClaw.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Start-Approved.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Stop-Compute.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Update-Signer.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Verified-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/Verify-Package.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/evidence/upstream/openclaw-2026.9.5/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/fleet/Connect-Agent.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/fleet/Connect-Node.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/fleet/Launch-Fleet-Monitor.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/fleet/Open-Fleet-Monitor.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/fleet/Remove-Supervised-Monitor.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/fleet/Setup-Supervised-Monitor.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/scripts/node-runtime.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/scripts/standard-node.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/shared/runtime/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Agent/shared/runtime/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/AGI Employer.app/Contents/MacOS/launch",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Administrator-DNS.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Cleanup-Evidence.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Continue-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Continue-Standard-Readiness.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Experimental-Migration.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Inspect.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Install.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Launch-AGI-Employer.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Launch-AGI-Employer.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Launch-Seed-Wallet.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Launch.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Prepare-Compute-Runtime.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Qualify-Mac.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Repair-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Restart-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Retry-Clean-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Retry-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Retry-Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Setup-OpenClaw.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Start-Approved.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Stop-Compute.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Update-Signer.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/Verify-Package.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/scripts/node-runtime.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/scripts/standard-node.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/shared/runtime/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Employer/shared/runtime/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/AGI Evidence.app/Contents/MacOS/launch",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Administrator-DNS.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Cleanup-Evidence.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Continue-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Continue-Standard-Readiness.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Experimental-Migration.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Inspect.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Install.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Launch-AGI-Evidence.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Launch-AGI-Evidence.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Launch.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Prepare-Compute-Runtime.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Qualify-Mac.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Repair-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Restart-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Retry-Clean-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Retry-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Retry-Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Setup-OpenClaw.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Start-Approved.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Stop-Compute.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Update-Signer.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/Verify-Package.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/scripts/node-runtime.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/scripts/standard-node.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/shared/runtime/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Evidence/shared/runtime/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/AGI Moderator.app/Contents/MacOS/launch",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Administrator-DNS.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Cleanup-Evidence.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Continue-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Continue-Standard-Readiness.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Experimental-Migration.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Inspect.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Install.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Launch-AGI-Moderator.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Launch-AGI-Moderator.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Launch-Seed-Wallet.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Launch.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Prepare-Compute-Runtime.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Qualify-Mac.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Repair-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Restart-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Retry-Clean-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Retry-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Retry-Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Setup-OpenClaw.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Start-Approved.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Stop-Compute.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Update-Signer.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/Verify-Package.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/scripts/node-runtime.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/scripts/standard-node.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/shared/runtime/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Moderator/shared/runtime/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/AGI Node.app/Contents/MacOS/start",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Administrator-DNS.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Clean-Install-Compute.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Cleanup-Evidence.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Configure-Public-Browser.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Configure-Public-Browser.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Continue-Fresh-Readiness.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Continue-Standard-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Continue-Standard-Readiness.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Experimental-Migration.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Import-Public-Browser-Qualification.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Import-Public-Browser-Qualification.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Inspect.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Install.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Launch-AGI-Node.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Launch-AGI-Node.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Launch-Demo.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Launch-Demo.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Launch-Native-Workforce.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Launch-Native-Workforce.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Launch-Seed-Wallet.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Launch.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Prepare-Compute-Runtime.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Qualify-Linux.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Qualify-Mac.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Repair-Compute.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Restart-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Resume-Fresh-OAuth.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Retry-Clean-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Retry-Standard-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Retry-Verified-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Setup-OpenClaw.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Setup-OpenClaw.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Start-Approved.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Stop-Compute.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Update-Signer.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Verified-Install.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/Verify-Package.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/evidence/upstream/openclaw-2026.9.5/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/fleet/Connect-Agent.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/fleet/Connect-Node.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/fleet/Launch-Fleet-Monitor.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/fleet/Open-Fleet-Monitor.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/fleet/Remove-Supervised-Monitor.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/fleet/Setup-Supervised-Monitor.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/scripts/node-runtime.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/scripts/standard-node.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/shared/runtime/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Node/shared/runtime/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/AGI Recovery.app/Contents/MacOS/launch",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Administrator-DNS.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Cleanup-Evidence.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Continue-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Continue-Standard-Readiness.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Experimental-Migration.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Inspect.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Install.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Launch-AGI-Recovery.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Launch-AGI-Recovery.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Launch-Seed-Wallet.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Launch.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Prepare-Compute-Runtime.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Qualify-Mac.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Repair-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Restart-Compute.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Retry-Clean-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Retry-Standard-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Retry-Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Setup-OpenClaw.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Start-Approved.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Stop-Compute.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Update-Signer.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Verified-Install.command",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/Verify-Package.command",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/scripts/node-runtime.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/scripts/standard-node.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/shared/runtime/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "packages/AGI_Recovery/shared/runtime/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "scripts/node-runtime.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "scripts/standard-node.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "shared/runtime/compute/browser/scripts/sandbox-browser-entrypoint.sh",
+        "shell": "bash",
+        "exitCode": 0,
+        "stderr": ""
+      },
+      {
+        "path": "shared/runtime/compute/public-web-images/browser/chromium-proxy-wrapper.sh",
+        "shell": "sh",
+        "exitCode": 0,
+        "stderr": ""
+      }
+    ],
+    "AGI_Fleet_Linux_v1.1.4-checks/successor-archive.json": {
+      "schema": "agi-fleet/successor-archive-check/v1",
+      "status": "PASS",
+      "archiveSHA256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+      "editionCopies": 7,
+      "languages": [
+        "en",
+        "fr"
+      ],
+      "editableSourceRebuild": "BYTE_IDENTICAL",
+      "freshPortableTests": 17,
+      "authority": "none"
+    },
+    "release.json": {
+      "schema": "agi-linux-candidate-build/v1",
+      "version": "1.1.4",
+      "tag": "v1.1.4-qualification",
+      "prefix": "AGI_Fleet_Linux_v1.1.4",
+      "name": "AGI_Fleet_Linux_v1.1.4.zip",
+      "bytes": 431360777,
+      "sha256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+      "sourceRevisionSHA256": "ccb404ab6bf79616e54aba2c33d71686447cb215128b04ba6a7dbce2e53d5383",
+      "sourceFiles": 6153,
+      "repositoryCommit": "392fa551c0cef00aac511c812c029fb053729a4e",
+      "workflowCommit": "392fa551c0cef00aac511c812c029fb053729a4e",
+      "sourceDateEpoch": 1791979200,
+      "epoch": 1791979200,
+      "baseline": {
+        "status": "PASS",
+        "sha256": "5e17bac752ae8dfc8756fe8dc612ceb8820616723808232f3541d552addce102",
+        "bytes": 401420759,
+        "manifestEntriesVerified": 57853,
+        "editions": 7,
+        "sourceFiles": 4816
+      },
+      "archiveVerification": {
+        "file": "/home/runner/work/_temp/candidate-dist/AGI_Fleet_Linux_v1.1.4.zip",
+        "bytes": 431360777,
+        "sha256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+        "files": 34861,
+        "crcVerified": true,
+        "allManifestsVerified": true,
+        "sourceInventoryVerified": true,
+        "freshExtraction": null
+      },
+      "finalExtractedGate": {
+        "schema": "agi-final-archive-gate/v1",
+        "archive": "AGI_Fleet_Linux_v1.1.4.zip",
+        "sha256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+        "bytes": 431360777,
+        "maximumFileBytes": 450000000,
+        "status": "PASS_PACKAGED_EXECUTABLES_AND_LINUX_LAUNCHER_SMOKE",
+        "physicalMacQualification": "NOT_RUN",
+        "platform": "linux",
+        "extractedFiles": 34861,
+        "freshExtraction": true,
+        "allArchiveCRCsVerified": true,
+        "shellSyntax": {
+          "files": 275,
+          "fail": 0
+        },
+        "executables": {
+          "schema": "agi-final-executable-validation/v1",
+          "generatedAt": "2026-10-22T05:28:15.153981Z",
+          "root": "/tmp/agi-final-extracted-6nughjs5/AGI_Fleet_Linux_v1.1.4",
+          "runtime": {
+            "path": "/home/runner/work/_temp/node-v24.21.0-linux-x64/bin/node",
+            "version": "v24.21.0",
+            "sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c"
+          },
+          "scope": "Every shipped .js, .mjs and .cjs file, including tests, dependencies and historical evidence; no exclusions.",
+          "hashbangPolicy": "The literal byte pair 0x23 0x21 is permitted only at byte offset 0; even comments and string literals are rejected elsewhere.",
+          "parseCommand": [
+            "<runtime.path>",
+            "--check",
+            "<absolute-file-path>"
+          ],
+          "nodeOptionsCleared": true,
+          "jobs": 4,
+          "status": "PASS",
+          "summary": {
+            "files": 8803,
+            "pass": 8803,
+            "fail": 0,
+            "nodeChecksPassed": 8803,
+            "misplacedHashbangFiles": 0
+          }
+        },
+        "executableEvidence": "executables.json",
+        "launcherEvidence": "launchers/launcher-smoke.json",
+        "launchers": {
+          "platform": "Linux",
+          "physicalMacQualification": "NOT_RUN",
+          "summary": {
+            "cases": 248,
+            "passed": 248,
+            "failed": 0
+          },
+          "status": "PASS"
+        },
+        "extractedBytesAndModesUnchangedAfterTests": true
+      },
+      "nativeAcceptance": "NOT_RUN",
+      "operatorGate": "CLOSED_PENDING_NATIVE_ACCEPTANCE",
+      "productionQualified": false,
+      "physicalQualification": {
+        "nativeX64": "NOT_RUN",
+        "nativeArm64": "NOT_RUN",
+        "physicalLinux": "NOT_RUN",
+        "rootlessDocker": "NOT_RUN",
+        "oauthInference": "NOT_RUN",
+        "liveDocuments": "NOT_RUN",
+        "baseAndBrowserCleanup": "NOT_RUN",
+        "rebootIdentity": "NOT_RUN",
+        "endurance72Hours": "NOT_RUN"
+      },
+      "native": {
+        "targeted": {
+          "tests": 291,
+          "files": 25
+        },
+        "complete": {
+          "tests": 3931,
+          "files": 344
+        }
+      },
+      "integration": {
+        "repository": "MontrealAI/AGIJobManager",
+        "version": "1.16.1",
+        "commit": "b12cb2fd711934562af6d14b9edcd1614956434c",
+        "managerTests": 780,
+        "standaloneScripts": 8,
+        "contractArtifacts": 11
+      }
+    }
+  },
+  "downloadMode": "RAM-only ZIP; no archive/extraction saved and no artifact code executed"
+}

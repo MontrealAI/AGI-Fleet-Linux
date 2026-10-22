@@ -1,0 +1,576 @@
+{
+  "schema": "fleet/original-pr-artifact-ram-custody/v1",
+  "scope": "Exact 904 PR-only original attempt1; no new installed/main/release qualification",
+  "runId": 39727291254,
+  "runAttempt": 1,
+  "headCommit": "904fce44eac8bc5c51215e02102e13245b3f20fa",
+  "expectedSyntheticCheckout": "392fa551c0cef00aac511c812c029fb053729a4e",
+  "artifactId": 12404118172,
+  "artifactName": "next-integration-x64",
+  "outerBytes": 33886,
+  "outerSha256": "b29d971181cc640675ee32d175b2fa87f963b3102dca48f1545cb4e5dfed784a",
+  "outerByteIdentityVerified": true,
+  "allMembersCRCAndSha256Verified": true,
+  "allMembersUniqueSafePaths": true,
+  "members": [
+    {
+      "path": "AGI_Agent-integration-computer.log",
+      "bytes": 412,
+      "sha256": "98f1d373219ba70572427d7a93164489b53432581f5117b93d774b2a0af2cdcf",
+      "crc32": "a06e5e31",
+      "directory": false
+    },
+    {
+      "path": "AGI_Agent-integration-budget-recovery.log",
+      "bytes": 1287,
+      "sha256": "ec4c54551ba3523879931abce95fb15c116f3702d349d0a2d9613192bb23b574",
+      "crc32": "a34abcf2",
+      "directory": false
+    },
+    {
+      "path": "AGI_Agent-integration-finalization.log",
+      "bytes": 1214,
+      "sha256": "f85ef210d3ba71ab73d7134d0285438eb5f35f9bf6a4810d17cbf999a84043a3",
+      "crc32": "56917512",
+      "directory": false
+    },
+    {
+      "path": "AGI_Agent-integration-identity.log",
+      "bytes": 374,
+      "sha256": "959636c94d1f7f502b84756f9c44f754927a1adb1dfbd9ea13f6b1571ac7478f",
+      "crc32": "ee418adc",
+      "directory": false
+    },
+    {
+      "path": "AGI_Agent-integration-images.log",
+      "bytes": 411,
+      "sha256": "352d743967a55e92117f76028413a7afee70a2cdef46fab01af0cf74c1a3b363",
+      "crc32": "0a7b8e48",
+      "directory": false
+    },
+    {
+      "path": "AGI_Agent-integration.log",
+      "bytes": 783,
+      "sha256": "36a9a29a31159b53ca634b9d523b49b3f5866092c3a42062327babaf220acb42",
+      "crc32": "ca95eb73",
+      "directory": false
+    },
+    {
+      "path": "AGI_Node-integration-finalization.log",
+      "bytes": 1213,
+      "sha256": "7404d930c452f23c80869b84f977ad717df578631f6561707673f8b30ed5c4b8",
+      "crc32": "35fc5f2d",
+      "directory": false
+    },
+    {
+      "path": "AGI_Node-integration.log",
+      "bytes": 671,
+      "sha256": "224b03a5e6eca110921c482b87939b2799f11d22c4271f09b3b5ab3c28de99c7",
+      "crc32": "f362f9e8",
+      "directory": false
+    },
+    {
+      "path": "candidate-binding.json",
+      "bytes": 964,
+      "sha256": "e000f5a49efd31923f638e7c839c09e03d51799310425f6927c9453e49f88da3",
+      "crc32": "64133ea1",
+      "directory": false
+    },
+    {
+      "path": "compiler-compatibility.log",
+      "bytes": 73,
+      "sha256": "526ad2a6c54ffd9caf4fa531a65f87abaf07c31a58114136c1100ae37f1141df",
+      "crc32": "0d39c4b3",
+      "directory": false
+    },
+    {
+      "path": "current-manager-lifecycle.json",
+      "bytes": 1047,
+      "sha256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56",
+      "crc32": "59b4c58d",
+      "directory": false
+    },
+    {
+      "path": "current-manager-lifecycle.log",
+      "bytes": 1047,
+      "sha256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56",
+      "crc32": "59b4c58d",
+      "directory": false
+    },
+    {
+      "path": "fleet-artifact-reproduction.log",
+      "bytes": 488,
+      "sha256": "f768694723acc3a362186adf0a311706c0261579f85f0dc8ca92992e5f96a4cd",
+      "crc32": "1ff47111",
+      "directory": false
+    },
+    {
+      "path": "hardhat-dependencies.log",
+      "bytes": 26,
+      "sha256": "9aef0288e2b643be7b1c46d0ce7be6c483c63469da2087c78175e72b39c491ec",
+      "crc32": "032a55c2",
+      "directory": false
+    },
+    {
+      "path": "manager-build.log",
+      "bytes": 385,
+      "sha256": "359986a6251ed119bb1ed754615dceffbf3989869f1115a37dc6003e4466acf6",
+      "crc32": "9549785c",
+      "directory": false
+    },
+    {
+      "path": "manager-checkout.log",
+      "bytes": 99,
+      "sha256": "275cccd20acce611db8f1aff97d3f810f986cced57a1ba5ee2b430a4540a9447",
+      "crc32": "68269ae2",
+      "directory": false
+    },
+    {
+      "path": "manager-dependencies.log",
+      "bytes": 26,
+      "sha256": "d65aa05c9e6a43c5b1455e82fb7d599d27eef733ffbd66a5a19b2d7aee914c54",
+      "crc32": "c79ae85b",
+      "directory": false
+    },
+    {
+      "path": "manager-fetch.log",
+      "bytes": 125,
+      "sha256": "d8dbdc54ca2e36ee82d81acdabe4ae26c37e98f20cfe40fbe38418b9306df05d",
+      "crc32": "e9d95079",
+      "directory": false
+    },
+    {
+      "path": "manager-init.log",
+      "bytes": 690,
+      "sha256": "4858918194933dfe7b5b9a6d72246025aa09183ec8e32b20035966abff84d9c5",
+      "crc32": "9ef67103",
+      "directory": false
+    },
+    {
+      "path": "manager-regression.log",
+      "bytes": 68773,
+      "sha256": "9a7b1cf28b121fba7a0abe51cfa31c99d6f72943c6bca1070daf850536139db4",
+      "crc32": "11390f34",
+      "directory": false
+    },
+    {
+      "path": "manager-remote.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000",
+      "directory": false
+    },
+    {
+      "path": "summary.json",
+      "bytes": 13196,
+      "sha256": "a970646b9c112de49be3c0cbdfd07a092bde9e81ea92826f801769fc128e004c",
+      "crc32": "1f1b4cd9",
+      "directory": false
+    }
+  ],
+  "smallJsonParseOnly": {
+    "candidate-binding.json": {
+      "schema": "agi-next-validation-binding/v1",
+      "candidate": {
+        "version": "1.1.4",
+        "tag": "v1.1.4-qualification",
+        "name": "AGI_Fleet_Linux_v1.1.4.zip",
+        "bytes": 431360777,
+        "sha256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+        "sourceRevisionSHA256": "ccb404ab6bf79616e54aba2c33d71686447cb215128b04ba6a7dbce2e53d5383"
+      },
+      "integration": {
+        "repository": "MontrealAI/AGIJobManager",
+        "version": "1.16.1",
+        "commit": "b12cb2fd711934562af6d14b9edcd1614956434c",
+        "managerTests": 780,
+        "standaloneScripts": 8,
+        "contractArtifacts": 11
+      },
+      "baselineHarnesses": {
+        "run-linux-1.0.9-native.py": "93c3ed0df093c1e07ab818f3f7f9f76053dfb7a911ad89ef3fc7ebfd74be645e",
+        "run-job-integration.py": "423b1de88924fad41f9761bc3952e78ff2ab48e3be8193e66c599c9098c223b4",
+        "audit-job-evidence.py": "f101219ccce9b08e73b3d7bfd50aacc8ca88ecd7cf5c36fbc148168bec284d49"
+      },
+      "productionQualified": false
+    },
+    "current-manager-lifecycle.json": {
+      "schema": "agi-fleet-job-lifecycle/v1",
+      "status": "PASS",
+      "chainId": 31337,
+      "managerArtifacts": "freshly compiled AGIJobManager source",
+      "linkedProductionContracts": 9,
+      "defaultVoteQuorum": 3,
+      "defaultReviewPeriodSeconds": 604800,
+      "agentGenerationCount": 1,
+      "publicationCount": 1,
+      "persistedAgentPreparationAndApproval": true,
+      "threePersistedNodeVotes": true,
+      "exactBondAllowancesConsumed": true,
+      "persistedFinalization": true,
+      "deferredClaimsConservedUSDC": true,
+      "persistedAgentAndNodeClaims": true,
+      "noDuplicateTransactionsAfterRestart": true,
+      "releasedAllClientExposure": true,
+      "managerTokenBalanceAfter": "0",
+      "conservedTotalMockUSDC": "5000000000",
+      "limitations": {
+        "liveInference": false,
+        "publicIPFS": false,
+        "nativeUSDC": false,
+        "independentlyOperatedValidators": false,
+        "independentRPCBackends": false,
+        "realTimeEndurance": false,
+        "reviewWindow": "eight simulated days",
+        "identities": "fixture allowlist; ENS/Merkle covered in the separate identity script"
+      }
+    },
+    "summary.json": {
+      "schema": "agi-fleet-manager-integration/v1",
+      "status": "PASS",
+      "startedAt": "2026-10-22T05:37:29.384308+00:00",
+      "workflowRun": "39727291254",
+      "workflowCommit": "392fa551c0cef00aac511c812c029fb053729a4e",
+      "fleet": {
+        "version": "1.1.4",
+        "sha256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+        "bytes": 431360777
+      },
+      "manager": {
+        "repository": "MontrealAI/AGIJobManager",
+        "requestedRef": "b12cb2fd711934562af6d14b9edcd1614956434c",
+        "commit": "b12cb2fd711934562af6d14b9edcd1614956434c",
+        "version": "1.16.1",
+        "lockfileSHA256": "d526341337e5bf94e6fee8aca003fcf3bac865fc43ec8fa8c3507d9db1743980",
+        "hardhatLockfileSHA256": "65a889b2611afe2327602c9899b6bb2eacd7a6f1259ba0924f31bdc052fe757d"
+      },
+      "steps": [
+        {
+          "name": "manager-init",
+          "exitCode": 0,
+          "seconds": 0.004,
+          "log": "manager-init.log",
+          "logSHA256": "4858918194933dfe7b5b9a6d72246025aa09183ec8e32b20035966abff84d9c5"
+        },
+        {
+          "name": "manager-remote",
+          "exitCode": 0,
+          "seconds": 0.004,
+          "log": "manager-remote.log",
+          "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "manager-fetch",
+          "exitCode": 0,
+          "seconds": 0.766,
+          "log": "manager-fetch.log",
+          "logSHA256": "d8dbdc54ca2e36ee82d81acdabe4ae26c37e98f20cfe40fbe38418b9306df05d"
+        },
+        {
+          "name": "manager-checkout",
+          "exitCode": 0,
+          "seconds": 0.164,
+          "log": "manager-checkout.log",
+          "logSHA256": "275cccd20acce611db8f1aff97d3f810f986cced57a1ba5ee2b430a4540a9447"
+        },
+        {
+          "name": "manager-dependencies",
+          "exitCode": 0,
+          "seconds": 5.681,
+          "log": "manager-dependencies.log",
+          "logSHA256": "d65aa05c9e6a43c5b1455e82fb7d599d27eef733ffbd66a5a19b2d7aee914c54"
+        },
+        {
+          "name": "hardhat-dependencies",
+          "exitCode": 0,
+          "seconds": 3.928,
+          "log": "hardhat-dependencies.log",
+          "logSHA256": "9aef0288e2b643be7b1c46d0ce7be6c483c63469da2087c78175e72b39c491ec"
+        },
+        {
+          "name": "compiler-compatibility",
+          "exitCode": 0,
+          "seconds": 0.065,
+          "log": "compiler-compatibility.log",
+          "logSHA256": "526ad2a6c54ffd9caf4fa531a65f87abaf07c31a58114136c1100ae37f1141df"
+        },
+        {
+          "name": "manager-build",
+          "exitCode": 0,
+          "seconds": 57.17,
+          "log": "manager-build.log",
+          "logSHA256": "359986a6251ed119bb1ed754615dceffbf3989869f1115a37dc6003e4466acf6"
+        },
+        {
+          "name": "fleet-artifact-reproduction",
+          "exitCode": 0,
+          "seconds": 69.346,
+          "log": "fleet-artifact-reproduction.log",
+          "logSHA256": "f768694723acc3a362186adf0a311706c0261579f85f0dc8ca92992e5f96a4cd"
+        },
+        {
+          "name": "AGI_Agent-integration",
+          "exitCode": 0,
+          "seconds": 19.814,
+          "log": "AGI_Agent-integration.log",
+          "logSHA256": "36a9a29a31159b53ca634b9d523b49b3f5866092c3a42062327babaf220acb42"
+        },
+        {
+          "name": "AGI_Agent-integration-identity",
+          "exitCode": 0,
+          "seconds": 1.969,
+          "log": "AGI_Agent-integration-identity.log",
+          "logSHA256": "959636c94d1f7f502b84756f9c44f754927a1adb1dfbd9ea13f6b1571ac7478f"
+        },
+        {
+          "name": "AGI_Agent-integration-finalization",
+          "exitCode": 0,
+          "seconds": 4.675,
+          "log": "AGI_Agent-integration-finalization.log",
+          "logSHA256": "f85ef210d3ba71ab73d7134d0285438eb5f35f9bf6a4810d17cbf999a84043a3"
+        },
+        {
+          "name": "AGI_Agent-integration-budget-recovery",
+          "exitCode": 0,
+          "seconds": 22.872,
+          "log": "AGI_Agent-integration-budget-recovery.log",
+          "logSHA256": "ec4c54551ba3523879931abce95fb15c116f3702d349d0a2d9613192bb23b574"
+        },
+        {
+          "name": "AGI_Agent-integration-images",
+          "exitCode": 0,
+          "seconds": 20.166,
+          "log": "AGI_Agent-integration-images.log",
+          "logSHA256": "352d743967a55e92117f76028413a7afee70a2cdef46fab01af0cf74c1a3b363"
+        },
+        {
+          "name": "AGI_Agent-integration-computer",
+          "exitCode": 0,
+          "seconds": 20.564,
+          "log": "AGI_Agent-integration-computer.log",
+          "logSHA256": "98f1d373219ba70572427d7a93164489b53432581f5117b93d774b2a0af2cdcf"
+        },
+        {
+          "name": "AGI_Node-integration",
+          "exitCode": 0,
+          "seconds": 12.294,
+          "log": "AGI_Node-integration.log",
+          "logSHA256": "224b03a5e6eca110921c482b87939b2799f11d22c4271f09b3b5ab3c28de99c7"
+        },
+        {
+          "name": "AGI_Node-integration-finalization",
+          "exitCode": 0,
+          "seconds": 4.625,
+          "log": "AGI_Node-integration-finalization.log",
+          "logSHA256": "7404d930c452f23c80869b84f977ad717df578631f6561707673f8b30ed5c4b8"
+        },
+        {
+          "name": "current-manager-lifecycle",
+          "exitCode": 0,
+          "seconds": 21.967,
+          "log": "current-manager-lifecycle.log",
+          "logSHA256": "62f3f64fd33a778e54a9a9716ae9e8072fc3d351c64775ef541c61281fe44a56"
+        },
+        {
+          "name": "manager-regression",
+          "exitCode": 0,
+          "seconds": 26.479,
+          "log": "manager-regression.log",
+          "logSHA256": "9a7b1cf28b121fba7a0abe51cfa31c99d6f72943c6bca1070daf850536139db4"
+        }
+      ],
+      "limitations": {
+        "localChainId": 31337,
+        "realUSDC": false,
+        "liveInference": false,
+        "publicIPFS": false,
+        "independentOperators": false,
+        "independentRPCBackends": false,
+        "physicalInstallation": false,
+        "realTimeEndurance": false
+      },
+      "archiveVerification": {
+        "status": "PASS",
+        "sha256": "7d333f3859890296a4f0690f9b1cb796ab6af626d9d13b060ff62b7517c62c83",
+        "bytes": 431360777,
+        "manifestEntriesVerified": 61583,
+        "editions": 7,
+        "sourceFiles": 6153
+      },
+      "runtime": {
+        "node": "24.21.0",
+        "architecture": "x64",
+        "nodeArchiveSHA256": "fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6"
+      },
+      "contractCompatibility": {
+        "status": "PASS",
+        "bundledSourceCommit": "db876a8021da6afcf7aa974489d13374e6d188b5",
+        "productionSources": [
+          {
+            "path": "contracts/AGIJobManager.sol",
+            "sha256": "e9be32b61afb55818d4108f295c5b80d9e2f5649e4697b9a199f8c000d8285c4"
+          },
+          {
+            "path": "contracts/utils/BondMath.sol",
+            "sha256": "f082b47230121bd98c9a2c4c5c0957734461f2fbf612b2386e249fa4b4b3fa30"
+          },
+          {
+            "path": "contracts/utils/ENSOwnership.sol",
+            "sha256": "5178a64b4618bf861a300b57fa4c4ca183313c46005509e14dc0c87ca8254209"
+          },
+          {
+            "path": "contracts/utils/EnsLabelUtils.sol",
+            "sha256": "e7bf88fa5c3ecd85472e066c73dd76c2ce3b9f1f9700db27c4781e0577b358db"
+          },
+          {
+            "path": "contracts/utils/JobSettlement.sol",
+            "sha256": "0e38c450b7461f36d30ec0aa06488135cf690dec0c8822b837f6f1b273a7cd93"
+          },
+          {
+            "path": "contracts/utils/JobState.sol",
+            "sha256": "1840624830777ffbaedb5aada50d3f748f2f7aa89f788f329d9e598ff1b37459"
+          },
+          {
+            "path": "contracts/utils/JobValidation.sol",
+            "sha256": "0f085da143a6ecbd3f7d941945a86dd54ad4bd27834457041f75bcab782a615d"
+          },
+          {
+            "path": "contracts/utils/NftEligibility.sol",
+            "sha256": "f08254fbcdaad64a1e22c8f79b2cfc3ade0ee41c76dbb7c659bdfd196f7637dc"
+          },
+          {
+            "path": "contracts/utils/ReputationMath.sol",
+            "sha256": "c742c3e7cb05a412405e8fe29d5283b1464e6c377ce98e2d8a360f96f3e3522c"
+          },
+          {
+            "path": "contracts/utils/TransferUtils.sol",
+            "sha256": "797242b5d1ac32547e065a0989d8f407a3f5a22618e98681a332d3e85197ce36"
+          },
+          {
+            "path": "contracts/utils/UriUtils.sol",
+            "sha256": "b3d5b14eed8b89f71781d2d7258e1bd88113db6a77984e1967c4eb341178647b"
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "AGIJobManager",
+            "abiSHA256": "67254f87b0f72b53b08c1d5c01f6adea186a6a52f18334a4c34e0bdc1e09d396",
+            "bytecodeSHA256": "771752477bde64f4e7bd0219b861519c62762b8cc8fa1d4b185c23f6a5cdb188",
+            "deployedBytecodeSHA256": "156acdde533a1c7c5ffbf1b01edf80b64cf375046ad73ea6d7441e803d17ee0b",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "UriUtils",
+            "abiSHA256": "b55d888287c25362b201dc6efe42f5c24ac46cf0eca72e1adf5c7e47e7479ea1",
+            "bytecodeSHA256": "995e26172eb6c2751659f07fc602fd569fd6db3f4dee52637534895e5d9b536e",
+            "deployedBytecodeSHA256": "4d5963dddd85f032105b8b2d1dd407b2083bf0dbf05b24f9464dd42b6dc196df",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "TransferUtils",
+            "abiSHA256": "0995e74e097f4ff11ddeab4086dd30c522ff5a5e5e0d06ba993d8df00c2fb86e",
+            "bytecodeSHA256": "ed8fa291e9be3106ff8f6ada08f3ab4219cb41d6053888d78ac98ca153684e31",
+            "deployedBytecodeSHA256": "c8f5b85c8a8b28effe83adfcc2da3f341cbb9ea3be13898ffa2e26dbc9955516",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "BondMath",
+            "abiSHA256": "7e081e15260c88bc60f3255514f752ceafe679c162c94f45c4ab98f77248abb3",
+            "bytecodeSHA256": "94273c3819c2b05d3d806b9c041b742519d41d22e35de285120d4cbcd9047f06",
+            "deployedBytecodeSHA256": "fc1f985d8496d6188818df92f9faeebfc020baeee5e43f41e667bde16779ff3c",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "ReputationMath",
+            "abiSHA256": "954bbbd9bbd759c53ff363b2a266c754ef6d7c95a8b2ae29dc6e3fd07a73a2db",
+            "bytecodeSHA256": "f0a0ff78a727c34be123cd764b1844e199d9c4be2524da58c77e7fcfaf7d5a3b",
+            "deployedBytecodeSHA256": "be03025337ddd37e6c09e2e463672dbb3f4b4b2139624e425f8441478f08bd63",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "ENSOwnership",
+            "abiSHA256": "32a268f73870785e9fb23aeb775d35840048292d7c530010188cb273a993c9fe",
+            "bytecodeSHA256": "ab977d11019eb9e65b25eba01089b1caab1780f6122e9e9cacc64c8834bc3940",
+            "deployedBytecodeSHA256": "a93cbb4e680d93f84fa26aa74b8a139b7404dd7fc9805dac6bd7241fb4e9b0ac",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "NftEligibility",
+            "abiSHA256": "6fc55b77a43ac9e2019a0901ce29d11e6b40ba99926a881caf141a8d16f131e2",
+            "bytecodeSHA256": "daa3e477b3cf0b0a80320ab226d9800ccc0ee102f629bc99cd8d6ef5d9d51889",
+            "deployedBytecodeSHA256": "a76e8e9acd5bb7006181bf060396e59f3f99808b2599fe047fb4ac3ab7363da2",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "JobSettlement",
+            "abiSHA256": "eea66fce0b4bceab9e10869d345682ef7d7cb64254cca36aa18a8d6268af2e51",
+            "bytecodeSHA256": "a2f6251c84bdd23876fc84769e401392ddce6bc6ba3a4f49ddf9259ceb5be49f",
+            "deployedBytecodeSHA256": "e61900ad7bc8bc97878619fe8cb991d056310047c340a6dd4093083b510441a5",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "JobValidation",
+            "abiSHA256": "0d286726188fd0cc9b5b9054678b1a3965405f0a8f5582a4adc8f831f01757bf",
+            "bytecodeSHA256": "875f7b14b3e47160270df74a40e1ee375bc2f646835f5fa98cddc38c90ba78d1",
+            "deployedBytecodeSHA256": "40a618b8bab97f47dc13d187bcff1dfe6181b3f348a8d863dbd35b45008d15ee",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "MockERC20",
+            "abiSHA256": "15db43f3a228cc8dd814724aa617735c6c75aa61c828fc692364b8aaa933b792",
+            "bytecodeSHA256": "c843344a0ca9b31fb0032b099b4f0f6322acf8cf191bb0bd281aa159dc89e0a1",
+            "deployedBytecodeSHA256": "49e972aee194f5d55060fd15ef085d4c80430e1329186de1360e2d8d6cbc2be2",
+            "immutableOffsetsMatch": true
+          },
+          {
+            "name": "FailingERC20",
+            "abiSHA256": "364416170589a7b618dc275a7600a61bbccb98d2c89c85fecad72270d2a5bffd",
+            "bytecodeSHA256": "aa75516ba410d712abd03ec05c36d8720345e5933e4b8e849e3566da7359de15",
+            "deployedBytecodeSHA256": "432e3b328da6e8e01045022c88b6ebe55755f486eba5865951559485464b3e5c",
+            "immutableOffsetsMatch": true
+          }
+        ],
+        "comparison": "exact source bytes, ABI, creation/runtime bytecode, links and immutable byte offsets"
+      },
+      "currentManagerLifecycle": {
+        "schema": "agi-fleet-job-lifecycle/v1",
+        "status": "PASS",
+        "chainId": 31337,
+        "managerArtifacts": "freshly compiled AGIJobManager source",
+        "linkedProductionContracts": 9,
+        "defaultVoteQuorum": 3,
+        "defaultReviewPeriodSeconds": 604800,
+        "agentGenerationCount": 1,
+        "publicationCount": 1,
+        "persistedAgentPreparationAndApproval": true,
+        "threePersistedNodeVotes": true,
+        "exactBondAllowancesConsumed": true,
+        "persistedFinalization": true,
+        "deferredClaimsConservedUSDC": true,
+        "persistedAgentAndNodeClaims": true,
+        "noDuplicateTransactionsAfterRestart": true,
+        "releasedAllClientExposure": true,
+        "managerTokenBalanceAfter": "0",
+        "conservedTotalMockUSDC": "5000000000",
+        "limitations": {
+          "liveInference": false,
+          "publicIPFS": false,
+          "nativeUSDC": false,
+          "independentlyOperatedValidators": false,
+          "independentRPCBackends": false,
+          "realTimeEndurance": false,
+          "reviewWindow": "eight simulated days",
+          "identities": "fixture allowlist; ENS/Merkle covered in the separate identity script"
+        }
+      },
+      "managerRegression": {
+        "collectedTests": 780,
+        "executedTests": 780,
+        "passedTests": 780
+      },
+      "standaloneIntegrationScripts": 8,
+      "finishedAt": "2026-10-22T05:42:44.352308+00:00"
+    }
+  },
+  "downloadMode": "RAM-only ZIP; no archive/extraction saved and no artifact code executed"
+}

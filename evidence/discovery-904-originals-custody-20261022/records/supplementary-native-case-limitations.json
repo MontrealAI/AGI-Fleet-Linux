@@ -1,0 +1,25 @@
+{
+  "schema": "fleet/supplementary-case-parser-observations/v1",
+  "state": "NOT_COMPLETED_NOT_ACCEPTED",
+  "originals": "Both native jobs, original audit and original Required release qualification SUCCESS; raw artifacts independently authenticated separately.",
+  "checkerObservations": [
+    "Initial checker assumed full result scope ALL; actual frozen schema is FULL, established by immutable runner accept() source. Corrected only the scratch verifier.",
+    "Next checker assumed every executed case is in fresh Git/source-revision snapshot; legacy tests/current-guides.test.mjs is deliberately outside that snapshot and is covered by existing complete-archive audits. No source defect inferred.",
+    "An inspection command accidentally emitted a large public path/hash dictionary; no secrets or artifact executable code were emitted or executed.",
+    "Proposed supplemental verifier binds all native case hashes to the complete archive-members map whose raw/canonical hashes were already computed independently from actual downloaded candidate bytes. This proposed full case verification has not passed to completion."
+  ],
+  "transportFailures": [
+    {
+      "phase": "arm64 native artifact cached signed URL re-read",
+      "code": 403,
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "phase": "x64 profile archive-members cached signed URL re-read",
+      "code": 403,
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
+  "response": "Stopped these reads; no fresh URL request, alternate transport, credential change, retry or delegation to route around either403.",
+  "scope": "Existing outer ZIP/member/native summary/full original log/source/package proofs remain valid; no independent all-native-case TAP/source-row completion is claimed."
+}
