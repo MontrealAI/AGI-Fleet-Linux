@@ -13,6 +13,18 @@ CHECK=importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CHECK)
 
 class ProfilePreservation(unittest.TestCase):
+    def test_only_exact_six_port_reservation_fixtures_are_classified(self):
+        self.assertEqual(len(CHECK.PORT_RESERVATION_FIXTURES),6)
+        for name in CHECK.PORT_RESERVATION_FIXTURES:
+            self.assertIn('port',CHECK.reason(name))
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);name=next(iter(CHECK.PORT_RESERVATION_FIXTURES));file=root/name
+            file.parent.mkdir(parents=True);file.write_bytes(b'unreviewed fixture change')
+            with patch.object(CHECK,'ROOT',root),self.assertRaisesRegex(ValueError,'fixture bytes differ'):
+                CHECK.reason(name)
+        with self.assertRaisesRegex(ValueError,'Unclassified'):
+            CHECK.reason('fleet/packages/AGI_Unknown/tests/setup-runtime-materialization.test.mjs')
+
     def test_all_original_paths_modes_anchors_and_diagrams_survive(self):
         result=CHECK.check()
         self.assertEqual(result['status'],'PASS')

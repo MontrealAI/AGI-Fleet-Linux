@@ -11,11 +11,18 @@ PROFILE_RUNTIME_PATHS=frozenset(
 PROFILE_OPERATOR_PATHS=frozenset(['fleet/shared/operator/ops/config.mjs']
     +[f'fleet/packages/AGI_{role}/shared/operator/ops/config.mjs' for role in PROFILE_PARENT_ROLES])
 PROFILE_VERIFIER_PATHS=frozenset(f'fleet/packages/AGI_{role}/scripts/verify-contract-artifacts.mjs' for role in ('Agent','Node'))
+PORT_RESERVATION_FIXTURES={f'fleet/packages/AGI_{role}/tests/setup-runtime-materialization.test.mjs':
+    ('a9ab7d9ce97cf0213c6e0376f6e09f6ba9fbbe67fc15b67da7324df26f4319fb' if role in ('Agent','Node')
+     else 'e4d8883cd78121e3fe33fb6e4fec0e43398408caf49f696f87d617332ae74bd2') for role in PROFILE_ROLES}
 def require(condition,message):
     if not condition:raise ValueError(message)
 def sha(b):return hashlib.sha256(b).hexdigest()
 def reason(name):
     p=Path(name)
+    if name in PORT_RESERVATION_FIXTURES:
+        require(sha((ROOT/name).read_bytes())==PORT_RESERVATION_FIXTURES[name],
+                'Port reservation fixture bytes differ: '+name)
+        return 'Hold the Gateway test listener until Compute obtains a distinct port; retain early-failure cleanup and every original Gateway, health, rollback and authority assertion. Exact six fixture digests only.'
     if name in PROFILE_RUNTIME_PATHS:return 'Select only reviewed hash-pinned contract profiles and verify the entire selected deployment graph before transactions; omitted profile retains legacy defaults, budget and STOP identity.'
     if name in PROFILE_OPERATOR_PATHS:return 'Carry the optional finite reviewed contract profile through operator configuration; retain omitted-profile legacy configuration and reject arbitrary profile overrides.'
     if name in PROFILE_VERIFIER_PATHS:return 'Recompile the explicitly selected reviewed profile from its hash-bound compiler inputs and compare all 11 complete artifacts; preserve legacy default and exact equality checks.'

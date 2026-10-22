@@ -1,0 +1,139 @@
+{
+  "schema": "agi-fleet/port-isolation-correction/v1",
+  "reviewedParentCommit": "0dd352fdd2b1af00bc8358e0ac7f96682fd6f796",
+  "parentTree": "79415af24ebf57d30981f841f13b7969e4193502",
+  "downloadedSource": {
+    "producerRun": 39690796323,
+    "testedCommit": "bef7dd125958b2e336743217f1d9d00451efd17c",
+    "artifactId": 12389061360,
+    "artifactBytes": 31295971,
+    "artifactSha256": "80e3c9fbb7158cb6bc20b386814756c9f850ae76932945625dbeba8cc035b348",
+    "innerBytes": 31294952,
+    "innerSha256": "78c8f0228b7b0a062f3f3e72ee6e0d7d449b79db2edad007a04e93bad4496da6",
+    "all6789LeavesAndModesMatched": true
+  },
+  "originalFailure": {
+    "run": 39690796342,
+    "attempt": 1,
+    "job": 119555074016,
+    "artifactId": 12393264305,
+    "artifactBytes": 1179877,
+    "artifactSha256": "0449f4095259692d14cb498dd015c129a55a16644eff19fef8aa8249195fa6a8",
+    "logBytes": 12672,
+    "logSha256": "c0e2c5919dc376c50ca8acbe8a970aec67c762fbad8542539b8fab1cb6813226",
+    "expected": "COMPUTE_SERVICE_HEALTH_FAILED",
+    "observed": "EADDRINUSE 127.0.0.1:40329",
+    "sameTestGatewayPort": 40329,
+    "targetedPass": 4,
+    "targetedFail": 1,
+    "laterCompleteFilePass": 5,
+    "disposition": "Port reuse allowed by released Gateway reservation; original failure preserved, later pass does not erase it."
+  },
+  "candidateSourceRevisionSha256": "be922726fa37989360f36b39bdb3d1f779c5e8e751c9bf2afcf4a91e35886b9a",
+  "changedLeaves": [
+    {
+      "path": "engineering/check-successor-preservation.py",
+      "beforeGitBlob": "11159f9815986559009fa12f7ca5bc31e0cd7a39",
+      "afterGitBlob": "ce4ee49aafcf7cd1851d3fe288a0aa93db1428ac",
+      "bytes": 7081,
+      "sha256": "103eb5a8a2796ea3f300d112ee283a3750e0efc1117d5dbb7ae265e83d94185d",
+      "mode": "100644"
+    },
+    {
+      "path": "engineering/tests/test_profile_preservation.py",
+      "beforeGitBlob": "d2e647c5c9f31618632a2c4f351ce10aef4ff9c3",
+      "afterGitBlob": "4d3d836df41b1db9c70dff98a2c5a3fcee5e062c",
+      "bytes": 3484,
+      "sha256": "45090470591b2326e391c110ab90cac89b64f0d1d8a3ff731ead94e5b7ed4f47",
+      "mode": "100644"
+    },
+    {
+      "path": "engineering/next-release.json",
+      "beforeGitBlob": "3d38ac6cbc5ca61c5686f8fcdf8e63ad09d51687",
+      "afterGitBlob": "855a7c1983fb1939d16ec2d124eb1f58d0e7b27c",
+      "bytes": 739,
+      "sha256": "20d3adbdd7bffc1c3e86b2d0a336d2cd624857dcde464849c72a4498a0ec5027",
+      "mode": "100644"
+    },
+    {
+      "path": "fleet/source-inventory.json",
+      "beforeGitBlob": "2e043289b2c06a45293d7c4d663fb4770c0c5607",
+      "afterGitBlob": "68a5e66360501e3cc06d1e2485ffbdadb2d5d125",
+      "bytes": 1256964,
+      "sha256": "682b6c09540b6fb46c4debb2813650d6c4ce932528be3124b3e32bee4c7b7ac2",
+      "mode": "100644"
+    },
+    {
+      "path": "fleet/packages/AGI_Agent/tests/setup-runtime-materialization.test.mjs",
+      "beforeGitBlob": "8d5a5ea7b6987c1d77dda495610f0913b6e74d13",
+      "afterGitBlob": "28647d7f68662355cac8afaa4cb4b1d319f7b864",
+      "bytes": 20524,
+      "sha256": "a9ab7d9ce97cf0213c6e0376f6e09f6ba9fbbe67fc15b67da7324df26f4319fb",
+      "mode": "100644"
+    },
+    {
+      "path": "fleet/packages/AGI_Employer/tests/setup-runtime-materialization.test.mjs",
+      "beforeGitBlob": "45d803d282ef1fd4dfc90145790c9f0fc93bd5ae",
+      "afterGitBlob": "d098e8ac6785c1ea493c732735cb9548932f4f2e",
+      "bytes": 20554,
+      "sha256": "e4d8883cd78121e3fe33fb6e4fec0e43398408caf49f696f87d617332ae74bd2",
+      "mode": "100644"
+    },
+    {
+      "path": "fleet/packages/AGI_Evidence/tests/setup-runtime-materialization.test.mjs",
+      "beforeGitBlob": "45d803d282ef1fd4dfc90145790c9f0fc93bd5ae",
+      "afterGitBlob": "d098e8ac6785c1ea493c732735cb9548932f4f2e",
+      "bytes": 20554,
+      "sha256": "e4d8883cd78121e3fe33fb6e4fec0e43398408caf49f696f87d617332ae74bd2",
+      "mode": "100644"
+    },
+    {
+      "path": "fleet/packages/AGI_Moderator/tests/setup-runtime-materialization.test.mjs",
+      "beforeGitBlob": "45d803d282ef1fd4dfc90145790c9f0fc93bd5ae",
+      "afterGitBlob": "d098e8ac6785c1ea493c732735cb9548932f4f2e",
+      "bytes": 20554,
+      "sha256": "e4d8883cd78121e3fe33fb6e4fec0e43398408caf49f696f87d617332ae74bd2",
+      "mode": "100644"
+    },
+    {
+      "path": "fleet/packages/AGI_Node/tests/setup-runtime-materialization.test.mjs",
+      "beforeGitBlob": "8d5a5ea7b6987c1d77dda495610f0913b6e74d13",
+      "afterGitBlob": "28647d7f68662355cac8afaa4cb4b1d319f7b864",
+      "bytes": 20524,
+      "sha256": "a9ab7d9ce97cf0213c6e0376f6e09f6ba9fbbe67fc15b67da7324df26f4319fb",
+      "mode": "100644"
+    },
+    {
+      "path": "fleet/packages/AGI_Recovery/tests/setup-runtime-materialization.test.mjs",
+      "beforeGitBlob": "45d803d282ef1fd4dfc90145790c9f0fc93bd5ae",
+      "afterGitBlob": "d098e8ac6785c1ea493c732735cb9548932f4f2e",
+      "bytes": 20554,
+      "sha256": "e4d8883cd78121e3fe33fb6e4fec0e43398408caf49f696f87d617332ae74bd2",
+      "mode": "100644"
+    }
+  ],
+  "localValidation": {
+    "nodeVersion": "24.19.0",
+    "httpControls": {
+      "pass": 3,
+      "fail": 0,
+      "description": "Real HTTP sockets: duplicate selection reproduces bind failure; simultaneous reservations allocate distinct ports; early preparation failure cleans held listener."
+    },
+    "sixFixtureSyntaxChecks": "PASS",
+    "candidateSourceChecker": "PASS",
+    "preservationChecker": "PASS after exact six digest classification",
+    "preservationUnittests": {
+      "pass": 5,
+      "fail": 0
+    },
+    "diffCheck": "PASS"
+  },
+  "limitations": {
+    "fullPinnedOpenClawNativeSuite": "NOT_RUN_LOCALLY; fresh existing hosted qualification required",
+    "fullSdkRuntime": "No local full native Gateway run",
+    "originalFleet61EligibleOwnerReview": "HELD; no retry, reroute or replacement",
+    "newCompatibleRelease": "NOT_PUBLISHED",
+    "installedIntegration": "NOT_RUN",
+    "sourceVersion": "Parent1.1.4 metadata retained during source preparation; must reconcile with held1.1.5 branch before any publication. Published1.1.4 untouched."
+  }
+}
