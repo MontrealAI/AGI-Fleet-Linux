@@ -1,0 +1,80 @@
+{
+  "binding": {
+    "componentArchiveSha256": "3e43304450eb4ca03476f88536c36a83738d87223e036c7c7669ffbb8b23a869",
+    "componentArtifact": 12909162998,
+    "componentRun": 40900990932,
+    "controlsArchiveSha256": "cd8303bb612aba41cd9377692207fcaa367bdd34e635da736905009588f4c456",
+    "controlsArtifact": 12907839857,
+    "controlsRun": 40900990915,
+    "repository": "MontrealAI/AGI-Alpha-Agent-v0",
+    "sourceCommit": "ca626861c3a7c263cbcb2ac46347cb7704e7f4b6"
+  },
+  "files": {
+    "controls.json": {
+      "archiveMember": "summary.json",
+      "bytes": 5652,
+      "originalMemberSha256": "bca02114f37605ca4a6af0a49cd0404cd346f06aa08017f033a9ac0cbd2b166c",
+      "projection": "exact original UTF-8 bytes",
+      "sha256": "bca02114f37605ca4a6af0a49cd0404cd346f06aa08017f033a9ac0cbd2b166c"
+    },
+    "installed.json": {
+      "archiveMember": "_temp/invention-installed-proof/dynamic.json",
+      "bytes": 14079,
+      "originalMemberSha256": "e6816daa816d794f35d7962aab38baa95bfa6179bf217640ce84b6e970e92c91",
+      "projection": "exact original UTF-8 bytes",
+      "sha256": "e6816daa816d794f35d7962aab38baa95bfa6179bf217640ce84b6e970e92c91"
+    },
+    "layout.json": {
+      "archiveMember": "_temp/invention-installed-proof/installation.json",
+      "bytes": 3226,
+      "originalMemberSha256": "46c0a3ea4b693a515d185259ae60b242e11a8182293e00e24f428d4f678d2605",
+      "projection": "omit installed_root and python; JSON reserialized",
+      "sha256": "14d3febe0200ba8d96cd3dbaa912ac7d61954af079f37554493f1cd3b621b5c9"
+    },
+    "source.json": {
+      "archiveMember": "AGI-Alpha-Agent-v0/AGI-Alpha-Agent-v0/evidence/invention/dynamic.json",
+      "bytes": 14079,
+      "originalMemberSha256": "f6ec5dd7d8569ada6ad969159982195b0725d1d448e82ef293869b964294c34c",
+      "projection": "exact original UTF-8 bytes",
+      "sha256": "f6ec5dd7d8569ada6ad969159982195b0725d1d448e82ef293869b964294c34c"
+    }
+  },
+  "fleetBasis": "45759fb096faf8988f58ae5ea71248d0f35a97c7",
+  "identities": {
+    "cohort_sha256": "f62c55942f811d3ece68bb50cd1622ad7916173123601a6c04c3df2c69f5b34e",
+    "context_sha256": "940e34e63f23a6b8eb517ec2700b0a219e8a68081b28d472dc4c8b0fbba3e000",
+    "image": "python@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159",
+    "implementation_sha256": "5f332024f54acaf0f9b69ae30c7182607bbd3083d85e2ba74a52cec1a025f68d",
+    "program_sha256": "6e6f35e0d06de268736e557cf1593860c635d89d9aea1e5302e80e87746e4639",
+    "request_sha256": "d8c9b678eb868d9a78ef664c246ae090b3cc56045f54f60cedf0c3598271e9b7",
+    "source_evidence_sha256": "41ed34b89a06beb79600362d1a9201053fa39b7d9b25db3e3e9884a1978b5073"
+  },
+  "installedFiles": {
+    "alpha_factory_v1/core/runtime/cli.py": "917bd54319ec4e88e9ca944aea6ca25bee4480c85fc5484ecac2e372cc409823",
+    "alpha_factory_v1/core/runtime/invention_automation/__init__.py": "9146adc61d0733110fa8b0c27a77fa2c10574666b78ec16cbcd89d177e7ec383",
+    "alpha_factory_v1/core/runtime/invention_automation/critic_loop.py": "417b4c8c6e6ff65234ca13c88d9078c8a40cbd88b45fb22e4996df7f2a9b2627",
+    "alpha_factory_v1/core/runtime/invention_automation/critic_protocol.json": "7b103cae721fbe92129f059f7eace2e272bce0c28f4072f13d5a7f8cb8e76133",
+    "alpha_factory_v1/core/runtime/invention_automation/evidence_contracts.py": "f15daef99011d4e895e4ff20f8301338abf15c3ba8d477996e0502862b63d917",
+    "alpha_factory_v1/core/runtime/invention_automation/evidence_critic.py": "b1ac820c26bfb314b79ae8abca2e2c64925656d8f85e136c3d7a1cf2b565fdde",
+    "alpha_factory_v1/core/runtime/invention_automation/operator.py": "5876ee1c4856ca9502a9fdb8a41bf08d2601a26653d79c8739f471d73d70d221",
+    "alpha_factory_v1/core/runtime/invention_automation/qualification.py": "5f332024f54acaf0f9b69ae30c7182607bbd3083d85e2ba74a52cec1a025f68d",
+    "alpha_factory_v1/core/runtime/invention_automation/specification.py": "715cf4518dc9ecd0a18a9a85b963a67039809558bb154f4dd8641a8dc252158a",
+    "alpha_factory_v1/core/runtime/invention_automation/specification_run.py": "5c3ca77f0e34502da5fb8453bbb7d004e8e97a2e40b030008e74d5fab5b99e03",
+    "alpha_factory_v1/core/runtime/structural_transfer/__init__.py": "69130a04e0fa5d9db8a7043a2114ef2466c3998dbf1d8c4351c94188a04c9b88",
+    "alpha_factory_v1/core/runtime/structural_transfer/contracts.py": "26caa51dad283d55023ce6605528ef1366153a8cfe3e9657e2b6ac9f012370ee",
+    "alpha_factory_v1/core/utils/secure_run.py": "2ca2bccb65781a112275acf4d88c29960fb56a8dd8c4b18b660362cbfcbfc43f",
+    "contrib/invention_automation/critic_verify.py": "e31fffcc5e8cbadc3196d4c09894b8e966c2e91b5101bdb4506adf9aae6f5a8e",
+    "contrib/invention_automation/qualify_verify.py": "c8b559f52e78bf71c65382c8c294158aa008dca3efdb3d4f6f438d0e9b789cfb",
+    "contrib/invention_automation/readonly.py": "d459a955e9bec6733bbdcb5a5393419b00bcb86f004de9c6391fbddbee81cdfc"
+  },
+  "installedFreeze": {
+    "file": "c2354f0fca7fec9a463408da64ede1d3733f64eed429106f64486fe4d862278a",
+    "semantic": "54f4a881daf1467d9a908479f6beea1d4d08c7450a6224c575b74ce437e4f256"
+  },
+  "schema": "agi-fleet/reviewed-invention-evidence/v1",
+  "scope": "Fixed historical component evidence only; not an installed Fleet runtime or authority.",
+  "sourceFreeze": {
+    "file": "6582133149b5cdbeca541c09fc388864dc5c0959a2b18743fcce63fa7d432711",
+    "semantic": "4bdd62ba8115cf996bbe9d8be6cd10797d02ab20b2f2042526fb0010a91305ea"
+  }
+}
