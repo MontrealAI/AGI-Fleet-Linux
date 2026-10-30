@@ -1,0 +1,643 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agi-fleet:final-public-live-inputs:v1",
+  "description": "Separate Pages T observation only; release S and genuine ONE journey remain distinct.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "websiteSource",
+    "releaseInput",
+    "connectedJourney",
+    "sites"
+  ],
+  "properties": {
+    "schema": {
+      "const": "agi-fleet/final-public-live-inputs/v1"
+    },
+    "websiteSource": {
+      "$ref": "#/$defs/identity"
+    },
+    "releaseInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blob",
+        "sha256"
+      ],
+      "properties": {
+        "blob": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "connectedJourney": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runId",
+        "attempt"
+      ],
+      "properties": {
+        "runId": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "attempt": {
+          "const": 1
+        }
+      }
+    },
+    "sites": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alpha",
+        "fleet",
+        "jobs",
+        "manager"
+      ],
+      "properties": {
+        "alpha": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "baseUrl",
+            "source",
+            "version",
+            "buildInfo",
+            "pagesRun",
+            "languages"
+          ],
+          "properties": {
+            "baseUrl": {
+              "const": "https://montrealai.github.io/AGI-Alpha-Agent-v0/"
+            },
+            "source": {
+              "$ref": "#/$defs/identity"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,80}$"
+            },
+            "buildInfo": {
+              "$ref": "#/$defs/buildInfo"
+            },
+            "pagesRun": {
+              "$ref": "#/$defs/pagesRun"
+            },
+            "languages": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "fr"
+              ],
+              "properties": {
+                "en": {
+                  "$ref": "#/$defs/languageAlpha"
+                },
+                "fr": {
+                  "$ref": "#/$defs/languageAlpha"
+                }
+              }
+            }
+          }
+        },
+        "fleet": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "baseUrl",
+            "source",
+            "version",
+            "buildInfo",
+            "pagesRun",
+            "languages"
+          ],
+          "properties": {
+            "baseUrl": {
+              "const": "https://montrealai.github.io/AGI-Fleet-Linux/"
+            },
+            "source": {
+              "$ref": "#/$defs/identity"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,80}$"
+            },
+            "buildInfo": {
+              "$ref": "#/$defs/fleetBuildInfo"
+            },
+            "pagesRun": {
+              "$ref": "#/$defs/pagesRun"
+            },
+            "languages": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "fr"
+              ],
+              "properties": {
+                "en": {
+                  "$ref": "#/$defs/languageFleet"
+                },
+                "fr": {
+                  "$ref": "#/$defs/languageFleet"
+                }
+              }
+            }
+          }
+        },
+        "jobs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "baseUrl",
+            "source",
+            "version",
+            "buildInfo",
+            "pagesRun",
+            "languages"
+          ],
+          "properties": {
+            "baseUrl": {
+              "const": "https://montrealai.github.io/AGIJobsv0/"
+            },
+            "source": {
+              "$ref": "#/$defs/identity"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,80}$",
+              "description": "External release-version context; catalog.json does not serve a version."
+            },
+            "buildInfo": {
+              "$ref": "#/$defs/jobsBuildInfo"
+            },
+            "pagesRun": {
+              "$ref": "#/$defs/pagesRun"
+            },
+            "languages": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "fr"
+              ],
+              "properties": {
+                "en": {
+                  "$ref": "#/$defs/languageJobs"
+                },
+                "fr": {
+                  "$ref": "#/$defs/languageJobs"
+                }
+              }
+            }
+          }
+        },
+        "manager": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "baseUrl",
+            "source",
+            "version",
+            "buildInfo",
+            "pagesRun",
+            "languages"
+          ],
+          "properties": {
+            "baseUrl": {
+              "const": "https://montrealai.github.io/AGIJobManager/"
+            },
+            "source": {
+              "$ref": "#/$defs/identity"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,80}$"
+            },
+            "buildInfo": {
+              "$ref": "#/$defs/buildInfo"
+            },
+            "pagesRun": {
+              "$ref": "#/$defs/pagesRun"
+            },
+            "languages": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "fr"
+              ],
+              "properties": {
+                "en": {
+                  "$ref": "#/$defs/languageManager"
+                },
+                "fr": {
+                  "$ref": "#/$defs/languageManager"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commit",
+        "tree"
+      ],
+      "properties": {
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      }
+    },
+    "pagesRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "attempt",
+        "path",
+        "event",
+        "ref"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^\\.github/workflows/[a-z0-9-]+\\.yml$"
+        },
+        "event": {
+          "enum": [
+            "push",
+            "workflow_dispatch",
+            "workflow_run"
+          ]
+        },
+        "ref": {
+          "type": "string",
+          "pattern": "^refs/heads/[A-Za-z0-9._/-]{1,180}$"
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "selector",
+        "value"
+      ],
+      "properties": {
+        "action": {
+          "enum": [
+            "assertVisible",
+            "assertText",
+            "click",
+            "fill",
+            "select"
+          ]
+        },
+        "selector": {
+          "type": "string",
+          "pattern": "^[^\\r\\n]{1,256}$"
+        },
+        "value": {
+          "type": "string",
+          "maxLength": 300
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "fill"
+              }
+            },
+            "required": [
+              "action"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "enum": [
+                  "synthetic-title",
+                  "synthetic-goal",
+                  "zero"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "buildInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "commitPointer",
+        "versionPointer"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^/(?!/)[^\\r\\n\\\\]*$",
+          "maxLength": 300,
+          "description": "Project-relative path. Runtime rejects parent components."
+        },
+        "commitPointer": {
+          "type": "string",
+          "pattern": "^(?:/[A-Za-z0-9_-]{1,64}){1,6}$"
+        },
+        "versionPointer": {
+          "type": "string",
+          "pattern": "^(?:/[A-Za-z0-9_-]{1,64}){1,6}$"
+        }
+      }
+    },
+    "languageAlpha": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "steps",
+        "downloads"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^/(?!/)[^\\r\\n\\\\]*$",
+          "maxLength": 300,
+          "description": "Project-relative path. Runtime rejects parent components."
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        },
+        "downloads": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "selector",
+              "assetRole"
+            ],
+            "properties": {
+              "selector": {
+                "type": "string",
+                "pattern": "^[^\\r\\n]{1,256}$"
+              },
+              "assetRole": {
+                "enum": [
+                  "source",
+                  "wheel",
+                  "manifest",
+                  "checksums"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "languageFleet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "steps",
+        "downloads"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^/(?!/)[^\\r\\n\\\\]*$",
+          "maxLength": 300,
+          "description": "Project-relative path. Runtime rejects parent components."
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        },
+        "downloads": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "selector",
+              "assetRole"
+            ],
+            "properties": {
+              "selector": {
+                "type": "string",
+                "pattern": "^[^\\r\\n]{1,256}$"
+              },
+              "assetRole": {
+                "enum": [
+                  "packageX64",
+                  "packageArm64",
+                  "manifest",
+                  "checksums"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "languageJobs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "steps",
+        "downloads"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^/(?!/)[^\\r\\n\\\\]*$",
+          "maxLength": 300,
+          "description": "Project-relative path. Runtime rejects parent components."
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        },
+        "downloads": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "selector",
+              "assetRole"
+            ],
+            "properties": {
+              "selector": {
+                "type": "string",
+                "pattern": "^[^\\r\\n]{1,256}$"
+              },
+              "assetRole": {
+                "enum": [
+                  "source",
+                  "provenance",
+                  "sourceProfile",
+                  "checksums"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "languageManager": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "steps",
+        "downloads"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^/(?!/)[^\\r\\n\\\\]*$",
+          "maxLength": 300,
+          "description": "Project-relative path. Runtime rejects parent components."
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        },
+        "downloads": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "selector",
+              "assetRole"
+            ],
+            "properties": {
+              "selector": {
+                "type": "string",
+                "pattern": "^[^\\r\\n]{1,256}$"
+              },
+              "assetRole": {
+                "enum": [
+                  "package",
+                  "manifest",
+                  "qualification",
+                  "checksums"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "jobsBuildInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "commitPointer",
+        "versionPointer"
+      ],
+      "properties": {
+        "path": {
+          "const": "/catalog.json"
+        },
+        "commitPointer": {
+          "const": "/revision"
+        },
+        "versionPointer": {
+          "const": null
+        }
+      }
+    },
+    "fleetBuildInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "commitPointer",
+        "versionPointer",
+        "versionPath"
+      ],
+      "properties": {
+        "path": {
+          "const": "/build-info.json"
+        },
+        "commitPointer": {
+          "const": "/commit"
+        },
+        "versionPointer": {
+          "const": "/version"
+        },
+        "versionPath": {
+          "const": "/release.json"
+        }
+      }
+    }
+  }
+}

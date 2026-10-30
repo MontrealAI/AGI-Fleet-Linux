@@ -1,0 +1,92 @@
+name: Final public-package connected journey
+on:
+  push:
+    branches: ['qualification/ti-public-packages-*']
+permissions:
+  contents: read
+  actions: read
+  issues: read
+  pull-requests: read
+concurrency:
+  group: final-public-package-connected-journey
+  cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  authenticate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Authenticate the reviewed immutable input blob and actual public asset bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          /usr/bin/python3 -I -S -B engineering/integration/public_release_assets.py acquire --bundle "$RUNNER_TEMP/public-assets"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: final-public-input-assets
+          path: ${{ runner.temp }}/public-assets/
+          if-no-files-found: error
+          retention-days: 90
+  journey:
+    needs: authenticate
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            arch: x64
+          - runner: ubuntu-24.04-arm
+            arch: arm64
+    uses: ./.github/workflows/public-release-service.yml
+    with:
+      architecture: ${{ matrix.arch }}
+      runner: ${{ matrix.runner }}
+  independent-collection:
+    needs: journey
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: final-public-input-assets
+          path: public-assets
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Protect official caches through the original trusted bootstrap
+        run: |
+          /usr/bin/python3 -I -S -B engineering/integration/prepare-hosted-runtime.py --prepare-only
+      - name: Independently authenticate and materialize the exact public source package bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          /usr/bin/python3 -I -S -B engineering/integration/public_release_install.py sources --bundle "$PWD/public-assets" --work "$RUNNER_TEMP/public-package-independent"
+      - name: Independently derive the original Jobs static source transition
+        run: |
+          node engineering/integration/public-release-source-transition.cjs "$PWD/public-assets/input.json" "$PWD/.integration-jobs" "$PWD/public-assets/jobs/source-profile-rc16.json" "$RUNNER_TEMP/public-package-independent/independent-jobs-source-transition.json"
+      - name: Authenticate original artifact ZIPs and replay unchanged independent collectors
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          /usr/bin/python3 -I -S -B engineering/integration/public_release_collect.py --bundle "$PWD/public-assets" --work "$RUNNER_TEMP/public-package-independent" --artifacts "$RUNNER_TEMP/public-package-original-artifacts" --output "$RUNNER_TEMP/public-package-independent-collection.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: success()
+        with:
+          name: final-public-package-independent-collection
+          path: ${{ runner.temp }}/public-package-independent-collection.json
+          if-no-files-found: error
+          retention-days: 90

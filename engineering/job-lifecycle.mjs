@@ -66,10 +66,15 @@ try {
   }
 
   const token = await deploy('FailingERC20');
-  const manager = await deploy('AGIJobManager', [
+  const constructorArgs = [
     addresses.FailingERC20, 'ipfs://', [ZeroAddress, ZeroAddress],
     [ZeroHash, ZeroHash, ZeroHash, ZeroHash], [ZeroHash, ZeroHash], [fee30.address, fee10.address],
-  ]);
+  ];
+  // This exact reviewed generation requires an explicit initial governor.
+  // Preserve the six historical arguments for the unchanged older profiles.
+  if (contractProfile === 'manager-1.19.3-d0c2cbaf') constructorArgs.push(owner.address);
+  const manager = await deploy('AGIJobManager', constructorArgs);
+  assert.equal(await manager.owner(), owner.address);
   const deploymentBlock = (await manager.deploymentTransaction().wait()).blockNumber;
   await mined(manager.addAdditionalAgent(agent.address));
   for (const validator of validators) await mined(manager.addAdditionalValidator(validator.address));

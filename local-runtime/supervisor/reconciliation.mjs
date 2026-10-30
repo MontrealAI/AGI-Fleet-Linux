@@ -13,6 +13,13 @@ function record(runtime, input, principal) {
 }
 
 function proof(runtime, value, result) {
+  const computer=value.admission?.binding?.computer,computerObservation=result?.observation;
+  if(value.spendUSDC==='0'&&value.authority==='none'&&value.inference==='scripted-zero-cost'&&/^[a-f0-9]{64}$/.test(computer?.runtimeIdentity||'')&&computer?.evidenceClass==='NATIVE_ALPHA_SCRIPTED_REHEARSAL'&&
+    value.host?.alphaComputerRuntimeIdentity===computer.runtimeIdentity&&computerObservation?.runtimeIdentity===computer.runtimeIdentity&&
+    computerObservation.backend==='native-alpha-computer-scripted/v1'&&computerObservation.evidenceClass==='NATIVE_ALPHA_SCRIPTED_REHEARSAL'&&
+    computerObservation.processGroupGone===true&&computerObservation.containerClosed===true&&computerObservation.providerCalls===0)
+    return {eligible:true,kind:'recorded-scripted-computer-closure',observationSha256:digest(computerObservation),runtimeIdentity:computer.runtimeIdentity,
+      externalEffects:'No live model requests or transaction authority; retained public read and fixed browser actions remain historical.'};
   // A future provider/signer adapter must implement its own external-action
   // reconciliation. The offline rule cannot be borrowed by another backend.
   if(value.host?.backend!=='linux-bwrap-offline/v1'||value.host.authority!=='bounded-offline-only'||value.inference!=='none'||value.spendUSDC!=='0')

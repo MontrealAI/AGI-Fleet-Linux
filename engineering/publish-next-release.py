@@ -13,7 +13,7 @@ import zipfile
 
 from release_tools import ROOT, REPOSITORY, LIMIT, require, sha
 from release_note_links import render_release_note_links
-from contract_profiles import CONTRACT_PROFILES
+from contract_profiles import CONTRACT_PROFILES, RELEASE_CONTRACT_PROFILES
 
 
 def load(path):
@@ -22,6 +22,15 @@ def load(path):
 
 def write(path, value):
     Path(path).write_text(json.dumps(value, indent=2) + '\n')
+
+
+def require_current_main(api, commit):
+    ref = api('/git/ref/heads/main')
+    require(re.fullmatch(r'[0-9a-f]{40}', commit or '') is not None
+            and isinstance(ref, dict) and ref.get('ref') == 'refs/heads/main'
+            and isinstance(ref.get('object'), dict)
+            and ref['object'].get('type') == 'commit' and ref['object'].get('sha') == commit,
+            'Publication source is not the exact current main commit')
 
 
 def validate(metadata, audit, commit):
@@ -35,8 +44,8 @@ def validate(metadata, audit, commit):
     require(re.fullmatch(r'[1-9][0-9]*', run_id) is not None, 'An exact workflow run is required')
     require(not os.environ.get('GITHUB_RUN_ID') or os.environ['GITHUB_RUN_ID'] == run_id,
             'Publication workflow run differs')
-    require(metadata['version'] == '1.1.4' and metadata['tag'] == 'v1.1.4-qualification'
-            and metadata['name'] == 'AGI_Fleet_Linux_v1.1.4.zip', 'Unexpected release identity')
+    require(metadata['version'] == '1.1.5' and metadata['tag'] == 'v1.1.5-qualification'
+            and metadata['name'] == 'AGI_Fleet_Linux_v1.1.5.zip', 'Unexpected release identity')
     require(0 < metadata['bytes'] < LIMIT and re.fullmatch('[0-9a-f]{64}', metadata['sha256']), 'Invalid archive identity')
     require(audit['status'] == 'PASS' and audit['releaseSHA256'] == metadata['sha256']
             and audit['productionQualified'] is False and audit['workflowCommit'] == commit,
@@ -78,11 +87,13 @@ def validate(metadata, audit, commit):
                         'Integration acceptance count differs')
                 integration_logs += run['verifiedLogs']
     profiles = audit.get('contractProfiles', [])
-    profile_id = 'manager-1.17.0-b7218196'
-    profile = CONTRACT_PROFILES[profile_id]
-    require(len(profiles) == 2 and {row.get('architecture') for row in profiles} == {'x64', 'arm64'},
-            'Both saved-archive contract-profile architectures are required')
+    expected_profiles = {(profile, arch) for profile in RELEASE_CONTRACT_PROFILES for arch in ('x64', 'arm64')}
+    require(len(profiles) == len(expected_profiles)
+            and {(row.get('profile'), row.get('architecture')) for row in profiles} == expected_profiles,
+            'Every saved-archive contract profile requires distinct x64 and arm64 evidence')
     for row in profiles:
+        profile_id = row['profile']
+        profile = CONTRACT_PROFILES[profile_id]
         require(row.get('status') == 'PASS' and row.get('productionQualified') is False
                 and row.get('workflowCommit') == commit and str(row.get('workflowRun')) == run_id
                 and row.get('archiveSHA256') == metadata['sha256']
@@ -102,7 +113,7 @@ def validate(metadata, audit, commit):
 def publication_notes(assets, commit, workflow_run):
     require(re.fullmatch(r'[1-9][0-9]*', str(workflow_run or '')) is not None,
             'Release notes require an exact workflow run')
-    source = 'docs/RELEASE_NOTES_1_1_4.md'
+    source = 'docs/RELEASE_NOTES_1_1_5.md'
     notes = render_release_note_links((ROOT / source).read_text(), root=ROOT,
         source=source, repository=REPOSITORY, commit=commit)
     notes += '\n## Published artifact identities\n\n| Asset | Bytes | SHA-256 |\n| --- | ---: | --- |\n'
@@ -119,9 +130,9 @@ def prepare(release, evidence, output):
     require(sha(archive) == metadata['sha256'] and archive.stat().st_size == metadata['bytes'], 'Candidate archive changed')
     require(not output.exists() and not output.is_symlink(), 'Publication output must be absent')
     output.mkdir()
-    name = 'Linux-Qualification-Evidence-v1.1.4.zip'
+    name = 'Linux-Qualification-Evidence-v1.1.5.zip'
     with zipfile.ZipFile(output / name, 'x', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as target:
-        for root, prefix in [(evidence, 'validation'), (release / 'AGI_Fleet_Linux_v1.1.4-checks', 'packaging')]:
+        for root, prefix in [(evidence, 'validation'), (release / 'AGI_Fleet_Linux_v1.1.5-checks', 'packaging')]:
             require(root.is_dir(), 'Missing retained evidence: ' + str(root))
             for path in sorted(root.rglob('*')):
                 require(not path.is_symlink(), 'Evidence links are forbidden')
@@ -138,21 +149,21 @@ def prepare(release, evidence, output):
         'operatorGate': 'OPEN_FOR_CONTROLLED_FRESH_INSTALL',
         'productionQualified': False, 'physicalQualification': 'NOT_RUN', 'audit': audit,
         'evidence': {'name': name, 'bytes': (output / name).stat().st_size, 'sha256': sha(output / name)}}
-    write(output / 'Release-Manifest-v1.1.4.json', manifest)
-    assets = [archive, output / name, output / 'Release-Manifest-v1.1.4.json']
-    (output / 'SHA256SUMS-v1.1.4.txt').write_text(''.join(sha(path) + '  ' + path.name + '\n' for path in assets))
+    write(output / 'Release-Manifest-v1.1.5.json', manifest)
+    assets = [archive, output / name, output / 'Release-Manifest-v1.1.5.json']
+    (output / 'SHA256SUMS-v1.1.5.txt').write_text(''.join(sha(path) + '  ' + path.name + '\n' for path in assets))
     (output / 'release-notes.md').write_text(publication_notes(assets, commit, manifest['workflowRun']))
     print(json.dumps({'status': 'PREPARED', 'assets': [p.name for p in assets], 'productionQualified': False}))
 
 
 def publish(release_dir, output):
     metadata = load(release_dir / 'release.json')
-    manifest = load(output / 'Release-Manifest-v1.1.4.json')
+    manifest = load(output / 'Release-Manifest-v1.1.5.json')
     commit = os.environ.get('GITHUB_SHA')
     validate(metadata, manifest['audit'], commit)
     require(manifest['workflowCommit'] == commit and manifest['sha256'] == metadata['sha256'], 'Publication identity differs')
     assets = [release_dir / metadata['name'], output / manifest['evidence']['name'],
-              output / 'Release-Manifest-v1.1.4.json', output / 'SHA256SUMS-v1.1.4.txt']
+              output / 'Release-Manifest-v1.1.5.json', output / 'SHA256SUMS-v1.1.5.txt']
     expected = {line.split('  ', 1)[1]: line.split('  ', 1)[0] for line in assets[-1].read_text().splitlines()}
     require(set(expected) == {p.name for p in assets[:-1]}, 'Checksum coverage differs')
     for path in assets:
@@ -174,6 +185,7 @@ def publish(release_dir, output):
     except urllib.error.HTTPError as error:
         if error.code != 404:
             raise
+        require_current_main(api, commit)
         tag = api('/git/refs', method='POST', data=json.dumps({'ref': 'refs/tags/' + metadata['tag'], 'sha': commit}).encode())
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Release tag targets different source')
     try:
@@ -182,7 +194,7 @@ def publish(release_dir, output):
         if error.code != 404:
             raise
         release = api('/releases', method='POST', data=json.dumps({'tag_name': metadata['tag'],
-            'target_commitish': commit, 'name': 'Linux 1.1.4 — exact-archive SUCCESSOR Ω + Fleet / AGIJobManager 1.16.1 qualification',
+            'target_commitish': commit, 'name': 'Linux 1.1.5 — exact-archive SUCCESSOR Ω + Fleet / AGIJobManager 1.16.1 qualification',
             'body': notes, 'draft': True, 'prerelease': True}).encode())
     require(release['prerelease'] is True and release['target_commitish'] == commit, 'Existing release targets different source')
     ref = api('/git/ref/tags/' + metadata['tag']) if not release['draft'] else None
@@ -205,7 +217,8 @@ def publish(release_dir, output):
         and remote[p.name]['size'] == p.stat().st_size for p in assets), 'Remote publication verification failed')
     tag = api('/git/ref/tags/' + metadata['tag'])
     require(tag['object']['type'] == 'commit' and tag['object']['sha'] == commit, 'Tag changed before publication')
-    if release['draft']:
+    if observed['draft']:
+        require_current_main(api, commit)
         observed = api(f'/releases/{release["id"]}', method='PATCH', data=json.dumps({'draft': False, 'prerelease': True, 'make_latest': 'false', 'body': notes}).encode())
     require(not observed['draft'] and observed['prerelease'], 'Release publication classification differs')
     require(observed.get('body') == notes, 'Published release notes differ from reviewed publication text')

@@ -9,5 +9,5 @@ export function localTool(context,config){
       return {content:[{type:'text',text:JSON.stringify({trust:'UNTRUSTED_TASK_DATA',actor:config.actor,role:config.role,value})}],details:{authority:'scoped-client-only',independentReview:false}};
     }};
 }
-export default {id:'agi-fleet-local',name:'AGI Fleet Local Skills',version:'0.1.0-alpha.5',description:'Actor-scoped local client for pinned OpenClaw 2026.9.5. No operator authority.',
+export default {id:'agi-fleet-local',name:'AGI Fleet Local Skills',version:'0.1.0-alpha.6',description:'Actor-scoped local client for pinned OpenClaw 2026.9.5. No operator authority.',
   register(api){api.registerTool(context=>localTool(context,api.pluginConfig),{names:[TOOL],optional:true});}};

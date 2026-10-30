@@ -179,6 +179,33 @@ def edition_paths(root):
     return [('fleet', root)] + [(role, root / 'packages' / entry['package']) for role, entry in registry.items()]
 
 
+def update_application_versions(root, version):
+    """Coordinate only current application labels and launcher metadata.
+
+    Historical records, executable code and dependency versions are unchanged.
+    The reviewed mirror must receive these same bytes before a candidate build.
+    """
+    require(re.fullmatch(r'\d+\.\d+\.\d+', version), 'Invalid application version')
+    for _, app in edition_paths(root):
+        for file in app.glob('*.app/Contents/Info.plist'):
+            text = file.read_text()
+            for key in ('CFBundleShortVersionString', 'CFBundleVersion'):
+                pattern = r'(<key>' + key + r'</key>\s*<string>)\d+\.\d+\.\d+(</string>)'
+                text, count = re.subn(pattern, lambda match: match[1] + version + match[2], text)
+                require(count == 1, 'Missing or duplicate current launcher version: ' + str(file))
+            file.write_text(text)
+        for relative in ('app/index.html', 'web/index.html'):
+            file = app / relative
+            if not file.is_file():
+                continue
+            text = file.read_text()
+            text = re.sub(r'((?:id="appVersion"|data-app-version)[^>]*>)\d+\.\d+\.\d+',
+                          lambda match: match[1] + version, text)
+            text = re.sub(r'(/MontrealAI/AGI-Fleet-Linux/blob/v)\d+\.\d+\.\d+(-qualification/docs/FRESH_INSTALL\.md)',
+                          lambda match: match[1] + version + match[2], text)
+            file.write_text(text)
+
+
 def plain_text_guide(version, role):
     return f'''AGI Fleet Linux {version} — {role.title()} edition
 Current Linux installation and qualification guide
@@ -384,6 +411,7 @@ def build(args):
     extract(archive, work / 'extracted')
     root = work / 'extracted' / PREFIX
     overlay_source(root, source, source_inventory['files'])
+    update_application_versions(root, version)
     add_operator_guides(root, repository, version, args.commit)
     add_successor(root, repository, node)
     validation = update_manifests(root, version, epoch)

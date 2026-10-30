@@ -1,6 +1,6 @@
 {
   "schema": "agi-source-inventory/v1",
-  "revisionSHA256": "ccb404ab6bf79616e54aba2c33d71686447cb215128b04ba6a7dbce2e53d5383",
+  "revisionSHA256": "c7a0c5c47593d9cec35448bf846a61c50ff5147d6332886d9ee6ecda716ec9be",
   "definition": "SHA256 of compact sorted-key JSON files array. Excludes docs/evidence/dependencies/historical folders/generated release metadata/root prose; complete file bytes are in MANIFEST.sha256.",
   "files": [
     {
@@ -210,7 +210,7 @@
     },
     {
       "path": "config/companion-releases.json",
-      "sha256": "3387d585c4b54bc3d6c396f10ecd53eaeea6e1baba04c999dd7bb50794f074f1",
+      "sha256": "2d50d785f0a682960264f1369cf5216a977a1de08494a0a54926e48256002245",
       "executable": false
     },
     {
@@ -385,17 +385,17 @@
     },
     {
       "path": "package-lock.json",
-      "sha256": "2a50c4ebbe6dae4f3a7b52e6236fd5763e4c106793478b77d2be9dbf9b61b3c2",
+      "sha256": "2f2e466e273c64badd26e270096c61094d24334fc630bd8e2e911dce8e489b60",
       "executable": false
     },
     {
       "path": "package.json",
-      "sha256": "47a0b70f23ea4fa153ee74806eba7031b8e1be260f5bfdab02df2619473d1919",
+      "sha256": "f5e711b35f13610b3e7f769c29fe2e49c5994b987ddd835236ffbbd369b8b222",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/AGI Agent.app/Contents/Info.plist",
-      "sha256": "6138c4bc827b585d0a7ba5814206aa14289ebc6d7dd9f5aeb1532810072cafde",
+      "sha256": "46cd35e4007029f3aa4dad1f5a223cf2c2ff2041fb480779c924970db95dc5ba",
       "executable": false
     },
     {
@@ -515,12 +515,12 @@
     },
     {
       "path": "packages/AGI_Agent/Linux-Guide.html",
-      "sha256": "5249d4795fef1b15d089eb7624ff1536c4de9bc72ce82b9bf5ef2ce0ee284716",
+      "sha256": "509fbf2874775bf36cdb19018ec9443772515fce2b1d31fca4b846831240d565",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/Linux-Guide.txt",
-      "sha256": "e4c38e76bb0a5711b42b4cfc1938ab01ad1c0e7fc71e4767a9477cf1d4140969",
+      "sha256": "b5b99595be609bcddd6378a0573201467388d85aa520c9350a872d4b5897dc72",
       "executable": false
     },
     {
@@ -550,17 +550,17 @@
     },
     {
       "path": "packages/AGI_Agent/README.html",
-      "sha256": "5249d4795fef1b15d089eb7624ff1536c4de9bc72ce82b9bf5ef2ce0ee284716",
+      "sha256": "509fbf2874775bf36cdb19018ec9443772515fce2b1d31fca4b846831240d565",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/README.md",
-      "sha256": "1818fc99de68e48d543cac745079497a63e79e1abc53eb1017bf9e5e1450424b",
+      "sha256": "b77f0f6a1f8ff2139822d0c8f7ce49e725b5edfcc8d002f6a430f3745b2e4612",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/READ_ME_FIRST.txt",
-      "sha256": "bea569ab6e90f1019130c7f11c6d386168bb14e1bc6432ed58fc0fde9dcaf3a4",
+      "sha256": "fa708615a33a74fbd87b9621d4410022a582085d958d25303fc3f9cd58670a52",
       "executable": false
     },
     {
@@ -610,12 +610,12 @@
     },
     {
       "path": "packages/AGI_Agent/START_HERE.html",
-      "sha256": "5249d4795fef1b15d089eb7624ff1536c4de9bc72ce82b9bf5ef2ce0ee284716",
+      "sha256": "509fbf2874775bf36cdb19018ec9443772515fce2b1d31fca4b846831240d565",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/START_HERE.md",
-      "sha256": "1818fc99de68e48d543cac745079497a63e79e1abc53eb1017bf9e5e1450424b",
+      "sha256": "b77f0f6a1f8ff2139822d0c8f7ce49e725b5edfcc8d002f6a430f3745b2e4612",
       "executable": false
     },
     {
@@ -690,7 +690,7 @@
     },
     {
       "path": "packages/AGI_Agent/app/index.html",
-      "sha256": "50d1eb45858da4b40640cf2fa12359db498beedfc0c5e004b94c8bac619e202d",
+      "sha256": "6b9fe98e01f2a5f9ff2f10c0c1467befd82938715e384a797f11769cf186403e",
       "executable": false
     },
     {
@@ -1375,7 +1375,7 @@
     },
     {
       "path": "packages/AGI_Agent/config/companion-releases.json",
-      "sha256": "0d9e808f334a02e9c1051d02a006e3a3330c632bd18aa4209ab3e60d2a251299",
+      "sha256": "3de2720ae5f69e03fa29f21c78e6669430327ade26bdf947252e32d3d59666e2",
       "executable": false
     },
     {
@@ -1630,12 +1630,12 @@
     },
     {
       "path": "packages/AGI_Agent/package-lock.json",
-      "sha256": "43b5d5f9f8f8970ec95f79e447469d1ea8af263ed4ff3a4b529b16a39f30098e",
+      "sha256": "98b0956080188c3deaf568bed0296a952eb310ce36e5c1026b60e8c2671b8a5c",
       "executable": false
     },
     {
       "path": "packages/AGI_Agent/package.json",
-      "sha256": "ff23753f2916e1bb8af50d724dee0bf3fd75859ce2da3f64f00509c307ee117b",
+      "sha256": "a56839fd9b90a3f59fcfdcc89dd4d1dd0192076d1378f52427638c71bfeaac3d",
       "executable": false
     },
     {
@@ -2529,6 +2529,91 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/BUILD_RECEIPT.json",
+      "sha256": "f969dc0d20f010706f4beac5301b17426add05244649a7161e4d0cfb6b6dc935",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifact-provenance.json",
+      "sha256": "7e2f20e21bcd18d567032e45c3850f5580b18ea277093ad2bfaffe1aaebfb5ef",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/AGIJobManager.json",
+      "sha256": "131135ef1464d1d80eb5e9c18f09e6a311051f6de59c2c1c76bb8a11a3b5cdfe",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/BondMath.json",
+      "sha256": "661db19babee1ca7ba5a1ab6b4fd1f687cfece6876ae2eedf0a8253060cb644c",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ENSOwnership.json",
+      "sha256": "309efa9e2dd1ce58b40ac204536142cb4118fee147a440f6ee8df168037886de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/FailingERC20.json",
+      "sha256": "a24a3c721b4fc595f23d4b53a867590adeb542e4184aae01e72334defd510f28",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobSettlement.json",
+      "sha256": "358799fafac2828f11e1199136a5febb8a24e0ef87079082bce3e5164e71b9c1",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobValidation.json",
+      "sha256": "75362403791121dd152bf92cd3d4104183f5869ea82108fa83a8de1d7a206059",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/MockERC20.json",
+      "sha256": "d16f2209c432228a75c377894b83013673ecb0463c08053c58dc4a2fe9fa930d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/NftEligibility.json",
+      "sha256": "b19917d2ff7493f25a10b38805f7940e37d33c9546e2cf2d7a3c6d47979d0fc2",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ReputationMath.json",
+      "sha256": "20210655124db86455747619eed37ceb91564d1f642367aab8ccdc379284fa19",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/TransferUtils.json",
+      "sha256": "9066b87058bfd5aafa006a2fdf4163c3714c6965b0f9d9d03c7020971536e47e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/UriUtils.json",
+      "sha256": "84ffc8a8babaa373c5eefa2e2c9fda63dc3aedab1471a0063737ccab9b9b352d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/compiler-inputs/solc-0_8_37-b7b32a9f69cd9c3361fc6ec4ef7ba6dfd27241cb.json",
+      "sha256": "76a949de02331f57f092c84cdf7c6e699e614d750f9867a7a45b5e02822ee28e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf.json",
+      "sha256": "bf31418e6a26a24cd1af4c527e1a64c2566dba9078c4bfa09ba62a90f8cd6e93",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Agent/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
       "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
       "executable": false
@@ -2585,7 +2670,7 @@
     },
     {
       "path": "packages/AGI_Agent/shared/runtime/src/contract-profiles.mjs",
-      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
+      "sha256": "0ed14b8de5e502ce6d81fb7c0803a29428324681c6690d2a52beae1b22cc9c1e",
       "executable": false
     },
     {
@@ -2780,7 +2865,7 @@
     },
     {
       "path": "packages/AGI_Agent/src/contract-profiles.mjs",
-      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
+      "sha256": "7dcb739f9bb7d2515c30cbcecac806b0c986196ff63e959c59f111dfb67653aa",
       "executable": false
     },
     {
@@ -4315,7 +4400,7 @@
     },
     {
       "path": "packages/AGI_Employer/AGI Employer.app/Contents/Info.plist",
-      "sha256": "2c7c58e4e97094592b8ae262770a6411613a197a3398b67a232cabe166deff53",
+      "sha256": "c65800501e1872a84fc0ff5a55da2a8454960dec36bab6c65a55d127b2959d37",
       "executable": false
     },
     {
@@ -4390,12 +4475,12 @@
     },
     {
       "path": "packages/AGI_Employer/Linux-Guide.html",
-      "sha256": "6dec3e08a8614c10d4528060e493f49cae61992f67055f25472b673c06bcdced",
+      "sha256": "c76c2baaab7061f9ade3dd744843c0245103e255d46749dc367869914b43746f",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/Linux-Guide.txt",
-      "sha256": "8470394fc5c532c2188abfffb0910c73e1115767b50f08ae842c41e1f37adacb",
+      "sha256": "2cd4e3d686829ff5d38bb9aa4d8a13cc877179592075316f0e63848fb448c0f8",
       "executable": false
     },
     {
@@ -4420,17 +4505,17 @@
     },
     {
       "path": "packages/AGI_Employer/README.html",
-      "sha256": "6dec3e08a8614c10d4528060e493f49cae61992f67055f25472b673c06bcdced",
+      "sha256": "c76c2baaab7061f9ade3dd744843c0245103e255d46749dc367869914b43746f",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/README.md",
-      "sha256": "a117bc0df3c890c7339cffd8bd0ed2bf587217319b2a0236efab842811aa6215",
+      "sha256": "7f621fef96e0dd0cbd78bb3b51e9728e61c83bc28a04c42ed44a8cabb5402ffc",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/READ_ME_FIRST.txt",
-      "sha256": "bea569ab6e90f1019130c7f11c6d386168bb14e1bc6432ed58fc0fde9dcaf3a4",
+      "sha256": "fa708615a33a74fbd87b9621d4410022a582085d958d25303fc3f9cd58670a52",
       "executable": false
     },
     {
@@ -4460,12 +4545,12 @@
     },
     {
       "path": "packages/AGI_Employer/START_HERE.html",
-      "sha256": "6dec3e08a8614c10d4528060e493f49cae61992f67055f25472b673c06bcdced",
+      "sha256": "c76c2baaab7061f9ade3dd744843c0245103e255d46749dc367869914b43746f",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/START_HERE.md",
-      "sha256": "a117bc0df3c890c7339cffd8bd0ed2bf587217319b2a0236efab842811aa6215",
+      "sha256": "7f621fef96e0dd0cbd78bb3b51e9728e61c83bc28a04c42ed44a8cabb5402ffc",
       "executable": false
     },
     {
@@ -5145,7 +5230,7 @@
     },
     {
       "path": "packages/AGI_Employer/config/companion-releases.json",
-      "sha256": "6184a0368f659f4364afe5c9bd11e29ea091f719c281dbe72caba960f88fe7e4",
+      "sha256": "ceb18e12ba894a8636f3cfd19f67f7fe786511ed9e8ec53828a04a05b0395c9e",
       "executable": false
     },
     {
@@ -5340,12 +5425,12 @@
     },
     {
       "path": "packages/AGI_Employer/package-lock.json",
-      "sha256": "f13a833483130d7d361ad6c8767b03110dabfca7d93ab751d20c3b5a7b37f92a",
+      "sha256": "31e9235f5b1a7e365ca6d3c427f548723d6576cb52a85511a32e331589a64517",
       "executable": false
     },
     {
       "path": "packages/AGI_Employer/package.json",
-      "sha256": "35ad276bd02664730d538a277531004b578b5e93d973efe055929f6dee663d98",
+      "sha256": "ae3d9dbf391e0304a8780bd0c5a843b32997bd9f269c7482dc20d1f69e9d5d59",
       "executable": false
     },
     {
@@ -5605,7 +5690,7 @@
     },
     {
       "path": "packages/AGI_Employer/packages/AGI_Agent/src/contract-profiles.mjs",
-      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
+      "sha256": "69d8b659a230a41bac99f20d6cf3fde90e4f0738f9cf14e29cd1dbdde2fe41ef",
       "executable": false
     },
     {
@@ -6475,7 +6560,7 @@
     },
     {
       "path": "packages/AGI_Employer/packages/AGI_Node/src/contract-profiles.mjs",
-      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
+      "sha256": "69d8b659a230a41bac99f20d6cf3fde90e4f0738f9cf14e29cd1dbdde2fe41ef",
       "executable": false
     },
     {
@@ -8259,6 +8344,91 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/BUILD_RECEIPT.json",
+      "sha256": "f969dc0d20f010706f4beac5301b17426add05244649a7161e4d0cfb6b6dc935",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifact-provenance.json",
+      "sha256": "7e2f20e21bcd18d567032e45c3850f5580b18ea277093ad2bfaffe1aaebfb5ef",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/AGIJobManager.json",
+      "sha256": "131135ef1464d1d80eb5e9c18f09e6a311051f6de59c2c1c76bb8a11a3b5cdfe",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/BondMath.json",
+      "sha256": "661db19babee1ca7ba5a1ab6b4fd1f687cfece6876ae2eedf0a8253060cb644c",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ENSOwnership.json",
+      "sha256": "309efa9e2dd1ce58b40ac204536142cb4118fee147a440f6ee8df168037886de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/FailingERC20.json",
+      "sha256": "a24a3c721b4fc595f23d4b53a867590adeb542e4184aae01e72334defd510f28",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobSettlement.json",
+      "sha256": "358799fafac2828f11e1199136a5febb8a24e0ef87079082bce3e5164e71b9c1",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobValidation.json",
+      "sha256": "75362403791121dd152bf92cd3d4104183f5869ea82108fa83a8de1d7a206059",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/MockERC20.json",
+      "sha256": "d16f2209c432228a75c377894b83013673ecb0463c08053c58dc4a2fe9fa930d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/NftEligibility.json",
+      "sha256": "b19917d2ff7493f25a10b38805f7940e37d33c9546e2cf2d7a3c6d47979d0fc2",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ReputationMath.json",
+      "sha256": "20210655124db86455747619eed37ceb91564d1f642367aab8ccdc379284fa19",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/TransferUtils.json",
+      "sha256": "9066b87058bfd5aafa006a2fdf4163c3714c6965b0f9d9d03c7020971536e47e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/UriUtils.json",
+      "sha256": "84ffc8a8babaa373c5eefa2e2c9fda63dc3aedab1471a0063737ccab9b9b352d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/compiler-inputs/solc-0_8_37-b7b32a9f69cd9c3361fc6ec4ef7ba6dfd27241cb.json",
+      "sha256": "76a949de02331f57f092c84cdf7c6e699e614d750f9867a7a45b5e02822ee28e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf.json",
+      "sha256": "bf31418e6a26a24cd1af4c527e1a64c2566dba9078c4bfa09ba62a90f8cd6e93",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Employer/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
       "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
       "executable": false
@@ -8315,7 +8485,7 @@
     },
     {
       "path": "packages/AGI_Employer/shared/runtime/src/contract-profiles.mjs",
-      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
+      "sha256": "0ed14b8de5e502ce6d81fb7c0803a29428324681c6690d2a52beae1b22cc9c1e",
       "executable": false
     },
     {
@@ -8515,7 +8685,7 @@
     },
     {
       "path": "packages/AGI_Employer/src/contract-profiles.mjs",
-      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
+      "sha256": "7dcb739f9bb7d2515c30cbcecac806b0c986196ff63e959c59f111dfb67653aa",
       "executable": false
     },
     {
@@ -9270,7 +9440,7 @@
     },
     {
       "path": "packages/AGI_Employer/web/index.html",
-      "sha256": "3b8f3f002f62bab5e640e4077129c9c20ad699e983829f48790bdd4a8b9ae8af",
+      "sha256": "6242a7cfb1943649bc772d288196d9c0df01fb130e21017f31dbe92c3dd4bbd4",
       "executable": false
     },
     {
@@ -9370,7 +9540,7 @@
     },
     {
       "path": "packages/AGI_Evidence/AGI Evidence.app/Contents/Info.plist",
-      "sha256": "8b1727208c4e1deda903aa7e2740a959c0476a080eda633a8aea6aad106cd502",
+      "sha256": "271c520a8c45141be0f98bcfbb1fe8e35d3ea7a7aa59362262c574e8817740d4",
       "executable": false
     },
     {
@@ -9440,12 +9610,12 @@
     },
     {
       "path": "packages/AGI_Evidence/Linux-Guide.html",
-      "sha256": "8e2f3cf64c4187d99a3875243d74bc4234b8adc35a3c8486f141bfaf4603cfdc",
+      "sha256": "b636b94064b6de21aa8574baf0eda786631641231daac2e97b52ccc673760697",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/Linux-Guide.txt",
-      "sha256": "a4e1acec4db6c127b932e397b20d8c357b3568b9e261a23f5c460ce8e03c3d2d",
+      "sha256": "ab7f434cb89a89fee0e983df4018f4c70390bdb41b995bd0ca7400350e937df2",
       "executable": false
     },
     {
@@ -9470,17 +9640,17 @@
     },
     {
       "path": "packages/AGI_Evidence/README.html",
-      "sha256": "8e2f3cf64c4187d99a3875243d74bc4234b8adc35a3c8486f141bfaf4603cfdc",
+      "sha256": "b636b94064b6de21aa8574baf0eda786631641231daac2e97b52ccc673760697",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/README.md",
-      "sha256": "51c911e5dfe6e10dd7fb266cfaedb122973d4af00e40264cd65cc70f8e7cc147",
+      "sha256": "15985b757014f4a655d2a203431de7e4acb97f6dd25cb0384a73cd3240941f6c",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/READ_ME_FIRST.txt",
-      "sha256": "bea569ab6e90f1019130c7f11c6d386168bb14e1bc6432ed58fc0fde9dcaf3a4",
+      "sha256": "fa708615a33a74fbd87b9621d4410022a582085d958d25303fc3f9cd58670a52",
       "executable": false
     },
     {
@@ -9510,12 +9680,12 @@
     },
     {
       "path": "packages/AGI_Evidence/START_HERE.html",
-      "sha256": "8e2f3cf64c4187d99a3875243d74bc4234b8adc35a3c8486f141bfaf4603cfdc",
+      "sha256": "b636b94064b6de21aa8574baf0eda786631641231daac2e97b52ccc673760697",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/START_HERE.md",
-      "sha256": "51c911e5dfe6e10dd7fb266cfaedb122973d4af00e40264cd65cc70f8e7cc147",
+      "sha256": "15985b757014f4a655d2a203431de7e4acb97f6dd25cb0384a73cd3240941f6c",
       "executable": false
     },
     {
@@ -10195,7 +10365,7 @@
     },
     {
       "path": "packages/AGI_Evidence/config/companion-releases.json",
-      "sha256": "467ff685f559f779689f80cd06487f08c15b7988bb57a768264f4c6b8cbfbf69",
+      "sha256": "3da4f62a451595150033933adae79e19d2abfcef4f3fbeb114a4a316e84e35e0",
       "executable": false
     },
     {
@@ -10390,12 +10560,12 @@
     },
     {
       "path": "packages/AGI_Evidence/package-lock.json",
-      "sha256": "1dda2bece68d3069bd403163d198307385a7454a009611c55423be167f9da058",
+      "sha256": "fee7f2dfee606cd2c4752f51ed57820273b759d17b4a9aee709f58c014b10b50",
       "executable": false
     },
     {
       "path": "packages/AGI_Evidence/package.json",
-      "sha256": "75ba3b3b3662078c0591d2ba7a1ddba38d1f60d8c4364891e6b91966d1baf089",
+      "sha256": "bde74f41d05d3957ebd179cecd66580048af1b94903f282c83ae1542c29dcd56",
       "executable": false
     },
     {
@@ -10655,7 +10825,7 @@
     },
     {
       "path": "packages/AGI_Evidence/packages/AGI_Agent/src/contract-profiles.mjs",
-      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
+      "sha256": "69d8b659a230a41bac99f20d6cf3fde90e4f0738f9cf14e29cd1dbdde2fe41ef",
       "executable": false
     },
     {
@@ -11525,7 +11695,7 @@
     },
     {
       "path": "packages/AGI_Evidence/packages/AGI_Node/src/contract-profiles.mjs",
-      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
+      "sha256": "69d8b659a230a41bac99f20d6cf3fde90e4f0738f9cf14e29cd1dbdde2fe41ef",
       "executable": false
     },
     {
@@ -13309,6 +13479,91 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/BUILD_RECEIPT.json",
+      "sha256": "f969dc0d20f010706f4beac5301b17426add05244649a7161e4d0cfb6b6dc935",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifact-provenance.json",
+      "sha256": "7e2f20e21bcd18d567032e45c3850f5580b18ea277093ad2bfaffe1aaebfb5ef",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/AGIJobManager.json",
+      "sha256": "131135ef1464d1d80eb5e9c18f09e6a311051f6de59c2c1c76bb8a11a3b5cdfe",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/BondMath.json",
+      "sha256": "661db19babee1ca7ba5a1ab6b4fd1f687cfece6876ae2eedf0a8253060cb644c",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ENSOwnership.json",
+      "sha256": "309efa9e2dd1ce58b40ac204536142cb4118fee147a440f6ee8df168037886de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/FailingERC20.json",
+      "sha256": "a24a3c721b4fc595f23d4b53a867590adeb542e4184aae01e72334defd510f28",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobSettlement.json",
+      "sha256": "358799fafac2828f11e1199136a5febb8a24e0ef87079082bce3e5164e71b9c1",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobValidation.json",
+      "sha256": "75362403791121dd152bf92cd3d4104183f5869ea82108fa83a8de1d7a206059",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/MockERC20.json",
+      "sha256": "d16f2209c432228a75c377894b83013673ecb0463c08053c58dc4a2fe9fa930d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/NftEligibility.json",
+      "sha256": "b19917d2ff7493f25a10b38805f7940e37d33c9546e2cf2d7a3c6d47979d0fc2",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ReputationMath.json",
+      "sha256": "20210655124db86455747619eed37ceb91564d1f642367aab8ccdc379284fa19",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/TransferUtils.json",
+      "sha256": "9066b87058bfd5aafa006a2fdf4163c3714c6965b0f9d9d03c7020971536e47e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/UriUtils.json",
+      "sha256": "84ffc8a8babaa373c5eefa2e2c9fda63dc3aedab1471a0063737ccab9b9b352d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/compiler-inputs/solc-0_8_37-b7b32a9f69cd9c3361fc6ec4ef7ba6dfd27241cb.json",
+      "sha256": "76a949de02331f57f092c84cdf7c6e699e614d750f9867a7a45b5e02822ee28e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf.json",
+      "sha256": "bf31418e6a26a24cd1af4c527e1a64c2566dba9078c4bfa09ba62a90f8cd6e93",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Evidence/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
       "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
       "executable": false
@@ -13365,7 +13620,7 @@
     },
     {
       "path": "packages/AGI_Evidence/shared/runtime/src/contract-profiles.mjs",
-      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
+      "sha256": "0ed14b8de5e502ce6d81fb7c0803a29428324681c6690d2a52beae1b22cc9c1e",
       "executable": false
     },
     {
@@ -13565,7 +13820,7 @@
     },
     {
       "path": "packages/AGI_Evidence/src/contract-profiles.mjs",
-      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
+      "sha256": "7dcb739f9bb7d2515c30cbcecac806b0c986196ff63e959c59f111dfb67653aa",
       "executable": false
     },
     {
@@ -14320,7 +14575,7 @@
     },
     {
       "path": "packages/AGI_Evidence/web/index.html",
-      "sha256": "3b8f3f002f62bab5e640e4077129c9c20ad699e983829f48790bdd4a8b9ae8af",
+      "sha256": "6242a7cfb1943649bc772d288196d9c0df01fb130e21017f31dbe92c3dd4bbd4",
       "executable": false
     },
     {
@@ -14420,7 +14675,7 @@
     },
     {
       "path": "packages/AGI_Moderator/AGI Moderator.app/Contents/Info.plist",
-      "sha256": "6fbf3cf9cbc952154a83388f1d08c2b1108e6ce2d7b77bb7a0c6b65277e5709c",
+      "sha256": "8d86cf3fe8055a8c1c7e4cf95a868fe200c4355f6f05df4a6e16f1718a6ed015",
       "executable": false
     },
     {
@@ -14495,12 +14750,12 @@
     },
     {
       "path": "packages/AGI_Moderator/Linux-Guide.html",
-      "sha256": "c7a912ac53b163cf89bd421e0752f9d653375b9e7f77679aa482037fa1bf1428",
+      "sha256": "42967daef2f868bb3f3e7fda4157d9da759e505f586d8f7b74b5b928bfd51b32",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/Linux-Guide.txt",
-      "sha256": "7eac847e44f7bd87c1671879e44058b92318cb882b77eff0ff99cb73f87d9985",
+      "sha256": "48ba5eafaaca984b59d77ca88e3ab1e9fb6d56cb010ce9b564dc39ae2b012c23",
       "executable": false
     },
     {
@@ -14525,17 +14780,17 @@
     },
     {
       "path": "packages/AGI_Moderator/README.html",
-      "sha256": "c7a912ac53b163cf89bd421e0752f9d653375b9e7f77679aa482037fa1bf1428",
+      "sha256": "42967daef2f868bb3f3e7fda4157d9da759e505f586d8f7b74b5b928bfd51b32",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/README.md",
-      "sha256": "86121727599515976afd5c869796e51ffe79a85a65df8e9198bbe100920571b0",
+      "sha256": "240918bf86e74224479f1d3477ca854bb99648202e0141c61ab676971abd399a",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/READ_ME_FIRST.txt",
-      "sha256": "bea569ab6e90f1019130c7f11c6d386168bb14e1bc6432ed58fc0fde9dcaf3a4",
+      "sha256": "fa708615a33a74fbd87b9621d4410022a582085d958d25303fc3f9cd58670a52",
       "executable": false
     },
     {
@@ -14565,12 +14820,12 @@
     },
     {
       "path": "packages/AGI_Moderator/START_HERE.html",
-      "sha256": "c7a912ac53b163cf89bd421e0752f9d653375b9e7f77679aa482037fa1bf1428",
+      "sha256": "42967daef2f868bb3f3e7fda4157d9da759e505f586d8f7b74b5b928bfd51b32",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/START_HERE.md",
-      "sha256": "86121727599515976afd5c869796e51ffe79a85a65df8e9198bbe100920571b0",
+      "sha256": "240918bf86e74224479f1d3477ca854bb99648202e0141c61ab676971abd399a",
       "executable": false
     },
     {
@@ -15250,7 +15505,7 @@
     },
     {
       "path": "packages/AGI_Moderator/config/companion-releases.json",
-      "sha256": "3c9c7c446c3a77fd28028353ae34a0aff421d3f84719eb9131514a9888258a6e",
+      "sha256": "7e6c191c32c2198161adebfdbca07ec74e62300a2fe439db98cdc97cf1325d44",
       "executable": false
     },
     {
@@ -15445,12 +15700,12 @@
     },
     {
       "path": "packages/AGI_Moderator/package-lock.json",
-      "sha256": "38e09f8617966aecfc39a7c8c68bde0280a570ff5aed4600360c9cfbbf376e35",
+      "sha256": "0dcfc5d1052f30cd400ebf162cac1646604074bc7f5810dd0c02d8b16f69ed7b",
       "executable": false
     },
     {
       "path": "packages/AGI_Moderator/package.json",
-      "sha256": "efce373c973b752d1134329fd8a19992ca6454ba81fdc35ca6b7f5d698b46493",
+      "sha256": "147ca8dd50b7bbd1211df61fc0a8da5e998a4b8b9d7e6fb9e0f438b8bc9bc2fa",
       "executable": false
     },
     {
@@ -15710,7 +15965,7 @@
     },
     {
       "path": "packages/AGI_Moderator/packages/AGI_Agent/src/contract-profiles.mjs",
-      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
+      "sha256": "69d8b659a230a41bac99f20d6cf3fde90e4f0738f9cf14e29cd1dbdde2fe41ef",
       "executable": false
     },
     {
@@ -16580,7 +16835,7 @@
     },
     {
       "path": "packages/AGI_Moderator/packages/AGI_Node/src/contract-profiles.mjs",
-      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
+      "sha256": "69d8b659a230a41bac99f20d6cf3fde90e4f0738f9cf14e29cd1dbdde2fe41ef",
       "executable": false
     },
     {
@@ -18364,6 +18619,91 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/BUILD_RECEIPT.json",
+      "sha256": "f969dc0d20f010706f4beac5301b17426add05244649a7161e4d0cfb6b6dc935",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifact-provenance.json",
+      "sha256": "7e2f20e21bcd18d567032e45c3850f5580b18ea277093ad2bfaffe1aaebfb5ef",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/AGIJobManager.json",
+      "sha256": "131135ef1464d1d80eb5e9c18f09e6a311051f6de59c2c1c76bb8a11a3b5cdfe",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/BondMath.json",
+      "sha256": "661db19babee1ca7ba5a1ab6b4fd1f687cfece6876ae2eedf0a8253060cb644c",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ENSOwnership.json",
+      "sha256": "309efa9e2dd1ce58b40ac204536142cb4118fee147a440f6ee8df168037886de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/FailingERC20.json",
+      "sha256": "a24a3c721b4fc595f23d4b53a867590adeb542e4184aae01e72334defd510f28",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobSettlement.json",
+      "sha256": "358799fafac2828f11e1199136a5febb8a24e0ef87079082bce3e5164e71b9c1",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobValidation.json",
+      "sha256": "75362403791121dd152bf92cd3d4104183f5869ea82108fa83a8de1d7a206059",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/MockERC20.json",
+      "sha256": "d16f2209c432228a75c377894b83013673ecb0463c08053c58dc4a2fe9fa930d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/NftEligibility.json",
+      "sha256": "b19917d2ff7493f25a10b38805f7940e37d33c9546e2cf2d7a3c6d47979d0fc2",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ReputationMath.json",
+      "sha256": "20210655124db86455747619eed37ceb91564d1f642367aab8ccdc379284fa19",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/TransferUtils.json",
+      "sha256": "9066b87058bfd5aafa006a2fdf4163c3714c6965b0f9d9d03c7020971536e47e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/UriUtils.json",
+      "sha256": "84ffc8a8babaa373c5eefa2e2c9fda63dc3aedab1471a0063737ccab9b9b352d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/compiler-inputs/solc-0_8_37-b7b32a9f69cd9c3361fc6ec4ef7ba6dfd27241cb.json",
+      "sha256": "76a949de02331f57f092c84cdf7c6e699e614d750f9867a7a45b5e02822ee28e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf.json",
+      "sha256": "bf31418e6a26a24cd1af4c527e1a64c2566dba9078c4bfa09ba62a90f8cd6e93",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Moderator/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
       "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
       "executable": false
@@ -18420,7 +18760,7 @@
     },
     {
       "path": "packages/AGI_Moderator/shared/runtime/src/contract-profiles.mjs",
-      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
+      "sha256": "0ed14b8de5e502ce6d81fb7c0803a29428324681c6690d2a52beae1b22cc9c1e",
       "executable": false
     },
     {
@@ -18620,7 +18960,7 @@
     },
     {
       "path": "packages/AGI_Moderator/src/contract-profiles.mjs",
-      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
+      "sha256": "7dcb739f9bb7d2515c30cbcecac806b0c986196ff63e959c59f111dfb67653aa",
       "executable": false
     },
     {
@@ -19375,7 +19715,7 @@
     },
     {
       "path": "packages/AGI_Moderator/web/index.html",
-      "sha256": "3b8f3f002f62bab5e640e4077129c9c20ad699e983829f48790bdd4a8b9ae8af",
+      "sha256": "6242a7cfb1943649bc772d288196d9c0df01fb130e21017f31dbe92c3dd4bbd4",
       "executable": false
     },
     {
@@ -19475,7 +19815,7 @@
     },
     {
       "path": "packages/AGI_Node/AGI Node.app/Contents/Info.plist",
-      "sha256": "f5576391aece0c7be1c4e8d4e55678f4acca84763f4ad7168adbe2aa2194e6dc",
+      "sha256": "e7472684c0b97179362f8223a7eadca549b29d16c2c4938f96c05ac78d3864ae",
       "executable": false
     },
     {
@@ -19610,12 +19950,12 @@
     },
     {
       "path": "packages/AGI_Node/Linux-Guide.html",
-      "sha256": "8a6cfeacfd193c3f88aba4ba25f75cf92384eae38b5cf4c366d8a21a00f40a40",
+      "sha256": "4ac19b32651c590757a02dc0047c1e2189154a779afa07ccb320db3dc6a74e24",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/Linux-Guide.txt",
-      "sha256": "17d773432809df69893aa3e57df396d459104bd11ce7ecce5d2551bea1070a04",
+      "sha256": "c685fc459cada221cc15c8366cc15ee7eb9cafcc23e50d43d57e95b41a8b9a6b",
       "executable": false
     },
     {
@@ -19645,17 +19985,17 @@
     },
     {
       "path": "packages/AGI_Node/README.html",
-      "sha256": "8a6cfeacfd193c3f88aba4ba25f75cf92384eae38b5cf4c366d8a21a00f40a40",
+      "sha256": "4ac19b32651c590757a02dc0047c1e2189154a779afa07ccb320db3dc6a74e24",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/README.md",
-      "sha256": "384e0bff2421dec8062d8d254fe92ace31644112ce00c194b52c0a472c9948e4",
+      "sha256": "980a7fe8809f3c7463f0565d5e20f183fd2bcb3dda64312cbc2406a69c6d4f04",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/READ_ME_FIRST.txt",
-      "sha256": "bea569ab6e90f1019130c7f11c6d386168bb14e1bc6432ed58fc0fde9dcaf3a4",
+      "sha256": "fa708615a33a74fbd87b9621d4410022a582085d958d25303fc3f9cd58670a52",
       "executable": false
     },
     {
@@ -19705,12 +20045,12 @@
     },
     {
       "path": "packages/AGI_Node/START_HERE.html",
-      "sha256": "8a6cfeacfd193c3f88aba4ba25f75cf92384eae38b5cf4c366d8a21a00f40a40",
+      "sha256": "4ac19b32651c590757a02dc0047c1e2189154a779afa07ccb320db3dc6a74e24",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/START_HERE.md",
-      "sha256": "384e0bff2421dec8062d8d254fe92ace31644112ce00c194b52c0a472c9948e4",
+      "sha256": "980a7fe8809f3c7463f0565d5e20f183fd2bcb3dda64312cbc2406a69c6d4f04",
       "executable": false
     },
     {
@@ -19780,7 +20120,7 @@
     },
     {
       "path": "packages/AGI_Node/app/index.html",
-      "sha256": "4bee5583ffa43e6331f362f558c98a59e4d1dd4baeaf13bb4d7c5d8c800a9bf8",
+      "sha256": "53246da160e30cc3c6b7b59400a423f2ee75d2d566ea5123692dbc33bcf430b3",
       "executable": false
     },
     {
@@ -20465,7 +20805,7 @@
     },
     {
       "path": "packages/AGI_Node/config/companion-releases.json",
-      "sha256": "9152f6388097e10be556b6a03d78d8233bed27e56d663a8e5b9287577cf2f3bf",
+      "sha256": "2d7d17e444e8fbbe132a2640c2cd63a127bc602e3a16220e2e74fa189deae456",
       "executable": false
     },
     {
@@ -20775,12 +21115,12 @@
     },
     {
       "path": "packages/AGI_Node/package-lock.json",
-      "sha256": "26c5750aec23f232c56f6ebcc5e8d361b46120eced7e332269fe0e6a4e2a6437",
+      "sha256": "fd65f346a050e2658d64a4f8c90b63bc4a9185c77db0c95c83b1bb7f757a10b1",
       "executable": false
     },
     {
       "path": "packages/AGI_Node/package.json",
-      "sha256": "4e1282e94d97a0e8ab29d7f364c728a0331d0045daeceb9ecff9c730644196af",
+      "sha256": "063eca38973063a0d59636228d00fc990fc1417188c5648999dcd85eb776516f",
       "executable": false
     },
     {
@@ -21684,6 +22024,91 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/BUILD_RECEIPT.json",
+      "sha256": "f969dc0d20f010706f4beac5301b17426add05244649a7161e4d0cfb6b6dc935",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifact-provenance.json",
+      "sha256": "7e2f20e21bcd18d567032e45c3850f5580b18ea277093ad2bfaffe1aaebfb5ef",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/AGIJobManager.json",
+      "sha256": "131135ef1464d1d80eb5e9c18f09e6a311051f6de59c2c1c76bb8a11a3b5cdfe",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/BondMath.json",
+      "sha256": "661db19babee1ca7ba5a1ab6b4fd1f687cfece6876ae2eedf0a8253060cb644c",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ENSOwnership.json",
+      "sha256": "309efa9e2dd1ce58b40ac204536142cb4118fee147a440f6ee8df168037886de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/FailingERC20.json",
+      "sha256": "a24a3c721b4fc595f23d4b53a867590adeb542e4184aae01e72334defd510f28",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobSettlement.json",
+      "sha256": "358799fafac2828f11e1199136a5febb8a24e0ef87079082bce3e5164e71b9c1",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobValidation.json",
+      "sha256": "75362403791121dd152bf92cd3d4104183f5869ea82108fa83a8de1d7a206059",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/MockERC20.json",
+      "sha256": "d16f2209c432228a75c377894b83013673ecb0463c08053c58dc4a2fe9fa930d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/NftEligibility.json",
+      "sha256": "b19917d2ff7493f25a10b38805f7940e37d33c9546e2cf2d7a3c6d47979d0fc2",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ReputationMath.json",
+      "sha256": "20210655124db86455747619eed37ceb91564d1f642367aab8ccdc379284fa19",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/TransferUtils.json",
+      "sha256": "9066b87058bfd5aafa006a2fdf4163c3714c6965b0f9d9d03c7020971536e47e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/UriUtils.json",
+      "sha256": "84ffc8a8babaa373c5eefa2e2c9fda63dc3aedab1471a0063737ccab9b9b352d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/compiler-inputs/solc-0_8_37-b7b32a9f69cd9c3361fc6ec4ef7ba6dfd27241cb.json",
+      "sha256": "76a949de02331f57f092c84cdf7c6e699e614d750f9867a7a45b5e02822ee28e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf.json",
+      "sha256": "bf31418e6a26a24cd1af4c527e1a64c2566dba9078c4bfa09ba62a90f8cd6e93",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Node/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
       "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
       "executable": false
@@ -21740,7 +22165,7 @@
     },
     {
       "path": "packages/AGI_Node/shared/runtime/src/contract-profiles.mjs",
-      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
+      "sha256": "0ed14b8de5e502ce6d81fb7c0803a29428324681c6690d2a52beae1b22cc9c1e",
       "executable": false
     },
     {
@@ -21940,7 +22365,7 @@
     },
     {
       "path": "packages/AGI_Node/src/contract-profiles.mjs",
-      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
+      "sha256": "7dcb739f9bb7d2515c30cbcecac806b0c986196ff63e959c59f111dfb67653aa",
       "executable": false
     },
     {
@@ -23515,7 +23940,7 @@
     },
     {
       "path": "packages/AGI_Recovery/AGI Recovery.app/Contents/Info.plist",
-      "sha256": "2ced78f459c6c37bac53578c52dcf6d1f219a82cdd0738e6229cfd7b782bf0e5",
+      "sha256": "258c2c77c3fbbfdc252fcd4280a3820b59c97a979e726a071d5da27e4a303dbd",
       "executable": false
     },
     {
@@ -23590,12 +24015,12 @@
     },
     {
       "path": "packages/AGI_Recovery/Linux-Guide.html",
-      "sha256": "921101d0b86418a1eadc6a4ce6cbc04dbc8b4df263e2e9588ecbf84ca70a596a",
+      "sha256": "7beb1a72d3cdf56f8cb6115425c4472044a9cdde4e968fe5d73169a7084986fa",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/Linux-Guide.txt",
-      "sha256": "410f76e2f52761ea0071a01942849787e59665e5e1f6774c8a02a6f0e537a9ff",
+      "sha256": "46e1a28b493eb20ddcbb0aa6110a357922bca1f03b605fcb98a664097eb67812",
       "executable": false
     },
     {
@@ -23620,17 +24045,17 @@
     },
     {
       "path": "packages/AGI_Recovery/README.html",
-      "sha256": "921101d0b86418a1eadc6a4ce6cbc04dbc8b4df263e2e9588ecbf84ca70a596a",
+      "sha256": "7beb1a72d3cdf56f8cb6115425c4472044a9cdde4e968fe5d73169a7084986fa",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/README.md",
-      "sha256": "1fae91063bfb8bd946f58c6546cc832d519bafed790d0b471b10bb7bff0a3d6b",
+      "sha256": "0e62178bf409242eec25e8ab578c3223a8a99d94c1c0cc1b56bb497742f5190f",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/READ_ME_FIRST.txt",
-      "sha256": "bea569ab6e90f1019130c7f11c6d386168bb14e1bc6432ed58fc0fde9dcaf3a4",
+      "sha256": "fa708615a33a74fbd87b9621d4410022a582085d958d25303fc3f9cd58670a52",
       "executable": false
     },
     {
@@ -23660,12 +24085,12 @@
     },
     {
       "path": "packages/AGI_Recovery/START_HERE.html",
-      "sha256": "921101d0b86418a1eadc6a4ce6cbc04dbc8b4df263e2e9588ecbf84ca70a596a",
+      "sha256": "7beb1a72d3cdf56f8cb6115425c4472044a9cdde4e968fe5d73169a7084986fa",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/START_HERE.md",
-      "sha256": "1fae91063bfb8bd946f58c6546cc832d519bafed790d0b471b10bb7bff0a3d6b",
+      "sha256": "0e62178bf409242eec25e8ab578c3223a8a99d94c1c0cc1b56bb497742f5190f",
       "executable": false
     },
     {
@@ -24345,7 +24770,7 @@
     },
     {
       "path": "packages/AGI_Recovery/config/companion-releases.json",
-      "sha256": "96cd1c59be6105594db6d4a8a2c0fe96024f6d4dda548f27f5b7a7bffff0bf5d",
+      "sha256": "6d6ea9696f9e6747b4cf6199406099ef8d265e1caa8e2910b8b50066f7daa559",
       "executable": false
     },
     {
@@ -24540,12 +24965,12 @@
     },
     {
       "path": "packages/AGI_Recovery/package-lock.json",
-      "sha256": "64d03cf5685f39faef5aa738af07e2fa15b7b6fe1d2683c4ab48c357fa65466e",
+      "sha256": "21f86aaf6d62561c4141538f3997c9bc0642406034b83c2c5a1fc08c590b3c66",
       "executable": false
     },
     {
       "path": "packages/AGI_Recovery/package.json",
-      "sha256": "6ce1e8340ef36e5e528bfd7e35c4c35aa6cb36e05f67d1ffe298d2c5d6629912",
+      "sha256": "801ffac332841ca658e7a1f3b5242dffbe83673f44d6131cb3fa2d6b66a43238",
       "executable": false
     },
     {
@@ -24805,7 +25230,7 @@
     },
     {
       "path": "packages/AGI_Recovery/packages/AGI_Agent/src/contract-profiles.mjs",
-      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
+      "sha256": "69d8b659a230a41bac99f20d6cf3fde90e4f0738f9cf14e29cd1dbdde2fe41ef",
       "executable": false
     },
     {
@@ -25675,7 +26100,7 @@
     },
     {
       "path": "packages/AGI_Recovery/packages/AGI_Node/src/contract-profiles.mjs",
-      "sha256": "c60f9c1b1c8d2db453d9bbe48020cced8cb22c5668ccef708d892dab68517a31",
+      "sha256": "69d8b659a230a41bac99f20d6cf3fde90e4f0738f9cf14e29cd1dbdde2fe41ef",
       "executable": false
     },
     {
@@ -27459,6 +27884,91 @@
       "executable": false
     },
     {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/BUILD_RECEIPT.json",
+      "sha256": "f969dc0d20f010706f4beac5301b17426add05244649a7161e4d0cfb6b6dc935",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifact-provenance.json",
+      "sha256": "7e2f20e21bcd18d567032e45c3850f5580b18ea277093ad2bfaffe1aaebfb5ef",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/AGIJobManager.json",
+      "sha256": "131135ef1464d1d80eb5e9c18f09e6a311051f6de59c2c1c76bb8a11a3b5cdfe",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/BondMath.json",
+      "sha256": "661db19babee1ca7ba5a1ab6b4fd1f687cfece6876ae2eedf0a8253060cb644c",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ENSOwnership.json",
+      "sha256": "309efa9e2dd1ce58b40ac204536142cb4118fee147a440f6ee8df168037886de",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/FailingERC20.json",
+      "sha256": "a24a3c721b4fc595f23d4b53a867590adeb542e4184aae01e72334defd510f28",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobSettlement.json",
+      "sha256": "358799fafac2828f11e1199136a5febb8a24e0ef87079082bce3e5164e71b9c1",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobValidation.json",
+      "sha256": "75362403791121dd152bf92cd3d4104183f5869ea82108fa83a8de1d7a206059",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/MockERC20.json",
+      "sha256": "d16f2209c432228a75c377894b83013673ecb0463c08053c58dc4a2fe9fa930d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/NftEligibility.json",
+      "sha256": "b19917d2ff7493f25a10b38805f7940e37d33c9546e2cf2d7a3c6d47979d0fc2",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ReputationMath.json",
+      "sha256": "20210655124db86455747619eed37ceb91564d1f642367aab8ccdc379284fa19",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/TransferUtils.json",
+      "sha256": "9066b87058bfd5aafa006a2fdf4163c3714c6965b0f9d9d03c7020971536e47e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/UriUtils.json",
+      "sha256": "84ffc8a8babaa373c5eefa2e2c9fda63dc3aedab1471a0063737ccab9b9b352d",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/compiler-inputs/solc-0_8_37-b7b32a9f69cd9c3361fc6ec4ef7ba6dfd27241cb.json",
+      "sha256": "76a949de02331f57f092c84cdf7c6e699e614d750f9867a7a45b5e02822ee28e",
+      "executable": false
+    },
+    {
+      "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf.json",
+      "sha256": "bf31418e6a26a24cd1af4c527e1a64c2566dba9078c4bfa09ba62a90f8cd6e93",
+      "executable": false
+    },
+    {
       "path": "packages/AGI_Recovery/shared/runtime/contract-profiles/manager-legacy-db876a8.json",
       "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
       "executable": false
@@ -27515,7 +28025,7 @@
     },
     {
       "path": "packages/AGI_Recovery/shared/runtime/src/contract-profiles.mjs",
-      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
+      "sha256": "0ed14b8de5e502ce6d81fb7c0803a29428324681c6690d2a52beae1b22cc9c1e",
       "executable": false
     },
     {
@@ -27715,7 +28225,7 @@
     },
     {
       "path": "packages/AGI_Recovery/src/contract-profiles.mjs",
-      "sha256": "c56ce6321031dc5dc47cf7096402acabd9ec5ba1445d9e2903f584c79bb2f5a0",
+      "sha256": "7dcb739f9bb7d2515c30cbcecac806b0c986196ff63e959c59f111dfb67653aa",
       "executable": false
     },
     {
@@ -28470,7 +28980,7 @@
     },
     {
       "path": "packages/AGI_Recovery/web/index.html",
-      "sha256": "3b8f3f002f62bab5e640e4077129c9c20ad699e983829f48790bdd4a8b9ae8af",
+      "sha256": "6242a7cfb1943649bc772d288196d9c0df01fb130e21017f31dbe92c3dd4bbd4",
       "executable": false
     },
     {
@@ -28775,7 +29285,7 @@
     },
     {
       "path": "scripts/sync-contract-profiles.py",
-      "sha256": "af3279afc554f31522bb332a3f3db0e5b99cee188e7608ed072a9b5a722e9f65",
+      "sha256": "d5a84f91e64d4099389aef9ccb5c29f9360b776f61c69592d8a0601163958e64",
       "executable": false
     },
     {
@@ -29774,6 +30284,91 @@
       "executable": false
     },
     {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/BUILD_RECEIPT.json",
+      "sha256": "f969dc0d20f010706f4beac5301b17426add05244649a7161e4d0cfb6b6dc935",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/LICENSE",
+      "sha256": "4827c1af7eacb8f5941bd6867e74293d5f0c3a1360a567f65cfcf264c6c04a25",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/OPENZEPPELIN-LICENSE",
+      "sha256": "75236a5ec2a8b0fa7b1239bb281e43b0a0dd18339b98ca3ef50c09e9f230476d",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifact-provenance.json",
+      "sha256": "7e2f20e21bcd18d567032e45c3850f5580b18ea277093ad2bfaffe1aaebfb5ef",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/AGIJobManager.json",
+      "sha256": "131135ef1464d1d80eb5e9c18f09e6a311051f6de59c2c1c76bb8a11a3b5cdfe",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/BondMath.json",
+      "sha256": "661db19babee1ca7ba5a1ab6b4fd1f687cfece6876ae2eedf0a8253060cb644c",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ENSOwnership.json",
+      "sha256": "309efa9e2dd1ce58b40ac204536142cb4118fee147a440f6ee8df168037886de",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/FailingERC20.json",
+      "sha256": "a24a3c721b4fc595f23d4b53a867590adeb542e4184aae01e72334defd510f28",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobSettlement.json",
+      "sha256": "358799fafac2828f11e1199136a5febb8a24e0ef87079082bce3e5164e71b9c1",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/JobValidation.json",
+      "sha256": "75362403791121dd152bf92cd3d4104183f5869ea82108fa83a8de1d7a206059",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/MockERC20.json",
+      "sha256": "d16f2209c432228a75c377894b83013673ecb0463c08053c58dc4a2fe9fa930d",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/NftEligibility.json",
+      "sha256": "b19917d2ff7493f25a10b38805f7940e37d33c9546e2cf2d7a3c6d47979d0fc2",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/ReputationMath.json",
+      "sha256": "20210655124db86455747619eed37ceb91564d1f642367aab8ccdc379284fa19",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/TransferUtils.json",
+      "sha256": "9066b87058bfd5aafa006a2fdf4163c3714c6965b0f9d9d03c7020971536e47e",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/artifacts/UriUtils.json",
+      "sha256": "84ffc8a8babaa373c5eefa2e2c9fda63dc3aedab1471a0063737ccab9b9b352d",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf/compiler-inputs/solc-0_8_37-b7b32a9f69cd9c3361fc6ec4ef7ba6dfd27241cb.json",
+      "sha256": "76a949de02331f57f092c84cdf7c6e699e614d750f9867a7a45b5e02822ee28e",
+      "executable": false
+    },
+    {
+      "path": "shared/runtime/contract-profiles/manager-1.19.3-d0c2cbaf.json",
+      "sha256": "bf31418e6a26a24cd1af4c527e1a64c2566dba9078c4bfa09ba62a90f8cd6e93",
+      "executable": false
+    },
+    {
       "path": "shared/runtime/contract-profiles/manager-legacy-db876a8.json",
       "sha256": "8553cd0dc05dbf037c30ad3326561cb899ff42c5664fcb86a9f8a9d1c347a0ac",
       "executable": false
@@ -29830,7 +30425,7 @@
     },
     {
       "path": "shared/runtime/src/contract-profiles.mjs",
-      "sha256": "388cd4b7bc0204748253bd877a60eb22d9ac95ecec50667f55a3f850cbc21fc0",
+      "sha256": "0ed14b8de5e502ce6d81fb7c0803a29428324681c6690d2a52beae1b22cc9c1e",
       "executable": false
     },
     {
@@ -29875,7 +30470,7 @@
     },
     {
       "path": "shared/runtime-inventory.json",
-      "sha256": "9199638fe3255fe87a48994c9cae0b0dde54e650de43af9cf1399476fdbbbb5a",
+      "sha256": "be716e4c1ce701a96189ceff65540a2ebb864d6d2d69cc86c3f644c7538484f9",
       "executable": false
     },
     {
@@ -30350,7 +30945,7 @@
     },
     {
       "path": "tests/contract-profiles.test.mjs",
-      "sha256": "a741a49cdb21613343ff83f1a9437378c6928703cbd0c361bc2b79e24f996c69",
+      "sha256": "a9e555985b700346fd1b8c3ee08f4c888a8664cd0604de0687edc005d6bd71d8",
       "executable": false
     },
     {
@@ -30670,7 +31265,7 @@
     },
     {
       "path": "web/index.html",
-      "sha256": "3b8f3f002f62bab5e640e4077129c9c20ad699e983829f48790bdd4a8b9ae8af",
+      "sha256": "6242a7cfb1943649bc772d288196d9c0df01fb130e21017f31dbe92c3dd4bbd4",
       "executable": false
     },
     {

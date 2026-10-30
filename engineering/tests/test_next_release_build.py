@@ -131,6 +131,75 @@ class CandidateBuilder(unittest.TestCase):
                     self.assertTrue((app / relative).is_file(), relative)
                 self.assertIn('Production qualification remains pending', guide)
 
+    def test_current_app_labels_and_launcher_versions_advance_without_code_or_history_changes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            editions = self.edition_fixture(root)
+            for role, app in editions:
+                plist = app / (role.title() + '.app/Contents/Info.plist')
+                plist.parent.mkdir(parents=True)
+                plist.write_text('<plist>\n<key>CFBundleShortVersionString</key>\n\t<string>1.0.9</string>\n'
+                                 '<key>CFBundleVersion</key>\n\t<string>1.0.9</string>\n'
+                                 '<key>Unchanged</key><string>1.0.9</string>\n</plist>\n')
+                html = app / 'app/index.html'
+                html.parent.mkdir(parents=True)
+                html.write_text('<span id="appVersion">1.0.9</span>\n'
+                                '<a href="https://github.com/MontrealAI/AGI-Fleet-Linux/blob/v1.0.9-qualification/docs/FRESH_INSTALL.md">Guide</a>\n'
+                                '<script>const historicalMinimum="1.0.9";</script>\n')
+                history = app / 'evidence/history/old.html'
+                history.parent.mkdir(parents=True)
+                history.write_text('Historical version 1.0.9\n')
+            m.update_application_versions(root, '1.0.10')
+            for role, app in editions:
+                plist = (app / (role.title() + '.app/Contents/Info.plist')).read_text()
+                self.assertEqual(plist.count('<string>1.0.10</string>'), 2)
+                self.assertIn('<key>Unchanged</key><string>1.0.9</string>', plist)
+                html = (app / 'app/index.html').read_text()
+                self.assertIn('id="appVersion">1.0.10', html)
+                self.assertIn('/blob/v1.0.10-qualification/docs/FRESH_INSTALL.md', html)
+                self.assertIn('const historicalMinimum="1.0.9"', html)
+                self.assertEqual((app / 'evidence/history/old.html').read_text(), 'Historical version 1.0.9\n')
+            before = {p.relative_to(root): p.read_bytes() for p in root.rglob('*') if p.is_file()}
+            m.update_application_versions(root, '1.0.10')
+            self.assertEqual(before, {p.relative_to(root): p.read_bytes() for p in root.rglob('*') if p.is_file()})
+
+    def test_reviewed_current_application_metadata_matches_the_materialized_release(self):
+        repository = Path(__file__).resolve().parents[2]
+        source = repository / 'fleet'
+        version = json.loads((repository / 'engineering/next-release.json').read_text())['version']
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            m.write_json(root / 'config/role-registry.json', json.loads((source / 'config/role-registry.json').read_text()))
+            names = []
+            for role, app in m.edition_paths(source):
+                for original in [*app.glob('*.app/Contents/Info.plist'), app / 'app/index.html', app / 'web/index.html']:
+                    if original.is_file():
+                        relative = original.relative_to(source)
+                        target = root / relative
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        target.write_bytes(original.read_bytes())
+                        names.append(relative)
+            self.assertGreater(len(names), 10)
+            m.update_application_versions(root, version)
+            for relative in names:
+                self.assertEqual((source / relative).read_bytes(), (root / relative).read_bytes(), str(relative))
+
+    def test_reviewed_current_welcomes_match_the_release_builder(self):
+        repository = Path(__file__).resolve().parents[2]
+        specification = json.loads((repository / 'engineering/next-release.json').read_text())
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            m.write_json(root / 'config/role-registry.json', json.loads((repository / 'fleet/config/role-registry.json').read_text()))
+            (root / 'NOTICE.md').write_text('Temporary staging notice.\n')
+            m.add_operator_guides(root, repository, specification['version'], 'a' * 40)
+            names = ['README.md', 'README.html', 'START_HERE.md', 'START_HERE.html', 'Linux-Guide.html', 'Linux-Guide.txt', 'READ_ME_FIRST.txt']
+            for role, app in m.edition_paths(root):
+                if role == 'fleet':
+                    continue
+                for name in names:
+                    relative = app.relative_to(root) / name
+                    self.assertEqual((repository / 'fleet' / relative).read_bytes(), (app / name).read_bytes(), str(relative))
+
     def test_new_manifests_do_not_reuse_previous_acceptance(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

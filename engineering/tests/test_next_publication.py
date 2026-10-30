@@ -45,8 +45,6 @@ class PublicationAcceptance(unittest.TestCase):
                 'managerCommit': self.metadata['integration']['commit'], 'verifiedLogs': 19,
                 'productionSourcesMatched': 11, 'contractArtifactsMatched': 11})
 
-        profile_id = 'manager-1.17.0-b7218196'
-        profile = publisher.CONTRACT_PROFILES[profile_id]
         self.audit['contractProfiles'] = [
             {'architecture': arch, 'status': 'PASS', 'workflowCommit': self.commit,
              'workflowRun': self.run_id, 'productionQualified': False,
@@ -54,7 +52,10 @@ class PublicationAcceptance(unittest.TestCase):
              'profile': profile_id, 'profileManifestSHA256': profile['manifestSHA256'],
              'managerCommit': profile['commit'], 'managerTestsPassed': profile['managerTests'],
              'standaloneIntegrationScripts': 8, 'contractArtifactsMatched': 11, 'verifiedLogs': 12,
-             'completeArchiveUnchanged': True} for arch in ('x64', 'arm64')]
+             'completeArchiveUnchanged': True}
+            for profile_id in publisher.RELEASE_CONTRACT_PROFILES
+            for profile in [publisher.CONTRACT_PROFILES[profile_id]]
+            for arch in ('x64', 'arm64')]
 
     def test_profile_proof_missing_or_mixed_is_rejected(self):
         for key, value in [('archiveSHA256', '0' * 64), ('workflowCommit', 'd' * 40),
@@ -98,7 +99,7 @@ class PublicationAcceptance(unittest.TestCase):
                 publisher.validate(metadata, self.audit, self.commit)
 
     def test_published_guides_are_bound_to_the_validated_commit(self):
-        source = publisher.ROOT / 'docs/RELEASE_NOTES_1_1_4.md'
+        source = publisher.ROOT / 'docs/RELEASE_NOTES_1_1_5.md'
         before = source.read_bytes()
         notes = publisher.publication_notes([], self.commit, self.run_id)
         for path in ('successor/docs/GUIDE.md', 'successor/docs/ARCHITECTURE.md',
@@ -137,9 +138,9 @@ class PublicationAcceptance(unittest.TestCase):
                 'sha256': metadata['sha256'], 'audit': audit,
                 'evidence': {'name': evidence.name, 'sha256': publisher.sha(evidence)}}
             publisher.write(release / 'release.json', metadata)
-            manifest_path = output / 'Release-Manifest-v1.1.4.json'; publisher.write(manifest_path, manifest)
+            manifest_path = output / 'Release-Manifest-v1.1.5.json'; publisher.write(manifest_path, manifest)
             assets = [archive, evidence, manifest_path]
-            (output / 'SHA256SUMS-v1.1.4.txt').write_text(''.join(publisher.sha(p) + '  ' + p.name + '\n' for p in assets))
+            (output / 'SHA256SUMS-v1.1.5.txt').write_text(''.join(publisher.sha(p) + '  ' + p.name + '\n' for p in assets))
             expected = publisher.publication_notes(assets, self.commit, self.run_id)
             (output / 'release-notes.md').write_text(expected + '\nUnreviewed instructions.\n')
             with mock.patch.dict(os.environ, {'GITHUB_SHA': self.commit, 'GITHUB_RUN_ID': self.run_id}):

@@ -3,9 +3,14 @@ import {validateTaskInput} from '../worker.mjs';
 import {publicOnly} from '../../fleet/successor/vendor/manager/site/assets/successor/safe.mjs';
 import {validateAlphaInput} from '../alpha/contract.mjs';
 import {ALPHA_PACKAGE_HELP,ALPHA_SOURCE_COMMIT,inspectAlphaPackage} from '../alpha/package.mjs';
+import {prepareComputer,validateComputerInput} from '../computer/profile.mjs';
 
 export const OFFLINE_LIMITS=Object.freeze({wallMs:15000,cpuSeconds:10,heapMiB:128,outputBytes:2000000,modelCalls:0,spendUSDC:'0',actions:1});
 const HELP={
+  COMPUTER_DISABLED:'This optional browser backend is disabled. Install and inspect a private exact-source zero-cost rehearsal profile, then restart the service and activate a new grant.',
+  COMPUTER_RUNTIME_REBIND_REQUIRED:'The configured Alpha source, runtime, image or fixed rehearsal changed. Inspect the installation, reactivate explicitly and prepare a fresh grant.',
+  COMPUTER_FIXTURE_BINDING:'This installed rehearsal permits a different exact handoff. Imports cannot select or replace the configured action sequence.',
+  UNCOMMISSIONED_PROVIDER_COST:'Live paid model work is not commissioned. Only the explicitly installed zero-provider-request scripted Docker rehearsal is supported; no provider request was made.',
   ALPHA_PACKAGE_UNPROVISIONED:ALPHA_PACKAGE_HELP,
   ALPHA_RUNTIME_REBIND_REQUIRED:'The pinned Alpha installation or its runtime identity changed. Rerun doctor, explicitly reactivate the actor and request a new grant.',
   ALPHA_PACKAGE_MISSING:ALPHA_PACKAGE_HELP,
@@ -39,12 +44,24 @@ function problem(code,taskFormat=false){return {code,kind:OUTSIDE.has(code)||tas
 
 // Derive from the existing role package and host descriptor; no second action registry.
 // Qualification observations never come from a task, imported capsule or a green fixture.
-export function evaluateAdmission({actor,task,host,source,currentSource,hostId,at,paused,stopped,nativeBackend=false}) {
+export function evaluateAdmission({actor,task,host,source,currentSource,hostId,at,paused,stopped,nativeBackend=false,computerInstallation=null}) {
   const pkg=packagePolicy(actor.role),issues=[];
-  let valid=true,alpha=null;
+  let valid=true,alpha=null,computer=null;
   try {
     validateTaskInput(actor.role,task);
     if(task.action==='alpha-run')alpha=validateAlphaInput(task.input);
+    if(task.action==='alpha-computer-run'){
+      validateComputerInput(task.input);
+      if(nativeBackend){
+        need(computerInstallation?.supported,computerInstallation?.code||'COMPUTER_DISABLED');
+        need(host.alphaComputer?.runtimeIdentity===computerInstallation.runtimeIdentity&&actor.host?.alphaComputerRuntimeIdentity===computerInstallation.runtimeIdentity,'COMPUTER_RUNTIME_REBIND_REQUIRED');
+        computer=prepareComputer(task.input,computerInstallation);
+      }else{
+        need(host.alphaComputer?.mode==='scripted-zero-cost',host.alphaComputer?.code||'COMPUTER_DISABLED');
+        need(host.alphaComputer?.evidenceClass==='SYNTHETIC_COMPUTER_REHEARSAL'&&host.alphaComputer.preparation,'COMPUTER_NATIVE_BACKEND_REQUIRED');
+        computer={...host.alphaComputer.preparation,evidenceClass:'SYNTHETIC_COMPUTER_REHEARSAL'};
+      }
+    }
     const publicView=structuredClone(task);
     if(task.action==='protocol-inspect'){
       need(/^http:\/\/127\.0\.0\.1:\d{4,5}$/.test(publicView.input?.config?.gatewayURL),'GATEWAY_LOOPBACK_REQUIRED');
@@ -79,25 +96,26 @@ export function evaluateAdmission({actor,task,host,source,currentSource,hostId,a
     if(source!==currentSource||actor.host.sourceSha256!==currentSource)issues.push(problem('RUNTIME_REBIND_REQUIRED'));
     if(host.identity!==actor.host.identity)issues.push(problem('HOST_REBIND_REQUIRED'));
   }
-  const family=valid?(alpha?.kind||task.input.mission?.kind||task.action):null;
+  const family=valid?(computer?'successor-computer':alpha?.kind||task.input.mission?.kind||task.action):null;
   const binding={mode:'local-skills',platform:host.platform||process.platform,arch:host.arch||process.arch,machine:hostId,
     session:host.bootId||null,backend:host.backend||null,hostIdentity:host.identity||null,runtime:VERSION,sourceSha256:currentSource,
     node:process.versions.node,packageSha256:pkg.sha256,registrySha256:pkg.registry,actor:actor.id,role:actor.role,controller:actor.controller,generation:actor.generation,
-    provider:{route:'none',model:null,authentication:'not-required',modelCalls:0},
-    tools:{actions:pkg.policy.actions,capabilities:pkg.policy.capabilities,network:host.network||'none',inference:host.inference||'none',files:host.files||'per-run input only',browser:host.browser||'BLOCKED',desktop:host.desktop||'BLOCKED'},
-    taskFamily:family,taskSha256:digest(task),permissions:'bounded-offline-only',review:{kind:task?.review??null,sourceActor:task?.sourceActor??null,sourceController:task?.sourceController??null,independent:false},
+    provider:computer?{route:'scripted-zero-cost',model:computer.provider?.model??'SCRIPTED_TEST_DOUBLE',authentication:'not-required',modelCalls:0}:{route:'none',model:null,authentication:'not-required',modelCalls:0},
+    tools:{actions:pkg.policy.actions,capabilities:pkg.policy.capabilities,network:computer?'exact-public-read-broker':host.network||'none',inference:computer?'scripted-zero-cost':host.inference||'none',files:computer?'private native receipt and bounded artifacts':host.files||'per-run input only',browser:computer?'exact-image Docker browser':host.browser||'BLOCKED',desktop:host.desktop||'BLOCKED'},
+    taskFamily:family,taskSha256:digest(task),permissions:computer?'bounded-scripted-browser-rehearsal-only':'bounded-offline-only',review:{kind:task?.review??null,sourceActor:task?.sourceActor??null,sourceController:task?.sourceController??null,independent:false},
+    ...(computer?{computer}:{}),
     ...(alpha?{alpha:{sourceCommit:ALPHA_SOURCE_COMMIT,market:alpha.market,specSha256:alpha.specHash,normalizedMissionSemanticSha256:alpha.normalizedMissionSemanticSha256,outputBudget:alpha.budget,packageSha256:host.alphaRun?.packageSha256??null,trustLockSha256:host.alphaRun?.trustLockSha256??null,runtimeIdentity:host.alphaRun?.runtimeIdentity??null,adapterSha256:host.alphaRun?.adapterSha256??null,treeSha256:host.alphaRun?.treeSha256??null,evidenceClass:nativeBackend?(issues.length?'NATIVE_ADMISSION_BLOCKED':'REVIEWED_NATIVE_PACKAGE'):'SYNTHETIC_OR_UNVERIFIED'}}:{})};
   const status=issues.some(i=>i.kind==='OUTSIDE_SCOPE')?'OUTSIDE_SCOPE':issues.length?'MISSING_PREREQUISITE':'SUPPORTABLE';
   return {schema:'agi-fleet/local-admission/v1',status,checkedAt:at,expiresAt:at+300000,recheck:'authorization and immediately before durable dispatch reservation',issues,
     binding,bindingSha256:digest(binding),
-    qualification:{implemented:'BOUNDED_OFFLINE_ONLY',componentTested:'REQUIRES_EXACT_SOURCE_EVIDENCE',nativeTested:'REQUIRES_EXACT_SOURCE_EVIDENCE',
+    qualification:{implemented:computer?'OPTIONAL_SCRIPTED_DOCKER_REHEARSAL':'BOUNDED_OFFLINE_ONLY',componentTested:'REQUIRES_EXACT_SOURCE_EVIDENCE',nativeTested:'REQUIRES_EXACT_SOURCE_EVIDENCE',
       hostProbe:host.supported?(nativeBackend?'NATIVE_HOST_PROBE_PASS':'SYNTHETIC_OR_UNVERIFIED_PROBE'):'BLOCKED',
       liveObserved:'NOT_RUN',operationallyQualified:false,independentlyReviewed:'NOT_VERIFIED',commerciallyMeasured:'NOT_RUN',productionQualified:false},
     acceptedContract:status==='SUPPORTABLE'?{taskSha256:digest(task),inputs:'exact supplied task bytes; public nonpersonal data only',rights:task.input.mission?.rights||'caller must hold rights; not verified by byte inspection',
       requestedResult:task.input.mission?.purpose||task.action,operation:task.action,taskFamily:family,
-      deliverables:alpha?['alpha-result.json','alpha-spec-validation.json']:family==='analyst'?['report.html','result.json','method.json']:family==='website'?['index.html','method.json']:task.action==='successor-check'?['checker receipt']:task.action==='evidence-inspect'?['evidence-report.json']:['protocol-inspection.json'],
-      checks:alpha?'exact spec, normalized mission and result hashes; Alpha self-check only; no independent review or settlement authority':task.action==='successor-run'||task.action==='successor-check'?'fixed deterministic artifact checker; descriptive purpose and business acceptance are not evaluated':task.action==='evidence-inspect'?'byte hashes only; no correctness or authorship claim':'policy on supplied snapshot; no chain freshness or transaction claim',
-      authority:'bounded-offline-only; no signing or settlement',limits:OFFLINE_LIMITS,deadline:at+300000,recovery:'one-use grant; failed/uncertain reservations remain consumed; explicit STOP reconciliation; no restored authority'}:null};
+      deliverables:computer?['computer-return.json','receipt.json','signed-receipt.json','screenshots','visible-text.txt']:alpha?['alpha-result.json','alpha-spec-validation.json']:family==='analyst'?['report.html','result.json','method.json']:family==='website'?['index.html','method.json']:task.action==='successor-check'?['checker receipt']:task.action==='evidence-inspect'?['evidence-report.json']:['protocol-inspection.json'],
+      checks:computer?'exact handoff, installed scripted advice, native task permit, receipt and artifact hashes; local signature and internal checks do not establish economic acceptance or independent review':alpha?'exact spec, normalized mission and result hashes; Alpha self-check only; no independent review or settlement authority':task.action==='successor-run'||task.action==='successor-check'?'fixed deterministic artifact checker; descriptive purpose and business acceptance are not evaluated':task.action==='evidence-inspect'?'byte hashes only; no correctness or authorship claim':'policy on supplied snapshot; no chain freshness or transaction claim',
+      authority:computer?'fixed scripted browser rehearsal only; no live model or settlement':'bounded-offline-only; no signing or settlement',limits:computer?{wallMs:Math.min(150000,computer.maxSeconds*1000+25000),actions:computer.maxActions,modelCalls:0,spendUSDC:'0',deviceCost:'UNKNOWN',artifactBytes:computer.artifactReservationBytes}:OFFLINE_LIMITS,deadline:at+300000,recovery:'one-use grant; failed/uncertain reservations remain consumed; explicit STOP reconciliation; no restored authority'}:null};
 }
 
 export function requireAdmission(report,previous=null) {
